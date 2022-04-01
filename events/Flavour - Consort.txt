@@ -3150,197 +3150,197 @@ country_event = {
 #}
 
 #Yes you can divorce
-country_event = {
-	id = wwu_consort.203
-	title = wwu_consort.203.t
-	desc = wwu_consort.203.d
-	picture = CONSORT_DOING_BADLY_eventPicture
-
-	is_triggered_only = yes
-
-	trigger = { has_consort = yes }
-
-	#Divorce
-	option = {
-		name = wwu_consort.203.a
-		custom_tooltip = wwu_consort.203.a.tt
-
-		add_prestige = -15
-		
-		#Consort home country reacts
-		random_country = {
-			limit = { has_given_consort_to = ROOT } 
-
-			tooltip = {
-				add_opinion = {
-					who = ROOT
-					modifier = offended_by_divorce	
-				}
-
-				add_casus_belli = {
-					target = ROOT
-					type = cb_insult
-					months = 60
-				}
-			}
-
-			hidden_effect = { country_event = { id = wwu_consort.205 days = 15 } }
-		}
-
-		#Local consort family reacts
-		random_owned_province = {
-			limit = { has_province_modifier = domain_of_spouses_family } 
-
-			add_province_modifier = {
-				name = angered_nobles
-				duration = 7300
-			}
-		}
-		
-		#Heir takes legitimacy hit
-		if = {
-			limit = { 
-				has_heir = yes
-				can_heir_be_child_of_consort = yes
-			}
-			add_heir_claim = -30
-		}
-
-		#Consort is removed unless 205 is fired, things are cleaned up.
-		hidden_effect = { 
-			if = {
-				limit = { NOT = { any_country = { has_given_consort_to = ROOT } } }
-				remove_consort = yes
-			}
-			country_event = { id = wwu_consort.206 } 
-		}
-	}
-
-	#Opt out
-	option = {
-		name = wwu_consort.203.b
-		custom_tooltip = wwu_consort.203.b.tt
-	}
-}
+#country_event = {
+#	id = wwu_consort.203
+#	title = wwu_consort.203.t
+#	desc = wwu_consort.203.d
+#	picture = CONSORT_DOING_BADLY_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	trigger = { has_consort = yes }
+#
+#	#Divorce
+#	option = {
+#		name = wwu_consort.203.a
+#		custom_tooltip = wwu_consort.203.a.tt
+#
+#		add_prestige = -15
+#		
+#		#Consort home country reacts
+#		random_country = {
+#			limit = { has_given_consort_to = ROOT } 
+#
+#			tooltip = {
+#				add_opinion = {
+#					who = ROOT
+#					modifier = offended_by_divorce	
+#				}
+#
+#				add_casus_belli = {
+#					target = ROOT
+#					type = cb_insult
+#					months = 60
+#				}
+#			}
+#
+#			hidden_effect = { country_event = { id = wwu_consort.205 days = 15 } }
+#		}
+#
+#		#Local consort family reacts
+#		random_owned_province = {
+#			limit = { has_province_modifier = domain_of_spouses_family } 
+#
+#			add_province_modifier = {
+#				name = angered_nobles
+#				duration = 7300
+#			}
+#		}
+#		
+#		#Heir takes legitimacy hit
+#		if = {
+#			limit = { 
+#				has_heir = yes
+#				can_heir_be_child_of_consort = yes
+#			}
+#			add_heir_claim = -30
+#		}
+#
+#		#Consort is removed unless 205 is fired, things are cleaned up.
+#		hidden_effect = { 
+#			if = {
+#				limit = { NOT = { any_country = { has_given_consort_to = ROOT } } }
+#				remove_consort = yes
+#			}
+#			country_event = { id = wwu_consort.206 } 
+#		}
+#	}
+#
+#	#Opt out
+#	option = {
+#		name = wwu_consort.203.b
+#		custom_tooltip = wwu_consort.203.b.tt
+#	}
+#}
 
 #No you can't divorce
-country_event = {
-	id = wwu_consort.204
-	title = wwu_consort.204.t
-	desc = wwu_consort.204.d
-	picture = CONSORT_DOING_BADLY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = wwu_consort.202.b
-	}
-}
+#country_event = {
+#	id = wwu_consort.204
+#	title = wwu_consort.204.t
+#	desc = wwu_consort.204.d
+#	picture = CONSORT_DOING_BADLY_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = wwu_consort.202.b
+#	}
+#}
 
 
 #Family gets notified 
-country_event = {
-	id = wwu_consort.205
-	title = wwu_consort.205.t
-	desc = wwu_consort.205.d
-	picture = CONSORT_DOING_BADLY_eventPicture
-
-	is_triggered_only = yes
-
-	option = {
-		name = wwu_consort.205.a
-		custom_tooltip = wwu_consort.205.a.tt
-
-		hidden_effect = {
-			FROM = { 
-				remove_consort = yes 
-				country_event = { id = wwu_consort.206 } 
-			}
-		}
-
-		add_opinion = {
-			who = FROM
-			modifier = offended_by_divorce	
-		}
-
-		add_casus_belli = {
-			target = FROM
-			type = cb_insult
-			months = 60
-		}
-	}
-}
+#country_event = {
+#	id = wwu_consort.205
+#	title = wwu_consort.205.t
+#	desc = wwu_consort.205.d
+#	picture = CONSORT_DOING_BADLY_eventPicture
+#
+#	is_triggered_only = yes
+#
+#	option = {
+#		name = wwu_consort.205.a
+#		custom_tooltip = wwu_consort.205.a.tt
+#
+#		hidden_effect = {
+#			FROM = { 
+#				remove_consort = yes 
+#				country_event = { id = wwu_consort.206 } 
+#			}
+#		}
+#
+#		add_opinion = {
+#			who = FROM
+#			modifier = offended_by_divorce	
+#		}
+#
+#		add_casus_belli = {
+#			target = FROM
+#			type = cb_insult
+#			months = 60
+#		}
+#	}
+#}
 
 #Divorce clean up event 
-country_event = {
-	id = wwu_consort.206
-	title = none
-	desc = none
-	picture = none
-
-	is_triggered_only = yes
-
-	hidden = yes
-
-	immediate = {
-		#if = {
-			#limit = { has_consort_regency = no }
-			random_owned_province = {
-				limit = { has_province_modifier = domain_of_spouses_family }
-				remove_province_modifier = domain_of_spouses_family
-			}
-		#}
-		#if = {
-			#limit = { has_ruler_flag = accepted_help_from_spouses_family }
-			clr_ruler_flag = accepted_help_from_spouses_family
-		#}
-		#if = {
-			#limit = { has_ruler_flag = helped_spouses_family }
-			clr_ruler_flag = helped_spouses_family
-		#}
-		#if = {
-			#limit = { has_ruler_flag = refused_to_help_spouses_family }
-			clr_ruler_flag = refused_to_help_spouses_family
-		#}
-		if = {
-			limit = { has_ruler_flag = has_lowborn_consort }
-			random_owned_province = {
-				limit = { has_province_modifier = home_of_consort }
-				remove_province_modifier = home_of_consort
-			}
-		}
-		if = {
-			limit = { has_ruler_flag = has_lowborn_consort }
-			clr_ruler_flag = has_lowborn_consort
-		}
-		if = {
-			limit = { has_country_modifier = consort_adm_advice }
-			remove_country_modifier = consort_adm_advice
-		}
-		if = {
-			limit = { has_country_modifier = consort_dip_advice }
-			remove_country_modifier = consort_dip_advice
-		}
-		if = {
-			limit = { has_country_modifier = consort_mil_advice }
-			remove_country_modifier = consort_mil_advice
-		}
-		if = {
-			limit = { has_country_modifier = without_spouse_advice }
-			remove_country_modifier = without_spouse_advice
-		}
-		if = {
-			limit = { has_country_modifier = life_of_the_party }
-			remove_country_modifier = life_of_the_party
-		}
-		
-		clr_ruler_flag = marriage_length
-	}
-
-	option = {
-		name = "wwu_consort.206.a"
-	}
-}
+#country_event = {
+#	id = wwu_consort.206
+#	title = none
+#	desc = none
+#	picture = none
+#
+#	is_triggered_only = yes
+#
+#	hidden = yes
+#
+#	immediate = {
+#		#if = {
+#			#limit = { has_consort_regency = no }
+#			random_owned_province = {
+#				limit = { has_province_modifier = domain_of_spouses_family }
+#				remove_province_modifier = domain_of_spouses_family
+#			}
+#		#}
+#		#if = {
+#			#limit = { has_ruler_flag = accepted_help_from_spouses_family }
+#			clr_ruler_flag = accepted_help_from_spouses_family
+#		#}
+#		#if = {
+#			#limit = { has_ruler_flag = helped_spouses_family }
+#			clr_ruler_flag = helped_spouses_family
+#		#}
+#		#if = {
+#			#limit = { has_ruler_flag = refused_to_help_spouses_family }
+#			clr_ruler_flag = refused_to_help_spouses_family
+#		#}
+#		if = {
+#			limit = { has_ruler_flag = has_lowborn_consort }
+#			random_owned_province = {
+#				limit = { has_province_modifier = home_of_consort }
+#				remove_province_modifier = home_of_consort
+#			}
+#		}
+#		if = {
+#			limit = { has_ruler_flag = has_lowborn_consort }
+#			clr_ruler_flag = has_lowborn_consort
+#		}
+#		if = {
+#			limit = { has_country_modifier = consort_adm_advice }
+#			remove_country_modifier = consort_adm_advice
+#		}
+#		if = {
+#			limit = { has_country_modifier = consort_dip_advice }
+#			remove_country_modifier = consort_dip_advice
+#		}
+#		if = {
+#			limit = { has_country_modifier = consort_mil_advice }
+#			remove_country_modifier = consort_mil_advice
+#		}
+#		if = {
+#			limit = { has_country_modifier = without_spouse_advice }
+#			remove_country_modifier = without_spouse_advice
+#		}
+#		if = {
+#			limit = { has_country_modifier = life_of_the_party }
+#			remove_country_modifier = life_of_the_party
+#		}
+#		
+#		clr_ruler_flag = marriage_length
+#	}
+#
+#	option = {
+#		name = "wwu_consort.206.a"
+#	}
+#}
 
 # Anniversary
 country_event = {
