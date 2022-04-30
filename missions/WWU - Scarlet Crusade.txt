@@ -309,7 +309,7 @@ wwu_scarlet_crusade_column_2 = {
 		required_missions = { wwu_reclaim_hearthglen_a22 }
 		
 		trigger = {
-		    NOT = { num_accepted_culture = 1 }
+		    NOT = { num_accepted_cultures = 1 }
 		}
 		effect = {
 			add_country_modifier = {
@@ -609,7 +609,7 @@ wwu_scarlet_crusade_column_3 = {
 		required_missions = { wwu_securing_lordaeron_citizens_a22 }
 	
 	    trigger = {
-            area_shadowfang_keep = {
+			area_shadowfang_keep = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
@@ -628,19 +628,10 @@ wwu_scarlet_crusade_column_3 = {
 			area_boralus = {
                 add_permanent_claim = ROOT
             }
-			if = {
-				limit = {
-					exists = A12
-					valid_for_personal_unions_trigger = yes
-					A12 = {
-						valid_for_personal_unions_trigger = yes
-					}
-				}
-				add_casus_belli = {
-					type = cb_restore_personal_union
-					months = 300
-					target = A12
-				}
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				months = 300
+				target = A12
 			}
 		}
 	}
@@ -665,33 +656,15 @@ wwu_scarlet_crusade_column_3 = {
 				name = mission_conquest_of_alterac_mountains_a22
 				duration = 14600
 			}
-			if = {
-				limit = {
-					exists = A26
-					valid_for_personal_unions_trigger = yes
-					A26 = {
-						valid_for_personal_unions_trigger = yes
-					}
-				}
-				add_casus_belli = {
-					type = cb_restore_personal_union
-					months = 300
-					target = A26
-				}
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				months = 300
+				target = A26
 			}
-			if = {
-				limit = {
-					exists = A17
-					valid_for_personal_unions_trigger = yes
-					A17 = {
-						valid_for_personal_unions_trigger = yes
-					}
-				}
-				add_casus_belli = {
-					type = cb_restore_personal_union
-					months = 300
-					target = A17
-				}
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				months = 300
+				target = A17
 			}
 		}
 	}
@@ -743,13 +716,17 @@ wwu_scarlet_crusade_column_3 = {
 				name = mission_reclaiming_north_tirisfal_a22
 				duration = 12170
 			}
-			area_tirisfal_bulwark = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_vandermar = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							area = area_tirisfal_bulwark
+							area = area_vandermar
+						}
+						NOT = { owned_by = ROOT }
+					}
+					add_claim = ROOT
+				}
 			}
 		}
 	}
