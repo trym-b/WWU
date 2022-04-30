@@ -310,8 +310,8 @@ wwu_wyrmrest_accord_column_3 = {
 	
 	wwu_organising_the_faith_wya = {
 	    icon = mission_paladin_blinding_light
-		required_missions = { }
-		position = 1
+		required_missions = { wwu_mission_tree_warning_wya }
+		position = 2
 		
 		trigger = {
             is_subject = no
@@ -340,7 +340,7 @@ wwu_wyrmrest_accord_column_3 = {
 	}
 	wwu_religious_dragonblight_wya = {
 		icon = mission_drake_red
-		position = 2
+		position = 3
 		required_missions = { wwu_organising_the_faith_wya }
 		
 		trigger = {
@@ -361,7 +361,7 @@ wwu_wyrmrest_accord_column_3 = {
 	wwu_black_dragonflight_corruption_wya = {
 		icon = mission_black_dragonflight
 		required_missions = { wwu_religious_dragonblight_wya }
-		position = 3
+		position = 4
 		
 		trigger = {
 		    OR = {
@@ -404,7 +404,7 @@ wwu_wyrmrest_accord_column_3 = {
 	wwu_rise_of_chromatic_dragonflight_wya = {
 	    icon = mission_drake_twilight
 		required_missions = { wwu_black_dragonflight_corruption_wya }
-		position = 4
+		position = 5
 		
         trigger = {
 			calc_true_if = {
@@ -426,7 +426,7 @@ wwu_wyrmrest_accord_column_3 = {
 	wwu_stabilize_the_new_brood_wya = {
 	    icon = mission_drake_twilight
 		required_missions = { wwu_rise_of_chromatic_dragonflight_wya }
-		position = 5
+		position = 6
 		
         trigger = {
 			stability = 2
@@ -446,7 +446,7 @@ wwu_wyrmrest_accord_column_3 = {
 	wwu_time_to_conquer_the_world_wya = {
 	    icon = mission_hunter_rapid_killing
 		required_missions = { wwu_stabilize_the_new_brood_wya }
-		position = 6
+		position = 7
 		
         trigger = {
 			num_of_states = 20
@@ -475,10 +475,22 @@ wwu_wyrmrest_accord_column_4 = {
 	
 	has_country_shield = yes
 	
+	wwu_mission_tree_warning_wya = {
+	    icon = mission_drake_twilight
+	    required_missions = {  }
+	
+    	trigger = {		    
+		}
+		effect = {
+			country_event = {
+				id = wwu_setup_dragonflight.1
+			}
+		}	
+	}
 	wwu_unite_the_dragonflights_wya = {
 	    icon = mission_drake_bronze
 	    required_missions = { wwu_dragonblight_for_dragonflights_wya }
-	    position = 3
+	    position = 4
 	
     	trigger = {
 	        NOT = { mission_completed = wwu_turn_to_the_old_ways_wya }
@@ -508,7 +520,7 @@ wwu_wyrmrest_accord_column_4 = {
 	wwu_dawn_of_aspects_wya = {
 	    icon = mission_drake_proto
 	    required_missions = { wwu_unite_the_dragonflights_wya }
-	    position = 4
+	    position = 5
 	
     	trigger = {
 	        region_dragonblight = {
@@ -565,7 +577,8 @@ wwu_wyrmrest_accord_column_5 = {
 	
 	wwu_dragonblight_owners_wya = {
 	    icon = mission_drake_bronze
-		required_missions = { }
+		position = 2
+		required_missions = { wwu_mission_tree_warning_wya }
 		
 		provinces_to_highlight = {
 			region = region_dragonblight
@@ -589,7 +602,7 @@ wwu_wyrmrest_accord_column_5 = {
 	wwu_dragonblight_for_dragonflights_wya = {
 	    icon = mission_eranikus
 		required_missions = { wwu_dragonblight_owners_wya }
-		position = 2
+		position = 3
 		
         trigger = {
 			calc_true_if = {
@@ -610,7 +623,7 @@ wwu_wyrmrest_accord_column_5 = {
 	wwu_turn_to_the_old_ways_wya = {
 	    icon = mission_drake_proto
 		required_missions = { wwu_dragonblight_for_dragonflights_wya }
-		position = 3
+		position = 4
 		
 		provinces_to_highlight = {
 		    province_id = 733
@@ -634,7 +647,7 @@ wwu_wyrmrest_accord_column_5 = {
 	wwu_devour_the_other_dragonflights_wya = {
 	    icon = mission_cannibalize
 		required_missions = { wwu_turn_to_the_old_ways_wya }
-		position = 4
+		position = 5
 		
         trigger = {
 			calc_true_if = {
@@ -655,7 +668,7 @@ wwu_wyrmrest_accord_column_5 = {
 	wwu_galakrond_the_father_of_dragons_wya = {
 	    icon = mission_devour
 		required_missions = { wwu_devour_the_other_dragonflights_wya }
-		position = 5
+		position = 6
 		
         trigger = {
 			733 = { development = 20 }
@@ -679,7 +692,7 @@ wwu_wyrmrest_accord_column_5 = {
 	wwu_devour_the_world_wya = {
 	    icon = mission_hunter_rapid_killing
 		required_missions = { wwu_galakrond_the_father_of_dragons_wya }
-		position = 6
+		position = 7
 		
         trigger = {
 			num_of_states = 30
