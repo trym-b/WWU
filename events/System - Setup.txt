@@ -263,6 +263,7 @@ country_event = {
                 duration = -1
             }
         }
+        country_event = { id = wwu_setup.3 days = 1 }
     }
     
     option = {
@@ -273,6 +274,9 @@ country_event = {
 #---------------------------------------
 # Configuration
 #---------------------------------------
+# This event has to be triggered after the flags in `wwu_setup.1` flags
+# has been properly set, otherwise certain flags might not be set
+# correctly when triggering this event, such as `executor`
 country_event = {
 	id = wwu_setup.3
 	title = wwu_setup.3.title
@@ -283,8 +287,8 @@ country_event = {
 
     trigger = {
         NOT = { has_global_flag = completed_wwu_configuration }
-        has_country_flag = host_player
         ai = no
+        tag = event_target:executor
     }
 
     immediate = {
