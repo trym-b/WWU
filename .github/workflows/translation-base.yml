@@ -1,0 +1,339 @@
+﻿on:
+    workflow_call:
+        inputs:
+            target-language:
+                required: true
+                type: string
+jobs:
+    translate-files-events:
+        name: "Machine translation - Events"
+        runs-on: ubuntu-22.04
+        strategy:
+            matrix:
+                file:
+                    [
+                        "localisation/events/WWU_event_aldorscryer_",
+                        "localisation/events/WWU_event_ancestral_",
+                        "localisation/events/WWU_event_anvilmar_",
+                        "localisation/events/WWU_event_arcane_",
+                        "localisation/events/WWU_event_artifacts_",
+                        "localisation/events/WWU_event_assassination_",
+                        "localisation/events/WWU_event_bastion_of_the_faith_",
+                        "localisation/events/WWU_event_battle_inspiration_",
+                        "localisation/events/WWU_event_broken_shore_",
+                        "localisation/events/WWU_event_buildings_",
+                        "localisation/events/WWU_event_celestials_",
+                        "localisation/events/WWU_event_consort_",
+                        "localisation/events/WWU_event_contracts_",
+                        "localisation/events/WWU_event_corruption_",
+                        "localisation/events/WWU_event_council_of_tirisfal_",
+                        "localisation/events/WWU_event_country_switch_",
+                        "localisation/events/WWU_event_cultural_",
+                        "localisation/events/WWU_event_debug_",
+                        "localisation/events/WWU_event_decision_events_",
+                        "localisation/events/WWU_event_deepholm_",
+                        "localisation/events/WWU_event_defias_brotherhood_",
+                        "localisation/events/WWU_event_discovery_",
+                        "localisation/events/WWU_event_distant_claims_",
+                        "localisation/events/WWU_event_divine_fate_",
+                        "localisation/events/WWU_event_dragonflight_",
+                        "localisation/events/WWU_event_druidism_",
+                        "localisation/events/WWU_event_dwarf_",
+                        "localisation/events/WWU_event_dynastic_",
+                        "localisation/events/WWU_event_elemental_attunement_",
+                        "localisation/events/WWU_event_elune_",
+                        "localisation/events/WWU_event_emerald_dream_",
+                        "localisation/events/WWU_event_empire_of_pandaria_",
+                        "localisation/events/WWU_event_estates_",
+                        "localisation/events/WWU_event_exodar_",
+                        "localisation/events/WWU_event_exploration_",
+                        "localisation/events/WWU_event_explorers_league_",
+                        "localisation/events/WWU_event_faction_system_",
+                        "localisation/events/WWU_event_fall_of_gnomeragan_",
+                        "localisation/events/WWU_event_fel_",
+                        "localisation/events/WWU_event_forgotten_isles_",
+                        "localisation/events/WWU_event_gilneas_",
+                        "localisation/events/WWU_event_gnoll_",
+                        "localisation/events/WWU_event_government_",
+                        "localisation/events/WWU_event_gurubashi_conflict_",
+                        "localisation/events/WWU_event_harmonization_",
+                        "localisation/events/WWU_event_heir_training_",
+                        "localisation/events/WWU_event_ideagroups_",
+                        "localisation/events/WWU_event_illidan_assault_northrend_",
+                        "localisation/events/WWU_event_imperial_fracture_",
+                        "localisation/events/WWU_event_inhospitable_terrain_",
+                        "localisation/events/WWU_event_integration_",
+                        "localisation/events/WWU_event_invasion_",
+                        "localisation/events/WWU_event_karazhan_",
+                        "localisation/events/WWU_event_kul_tiras_",
+                        "localisation/events/WWU_event_miscellanous_",
+                        "localisation/events/WWU_event_mists_of_pandaria_",
+                        "localisation/events/WWU_event_monument_research_",
+                        "localisation/events/WWU_event_murloc_",
+                        "localisation/events/WWU_event_naga_",
+                        "localisation/events/WWU_event_nation_setup_",
+                        "localisation/events/WWU_event_naxxramas_",
+                        "localisation/events/WWU_event_old_gods_",
+                        "localisation/events/WWU_event_orcish_horde_",
+                        "localisation/events/WWU_event_overextension_",
+                        "localisation/events/WWU_event_personalities_",
+                        "localisation/events/WWU_event_pirate_government_",
+                        "localisation/events/WWU_event_pirate_ruler_death_",
+                        "localisation/events/WWU_event_portal_energies_",
+                        "localisation/events/WWU_event_pretenders_",
+                        "localisation/events/WWU_event_prices_",
+                        "localisation/events/WWU_event_quelthalas_",
+                        "localisation/events/WWU_event_raid_",
+                        "localisation/events/WWU_event_random_country_events_",
+                        "localisation/events/WWU_event_random_province_events_",
+                        "localisation/events/WWU_event_realm_action_",
+                        "localisation/events/WWU_event_religion_",
+                        "localisation/events/WWU_event_reliquary_guild_",
+                        "localisation/events/WWU_event_rise_of_the_horde_",
+                        "localisation/events/WWU_event_rise_of_the_qiraji_",
+                        "localisation/events/WWU_event_rise_of_the_scourge_",
+                        "localisation/events/WWU_event_ruler_education_",
+                        "localisation/events/WWU_event_ruler_",
+                        "localisation/events/WWU_event_ruler_training_",
+                        "localisation/events/WWU_event_sargeras_eye_",
+                        "localisation/events/WWU_event_savage_",
+                        "localisation/events/WWU_event_savage_vassalage_",
+                        "localisation/events/WWU_event_scarlet_crusade_",
+                        "localisation/events/WWU_event_scourge_",
+                        "localisation/events/WWU_event_scourge_of_lordaeron_",
+                        "localisation/events/WWU_event_shadow_council_",
+                        "localisation/events/WWU_event_sha_",
+                        "localisation/events/WWU_event_silvermoon_",
+                        "localisation/events/WWU_event_silver_hand_",
+                        "localisation/events/WWU_event_splintering_of_the_alliance_",
+                        "localisation/events/WWU_event_states_general_",
+                        "localisation/events/WWU_event_stormwind_",
+                        "localisation/events/WWU_event_story_misc_",
+                        "localisation/events/WWU_event_subject_rebellion_disaster_",
+                        "localisation/events/WWU_event_sunfury_",
+                        "localisation/events/WWU_event_sunfury_outland_",
+                        "localisation/events/WWU_event_suramar_",
+                        "localisation/events/WWU_event_thalassian_",
+                        "localisation/events/WWU_event_theocracy_",
+                        "localisation/events/WWU_event_the_burning_crusade_",
+                        "localisation/events/WWU_event_the_first_war_",
+                        "localisation/events/WWU_event_the_missing_diplomat_",
+                        "localisation/events/WWU_event_the_risen_",
+                        "localisation/events/WWU_event_the_second_war_",
+                        "localisation/events/WWU_event_the_shattering_",
+                        "localisation/events/WWU_event_the_silver_hand_schism_",
+                        "localisation/events/WWU_event_titan_corruption_",
+                        "localisation/events/WWU_event_tribal_",
+                        "localisation/events/WWU_event_tribe_events_",
+                        "localisation/events/WWU_event_uncivilized_",
+                        "localisation/events/WWU_event_undead_plague_",
+                        "localisation/events/WWU_event_warlords_of_draenor_",
+                        "localisation/events/WWU_event_world_trees_",
+                        "localisation/events/WWU_event_wrath_of_the_lich_king_",
+                    ]
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Translate
+              uses: ./.github/actions/translate
+              with:
+                  target-language: ${{ inputs.target-language }}
+            - name: "Store translation results"
+              uses: actions/upload-artifact@v3
+              with:
+                  name: ${{ inputs.target-language }}-translation
+                  retention-days: 2
+                  path: "*${{ matrix.file }}l_${{ inputs.target-language }}.yml"
+    translate-files-missions:
+        name: "Machine translation - Missions"
+        runs-on: ubuntu-22.04
+        strategy:
+            matrix:
+                file:
+                    [
+                        "localisation/missions/WWU_mission_aerie_peak_",
+                        "localisation/missions/WWU_mission_ahnqiraj_",
+                        "localisation/missions/WWU_mission_amani_",
+                        "localisation/missions/WWU_mission_ango_rosh_",
+                        "localisation/missions/WWU_mission_blackrock_",
+                        "localisation/missions/WWU_mission_bleeding_hollow_",
+                        "localisation/missions/WWU_mission_bloodsail_",
+                        "localisation/missions/WWU_mission_bonechewer_",
+                        "localisation/missions/WWU_mission_burning_blade_",
+                        "localisation/missions/WWU_mission_centaur_generic_",
+                        "localisation/missions/WWU_mission_dark_iron_",
+                        "localisation/missions/WWU_mission_deepholm_",
+                        "localisation/missions/WWU_mission_dragonmaw_",
+                        "localisation/missions/WWU_mission_forsaken_",
+                        "localisation/missions/WWU_mission_frostwolf_",
+                        "localisation/missions/WWU_mission_furbolg_generic_",
+                        "localisation/missions/WWU_mission_generic_",
+                        "localisation/missions/WWU_mission_gilneas_",
+                        "localisation/missions/WWU_mission_gnoll_generic_",
+                        "localisation/missions/WWU_mission_harpy_generic_",
+                        "localisation/missions/WWU_mission_heart_of_fear_",
+                        "localisation/missions/WWU_mission_ironforge_",
+                        "localisation/missions/WWU_mission_kunzen_",
+                        "localisation/missions/WWU_mission_laughing_skull_",
+                        "localisation/missions/WWU_mission_lordaeron_",
+                        "localisation/missions/WWU_mission_mantid_",
+                        "localisation/missions/WWU_mission_murloc_generic_",
+                        "localisation/missions/WWU_mission_nazmir_",
+                        "localisation/missions/WWU_mission_orcish_horde_",
+                        "localisation/missions/WWU_mission_quelthalas_",
+                        "localisation/missions/WWU_mission_redridge_",
+                        "localisation/missions/WWU_mission_red_dragonflight_",
+                        "localisation/missions/WWU_mission_riverpaw_",
+                        "localisation/missions/WWU_mission_scarlet_crusade_",
+                        "localisation/missions/WWU_mission_scourge_",
+                        "localisation/missions/WWU_mission_sentinels_",
+                        "localisation/missions/WWU_mission_shadowhide_",
+                        "localisation/missions/WWU_mission_shadowmoon_",
+                        "localisation/missions/WWU_mission_shared_",
+                        "localisation/missions/WWU_mission_shared_orc_",
+                        "localisation/missions/WWU_mission_shattered_hand_",
+                        "localisation/missions/WWU_mission_silvermoon_",
+                        "localisation/missions/WWU_mission_silver_hand_",
+                        "localisation/missions/WWU_mission_stormwind_",
+                        "localisation/missions/WWU_mission_sunfury_",
+                        "localisation/missions/WWU_mission_theramore_",
+                        "localisation/missions/WWU_mission_thunderlord_",
+                        "localisation/missions/WWU_mission_vandermar_",
+                        "localisation/missions/WWU_mission_vashjir_",
+                        "localisation/missions/WWU_mission_vermilion_redoubt_",
+                        "localisation/missions/WWU_mission_vilebranch_",
+                        "localisation/missions/WWU_mission_voldun_cartel_",
+                        "localisation/missions/WWU_mission_warsong_",
+                        "localisation/missions/WWU_mission_wildhammer_",
+                        "localisation/missions/WWU_mission_wyrmrest_accord_",
+                        "localisation/missions/WWU_mission_zandalar_",
+                    ]
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Translate
+              uses: ./.github/actions/translate
+              with:
+                  target-language: ${{ inputs.target-language }}
+            - name: "Store translation results"
+              uses: actions/upload-artifact@v3
+              with:
+                  name: ${{ inputs.target-language }}-translation
+                  retention-days: 2
+                  path: "*${{ matrix.file }}l_${{ inputs.target-language }}.yml"
+    translate-files-replace:
+        name: "Machine translation - Replace"
+        runs-on: ubuntu-22.04
+        strategy:
+            matrix:
+                file:
+                    [
+                        "localisation/replace/generic_events_",
+                        "localisation/replace/loadingtips_",
+                        "localisation/replace/prov_adj_",
+                        "localisation/replace/prov_names_",
+                        "localisation/replace/WWU_countries_",
+                        "localisation/replace/WWU_replacements_",
+                        "localisation/replace/wwu_technology_",
+                    ]
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Translate
+              uses: ./.github/actions/translate
+              with:
+                  target-language: ${{ inputs.target-language }}
+            - name: "Store translation results"
+              uses: actions/upload-artifact@v3
+              with:
+                  name: ${{ inputs.target-language }}-translation
+                  retention-days: 2
+                  path: "*${{ matrix.file }}l_${{ inputs.target-language }}.yml"
+    translate-files-no-sub-directories:
+        name: "Machine translation - no sub-directories"
+        runs-on: ubuntu-22.04
+        strategy:
+            matrix:
+                file:
+                    [
+                        "localisation/decisions/WWU_decisions_",
+                        "localisation/esu_for_wwu_general_",
+                        "localisation/WWU_advisors_",
+                        "localisation/WWU_ages_",
+                        "localisation/WWU_archaeology_",
+                        "localisation/WWU_artifacts_",
+                        "localisation/WWU_bookmarks_",
+                        "localisation/WWU_buildings_",
+                        "localisation/WWU_casus_belli_",
+                        "localisation/WWU_classes_",
+                        "localisation/WWU_colonial_regions_",
+                        "localisation/WWU_cultures_",
+                        "localisation/WWU_custom_ideas_",
+                        "localisation/WWU_decrees_",
+                        "localisation/WWU_diplomatic_actions_",
+                        "localisation/WWU_disasters_",
+                        "localisation/WWU_dragon_aspects_",
+                        "localisation/WWU_edicts_",
+                        "localisation/WWU_empire_of_pandaria_",
+                        "localisation/WWU_estates_",
+                        "localisation/WWU_estate_agenda_",
+                        "localisation/WWU_event_modifiers_",
+                        "localisation/WWU_factions_",
+                        "localisation/WWU_faction_system_",
+                        "localisation/WWU_federation_advancements_",
+                        "localisation/WWU_governments_",
+                        "localisation/WWU_graphical_cultures_",
+                        "localisation/WWU_great_projects_",
+                        "localisation/WWU_hre_reforms_",
+                        "localisation/WWU_ideagroups_",
+                        "localisation/WWU_imperial_incidents_",
+                        "localisation/WWU_institutions_",
+                        "localisation/WWU_leader_personalities_",
+                        "localisation/WWU_loa_",
+                        "localisation/WWU_magic_",
+                        "localisation/WWU_map_",
+                        "localisation/WWU_mercenary_companies_",
+                        "localisation/WWU_music_",
+                        "localisation/WWU_national_ideas_",
+                        "localisation/WWU_opinion_modifiers_",
+                        "localisation/WWU_peace_terms_",
+                        "localisation/WWU_policies_",
+                        "localisation/WWU_province_menu_",
+                        "localisation/WWU_rebels_",
+                        "localisation/WWU_religions_",
+                        "localisation/WWU_ruler_personalities_",
+                        "localisation/WWU_ruler_view_",
+                        "localisation/WWU_startscreen_",
+                        "localisation/WWU_subject_types_",
+                        "localisation/WWU_technology_",
+                        "localisation/WWU_terrain_",
+                        "localisation/WWU_tooltips_",
+                        "localisation/WWU_tradenodes_",
+                        "localisation/WWU_trade_companies_",
+                        "localisation/WWU_trade_goods_",
+                        "localisation/WWU_trading_policies_",
+                        "localisation/WWU_triggered_modifiers_",
+                        "localisation/WWU_units_",
+                        "localisation/WWU_variables_",
+                    ]
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: Setup
+              uses: ./.github/actions/setup
+            - name: Translate
+              uses: ./.github/actions/translate
+              with:
+                  target-language: ${{ inputs.target-language }}
+            - name: "Store translation results"
+              uses: actions/upload-artifact@v3
+              with:
+                  name: ${{ inputs.target-language }}-translation
+                  retention-days: 2
+                  path: "*${{ matrix.file }}l_${{ inputs.target-language }}.yml"
