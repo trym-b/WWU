@@ -1,0 +1,32 @@
+# Removes Orcish Horde alliances/subjects on Draenor/Outland when the Dark Portal is closed
+cutoff_orcish_horde = {
+    if = {
+        limit = {
+            exists = U03
+        }
+        every_country = {
+            limit = { 
+                alliance_with = U03
+                capital_scope = {
+                    OR = {
+                        continent = continent_draenor
+                        continent = continent_outland
+                    }
+                }
+            }
+            add_truce_with = U03
+        }
+        every_country = {
+            limit = { 
+                is_subject_of = U03
+                capital_scope = {
+                    OR = {
+                        continent = continent_draenor
+                        continent = continent_outland
+                    }
+                }
+            }
+            grant_independence = yes
+        }
+    }
+}
