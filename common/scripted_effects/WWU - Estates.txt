@@ -125,6 +125,28 @@ each_estate_effect = {
 			$adventuring_guild_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_reliquary
+		}
+		[[effect]
+			$effect$
+		]
+		[[reliquary_effect]
+			$reliquary_effect$
+		]
+	}
+    if = {
+		limit = {
+			has_estate = estate_explorers_league
+		}
+		[[effect]
+			$effect$
+		]
+		[[explorers_league_effect]
+			$explorers_league_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -682,6 +704,14 @@ scaled_estate_criminal_syndicate_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_criminal_syndicate }
 }
 
+scaled_estate_reliquary_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_reliquary }
+}
+
+scaled_estate_explorers_league_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_explorers_league }
+}
+
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1044,6 +1074,44 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_reliquary
+					NOT = {
+						estate_loyalty = {
+							estate = estate_reliquary
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_reliquary
+				as_if_faction = yes
+			}
+		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_explorers_league
+					NOT = {
+						estate_loyalty = {
+							estate = estate_explorers_league
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_explorers_league
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1157,6 +1225,26 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_criminal_syndicate_$flag$
 			[[estate_action]
 			$estate_action$ = estate_criminal_syndicate
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_reliquary
+				NOT = { has_country_flag = estate_reliquary_$flag$ }
+			}
+			set_country_flag = estate_reliquary_$flag$
+			[[estate_action]
+			$estate_action$ = estate_reliquary
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_explorers_league
+				NOT = { has_country_flag = estate_explorers_league_$flag$ }
+			}
+			set_country_flag = estate_explorers_league_$flag$
+			[[estate_action]
+			$estate_action$ = estate_explorers_league
 			]
 		}
 	}
@@ -1654,6 +1742,44 @@ give_land_shares_to_estate_impulse = {
 		}
 		change_estate_land_share = {
 			estate = estate_criminal_syndicate
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_reliquary
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_reliquary
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_explorers_league
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_explorers_league
 			share = -1
 		}
 		change_estate_land_share = {

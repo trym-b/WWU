@@ -1,0 +1,54 @@
+namespace = explorers_league
+
+# The Explorer's League
+# Appears for members of the Alliance if they are sufficiently developed
+country_event = {
+	id = explorers_league.1
+	title = explorers_league.1.title
+	desc = explorers_league.1.desc
+	picture = BRANN_eventPicture
+
+	trigger = {
+		has_country_modifier = member_of_alliance
+        total_development = 250
+        NOT = { has_country_flag = explorers_league_estate_offer }
+	}
+
+    mean_time_to_happen = {
+		months = 120
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = explorers_league_estate_offer
+        }
+    }
+    
+	option = {
+		name = explorers_league.1.option.a
+		
+		custom_tooltip = ADD_EXPLORERS_LEAGUE_ESTATE
+        hidden_effect = {
+            set_country_flag = has_explorers_league_estate
+        }
+        
+        ai_chance = {
+            factor = 75
+        }
+	}
+	option = {
+		name = explorers_league.1.option.b
+		
+		add_treasury = 250
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+                
+                has_country_modifier = head_of_alliance
+            }
+        }
+	}
+}
