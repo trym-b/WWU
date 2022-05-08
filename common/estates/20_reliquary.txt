@@ -1,0 +1,107 @@
+estate_reliquary = {
+	icon = 12
+    color = { 115 85 50 }
+    
+    influence_from_dev_modifier = 0.4
+    
+	independence_government = monarchy
+	starting_reform = autocracy_reform
+	independence_tech_group = tech_human
+    
+	# ----- Conditions -----
+    trigger = { 
+        has_country_flag = has_reliquary_estate
+    }
+
+	# ----- Country -----
+    country_modifier_happy = {
+        monthly_splendor = 2
+        prestige = 1
+        legitimacy = 1
+        republican_tradition = 1
+        devotion = 1
+        horde_unity = 1
+        meritocracy = 1
+    }
+    country_modifier_neutral = {
+        monthly_splendor = 1
+        prestige = 0.5
+        legitimacy = 0.5
+        republican_tradition = 0.5
+        devotion = 0.5
+        horde_unity = 0.5
+        meritocracy = 0.5
+    }    
+    country_modifier_angry = {
+        monthly_splendor = -2
+        prestige = -1
+        legitimacy = -1
+        republican_tradition = -1
+        devotion = -1
+        horde_unity = -1
+        meritocracy = -1
+    }
+    
+	land_ownership_modifier = {
+		reliquary_loyalty_modifier = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 2
+			culture_group = owner
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { religion = owner }
+			NOT = { culture_group = owner }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { development = 10 }
+		}
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+	}
+
+	# ----- Influence -----
+    base_influence = 10
+
+    # ----- Loyalty -----
+    loyalty_modifier = {
+        desc = EST_VAL_HIGH_PRESTIGE
+        trigger = {
+            prestige = 50
+        }
+        loyalty = 10
+    }
+    loyalty_modifier = {
+        desc = EST_VAL_LOW_PRESTIGE
+        trigger = {
+            NOT = { prestige = 0 }
+        }
+        loyalty = -10
+    }
+    
+    # ----- Privileges -----
+	privileges = {
+		estate_reliquary_land_rights
+        estate_reliquary_guild_oversight
+        estate_reliquary_amass_artifacts
+        estate_reliquary_plunder_alliance_digsites
+        estate_reliquary_exploit_ancient_weaponry
+        estate_reliquary_support_local_digsites
+	}
+
+    # ----- Agendas -----
+	agendas = {
+        
+	}
+}

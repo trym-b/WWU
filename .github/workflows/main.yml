@@ -1,0 +1,13 @@
+name: "Main"
+on: ["push"]
+jobs:
+    validate-localization-files:
+        name: "Validate localization files"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: "Setup"
+              run: "pip install --requirement '# Development/tools/validate-yml/requirements.txt'"
+            - name: "Validate"
+              run: "python '# Development/tools/validate-yml/validate_yaml.py'"

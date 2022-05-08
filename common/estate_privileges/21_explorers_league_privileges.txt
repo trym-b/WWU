@@ -1,0 +1,239 @@
+estate_explorers_league_land_rights = {
+	icon = privilege_blueprint
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 10
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		governing_capacity = 100
+	}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 1.4
+			num_of_territories = 5
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 10
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 15
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 25 }
+				estate_influence = {
+					estate = estate_explorers_league
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_explorers_league_land_rights }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_territories = 1 }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 40 }
+				AND = {
+					NOT = { crown_land_share = 60 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_explorers_league_land_rights }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 30 }
+				AND = {
+					NOT = { crown_land_share = 50 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_explorers_league_land_rights }
+		}
+	}
+}
+estate_explorers_league_guild_oversight = {
+	icon = privilege_ancient_history
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.1
+	influence = 0.1
+    
+	penalties = {
+	}
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+# Amass Artifacts
+estate_explorers_league_amass_artifacts = {
+	icon = privilege_city_of_gold
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+	}
+	benefits = {
+        prestige_decay = -0.01
+        monthly_splendor = 1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+# Plunder Horde Digsites
+estate_explorers_league_plunder_horde_digsites = {
+	icon = privilege_jack_of_trades
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    cooldown_years = 10
+    
+    is_valid = {
+        any_known_country = {
+            has_country_modifier = member_of_horde
+            has_estate = estate_reliquary
+        }
+    }
+    can_select = {
+        any_known_country = {
+            has_country_modifier = member_of_horde
+            has_estate = estate_reliquary
+        }
+    }
+	benefits = {
+        
+	}
+    on_granted = {
+        random_known_country = {
+            limit = {
+                has_country_modifier = member_of_horde
+                has_estate = estate_reliquary
+            }
+            add_opinion = {
+                who = ROOT
+                modifier = plundered_digsite
+                years = 5
+            }
+            
+            if = {
+                limit = {
+                    total_development = 100
+                }
+                
+                ROOT = {
+                    add_treasury = 200
+                }
+            }
+            else_if = {
+                limit = {
+                    total_development = 250
+                }
+                
+                ROOT = {
+                    add_treasury = 500
+                }
+            }
+            else_if = {
+                limit = {
+                    total_development = 500
+                }
+                
+                ROOT = {
+                    add_treasury = 1000
+                }
+            }
+            else = {
+                ROOT = {
+                    add_treasury = 100
+                }
+            }
+        }
+	}
+    
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+# Exploit Ancient Weaponry
+estate_explorers_league_exploit_ancient_weaponry = {
+	icon = privilege_challenge
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = -0.05
+	influence = 0.05
+    
+	penalties = {
+        monthly_splendor = -1
+	}
+	benefits = {
+        fire_damage = 0.05
+        shock_damage = 0.05
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+# Support Local Digsites
+estate_explorers_league_support_local_digsites = {
+	icon = privilege_backpack
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        global_tax_modifier = -0.1
+	}
+    on_granted = {
+        custom_tooltip = BOOST_EXCAVATION_DIG_PROGRESS_EFFECTS
+        hidden_effect = {
+            set_country_flag = excavation_progress_boost
+        }
+    }
+    on_revoked = {
+        hidden_effect = {
+            clr_country_flag = excavation_progress_boost
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+

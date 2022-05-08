@@ -1,0 +1,61 @@
+namespace = reliquary_guild
+
+# The Reliquary
+# Appears for members of the new Horde if they are sufficiently developed
+country_event = {
+	id = reliquary_guild.1
+	title = reliquary_guild.1.title
+	desc = reliquary_guild.1.desc
+	picture = RELIQUARY_eventPicture
+
+    desc = { 
+        trigger = { 
+            primary_culture = culture_blood_elf
+        }
+		desc = reliquary_guild.1.desc_blood_elf
+	}
+
+	trigger = {
+		has_country_modifier = member_of_horde
+        total_development = 250
+        NOT = { has_country_flag = reliquary_estate_offer }
+	}
+
+    mean_time_to_happen = {
+		months = 120
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = reliquary_estate_offer
+        }
+    }
+    
+	option = {
+		name = reliquary_guild.1.option.a
+		
+		custom_tooltip = ADD_RELIQUARY_ESTATE
+        hidden_effect = {
+            set_country_flag = has_reliquary_estate
+        }
+        
+        ai_chance = {
+            factor = 75
+        }
+	}
+	option = {
+		name = reliquary_guild.1.option.b
+		
+		add_treasury = 250
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+                
+                has_country_modifier = head_of_horde
+            }
+        }
+	}
+}

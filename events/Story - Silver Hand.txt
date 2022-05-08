@@ -1,0 +1,260 @@
+namespace = silver_hand
+
+# Order of the Silver Hand
+country_event = {
+	id = silver_hand.1
+	title = silver_hand.1.title
+	desc = silver_hand.1.desc
+	picture = SILVER_HAND_eventPicture
+
+    major = yes
+	
+	trigger = {
+        NOT = { has_global_flag = silver_hand_offer }
+        NOT = { exists = SVH }
+        
+		tag = A08 # Lordaeron
+        A10 = {
+            is_subject_of = A08
+        }
+        
+        # Alliance exists
+        any_country = {
+            has_country_modifier = head_of_alliance
+        }
+        exists = U03 # Orcish Horde
+        
+        2975 = {
+            OR = {
+                owned_by = A08
+                owned_by = A10
+            }
+        }
+	}
+	
+	mean_time_to_happen = { 
+        months = 120
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = silver_hand_offer }
+    }
+	
+	option = {
+		name = silver_hand.1.option.a
+		
+        # Scarlet Bastion
+        if = {
+            limit = {
+                2975 = {
+                    OR = {
+                        owned_by = A08
+                        owned_by = A10
+                    }
+                }
+            }
+            2975 = {
+                cede_province = SVH
+            }
+        }
+        
+        # Deathrot Enclave
+        if = {
+            limit = {
+                2187 = {
+                    OR = {
+                        owned_by = A08
+                        owned_by = A10
+                    }
+                }
+            }
+            2187 = {
+                cede_province = SVH
+            }
+        }
+        
+        # Westdale
+        if = {
+            limit = {
+                2175 = {
+                    OR = {
+                        owned_by = A08
+                        owned_by = A10
+                    }
+                }
+            }
+            2175 = {
+                cede_province = SVH
+            }
+        }
+        
+        # Plagueshore
+        if = {
+            limit = {
+                2172 = {
+                    OR = {
+                        owned_by = A08
+                        owned_by = A10
+                    }
+                }
+            }
+            2172 = {
+                cede_province = SVH
+            }
+        }
+        
+        # Lost King's Rest
+        if = {
+            limit = {
+                2168 = {
+                    OR = {
+                        owned_by = A08
+                        owned_by = A10
+                    }
+                }
+            }
+            
+            2168 = {
+                cede_province = SVH
+            }
+        }
+
+        # Make Silver Hand a subject to Lordaeron
+        create_subject = {
+            subject_type = religious_order
+            subject = SVH
+        }
+        
+        hidden_effect = {
+            SVH = {
+                country_event = { id = silver_hand.3 days = 7 }
+                
+                define_ruler = {
+                    name = "Alonsus" 
+                    dynasty = "Faol" 
+                    adm = 5
+                    dip = 5
+                    mil = 3
+                }
+                
+                set_ruler_flag = priest_personality
+            }
+        }
+        
+        ai_chance = {
+            factor = 50
+        }
+	}
+    option = {
+		name = silver_hand.1.option.b
+		
+        add_prestige = 25
+        
+        ai_chance = {
+            factor = 50
+        }
+	}
+}
+
+# Silver Hand Leadership
+country_event = {
+	id = silver_hand.2
+	title = silver_hand.2.title
+	desc = silver_hand.2.desc
+	picture = SILVER_HAND_eventPicture
+
+	trigger = {
+        NOT = { has_global_flag = silver_hand_switch }
+        
+        ai = no
+        
+        exists = SVH
+        has_global_flag = silver_hand_offer
+        tag = A08
+	}
+	
+	mean_time_to_happen = { 
+        months = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = silver_hand_switch }
+    }
+	
+	option = {
+		name = silver_hand.2.option.a
+		
+        switch_tag = SVH
+	}
+    option = {
+		name = silver_hand.2.option.b
+
+	}
+}
+
+# Silver Hand Independence
+country_event = {
+	id = silver_hand.3
+	title = silver_hand.3.title
+	desc = silver_hand.3.desc
+	picture = SILVER_HAND_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            discover_eastern_kingdoms = yes
+            
+            add_treasury = 5000
+            add_manpower = 10
+        }
+    }
+    
+	option = {
+		name = silver_hand.3.option.a
+		
+	}
+}
+
+# Uther the Lightbringer
+country_event = {
+	id = silver_hand.4
+	title = silver_hand.4.title
+	desc = silver_hand.4.desc
+	picture = UTHER_eventPicture
+
+	trigger = {
+        NOT = { has_country_flag = uther_ascends }
+        tag = SVH
+        total_development = 100
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = uther_ascends
+        }
+    }
+    
+	option = {
+		name = silver_hand.4.option.a
+		
+        define_ruler = { 
+            name = "Uther" 
+            dynasty = "the Lightbringer" 
+            adm = 5
+            dip = 6
+            mil = 6
+        }
+        
+        set_ruler_flag = ruler_portrait_uther_the_lightbringer
+        set_ruler_flag = paladin_personality
+	}
+}
