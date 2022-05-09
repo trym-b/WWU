@@ -21,7 +21,7 @@ def _ignored_files() -> List[Path]:
         "localisation/events/WWU_event_consort_l_*.yml",
         "localisation/WWU_estate_agenda_l_*.yml",
     ]
-    repo_root = Path(__file__).parent.parent.parent
+    repo_root = Path(__file__).parent.parent.parent.parent
     invalid_files = []
     for pattern in invalid_file_patterns:
         invalid_files.extend(list(repo_root.rglob(pattern=pattern)))
@@ -29,8 +29,11 @@ def _ignored_files() -> List[Path]:
 
 
 def _main() -> None:
-    repo_root = Path(__file__).parent.parent.parent
-    localisation_files = sorted(list((repo_root / "localisation").rglob("*.yml")))
+    repo_root = Path(__file__).parent.parent.parent.parent
+    localisation_directory = repo_root / "localisation"
+    localisation_files = sorted(list(localisation_directory.rglob("*.yml")))
+    if len(localisation_files) < 1:
+        raise RuntimeError(f"No localisation files found in {localisation_directory}")
     for localisation_file in localisation_files:
         if localisation_file in _ignored_files():
             print(f"Skipping file {localisation_file}", flush=True)

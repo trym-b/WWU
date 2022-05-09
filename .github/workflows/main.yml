@@ -11,3 +11,13 @@ jobs:
               run: "pip install --requirement '# Development/tools/validate-yml/requirements.txt'"
             - name: "Validate"
               run: "python '# Development/tools/validate-yml/validate_yaml.py'"
+    spell-checking-localization-files:
+        name: "Check spelling"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: "Setup"
+              run: "npm install --global cspell"
+            - name: "Check spelling"
+              run: "python '# Development/tools/spell-checking/spellcheck.py'"
