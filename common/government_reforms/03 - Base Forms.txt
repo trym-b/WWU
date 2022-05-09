@@ -801,6 +801,46 @@ zandalari_empire_reform = {
     nation_designer_cost = 0
 }
 
+
+# Used for HRE Free City mechanic
+free_city_reform = {
+	icon = "city_of_gold"
+    legacy_equivalent = free_city_legacy
+    
+    potential = {
+		have_had_reform = free_city_reform
+	}
+    
+    free_city = yes
+    
+    heir = yes
+	queen = yes
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+	modifiers = {
+		army_tradition = 0.5
+		defensiveness = 0.1
+        land_morale = 0.1
+		governing_capacity_modifier = -0.1
+	}
+
+	ai = { factor = 0 }
+    
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+    allow_convert = no              # Can be converted to via peace term
+    lock_level_when_selected = yes
+
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+    nation_designer_trigger = {
+		capital_scope = { is_part_of_hre = yes }
+	}
+}
+
 #--------------------------------------------
 # Republic
 #--------------------------------------------
@@ -2074,7 +2114,7 @@ yaungol_tribe_reform = {
     raze_province = yes
     
     potential = {
-		technology_group = tech_yaungol
+		culture_group = culture_group_yaungol
 	}
     
 	modifiers = {
@@ -2169,7 +2209,7 @@ saurok_pod_reform = {
     raze_province = yes
     
     potential = {
-		primary_culture = culture_saurok
+		culture_group = culture_group_saurok
 	}
     
 	modifiers = {
@@ -2214,7 +2254,7 @@ giant_tribe_reform = {
     heir = no
     
     potential = {
-		primary_culture = culture_saurok
+		has_reform = giant_tribe_reform
 	}
     
 	modifiers = {
@@ -2250,7 +2290,10 @@ draenei_clan_reform = {
     legacy_equivalent = draenei_clan_legacy
     
 	potential = {
-		technology_group = tech_draenei
+		OR = {
+            culture_group = culture_group_draenei
+            culture_group = culture_group_broken
+        }
 	}
     
 	heir = yes
@@ -2285,7 +2328,7 @@ ancient_clan_reform = {
     legacy_equivalent = ancient_clan_legacy
     
 	potential = {
-		technology_group = tech_mogu
+		culture_group = culture_group_mogu
 	}
     
 	heir = yes
@@ -2316,7 +2359,7 @@ expeditionary_force_reform = {
     legacy_equivalent = expeditionary_force_legacy
     
     potential = {
-		have_had_reform = expeditionary_force_reform
+		has_reform = expeditionary_force_reform
 	}
     
     republic = yes
@@ -2347,7 +2390,7 @@ criminal_organization_reform = {
 	legacy_equivalent = criminal_organization_legacy
     
     potential = {
-		have_had_reform = criminal_organization_reform
+		has_reform = criminal_organization_reform
 	}
     
     monarchy = yes
@@ -2381,7 +2424,7 @@ dwarven_clan_reform = {
 	queen = yes
     
     potential = {
-        have_had_reform = dwarven_clan_reform
+        culture_group = culture_group_dwarven
     }
     
 	modifiers = {
@@ -2410,7 +2453,7 @@ satyr_sect_reform = {
     legacy_equivalent = satyr_sect_legacy
     
     potential = {
-        have_had_reform = satyr_sect_reform
+        culture_group = culture_group_satyr
     }
     
     monarchy = no
@@ -2447,45 +2490,6 @@ satyr_sect_reform = {
     nation_designer_cost = 0
 }
 
-# Used for HRE Free City mechanic
-free_city_reform = {
-	icon = "tauren_bull_rush"
-    legacy_equivalent = free_city_legacy
-    
-    potential = {
-		have_had_reform = free_city_reform
-	}
-    
-    free_city = yes
-    
-    heir = yes
-	queen = yes
-    
-    custom_attributes = {
-		locked_government_type = yes
-	}
-    
-	modifiers = {
-		army_tradition = 0.5
-		defensiveness = 0.1
-        land_morale = 0.1
-		governing_capacity_modifier = -0.1
-	}
-
-	ai = { factor = 0 }
-    
-    valid_for_new_country = no      # Can be converted to via nation release
-    allow_normal_conversion = no    # Can be picked as a new reform
-    allow_convert = no              # Can be converted to via peace term
-    lock_level_when_selected = yes
-
-    valid_for_nation_designer = yes
-    nation_designer_cost = 0
-    nation_designer_trigger = {
-		capital_scope = { is_part_of_hre = yes }
-	}
-}
-
 # Used for Centaur nations
 centaur_khanate_reform = {
 	icon = "centaur"
@@ -2503,7 +2507,7 @@ centaur_khanate_reform = {
     raze_province = yes
     
     potential = {
-		have_had_reform = centaur_khanate_reform
+		culture_group = culture_group_centaur
 	}
     
 	modifiers = {
@@ -2548,7 +2552,7 @@ mantid_swarm_reform = {
     raze_province = yes
     
     potential = {
-		have_had_reform = mantid_swarm_reform
+		culture_group = culture_group_mantid
 	}
     
 	modifiers = {
@@ -2579,58 +2583,60 @@ mantid_swarm_reform = {
     nation_designer_cost = 0
 }
 
-#------------------------------------------------------------
+# Used for Tauren nations
+tauren_tribe_reform = {
+	icon = "tauren_bull_rush"
+    legacy_equivalent = tauren_tribe_legacy
+    
+	heir = yes
+	queen = yes
+    
+    potential = {
+        culture_group = culture_group_tauren
+    }
+    
+	modifiers = {
+		development_cost = -0.05
+        improve_relation_modifier = 0.1
+        global_unrest = -1
+	}
+	
+	ai = { factor = 0 }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+    lock_level_when_selected = yes
+    
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
+
+#--------------------------------------------
 # Native
-#------------------------------------------------------------
-wwu_native_chiefdom_reform = {
-	icon = "salvage_yard"
-    legacy_equivalent = wwu_native_chiefdom_legacy
-	allow_normal_conversion = yes
-
-	valid_for_nation_designer = yes
-	nation_designer_cost = 20
-
-	modifiers = {
-		tribal_development_growth = 0.02
-	}
-}
-
-wwu_native_federation_reform = {
-	icon = "reputation"
-    legacy_equivalent = wwu_native_federation_legacy
+#--------------------------------------------
+native_tribe_reform = {
+	icon = "ancestral_call"
+    legacy_equivalent = native_tribe_legacy
     
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 0
+	heir = yes
+	queen = yes
     
 	modifiers = {
-		global_manpower_modifier = 0.2
+		global_tax_modifier = 0.1
+		reinforce_speed = 0.05
 	}
-}
+	
+	ai = { factor = 0 }
+    
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
 
-wwu_native_clan_council_reform = {
-	icon = "scroll_1"
-    legacy_equivalent = wwu_native_clan_council_legacy
-    
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 0
-    
-	modifiers = {
-		diplomatic_upkeep = 1
-		diplomats = 1
-	}
-}
-
-wwu_native_hereditary_reform = {
-	icon = "control_is_king"
-    legacy_equivalent = wwu_native_hereditary_legacy
-    
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 20
-    
-	modifiers = {
-		stability_cost_modifier = -0.33
-	}
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
 }

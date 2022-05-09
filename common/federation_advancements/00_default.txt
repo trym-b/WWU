@@ -23,29 +23,57 @@ wwu_shared_constitution = {
 				}
 			}
 		}
-		
-		if = {
-			limit = {
-				NOT = { government_rank = 2 }
-			}
-			set_government_rank_force = 2
-		}
-		add_country_modifier = {
-			name = "centralization_modifier"
-			duration = 7300
-		}
-		add_prestige = 25
+
+		add_formable_bonus = yes
         
-		# Switch Tag
+		# Thunderbluff
 		if = { 
 			limit = { 
                 primary_culture = culture_tauren 
+                NOT = { primary_culture = culture_highmountain_tauren }
                 NOT = { exists = THB } 
             }
 			change_tag = THB
 			add_permanent_claims_for_federation_nation = { ORIGINAL = ROOT TAG = CRE }
 			swap_federation_idea_group = yes
 
+            area_thunderbluff = {
+                add_base_tax = 2
+                add_base_manpower = 2
+                add_base_production = 2
+                change_religion = ROOT
+                change_culture = ROOT
+            }
+		}
+        # Centaur Khanate
+        else_if = { 
+			limit = { 
+                primary_culture = culture_group_centaur 
+                NOT = { exists = CTR } 
+            }
+			change_tag = CTR
+			add_permanent_claims_for_federation_nation = { ORIGINAL = ROOT TAG = CRE }
+			swap_federation_idea_group = yes
+		}
+        # Gnoll Horde
+        else_if = { 
+			limit = { 
+                primary_culture = culture_group_gnoll
+                NOT = { exists = GHR } 
+            }
+			change_tag = GHR
+			add_permanent_claims_for_federation_nation = { ORIGINAL = ROOT TAG = CRE }
+			swap_federation_idea_group = yes
+		}
+        # Thunder Totem
+        else_if = { 
+			limit = { 
+                primary_culture = culture_highmountain_tauren
+                NOT = { exists = TTM } 
+            }
+			change_tag = TTM
+			add_permanent_claims_for_federation_nation = { ORIGINAL = ROOT TAG = CRE }
+			swap_federation_idea_group = yes
 		}
 		else = {
 			form_federation_nation = {

@@ -1297,6 +1297,14 @@ wwu_switch_become_a_monarchy = {
 
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
+		OR = {
+            AND = {
+                NOT = { has_reform = dwarven_clan_reform }
+                NOT = { has_government_attribute = locked_government_type }
+            }
+            # Allow for this locked government
+            has_reform = dwarven_clan_reform
+        }
     }
     
 	trigger = {
@@ -1317,16 +1325,15 @@ wwu_switch_become_a_monarchy = {
 		lose_reforms = 3
 		change_government = monarchy
         
-        # Native mechanic
+        # Tribal Land
         if = {
             limit = {
-                government = native
+                government = tribal
             }
             every_tribal_land_province = {
                 limit = { NOT = { owner = { exists = yes } } }
                 settle_province = ROOT
             }
-            change_government_reform_progress = -250 # Doing it like this to avoid that migration code triggers
         }
 	}
 	ai = {
@@ -1340,10 +1347,25 @@ wwu_switch_become_a_republic = {
 
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
+		OR = {
+            AND = {
+                NOT = { has_reform = tauren_tribe_reform }
+                NOT = { has_government_attribute = locked_government_type }
+            }
+            # Allow for this locked government
+            has_reform = tauren_tribe_reform
+        }
     }
     
 	trigger = {
-		NOT = { has_government_attribute = locked_government_type }
+		OR = {
+            AND = {
+                NOT = { has_reform = tauren_tribe_reform }
+                NOT = { has_government_attribute = locked_government_type }
+            }
+            # Allow for this locked government
+            has_reform = tauren_tribe_reform
+        }
 		is_emperor = no
 		NOT = { is_lesser_in_union = yes }
 	}
@@ -1353,16 +1375,15 @@ wwu_switch_become_a_republic = {
 		lose_reforms = 3
 		change_government = republic
         
-        # Native mechanic
+        # Tribal Land
         if = {
             limit = {
-                government = native
+                government = tribal
             }
             every_tribal_land_province = {
                 limit = { NOT = { owner = { exists = yes } } }
                 settle_province = ROOT
             }
-            change_government_reform_progress = -250 # Doing it like this to avoid that migration code triggers
         }
 	}
 	ai = {
@@ -1376,6 +1397,7 @@ wwu_switch_become_a_theocracy = {
     
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
+		NOT = { has_government_attribute = locked_government_type }
     }
     
 	trigger = {
@@ -1389,16 +1411,15 @@ wwu_switch_become_a_theocracy = {
 		lose_reforms = 3
 		change_government = theocracy
         
-        # Native mechanic
+        # Tribal Land
         if = {
             limit = {
-                government = native
+                government = tribal
             }
             every_tribal_land_province = {
                 limit = { NOT = { owner = { exists = yes } } }
                 settle_province = ROOT
             }
-            change_government_reform_progress = -250 # Doing it like this to avoid that migration code triggers
         }
 	}
     
