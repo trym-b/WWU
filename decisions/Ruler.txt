@@ -28,16 +28,32 @@ country_decisions = {
     
     undertake_class_training = {
         potential = {
-            
             NOT = { has_assigned_ruler_class = yes }
         }
         allow = {
             NOT = { has_assigned_ruler_class = yes }
             NOT = { has_ruler_flag = ruler_is_training }
-            treasury = 100
+            
+            if = {
+                limit = {
+                    is_immortal_lifespan = yes
+                }
+                years_of_income = 2.0
+            }
+            else = {
+                years_of_income = 1.0
+            }
         }
         effect = {
-            add_treasury = -100
+            if = {
+                limit = {
+                    is_immortal_lifespan = yes
+                }
+                add_years_of_income = -2.0
+            }
+            else = {
+                add_years_of_income = -1.0
+            }
             
             country_event = { id = wwu_ruler_training.1 }
         }
@@ -45,4 +61,7 @@ country_decisions = {
 			factor = 1
 		}
     }
+    
+    # Class Actions
+    
 }
