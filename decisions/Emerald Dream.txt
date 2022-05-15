@@ -1,66 +1,77 @@
 country_decisions = {
 	awaken_from_dream = {
 		potential = {
-			
 			has_country_modifier = dreaming
 			religion = druidism
 		}
 		allow = {
-			dip_power = 50
-			adm_power = 100
+			stability = 1
 		}
 		effect = {
-			add_dip_power = -50
-			add_adm_power = -100
+			add_stability = -1
+            
 			remove_country_modifier = dreaming
-			if = {
-				limit = {
-					NOT = { 
-						has_global_flag = seeds_of_teldrassil
-						primary_culture = culture_green_dragonflight
-					}
+            
+            if = {
+                limit = {
+                    primary_culture = culture_green_dragonflight
+                }
+                add_country_modifier = {
+					name = slumber_sickness
+					duration = 3650
 				}
-				add_country_modifier = {
-					name = long_slumber_sickness
-					duration = 36500
+            }
+            else = {
+                add_country_modifier = {
+					name = slumber_sickness
+					duration = 7300
 				}
-			}
-			custom_tooltip = awaken_from_dream_tooltip
+            }
 		}
 		ai_will_do = {
 			factor = 1
+            
+            # Don't awaken if at peace
 			modifier = {
 				factor = 0
-				OR = {
-					NOT = { piety = 0.2 }
-					NOT = { is_at_war = yes }
-				}
+                
+				NOT = { is_at_war = yes }
+			}
+            
+            # Don't awaken if not at full Dream
+            modifier = {
+				factor = 0
+                
+				NOT = { piety = 1.0 }
 			}
 		}
 	}
 	
 	slumber_into_dream = {
 		potential = {
-			
 			NOT = { has_country_modifier = dreaming }
 			religion = druidism
 		}
 		allow = {
-			is_at_war = no
+            stability = 0
+			NOT = { is_at_war = yes }
 		}
 		effect = {
+			custom_tooltip = slumber_into_dream_tooltip
+            
 			add_country_modifier = {
 				name = dreaming
 				duration = -1
 			}
-			custom_tooltip = slumber_into_dream_tooltip
 		}
 		ai_will_do = {
 			factor = 1
+            
+            # Don't use if Purity isn't very low
 			modifier = {
 				factor = 0
-				piety = -0.2
-				# maybe add more here...
+                
+				piety = -0.25
 			}
 		}
 	}
