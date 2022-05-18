@@ -300,7 +300,18 @@ wwu_scourge_column_2 = {
 		required_missions = { wwu_stabilize_the_frozen_throne }
         
 		trigger = {
-            claim = P15
+            if = {
+                limit = {
+                    exists = P15
+                }
+                OR = {
+                    claim = P15
+                    core_claim = P15
+                }
+            }
+            else = {
+                always = yes
+            }
 		}
 		provinces_to_highlight = {
             owned_by = P15
@@ -308,12 +319,17 @@ wwu_scourge_column_2 = {
 		effect = {
             add_prestige = 10
             
-			add_historical_rival = P15 # Ymirjar
-            
-            # Ymirjar
-			P15 = {
-				add_historical_rival = P11
-			}
+            if = {
+                limit = {
+                    exists = P15
+                }
+                add_historical_rival = P15 # Ymirjar
+                
+                # Ymirjar
+                P15 = {
+                    add_historical_rival = P11
+                }
+            }
 		}
 	}
     
