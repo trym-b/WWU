@@ -19,59 +19,14 @@ country_event = {
         change_primary_culture = culture_forsaken
         change_religion = fel
         
-        every_owned_province = {
-            change_culture = culture_forsaken
-            change_religion = fel
+        hidden_effect = {
+            every_owned_province = {
+                change_culture = culture_forsaken
+                change_religion = fel
+            }
         }
         
         add_stability = 6
-        
-        # Havenshire
-        if = {
-            limit = {    
-                1011 = {
-                    NOT = { owned_by = ROOT }
-                }
-            }
-            1011 = {
-                cede_province = ROOT
-            }
-        }
-        # New Avalon
-        if = {
-            limit = {    
-                1028 = {
-                    NOT = { owned_by = ROOT }
-                }
-            }
-            1028 = {
-                cede_province = ROOT
-            }
-        }
-        
-        # King's Harbor
-        if = {
-            limit = {    
-                519 = {
-                    NOT = { owned_by = ROOT }
-                }
-            }
-            519 = {
-                cede_province = ROOT
-            }
-        }
-        
-        # Fletcher's Hollow
-        if = {
-            limit = {    
-                539 = {
-                    NOT = { owned_by = ROOT }
-                }
-            }
-            539 = {
-                cede_province = ROOT
-            }
-        }
         
         define_ruler = {
             name = "Balnazzar"
@@ -80,204 +35,18 @@ country_event = {
             DIP = 2
             MIL = 6
         }
+        
+        grant_risen_free_provinces = yes
     }
 	option = {
         name = wwu_setup_the_risen.1.option.b
 		
 		add_stability = -1
 		
-		if = {
-            limit = {    
-                642 = {
-                    previous_owner = A22
-                }
-            }
-		    642 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2975 = {
-                    previous_owner = A22
-                }
-            }
-		    2975 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                608 = {
-                    previous_owner = A22
-                }
-            }
-		    608 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                3075 = {
-                    previous_owner = A22
-                }
-            }
-		    3075 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                625 = {
-                    previous_owner = A22
-                }
-            }
-		    625 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                592 = {
-                    previous_owner = A22
-                }
-            }
-		    592 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2170 = {
-                    previous_owner = A22
-                }
-            }
-		    2170 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2175 = {
-                    previous_owner = A22
-                }
-            }
-		    2175 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2172 = {
-                    previous_owner = A22
-                }
-            }
-		    2172 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2168 = {
-                    previous_owner = A22
-                }
-            }
-		    2168 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2027 = {
-                    previous_owner = A22
-                }
-            }
-		    2027 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                859 = {
-                    previous_owner = A22
-                }
-            }
-		    859 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2026 = {
-                    previous_owner = A22
-                }
-            }
-		    2026 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2096 = {
-                    previous_owner = A22
-                }
-            }
-		    2096 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2124 = {
-                    previous_owner = A22
-                }
-            }
-		    2124 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                2187 = {
-                    previous_owner = A22
-                }
-            }
-		    2187 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
-		if = {
-            limit = {    
-                843 = {
-                    previous_owner = A22
-                }
-            }
-		    843 = {
-                cede_province = X01
-				add_core = X01
-			}
-        }
+        # Give Risen provinces to Risen nation
+        spawn_risen = yes
+        
 		X01 = {
-		    every_owned_province = {
-                change_culture = culture_forsaken
-                change_religion = fel
-			}
 			define_ruler = {
                 name = "Balnazzar"
                 dynasty = "the Cunning"
@@ -285,11 +54,24 @@ country_event = {
                 DIP = 2
                 MIL = 6
 			}
-        }
-		X01 = {
-		    declare_war = A22			
+
+            country_event = { id = wwu_setup_the_risen.2 days = 7 }
 		}
 	}
 }
 
-     
+# Balnazzar's War
+country_event = {
+    id = wwu_setup_the_risen.2
+    title = wwu_setup_the_risen.2.title
+    desc = wwu_setup_the_risen.2.desc
+    picture = NATHREZIM_eventPicture
+	
+    is_triggered_only = yes
+    
+    option = {
+        name = wwu_setup_the_risen.2.option.a
+        
+        declare_war = A22
+	}
+}
