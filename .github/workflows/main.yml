@@ -21,3 +21,13 @@ jobs:
               run: "npm install --global cspell"
             - name: "Check spelling"
               run: "python '# Development/tools/spell-checking/spellcheck.py'"
+    naively-verify-event-and-mission-modifiers-are-used:
+        name: "Verify event and mission modifiers"
+        runs-on: ubuntu-22.04
+        steps:
+            - name: "Check out repository code"
+              uses: actions/checkout@v3
+            - name: "Setup"
+              run: "pip install --requirement '# Development/tools/verify-unused-modifier/requirements.txt'"
+            - name: "Verify"
+              run: "python '# Development/tools/verify-unused-modifier/verify_all_event_and_mission_modifiers_are_used.py'"
