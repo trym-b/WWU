@@ -1,0 +1,59 @@
+country_decisions = {
+    form_new_nathreza = {
+		major = yes
+        ai_importance = 300
+        
+		potential = {
+			# Exclusions
+			NOT = { exists = NNT } # New Nathreza
+			
+        	tag = DDL
+		}
+        
+		allow = {
+		
+			# General
+			is_at_war = no	
+			stability = 2
+            total_development = 900
+            
+            # Cost
+            adm_power = 300
+			dip_power = 300
+			mil_power = 300
+		}
+        
+		effect = {
+            # Cost
+			add_adm_power = -300
+			add_dip_power = -300
+            add_mil_power = -300
+        
+            # Switch
+			change_tag = NNT
+			set_government_rank = 2
+			if = {
+			    limit = {
+			        primary_culture = culture_scourge
+				}
+			    change_primary_culture = culture_dreadlord
+			}
+			every_owned_province = { 
+                limit = {
+                    culture = culture_scourge
+                    NOT = { culture = culture_dreadlord }
+                }
+                change_culture = culture_dreadlord
+            }
+            
+            # Bonus
+			add_formable_bonus = yes
+            trigger_ni_switch = no
+            #trigger_mission_switch = no
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
