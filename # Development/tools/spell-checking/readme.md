@@ -11,8 +11,8 @@
 To setup your environment to spell check, run the following:
 
 ```shell
-docker run --volume <path\to\repo>:/host_dir --tty --interactive ubuntu:22.04
-cd /host_dir && ./"# Development"/tools/spell-checking/cspell_docker_setup.sh
+docker run --volume <path\to\repo>:/host_dir --tty --interactive --rm --workdir /host_dir ubuntu:22.04
+./"# Development"/tools/spell-checking/cspell_docker_setup.sh
 ```
 
 Note `<C:\path\to\repo\>` should be replaced by the path to the root of the repository,
