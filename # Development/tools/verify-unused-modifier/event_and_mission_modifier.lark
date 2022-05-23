@@ -1,0 +1,26 @@
+value: SIGNED_NUMBER
+    | WORDS_WITH_UNDERSCORE
+    | ESCAPED_STRING
+    | object
+    | NUMBER
+
+starts_with_number: NUMBER "_" WORDS_WITH_UNDERSCORE
+
+object: "{" [repeated_assignments (" " repeated_assignments)*] "}"
+
+single_assignment: WORDS_WITH_UNDERSCORE "=" value
+    | NUMBER "=" value
+    | starts_with_number "=" value
+
+repeated_assignments: single_assignment*
+
+%import common.ESCAPED_STRING
+%import common.NUMBER
+%import common.CNAME -> WORDS_WITH_UNDERSCORE
+%import common.SIGNED_NUMBER
+%import common.SH_COMMENT
+
+// Ignore white space and '#' comments
+%import common.WS
+%ignore WS
+%ignore SH_COMMENT
