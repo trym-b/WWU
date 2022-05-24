@@ -1,0 +1,143 @@
+namespace = wwu_sha_emergence
+
+# Sha Emergence
+country_event = {
+	id = wwu_sha_emergence.1
+	title = wwu_sha_emergence.1.title
+	desc = wwu_sha_emergence.1.desc
+	picture = SHA_ARISES_eventPicture
+
+	is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_sha_emergence.1.option.a
+		
+        add_stability = -3
+        
+        random_owned_province = {
+            limit = {
+                continent = continent_pandaria
+            }
+            change_religion = sha
+            add_reform_center = sha
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_sha_emergence.2 days = 3650 }
+        }
+	}
+}
+
+# Sha Quelled
+country_event = {
+	id = wwu_sha_emergence.100
+	title = wwu_sha_emergence.100.title
+    
+	desc = {
+        trigger = {
+            NOT = { religion = sha }
+        }
+        desc = wwu_sha_emergence.100.desc
+    }
+    desc = {
+        trigger = {
+            religion = sha
+        }
+        desc = wwu_sha_emergence.100.desc_sha
+    }
+    
+	picture = SHA_ARISES_eventPicture
+
+	is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_sha_emergence.100.option.a
+		
+        add_stability = 3
+	}
+}
+
+# Sha of Doubt
+
+# Sha of Despair
+
+# Sha of Fear
+
+# Sha of Hatred
+
+# Sha of Violence
+
+# Sha of Anger
+
+# Sha of Pride
+
+country_event = {
+	id = wwu_sha_emergence.10
+	title = wwu_sha_emergence.10.title
+	desc = wwu_sha_emergence.10.desc
+	picture = SHA_ARISES_eventPicture
+
+	is_triggered_only = yes
+    
+	
+	immediate = {
+		random_owned_province = {
+			save_event_target_as = sha_province
+			limit = {
+				continent = continent_pandaria
+			}
+			spawn_rebels = {
+				size = 3
+				leader = "Sha of Doubt"
+				type = noble_rebels
+			}
+		}
+	}
+	option = {
+		name = wwu_sha_emergence.10.option.a
+		highlight = yes
+        
+		trigger = { 
+			P37 = {
+				NOT = { war_with = ROOT }
+				has_opinion = {
+					who = ROOT
+					value = 0
+				}
+			}
+		}
+		add_dip_power = -40
+		
+	}
+	option = {
+		name = wwu_sha_emergence.10.option.b
+		highlight = yes
+        
+		trigger = { 
+			has_country_modifier = adventurers_allowed
+		}
+		add_mil_power = -40
+		
+	}
+	option = {
+		name = wwu_sha_emergence.10.option.c
+        
+		event_target:sha_province = {
+			add_devastation = 100
+		}
+		add_adm_power = -40
+		
+	}
+	option = {
+		name = wwu_sha_emergence.10.option.d
+        
+	}
+}
