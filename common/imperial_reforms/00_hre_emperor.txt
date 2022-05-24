@@ -47,7 +47,7 @@ emperor_safeguard_imperial_stability = {
 	required_reform = emperor_imperial_levies
 	gui_container = mainline
 }
-emperor_contributions_to_the_emperor = {
+emperor_enforce_imperial_contributions = {
 	empire = hre
 	potential = {
 		has_dlc = "Emperor"
@@ -63,7 +63,7 @@ emperor_contributions_to_the_emperor = {
 }
 emperor_establish_celestial_council = {
 	empire = hre
-	required_reform = emperor_contributions_to_the_emperor
+	required_reform = emperor_enforce_imperial_contributions
 	gui_container = mainline
 
 	potential = {
@@ -76,7 +76,7 @@ emperor_establish_celestial_council = {
 		max_absolutism = 1
 	}
 }
-emperor_seek_celestial_blessing = {
+emperor_mandate_imperial_barracks = {
 	empire = hre
 	required_reform = emperor_establish_celestial_council
 	gui_container = mainline
@@ -105,17 +105,34 @@ emperor_enforce_peace = {
 	off_effect = {
 		internal_hre_cb = yes
 	}
-	required_reform = emperor_seek_celestial_blessing
+	required_reform = emperor_mandate_imperial_barracks
 	gui_container = mainline
 }
 
 #----------------------------------------
 # Left
 #----------------------------------------
-emperor_council_dues = {
+emperor_mandatory_conscription = {
 	empire = hre
 	required_reform = emperor_establish_celestial_council
 	disabled_by = emperor_bypass_the_council
+	gui_container = left_branch
+
+	potential = {
+		has_dlc = "Emperor"
+	}
+	emperor_per_prince = {
+		garrison_size = 0.1
+        global_manpower_modifier = 0.05
+	}
+	elector_per_prince = {
+		garrison_size = 0.05
+        global_manpower_modifier = 0.025
+	}
+}
+emperor_council_dues = {
+	empire = hre
+	required_reform = emperor_mandatory_conscription
 	gui_container = left_branch
 
 	potential = {
@@ -200,21 +217,34 @@ emperor_imperial_mobilization = {
 #----------------------------------------
 emperor_bypass_the_council = { 
 	empire = hre
+	required_reform = emperor_establish_celestial_council
+	disabled_by = emperor_council_dues
+	gui_container = right_branch
+    
 	potential = {
 		has_dlc = "Emperor"
 	}
 	emperor = {
 		core_creation = -0.10
 	}
-	required_reform = emperor_establish_celestial_council
-	disabled_by = emperor_council_dues
-	gui_container = right_branch
 }
-
-emperor_curtail_the_electors = {
+emperor_quell_insurrections = { 
 	empire = hre
 	required_reform = emperor_bypass_the_council
 	gui_container = right_branch
+    
+	potential = {
+		has_dlc = "Emperor"
+	}
+	emperor = {
+		global_unrest = -2
+	}
+}
+emperor_curtail_the_electors = {
+	empire = hre
+	required_reform = emperor_quell_insurrections
+	gui_container = right_branch
+    
 	potential = {
 		has_dlc = "Emperor"
 	}
@@ -264,7 +294,7 @@ emperor_revoke_imperial_privileges = {
 	gui_container = right_branch
 }
 
-emperor_establish_tauren_empire = {
+emperor_establish_united_empire = {
 	empire = hre
 	potential = {
 		has_dlc = "Emperor"
