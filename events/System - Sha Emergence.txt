@@ -13,6 +13,12 @@ country_event = {
 		days = 1
 	}
     
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_emergence
+        }
+    }
+    
 	option = {
 		name = wwu_sha_emergence.1.option.a
 		
@@ -32,7 +38,7 @@ country_event = {
 	}
 }
 
-# Sha Quelled
+# Sha Emergence Fades
 country_event = {
 	id = wwu_sha_emergence.100
 	title = wwu_sha_emergence.100.title
@@ -58,86 +64,334 @@ country_event = {
 		days = 1
 	}
     
+     immediate = {
+        hidden_effect = {
+            set_global_flag = sha_emergence_over
+        }
+    }
+    
 	option = {
 		name = wwu_sha_emergence.100.option.a
 		
         add_stability = 3
+        
+        hidden_effect = {
+            country_event = { id = wwu_imperial_fracture.1 days = 30 }
+        }
 	}
 }
 
 # Sha of Doubt
-
-# Sha of Despair
-
-# Sha of Fear
-
-# Sha of Hatred
-
-# Sha of Violence
-
-# Sha of Anger
-
-# Sha of Pride
-
 country_event = {
 	id = wwu_sha_emergence.10
 	title = wwu_sha_emergence.10.title
-	desc = wwu_sha_emergence.10.desc
-	picture = SHA_ARISES_eventPicture
+    desc = wwu_sha_emergence.10.desc
+    
+	picture = SHA_ATTACK_eventPicture
 
 	is_triggered_only = yes
     
-	
-	immediate = {
-		random_owned_province = {
-			save_event_target_as = sha_province
-			limit = {
-				continent = continent_pandaria
-			}
-			spawn_rebels = {
-				size = 3
-				leader = "Sha of Doubt"
-				type = noble_rebels
-			}
-		}
+    trigger = {
+        NOT = { has_global_flag = sha_of_doubt }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_doubt
+        }
+    }
+    
 	option = {
 		name = wwu_sha_emergence.10.option.a
-		highlight = yes
-        
-		trigger = { 
-			P37 = {
-				NOT = { war_with = ROOT }
-				has_opinion = {
-					who = ROOT
-					value = 0
-				}
-			}
-		}
-		add_dip_power = -40
 		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
 	}
+}
+
+# Sha of Despair
+country_event = {
+	id = wwu_sha_emergence.11
+	title = wwu_sha_emergence.11.title
+    desc = wwu_sha_emergence.11.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_despair }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_despair
+        }
+    }
+    
 	option = {
-		name = wwu_sha_emergence.10.option.b
-		highlight = yes
-        
-		trigger = { 
-			has_country_modifier = adventurers_allowed
-		}
-		add_mil_power = -40
+		name = wwu_sha_emergence.11.option.a
 		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
 	}
+}
+
+# Sha of Fear
+country_event = {
+	id = wwu_sha_emergence.12
+	title = wwu_sha_emergence.12.title
+    desc = wwu_sha_emergence.12.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_fear }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_fear
+        }
+    }
+    
 	option = {
-		name = wwu_sha_emergence.10.option.c
-        
-		event_target:sha_province = {
-			add_devastation = 100
-		}
-		add_adm_power = -40
+		name = wwu_sha_emergence.12.option.a
 		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
 	}
+}
+
+# Sha of Hatred
+country_event = {
+	id = wwu_sha_emergence.13
+	title = wwu_sha_emergence.13.title
+    desc = wwu_sha_emergence.13.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_hatred }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_hatred
+        }
+    }
+    
 	option = {
-		name = wwu_sha_emergence.10.option.d
-        
+		name = wwu_sha_emergence.13.option.a
+		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
+	}
+}
+
+# Sha of Violence
+country_event = {
+	id = wwu_sha_emergence.14
+	title = wwu_sha_emergence.14.title
+    desc = wwu_sha_emergence.14.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_violence }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_violence
+        }
+    }
+    
+	option = {
+		name = wwu_sha_emergence.14.option.a
+		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
+	}
+}
+
+# Sha of Anger
+country_event = {
+	id = wwu_sha_emergence.15
+	title = wwu_sha_emergence.15.title
+    desc = wwu_sha_emergence.15.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_anger }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_anger
+        }
+    }
+    
+	option = {
+		name = wwu_sha_emergence.15.option.a
+		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
+	}
+}
+
+# Sha of Pride
+country_event = {
+	id = wwu_sha_emergence.16
+	title = wwu_sha_emergence.16.title
+    desc = wwu_sha_emergence.16.desc
+    
+	picture = SHA_ATTACK_eventPicture
+
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = sha_of_pride }
+        any_province = {
+            NOT = { has_hostile_reformation_center = yes }
+            is_part_of_hre = yes
+            owner = { religion = celestials }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sha_of_pride
+        }
+    }
+    
+	option = {
+		name = wwu_sha_emergence.16.option.a
+		
+        random_province = {
+            limit = {
+                NOT = { has_hostile_reformation_center = yes }
+                is_part_of_hre = yes
+                owner = { religion = celestials }
+            }
+            
+            change_religion = sha
+            add_reform_center = sha
+        }
 	}
 }

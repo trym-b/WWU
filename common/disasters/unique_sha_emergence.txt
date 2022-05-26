@@ -1,6 +1,6 @@
 sha_emergence = {
 	potential = {
-		NOT = { has_country_flag = complete_stasis }
+		NOT = { has_global_flag = sha_emergence_over }
         is_emperor = yes
 		capital_scope = {
 			continent = continent_pandaria
@@ -9,26 +9,26 @@ sha_emergence = {
 	}
 
 	can_start = {
-        total_development = 500
+        total_development = 200
         is_at_war = yes
 	}
 	
 	progress = {
 		modifier = {
 			factor = 1
-			total_development = 600
+			total_development = 300
 		}
 		modifier = {
 			factor = 1
-			total_development = 700
+			total_development = 400
 		}
         modifier = {
 			factor = 1
-			total_development = 800
+			total_development = 500
 		}
         modifier = {
 			factor = 1
-			total_development = 900
+			total_development = 750
 		}
         modifier = {
 			factor = 1
@@ -37,22 +37,18 @@ sha_emergence = {
 	}
 	
 	can_stop = {
-		always = no
+		is_at_war = no
 	}
 	
 	can_end = {
-        OR = {
-            religion = sha
-            NOT = {
-                any_owned_province = {
-                    religion = sha
-                }
-            }
+        had_global_flag {
+            flag = sha_emergence
+            days = 365
         }
 	}
 	
 	modifier = {
-	
+        stability_cost_modifier = 1.0
 	}
 
 	on_start = wwu_sha_emergence.1
