@@ -41,9 +41,31 @@ sha_emergence = {
 	}
 	
 	can_end = {
-        had_global_flag = {
-            flag = sha_emergence
-            days = 3650
+        OR = {
+            # End after 25 years
+            had_global_flag = {
+                flag = sha_emergence
+                days = 9125
+            }
+            # End after 10 years if no reform center remains
+            AND = {
+                had_global_flag = {
+                    flag = sha_emergence
+                    days = 3650
+                }
+                NOT = {
+                    continent_pandaria = {
+                        is_reformation_center = yes
+                    }
+                }
+            }
+            # End if any country becomes fully Sha
+            any_country = {
+                religion = sha
+                capital_scope = {
+                    continent = continent_pandaria
+                }
+            }
         }
 	}
 	

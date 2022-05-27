@@ -30,6 +30,14 @@ country_event = {
             }
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -118,6 +126,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -163,6 +179,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -208,6 +232,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -253,6 +285,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -298,6 +338,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -343,6 +391,14 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
         }
 	}
 }
@@ -388,6 +444,56 @@ country_event = {
             
             change_religion = sha
             add_reform_center = sha
+            
+            add_permanent_province_modifier = {
+                name = province_sha_emergence
+                duration = -1
+            }
+            hidden_effect = {
+                set_permanent_province_flag = sha_emergence_timer
+            }
+        }
+	}
+}
+
+# Sha Corruption Fades
+province_event = {
+	id = wwu_sha_emergence.20
+	title = wwu_sha_emergence.20.title
+    desc = wwu_sha_emergence.20.desc
+	picture = PANDAREN_WARRIOR_eventPicture
+
+    trigger = {
+        had_province_flag = {
+            flag = sha_emergence_timer
+            days = 3650
+        }
+        is_reformation_center = yes
+        
+        # If owner is Sha, keep it since it is a benefit for them
+        owner = {
+            NOT = { religion = sha }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_province_flag = sha_emergence_timer
+            remove_reform_center = yes
+            remove_province_modifier = province_sha_emergence
+        }
+    }
+    
+	option = {
+		name = wwu_sha_emergence.20.option.a
+    
+        tooltip = {
+            remove_reform_center = yes
+            remove_province_modifier = province_sha_emergence
         }
 	}
 }
