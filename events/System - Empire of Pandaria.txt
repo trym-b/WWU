@@ -13,55 +13,26 @@ country_event = {
 	option = {
 		name = wwu_empire_of_pandaria.1.option.a
             
-		every_province = {
-			limit = {
-				is_part_of_hre = yes
-				OR = {
-					owned_by = ROOT
-					owner = { is_neighbor_of = ROOT }
-				}
-				NOT = { is_core = ROOT }
-			}
-			add_core = emperor
+		continent_pandaria = {
+			add_core = ROOT
 		}
+        
 		every_country = {
 			limit = {
 				is_part_of_hre = yes
 				is_emperor = no
-				num_of_cities = 1
 			}
-			country_event = { id = wwu_empire_of_pandaria.2 }
+			PREV = {
+                inherit = PREV
+            }
 		}
         
 		dismantle_hre = yes
 		set_government_rank = 3
-		add_adm_power = 250
         
-		if = {
-			limit = {
-				has_custom_ideas = no
-			}
-			country_event = { id = wwu_country_switch.1 } #Swap Ideas
-		}
-		swap_non_generic_missions = yes
-	}
-}
-
-# "Empire of Pandaria" - Members
-country_event = {
-	id = wwu_empire_of_pandaria.2
-	title = wwu_empire_of_pandaria.2.title
-	desc = wwu_empire_of_pandaria.2.desc
-	picture = PANDAREN_WARRIOR_eventPicture
-
-	is_triggered_only = yes
-	
-	option = {
-		name = wwu_empire_of_pandaria.2.option.a
-        
-		emperor = {
-			inherit = ROOT
-		}
+		add_formable_bonus = yes
+        #trigger_ni_switch = yes
+        #trigger_mission_switch = yes
 	}
 }
 
