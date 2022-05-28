@@ -18,7 +18,7 @@ po_depose_ruler = {
 		cancelled_subject = 0.0
 		concede_colonial_region = 0.0
 	}
-	warscore_cap = 100.0
+	warscore_cap = 50.0
 	requires_demand_independence = no
 	is_make_subject = no
 	requires_is_allowed = no
@@ -27,11 +27,17 @@ po_depose_ruler = {
 		FROM = {
             has_regency = no
         }
+        
+        # ROOT is the attacker, FROM is the defender
+        AND = {
+            offensive_war_with = FROM
+            is_in_war = {
+                attacker_leader = ROOT
+                defender_leader = FROM
+            }
+        }
 	}
 	is_allowed = {
-        # ROOT is the attacker, FROM is the defender
-        offensive_war_with = FROM
-        
         NOT = { has_country_modifier = depose_ruler_cooldown }
 		FROM = {
             has_regency = no
