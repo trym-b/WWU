@@ -325,8 +325,147 @@ country_event = {
 # Saurok Incursion
 #-------------------------------------
 # Saurok have begun raiding imperial villages more frequently.
+# Incident
+country_event = {
+	id = wwu_imperial_incidents.16
+	title = wwu_imperial_incidents.16.title
+	desc = wwu_imperial_incidents.16.desc
+	picture = SAUROK_DINOMANCER_eventPicture
+
+	is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    # Isolate the ringleader
+	option = {
+		name = wwu_imperial_incidents.16.option.a
+        
+        emperor = {
+            random_owned_province = {
+                spawn_rebels = {
+                    size = 5
+                    type = saurok_rebels
+                }
+            }
+            
+            add_country_modifier = {
+                name = imperial_vigor
+                duration = 3650
+            }
+        }
+        
+        ai_chance = {
+            factor = 15
+        }
+	}
+
+    # Indiscriminately purge them
+    option = {
+		name = wwu_imperial_incidents.16.option.b
+        
+        random_country = {
+            limit = { is_part_of_hre = yes }
+            spawn_rebels = {
+                size = 2
+                type = saurok_rebels
+            }
+        }
+        random_country = {
+            limit = { is_part_of_hre = yes }
+            spawn_rebels = {
+                size = 2
+                type = saurok_rebels
+            }
+        }
+        random_country = {
+            limit = { is_part_of_hre = yes }
+            spawn_rebels = {
+                size = 2
+                type = saurok_rebels
+            }
+        }
+        random_country = {
+            limit = { is_part_of_hre = yes }
+            spawn_rebels = {
+                size = 2
+                type = saurok_rebels
+            }
+        }
+        
+        every_country = {
+            limit = { is_part_of_hre = yes }
+            
+            add_country_modifier = {
+                name = imperial_vigor
+                duration = 3650
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+    
+    # Ignore the issue
+    option = {
+		name = wwu_imperial_incidents.16.option.c
+        
+        emperor = {
+            add_imperial_influence = -50
+        }
+        
+        every_country = {
+            limit = { is_part_of_hre = yes }
+            
+            add_country_modifier = {
+                name = saurok_raiders_amok
+                duration = 3650
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+
+# Trigger
+country_event = {
+	id = wwu_imperial_incidents.17
+	title = wwu_imperial_incidents.17.title
+	desc = wwu_imperial_incidents.17.desc
+	picture = SAUROK_DINOMANCER_eventPicture
+
+    fire_only_once = yes
+    hidden = yes
+    
+    trigger = {
+        culture_group = culture_group_saurok
+        any_country = {
+            culture_group = culture_group_pandaren
+            is_neighbor_of = PREV
+        }
+	}
+    
+    mean_time_to_happen = {
+		months = 640
+	}
+
+	option = {
+		name = wwu_imperial_incidents.17.option.a
+        
+        emperor = { set_imperial_incident = incident_saurok_incursion }
+	}
+}
 
 #-------------------------------------
-# Poisoned Harvest
+# Infested Harvest
 #-------------------------------------
-# Tiller fields have been poisoned by malicious Mantid.
+# Tiller fields have been infested by Virmen
+
+#-------------------------------------
+# Shado-pan Investment
+#-------------------------------------
+
