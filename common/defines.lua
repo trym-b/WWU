@@ -624,7 +624,7 @@ NCountry = {
 	PARLIAMENT_CHANCE_OF_DECISION = 10,			-- % Chance debate is ended after PARLIAMENT_DEBATE_DURATION
 
 	ALLOW_FEMALE_GENERALS = 1,
-	FEMALE_ADVISOR_CHANCE = 0.5,
+	FEMALE_ADVISOR_CHANCE = 25,
 	MAX_IDEA_GROUPS_FROM_SAME_CATEGORY = 1.0,   -- Allow any type at any time
 
 	RANDOM_LUCKY_BASE_WEIGHT = 100,					-- Base weight given to each nation when rolling for random lucky
@@ -671,10 +671,10 @@ NCountry = {
 	GREAT_PROJECT_DEGRADATION_PERCENT_THRESHOLD_FOR_TIER_1 = 25, --state of repair threshold for tier 1 benefits
 	GREAT_PROJECT_DEGRADATION_PERCENT_THRESHOLD_FOR_TIER_2 = 50, --state of repair threshold for tier 2 benefits
 	GREAT_PROJECT_DEGRADATION_PERCENT_THRESHOLD_FOR_TIER_3 = 75, --state of repair threshold for tier 3 benefits
-	GREAT_PROJECT_MANPOWER_REQUIRED_FOR_CONSTRUCTION_BOOST = 1000, --use a bunch of manpower to move things on
-	GREAT_PROJECT_MANPOWER_CONSTRUCTION_BOOST_AMOUNT_IN_DAYS = 100, --how far throwing men at the problem gets you
-	GREAT_PROJECT_MONEY_REQUIRED_FOR_CONSTRUCTION_BOOST = 100, --use a bunch of money to move things on
-	GREAT_PROJECT_MONEY_CONSTRUCTION_BOOST_AMOUNT_IN_DAYS = 100, --how far throwing cash at the problem gets you
+	GREAT_PROJECT_MANPOWER_REQUIRED_FOR_CONSTRUCTION_BOOST = 10000, --use a bunch of manpower to move things on
+	GREAT_PROJECT_MANPOWER_CONSTRUCTION_BOOST_AMOUNT_IN_DAYS = 960, --how far throwing men at the problem gets you
+	GREAT_PROJECT_MONEY_REQUIRED_FOR_CONSTRUCTION_BOOST = 1000, --use a bunch of money to move things on
+	GREAT_PROJECT_MONEY_CONSTRUCTION_BOOST_AMOUNT_IN_DAYS = 960, --how far throwing cash at the problem gets you
 	GREAT_PROJECT_MOVE_COST_PER_DAY = 3, --how much to move a great project for one day
 	COUNTRIES_GETTING_SCORE = 10,
 	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 2,			-- extra expense for being above forcelimit
@@ -720,7 +720,7 @@ NCountry = {
 	TECH_AHEAD_OF_TIME = 0.1,		-- per year ahead.
 
 
-	PS_BUY_IDEA = 500,
+	PS_BUY_IDEA = 400,
 	PS_BUY_NATIVE_ADVANCEMENT = 500,
 	PS_BUY_RELIGIOUS_REFORM = 0,
 	PS_ADVANCE_TECH = 600,
@@ -1212,11 +1212,12 @@ NEconomy = {
 },
 
 NMilitary = {
-	SLACKEN_AP_DROP = 0.01,
-	SLACKEN_MANPOWER_INCREASE = 0.2,
+	SLACKEN_AP_DROP = 0.05,
+	SLACKEN_MANPOWER_INCREASE = 2.0,
 
 	DEVELOPMENT_FOR_BLOCKADE_COST = 0.5,
 	
+
 	ARMY_DRILL_YEARLY_DECAY = -1.0,					-- Loss from not Drilling
 	ARMY_DRILL_YEARLY_GAIN = 10.0,					-- Gain from Drilling
 	ARMY_DRILL_MAX = 100.0,
@@ -1619,7 +1620,7 @@ NAI = {
 	DEVELOPMENT_CAP_BASE = 30,	-- AI will not develop provinces that have more development than this or DEVELOPMENT_CAP_MULT*original development (whichever is bigger)
 	DEVELOPMENT_CAP_MULT = 1.0,
 
-	PEACE_BASE_RELUCTANCE = 2, -- AI base stubbornness to refuse peace (always applied)
+	PEACE_BASE_RELUCTANCE = 0, -- AI base stubbornness to refuse peace (always applied)
 	PEACE_BATTLE_RELUCTANCE = 60, -- Reluctance multiplied by fraction of support limit currently in an ongoing battle in this war (to encourage battle resolution before peacing).
 	PEACE_EXCESSIVE_DEMANDS_FACTOR = 0.005, -- AI unwillingness to peace based on demanding more stuff than you have warscore
 	PEACE_EXCESSIVE_DEMANDS_THRESHOLD = 15, -- If you have less warscore than this, excessive demands will be factored in more highly
@@ -2583,10 +2584,10 @@ NGovernment = {
 	LEGACY_NATIVES_REFORM_THEOCRACY_SPONSOR = "theocracy_legacy",
 	LEADER_AS_MONARCH_TRADITION = 30, -- How much tradition leaders will get when generated for
 	
-	CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 0.5,
+	CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 0.8,
 	DEVASTATION_PER_DEV_STOLEN = 5,
-	FREE_CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 0.5,
-	FREE_CONCENTRATE_DEVELOPMENT_OTHER_STATE_PROVINCES_PROPORTION = 0.5,
+	FREE_CONCENTRATE_DEVELOPMENT_CAPITAL_PROPORTION = 1,
+	FREE_CONCENTRATE_DEVELOPMENT_OTHER_STATE_PROVINCES_PROPORTION = 0,
 },
 
 }
