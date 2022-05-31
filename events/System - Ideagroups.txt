@@ -220,32 +220,49 @@ country_event = {
 		months = 1200
 	}
 	
-	option = {
-		name = wwu_ideagroups.9.option.a
-		
+    immediate = {
         hidden_effect = {
             random_subject_country = {
-                limit = { junior_union_with = ROOT }
+                limit = { 
+                    junior_union_with = ROOT 
+                }
                 
                 save_event_target_as = chosen_subject
             }
         }
-        
-        inherit = event_target:chosen_subject
+    }
+    
+	option = {
+		name = wwu_ideagroups.9.option.a
+		
+        if = {
+            limit = {
+                has_saved_event_target = chosen_subject
+                any_subject_country = {
+                    tag = event_target:chosen_subject
+                    NOT = { total_development = 250 }
+                }
+            }
+            
+            inherit = event_target:chosen_subject
+        }
+        else = {
+            add_country_modifier = {
+                name = integration_of_royalty
+                duration = 9125
+            }
+        }
 	}
     option = {
 		name = wwu_ideagroups.9.option.b
 		
-        hidden_effect = {
-            random_subject_country = {
-                limit = { junior_union_with = ROOT }
-                
-                save_event_target_as = chosen_subject
+        if = {
+            limit = {
+                has_saved_event_target = chosen_subject
             }
-        }
-        
-        event_target:chosen_subject = {
-            add_liberty_desire = -50
+            event_target:chosen_subject = {
+                add_liberty_desire = -50
+            }
         }
 	}
 }
@@ -262,7 +279,16 @@ country_event = {
         NOT = { culture_group = culture_group_scourge }
 		any_subject_country = {
             NOT = { culture_group = culture_group_scourge }
-            vassal_of = ROOT
+            is_subject_of = ROOT
+            OR = {
+                is_subject_of_type = vassal
+                is_subject_of_type = client_vassal
+                is_subject_of_type = hegemonic_vassal
+                is_subject_of_type = naga_vassal
+                is_subject_of_type = feudal_vassal
+                is_subject_of_type = protected_vassal
+                is_subject_of_type = religious_order
+            }
         }
 	}
 	
@@ -270,32 +296,58 @@ country_event = {
 		months = 1200
 	}
 	
-	option = {
-		name = wwu_ideagroups.10.option.a
-		
+    immediate = {
         hidden_effect = {
             random_subject_country = {
-                limit = { vassal_of = ROOT }
+                limit = { 
+                    is_subject_of = ROOT
+                    OR = {
+                        is_subject_of_type = vassal
+                        is_subject_of_type = client_vassal
+                        is_subject_of_type = hegemonic_vassal
+                        is_subject_of_type = naga_vassal
+                        is_subject_of_type = feudal_vassal
+                        is_subject_of_type = protected_vassal
+                        is_subject_of_type = religious_order
+                    }
+                }
                 
                 save_event_target_as = chosen_subject
             }
         }
-        
-        inherit = event_target:chosen_subject
+    }
+    
+	option = {
+		name = wwu_ideagroups.10.option.a
+		
+        if = {
+            limit = {
+                has_saved_event_target = chosen_subject
+                any_subject_country = {
+                    tag = event_target:chosen_subject
+                    NOT = { total_development = 250 }
+                }
+            }
+            
+            inherit = event_target:chosen_subject
+        }
+        else = {
+            add_country_modifier = {
+                name = integration_of_vassal
+                duration = 9125
+            }
+        }
 	}
     option = {
 		name = wwu_ideagroups.10.option.b
 		
-        hidden_effect = {
-            random_subject_country = {
-                limit = { vassal_of = ROOT }
-                
-                save_event_target_as = chosen_subject
+        if = {
+            limit = {
+                has_saved_event_target = chosen_subject
             }
-        }
-        
-        event_target:chosen_subject = {
-            add_liberty_desire = -50
+            event_target:chosen_subject = {
+                add_liberty_desire = -50
+            }
         }
 	}
 }
