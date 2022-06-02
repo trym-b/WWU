@@ -1,0 +1,139 @@
+#--------------------------------------
+# Shared Orc
+#--------------------------------------
+wwu_shared_orc_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		OR = {
+            tag = A41
+            tag = A35
+            tag = A37
+            tag = A36
+            tag = A34
+            tag = A38
+            tag = A46
+            tag = A45
+            tag = A44
+            tag = A39
+            tag = A40
+        }
+	}
+    
+    wwu_shared_orc_succumb_to_fel = {
+		icon = mission_demonhunter_consume_magic
+        position = 1
+		required_missions = { }
+        completed_by = 592.1.1
+        
+		trigger = {
+            NOT = { religion = fel }
+            
+            any_owned_province = {
+                religion = fel
+            }
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                dominant_religion = fel
+            }
+		}
+		effect = {
+            add_stability = -3
+        
+            change_religion = fel
+            
+            every_owned_province = {
+                change_religion = fel
+            }
+		}
+	}
+    
+    
+    wwu_shared_orc_construct_the_dark_portal = {
+		icon = mission_dark_portal_blue
+        position = 2
+		required_missions = { }
+        completed_by = 592.1.1
+        
+		trigger = {
+            NOT = { has_global_flag = dark_portal_built }
+            religion = fel
+			owns_core_province = 3792
+            is_year = 575
+		}
+        provinces_to_highlight = {
+            province_id = 3792
+            NOT = { owned_by = ROOT }
+        }
+		effect = {
+			add_yearly_manpower = -1.0
+            
+            continent_draenor = {
+				add_devastation = 25
+            }
+			region_blasted_lands = {
+				add_devastation = 25
+            }
+            
+            3792 = {
+                add_canal = gp_dark_portal_draenor
+            }
+            
+            hidden_effect = {
+                # Grant 1 year exclusive timer for Dark Portal builder to use Establish Foothold mission
+                set_country_flag = can_trigger_establish_foothold_mission
+                
+                set_global_flag = the_first_war
+                set_global_flag = dark_portal_built
+                set_global_flag = dark_portal_opened_flag
+            }
+		}
+	}
+    
+    wwu_shared_orc_establish_foothold = {
+		icon = mission_defend_towers
+        position = 3
+		required_missions = { }
+        completed_by = 592.1.1
+        
+		trigger = {
+            if = {
+                limit = {
+                    NOT = { has_country_flag = can_trigger_establish_foothold_mission }
+                }
+                custom_trigger_tooltip = {
+                    tooltip = DID_NOT_BUILD_DARK_PORTAL_TT
+                }
+            }
+        
+            # Only allow for Dark Portal builder, or any nation after 1 year of Dark Portal mission
+            hidden_trigger = {
+                has_country_flag = can_trigger_establish_foothold_mission
+            }
+            
+            NOT = { exists = U03 }
+            has_global_flag = dark_portal_built
+            religion = fel
+            
+            region_blasted_lands = {
+                type = any
+                is_empty = yes
+            }
+		}
+		effect = {
+			add_country_modifier = {
+				name = motivated_for_assault
+				duration = 3650
+			}
+            
+            spawn_orcish_horde = yes
+        }
+	}
+}
