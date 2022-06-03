@@ -6,38 +6,50 @@ country_decisions = {
 		potential = {
             # Exclusions
 			NOT = { tag = B94 }
-			NOT = { exists = A90 } # QuelThalas
+			NOT = { exists = A90 } # QuelThalas			
             
             # Requisites
 			OR = {
 			    primary_culture = culture_blood_elf
 			    primary_culture = culture_high_elf
 			}
+			NOT = { has_country_flag = rebuild_quelthalas }
 			
             any_owned_province = {
-                region = region_isle_of_quel_danas
+                region = region_eversong_woods
             }
 		}
         
         provinces_to_highlight = {
+			OR = {			
+                region = region_eversong_woods  
+                region = region_isle_of_quel_danas
+				region = region_ghostlands
+			}
 			NOT = { owned_by = ROOT }
-			OR = {
-                province_id = 660
-                province_id = 2991
-                province_id = 1039
-            }
 		}
         
 		allow = {
             # Ownership
-		    owns_core_province = 660    # Silvermoon
-			owns_core_province = 2991   # Sunwell
-			owns_core_province = 1039   # Deatholme
+		    region_eversong_woods = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region_isle_of_quel_danas = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region_ghostlands = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = { exists = P52 } # Scourge of Lordaeron
+			NOT = { exists = F21 } # Deatholme
             
             # General
 			is_at_war = no	
 			stability = 1
-            total_development = 300
+            total_development = 500
             
             # Cost
             adm_power = 200
@@ -59,6 +71,7 @@ country_decisions = {
             add_formable_bonus = yes
             trigger_ni_switch = yes
             #trigger_mission_switch = yes
+			set_country_flag = rebuild_quelthalas
 		}
 
 		ai_will_do = {

@@ -11,24 +11,48 @@ country_decisions = {
             # Requisites
 			primary_culture = culture_high_elf
 			
+			NOT = { has_country_flag = formed_silvermoon }
+			
+			OR = {
+			    current_age = age_burning_legion
+				current_age = age_scourge
+			}
+			
             any_owned_province = {
                 region = region_eversong_woods
             }
 		}
         
         provinces_to_highlight = {
+			OR = {			
+                region = region_eversong_woods  
+                region = region_isle_of_quel_danas
+				area = area_tranquillien
+			}
 			NOT = { owned_by = ROOT }
-			province_id = 660
 		}
         
 		allow = {
             # Ownership
-		    owns_core_province = 660 # Silvermoon
+		    region_eversong_woods = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region_isle_of_quel_danas = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_tranquillien = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
             
+			exists = P52
+			
 			# General
 			is_at_war = no	
 			stability = 1
-            total_development = 300
+            total_development = 500
             
             # Cost
             adm_power = 200
@@ -59,6 +83,7 @@ country_decisions = {
             add_formable_bonus = yes
             trigger_ni_switch = yes
             #trigger_mission_switch = yes
+			set_country_flag = formed_silvermoon
 		}
         
 		ai_will_do = {
