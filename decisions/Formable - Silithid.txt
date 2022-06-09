@@ -1,0 +1,84 @@
+country_decisions = {
+    form_silithid_swarm = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+		    # Exclusions
+			NOT = { exists = A98 }
+			
+            # Requisites
+			OR = {
+			    tag = AIH
+				tag = RGH
+				tag = SPH
+				tag = VKH
+				tag = ZOH
+				tag = ZRH
+			}
+            
+            any_owned_province = {
+                region = region_silithus
+            }
+		}
+		
+		allow = {
+            # Ownership
+			if = {
+                limit = {
+                    NOT = { tag = AIH }
+                }
+                NOT = { exists = AIH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = RGH }
+                }
+                NOT = { exists = RGH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = SPH }
+                }
+                NOT = { exists = SPH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = VKH }
+                }
+                NOT = { exists = VKH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = ZOH }
+                }
+                NOT = { exists = ZOH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = ZRH }
+                }
+                NOT = { exists = ZRH }
+            }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            
+		}
+		effect = {       
+            # Switch
+			change_tag = A98
+			
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+}
