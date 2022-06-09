@@ -1,0 +1,64 @@
+country_decisions = {
+    form_noxious_lair = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+		    # Exclusions
+			NOT = { exists = NXL }
+			
+            # Requisites
+			OR = {
+			    tag = ZZH
+				tag = GRH
+				tag = CPH
+			}
+            
+            any_owned_province = {
+                region = region_tanaris
+            }
+		}
+		
+		allow = {
+            # Ownership
+			if = {
+                limit = {
+                    NOT = { tag = ZZH }
+                }
+                NOT = { exists = ZZH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = GRH }
+                }
+                NOT = { exists = GRH }
+            }
+            if = {
+                limit = {
+                    NOT = { tag = CPH }
+                }
+                NOT = { exists = CPH }
+            }
+            
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            
+		}
+		effect = {       
+            # Switch
+			change_tag = NXL
+			
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+}
