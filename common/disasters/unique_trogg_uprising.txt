@@ -1,0 +1,71 @@
+trogg_uprising = {
+	potential = {
+		culture_group = culture_group_dwarven
+        any_neighbor_country = {
+            culture_group = culture_group_trogg
+        }
+        any_owned_province = {
+            continent = continent_eastern_kingdoms
+        }
+	}
+
+	can_start = {
+        has_any_disaster = no
+        culture_group = culture_group_dwarven
+        any_neighbor_country = {
+            culture_group = culture_group_trogg
+        }
+        NOT = { stability = 0 }
+	}
+	
+	progress = {
+		modifier = {
+			factor = 1
+			NOT = { stability = -1 }
+		}
+		modifier = {
+			factor = 1
+			NOT = { stability = -2 }
+		}
+        modifier = {
+			factor = 1
+			is_at_war = yes
+		}
+	}
+	
+	can_stop = {
+        NOT = {
+            any_neighbor_country = {
+                culture_group = culture_group_trogg
+                military_strength = {
+                    who = ROOT
+                    value = 1.0
+                }
+            }
+        }
+	}
+	
+	can_end = {
+        stability = 1
+        NOT = { num_of_rebel_armies = 1 }
+	}
+	
+	modifier = {
+        stability_cost_modifier = 1.0
+	}
+
+	on_start = wwu_trogg_uprising.1
+	on_end = wwu_trogg_uprising.100
+	
+	on_monthly = {
+        random_events = {
+            2000 = 0
+            200 = wwu_trogg_uprising.10 # Trogg Meance
+            100 = wwu_trogg_uprising.11 # Trogg Confusion
+            50 = wwu_trogg_uprising.12 # Trogg Assault
+        }
+	}
+}
+
+
+
