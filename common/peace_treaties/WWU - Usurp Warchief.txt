@@ -1,0 +1,100 @@
+#-------------------------------
+# Steam Artifact
+#-------------------------------
+po_usurp_warchief = {
+	category = 6
+	power_projection = vassalized_rival 
+	power_cost_base = 1.0
+	prestige_base = 1.0
+	ae_base = 1.0
+    
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 100.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 100.0
+	requires_demand_independence = no
+	is_make_subject = no
+	requires_is_allowed = no
+	
+	is_visible = {
+		FROM = {
+            OR = {
+                has_country_modifier = head_of_horde
+                has_country_modifier = head_of_old_horde
+            }
+        }
+        OR = {
+            has_country_modifier = member_of_horde
+            has_country_modifier = member_of_old_horde
+        }
+	}
+	is_allowed = {
+        FROM = {
+            OR = {
+                has_country_modifier = head_of_horde
+                has_country_modifier = head_of_old_horde
+            }
+        }
+        OR = {
+            has_country_modifier = member_of_horde
+            has_country_modifier = member_of_old_horde
+        }
+	}
+	effect = {
+        custom_tooltip = USURP_WARCHIEF_TT
+        
+        hidden_effect = {
+            # New Horde
+            if = {
+                limit = {
+                    FROM = {
+                        has_country_modifier = head_of_horde
+                    }
+                    has_country_modifier = member_of_horde
+                }
+            
+                add_country_modifier = {
+                    name = head_of_horde
+                    duration = -1
+                }
+                FROM = {
+                    remove_country_modifier = head_of_horde
+                }
+            }
+            # Old Horde
+            if = {
+                limit = {
+                    FROM = {
+                        has_country_modifier = head_of_old_horde
+                    }
+                    has_country_modifier = member_of_old_horde
+                }
+            
+                add_country_modifier = {
+                    name = head_of_old_horde
+                    duration = -1
+                }
+                FROM = {
+                    remove_country_modifier = head_of_old_horde
+                }
+            }
+        }
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = 1000
+		}
+		limit = {
+			always = yes
+		}
+	}
+}
+
