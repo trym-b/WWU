@@ -141,7 +141,7 @@ NDiplomacy = {
 	EMPEROR_VOTE_DAYS = 60,	 						-- _DDEF_EMPEROR_VOTE_DAYS_; "Cooldown" until Electors can change their vote again.
 	EMPEROR_REVOKE_AUTHORITY_COST = 50.0,			-- Cost for the emperor to revoke a reform
 	EMPEROR_REVOKE_MODIFIER_DAYS = 1800,			-- How long the temporary modifier applied after revoking will last
-	TRUCE_YEARS = 2, 								-- _DDEF_TRUCE_YEARS_; Years of Truce
+	TRUCE_YEARS = 5, 								-- _DDEF_TRUCE_YEARS_; Years of Truce
 	SCALED_TRUCE_YEARS = 3,						-- Additional years of truce based on % of warscore taken in war (100% warscore = full scaled truce years)
 	REQUEST_HEIR_TRUCE = 2,
 	REQUEST_HEIR_AE = 20,
@@ -389,7 +389,7 @@ NDiplomacy = {
 	STUDY_TECHNOLOGY_MIN_TECHS_AHEAD = 2,			-- Target must be at least this number of techs ahead of you to get power
 
 	THREATEN_WAR_PRESTIGE = 10,						-- Prestige lost due to complying with Threaten War.
-	THREATEN_WAR_TRUCE_YEARS = 2,					-- Length of truce imposed by Threaten War.
+	THREATEN_WAR_TRUCE_YEARS = 5,					-- Length of truce imposed by Threaten War.
 	THREATEN_WAR_ALLIANCE_OFFSET = 1.5,				-- If relative alliance strength is above this threshold, start applying gradient.
 	THREATEN_WAR_ALLIANCE_GRADIENT = 20,			-- Relative alliance strength to acceptance value, capped at +100.
 	THREATEN_WAR_COALITION_GRADIENT = -50,			-- Relative coalition strength to acceptance value, capped at -1000.
@@ -411,7 +411,7 @@ NDiplomacy = {
 	LEAVING_GREAT_POWER_YEARS = 5,					-- The number of years a Great Power can remain after being removed from the top (8).
 	GREAT_POWER_SUBJECT_CONTRIBUTION = 0.5,			-- Share of subjects' development that will count towards overlord's Great Power score.
 
-	FORCE_BREAK_ALLIANCE_TRUCE_YEARS = 2,			-- Length of truce imposed by Break Alliance.
+	FORCE_BREAK_ALLIANCE_TRUCE_YEARS = 5,			-- Length of truce imposed by Break Alliance.
 	FORCE_END_RIVALRY_YEARS = 15,					-- Years until you can re-add a Rival after being forced to remove them by peace treaty.
 	DECLINE_FAVOR_ACTION_STAB_HIT = 0,																					
 	TRIBUTE_BASE_CASH = 0.2,						-- Tributary State: Part of yearly income given in tribute
@@ -1338,7 +1338,7 @@ NMilitary = {
 	NOMAD_LOOT_TRADITION = 0.01,	 				-- _MDEF_NOMAD_LOOT_TRADITION_;Military tradition a horde gets from looting territory
 	NOMAD_PLAINS_SHOCK_BONUS = 0.25, 				--
 	NOMAD_NON_PLAINS_SHOCK_PENALTY = -0.25, 			--
-	SUPPLYLIMIT_BASE_MULTIPLIER = 6.0, 				--
+	SUPPLYLIMIT_BASE_MULTIPLIER = 16.0, 				--
 	WAR_LENGTH_DAMAGE_MODIFIER = 0.01,				-- How much (by percentage) the damage dealt will be increased each day of the combat
 	BACK_LINE_MORALE_DAMAGE_TAKEN_MODIFIER = 0.75,	-- Multiplier for morale damage taken by backrow
 	BACK_LINE_STRENGTH_DAMAGE_TAKEN_MODIFIER = 0.75,	-- Multiplier for strength damage taken by backrow
