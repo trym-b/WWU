@@ -308,6 +308,8 @@ country_event = {
         lose_mana_2 = yes
         polymorph_effect = yes
         
+        country_event = { id = wwu_magic.30 }
+        
         ai_chance = {
             factor = 1
         }
@@ -511,6 +513,84 @@ country_event = {
         tooltip = {
             lose_mana_2 = yes
             focus_magic_effect = yes
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Common - Mirror Image
+    #-------------------------
+    option = {
+		name = wwu_magic_menu.10.option.mirror_image
+        
+        trigger = {
+            has_mana_2 = yes
+            has_common_aptitude = yes
+            any_owned_province = {
+                NOT = { culture = ROOT }
+            }
+        }
+		
+        lose_mana_2 = yes
+        mirror_image_effect = yes
+        
+        country_event = { id = wwu_magic.31 }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_menu.10.option.mirror_image.invalid
+        
+        trigger = {
+            OR = {
+                has_less_than_2_mana = yes  
+                NOT = { has_common_aptitude = yes }
+                NOT = {
+                    any_owned_province = {
+                        NOT = { religion = ROOT }
+                    }
+                }
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = {
+                    any_owned_province = {
+                        NOT = { religion = ROOT }
+                    }
+                }
+            }
+            custom_tooltip = NO_WRONG_RELIGION_PROVINCES
+        }
+        else_if = {
+            limit = {
+                NOT = { has_common_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        
+        tooltip = {
+            lose_mana_2 = yes
+            custom_tooltip = MIRROR_IMAGE_FAKE_EFFECT
         }
         
         ai_chance = {
