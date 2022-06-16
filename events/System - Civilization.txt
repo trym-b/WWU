@@ -1,0 +1,299 @@
+namespace = wwu_civilization
+
+# Civilization of [Root.GetName]
+country_event = {
+	id = wwu_civilization.1
+	title = wwu_civilization.1.title
+	desc = wwu_civilization.1.desc
+	picture = UNSTABLE_PORTAL_eventPicture
+    
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+            set_variable = {
+                which = civilization_progress
+                value = 0
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_civilization.1.option.a
+		
+		custom_tooltip = CURRENT_CIVILIZATION_PROGRESS
+	}
+}
+
+# Unrest in the Capital
+country_event = {
+	id = wwu_civilization.2
+	title = wwu_civilization.2.title
+	desc = wwu_civilization.2.desc
+	picture = KORRAK_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        NOT = { has_country_modifier = civilization_event_cooldown }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+    immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = civilization_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    is_capital = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+	}
+    
+	option = {
+		name = wwu_civilization.2.option.a
+		
+		increment_civilization = yes
+        
+        event_target:target_province = {
+            spawn_rebels = {
+                type = anti_tax_rebels
+                size = 3
+            }
+        }
+	}
+    option = {
+		name = wwu_civilization.2.option.b
+		
+		decrement_civilization = yes
+        
+        
+	}
+}
+
+# Reformer Fumbles
+country_event = {
+	id = wwu_civilization.3
+	title = wwu_civilization.3.title
+	desc = wwu_civilization.3.desc
+	picture = TIME_FOR_SMASH_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        NOT = { has_country_modifier = civilization_event_cooldown }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = civilization_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    is_state = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_civilization.3.option.a
+		
+		increment_civilization = yes
+        
+        event_target:target_province = {
+            add_devastation = 50
+        }
+	}
+    option = {
+		name = wwu_civilization.3.option.b
+		
+		decrement_civilization = yes
+	}
+}
+
+# Uplift Resistance
+country_event = {
+	id = wwu_civilization.4
+	title = wwu_civilization.4.title
+	desc = wwu_civilization.4.desc
+	picture = CLOAKED_HUNTRESS_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        NOT = { has_country_modifier = civilization_event_cooldown }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {   
+            add_country_modifier = {
+                name = civilization_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    is_core = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_civilization.4.option.a
+		
+		increment_civilization = yes
+        
+        add_years_of_income = -1
+	}
+    option = {
+		name = wwu_civilization.4.option.b
+		
+        increment_civilization = yes
+        
+		event_target:target_province = {
+            spawn_rebels = {
+                type = anti_tax_rebels
+                size = 2
+            }
+        }
+	}
+    option = {
+		name = wwu_civilization.4.option.c
+		
+		decrement_civilization = yes
+	}
+}
+
+# Civilization Breakthrough
+country_event = {
+	id = wwu_civilization.5
+	title = wwu_civilization.5.title
+	desc = wwu_civilization.5.desc
+	picture = VIOLET_ILLUSIONIST_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        NOT = { has_country_modifier = civilization_event_cooldown }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+    
+    immediate = {
+        hidden_effect = {
+            add_country_modifier = {
+                name = civilization_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_civilization.5.option.a
+		
+		increment_civilization = yes
+	}
+}
+
+# Civilized Society of [Root.GetName]
+country_event = {
+	id = wwu_civilization.6
+	title = wwu_civilization.6.title
+	desc = wwu_civilization.6.desc
+	picture = HOLY_CHAMPION_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        NOT = { has_country_modifier = civilization_event_cooldown }
+    }
+
+	mean_time_to_happen = {
+		months = 120
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = civilization_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_civilization.5.option.a
+		
+		increment_civilization_massively = yes 
+	}
+}
+
+# Civilization of [Root.GetName]
+country_event = {
+	id = wwu_civilization.100
+	title = wwu_civilization.100.title
+	desc = wwu_civilization.100.desc
+	picture = RENOUNCE_DARKNESS_eventPicture
+    
+    trigger = {
+        has_country_flag = civilization_process_active
+        
+        check_variable = {
+            which = civilization_progress
+            value = 5
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+		hidden_effect = {
+            clr_country_flag = civilization_process_active
+            set_variable = {
+                which = civilization_progress
+                value = 0
+            }
+            set_country_flag = has_become_civilized_nation
+        }
+	}
+	
+	option = {
+		name = wwu_civilization.100.option.a
+		
+        custom_tooltip = BECOME_CIVILIZED_TT
+	}
+}

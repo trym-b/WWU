@@ -1,0 +1,45 @@
+country_decisions = {
+    # Civilize [Root.GetName]
+    civilize_nation = {
+        major = yes
+        
+        potential = {
+            NOT = { has_country_flag = has_become_civilized_nation }
+            NOT = { has_country_flag = civilization_process_active }
+            
+            is_uncivilized = yes
+        }
+        allow = {
+            total_development = 100
+            
+            is_uncivilized = yes
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        effect = {
+			add_adm_power = -50
+            add_dip_power = -50
+            add_mil_power = -50
+            
+            custom_tooltip = START_CIVILIZATION_PROCESS
+            
+            country_event = { id = wwu_civilization.1 }
+            
+            hidden_effect = {
+                set_country_flag = civilization_process_active
+            }
+        }		
+        ai_will_do = {
+            factor = 1
+            
+            # AI will only civilize at 300 development
+            modifier = {
+                factor = 0
+                
+                NOT = { total_development = 300 }
+            }
+        }
+    }
+}
