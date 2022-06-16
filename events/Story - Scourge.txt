@@ -1,22 +1,240 @@
 namespace = wwu_scourge
 
+# OLD METHOD
 # This sets up the Scourge mid-game
+# country_event = {
+	# id = wwu_scourge.1
+	# title = wwu_scourge.1.title
+	# desc = wwu_scourge.1.desc
+	# picture = FROZENTHRONE_eventPicture
+
+    # major = yes
+    
+	# trigger = {
+        # AND = {
+            # ai = no
+            # has_country_flag = host_player
+        # }
+		# current_age = age_scourge
+        # NOT = { is_year = 618 } # Stops it occuring if the game was started from the Frozen Throne bookmark forward
+		# NOT = { has_global_flag = nerzhul_arrived }
+	# }
+	
+	# mean_time_to_happen = { 
+        # days = 1
+    # }
+    
+	# immediate = {
+		# hidden_effect = { set_global_flag = nerzhul_arrived }
+    # }
+	
+	# option = {
+		# name = wwu_scourge.1.option.a
+		
+        # custom_tooltip = scourge_appears_tt
+        
+        # hidden_effect = {
+            # # The Scourge
+			# P11 = {
+				# add_stability = 1
+				# add_treasury = 250
+			# }
+            # if = {
+                # limit = {
+                    # NOT = { 
+                        # exists = P11 # The Scourge 
+                    # }
+                # }
+                
+                # # Icecrown Citadel
+                # 1268 = {
+					# cede_province = P11
+					# add_core = P11
+					# add_base_tax = 8
+                    # add_base_production = 8
+                    # add_base_manpower = 8
+                    # add_building = wow_fort_1
+					# change_religion = cult_of_the_damned
+                    # change_culture = culture_scourge
+					# change_trade_goods = saronite
+					# infantry = P11
+					# infantry = P11
+					# infantry = P11
+					# infantry = P11
+					# infantry = P11
+					# cavalry = P11
+					# cavalry = P11
+					# artillery = P11
+                # }
+                # # Corp'rethar
+                # 1267 = {
+                    # cede_province = P11
+					# add_core = P11
+					# add_base_tax = 1
+                    # add_base_production = 1
+                    # add_base_manpower = 2
+                    # change_religion = cult_of_the_damned
+                    # change_culture = culture_scourge
+					# change_trade_goods = saronite
+					# add_building = wow_fort_1
+                # }
+                
+                # # The Scourge
+                # P11 = {
+					# define_ruler = {
+						# name = "Ner'zhul"
+						# dynasty = "Shadowmoon" 	
+						# adm = 6
+						# dip = 6	
+						# mil = 6	
+						# age = 80
+						# claim = 100
+					# }
+					# set_ruler_flag = is_immortal
+					# set_ruler_flag = warlock_personality
+					# set_capital = 1268
+					# add_stability = 3
+					# add_adm_power = 300
+					# add_dip_power = 300
+					# add_mil_power = 300
+					# add_country_modifier = {
+						# name = helm_of_domination
+						# duration = -1
+					# }
+					# add_country_modifier = {
+						# name = nathrezim_jailors
+						# duration = -1
+					# }
+					# add_treasury = 1000
+				# }
+                
+                # # Jotunheim
+				# P17 = {
+					# change_religion = cult_of_the_damned
+					# set_ruler_religion = cult_of_the_damned
+					# set_heir_religion = cult_of_the_damned
+					# every_owned_province = {
+						# change_religion = cult_of_the_damned
+					# }
+                # }
+                
+                # # Dragonflayer
+				# B08 = {
+					# change_religion = cult_of_the_damned
+					# set_ruler_religion = cult_of_the_damned
+					# set_heir_religion = cult_of_the_damned
+					# every_owned_province = {
+						# change_religion = cult_of_the_damned
+					# }
+                # }
+				# area_icecrown_interior = {
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# if = {
+						# limit = {
+							# culture = culture_vrykul
+						# }
+						# change_culture = culture_scourge
+						# remove_core = P17
+						# remove_core = P15
+						# remove_core = B09
+					# }
+				# }
+				# area_the_conflagration = {
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# if = {
+						# limit = {
+							# culture = culture_vrykul
+						# }
+						# change_culture = culture_scourge
+						# remove_core = P17
+						# remove_core = P15
+						# remove_core = B09
+					# }
+				# }				
+				# area_aldurthar = {
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# if = {
+						# limit = {
+							# culture = culture_vrykul
+						# }
+						# change_culture = culture_scourge
+						# remove_core = P17
+						# remove_core = P15
+						# remove_core = B09
+					# }
+				# }				
+				# area_north_valley_of_lost_hope = {
+					# limit = {
+						# NOT = { owned_by = SNB }
+					# }
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# remove_core = P17
+					# remove_core = P15
+					# remove_core = B09
+				# }				
+				# area_south_valley_of_lost_hope = {
+					# limit = {
+						# NOT = { owned_by = SNB }
+					# }
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# remove_core = P17
+					# remove_core = P15
+					# remove_core = B09
+				# }				
+                
+                # # Mord'rethar
+				# 998 = {
+					# cede_province = P11
+					# add_core = P11
+					# change_religion = cult_of_the_damned
+					# remove_core = P17
+					# remove_core = P15
+					# remove_core = B09
+				# }
+                
+                # # The Scourge
+				# P11 = {
+					# create_march = P17 # Jotunheim
+					# create_alliance = B08 # Dragonflayer
+				# }
+                
+				# complete_mission = wwu_infiltrate_jotunheim
+				# complete_mission = wwu_bless_jotunheim
+				# complete_mission = wwu_infiltrate_dragonflayer
+                
+                # P11 = {
+                    # country_event = { id = wwu_scourge.100 days = 30 } # Discovery
+                # }
+            # }
+		# }
+	# }
+# }
+
+# Ner'zhul's Arrival to Icecrown Citadel
 country_event = {
 	id = wwu_scourge.1
 	title = wwu_scourge.1.title
 	desc = wwu_scourge.1.desc
-	picture = FROZENTHRONE_eventPicture
+	picture = ICECROWN_CITADEL_eventPicture
 
     major = yes
     
 	trigger = {
-        AND = {
-            ai = no
-            has_country_flag = host_player
-        }
-		current_age = age_scourge
-        NOT = { is_year = 618 } # Stops it occuring if the game was started from the Frozen Throne bookmark forward
-		NOT = { has_global_flag = nerzhul_arrived }
+        NOT = { has_global_flag = nerzhul_arrived }
+        
+        # Only occur in starts before Rise of the Lich King
+        is_year = 605
+        NOT = { is_year = 606 }
 	}
 	
 	mean_time_to_happen = { 
@@ -30,192 +248,123 @@ country_event = {
 	option = {
 		name = wwu_scourge.1.option.a
 		
-        custom_tooltip = scourge_appears_tt
+        custom_tooltip = SCOURGE_APPEARS_TT
         
         hidden_effect = {
-            # The Scourge
-			P11 = {
-				add_stability = 1
-				add_treasury = 250
-			}
-            if = {
-                limit = {
-                    NOT = { 
-                        exists = P11 # The Scourge 
-                    }
-                }
-                
-                # Icecrown Citadel
-                1268 = {
-					cede_province = P11
-					add_core = P11
-					add_base_tax = 8
-                    add_base_production = 8
-                    add_base_manpower = 8
-                    add_building = wow_fort_1
-					change_religion = cult_of_the_damned
-                    change_culture = culture_scourge
-					change_trade_goods = saronite
-					infantry = P11
-					infantry = P11
-					infantry = P11
-					infantry = P11
-					infantry = P11
-					cavalry = P11
-					cavalry = P11
-					artillery = P11
-                }
-                # Corp'rethar
-                1267 = {
-                    cede_province = P11
-					add_core = P11
-					add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 2
-                    change_religion = cult_of_the_damned
-                    change_culture = culture_scourge
-					change_trade_goods = saronite
-					add_building = wow_fort_1
-                }
-                
-                # The Scourge
-                P11 = {
-					define_ruler = {
-						name = "Ner'zhul"
-						dynasty = "Shadowmoon" 	
-						adm = 6
-						dip = 6	
-						mil = 6	
-						age = 80
-						claim = 100
-					}
-					set_ruler_flag = is_immortal
-					set_ruler_flag = warlock_personality
-					set_capital = 1268
-					add_stability = 3
-					add_adm_power = 300
-					add_dip_power = 300
-					add_mil_power = 300
-					add_country_modifier = {
-						name = helm_of_domination
-						duration = -1
-					}
-					add_country_modifier = {
-						name = nathrezim_jailors
-						duration = -1
-					}
-					add_treasury = 1000
-				}
-                
-                # Jotunheim
-				P17 = {
-					change_religion = cult_of_the_damned
-					set_ruler_religion = cult_of_the_damned
-					set_heir_religion = cult_of_the_damned
-					every_owned_province = {
-						change_religion = cult_of_the_damned
-					}
-                }
-                
-                # Dragonflayer
-				B08 = {
-					change_religion = cult_of_the_damned
-					set_ruler_religion = cult_of_the_damned
-					set_heir_religion = cult_of_the_damned
-					every_owned_province = {
-						change_religion = cult_of_the_damned
-					}
-                }
-				area_icecrown_interior = {
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					if = {
-						limit = {
-							culture = culture_vrykul
-						}
-						change_culture = culture_scourge
-						remove_core = P17
-						remove_core = P15
-						remove_core = B09
-					}
-				}
-				area_the_conflagration = {
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					if = {
-						limit = {
-							culture = culture_vrykul
-						}
-						change_culture = culture_scourge
-						remove_core = P17
-						remove_core = P15
-						remove_core = B09
-					}
-				}				
-				area_aldurthar = {
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					if = {
-						limit = {
-							culture = culture_vrykul
-						}
-						change_culture = culture_scourge
-						remove_core = P17
-						remove_core = P15
-						remove_core = B09
-					}
-				}				
-				area_north_valley_of_lost_hope = {
-					limit = {
-						NOT = { owned_by = SNB }
-					}
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					remove_core = P17
-					remove_core = P15
-					remove_core = B09
-				}				
-				area_south_valley_of_lost_hope = {
-					limit = {
-						NOT = { owned_by = SNB }
-					}
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					remove_core = P17
-					remove_core = P15
-					remove_core = B09
-				}				
-                
-                # Mord'rethar
-				998 = {
-					cede_province = P11
-					add_core = P11
-					change_religion = cult_of_the_damned
-					remove_core = P17
-					remove_core = P15
-					remove_core = B09
-				}
-                
-                # The Scourge
-				P11 = {
-					create_march = P17 # Jotunheim
-					create_alliance = B08 # Dragonflayer
-				}
-                
-				complete_mission = wwu_infiltrate_jotunheim
-				complete_mission = wwu_bless_jotunheim
-				complete_mission = wwu_infiltrate_dragonflayer
-                
-                P11 = {
-                    country_event = { id = wwu_scourge.100 days = 30 } # Discovery
-                }
+            # Icecrown Citadel
+            1268 = {
+                cede_province = P11
+                add_core = P11
+                add_base_tax = 8
+                add_base_production = 8
+                add_base_manpower = 8
+                add_building = wow_fort_1
+                change_religion = cult_of_the_damned
+                change_culture = culture_scourge
+                change_trade_goods = saronite
+                infantry = P11
+                infantry = P11
+                infantry = P11
+                infantry = P11
+                infantry = P11
+                cavalry = P11
+                cavalry = P11
+                artillery = P11
             }
-		}
+            
+            # Corp'rethar
+            1267 = {
+                cede_province = P11
+                add_core = P11
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 2
+                change_religion = cult_of_the_damned
+                change_culture = culture_scourge
+                change_trade_goods = saronite
+                add_building = wow_fort_1
+            }
+
+            # The Scourge
+            P11 = {
+                define_ruler = {
+                    name = "Ner'zhul"
+                    dynasty = "Shadowmoon" 	
+                    adm = 6
+                    dip = 6	
+                    mil = 6	
+                    age = 80
+                    claim = 100
+                }
+                set_ruler_flag = is_immortal
+                set_ruler_flag = warlock_personality
+                set_ruler_flag = ruler_portrait_nerzhul
+    
+                setup_spellcaster_history = {
+                    APTITUDE = 4
+                    FINESSE = 4
+                    CONCENTRATION = 5
+                    MANA = 5
+                }
+                
+                set_capital = 1268
+                
+                add_adm_power = 300
+                add_dip_power = 300
+                add_mil_power = 300
+                add_treasury = 1000
+                add_manpower = 25
+                
+                add_country_modifier = {
+                    name = helm_of_domination
+                    duration = -1
+                }
+                
+                add_country_modifier = {
+                    name = nathrezim_jailors
+                    duration = -1
+                }
+            
+                add_country_modifier = {
+                    name = nerzhuls_fervor
+                    duration = 10950
+                }
+                
+                every_country = {
+                    limit = {
+                        ai = no
+                    }
+                    
+                    country_event = { id = wwu_scourge.99 days = 10 }
+                }
+                
+                country_event = { id = wwu_scourge.100 days = 7 } # Discovery
+            }
+        }
+	}
+}
+
+# The Scourge
+country_event = {
+	id = wwu_scourge.99
+	title = wwu_scourge.99.title
+	desc = wwu_scourge.99.desc
+	picture = LICH_KING_CLOSEUP_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.99.option.a
+		
+        switch_tag = P11
+	}
+    option = {
+		name = wwu_scourge.99.option.b
+		
 	}
 }
 
@@ -241,5 +390,362 @@ country_event = {
         discover_broken_isles = yes
         discover_outland = yes
         discover_draenor = yes
+	}
+}
+
+# Conversion of Jotunheim
+country_event = {
+	id = wwu_scourge.10
+	title = wwu_scourge.10.title
+	desc = wwu_scourge.10.desc
+	picture = UNDEAD_ASSAULT_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.10.option.a
+		
+        set_ruler_religion = cult_of_the_damned
+        
+        if = {
+            limit = {
+                has_heir = yes
+            }
+            set_heir_religion = cult_of_the_damned
+        }
+        
+        capital_scope = {
+            change_religion = cult_of_the_damned
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_scourge.10.option.b
+		
+        add_stability = 1
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Jotunheim Loyalty
+country_event = {
+	id = wwu_scourge.11
+	title = wwu_scourge.11.title
+	desc = wwu_scourge.11.desc
+	picture = LICH_KING_CLOSE_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.11.option.a
+		
+        change_religion = cult_of_the_damned
+        create_alliance = P17
+	}
+}
+
+# Lich King's Punishment
+country_event = {
+	id = wwu_scourge.12
+	title = wwu_scourge.12.title
+	desc = wwu_scourge.12.desc
+	picture = LICH_KING_CLOSE_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.12.option.a
+		
+        random_owned_province = {
+            spawn_rebels = {
+                type = scourge_rebels
+                size = 3
+            }
+        }
+	}
+}
+
+# Construction of Icecrown Citadel
+country_event = {
+	id = wwu_scourge.13
+	title = wwu_scourge.13.title
+	desc = wwu_scourge.13.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.13.option.a
+		
+        center_of_trade = 1
+        
+        add_base_production = 5
+        add_base_manpower = 5
+        
+        add_building = wow_fort_2
+        
+        add_permanent_province_modifier = { 
+            name = icecrown_province
+            duration = -1
+        }
+	}
+}
+
+# Corruption of Sindragosa's Brood
+country_event = {
+	id = wwu_scourge.14
+	title = wwu_scourge.14.title
+	desc = wwu_scourge.14.desc
+	picture = LICH_KING_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.14.option.a
+		
+        if = {
+            limit = {
+                exists = SNB
+            }
+            
+            inherit = SNB
+        }
+        
+        # Sindragosa's Fall
+        777 = {
+            add_base_manpower = 4
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            change_trade_goods = flying_mounts
+        }
+        # East Sindragosa's Peaks
+        895 = {
+            add_base_manpower = 2
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            change_trade_goods = flying_mounts
+        }
+        # West Sindragosa's Peaks
+        3261 = {
+            add_base_manpower = 2
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            change_trade_goods = flying_mounts
+        }
+        # Sindragosa's Fall Nest
+        3257 = {
+            add_base_manpower = 2
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            change_trade_goods = flying_mounts
+        }
+        add_country_modifier = {
+            name = frostbrood
+            duration = -1
+        }
+	}
+}
+
+# Construction of Corp'Rethar
+province_event = {
+	id = wwu_scourge.15
+	title = wwu_scourge.15.title
+	desc = wwu_scourge.15.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.15.option.a
+		
+        add_base_manpower = 3
+        
+        add_building = wow_arsenal
+        add_building = wow_barracks
+        
+        add_permanent_province_modifier = { 
+            name = scourge_fortification_province
+            duration = -1
+        }
+	}
+}
+
+# Construction of the Shadow Vault
+province_event = {
+	id = wwu_scourge.16
+	title = wwu_scourge.16.title
+	desc = wwu_scourge.16.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.16.option.a
+		
+        add_base_tax = 2
+        add_base_production = 2
+        add_base_manpower = 2
+        
+        add_building = wow_arsenal
+        add_building = wow_barracks
+        add_building = wow_temple
+        
+        change_trade_goods = mounts
+        
+        change_culture = culture_death_knight
+        change_religion = cult_of_the_damned
+	}
+}
+
+# Construction of Mord'Rethar
+province_event = {
+	id = wwu_scourge.17
+	title = wwu_scourge.17.title
+	desc = wwu_scourge.17.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.17.option.a
+		
+        add_building = wow_arsenal
+        add_building = wow_barracks
+        
+        change_culture = culture_scourge
+        change_religion = cult_of_the_damned
+        
+        add_permanent_province_modifier = { 
+            name = scourge_fortification_province
+            duration = -1 
+        }
+	}
+}
+
+# Construction of the Fleshwerks
+province_event = {
+	id = wwu_scourge.18
+	title = wwu_scourge.18.title
+	desc = wwu_scourge.18.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.18.option.a
+		
+        add_base_production = 8
+        add_building = wow_manufactory
+        add_building = wow_mine
+        change_trade_goods = warbeasts
+        change_culture = culture_scourge
+	}
+}
+
+# Construction of Aldur'Thar
+province_event = {
+	id = wwu_scourge.19
+	title = wwu_scourge.19.title
+	desc = wwu_scourge.19.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.19.option.a
+		
+        add_base_manpower = 4
+        add_building = wow_arsenal
+        add_building = wow_barracks
+        change_culture = culture_scourge
+        change_religion = cult_of_the_damned
+        change_trade_goods = saronite
+        
+        add_permanent_province_modifier = { 
+            name = scourge_fortification_province
+            duration = -1
+        }
+	}
+}
+
+# Construction of Angrathar
+province_event = {
+	id = wwu_scourge.20
+	title = wwu_scourge.20.title
+	desc = wwu_scourge.20.desc
+	picture = LICH_KING_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.20.option.a
+		
+        add_base_tax = 1
+        add_base_production = 1
+        add_base_manpower = 4
+        
+        add_building = wow_fort_1
+        add_building = wow_arsenal
+        add_building = wow_barracks
+        
+        change_culture = culture_scourge
+        change_religion = cult_of_the_damned
+        
+        change_trade_goods = saronite
+        
+        add_permanent_province_modifier = { 
+            name = scourge_fortification_province
+            duration = -1
+        }
 	}
 }
