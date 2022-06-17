@@ -1,0 +1,200 @@
+wwu_scourge_of_lordaeron_column_1 = { 
+	slot = 1
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = P52
+	} 
+    
+}
+
+wwu_scourge_of_lordaeron_column_2 = { 
+	slot = 2
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = P52
+	} 
+    
+}
+
+wwu_scourge_of_lordaeron_column_3 = { 
+	slot = 3
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = P52
+	} 
+    
+    wwu_lordaeron_succession = { 
+		icon = mission_lordaeron_crown
+		position = 1
+		completed_by = 618.12.31
+        
+		required_missions = { } 
+        
+		trigger = {
+            has_country_modifier = frostmourne
+            if = {
+                limit = {
+                    exists = A08
+                }
+                exists = A08
+            }
+            else = {
+                region_tirisfal_glades = {
+                    owned_by = ROOT
+                }
+                region_eastern_plaguelands = {
+                    owned_by = ROOT
+                }
+                region_western_plaguelands = {
+                    owned_by = ROOT
+                }
+            }
+		}
+		effect = {
+            if = {
+                limit = {
+                    exists = A08
+                }
+                hidden_effect = {
+                    every_owned_province = {
+                        limit = {
+                            owned_by = A08
+                        }
+                        add_permanent_claim = ROOT
+                    }
+                }
+                
+                # Lordaeron
+                A08 = {
+                    country_event = { id = wwu_lordaeron_succession.1 }
+                }
+                
+                region_eastern_plaguelands = {
+                    add_permanent_claim = ROOT
+                }
+                region_western_plaguelands = {
+                    add_permanent_claim = ROOT
+                }
+                region_tirisfal_glades = {
+                    add_permanent_claim = ROOT
+                }
+                area_silverpine_fields = {
+                    add_permanent_claim = ROOT
+                }
+                area_silverpine_crossing = {
+                    add_permanent_claim = ROOT
+                }
+                area_durnholde_keep = {
+                    add_permanent_claim = ROOT
+                }
+                area_tarren_mill = {
+                    add_permanent_claim = ROOT
+                }
+            }
+            else = {
+                add_prestige = 25
+            }
+            
+            # Silver Hand
+            if = {
+                limit = {
+                    exists = SVH
+                }
+                
+                SVH = {
+                    country_event = { id = silver_hand.5 } # Boost Silver Hand
+                }
+            }
+            else_if = {
+                limit = {
+                    exists = A08
+                }
+                A08 = {
+                    country_event = { id = silver_hand.5 } # Spawn Silver Hand
+                }
+            }
+            else = {
+                random_country = {
+                    limit = {
+                        ai = yes
+                    }
+                    
+                    country_event = { id = silver_hand.5 } # Spawn Silver Hand
+                }
+            }
+            
+            
+		}
+	}
+    
+    wwu_blight_lordaeron = { 
+		icon = mission_alchemy
+		position = 2
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_lordaeron_succession } 
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = A25
+                }
+                
+                NOT = { war_with = A25 }
+            }
+            else = {
+                stability = 3
+            }
+		}
+		effect = {
+            if = {
+                limit = {
+                    exists = A25
+                }
+                declare_war = A25
+                
+                A25 = {
+                    capital_scope = {
+                        province_event = { id = wwu_scourge.34 }
+                    }
+                }
+            }
+            else = {
+                add_prestige = 10
+            }
+		}
+	}
+}
+
+wwu_scourge_of_lordaeron_column_4 = { 
+	slot = 4
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = P52
+	} 
+    
+}
+
+wwu_scourge_of_lordaeron_column_5 = { 
+	slot = 5
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = P52
+	} 
+    
+}

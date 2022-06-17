@@ -1,6 +1,178 @@
 #--------------------------------------
 # Lordaeron
 #--------------------------------------
+wwu_lordaeron_column_1 = { 
+	slot = 1
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = A08
+	} 
+    
+    wwu_ready_the_soldiers = { 
+		icon = mission_ancient_sword
+        position = 2
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_uthers_investigations } 
+        
+		trigger = {
+            exists = P52
+            NOT = { army_size_percentage = 1.0 }
+		}
+		effect = { 
+			capital_scope = {
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+            }
+		}
+	}
+}
+
+wwu_lordaeron_column_2 = { 
+	slot = 2
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = A08
+	}
+    
+    wwu_uthers_investigations = { 
+		icon = mission_crown_of_heavens
+        position = 1
+		completed_by = 616.12.31
+        
+		required_missions = {  } 
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = UNDEAD_PLAGUE_ACTIVE_TT
+                
+                has_global_flag = undead_plague_active
+            }
+            
+            stability = 1
+		}
+		effect = { 
+			add_country_modifier = {
+                name = mission_uthers_investigations
+                duration = 10950
+            }
+		}
+	}
+    
+    wwu_arthas_crusade = { 
+		icon = mission_brimstone
+        position = 3
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_uthers_investigations } 
+        
+		trigger = {
+            exists = P12
+            exists = P52
+            army_size_percentage = 0.5
+		}
+		effect = { 
+			P12 = {
+                country_event = { id = wwu_scourge.37 }
+            }
+            
+            add_prestige = 50
+		}
+	}
+    
+    wwu_the_culling = { 
+		icon = mission_cannibalize
+		position = 4
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_arthas_crusade } 
+                		
+		trigger = {
+			P52 = {
+                num_of_cities = 15
+            }
+            OR = {
+                P52 = {
+                    owns = 642
+                }
+                owns = 642
+            }
+		}
+		provinces_to_highlight = {
+			province_id = 642 # Stratholme
+        }
+		effect = {
+            add_mil_power = 200
+        
+            # Stratholme
+			642 = {
+				set_base_tax = 1
+                set_base_production = 1
+                set_base_manpower = 1
+			}
+        }
+    }
+    
+    wwu_expedition_to_northrend = { 
+		icon = mission_frostmourne
+		position = 5
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_the_culling } 
+                		
+		trigger = {
+			P52 = {
+                num_of_cities = 20
+            }
+		}
+		effect = {
+            country_event = { id = wwu_arthas_expedition.1 }
+        }
+    }
+}
+
+wwu_lordaeron_column_3 = { 
+	slot = 3
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = A08
+	} 
+    
+    wwu_purge_the_infected = { 
+		icon = mission_fireball_1
+        position = 2
+		completed_by = 618.12.31
+        
+		required_missions = { wwu_uthers_investigations } 
+        
+		trigger = {
+            has_rebel_faction = scourge_cultist_rebels
+		}
+		effect = { 
+            add_stability = -1
+            
+			disband_rebels = scourge_cultist_rebels
+		}
+	}
+}
+
 wwu_lordaeron_column_4 = { 
 	slot = 4
 	generic = no

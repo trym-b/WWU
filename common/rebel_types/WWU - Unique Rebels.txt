@@ -581,3 +581,161 @@ trogg_rebels = {
 		add_prestige = -50
 	}
 }
+
+#---------------------------------
+# Scourge Cultist
+#---------------------------------
+scourge_cultist_rebels = {
+
+	color = { 32 12 164  }
+
+	area = nation 					# Stays within the nation
+	government = any
+	defection = none					# Will defect to the "best" alternative.
+	independence = none				# Does not strive for independence
+	defect_delay = 120
+	gfx_type = culture_province
+	
+	resilient = yes
+	reinforcing = yes
+	general = yes
+	smart = yes
+	
+	artillery = 0.0
+	infantry = 1.0
+	cavalry = 0.0
+	
+	morale = 0.9
+
+	# Possible handle actions
+	handle_action_negotiate = no
+	handle_action_stability = yes
+	handle_action_build_core = no
+	handle_action_send_missionary = no		
+ 
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 10
+        
+		modifier = {
+			factor = 0
+            
+			NOT = { has_global_flag = undead_plague_active }		
+	 	}
+        modifier = {
+			factor = 0
+            
+			owner = {
+                NOT = { tag = A08 }
+            }
+	 	}
+	}
+ 
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+ 
+ 	# Province Scope
+ 	siege_won_trigger = {
+ 		always = yes
+ 	}
+	siege_won_effect = {
+        if = {
+            limit = {
+                owner = {
+                    tag = P52
+                }
+            }
+            disband_rebels = scourge_cultist_rebels
+        }
+        else = {
+            if = {
+                limit = { NOT = { is_core = P52 } }
+                add_core = P52
+                cede_province = P52
+                change_culture = culture_scourge
+                change_religion = cult_of_the_damned
+            }
+        }
+	}
+	
+	# Country scope
+	can_negotiate_trigger = {
+		tag = P52
+	}
+	
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+	
+	# Localisation for their demands
+	demands_description = "scourge_cultist_demand"
+	
+	# Country scope
+	demands_enforced_effect = {
+		add_country_modifier = { name = just_lost_to_rebels duration = 10 hidden = yes }
+        
+        if = {
+            limit = {
+                owner = {
+                    tag = P52
+                }
+            }
+            disband_rebels = scourge_cultist_rebels
+        }
+        else = {
+            add_prestige = -10
+        
+            if = {
+                limit = {
+                    exists = P52
+                }
+                every_owned_province = {
+                    limit = {
+                        has_rebel_faction = REB
+                    }
+                    cede_province = P52
+                    add_core = P52
+                    change_culture = culture_scourge
+                    change_religion = cult_of_the_damned
+                }		
+            }
+            if = {
+                limit = {
+                    NOT = { exists = P52 }
+                }
+                every_owned_province = {
+                    limit = {
+                        has_rebel_faction = REB
+                    }
+                    cede_province = P52
+                    add_core = P52
+                    change_culture = culture_scourge
+                    change_religion = cult_of_the_damned
+                }
+            }
+        }        
+	}
+}

@@ -1,0 +1,226 @@
+namespace = wwu_arthas_expedition
+
+#-------------------------------------------
+# Arthas
+#-------------------------------------------
+# Valgarde Expedition
+country_event = {
+	id = wwu_arthas_expedition.1
+	title = wwu_arthas_expedition.1.title
+	desc = wwu_arthas_expedition.1.desc
+	picture = DWARF_WARRIOR_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	option = {
+		name = wwu_arthas_expedition.1.option.a
+		
+        ROOT = {
+            remove_heir = { }
+        }
+        
+        # Valgarde
+        882 = {
+            cede_province = F38 # Valgarde
+            add_core = F38 # Valgarde
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+            add_base_tax = 2
+            add_base_manpower = 4
+            center_of_trade = 1
+            add_building = wow_fort_1
+            add_building = wow_barracks
+            add_building = wow_arsenal
+        }
+        area_halvarde = {
+            cede_province = F38 # Valgarde
+            add_core = F38 # Valgarde
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+        
+        # Explorers' League Outpost
+        749 = {
+            change_culture = culture_ironforge
+        }
+        
+        # Westguard Keep
+        635 = {
+            cede_province = F38 # Valgarde
+            add_core = F38 # Valgarde
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+        # The Forgotten Shore
+        583 = {
+            cede_province = F38 # Valgarde
+            add_core = F38 # Valgarde
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+        
+        # Valgarde
+        F38 = {
+            add_accepted_culture = culture_ironforge
+            set_capital = 882
+            
+            define_ruler = {
+                name = "Arthas"
+                dynasty = "Menethil"
+                age = 24
+                claim = 100
+                adm = 4
+                dip = 2
+                mil = 6
+            }
+            set_ruler_flag = ruler_portrait_arthas_menethil_undead
+    
+            setup_spellcaster_history = {
+                APTITUDE = 3
+                FINESSE = 3
+                CONCENTRATION = 2
+                MANA = 5
+            }
+            set_ruler_flag = is_immortal
+            set_ruler_flag = paladin_personality
+            
+            define_general = {
+                name = "Muradin Bronzebeard"
+                fire = 5
+                shock = 7
+                manuever = 5
+                siege = 3
+            }
+        }
+	}
+}
+
+# Corruption of Arthas
+country_event = {
+	id = wwu_arthas_expedition.2
+	title = wwu_arthas_expedition.2.title
+	desc = wwu_arthas_expedition.2.desc
+	picture = ARTHAS_FALLS_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	option = {
+		name = wwu_arthas_expedition.2.option.a
+		
+        set_ruler_religion = cult_of_the_damned
+        set_ruler_flag = is_immortal
+        
+        2413 = {
+            cede_province = ROOT
+            add_core = ROOT
+        }
+	}
+}
+
+# Mal'Ganis Confronted
+country_event = {
+	id = wwu_arthas_expedition.3
+	title = wwu_arthas_expedition.3.title
+	desc = wwu_arthas_expedition.3.desc
+	picture = MALGANIS_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	option = {
+		name = wwu_arthas_expedition.3.option.a
+		
+        kill_leader = {
+            type = "Muradin Bronzebeard"
+        }
+
+        define_ruler = {
+            name = "Luc"
+            dynasty = "Valonforth"
+            age = 35
+            claim = 100
+            adm = 3
+            dip = 4
+            mil = 5
+        }
+        
+        set_ruler_flag = warrior_personality
+	}
+}
+
+# Prince Arthas, Death Knight
+country_event = {
+	id = wwu_arthas_expedition.4
+	title = wwu_arthas_expedition.4.title
+	desc = wwu_arthas_expedition.4.desc
+	picture = LICH_KING_CLOSE_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	option = {
+		name = wwu_arthas_expedition.4.option.a
+		
+        define_ruler = {
+            name = "Arthas"
+            dynasty = "Menethil"
+            age = 25
+            claim = 100
+            adm = 5
+            dip = 4
+            mil = 6
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = death_knight_personality
+        set_ruler_flag = ruler_portrait_arthas_menethil_undead
+    
+        set_ruler_culture = culture_death_knight
+        
+        setup_spellcaster_history = {
+            APTITUDE = 3
+            FINESSE = 3
+            CONCENTRATION = 2
+            MANA = 5
+        }
+        
+        add_accepted_culture = culture_death_knight
+        add_country_modifier = {
+            name = frostmourne
+            duration = -1
+        }
+	}
+}
+
+# Weakening of the Nathrezim
+country_event = {
+	id = wwu_arthas_expedition.5
+	title = wwu_arthas_expedition.5.title
+	desc = wwu_arthas_expedition.5.desc
+	picture = MALGANIS_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	option = {
+		name = wwu_arthas_expedition.5.option.a
+		
+        remove_country_modifier = nathrezim_jailors
+        add_country_modifier = {
+            name = nathrezim_jailors_weakened
+            duration = -1
+        }
+	}
+}
