@@ -1,0 +1,174 @@
+namespace = wwu_dreadlords
+
+# Dreadlords Revealed
+country_event = {
+	id = wwu_dreadlords.1
+	title = wwu_dreadlords.1.title
+	desc = wwu_dreadlords.1.desc
+	picture = MALGANIS_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_dreadlords.1.option.a
+        
+        hidden_effect = { set_global_flag = dreadlords_revealed }
+
+        543 = {
+            cede_province = DDL
+            add_core = DDL
+            change_province_name = "Undercity"
+            change_religion = fel
+            change_culture = culture_scourge
+            add_core = P14
+        }
+        if = {
+            limit = {
+                owns = 1928
+            }
+            1928 = {
+                cede_province = DDL
+                add_core = DDL
+                change_religion = fel
+                change_culture = culture_scourge
+            }
+        }
+        if = {
+            limit = {
+                owns = 1044
+            }
+            1044 = {
+                cede_province = DDL
+                add_core = DDL
+                change_religion = fel
+                change_culture = culture_scourge
+            }
+        }
+        if = {
+            limit = {
+                owns = 607
+            }
+            607 = {
+                cede_province = DDL
+                add_core = DDL
+                change_religion = fel
+                change_culture = culture_scourge
+            }
+        }
+        if = {
+            limit = {
+                owns = 2968
+            }
+            2968 = {
+                cede_province = DDL
+                add_core = DDL
+                change_religion = fel
+                change_culture = culture_scourge
+            }
+        }
+        if = {
+            limit = {
+                owns = 843
+            }
+            843 = {
+                cede_province = DDL
+                add_core = DDL
+                change_religion = fel
+                change_culture = culture_scourge
+            }
+        }
+
+        area_tirisfal_bulwark = {
+            limit = {
+                owned_by = ROOT
+            }
+            cede_province = DDL
+            add_core = DDL
+            change_religion = fel
+            change_culture = culture_scourge
+        }
+        area_andorhal = {
+            limit = {
+                owned_by = ROOT
+            }
+            cede_province = DDL
+            add_core = DDL
+            change_religion = fel
+            change_culture = culture_scourge
+        }
+        area_andorhal_fields = {
+            limit = {
+                owned_by = ROOT
+            }
+            cede_province = DDL
+            add_core = DDL
+            change_religion = fel
+            change_culture = culture_scourge
+        }
+        
+        add_historical_rival = DDL
+    }
+    
+    after = {
+        hidden_effect = {
+            DDL = {
+                country_event = { id = wwu_dreadlords.2 }
+            }
+        }
+    }
+}
+
+# Dreadlords
+country_event = {
+	id = wwu_dreadlords.2
+	title = wwu_dreadlords.2.title
+	desc = wwu_dreadlords.2.desc
+	picture = MALGANIS_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_dreadlords.2.option.a
+
+        set_capital = 543
+        
+        define_ruler = {
+            name = "Balnazzar" 
+            dynasty = "the Nathrezim"
+            culture = culture_dreadlord
+            adm = 4
+            dip = 5	
+            mil = 4	
+            age = 100
+            claim = 100
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = warlock_personality
+        event_add_cruel_personality = yes
+        event_add_ruthless_personality = yes
+        
+        setup_spellcaster_history = {
+            APTITUDE = 3
+            FINESSE = 3
+            CONCENTRATION = 2
+            MANA = 3
+        }
+    
+        add_historical_rival = P11
+        
+        declare_war_with_cb = {
+            who = P11
+            casus_belli = cb_core
+        }
+    }
+}
+

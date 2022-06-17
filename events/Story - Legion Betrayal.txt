@@ -1,0 +1,361 @@
+namespace = wwu_legion_betrayal
+
+# Demonic Presence
+country_event = {
+	id = wwu_legion_betrayal.1
+	title = wwu_legion_betrayal.1.title
+	desc = wwu_legion_betrayal.1.desc
+	picture = DEMONIC_PRESENCE_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.1.option.a
+    
+        add_church_power = 100
+        add_adm_power = 100
+        add_dip_power = 100
+        add_mil_power = 100
+        add_stability = 3
+    }
+}
+
+# Arrival of Archimonde
+country_event = {
+	id = wwu_legion_betrayal.2
+	title = wwu_legion_betrayal.2.title
+	desc = wwu_legion_betrayal.2.desc
+	picture = ARCHIMONDE_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.2.option.a
+    
+        953 = {
+            cede_province = DVG
+            add_core = DVG
+            change_culture = culture_eredar
+            change_religion = fel
+            add_base_tax = 4
+            add_base_production = 4
+            add_base_manpower = 8
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            DVG = {
+                country_event = { id = wwu_legion_betrayal.3 }
+            }
+        }
+    }
+}
+
+# Archimonde's Arrival
+country_event = {
+	id = wwu_legion_betrayal.3
+	title = wwu_legion_betrayal.3.title
+	desc = wwu_legion_betrayal.3.desc
+	picture = ARCHIMONDE_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.3.option.a
+        
+        DVG = {
+            define_ruler = {
+                name = "Archimonde" 
+                dynasty = "the Defiler"
+                adm = 7
+                dip = 7
+                mil = 7
+            }
+            set_ruler_flag = is_immortal
+            set_ruler_flag = warlock_personality
+            event_add_ruthless_personality = yes
+            
+            set_ruler_flag = ruler_portrait_archimonde
+    
+            setup_spellcaster_history = {
+                APTITUDE = 5
+                FINESSE = 5
+                CONCENTRATION = 5
+                MANA = 5
+            }
+    
+            add_country_modifier = {
+                name = is_evil
+                duration = -1
+            }
+        }
+    }
+}
+
+# Destruction of Dalaran
+country_event = {
+	id = wwu_legion_betrayal.4
+	title = wwu_legion_betrayal.4.title
+	desc = wwu_legion_betrayal.4.desc
+	picture = DALARAN_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.4.option.a
+
+        add_permanent_province_modifier = { 
+            name = ruined_dalaran
+            duration = -1
+        }
+        
+        change_province_name = "Ruined Dalaran"
+        
+        set_base_tax = 1
+        set_base_production = 1
+        set_base_manpower = 1
+        
+        add_devastation = 100
+        
+        change_trade_goods = fel
+        
+        remove_building = wow_fort_4
+        remove_building = wow_fort_3
+        remove_building = wow_fort_2
+        remove_building = wow_fort_1
+        remove_building = wow_temple
+        remove_building = wow_arsenal
+        remove_building = wow_barracks
+        remove_building = wow_city_barracks
+        remove_building = wow_farm
+        remove_building = wow_mine
+        remove_building = wow_manufactory
+        remove_building = wow_marketplace
+        remove_building = wow_tavern
+        remove_building = wow_citadel
+        remove_building = wow_arcane_tower
+    }
+}
+
+# Legion Corruption
+country_event = {
+	id = wwu_legion_betrayal.5
+	title = wwu_legion_betrayal.5.title
+	desc = wwu_legion_betrayal.5.desc
+	picture = DEMONS_BITE_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.5.option.a
+
+        change_religion = fel
+        set_ruler_religion = fel
+        set_heir_religion = fel
+        every_owned_province = {
+            change_religion = fel
+        }
+    }
+}
+
+# Hyjal Assault
+country_event = {
+	id = wwu_legion_betrayal.6
+	title = wwu_legion_betrayal.6.title
+	desc = wwu_legion_betrayal.6.desc
+	picture = HYJAL_ASSAULT_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.6.option.a
+
+        area_upper_groves = {
+            cede_province = DVG
+            add_core = DVG
+            change_culture = culture_demonspawn
+            change_religion = fel
+        }
+        
+        area_nordrassil = {
+            cede_province = DVG
+            add_core = DVG
+            change_culture = culture_demonspawn
+            change_religion = fel
+        }
+        
+        1334 = {
+            change_culture = culture_eredar
+        }
+        
+        DVG = {
+            set_capital = 1334
+        }
+    }
+}
+
+# Nordrassil's Sacrifice - For the Demonic Vanguard
+country_event = {
+	id = wwu_legion_betrayal.7
+	title = wwu_legion_betrayal.7.title
+	desc = wwu_legion_betrayal.7.desc
+	picture = BIG_WISPS_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.7.option.a
+
+        hidden_effect = {
+            set_global_flag = archimonde_dead
+        }
+        
+        kill_ruler = yes
+        add_stability = -3
+        
+        define_ruler = {
+            name = "Kil'Jaeden" 
+            dynasty = "the Deciever" 
+            adm = 7
+            dip = 7
+            mil = 7
+        }
+        set_ruler_flag = is_immortal
+        set_ruler_flag = warlock_personality
+        event_add_ruthless_personality = yes
+        
+        set_ruler_flag = ruler_portrait_kiljaeden
+    
+        setup_spellcaster_history = {
+            APTITUDE = 5
+            FINESSE = 5
+            CONCENTRATION = 5
+            MANA = 5
+        }
+        
+        # Spawn Darkwhisper
+        area_upper_groves = {
+            cede_province = G02
+            add_core = G02
+            remove_core = DVG
+        }
+        
+        area_nordrassil = {
+            cede_province = G02
+            add_core = G02
+            remove_core = DVG
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            G02 = {
+                country_event = { id = wwu_legion_betrayal.9 }
+            }
+        }
+    }
+}
+
+# Nordrassil's Sacrifice - For the dousing nation
+country_event = {
+	id = wwu_legion_betrayal.8
+	title = wwu_legion_betrayal.8.title
+	desc = wwu_legion_betrayal.8.desc
+	picture = BIG_WISPS_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.8.option.a
+
+        region_mount_hyjal = {
+            add_devastation = 100
+        }
+        
+        1334 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_religion = ROOT
+            change_culture = ROOT
+        }
+        
+        # Peace out all
+        every_country = {
+            limit = {
+                war_with = ROOT
+            }
+            white_peace = ROOT
+        }
+    }
+}
+
+# Darkwhisper Arises
+country_event = {
+	id = wwu_legion_betrayal.9
+	title = wwu_legion_betrayal.9.title
+	desc = wwu_legion_betrayal.9.desc
+	picture = PIT_LORD_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_legion_betrayal.9.option.a
+
+        define_ruler = {
+            name = "Garnoth" 
+            dynasty = "Fist of the Legion" 	
+            adm = 3
+            dip = 3	
+            mil = 3	
+        }
+        
+        setup_spellcaster_history = {
+            APTITUDE = 1
+            FINESSE = 1
+            CONCENTRATION = 1
+            MANA = 5
+        }
+        set_ruler_flag = is_immortal
+        set_ruler_flag = warrior_personality
+        
+        set_capital = 1345
+    }
+}
+

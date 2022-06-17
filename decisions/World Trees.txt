@@ -6,6 +6,7 @@ country_decisions = {
 		major = yes
         
 		potential = {
+
             OR = {
                 has_global_flag = nordrassil_burned
                 has_country_flag = night_elf_ambition
@@ -48,6 +49,8 @@ country_decisions = {
     # Burn Nordrassil
     burn_nordrassil = {
         potential = {
+            NOT = { tag = DVG } # Does it via mission tree instead
+            
             # Is Evil inclined
 			OR = {
 				religion = fel
@@ -145,6 +148,20 @@ country_decisions = {
         
         effect = {
             add_mil_power = -100
+            
+            # Related to Demonic Vanguard mission tree
+            if = {
+                limit = {
+                    has_global_flag = demonic_vanguard_burning_world_tree
+                    exists = DVG
+                }
+                
+                country_event = { id = wwu_legion_betrayal.8 }
+                
+                DVG = {
+                    country_event = { id = wwu_legion_betrayal.7 }
+                }
+            }
             
             every_country = {
                 limit = {
