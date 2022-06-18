@@ -69,18 +69,6 @@ control_subject = {
 	require_acceptance = no
 	
 	is_visible = {
-        NOT = {
-            OR = {
-                has_reform = scourge_reform
-                has_reform = scourge_domain_reform
-            }
-            FROM = {
-                OR = {
-                    has_reform = scourge_reform
-                    has_reform = scourge_domain_reform
-                }
-            }
-        }
         ai = no
         FROM = {
             is_subject_of = ROOT
@@ -121,18 +109,6 @@ return_to_overlord = {
 	require_acceptance = no
 	
 	is_visible = {
-        NOT = {
-            OR = {
-                has_reform = scourge_reform
-                has_reform = scourge_domain_reform
-            }
-            FROM = {
-                OR = {
-                    has_reform = scourge_reform
-                    has_reform = scourge_domain_reform
-                }
-            }
-        }
         ai = no
         FROM = {
             overlord_of = ROOT
@@ -165,60 +141,6 @@ return_to_overlord = {
         always = no
 	}
 }
-control_scourge = {
-	category = relation
-	alert_index = 3
-	alert_tooltip = control_scourge_tooltip
-	
-	require_acceptance = no
-	
-	is_visible = {
-        ai = no
-        OR = {
-            has_reform = scourge_reform
-            has_reform = scourge_domain_reform
-        }
-        FROM = {
-            OR = {
-                has_reform = scourge_reform
-                has_reform = scourge_domain_reform
-            }
-        }
-	}
-    
-	is_allowed = {
-        OR = {
-            has_reform = scourge_reform
-            has_reform = scourge_domain_reform
-        }
-        FROM = {
-            OR = {
-                has_reform = scourge_reform
-                has_reform = scourge_domain_reform
-            }
-        }
-	}
-	on_accept = {
-        switch_tag = FROM
-	}
-	on_decline = {
-        switch_tag = FROM
-	}
-	
-	ai_acceptance = {
-        add_entry = {
-			name = BASE
-			export_to_variable = {
-				which = ai_value
-				value = -1000
-			}
-		}
-	}
-	ai_will_do = {
-        always = no
-	}
-}
-
 control_orcish_horde = {
 	category = relation
 	alert_index = 3

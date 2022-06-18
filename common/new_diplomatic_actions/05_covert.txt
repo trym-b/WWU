@@ -417,3 +417,67 @@ spread_fel = {
 		always = yes
 	}
 }
+
+#---------------------------------------
+# Claim Port
+#---------------------------------------
+claim_port = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = claim_port_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_pirate = yes
+        any_owned_province = {
+            has_port = yes
+        }
+        FROM = {
+            any_owned_province = {
+                has_port = yes
+                NOT = { is_claim = ROOT }
+            }
+        }
+	}
+	is_allowed = {
+        any_owned_province = {
+            has_port = yes
+        }
+        FROM = {
+            any_owned_province = {
+                has_port = yes
+                NOT = { is_claim = ROOT }
+            }
+        }
+		has_spy_network_in = {
+			who = FROM
+			value = 50
+		}
+	}
+	on_accept = {
+		add_spy_network_in = {
+			who = FROM
+			value = -50
+		}
+		FROM = {
+			random_owned_province = {
+				limit = { 
+                    has_port = yes
+                    NOT = { is_claim = ROOT } 
+                }
+                add_claim = ROOT
+			}
+		}
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = yes
+	}
+}
