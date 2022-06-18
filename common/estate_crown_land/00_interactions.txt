@@ -1021,3 +1021,367 @@ interaction = {
         }
 	}
 }
+
+# SECOND ROW
+interaction = {
+    key = visit_personal_chamber
+    random_seed = random
+
+    trigger = {
+        if = {
+            limit = {
+                ai = yes
+            }
+            has_country_flag = ai_can_use_ruler_view
+        }
+        else = {
+            always = yes
+        }
+    }
+
+    effect = {
+		country_event = { id = wwu_ruler_view.1 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                clr_country_flag = ai_can_use_ruler_view
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+interaction = {
+    key = start_class_training
+    random_seed = random
+
+    trigger = {
+        NOT = { has_assigned_ruler_class = yes }
+        NOT = { has_ruler_flag = ruler_is_training }
+        
+        if = {
+            limit = {
+                is_immortal_lifespan = yes
+            }
+            years_of_income = 2.0
+        }
+        else = {
+            years_of_income = 1.0
+        }
+    }
+
+    effect = {
+		if = {
+            limit = {
+                is_immortal_lifespan = yes
+            }
+            add_years_of_income = -2.0
+        }
+        else = {
+            add_years_of_income = -1.0
+        }
+        
+        country_event = { id = wwu_ruler_training.1 }
+    }
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+interaction = {
+    key = start_magic_training
+    random_seed = random
+
+    trigger = {
+        # Non Spellcaster
+        if = {
+            limit = {
+                NOT = { has_ruler_modifier = spellcaster_capabilities }
+            }
+            NOT = { has_ruler_modifier = spellcaster_capabilities }
+            NOT = { has_ruler_modifier = magical_training }
+            
+            if = {
+                limit = {
+                    OR = {
+                        has_ruler_flag = mage_personality
+                        has_ruler_flag = priest_personality
+                        has_ruler_flag = warlock_personality
+                        has_ruler_flag = druid_personality
+                    }
+                }
+                treasury = 250
+            }
+            else = {
+                treasury = 1000
+            }
+        }
+        # Spellcaster
+        else = {
+            has_ruler_modifier = spellcaster_capabilities
+            NOT = { has_ruler_modifier = recently_trained_magic }
+        }
+    }
+    effect = {
+         # Non Spellcaster
+         if = {
+            limit = {
+                NOT = { has_ruler_modifier = spellcaster_capabilities }
+            }
+             
+             if = {
+                limit = {
+                    OR = {
+                        has_ruler_flag = mage_personality
+                        has_ruler_flag = priest_personality
+                        has_ruler_flag = warlock_personality
+                        has_ruler_flag = druid_personality
+                    }
+                }
+                add_treasury = -250
+            }
+            else = {
+                add_treasury = -1000
+            }
+            
+            add_ruler_modifier = {
+                name = magical_training
+                duration = 3650
+            }
+            
+            custom_tooltip = MAGIC_UNDERGO_TRAINING
+            
+            # Play failure event if the ruler isn't a spellcaster by the end
+            hidden_effect = {
+                country_event = { id = wwu_magic.12 days = 3650 }
+            }
+            
+            # Add free points based on monarch skill
+            # Only do it for the first instance of the decision
+            hidden_effect = {
+                if = {
+                    limit = {
+                        is_variable_equal = {
+                            which = ruler_magic_training
+                            value = 0
+                        }
+                    }
+                    if = {
+                        limit = {
+                            adm = 5
+                        }
+                        add_magical_training_point = yes
+                    }
+                    if = {
+                        limit = {
+                            dip = 5
+                        }
+                        add_magical_training_point = yes
+                    }
+                    if = {
+                        limit = {
+                            mil = 5
+                        }
+                        add_magical_training_point = yes
+                    }
+                }
+            }
+        }
+        # Spellcaster
+        else = {
+            country_event = { id = wwu_magic.60 }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            if = {
+                limit = {
+                    NOT = { has_ruler_modifier = spellcaster_capabilities }
+                }
+                NOT = { treasury = 3000 }
+            }
+            else = {
+                OR = {
+                    adm_power = 500
+                    dip_power = 500
+                    mil_power = 500
+                }
+            }
+        }
+	}
+}
+
+interaction = {
+    key = invoke_magic_1
+    random_seed = random
+
+    trigger = {
+       has_ruler_modifier = spellcaster_capabilities
+    }
+
+    effect = {
+		country_event = { id = wwu_magic_menu.10 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { has_country_modifier = ai_spell_cooldown }
+        }
+	}
+}
+interaction = {
+    key = invoke_magic_2
+    random_seed = random
+
+    trigger = {
+       has_ruler_modifier = spellcaster_capabilities
+    }
+
+    effect = {
+		country_event = { id = wwu_magic_menu.11 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { has_country_modifier = ai_spell_cooldown }
+        }
+	}
+}
+interaction = {
+    key = invoke_magic_3
+    random_seed = random
+
+    trigger = {
+       has_ruler_modifier = spellcaster_capabilities
+    }
+
+    effect = {
+		country_event = { id = wwu_magic_menu.12 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { has_country_modifier = ai_spell_cooldown }
+        }
+	}
+}
+interaction = {
+    key = invoke_magic_4
+    random_seed = random
+
+    trigger = {
+       has_ruler_modifier = spellcaster_capabilities
+    }
+
+    effect = {
+		country_event = { id = wwu_magic_menu.13 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { has_country_modifier = ai_spell_cooldown }
+        }
+	}
+}
+interaction = {
+    key = invoke_magic_5
+    random_seed = random
+
+    trigger = {
+       has_ruler_modifier = spellcaster_capabilities
+    }
+
+    effect = {
+		country_event = { id = wwu_magic_menu.14 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+    }
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { has_country_modifier = ai_spell_cooldown }
+        }
+	}
+}

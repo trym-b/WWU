@@ -790,3 +790,862 @@ country_event = {
         remove_concentration_point = yes
 	}
 }
+
+# Magical Improvements
+country_event = {
+	id = wwu_magic.60
+	title = wwu_magic.60.title
+	desc = wwu_magic.60.desc
+	picture = MAGIC_TOME_eventPicture
+    
+	is_triggered_only = yes
+    
+    trigger = {
+        has_ruler_modifier = spellcaster_capabilities
+    }
+	
+	option = {
+		name = wwu_magic.60.improve_aptitude.valid
+        
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 4
+                    }
+                }
+                adm_power = 500
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 3
+                    }
+                }
+                adm_power = 400
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 2
+                    }
+                }
+                adm_power = 300
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 1
+                    }
+                }
+                adm_power = 200
+            }
+            # -> Poor
+            else = {
+                adm_power = 100
+            }
+        }
+		
+        # -> Legendary
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 4
+                }
+            }
+            add_adm_power = -500
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 3
+                }
+            }
+            add_adm_power = -400
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 2
+                }
+            }
+            add_adm_power = -300
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 1
+                }
+            }
+            add_adm_power = -200
+        }
+        # -> Poor
+        else = {
+            add_adm_power = -100
+        }
+        
+        add_ruler_modifier = {
+            name = recently_trained_magic
+            duration = 1800
+        }
+        
+        country_event = { id = wwu_magic.40 }
+	}
+    option = {
+		name = wwu_magic.60.improve_aptitude.invalid
+		
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 4
+                    }
+                }
+                NOT = { adm_power = 500 }
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 3
+                    }
+                }
+                NOT = { adm_power = 400 }
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 2
+                    }
+                }
+                NOT = { adm_power = 300 }
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_aptitude
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 1
+                    }
+                }
+                NOT = { adm_power = 200 }
+            }
+            # -> Poor
+            else = {
+                NOT = { adm_power = 100 }
+            }
+        }
+		
+        # -> Max
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 5
+                }
+            }
+            custom_tooltip = MAX_APTITUDE_TT
+        }
+        # -> Legendary
+        else_if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 4
+                }
+            }
+            custom_tooltip = NEED_ADM_POWER_500_TT
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 3
+                }
+            }
+            custom_tooltip = NEED_ADM_POWER_400_TT
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 2
+                }
+            }
+            custom_tooltip = NEED_ADM_POWER_300_TT
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_aptitude
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_aptitude
+                    value = 1
+                }
+            }
+            custom_tooltip = NEED_ADM_POWER_200_TT
+        }
+        # -> Poor
+        else = {
+            custom_tooltip = NEED_ADM_POWER_100_TT
+        }
+	}
+    
+    option = {
+		name = wwu_magic.60.improve_finesse.valid
+        
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 4
+                    }
+                }
+                mil_power = 500
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 3
+                    }
+                }
+                mil_power = 400
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 2
+                    }
+                }
+                mil_power = 300
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 1
+                    }
+                }
+                mil_power = 200
+            }
+            # -> Poor
+            else = {
+                mil_power = 100
+            }
+        }
+		
+        # -> Legendary
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 4
+                }
+            }
+            add_mil_power = -500
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 3
+                }
+            }
+            add_mil_power = -400
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 2
+                }
+            }
+            add_mil_power = -300
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 1
+                }
+            }
+            add_mil_power = -200
+        }
+        # -> Poor
+        else = {
+            add_mil_power = -100
+        }
+        
+        add_ruler_modifier = {
+            name = recently_trained_magic
+            duration = 1800
+        }
+        
+        country_event = { id = wwu_magic.41 }
+	}
+    option = {
+		name = wwu_magic.60.improve_finesse.invalid
+		
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 4
+                    }
+                }
+                NOT = { mil_power = 500 }
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 3
+                    }
+                }
+                NOT = { mil_power = 400 }
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 2
+                    }
+                }
+                NOT = { mil_power = 300 }
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_finesse
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 1
+                    }
+                }
+                NOT = { mil_power = 200 }
+            }
+            # -> Poor
+            else = {
+                NOT = { mil_power = 100 }
+            }
+        }
+		
+        # -> Max
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 5
+                }
+            }
+            custom_tooltip = MAX_FINESSE_TT
+        }
+        # -> Legendary
+        else_if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 4
+                }
+            }
+            custom_tooltip = NEED_MIL_POWER_500_TT
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 3
+                }
+            }
+            custom_tooltip = NEED_MIL_POWER_400_TT
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 2
+                }
+            }
+            custom_tooltip = NEED_MIL_POWER_300_TT
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_finesse
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_finesse
+                    value = 1
+                }
+            }
+            custom_tooltip = NEED_MIL_POWER_200_TT
+        }
+        # -> Poor
+        else = {
+            custom_tooltip = NEED_MIL_POWER_100_TT
+        }
+	}
+    
+    option = {
+		name = wwu_magic.60.improve_concentration.valid
+        
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 4
+                    }
+                }
+                dip_power = 500
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 3
+                    }
+                }
+                dip_power = 400
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 2
+                    }
+                }
+                dip_power = 300
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 1
+                    }
+                }
+                dip_power = 200
+            }
+            # -> Poor
+            else = {
+                dip_power = 100
+            }
+        }
+		
+        # -> Legendary
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 4
+                }
+            }
+            add_dip_power = -500
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 3
+                }
+            }
+            add_dip_power = -400
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 2
+                }
+            }
+            add_dip_power = -300
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 1
+                }
+            }
+            add_dip_power = -200
+        }
+        # -> Poor
+        else = {
+            add_dip_power = -100
+        }
+        
+        add_ruler_modifier = {
+            name = recently_trained_magic
+            duration = 1800
+        }
+        
+        country_event = { id = wwu_magic.41 }
+	}
+    option = {
+		name = wwu_magic.60.improve_concentration.invalid
+		
+        trigger = {
+            # -> Legendary
+            if = {
+                limit = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 4
+                    }
+                }
+                NOT = { dip_power = 500 }
+            }
+            # -> Epic
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 4
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 3
+                    }
+                }
+                NOT = { dip_power = 400 }
+            }
+            # -> Rare
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 3
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 2
+                    }
+                }
+                NOT = { dip_power = 300 }
+            }
+            # -> Common
+            else_if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = ruler_magic_concentration
+                            value = 2
+                        }
+                    }
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 1
+                    }
+                }
+                NOT = { dip_power = 200 }
+            }
+            # -> Poor
+            else = {
+                NOT = { dip_power = 100 }
+            }
+        }
+		
+        # -> Max
+        if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 5
+                }
+            }
+            custom_tooltip = MAX_CONCENTRATION_TT
+        }
+        # -> Legendary
+        else_if = {
+            limit = {
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 4
+                }
+            }
+            custom_tooltip = NEED_DIP_POWER_500_TT
+        }
+        # -> Epic
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 4
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 3
+                }
+            }
+            custom_tooltip = NEED_DIP_POWER_400_TT
+        }
+        # -> Rare
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 3
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 2
+                }
+            }
+            custom_tooltip = NEED_DIP_POWER_300_TT
+        }
+        # -> Common
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = ruler_magic_concentration
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = ruler_magic_concentration
+                    value = 1
+                }
+            }
+            custom_tooltip = NEED_DIP_POWER_200_TT
+        }
+        # -> Poor
+        else = {
+            custom_tooltip = NEED_DIP_POWER_100_TT
+        }
+	}
+    
+    option = {
+		name = wwu_magic.60.exit
+		
+    }
+}
