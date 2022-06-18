@@ -515,6 +515,7 @@ wwu_silver_hand_column_2 = {
                             value = 100
 						}
 					}
+                    exists = A17
 				}
 				create_alliance = A17
 			}
@@ -526,6 +527,7 @@ wwu_silver_hand_column_2 = {
                             value = 100
 						}
 					}
+                    exists = A26
 				}
 				vassalize = A26
 			}
@@ -577,6 +579,7 @@ wwu_silver_hand_column_2 = {
                             value = 100
 						}
 					}
+                    exists = LGA
 				}
 				vassalize = LGA				
 			}
@@ -1244,7 +1247,12 @@ wwu_silver_hand_column_3 = {
 				name = mission_control_argent_dawn_svh
 				duration = 14800
 			}
-			vassalize = A24
+			if = {
+                limit = {
+                    exists = A24
+                }
+                vassalize = A24
+            }
 			hidden_effect = {
 			    country_event = {
 				    id = wwu_setup_silver_hand.23
@@ -1383,7 +1391,8 @@ wwu_silver_hand_column_4 = {
 						    who = ROOT
                             value = 150
 						}
-					}					
+					}
+                    exists = A25
 				}
 				vassalize = A25
 			}
@@ -1395,6 +1404,7 @@ wwu_silver_hand_column_4 = {
                             value = 150
 						}
 					}
+                    exists = F55
 				}
 				vassalize = F55
 			}
@@ -1627,24 +1637,26 @@ wwu_silver_hand_column_5 = {
 		required_missions = { wwu_restore_lordaerons_borders_svh }
 		
 		trigger = {
-		    if = {
-                limit = {
-                    exists = P62					            
-				}
-				P62 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 170
-                    }                  
-				}
-			}
+		    P62 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 170
+                }                  
+            }
 		}
 		effect = {
 			add_country_modifier = {
 				name = mission_tyr_hand_svh
 				duration = -1
 			}
-			vassalize = P62
+            
+            if = {
+                limit = { 
+                    exists = P62
+                }
+                vassalize = P62
+            }
+            
 			hidden_effect = {
 			    country_event = {
 				    id = wwu_setup_silver_hand.27
@@ -1658,17 +1670,12 @@ wwu_silver_hand_column_5 = {
 		required_missions = { wwu_tyrs_hand_svh }
 		
 		trigger = {
-		    if = {
-                limit = {
-                    exists = F38					            
-				}
-				F38 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 170
-                    }                  
-				}
-			}
+		    F38 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 170
+                }                  
+            }
 		}
 		effect = {
 		    add_mil_power = 100
@@ -1676,7 +1683,14 @@ wwu_silver_hand_column_5 = {
 				name = mission_reunite_with_valgarde_svh
 				duration = -1
 			}
-			vassalize = F38
+            
+            if = {
+                limit = {
+                    exists = F38
+                }
+                vassalize = F38
+            }
+            
 			area_south_hearthglen = {
                 add_permanent_claim = ROOT
             }
