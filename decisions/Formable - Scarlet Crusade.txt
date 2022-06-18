@@ -1,0 +1,55 @@
+country_decisions = {
+    reorganize_scarlet_crusade = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+			# Exclusions
+			NOT = { exists = A22 } # Scarlet Crusade
+            
+            # Requisites
+			OR = {
+			    tag = SOT
+				tag = SCE
+			}
+		}
+        
+		allow = {
+            
+			# General
+			mil_tech = 10
+			is_at_war = no	
+			stability = 1
+            total_development = 300
+            
+            # Cost
+            adm_power = 300
+			dip_power = 300
+			mil_power = 300
+		}
+        
+		effect = {
+            # Cost
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
+        
+            # Switch
+			change_tag = A22
+			change_government = theocracy
+            
+            # Bonus
+			add_formable_bonus = yes
+            #trigger_mission_switch = yes
+            set_final_tag_status = yes
+		}
+		
+		
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
