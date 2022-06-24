@@ -1423,72 +1423,7 @@ country_event = {
     
     # Spawn pretenders if legitimacy is low
     after = {
-        hidden_effect = {
-            if = {
-                limit = {
-                    NOT = { legitimacy = 15 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 3
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 2
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { legitimacy = 30 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 3
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 1
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { legitimacy = 45 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 3
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { legitimacy = 60 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 2
-                }
-            }
-            else = {
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 1
-                }
-            }
-        }
+        ruler_succession_rebel_spawn_devotion = yes
     }
 }
 
@@ -1558,72 +1493,7 @@ country_event = {
     
     # Spawn pretenders if legitimacy is low
     after = {
-        hidden_effect = {
-            if = {
-                limit = {
-                    NOT = { devotion = 15 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 3
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 2
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { devotion = 30 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 3
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 1
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { devotion = 45 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 3
-                }
-            }
-            else_if = {
-                limit = {
-                    NOT = { devotion = 60 }
-                }
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 2
-                }
-            }
-            else = {
-                random_owned_province = {
-                    limit = { 
-                        NOT = { is_in_capital_area = yes }
-                    }
-                    pretender_rebels = 1
-                }
-            }
-        }
+        ruler_succession_rebel_spawn_devotion = yes
     }
 }
 
@@ -1841,6 +1711,971 @@ country_event = {
 	}
 }
 
+# Ancient Theocracy
+# Monastic Order
+# Theocracy
+country_event = {
+	id = wwu_government.20
+	title = wwu_government.20.title
+	desc = wwu_government.20.desc
+	picture = HOLY_BOOK_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+            has_reform = ancient_theocracy_reform
+            has_reform = monastic_order_reform
+            has_reform = theocracy_reform
+            has_reform = argent_crusade_reform
+            has_reform = scarlet_crusade_reform
+        }
+	}
+	
+    # An administrator shall lead us
+	option = {
+		name = wwu_government.20.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A diplomat shall lead us
+	option = {
+		name = wwu_government.20.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A commander shall lead us
+	option = {
+		name = wwu_government.20.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Let fate decide
+    option = {
+		name = wwu_government.20.option.d
+
+        custom_tooltip = FATE_RULER_TT
+        
+        hidden_effect = {
+            random_list = {
+                30 = {
+                    define_ruler = {
+                        mil = 3
+                        adm = -3
+                        dip = -3
+                        hide_skills = yes
+                    }
+                }
+                30 = {
+                    define_ruler = {
+                        mil = 3
+                        adm = -3
+                        dip = -3
+                        hide_skills = yes
+                    }
+                }
+                30 = {
+                    define_ruler = {
+                        mil = 3
+                        adm = -3
+                        dip = -3
+                        hide_skills = yes
+                    }
+                }
+                8 = {
+                    define_ruler = {
+                        mil = 6
+                        adm = 6
+                        dip = 6
+                        hide_skills = yes
+                    }
+                }
+                2 = {
+                    define_ruler = {
+                        mil = 7
+                        adm = 7
+                        dip = 7
+                        hide_skills = yes
+                    }
+                }
+            }
+        }
+		
+		ai_chance = {
+			factor = 10
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Naga Empire
+country_event = {
+	id = wwu_government.21
+	title = wwu_government.21.title
+	desc = wwu_government.21.desc
+	picture = NAGA_SEA_WITCH_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+            has_reform = naga_empire_reform
+            has_reform = naga_domain_reform
+        }
+	}
+	
+    # An tidemistress shall lead us
+	option = {
+		name = wwu_government.21.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+            female = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A sea witch shall lead us
+	option = {
+		name = wwu_government.21.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+            female = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A tidelord shall lead us
+	option = {
+		name = wwu_government.21.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A puppet of N'Zoth shall lead us
+	option = {
+		name = wwu_government.21.option.d
+
+        trigger = {
+            religion = nzoth
+        }
+
+		define_ruler = {
+            mil = -2
+            adm = -2
+            dip = -2
+            hide_skills = yes
+        }
+        
+        add_ruler_modifier = {
+            name = nzoth_fervor
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Mantid Kingdom
+country_event = {
+	id = wwu_government.22
+	title = wwu_government.22.title
+	desc = wwu_government.22.desc
+	picture = MANTID_QUEEN_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = mantid_kingdom_reform
+	}
+	
+    # A vizier shall lead us
+	option = {
+		name = wwu_government.22.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # An amber-shaper shall lead us
+	option = {
+		name = wwu_government.22.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A blade lord shall lead us
+	option = {
+		name = wwu_government.22.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A disciple of Y'Shaarj shall lead us
+	option = {
+		name = wwu_government.22.option.d
+
+        trigger = {
+            religion = yshaarj
+        }
+
+		define_ruler = {
+            mil = -2
+            adm = -2
+            dip = -2
+            hide_skills = yes
+        }
+        
+        add_ruler_modifier = {
+            name = yshaarj_fervor
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Nerubian Kingdom
+country_event = {
+	id = wwu_government.23
+	title = wwu_government.23.title
+	desc = wwu_government.23.desc
+	picture = AZJOL_NERUB_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = nerubian_kingdom_reform
+	}
+	
+    # An administrative vizier shall lead us
+	option = {
+		name = wwu_government.23.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A diplomatic vizier shall lead us
+	option = {
+		name = wwu_government.23.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A commander shall lead us
+	option = {
+		name = wwu_government.23.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Aqir Kingdom
+country_event = {
+	id = wwu_government.24
+	title = wwu_government.24.title
+	desc = wwu_government.24.desc
+	picture = TEMPLE_OF_AHN_QIRAJ_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = aqir_kingdom_reform
+	}
+	
+    # Focus on the kingdom internals
+	option = {
+		name = wwu_government.24.option.a
+
+		define_ruler = {
+            adm = 3
+            dip = 3
+            mil = -4
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = aqir_internal_focus
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Focus on expanding the empire
+	option = {
+		name = wwu_government.24.option.b
+
+		define_ruler = {
+            mil = 4
+            adm = -3
+            mil = -3
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = aqir_external_focus
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Tol'vir Kingdom
+country_event = {
+	id = wwu_government.25
+	title = wwu_government.25.title
+	desc = wwu_government.25.desc
+	picture = LOST_CITY_OF_TOLVIR_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = tolvir_kingdom_reform
+	}
+	
+    # Arise, Sun King
+	option = {
+		name = wwu_government.25.option.a
+
+		define_ruler = {
+            adm = 3
+            dip = 3
+            mil = -4
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = tolvir_sun_king
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Arise, Moon King
+	option = {
+		name = wwu_government.25.option.b
+
+		define_ruler = {
+            mil = 4
+            adm = -3
+            mil = -3
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = tolvir_moon_king
+            duration = -1
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Titan Facility
+country_event = {
+	id = wwu_government.26
+	title = wwu_government.26.title
+	desc = wwu_government.26.desc
+	picture = ULDAMAN_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = titan_facility_reform
+	}
+	
+    # Alas
+	option = {
+		name = wwu_government.26.option.a
+
+		define_ruler = {
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = titanic_rigor
+            duration = 3650
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Dragonflight Brood
+country_event = {
+	id = wwu_government.27
+	title = wwu_government.27.title
+	desc = wwu_government.27.desc
+	picture = DRAGON_CONSORT_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = dragonflight_brood_reform
+	}
+	
+    # ADM
+	option = {
+		name = wwu_government.27.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # DIP
+	option = {
+		name = wwu_government.27.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # MIL
+	option = {
+		name = wwu_government.27.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Cult of Hakkar
+country_event = {
+	id = wwu_government.28
+	title = wwu_government.28.title
+	desc = wwu_government.28.desc
+	picture = HAKKAR_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = cult_of_hakkar_reform
+	}
+	
+    # Alas
+	option = {
+		name = wwu_government.28.option.a
+
+		define_ruler = {
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = hakkar_favour
+            duration = 3650
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Shadow Cult
+country_event = {
+	id = wwu_government.29
+	title = wwu_government.29.title
+	desc = wwu_government.29.desc
+	picture = SPAWN_OF_SHADOWS_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = shadow_cult_reform
+	}
+	
+    # Favour the composed, eloquent disciple
+	option = {
+		name = wwu_government.29.option.a
+
+		define_ruler = {
+            adm = 3
+            dip = 3
+            mil = -3
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Favour the rabid, fanatical disciple
+	option = {
+		name = wwu_government.29.option.b
+
+		define_ruler = {
+            mil = 4
+            adm = -3
+            dip = -3
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Elemental Cult
+country_event = {
+	id = wwu_government.30
+	title = wwu_government.30.title
+	desc = wwu_government.30.desc
+    
+    picture = {
+		picture = RAGNAROS_eventPicture
+        
+		trigger = {
+            OR = {
+                culture_group = culture_group_fire
+                religion = fire
+            }
+        }
+	}
+	picture = {
+		picture = THERAZANE_eventPicture
+        
+		trigger = {
+            OR = {
+                culture_group = culture_group_earth
+                religion = earth
+            }
+        }
+	}
+    picture = {
+		picture = NEPTULON_eventPicture
+        
+		trigger = {
+            OR = {
+                culture_group = culture_group_water
+                religion = water
+            }
+        }
+	}
+    picture = {
+		picture = ALAKIR_THE_WINDLORD_eventPicture
+        
+		trigger = {
+            OR = {
+                culture_group = culture_group_air
+                religion = wind
+            }
+        }
+	}
+    picture = {
+        picture = BESTIARY_eventPicture
+        
+		trigger = {
+            NOT = {
+                OR = {
+                    culture_group = culture_group_fire
+                    religion = fire
+                }
+            }
+            NOT = {
+                OR = {
+                    culture_group = culture_group_earth
+                    religion = earth
+                }
+            }
+            NOT = {
+                OR = {
+                    culture_group = culture_group_water
+                    religion = water
+                }
+            }
+            NOT = {
+                OR = {
+                    culture_group = culture_group_air
+                    religion = wind
+                }
+            }
+        }
+	}
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = elemental_cult_reform
+	}
+	
+    # 
+	option = {
+		name = wwu_government.30.option.a
+
+		define_ruler = {
+            hide_skills = yes
+        }
+        
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_fire
+                    religion = fire
+                }
+            }
+            
+            add_ruler_modifier = {
+                name = elemental_ragnaros_favour
+                duration = 3650
+            }
+        }
+		if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_earth
+                    religion = earth
+                }
+            }
+            
+            add_ruler_modifier = {
+                name = elemental_therazane_favour
+                duration = 3650
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_water
+                    religion = water
+                }
+            }
+            
+            add_ruler_modifier = {
+                name = elemental_neptulon_favour
+                duration = 3650
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_air
+                    religion = wind
+                }
+            }
+            
+            add_ruler_modifier = {
+                name = elemental_alakir_favour
+                duration = 3650
+            }
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Druidic Circle
+country_event = {
+	id = wwu_government.31
+	title = wwu_government.31.title
+	desc = wwu_government.31.desc
+	picture = DRUID_OF_THE_CLAW_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = druidic_circle_reform
+	}
+	
+    # ADM
+	option = {
+		name = wwu_government.31.option.a
+
+		define_ruler = {
+            adm = 4
+            dip = -1
+            mil = -1
+            hide_skills = yes
+            female = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # DIP
+	option = {
+		name = wwu_government.31.option.b
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # MIL
+	option = {
+		name = wwu_government.31.option.c
+
+		define_ruler = {
+            mil = 4
+            adm = -1
+            dip = -1
+            hide_skills = yes
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+# Demonic Circle
+country_event = {
+	id = wwu_government.32
+	title = wwu_government.32.title
+	desc = wwu_government.32.desc
+	picture = INNER_DEMON_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_reform = demonic_order_reform
+	}
+	
+    # Alas
+	option = {
+		name = wwu_government.32.option.a
+
+		define_ruler = {
+            hide_skills = yes
+        }
+		
+        add_ruler_modifier = {
+            name = demonic_favour
+            duration = 3650
+        }
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_devotion = yes
+    }
+}
+
+
+#--------------------------------------------------
+# Hidden Events
+#--------------------------------------------------
 # Update Event - Liege and Nobles
 country_event = {
 	id = wwu_government.100

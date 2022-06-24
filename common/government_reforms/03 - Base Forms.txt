@@ -344,11 +344,7 @@ scourge_reform = {
     legacy_equivalent = scourge_legacy
     
     potential = {
-        # NOT = { has_global_flag = destroyed_lich_king }
-		OR = {
-			technology_group = tech_undead
-			technology_group = tech_scourge
-		}
+        have_had_reform = scourge_reform
 	}
     
 	royal_marriage = no
@@ -606,11 +602,12 @@ naga_domain_reform = {
     legacy_equivalent = naga_domain_legacy
     
     potential = {
-		technology_group = tech_naga
+		culture_group = culture_group_naga
 	}
     
     heir = no
 	queen = no
+    election_on_death = yes
     
     custom_attributes = {
 		locked_government_type = yes
@@ -1313,6 +1310,9 @@ theocracy_reform = {
 	icon = "clarity_of_purpose"
     legacy_equivalent = theocracy_legacy
     
+    heir = no
+    election_on_death = yes
+    
 	modifiers = {
 		tolerance_own = 1
 		missionaries = 1
@@ -1344,6 +1344,9 @@ monastic_order_reform = {
 	rulers_can_be_generals = yes
 	heirs_can_be_generals = yes
 	
+    heir = no
+    election_on_death = yes
+    
 	modifiers = {
 		tolerance_own = 1
 	    land_morale = 0.05
@@ -1370,6 +1373,7 @@ ancient_theocracy_reform = {
     
     queen = no
     heir = no
+    election_on_death = yes
     
     custom_attributes = {
 		locked_government_type = yes
@@ -1415,6 +1419,7 @@ scarlet_crusade_reform = {
 	heirs_can_be_generals = yes
 	queen = no
     heir = no
+    election_on_death = yes
     
     custom_attributes = {
 		locked_government_type = yes
@@ -1455,6 +1460,7 @@ argent_crusade_reform = {
 	heirs_can_be_generals = yes
 	queen = no
     heir = no
+    election_on_death = yes
     
     custom_attributes = {
 		locked_government_type = yes
@@ -1496,6 +1502,7 @@ demonic_order_reform = {
 	royal_marriage = no
     queen = no
     heir = no
+    election_on_death = yes
     
     custom_attributes = {
 		locked_government_type = yes
@@ -1549,6 +1556,7 @@ druidic_circle_reform = {
 	royal_marriage = no
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
 		diplomatic_reputation = 1
@@ -1597,6 +1605,7 @@ elemental_cult_reform = {
 
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
 		global_unrest = -1
@@ -1642,6 +1651,7 @@ shadow_cult_reform = {
     
     queen = no
     heir = no
+    election_on_death = yes
     
     conditional = {
 		allow = { has_dlc = "Cradle of Civilization" }
@@ -1675,11 +1685,18 @@ cult_of_hakkar_reform = {
     legacy_equivalent = cult_of_hakkar_legacy
     
 	potential = {
-        have_had_reform = cult_of_hakkar_reform
+        OR = {
+            have_had_reform = cult_of_hakkar_reform
+            AND = {
+                religion = hakkari
+                primary_culture = culture_jungle_troll
+            }
+        }
     }
     
     queen = no
     heir = no
+    election_on_death = yes
     
     conditional = {
 		allow = { has_dlc = "Cradle of Civilization" }
@@ -1718,12 +1735,16 @@ dragonflight_brood_reform = {
     legacy_equivalent = dragonflight_brood_legacy
     
 	potential = {
-		have_had_reform = dragonflight_brood_reform
+		OR = {
+            have_had_reform = dragonflight_brood_reform
+            culture_group = culture_group_dragonkin
+        }
 	}
     
 	republican_name = yes
     queen = yes
     heir = no
+    election_on_death = yes
     
     rulers_can_be_generals = yes
     
@@ -1796,12 +1817,16 @@ titan_facility_reform = {
     legacy_equivalent = titan_facility_legacy
     
 	potential = {
-        technology_group = tech_titan
+        OR = {
+            have_had_reform = titan_facility_reform
+            culture_group = culture_group_titan
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
       
 	modifiers = {
         fire_damage_received = -0.05
@@ -1842,12 +1867,16 @@ tolvir_kingdom_reform = {
     legacy_equivalent = tolvir_kingdom_legacy
     
 	potential = {
-        have_had_reform = tolvir_kingdom_reform
+        OR = {
+            have_had_reform = tolvir_kingdom_reform
+            culture_group = culture_group_tol_vir
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
       
 	modifiers = {
         production_efficiency = 0.05
@@ -1883,12 +1912,16 @@ aqir_kingdom_reform = {
     legacy_equivalent = aqir_kingdom_legacy
     
     potential = {
-        have_had_reform = aqir_kingdom_reform
+        OR = {
+            have_had_reform = aqir_kingdom_reform
+            culture_group = culture_group_aqir
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
         global_manpower_modifier = 0.1
@@ -1924,12 +1957,16 @@ nerubian_kingdom_reform = {
     legacy_equivalent = nerubian_kingdom_legacy
     
     potential = {
-        have_had_reform = nerubian_kingdom_reform
+        OR = {
+            have_had_reform = nerubian_kingdom_reform
+            culture_group = culture_group_nerubian
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
         technology_cost = -0.05
@@ -1965,12 +2002,16 @@ mantid_kingdom_reform = {
     legacy_equivalent = mantid_kingdom_legacy
     
     potential = {
-        have_had_reform = mantid_kingdom_reform
+        OR = {
+            have_had_reform = mantid_kingdom_reform
+            culture_group = culture_group_mantid
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
 		global_manpower_modifier = 0.1
@@ -2006,12 +2047,19 @@ naga_empire_reform = {
     legacy_equivalent = naga_empire_legacy
     
     potential = {
-        have_had_reform = naga_empire_reform
+        OR = {
+            have_had_reform = naga_empire_reform
+            AND = {
+                culture_group = culture_group_naga
+                total_development = 250
+            }
+        }
     }
     
     republican_name = yes
     queen = no
     heir = no
+    election_on_death = yes
     
 	modifiers = {
 		army_tradition = 1.0
@@ -2053,8 +2101,13 @@ blood_matriarchy_reform = {
     legacy_equivalent = blood_matriarchy_legacy
     
     potential = {
-        have_had_reform = blood_matriarchy_reform
-        religion = bloodmancy
+        OR = {
+            have_had_reform = blood_matriarchy_reform
+            AND = {
+                religion = bloodmancy
+                primary_culture = culture_blood_troll
+            }
+        }
     }
     
 	modifiers = {

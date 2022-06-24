@@ -1302,33 +1302,26 @@ wwu_switch_become_a_monarchy = {
 
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
-		OR = {
-            AND = {
-                NOT = { has_reform = dwarven_clan_reform }
-                NOT = { has_government_attribute = locked_government_type }
-            }
-            # Allow for this locked government
-            has_reform = dwarven_clan_reform
-        }
+        
+        # Blocked for the reforms since they are special
+        NOT = { has_reform = alliance_reform }
+        NOT = { has_reform = horde_reform }
+        NOT = { has_reform = old_horde_reform }
+        NOT = { has_reform = scourge_reform }
+        NOT = { has_reform = scourge_domain_reform }
     }
     
 	trigger = {
-		OR = {
-            AND = {
-                NOT = { has_reform = dwarven_clan_reform }
-                NOT = { has_government_attribute = locked_government_type }
-            }
-            # Allow for this locked government
-            has_reform = dwarven_clan_reform
-        }
-		is_emperor = no
 		NOT = { is_lesser_in_union = yes }
 	}
     
 	effect = {
-		set_country_flag = populists_in_government
 		lose_reforms = 3
 		change_government = monarchy
+        
+        hidden_effect = {
+            set_country_flag = populists_in_government
+        }
         
         # Tribal Land
         if = {
@@ -1352,33 +1345,26 @@ wwu_switch_become_a_republic = {
 
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
-		OR = {
-            AND = {
-                NOT = { has_reform = tauren_tribe_reform }
-                NOT = { has_government_attribute = locked_government_type }
-            }
-            # Allow for this locked government
-            has_reform = tauren_tribe_reform
-        }
+        
+        # Blocked for the reforms since they are special
+        NOT = { has_reform = alliance_reform }
+        NOT = { has_reform = horde_reform }
+        NOT = { has_reform = old_horde_reform }
+        NOT = { has_reform = scourge_reform }
+        NOT = { has_reform = scourge_domain_reform }
     }
     
 	trigger = {
-		OR = {
-            AND = {
-                NOT = { has_reform = tauren_tribe_reform }
-                NOT = { has_government_attribute = locked_government_type }
-            }
-            # Allow for this locked government
-            has_reform = tauren_tribe_reform
-        }
-		is_emperor = no
 		NOT = { is_lesser_in_union = yes }
 	}
     
 	effect = {
-		set_country_flag = populists_in_government
 		lose_reforms = 3
 		change_government = republic
+        
+        hidden_effect = {
+            set_country_flag = populists_in_government
+        }
         
         # Tribal Land
         if = {
@@ -1402,19 +1388,27 @@ wwu_switch_become_a_theocracy = {
     
     potential = {
         NOT = { has_unique_government_switch_reform = yes }
-		NOT = { has_government_attribute = locked_government_type }
+        
+        # Blocked for the reforms since they are special
+        NOT = { has_reform = alliance_reform }
+        NOT = { has_reform = horde_reform }
+        NOT = { has_reform = old_horde_reform }
+        NOT = { has_reform = scourge_reform }
+        NOT = { has_reform = scourge_domain_reform }
     }
     
 	trigger = {
-		NOT = { has_government_attribute = locked_government_type }
-		is_emperor = no
 		NOT = { is_lesser_in_union = yes }
 	}
     
 	effect = {
-		set_country_flag = populists_in_government
 		lose_reforms = 3
 		change_government = theocracy
+        
+        hidden_effect = {
+            set_country_flag = populists_in_government
+            set_country_flag = switched_government
+        }
         
         # Tribal Land
         if = {
