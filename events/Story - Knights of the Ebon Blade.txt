@@ -1,0 +1,140 @@
+namespace = wwu_knights_of_the_ebon_blade
+
+# Knights of the Ebon Blade - Spawn
+country_event = {
+	id = wwu_knights_of_the_ebon_blade.1
+	title = wwu_knights_of_the_ebon_blade.1.title
+	desc = wwu_knights_of_the_ebon_blade.1.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = knights_of_the_ebon_blade_setup }
+        ai = no
+        
+        # Only occur in starts before Wrath of the Lich King
+        is_year = 625
+        NOT = { is_year = 626 }
+        
+        # Any Silver Hand related country exists
+        OR = {
+            exists = AGC
+            exists = A22
+            exists = A24
+            exists = SOT
+            exists = SCE
+            exists = SVH
+        }
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = knights_of_the_ebon_blade_setup }
+    }
+	
+	option = {
+		name = wwu_knights_of_the_ebon_blade.1.option.a
+		
+        # Acherus
+        992 = {
+            cede_province = P13
+            add_core = P13
+            change_culture = culture_death_knight
+            change_religion = forgotten_shadow
+             
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            
+            add_building = wow_fort_1
+        }
+        
+        # The Noxious Glades
+        915 = {
+            cede_province = P13
+            add_core = P13
+            change_culture = culture_death_knight
+            change_religion = forgotten_shadow
+        }
+        
+        # Light's Point
+        3073 = {
+            cede_province = P13
+            add_core = P13
+            change_culture = culture_death_knight
+            change_religion = forgotten_shadow
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            P13 = {
+                country_event = { id = wwu_knights_of_the_ebon_blade.2 }
+            }
+        }
+    }
+}
+
+# Knights of the Ebon Blade - Self
+country_event = {
+	id = wwu_knights_of_the_ebon_blade.2
+	title = wwu_knights_of_the_ebon_blade.2.title
+	desc = wwu_knights_of_the_ebon_blade.2.desc
+	picture = ICECROWN_CITADEL_eventPicture
+
+   is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = knights_of_the_ebon_blade_setup }
+    }
+	
+	option = {
+		name = wwu_knights_of_the_ebon_blade.1.option.a
+		
+        define_ruler = {
+            name = "Darion"
+            dynasty = "Morgraine"
+            adm = 4
+            dip = 4
+            mil = 4
+        }
+        
+        setup_spellcaster_history = {
+            APTITUDE = 1
+            FINESSE = 1
+            CONCENTRATION = 2
+            MANA = 3
+        }
+        
+        set_capital = 992
+        
+        add_adm_power = 300
+        add_dip_power = 300
+        add_mil_power = 300
+        add_treasury = 1000
+        add_manpower = 25
+        
+        every_province = {
+            limit = {
+                OR = {
+                    owned_by = AGC
+                    owned_by = A22
+                    owned_by = A24
+                    owned_by = SOT
+                    owned_by = SCE
+                    owned_by = SVH
+                }
+            }
+            
+            add_permanent_claim = ROOT
+        }
+	}
+}
