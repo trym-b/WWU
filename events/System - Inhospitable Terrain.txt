@@ -1,6 +1,6 @@
 namespace = inhospitable_terrain
 
-# Underwater
+# Underwater - Apply
 province_event = {
 	id = inhospitable_terrain.1
 	title = inhospitable_terrain.1.title
@@ -11,9 +11,14 @@ province_event = {
     is_triggered_only = yes
     
 	trigger = {
-		NOT = { has_province_modifier = inhospitable_terrain_underwater }
+        # Province is underwater
 		has_terrain = underwater
-		owner = { NOT = { is_underwater_country = yes } }
+        
+        # Modifier is not currently present
+		NOT = { has_province_modifier = inhospitable_terrain_underwater }
+        
+        # Province is not underwater culture
+        NOT = { is_underwater_province = yes }
 	}
 	
 	mean_time_to_happen = {
@@ -29,7 +34,7 @@ province_event = {
 		}
 	}
 }
-# Underground
+# Underground - Apply
 province_event = {
 	id = inhospitable_terrain.2
 	title = inhospitable_terrain.2.title
@@ -40,9 +45,14 @@ province_event = {
     is_triggered_only = yes
     
 	trigger = {
-		NOT = { has_province_modifier = inhospitable_terrain_underground }
+        # Province is underground
 		has_terrain = underground
-		owner = { NOT = { is_underground_country = yes } }
+        
+        # Modifier is not currently present
+		NOT = { has_province_modifier = inhospitable_terrain_underground }
+        
+        # Province is not underground culture
+        NOT = { is_underground_province = yes }
 	}
 	
 	mean_time_to_happen = {
@@ -58,7 +68,7 @@ province_event = {
 		}
 	}
 }
-# Removal
+# Underwater - Remove
 province_event = {
 	id = inhospitable_terrain.3
 	title = inhospitable_terrain.3.title
@@ -69,18 +79,14 @@ province_event = {
     is_triggered_only = yes
     
 	trigger = {
-		OR = {
-			AND = {
-				has_province_modifier = inhospitable_terrain_underground
-				has_terrain = underground
-				is_underground = yes 
-			}
-			AND = {
-				has_province_modifier = inhospitable_terrain_underwater
-				has_terrain = underwater
-				is_underwater = yes 
-			}
-		}
+        # Province is underwater
+        has_terrain = underwater
+        
+        # Modifier is present
+		has_province_modifier = inhospitable_terrain_underwater
+        
+        # Province is underwater culture
+        is_underwater_province = yes
 	}
 	
 	mean_time_to_happen = {
@@ -90,7 +96,37 @@ province_event = {
 	option = {
 		name = inhospitable_terrain.3.option.a
 		
-		remove_province_modifier = inhospitable_terrain_underground
 		remove_province_modifier = inhospitable_terrain_underwater
+	}
+}
+# Underground - Remove
+province_event = {
+	id = inhospitable_terrain.4
+	title = inhospitable_terrain.4.title
+	desc = inhospitable_terrain.4.desc
+	picture = TIME_WARP_eventPicture
+    
+	hidden = yes
+    is_triggered_only = yes
+    
+	trigger = {
+		# Province is underground
+        has_terrain = underground
+        
+        # Modifier is present
+		has_province_modifier = inhospitable_terrain_underground
+        
+        # Province is underground culture
+        is_underground_province = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = inhospitable_terrain.4.option.a
+		
+		remove_province_modifier = inhospitable_terrain_underground
 	}
 }
