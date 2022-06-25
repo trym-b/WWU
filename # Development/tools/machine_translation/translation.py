@@ -22,23 +22,29 @@ def initialize_translation(target_language: Language, translation_model_cache_di
 
 def translate_or_skip_value(
     key: str, value: str, target_language: Language, translation_model_cache_dir: Path
-) -> tuple[str, DoubleQuotedScalarString]:
+) -> bool:#-> tuple[str, DoubleQuotedScalarString]:
     if is_key_ignored(key, target_language):
-        return key, DoubleQuotedScalarString(value)
+        return False
+        #return key, DoubleQuotedScalarString(value)
     if is_value_ignored(value, target_language):
-        return key, DoubleQuotedScalarString(value)
+        #return key, DoubleQuotedScalarString(value)
+        return False
     if starts_with_icon_like_structure(value):
         if is_just_icon_like_structure(value):
-            return key, DoubleQuotedScalarString(value)
+            #return key, DoubleQuotedScalarString(value)
+            return False
         split_string = split_because_of_start_icon_like_structure(value)
         icon = split_string[0]
         separators = split_string[1]
         rest = split_string[2]
         if is_value_ignored(rest, target_language):
-            return key, DoubleQuotedScalarString(value)
-        result = translate(rest, target_language.code, translation_model_cache_dir)
-        return key, DoubleQuotedScalarString(f"{icon}{separators}{result}")
-    return key, DoubleQuotedScalarString(translate(value, target_language.code, translation_model_cache_dir))
+            #return key, DoubleQuotedScalarString(value)
+            return False
+        #result = translate(rest, target_language.code, translation_model_cache_dir)
+        #return key, DoubleQuotedScalarString(f"{icon}{separators}{result}")
+        return False # not correct
+    #return key, DoubleQuotedScalarString(translate(value, target_language.code, translation_model_cache_dir))
+    return True
 
 
 def translate(to_be_translated: str, language_code: str, translation_model_cache_dir: Path) -> str:

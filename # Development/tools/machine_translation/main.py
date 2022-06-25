@@ -7,9 +7,9 @@ from pathlib import Path
 
 from languages import Language, LanguageCollection, source_language, target_language
 from tqdm import tqdm
-from translation import initialize_translation, translate_or_skip_value
+from translation import initialize_translation, translate_or_skip_value, translate
 from utils import initialize_yaml, replace_clrf_with_lf, replace_whitespace_before_keys, save_as_utf_8_bom
-
+from ruamel.yaml.scalarstring import DoubleQuotedScalarString
 
 def _args() -> Namespace:
     parser = ArgumentParser()
@@ -78,15 +78,38 @@ def _main() -> None:
 
         if not data[source_language().paradox_localization_key]:
             continue
+        list_2 = []
 
         for key, value in tqdm(
             data[source_language().paradox_localization_key].items(),
             total=len(data[source_language().paradox_localization_key]),
         ):
-            key, value = translate_or_skip_value(
+            list_2.append(translate_or_skip_value(
                 key, value, target_language, args.translation_model_cache_dir.resolve()
-            )
-            translated[key] = value
+            ))
+            #translated[key] = value
+
+        print("translating", flush=True)
+        to_be_translated = []
+        for count, key_value in enumerate(data[source_language().paradox_localization_key].items()):
+            key = key_value[0]
+            value = key_value[1]
+            if list_2[count]:
+                to_be_translated.append(value)
+        
+        res = translate(to_be_translated, target_language.code, args.translation_model_cache_dir.resolve())
+        count_2 = 0
+
+        for count, key_value in enumerate(data[source_language().paradox_localization_key].items()):
+            key = key_value[0]
+            value = key_value[1]
+            if list_2[count]:
+                translated[key] = DoubleQuotedScalarString(res[count_2])
+                count_2 += 1
+            else:
+                translated[key] = DoubleQuotedScalarString(value)
+
+
 
         translation = {target_language.paradox_localization_key: translated}
         initialize_yaml().dump(translation, destination)
