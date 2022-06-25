@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from backoff import expo, on_exception
 from easynmt import EasyNMT
 from languages import Language, is_key_ignored, is_value_ignored, source_language
@@ -12,13 +14,15 @@ from utils import (
 
 
 @on_exception(expo, HTTPError, max_time=120)
-def initialize_translation(target_language: Language) -> None:
+def initialize_translation(target_language: Language, translation_model_cache_dir: Path) -> None:
     download("punkt")
     print("Dummy translation to ensure translation data has been setup properly")
-    _translate("hello", language_code=target_language.code)
+    translate("hello", language_code=target_language.code, translation_model_cache_dir=translation_model_cache_dir)
 
 
-def translate_or_skip_value(key: str, value: str, target_language: Language) -> tuple[str, DoubleQuotedScalarString]:
+def translate_or_skip_value(
+    key: str, value: str, target_language: Language, translation_model_cache_dir: Path
+) -> tuple[str, DoubleQuotedScalarString]:
     if is_key_ignored(key, target_language):
         return key, DoubleQuotedScalarString(value)
     if is_value_ignored(value, target_language):
@@ -32,14 +36,14 @@ def translate_or_skip_value(key: str, value: str, target_language: Language) -> 
         rest = split_string[2]
         if is_value_ignored(rest, target_language):
             return key, DoubleQuotedScalarString(value)
-        result = _translate(rest, target_language.code)
+        result = translate(rest, target_language.code, translation_model_cache_dir)
         return key, DoubleQuotedScalarString(f"{icon}{separators}{result}")
-    return key, DoubleQuotedScalarString(_translate(value, target_language.code))
+    return key, DoubleQuotedScalarString(translate(value, target_language.code, translation_model_cache_dir))
 
 
-def _translate(to_be_translated: str, language_code: str) -> str:
+def translate(to_be_translated: str, language_code: str, translation_model_cache_dir: Path) -> str:
     """Translate a single string into the target language"""
-    model = EasyNMT("opus-mt", max_loaded_models=10)
+    model = EasyNMT(model_name="opus-mt", cache_folder=str(translation_model_cache_dir))
 
     translated = model.translate(
         to_be_translated,
