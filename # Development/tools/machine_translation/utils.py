@@ -51,7 +51,7 @@ def initialize_yaml() -> YAML:
     return yaml
 
 
-def split_because_of_start_icon_like_structure(value: str) -> tuple[str, str, str]:
+def split_because_of_start_icon_like_structure(value: str): #-> tuple[str, str, str]:
     icon_lie_start_pattern = r"(^[\[£]\S+[\]£]+)"
     result = split(icon_lie_start_pattern, value, maxsplit=1)
     icon = result[1]

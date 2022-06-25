@@ -34,7 +34,7 @@ class LanguageCollection:
     )
 
 
-def _ignored_key_patterns(language: Language) -> list[str]:
+def _ignored_key_patterns(language: Language):# -> list[str]:
     if language == LanguageCollection.german:
         return [
             r"^artifact_icon_\S*$",
@@ -84,7 +84,7 @@ def _ignored_key_patterns(language: Language) -> list[str]:
     raise RuntimeError(f"Unsupported language: {language}")
 
 
-def _ignored_keys(language: Language) -> list[str]:
+def _ignored_keys(language: Language):# -> list[str]:
     if language == LanguageCollection.german:
         return [
             "immortal_life_text",
@@ -134,7 +134,7 @@ def _ignored_keys(language: Language) -> list[str]:
     raise RuntimeError(f"Unsupported language: {language}")
 
 
-def _ignored_values(language: Language) -> list[str]:
+def _ignored_values(language: Language):# -> list[str]:
     if language == LanguageCollection.german:
         return [
             "Hurrah!",
