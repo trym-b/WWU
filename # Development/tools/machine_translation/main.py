@@ -142,6 +142,8 @@ def _main() -> None:
         )
 
         source_data = data[source_language().paradox_localization_key]
+        if source_data is None:
+            continue
         translation_entry_collection = []
 
         # create list of to_be_translated entries key + list[translate_this,do_not_translate_this]
