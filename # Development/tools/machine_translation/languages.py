@@ -1,4 +1,5 @@
-from dataclasses import dataclass
+from argparse import ArgumentParser, ArgumentTypeError, Namespace
+from dataclasses import dataclass, fields
 from re import match, search
 
 
@@ -165,3 +166,15 @@ def is_value_ignored(value: str, target_language: Language) -> bool:
 
 def source_language() -> Language:
     return LanguageCollection.english
+
+
+def target_language(language_as_string: str) -> Language:
+    if language_as_string == LanguageCollection.german.name:
+        return LanguageCollection.german
+    if language_as_string == LanguageCollection.spanish.name:
+        return LanguageCollection.spanish
+    if language_as_string == LanguageCollection.french.name:
+        return LanguageCollection.french
+    raise ArgumentTypeError(
+        f"Invalid language: {language_as_string}, valid options: {' '.join([f.name for f in fields(LanguageCollection)])}"
+    )
