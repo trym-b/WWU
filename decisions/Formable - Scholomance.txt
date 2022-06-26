@@ -1,0 +1,68 @@
+country_decisions = {
+    form_scholomance = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+			# Exclusions
+			NOT = { exists = SCH } # Scholomance
+            
+            # Requisites
+			OR = {
+			    tag = P12
+				tag = CDR
+			}
+		}
+        
+        provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			area = area_scholomance
+		}
+        
+		allow = {   
+            # Ownership
+		    area_scholomance = {
+                type = all
+                owned_by = ROOT
+            }
+            
+			# General
+			adm_tech = 8
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+            # Cost
+            adm_power = 200
+			dip_power = 200
+			mil_power = 200
+		}
+        
+		effect = {
+            # Cost
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
+        
+            # Switch
+			change_tag = SCH
+			change_government = monarchy
+			set_capital = 790
+            
+            # Bonus
+			add_formable_bonus = yes
+            #trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_final_tag_status = yes
+		}
+		
+		
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+}
