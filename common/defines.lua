@@ -637,12 +637,12 @@ NCountry = {
 
 	EXPLORE_COAST_EVENT_CHANCE = 2,			-- Chance (in %) of getting an event when exploring coasts
 	MIN_TECH_FOR_CIRCUMNAVIGATE = 9,			-- Must have this level of dip tech to circumnavigate the globe
-	CIRCUMNAVIGATION_PROVINCE_1 = 291,			-- Provinces for circumnavigation (coast of gambia)
-	CIRCUMNAVIGATION_PROVINCE_2 = 426,			-- Provinces for circumnavigation (magellan strait)
-	CIRCUMNAVIGATION_PROVINCE_3 = 159,			-- Provinces for circumnavigation (hawaii sea)
-	CIRCUMNAVIGATION_PROVINCE_4 = 50,			-- Provinces for circumnavigation (hawaii sea)
-	CIRCUMNAVIGATION_PROVINCE_5 = 106,			-- Provinces for circumnavigation (hawaii sea)
-	CIRCUMNAVIGATION_PROVINCE_6 = 3964,			-- Provinces for circumnavigation (cape of good hope)
+	CIRCUMNAVIGATION_PROVINCE_1 = 254,			-- Provinces for circumnavigation (coast of gambia)
+	CIRCUMNAVIGATION_PROVINCE_2 = 3990,			-- Provinces for circumnavigation (magellan strait)
+	CIRCUMNAVIGATION_PROVINCE_3 = 166,			-- Provinces for circumnavigation (hawaii sea)
+	CIRCUMNAVIGATION_PROVINCE_4 = 53,			-- Provinces for circumnavigation (hawaii sea)
+	CIRCUMNAVIGATION_PROVINCE_5 = 4229,			-- Provinces for circumnavigation (hawaii sea)
+	CIRCUMNAVIGATION_PROVINCE_6 = 2093,			-- Provinces for circumnavigation (cape of good hope)
 
 	MIN_DEV_FOR_OLD_GREAT_POWER = 100,					-- Countries with less development than this cannot be considered Great Powers
 
@@ -2289,16 +2289,16 @@ NMacroBuildColors = {
 },
 
 NFrontend = {
-	CAMERA_LOOKAT_X = 4000.0, 						-- Rotation point in main menu
+	CAMERA_LOOKAT_X = 4270.0, 						-- Rotation point in main menu
 	CAMERA_LOOKAT_Y = 0.0,
-	CAMERA_LOOKAT_Z = 1519.0,
+	CAMERA_LOOKAT_Z = 1194.0,
 	CAMERA_LOOKAT_SETTINGS_X = 2958.0, 				-- Rotation point in settings
 	CAMERA_LOOKAT_SETTINGS_Y = 0.0,					-- Y is height
 	CAMERA_LOOKAT_SETTINGS_Z = 1519.0,
-	CAMERA_START_X = 4000.0,						-- Initial position in main menu
+	CAMERA_START_X = 4270.0,						-- Initial position in main menu
 	CAMERA_START_Y = 800,							-- Y is height
-	CAMERA_START_Z = 1400.0,
-	CAMERA_END_X = 4000.0,							-- Move to position in main menu
+	CAMERA_START_Z = 1194.0,
+	CAMERA_END_X = 4270.0,							-- Move to position in main menu
 	CAMERA_END_Y = 900.0,
 	CAMERA_END_Z = 1127.0,
 	CAMERA_MIN_DIST_FOR_ROTATE = 800.0, 			-- Controlls when rotation starts. When camera is close enought it starts
@@ -2316,12 +2316,12 @@ NFrontend = {
 
 	CAMERA_SPEED_IN_MENUS = 0.1,
 
-	FRONTEND_POS_X = 4000.0,
+	FRONTEND_POS_X = 4270.0,
 	FRONTEND_POS_Y = 900.0,
-	FRONTEND_POS_Z = 1500.0,
-	FRONTEND_LOOK_X = 4000.0,
+	FRONTEND_POS_Z = 1194.0,
+	FRONTEND_LOOK_X = 4270.0,
 	FRONTEND_LOOK_Y = 0.0,
-	FRONTEND_LOOK_Z = 1519.0,
+	FRONTEND_LOOK_Z = 1200.0,
 
 	SETTINGS_POS_X = 2958.0,
 	SETTINGS_POS_Y = 551.0,

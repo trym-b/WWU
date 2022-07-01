@@ -16,6 +16,7 @@ setup_world_discovery = {
 		
         discover_outland = yes
         discover_draenor = yes
+        discover_elemental_plane = yes
     }
     
     # Kalimdor
@@ -27,7 +28,8 @@ setup_world_discovery = {
         }
         discover_kalimdor = yes
         discover_south_seas = yes
-        discover_maelstrom = yes
+        discover_paradise_isles = yes
+        discover_nazjatar = yes
     }
     
     # Northrend
@@ -50,7 +52,7 @@ setup_world_discovery = {
         }
         discover_pandaria = yes
         discover_zandalar = yes
-        discover_maelstrom = yes
+        discover_paradise_isles = yes
         discover_south_seas = yes
     }
     
@@ -66,6 +68,7 @@ setup_world_discovery = {
 		discover_kul_tiras = yes
         discover_zandalar = yes
         discover_plunder_isle = yes
+        discover_nazjatar = yes
     }
     
     # Zandalar
@@ -80,6 +83,7 @@ setup_world_discovery = {
         discover_plunder_isle = yes
         discover_eastern_kingdoms = yes
         discover_pandaria = yes
+        discover_nazjatar = yes
     }
     
     # Plunder Isle
@@ -98,18 +102,31 @@ setup_world_discovery = {
         discover_zandalar = yes
     }
     
-    # Maelstrom
+    # Nazjatar
     if = {
         limit = {
             capital_scope = {
-                OR = {
-                    continent = continent_nazjatar
-                    continent = continent_deepholm
-                    continent = continent_paradise_isles
-                }
+                continent = continent_nazjatar
             }
         }
-        discover_maelstrom = yes
+        discover_paradise_isles = yes
+        discover_nazjatar = yes
+        discover_south_seas = yes
+        discover_broken_isles = yes
+		discover_kul_tiras = yes
+        discover_zandalar = yes
+        discover_pandaria = yes
+    }
+    
+    # Paradise Isles
+    if = {
+        limit = {
+            capital_scope = {
+                continent = continent_paradise_isles
+            }
+        }
+        discover_paradise_isles = yes
+        discover_nazjatar = yes
         discover_south_seas = yes
         discover_broken_isles = yes
 		discover_kul_tiras = yes
@@ -128,7 +145,10 @@ setup_world_discovery = {
         }
         discover_south_seas = yes
         discover_kalimdor = yes
-        discover_maelstrom = yes
+        discover_paradise_isles = yes
+        discover_nazjatar = yes
+        discover_pandaria = yes
+        discover_paradise_isles = yes
     }
     
     # Outland 
@@ -166,6 +186,23 @@ setup_world_discovery = {
         }
         discover_forgotten_isles = yes
         discover_kalimdor = yes
+    }
+    
+    # Elemental Plane
+    if = {
+        limit = {
+            capital_scope = {
+                OR = {
+                    continent = continent_skywall
+                    continent = continent_deepholm
+                    continent = continent_abyssal_maw
+                    continent = continent_firelands
+                }
+            }
+        }
+        
+        discover_elemental_plane = yes
+        discover_eastern_kingdoms = yes
     }
 }
 
@@ -294,21 +331,20 @@ reveal_all_discovery = {
 	discover_kul_tiras = yes
     discover_zandalar = yes
     discover_broken_isles = yes
-    discover_maelstrom = yes
+    discover_nazjatar = yes
+    discover_paradise_isles = yes
     discover_plunder_isle = yes
     discover_south_seas = yes
     discover_outland = yes
     discover_draenor = yes
+    discover_elemental_plane = yes
 }
 
 discover_eastern_kingdoms = {
     eastern_kingdom_superregion = {
 		discover_country = ROOT
 	}
-    eastern_seas = {
-        discover_country = ROOT
-    }
-    area_ek_east = {
+    region_eastern_kingdom_seas = {
         discover_country = ROOT
     }
     ek_lakes = {
@@ -317,25 +353,28 @@ discover_eastern_kingdoms = {
     ek_wasteland = {
         discover_country = ROOT
     }
+    3905 = {
+        discover_country = ROOT
+    }
 }
 
 discover_kul_tiras = {
 	kul_tiras_superregion = {
 		discover_country = ROOT
 	}
-	kul_tiras_seas = {
+	region_kul_tiras_seas = {
 		discover_country = ROOT
 	}
+    3717 = {
+        discover_country = ROOT
+    }
 }
 
 discover_kalimdor = {
     kalimdor_superregion = {
 		discover_country = ROOT
 	}
-    western_seas = {
-        discover_country = ROOT
-    }
-    area_kalimdor_west = {
+    region_kalimdor_seas = {
         discover_country = ROOT
     }
     kalimdor_lakes = {
@@ -344,13 +383,19 @@ discover_kalimdor = {
     kalimdor_wasteland = {
         discover_country = ROOT
     }
+    3722 = {
+        discover_country = ROOT
+    }
+    3725 = {
+        discover_country = ROOT
+    }
 }
 
 discover_northrend = {
     northrend_superregion = {
 		discover_country = ROOT
 	}
-    northern_seas = {
+    region_northrend_seas = {
         discover_country = ROOT
     }
     northrend_lakes = {
@@ -359,13 +404,22 @@ discover_northrend = {
     northrend_wasteland = {
         discover_country = ROOT
     }
+    3726 = {
+        discover_country = ROOT
+    }
+    4 = {
+        discover_country = ROOT
+    }
+    3719 = {
+        discover_country = ROOT
+    }
 }
 
 discover_pandaria = {
     pandaria_superregion = {
 		discover_country = ROOT
 	}
-    pandarian_seas = {
+    region_pandaria_seas = {
         discover_country = ROOT
     }
     pandaria_lakes = {
@@ -374,13 +428,19 @@ discover_pandaria = {
     pandaria_wasteland = {
         discover_country = ROOT
     }
+    3718 = {
+        discover_country = ROOT
+    }
+    3723 = {
+        discover_country = ROOT
+    }
 }
 
 discover_zandalar = {
     zandalar_superregion = {
 		discover_country = ROOT
 	}
-    zandalar_seas = {
+    region_zandalar_seas = {
         discover_country = ROOT
     }
     zandalar_lakes = {
@@ -389,13 +449,17 @@ discover_zandalar = {
     zandalar_wasteland = {
         discover_country = ROOT
     }
+    3717 = {
+        discover_country = ROOT
+    }
+    
 }
 
 discover_broken_isles = {
     broken_isles_superregion = {
         discover_country = ROOT
     }
-    broken_seas = {
+    region_broken_isles_seas = {
         discover_country = ROOT
     }
     broken_isles_lakes = {
@@ -404,25 +468,31 @@ discover_broken_isles = {
     broken_isles_wasteland = {
         discover_country = ROOT
     }
+    3719 = {
+        discover_country = ROOT
+    }
 }
 
-discover_maelstrom = {
+discover_nazjatar = {
     nazjatar_superregion = {
         discover_country = ROOT
     }
-    deepholm_superregion = {
-		discover_country = ROOT
-	}
+    region_nazjatar_seas = {
+        discover_country = ROOT
+    }
+    3726 = {
+        discover_country = ROOT
+    }
+    3725 = {
+        discover_country = ROOT
+    }
+}
+
+discover_paradise_isles = {
     paradise_isles_superregion = {
         discover_country = ROOT
     }
-    central_seas = {
-        discover_country = ROOT
-    }
-    maelstrom_lakes = {
-        discover_country = ROOT
-    }
-    maelstrom_wasteland = {
+    region_paradise_seas = {
         discover_country = ROOT
     }
 }
@@ -434,13 +504,13 @@ discover_plunder_isle = {
     vashjir_superregion = {
 		discover_country = ROOT
 	}
-    plunder_seas = {
+    region_eastern_kingdom_seas = {
         discover_country = ROOT
     }
-    area_ek_south_coast = {
+    area_southern_passage = {
         discover_country = ROOT
     }
-    area_zandalar_ocean = {
+    3718 = {
         discover_country = ROOT
     }
 }
@@ -449,13 +519,22 @@ discover_south_seas = {
     south_seas_superregion = {
 		discover_country = ROOT
 	}
-    southern_seas = {
+    region_south_seas = {
         discover_country = ROOT
     }
-    south_sea_lakes = {
+    region_volcanic_seas = {
         discover_country = ROOT
     }
     south_sea_wasteland ={
+        discover_country = ROOT
+    }
+    3722 = {
+        discover_country = ROOT
+    }
+    3724 = {
+        discover_country = ROOT
+    }
+    3725 = {
         discover_country = ROOT
     }
 }
@@ -464,7 +543,13 @@ discover_forgotten_isles = {
     forgotten_isles_superregion = {
         discover_country = ROOT
     }
-    hidden_sea_superregion = {
+    region_titanic_seas = {
+        discover_country = ROOT
+    }
+    3740 = {
+        discover_country = ROOT
+    }
+    3739 = {
         discover_country = ROOT
     }
 }
@@ -473,13 +558,16 @@ discover_outland = {
     outland_superregion = {
 		discover_country = ROOT
 	}
-    outland_seas = {
-        discover_country = ROOT
-    }
     outland_lakes = {
         discover_country = ROOT
     }
     outland_wasteland = {
+        discover_country = ROOT
+    }
+    outland_void_wasteland = {
+        discover_country = ROOT
+    }
+    frame_wasteland = {
         discover_country = ROOT
     }
 }
@@ -488,7 +576,7 @@ discover_draenor = {
     draenor_superregion = {
         discover_country = ROOT
     }
-    draenor_seas = {
+    region_draenor_seas = {
         discover_country = ROOT
     }
     draenor_lakes = {
@@ -497,4 +585,23 @@ discover_draenor = {
     draenor_wasteland = {
         discover_country = ROOT
     }
+    draenor_ocean_wasteland = {
+        discover_country = ROOT
+    }
+    frame_wasteland = {
+        discover_country = ROOT
+    }
 }
+
+discover_elemental_plane = {
+    elemental_plane_superregion = {
+        discover_country = ROOT
+    }
+    elemental_plane_wasteland = {
+        discover_country = ROOT
+    }
+    frame_wasteland = {
+        discover_country = ROOT
+    }
+}
+
