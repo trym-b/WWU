@@ -1,0 +1,142 @@
+#---------------------------------------
+# Elemental Invasion
+#---------------------------------------
+start_invasion = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = start_invasion_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		OR = {
+            tag = P24
+            tag = P26
+            tag = P27
+            tag = P28
+        }
+        FROM = {
+            num_of_cities = 3
+        }
+        is_at_war = no
+	}
+	is_allowed = {
+		is_at_war = no
+        mil_power = 250
+        manpower = 10
+        
+        NOT = { has_country_modifier = elemental_invasion_support_cooldown }
+	}
+	on_accept = {
+        add_mil_power = -250
+        add_manpower = -10
+        
+        declare_war_with_cb = {
+            who = FROM
+            casus_belli = cb_elemental_invasion
+        }
+		FROM = {
+            random_owned_province = {
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = elemental_invasion_support_cooldown
+            duration = 3650
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		mil_power = 500
+        
+        # AI will only do it to other AI
+        FROM = {
+            ai = yes
+        }
+        
+        # AI will only do it to weaker nations
+        FROM = {
+            NOT = { total_development = 250 }
+        }
+	}
+}
+send_elemental_support = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = send_elemental_support_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		OR = {
+            tag = P24
+            tag = P26
+            tag = P27
+            tag = P28
+        }
+        FROM = {
+            war_with = ROOT
+        }
+        is_at_war = yes
+	}
+	is_allowed = {
+		manpower = 10
+        
+        NOT = { has_country_modifier = elemental_invasion_support_cooldown }
+	}
+	on_accept = {
+        add_manpower = -10
+        
+        add_country_modifier = {
+            name = elemental_invasion_support_cooldown
+            duration = 3650
+        }
+        
+		FROM = {
+            random_owned_province = {
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		manpower = 50
+	}
+}
