@@ -1,6 +1,6 @@
 namespace = wwu_ruler_view
 
-# Personal Chamber
+# Realm Management
 country_event = {
 	id = wwu_ruler_view.1
 	title = wwu_ruler_view.1.title
@@ -9,10 +9,244 @@ country_event = {
 	
 	is_triggered_only = yes
     
+    # Artifact Repository
     option = {
 		name = wwu_ruler_view.1.option.artifacts
         
         country_event = { id = wwu_artifact_repository.1 }
+	}
+    
+    # Seek Advisor
+    option = {
+		name = wwu_ruler_view.1.option.seek_advisor
+        
+        country_event = { 
+            id = estate_system.10
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Undergo Class Training
+    option = {
+		name = wwu_ruler_view.1.option.class_training
+        
+        trigger = {
+            NOT = { has_assigned_ruler_class = yes }
+            NOT = { has_ruler_flag = ruler_is_training }
+            
+            adm_power = 250
+            dip_power = 250
+            mil_power = 250
+        }
+        
+        add_adm_power = -250
+        add_dip_power = -250
+        add_mil_power = -250
+        
+        country_event = { id = wwu_ruler_training.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Undergo Class Training - Lack Requirements
+    option = {
+		name = wwu_ruler_view.1.option.class_training.lack_requirement
+        
+        trigger = {
+            NOT = { has_assigned_ruler_class = yes }
+            NOT = { has_ruler_flag = ruler_is_training }
+            
+            NOT = { adm_power = 250 }
+            NOT = { dip_power = 250 }
+            NOT = { mil_power = 250 }
+        }
+        
+        custom_tooltip = NEED_CLASS_TRAINING_REQUIREMENT
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Undergo Magical Training
+    option = {
+		name = wwu_ruler_view.1.option.magical_training
+        
+        trigger = {
+            NOT = { has_ruler_modifier = spellcaster_capabilities }
+            NOT = { has_ruler_modifier = magical_training }
+            
+            if = {
+                limit = {
+                    OR = {
+                        has_ruler_flag = mage_personality
+                        has_ruler_flag = priest_personality
+                        has_ruler_flag = warlock_personality
+                        has_ruler_flag = druid_personality
+                    }
+                }
+                
+                adm_power = 250
+                dip_power = 250
+                mil_power = 250
+            }
+            else = {
+                adm_power = 500
+                dip_power = 500
+                mil_power = 500
+            }
+        }
+        
+        add_ruler_modifier = {
+            name = magical_training
+            duration = 3650
+        }
+        
+        custom_tooltip = MAGIC_UNDERGO_TRAINING
+        
+        # Play failure event if the ruler isn't a spellcaster by the end
+        hidden_effect = {
+            country_event = { id = wwu_magic.12 days = 3650 }
+        }
+        
+        # Add free points based on monarch skill
+        # Only do it for the first instance of the decision
+        hidden_effect = {
+            if = {
+                limit = {
+                    is_variable_equal = {
+                        which = ruler_magic_training
+                        value = 0
+                    }
+                }
+                if = {
+                    limit = {
+                        adm = 5
+                    }
+                    add_magical_training_point = yes
+                }
+                if = {
+                    limit = {
+                        dip = 5
+                    }
+                    add_magical_training_point = yes
+                }
+                if = {
+                    limit = {
+                        mil = 5
+                    }
+                    add_magical_training_point = yes
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Undergo Magical Training - Lack Requirements
+    option = {
+		name = wwu_ruler_view.1.option.magical_training.lack_requirement
+        
+        trigger = {
+            NOT = { has_ruler_modifier = spellcaster_capabilities }
+            NOT = { has_ruler_modifier = magical_training }
+            
+            if = {
+                limit = {
+                    OR = {
+                        has_ruler_flag = mage_personality
+                        has_ruler_flag = priest_personality
+                        has_ruler_flag = warlock_personality
+                        has_ruler_flag = druid_personality
+                    }
+                }
+                
+                NOT = { adm_power = 250 }
+                NOT = { dip_power = 250 }
+                NOT = { mil_power = 250 }
+            }
+            else = {
+                NOT = { adm_power = 500 }
+                NOT = { dip_power = 500 }
+                NOT = { mil_power = 500 }
+            }
+        }
+        
+        if = {
+            limit = {
+                OR = {
+                    has_ruler_flag = mage_personality
+                    has_ruler_flag = priest_personality
+                    has_ruler_flag = warlock_personality
+                    has_ruler_flag = druid_personality
+                }
+            }
+            
+            custom_tooltip = NEED_MAGICAL_TRAINING_REQUIREMENT_MAGE
+        }
+        else = {
+            custom_tooltip = NEED_MAGICAL_TRAINING_REQUIREMENT
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Improve Magical Skill
+    option = {
+		name = wwu_ruler_view.1.option.magical_skill_training
+        
+        trigger = {
+            has_ruler_modifier = spellcaster_capabilities
+            NOT = { has_ruler_modifier = recently_trained_magic }
+        }
+        
+        country_event = { id = wwu_magic.60 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Invoke Magic
+    option = {
+		name = wwu_ruler_view.1.option.invoke_magic
+        
+        trigger = {
+            has_ruler_modifier = spellcaster_capabilities
+        }
+        
+        country_event = { id = wwu_magic_menu.1 }
+            
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = yes
+                }
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+        }
 	}
     
     # Retire [Root.Monarch.GetName]
@@ -54,5 +288,4 @@ country_event = {
         
 	}
 }
-
 

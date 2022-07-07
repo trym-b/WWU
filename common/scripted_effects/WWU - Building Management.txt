@@ -1,0 +1,1797 @@
+auto_build_effect = {
+    # Buffer is double the listed amount to account for usage before termination
+    
+    set_country_flag = auto_build_process
+    
+    if = {
+        limit = {
+            has_country_flag = auto_build_active
+        }
+        if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_low
+            }
+            
+            while = {
+                limit = {
+                    treasury = 100 
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_med
+            }
+            
+            while = {
+                limit = {
+                    treasury = 500
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_high
+            }
+            
+            while = {
+                limit = {
+                    treasury = 1000
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+    }
+}
+
+auto_building_construction = {
+    # End early conditions
+    if = {
+        limit = {
+            OR = {
+                # All provinces have an active process ongoing
+                NOT = {
+                    any_owned_province = {  
+                        if = {
+                            limit = {
+                                owner = {
+                                    has_country_flag = auto_build_target_state_only
+                                }
+                            }
+                            is_state = yes
+                        }
+                        else_if = {
+                            limit = {
+                                owner = {
+                                    has_country_flag = auto_build_target_territory_only
+                                }
+                            }
+                            is_territory = yes
+                        }
+                        
+                        NOT = { has_construction = any }
+                    }
+                }
+                # No building slots in any province
+                NOT = {
+                    any_owned_province = {
+                        if = {
+                            limit = {
+                                owner = {
+                                    has_country_flag = auto_build_target_state_only
+                                }
+                            }
+                            is_state = yes
+                        }
+                        else_if = {
+                            limit = {
+                                owner = {
+                                    has_country_flag = auto_build_target_territory_only
+                                }
+                            }
+                            is_territory = yes
+                        }
+                        
+                        num_free_building_slots = 1
+                    }
+                }
+                
+            }
+        }
+        
+        clr_country_flag = auto_build_process
+    }
+
+    # Famr
+    if = {
+        limit = {
+            has_country_flag = auto_build_farm
+        }
+        
+        if = {
+            limit = {
+                NOT = { adm_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_farm }
+                    can_build = wow_farm
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_farm
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_farmstead }
+                    can_build = wow_farmstead
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_farmstead
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Internment Camp
+    if = {
+        limit = {
+            has_country_flag = auto_build_interment_camp
+        }
+        
+        if = {
+            limit = {
+                NOT = { dip_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_internment_camp }
+                    can_build = wow_internment_camp
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_internment_camp
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_internment_complex }
+                    can_build = wow_internment_complex
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_internment_complex
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Temple
+    if = {
+        limit = {
+            has_country_flag = auto_build_temple
+        }
+        
+        if = {
+            limit = {
+                NOT = { adm_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_temple }
+                    can_build = wow_temple
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_temple
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_temple }
+                    can_build = wow_grand_temple
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_temple
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Mine
+    if = {
+        limit = {
+            has_country_flag = auto_build_mine
+        }
+        
+        if = {
+            limit = {
+                NOT = { adm_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_mine }
+                    can_build = wow_mine
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_mine
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_mine_complex }
+                    can_build = wow_mine_complex
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_mine_complex
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Marketplace
+    if = {
+        limit = {
+            has_country_flag = auto_build_marketplace
+        }
+        
+        if = {
+            limit = {
+                NOT = { dip_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_marketplace }
+                    can_build = wow_marketplace
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_marketplace
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_market }
+                    can_build = wow_grand_market
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_market
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Tavern
+    if = {
+        limit = {
+            has_country_flag = auto_build_tavern
+        }
+        
+        if = {
+            limit = {
+                NOT = { adm_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_tavern }
+                    can_build = wow_tavern
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_tavern
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_inn }
+                    can_build = wow_inn
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_inn
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Barracks
+    if = {
+        limit = {
+            has_country_flag = auto_build_barracks
+        }
+        
+        if = {
+            limit = {
+                NOT = { mil_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_barracks }
+                    can_build = wow_barracks
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_barracks
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_barracks }
+                    can_build = wow_grand_barracks
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_barracks
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Arsenal
+    if = {
+        limit = {
+            has_country_flag = auto_build_arsenal
+        }
+        
+        if = {
+            limit = {
+                NOT = { mil_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_arsenal }
+                    can_build = wow_arsenal
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_arsenal
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_arsenal }
+                    can_build = wow_grand_arsenal
+                    num_free_building_slots = 1
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_arsenal
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Shipyard
+    if = {
+        limit = {
+            has_country_flag = auto_build_shipyard
+        }
+        
+        if = {
+            limit = {
+                NOT = { dip_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_shipyard }
+                    can_build = wow_shipyard
+                    num_free_building_slots = 1
+                    has_port = yes
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_shipyard
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_shipyard }
+                    can_build = wow_grand_shipyard
+                    num_free_building_slots = 1
+                    has_port = yes
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_shipyard
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Dockyard
+    if = {
+        limit = {
+            has_country_flag = auto_build_dockyard
+        }
+        
+        if = {
+            limit = {
+                NOT = { dip_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_dockyard }
+                    can_build = wow_dockyard
+                    num_free_building_slots = 1
+                    has_port = yes
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_dockyard
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_grand_dockyard }
+                    can_build = wow_grand_dockyard
+                    num_free_building_slots = 1
+                    has_port = yes
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_grand_dockyard
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Tower
+    if = {
+        limit = {
+            has_country_flag = auto_build_tower
+        }
+        
+        if = {
+            limit = {
+                NOT = { mil_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_tower }
+                    can_build = wow_tower
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_tower
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_reinforced_tower }
+                    can_build = wow_reinforced_tower
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_reinforced_tower
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Training Ring
+    if = {
+        limit = {
+            has_country_flag = auto_build_training_ring
+        }
+        
+        if = {
+            limit = {
+                NOT = { mil_tech = 7 }
+                treasury = 200
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_training_ring }
+                    can_build = wow_training_ring
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_training_ring
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+        else_if = {
+            limit = {
+                treasury = 400
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_training_ground }
+                    can_build = wow_training_ground
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_training_ground
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    # Manufactory
+    if = {
+        limit = {
+            has_country_flag = auto_build_manufactory
+        }
+        
+        if = {
+            limit = {
+                dip_tech = 15
+                treasury = 600
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_manufactory }
+                    can_build = wow_manufactory
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_manufactory
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+}
+
+auto_destroy_effect = {
+    # Farm
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_farm
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_farmstead
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_farmstead
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_farm
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_farm
+        }
+    }
+    
+    # Internment Camp
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_internment_camp
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_internment_complex
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_internment_complex
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_internment_camp
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_internment_camp
+        }
+    }
+    
+    # Temple
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_temple
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_temple
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_temple
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_temple
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_temple
+        }
+    }
+    
+    # Mine
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_mine
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_mine_complex
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_mine_complex
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_mine
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_mine
+        }
+    }
+    
+    # Marketplace
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_marketplace
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_market
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_market
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_marketplace
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_marketplace
+        }
+    }
+    
+    # Tavern
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_tavern
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_inn
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_inn
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_tavern
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_tavern
+        }
+    }
+    
+    # Barracks
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_barracks
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_barracks
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_barracks
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_barracks
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_barracks
+        }
+    }
+    
+    # Arsenal
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_arsenal
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_arsenal
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_arsenal
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_arsenal
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_arsenal
+        }
+    }
+    
+    # Dockyard
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_dockyard
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_dockyard
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_dockyard
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_dockyard
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_dockyard
+        }
+    }
+    
+    # Shipyard
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_shipyard
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_grand_shipyard
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_grand_shipyard
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_shipyard
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_shipyard
+        }
+    }
+    
+    # Tower
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_tower
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_reinforced_tower
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_reinforced_tower
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_tower
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_tower
+        }
+    }
+    
+    # Training Ring
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_training_ring
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_training_ground
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_training_ground
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_training_ring
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_training_ring
+        }
+    }
+    
+    # Manufactory
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_manufactory
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_building = wow_manufactory
+                
+                if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_state_only
+                        }
+                    }
+                    is_state = yes
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            has_country_flag = auto_destroy_target_territory_only
+                        }
+                    }
+                    is_territory = yes
+                }
+            }
+            
+            remove_building = wow_manufactory
+        }
+    }
+}

@@ -1,0 +1,1301 @@
+namespace = wwu_building_manager
+
+# Building Management
+country_event = {
+	id = wwu_building_manager.1
+	title = wwu_building_manager.1.title
+	desc = wwu_building_manager.1.desc
+	picture = ARCANE_NULLIFIER_eventPicture
+	
+	is_triggered_only = yes
+
+    # Automatic Construction
+	option = {
+		name = wwu_building_manager.1.option.a
+        
+        country_event = { id = wwu_building_manager.2 }
+	}
+    
+    # Automatic Destruction
+	option = {
+		name = wwu_building_manager.1.option.b
+        
+        country_event = { id = wwu_building_manager.3 }
+	}
+    
+    # Gold Consumption Limit
+	option = {
+		name = wwu_building_manager.1.option.c
+        
+        country_event = { id = wwu_building_manager.4 }
+	}
+
+    # Construction: Target Provinces
+	option = {
+		name = wwu_building_manager.1.option.d
+        
+        country_event = { id = wwu_building_manager.5 }
+	}
+    
+    # Destruction: Target Provinces
+	option = {
+		name = wwu_building_manager.1.option.e
+        
+        country_event = { id = wwu_building_manager.6 }
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.1.option.exit
+        
+        
+	}
+}
+
+# Automatic Construction
+country_event = {
+	id = wwu_building_manager.2
+	title = wwu_building_manager.2.title
+	desc = wwu_building_manager.2.desc
+	picture = ENHANCE_O_MECHANO_eventPicture
+	
+	is_triggered_only = yes
+
+    # Farm - OFF
+	option = {
+		name = wwu_building_manager.2.option.farm
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_farm }
+        }
+        
+        custom_tooltip = AUTO_BUILD_FARM
+        hidden_effect = {
+            set_country_flag = auto_build_farm
+            clr_country_flag = auto_destroy_farm
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Farm - ON
+	option = {
+		name = wwu_building_manager.2.option.farm
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_farm
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_farm
+        }
+	}
+    
+    # Internment Camp - OFF
+	option = {
+		name = wwu_building_manager.2.option.internment_camp
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_internment_camp }
+        }
+        
+        custom_tooltip = AUTO_BUILD_INTERNMENT_CAMP
+        hidden_effect = {
+            set_country_flag = auto_build_internment_camp
+            clr_country_flag = auto_destroy_internment_camp
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Internment Camp - ON
+	option = {
+		name = wwu_building_manager.2.option.internment_camp
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_internment_camp
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_internment_camp
+        }
+	}
+    
+    # Temple - OFF
+	option = {
+		name = wwu_building_manager.2.option.temple
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_temple }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TEMPLE
+        hidden_effect = {
+            set_country_flag = auto_build_temple
+            clr_country_flag = auto_destroy_temple
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Temple - ON
+	option = {
+		name = wwu_building_manager.2.option.temple
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_temple
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_temple
+        }
+	}
+    
+    # Mine - OFF
+	option = {
+		name = wwu_building_manager.2.option.mine
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_mine }
+        }
+        
+        custom_tooltip = AUTO_BUILD_MINE
+        hidden_effect = {
+            set_country_flag = auto_build_mine
+            clr_country_flag = auto_destroy_mine
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Mine - ON
+	option = {
+		name = wwu_building_manager.2.option.mine
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_mine
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_mine
+        }
+	}
+    
+    # Marketplace - OFF
+	option = {
+		name = wwu_building_manager.2.option.marketplace
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_marketplace }
+        }
+        
+        custom_tooltip = AUTO_BUILD_MARKETPLACE
+        hidden_effect = {
+            set_country_flag = auto_build_marketplace
+            clr_country_flag = auto_destroy_marketplace
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Marketplace - ON
+	option = {
+		name = wwu_building_manager.2.option.marketplace
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_marketplace
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_marketplace
+        }
+	}
+    
+    # Tavern - OFF
+	option = {
+		name = wwu_building_manager.2.option.tavern
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_tavern }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TAVERN
+        hidden_effect = {
+            set_country_flag = auto_build_tavern
+            clr_country_flag = auto_destroy_tavern
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Tavern - ON
+	option = {
+		name = wwu_building_manager.2.option.tavern
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_tavern
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_tavern
+        }
+	}
+    
+    # Barracks - OFF
+	option = {
+		name = wwu_building_manager.2.option.barracks
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_barracks }
+        }
+        
+        custom_tooltip = AUTO_BUILD_BARRACKS
+        hidden_effect = {
+            set_country_flag = auto_build_barracks
+            clr_country_flag = auto_destroy_barracks
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Barracks - ON
+	option = {
+		name = wwu_building_manager.2.option.barracks
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_barracks
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_barracks
+        }
+	}
+    
+    # Arsenal - OFF
+	option = {
+		name = wwu_building_manager.2.option.arsenal
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_arsenal }
+        }
+        
+        custom_tooltip = AUTO_BUILD_ARSENAL
+        hidden_effect = {
+            set_country_flag = auto_build_arsenal
+            clr_country_flag = auto_destroy_arsenal
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Arsenal - ON
+	option = {
+		name = wwu_building_manager.2.option.arsenal
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_arsenal
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_arsenal
+        }
+	}
+    
+    # Shipyard - OFF
+	option = {
+		name = wwu_building_manager.2.option.shipyard
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_shipyard }
+        }
+        
+        custom_tooltip = AUTO_BUILD_SHIPYARD
+        hidden_effect = {
+            set_country_flag = auto_build_shipyard
+            clr_country_flag = auto_destroy_shipyard
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Shipyard - ON
+	option = {
+		name = wwu_building_manager.2.option.shipyard
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_shipyard
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_shipyard
+        }
+	}
+    
+    # Dockyard - OFF
+	option = {
+		name = wwu_building_manager.2.option.dockyard
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_dockyard }
+        }
+        
+        custom_tooltip = AUTO_BUILD_DOCKYARD
+        hidden_effect = {
+            set_country_flag = auto_build_dockyard
+            clr_country_flag = auto_destroy_dockyard
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Dockyard - ON
+	option = {
+		name = wwu_building_manager.2.option.dockyard
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_dockyard
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_dockyard
+        }
+	}
+    
+    # Tower - OFF
+	option = {
+		name = wwu_building_manager.2.option.tower
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_tower }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TOWER
+        hidden_effect = {
+            set_country_flag = auto_build_tower
+            clr_country_flag = auto_destroy_tower
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Tower - ON
+	option = {
+		name = wwu_building_manager.2.option.tower
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_tower
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_tower
+        }
+	}
+    
+    # Training Ring - OFF
+	option = {
+		name = wwu_building_manager.2.option.training_ring
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_training_ring }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TRAINING_RING
+        hidden_effect = {
+            set_country_flag = auto_build_training_ring
+            clr_country_flag = auto_destroy_training_ring
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Training Ring - ON
+	option = {
+		name = wwu_building_manager.2.option.training_ring
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_training_ring
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_training_ring
+        }
+	}
+    
+    # Manufactory - OFF
+	option = {
+		name = wwu_building_manager.2.option.manufactory
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_manufactory }
+        }
+        
+        custom_tooltip = AUTO_BUILD_MANUFACTORY
+        hidden_effect = {
+            set_country_flag = auto_build_manufactory
+            clr_country_flag = auto_destroy_manufactory
+            set_country_flag = auto_build_active
+        }
+	}
+
+    # Manufactory - ON
+	option = {
+		name = wwu_building_manager.2.option.manufactory
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_manufactory
+        }
+        
+        custom_tooltip = AUTO_BUILD_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_manufactory
+        }
+	}
+    
+    # Clear
+	option = {
+		name = wwu_building_manager.2.option.clear
+        
+        custom_tooltip = AUTO_BUILD_CLEAR
+        hidden_effect = {
+            clr_country_flag = auto_build_farm
+            clr_country_flag = auto_build_internment_camp
+            clr_country_flag = auto_build_temple
+            clr_country_flag = auto_build_mine
+            clr_country_flag = auto_build_marketplace
+            clr_country_flag = auto_build_tavern
+            clr_country_flag = auto_build_barracks
+            clr_country_flag = auto_build_arsenal
+            clr_country_flag = auto_build_shipyard
+            clr_country_flag = auto_build_dockyard
+            clr_country_flag = auto_build_tower
+            clr_country_flag = auto_build_training_ring
+            clr_country_flag = auto_build_manufactory
+            clr_country_flag = auto_build_active
+        }
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.2.option.exit
+        
+        
+	}
+    
+    after = {
+        country_event = { id = wwu_building_manager.1 }
+    }
+}
+
+# Automatic Destruction
+country_event = {
+	id = wwu_building_manager.3
+	title = wwu_building_manager.3.title
+	desc = wwu_building_manager.3.desc
+	picture = FLAME_LEVIATHAN_eventPicture
+	
+	is_triggered_only = yes
+
+    # Farm - OFF
+	option = {
+		name = wwu_building_manager.3.option.farm
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_farm }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_FARM
+        hidden_effect = {
+            set_country_flag = auto_destroy_farm
+            clr_country_flag = auto_build_farm
+        }
+	}
+
+    # Farm - ON
+	option = {
+		name = wwu_building_manager.3.option.farm
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_farm
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_farm
+        }
+	}
+    
+    # Internment Camp - OFF
+	option = {
+		name = wwu_building_manager.3.option.internment_camp
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_internment_camp }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_INTERNMENT_CAMP
+        hidden_effect = {
+            set_country_flag = auto_destroy_internment_camp
+            clr_country_flag = auto_build_internment_camp
+        }
+	}
+
+    # Internment Camp - ON
+	option = {
+		name = wwu_building_manager.3.option.internment_camp
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_internment_camp
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_internment_camp
+        }
+	}
+    
+    # Temple - OFF
+	option = {
+		name = wwu_building_manager.3.option.temple
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_temple }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TEMPLE
+        hidden_effect = {
+            set_country_flag = auto_destroy_temple
+            clr_country_flag = auto_build_temple
+        }
+	}
+
+    # Temple - ON
+	option = {
+		name = wwu_building_manager.3.option.temple
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_temple
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_temple
+        }
+	}
+    
+    # Mine - OFF
+	option = {
+		name = wwu_building_manager.3.option.mine
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_mine }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_MINE
+        hidden_effect = {
+            set_country_flag = auto_destroy_mine
+            clr_country_flag = auto_build_mine
+        }
+	}
+
+    # Mine - ON
+	option = {
+		name = wwu_building_manager.3.option.mine
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_mine
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_mine
+        }
+	}
+    
+    # Marketplace - OFF
+	option = {
+		name = wwu_building_manager.3.option.marketplace
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_marketplace }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_MARKETPLACE
+        hidden_effect = {
+            set_country_flag = auto_destroy_marketplace
+            clr_country_flag = auto_build_marketplace
+        }
+	}
+
+    # Marketplace - ON
+	option = {
+		name = wwu_building_manager.3.option.marketplace
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_marketplace
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_marketplace
+        }
+	}
+    
+    # Tavern - OFF
+	option = {
+		name = wwu_building_manager.3.option.tavern
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_tavern }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TAVERN
+        hidden_effect = {
+            set_country_flag = auto_destroy_tavern
+            clr_country_flag = auto_build_tavern
+        }
+	}
+
+    # Tavern - ON
+	option = {
+		name = wwu_building_manager.3.option.tavern
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_tavern
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_tavern
+        }
+	}
+    
+    # Barracks - OFF
+	option = {
+		name = wwu_building_manager.3.option.barracks
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_barracks }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_BARRACKS
+        hidden_effect = {
+            set_country_flag = auto_destroy_barracks
+            clr_country_flag = auto_build_barracks
+        }
+	}
+
+    # Barracks - ON
+	option = {
+		name = wwu_building_manager.3.option.barracks
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_barracks
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_barracks
+        }
+	}
+    
+    # Arsenal - OFF
+	option = {
+		name = wwu_building_manager.3.option.arsenal
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_arsenal }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_ARSENAL
+        hidden_effect = {
+            set_country_flag = auto_destroy_arsenal
+            clr_country_flag = auto_build_arsenal
+        }
+	}
+
+    # Arsenal - ON
+	option = {
+		name = wwu_building_manager.3.option.arsenal
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_arsenal
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_arsenal
+        }
+	}
+    
+    # Shipyard - OFF
+	option = {
+		name = wwu_building_manager.3.option.shipyard
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_shipyard }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SHIPYARD
+        hidden_effect = {
+            set_country_flag = auto_destroy_shipyard
+            clr_country_flag = auto_build_shipyard
+        }
+	}
+
+    # Shipyard - ON
+	option = {
+		name = wwu_building_manager.3.option.shipyard
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_shipyard
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_shipyard
+        }
+	}
+    
+    # Dockyard - OFF
+	option = {
+		name = wwu_building_manager.3.option.dockyard
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_dockyard }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_DOCKYARD
+        hidden_effect = {
+            set_country_flag = auto_destroy_dockyard
+            clr_country_flag = auto_build_dockyard
+        }
+	}
+
+    # Dockyard - ON
+	option = {
+		name = wwu_building_manager.3.option.dockyard
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_dockyard
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_dockyard
+        }
+	}
+    
+    # Tower - OFF
+	option = {
+		name = wwu_building_manager.3.option.tower
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_tower }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TOWER
+        hidden_effect = {
+            set_country_flag = auto_destroy_tower
+            clr_country_flag = auto_build_tower
+        }
+	}
+
+    # Tower - ON
+	option = {
+		name = wwu_building_manager.3.option.tower
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_tower
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_tower
+        }
+	}
+    
+    # Training Ring - OFF
+	option = {
+		name = wwu_building_manager.3.option.training_ring
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_training_ring }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TRAINING_RING
+        hidden_effect = {
+            set_country_flag = auto_destroy_training_ring
+            clr_country_flag = auto_build_training_ring
+        }
+	}
+
+    # Training Ring - ON
+	option = {
+		name = wwu_building_manager.3.option.training_ring
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_training_ring
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_training_ring
+        }
+	}
+    
+    # Manufactory - OFF
+	option = {
+		name = wwu_building_manager.3.option.manufactory
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_manufactory }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_MANUFACTORY
+        hidden_effect = {
+            set_country_flag = auto_destroy_manufactory
+            clr_country_flag = auto_build_manufactory
+        }
+	}
+
+    # Manufactory - ON
+	option = {
+		name = wwu_building_manager.3.option.manufactory
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_manufactory
+        }
+        
+        custom_tooltip = AUTO_DESTROY_SELECTED
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_manufactory
+        }
+	}
+    
+    # Clear
+	option = {
+		name = wwu_building_manager.3.option.clear
+        
+        custom_tooltip = AUTO_DESTROY_CLEAR
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_farm
+            clr_country_flag = auto_destroy_internment_camp
+            clr_country_flag = auto_destroy_temple
+            clr_country_flag = auto_destroy_mine
+            clr_country_flag = auto_destroy_marketplace
+            clr_country_flag = auto_destroy_tavern
+            clr_country_flag = auto_destroy_barracks
+            clr_country_flag = auto_destroy_arsenal
+            clr_country_flag = auto_destroy_shipyard
+            clr_country_flag = auto_destroy_dockyard
+            clr_country_flag = auto_destroy_tower
+            clr_country_flag = auto_destroy_training_ring
+            clr_country_flag = auto_destroy_manufactory
+            clr_country_flag = auto_destroy_active
+        }
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.3.option.exit
+        
+        
+	}
+    
+    after = {
+        country_event = { id = wwu_building_manager.1 }
+    }
+}
+
+# Gold Consumption Limit
+country_event = {
+	id = wwu_building_manager.4
+	title = wwu_building_manager.4.title
+	desc = wwu_building_manager.4.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	is_triggered_only = yes
+
+    # Low (100 Gold) - OFF
+	option = {
+		name = wwu_building_manager.4.option.low
+        
+        trigger = {
+            NOT = { has_country_flag = gold_buffer_limit_low }
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_LOW
+        hidden_effect = {
+            set_country_flag = gold_buffer_limit_low
+            clr_country_flag = gold_buffer_limit_med
+            clr_country_flag = gold_buffer_limit_high
+        }
+	}
+
+    # Low (100 Gold) - ON
+	option = {
+		name = wwu_building_manager.4.option.low
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = gold_buffer_limit_low
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_LOW
+	}
+    
+    # Medium (500 Gold) - OFF
+	option = {
+		name = wwu_building_manager.4.option.med
+        
+        trigger = {
+            NOT = { has_country_flag = gold_buffer_limit_med }
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_MED
+        hidden_effect = {
+            set_country_flag = gold_buffer_limit_med
+            clr_country_flag = gold_buffer_limit_low
+            clr_country_flag = gold_buffer_limit_high
+        }
+	}
+    
+    # Medium (500 Gold) - ON
+	option = {
+		name = wwu_building_manager.4.option.med
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = gold_buffer_limit_med
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_MED
+	}
+    
+    # High (1000 Gold) - OFF
+	option = {
+		name = wwu_building_manager.4.option.high
+        
+        trigger = {
+            NOT = { has_country_flag = gold_buffer_limit_high }
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_HIGH
+        hidden_effect = {
+            set_country_flag = gold_buffer_limit_high
+            clr_country_flag = gold_buffer_limit_med
+            clr_country_flag = gold_buffer_limit_low
+        }
+	}
+    
+    # High (1000 Gold) - ON
+	option = {
+		name = wwu_building_manager.4.option.high
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = gold_buffer_limit_high
+        }
+        
+        custom_tooltip = GOLD_BUFFER_LIMIT_HIGH
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.4.option.exit
+        
+	}
+    
+    after = {
+        country_event = { id = wwu_building_manager.1 }
+    }
+}
+
+# Construction Target Settings
+country_event = {
+	id = wwu_building_manager.5
+	title = wwu_building_manager.5.title
+	desc = wwu_building_manager.5.desc
+	picture = BESTIARY_eventPicture
+	
+	is_triggered_only = yes
+
+    # All Provinces - OFF
+	option = {
+		name = wwu_building_manager.5.option.all
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_target_all }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_ALL
+        hidden_effect = {
+            set_country_flag = auto_build_target_all
+            clr_country_flag = auto_build_target_state_only
+            clr_country_flag = auto_build_target_territory_only
+        }
+	}
+    
+    # All Provinces - ON
+	option = {
+		name = wwu_building_manager.5.option.all
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_target_all
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_ALL
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_target_all
+        }
+	}
+
+    # State Provinces - OFF
+    option = {
+		name = wwu_building_manager.5.option.state_only
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_target_state_only }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_STATE
+        
+        hidden_effect = {
+            set_country_flag = auto_build_target_state_only
+            clr_country_flag = auto_build_target_all
+            clr_country_flag = auto_build_target_territory_only
+        }
+	}
+    
+    # State Provinces - ON
+    option = {
+		name = wwu_building_manager.5.option.state_only
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_target_state_only
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_STATE
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_target_state_only
+        }
+	}
+    
+    # Territory Provinces - OFF
+    option = {
+		name = wwu_building_manager.5.option.territory_only
+        
+        trigger = {
+            NOT = { has_country_flag = auto_build_target_territory_only }
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_TERRITORY
+        
+        hidden_effect = {
+            set_country_flag = auto_build_target_territory_only
+            clr_country_flag = auto_build_target_all
+            clr_country_flag = auto_build_target_state_only
+        }
+	}
+    
+    # Territory Provinces - ON
+    option = {
+		name = wwu_building_manager.5.option.territory_only
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_build_target_territory_only
+        }
+        
+        custom_tooltip = AUTO_BUILD_TARGET_TERRITORY
+        
+        hidden_effect = {
+            clr_country_flag = auto_build_target_territory_only
+        }
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.5.option.exit
+        
+	}
+    
+    after = {
+        country_event = { id = wwu_building_manager.1 }
+    }
+}
+
+# Construction Target Settings
+country_event = {
+	id = wwu_building_manager.6
+	title = wwu_building_manager.6.title
+	desc = wwu_building_manager.6.desc
+	picture = BESTIARY_eventPicture
+	
+	is_triggered_only = yes
+
+    # All Provinces - OFF
+	option = {
+		name = wwu_building_manager.6.option.all
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_target_all }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_ALL
+        hidden_effect = {
+            set_country_flag = auto_destroy_target_all
+            clr_country_flag = auto_destroy_target_state_only
+            clr_country_flag = auto_destroy_target_territory_only
+        }
+	}
+    
+    # All Provinces - ON
+	option = {
+		name = wwu_building_manager.6.option.all
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_target_all
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_ALL
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_target_all
+        }
+	}
+
+    # State Provinces - OFF
+    option = {
+		name = wwu_building_manager.6.option.state_only
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_target_state_only }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_STATE
+        
+        hidden_effect = {
+            set_country_flag = auto_destroy_target_state_only
+            clr_country_flag = auto_destroy_target_all
+            clr_country_flag = auto_destroy_target_territory_only
+        }
+	}
+    
+    # State Provinces - ON
+    option = {
+		name = wwu_building_manager.6.option.state_only
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_target_state_only
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_STATE
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_target_state_only
+        }
+	}
+    
+    # Territory Provinces - OFF
+    option = {
+		name = wwu_building_manager.6.option.territory_only
+        
+        trigger = {
+            NOT = { has_country_flag = auto_destroy_target_territory_only }
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_TERRITORY
+        
+        hidden_effect = {
+            set_country_flag = auto_destroy_target_territory_only
+            clr_country_flag = auto_destroy_target_all
+            clr_country_flag = auto_destroy_target_state_only
+        }
+	}
+    
+    # Territory Provinces - ON
+    option = {
+		name = wwu_building_manager.6.option.territory_only
+        highlight = yes
+        
+        trigger = {
+            has_country_flag = auto_destroy_target_territory_only
+        }
+        
+        custom_tooltip = AUTO_DESTROY_TARGET_TERRITORY
+        
+        hidden_effect = {
+            clr_country_flag = auto_destroy_target_territory_only
+        }
+	}
+    
+    # Exit
+	option = {
+		name = wwu_building_manager.6.option.exit
+        
+	}
+    
+    after = {
+        country_event = { id = wwu_building_manager.1 }
+    }
+}
