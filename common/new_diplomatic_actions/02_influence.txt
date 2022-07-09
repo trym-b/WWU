@@ -1,5 +1,5 @@
 #---------------------------------------
-# Elemental Invasion
+# Invasion
 #---------------------------------------
 start_invasion = {
 	category = influence
@@ -10,31 +10,191 @@ start_invasion = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-		OR = {
-            tag = P24
-            tag = P26
-            tag = P27
-            tag = P28
+        # Capital is in other-worldly plane
+        capital_scope = {
+            OR = {
+                # Elemental Plane
+                continent = continent_skywall
+                continent = continent_deepholm
+                continent = continent_abyssal_maw
+                continent = continent_firelands
+                
+                # Argus
+                continent = continent_argus
+            }
         }
+        
+        # Culture is appropirate
+        OR = {
+            culture_group = culture_group_ethereal
+            culture_group = culture_group_demonic
+            primary_culture = culture_lightforged
+        }
+        
+        # Target has atleast 2 provinces
         FROM = {
-            num_of_cities = 3
+            num_of_cities = 2
+            
+            # Target is not in the same plane as ROOT
+            if = {
+                limit = {
+                    ROOT = {
+                        capital_scope = {
+                            continent = continent_skywall
+                        }
+                    }
+                }
+                NOT = {
+                    capital_scope = {
+                        continent = continent_skywall
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    ROOT = {
+                        capital_scope = {
+                            continent = continent_deepholm
+                        }
+                    }
+                }
+                NOT = {
+                    capital_scope = {
+                        continent = continent_deepholm
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    ROOT = {
+                        capital_scope = {
+                            continent = continent_abyssal_maw
+                        }
+                    }
+                }
+                NOT = {
+                    capital_scope = {
+                        continent = continent_abyssal_maw
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    ROOT = {
+                        capital_scope = {
+                            continent = continent_firelands
+                        }
+                    }
+                }
+                NOT = {
+                    capital_scope = {
+                        continent = continent_firelands
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    ROOT = {
+                        capital_scope = {
+                            continent = continent_argus
+                        }
+                    }
+                }
+                NOT = {
+                    capital_scope = {
+                        continent = continent_argus
+                    }
+                }
+            }
         }
+        
+        # Not currently at war
         is_at_war = no
 	}
 	is_allowed = {
 		is_at_war = no
-        mil_power = 250
         manpower = 10
         
-        NOT = { has_country_modifier = elemental_invasion_support_cooldown }
+        NOT = { has_country_modifier = invasion_action_cooldown }
+        
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            mil_power = 800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            mil_power = 700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            mil_power = 600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            mil_power = 400
+        }
+        else = {
+            mil_power = 200
+        }
 	}
 	on_accept = {
-        add_mil_power = -250
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            add_mil_power = -800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            add_mil_power = -700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            add_mil_power = -600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            add_mil_power = -400
+        }
+        else = {
+            add_mil_power = -200
+        }
+        
         add_manpower = -10
         
         declare_war_with_cb = {
             who = FROM
-            casus_belli = cb_elemental_invasion
+            casus_belli = cb_invasion
         }
 		FROM = {
             random_owned_province = {
@@ -55,7 +215,7 @@ start_invasion = {
         }
         
         add_country_modifier = {
-            name = elemental_invasion_support_cooldown
+            name = invasion_action_cooldown
             duration = 3650
         }
 	}
@@ -66,6 +226,10 @@ start_invasion = {
 	}
 
 	ai_will_do = {
+        # AI will not do it with these tags
+        NOT = { tag = ARL }
+        NOT = { tag = SDG }
+        
 		mil_power = 500
         
         # AI will only do it to other AI
@@ -79,20 +243,34 @@ start_invasion = {
         }
 	}
 }
-send_elemental_support = {
+send_invasion_support = {
 	category = influence
 	
 	alert_index = 40
-	alert_tooltip = send_elemental_support_tooltip
+	alert_tooltip = send_invasion_support_tooltip
 	
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-		OR = {
-            tag = P24
-            tag = P26
-            tag = P27
-            tag = P28
+		# Capital is in other-worldly plane
+        capital_scope = {
+            OR = {
+                # Elemental Plane
+                continent = continent_skywall
+                continent = continent_deepholm
+                continent = continent_abyssal_maw
+                continent = continent_firelands
+                
+                # Argus
+                continent = continent_argus
+            }
+        }
+        
+        # Culture is appropirate
+        OR = {
+            culture_group = culture_group_ethereal
+            culture_group = culture_group_demonic
+            primary_culture = culture_lightforged
         }
         FROM = {
             war_with = ROOT
@@ -102,13 +280,13 @@ send_elemental_support = {
 	is_allowed = {
 		manpower = 10
         
-        NOT = { has_country_modifier = elemental_invasion_support_cooldown }
+        NOT = { has_country_modifier = invasion_support_cooldown }
 	}
 	on_accept = {
         add_manpower = -10
         
         add_country_modifier = {
-            name = elemental_invasion_support_cooldown
+            name = invasion_support_cooldown
             duration = 3650
         }
         
