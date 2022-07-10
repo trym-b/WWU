@@ -217,6 +217,7 @@ start_invasion = {
         add_country_modifier = {
             name = invasion_action_cooldown
             duration = 3650
+            hidden = yes
         }
 	}
 	on_decline = { 
@@ -288,10 +289,459 @@ send_invasion_support = {
         add_country_modifier = {
             name = invasion_support_cooldown
             duration = 3650
+            hidden = yes
         }
         
 		FROM = {
             random_owned_province = {
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		manpower = 50
+	}
+}
+
+#---------------------------------------
+# Argus Invasion
+#---------------------------------------
+start_argus_invasion = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = start_argus_invasion_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        has_country_modifier = sargerite_keystone
+        
+        FROM = {
+            num_of_cities = 2
+            
+            capital_scope = {
+                continent = continent_argus
+            }
+        }
+        
+        # Not currently at war
+        is_at_war = no
+	}
+	is_allowed = {
+		is_at_war = no
+        manpower = 10
+        
+        NOT = { has_country_modifier = invasion_action_cooldown }
+        
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            mil_power = 800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            mil_power = 700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            mil_power = 600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            mil_power = 400
+        }
+        else = {
+            mil_power = 200
+        }
+	}
+	on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            add_mil_power = -800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            add_mil_power = -700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            add_mil_power = -600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            add_mil_power = -400
+        }
+        else = {
+            add_mil_power = -200
+        }
+        
+        add_manpower = -10
+        
+        declare_war_with_cb = {
+            who = FROM
+            casus_belli = cb_invasion
+        }
+		FROM = {
+            random_owned_province = {
+                limit = {
+                    continent = continent_argus
+                }
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = invasion_action_cooldown
+            duration = 3650
+            hidden = yes
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = no
+	}
+}
+send_argus_invasion_support = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = send_argus_invasion_support_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		has_country_modifier = sargerite_keystone
+        
+        FROM = {
+            war_with = ROOT
+            
+            capital_scope = {
+                continent = continent_argus
+            }
+        }
+        
+        is_at_war = yes
+	}
+	is_allowed = {
+		manpower = 10
+        
+        NOT = { has_country_modifier = invasion_support_cooldown }
+	}
+	on_accept = {
+        add_manpower = -10
+        
+        add_country_modifier = {
+            name = invasion_support_cooldown
+            duration = 3650
+            hidden = yes
+        }
+        
+		FROM = {
+            random_owned_province = {
+                limit = {
+                    continent = continent_argus
+                }
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		manpower = 50
+	}
+}
+
+#---------------------------------------
+# Elemental Invasion
+#---------------------------------------
+start_elemental_invasion = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = start_elemental_invasion_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        has_country_modifier = elemental_riftstone
+        
+        FROM = {
+            num_of_cities = 2
+            
+            capital_scope = {
+                OR = {
+                    continent = continent_skywall
+                    continent = continent_deepholm
+                    continent = continent_abyssal_maw
+                    continent = continent_firelands
+                }
+            }
+        }
+        
+        # Not currently at war
+        is_at_war = no
+	}
+	is_allowed = {
+		is_at_war = no
+        manpower = 10
+        
+        NOT = { has_country_modifier = invasion_action_cooldown }
+        
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            mil_power = 800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            mil_power = 700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            mil_power = 600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            mil_power = 400
+        }
+        else = {
+            mil_power = 200
+        }
+	}
+	on_accept = {
+        if = {
+            limit = {
+                FROM = {
+                    total_development = 1000
+                }
+            }
+            add_mil_power = -800
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 750
+                }
+            }
+            add_mil_power = -700
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 500
+                }
+            }
+            add_mil_power = -600
+        }
+        else_if = {
+            limit = {
+                FROM = {
+                    total_development = 250
+                }
+            }
+            add_mil_power = -400
+        }
+        else = {
+            add_mil_power = -200
+        }
+        
+        add_manpower = -10
+        
+        declare_war_with_cb = {
+            who = FROM
+            casus_belli = cb_invasion
+        }
+		FROM = {
+            random_owned_province = {
+                limit = {
+                    OR = {
+                        continent = continent_skywall
+                        continent = continent_deepholm
+                        continent = continent_abyssal_maw
+                        continent = continent_firelands
+                    }
+                }
+                change_controller = ROOT
+                add_core = ROOT
+                
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                cavalry = ROOT
+                artillery = ROOT
+                artillery = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = invasion_action_cooldown
+            duration = 3650
+            hidden = yes
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = no
+	}
+}
+send_elemental_invasion_support = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = send_elemental_invasion_support_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		has_country_modifier = elemental_riftstone
+        
+        FROM = {
+            war_with = ROOT
+            
+            capital_scope = {
+                OR = {
+                    continent = continent_skywall
+                    continent = continent_deepholm
+                    continent = continent_abyssal_maw
+                    continent = continent_firelands
+                }
+            }
+        }
+        
+        is_at_war = yes
+	}
+	is_allowed = {
+		manpower = 10
+        
+        NOT = { has_country_modifier = invasion_support_cooldown }
+	}
+	on_accept = {
+        add_manpower = -10
+        
+        add_country_modifier = {
+            name = invasion_support_cooldown
+            duration = 3650
+            hidden = yes
+        }
+        
+		FROM = {
+            random_owned_province = {
+                limit = {
+                    OR = {
+                        continent = continent_skywall
+                        continent = continent_deepholm
+                        continent = continent_abyssal_maw
+                        continent = continent_firelands
+                    }
+                }
                 change_controller = ROOT
                 add_core = ROOT
                 
