@@ -951,7 +951,7 @@ wwu_scourge_column_4 = {
 		}
 	}
     
-    wwu_construct_angrathar_wall = { 
+    wwu_construct_angrathar_wall = {
 		icon = mission_barracks
         position = 6
         
@@ -965,40 +965,27 @@ wwu_scourge_column_4 = {
 		}
 		
 		trigger = {
-			total_development = 200
-            
-            3220 = { is_empty = yes }
-            3221 = { is_empty = yes }
-            3222 = { is_empty = yes }
-            2407 = { is_empty = yes }
+			2407 = {
+                owned_by = ROOT
+                
+				OR = {
+					has_building = wow_fort_1
+					has_building = wow_fort_2
+					has_building = wow_fort_3
+					has_building = wow_fort_4
+				}
+			}
 		}
 		provinces_to_highlight = {
-            area = area_the_wrath_gate
+            province_id = 2407
         }
 		effect = {
 			add_country_modifier = {
 				name = angrathar
 				duration = -1
 			}
-            
-            3220 = {
-                cede_province = ROOT
-                add_core = ROOT
-                province_event = { id = wwu_scourge.20 }
-            }
-            3221 = {
-                cede_province = ROOT
-                add_core = ROOT
-                province_event = { id = wwu_scourge.20 }
-            }
-            3222 = {
-                cede_province = ROOT
-                add_core = ROOT
-                province_event = { id = wwu_scourge.20 }
-            }
+
             2407 = {
-                cede_province = ROOT
-                add_core = ROOT
                 province_event = { id = wwu_scourge.20 }
             }
 		}
