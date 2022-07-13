@@ -1,0 +1,1511 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_tel_abim_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TAB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_bashmaster_the_unbreakable = {
+		icon = mission_dk_bashmaster
+        position = 6
+        
+		required_missions = { wwu_pompy_the_presumptuous }
+        
+		trigger = { 
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        continent = continent_northrend
+                    }
+                    culture_group = culture_group_furbolg
+                }
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+            owner = {
+                culture_group = culture_group_furbolg
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_victory_over_bashmaster_the_unbreakable
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_pursuit_of_the_snowmads = {
+		icon = mission_dk_tuck
+        position = 7
+        
+		required_missions = { wwu_bashmaster_the_unbreakable }
+        
+		trigger = { 
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        continent = continent_northrend
+                    }
+                    culture_group = culture_group_dryad
+                }
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+            owner = {
+                culture_group = culture_group_dryad
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_snowmad_success
+                duration = 9125
+            }
+		}
+	}
+    
+    wwu_rout_of_the_snowmads = {
+		icon = mission_dk_tuck_2
+        position = 8
+        
+		required_missions = { wwu_pursuit_of_the_snowmads }
+        
+		trigger = { 
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        continent = continent_northrend
+                    }
+                    culture_group = culture_group_vrykul
+                }
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+            owner = {
+                culture_group = culture_group_vrykul
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_snowmad_rout
+                duration = 9125
+            }
+		}
+	}
+    
+    wwu_lord_fredrik_the_snowmad_king = {
+		icon = mission_dk_fredrik
+        position = 9
+        
+		required_missions = { wwu_rout_of_the_snowmads }
+        
+		trigger = { 
+            area_icecrown_interior = {
+                owned_by = ROOT
+            }
+            
+            # Only check if the Scourge has existed
+            if = {
+                limit = {
+                    is_year = 605
+                }
+                custom_trigger_tooltip = {
+                    tooltip = DESTROY_THE_HELM_OF_DOMINATION_TT
+                    has_global_flag = destroyed_helm_flag
+                }
+            }
+		}
+        provinces_to_highlight = {
+            area = area_icecrown_interior
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_victory_over_fredrik
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_tel_abim_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TAB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_cranky_kongs_knowledge = {
+		icon = mission_dk_cranky_kong
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = { 
+            has_estate = estate_traders
+            estate_loyalty = {
+                estate = estate_traders
+                loyalty = 60
+            }
+            estate_influence = {
+                estate = estate_traders
+                influence = 40
+            }
+		}
+        
+		effect = {
+			add_dip_power = 100
+		}
+	}
+    wwu_dustwallow_banana_markets = {
+		icon = mission_trading_outpost
+        position = 2
+        
+		required_missions = { wwu_cranky_kongs_knowledge }
+        
+		trigger = { 
+            any_trade_node = {
+                region = region_dustwallow_marsh
+                
+				trade_share = {
+					country = ROOT
+					share = 50
+				}
+			}
+		}
+        provinces_to_highlight = {
+            region = region_dustwallow_marsh
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_local_banana_monopoly
+                duration = 9125
+            }
+		}
+	}
+    wwu_in_pursuit_of_plantations = {
+		icon = mission_lumbermill
+        position = 3
+        
+		required_missions = { wwu_dustwallow_banana_markets }
+        
+		trigger = { 
+            any_country = {
+                capital_scope = {
+                    area = area_echo_isles
+                }
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
+		}
+        provinces_to_highlight = {
+            area = area_echo_isles
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_new_banana_plantations
+                duration = 9125
+            }
+		}
+	}
+    wwu_news_of_a_frozen_land = {
+		icon = mission_hunter_vs_wild
+        position = 4
+        
+		required_missions = { wwu_in_pursuit_of_plantations }
+        
+		trigger = { 
+            # Any province in Northrend
+            continent_northrend = {
+                has_discovered = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+        }
+        
+		effect = {
+            region_borean_tundra = {
+                limit = {
+                    has_port = yes
+                }
+                add_claim = ROOT
+            }
+		}
+	}
+    wwu_pompy_the_presumptuous = {
+		icon = mission_dk_pompy
+        position = 5
+        
+		required_missions = { wwu_news_of_a_frozen_land }
+        
+		trigger = { 
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        continent = continent_northrend
+                    }
+                    culture_group = culture_group_tuskarr
+                }
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+            owner = {
+                culture_group = culture_group_tuskarr
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_victory_over_pompy_the_presumptuous
+                duration = -1
+            }
+		}
+	}
+    wwu_ba_boom_the_boisterous = {
+		icon = mission_dk_ba_boom
+        position = 6
+        
+		required_missions = { wwu_pompy_the_presumptuous }
+        
+		trigger = { 
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        continent = continent_northrend
+                    }
+                    culture_group = culture_group_dragonkin
+                }
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_northrend
+            owner = {
+                culture_group = culture_group_dragonkin
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_victory_over_ba_boom_the_boisterous
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_help_diddy = {
+		icon = mission_dk_diddy
+        position = 7
+        
+		required_missions = { wwu_threaten_the_lost_isles }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_darkspear_isles
+            }
+		}
+        provinces_to_highlight = {
+            region = region_darkspear_isles
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            region_darkspear_isles = {
+                add_claim = ROOT
+            }
+            region_voldun = {
+                add_claim = ROOT
+            }
+            discover_zandalar = yes
+		}
+	}
+    wwu_konga_beat = {
+		icon = mission_dk_konga_beat
+        position = 8
+        
+		required_missions = { wwu_help_diddy }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_voldun
+            }
+		}
+        provinces_to_highlight = {
+            region = region_voldun
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            region_nazmir = {
+                add_claim = ROOT
+            }
+		}
+	}
+    wwu_jungle_rush = {
+		icon = mission_dk_jungle_rush
+        position = 9
+        
+		required_missions = { wwu_konga_beat }
+        
+		trigger = {
+            num_of_owned_provinces_with = {
+                value = 8
+                
+                is_core = ROOT
+                region = region_nazmir
+            }
+		}
+        provinces_to_highlight = {
+            region = region_nazmir
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            region_zuldazar = {
+                add_claim = ROOT
+            }
+            
+            add_mil_power = 100
+		}
+	}
+    wwu_finding_diddy  = {
+		icon = mission_dk_diddy_2
+        position = 10
+        
+		required_missions = { wwu_jungle_rush }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = DAK
+                }
+                DAK = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 150
+                    }
+                }
+            }
+            else = {
+                owns = 2757
+                owns = 2621
+            }
+		}
+        provinces_to_highlight = {
+            if = {
+                limit = {
+                    NOT = { exists = DAK }
+                }
+                OR = {
+                    province_id = 2757
+                    province_id = 2621
+                }
+            }
+            else = {
+                owned_by = DAK
+            }
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = DAK
+                }
+                vassalize = DAK
+            }
+            else = {
+                add_mil_power = 250
+            }
+		}
+	}
+    wwu_king_k_rool  = {
+		icon = mission_dk_king_k_rool
+        position = 11
+        
+		required_missions = { wwu_finding_diddy }
+        
+		trigger = {
+            region_zuldazar = {
+                type = all
+                OR = {
+                    owned_by = ROOT
+                    owned_by = DAK
+                }
+            }
+		}
+        provinces_to_highlight = {
+            region = region_zuldazar
+            OR = {
+                NOT = { owned_by = ROOT }
+                NOT = { owned_by = DAK }
+            }
+        }
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_king_k_rool
+                duration = -1
+            }
+		}
+	}
+    wwu_pirate_extermination  = {
+		icon = mission_hunter_gun
+        position = 12
+        
+		required_missions = { wwu_king_k_rool }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_plunder_isle
+            }
+		}
+        provinces_to_highlight = {
+            region = region_plunder_isle
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            region_plunder_isle = {
+                add_claim = ROOT
+            }
+		}
+	}
+    wwu_kaptain_k_rool = {
+		icon = mission_dk_kaptain_k_rool
+        position = 13
+        
+		required_missions = { wwu_pirate_extermination }
+        
+		trigger = {
+            region_plunder_isle = {
+                type = all
+                owned_by = ROOT
+            }
+            NOT = { exists = A15 }
+		}
+        provinces_to_highlight = {
+            region = region_plunder_isle
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            remove_country_modifier = mission_king_k_rool
+            
+            add_country_modifier = {
+                name = mission_kaptain_k_rool
+                duration = -1
+            }
+		}
+	}
+    wwu_acquire_kaos = {
+		icon = mission_dk_kaos
+        position = 14
+        
+		required_missions = { wwu_kaptain_k_rool }
+        
+		trigger = {
+            area_booty_bay = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            area = area_booty_bay
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_kaos_acquired
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_tel_abim_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TAB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_tel_abim_bananas = {
+		icon = mission_banana
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            any_owned_province = {
+                development = 20
+                trade_goods = banana
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = ROOT
+            trade_goods = banana
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4064 = {
+                        is_empty = yes
+                    }
+                }
+                4064 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4064 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_capture_hozu_mozu = {
+		icon = mission_treasure_map
+        position = 2
+        
+		required_missions = { wwu_tel_abim_bananas }
+        
+		trigger = {
+            3965 = {
+                light_ships_in_province = 3
+            }
+		}
+        provinces_to_highlight = {
+            province_id = 3965
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4065 = {
+                        is_empty = yes
+                    }
+                }
+                4065 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4065 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_claim_verdant_wilds = {
+		icon = mission_hunter_camouflage
+        position = 3
+        
+		required_missions = { wwu_capture_hozu_mozu }
+        
+		trigger = {
+            3967 = {
+                light_ships_in_province = 6
+            }
+		}
+        provinces_to_highlight = {
+            province_id = 3967
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4071 = {
+                        is_empty = yes
+                    }
+                }
+                4071 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4071 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_secure_the_south_seas = {
+		icon = mission_defend_towers
+        position = 4
+        
+		required_missions = { wwu_claim_verdant_wilds }
+        
+		trigger = {
+            navy_size_percentage = 1.0
+            num_of_owned_provinces_with = {
+                value = 8
+                region = region_south_sea_islands
+            }
+		}
+        provinces_to_highlight = {
+            region = region_south_sea_islands
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4073 = {
+                        is_empty = yes
+                    }
+                }
+                4073 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4073 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4072 = {
+                        is_empty = yes
+                    }
+                }
+                4072 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4072 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_threaten_the_lost_isles = {
+		icon = mission_axe_and_sword
+        position = 6
+        
+		required_missions = { wwu_secure_the_south_seas }
+        
+		trigger = {
+            OR = {
+                3978 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+                3979 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+                3976 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+                3977 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+                379 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+                380 = {
+                    OR = {
+                        heavy_ships_in_province = 8
+                        galleys_in_province = 16
+                    }
+                }
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3978
+                province_id = 3979
+                province_id = 3976
+                province_id = 3977
+                province_id = 379
+                province_id = 380
+            }
+        }
+        
+		effect = {
+            region_lost_isles = {
+                add_claim = ROOT
+            }
+            region_kezan = {
+                add_claim = ROOT
+            }
+		}
+	}
+    wwu_defeat_tiki_tong = {
+		icon = mission_dk_tiki_tong
+        position = 7
+        
+		required_missions = { wwu_threaten_the_lost_isles }
+        
+		trigger = {
+            region_kezan = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            region = region_kezan
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_victory_over_tiki_tong
+                duration = -1
+            }
+		}
+	}
+    
+}
+
+wwu_tel_abim_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TAB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_market_of_gadgetzan = {
+		icon = mission_camp_flag
+        position = 2
+        
+		required_missions = { wwu_tel_abim_bananas }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = A80
+                }
+                A80 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 120
+                    }
+                }
+            }
+            else = {
+                always = yes
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = A80
+        }
+        
+		effect = {
+			if = {
+                limit = {
+                    1551 = {
+                        is_empty = yes
+                    }
+                }
+                1551 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1551 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    2324 = {
+                        is_empty = yes
+                    }
+                }
+                2324 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                2324 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    2323 = {
+                        is_empty = yes
+                    }
+                }
+                2323 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                2323 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    1552 = {
+                        is_empty = yes
+                    }
+                }
+                1552 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1552 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4559 = {
+                        is_empty = yes
+                    }
+                }
+                4559 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4559 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_flavour_fusion_time = {
+		icon = mission_arcane_book
+        position = 2
+        
+		required_missions = { wwu_market_of_gadgetzan }
+        
+		trigger = {
+            owns = 1544
+		}
+        provinces_to_highlight = {
+            province_id = 1544
+        }
+        
+		effect = {
+			custom_tooltip = UNLOCK_BANANA_SWITCH_DECISION_TT
+            hidden_effect = {
+                set_country_flag = unlock_banana_switch_decision
+            }
+		}
+	}
+    
+    wwu_purge_the_zingers = {
+		icon = mission_dk_zinger
+        position = 3
+        
+		required_missions = { wwu_flavour_fusion_time }
+        
+		trigger = {
+            NOT = { exists = ZZH }
+		}
+        provinces_to_highlight = {
+            owned_by = ZZH
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4567 = {
+                        is_empty = yes
+                    }
+                }
+                4567 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4567 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4568 = {
+                        is_empty = yes
+                    }
+                }
+                4568 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4568 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    1243 = {
+                        is_empty = yes
+                    }
+                }
+                1243 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1243 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    1549 = {
+                        is_empty = yes
+                    }
+                }
+                1549 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1549 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4566 = {
+                        is_empty = yes
+                    }
+                }
+                4566 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4566 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    1239 = {
+                        is_empty = yes
+                    }
+                }
+                1239 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1239 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_cultivate_banana_farms = {
+		icon = mission_banana
+        position = 4
+        
+		required_missions = { wwu_purge_the_zingers }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_tanaris
+                has_port = yes
+                development = 20
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = ROOT
+            region = region_tanaris
+            has_port = yes
+            development = 10
+        }
+        
+		effect = {
+            every_owned_province = {
+                limit = {
+                    region = region_tanaris
+                    has_port = yes
+                }
+                change_trade_goods = banana
+            }
+            
+            change_price = {
+                trade_goods = banana
+                key = KALIMDORIAN_BANANAS
+                value = 0.5
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_uldum_connections = {
+		icon = mission_arch_dinosaur_skeleton
+        position = 5
+        
+		required_missions = { wwu_cultivate_banana_farms }
+        
+		trigger = {
+            any_country = {
+                culture_group = culture_group_tol_vir
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
+		}
+        provinces_to_highlight = {
+            owner = {
+                culture_group = culture_group_tol_vir
+            }
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    1557 = {
+                        is_empty = yes
+                    }
+                }
+                1557 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1557 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4570 = {
+                        is_empty = yes
+                    }
+                }
+                4570 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4570 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_market_of_a_lost_city = {
+		icon = mission_strand_of_the_ancients
+        position = 6
+        
+		required_missions = { wwu_uldum_connections }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_uldum
+                development = 20
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = ROOT
+            region = region_uldum
+            development = 10
+        }
+        
+		effect = {
+            if = {
+                limit = {
+                    4598 = {
+                        is_empty = yes
+                    }
+                }
+                4598 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4598 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4599 = {
+                        is_empty = yes
+                    }
+                }
+                4599 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4599 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4600 = {
+                        is_empty = yes
+                    }
+                }
+                4600 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4600 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    4601 = {
+                        is_empty = yes
+                    }
+                }
+                4601 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                4601 = {
+                    add_core = ROOT
+                }
+            }
+            if = {
+                limit = {
+                    1599 = {
+                        is_empty = yes
+                    }
+                }
+                1599 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                1599 = {
+                    add_core = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_uldum_monopoly = {
+		icon = mission_storehouse
+        position = 7
+        
+		required_missions = { wwu_market_of_a_lost_city }
+        
+		trigger = {
+            1559 = {
+                owned_by = ROOT
+                if = {
+                    limit = {
+                        has_dlc = "Dharma"
+                    }
+                    province_has_center_of_trade_of_level = 3
+                }
+                else = {
+                    development = 20
+                }
+            }
+		}
+        provinces_to_highlight = {
+            province_id = 1559
+        }
+        
+		effect = {
+            region_uldum = {
+                add_claim = ROOT
+            }
+            
+            add_country_modifier = {
+                name = mission_uldum_monopoly
+                duration = 9125
+            }
+		}
+	}
+    
+    wwu_desert_cultivation = {
+		icon = mission_city_of_gold
+        position = 8
+        
+		required_missions = { wwu_uldum_monopoly }
+        
+		trigger = {
+            num_of_owned_provinces_with = {
+                value = 12
+                has_port = yes
+                region = region_uldum
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = ROOT
+            region = region_uldum
+            has_port = yes
+        }
+        
+		effect = {
+            every_owned_province = {
+                limit = {
+                    region = region_uldum
+                    has_port = yes
+                }
+                change_trade_goods = banana
+            }
+            
+            change_price = {
+                trade_goods = banana
+                key = ULDUM_BANANAS
+                value = 0.5
+                duration = -1
+            }
+		}
+	}
+    
+    
+    wwu_zinger_assault = {
+		icon = mission_dk_zinger
+        position = 9
+        
+		required_missions = { wwu_desert_cultivation }
+        
+		trigger = {
+            any_country = {
+                war_with = ROOT
+                culture_group = culture_group_aqir
+            }
+		}
+        
+		effect = {
+            region_silithus = {
+                add_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_zinger_decimation = {
+		icon = mission_blood_corruption
+        position = 10
+        
+		required_missions = { wwu_zinger_assault }
+        
+		trigger = {
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        OR = {
+                            region = region_uldum
+                            region = region_tanaris
+                            region = region_ungoro_crater
+                        }
+                    }
+                    culture_group = culture_group_aqir
+                }
+            }
+		}
+        provinces_to_highlight = {
+            region = region_uldum
+            region = region_tanaris
+            region = region_ungoro_crater
+            owner = {
+                culture_group = culture_group_aqir
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_zinger_mastery
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_queen_b = {
+		icon = mission_dk_queen_b
+        position = 11
+        
+		required_missions = { wwu_zinger_decimation }
+        
+		trigger = {
+            region_silithus = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            region = region_silithus
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_victory_over_queen_b
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_tel_abim_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TAB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_tropical_lands_of_ungoro = {
+		icon = mission_ungoro
+        position = 5
+        
+		required_missions = { wwu_purge_the_zingers }
+        
+		trigger = {
+            any_owned_province = {
+                region = region_ungoro_crater
+            }
+		}
+		provinces_to_highlight = {
+            region = region_ungoro_crater
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_gorilla_explorers
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_skullyrex = {
+		icon = mission_dk_skullyrex
+        position = 6
+        
+		required_missions = { wwu_tropical_lands_of_ungoro }
+        
+		trigger = {
+            1533 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1533
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_victory_over_skullyrex
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_master_of_the_jungle = {
+		icon = mission_snake
+        position = 7
+        
+		required_missions = { wwu_skullyrex }
+        
+		trigger = {
+            region_ungoro_crater = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_ungoro_crater
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			custom_tooltip = UNLOCK_VOLCANO_BANANA_DECISION_TT
+            hidden_effect = {
+                set_country_flag = unlock_volcano_banana_decision
+            }
+		}
+	}
+}

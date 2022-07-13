@@ -1,0 +1,47 @@
+country_decisions = {
+    start_banana_timewarp = {
+        potential = {
+            religion = bananas
+            has_country_flag = unlock_banana_switch_decision
+		}
+		allow = {
+            has_country_flag = unlock_banana_switch_decision
+            adm_power = 100
+		}
+        effect = {
+            add_adm_power = -100
+            
+            country_event = { id = wwu_banana_flavour.1 }
+        }
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+    imbibe_volcano_cocktail = {
+        potential = {
+            religion = bananas
+            has_country_flag = unlock_volcano_banana_decision
+            NOT = { has_ruler_modifier = volcano_cocktail }
+		}
+		allow = {
+            has_country_flag = unlock_banana_switch_decision
+		}
+        effect = {
+            custom_tooltip = VOLCANO_COCKTAIL_TT
+            
+            hidden_effect = {
+                set_ruler_flag = volcano_cocktail
+                
+                add_ruler_modifier = {
+                    name = volcano_cocktail
+                    duration = -1
+                    hidden = yes
+                }
+            }
+        }
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}
