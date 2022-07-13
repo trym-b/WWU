@@ -1,5 +1,5 @@
 NDefines = {
-
+ 
 NGame = {
 	START_DATE = "546.1.1",
 	END_DATE = "2000.1.1",
@@ -105,8 +105,8 @@ NDiplomacy = {
 	PEACE_IMPACT_DIP_SCORE = 0.25,
 	PEACE_IMPACT_MIL_SCORE = 0.25,
 
-	AUTONOMY_WARSCORE_COST_MODIFIER = 0.33,			-- How much autonomy reduces score by (at 1, 50% autonomy = 50% reduction)
-	GREAT_PROJECT_WARSCORE_COST_MODIFIER = 0.33,	-- How much each great project multiplies a war score cost by (so 1 GP adds 33%, 2 add 66% etc)
+	AUTONOMY_WARSCORE_COST_MODIFIER = 0.25,			-- How much autonomy reduces score by (at 1, 50% autonomy = 50% reduction)
+	GREAT_PROJECT_WARSCORE_COST_MODIFIER = 0.25,	-- How much each great project multiplies a war score cost by (so 1 GP adds 33%, 2 add 66% etc)
 
 	NUM_POSSIBLE_RIVALS = 3,
 	RIVAL_PRESTIGE_BONUS = 0.25,
@@ -192,7 +192,7 @@ NDiplomacy = {
 	SPY_NETWORK_DISCOVER_WAR = 50,
 	SUPPORT_REBELS_EFFECT = 10,
 	SUPPORT_REBELS_MONEY_FACTOR = 0.5,
-	FABRICATE_CLAIM_COST = 10,
+	FABRICATE_CLAIM_COST = 20,
 	FABRICATE_CLAIM_COST_MODIFIER_PER_CLAIM = 0.25,
 	CLAIM_STATE_MODIFIER = 0.5,
 	JUSTIFY_TRADE_CONFLICT_COST = 10,
@@ -273,10 +273,10 @@ NDiplomacy = {
 	PO_END_RIVALRY_PRESTIGE = 5,
 
 	PEACE_COST_PRIMITIVE_NERF = 0.75,				-- war score cost multiplier vs primitives
-	PEACE_COST_DEMAND_PROVINCE = 0.8,					-- Demand a province (scales by province wealth, also used for annex)
-	PEACE_COST_CONCEDE_PROVINCE = 0.8,				-- Demand colonial area province concession.
-	PEACE_COST_BECOME_VASSAL = 0.8,					-- Vassalize a country (scales by province wealth)
-	PEACE_COST_PILLAGE_CAPITAL = 1,					-- Pillage a capital state's dev (scales by province wealth)
+	PEACE_COST_DEMAND_PROVINCE = 1.2,					-- Demand a province (scales by province wealth, also used for annex)
+	PEACE_COST_CONCEDE_PROVINCE = 1.2,				-- Demand colonial area province concession.
+	PEACE_COST_BECOME_VASSAL = 1.0,					-- Vassalize a country (scales by province wealth)
+	PEACE_COST_PILLAGE_CAPITAL = 1.0,					-- Pillage a capital state's dev (scales by province wealth)
 	PEACE_COST_RETURN_CORE = 0.8,						-- Return a core (scales by province wealth)
 	PEACE_COST_REVOKE_CORE = 0.4,						-- Revoke a core (scales by province wealth)
 	PEACE_COST_RELEASE_ANNEXED = 0.8,					-- Release annexed nation (scales by province wealth)
