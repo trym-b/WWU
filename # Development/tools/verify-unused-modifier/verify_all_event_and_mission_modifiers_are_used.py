@@ -21,6 +21,9 @@ def _main() -> None:
     all_text_and_yaml_files = list(repo_root.rglob("*.txt")) + list(
         repo_root.rglob("*.yml")
     )
+    for dir in all_text_and_yaml_files:
+        if "/map/" in dir:
+            all_text_and_yaml_files.remove(dir)
     if not all_text_and_yaml_files:
         raise RuntimeError(f"{repo_root} globbed no '*.txt' or '*.yml*' files")
     relevant_files = sorted(
