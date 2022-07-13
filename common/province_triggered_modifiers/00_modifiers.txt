@@ -4,23 +4,21 @@
 # Effects are fully scriptable here.
 forge_of_the_burning_legion = {
 	potential = {
-		always = yes
-	}
-	
-	#viewer = {
-	#}
-	
-	trigger = {
 		owner = {
 			tag = B92
+        }
+	}
+
+	trigger = {
+		owner = {
 			religion = fel
 		}
         religion = fel
 	}
 
 	global_tax_income = 240
-    global_manpower = 50.0
-    land_forcelimit = 50.0
+    global_manpower = 25.0
+    land_forcelimit = 25.0
 	
 	#Province scope
 	on_activation = {
@@ -35,23 +33,21 @@ forge_of_the_burning_legion = {
 
 seat_of_the_lich_king = {
 	potential = {
-		always = yes
+		owner = {
+			tag = P11
+        }
 	}
-	
-	#viewer = {
-	#}
 	
 	trigger = {
 		owner = {
-			tag = P11
 			religion = cult_of_the_damned
 		}
         religion = cult_of_the_damned
 	}
 
 	global_tax_income = 120
-    global_manpower = 30.0
-    land_forcelimit = 30.0
+    global_manpower = 25.0
+    land_forcelimit = 25.0
 	
 	#Province scope
 	on_activation = {
@@ -66,23 +62,21 @@ seat_of_the_lich_king = {
 
 riches_of_azjol_nerub = {
 	potential = {
-		always = yes
+		owner = {
+			tag = P74
+		}
 	}
-	
-	#viewer = {
-	#}
 	
 	trigger = {
 		owner = {
-			tag = P74
 			religion = void
 		}
         religion = void
 	}
 
 	global_tax_income = 120
-    global_manpower = 30.0
-    land_forcelimit = 30.0
+    global_manpower = 25.0
+    land_forcelimit = 25.0
 	
 	#Province scope
 	on_activation = {
@@ -93,4 +87,111 @@ riches_of_azjol_nerub = {
 	
 	}
 	
+}
+
+power_of_the_nightwell = {
+	potential = {
+		owner = {
+            primary_culture = culture_nightborne
+        }
+	}
+	
+	trigger = {
+		owner = {
+			primary_culture = culture_nightborne
+		}
+        culture = culture_nightborne
+	}
+
+	global_unrest = -5
+	
+    discipline = 0.075
+    army_tradition = 1.0
+    global_manpower_modifier = 0.2
+    recover_army_morale_speed = 0.1
+	
+	#Province scope
+	on_activation = {
+	
+	}
+	
+	on_deactivation = {
+	
+	}
+	
+}
+
+power_of_the_sunwell = {
+	potential = {
+        NOT = { has_province_modifier = mission_province_desecration_of_the_sunwell }
+        
+		owner = { 
+            OR = {
+                religion = fel
+                religion = arcane
+                religion = shadow
+                religion = holy_light
+                religion = light_of_the_sunwell
+            }
+        }
+	}
+	
+	trigger = {
+		OR = {
+            religion = fel
+            religion = arcane
+            religion = shadow
+            religion = light_of_the_sunwell
+            religion = holy_light
+        }
+	}
+
+	global_unrest = -5
+	
+    discipline = 0.075
+    army_tradition = 1.0
+    global_manpower_modifier = 0.2
+    recover_army_morale_speed = 0.1
+	
+	#Province scope
+	on_activation = {
+	
+	}
+	
+	on_deactivation = {
+	
+	}
+	
+}
+
+bastion_of_light = {
+	potential = {
+		owner = { 
+            OR = {
+                religion = holy_light
+                religion = scarlet_light
+                religion = argent_light
+            }
+        }
+	}
+	
+	trigger = {
+		OR = {
+            religion = holy_light
+            religion = scarlet_light
+            religion = argent_light
+        }
+	}
+
+	global_missionary_strength = 0.01
+	missionaries = 1
+	
+	#Province scope
+	on_activation = {
+	
+	}
+	
+	on_deactivation = {
+	
+	}
 }
