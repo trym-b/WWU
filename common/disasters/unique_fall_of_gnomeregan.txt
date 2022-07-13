@@ -1,0 +1,77 @@
+fall_of_gnomeregan = {
+	potential = {
+		culture_group = culture_group_gnomish
+        
+        any_neighbor_country = {
+            culture_group = culture_group_trogg
+        }
+        
+        area_gnomeregan = {
+            owned_by = ROOT
+        }
+	}
+
+	can_start = {
+        has_any_disaster = no
+        culture_group = culture_group_gnomish
+        
+        any_neighbor_country = {
+            culture_group = culture_group_trogg
+        }
+        
+        area_gnomeregan = {
+            owned_by = ROOT
+        }
+        NOT = { stability = 0 }
+	}
+	
+	progress = {
+        modifier = {
+			factor = 1
+			is_year = 620
+		}
+		modifier = {
+			factor = 1
+			NOT = { stability = -1 }
+		}
+		modifier = {
+			factor = 1
+			NOT = { stability = -2 }
+		}
+        modifier = {
+			factor = 1
+			is_at_war = yes
+		}
+	}
+	
+	can_stop = {
+        always = no
+	}
+	
+	can_end = {
+        custom_trigger_tooltip = {
+            tooltip = FALL_OF_GNOMEREGAN_TT
+            
+            has_country_flag = gnomeregan_fate_decided
+        }
+	}
+	
+	modifier = {
+        stability_cost_modifier = 1.0
+	}
+
+	on_start = wwu_fall_of_gnomeregan.1
+	on_end = wwu_fall_of_gnomeregan.100
+	
+	on_monthly = {
+        random_events = {
+            2000 = 0
+            200 = wwu_fall_of_gnomeregan.10 # Trogg Uprising
+            50 = wwu_fall_of_gnomeregan.11 # Thermaplugg's Plan
+            10 = wwu_fall_of_gnomeregan.12 # Trogg Assault Ends
+        }
+	}
+}
+
+
+

@@ -1,0 +1,182 @@
+namespace = wwu_fall_of_gnomeregan
+
+# Fall of Gnomeregan
+country_event = {
+	id = wwu_fall_of_gnomeregan.1
+	title = wwu_fall_of_gnomeregan.1.title
+	desc = wwu_fall_of_gnomeregan.1.desc
+	picture = GNOMEREGAN_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_fall_of_gnomeregan.1.option.a
+		
+		add_stability = -3
+        
+        area_gnomeregan = {
+            spawn_rebels = {
+				type = trogg_rebels
+				size = 5
+			}
+        }
+	}
+}
+
+# Fate of Gnomeregan
+country_event = {
+	id = wwu_fall_of_gnomeregan.100
+	title = wwu_fall_of_gnomeregan.100.title
+	desc = wwu_fall_of_gnomeregan.100.desc
+	picture = GNOMEREGAN_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	
+	option = {
+		name = wwu_fall_of_gnomeregan.100.option.a
+		
+		add_stability = 3
+	}
+}
+
+
+# Trogg Uprising
+country_event = {
+	id = wwu_fall_of_gnomeregan.10
+	title = wwu_fall_of_gnomeregan.10.title
+	desc = wwu_fall_of_gnomeregan.10.desc
+	picture = ROCKJAW_TROGG_eventPicture
+	
+	trigger = {
+		manpower_percentage = 0.25
+	}
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_fall_of_gnomeregan.10.option.a
+		
+		random_owned_province = {
+            limit = {
+                continent = continent_eastern_kingdoms
+            }
+            
+            spawn_rebels = {
+				type = trogg_rebels
+				size = 2
+			}
+        }
+	}
+}
+
+# Thermaplugg's Plan
+country_event = {
+	id = wwu_fall_of_gnomeregan.11
+	title = wwu_fall_of_gnomeregan.11.title
+	desc = wwu_fall_of_gnomeregan.11.desc
+	picture = GNOMEREGAN_INFANTRY_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = thermapluggs_plan }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = thermapluggs_plan
+        }
+    }
+
+	option = {
+		name = wwu_fall_of_gnomeregan.11.option.a
+		
+		disband_rebels = trogg_rebels
+        
+        add_country_modifier = {
+            name = gnome_massacre
+            duration = 9125
+        }
+        
+        add_yearly_manpower = -5
+        
+        area_gnomeregan = {
+            cede_province = A33
+            add_core = A33
+        }
+        
+        custom_tooltip = TROGG_UPRISINGS_WILL_STOP_TT
+        
+        hidden_effect = {
+            set_country_flag = gnomeregan_fate_decided
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_fall_of_gnomeregan.11.option.b
+		
+		add_prestige = 5
+        
+        custom_tooltip = TROGG_UPRISINGS_WILL_CONTINUE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = { 
+                exists = A33
+            }
+            add_truce_with = A33
+        }
+    }
+}
+# Trogg Assault Ends
+country_event = {
+	id = wwu_fall_of_gnomeregan.12
+	title = wwu_fall_of_gnomeregan.12.title
+	desc = wwu_fall_of_gnomeregan.12.desc
+	picture = ROCKJAW_TROGG_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        has_country_flag = thermapluggs_plan
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_fall_of_gnomeregan.12.option.a
+		
+        custom_tooltip = TROGG_UPRISINGS_WILL_STOP_TT
+        
+        hidden_effect = {
+            set_country_flag = gnomeregan_fate_decided
+        }
+	}
+}
