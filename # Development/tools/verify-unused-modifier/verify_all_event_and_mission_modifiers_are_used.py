@@ -22,7 +22,7 @@ def _main() -> None:
         repo_root.rglob("*.yml")
     )
     for dir in all_text_and_yaml_files:
-        if "/map/" in dir:
+        if "/map/" in str(dir):
             all_text_and_yaml_files.remove(dir)
     if not all_text_and_yaml_files:
         raise RuntimeError(f"{repo_root} globbed no '*.txt' or '*.yml*' files")
