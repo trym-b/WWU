@@ -43,6 +43,7 @@ def _main() -> None:
         for key in res:
             found = False
             for file in relevant_files:
+                print(file)
                 file_content = file.read_text(encoding="utf-8")
                 if key in file_content:
                     print(
