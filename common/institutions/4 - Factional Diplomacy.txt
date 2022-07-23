@@ -1,0 +1,143 @@
+wwu_factional_diplomacy = {
+	historical_start_date = 720.1.1
+	historical_start_province = 1022
+    trade_company_efficiency = 1.0
+    
+	bonus = {
+		diplomatic_upkeep = 2
+        diplomatic_reputation = 1
+        improve_relation_modifier = 0.1
+	}
+    
+	history = {
+        is_year = 720
+		is_civilized = yes
+        OR = {
+            has_country_modifier = member_of_alliance
+            has_country_modifier = head_of_alliance
+            has_country_modifier = member_of_horde
+            has_country_modifier = head_of_horde
+        }
+	}
+    
+	can_embrace = {
+		always = yes
+	}
+    
+    can_start = {
+        wwu_mechanized_warfare = 100
+        is_year = 720
+		owner = {
+            is_civilized = yes
+            OR = {
+                has_country_modifier = member_of_alliance
+                has_country_modifier = head_of_alliance
+                has_country_modifier = member_of_horde
+                has_country_modifier = head_of_horde
+            }
+        }
+    }
+    start_chance = 5
+	on_start = wwu_institutions.5
+    
+	embracement_speed = {
+        # Baseline Growth
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.5
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_baseline_growth
+				
+                owner = { is_civilized = yes }
+			}
+		}
+        
+        # Affinity Growth
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 1.0
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_technological_affinity
+				
+                owner = {
+                    OR = {
+                        has_country_modifier = member_of_alliance
+                        has_country_modifier = head_of_alliance
+                        has_country_modifier = member_of_horde
+                        has_country_modifier = head_of_horde
+                    }
+                }
+			}
+		}
+        
+        # Nearby Coast
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.5
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_friendly_coast_factional_diplomacy
+                
+				any_friendly_coast_border_province = {
+					wwu_factional_diplomacy = 100
+				}
+			}
+		}
+        # Nearby Province
+		modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.3
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_neighbour_factional_diplomacy
+				any_neighbor_province = {
+					NOT = { owned_by = ROOT }
+					wwu_factional_diplomacy = 100
+				}
+			}
+		}
+        # Embraced by Country
+		modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 2.0
+            
+			potential = {
+				owner = {
+					has_institution = wwu_factional_diplomacy
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = tt_embraced_factional_diplomacy
+				owner = {
+					has_institution = wwu_factional_diplomacy
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 24
+        
+        modifier = {
+			factor = 0.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.1
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.2
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.3
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.4
+		}
+	}
+}

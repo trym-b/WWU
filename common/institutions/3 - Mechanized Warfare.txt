@@ -1,0 +1,135 @@
+wwu_mechanized_warfare = {
+	historical_start_date = 675.1.1
+	historical_start_province = 3036
+    trade_company_efficiency = 1.0
+    
+	bonus = {
+		discipline = 0.05
+        ship_durability = 0.1
+        movement_speed = 0.25
+	}
+    
+	history = {
+        is_year = 675
+		is_civilized = yes
+        OR = {
+            culture_group = culture_group_gnome
+            culture_group = culture_group_goblin
+        }
+	}
+    
+	can_embrace = {
+		always = yes
+	}
+    
+    can_start = {
+        wwu_civil_engineering = 100
+        is_year = 675
+		owner = {
+            is_civilized = yes
+        }
+        OR = {
+            culture_group = culture_group_gnome
+            culture_group = culture_group_goblin
+        }
+    }
+    start_chance = 5
+	on_start = wwu_institutions.4
+    
+	embracement_speed = {
+        # Baseline Growth
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.3
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_baseline_growth
+				
+                owner = { is_civilized = yes }
+			}
+		}
+        
+        # Affinity Growth
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 1.0
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_technological_affinity
+				
+                OR = {
+                    culture_group = culture_group_gnome
+                    culture_group = culture_group_goblin
+                }
+			}
+		}
+        
+        # Nearby Coast
+        modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.5
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_friendly_coast_mechanized_warfare
+                
+				any_friendly_coast_border_province = {
+					wwu_mechanized_warfare = 100
+				}
+			}
+		}
+        # Nearby Province
+		modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 0.3
+            
+			custom_trigger_tooltip = {
+				tooltip = tt_neighbour_mechanized_warfare
+				any_neighbor_province = {
+					NOT = { owned_by = ROOT }
+					wwu_mechanized_warfare = 100
+				}
+			}
+		}
+        # Embraced by Country
+		modifier = {
+			scale = yes     # Factor is growth per 12 dev
+			factor = 2.0
+            
+			potential = {
+				owner = {
+					has_institution = wwu_mechanized_warfare
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = tt_embraced_mechanized_warfare
+				owner = {
+					has_institution = wwu_mechanized_warfare
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 24
+        
+        modifier = {
+			factor = 0.25
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.1
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.2
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.3
+		}
+		modifier = {
+			factor = 2
+			neighbors_tech_discount = 0.4
+		}
+	}
+}
