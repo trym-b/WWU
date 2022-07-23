@@ -1,0 +1,366 @@
+namespace = wwu_nightfallen
+
+# Withering
+country_event = {
+	id = wwu_nightfallen.1
+	title = wwu_nightfallen.1.title
+	desc = wwu_nightfallen.1.desc
+	picture = WITHERED_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        NOT = {
+            any_owned_province = {
+                has_province_modifier = power_of_the_nightwell
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+        
+        modifier = {
+            factor = 2.0
+            
+            is_statists_in_power = yes # Withered
+        }
+	}
+	
+	option = {
+		name = wwu_nightfallen.1.option.a
+		
+		change_statists_vs_monarchists = -0.05
+	}
+}
+
+# Arcwine Caravan
+country_event = {
+	id = wwu_nightfallen.2
+	title = wwu_nightfallen.2.title
+	desc = wwu_nightfallen.2.desc
+	picture = ARCWINE_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        NOT = {
+            any_owned_province = {
+                has_province_modifier = power_of_the_nightwell
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 64
+	}
+	
+	option = {
+		name = wwu_nightfallen.2.option.a
+		
+		change_statists_vs_monarchists = 0.2
+        
+        random_list = {
+            25 = {
+                custom_tooltip = GUARDS_ATTACK_TT
+                
+                random_owned_province = {
+                    noble_rebels = 1
+                }
+            }
+            75 = {
+                custom_tooltip = NOTHING_HAPPENS_TT
+            }
+        }
+	}
+    option = {
+		name = wwu_nightfallen.2.option.b
+		
+		change_statists_vs_monarchists = -0.05
+	}
+}
+
+# Empower the western Leylines
+country_event = {
+	id = wwu_nightfallen.3
+	title = wwu_nightfallen.3.title
+	desc = wwu_nightfallen.3.desc
+	picture = THALYSSRA_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        NOT = {
+            any_owned_province = {
+                has_province_modifier = power_of_the_nightwell
+            }
+        }
+        owns = 2675 # Falanaar
+        NOT = { has_country_modifier = western_leylines_empowered }
+	}
+	
+	mean_time_to_happen = {
+		months = 300
+	}
+	
+	option = {
+		name = wwu_nightfallen.3.option.a
+		
+        add_adm_power = -100
+        add_dip_power = -100
+        add_mil_power = -100
+        
+		add_country_modifier = {
+            name = western_leylines_empowered
+            duration = -1
+        }
+        
+        if = {
+            limit = {
+                has_country_modifier = eastern_leylines_empowered
+            }
+            custom_tooltip = BOOSTS_LEYLINE_EMPOWERMENT_TT
+        }
+        else = {
+            custom_tooltip = UNLOCK_LEYLINE_EMPOWERMENT_TT
+        }
+	}
+    option = {
+		name = wwu_nightfallen.3.option.b
+		
+		change_statists_vs_monarchists = 0.05
+	}
+}
+
+# Empower the Eastern Leylines
+country_event = {
+	id = wwu_nightfallen.4
+	title = wwu_nightfallen.4.title
+	desc = wwu_nightfallen.4.desc
+	picture = THALYSSRA_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        NOT = {
+            any_owned_province = {
+                has_province_modifier = power_of_the_nightwell
+            }
+        }
+        owns = 2672 # Tel'anor
+        NOT = { has_country_modifier = eastern_leylines_empowered }
+	}
+	
+	mean_time_to_happen = {
+		months = 300
+	}
+	
+	option = {
+		name = wwu_nightfallen.4.option.a
+		
+        add_adm_power = -100
+        add_dip_power = -100
+        add_mil_power = -100
+        
+		add_country_modifier = {
+            name = eastern_leylines_empowered
+            duration = -1
+        }
+        
+        if = {
+            limit = {
+                has_country_modifier = western_leylines_empowered
+            }
+            custom_tooltip = BOOSTS_LEYLINE_EMPOWERMENT_TT
+        }
+        else = {
+            custom_tooltip = UNLOCK_LEYLINE_EMPOWERMENT_TT
+        }
+	}
+    option = {
+		name = wwu_nightfallen.4.option.b
+		
+		change_statists_vs_monarchists = 0.05
+	}
+}
+
+# Leyline Nourishment
+country_event = {
+	id = wwu_nightfallen.5
+	title = wwu_nightfallen.5.title
+	desc = wwu_nightfallen.5.desc
+	picture = ARCWINE_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        OR = {
+            has_country_modifier = western_leylines_empowered
+            has_country_modifier = eastern_leylines_empowered
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+        
+        modifier = {
+            factor = 0.5
+            
+            has_country_modifier = western_leylines_empowered
+            has_country_modifier = eastern_leylines_empowered
+        }
+	}
+	
+	option = {
+		name = wwu_nightfallen.5.option.a
+		
+        change_statists_vs_monarchists = 0.1
+	}
+}
+
+# Nightwell Nourishment
+country_event = {
+	id = wwu_nightfallen.6
+	title = wwu_nightfallen.6.title
+	desc = wwu_nightfallen.6.desc
+	picture = SURAMAR_GARDEN_eventPicture
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        any_owned_province = {
+            has_province_modifier = power_of_the_nightwell
+        }
+        NOT = { statists_vs_orangists = 1.0 }
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = wwu_nightfallen.6.option.a
+		
+        change_statists_vs_monarchists = 0.5
+	}
+}
+
+# Arcwine Heist - Decision
+country_event = {
+	id = wwu_nightfallen.10
+	title = wwu_nightfallen.10.title
+	desc = wwu_nightfallen.10.desc
+	picture = ARCWINE_eventPicture
+    
+    hidden = yes
+    
+	trigger = {
+        has_reform = withered_reform
+		primary_culture = culture_withered
+        has_country_flag = arcwine_heist_decision
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = arcwine_heist_decision
+        }
+    }
+	
+	option = {
+		name = wwu_nightfallen.10.option.a
+		
+        random_list = {
+            25 = { country_event = { id = wwu_nightfallen.11 } }
+            25 = { country_event = { id = wwu_nightfallen.12 } }
+            25 = { country_event = { id = wwu_nightfallen.13 } }
+            25 = { country_event = { id = wwu_nightfallen.14 } }
+        }
+		
+	}
+}
+
+# Arcwine Heist - Large Haul
+country_event = {
+	id = wwu_nightfallen.11
+	title = wwu_nightfallen.11.title
+	desc = wwu_nightfallen.11.desc
+	picture = ARCWINE_eventPicture
+    
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_nightfallen.11.option.a
+		
+		change_statists_vs_monarchists = 0.1
+	}
+}
+
+# Arcwine Heist - Small Haul
+country_event = {
+	id = wwu_nightfallen.12
+	title = wwu_nightfallen.12.title
+	desc = wwu_nightfallen.12.desc
+	picture = ARCWINE_eventPicture
+    
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_nightfallen.12.option.a
+		
+		change_statists_vs_monarchists = 0.05
+	}
+}
+
+# Arcwine Heist - Massacre
+country_event = {
+	id = wwu_nightfallen.13
+	title = wwu_nightfallen.13.title
+	desc = wwu_nightfallen.13.desc
+	picture = ARCWINE_eventPicture
+    
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_nightfallen.13.option.a
+		
+		add_yearly_manpower = -0.25
+	}
+}
+
+# Arcwine Heist - Hunted
+country_event = {
+	id = wwu_nightfallen.14
+	title = wwu_nightfallen.14.title
+	desc = wwu_nightfallen.14.desc
+	picture = ARCWINE_eventPicture
+    
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_nightfallen.14.option.a
+		
+		random_owned_province = {
+            noble_rebels = 1
+        }
+	}
+}

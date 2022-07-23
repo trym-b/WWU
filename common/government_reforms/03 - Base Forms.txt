@@ -912,6 +912,36 @@ shado_pan_order_reform = {
     valid_for_nation_designer = yes
     nation_designer_cost = 0
 }
+nightfallen_reform = {
+	icon = "arcane_pattern"
+    legacy_equivalent = nightfallen_legacy
+    
+	heir = no
+	queen = no
+    
+    potential = {
+		primary_culture = culture_nightfallen
+	}
+    
+	modifiers = {
+        all_power_cost = -0.1
+        reform_progress_growth = 1.0
+	}
+	
+	ai = { factor = 0 }
+	    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+		
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+	lock_level_when_selected = yes
+
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
 
 #--------------------------------------------
 # Republic
@@ -2223,6 +2253,58 @@ tribal_despotism_reform = {
     valid_for_new_country = yes     # Can be converted to via nation release
     allow_normal_conversion = yes   # Can be picked as a new reform
     allow_convert = yes             # Can be converted to via peace term
+
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
+
+# Used by Nightfallen
+withered_reform = {
+	icon = "arcane_pattern"
+    legacy_equivalent = withered_legacy
+    
+	heir = no
+	queen = no
+    
+    potential = {
+		primary_culture = culture_withered
+	}
+    
+	modifiers = {
+        advisor_pool = 1
+        
+        relation_with_heretics = -25
+        relation_with_heathens = -25
+        relation_with_same_religion = -25
+	}
+	
+	ai = { factor = 0 }
+    
+    conditional = {
+		allow = { has_dlc = "Res Publica" }
+        
+		states_general_mechanic = {
+			sg_withered = {
+                global_tax_modifier = -0.25
+                production_efficiency = -0.25
+                global_manpower_modifier = -0.25
+                all_power_cost = 0.25
+			}
+
+			sg_restored = {
+				reform_progress_growth = 1.0
+			}
+		}
+	}
+	    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+		
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+	lock_level_when_selected = yes
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0

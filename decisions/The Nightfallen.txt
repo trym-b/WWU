@@ -7,11 +7,19 @@ country_decisions = {
 		
 		allow = {
 			primary_culture = culture_withered
-            has_idea = nightfallen_ideas_1
-            total_development = 100
+            has_reform = withered_reform
+            is_monarchists_in_power = yes # Nightfallen
+            government_reform_progress = 500
 		}
 		
 		effect = {
+            change_government_reform_progress = -500
+            
+            override_country_name = THE_NIGHTFALLEN
+            
+            change_government = monarchy
+            add_government_reform = nightfallen_reform
+            
 			change_primary_culture = culture_nightfallen
             every_owned_province = {
                 limit = {
@@ -19,8 +27,6 @@ country_decisions = {
                 }
                 change_culture = culture_nightfallen
             }
-            
-            override_country_name = THE_NIGHTFALLEN
             
             add_country_modifier = {
                 name = restoration_of_the_nightfallen
@@ -30,6 +36,48 @@ country_decisions = {
 		
 		ai_will_do = {
 			factor = 1
+		}
+	}
+    
+    attempt_arcwine_heist = {
+		potential = {
+			primary_culture = culture_withered
+            NOT = { has_country_modifier = arcwine_heist_cooldown }
+		}
+		
+		allow = {
+			has_reform = withered_reform
+            primary_culture = culture_withered
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+		}
+		
+		effect = {
+            add_adm_power = -50
+            add_dip_power = -50
+            add_mil_power = -50
+            
+            custom_tooltip = ARCWINE_HEIST_OCCURS_TT
+            hidden_effect = {
+                set_country_flag = arcwine_heist_decision
+                add_country_modifier = {
+                    name = arcwine_heist_cooldown
+                    duration = 365
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 500 }
+                NOT = { dip_power = 500 }
+                NOT = { mil_power = 500 }
+            }
 		}
 	}
 }
