@@ -1,0 +1,251 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+# wwu_nightfallen_column_1 = {
+	# slot = 1
+	# generic = no
+	# ai = yes
+    
+	# potential = {
+		# tag = WIT
+	# }
+    
+	# has_country_shield = yes
+	
+	# wwu_mission = {
+		# icon = mission_titan_spirits
+        # position = 1
+        
+		# required_missions = { }
+        
+		# trigger = {
+            
+		# }
+		# provinces_to_highlight = {
+            
+			# NOT = { owned_by = ROOT }
+		# }
+        
+		# effect = {
+			
+		# }
+	# }
+# }
+
+wwu_nightfallen_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = WIT
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_falanaar = {
+		icon = mission_arcane_tower
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            owns = 2675
+            2675 = {
+                OR = {
+					has_building = wow_fort_1
+					has_building = wow_fort_2
+					has_building = wow_fort_3
+					has_building = wow_fort_4
+				}
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2675
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			change_statists_vs_monarchists = 0.25
+		}
+	}
+}
+
+wwu_nightfallen_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = WIT
+	}
+    
+	has_country_shield = yes
+	
+	wwu_nourishment_of_the_withered = {
+		icon = mission_allied_race_nightborne
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            is_monarchists_in_power = yes
+		}
+        
+		effect = {
+			change_government_reform_progress = 250
+		}
+	}
+    
+    wwu_assault_suramar = {
+		icon = mission_arcane_barrage
+        position = 2
+        
+		required_missions = { wwu_nourishment_of_the_withered }
+        
+		trigger = {
+            OR = {
+                owns = 3183
+                owns = 2669
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3183
+                province_id = 2669
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_nightfallen_vigor
+                duration = 10950
+            }
+		}
+	}
+    
+    wwu_secure_the_nighthold = {
+		icon = mission_mass_dispel
+        position = 3
+        
+		required_missions = { wwu_assault_suramar }
+        
+		trigger = {
+            owns = 3182
+		}
+        provinces_to_highlight = {
+            province_id = 3182
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            change_government_reform_progress = 250
+            
+			add_country_modifier = {
+                name = mission_nightwell_nourishment
+                duration = 10950
+            }
+		}
+	}
+    
+    wwu_fate_of_the_nightborne = {
+		icon = mission_nightborne_female
+        position = 4
+        
+		required_missions = { wwu_secure_the_nighthold }
+        
+		trigger = {
+            has_reform = nightfallen_reform
+            
+            NOT = { exists = SUR }
+            
+            region_suramar = {
+                type = all
+                
+                OR = {
+                    owned_by = ROOT
+                    is_empty = yes
+                }
+            }
+		}
+        provinces_to_highlight = {
+            region = region_suramar
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            country_event = { id = wwu_nightfallen.110 }
+		}
+	}
+}
+
+wwu_nightfallen_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = WIT
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_telanor = {
+		icon = mission_arcane_tower
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            owns = 2672
+            2672 = {
+                OR = {
+					has_building = wow_fort_1
+					has_building = wow_fort_2
+					has_building = wow_fort_3
+					has_building = wow_fort_4
+				}
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2672
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			change_statists_vs_monarchists = 0.25
+		}
+	}
+}
+
+# wwu_nightfallen_column_5 = {
+	# slot = 5
+	# generic = noa
+	# ai = yes
+    
+	# potential = {
+		# tag = WIT
+	# }
+    
+	# has_country_shield = yes
+	
+	# wwu_mission = {
+		# icon = mission_titan_spirits
+        # position = 1
+        
+		# required_missions = { }
+        
+		# trigger = {
+            
+		# }
+		# provinces_to_highlight = {
+            
+			# NOT = { owned_by = ROOT }
+		# }
+        
+		# effect = {
+			
+		# }
+	# }
+# }
