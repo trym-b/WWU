@@ -1,6 +1,27 @@
-#-------------------------------------------
-# General
-#-------------------------------------------
+estate_clergy_exception = {
+	icon = privilege_three_flags
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+	}
+	on_granted = {
+        custom_tooltip = EXCEPT_ESTATE_FROM_SIEZE_LAND_TT
+	}
+	penalties = {
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
 estate_clergy_land_rights = {
 	icon = privilege_blueprint
     
@@ -356,6 +377,130 @@ estate_clergy_statutory_rights = {
 	cooldown_years = 20
 }
 
+
+estate_clergy_splendiferous_investment = {
+	icon = privilege_blessed_hands
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.2
+	influence = 0.05
+    
+	is_valid = {
+		monthly_income = 30
+	}
+	can_select = {
+		monthly_income = 30
+	}
+	penalties = {
+		missionary_maintenance_cost = 5.0
+	}
+	benefits = {
+        missionaries = 2
+        global_missionary_strength = 0.05
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+# Evangelism
+estate_clergy_evangelism = {
+	icon = privilege_cascade
+
+    # Costs
+    max_absolutism = -5
+	land_share = 3
+	loyalty = 0.05
+	influence = 0.1
+    
+	can_select = {
+	}
+	penalties = {
+	}
+	benefits = {
+        missionaries = 1
+        global_missionary_strength = 0.01
+	}
+    
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            religious_unity = 0.5
+        }
+	}
+}
+
+# Eternal Damnation
+estate_clergy_eternal_damnation = {
+	icon = privilege_crown_of_heaven
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+	}
+	penalties = {
+        diplomatic_reputation = -1
+        relation_with_heretics = -100
+        relation_with_heathens = -100
+	}
+	benefits = {
+        enforce_religion_cost = -0.25
+        warscore_cost_vs_other_religion = -0.25
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+# Enforced Conversion
+estate_clergy_enforced_conversion = {
+	icon = privilege_defend
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.0
+	influence = 0.0
+    
+	cooldown_years = 5
+    
+	can_select = {
+		any_owned_province = {
+            NOT = { religion = ROOT }
+        }
+	}
+	on_granted = {
+		random_owned_province = {
+            limit = {
+                NOT = { religion = ROOT }
+            }
+            
+            change_religion = ROOT
+        }
+	}
+	penalties = {
+		global_unrest = 2
+	}
+    
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
 #-------------------------------------------
 # Unique
 #-------------------------------------------
@@ -425,33 +570,5 @@ estate_clergy_ancient_diplomats = {
             
             NOT = { religious_unity = 0.5 }
         }
-	}
-}
-
-estate_clergy_splendiferous_investment = {
-	icon = privilege_blessed_hands
-
-    # Costs
-    max_absolutism = -5
-	land_share = 0
-	loyalty = 0.2
-	influence = 0.05
-    
-	is_valid = {
-		monthly_income = 30
-	}
-	can_select = {
-		monthly_income = 30
-	}
-	penalties = {
-		missionary_maintenance_cost = 5.0
-	}
-	benefits = {
-        missionaries = 2
-        global_missionary_strength = 0.1
-	}
-    
-	ai_will_do = {
-		factor = 0
 	}
 }
