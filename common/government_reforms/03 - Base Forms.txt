@@ -8,6 +8,10 @@ autocracy_reform = {
 	icon = "control_is_king"
 	legacy_equivalent = autocracy_legacy
     
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
 	modifiers = {
 		stability_cost_modifier = -0.05
 		years_of_nationalism = -5
@@ -27,6 +31,10 @@ autocracy_reform = {
 feudalism_reform = {
 	icon = "barracks"
     legacy_equivalent = feudalism_legacy
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
     
 	modifiers = {
 		vassal_income = 0.25
@@ -57,6 +65,7 @@ admiralty_reform = {
     legacy_equivalent = admiralty_legacy
     
 	potential = {
+        NOT = { has_government_attribute = locked_government_type }
 		OR = {
             num_of_ports = 20
             primary_culture = culture_kul_tiran
@@ -857,12 +866,17 @@ pandaren_union_reform = {
     
     queen = no
     
-    valid_for_new_country = yes     # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
-    allow_convert = yes             # Can be converted to via peace term
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+    allow_convert = no              # Can be converted to via peace term
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+ 
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
 }
 
 # Used for Pandaren nations
@@ -882,12 +896,17 @@ celestial_order_reform = {
     
     queen = no
     
-    valid_for_new_country = yes     # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
-    allow_convert = yes             # Can be converted to via peace term
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+    allow_convert = no              # Can be converted to via peace term
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
 }
 
 # Used for Shado-pan
@@ -905,12 +924,17 @@ shado_pan_order_reform = {
     
     queen = no
     
-    valid_for_new_country = yes     # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
-    allow_convert = yes             # Can be converted to via peace term
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+    allow_convert = no              # Can be converted to via peace term
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
 }
 nightfallen_reform = {
 	icon = "arcane_pattern"
@@ -942,6 +966,37 @@ nightfallen_reform = {
     valid_for_nation_designer = yes
     nation_designer_cost = 0
 }
+mechagon_reform = {
+	icon = "rearm"
+    legacy_equivalent = mechagon_legacy
+    
+	heir = yes
+	queen = no
+    
+    potential = {
+        tag = ARF
+    }
+    
+	modifiers = {
+		technology_cost = -0.1
+        production_efficiency = 0.2
+        infantry_power = 0.1
+	}
+	
+	ai = { factor = 0 }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+    lock_level_when_selected = yes
+    
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
 
 #--------------------------------------------
 # Republic
@@ -952,6 +1007,7 @@ noble_republic_reform = {
     legacy_equivalent = noble_republic_legacy
     
 	potential = {
+        NOT = { has_government_attribute = locked_government_type }
         is_colonial_nation = no
 		NOT = { has_reform = free_city_reform }
 		NOT = { has_reform = trading_city_reform }
@@ -980,6 +1036,7 @@ mercantile_republic_reform = {
     legacy_equivalent = mercantile_republic_legacy
     
     potential = {
+        NOT = { has_government_attribute = locked_government_type }
         is_colonial_nation = no
 		NOT = { has_reform = free_city_reform }
 		NOT = { has_reform = trading_city_reform }
@@ -1044,6 +1101,7 @@ despotic_republic_reform = {
     legacy_equivalent = despotic_republic_legacy
     
     potential = {   
+        NOT = { has_government_attribute = locked_government_type }
         is_colonial_nation = no
 		NOT = { has_reform = free_city_reform }
 		NOT = { has_reform = trading_city_reform }
@@ -1249,6 +1307,11 @@ troll_republic_reform = {
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
 }
 
 # Used by Gnomeregan
@@ -1286,7 +1349,7 @@ tinker_republic_reform = {
 	ai = { factor = 0 }
     
     valid_for_new_country = no      # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_normal_conversion = no   # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
 
     valid_for_nation_designer = yes
@@ -1294,6 +1357,11 @@ tinker_republic_reform = {
     nation_designer_trigger = {
         religion = technomancy
     }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
 }
 
 # Used by Pirate nations
@@ -1305,6 +1373,7 @@ pirate_republic_reform = {
 	duration = 10
     
     potential = {
+        NOT = { has_government_attribute = locked_government_type }
         is_colonial_nation = no
     }
     
@@ -1332,6 +1401,37 @@ pirate_republic_reform = {
     nation_designer_cost = 0
 }
 
+# Used by Tortollan
+tortollan_enclave_reform = {
+	icon = "scroll_1"
+    legacy_equivalent = tortollan_enclave_legacy
+    
+	potential = {
+        primary_culture = culture_tortollan
+	}
+    
+    has_term_election = yes
+    duration = 8
+    
+	modifiers = {
+		development_cost = -0.1
+        global_institution_spread = 0.33
+        embracement_cost = -0.25
+	}
+    
+    valid_for_new_country = no     # Can be converted to via nation release
+    allow_normal_conversion = no   # Can be picked as a new reform
+    allow_convert = no             # Can be converted to via peace term
+
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    lock_level_when_selected = yes
+}
+
 #--------------------------------------------
 # Theocracy
 #--------------------------------------------
@@ -1339,6 +1439,10 @@ pirate_republic_reform = {
 theocracy_reform = {
 	icon = "clarity_of_purpose"
     legacy_equivalent = theocracy_legacy
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
     
 	different_religion_acceptance = -20
 	different_religion_group_acceptance = -50
@@ -1369,6 +1473,10 @@ theocracy_reform = {
 monastic_order_reform = {
 	icon = "clarity_of_will"
     legacy_equivalent = monastic_order_legacy
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
     
     monastic = yes
     
@@ -1644,8 +1752,12 @@ druidic_circle_reform = {
     
 	ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = no      # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_normal_conversion = no   # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
     lock_level_when_selected = yes
     
@@ -1693,8 +1805,12 @@ elemental_cult_reform = {
     
 	ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = no      # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_normal_conversion = no   # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
     lock_level_when_selected = yes
     
@@ -1737,8 +1853,12 @@ shadow_cult_reform = {
 	
 	ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = no      # Can be converted to via nation release
-    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_normal_conversion = no   # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
     lock_level_when_selected = yes
     
@@ -2217,6 +2337,10 @@ tribal_federation_reform = {
 	icon = "ancestral_call"
     legacy_equivalent = tribal_federation_legacy
     
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
 	heir = yes
 	queen = yes
     
@@ -2239,6 +2363,10 @@ tribal_federation_reform = {
 tribal_despotism_reform = {
 	icon = "hunger_for_blood"
     legacy_equivalent = tribal_despotism_legacy
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
     
 	heir = yes
 	queen = yes
@@ -2577,6 +2705,10 @@ draenei_clan_reform = {
 	
     ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = no      # Can be converted to via nation release
     allow_normal_conversion = no    # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
@@ -2604,6 +2736,10 @@ ancient_clan_reform = {
 	}
 	
     ai = { factor = 0 }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
     
     valid_for_new_country = no      # Can be converted to via nation release
     allow_normal_conversion = no    # Can be picked as a new reform
@@ -2639,6 +2775,10 @@ expeditionary_force_reform = {
 	
 	ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = no      # Can be converted to via nation release
     allow_normal_conversion = no    # Can be picked as a new reform
     allow_convert = no              # Can be converted to via peace term
@@ -2669,6 +2809,10 @@ criminal_organization_reform = {
 	}
     
     ai = { factor = 0 }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
     
     valid_for_new_country = no      # Can be converted to via nation release
     allow_normal_conversion = no    # Can be picked as a new reform
@@ -2746,9 +2890,14 @@ satyr_sect_reform = {
     
 	ai = { factor = 0 }
     
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
     valid_for_new_country = yes     # Can be converted to via nation release
     allow_normal_conversion = yes   # Can be picked as a new reform
     allow_convert = yes             # Can be converted to via peace term
+    lock_level_when_selected = yes
 
     valid_for_nation_designer = yes
     nation_designer_cost = 0
@@ -2880,7 +3029,7 @@ tauren_tribe_reform = {
     nation_designer_cost = 0
 }
 
-# For Mecha-Gnomes
+# For Rustbolt Resistance
 junkyard_reform = {
 	icon = "rearm"
     legacy_equivalent = junkyard_legacy
@@ -2889,7 +3038,7 @@ junkyard_reform = {
 	queen = no
     
     potential = {
-        culture_group = culture_group_mecha_gnomish
+        tag = RBR
     }
     
 	modifiers = {
