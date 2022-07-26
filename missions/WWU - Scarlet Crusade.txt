@@ -906,16 +906,23 @@ wwu_scarlet_crusade_column_4 = {
 		required_missions = { wwu_increase_the_faith_on_crusaders_a22 }
         
 		trigger = {
-            
             area_silverpine_fields = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			F55 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = F55
                 }
+                F55 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+            else = {
+                total_development = 250
             }
 		}
 		effect = { 
@@ -928,6 +935,9 @@ wwu_scarlet_crusade_column_4 = {
                     exists = F55
                 }
                 vassalize = F55
+            }
+            else = {
+                add_stability = 1
             }
 		}
 	}

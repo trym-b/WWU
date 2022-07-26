@@ -94,6 +94,9 @@ pick_type_of_military_advisor = {
 		1 = { set_country_flag = generate_recruitmaster }
 		1 = { set_country_flag = generate_fortification_expert }
 		1 = { set_country_flag = generate_grand_captain }
+		1 = { set_country_flag = generate_sapper }
+		1 = { set_country_flag = generate_scout }
+		1 = { set_country_flag = generate_orator }
 	}
 }
 
@@ -105,6 +108,9 @@ clear_random_military_advisor_generation_flags = {
 	clr_country_flag = generate_recruitmaster
 	clr_country_flag = generate_fortification_expert
 	clr_country_flag = generate_grand_captain
+	clr_country_flag = generate_sapper
+	clr_country_flag = generate_scout
+	clr_country_flag = generate_orator
 }
 
 #Needs you to have executed pick_type_of_military_advisor
@@ -206,6 +212,24 @@ remove_advisor_adm_effect = {
 		}
 		remove_advisor = treasurer
 	}
+	if = {
+		limit = { 
+			advisor = administrator
+		}
+		remove_advisor = administrator
+	}
+	if = {
+		limit = { 
+			advisor = supervisor
+		}
+		remove_advisor = supervisor
+	}
+	if = {
+		limit = { 
+			advisor = reformer
+		}
+		remove_advisor = reformer
+	}
 }
 
 generate_traitor_advisor_effect = {
@@ -282,6 +306,30 @@ generate_traitor_advisor_effect = {
 					skill = $skill_level$
 					culture = ROOT
 					type = master_of_mint
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = administrator
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = supervisor
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = reformer
 				}
 			}
 		}
@@ -369,6 +417,36 @@ generate_traitor_advisor_effect = {
 					}
 				}
 			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = shipwright
+				}
+				trigger = {
+					navy_size = 1
+					from = {
+						navy_size = 1
+					}
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = ambassador
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = negotiator
+				}
+			}
 		}
 	}
 	else = {
@@ -429,6 +507,30 @@ generate_traitor_advisor_effect = {
 					type = grand_captain
 				}
 			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = sapper
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = scout
+				}
+			}
+			1 = {
+				define_advisor = {
+					name = advisor_traitor
+					skill = $skill_level$
+					culture = ROOT
+					type = orator
+				}
+			}
 		}
 	}
 }
@@ -484,6 +586,9 @@ kill_advisor_by_category_effect = {
 			theologian = { kill_advisor = theologian }
 			master_of_mint = { kill_advisor = master_of_mint }
 			inquisitor = { kill_advisor = inquisitor }
+			administrator = { kill_advisor = administrator }
+			supervisor = { kill_advisor = supervisor }
+			reformer = { kill_advisor = reformer }
 		}
 	]
 	[[DIP]
@@ -496,6 +601,9 @@ kill_advisor_by_category_effect = {
 			colonial_governor = { kill_advisor = colonial_governor }
 			diplomat = { kill_advisor = diplomat }
 			navigator = { kill_advisor = navigator }
+			shipwright = { kill_advisor = shipwright }
+			ambassador = { kill_advisor = ambassador }
+			negotiator = { kill_advisor = negotiator }
 		}
 	]
 	[[MIL]
@@ -508,6 +616,9 @@ kill_advisor_by_category_effect = {
 			recruitmaster = { kill_advisor = recruitmaster }
 			fortification_expert = { kill_advisor = fortification_expert }
 			grand_captain = { kill_advisor = grand_captain }
+			sapper = { kill_advisor = sapper }
+			scout = { kill_advisor = scout }
+			orator = { kill_advisor = orator }
 		}
 	]
 }
