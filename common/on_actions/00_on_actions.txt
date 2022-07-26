@@ -145,6 +145,16 @@ on_war_won = {
         add_horde_unity = 20
     }
     
+    if = {
+        limit = {
+            has_estate_privilege = estate_tribals_spoils_of_war
+        }
+        add_estate_loyalty = {
+            estate = estate_tribals
+            loyalty = 20
+        }
+    }
+    
 	events = {
         wwu_dragon_aspects.1
 		on_action_special.2
@@ -192,6 +202,14 @@ on_battle_won_country = {
         
         add_horde_unity = 5
     }
+    
+    if = {
+        limit = {
+            has_estate_privilege = estate_peasants_war_propaganda
+        }
+        
+        add_prestige = 5
+    }
 
 
     if = {
@@ -230,6 +248,14 @@ on_battle_won_country = {
 on_battle_lost_country = {
 	#log = "[Root.GetName]: Triggered battle_lost_country"
 	battle_cult_spreading_effect = yes
+    
+    if = {
+        limit = {
+            has_estate_privilege = estate_peasants_war_propaganda
+        }
+        
+        add_prestige = -5
+    }
     
 	random_events = {
 		12 = 0
@@ -2593,7 +2619,8 @@ on_janissaries_raised = {
 
 # THIS = Province
 on_cawa_raised = {
-} 
+}
+
 on_revolutionary_guard_raised = {
     #log = "[Root.GetName]: Triggered on_revolutionary_guard_raised"
 }
