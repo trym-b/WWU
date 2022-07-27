@@ -1451,10 +1451,10 @@ NMilitary = {
 	MAX_DRAFT_SIZE_TO_YEARLY_INCOME_COST_RATIO = 0.8, -- How much of your yearly income it costs to draft the above ratio's worth of units
 	DRAFTED_TRANSPORT_MEN_RATIO = 0.8, 				-- Cost in sailors of a drafted unit relative to a normal unit
 	
-	MERCENARY_COMPANY_HIRING_COST_MONTHS = 12,		-- Initial hiring cost in months of maintenance
+	MERCENARY_COMPANY_HIRING_COST_MONTHS = 72,		-- Initial hiring cost in months of maintenance
 	MERCENARY_COMPANY_STARTING_MORALE = 0.5,		-- Starting morale
-	MERCENARY_COMPANY_MIN_REGIMENTS = 5,			-- Minimum regiments
-	MERCENARY_COMPANY_MAX_REGIMENTS = 5,			-- Maximum regiments
+	MERCENARY_COMPANY_MIN_REGIMENTS = 10,			-- Minimum regiments
+	MERCENARY_COMPANY_MAX_REGIMENTS = 10,			-- Maximum regiments
 	MERCENARY_COMPANY_MANPOWER_PER_REGIMENT = 2.0,	-- Manpower reserve factor (multiplied by 1000 per regiment)
 	MERCENARY_COMPANY_MANPOWER_RECOVERY = 120,				-- How many months to recover mercenary manpower fully
 	MERCENARY_COMPANY_HIRED_MANPOWER_RECOVERY_MOD = 2.0,		-- How much to modify the length for manpower recovery if they are hired
