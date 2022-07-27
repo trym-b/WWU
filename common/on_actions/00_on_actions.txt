@@ -251,6 +251,36 @@ on_battle_lost_country = {
     
     if = {
         limit = {
+            # Loser has a general
+            has_leaders = {
+                value = 1
+                type = general
+                include_monarch = no
+                include_heir = no
+            }
+            
+            # Winner has Trial by Combat
+            FROM = {
+                has_idea = wwu_law_ideas_2
+            }
+        }
+        
+        random_list = {
+            25 = {
+                # Loser event
+                country_event = { id = wwu_ideagroups.15 }
+                
+                # Winner event
+                FROM = {
+                    country_event = { id = wwu_ideagroups.14 }
+                }
+            }
+            75 = { }
+        }
+    }
+    
+    if = {
+        limit = {
             has_estate_privilege = estate_peasants_war_propaganda
         }
         
