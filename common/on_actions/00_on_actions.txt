@@ -2561,6 +2561,14 @@ on_leader_recruited = {
 on_general_recruited = {
 	#log = "[Root.GetName]: Triggered general_recruited"
 	add_army_professionalism = 0.02
+    
+    if = {
+        limit = {
+            has_idea = wwu_innovation_ideas_7
+        }
+        
+        add_army_professionalism = 0.01
+    }
 }
 
 # country
@@ -2587,7 +2595,14 @@ on_regiment_recruited = {
 on_mercenary_recruited = {
 	#log = "[Root.GetName]: Triggered mercenary_recruited"
 	FROM = {
-		add_army_professionalism = -0.0015
+        if = {
+            limit = {
+                NOT = {
+                    has_idea = wwu_mercenary_army_ideas_1
+                }
+            }
+            add_army_professionalism = -0.0015
+        }
 	}
 }
 
@@ -3046,5 +3061,16 @@ on_expanded_infrastructure = {
 
 #ROOT = province that was centralized in
 on_centralized_state = {
-
+    if = {
+        limit = {
+            owner = {
+                has_idea = wwu_economic_ideas_5
+            }
+        }
+        area = {
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+        }
+    }
 }
