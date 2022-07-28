@@ -1,115 +1,57 @@
 loss_of_the_nightwell_disaster = {
 	potential = {
 		primary_culture = culture_nightborne
-		
-		num_of_owned_provinces_with  = {
-			value = 2
-			culture = culture_nightborne
-			is_capital = no
-		}
+        NOT = { owns = 3182 }
 	}
-
 
 	can_start = {
-		3182 = { 
-            NOT = { has_province_modifier = power_of_the_nightwell }
-        }
-	}
-	
-	can_stop = {
-		3182 = { 
-            has_province_modifier = power_of_the_nightwell
-        }
+		NOT = { owns = 3182 }
 	}
 	
 	progress = {
 		modifier = {
-            factor = 2
-		}
-		modifier = {
-            factor = -1
+            factor = 1
             
-			num_of_owned_provinces_with  = {
-				value = 1
-				OR = {
-					trade_goods = arcwine
-					trade_goods = mana_source
-				}
-			}
-			hidden_trigger = {
-				NOT = {
-					num_of_owned_provinces_with  = {
-						value = 2
-						OR = {
-							trade_goods = arcwine
-							trade_goods = mana_source
-						}
-					}
-				}
-			}
+            always = yes
 		}
-		modifier = {
-            factor = -1
-            
-			num_of_owned_provinces_with  = {
-				value = 2
-				OR = {
-					trade_goods = arcwine
-					trade_goods = mana_source
-				}
-			}
-			hidden_trigger = {
-				NOT = {
-					num_of_owned_provinces_with  = {
-						value = 3
-						OR = {
-							trade_goods = arcwine
-							trade_goods = mana_source
-						}
-					}
-				}
-			}
-		}
-		modifier = {
-            factor = -1
-            
-			num_of_owned_provinces_with  = {
-				value = 3
-				OR = {
-					trade_goods = arcwine
-					trade_goods = mana_source
-				}
-			}
-		}
+	}
+	
+	can_stop = {
+        owns = 3182
 	}
 	
 	can_end = {
 		OR = {
-			primary_culture = culture_withered
-			3182 = { 
-                has_province_modifier = power_of_the_nightwell
+            # No mana supplies
+            NOT = {
+                check_variable = {
+                    which = mana_supplies
+                    value = 1
+                }
             }
-			NOT = {
-				num_of_owned_provinces_with  = {
-					value = 3
-					culture = culture_nightborne
-				}
-			}
+            # Own the Nighthold
+            AND = {
+                owns = 3182
+                3182 = { 
+                    has_province_modifier = power_of_the_nightwell
+                }
+            }
 		}
 	}
 	
 	modifier = {
-        global_unrest = 1
+        global_unrest = 2
 	}
 
-	on_start = wwu_loss_of_the_nightwell.1
+	on_start = wwu_loss_of_the_nightwell.1  
 	on_end = wwu_loss_of_the_nightwell.100
 	
 	on_monthly = {
 		random_events = { 
 			1000 = 0
-			100 =  wwu_loss_of_the_nightwell.10
-			25 =  wwu_loss_of_the_nightwell.11
+			200 =  wwu_loss_of_the_nightwell.10
+			50 =  wwu_loss_of_the_nightwell.11
+			50 =  wwu_loss_of_the_nightwell.12
 		}
 	}
 }

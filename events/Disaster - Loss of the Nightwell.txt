@@ -10,17 +10,37 @@ country_event = {
     is_triggered_only = yes
 	
 	immediate = {
+        hidden_effect = {
+            set_variable = {
+                which = mana_supplies
+                value = 1
+            }
+        
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        trade_goods = arcwine
+                        trade_goods = mana_source
+                    }
+                }
+                ROOT = {
+                    change_variable = {
+                        which = mana_supplies
+                        value = 1
+                    }
+                }
+            }
+        }
 	}
 
 	option = {
 		name = wwu_loss_of_the_nightwell.1.option.a
         
-        
-        add_stability = -1
+        custom_tooltip = CURRENT_MANA_SUPPLIES_TT
 	}
 }
 
-# Withered
+# End Logic
 country_event = {
 	id = wwu_loss_of_the_nightwell.100
 	title = wwu_loss_of_the_nightwell.100.title
@@ -28,11 +48,63 @@ country_event = {
 	picture = SURAMAR_eventPicture
 
     is_triggered_only = yes
+    hidden = yes
     
 	option = {
 		name = wwu_loss_of_the_nightwell.100.option.a
         
-		change_primary_culture = culture_nightfallen
+        # Recovery of the Nightwell
+		if = {
+            limit = {
+                owns = 3182
+                3182 = { 
+                    has_province_modifier = power_of_the_nightwell
+                }
+            }
+            country_event = { id = wwu_loss_of_the_nightwell.101 }
+        }
+        # Withered
+        else = {
+            country_event = { id = wwu_loss_of_the_nightwell.102 }
+        }
+	}
+}
+
+# Recovery of the Nightwell
+country_event = {
+	id = wwu_loss_of_the_nightwell.101
+	title = wwu_loss_of_the_nightwell.101.title
+	desc = wwu_loss_of_the_nightwell.101.desc
+	picture = SURAMAR_eventPicture
+
+    is_triggered_only = yes
+    
+	option = {
+		name = wwu_loss_of_the_nightwell.101.option.a
+        
+        add_stability = 3
+	}
+}
+
+# Withered
+country_event = {
+	id = wwu_loss_of_the_nightwell.102
+	title = wwu_loss_of_the_nightwell.102.title
+	desc = wwu_loss_of_the_nightwell.102.desc
+	picture = SURAMAR_eventPicture
+
+    is_triggered_only = yes
+    
+	option = {
+		name = wwu_loss_of_the_nightwell.102.option.a
+        
+        change_primary_culture = culture_withered
+        every_owned_province = {
+            limit = {
+                culture = culture_nightborne
+            }
+            change_culture = culture_withered
+        }
 	}
 }
 
@@ -46,7 +118,14 @@ country_event = {
     is_triggered_only = yes
     
     trigger = {
-        NOT = { has_country_flag = postponed_arcwine_draught }
+        any_owned_province = {
+            is_capital = no
+            culture = culture_nightborne
+        }
+        check_variable = {
+            which = mana_supplies
+            value = 1
+        }
     }
 
 	mean_time_to_happen = {
@@ -60,97 +139,40 @@ country_event = {
 				culture = culture_nightborne
 			}
 			
-			save_event_target_as = withering_1
-			set_province_flag = withering_flag
+			save_event_target_as = withering_province
 		}
-        
-		random_owned_province = {
-			limit = {
-				is_capital = no
-				culture = culture_nightborne
-				NOT = { has_province_flag = withering_flag }
-			}
-			
-			save_event_target_as = withering_2
-			set_province_flag = withering_flag
-		}
-		
 	}
 
 	option = {
 		name = wwu_loss_of_the_nightwell.10.option.a
         
 		trigger = {
-			has_saved_event_target = withering_1
+			has_saved_event_target = withering_province
 		}
 		
-		add_adm_power = -25
-        
-		event_target:withering_1 = {
-			add_base_production = 1
+		event_target:withering_province = {
+            change_culture = culture_withered
 		}
-        
-		event_target:withering_2 = {
-			add_base_production = -1
-			change_culture = culture_withered
-			add_province_modifier = {
-				name = withered_province
-				duration = 730
-			}
-		}
-        
 	}
     
     option = {
 		name = wwu_loss_of_the_nightwell.10.option.b
         
 		trigger = {
-			has_saved_event_target = withering_2 # Steer arcwine supplies to [withering_2.GetName] and let [withering_1.GetName] wither.
+			has_saved_event_target = withering_province
 		}
 		
-		add_adm_power = -25
-        
-		event_target:withering_2 = {
-			add_base_production = 1
-		}
-        
-		event_target:withering_1 = {
-			add_base_production = -1
-			change_culture = culture_withered
-			add_province_modifier = {
-				name = withered_province
-				duration = 730
-			}
-		}
-	}
-    
-    option = {
-		name = wwu_loss_of_the_nightwell.10.option.c
-        
-		trigger = {
-			has_ruler_flag = mage_personality
-		}
-		
-		add_mil_power = -50
-		add_dip_power = -50
-		
-        custom_tooltip = REDUCE_WITHERING_RATE_TT
+        custom_tooltip = LOSE_MANA_SUPPLIES_TT
         hidden_effect = {
-            set_country_flag  = postponed_arcwine_draught
+            subtract_variable = {
+                which = mana_supplies
+                value = 1
+            }
         }
-	}
-	
-	after = {
-		event_target:withering_1 = {
-			clr_province_flag = withering_flag
-		}
-		event_target:withering_2 = {
-			clr_province_flag = withering_flag
-		}
 	}
 }
 
-# Withering
+# Arcwine Stash
 country_event = {
 	id = wwu_loss_of_the_nightwell.11
 	title = wwu_loss_of_the_nightwell.11.title
@@ -159,82 +181,75 @@ country_event = {
 
     is_triggered_only = yes
     
-    trigger = {
-        NOT = { has_country_flag = postponed_arcwine_draught }
-    }
-
 	mean_time_to_happen = {
 		days = 1
 	}
-	
-	immediate = {
-		random_owned_province = {
-			limit = {
-				is_capital = no
-				culture = culture_nightborne
-			}
-			
-			save_event_target_as = withering_1
-			set_province_flag = withering_flag
-		}
-        
-		random_owned_province = {
-			limit = {
-				is_capital = no
-				culture = culture_nightborne
-				NOT = { has_province_flag = withering_flag }
-			}
-			
-			save_event_target_as = withering_2
-			set_province_flag = withering_flag
-		}
-		
-	}
 
-	option = {
-		name = wwu_loss_of_the_nightwell.11.option.a
-        
-		trigger = {
-			has_saved_event_target = withering_1
-		}
-		
-		add_adm_power = -25
-        
-		event_target:withering_1 = {
-			add_base_production = 1
-		}
-        
-		event_target:withering_2 = {
-			add_base_production = -1
-			change_culture = culture_withered
-			add_province_modifier = {
-				name = withered_province
-				duration = 730
-			}
-		}
-        
-	}
-    
     option = {
-		name = wwu_loss_of_the_nightwell.11.option.b
-        
-		trigger = {
-			has_saved_event_target = withering_2 # Steer arcwine supplies to [withering_2.GetName] and let [withering_1.GetName] wither.
-		}
+		name = wwu_loss_of_the_nightwell.11.option.a
 		
-		add_adm_power = -25
-        
-		event_target:withering_2 = {
-			add_base_production = 1
-		}
-        
-		event_target:withering_1 = {
-			add_base_production = -1
-			change_culture = culture_withered
-			add_province_modifier = {
-				name = withered_province
-				duration = 730
-			}
-		}
+        custom_tooltip = GAIN_MANA_SUPPLIES_TT
+        hidden_effect = {
+            change_variable = {
+                which = mana_supplies
+                value = 1
+            }
+        }
 	}
 }
+
+# Tap the Leylines
+country_event = {
+	id = wwu_loss_of_the_nightwell.12
+	title = wwu_loss_of_the_nightwell.12.title
+	desc = wwu_loss_of_the_nightwell.12.desc
+	picture = SURAMAR_eventPicture
+
+    is_triggered_only = yes
+    
+    trigger = {
+        check_variable = {
+            which = mana_supplies
+            value = 1
+        }
+    }
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    option = {
+		name = wwu_loss_of_the_nightwell.12.option.a
+		
+        add_adm_power = -50
+        add_dip_power = -50
+        add_mil_power = -50
+        
+        random_list = {
+            50 = {
+                custom_tooltip = GAIN_MANA_SUPPLIES_TT
+                hidden_effect = {
+                    change_variable = {
+                        which = mana_supplies
+                        value = 1
+                    }
+                }
+            }
+            50 = {
+                custom_tooltip = NOTHING_HAPPENS_TT
+            }
+        }
+	}
+    option = {
+		name = wwu_loss_of_the_nightwell.12.option.b
+		
+        custom_tooltip = LOSE_MANA_SUPPLIES_TT
+        hidden_effect = {
+            subtract_variable = {
+                which = mana_supplies
+                value = 1
+            }
+        }
+	}
+}
+
