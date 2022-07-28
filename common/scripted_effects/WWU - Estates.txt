@@ -147,6 +147,17 @@ each_estate_effect = {
 			$explorers_league_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_guild_of_invention
+		}
+		[[effect]
+			$effect$
+		]
+		[[guild_of_invention_effect]
+			$guild_of_invention_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -712,6 +723,10 @@ scaled_estate_explorers_league_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_explorers_league }
 }
 
+scaled_estate_guild_of_invention_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_guild_of_invention }
+}
+
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1112,6 +1127,25 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_guild_of_invention
+					NOT = {
+						estate_loyalty = {
+							estate = estate_guild_of_invention
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_guild_of_invention
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1245,6 +1279,16 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_explorers_league_$flag$
 			[[estate_action]
 			$estate_action$ = estate_explorers_league
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_guild_of_invention
+				NOT = { has_country_flag = estate_guild_of_invention_$flag$ }
+			}
+			set_country_flag = estate_guild_of_invention_$flag$
+			[[estate_action]
+			$estate_action$ = estate_guild_of_invention
 			]
 		}
 	}
@@ -1787,6 +1831,25 @@ give_land_shares_to_estate_impulse = {
 		}
 		change_estate_land_share = {
 			estate = estate_explorers_league
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_guild_of_invention
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_guild_of_invention
 			share = -1
 		}
 		change_estate_land_share = {

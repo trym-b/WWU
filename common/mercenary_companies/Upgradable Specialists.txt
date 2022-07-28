@@ -1,0 +1,106 @@
+#--------------------------------
+# Tinker
+#--------------------------------
+wwu_specialist_tinker = {
+    regiments_per_development = 0.04
+    cavalry_weight = 0.0
+    artillery_weight = 0.0
+    cost_modifier = 1.0
+    
+    trigger = {
+        OR = {
+            OR = {
+                culture_group = culture_group_gnomish
+                culture_group = culture_group_mecha_gnomish
+                culture_group = culture_group_goblin
+            }
+            AND = {
+                any_known_country = {
+                    OR = {
+                        culture_group = culture_group_gnomish
+                        culture_group = culture_group_mecha_gnomish
+                        culture_group = culture_group_goblin
+                    }
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+	}
+	modifier = {
+		land_morale = 0.1
+        infantry_power = 0.1
+    }
+}
+
+#--------------------------------
+# Bombardier
+#--------------------------------
+wwu_specialist_bombardier = {
+    regiments_per_development = 0.04
+    cavalry_weight = 0.0
+    artillery_weight = 0.0
+    cost_modifier = 1.0
+    
+    trigger = {
+        OR = {
+            has_institution = wwu_gunpowder_warfare
+            AND = {
+                any_known_country = {
+                    has_institution = wwu_gunpowder_warfare
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+	}
+	modifier = {
+		infantry_shock = 1.0
+        siege_ability = 0.1
+    }
+}
+
+#--------------------------------
+# Engineer
+#--------------------------------
+wwu_specialist_engineer = {
+    regiments_per_development = 0.04
+    cavalry_weight = 0.0
+    artillery_weight = 0.0
+    cost_modifier = 1.0
+    
+    trigger = {
+        OR = {
+            OR = {
+                has_institution = wwu_gunpowder_warfare
+                culture_group = culture_group_dwarven
+                culture_group = culture_group_gnomish
+                culture_group = culture_group_mecha_gnomish
+                culture_group = culture_group_goblin
+            }
+            AND = {
+                any_known_country = {
+                    OR = {
+                        has_institution = wwu_gunpowder_warfare
+                        culture_group = culture_group_dwarven
+                        culture_group = culture_group_gnomish
+                        culture_group = culture_group_mecha_gnomish
+                        culture_group = culture_group_goblin
+                    }
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+	}
+	modifier = {
+        fire_damage = 0.15
+		land_attrition = -0.25
+    }
+}

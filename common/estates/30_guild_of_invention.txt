@@ -1,0 +1,86 @@
+estate_guild_of_invention = {
+	icon = 13
+    color = { 69 103 176 }
+    
+    influence_from_dev_modifier = 0.0
+    
+	independence_government = monarchy
+	starting_reform = autocracy_reform
+	independence_tech_group = tech_human
+    
+	# ----- Conditions -----
+    trigger = { 
+        OR = {
+            culture_group = culture_group_gnomish
+            culture_group = culture_group_mecha_gnomish
+            culture_group = culture_group_goblin
+            culture_group = culture_group_dwarven
+        }
+    }
+
+	# ----- Country -----
+    country_modifier_happy = {
+        idea_cost = -0.1
+        technology_cost = -0.1
+        global_institution_spread = 0.25
+    }
+    country_modifier_neutral = {
+        idea_cost = -0.05
+        technology_cost = -0.05
+        global_institution_spread = 0.1
+    }    
+    country_modifier_angry = {
+        global_institution_spread = -0.25
+    }
+    
+	land_ownership_modifier = {
+		guild_of_invention_loyalty_modifier = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 2
+			culture_group = owner
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { religion = owner }
+			NOT = { culture_group = owner }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { development = 10 }
+		}
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+	}
+
+	# ----- Influence -----
+    base_influence = 10
+
+    # ----- Loyalty -----
+    loyalty_modifier = {
+        desc = EST_VAL_GUNPOWDER_WARFARE
+        trigger = {
+            has_institution = wwu_gunpowder_warfare
+        }
+        loyalty = 10
+    }
+    
+    # ----- Privileges -----
+	privileges = {
+		estate_guild_of_invention_exception
+	}
+
+    # ----- Agendas -----
+	agendas = {
+        
+	}
+}
