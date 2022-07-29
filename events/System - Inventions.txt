@@ -1,21 +1,713 @@
 namespace = wwu_inventions
 
-# 
+# Research Project: Initial Focus
 country_event = {
 	id = wwu_inventions.1
 	title = wwu_inventions.1.title
 	desc = wwu_inventions.1.desc
+	picture = GNOMEREGAN_eventPicture
+	
+	trigger = {
+        NOT = { has_country_flag = research_project_focus }
+        has_estate_privilege = estate_invention_research_project
+        NOT = { 
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+	}
+	
+    immediate = {
+        hidden_effect = {
+            set_country_flag = research_project_focus
+            set_variable = {
+                which = research_progress
+                value = 0
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    # Utility
+	option = {
+		name = wwu_inventions.1.option.a
+        
+        trigger = {
+            NOT = { has_all_utility_inventions = yes }
+        }
+        
+        custom_tooltip = FOCUS_ON_UTILITY_INVENTIONS_TT
+        hidden_effect = {
+            set_country_flag = research_focus_utility
+        }
+	}
+    
+    # Hardware
+	option = {
+		name = wwu_inventions.1.option.b
+        
+        trigger = {
+            NOT = { has_all_hardware_inventions = yes }
+        }
+        
+        custom_tooltip = FOCUS_ON_HARDWARE_INVENTIONS_TT
+        hidden_effect = {
+            set_country_flag = research_focus_hardware
+        }
+	}
+    
+    # Modifications
+	option = {
+		name = wwu_inventions.1.option.c
+        
+        trigger = {
+            NOT = { has_all_modification_inventions = yes }
+        }
+        
+        custom_tooltip = FOCUS_ON_MODIFICATION_INVENTIONS_TT
+        hidden_effect = {
+            set_country_flag = research_focus_modification
+        }
+	}
+}
+
+
+# Research Project in Jeopardy
+country_event = {
+	id = wwu_inventions.2
+	title = wwu_inventions.2.title
+	desc = wwu_inventions.2.desc
+	picture = AMBER_eventPicture
+    
+    trigger = {
+        has_country_flag = research_project_focus
+        NOT = { has_country_modifier = research_event_cooldown }
+        NOT = { 
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = research_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_inventions.2.option.a
+	
+        add_years_of_income = -1
+		increment_research = yes
+	}
+    option = {
+		name = wwu_inventions.2.option.b
+		
+		decrement_research = yes 
+	}
+}
+
+# Breakthrough Attempt
+country_event = {
+	id = wwu_inventions.3
+	title = wwu_inventions.3.title
+	desc = wwu_inventions.3.desc
+	picture = AMBER_eventPicture
+    
+    trigger = {
+        has_country_flag = research_project_focus
+        NOT = { has_country_modifier = research_event_cooldown }
+        NOT = { 
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = research_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_inventions.3.option.a
+	
+        add_years_of_income = -1
+		increment_research_massively = yes
+	}
+    option = {
+		name = wwu_inventions.3.option.b
+		
+		decrement_research = yes 
+	}
+}
+
+# Eureka!
+country_event = {
+	id = wwu_inventions.4
+	title = wwu_inventions.4.title
+	desc = wwu_inventions.4.desc
+	picture = MIMIRONS_HEAD_eventPicture
+    
+    trigger = {
+        has_country_flag = research_project_focus
+        NOT = { has_country_modifier = research_event_cooldown }
+        NOT = { 
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = research_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_inventions.4.option.a
+        
+		increment_research_massively = yes
+	}
+}
+
+# Resource Management
+country_event = {
+	id = wwu_inventions.5
+	title = wwu_inventions.5.title
+	desc = wwu_inventions.5.desc
+	picture = JUNKBOT_eventPicture
+    
+    trigger = {
+        has_country_flag = research_project_focus
+        NOT = { has_country_modifier = research_event_cooldown }
+        NOT = { 
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+
+	mean_time_to_happen = {
+		months = 32
+	}
+	
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = research_event_cooldown
+                duration = 90
+                hidden = yes
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_inventions.5.option.a
+        
+        add_adm_power = -50
+		increment_research = yes
+	}
+    option = {
+		name = wwu_inventions.5.option.b
+        
+        add_dip_power = -50
+		increment_research = yes
+	}
+    option = {
+		name = wwu_inventions.5.option.c
+        
+        add_mil_power = -50
+		increment_research = yes
+	}
+    option = {
+		name = wwu_inventions.5.option.d
+        
+		decrement_research = yes
+	}
+}
+
+# Reward Logic
+country_event = {
+	id = wwu_inventions.10
+	title = wwu_inventions.10.title
+	desc = wwu_inventions.10.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+    hidden = yes
+    
+	trigger = {
+        has_country_flag = research_project_focus
+        check_variable = {
+            which = research_progress
+            value = 5
+        }
+    }
+
+	option = {
+		name = wwu_inventions.10.option.a
+		
+        reward_invention = yes
+	}
+}
+
+# Invention: Accurascope
+country_event = {
+	id = wwu_inventions.100
+	title = wwu_inventions.100.title
+	desc = wwu_inventions.100.desc
 	picture = CLOCKWORK_GNOME_eventPicture
 	
 	is_triggered_only = yes
 
-	trigger = {
-       
-	}
-	
 	option = {
-		name = wwu_inventions.1.option.a
+		name = wwu_inventions.100.option.a
+		
+        custom_tooltip = UNLOCK_ACCURASCOPE_TT
+        hidden_effect = {
+            set_country_flag = invention_accurascope
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Field Repair Bot
+country_event = {
+	id = wwu_inventions.101
+	title = wwu_inventions.101.title
+	desc = wwu_inventions.101.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.101.option.a
+		
+        custom_tooltip = UNLOCK_FIELD_REPAIR_BOT_TT
+        hidden_effect = {
+            set_country_flag = invention_field_repair_bot
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Major Recombobulator
+country_event = {
+	id = wwu_inventions.102
+	title = wwu_inventions.102.title
+	desc = wwu_inventions.102.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.102.option.a
+		
+        custom_tooltip = UNLOCK_MAJOR_RECOMBOBULATOR_TT
+        hidden_effect = {
+            set_country_flag = invention_major_recombobulator
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Deepdive Helmet
+country_event = {
+	id = wwu_inventions.103
+	title = wwu_inventions.103.title
+	desc = wwu_inventions.103.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.103.option.a
+		
+        custom_tooltip = UNLOCK_DEEPDIVE_HELMET_TT
+        hidden_effect = {
+            set_country_flag = invention_deepdive_helmet
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Rocket Boots
+country_event = {
+	id = wwu_inventions.104
+	title = wwu_inventions.104.title
+	desc = wwu_inventions.104.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.104.option.a
+		
+        custom_tooltip = UNLOCK_ROCKET_BOOTS_TT
+        hidden_effect = {
+            set_country_flag = invention_rocket_boots
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Dimensional Ripper
+country_event = {
+	id = wwu_inventions.105
+	title = wwu_inventions.105.title
+	desc = wwu_inventions.105.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.105.option.a
+		
+        custom_tooltip = UNLOCK_DIMENSIONAL_RIPPER_TT
+        hidden_effect = {
+            set_country_flag = invention_dimensional_ripper
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Voice Amplification Modulator
+country_event = {
+	id = wwu_inventions.106
+	title = wwu_inventions.106.title
+	desc = wwu_inventions.106.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.106.option.a
+		
+        custom_tooltip = UNLOCK_VOICE_AMPLIFICATION_MODULATOR_TT
+        hidden_effect = {
+            set_country_flag = invention_voice_amplification_modulator
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Harvester
+country_event = {
+	id = wwu_inventions.107
+	title = wwu_inventions.107.title
+	desc = wwu_inventions.107.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.107.option.a
+		
+        custom_tooltip = UNLOCK_HARVESTER_TT
+        hidden_effect = {
+            set_country_flag = invention_harvester
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Shredder
+country_event = {
+	id = wwu_inventions.108
+	title = wwu_inventions.108.title
+	desc = wwu_inventions.108.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.108.option.a
+		
+        custom_tooltip = UNLOCK_SHREDDER_TT
+        hidden_effect = {
+            set_country_flag = invention_shredder
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Clockwork Giant
+country_event = {
+	id = wwu_inventions.109
+	title = wwu_inventions.109.title
+	desc = wwu_inventions.109.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.109.option.a
+		
+        custom_tooltip = UNLOCK_CLOCKWORK_GIANT_TT
+        hidden_effect = {
+            set_country_flag = invention_clockwork_giant
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Shrink Ray
+country_event = {
+	id = wwu_inventions.110
+	title = wwu_inventions.110.title
+	desc = wwu_inventions.110.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.110.option.a
+		
+        custom_tooltip = UNLOCK_TINKER_SHRINK_RAY_TT
+        hidden_effect = {
+            set_country_flag = invention_tinker_shrink_ray
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Seaforium Charge
+country_event = {
+	id = wwu_inventions.111
+	title = wwu_inventions.111.title
+	desc = wwu_inventions.111.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.111.option.a
+		
+        custom_tooltip = UNLOCK_TINKER_SEAFORIUM_CHARGE_TT
+        hidden_effect = {
+            set_country_flag = invention_tinker_seaforium_charge
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Rocket Launcher
+country_event = {
+	id = wwu_inventions.112
+	title = wwu_inventions.112.title
+	desc = wwu_inventions.112.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.112.option.a
+		
+        custom_tooltip = UNLOCK_TINKER_ROCKET_LAUNCHER_TT
+        hidden_effect = {
+            set_country_flag = invention_tinker_rocket_launcher
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Force Reactive Disk
+country_event = {
+	id = wwu_inventions.113
+	title = wwu_inventions.113.title
+	desc = wwu_inventions.113.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.113.option.a
+		
+        custom_tooltip = UNLOCK_TINKER_FORCE_REACTIVE_DISK_TT
+        hidden_effect = {
+            set_country_flag = invention_tinker_force_reactive_disk
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Invention: Hyper-Radiant Flame Reflector
+country_event = {
+	id = wwu_inventions.114
+	title = wwu_inventions.114.title
+	desc = wwu_inventions.114.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.114.option.a
+		
+        custom_tooltip = UNLOCK_TINKER_HYPER_RADIANT_FLAME_REFLECTOR_TT
+        hidden_effect = {
+            set_country_flag = invention_tinker_hyper_radiant_flame_reflector
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# General Understanding
+country_event = {
+	id = wwu_inventions.200
+	title = wwu_inventions.200.title
+	desc = wwu_inventions.200.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_inventions.200.option.a
+		
+        add_adm_power = 100
+        add_dip_power = 100
+        add_mil_power = 100
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_inventions.300 }
+        }
+    }
+}
+
+# Cleanup
+country_event = {
+	id = wwu_inventions.300
+	title = wwu_inventions.300.title
+	desc = wwu_inventions.300.desc
+	picture = CLOCKWORK_GNOME_eventPicture
+	
+	is_triggered_only = yes
+    hidden = yes
+
+	option = {
+		name = wwu_inventions.300.option.a
+		
+        remove_estate_privilege = estate_invention_research_project
         
+        clr_country_flag = research_project_focus
+        clr_country_flag = research_focus_hardware
+        clr_country_flag = research_focus_utility
+        clr_country_flag = research_focus_modification
         
+        set_variable = {
+            which = research_progress
+            value = 0
+        }
 	}
 }

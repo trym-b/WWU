@@ -1,0 +1,215 @@
+increment_research = {
+    custom_tooltip = INCREMENT_RESEARCH_TT
+    
+    hidden_effect = {
+        change_variable = {
+            which = research_progress
+            value = 1
+        }
+        
+        if = {
+            limit = { 
+                has_country_flag = research_progress_boost
+            }
+            
+            change_variable = {
+                which = research_progress
+                value = 1
+            }
+        }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = research_progress
+                    value = 5
+                }
+            }
+            set_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+}
+
+increment_research_massively = {
+    custom_tooltip = INCREMENT_RESEARCH_MASSIVELY_TT
+    
+    hidden_effect = {
+        change_variable = {
+            which = research_progress
+            value = 3
+        }
+        
+        if = {
+            limit = { 
+                has_country_flag = research_progress_boost
+            }
+            
+            change_variable = {
+                which = research_progress
+                value = 1
+            }
+        }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = research_progress
+                    value = 5
+                }
+            }
+            set_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+    }
+}
+
+decrement_research = {
+    custom_tooltip = DECREMENT_RESEARCH_TT
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = research_progress
+            value = 1
+        }
+        
+        if = {
+            limit = {
+                NOT = { 
+                    check_variable = {
+                        which = research_progress
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = research_progress
+                value = 0
+            }
+        }
+    }
+}
+
+reward_invention = {
+    random_list = {
+        # Invention - Hardware
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_hardware
+                NOT = { has_country_flag = invention_accurascope }
+            }
+            country_event = { id = wwu_inventions.100 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_hardware
+                NOT = { has_country_flag = invention_field_repair_bot }
+            }
+            country_event = { id = wwu_inventions.101 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_hardware
+                NOT = { has_country_flag = invention_major_recombobulator }
+            }
+            country_event = { id = wwu_inventions.102 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_hardware
+                NOT = { has_country_flag = invention_deepdive_helmet }
+            }
+            country_event = { id = wwu_inventions.103 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_hardware
+                NOT = { has_country_flag = invention_rocket_boots }
+            }
+            country_event = { id = wwu_inventions.104 }
+        }
+        
+        # Invention - Utility
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_utility
+                NOT = { has_country_flag = invention_dimensional_ripper }
+            }
+            country_event = { id = wwu_inventions.105 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_utility
+                NOT = { has_country_flag = invention_voice_amplification_modulator }
+            }
+            country_event = { id = wwu_inventions.106 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_utility
+                NOT = { has_country_flag = invention_harvester }
+            }
+            country_event = { id = wwu_inventions.107 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_utility
+                NOT = { has_country_flag = invention_shredder }
+            }
+            country_event = { id = wwu_inventions.108 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_utility
+                NOT = { has_country_flag = invention_clockwork_giant }
+            }
+            country_event = { id = wwu_inventions.109 }
+        }
+        
+        # Invention - Modifications
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_modification
+                NOT = { has_country_flag = invention_tinker_shrink_ray }
+            }
+            country_event = { id = wwu_inventions.110 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_modification
+                NOT = { has_country_flag = invention_tinker_seaforium_charge }
+            }
+            country_event = { id = wwu_inventions.111 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_modification
+                NOT = { has_country_flag = invention_tinker_rocket_launcher }
+            }
+            country_event = { id = wwu_inventions.112 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_modification
+                NOT = { has_country_flag = invention_tinker_force_reactive_disk }
+            }
+            country_event = { id = wwu_inventions.113 }
+        }
+        1 = {
+            trigger = {
+                has_country_flag = research_focus_modification
+                NOT = { has_country_flag = invention_tinker_hyper_radiant_flame_reflector }
+            }
+            country_event = { id = wwu_inventions.114 }
+        }
+        
+        # Minor Reward
+        10 = {
+            country_event = { id = wwu_inventions.200 }
+        }
+    }
+}
