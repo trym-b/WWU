@@ -61,11 +61,7 @@ country_decisions = {
             NOT = { has_country_modifier = burning_nordrassil }
             NOT = { has_country_flag = burning_nordrassil_timer }
             NOT = { has_country_modifier = destroyer_of_nordrassil }
-            NOT = {
-                any_country = {
-                    has_country_modifier = destroyer_of_nordrassil
-                }
-            }
+
             controls = 1334
         }
         
@@ -130,15 +126,21 @@ country_decisions = {
         potential = {
             NOT = { religion = fel }
             
-            any_country = {
-                has_country_modifier = burning_nordrassil
+            # Nordrassil is owned by the burner
+            1334 = {
+                owner = {
+                    has_country_flag = burning_nordrassil_timer
+                }
             }
         }
         
         allow = {
-            any_country = {
-                has_country_modifier = burning_nordrassil
-                war_with = ROOT
+            # Nordrassil is owned by the burner, and we are at war with them
+            1334 = {
+                owner = {
+                    has_country_flag = burning_nordrassil_timer
+                    war_with = ROOT
+                }
             }
             
             controls = 1334
@@ -196,11 +198,7 @@ country_decisions = {
             NOT = { has_country_modifier = burning_teldrassil }
             NOT = { has_country_flag = burning_teldrassil_timer }
             NOT = { has_country_modifier = destroyer_of_teldrassil }
-            NOT = {
-                any_country = {
-                    has_country_modifier = destroyer_of_teldrassil
-                }
-            }
+
             controls = 1073
         }
         
@@ -254,20 +252,26 @@ country_decisions = {
         }
     }
 
-    # Douse teldrassil
+    # Douse Teldrassil
     douse_teldrassil = {
         potential = {
             NOT = { religion = fel }
             
-            any_country = {
-                has_country_modifier = burning_teldrassil
+            # Teldrassil is owned by the burner
+            1073 = {
+                owner = {
+                    has_country_flag = burning_teldrassil_timer
+                }
             }
         }
         
         allow = {
-            any_country = {
-                has_country_modifier = burning_teldrassil
-                war_with = ROOT
+            # Teldrassil is owned by the burner,  and we are at war with them
+            1073 = {
+                owner = {
+                    has_country_flag = burning_teldrassil_timer
+                    war_with = ROOT
+                }
             }
             
             controls = 1073

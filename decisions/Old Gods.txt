@@ -56,11 +56,7 @@ country_decisions = {
             NOT = { has_country_modifier = awakening_cthun }
 			NOT = { has_country_flag = awakening_cthun_timer }
             NOT = { has_country_modifier = seat_of_cthun }
-            NOT = {
-                any_country = {
-                    has_country_modifier = seat_of_cthun
-                }
-            }
+            NOT = { has_global_flag = cthun_active }
 			owns = 1520
 		}
 		
@@ -90,7 +86,7 @@ country_decisions = {
                 duration = 3650
             }
             
-            hidden_effect = {
+            hidden_effect = {  
                 set_country_flag = awakening_cthun_timer
             }
             
@@ -121,98 +117,6 @@ country_decisions = {
 		}
 	}
     
-    # Kill C'Thun
-	kill_cthun = {
-		
-		potential = {
-			NOT = { religion = cthun }
-            
-			any_country = {
-                has_country_modifier = seat_of_cthun
-            }
-            
-            # Only show for those within the relevant region
-            any_owned_province = {
-                region = region_silithus
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = seat_of_cthun
-                war_with = ROOT
-            }
-            
-			controls = 1520
-            
-			mil_power = 250
-		}
-		
-		effect = {
-			add_mil_power = -250
-
-            hidden_effect = {
-                hide_ambient_object = cthun
-                clr_global_flag = cthun_active
-            }
-            
-            every_country = {
-                limit = {
-                    has_country_modifier = seat_of_cthun
-                }
-                
-                remove_country_modifier = seat_of_cthun
-                add_stability = -6
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
-    # Stop C'Thun's Awakening
-	stop_cthun_awakening = {
-		
-		potential = {
-			NOT = { religion = cthun }
-            
-			any_country = {
-                has_country_modifier = awakening_cthun
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = awakening_cthun
-                war_with = ROOT
-            }
-            
-			controls = 1520
-            
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-            
-            every_country = {
-                limit = {
-                    has_country_modifier = awakening_cthun
-                }
-                
-                clr_country_flag = awakening_cthun_timer
-                remove_country_modifier = awakening_cthun
-                
-                add_stability = -3
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
     #--------------------------------
     # Yogg-Saron
     #--------------------------------
@@ -223,11 +127,7 @@ country_decisions = {
             NOT = { has_country_modifier = awakening_yogg_saron }
 			NOT = { has_country_flag = awakening_yogg_saron_timer }
             NOT = { has_country_modifier = seat_of_yogg_saron }
-            NOT = {
-                any_country = {
-                    has_country_modifier = seat_of_yogg_saron
-                }
-            }
+            NOT = { has_global_flag = yogg_saron_active }
 			owns = 2495
 		}
 		
@@ -294,98 +194,6 @@ country_decisions = {
 		}
 	}
     
-    # Kill Yogg-Saron
-	kill_yogg_saron = {
-		
-		potential = {
-			NOT = { religion = yogg_saron }
-            
-			any_country = {
-                has_country_modifier = seat_of_yogg_saron
-            }
-            
-            # Only show for those within the relevant region
-            any_owned_province = {
-                region = region_storm_peak
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = seat_of_yogg_saron
-                war_with = ROOT
-            }
-            
-			controls = 2495
-            
-			mil_power = 250
-		}
-		
-		effect = {
-			add_mil_power = -250
-            
-            hidden_effect = {
-                hide_ambient_object = yogg
-                clr_global_flag = yogg_saron_active
-            }
-		
-            every_country = {
-                limit = {
-                    has_country_modifier = seat_of_yogg_saron
-                }
-                
-                remove_country_modifier = seat_of_yogg_saron
-                add_stability = -6
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
-    # Stop Yogg-Saron's Awakening
-	stop_yogg_saron_awakening = {
-		
-		potential = {
-			NOT = { religion = yogg_saron }
-            
-			any_country = {
-                has_country_modifier = awakening_yogg_saron
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = awakening_yogg_saron
-                war_with = ROOT
-            }
-            
-			controls = 2495
-            
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-            
-            every_country = {
-                limit = {
-                    has_country_modifier = awakening_yogg_saron
-                }
-                
-                clr_country_flag = awakening_yogg_saron_timer
-                remove_country_modifier = awakening_yogg_saron
-                
-                add_stability = -3
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
     #--------------------------------
     # N'Zoth
     #--------------------------------
@@ -396,11 +204,7 @@ country_decisions = {
             NOT = { has_country_modifier = awakening_nzoth }
 			NOT = { has_country_flag = awakening_nzoth_timer }
             NOT = { has_country_modifier = seat_of_nzoth }
-            NOT = {
-                any_country = {
-                    has_country_modifier = seat_of_nzoth
-                }
-            }
+            NOT = { has_global_flag = nzoth_active }
 			owns = 616
 		}
 		
@@ -461,113 +265,16 @@ country_decisions = {
 		}
 	}
     
-    # Kill N'Zoth
-	kill_nzoth = {
-		
-		potential = {
-			NOT = { religion = nzoth }
-            
-			any_country = {
-                has_country_modifier = seat_of_nzoth
-            }
-            
-            # Only show for those within the relevant region
-            any_owned_province = {
-                region = region_nazjatar
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = seat_of_nzoth
-                war_with = ROOT
-            }
-            
-			controls = 616
-            
-			mil_power = 250
-		}
-		
-		effect = {
-			add_mil_power = -250
-            
-            hidden_effect = {
-                hide_ambient_object = nzoth
-                clr_global_flag = nzoth_active
-            }
-		
-            every_country = {
-                limit = {
-                    has_country_modifier = seat_of_nzoth
-                }
-                
-                remove_country_modifier = seat_of_nzoth
-                add_stability = -6
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
-    # Stop N'Zoth's Awakening
-	stop_nzoth_awakening = {
-		
-		potential = {
-			NOT = { religion = nzoth }
-            
-			any_country = {
-                has_country_modifier = awakening_nzoth
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = awakening_nzoth
-                war_with = ROOT
-            }
-            
-			controls = 616
-            
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-            
-            every_country = {
-                limit = {
-                    has_country_modifier = awakening_nzoth
-                }
-                
-                clr_country_flag = awakening_nzoth_timer
-                remove_country_modifier = awakening_nzoth
-                
-                add_stability = -3
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
     #--------------------------------
     # Y'Shaarj
     #--------------------------------
     # Awaken Y'Shaarj
 	awaken_yshaarj = {
-		
 		potential = {
             NOT = { has_country_modifier = awakening_yshaarj }
 			NOT = { has_country_flag = awakening_yshaarj_timer }
             NOT = { has_country_modifier = seat_of_yshaarj }
-            NOT = {
-                any_country = {
-                    has_country_modifier = seat_of_yshaarj
-                }
-            }
+            NOT = { has_global_flag = yshaarj_active }
 			owns = 1839
 		}
 		
@@ -625,98 +332,6 @@ country_decisions = {
                 
                 NOT = { religion = yshaarj }
             }
-		}
-	}
-    
-    # Kill Y'Shaarj
-	kill_yshaarj = {
-		
-		potential = {
-			NOT = { religion = yshaarj }
-            
-			any_country = {
-                has_country_modifier = seat_of_yshaarj
-            }
-            
-            # Only show for those within the relevant region
-            any_owned_province = {
-                region = region_dread_wastes
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = seat_of_yshaarj
-                war_with = ROOT
-            }
-            
-			controls = 1839
-            
-			mil_power = 250
-		}
-		
-		effect = {
-			add_mil_power = -250
-            
-            hidden_effect = {
-                hide_ambient_object = sha
-                clr_global_flag = yshaarj_active
-            }
-		
-            every_country = {
-                limit = {
-                    has_country_modifier = seat_of_yshaarj
-                }
-                
-                remove_country_modifier = seat_of_yshaarj
-                add_stability = -6
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
-    # Stop Y'Shaarj's Awakening
-	stop_yshaarj_awakening = {
-		
-		potential = {
-			NOT = { religion = yshaarj }
-            
-			any_country = {
-                has_country_modifier = awakening_yshaarj
-            }
-		}
-		
-		allow = {
-            any_country = {
-                has_country_modifier = awakening_yshaarj
-                war_with = ROOT
-            }
-            
-			controls = 1839
-            
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-            
-            every_country = {
-                limit = {
-                    has_country_modifier = awakening_yshaarj
-                }
-                
-                clr_country_flag = awakening_yshaarj_timer
-                remove_country_modifier = awakening_yshaarj
-                
-                add_stability = -3
-            }
-		}
-		
-		ai_will_do = {
-			factor = 1
 		}
 	}
     

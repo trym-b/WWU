@@ -31,11 +31,6 @@ on_startup = {
     
     unlock_initial_cults = yes
     
-    # Building Management Settings
-    set_country_flag = gold_buffer_limit_low
-    set_country_flag = auto_build_target_all
-    set_country_flag = auto_destroy_target_all
-    
     events = {
         wwu_setup.1    # Global
         wwu_setup.2    # Country
@@ -1074,7 +1069,7 @@ on_annexed = {
 		value = 1
 	}
     
-    # If Head of faction is annxed, re-assign leadership
+    # If Head of faction is annexed, re-assign leadership
     if = {
         limit = {
             FROM = {
@@ -1098,6 +1093,14 @@ on_annexed = {
             }
         }
         country_event = { id = wwu_faction_system.32 }
+    }
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = head_of_trade_coalition
+            }
+        }
+        country_event = { id = wwu_faction_system.33 }
     }
 }
 
@@ -1436,10 +1439,10 @@ on_bi_yearly_pulse_4 = {
 		100 = innovativeness_events.15
         
         # Mercenaries
-		100 = mercs.2
+		#100 = mercs.2
 		100 = mercs.3
 		100 = mercs.4
-		100 = mercs.7
+		#100 = mercs.7
 		100 = mercs.8
 		100 = mercs.11
 		

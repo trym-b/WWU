@@ -10,6 +10,8 @@ setup_faction_system = {
     #-------------------------
     # Trade Coalition
     #-------------------------
+    set_global_flag = trade_coalition_exists
+        
     # Bilgewater
     A79 = {
         add_country_modifier = {
@@ -184,6 +186,7 @@ setup_faction_system = {
             current_age = age_scourge
         }
         
+        set_global_flag = alliance_exists
         set_global_flag = setup_the_alliance
         
         # Setup for the Third War
@@ -284,6 +287,7 @@ setup_faction_system = {
             current_age = age_burning_legion
         }
         
+        set_global_flag = alliance_exists
         set_global_flag = setup_the_alliance
         
         # Setup for the post Third War
@@ -435,6 +439,7 @@ setup_faction_system = {
             current_age = age_orcish_horde
         }
         
+        set_global_flag = old_horde_exists
         set_global_flag = setup_the_old_horde
         
         # Setup for the First War
@@ -590,6 +595,7 @@ setup_faction_system = {
             current_age = age_burning_legion
         }
         
+        set_global_flag = horde_exists
         set_global_flag = setup_the_horde
         
         # Setup for the post Third War
@@ -658,62 +664,22 @@ setup_faction_system = {
 #--------------------------
 # Utility
 #--------------------------
-set_head_of_alliance = {
+set_head_of_faction = {
     every_country = {
         limit = {
-            has_country_modifier = head_of_alliance
+            has_country_modifier = head_of_$faction$
         }
-        remove_country_modifier = head_of_alliance
+        remove_country_modifier = head_of_$faction$
     }
     add_country_modifier = {
-        name = head_of_alliance
+        name = head_of_$faction$
         duration = -1
     }
 }
 
-set_head_of_horde = {
-    every_country = {
-        limit = {
-            has_country_modifier = head_of_horde
-        }
-        remove_country_modifier = head_of_horde
-    }
+set_member_of_faction = {
     add_country_modifier = {
-        name = head_of_horde
-        duration = -1
-    }
-}
-
-set_head_of_old_horde = {
-    every_country = {
-        limit = {
-            has_country_modifier = head_of_old_horde
-        }
-        remove_country_modifier = head_of_old_horde
-    }
-    add_country_modifier = {
-        name = head_of_old_horde
-        duration = -1
-    }
-}
-
-add_member_of_alliance = {
-    add_country_modifier = {
-        name = member_of_alliance
-        duration = -1
-    }
-}
-
-add_member_of_horde = {
-    add_country_modifier = {
-        name = member_of_horde
-        duration = -1
-    }
-}
-
-add_member_of_old_horde = {
-    add_country_modifier = {
-        name = member_of_old_horde
+        name = member_of_$faction$
         duration = -1
     }
 }

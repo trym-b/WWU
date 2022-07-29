@@ -1,0 +1,60 @@
+#-------------------------------
+# Stop N'Zoth
+#-------------------------------
+po_stop_summoning_nzoth = {
+	category = 6
+	power_projection = vassalized_rival 
+	power_cost_base = 1.0
+	prestige_base = 1.0
+	ae_base = 1.0
+    
+	warscore_cost = {
+		all_provinces = 0.0
+		no_provinces = 25.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 25.0
+	requires_demand_independence = no
+	is_make_subject = no
+	requires_is_allowed = no
+	
+	is_visible = {
+        has_global_flag = nzoth_active
+        NOT = { religion = nzoth }
+        
+		FROM = {
+            has_country_modifier = awakening_nzoth
+        }
+	}
+	is_allowed = {
+        FROM = {
+            has_country_modifier = awakening_nzoth
+            capital_scope = {
+                controlled_by = ROOT
+            }
+        }
+	}
+	effect = {
+        FROM = {
+            clr_country_flag = awakening_nzoth_timer
+            remove_country_modifier = awakening_nzoth
+            add_stability = -1
+        }
+	}
+	ai_weight = {
+        # Only AI horde should use this against the Alliance
+		export_to_variable = {
+			variable_name = ai_value
+			value = 1000
+		}
+		limit = {
+            always = yes
+		}
+	}
+}
+
