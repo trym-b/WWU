@@ -1,0 +1,159 @@
+namespace = wwu_scourge_estate
+
+# Lichborne Focus
+country_event = {
+	id = wwu_scourge_estate.1
+	title = wwu_scourge_estate.1.title
+    desc = wwu_scourge_estate.1.desc
+	picture = BESTIARY_eventPicture
+
+    hidden = yes
+
+    trigger = { 
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+        has_estate_privilege = estate_nobility_lichborne_focus
+    }
+
+	mean_time_to_happen = {
+		months = 64
+	}
+
+	option = {
+		name = wwu_scourge_estate.1.option.a
+		
+        random_list = {
+            20 = { change_statists_vs_monarchists = -0.05 }
+            20 = { change_statists_vs_monarchists = -0.04 }
+            20 = { change_statists_vs_monarchists = -0.03 }
+            20 = { change_statists_vs_monarchists = -0.02 }
+            20 = { change_statists_vs_monarchists = -0.01 }
+        }
+	}
+
+}
+
+# Stitched Focus
+country_event = {
+	id = wwu_scourge_estate.2
+	title = wwu_scourge_estate.2.title
+    desc = wwu_scourge_estate.2.desc
+	picture = BESTIARY_eventPicture
+
+    hidden = yes
+
+    trigger = {
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+        has_estate_privilege = estate_nobility_stitched_focus
+    }
+
+	mean_time_to_happen = {
+		months = 64
+	}
+
+	option = {
+		name = wwu_scourge_estate.2.option.a
+		
+        random_list = {
+            20 = { change_statists_vs_monarchists = 0.05 }
+            20 = { change_statists_vs_monarchists = 0.04 }
+            20 = { change_statists_vs_monarchists = 0.03 }
+            20 = { change_statists_vs_monarchists = 0.02 }
+            20 = { change_statists_vs_monarchists = 0.01 }
+        }
+	}
+
+}
+
+# Raise the Dead
+country_event = {
+	id = wwu_scourge_estate.3
+	title = wwu_scourge_estate.3.title
+    desc = wwu_scourge_estate.3.desc
+	picture = UNDEAD_ASSAULT_eventPicture
+
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = automatic_raise_the_dead_option }
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+        has_estate_privilege = estate_clergy_necromantic_resurrection
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_scourge_estate.3.option.a
+		
+        add_manpower = 2
+    }
+    option = {
+		name = wwu_scourge_estate.3.option.b
+		
+        capital_scope = {
+            infantry = ROOT
+        }
+    }
+    option = {
+		name = wwu_scourge_estate.3.option.c
+		
+        capital_scope = {
+            cavalry = ROOT
+        }
+    }
+    option = {
+		name = wwu_scourge_estate.3.option.d
+		
+        trigger = {
+            NOT = { has_country_flag = automatic_raise_the_dead_option }
+        }
+        
+        add_manpower = 2
+        
+        custom_tooltip = AUTOMATIC_RAISE_THE_DEAD_TT
+        
+        hidden_effect = {
+            set_country_flag = automatic_raise_the_dead_option
+        }
+    }
+}
+
+# Raise the Dead - Automatic
+country_event = {
+	id = wwu_scourge_estate.4
+	title = wwu_scourge_estate.4.title
+    desc = wwu_scourge_estate.4.desc
+	picture = UNDEAD_ASSAULT_eventPicture
+
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        has_country_flag = automatic_raise_the_dead_option
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+        has_estate_privilege = estate_clergy_necromantic_resurrection
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_scourge_estate.4.option.a
+		
+        add_manpower = 2
+    }
+}

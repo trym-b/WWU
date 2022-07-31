@@ -714,3 +714,63 @@ estate_nobility_diplomatic_focus = {
 		factor = 1
 	}
 }
+
+# Scourge
+estate_nobility_lichborne_focus = {
+	icon = privilege_lichborne
+    
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.1
+    
+	is_valid = {
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+	}
+	can_select = {
+		NOT = { has_estate_privilege = estate_nobility_stitched_focus }
+	}
+    on_granted = {
+        custom_tooltip = LICHBORNE_FOCUS_TT
+    }
+    benefits = {
+        siege_ability = 0.05
+    }
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+estate_nobility_stitched_focus = {
+	icon = privilege_stitched
+    
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.1
+    
+	is_valid = {
+        OR = {
+            has_reform = scourge_reform
+            has_reform = scourge_domain_reform
+        }
+	}
+	can_select = {
+		NOT = { has_estate_privilege = estate_nobility_lichborne_focus }
+	}
+    on_granted = {
+        custom_tooltip = STITCHED_FOCUS_TT
+    }
+    benefits = {
+        reinforce_speed = 0.05
+    }
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
