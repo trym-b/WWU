@@ -1,0 +1,56 @@
+# Do not change tags in here without changing every other reference to them.
+# If adding new buildings, make sure they are uniquely named.
+
+# cost = x #==> cost in $ to build (subject to other modifiers)
+# time = x #==> number of months to build.
+# modifier = m # a modifier on the province that the building gives
+# build_trigger  = t # an and build_trigger  that needs to be fullfilled to build and keep the building
+# one_per_country = yes/no # if yes, only one of these can exist in a country
+# manufactory = { trade_good trade_good } # list of trade goods that get a production bonus
+# onmap = yes/no # show as a sprite on the map
+# indestructible = yes # Stops the buildings being destroyed by bankruptcy
+
+# FROM = owner
+# ROOT = province
+
+# AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
+
+wow_training_ring = {
+	cost = 100
+	time = 12
+    
+	modifier = {
+		local_regiment_cost = -0.25
+        regiment_recruit_speed = -0.25
+	}
+	
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+			factor = 0.5
+            
+            NOT = { development = 15 }
+		}
+	}
+}
+wow_training_ground = {
+	cost = 300
+	time = 24
+    make_obsolete = wow_training_ring
+    
+	modifier = {
+		local_regiment_cost = -0.5
+        regiment_recruit_speed = -0.5
+	}
+	
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+			factor = 0.5
+            
+            NOT = { development = 15 }
+		}
+	}
+}

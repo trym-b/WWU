@@ -1,0 +1,434 @@
+# Do not change tags in here without changing every other reference to them.
+# If adding new buildings, make sure they are uniquely named.
+
+# cost = x #==> cost in $ to build (subject to other modifiers)
+# time = x #==> number of months to build.
+# modifier = m # a modifier on the province that the building gives
+# build_trigger  = t # an and build_trigger  that needs to be fullfilled to build and keep the building
+# one_per_country = yes/no # if yes, only one of these can exist in a country
+# manufactory = { trade_good trade_good } # list of trade goods that get a production bonus
+# onmap = yes/no # show as a sprite on the map
+# indestructible = yes # Stops the buildings being destroyed by bankruptcy
+
+# FROM = owner
+# ROOT = province
+
+# AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
+
+manufactory = {
+	cost = 500
+	time = 60
+	modifier = {
+		trade_goods_size = 1.0
+		allowed_num_of_buildings = 1
+	}
+}
+
+wow_manufactory = {
+	manufactory = {
+		all
+	}
+
+	ai_will_do = {
+		factor = 10.0
+
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 500 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 500 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 750 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 1.5
+			base_production = 2
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 4
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 6
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 8
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 10
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 12
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 14
+		}
+		modifier = {
+			factor = 1.5
+			base_production = 15
+		}
+
+		modifier = {
+			factor = 2.0
+			FROM = { ruler_has_good_adm_personality = yes }
+		}
+		modifier = {
+			factor = 2.0
+			FROM = {
+				OR = {
+					personality = ai_capitalist
+					personality = ai_balanced
+				}
+			}
+		}
+
+		modifier = {
+			factor = 3.5
+			development = 10
+		}
+		modifier = {
+			factor = 3.5
+			development = 20
+		}
+		modifier = {
+			factor = 5.0
+			wealthy_province_trigger = yes
+		}
+
+		modifier = {
+			factor = 5.0
+			flat_terrain_trigger = yes
+		}
+
+		modifier = {
+			factor = 5.0
+			has_manufactory_trigger = yes
+		}
+		
+		modifier = {
+			factor = 15.0
+			lowest_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 20.0
+			low_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 25.5
+			medium_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 30.0
+			high_quality_trade_goods_trigger = yes
+		}
+	}
+}
+
+wow_arcane_tower = {
+    
+	manufactory = {
+		artifacts
+	}
+    
+	modifier = {
+		global_trade_goods_size_modifier = 0.05
+	}
+	show_separate = yes
+    one_per_country = yes
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+wow_stables = {
+    
+	manufactory = {
+		mounts
+        flying_mounts
+        warbeasts
+	}
+    
+	modifier = {
+		movement_speed = 0.15
+	}
+	show_separate = yes
+    one_per_country = yes
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+wow_citadel = {
+    
+	manufactory = {
+		all
+	}
+	modifier = {
+        fort_level = 4
+		local_defensiveness = 0.25
+	}
+	onmap = yes
+	show_separate = yes 
+
+	ai_will_do = {
+		factor = 1
+        
+        # AI should only build this in capital
+        modifier = {
+            factor = 0
+            
+            NOT = { is_capital = yes }
+        }
+	}
+}
+
+wow_city_barracks = {
+	manufactory = {
+		all
+	}
+
+	modifier = {
+		local_manpower = 1.0
+	}
+    
+	show_separate = yes 
+
+	ai_will_do = {
+		factor = 10.0
+
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 500 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 500 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 750 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 1.5
+			base_manpower = 2
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 4
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 6
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 8
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 10
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 12
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 14
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 15
+		}
+
+		modifier = {
+			factor = 2.0
+			FROM = { ruler_has_good_mil_personality = yes }
+		}
+		modifier = {
+			factor = 2.0
+			FROM = { personality = ai_militarist }
+		}
+
+		modifier = {
+			factor = 2.5
+			development = 10
+		}
+		modifier = {
+			factor = 2.5
+			development = 20
+		}
+
+		modifier = {
+			factor = 2.5
+			flat_terrain_trigger = yes
+		}
+
+		modifier = {
+			factor = 5.0
+			has_manpower_building_trigger = yes
+		}
+
+		modifier = {
+			factor = 10.0
+			lowest_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 15.0
+			additional_manpower_goods_trigger = yes
+		}		
+	}
+}
+
+wow_garrison = {
+	manufactory = {
+		all
+	}
+
+	build_trigger = {
+		NOT = {
+			area_for_scope_province = {
+				owner = {
+					tag = ROOT
+				}
+				OR = {
+					has_building = wow_garrison
+					has_construction = wow_garrison
+				}
+			}
+		}
+	}
+	
+	keep_trigger = {
+		NOT = {
+			area_for_scope_province = {
+				NOT = { province_id = root }
+				owner = {
+					tag = ROOT
+				}
+				OR = {
+					has_building = wow_garrison
+					has_construction = wow_garrison
+				}
+			}
+		}
+	}
+
+	modifier = {
+		statewide_governing_cost = -0.25
+		min_local_autonomy = -5
+	}
+    
+	show_separate = yes 
+
+	ai_will_do = {
+		factor = 1000.0
+
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 500 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 500 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 750 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 0.2
+			high_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 0.4
+			medium_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 0.5
+			low_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 2.0
+			trade_goods = gold
+		}
+	}
+}
+
+

@@ -1,0 +1,162 @@
+# Do not change tags in here without changing every other reference to them.
+# If adding new buildings, make sure they are uniquely named.
+
+# cost = x #==> cost in $ to build (subject to other modifiers)
+# time = x #==> number of months to build.
+# modifier = m # a modifier on the province that the building gives
+# build_trigger  = t # an and build_trigger  that needs to be fullfilled to build and keep the building
+# one_per_country = yes/no # if yes, only one of these can exist in a country
+# manufactory = { trade_good trade_good } # list of trade goods that get a production bonus
+# onmap = yes/no # show as a sprite on the map
+# indestructible = yes # Stops the buildings being destroyed by bankruptcy
+
+# FROM = owner
+# ROOT = province
+
+# AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
+
+wow_marketplace = {
+	cost = 100
+	time = 12
+
+	modifier = {
+		province_trade_power_modifier = 0.25
+		local_state_maintenance_modifier = -0.1
+	}
+	
+	ai_will_do = {
+		factor = 1.0
+		
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { province_has_center_of_trade_of_level = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 200 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+		
+		modifier = {
+			factor = 1.1
+			FROM = { treasury = 200 }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 400 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 600 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 800 }
+		}
+		modifier = {
+			factor = 1.5
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 10.0
+			province_has_center_of_trade_of_level = 1
+		}
+		modifier = {
+			factor = 20.0
+			province_has_center_of_trade_of_level = 2
+		}
+		modifier = {
+			factor = 30.0
+			province_has_center_of_trade_of_level = 1
+		}
+	}
+}
+wow_grand_market = {
+	cost = 300
+	time = 24
+    make_obsolete = wow_marketplace
+    
+	modifier = {
+		province_trade_power_modifier = 0.5
+		local_state_maintenance_modifier = -0.2
+	}
+	
+	ai_will_do = {
+		factor = 1.0
+		
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { province_has_center_of_trade_of_level = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 200 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+		
+		modifier = {
+			factor = 1.1
+			FROM = { treasury = 200 }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 400 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 600 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 800 }
+		}
+		modifier = {
+			factor = 1.5
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 10.0
+			province_has_center_of_trade_of_level = 1
+		}
+		modifier = {
+			factor = 20.0
+			province_has_center_of_trade_of_level = 2
+		}
+		modifier = {
+			factor = 30.0
+			province_has_center_of_trade_of_level = 1
+		}
+	}
+}
