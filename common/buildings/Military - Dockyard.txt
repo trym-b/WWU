@@ -15,7 +15,7 @@
 
 # AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
 
-wow_dockyard = {
+wow_dockyard_1 = {
 	cost = 100
 	time = 12
 	
@@ -37,10 +37,10 @@ wow_dockyard = {
 		}
 	}
 }
-wow_grand_dockyard = {
+wow_dockyard_2 = {
 	cost = 300
 	time = 24
-	make_obsolete = wow_dockyard
+	make_obsolete = wow_dockyard_1
     
     build_trigger  = { 
         has_port = yes
@@ -60,3 +60,27 @@ wow_grand_dockyard = {
 		}
 	}
 }
+wow_dockyard_3 = {
+	cost = 500
+	time = 36
+	make_obsolete = wow_dockyard_2
+    
+    build_trigger  = { 
+        has_port = yes
+    }
+    
+	modifier = {
+		local_sailors_modifier = 0.75
+        ship_recruit_speed = -0.75
+	}
+	
+	ai_will_do = {
+		factor = 1
+        
+		modifier = {
+			factor = 0.5
+			NOT = { owner = { navy_size = 50 } }
+		}
+	}
+}
+

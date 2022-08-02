@@ -15,7 +15,7 @@
 
 # AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
 
-wow_arsenal = {
+wow_arsenal_1 = {
 	cost = 100
 	time = 12
     
@@ -84,14 +84,84 @@ wow_arsenal = {
 		}
 	}
 }
-wow_grand_arsenal = {
+wow_arsenal_2 = {
 	cost = 300
 	time = 24
-    make_obsolete = wow_arsenal
+    make_obsolete = wow_arsenal_1
     
 	modifier = {
 		land_forcelimit = 2
         supply_limit_modifier = 0.5
+	}
+	
+	ai_will_do = {
+		factor = 1.0
+
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 250 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+
+		modifier = {
+			factor = 1.1
+			FROM = { treasury = 250 }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 500 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 750 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 1.5
+			FROM = { army_size_percentage = 0.8 }
+		}
+		modifier = {
+			factor = 1.5
+			FROM = { army_size_percentage = 0.9 }
+		}
+		modifier = {
+			factor = 1.5
+			FROM = { army_size_percentage = 1 }
+		}
+
+		modifier = {
+			factor = 10.0
+			has_every_essential_building_trigger = yes
+		}
+	}
+}
+wow_arsenal_3 = {
+	cost = 500
+	time = 36
+    make_obsolete = wow_arsenal_2
+    
+	modifier = {
+		land_forcelimit = 3
+        supply_limit_modifier = 0.75
 	}
 	
 	ai_will_do = {

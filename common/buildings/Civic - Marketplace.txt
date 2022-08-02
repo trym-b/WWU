@@ -15,13 +15,12 @@
 
 # AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
 
-wow_marketplace = {
+wow_market_1 = {
 	cost = 100
 	time = 12
 
 	modifier = {
 		province_trade_power_modifier = 0.25
-		local_state_maintenance_modifier = -0.1
 	}
 	
 	ai_will_do = {
@@ -87,14 +86,87 @@ wow_marketplace = {
 		}
 	}
 }
-wow_grand_market = {
+wow_market_2 = {
 	cost = 300
 	time = 24
-    make_obsolete = wow_marketplace
+    make_obsolete = wow_market_1
     
 	modifier = {
 		province_trade_power_modifier = 0.5
 		local_state_maintenance_modifier = -0.2
+	}
+	
+	ai_will_do = {
+		factor = 1.0
+		
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { province_has_center_of_trade_of_level = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 200 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+		
+		modifier = {
+			factor = 1.1
+			FROM = { treasury = 200 }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 400 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 600 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 800 }
+		}
+		modifier = {
+			factor = 1.5
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 10.0
+			province_has_center_of_trade_of_level = 1
+		}
+		modifier = {
+			factor = 20.0
+			province_has_center_of_trade_of_level = 2
+		}
+		modifier = {
+			factor = 30.0
+			province_has_center_of_trade_of_level = 1
+		}
+	}
+}
+wow_market_3 = {
+	cost = 500
+	time = 36
+    make_obsolete = wow_market_2
+    
+	modifier = {
+		province_trade_power_modifier = 0.75
+		local_state_maintenance_modifier = -0.3
 	}
 	
 	ai_will_do = {

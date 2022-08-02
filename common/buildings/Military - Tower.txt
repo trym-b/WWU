@@ -15,13 +15,15 @@
 
 # AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
 
-wow_tower = {
+wow_tower_1 = {
 	cost = 100
 	time = 12
     
 	modifier = {
-		local_hostile_attrition = 2
-        local_hostile_movement_speed = 0.25
+		local_defensiveness = 0.25
+        garrison_growth = 0.25
+        local_hostile_attrition = 1
+        local_hostile_movement_speed = -0.25
 	}
 	
 	ai_will_do = {
@@ -34,14 +36,16 @@ wow_tower = {
 		}
 	}
 }
-wow_reinforced_tower = {
+wow_tower_2 = {
 	cost = 300
 	time = 24
-    make_obsolete = wow_tower
+    make_obsolete = wow_tower_1
     
 	modifier = {
-		local_hostile_attrition = 4
-        local_hostile_movement_speed = 0.5
+		local_defensiveness = 0.5
+        garrison_growth = 0.5
+        local_hostile_attrition = 2
+        local_hostile_movement_speed = -0.33
 	}
 	
 	ai_will_do = {
@@ -54,3 +58,26 @@ wow_reinforced_tower = {
 		}
 	}
 }
+wow_tower_3 = {
+	cost = 500
+	time = 36
+    make_obsolete = wow_tower_2
+    
+	modifier = {
+		local_defensiveness = 0.75
+        garrison_growth = 0.75
+        local_hostile_attrition = 3
+        local_hostile_movement_speed = -0.5
+	}
+	
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+			factor = 0.5
+            
+            NOT = { development = 15 }
+		}
+	}
+}
+

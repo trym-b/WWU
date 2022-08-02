@@ -15,7 +15,7 @@
 
 # AI will consider buildings it does not have the tech for at 20% of scripted AI weight (in case it wants to save slots)
 
-wow_barracks = {
+wow_barracks_1 = {
 	cost = 100
 	time = 12
     
@@ -135,10 +135,10 @@ wow_barracks = {
 		}
 	}
 }
-wow_grand_barracks = {
+wow_barracks_2 = {
 	cost = 300
 	time = 24
-    make_obsolete = wow_barracks
+    make_obsolete = wow_barracks_1
     
 	modifier = {
 		local_manpower_modifier = 0.5
@@ -256,3 +256,125 @@ wow_grand_barracks = {
 		}
 	}
 }
+wow_barracks_3 = {
+	cost = 500
+	time = 36
+    make_obsolete = wow_barracks_2
+    
+	modifier = {
+		local_manpower_modifier = 0.75
+	}
+	
+	ai_will_do = {
+		factor = 2.5
+
+		modifier = {
+			factor = 0
+			FROM = { num_of_loans = 3 }
+		}
+		modifier = {
+			factor = 0.3
+			FROM = { num_of_loans = 2 }
+		}
+		modifier = {
+			factor = 0.5
+			FROM = { num_of_loans = 1 }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { NOT = { treasury = 250 } }
+		}
+		modifier = {
+			factor = 0.75
+			FROM = { is_in_deficit = yes }
+		}
+
+		modifier = {
+			factor = 1.1
+			FROM = { treasury = 250 }
+		}
+		modifier = {
+			factor = 1.2
+			FROM = { treasury = 500 }
+		}
+		modifier = {
+			factor = 1.3
+			FROM = { treasury = 750 }
+		}
+		modifier = {
+			factor = 1.4
+			FROM = { treasury = 1000 }
+		}
+
+		modifier = {
+			factor = 1.5
+			base_manpower = 2
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 4
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 6
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 8
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 10
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 12
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 14
+		}
+		modifier = {
+			factor = 1.5
+			base_manpower = 15
+		}
+
+		modifier = {
+			factor = 2.0
+			FROM = { ruler_has_good_mil_personality = yes }
+		}
+		modifier = {
+			factor = 2.0
+			FROM = { personality = ai_militarist }
+		}
+
+		modifier = {
+			factor = 2.5
+			development = 10
+		}
+		modifier = {
+			factor = 2.5
+			development = 20
+		}
+
+		modifier = {
+			factor = 2.5
+			flat_terrain_trigger = yes
+		}
+
+		modifier = {
+			factor = 2.5
+			has_manufactory_trigger = yes
+		}
+
+		modifier = {
+			factor = 5.0
+			lowest_quality_trade_goods_trigger = yes
+		}
+		modifier = {
+			factor = 7.5
+			additional_manpower_goods_trigger = yes
+		}
+	}
+}
+
