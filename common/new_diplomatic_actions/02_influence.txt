@@ -120,94 +120,178 @@ start_invasion = {
 	}
 	is_allowed = {
 		is_at_war = no
-        manpower = 10
         
         NOT = { has_country_modifier = invasion_action_cooldown }
         
+        
         if = {
             limit = {
-                FROM = {
-                    total_development = 1000
-                }
+                has_estate_privilege = estate_legion_invasion_preparations
             }
-            mil_power = 800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
+            if = {
+                limit = {
+                    FROM = {
+                        total_development = 1000
+                    }
                 }
+                mil_power = 400
             }
-            mil_power = 700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 750
+                    }
                 }
+                mil_power = 300
             }
-            mil_power = 600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 500
+                    }
                 }
+                mil_power = 200
             }
-            mil_power = 400
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 250
+                    }
+                }
+                mil_power = 100
+            }
+            else = {
+                mil_power = 50
+            }
         }
         else = {
-            mil_power = 200
+            if = {
+                limit = {
+                    FROM = {
+                        total_development = 1000
+                    }
+                }
+                mil_power = 800
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 750
+                    }
+                }
+                mil_power = 700
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 500
+                    }
+                }
+                mil_power = 600
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 250
+                    }
+                }
+                mil_power = 400
+            }
+            else = {
+                mil_power = 200
+            }
         }
 	}
 	on_accept = {
         if = {
             limit = {
-                FROM = {
-                    total_development = 1000
-                }
+                has_estate_privilege = estate_legion_invasion_preparations
             }
-            add_mil_power = -800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
+            if = {
+                limit = {
+                    FROM = {
+                        total_development = 1000
+                    }
                 }
+                add_mil_power = -400
             }
-            add_mil_power = -700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 750
+                    }
                 }
+                add_mil_power = -300
             }
-            add_mil_power = -600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 500
+                    }
                 }
+                add_mil_power = -200
             }
-            add_mil_power = -400
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 250
+                    }
+                }
+                add_mil_power = -100
+            }
+            else = {
+                add_mil_power = -50
+            }
         }
         else = {
-            add_mil_power = -200
+            if = {
+                limit = {
+                    FROM = {
+                        total_development = 1000
+                    }
+                }
+                add_mil_power = -800
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 750
+                    }
+                }
+                add_mil_power = -700
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 500
+                    }
+                }
+                add_mil_power = -600
+            }
+            else_if = {
+                limit = {
+                    FROM = {
+                        total_development = 250
+                    }
+                }
+                add_mil_power = -400
+            }
+            else = {
+                add_mil_power = -200
+            }
         }
-        
-        add_manpower = -10
         
         declare_war_with_cb = {
             who = FROM
             casus_belli = cb_invasion
         }
+        
 		FROM = {
             random_owned_province = {
                 change_controller = ROOT
                 add_core = ROOT
                 
+                # 10
                 infantry = ROOT
                 infantry = ROOT
                 infantry = ROOT
@@ -218,8 +302,44 @@ start_invasion = {
                 cavalry = ROOT
                 artillery = ROOT
                 artillery = ROOT
+                
+                if = {
+                    limit = {
+                        ROOT = {
+                            has_estate_privilege = estate_legion_merciless_invasion
+                        }
+                    }
+                    
+                    # 10
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    cavalry = ROOT
+                    cavalry = ROOT
+                    cavalry = ROOT
+                    artillery = ROOT
+                    artillery = ROOT
+                    
+                    # 10
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    infantry = ROOT
+                    cavalry = ROOT
+                    cavalry = ROOT
+                    cavalry = ROOT
+                    artillery = ROOT
+                    artillery = ROOT
+                }
             }
+            
+            hidden_effect = { set_country_flag = is_invaded }
         }
+        
+        hidden_effect = { set_country_flag = is_invading }
         
         add_country_modifier = {
             name = invasion_action_cooldown
@@ -294,17 +414,28 @@ send_invasion_support = {
         is_at_war = yes
 	}
 	is_allowed = {
-		manpower = 10
-        
         NOT = { has_country_modifier = invasion_support_cooldown }
+        mil_power = 100
 	}
 	on_accept = {
-        add_manpower = -10
+        add_mil_power = -100
         
-        add_country_modifier = {
-            name = invasion_support_cooldown
-            duration = 3650
-            hidden = yes
+        if = {
+            limit = {
+                has_estate_privilege = estate_legion_rapid_strikes
+            }
+            add_country_modifier = {
+                name = invasion_support_cooldown
+                duration = 1825
+                hidden = yes
+            }
+        }
+        else = {
+            add_country_modifier = {
+                name = invasion_support_cooldown
+                duration = 3650
+                hidden = yes
+            }
         }
         
 		FROM = {
@@ -333,6 +464,8 @@ send_invasion_support = {
 
 	ai_will_do = {
 		manpower = 50
+        
+        NOT = { army_size_percentage = 0.75 }
 	}
 }
 
@@ -348,7 +481,13 @@ start_argus_invasion = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-        has_country_modifier = sargerite_keystone
+        OR = {
+            has_country_modifier = sargerite_keystone
+            FROM = {
+                tag = B92
+                war_with = ROOT
+            }
+        }
         
         FROM = {
             num_of_cities = 2
@@ -363,7 +502,6 @@ start_argus_invasion = {
 	}
 	is_allowed = {
 		is_at_war = no
-        manpower = 10
         
         NOT = { has_country_modifier = invasion_action_cooldown }
         
@@ -439,8 +577,6 @@ start_argus_invasion = {
         else = {
             add_mil_power = -200
         }
-        
-        add_manpower = -10
         
         declare_war_with_cb = {
             who = FROM
@@ -492,7 +628,13 @@ send_argus_invasion_support = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-		has_country_modifier = sargerite_keystone
+		OR = {
+            has_country_modifier = sargerite_keystone
+            FROM = {
+                tag = B92
+                war_with = ROOT
+            }
+        }
         
         FROM = {
             war_with = ROOT
@@ -505,12 +647,11 @@ send_argus_invasion_support = {
         is_at_war = yes
 	}
 	is_allowed = {
-		manpower = 10
-        
         NOT = { has_country_modifier = invasion_support_cooldown }
+        mil_power = 100
 	}
 	on_accept = {
-        add_manpower = -10
+        add_mil_power = -100
         
         add_country_modifier = {
             name = invasion_support_cooldown
@@ -547,6 +688,8 @@ send_argus_invasion_support = {
 
 	ai_will_do = {
 		manpower = 50
+        
+        NOT = { army_size_percentage = 0.75 }
 	}
 }
 
@@ -582,7 +725,6 @@ start_elemental_invasion = {
 	}
 	is_allowed = {
 		is_at_war = no
-        manpower = 10
         
         NOT = { has_country_modifier = invasion_action_cooldown }
         
@@ -658,8 +800,6 @@ start_elemental_invasion = {
         else = {
             add_mil_power = -200
         }
-        
-        add_manpower = -10
         
         declare_war_with_cb = {
             who = FROM
@@ -734,12 +874,11 @@ send_elemental_invasion_support = {
         is_at_war = yes
 	}
 	is_allowed = {
-		manpower = 10
-        
         NOT = { has_country_modifier = invasion_support_cooldown }
+        mil_power = 100
 	}
 	on_accept = {
-        add_manpower = -10
+        add_mil_power = -100
         
         add_country_modifier = {
             name = invasion_support_cooldown
@@ -781,5 +920,7 @@ send_elemental_invasion_support = {
 
 	ai_will_do = {
 		manpower = 50
+        
+        NOT = { army_size_percentage = 0.75 }
 	}
 }

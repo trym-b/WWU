@@ -1,0 +1,383 @@
+estate_legion_loyalty_to_sargeras = {
+	icon = privilege_blueprint
+    
+    # Costs
+    max_absolutism = -10
+	land_share = 20
+	loyalty = 0.1
+	influence = 0.1
+    
+	can_select = {
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		governing_capacity = 250
+	}
+    
+	ai_will_do = {
+		factor = 25
+		modifier = {
+			factor = 1.4
+			num_of_territories = 5
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 10
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 15
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 25 }
+				estate_influence = {
+					estate = estate_legion
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_loyalty_to_sargeras }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_territories = 1 }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 40 }
+				AND = {
+					NOT = { crown_land_share = 60 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_loyalty_to_sargeras }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 30 }
+				AND = {
+					NOT = { crown_land_share = 50 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_loyalty_to_sargeras }
+		}
+	}
+}
+estate_legion_manari_leadership = {
+	icon = privilege_eredar
+    
+    # Costs
+    max_absolutism = -10
+	land_share = 10
+	loyalty = 0.0
+	influence = 0.1
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_legion_nathrezim_leadership }
+        NOT = { has_estate_privilege = estate_legion_annihilan_leadership }
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		technology_cost = -0.15
+	}
+	ai_will_do = {
+		factor = 25
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 30 }
+				estate_influence = {
+					estate = estate_legion
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_manari_leadership }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 35 }
+				AND = {
+					NOT = { crown_land_share = 55 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_manari_leadership }
+		}
+	}
+}
+estate_legion_nathrezim_leadership = {
+	icon = privilege_nathrezim
+    
+    # Costs
+    max_absolutism = -10
+	land_share = 10
+	loyalty = 0.0
+	influence = 0.1
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_legion_manari_leadership }
+        NOT = { has_estate_privilege = estate_legion_annihilan_leadership }
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		spy_offence = 1.0
+	}
+	ai_will_do = {
+		factor = 25
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 30 }
+				estate_influence = {
+					estate = estate_legion
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_nathrezim_leadership }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 35 }
+				AND = {
+					NOT = { crown_land_share = 55 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_nathrezim_leadership }
+		}
+	}
+}
+estate_legion_annihilan_leadership = {
+	icon = privilege_pitlord
+    
+    # Costs
+    max_absolutism = -10
+	land_share = 10
+	loyalty = 0.0
+	influence = 0.1
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_legion_nathrezim_leadership }
+        NOT = { has_estate_privilege = estate_legion_manari_leadership }
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		infantry_power = 0.15
+	}
+	ai_will_do = {
+		factor = 25
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 30 }
+				estate_influence = {
+					estate = estate_legion
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_annihilan_leadership }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 35 }
+				AND = {
+					NOT = { crown_land_share = 55 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_legion_annihilan_leadership }
+		}
+	}
+}
+
+estate_legion_demonic_advisors = {
+	icon = privilege_demonic_power
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+		
+	}
+	benefits = {
+		advisor_cost = -0.1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_legion_invasion_preparations = {
+	icon = privilege_fel_mark
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    on_granted = {
+        custom_tooltip = INVASION_COST_REDUCTION_TT
+    }
+	penalties = {
+		global_tax_modifier = -0.2
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+
+estate_legion_merciless_invasion = {
+	icon = privilege_velhari
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    on_granted = {
+        custom_tooltip = INVASION_FORCE_BOOST_TT
+    }
+	penalties = {
+		ae_impact = 0.25
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 10
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { total_development = 300 }
+        }
+	}
+}
+
+estate_legion_burning_chains = {
+	icon = privilege_imprison
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.1
+	influence = 0.1
+    
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_legion_demonic_empowerment = {
+	icon = privilege_fel_lord
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+		
+	}
+	on_granted = {
+	}
+	modifier_by_land_ownership = {
+		land_morale = 0.4
+	}
+	penalties = {
+        land_maintenance_modifier = 0.25
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_legion_fel_conversion = {
+	icon = privilege_fel_skull
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.0
+	influence = 0.0
+    
+	cooldown_years = 5
+    
+	can_select = {
+		any_owned_province = {
+            NOT = { religion = ROOT }
+        }
+	}
+	on_granted = {
+		random_owned_province = {
+            limit = {
+                NOT = { religion = ROOT }
+            }
+            
+            change_religion = ROOT
+        }
+	}
+	penalties = {
+		global_unrest = 2
+	}
+    
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_legion_rapid_strikes = {
+	icon = privilege_hand_of_guldan
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    on_granted = {
+        custom_tooltip = INVASION_COOLDOWN_REDUCTION_TT
+    }
+	penalties = {
+		production_efficiency = -0.2
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}

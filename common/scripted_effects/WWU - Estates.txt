@@ -158,6 +158,17 @@ each_estate_effect = {
 			$invention_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_legion
+		}
+		[[effect]
+			$effect$
+		]
+		[[legion_effect]
+			$legion_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -734,6 +745,10 @@ scaled_estate_invention_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_invention }
 }
 
+scaled_estate_legion_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_legion }
+}
+
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1153,6 +1168,25 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_legion
+					NOT = {
+						estate_loyalty = {
+							estate = estate_legion
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_legion
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1296,6 +1330,16 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_invention_$flag$
 			[[estate_action]
 			$estate_action$ = estate_invention
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_legion
+				NOT = { has_country_flag = estate_legion_$flag$ }
+			}
+			set_country_flag = estate_legion_$flag$
+			[[estate_action]
+			$estate_action$ = estate_legion
 			]
 		}
 	}
@@ -1857,6 +1901,25 @@ give_land_shares_to_estate_impulse = {
 		}
 		change_estate_land_share = {
 			estate = estate_invention
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_legion
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_legion
 			share = -1
 		}
 		change_estate_land_share = {

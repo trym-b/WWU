@@ -71,3 +71,188 @@ country_event = {
         set_global_flag = elemental_riftstone_triggerpoint
 	}
 }
+
+# Invasion Failed
+country_event = {
+	id = wwu_invasion.3
+	title = wwu_invasion.3.title
+	desc = wwu_invasion.3.desc
+	picture = BALNAZZAR_eventPicture
+	
+	trigger = {
+        has_country_flag = is_invading
+        is_at_war = yes
+        
+        NOT = {
+            continent_eastern_kingdoms = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_kalimdor = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_northrend = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_pandaria = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_outland = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_draenor = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_broken_isles = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_zandalar = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_kul_tiras = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_vashjir = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_nazjatar = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_south_seas = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_plunder_isle = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_dragon_isles = {
+                controlled_by = ROOT
+            }
+        }
+        NOT = {
+            continent_paradise_isles = {
+                controlled_by = ROOT
+            }
+        }
+        
+        if = {  
+            limit = {
+                capital_scope = {
+                    continent = continent_argus
+                }
+            }
+            
+            NOT = {
+                continent_skywall = {
+                    controlled_by = ROOT
+                }
+            }
+            NOT = {
+                continent_deepholm = {
+                    controlled_by = ROOT
+                }
+            }
+            NOT = {
+                continent_abyssal_maw = {
+                    controlled_by = ROOT
+                }
+            }
+            NOT = {
+                continent_firelands = {
+                    controlled_by = ROOT
+                }
+            }
+        }
+        
+        if = {
+            limit = {
+                capital_scope = {
+                    OR = {
+                        continent = continent_skywall
+                        continent = continent_deepholm
+                        continent = continent_abyssal_maw
+                        continent = continent_firelands
+                    }
+                }
+            }
+            
+            NOT = {
+                continent_argus = {
+                    controlled_by = ROOT
+                }
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_invasion.3.option.a
+        
+        every_country = {
+            limit = {
+                has_country_flag = is_invaded
+            }
+            hidden_effect = {
+                clr_country_flag = is_invaded
+            }
+            
+            white_peace = ROOT
+            
+            country_event = { id = wwu_invasion.4 }
+        }
+        
+        hidden_effect = {
+            clr_country_flag = is_invading
+        }
+	}
+}
+
+# Invasion Repelled
+country_event = {
+	id = wwu_invasion.4
+	title = wwu_invasion.4.title
+	desc = wwu_invasion.4.desc
+	picture = SILVERMOON_BALCONY_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_invasion.4.option.a
+        
+        add_prestige = 25
+        add_adm_power = 100
+        add_dip_power = 100
+        add_mil_power = 100
+	}
+}
