@@ -481,19 +481,18 @@ start_argus_invasion = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-        OR = {
-            has_country_modifier = sargerite_keystone
-            FROM = {
-                tag = B92
-                war_with = ROOT
-            }
-        }
-        
         FROM = {
             num_of_cities = 2
             
             capital_scope = {
                 continent = continent_argus
+            }
+            
+            OR = {
+                war_with = ROOT
+                ROOT = { 
+                    has_country_modifier = sargerite_keystone
+                }
             }
         }
         
@@ -628,13 +627,7 @@ send_argus_invasion_support = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-		OR = {
-            has_country_modifier = sargerite_keystone
-            FROM = {
-                tag = B92
-                war_with = ROOT
-            }
-        }
+        has_country_modifier = invasion_action_cooldown
         
         FROM = {
             war_with = ROOT
@@ -705,8 +698,6 @@ start_elemental_invasion = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-        has_country_modifier = elemental_riftstone
-        
         FROM = {
             num_of_cities = 2
             
@@ -716,6 +707,13 @@ start_elemental_invasion = {
                     continent = continent_deepholm
                     continent = continent_abyssal_maw
                     continent = continent_firelands
+                }
+            }
+            
+            OR = {
+                war_with = ROOT
+                ROOT = { 
+                    has_country_modifier = elemental_riftstone
                 }
             }
         }
@@ -856,7 +854,7 @@ send_elemental_invasion_support = {
 	require_acceptance = no # Whether the recipient gets an option to decline
 	
 	is_visible = {
-		has_country_modifier = elemental_riftstone
+        has_country_modifier = invasion_action_cooldown
         
         FROM = {
             war_with = ROOT
