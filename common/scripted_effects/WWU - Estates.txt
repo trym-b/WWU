@@ -169,6 +169,50 @@ each_estate_effect = {
 			$legion_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_abyssal_maw
+		}
+		[[effect]
+			$effect$
+		]
+		[[abyssal_maw_effect]
+			$abyssal_maw_effect$
+		]
+	}
+    if = {
+		limit = {
+			has_estate = estate_firelands
+		}
+		[[effect]
+			$effect$
+		]
+		[[firelands_effect]
+			$firelands_effect$
+		]
+	}
+    if = {
+		limit = {
+			has_estate = estate_deepholm
+		}
+		[[effect]
+			$effect$
+		]
+		[[deepholm_effect]
+			$deepholm_effect$
+		]
+	}
+    if = {
+		limit = {
+			has_estate = estate_skywall
+		}
+		[[effect]
+			$effect$
+		]
+		[[skywall_effect]
+			$skywall_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -749,6 +793,21 @@ scaled_estate_legion_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_legion }
 }
 
+scaled_estate_abyssal_maw_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_abyssal_maw }
+}
+
+scaled_estate_firelands_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_firelands }
+}
+
+scaled_estate_deepholm_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_deepholm }
+}
+
+scaled_estate_skywall_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_skywall }
+}
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1187,6 +1246,84 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_abyssal_maw
+					NOT = {
+						estate_loyalty = {
+							estate = estate_abyssal_maw
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_abyssal_maw
+				as_if_faction = yes
+			}
+		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_firelands
+					NOT = {
+						estate_loyalty = {
+							estate = estate_firelands
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_firelands
+				as_if_faction = yes
+			}
+		}
+        
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_deepholm
+					NOT = {
+						estate_loyalty = {
+							estate = estate_deepholm
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_deepholm
+				as_if_faction = yes
+			}
+		}
+        
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_skywall
+					NOT = {
+						estate_loyalty = {
+							estate = estate_skywall
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_skywall
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1340,6 +1477,46 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_legion_$flag$
 			[[estate_action]
 			$estate_action$ = estate_legion
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_abyssal_maw
+				NOT = { has_country_flag = estate_abyssal_maw_$flag$ }
+			}
+			set_country_flag = estate_abyssal_maw_$flag$
+			[[estate_action]
+			$estate_action$ = estate_abyssal_maw
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_firelands
+				NOT = { has_country_flag = estate_firelands_$flag$ }
+			}
+			set_country_flag = estate_firelands_$flag$
+			[[estate_action]
+			$estate_action$ = estate_firelands
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_deepholm
+				NOT = { has_country_flag = estate_deepholm_$flag$ }
+			}
+			set_country_flag = estate_deepholm_$flag$
+			[[estate_action]
+			$estate_action$ = estate_deepholm
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_skywall
+				NOT = { has_country_flag = estate_skywall_$flag$ }
+			}
+			set_country_flag = estate_skywall_$flag$
+			[[estate_action]
+			$estate_action$ = estate_skywall
 			]
 		}
 	}
@@ -1920,6 +2097,82 @@ give_land_shares_to_estate_impulse = {
 		}
 		change_estate_land_share = {
 			estate = estate_legion
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_abyssal_maw
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_abyssal_maw
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_firelands
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_firelands
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_deepholm
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_deepholm
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_skywall
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_skywall
 			share = -1
 		}
 		change_estate_land_share = {
