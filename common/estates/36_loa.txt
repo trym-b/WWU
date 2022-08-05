@@ -1,0 +1,92 @@
+estate_loa = {
+	icon = 16
+    color = { 42 120 35 }
+    
+    influence_from_dev_modifier = 0.0
+    
+	independence_government = monarchy
+	starting_reform = autocracy_reform
+	independence_tech_group = tech_elemental_wind
+    
+	# ----- Conditions -----
+    trigger = { 
+        OR = {
+            religion = voodoo
+            religion = hakkari
+            religion = bloodmancy
+        }
+    }
+
+	# ----- Country -----
+    country_modifier_happy = {
+        land_morale = 0.1
+        global_missionary_strength = 0.03
+        recover_army_morale_speed = 0.2
+    }
+    country_modifier_neutral = {
+        land_morale = 0.05
+        global_missionary_strength = 0.01
+        recover_army_morale_speed = 0.1
+    }    
+    country_modifier_angry = {  
+        land_morale = -0.1
+        global_missionary_strength = -0.03
+        recover_army_morale_speed = -0.2
+    }
+    
+	land_ownership_modifier = {
+		loa_loyalty_modifier = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 2
+			culture_group = owner
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { religion = owner }
+			NOT = { culture_group = owner }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { development = 10 }
+		}
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+	}
+
+	# ----- Influence -----
+    base_influence = 20
+
+    # ----- Loyalty -----
+
+    # ----- Privileges -----
+	privileges = {
+        estate_loa_seek_loa_favour
+        estate_loa_incite_berserkers
+        estate_loa_loyal_witch_doctors
+        estate_loa_empower_troll_warriors
+        estate_loa_construct_shrine
+        estate_loa_sway_of_the_loa
+        estate_loa_blood_rituals
+        estate_loa_exception
+        estate_loa_overwhelming_influence
+        estate_loa_high_influence
+        estate_loa_medium_influence
+        estate_loa_low_influence
+        estate_loa_minimal_influence
+	}
+
+    # ----- Agendas -----
+	agendas = {
+        
+	}
+}

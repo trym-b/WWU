@@ -2,87 +2,81 @@
 increase_loa_influence = {
     if = {
         limit = {
-            has_country_modifier = loa_influence_high
+            has_estate_privilege = estate_loa_high_influence
         }
         custom_tooltip = LOA_INFLUENCE_REMAINS_HIGH
     }
     else_if = {
         limit = {
-            has_country_modifier = loa_influence_medium
+            has_estate_privilege = estate_loa_medium_influence
         }
         
-        custom_tooltip = LOA_INFLUENCE_SET_TO_HIGH
-        
+
         hidden_effect = {
-            remove_country_modifier = loa_influence_medium
-            add_ruler_modifier = {
-                name = loa_influence_high
-                duration = -1
-            }
+            remove_estate_privilege = estate_loa_medium_influence
+            set_estate_privilege = estate_loa_high_influence
         }
     }
     else_if = {
         limit = {
-            has_country_modifier = loa_influence_low
+            has_estate_privilege = estate_loa_low_influence
         }
         
-        custom_tooltip = LOA_INFLUENCE_SET_TO_MEDIUM
+        hidden_effect = {
+            remove_estate_privilege = estate_loa_low_influence
+            set_estate_privilege = estate_loa_medium_influence
+        }
+    }
+    else_if = {
+        limit = {
+            has_estate_privilege = estate_loa_minimal_influence
+        }
         
         hidden_effect = {
-            remove_country_modifier = loa_influence_low
-            add_ruler_modifier = {
-                name = loa_influence_medium
-                duration = -1
-            }
+            remove_estate_privilege = estate_loa_minimal_influence
+            set_estate_privilege = estate_loa_low_influence
         }
     }
     else = {
-        custom_tooltip = LOA_INFLUENCE_SET_TO_LOW
-        
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = loa_influence_low
-                duration = -1
-            }
-        }
+        set_estate_privilege = estate_loa_minimal_influence
     }
 }
 
 decrease_loa_influence = {
     if = {
         limit = {
-            has_country_modifier = loa_influence_low
+            has_estate_privilege = estate_loa_minimal_influence
         }
         custom_tooltip = LOA_INFLUENCE_REMIANS_LOW
     }
     else_if = {
         limit = {
-            has_country_modifier = loa_influence_medium
+            has_estate_privilege = estate_loa_low_influence
         }
         
-        custom_tooltip = LOA_INFLUENCE_SET_TO_LOW
-        
         hidden_effect = {
-            remove_country_modifier = loa_influence_medium
-            add_ruler_modifier = {
-                name = loa_influence_low
-                duration = -1
-            }
+            remove_estate_privilege = estate_loa_low_influence
+            set_estate_privilege = estate_loa_minimal_influence
         }
     }
     else_if = {
         limit = {
-            has_country_modifier = loa_influence_high
+            has_estate_privilege = estate_loa_medium_influence
         }
         
-         custom_tooltip = LOA_INFLUENCE_SET_TO_MEDIUM
-         
         hidden_effect = {
-            remove_country_modifier = loa_influence_high
-            add_ruler_modifier = {
-                name = loa_influence_medium
-                duration = -1
-            }
+            remove_estate_privilege = estate_loa_medium_influence
+            set_estate_privilege = estate_loa_low_influence
+        }
+    }
+    else_if = {
+        limit = {
+            has_estate_privilege = estate_loa_high_influence
+        }
+        
+        hidden_effect = {
+            remove_estate_privilege = estate_loa_high_influence
+            set_estate_privilege = estate_loa_medium_influence
         }
     }
 }
@@ -1012,7 +1006,9 @@ gain_loa_effect = {
 }
 
 remove_loa_influence = {
-    remove_country_modifier = loa_influence_low
-    remove_country_modifier = loa_influence_medium
-    remove_country_modifier = loa_influence_high
+    remove_estate_privilege = estate_loa_overwhelming_influence
+    remove_estate_privilege = estate_loa_high_influence
+    remove_estate_privilege = estate_loa_medium_influence
+    remove_estate_privilege = estate_loa_minimal_influence
+    set_estate_privilege = estate_loa_minimal_influence
 }

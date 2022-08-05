@@ -213,6 +213,17 @@ each_estate_effect = {
 			$skywall_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_loa
+		}
+		[[effect]
+			$effect$
+		]
+		[[loa_effect]
+			$loa_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -808,6 +819,10 @@ scaled_estate_deepholm_land_share_effect = {
 scaled_estate_skywall_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_skywall }
 }
+
+scaled_estate_loa_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_loa }
+}
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1324,6 +1339,25 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_loa
+					NOT = {
+						estate_loyalty = {
+							estate = estate_loa
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_loa
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1517,6 +1551,16 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_skywall_$flag$
 			[[estate_action]
 			$estate_action$ = estate_skywall
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_loa
+				NOT = { has_country_flag = estate_loa_$flag$ }
+			}
+			set_country_flag = estate_loa_$flag$
+			[[estate_action]
+			$estate_action$ = estate_loa
 			]
 		}
 	}
@@ -2173,6 +2217,25 @@ give_land_shares_to_estate_impulse = {
 		}
 		change_estate_land_share = {
 			estate = estate_skywall
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_loa
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_loa
 			share = -1
 		}
 		change_estate_land_share = {

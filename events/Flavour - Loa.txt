@@ -1,16 +1,17 @@
 namespace = wwu_loa
 
-# Influence of the Loa
+# Troll - Starting Loa Influence
 country_event = {
 	id = wwu_loa.1
 	title = wwu_loa.1.title
 	desc = wwu_loa.1.desc
 	picture = AMANI_BERSERKER_eventPicture
 	
+    hidden = yes
 	is_triggered_only = yes
     
     trigger = {
-        religion = voodoo
+        has_estate = estate_loa
     }
     
 	mean_time_to_happen = {
@@ -20,7 +21,17 @@ country_event = {
 	option = {
 		name = wwu_loa.1.option.a
 		
-		increase_loa_influence = yes
+		random_list = {
+            33 = {
+                set_estate_privilege = estate_loa_high_influence
+            }
+            33 = {
+                set_estate_privilege = estate_loa_medium_influence
+            }
+            33 = {
+                set_estate_privilege = estate_loa_low_influence
+            }
+        }
 	}
 }
 
@@ -32,6 +43,8 @@ country_event = {
 	picture = GURUBASHI_BERSERKER_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -93,6 +106,8 @@ country_event = {
 	picture = EAGLEHORN_BOW_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -137,6 +152,8 @@ country_event = {
 	picture = DARKSPEAR_HUNTER_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -202,6 +219,8 @@ country_event = {
 	picture = BLADED_CULTIST_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -277,6 +296,8 @@ country_event = {
 	picture = FIERY_BAT_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         NOT = { has_country_modifier = loa_harmed_by_another }
         NOT = { has_country_modifier = loa_victorious_over_another }
@@ -356,6 +377,8 @@ country_event = {
 	picture = DECIMATE_eventPicture
     
 	trigger = { 
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -437,6 +460,8 @@ country_event = {
 	picture = AMANI_BERSERKER_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
@@ -528,6 +553,8 @@ country_event = {
 	picture = DEADLY_POISON_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+        
         NOT = { has_country_modifier = loa_event_cooldown }
         NOT = { has_country_modifier = loa_forbidden_worship }
 		has_any_loa = yes
@@ -585,6 +612,7 @@ country_event = {
 	picture = MADAME_LAZUL_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
         NOT = { has_country_modifier = loa_event_cooldown }
 		has_any_loa = yes
 		has_ruler_modifier = loa_forbidden_worship
@@ -638,9 +666,13 @@ country_event = {
 	picture = MANA_SPRING_TOTEM_eventPicture
     
 	trigger = {
+        has_estate = estate_loa
+		OR = {
+            has_estate_privilege = estate_loa_overwhelming_influence
+            has_estate_privilege = estate_loa_high_influence
+        }
         NOT = { has_country_modifier = loa_event_cooldown }
 		has_any_loa = yes
-		has_country_modifier = loa_influence_high
         any_owned_province = {
             development = 10
         }
@@ -687,10 +719,14 @@ country_event = {
 	picture = PANTHER_eventPicture
     
 	trigger = { 
+        has_estate = estate_loa
+		OR = {
+            has_estate_privilege = estate_loa_overwhelming_influence
+            has_estate_privilege = estate_loa_high_influence
+        }
         NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
-		has_country_modifier = loa_influence_high
 		has_ruler_modifier = loa_forbidden_worship
 	}
 	
