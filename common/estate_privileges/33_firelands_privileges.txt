@@ -1,4 +1,4 @@
-estate_firelands_burning_domain = {
+estate_firelands_smouldering_domain = {
 	icon = privilege_blueprint
     
     # Costs
@@ -39,7 +39,7 @@ estate_firelands_burning_domain = {
 					influence = 75
 				}
 			}
-			NOT = { has_estate_privilege = estate_firelands_burning_domain }
+			NOT = { has_estate_privilege = estate_firelands_smouldering_domain }
 		}
 		modifier = {
 			factor = 0
@@ -53,7 +53,7 @@ estate_firelands_burning_domain = {
 					NOT = { crown_land_share = 60 }
 				}
 			}
-			NOT = { has_estate_privilege = estate_firelands_burning_domain }
+			NOT = { has_estate_privilege = estate_firelands_smouldering_domain }
 		}
 		modifier = {
 			factor = 0.8
@@ -63,12 +63,12 @@ estate_firelands_burning_domain = {
 					NOT = { crown_land_share = 50 }
 				}
 			}
-			NOT = { has_estate_privilege = estate_firelands_burning_domain }
+			NOT = { has_estate_privilege = estate_firelands_smouldering_domain }
 		}
 	}
 }
 
-estate_firelands_deep_burns = {
+estate_firelands_spirit_of_flame = {
 	icon = privilege_lava_lash
     
     # Costs
@@ -84,7 +84,7 @@ estate_firelands_deep_burns = {
 	penalties = {
 	}
 	benefits = {
-		fire_damage = 0.2
+		fire_damage = 0.25
 	}
 	ai_will_do = {
 		factor = 25
@@ -97,7 +97,7 @@ estate_firelands_deep_burns = {
 					influence = 75
 				}
 			}
-			NOT = { has_estate_privilege = estate_firelands_deep_burns }
+			NOT = { has_estate_privilege = estate_firelands_spirit_of_flame }
 		}
 		modifier = {
 			factor = 0.8
@@ -107,13 +107,13 @@ estate_firelands_deep_burns = {
 					NOT = { crown_land_share = 55 }
 				}
 			}
-			NOT = { has_estate_privilege = estate_firelands_deep_burns }
+			NOT = { has_estate_privilege = estate_firelands_spirit_of_flame }
 		}
 	}
 }
 
-estate_firelands_flaming_advisors = {
-	icon = privilege_bad_dragon
+estate_firelands_burning_advisors = {
+	icon = privilege_ancestral_guidance
     
     # Costs
     max_absolutism = -5
@@ -150,35 +150,8 @@ estate_firelands_ragnaros_vision = {
 	}
 }
 
-estate_firelands_forges_of_fire = {
+estate_firelands_screeching_firehawks = {
 	icon = privilege_crystal_fire
-
-    # Costs
-    max_absolutism = -5
-	land_share = 0
-	loyalty = 0.05
-	influence = 0.05
-    
-	can_select = {
-		NOT = { has_estate_privilege = estate_firelands_crucible_of_flame }
-	}
-	on_granted = {
-	}
-	modifier_by_land_ownership = {
-		production_efficiency = 0.5
-	}
-	penalties = {
-		stability_cost_to_declare_war = 1
-	}
-	benefits = {
-	}
-	ai_will_do = {
-		factor = 0
-	}
-}
-
-estate_firelands_crucible_of_flame = {
-	icon = privilege_eternal_fire
 
     # Costs
     max_absolutism = -5
@@ -192,10 +165,37 @@ estate_firelands_crucible_of_flame = {
 	on_granted = {
 	}
 	modifier_by_land_ownership = {
-		siege_ability = 0.4
+		cavalry_power = 0.5
 	}
 	penalties = {
 		development_cost = 0.25
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_firelands_forges_of_fire = {
+	icon = privilege_eternal_fire
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+		NOT = { has_estate_privilege = estate_firelands_screeching_firehawks }
+	}
+	on_granted = {
+	}
+	modifier_by_land_ownership = {
+		development_cost = -0.5
+	}
+	penalties = {
+		stability_cost_to_declare_war = 1
 	}
 	benefits = {
 	}
@@ -231,7 +231,7 @@ estate_firelands_molten_flow = {
 }
 
 estate_firelands_sulfuron_keep = {
-	icon = privilege_primal_fire
+	icon = privilege_heroism
 
     # Costs
     max_absolutism = -5
@@ -271,8 +271,8 @@ estate_firelands_sulfuron_keep = {
 	}
 }
 
-estate_firelands_anvil_of_conflagration = {
-	icon = privilege_heroism
+estate_firelands_flamewalker_trials = {
+	icon = privilege_primal_fire
     
     # Costs
     max_absolutism = -5
@@ -297,8 +297,8 @@ estate_firelands_anvil_of_conflagration = {
 	}
 }
 
-estate_firelands_invasion_preparation = {
-	icon = privilege_astral_shift
+estate_firelands_overwhelming_force = {
+	icon = privilege_bad_dragon
     
     # Costs
     max_absolutism = -5
@@ -323,5 +323,52 @@ estate_firelands_invasion_preparation = {
             
             NOT = { total_development = 300 }
         }
+	}
+}
+
+estate_firelands_invasion_preparation = {
+	icon = privilege_astral_shift
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    on_granted = {
+        custom_tooltip = INVASION_COST_REDUCTION_TT
+    }
+	penalties = {
+		global_tax_modifier = -0.2
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+
+estate_firelands_fury_of_ragnaros = {
+	icon = privilege_elemental_blast
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    on_granted = {
+        custom_tooltip = INVASION_COOLDOWN_REDUCTION_TT
+    }
+	penalties = {
+		production_efficiency = -0.2
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
 	}
 }
