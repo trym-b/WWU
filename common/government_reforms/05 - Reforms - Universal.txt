@@ -400,8 +400,10 @@ wwu_magic_free_magic = {
 	modifiers = {
         innovativeness_gain = 0.1
         development_cost = -0.05
-        yearly_corruption = 0.02
 	}
+    effect = {
+        custom_tooltip = SPELLCASTER_TRAINING_REDUCTION_SMALL_TT
+    }
     
     ai = {
 		factor = 1
@@ -412,8 +414,8 @@ wwu_magic_controlled_magic = {
 	allow_normal_conversion = yes
 
 	modifiers = {
-        max_absolutism = 5
-        stability_cost_modifier = -0.15
+        max_absolutism = 10
+        stability_cost_modifier = -0.2
 	}
     
     ai = {
@@ -425,9 +427,8 @@ wwu_magic_regulated_magic = {
 	allow_normal_conversion = yes
 
 	modifiers = {
-        reform_progress_growth = 0.1
-        stability_cost_modifier = -0.05
-        
+        reform_progress_growth = 0.2
+        stability_cost_modifier = -0.1
 	}
     
     ai = {
@@ -438,42 +439,13 @@ wwu_magic_regulated_magic = {
 wwu_magic_magical_society = {
 	icon = "mass_invisibility"
 	allow_normal_conversion = yes
-
-    trigger = {
-        NOT = { has_reform = wwu_assembly_checks_and_balances }
-        NOT = { has_reform = wwu_separation_of_powers_autonomous_institutions }
-        NOT = { has_reform = wwu_republican_institution_politicized_warfare }
-        NOT = { has_reform = wwu_fanaticism_embraced }
-        NOT = { has_reform = scourge_reform }
-        NOT = { has_reform = scourge_domain_reform }
-        #NOT = { has_government_mechanic = russian_mechanic }
-        NOT = { has_government_mechanic = feudal_theocracy_mechanic }
-        NOT = { has_government_mechanic = tribal_federation_mechanic }
-        NOT = { has_government_mechanic = mamluk_mechanic }
-        NOT = { has_government_mechanic = iqta_mechanic }
-    }
-
-	modifiers = {
-        all_power_cost = -0.05
-        yearly_corruption = 0.05
-	}
     
-    conditional = {
-		allow = { has_dlc = "Res Publica" }
-        
-		states_general_mechanic = {
-			sg_mundane = {
-				global_unrest = 2
-                idea_cost = 0.1
-                stability_cost_modifier = 1.0
-			}
-
-			sg_mythical = {
-				tolerance_own = 1
-                idea_cost = -0.1
-			}
-		}
+	modifiers = {
+        technology_cost = -0.05
 	}
+    effect = {
+        custom_tooltip = SPELLCASTER_TRAINING_REDUCTION_BIG_TT
+    }
     
     ai = {
 		factor = 1
@@ -504,6 +476,9 @@ wwu_magic_dalaran_education = {
         innovativeness_gain = 0.2
         idea_cost = -0.05
 	}
+    effect = {
+        custom_tooltip = SPELLCASTER_TRAINING_REDUCTION_BIG_TT
+    }
     
     ai = {
 		factor = 1
