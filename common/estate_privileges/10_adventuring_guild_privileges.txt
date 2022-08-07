@@ -328,7 +328,7 @@ estate_adventuring_guild_sponsor_bandit_hunters = {
     
 	max_absolutism = -5
     influence = 0.05
-	loyalty = 0.0
+	loyalty = 0.1
     
 	penalties = {
 		global_autonomy = 0.05
@@ -348,7 +348,7 @@ estate_adventuring_guild_sponsor_orc_hunters = {
     
 	max_absolutism = -5
     influence = 0.05
-	loyalty = 0.0
+	loyalty = 0.1
     
 	penalties = {
 		global_autonomy = 0.05
@@ -368,7 +368,7 @@ estate_adventuring_guild_sponsor_murloc_hunters = {
     
 	max_absolutism = -5
     influence = 0.05
-	loyalty = 0.0
+	loyalty = 0.1
     
 	penalties = {
 		global_autonomy = 0.05
@@ -388,7 +388,7 @@ estate_adventuring_guild_sponsor_gnoll_hunters = {
     
 	max_absolutism = -5
     influence = 0.05
-	loyalty = 0.0
+	loyalty = 0.1
     
 	penalties = {
 		global_autonomy = 0.05
@@ -401,5 +401,42 @@ estate_adventuring_guild_sponsor_gnoll_hunters = {
 	}
 	ai_will_do = {
 		factor = 5
+	}
+}
+
+estate_adventuring_guild_hunt_threats = {
+	icon = privilege_bad_dragon
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.1
+    
+	cooldown_years = 5
+    
+	can_select = {
+		any_owned_province = {
+            has_any_type_of_local_concern = yes
+        }
+	}
+	on_granted = {
+		random_owned_province = {
+            limit = {
+                has_any_type_of_local_concern = yes
+            }
+            
+            trigger_local_concern_events = yes
+        }
+	}
+	penalties = {
+		global_tax_modifier = -0.1
+	}
+    
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 0
 	}
 }
