@@ -1,26 +1,26 @@
-namespace = wwu_lc_bandits
+namespace = wwu_lc_orcs
 
 #------------------------------------
 # Spawn in Province
 #------------------------------------
 province_event = {
-    id = wwu_lc_bandits.1
-    title = wwu_lc_bandits.1.title
-    desc = wwu_lc_bandits.1.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.1
+    title = wwu_lc_orcs.1.title
+    desc = wwu_lc_orcs.1.desc
+    picture = FROSTWOLF_GRUNT_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     option = {  
-        name = wwu_lc_bandits.1.option.a
+        name = wwu_lc_orcs.1.option.a
         
         ai_chance = { 
             factor = 20 
         }
         
         add_permanent_province_modifier = {
-            name = lc_level_bandit_1
+            name = lc_level_orc_1
             duration = -1  
         }
 
@@ -32,19 +32,19 @@ province_event = {
 # Event Manager
 #------------------------------------
 country_event = {
-    id = wwu_lc_bandits.2
-    title = wwu_lc_bandits.2.title
-    desc = wwu_lc_bandits.2.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.2
+    title = wwu_lc_orcs.2.title
+    desc = wwu_lc_orcs.2.desc
+    picture = BESTIARY_eventPicture
     
     hidden = yes
     is_triggered_only = yes
 
     trigger = {
-        # Bandits are present in any province
+        # orcs are present in any province
         any_owned_province = {
             has_any_local_concern = {
-                TYPE = bandit
+                TYPE = orc
             }
         }
     }
@@ -53,37 +53,37 @@ country_event = {
     mean_time_to_happen = {
         days = 1
         
-        # Increase occurance if multiple Bandits are present
+        # Increase occurance if multiple orcs are present
         modifier = {
             factor = 2
             
             num_of_owned_provinces_with = {
                 value = 3
                 has_any_local_concern = {
-                    TYPE = bandit
+                    TYPE = orc
                 }
             }
         }
     }
 
     immediate = {
-        # Get Bandit target province
+        # Get orc target province
         random_owned_province = {
             limit = {
                 has_any_local_concern = {
-                    TYPE = bandit
+                    TYPE = orc
                 }
             }
-            save_event_target_as = lc_bandit_target
+            save_event_target_as = lc_orc_target
         }
     }
     
 	
 	option = {
-        # Bandit target province
-        event_target:lc_bandit_target = {
+        # orc target province
+        event_target:lc_orc_target = {
             
-            # Randomly pick Bandit action
+            # Randomly pick orc action
             random_list = {
                 #------------------------
                 # System
@@ -95,24 +95,24 @@ country_event = {
                         devastation = 75
                     }
                     
-					province_event = { id = wwu_lc_bandits.10 }
+					province_event = { id = wwu_lc_orcs.10 }
 				}
                 
                 # Local Growth
                 10 = {
-                    province_event = { id = wwu_lc_bandits.13 }
+                    province_event = { id = wwu_lc_orcs.13 }
                 }
                 
                 # Migration if Same Kind
                 75 = {
-                    # Only apply if the owner is not a Bandit nation
+                    # Only apply if the owner is not a orc nation
                     trigger = {
                         owner = {
-                            is_bandit_type_nation = yes
+                            is_orc_type_nation = yes
                         }
                     }
                     
-                    province_event = { id = wwu_lc_bandits.15 }
+                    province_event = { id = wwu_lc_orcs.15 }
                 }
                 
                 # Random Removal
@@ -162,12 +162,12 @@ country_event = {
                         owner = { has_estate_privilege = estate_adventuring_guild_generous_quest_rewards }
                     }
                     
-                    province_event = { id = wwu_lc_bandits.21 }
+                    province_event = { id = wwu_lc_orcs.21 }
                 }
                 
                 # Downgrade Tier - Random
                 2 = {
-                    province_event = { id = wwu_lc_bandits.22 }
+                    province_event = { id = wwu_lc_orcs.22 }
                 }
                 
                 # Downgrade Tier - Adventurers
@@ -214,25 +214,25 @@ country_event = {
                         owner = { has_estate_privilege = estate_adventuring_guild_generous_quest_rewards }
                     }
                     
-                    # Boost if Adventurer estate has Sponser Bandit Hunters
+                    # Boost if Adventurer estate has Sponser orc Hunters
                     modifier = {
                         factor = 3
                         
-                        owner = { has_estate_privilege = estate_adventuring_guild_sponsor_bandit_hunters }
+                        owner = { has_estate_privilege = estate_adventuring_guild_sponsor_orc_hunters }
                     }
                     
-                    province_event = { id = wwu_lc_bandits.23 }
+                    province_event = { id = wwu_lc_orcs.23 }
                 }
                 
                 # Remove if Same Kind
                 50 = {
                     trigger = {
                         owner = {
-                            is_bandit_type_nation = yes
+                            is_orc_type_nation = yes
                         }
                     }
                     
-                    province_event = { id = wwu_lc_bandits.24 }
+                    province_event = { id = wwu_lc_orcs.24 }
                 }
                 
                 # Upgrade Tier - Random
@@ -242,78 +242,53 @@ country_event = {
                         devastation = 25
                         NOT = { devastation = 75 }
                     }
-                    province_event = { id = wwu_lc_bandits.30 }
+                    province_event = { id = wwu_lc_orcs.30 }
                 }
                 
                 #------------------------
                 # Flavour - Tier
                 #------------------------
-                # Pay to Disband
+                # Scare the Orcs
                 1 = {
-                    province_event = { id = wwu_lc_bandits.120 }
+                    province_event = { id = wwu_lc_orcs.120 }
                 }
-                # Soldiers become Bandits
-                1 = {
-                    modifier = {
-                        factor = 2
-                        owner = { war_exhaustion = 10 }
-                    }
-                    province_event = { id = wwu_lc_bandits.130 }
-                }
-                
+
                 #------------------------
                 # Flavour - General
                 #------------------------
-                # Bandits rob Tax Collectors
+                # Orcs kill Advisor!
                 1 = {
-                    province_event = { id = wwu_lc_bandits.200 }
+                    province_event = { id = wwu_lc_orcs.200 }
                 }
                 
-                # Bandits raze Settlement
+                # Orcs raze Settlement!
                 1 = {
-                    province_event = { id = wwu_lc_bandits.201 }
+                    province_event = { id = wwu_lc_orcs.201 }
                 }
                 
-                # Provoke Bandits
+                # Orcs on Edge
                 1 = {
-                    province_event = { id = wwu_lc_bandits.202 }
+                    province_event = { id = wwu_lc_orcs.202 }
                 }
                 
-                # Bandit Rampage
+                # Warchief Terrorizes Area!
                 1 = {
-                    province_event = { id = wwu_lc_bandits.203 }
+                    province_event = { id = wwu_lc_orcs.203 }
                 }
                 
-                # Bandits Help Poor
-                1 = {
-                    modifier = {
-                        factor = 2 
-                        
-                        NOT = { owner = { stability = 1 } }
-                    }
-                    
-                    modifier = {
-                        factor = 3
-                        
-                        owner = { corruption = 1 }
-                    }
-                    
-                    province_event = { id = wwu_lc_bandits.204 }
-                }
-                
-                # Garrison stops Bandits
+                # Fort Garrison Fights Orcs
                 1 = {
                     modifier = {
                         factor = 4
                         
                         has_fort_building_trigger = yes
                     }
-                    province_event = { id = wwu_lc_bandits.205 }
+                    province_event = { id = wwu_lc_orcs.205 }
                 }
                 
-                # Provoke Bandit King
+                # Warchief Army Rises!
                 1 = {
-                    province_event = { id = wwu_lc_bandits.206 }
+                    province_event = { id = wwu_lc_orcs.206 }
                 }
             }
         }
@@ -322,33 +297,33 @@ country_event = {
 
 # Local Migration
 province_event = {
-    id = wwu_lc_bandits.10
-    title = wwu_lc_bandits.10.title
-    desc = wwu_lc_bandits.10.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.10
+    title = wwu_lc_orcs.10.title
+    desc = wwu_lc_orcs.10.desc
+    picture = FROSTWOLF_WARLORD_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         OR = {
-            has_local_concern_level_1 = { TYPE = bandit }
-            has_local_concern_level_2 = { TYPE = bandit }
+            has_local_concern_level_1 = { TYPE = orc }
+            has_local_concern_level_2 = { TYPE = orc }
         }
 
         any_neighbor_province = {
             is_city = yes
             
+            has_no_local_concern = {
+                TYPE = orc
+            }
+            
             NOT = {
                 owner = {
-                    is_bandit_type_nation = yes
+                    is_orc_type_nation = yes
                 }
             }
 
-            has_no_local_concern = {
-                TYPE = bandit
-            }
-            
             NOT = {
                 has_banned_terrain = yes
             }
@@ -362,12 +337,12 @@ province_event = {
                     is_city = yes
 
                     has_no_local_concern = {
-                        TYPE = bandit
+                        TYPE = orc
                     }
                     
                     NOT = {
                         owner = {
-                            is_bandit_type_nation = yes
+                            is_orc_type_nation = yes
                         }
                     }
                     
@@ -376,46 +351,48 @@ province_event = {
                     }
                 }
                 
-                save_event_target_as = lc_bandit_target
+                save_event_target_as = lc_orc_target
             }
         }
     }
 
     # Same Country
     option = {  
-        name = wwu_lc_bandits.10.option.a
-        goto = lc_bandit_target
+        name = wwu_lc_orcs.10.option.a
+        goto = lc_orc_target
         
         ai_chance = { factor = 100 }
         
         trigger = {
-            event_target:lc_bandit_target = {
+            event_target:lc_orc_target = {
                 owned_by = ROOT
             }
         }
 
-        # Remove Bandits
+        # Remove orcs
         tooltip = {
-            remove_local_concern = {
-                TYPE = bandit
+            FROM = {
+                remove_local_concern = {
+                    TYPE = orc
+                }
             }
         }
 
-        # Add Bandits to the new province based on the previous province tier
-        event_target:lc_bandit_target = {
+        # Add orcs to the new province based on the previous province tier
+        event_target:lc_orc_target = {
             if = {
                 limit = {
                     owned_by = ROOT
                 }
 
                 upgrade_local_concern = {
-                    TYPE = bandit
+                    TYPE = orc
                 }
                 
-                # Remove Bandits from the previous province
+                # Remove orcs from the previous province
                 FROM = {
                     remove_local_concern = {
-                        TYPE = bandit
+                        TYPE = orc
                     }
                 }
             }
@@ -424,29 +401,29 @@ province_event = {
 
     # Different Country
     option = {  
-        name = wwu_lc_bandits.10.option.b
-        goto = lc_bandit_target
+        name = wwu_lc_orcs.10.option.b
+        goto = lc_orc_target
         
         ai_chance = { factor = 100 }
         
         trigger = {
-            event_target:lc_bandit_target = {
+            event_target:lc_orc_target = {
                 NOT = { owned_by = ROOT }
             }
         }
 
         tooltip = {
             remove_local_concern = {
-                TYPE = bandit
+                TYPE = orc
             }
         }
         
-		custom_tooltip = MIGRATION_BANDITS_DIFFERENT_COUNTRY_TT
+		custom_tooltip = MIGRATION_ORCS_DIFFERENT_COUNTRY_TT
         
 		hidden_effect = {
-			event_target:lc_bandit_target = {
+			event_target:lc_orc_target = {
 				province_event = {
-					id = wwu_lc_bandits.11
+					id = wwu_lc_orcs.11
 				}
 			}
 		}
@@ -455,16 +432,16 @@ province_event = {
 
 # Local Migration - Different Country Notification
 province_event = {
-    id = wwu_lc_bandits.11
-    title = wwu_lc_bandits.11.title
-    desc = wwu_lc_bandits.11.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.11
+    title = wwu_lc_orcs.11.title
+    desc = wwu_lc_orcs.11.desc
+    picture = FROSTWOLF_WARLORD_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     option = {
-        name = wwu_lc_bandits.11.option.a
+        name = wwu_lc_orcs.11.option.a
         
         ai_chance = { 
             factor = 20 
@@ -480,17 +457,17 @@ province_event = {
             }
         }
 
-        # Add Bandits to the new province based on the previous province tier
+        # Add orcs to the new province based on the previous province tier
         upgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 
     after = {
-        # Remove Bandits from previous province
+        # Remove orcs from previous province
         FROM = {
             remove_local_concern = {
-                TYPE = bandit
+                TYPE = orc
             }
         }
     }
@@ -498,26 +475,26 @@ province_event = {
 
 # Local Growth
 province_event = {
-    id = wwu_lc_bandits.13
-    title = wwu_lc_bandits.13.title
-    desc = wwu_lc_bandits.13.desc
-    picture = DEFIAS_RINGLEADER_eventPicture
+    id = wwu_lc_orcs.13
+    title = wwu_lc_orcs.13.title
+    desc = wwu_lc_orcs.13.desc
+    picture = EXECUTE_eventPicture
     goto = ROOT
     
     hidden = no
     is_triggered_only = yes
     
     trigger = {
-            has_local_concern_level_3 = { TYPE = bandit }
+        has_local_concern_level_3 = { TYPE = orc }
 
         any_neighbor_province = {
             has_no_local_concern = {
-                TYPE = bandit
+                TYPE = orc
             }
 
             NOT = {
                 owner = {
-                    is_bandit_type_nation = yes
+                    is_orc_type_nation = yes
                 }
             }
         }
@@ -530,41 +507,41 @@ province_event = {
                     is_city = yes
                     NOT = {
                         owner = {
-                            is_bandit_type_nation = yes
+                            is_orc_type_nation = yes
                         }
                     }
 
                     has_no_local_concern = {
-                        TYPE = bandit
+                        TYPE = orc
                     }
                 }
                 
-                save_event_target_as = lc_bandit_target
+                save_event_target_as = lc_orc_target
             }
         }
     }
 
     # Same Country
     option = { 
-        name = wwu_lc_bandits.13.option.a
-        goto = lc_bandit_target
+        name = wwu_lc_orcs.13.option.a
+        goto = lc_orc_target
         
         ai_chance = { factor = 100 }
         
         trigger = {
-            event_target:lc_bandit_target = {
+            event_target:lc_orc_target = {
                 owned_by = ROOT
             }
         }
         
-        event_target:lc_bandit_target = {
+        event_target:lc_orc_target = {
             if = {
                 limit = {
                     owned_by = ROOT
                 }
                 
                 add_local_concern = {
-                    TYPE = bandit
+                    TYPE = orc
                     LEVEL = 1
                 }
             }
@@ -574,21 +551,21 @@ province_event = {
     # Different Country
     option = {  
         name = aw_basic.13.option.b
-        goto = lc_bandit_target
+        goto = lc_orc_target
         
         ai_chance = { factor = 100 }
         
         trigger = {
-            event_target:lc_bandit_target = {
+            event_target:lc_orc_target = {
                 NOT = { owned_by = ROOT }
             }
         }
-		custom_tooltip = MIGRATION_BANDITS_DIFFERENT_COUNTRY_TT
+		custom_tooltip = MIGRATION_ORCS_DIFFERENT_COUNTRY_TT
         
 		hidden_effect = {
-			event_target:lc_bandit_target = {
+			event_target:lc_orc_target = {
 				province_event = {
-					id = wwu_lc_bandits.14
+					id = wwu_lc_orcs.14
 				}
 			}
 		}
@@ -597,16 +574,16 @@ province_event = {
 
 # Local Growth - Different Country Notification
 province_event = {
-    id = wwu_lc_bandits.14
-    title = wwu_lc_bandits.14.title
-    desc = wwu_lc_bandits.14.desc
-    picture = DEFIAS_RINGLEADER_eventPicture
+    id = wwu_lc_orcs.14
+    title = wwu_lc_orcs.14.title
+    desc = wwu_lc_orcs.14.desc
+    picture = EXECUTE_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     option = {
-        name = wwu_lc_bandits.14.option.a
+        name = wwu_lc_orcs.14.option.a
 
         owner = {
             add_opinion = {
@@ -616,7 +593,7 @@ province_event = {
         }
 
         add_local_concern = {
-            TYPE = bandit
+            TYPE = orc
             LEVEL = 1
         }
 
@@ -627,28 +604,28 @@ province_event = {
 
 # Migration Away if Type is same as Self
 province_event = {
-    id = wwu_lc_bandits.15
-    title = wwu_lc_bandits.15.title
-    desc = wwu_lc_bandits.15.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.15
+    title = wwu_lc_orcs.15.title
+    desc = wwu_lc_orcs.15.desc
+    picture = ANCESTRAL_HEALING_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         owner = {
-            is_bandit_type_nation = yes
+            is_orc_type_nation = yes
         }
         
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         owner = {
             any_neighbor_country = {
                 NOT = {
                     owner = {
-                        is_bandit_type_nation = yes
+                        is_orc_type_nation = yes
                     }
                 }
                 
@@ -657,7 +634,7 @@ province_event = {
 					is_city = yes
 
 					has_no_local_concern = {
-                        TYPE = bandit
+                        TYPE = orc
                     }
 				}
             }
@@ -671,7 +648,7 @@ province_event = {
                     limit = {
                         NOT = {
                             owner = {
-                                is_bandit_type_nation = yes
+                                is_orc_type_nation = yes
                             }
                         }
                     }
@@ -681,10 +658,10 @@ province_event = {
                             is_city = yes
     
                             has_no_local_concern = {
-                                TYPE = bandit
+                                TYPE = orc
                             }
                         }
-                        save_event_target_as = lc_bandit_target
+                        save_event_target_as = lc_orc_target
                     }
                 }
             }
@@ -694,29 +671,29 @@ province_event = {
 
     # Different Country
     option = {  
-        name = wwu_lc_bandits.15.option.a
-        goto = lc_bandit_target
+        name = wwu_lc_orcs.15.option.a
+        goto = lc_orc_target
         
         ai_chance = { factor = 100 }
         
         trigger = {
-            event_target:lc_bandit_target = {
+            event_target:lc_orc_target = {
                 NOT = { owned_by = ROOT } 
             }
         }
 
         tooltip = {
             remove_local_concern = {
-                TYPE = bandit
+                TYPE = orc
             }
         }
         
-        custom_tooltip = MIGRATION_BANDITS_DIFFERENT_COUNTRY_TT
+        custom_tooltip = MIGRATION_ORCS_DIFFERENT_COUNTRY_TT
         
 		hidden_effect = {
-			event_target:lc_bandit_target = {
+			event_target:lc_orc_target = {
 				province_event = {
-					id = wwu_lc_bandits.11
+					id = wwu_lc_orcs.11
 				}
 			}
 		}
@@ -725,9 +702,9 @@ province_event = {
 
 # Adventurer Removal
 province_event = {
-    id = wwu_lc_bandits.21
-    title = wwu_lc_bandits.21.title
-    desc = wwu_lc_bandits.21.desc
+    id = wwu_lc_orcs.21
+    title = wwu_lc_orcs.21.title
+    desc = wwu_lc_orcs.21.desc
     picture = ANCIENT_TEACHINGS_eventPicture
     goto = ROOT
     
@@ -739,17 +716,17 @@ province_event = {
         }
         
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     
     option = {
-        name = wwu_lc_bandits.21.option.a
+        name = wwu_lc_orcs.21.option.a
         
         ai_chance = { factor = 100 }
 
         remove_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         owner = {
@@ -769,36 +746,36 @@ province_event = {
 
 # Downgrade Tier - Random
 province_event = {
-    id = wwu_lc_bandits.22
-    title = wwu_lc_bandits.22.title
-    desc = wwu_lc_bandits.22.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.22
+    title = wwu_lc_orcs.22.title
+    desc = wwu_lc_orcs.22.desc
+    picture = FIERY_WAR_AXE_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     option = {
-        name = wwu_lc_bandits.22.option.a
+        name = wwu_lc_orcs.22.option.a
         
         ai_chance = { factor = 100 }
         
         downgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 }
 
 # Downgrade Tier - Adventurers
 province_event = {
-    id = wwu_lc_bandits.23
-    title = wwu_lc_bandits.23.title
-    desc = wwu_lc_bandits.23.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.23
+    title = wwu_lc_orcs.23.title
+    desc = wwu_lc_orcs.23.desc
+    picture = DEADLY_SHOT_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
@@ -809,16 +786,16 @@ province_event = {
         }
         
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     option = {
-        name = wwu_lc_bandits.23.option.a
+        name = wwu_lc_orcs.23.option.a
         
         ai_chance = { factor = 100 }
         
         downgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         owner = {
@@ -836,31 +813,31 @@ province_event = {
 
 # Remove if Type is same as Self
 province_event = {
-    id = wwu_lc_bandits.24
-    title = wwu_lc_bandits.24.title
-    desc = wwu_lc_bandits.24.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.24
+    title = wwu_lc_orcs.24.title
+    desc = wwu_lc_orcs.24.desc
+    picture = DEADLY_POISON_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         owner = {
-            is_bandit_type_nation = yes
+            is_orc_type_nation = yes
         }
 
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     
     option = {
-        name = wwu_lc_bandits.24.option.a
+        name = wwu_lc_orcs.24.option.a
         
         ai_chance = { factor = 100 }
 
         remove_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         owner = {
@@ -871,10 +848,10 @@ province_event = {
 
 # Upgrade Tier - Random
 province_event = {
-    id = wwu_lc_bandits.30
-    title = wwu_lc_bandits.30.title
-    desc = wwu_lc_bandits.30.desc
-    picture = DEFIAS_BANDIT_eventPicture
+    id = wwu_lc_orcs.30
+    title = wwu_lc_orcs.30.title
+    desc = wwu_lc_orcs.30.desc
+    picture = DEMOLISHER_eventPicture
     goto = ROOT
     
     hidden = no
@@ -882,44 +859,44 @@ province_event = {
     
     trigger = {
         OR = { 
-            has_local_concern_level_1 = { TYPE = bandit }
-            has_local_concern_level_2 = { TYPE = bandit }
+            has_local_concern_level_1 = { TYPE = orc }
+            has_local_concern_level_2 = { TYPE = orc }
         }
     }
     option = {
-        name = wwu_lc_bandits.30.option.a
+        name = wwu_lc_orcs.30.option.a
         
         ai_chance = { factor = 100 }
 
         add_devastation = 10
 
         add_or_upgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         custom_tooltip = BOOST_ADVENTURER_SUCCESS_TT
     }
 }
 
-# Bribe the Bandits?
+# Scare the Orcs?
 province_event = {
-    id = wwu_lc_bandits.120
-    title = wwu_lc_bandits.120.title
-    desc = wwu_lc_bandits.120.desc
-    picture = DEFIAS_CLEANER_eventPicture
+    id = wwu_lc_orcs.120
+    title = wwu_lc_orcs.120.title
+    desc = wwu_lc_orcs.120.desc
+    picture = CRAZED_HUNTER_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     
-    # Pay
+    # Scare
     option = {
-        name = wwu_lc_bandits.120.option.a
+        name = wwu_lc_orcs.120.option.a
         
         ai_chance = { 
             factor = 100 
@@ -929,18 +906,18 @@ province_event = {
             }
         }
 
-        adjust_income_by_local_concern = {
-            TYPE = bandit
+        adjust_MIL_power_by_local_concern = {
+            TYPE = orc
         }
 
         remove_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 
-    # Don't Pay
+    # Don't Scare
     option = {
-        name = wwu_lc_bandits.120.option.b
+        name = wwu_lc_orcs.120.option.b
         
         ai_chance = { factor = 100 }
 
@@ -948,124 +925,59 @@ province_event = {
     }
 }
 
-# Deserters Turn to Banditry
+# Orcs kill Advisor!
 province_event = {
-    id = wwu_lc_bandits.130
-    title = wwu_lc_bandits.130.title
-    desc = wwu_lc_bandits.130.desc
-    picture = DEFIAS_CLEANER_eventPicture
+    id = wwu_lc_orcs.200
+    title = wwu_lc_orcs.200.title
+    desc = wwu_lc_orcs.200.desc
+    picture = CRUEL_TASKMASTER_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
-        OR = {
-            owner = { had_recent_war = 10 }
-            owner = { is_at_war = yes }
-        }
-    }
-    
-    # Punish them
-    option = {
-        name = wwu_lc_bandits.130.option.a
+        has_mil_advisor = yes
         
-        ai_chance = { 
-            factor = 100 
-        }
-
-        add_local_concern = {
-            TYPE = bandit
-            LEVEL = 1
-        }
-
-        owner = { 
-            add_yearly_manpower = -0.25 
-        }
-    }
-
-    # Pay them more
-    option = {
-        name = wwu_lc_bandits.130.option.b
-        
-        ai_chance = { 
-            factor = 100 
-        }
-
-        owner = { 
-            add_years_of_income = -0.25 
-        }
-    }
-
-    # Force them back
-    option = {
-        name = wwu_lc_bandits.130.option.c
-        
-        ai_chance = { factor = 1000 }
-        
-		trigger = {
-			owner = { ruler_has_personality = strict_personality }
-		}
-        highlight = yes
-
-        owner = { 
-            add_mil_power = -50
-            add_yearly_manpower = 0.25
-        }
-    }
-}
-
-# Bandits rob Tax Collectors!
-province_event = {
-    id = wwu_lc_bandits.200
-    title = wwu_lc_bandits.200.title
-    desc = wwu_lc_bandits.200.desc
-    picture = BLUBBER_BARON_eventPicture
-    goto = ROOT
-    
-    is_triggered_only = yes
-    
-    trigger = {
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
     
     option = {
-        name = wwu_lc_bandits.200.option.a
+        name = wwu_lc_orcs.200.option.a
         
-        add_permanent_province_modifier  = {
-            name = lc_bandits_tax_collectors_robbed
-            duration = 3650  
+        kill_advisor_by_category_effect = {
+            MIL = yes
         }
 
         add_or_upgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 
 }
 
-# Bandits raze Settlement!
+# Orcs raze Settlement!
 province_event = {
-    id = wwu_lc_bandits.201
-    title = wwu_lc_bandits.201.title
-    desc = wwu_lc_bandits.201.desc
-    picture = BRAWL_eventPicture
+    id = wwu_lc_orcs.201
+    title = wwu_lc_orcs.201.title
+    desc = wwu_lc_orcs.201.desc
+    picture = BURNING_ADRENALINE_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
         OR = {
-            has_local_concern_level_2 = { TYPE = bandit }
-            has_local_concern_level_3 = { TYPE = bandit }
+            has_local_concern_level_2 = { TYPE = orc }
+            has_local_concern_level_3 = { TYPE = orc }
         }
         
         development = 6
     }
     
     option = {
-        name = wwu_lc_bandits.201.option.a
+        name = wwu_lc_orcs.201.option.a
         
         add_devastation = 33
 
@@ -1080,43 +992,43 @@ province_event = {
     }
 }
 
-# Bandits on Edge
+# Orcs on Edge
 province_event = {
-    id = wwu_lc_bandits.202
-    title = wwu_lc_bandits.202.title
-    desc = wwu_lc_bandits.202.desc
-    picture = ACOLYTE_OF_PAIN_eventPicture
+    id = wwu_lc_orcs.202
+    title = wwu_lc_orcs.202.title
+    desc = wwu_lc_orcs.202.desc
+    picture = BRAWL_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
 
     trigger = {
         OR = {
-            has_local_concern_level_2 = { TYPE = bandit }
-            has_local_concern_level_3 = { TYPE = bandit }
+            has_local_concern_level_2 = { TYPE = orc }
+            has_local_concern_level_3 = { TYPE = orc }
         }
     }
     
     # Provoke
     option = {
-        name = wwu_lc_bandits.202.option.a
+        name = wwu_lc_orcs.202.option.a
         
         ai_chance = { factor = 50 }
 
         add_devastation = 100
 
         spawn_rebels_by_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         remove_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 
     # Leave them
     option = {
-        name = wwu_lc_bandits.202.option.b
+        name = wwu_lc_orcs.202.option.b
         
         ai_chance = { factor = 50 }
 
@@ -1127,18 +1039,18 @@ province_event = {
 
 }
 
-# Bandit Lord Terrorizes Area!
+# Warchief Terrorizes Area!
 province_event = {
-    id = wwu_lc_bandits.203
-    title = wwu_lc_bandits.203.title
-    desc = wwu_lc_bandits.203.desc
-    picture = DEFIAS_RINGLEADER_eventPicture
+    id = wwu_lc_orcs.203
+    title = wwu_lc_orcs.203.title
+    desc = wwu_lc_orcs.203.desc
+    picture = BLACKROCK_SPIRE_eventPicture
     goto = ROOT
     
     is_triggered_only = yes
     
     trigger = {
-        has_local_concern_level_3 = { TYPE = bandit }
+        has_local_concern_level_3 = { TYPE = orc }
 
         area_for_scope_province = {
             owned_by = FROM
@@ -1147,7 +1059,7 @@ province_event = {
     }
     
     option = {
-        name = wwu_lc_bandits.203.option.a
+        name = wwu_lc_orcs.203.option.a
 
         area = { 
             limit = {
@@ -1170,42 +1082,12 @@ province_event = {
     }
 }
 
-# Bandits Steal From the Rich...
+# Fort Garrison Fights Orcs
 province_event = {
-    id = wwu_lc_bandits.204
-    title = wwu_lc_bandits.204.title
-    desc = wwu_lc_bandits.204.desc
-    picture = DEFIAS_CLEANER_eventPicture
-    goto = ROOT
-    
-    is_triggered_only = yes
-    
-    trigger = {
-        has_any_local_concern = {
-            TYPE = bandit
-        }
-
-        devastation = 20
-    }
-    
-    option = {
-        name = wwu_lc_bandits.204.option.a
-        
-        add_devastation = -30
-
-        add_named_unrest = {
-            name = BANDITS_POOR_GIVEN_MONEY
-            value = 5
-        }
-    }
-}
-
-# Fort Garrison Fights Bandits
-province_event = {
-    id = wwu_lc_bandits.205
-    title = wwu_lc_bandits.205.title
-    desc = wwu_lc_bandits.205.desc
-    picture = ENTRENCHMENT_eventPicture
+    id = wwu_lc_orcs.205
+    title = wwu_lc_orcs.205.title
+    desc = wwu_lc_orcs.205.desc
+    picture = BLACKHOWL_GUNSPIRE_eventPicture
     goto = ROOT
     
     hidden = no
@@ -1213,45 +1095,45 @@ province_event = {
     
     trigger = {
         has_any_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
 
         has_fort_building_trigger = yes
     }
     
     option = {
-        name = wwu_lc_bandits.205.option.a
+        name = wwu_lc_orcs.205.option.a
 
         downgrade_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 }
 
-# Bandit Lord Army Rises!
+# Warchief Army Rises!
 province_event = {
-    id = wwu_lc_bandits.206
-    title = wwu_lc_bandits.206.title
-    desc = wwu_lc_bandits.206.desc
-    picture = DEFIAS_RINGLEADER_eventPicture
+    id = wwu_lc_orcs.206
+    title = wwu_lc_orcs.206.title
+    desc = wwu_lc_orcs.206.desc
+    picture = ARATHI_WEAPONSMITH_eventPicture
     goto = ROOT
     
     hidden = no
     is_triggered_only = yes
 
     trigger = {
-        has_local_concern_level_3 = { TYPE = bandit }
+        has_local_concern_level_3 = { TYPE = orc }
     }
         
     option = {
-        name = wwu_lc_bandits.206.option.a
+        name = wwu_lc_orcs.206.option.a
         
         ai_chance = { factor = 50 }
 
         add_devastation = 100
 
         spawn_big_rebels_by_local_concern = {
-            TYPE = bandit
+            TYPE = orc
         }
     }
 }

@@ -480,6 +480,48 @@ province_event = {
         custom_tooltip = YOU_NEED_CLEAR_TERRAIN_COST
     }
     
+    # Direct Adventurers
+    option = {
+		name = www_province_menu.1.option.direct_adventurers
+        
+        trigger = {
+            owner = {
+                has_estate = estate_adventuring_guild
+            }
+            
+            has_any_type_of_local_concern = yes
+            
+            owner = {
+                treasury = 100
+            }
+        }
+        
+        owner = { 
+            add_treasury = -100
+        }
+        
+        trigger_local_concern_events = yes
+    }
+    
+    option = {
+		name = www_province_menu.1.option.direct_adventurers.lack_cost
+        
+        trigger = {
+            owner = {
+                has_estate = estate_adventuring_guild
+            }
+            
+            has_any_type_of_local_concern = yes
+            
+            owner = {
+                NOT = { treasury = 100 }
+            }
+        }
+        
+        custom_tooltip = YOU_NEED_DIRECT_ADVENTURERS_COST
+    }
+    
+    
     option = {
 		name = www_province_menu.1.option.exit
     }  
