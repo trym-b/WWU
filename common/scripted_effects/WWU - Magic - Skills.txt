@@ -676,3 +676,45 @@ cataclysmic_effect = {
     }
 }
 
+update_mana_regeneration = {
+    every_country = {
+        limit = {
+            has_country_modifier = spellcaster_capabilities
+            
+        }
+        
+        # Idea Regeneration
+        if = {
+            limit = {
+                OR = {
+                    has_idea = dalaran_ideas_3
+                    has_idea = blue_dragonflight_ideas_7
+                    has_idea = tortollan_ideas_5
+                    has_idea = karazhan_ideas_7
+                }
+            }
+            
+            set_variable = {
+                which = mana_chance
+                value = 10
+            }
+    
+            random_list = {
+                90 = { }
+                10 = { add_mana_1 = yes }
+            }
+        }
+        # Default
+        else = {
+            set_variable = {
+                which = mana_chance
+                value = 5
+            }
+    
+            random_list = {
+                95 = { }
+                5 = { add_mana_1 = yes }
+            }
+        }
+    }
+}
