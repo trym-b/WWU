@@ -1,0 +1,508 @@
+namespace = wwu_pandemic
+
+# Pandemic Outbreak
+country_event = {
+	id = wwu_pandemic.1
+	title = wwu_pandemic.1.title
+	desc = wwu_pandemic.1.desc
+	picture = PLAGUEBRINGER_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = pandemic_outbreak_active
+        }
+    }
+	
+	option = {
+		name = wwu_pandemic.1.option.a
+		
+		add_stability = -3
+	}
+}
+
+# Pandemic Passes
+country_event = {
+	id = wwu_pandemic.100
+	title = wwu_pandemic.100.title
+	desc = wwu_pandemic.100.desc
+	picture = ANCIENT_OF_LORE_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = pandemic_outbreak_active
+            set_country_flag = pandemic_outbreak_occured
+        }
+    }
+    
+	option = {
+		name = wwu_pandemic.100.option.a
+		
+		add_stability = 3
+        
+        add_country_modifier = {
+            name = pandemic_recovery
+            duration = 18250
+        }
+	}
+}
+
+
+# Minor Outbreak in [plague_ridden_province.GetName]
+country_event = {
+	id = wwu_pandemic.10
+	title = wwu_pandemic.10.title
+	desc = wwu_pandemic.10.desc
+	picture = PLAGUE_eventPicture
+    goto = plague_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+		any_owned_province = {
+            is_capital = no
+        
+            NOT = {
+                has_province_modifier = plague_ridden_province
+            }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_capital = no
+                
+                    NOT = {
+                        has_province_modifier = plague_ridden_province
+                    }
+                }
+                
+                save_event_target_as = plague_province
+            }
+        }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_pandemic.10.option.a
+		
+		event_target:plague_province = {
+            add_base_tax = -1
+            
+            if = {
+                limit = {
+                    NOT = { base_tax = 1 }
+                }
+                set_base_tax = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.10.option.b
+		
+		event_target:plague_province = {
+            add_base_production = -1
+            
+            if = {
+                limit = {
+                    NOT = { base_production = 1 }
+                }
+                set_base_production = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.10.option.c
+		
+		event_target:plague_province = {
+            add_base_manpower = -1
+            
+            if = {
+                limit = {
+                    NOT = { base_manpower = 1 }
+                }
+                set_base_manpower = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.10.option.d
+		
+        add_yearly_manpower = -1
+        
+		event_target:plague_province = {
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+}
+
+# Major Outbreak in [Root.GetName]
+country_event = {
+	id = wwu_pandemic.11
+	title = wwu_pandemic.11.title
+	desc = wwu_pandemic.11.desc
+	picture = PLAGUE_eventPicture
+    goto = plague_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+		any_owned_province = {
+            is_capital = no
+        
+            NOT = {
+                has_province_modifier = plague_ridden_province
+            }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_capital = no
+                
+                    NOT = {
+                        has_province_modifier = plague_ridden_province
+                    }
+                }
+                
+                save_event_target_as = plague_province
+            }
+        }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_pandemic.11.option.a
+		
+		event_target:plague_province = {
+            add_base_tax = -3
+            
+            if = {
+                limit = {
+                    NOT = { base_tax = 1 }
+                }
+                set_base_tax = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.11.option.b
+		
+		event_target:plague_province = {
+            add_base_production = -3
+            
+            if = {
+                limit = {
+                    NOT = { base_production = 1 }
+                }
+                set_base_production = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.11.option.c
+		
+		event_target:plague_province = {
+            add_base_manpower = -3
+            
+            if = {
+                limit = {
+                    NOT = { base_manpower = 1 }
+                }
+                set_base_manpower = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.11.option.d
+		
+        add_yearly_manpower = -3
+        
+		event_target:plague_province = {
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+}
+
+# Severe Outbreak in [Root.GetName]
+country_event = {
+	id = wwu_pandemic.12
+	title = wwu_pandemic.12.title
+	desc = wwu_pandemic.12.desc
+	picture = PLAGUE_eventPicture
+    goto = plague_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+		any_owned_province = {
+            is_capital = yes
+        
+            NOT = {
+                has_province_modifier = plague_ridden_province
+            }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_capital = yes
+                
+                    NOT = {
+                        has_province_modifier = plague_ridden_province
+                    }
+                }
+                
+                save_event_target_as = plague_province
+            }
+        }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	
+	option = {
+		name = wwu_pandemic.12.option.a
+		
+		event_target:plague_province = {
+            add_base_tax = -5
+            
+            if = {
+                limit = {
+                    NOT = { base_tax = 1 }
+                }
+                set_base_tax = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.12.option.b
+		
+		event_target:plague_province = {
+            add_base_production = -5
+            
+            if = {
+                limit = {
+                    NOT = { base_production = 1 }
+                }
+                set_base_production = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.12.option.c
+		
+		event_target:plague_province = {
+            add_base_manpower = -5
+            
+            if = {
+                limit = {
+                    NOT = { base_manpower = 1 }
+                }
+                set_base_manpower = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.12.option.d
+		
+        add_yearly_manpower = -10
+        
+		event_target:plague_province = {
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+}
+
+# [Root.Monarch.GetName] has fallen ill
+country_event = {
+	id = wwu_pandemic.13
+	title = wwu_pandemic.13.title
+	desc = wwu_pandemic.13.desc
+	picture = PLAGUE_eventPicture
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        NOT = { is_immortal_lifespan = yes }
+		has_ruler = yes
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	
+	option = {
+		name = wwu_pandemic.13.option.a
+		
+		kill_ruler = yes
+	}
+    option = {
+		name = wwu_pandemic.13.option.b
+		
+		add_adm_power = -100
+        
+        random = {
+            chance = 25
+            
+            kill_ruler = yes
+        }
+	}
+}
+
+# Court Infection
+country_event = {
+	id = wwu_pandemic.14
+	title = wwu_pandemic.14.title
+	desc = wwu_pandemic.14.desc
+	picture = PLAGUE_eventPicture
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            has_adm_advisor = yes
+            has_dip_advisor = yes
+            has_mil_advisor = yes
+        }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	
+	option = {
+		name = wwu_pandemic.14.option.a
+		
+		add_adm_power = -100
+        
+        random_list = {
+            33 = {
+                trigger = {
+                    has_adm_advisor = yes
+                }
+                
+                kill_advisor_by_category_effect = {
+                    ADM = yes
+                }
+            }
+            33 = {
+                trigger = {
+                    has_dip_advisor = yes
+                }
+                
+                kill_advisor_by_category_effect = {
+                    DIP = yes
+                }
+            }
+            33 = {
+                trigger = {
+                    has_mil_advisor = yes
+                }
+                
+                kill_advisor_by_category_effect = {
+                    MIL = yes
+                }
+            }
+            33 = {
+                
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.13.option.b
+		
+		add_prestige = -25
+        
+        kill_advisor_by_category_effect = {
+            ADM = yes
+        }
+        kill_advisor_by_category_effect = {
+            DIP = yes
+        }
+        kill_advisor_by_category_effect = {
+            MIL = yes
+        }
+	}
+}

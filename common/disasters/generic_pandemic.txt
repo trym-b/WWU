@@ -1,0 +1,131 @@
+pandemic_outbreak = {
+	potential = {
+        # These cultures wouldn't be affected by a pandemic
+        NOT = { culture_group = culture_group_old_ones }
+        NOT = { culture_group = culture_group_aqir }
+        NOT = { culture_group = culture_group_mantid }
+        NOT = { culture_group = culture_group_demonic }
+        NOT = { culture_group = culture_group_scourge }
+        NOT = { culture_group = culture_group_undead }
+        NOT = { culture_group = culture_group_crypt_fiends }
+        NOT = { culture_group = culture_group_ghost }
+        NOT = { culture_group = culture_group_fire }
+        NOT = { culture_group = culture_group_earth }
+        NOT = { culture_group = culture_group_water }
+        NOT = { culture_group = culture_group_air }
+        NOT = { culture_group = culture_group_nature }
+        NOT = { culture_group = culture_group_sha }
+    
+        # Cooldown period
+        NOT = { has_country_modifier = pandemic_recovery }
+        
+        # Only countries with a decent size should be affected
+        total_development = 100
+	}
+    
+	can_start = {
+		has_any_disaster = no
+        
+		OR = {
+            # First pandemic
+            AND = {
+                NOT = { has_country_flag = pandemic_outbreak_occured }
+                grown_by_development = 250
+            }
+            # Further pandemics
+            AND = {
+                has_country_flag = pandemic_outbreak_occured
+                total_development = 300
+                any_owned_province = {
+                    development = 20
+                }
+            }
+            hidden_trigger = {
+                # May occur for AI if any province they own is highly developed
+                AND = {
+                    ai = yes
+                    any_owned_province = {
+                        development = 30
+                    }
+                }
+            }
+        }
+	}
+	
+	can_stop = {
+		has_any_disaster = yes
+	}
+	
+	progress = {
+		modifier = {
+			factor = 1
+            
+			any_owned_province = {
+                development = 10
+            }
+		}		
+		modifier = {
+			factor = 1
+            
+			any_owned_province = {
+                development = 15
+            }
+		}	
+        modifier = {
+			factor = 1
+            
+			any_owned_province = {
+                development = 0
+            }
+		}	
+        modifier = {
+			factor = 1
+            
+			any_owned_province = {
+                development = 25
+            }
+		}	
+        modifier = {
+			factor = 1
+            
+			any_owned_province = {
+                development = 30
+            }
+		}	
+	}
+    
+	can_end = {
+        OR = {
+            had_country_flag = {
+                flag = pandemic_outbreak_active
+                days = 3650
+            }
+            calc_true_if = {
+                all_owned_province = {
+                    has_province_modifier = plague_ridden_province
+                }
+                amount = 10
+            }
+        }
+	}
+
+	modifier = {
+		stability_cost_modifier = 1.0
+        min_autonomy = 25
+	}	
+
+	on_start = wwu_pandemic.1
+	on_end = wwu_pandemic.100
+	
+	on_monthly = {
+		random_events = { 
+			1000 = 0
+			100 = wwu_pandemic.10
+			100 = wwu_pandemic.11
+			100 = wwu_pandemic.12
+			10 = wwu_pandemic.13
+			50 = wwu_pandemic.14
+		}
+	}
+}
+
