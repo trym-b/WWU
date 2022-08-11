@@ -665,11 +665,18 @@ setup_faction_system = {
 # Utility
 #--------------------------
 set_head_of_faction = {
-    every_country = {
+    if = {
         limit = {
-            has_country_modifier = head_of_$faction$
+            any_country = {
+                has_country_modifier = head_of_$faction$
+            }
         }
-        remove_country_modifier = head_of_$faction$
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_$faction$
+            }
+            remove_country_modifier = head_of_$faction$
+        }
     }
     add_country_modifier = {
         name = head_of_$faction$

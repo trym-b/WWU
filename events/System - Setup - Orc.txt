@@ -84,3 +84,160 @@ country_event = {
         }
 	}
 }
+
+# Ogrimmar
+country_event = {
+	id = wwu_setup_orc.10
+	title = wwu_setup_orc.10.title
+	desc = wwu_setup_orc.10.desc
+	picture = ENTERING_ORGRIMMAR_eventPicture
+
+	fire_only_once = yes
+    
+	trigger = {
+        OR = {
+            AND = {
+                ai = no
+                has_country_flag = host_player
+            }
+            is_great_power = yes
+        }
+        NOT = { exists = A48 }
+        NOT = { has_global_flag = setup_orgrimmar }
+        
+        # 50 years after Orcish invasion
+        had_global_flag = {
+            flag = orcish_horde_established
+            days = 18250
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_orgrimmar
+        }
+    }
+    
+    mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = wwu_setup_orc.10.option.a
+        
+        area_orgrimmar = {
+            cede_province = A48
+            add_core = A48
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        area_orgrimmar_exterior = {
+            cede_province = A48
+            add_core = A48
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        
+        hidden_effect = {
+            A48 = {
+                country_event = { id = wwu_setup_orc.11 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_orc.10.option.b
+        
+        trigger = {
+            OR = {
+                area_orgrimmar = {
+                    owned_by = ROOT
+                }
+                area_orgrimmar_exterior = {
+                    owned_by = ROOT
+                }
+            }
+        }
+        
+        area_orgrimmar = {
+            add_core = A48
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        area_orgrimmar_exterior = {
+            cede_province = A48
+            add_core = A48
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Orgrimmar - Setup Country
+country_event = {
+	id = wwu_setup_orc.11
+	title = wwu_setup_orc.11.title
+	desc = wwu_setup_orc.11.desc
+	picture = ENTERING_ORGRIMMAR_eventPicture
+
+	is_triggered_only = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+    immediate = {
+        hidden_effect = {
+            set_country_flag = ignore_horde_vote
+        }
+    }
+
+	option = {
+		name = wwu_setup_orc.11.option.a
+        
+        hidden_effect = {
+            set_global_flag = setup_the_horde
+            set_global_flag = horde_exists
+        }
+        
+        set_head_of_faction = {
+            faction = horde
+        }
+        set_member_of_faction = {
+            faction = horde
+        }
+        
+        define_ruler = {
+            name = "Thrall"
+            dynasty = "Durotan"
+            adm = 4
+            dip = 5
+            mil = 3
+            min_age = 40
+            max_age = 60
+        }
+        
+        set_ruler_flag = ruler_portrait_thrall
+        
+        setup_spellcaster_history = {
+            APTITUDE = 3
+            FINESSE = 3
+            CONCENTRATION = 3
+            MANA = 5
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = ignore_horde_vote
+            reveal_all_discovery = yes
+        }
+    }
+}
