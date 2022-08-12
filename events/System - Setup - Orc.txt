@@ -85,7 +85,7 @@ country_event = {
 	}
 }
 
-# Ogrimmar
+# Orgrimmar
 country_event = {
 	id = wwu_setup_orc.10
 	title = wwu_setup_orc.10.title
@@ -93,6 +93,7 @@ country_event = {
 	picture = ENTERING_ORGRIMMAR_eventPicture
 
 	fire_only_once = yes
+    major = yes
     
 	trigger = {
         OR = {
@@ -178,6 +179,22 @@ country_event = {
             factor = 0
         }
 	}
+    
+    after = {   
+        random_country = {
+            limit = {
+                OR = {
+                    AND = {
+                        ai = no
+                        has_country_flag = host_player
+                    }
+                    is_great_power = yes
+                }
+            }
+            
+            country_event = { id = wwu_setup_orc.12 random = 90 }
+        }
+    }
 }
 
 # Orgrimmar - Setup Country
@@ -237,6 +254,106 @@ country_event = {
     after = {
         hidden_effect = {
             clr_country_flag = ignore_horde_vote
+            reveal_all_discovery = yes
+        }
+    }
+}
+
+# Warsong Escapades
+country_event = {
+	id = wwu_setup_orc.12
+	title = wwu_setup_orc.12.title
+	desc = wwu_setup_orc.12.desc
+	picture = GROMMASH_HELLSCREAM_eventPicture
+
+	is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_global_flag = setup_warsong }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_warsong
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_orc.12.option.a
+        
+        area_splintertree_post = {
+            cede_province = A35
+            add_core = A35
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        
+        hidden_effect = {
+            A35 = {
+                country_event = { id = wwu_setup_orc.13 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_orc.12.option.b
+        
+        trigger = {
+            area_splintertree_post = {
+                owned_by = ROOT
+            }
+        }
+        
+        area_splintertree_post = {
+            add_core = A35
+            change_culture = culture_orc
+            change_religion = shamanism
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Warsong - Setup Country
+country_event = {
+	id = wwu_setup_orc.13
+	title = wwu_setup_orc.13.title
+	desc = wwu_setup_orc.13.desc
+	picture = GROMMASH_HELLSCREAM_eventPicture
+
+	is_triggered_only = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_orc.13.option.a
+        
+        define_ruler = { 
+            name = "Grom" 
+            dynasty = "Hellscream" 
+            adm = 2
+            dip = 2
+            mil = 6
+            min_age = 60
+            max_age = 90
+        }
+        
+        set_ruler_flag = ruler_portrait_grommash
+	}
+    
+    after = {
+        hidden_effect = {
             reveal_all_discovery = yes
         }
     }

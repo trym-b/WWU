@@ -318,3 +318,58 @@ establish_azeroth_clan = {
         always = no
 	}
 }
+
+#---------------------------------------
+# Enforce Vassal
+#---------------------------------------
+enforce_vassal = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = enforce_vassal_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        FROM = { 
+            is_subject_of = ROOT
+            is_subject_of_type = tributary_vassal
+        }
+	}
+    
+	is_allowed = {
+        FROM = { 
+            is_subject_of = ROOT
+            is_subject_of_type = tributary_vassal
+            NOT = { liberty_desire = 5 }
+            has_opinion = {
+                who = ROOT
+                value = 180
+            }
+        }
+	}
+	on_accept = {
+        create_subject = {
+            subject_type = vassal
+            subject = FROM
+        }
+	}
+	on_decline = {
+        create_subject = {
+            subject_type = vassal
+            subject = FROM
+        }
+	}
+	
+	ai_acceptance = {
+        add_entry = {
+			name = BASE
+			export_to_variable = {
+				which = ai_value
+				value = 1000
+			}
+		}
+	}
+	ai_will_do = {
+        always = no
+	}
+}
