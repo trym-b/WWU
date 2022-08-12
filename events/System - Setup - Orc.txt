@@ -124,10 +124,10 @@ country_event = {
         NOT = { exists = A48 }
         NOT = { has_global_flag = setup_orgrimmar }
         
-        # 50 years after Orcish invasion
+        # Set by the Thrall story event chain
         had_global_flag = {
-            flag = orcish_horde_established
-            days = 18250
+            flag = thralls_journey
+            days = 365
         }
     }
     
@@ -253,12 +253,14 @@ country_event = {
             name = "Thrall"
             dynasty = "Durotan"
             adm = 4
-            dip = 5
-            mil = 3
-            min_age = 40
-            max_age = 60
+            dip = 6
+            mil = 5
+            min_age = 20
+            max_age = 30
         }
-        
+            
+        set_ruler_flag = is_immortal
+        set_ruler_flag = shaman_personality
         set_ruler_flag = ruler_portrait_thrall
         
         setup_spellcaster_history = {
@@ -686,6 +688,15 @@ country_event = {
                 who = V01
             }
         }
+        
+        # Horde alliance
+        if = {
+            limit = {
+                exists = U03
+            }
+            
+            create_alliance = U03
+        }
 	}
     
     after = {
@@ -848,6 +859,15 @@ country_event = {
             }
             
             remove_country_modifier = member_of_old_horde
+        }
+        
+        # Horde alliance
+        if = {
+            limit = {
+                exists = U03
+            }
+            
+            create_alliance = U03
         }
 	}
     
