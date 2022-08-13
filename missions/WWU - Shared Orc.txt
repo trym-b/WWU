@@ -56,10 +56,41 @@ wwu_shared_orc_column_1 = {
 		}
 	}
     
+    wwu_shared_orc_prepare_for_invasion = {
+		icon = mission_fel_orc
+        position = 2
+		required_missions = { }
+        completed_by = 592.1.1
+        
+		trigger = {
+            has_country_modifier = head_of_old_horde
+            NOT = { owns_core_province = 3792 }
+            mil_power = 200
+            3792 = {
+                owner = {
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+		}
+        provinces_to_highlight = {
+            province_id = 3792
+            NOT = { owned_by = ROOT }
+        }
+		effect = {
+			add_mil_power = -200
+            
+            3792 = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+            }
+		}
+	}
     
     wwu_shared_orc_construct_the_dark_portal = {
 		icon = mission_dark_portal_blue
-        position = 2
+        position = 3
 		required_missions = { }
         completed_by = 592.1.1
         
@@ -100,7 +131,7 @@ wwu_shared_orc_column_1 = {
     
     wwu_shared_orc_establish_foothold = {
 		icon = mission_defend_towers
-        position = 3
+        position = 4
 		required_missions = { }
         completed_by = 592.1.1
         

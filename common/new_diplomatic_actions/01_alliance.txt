@@ -439,6 +439,15 @@ invite_to_old_horde = {
 		FROM = {
 			NOT = { cannot_join_old_horde = yes }
 			NOT = { has_country_modifier = recent_faction_interaction }
+            # Only allow Draenor nations before the Dark Portal is built
+            if = {
+                limit = {
+                    has_global_flag = dark_portal_built
+                }
+                capital_scope = {
+                    continent = continent_draenor
+                }
+            }
 		}
 	}
 	on_accept = {
@@ -1056,6 +1065,15 @@ join_the_old_horde = {
 		NOT = { has_country_modifier = member_of_old_horde }
         NOT = { cannot_join_old_horde = yes }
         NOT = { has_country_modifier = recent_faction_interaction }
+        # Only allow Draenor nations before the Dark Portal is built
+        if = {
+            limit = {
+                has_global_flag = dark_portal_built
+            }
+            capital_scope = {
+                continent = continent_draenor
+            }
+        }
         FROM = { 
             has_country_modifier = head_of_old_horde
         }
