@@ -10,44 +10,62 @@ country_event = {
     fire_only_once = yes
     
 	trigger = {
-		current_age = age_scourge
+		any_country = {
+			culture_group = culture_group_scourge
+            war_with = ROOT
+		}
         
 		tag = A12 # Gilneas
-		exists = A08 # Lordaeron
-        
 		owns = 914 # Greymane Gate
-		
-        # Greymane Gate
+        
         914 = {
             NOT = {
-                OR = {
-					has_building = wow_fort_1
-					has_building = wow_fort_2
-					has_building = wow_fort_3
-					has_building = wow_fort_4
-				}
+                has_great_project = {
+                    type = gp_greymane_wall
+                }
             }
         }
 	}
 	
 	mean_time_to_happen = {
-		months = 120
+		months = 12
 	}
 	
 	option = {
 		name = wwu_gilneas.1.option.a
 		
+        custom_tooltip = ALLOW_GREYMANE_WALL_TT
+        hidden_effect = {
+            set_country_flag = can_build_greymane_wall
+        }
+        
 		add_prestige = -25
         
-        # Grant Lordaeron all non Gilnea provinces
-		every_owned_province = {
-			limit = {
-				NOT = { region = region_gilneas }
-			}
-			cede_province = A08 
-			add_core = A08
-			remove_core = A12
-		}
+        # Pyrewood
+        if = {
+            limit = {
+                owns = 2962
+            }
+            2962 = {
+                spawn_rebels = {
+                    type = nobel_rebels
+                    size = 5
+                }
+            }
+        }
+        
+        # Ambermill
+        if = {
+            limit = {
+                owns = 720
+            }
+            720 = {
+                spawn_rebels = {
+                    type = nobel_rebels
+                    size = 5
+                }
+            }
+        }
 		
         # Greymane Gate
 		914 = {
@@ -60,7 +78,7 @@ country_event = {
 	option = {
 		name = wwu_gilneas.1.option.b
 		
-		add_prestige = 20
+		add_prestige = 25
         
 		ai_chance = { factor = 0 }
 	}
