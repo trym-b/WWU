@@ -1,252 +1,305 @@
 namespace = wwu_ruler_education
 
-# For regular races, i.e. Humans
 # The Education of [Root.Monarch.GetName]
-# "The previous [Root.Monarch.GetTitle] has passed away, it is time for [Root.GetName] to pick a new [Root.Monarch.GetTitle]. However, if the people think ill of the chosen [Root.Monarch.GetTitle], there is likely to be pretenders to the position."
 country_event = {
 	id = wwu_ruler_education.1
 	title = wwu_ruler_education.1.title
 	desc = wwu_ruler_education.1.desc
-	picture = QUEST_FOR_EPIC_LOOT_eventPicture
+	picture = HIDDEN_WISDOM_eventPicture
     
     is_triggered_only = yes
     
 	trigger = {
-	    is_civilized = yes
-	    NOT = { primary_culture = culture_kul_tiran }
-	    NOT = { has_country_flag = missing_diplomat_storyline }
+	    OR = {
+            has_country_flag = warrior_personality_education
+            has_country_flag = paladin_personality_education
+            has_country_flag = priest_personality_education
+            has_country_flag = rogue_personality_education
+            has_country_flag = mage_personality_education
+            has_country_flag = druid_personality_education
+            has_country_flag = hunter_personality_education
+            has_country_flag = shaman_personality_education
+            has_country_flag = death_knight_personality_education
+            has_country_flag = monk_personality_education
+            has_country_flag = demon_hunter_personality_education
+        }
 	}
 
 	option = {
 		name = wwu_ruler_education.1.option.a
 		
+        ai_chance = {
+            factor = 50
+        }
+        
+        add_adm_power = -50
+        add_dip_power = -50
+        add_mil_power = -50
+        
+        if = {
+            limit = {
+                has_country_flag = warrior_personality_education
+            }
             
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_1_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_2_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_3_civilized
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_clergy }
-				
-			add_estate_loyalty = {
-				estate = estate_clergy
-				loyalty = 5
-			}
-		}
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_warrior = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = paladin_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_paladin = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = priest_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_priest = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = rogue_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_rogue = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = mage_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_mage = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = warlock_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_warlock = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = druid_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_druid = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = hunter_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_hunter = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = shaman_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_shaman = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = death_knight_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_death_knight = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = monk_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_monk = yes
+        }
+        else_if = {
+            limit = {
+                has_country_flag = demon_hunter_personality_education
+            }
+            
+            hidden_effect = {
+                clr_country_flag = warrior_personality_education
+                clr_country_flag = paladin_personality_education
+                clr_country_flag = priest_personality_education
+                clr_country_flag = rogue_personality_education
+                clr_country_flag = mage_personality_education
+                clr_country_flag = druid_personality_education
+                clr_country_flag = hunter_personality_education
+                clr_country_flag = shaman_personality_education
+                clr_country_flag = death_knight_personality_education
+                clr_country_flag = monk_personality_education
+                clr_country_flag = demon_hunter_personality_education
+            }
+            trained_as_demon_hunter = yes
+        }
 	}
 
 	option = {
 		name = wwu_ruler_education.1.option.b
 		
-		
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_1_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_2_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_3_civilized
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_traders }
-				
-			add_estate_loyalty = {
-				estate = estate_traders
-				loyalty = 5
-			}
-		}
+        hidden_effect = {
+            clr_country_flag = warrior_personality_education
+            clr_country_flag = paladin_personality_education
+            clr_country_flag = priest_personality_education
+            clr_country_flag = rogue_personality_education
+            clr_country_flag = mage_personality_education
+            clr_country_flag = druid_personality_education
+            clr_country_flag = hunter_personality_education
+            clr_country_flag = shaman_personality_education
+            clr_country_flag = death_knight_personality_education
+            clr_country_flag = monk_personality_education
+            clr_country_flag = demon_hunter_personality_education
+        }
+        
+		add_prestige = 10
+        
+        ai_chance = {
+            factor = 50
+        }
 	}
 	
-	option = {
-		name = wwu_ruler_education.1.option.c
-		
-		
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_1_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_2_civilized
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_3_civilized
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_nobility }
-				
-			add_estate_loyalty = {
-				estate = estate_nobility
-				loyalty = 5
-			}
-		}
-	}
-}
-
-# For savage races, i.e. Orcs
-# Ascension of [Root.Monarch.GetName]
-# As the cycle of life continues, [Root.Monarch.GetName] has arisen to the position of [Root.Monarch.GetTitle] in [Root.GetName]. 
-country_event = {
-	id = wwu_ruler_education.2
-	title = wwu_ruler_education.2.title
-	desc = wwu_ruler_education.2.desc
-	picture = QUEST_FOR_EPIC_LOOT_eventPicture
-    
-    is_triggered_only = yes
-    
-	trigger = {
-        is_uncivilized = yes
-		NOT = { has_country_flag = missing_diplomat_storyline }
-	}
-
-    option = {
-		name = wwu_ruler_education.2.option.a
-		
-		
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_1_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_2_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_adm_3_savage
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_clergy }
-				
-			add_estate_loyalty = {
-				estate = estate_clergy
-				loyalty = 5
-			}
-		}
-	}
-
-	option = {
-		name = wwu_ruler_education.2.option.b
-		
-		
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_1_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_2_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_dip_3_savage
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_traders }
-				
-			add_estate_loyalty = {
-				estate = estate_traders
-				loyalty = 5
-			}
-		}
-	}
-	
-	option = {
-		name = wwu_ruler_education.2.option.c
-		
-		
-        ##if = { limit = { has_global_flag = enable_event_logging } }
-		random_list = {
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_1_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_2_savage
-					duration = -1
-				}
-			}
-			33 = {
-				add_ruler_modifier = {
-					name = ruler_education_mil_3_savage
-					duration = -1
-				}
-			}
-		}
-		
-		if = {
-			limit = { has_estate = estate_nobility }
-				
-			add_estate_loyalty = {
-				estate = estate_nobility
-				loyalty = 5
-			}
-		}
-	}
 }

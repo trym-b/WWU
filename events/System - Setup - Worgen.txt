@@ -1,0 +1,173 @@
+namespace = wwu_setup_worgen
+
+# Wolf Cult
+country_event = {
+	id = wwu_setup_worgen.1
+	title = wwu_setup_worgen.1.title
+	desc = wwu_setup_worgen.1.desc
+	picture = RAGING_WORGEN_eventPicture
+
+	fire_only_once = yes
+    
+	trigger = {
+        has_global_flag = enable_worgen
+        owns = 686 # Shadowfang Keep
+        NOT = { exists = P29 }
+        NOT = { has_global_flag = setup_wolf_cult }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_wolf_cult
+        }
+    }
+    
+    mean_time_to_happen = {
+		months = 360
+	}
+
+	option = {
+		name = wwu_setup_worgen.1.option.a
+        
+        area_shadowfang_keep = {
+            cede_province = P29
+            add_core = P29
+            change_culture = culture_wolfcult
+            change_religion = shadow
+        }
+	}
+    
+    after = {
+        P29 = {
+            country_event = { id = wwu_setup_worgen.2 days = 3 }
+        }
+    }
+}
+
+# Wolf Cult
+country_event = {
+	id = wwu_setup_worgen.2
+	title = wwu_setup_worgen.2.title
+	desc = wwu_setup_worgen.2.desc
+	picture = RAGING_WORGEN_eventPicture
+
+	is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_worgen.2.option.a
+        
+        define_ruler = {
+            name = "Alpha" 
+            dynasty = "Prime" 
+            adm = 3
+            dip = 2
+            mil = 6
+        }
+        
+        add_mil_power = 250
+	}
+    
+    after = {
+        hidden_effect = {
+            reveal_all_discovery = yes
+        }
+    }
+}
+
+# Nightbane
+country_event = {
+	id = wwu_setup_worgen.3
+	title = wwu_setup_worgen.3.title
+	desc = wwu_setup_worgen.3.desc
+	picture = RAGING_WORGEN_eventPicture
+
+	fire_only_once = yes
+    
+	trigger = {
+        had_global_flag = {
+            flag = enable_worgen
+            days = 18250
+        }
+        owns = 1057 # Brightwood Grove
+        
+        NOT = { exists = P31 }
+        NOT = { has_global_flag = setup_nightbane }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_nightbane
+        }
+    }
+    
+    mean_time_to_happen = {
+		months = 360
+	}
+
+	option = {
+		name = wwu_setup_worgen.3.option.a
+        
+        1057 = {
+            cede_province = P31
+            add_core = P31
+            change_culture = culture_wolfcult
+            change_religion = shadow
+        }
+        970 = {
+            cede_province = P31
+            add_core = P31
+            change_culture = culture_wolfcult
+            change_religion = shadow
+        }
+        586 = {
+            cede_province = P31
+            add_core = P31
+            change_culture = culture_wolfcult
+            change_religion = shadow
+        }
+	}
+    
+    after = {
+        P31 = {
+            country_event = { id = wwu_setup_worgen.4 days = 3 }
+        }
+    }
+}
+
+# Nightbane
+country_event = {
+	id = wwu_setup_worgen.4
+	title = wwu_setup_worgen.4.title
+	desc = wwu_setup_worgen.4.desc
+	picture = RAGING_WORGEN_eventPicture
+
+	is_triggered_only = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_worgen.4.option.a
+        
+        define_ruler = {
+            name = "Gervase" 
+            dynasty = "the Nightbane" 
+            adm = 3
+            dip = 3
+            mil = 6
+        }
+        
+        add_mil_power = 250
+	}
+    
+    after = {
+        hidden_effect = {
+            reveal_all_discovery = yes
+        }
+    }
+}
