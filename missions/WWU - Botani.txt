@@ -1,0 +1,828 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_botani_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = EVB
+	}
+    
+	has_country_shield = yes
+	
+}
+
+wwu_botani_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = EVB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_control_the_everbloom_wilds = {
+		icon = mission_everbloom
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            area_everbloom_wilds = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_highpass = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_everbloom_wilds
+                area = area_highpass
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_gorgrond = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_secure_the_southern_passes = {
+		icon = mission_gorgrond
+        position = 2
+        
+		required_missions = { wwu_control_the_everbloom_wilds }
+        
+		trigger = {
+            area_tangleheart = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_bastion_rise = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_tangleheart
+                area = area_bastion_rise
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_talador = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_secure_the_eastern_passes = {
+		icon = mission_gorgrond
+        position = 3
+        
+        required_missions = { wwu_secure_the_southern_passes }
+        
+		trigger = {
+            area_stonemaul_arena = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_magnarok = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_stonemaul_arena
+                area = area_magnarok
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_frostfire_ridge = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_to_the_sea_of_zang = {
+		icon = mission_zangar_sea
+        position = 5
+        
+		required_missions = { wwu_secure_the_eastern_passes }
+        
+		trigger = {
+            area_gromgar = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_frostwall = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_orunai = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_gromgar
+                area = area_frostwall
+                area = area_orunai
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            area_highmaul = {
+                add_permanent_claim = ROOT
+            }
+            
+			add_country_modifier = {
+                name = mission_roots_of_the_everbloom
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_end_of_the_gorians = {
+		icon = mission_ogre_king
+        position = 6
+        
+		required_missions = { wwu_to_the_sea_of_zang }
+        
+		trigger = {
+            NOT = {
+                any_country = { 
+                    capital_scope = {
+                        continent = continent_draenor
+                    }
+                    culture_group = culture_group_ogre
+                }
+            }
+            area_highmaul = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_highmaul
+                owner = {
+                    capital_scope = {
+                        continent = continent_draenor
+                    }
+                    culture_group = culture_group_ogre
+                }
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_highmaul_infestation
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_children_of_zang = {
+		icon = mission_witherbark
+        position = 8
+        
+		required_missions = { wwu_culling_of_the_south }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 12
+                
+                all_owned_province = {
+                    development = 10
+                    continent = continent_draenor
+                }
+            }
+		}
+		provinces_to_highlight = {
+            NOT = { development = 10 }
+            continent = continent_draenor
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_sporemound_creation
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_botani_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = EVB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_create_the_infested = {
+		icon = mission_infested_orc
+        position = 2
+        
+		required_missions = { 
+            wwu_control_the_everbloom_wilds
+        }
+        
+		trigger = {
+            any_owned_province = {
+                OR = {
+                    culture_group = culture_group_orc
+                    culture_group = culture_group_draenei
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_empty = no
+            OR = {
+                culture_group = culture_group_orc
+                culture_group = culture_group_draenei
+            } 
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			custom_tooltip = SPECIALIST_INFESTED_1_UNLOCK_TT
+            hidden_effect = {
+                set_country_flag = infested_unlock_1
+            }
+		}
+	}
+    
+    wwu_destroy_the_foundry = {
+		icon = mission_blacksmithing
+        position = 3
+        
+		required_missions = { 
+            wwu_create_the_infested
+        }
+        
+		trigger = {
+            3836 = {
+                has_province_modifier = scorched_earth
+            }
+            area_blackrock_foundry = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_gronn_canyon = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_blackrock_foundry
+                area = area_gronn_canyon
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_infested_machinery
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_culling_of_the_north = {
+		icon = mission_genesaur
+        position = 4
+        
+		required_missions = { 
+            wwu_destroy_the_foundry
+            wwu_secure_the_eastern_passes
+        }
+        
+		trigger = {
+            region_frostfire_ridge = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_gorgrond = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_farahlon = {
+                type = all
+                is_primal_culture = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_frostfire_ridge
+                region = region_gorgrond
+                region = region_farahlon
+            }
+            NOT = { 
+                is_primal_culture = yes 
+            }
+		}
+        
+		effect = {
+			custom_tooltip = SPECIALIST_INFESTED_2_UNLOCK_TT
+            hidden_effect = {
+                set_country_flag = infested_unlock_2
+            }
+            
+            add_country_modifier = {
+                name = mission_northern_dominance
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_to_the_jungles_of_naanu = {
+		icon = mission_orchid
+        position = 5
+
+		trigger = {
+            mission_completed = wwu_securing_farahlon
+            
+            area_temple_of_shanaar = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_zethgol = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            3786 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 3786
+                area = area_temple_of_shanaar
+                area = area_zethgol
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			area_zangarra = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+            }
+		}
+	}
+    
+    wwu_in_defense_of_our_kin = {
+		icon = mission_botani_hut
+        position = 6
+        
+		required_missions = { 
+            wwu_to_the_jungles_of_naanu
+        }
+        
+		trigger = {
+            3797 = {
+                is_primal_culture = yes 
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 3797
+            NOT = { is_primal_culture = yes  }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_sporeling_integration
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_culling_of_the_south = {
+		icon = mission_genesaur
+        position = 7
+        
+		required_missions = { 
+            wwu_end_of_the_gorians
+            wwu_in_defense_of_our_kin
+            wwu_end_of_the_apexis
+        }
+        
+		trigger = {
+            region_talador = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_tanaan_jungle = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_ashran = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_nagrand_draenor = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_spires_of_arak = {
+                type = all
+                is_primal_culture = yes
+            }
+            region_shadowmoon_valley_draenor = {
+                type = all
+                is_primal_culture = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_talador
+                region = region_tanaan_jungle
+                region = region_ashran
+                region = region_nagrand_draenor
+                region = region_spires_of_arak
+                region = region_shadowmoon_valley_draenor
+            }
+            NOT = { 
+                is_primal_culture = yes 
+            }
+		}
+        
+		effect = {
+			custom_tooltip = SPECIALIST_INFESTED_3_UNLOCK_TT
+            hidden_effect = {
+                set_country_flag = infested_unlock_3
+            }
+            
+            add_country_modifier = {
+                name = mission_southern_dominance
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_a_new_champion = {
+		icon = mission_sporemound
+        position = 8
+        
+		required_missions = { 
+            wwu_culling_of_the_south
+        }
+        
+		trigger = {
+            capital_scope = {
+                development = 30
+            }
+		}
+		provinces_to_highlight = {
+            is_capital = yes
+            owned_by = ROOT
+		}
+        
+		effect = {
+			change_primary_culture = culture_sporemound
+            capital_scope = {
+                area = {
+                    change_culture = culture_sporemound
+                }
+            }
+            
+            define_ruler = {
+                change_adm = 7
+                change_dip = 7
+                change_mil = 7
+            }
+            
+            hidden_effect = {
+                set_ruler_flag = is_immortal
+            }
+		}
+	}
+    
+    wwu_the_evergrowth = {
+		icon = mission_everbloom
+        position = 9
+        
+		required_missions = { 
+            wwu_a_new_champion
+        }
+        
+		trigger = {
+            capital_scope = {
+                development = 40
+            }
+            stability = 3
+            NOT = { unrest = 1 }
+            NOT = { num_of_rebel_armies = 1}
+		}
+        
+		effect = {
+			override_country_name = EVERGROWTH
+            
+            add_country_modifier = {
+                name = mission_the_evergrowth
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_through_the_dark_portal = {
+		icon = mission_dark_portal_blue
+        position = 10
+        
+		required_missions = { 
+            wwu_the_evergrowth
+        }
+        
+		trigger = {
+            region_blasted_lands = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            region_swamp_of_sorrows = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_blasted_lands
+                region = region_swamp_of_sorrows
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			custom_tooltip = INFESTATION_CB_TT
+            hidden_effect = {
+                set_country_flag = unlock_infestation_cb
+            }
+            
+            add_country_modifier = {
+                name = mission_infest_the_world
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_botani_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = EVB
+	}
+    
+	has_country_shield = yes
+	
+	wwu_securing_farahlon = {
+		icon = mission_defend_towers
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            region_farahlon = {
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            region = region_farahlon
+            NOT = {
+                has_fort_building_trigger = yes
+            }
+			NOT = { owned_by = ROOT }
+		}
+		effect = {
+			add_stability = 1
+		}
+	}
+    
+    wwu_holy_ground = {
+		icon = mission_orbital_strike
+        position = 2
+        
+		required_missions = { 
+            wwu_securing_farahlon
+        }
+        
+		trigger = {
+            area_everbloom_wilds = {    
+                type = all
+                
+                has_tax_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            area = area_everbloom_wilds
+            NOT = {
+                has_tax_building_trigger = yes
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_reverence_of_the_genesaur
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_ashes_of_our_fallen = {
+		icon = mission_fungal_whale
+        position = 3
+        
+		required_missions = { 
+            wwu_holy_ground
+        }
+        
+		trigger = {
+            region_farahlon = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            region_tanaan_jungle = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_farahlon
+                region = region_tanaan_jungle
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_fertile_ash
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_gnarlgars_forests = {
+		icon = mission_botani_hut
+        position = 5
+        
+		trigger = {
+            mission_completed = wwu_secure_the_eastern_passes
+            
+            area_shattrath_draenor = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_auchindoun_draenor = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_tuurem_draenor = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_shattrath_draenor
+                area = area_auchindoun_draenor
+                area = area_tuurem_draenor
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_draenei_infestation
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_end_of_the_apexis = {
+		icon = mission_skyreach
+        position = 6
+        
+		required_missions = { 
+            wwu_gnarlgars_forests
+        }
+        
+		trigger = {
+            area_skyreach = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            NOT = {
+                any_country = { 
+                    capital_scope = {
+                        continent = continent_draenor
+                    }
+                    culture_group = culture_group_arrakoa
+                }
+            }
+		}
+		provinces_to_highlight = {
+            area = area_skyreach
+            owner = {
+                capital_scope = {
+                    continent = continent_draenor
+                }
+                culture_group = culture_group_arrakoa
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_arrakoa_infestation
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_genesaur_legions = {
+		icon = mission_genesaur
+        position = 8
+        
+		required_missions = { 
+            wwu_culling_of_the_south
+        }
+        
+		trigger = {
+            land_forcelimit = 100
+            army_size_percentage = 0.8
+            manpower_percentage = 1.0
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_genesaur_brutality
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_botani_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = EVB
+	}
+    
+	has_country_shield = yes
+	
+	
+}
