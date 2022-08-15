@@ -45,6 +45,9 @@ invite_to_alliance = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -80,6 +83,10 @@ invite_to_alliance = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -90,11 +97,25 @@ invite_to_alliance = {
 				value = -25
 			}
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_LIGHT
+			limit = {
+				FROM = { religion_group = light_group }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
 		add_entry = {
 			name = INV_RELIGION_GROUP_DISORDER
 			limit = {
 				FROM = { 
-                    religion_group = religion_group_disorder
+                    religion_group = disorder_group
                 }
 			}
 			export_to_variable = {
@@ -106,7 +127,7 @@ invite_to_alliance = {
 			name = INV_RELIGION_GROUP_DEATH
 			limit = {
 				FROM = { 
-                    religion_group = religion_group_death
+                    religion_group = death_group
                 }
 			}
 			export_to_variable = {
@@ -118,7 +139,7 @@ invite_to_alliance = {
 			name = INV_RELIGION_GROUP_SHADOW
 			limit = {
 				FROM = { 
-                    religion_group = religion_group_shadow
+                    religion_group = shadow_group
                 }
 			}
 			export_to_variable = {
@@ -126,12 +147,68 @@ invite_to_alliance = {
 				value = -200
 			}
 		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_ALLIANCE_MEMBER
+			limit = {
+				FROM = {
+                    is_alliance_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_ALLIANCE_MEMBER
+			limit = {
+				FROM = {
+                    NOT = { is_alliance_culture = yes }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				FROM = {
+                    is_non_factional_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+				FROM = {
+                    is_alien_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
 		add_entry = {
 			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_alliance
                     }
                 }
@@ -146,7 +223,7 @@ invite_to_alliance = {
 			limit = {
 				calc_true_if = {
                     amount = 20
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_alliance
                     }
                 }
@@ -161,7 +238,7 @@ invite_to_alliance = {
 			limit = {
 				calc_true_if = {
                     amount = 25
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_alliance
                     }
                 }
@@ -178,7 +255,7 @@ invite_to_alliance = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -188,7 +265,7 @@ invite_to_alliance = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -201,7 +278,7 @@ invite_to_alliance = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 100
+				value = 25
 			}
 		}
 		add_entry = {
@@ -254,7 +331,15 @@ invite_to_alliance = {
 	}
 
 	ai_will_do = {
-		always = yes
+        # AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_alliance
+                }
+            }
+        }
 	}
 }
 
@@ -305,6 +390,9 @@ invite_to_horde = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -340,6 +428,10 @@ invite_to_horde = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -351,11 +443,95 @@ invite_to_horde = {
 			}
 		}
 		add_entry = {
+			name = INV_KALIMDOR_NATIVE
+			limit = {
+				FROM = {
+                    capital_scope = {
+                        continent = continent_kalimdor
+                    }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_ELEMENTAL
+			limit = {
+				FROM = { religion_group = elemental_group }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_HORDE
+			limit = {
+				FROM = {
+                    is_horde_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_HORDE
+			limit = {
+				FROM = {
+                    NOT = { is_horde_culture = yes }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				FROM = {
+                    is_non_factional_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+				FROM = {
+                    is_alien_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
 			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_horde
                     }
                 }
@@ -370,7 +546,7 @@ invite_to_horde = {
 			limit = {
 				calc_true_if = {
                     amount = 20
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_horde
                     }
                 }
@@ -385,7 +561,7 @@ invite_to_horde = {
 			limit = {
 				calc_true_if = {
                     amount = 25
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_horde
                     }
                 }
@@ -412,7 +588,7 @@ invite_to_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -425,7 +601,7 @@ invite_to_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 100
+				value = 25
 			}
 		}
 		add_entry = {
@@ -472,42 +648,18 @@ invite_to_horde = {
 				value = -1000
 			}
 		}
-		add_entry = {
-			name = INV_KALIMDOR_NATIVE
-			limit = {
-				FROM = {
-                    capital_scope = {
-                        continent = continent_kalimdor
-                    }
-				}
-			}
-			export_to_variable = {
-				which = ai_value
-				value = 25
-			}
-		}
-		add_entry = {
-			name = INV_NATURAL_HORDE_CULTURE
-			limit = {
-				FROM = {
-                    OR = {
-                        culture_group = culture_group_orc
-                        culture_group = culture_group_troll
-                        culture_group = culture_group_goblin
-                        culture_group = culture_group_tauren
-                        primary_culture = culture_forsaken
-                    }
-				}
-			}
-			export_to_variable = {
-				which = ai_value
-				value = 25
-			}
-		}
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_horde
+                }
+            }
+        }
 	}
 }
 
@@ -567,6 +719,9 @@ invite_to_old_horde = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -602,6 +757,10 @@ invite_to_old_horde = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -612,11 +771,35 @@ invite_to_old_horde = {
 				value = 25
 			}
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_ELEMENTAL
+			limit = {
+				FROM = { religion_group = elemental_group }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        add_entry = {
+			name = INV_RELIGION_GROUP_DISORDER
+			limit = {
+				FROM = { religion_group = disorder_group }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
 		add_entry = {
 			name = INV_RELIGION_GROUP_LIGHT
 			limit = {
 				FROM = { 
-                    religion_group = religion_group_light
+                    religion_group = light_group
                 }
 			}
 			export_to_variable = {
@@ -624,12 +807,68 @@ invite_to_old_horde = {
 				value = -200
 			}
 		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_HORDE
+			limit = {
+				FROM = {
+                    is_old_horde_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_HORDE
+			limit = {
+				FROM = {
+                    NOT = { is_old_horde_culture = yes }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				FROM = {
+                    is_non_factional_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+				FROM = {
+                    is_alien_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
 		add_entry = {
 			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_old_horde
                     }
                 }
@@ -644,7 +883,7 @@ invite_to_old_horde = {
 			limit = {
 				calc_true_if = {
                     amount = 20
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_old_horde
                     }
                 }
@@ -659,7 +898,7 @@ invite_to_old_horde = {
 			limit = {
 				calc_true_if = {
                     amount = 25
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_old_horde
                     }
                 }
@@ -686,7 +925,7 @@ invite_to_old_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -699,7 +938,7 @@ invite_to_old_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 100
+				value = 25
 			}
 		}
 		add_entry = {
@@ -733,7 +972,15 @@ invite_to_old_horde = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+        }
 	}
 }
 
@@ -784,6 +1031,9 @@ invite_to_trade_coalition = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -819,12 +1069,82 @@ invite_to_trade_coalition = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_PHILOSOPHY
+			limit = {
+				FROM = { religion_group = philsophy_group }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+    
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_TRADE_COALITION
+			limit = {
+				FROM = {
+                    is_trade_coalition_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_TRADE_COALITION
+			limit = {
+				FROM = {
+                    NOT = { is_trade_coalition_culture = yes }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				FROM = {
+                    is_non_factional_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+				FROM = {
+                    is_alien_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
 		add_entry = {
 			name = INV_OVER_5_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 5
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_trade_coalition
                     }
                 }
@@ -839,7 +1159,7 @@ invite_to_trade_coalition = {
 			limit = {
 				calc_true_if = {
                     amount = 10
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_trade_coalition
                     }
                 }
@@ -854,7 +1174,7 @@ invite_to_trade_coalition = {
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_trade_coalition
                     }
                 }
@@ -871,7 +1191,7 @@ invite_to_trade_coalition = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -884,7 +1204,7 @@ invite_to_trade_coalition = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 100
+				value = 25
 			}
 		}
 		add_entry = {
@@ -921,7 +1241,15 @@ invite_to_trade_coalition = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 8 members
+        NOT = {
+            calc_true_if = {
+                amount = 8
+                all_country = {
+                    has_country_modifier = member_of_trade_coalition
+                }
+            }
+        }
 	}
 }
 
@@ -968,6 +1296,9 @@ join_the_alliance = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -1003,6 +1334,10 @@ join_the_alliance = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -1013,19 +1348,141 @@ join_the_alliance = {
 				value = -25
 			}
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_LIGHT
+			limit = {
+                religion_group = light_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
 		add_entry = {
-			name = INV_TOO_MANY_MEMBERS
+			name = INV_RELIGION_GROUP_DISORDER
+			limit = {
+				religion_group = disorder_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -200
+			}
+		}
+		add_entry = {
+			name = INV_RELIGION_GROUP_DEATH
+			limit = {
+				religion_group = death_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -200
+			}
+		}
+		add_entry = {
+			name = INV_RELIGION_GROUP_SHADOW
+			limit = {
+				religion_group = shadow_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -200
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_ALLIANCE_MEMBER
+			limit = {
+				is_alliance_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_ALLIANCE_MEMBER
+			limit = {
+                NOT = { is_alliance_culture = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				is_non_factional_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+                is_alien_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_alliance
                     }
                 }
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -25
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_20_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 20
+                    all_country = {
+                        has_country_modifier = member_of_alliance
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_25_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 25
+                    all_country = {
+                        has_country_modifier = member_of_alliance
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
 			}
 		}
 		add_entry = {
@@ -1035,7 +1492,7 @@ join_the_alliance = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -1045,7 +1502,7 @@ join_the_alliance = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -1064,7 +1521,15 @@ join_the_alliance = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_alliance
+                }
+            }
+        }
 	}
 }
 
@@ -1111,6 +1576,9 @@ join_the_horde = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -1146,6 +1614,10 @@ join_the_horde = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -1157,18 +1629,122 @@ join_the_horde = {
 			}
 		}
 		add_entry = {
-			name = INV_TOO_MANY_MEMBERS
+			name = INV_KALIMDOR_NATIVE
+			limit = {
+                capital_scope = {
+                    continent = continent_kalimdor
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_ELEMENTAL
+			limit = {
+                religion_group = elemental_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_HORDE
+			limit = {
+                is_horde_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_HORDE
+			limit = {
+                NOT = { is_horde_culture = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+                is_non_factional_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+                is_alien_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_horde
                     }
                 }
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -25
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_20_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 20
+                    all_country = {
+                        has_country_modifier = member_of_horde
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_25_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 25
+                    all_country = {
+                        has_country_modifier = member_of_horde
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
 			}
 		}
 		add_entry = {
@@ -1178,7 +1754,7 @@ join_the_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -1188,7 +1764,7 @@ join_the_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -1207,7 +1783,15 @@ join_the_horde = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_horde
+                }
+            }
+        }
 	}
 }
 
@@ -1263,6 +1847,9 @@ join_the_old_horde = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -1298,6 +1885,10 @@ join_the_old_horde = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Country Weights
+        #----------------------
 		add_entry = {
 			name = INV_CIVILIZED
 			limit = {
@@ -1308,19 +1899,131 @@ join_the_old_horde = {
 				value = 25
 			}
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_ELEMENTAL
+			limit = {
+                religion_group = elemental_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        add_entry = {
+			name = INV_RELIGION_GROUP_DISORDER
+			limit = {
+                religion_group = disorder_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
 		add_entry = {
-			name = INV_TOO_MANY_MEMBERS
+			name = INV_RELIGION_GROUP_LIGHT
+			limit = {
+				religion_group = light_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -200
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_HORDE
+			limit = {
+                is_old_horde_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_HORDE
+			limit = {
+                NOT = { is_old_horde_culture = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+                is_non_factional_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+                is_alien_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 15
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_old_horde
                     }
                 }
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -25
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_20_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 20
+                    all_country = {
+                        has_country_modifier = member_of_old_horde
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_25_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 25
+                    all_country = {
+                        has_country_modifier = member_of_old_horde
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
 			}
 		}
 		add_entry = {
@@ -1330,7 +2033,7 @@ join_the_old_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -1340,7 +2043,7 @@ join_the_old_horde = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -250
+				value = -1000
 			}
 		}
 		add_entry = {
@@ -1359,7 +2062,15 @@ join_the_old_horde = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 15 members
+        NOT = {
+            calc_true_if = {
+                amount = 15
+                all_country = {
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+        }
 	}
 }
 
@@ -1406,6 +2117,9 @@ join_the_trade_coalition = {
 	}
 	
 	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
 		add_entry = {
 			name = INV_BASE
 			limit = {
@@ -1441,19 +2155,111 @@ join_the_trade_coalition = {
 			}
 			subtract_variable = { which = ai_value value = 25 }
 		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_GROUP_PHILOSOPHY
+			limit = {
+				religion_group = philsophy_group
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
 		add_entry = {
-			name = INV_TOO_MANY_MEMBERS
+			name = INV_NATURAL_TRADE_COALITION
+			limit = {
+                is_trade_coalition_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_TRADE_COALITION
+			limit = {
+                NOT = { is_trade_coalition_culture = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+                is_non_factional_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+                is_alien_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_5_MEMBERS
 			limit = {
 				calc_true_if = {
                     amount = 5
-                    any_country = {
+                    all_country = {
                         has_country_modifier = member_of_trade_coalition
                     }
                 }
 			}
 			export_to_variable = {
 				which = ai_value
-				value = -25
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_10_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 10
+                    all_country = {
+                        has_country_modifier = member_of_trade_coalition
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 15
+                    all_country = {
+                        has_country_modifier = member_of_trade_coalition
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
 			}
 		}
 		add_entry = {
@@ -1463,7 +2269,7 @@ join_the_trade_coalition = {
 			}
 			export_to_variable = {
 				which = ai_value
-				value = 150
+				value = 200
 			}
 		}
 		add_entry = {
@@ -1482,7 +2288,15 @@ join_the_trade_coalition = {
 	}
 
 	ai_will_do = {
-		always = yes
+		# AI will stop after 8 members
+        NOT = {
+            calc_true_if = {
+                amount = 8
+                all_country = {
+                    has_country_modifier = member_of_trade_coalition
+                }
+            }
+        }
 	}
 }
 
