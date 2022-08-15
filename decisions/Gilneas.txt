@@ -1,9 +1,68 @@
 country_decisions = {
+    # Release Greymane
+    release_greymane = {
+        potential = {
+            has_country_modifier = imprisonment_of_greymane
+            
+            # Block for the immediate years after the disaster
+            had_country_flag = {
+                flag = imprisonment_timer
+                days = 3650
+            }
+            
+            # End after 100 years since they will have died from old age by then
+            NOT = {
+                had_country_flag = {
+                    flag = imprisonment_timer
+                    days = 36500
+                }
+            }
+        }
+        
+		allow = {
+            stability = 1
+		}
+        
+		effect = {
+            remove_country_modifier = imprisonment_of_greymane
+            
+            add_dip_power = 300
+            add_stability = 1
+            
+            define_ruler = {
+                name = "Genn" 
+                dynasty = "Graymane"	
+                adm = 3
+                dip = 2
+                mil = 4
+                min_age = 40
+                max_age = 80
+            }
+		}		
+        
+		ai_will_do = {
+			factor = 0
+		}
+    }
+    
+    # Release Crownley
     release_crowley = {
         potential = {
-            tag = A12
-            is_year = 617
-            NOT = { has_country_flag = released_crowley }
+            has_country_modifier = imprisonment_of_crowley
+            
+            # Block for the immediate years after the disaster
+            had_country_flag = {
+                flag = imprisonment_timer
+                days = 3650
+            }
+            
+            # End after 100 years since they will have died from old age by then
+            NOT = {
+                had_country_flag = {
+                    flag = imprisonment_timer
+                    days = 36500
+                }
+            }
         }
         
 		allow = {
@@ -11,35 +70,63 @@ country_decisions = {
 		}
         
 		effect = {
-            hidden_effect = { 
-                set_country_flag = released_crowley
-                set_variable = { which = loop_counter value = 0 }
+            remove_country_modifier = imprisonment_of_crowley
+            
+            custom_tooltip = TOLERATE_THE_WORGEN_TT
+            hidden_effect = {
+                set_country_flag = tolerate_the_worgen
             }
             
-            custom_tooltip = released_crowley_tt
-            while = {
-                limit = {
-                    NOT = { check_variable = { which = loop_counter value = 10 } }
-                }
-                change_variable = { which = loop_counter value = 1 }
-                capital_scope = { mercenary_infantry = ROOT }
+            add_mil_power = 300
+            
+            capital_scope = {
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
             }
+		}		
+        
+		ai_will_do = {
+			factor = 0
+		}
+    }
+    
+    # End Gilnean Isolation
+    end_gilnean_isolation = {
+        potential = {
+            has_country_modifier = gilnean_isolation
+            
+            # Block for the immediate years after the disaster
+            had_country_flag = {
+                flag = imprisonment_timer
+                days = 3650
+            }
+        }
+        
+		allow = {
+            has_country_modifier = gilnean_isolation
+            has_country_modifier = member_of_alliance
+            adm_power = 250
+		}
+        
+		effect = {
+            add_adm_power = -250
+            remove_country_modifier = gilnean_isolation
 		}		
         
 		ai_will_do = {
 			factor = 1
             
-            # Don't allow unless the AI is losing
+            # AI should only do it after 50 years
             modifier = {
                 factor = 0
                 
-                any_known_country = {
-                    war_with = ROOT
-                    NOT = {
-                        war_score_against = {
-                            who = ROOT
-                            value = 25
-                        }
+                NOT = {
+                    had_country_flag = {
+                        flag = imprisonment_timer
+                        days = 18250
                     }
                 }
             }
