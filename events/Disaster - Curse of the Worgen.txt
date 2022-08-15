@@ -1,0 +1,283 @@
+namespace = wwu_curse_of_the_worgen
+
+# Curse of the Worgen
+country_event = {
+	id = wwu_curse_of_the_worgen.1
+	title = wwu_curse_of_the_worgen.1.title
+	desc = wwu_curse_of_the_worgen.1.desc
+	picture = WORGEN_INFILTRATOR_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_curse_of_the_worgen.1.option.a
+		
+		add_stability = -3
+        
+        random_owned_province = {
+            spawn_rebels = {
+				type = lc_worgen_rebels
+				size = 3
+			}
+        }
+	}
+}
+
+# Curse of the Worgen
+country_event = {
+	id = wwu_curse_of_the_worgen.100
+	title = wwu_curse_of_the_worgen.100.title
+	desc = wwu_curse_of_the_worgen.100.desc
+	picture = RAGING_WORGEN_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	
+	option = {
+		name = wwu_curse_of_the_worgen.100.option.a
+		
+		add_stability = 3
+	}
+}
+
+# Worgen Uprising
+country_event = {
+	id = wwu_curse_of_the_worgen.10
+	title = wwu_curse_of_the_worgen.10.title
+	desc = wwu_curse_of_the_worgen.10.desc
+	picture = RAGING_WORGEN_eventPicture
+	
+	trigger = {
+		manpower_percentage = 0.25
+	}
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_curse_of_the_worgen.10.option.a
+		
+		random_owned_province = {
+            spawn_rebels = {
+				type = lc_worgen_rebels
+				size = 1
+			}
+        }
+	}
+}
+
+# Plan of Action
+country_event = {
+	id = wwu_curse_of_the_worgen.11
+	title = wwu_curse_of_the_worgen.11.title
+	desc = wwu_curse_of_the_worgen.11.desc
+	picture = ANCIENT_MAGE_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = worgen_plan_of_action }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        hidden_effect = {
+            set_country_flag = worgen_plan_of_action
+        }
+    }
+
+	option = {
+		name = wwu_curse_of_the_worgen.11.option.a
+		
+		add_country_modifier = {
+            name = purge_the_worgen
+            duration = 3650
+        }
+        
+        random_owned_province = {
+            spawn_rebels = {
+				type = lc_worgen_rebels
+				size = 2
+			}
+        }
+        random_owned_province = {
+            spawn_rebels = {
+				type = lc_worgen_rebels
+				size = 2
+			}
+        }
+        random_owned_province = {
+            spawn_rebels = {
+				type = lc_worgen_rebels
+				size = 2
+			}
+        }
+        
+        ai_chance = {
+            factor = 10
+            
+            modifier = {
+                factor = 0
+                
+                tag = A12 # Gilneas
+            }
+        }
+	}
+    option = {
+		name = wwu_curse_of_the_worgen.11.option.b
+		
+        custom_tooltip = TOLERATE_THE_WORGEN_TT
+        
+		add_country_modifier = {
+            name = tolerate_the_worgen
+            duration = 3650
+        }
+        
+        hidden_effect = {
+            set_country_flag = tolerate_the_worgen
+        }
+        
+        ai_chance = {
+            factor = 10
+            
+            modifier = {
+                factor = 0
+                
+                tag = A12 # Gilneas
+            }
+        }
+	}
+    option = {
+		name = wwu_curse_of_the_worgen.11.option.b
+		
+		add_country_modifier = {
+            name = become_the_worgen
+            duration = 3650
+        }
+        
+        change_technology_group = tech_worgen
+        change_unit_type = tech_worgen
+        
+        if = {
+            limit = {
+                primary_culture = culture_gilnean
+            }
+            
+            change_primary_culture = culture_gilnean_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_gilnean
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_stormwindian
+            }
+            
+            change_primary_culture = culture_stormwindian_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_stormwindian
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_arathi
+            }
+            
+            change_primary_culture = culture_arathi_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_arathi
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_lordaeron
+            }
+            
+            change_primary_culture = culture_lordaeron_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_lordaeron
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_alterac
+            }
+            
+            change_primary_culture = culture_alterac_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_alterac
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_kul_tiran
+            }
+            
+            change_primary_culture = culture_kul_tiran_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_kul_tiran
+                duration = -1
+            }
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_dalaran
+            }
+            
+            change_primary_culture = culture_dalaran_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_dalaran
+                duration = -1
+            }
+        }
+		
+        if = {
+            limit = {
+                primary_culture = culture_night_elf
+            }
+            
+            change_primary_culture = culture_night_elf_worgen
+            
+            add_country_modifier = {
+                name = worgen_fury_night_elf
+                duration = -1
+            }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+}

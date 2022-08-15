@@ -1,0 +1,86 @@
+namespace = wwu_gilneas
+
+# Build the Wall
+country_event = {
+	id = wwu_gilneas.1
+	title = wwu_gilneas.1.title
+	desc = wwu_gilneas.1.desc
+	picture = GRAYMANE_WALL_eventPicture
+    
+    fire_only_once = yes
+    
+	trigger = {
+		any_country = {
+			culture_group = culture_group_scourge
+            war_with = ROOT
+		}
+        
+		tag = A12 # Gilneas
+		owns = 914 # Greymane Gate
+        
+        914 = {
+            NOT = {
+                has_great_project = {
+                    type = gp_greymane_wall
+                }
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
+	option = {
+		name = wwu_gilneas.1.option.a
+		
+        custom_tooltip = ALLOW_GREYMANE_WALL_TT
+        hidden_effect = {
+            set_country_flag = can_build_greymane_wall
+        }
+        
+		add_prestige = -25
+        
+        # Pyrewood
+        if = {
+            limit = {
+                owns = 2962
+            }
+            2962 = {
+                spawn_rebels = {
+                    type = nobel_rebels
+                    size = 5
+                }
+            }
+        }
+        
+        # Ambermill
+        if = {
+            limit = {
+                owns = 720
+            }
+            720 = {
+                spawn_rebels = {
+                    type = nobel_rebels
+                    size = 5
+                }
+            }
+        }
+		
+        # Greymane Gate
+		914 = {
+			add_building = wow_fort_4
+		}
+        
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = wwu_gilneas.1.option.b
+		
+		add_prestige = 25
+        
+		ai_chance = { factor = 0 }
+	}
+}
+

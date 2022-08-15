@@ -295,6 +295,86 @@ country_event = {
                     
                     province_event = { id = wwu_lc_gnolls.1 }
                 }
+                
+                #---------------
+                # Worgen
+                #---------------
+                20 = {
+                    trigger = {
+                        owner = { has_global_flag = enable_worgen }
+                        
+                        # Is on Azeroth
+                        ROOT = { is_capital_on_azeroth = yes }
+                    }
+                    
+                    # Worgens are much rarer with Tolerate the Worgen
+                    modifier = {
+                        factor = 0.1
+                        
+                        owner = { has_country_flag = tolerate_the_worgen }
+                    }
+                    
+                    # worgens are already present
+                    modifier = {
+                        factor = 0
+                        
+                        has_any_local_concern = {
+                            TYPE = worgen
+                        }
+                    }
+                    
+                    # worgens cannot spawn in the following terrain:
+                    modifier = {
+                        factor = 0
+                        
+                        has_banned_terrain = yes
+                    }
+
+                    # worgens prefer to spawn in the following terrain:
+                    modifier = {
+                        factor = 2
+                        
+                        OR = {
+                            has_terrain = forest
+                            has_terrain = woods
+                            has_terrain = farmlands
+                        }
+                    }
+                    
+                    # Worgen will affect Gilneas a lot more
+                    modifier = {
+                        factor = 5
+                        
+                        owner = { tag = A12 }
+                    }
+                    
+                    # worgens prefer to spawn in disordered provinces
+                    modifier = {
+                        factor = 1.25
+                        devastation = 10
+                    }
+                    
+                    modifier = {
+                        factor = 1.25
+                        devastation = 30
+                    }
+                    
+                    modifier = {
+                        factor = 1.25
+                        devastation = 60
+                    }
+                    
+                    # worgens prefer to spawn in unstable countries
+                    modifier = {
+                        factor = 2
+                        
+                        owner = { 
+                            NOT = { stability = 0 } 
+                        }
+                    }
+                    
+                    province_event = { id = wwu_lc_worgen.1 }
+                }
             }
         }
     }
@@ -444,6 +524,43 @@ country_event = {
         
         event_target:lc_spawn_target = {
             province_event = { id = wwu_lc_gnolls.1 }
+        }
+	}
+}
+
+# Debug Event - worgens
+country_event = {
+	id = wwu_lc_main.104
+	title = wwu_lc_main.104.title
+	desc = wwu_lc_main.104.desc
+	picture = BESTIARY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+    
+    trigger = {
+        has_estate = estate_adventuring_guild
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    immediate = {
+        random_owned_province = {
+            limit = {
+                is_city = yes
+            }
+            save_event_target_as = lc_spawn_target
+        }
+    }
+    
+	option = {
+		name = wwu_lc_main.1.option.a
+		goto = lc_spawn_target
+        
+        event_target:lc_spawn_target = {
+            province_event = { id = wwu_lc_worgen.1 }
         }
 	}
 }
