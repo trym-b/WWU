@@ -221,18 +221,59 @@ wwu_botani_column_2 = {
                 amount = 12
                 
                 all_owned_province = {
+                    OR = {  
+                        area = area_orunai
+                        area = area_shattrath_draenor
+                        area = area_frostwall
+                        area = area_worgol
+                        area = area_daggermaw
+                        area = area_throne_of_elements
+                        area = area_ring_of_blood
+                    }
+                    
                     development = 10
-                    continent = continent_draenor
                 }
             }
 		}
 		provinces_to_highlight = {
             NOT = { development = 10 }
-            continent = continent_draenor
+            OR = {  
+                area = area_orunai
+                area = area_shattrath_draenor
+                area = area_frostwall
+                area = area_worgol
+                area = area_daggermaw
+                area = area_throne_of_elements
+                area = area_ring_of_blood
+            }
 			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
+            every_owned_province = {
+                limit = {
+                    has_port = yes
+                    OR = {  
+                        area = area_orunai
+                        area = area_shattrath_draenor
+                        area = area_frostwall
+                        area = area_worgol
+                        area = area_daggermaw
+                        area = area_throne_of_elements
+                        area = area_ring_of_blood
+                    }
+                }
+                
+                random_list = {
+                    50 = {
+                        change_culture = culture_sporeling
+                    }
+                    50 = {
+                        change_culture = culture_fungal_giant
+                    }
+                }
+            }
+        
 			add_country_modifier = {
                 name = mission_sporemound_creation
                 duration = -1

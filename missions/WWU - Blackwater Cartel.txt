@@ -1,0 +1,788 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_blackwater_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A83
+	}
+    
+	has_country_shield = yes
+	
+    # Pandaria
+    wwu_enter_the_mist = {
+		icon = mission_pandaria
+        position = 4
+        
+		required_missions = { wwu_secure_the_plunder }
+        
+		trigger = {
+            area_southern_passage = {
+                light_ships_in_province = 3
+            }
+		}
+		provinces_to_highlight = {
+            area = area_southern_passage
+		}
+        
+		effect = {      
+            custom_tooltip = SHOW_PANDARIA_TT
+			hidden_effect = {
+                discover_pandaria = yes
+            }
+		}
+	}
+    
+    wwu_acquire_pandarian_connections = {
+		icon = mission_aya_blackclaw
+        position = 5
+        
+		required_missions = { wwu_enter_the_mist }
+        
+		trigger = {
+            region_jade_forest = { 
+                province_has_center_of_trade_of_level = 1
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_jade_forest
+            province_has_center_of_trade_of_level = 1
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    any_owned_province = {
+                        region = region_jade_forest
+                        province_has_center_of_trade_of_level = 1
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        region = region_jade_forest
+                        province_has_center_of_trade_of_level = 1
+                    }
+                    add_permanent_province_modifier = {
+                        name = mission_pandarian_connections
+                        duration = -1
+                    }
+                }
+            }
+            else = {
+                custom_tooltip = CONNECTION_PANDARIA_TT
+            }
+		}
+	}
+}
+
+wwu_blackwater_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A83
+	}
+    
+	has_country_shield = yes
+	
+    # West Expansion
+	wwu_plunder_the_pirates = {
+		icon = mission_blackwater_pirate
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            region_plunder_isle = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_plunder_isle
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_plunder_isle = {
+                add_permanent_claim = ROOT
+            }
+            
+            add_treasury = 250
+		}
+	}
+    
+    wwu_secure_the_plunder = {
+		icon = mission_goblin_captain
+        position = 3
+        
+		required_missions = { wwu_plunder_the_pirates }
+        
+		trigger = {
+            region_plunder_isle = { 
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_plunder_isle
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_pirate_cooperation
+                duration = -1
+            }
+		}
+	}
+    
+    # Kul Tiras
+    wwu_acquire_tirasian_connections = {
+		icon = mission_brush_it_off
+        position = 4
+        
+		required_missions = { wwu_secure_the_plunder }
+        
+		trigger = {
+            region_kul_tiras = { 
+                province_has_center_of_trade_of_level = 1
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_kul_tiras
+            province_has_center_of_trade_of_level = 1
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    any_owned_province = {
+                        region = region_kul_tiras
+                        province_has_center_of_trade_of_level = 1
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        region = region_kul_tiras
+                        province_has_center_of_trade_of_level = 1
+                    }
+                    add_permanent_province_modifier = {
+                        name = mission_tirasian_connections
+                        duration = -1
+                    }
+                }
+            }
+            else = {
+                custom_tooltip = CONNECTION_KUL_TIRAS_TT
+            }
+		}
+	}
+    
+    wwu_acquire_zandalari_connections = {
+		icon = mission_ward_of_loa
+        position = 5
+        
+		required_missions = { wwu_enter_the_mist }
+        
+		trigger = {
+            region_zuldazar = { 
+                province_has_center_of_trade_of_level = 1
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_zuldazar
+            province_has_center_of_trade_of_level = 1
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    any_owned_province = {
+                        region = region_zuldazar
+                        province_has_center_of_trade_of_level = 1
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        region = region_zuldazar
+                        province_has_center_of_trade_of_level = 1
+                    }
+                    add_permanent_province_modifier = {
+                        name = mission_zandalari_connections
+                        duration = -1
+                    }
+                }
+            }
+            else = {
+                custom_tooltip = CONNECTION_ZANDALAR_TT
+            }
+		}
+	}
+}
+
+wwu_blackwater_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A83
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_the_bay = {
+		icon = mission_beach
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            owns = 996
+            num_of_infantry = 10
+            num_of_light_ship = 12
+            996 = {
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 996
+		}
+        
+		effect = {
+            996 = {
+                add_base_tax = 2
+                add_base_production = 2
+            }
+            
+			area_lower_troll_ruins = {
+                add_permanent_claim = ROOT
+            }
+            area_mistvale = {
+                add_permanent_claim = ROOT
+            }
+            area_jaguero_isle = {
+                add_permanent_claim = ROOT
+            }
+            area_booty_bay = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    # Internal
+    wwu_loyalty_of_the_merchants = {
+		icon = mission_smug_goblin
+        position = 2
+        
+		required_missions = { wwu_secure_the_bay }
+        
+		trigger = {
+            has_estate = estate_traders
+            
+            num_of_estate_privileges = {
+                estate = estate_traders
+                value = 4
+            }
+            
+            estate_loyalty = { 
+                estate = estate_traders
+                loyalty = 75
+            }
+            estate_influence = { 
+                estate = estate_traders
+                influence = 50
+            }
+		}   
+        
+		effect = {
+            custom_tooltip = GOBLIN_BANKERS_PRIVILEGE_TT
+            
+			add_country_modifier = {
+                name = mission_loyal_goblin_traders
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_port_of_azeroth = {
+		icon = mission_dreadwake
+        position = 3
+        
+		required_missions = { wwu_loyalty_of_the_merchants }
+        
+		trigger = {
+            996 = {
+                has_shipyard_building_trigger = yes
+                has_dock_building_trigger = yes 
+                has_trade_building_trigger = yes
+                
+                province_has_center_of_trade_of_level = 3
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 996
+		}
+        
+		effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                }
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+                light_ship = ROOT
+            }
+			add_country_modifier = {
+                name = mission_vast_port_network
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_trade_princes_bountry = {
+		icon = mission_auction_master
+        position = 4
+        
+		required_missions = { wwu_port_of_azeroth }
+        
+		trigger = {
+            # Stranglethorn
+            996 = { 
+                is_strongest_trade_power = ROOT
+            }
+            # Westfall
+            716 = { 
+                is_strongest_trade_power = ROOT
+            }
+            # Elwynn Forest
+            2202 = { 
+                is_strongest_trade_power = ROOT
+            }
+            # Plunder Isle
+            3208 = { 
+                is_strongest_trade_power = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 996
+                province_id = 716
+                province_id = 2202
+                province_id = 3208
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_trade_princes_sway
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_investor_accumen = {
+		icon = mission_blingtron
+        position = 5
+        
+		required_missions = { wwu_trade_princes_bountry }
+        
+		trigger = {
+            any_owned_province = {
+                is_owned_by_trade_company = yes
+                
+                has_trade_company_investment_in_area  = {
+                    investment = wwu_tc_market_5
+                    investor = ROOT
+                }
+            }
+            any_owned_province = {
+                is_owned_by_trade_company = yes
+                
+                has_trade_company_investment_in_area  = {
+                    investment = wwu_tc_exchange_5
+                    investor = ROOT
+                }
+            }
+		}
+		provinces_to_highlight = {
+             is_owned_by_trade_company = yes
+             owned_by = ROOT
+             NOT = {
+                has_trade_company_investment_in_area  = {
+                    investment = wwu_tc_market_5
+                    investor = ROOT
+                }
+             }
+             NOT = {
+                has_trade_company_investment_in_area  = {
+                    investment = wwu_tc_exchange_5
+                    investor = ROOT
+                }
+             }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_established_investors
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_blackwater_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A83
+	}
+    
+	has_country_shield = yes
+	
+    # North
+	wwu_secure_lower_stranglethorn = {
+		icon = mission_evil_goblin
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            area_booty_bay = {
+                type = all
+                owned_by = ROOT
+            }
+            area_mistvale = {
+                type = all
+                owned_by = ROOT
+            }
+            area_jaguero_isle = {
+                type = all
+                owned_by = ROOT
+            }
+            area_lower_troll_ruins = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_booty_bay
+                area = area_mistvale
+                area = area_jaguero_isle
+                area = area_lower_troll_ruins
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_stranglethorn_vale = {
+                limit = {
+                    has_port = yes
+                }
+                
+                add_permanent_claim = ROOT
+            }
+            
+            area_booty_bay = {
+                add_province_modifier = {
+                    name = mission_goblin_integration
+                    duration = 3650
+                }
+            }
+            area_mistvale = {
+                add_province_modifier = {
+                    name = mission_goblin_integration
+                    duration = 3650
+                }
+            }
+            area_jaguero_isle = {
+                add_province_modifier = {
+                    name = mission_goblin_integration
+                    duration = 3650
+                }
+            }
+            area_lower_troll_ruins = {
+                add_province_modifier = {
+                    name = mission_goblin_integration
+                    duration = 3650
+                }
+            }
+		}
+	}
+    
+    wwu_dominate_the_stranglethorn_coast = {
+		icon = mission_gunspire
+        position = 3
+        
+		required_missions = { wwu_secure_lower_stranglethorn }
+        
+		trigger = {
+            883 = {
+                owned_by = ROOT
+            }
+            937 = {
+                owned_by = ROOT
+            }
+            969 = {
+                owned_by = ROOT
+            }
+            1003 = {
+                owned_by = ROOT
+            }
+            681 = {
+                owned_by = ROOT
+            }
+            697 = {
+                owned_by = ROOT
+            }
+            715 = {
+                owned_by = ROOT
+            }
+            735 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 883
+                province_id = 937
+                province_id = 969
+                province_id = 1003
+                province_id = 681
+                province_id = 697
+                province_id = 715
+                province_id = 735
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_westfall = {
+                limit = {
+                    has_port = yes
+                }
+                add_permanent_claim = ROOT
+            }
+            
+            add_country_modifier = {
+                name = mission_goblin_trade_hubs
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_establish_goblin_seaboard = {
+		icon = mission_goblin_sailor
+        position = 4
+        
+		required_missions = { wwu_dominate_the_stranglethorn_coast }
+        
+		trigger = {
+            2169 = {
+                owned_by = ROOT
+            }
+            799 = {
+                owned_by = ROOT
+            }
+            612 = {
+                owned_by = ROOT
+            }
+            815 = {
+                owned_by = ROOT
+            }
+            2154 = {
+                owned_by = ROOT
+            }
+            837 = {
+                owned_by = ROOT
+            }
+            627 = {
+                owned_by = ROOT
+            }
+            904 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2169
+                province_id = 799
+                province_id = 612
+                province_id = 815
+                province_id = 2154
+                province_id = 837
+                province_id = 627
+                province_id = 904
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_mercantile_princes
+                duration = -1
+            }
+            
+            add_mercantilism = 20
+		}
+	}
+    
+    wwu_grand_shipwright_network = {
+		icon = mission_goblin_engineer
+        position = 5
+        
+		required_missions = { wwu_establish_goblin_seaboard }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 20
+                
+                all_owned_province = {
+                    has_port = yes
+                    
+                    OR = {
+                        region = region_stranglethorn_vale
+                        region = region_westfall
+                    }
+                    has_shipyard_building_trigger = yes
+                    has_dock_building_trigger = yes
+                }
+            }
+		}
+		provinces_to_highlight = {
+            has_port = yes
+            
+            OR = {
+                region = region_stranglethorn_vale
+                region = region_westfall
+            }
+            NOT = { has_shipyard_building_trigger = yes }
+            NOT = { has_dock_building_trigger = yes }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_goblin_shipwrights
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_blackwater_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A83
+	}
+    
+	has_country_shield = yes
+	
+    wwu_goblinlake = {
+		icon = mission_dr_boom
+        position = 3
+        
+		required_missions = { }
+        
+		trigger = { 
+            NOT = {
+                any_owned_province = {
+                    has_port = no
+                }
+            }
+            calc_true_if = {
+                amount = 100
+                
+                all_owned_province = {
+                    has_port = yes
+                    OR = {
+                        continent = continent_eastern_kingdoms
+                        continent = continent_plunder_isle
+                    }
+                }
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_dr_booms_big_idea
+                duration = -1
+            }
+		}
+	}
+    
+	wwu_grand_trade_fleet = {
+		icon = mission_gold_pile
+        position = 5
+        
+		required_missions = { wwu_establish_goblin_seaboard }
+        
+		trigger = {
+            num_of_light_ship = 100
+            num_of_total_ports = 30
+            
+            # Stranglethorn
+            996 = {
+                is_strongest_trade_power = ROOT
+            }
+            # Elwynn Forest
+            2202 = { 
+                is_strongest_trade_power = ROOT
+            }
+            # Jade Forest
+            1722 = {
+                is_strongest_trade_power = ROOT
+            }
+            # Zandalar
+            2469 = {
+                is_strongest_trade_power = ROOT
+            }
+            # Kul Tiras
+            570 = {
+                is_strongest_trade_power = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 996
+                province_id = 2202
+                province_id = 1722
+                province_id = 2469
+                province_id = 570
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_trade_hegemony
+                duration = -1
+            }
+		}
+	}
+}
