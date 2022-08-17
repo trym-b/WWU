@@ -1,0 +1,119 @@
+rusty_empire = {
+	potential = {
+		NOT = { has_country_flag = rusty_empire }
+		tag = A78
+	}
+	
+	can_start = {
+		has_any_disaster = no
+	}
+	
+	can_stop = { 
+		has_any_disaster = yes
+	}
+	
+	
+	progress = {
+		modifier = {
+			factor = 100
+			tag = A78
+		}
+	}
+	
+	can_end = {
+		mission_completed = wwu_zan_three_two
+	}
+	
+
+	modifier = {
+		stability_cost_to_declare_war = 2
+		technology_cost = 0.1
+		idea_cost = 0.1
+	}
+	
+	on_start = zandalar.11
+	on_end = zandalar.12
+	
+	on_monthly = {
+		events = {
+		}
+		random_events = {
+		}
+	}
+}
+
+zandalar_great_war = {
+	potential = {
+		NOT = { has_country_flag = zandalar_great_war }
+		NOT = { has_country_flag = zandalar_great_war_end }
+		tag = A78
+	}
+	
+	can_start = {
+			check_variable = {
+	which = zul_influence 
+	value = 80
+}
+	}
+	
+	can_stop = { 
+	has_any_disaster = yes
+	}
+	
+	
+	progress = {
+			modifier = {
+			factor = 10
+			tag = A78
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = {
+	which = zul_influence 
+	value = 80
+}
+		}
+		modifier = {
+			factor = 0.25
+			check_variable = {
+	which = zul_influence 
+	value = 85
+}
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+	which = zul_influence 
+	value = 90
+}
+		}
+		modifier = {
+			factor = 1
+			check_variable = {
+	which = zul_influence 
+	value = 100
+}
+		}
+	}
+	
+	can_end = {
+		has_country_flag = zandalar_great_war_end
+	}
+	
+
+	modifier = {
+		legitimacy = -2
+		global_unrest = 5
+	}
+	
+	on_start = zan_civilwarstart.1
+	on_end = zandalar.12
+	
+	on_monthly = {
+		events = {
+		}
+		random_events = {
+		}
+	}
+}
+

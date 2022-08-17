@@ -1,6 +1,666 @@
 #--------------------------------------
 # zandalar
 #--------------------------------------
+wwu_zandalar_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A78
+	}
+	has_country_shield = yes
+	
+	wwu_zan_one_two = {
+		icon = mission_city_of_gold
+		position = 2
+		required_missions = {  }
+		
+		trigger = {
+		ROOT = {
+		OR = {
+		num_of_heavy_ship = 5
+		navy_size = 30
+		}
+		OR = {
+		wow_shipyard_1 = 2
+		wow_shipyard_2 = 2
+		wow_shipyard_3 = 2
+		}
+		}
+		}
+		effect = {
+		define_explorer = {
+    shock = 2
+    fire = 2
+    manuever = 5
+    siege = 0
+}
+			add_country_modifier = {
+                name = mission_zandalar_colonial_range
+                duration = 9125
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_one_three = {
+		icon = mission_city_of_gold
+		position = 3
+		required_missions = { wwu_zan_one_two }
+		
+		trigger = {
+		    region_darkspear_isles = {
+				type = all
+				has_discovered = ROOT
+			}
+					
+				}
+		effect = {
+region_darkspear_isles = {
+add_permanent_claim = ROOT
+		}
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+
+	wwu_zan_one_four = {
+		icon = mission_city_of_gold
+		position = 4
+		required_missions = { wwu_zan_one_three }
+		
+		trigger = {
+		num_of_colonists = 1
+		    region_darkspear_isles = {
+				type = all
+				OR = {
+				owned_by = ROOT 
+				is_empty = yes
+			}
+		}
+		}
+		effect = {
+		4087 = 
+		{add_permanent_claim = ROOT}
+		4088 = 
+		{add_permanent_claim = ROOT}
+		custom_tooltip = zandalari_tooltip_one_four_a
+		hidden_effect = {
+		every_province = {
+							limit = {
+							AND = {
+							is_empty = yes
+							region = region_darkspear_isles
+}							
+							}
+add_siberian_construction = 100
+   }
+		}
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_one_five = {
+		icon = mission_city_of_gold
+		position = 5
+		required_missions = { wwu_zan_one_four }
+		
+		trigger = {
+		OR = {
+		    4087 = {
+				owned_by = ROOT 
+		}
+		    4088 = {
+				owned_by = ROOT 
+		}
+		}
+OR = {
+
+area_port_kajaro = {
+has_discovered = ROOT
+}
+area_mt_kajaro = {
+has_discovered = ROOT
+}
+area_bilgewater_port = {
+has_discovered = ROOT
+}
+area_drudgetown = {
+has_discovered = ROOT
+}
+}
+		}
+		effect = {
+			region_kezan = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_one_six = {
+		icon = mission_city_of_gold
+		position = 6
+		required_missions = { wwu_zan_one_five }
+		
+		trigger = {
+region_kezan = {
+type = all
+owned_by = ROOT
+}
+		}
+		
+		effect = {
+		custom_tooltip = zandalari_tooltip_one_six_a
+		hidden_effect = {
+			region_kezan = {
+					type = all
+					add_province_triggered_modifier = goblin_zandalari_provinces
+		}
+        }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+}
+##############
+##############
+##############
+wwu_zandalar_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A78
+	}
+	has_country_shield = yes
+	
+	wwu_zan_two_one = {
+		icon = mission_city_of_gold
+		position = 1
+		required_missions = {  }
+		
+		trigger = {
+		ROOT = {
+		AND = {
+		num_of_generals = 2
+		AND = {
+		army_size_percentage = 0.9
+		manpower_percentage = 0.8
+		}
+		employed_advisor = {
+		category = MIL
+		}
+		}
+		}
+		}
+		effect = {
+		add_mil_power = 100
+		remove_country_modifier = rusty_empire_one
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_two_two = {
+		icon = mission_city_of_gold
+		position = 2
+		required_missions = { wwu_zan_two_one }
+		
+		trigger = {
+		ROOT = {
+		AND = {
+		has_global_modifier_value = {
+		which = cavalry_power
+		value = 0.2
+		}
+				area_isle_of_giants = {
+				type = all
+				AND = {
+				country_or_subject_holds = ROOT
+				development = 9}
+			}
+		}
+		}
+		}
+		effect = {
+		area_isle_of_giants = {
+					limit = {
+					NOT = { trade_goods = warbeasts }
+				}
+				change_trade_goods = warbeasts
+			}
+		change_price = {
+    trade_goods = warbeasts
+    key = grain_shortage
+    value = 0.1
+    duration = -1
+	}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_two_three = {
+		icon = mission_city_of_gold
+		position = 3
+		required_missions = { wwu_zan_one_two }
+		
+		trigger = {
+		ROOT = {
+			num_of_owned_provinces_with = {
+	value = 15
+	OR = {
+	OR = {
+	has_building = wow_dockyard
+	has_building = wow_grand_dockyard}
+	OR = {
+	has_building = wow_shipyard
+	has_building = wow_grand_shipyard}
+	}
+	is_overseas = yes
+}
+		}
+		}
+		effect = {
+add_country_modifier = {
+    name = "mission_zandalar_docks"
+    duration = -1  
+}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_two_four = {
+		icon = mission_city_of_gold
+		position = 4
+		required_missions = { wwu_zan_two_three }
+		
+		trigger = {
+has_leader_with = {
+admiral = yes
+	fire = 2
+	shock = 2
+	manuever = 2
+	siege = 1
+}
+		
+num_of_admirals = 3
+		}
+		effect = {
+define_advisor = {
+    type = naval_reformer
+	discount = yes
+    skill = 2
+    culture = ROOT
+    religion = ROOT
+}
+add_country_modifier = {
+    name = "mission_zandalar_admirals"
+    duration = -1  
+}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_two_five = {
+		icon = mission_city_of_gold
+		position = 5
+		required_missions = { 
+		wwu_zan_two_four
+		wwu_zan_three_four
+		}
+		
+		trigger = {
+		ROOT = {
+		AND = {
+navy_size_percentage = 0.8
+heavy_ship_fraction = 0.25
+}
+num_of_heavy_ship = 20
+}
+		}
+		effect = {
+		add_dip_power = 100
+			country_event = { id = zandalar.2 }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_two_six = {
+		icon = mission_city_of_gold
+		position = 6
+		required_missions = { wwu_zan_two_five }
+		
+		trigger = {
+		ROOT = {
+is_hegemon = yes
+num_of_heavy_ship = 150
+}
+		}
+		effect = {
+		add_adm_power = 300
+		add_dip_power = 300
+		add_mil_power = 300
+		add_country_modifier = {
+    name = "mission_zandalar_goldenfleet"
+    duration = -1  
+}
+
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	
+}
+
+##############
+##############
+##############
+wwu_zandalar_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A78
+	}
+	has_country_shield = yes
+	
+	wwu_zan_three_one = {
+		icon = mission_city_of_gold
+		position = 1
+		required_missions = {  }
+		
+		trigger = {
+		ROOT = {
+
+
+		        check_variable = {
+            which = zul_domination
+            value = 3
+        }
+		}
+		employed_advisor = {
+		category = DIP
+		}
+		}
+		##DODAJ ABY MISJA SIE WYKONYWALA PO DANIU PREZENTU NA NARADZIE TROLLI
+		effect = {
+		add_dip_power = 100
+		remove_country_modifier = rusty_empire_two
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_two = {
+		icon = mission_city_of_gold
+		position = 2
+		required_missions = { 
+	wwu_zan_two_one
+	wwu_zan_four_one
+	wwu_zan_three_one
+		}
+		
+		trigger = {
+		}
+		##DODAJ ABY MISJA SIE WYKONYWALA PO DANIU PREZENTU NA NARADZIE TROLLI
+		effect = {
+		custom_tooltip = zandalari_tooltip_rusty_empire_b
+		hidden_effect = {
+		end_disaster = rusty_empire
+		set_country_flag = rusty_empire}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_three = {
+		icon = mission_city_of_gold
+		position = 3
+		required_missions = { wwu_zan_two_two }
+		
+		trigger = {
+production_leader = {
+	trade_goods = warbeasts
+}
+AND = {
+army_size = 30
+OR = {
+cavalry_fraction = 0.5
+num_of_cavalry = 20
+}
+}
+		}
+		effect = {
+			country_event = { id = zandalar.3 }
+			custom_tooltip = zandalari_tooltip_three_three_a
+		add_country_modifier = {
+    name = "mission_zandalar_cavalery"
+    duration = -1  
+}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_four = {
+		icon = mission_city_of_gold
+		position = 4
+		required_missions = { wwu_zan_two_three }
+		
+		trigger = {
+1135 = {
+	OR = {
+	AND = {
+	development = 20
+	has_building = wow_grand_shipyard
+	has_building = wow_grand_dockyard}
+	AND = {
+	development = 25
+	has_building = wow_shipyard
+	has_building = wow_dockyard}
+	}
+	}
+		}
+		effect = {
+		add_navy_tradition = 25
+				if = {
+					limit = {
+						NOT = {
+							1135 = {
+								has_great_project = {
+									type = gp_warport_rastari
+									tier = 2
+								}
+							}
+						}
+					}
+					add_great_project_tier = {
+					type = gp_warport_rastari
+					tier = 1
+				}
+					1135 = {
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				}
+				else_if = {
+					limit = {
+						1135 = {
+							has_great_project = {
+								type = gp_warport_rastari
+								tier = 2
+							}
+						}
+					}
+					1135 = {
+					add_base_tax = 3
+					add_base_production = 3
+					add_base_manpower = 3
+				}
+
+		}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_five = {
+		icon = mission_city_of_gold
+		position = 5
+		required_missions = { wwu_zan_four_four }
+		
+		trigger = {
+area_heart_of_darkness = {
+type = all
+and = {
+religion = ROOT
+culture = ROOT
+}
+}
+area_the_necropolis = {
+type = all
+and = {
+religion = ROOT
+culture = ROOT
+}
+}
+		}
+		effect = {
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+		
+		1122 = {
+		change_province_name = "Uldir Complex"
+		rename_capital = "Uldir Complex"
+			add_province_triggered_modifier = zandalar_complex
+		}
+		custom_tooltip = zandalari_tooltip_three_five_a		
+
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_six = {
+		icon = mission_city_of_gold
+		position = 6
+		required_missions = { wwu_zan_two_five }
+		
+		trigger = {
+		OR = {
+navy_size = A14
+AND = {
+	navy_size = 75
+	NOT = {exists = A14}
+	}
+	}
+		}
+		effect = {
+		create_admiral = { tradition = 90 }
+		add_prestige = 25	
+					region_kul_tiras = {
+				limit = {
+					NOT = { is_permanent_claim = ROOT	}
+					NOT = { is_core = ROOT	}
+				}
+				add_permanent_claim = ROOT
+			}
+					add_country_modifier = {
+                name = mission_zandalar_kultiras_power_projection
+                duration = 7300
+            }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_seven = {
+		icon = mission_city_of_gold
+		position = 7
+		required_missions = {
+		wwu_zan_four_six
+		wwu_zan_three_six
+		}
+		
+		trigger = {
+		AND = {
+		    region_kul_tiras = {
+			    type = all
+				owned_by = ROOT
+			}
+				NOT = {exists = A14}
+				}
+		}
+		##
+		effect = {
+		add_prestige = 25
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+			add_country_modifier = {
+                name = mission_zandalar_kultiras
+                duration = -1
+            }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_three_eight = {
+		icon = mission_city_of_gold
+		position = 8
+		required_missions = { }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = zandalari_tooltip_three_eight_b
+				has_country_flag = wwu_zan_two_eight
+			}
+		}
+		
+		effect = {
+		custom_tooltip = zandalari_tooltip_three_eight_a
+		hidden_effect = {
+			region_kezan = {
+					type = all
+					add_province_triggered_modifier = goblin_zandalari_provinces
+		}
+        }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}		
+	
+	
+}
+	
+##############
+##############
+##############
 wwu_zandalar_column_4 = {
 	slot = 4
 	generic = no
@@ -11,123 +671,303 @@ wwu_zandalar_column_4 = {
 	}
 	has_country_shield = yes
 	
-	wwu_restore_the_city_of_gold = {
+	wwu_zan_four_one = {
 		icon = mission_city_of_gold
-        
+		position = 1
 		required_missions = {  }
 		
 		trigger = {
-            2469 = {
-                owned_by = ROOT
-                is_core = ROOT
-                development = 30
-            }
+		ROOT = {
+		AND = {
+		OR = {
+		wow_farm_1 = 3
+		wow_farm_2 = 3
+		wow_farm_3 = 3
 		}
-        
+		OR = {
+		wow_market_1 = 3
+		wow_market_2 = 3
+		wow_market_3 = 3
+		}
+		OR = {
+		wow_temple_1 = 3
+		wow_temple_2 = 3
+		wow_temple_3 = 3
+		}
+		}
+		}
+		OR = {
+							2469 = {
+								has_great_project = {
+									type = gp_dazaralor
+									tier = 1
+								}
+							}
+							2470 = {
+								has_great_project = {
+									type = gp_ataldazar
+									tier = 1
+								}
+							}
+							}
+		employed_advisor = {
+		category = ADM
+		}
+		}
+		##
 		effect = {
-			add_country_modifier = {
-                name = mission_city_of_gold
-                duration = -1
-            }
+		add_adm_power = 100
+		remove_country_modifier = rusty_empire_three
 		}
-        
         ai_weight   = { factor = 1 }
 		ai_priority = { factor = 1 }
 	}
-    
-    wwu_nazmir_incursion = {
-		icon = mission_crawg
-        
-		required_missions = { wwu_restore_the_city_of_gold }
 		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            region = region_nazmir
-		}
-        
-		trigger = {
-            any_owned_province = {
-                region = region_nazmir
-                is_core = ROOT
-            }
-		}
-        
-		effect = {
-			region_nazmir = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-    wwu_destroy_ghuun = {
-		icon = mission_blood_troll
-        
-		required_missions = { wwu_nazmir_incursion }
+	wwu_zan_four_two = {
+		icon = mission_city_of_gold
+		position = 2
+		required_missions = { wwu_zan_four_one }
 		
-        provinces_to_highlight = {
-			owned_by = NAZ
-		}
-        
 		trigger = {
-            NOT = { exists = NAZ }
-            owns_core_province = 1122
+		OR = {
+							2469 = {
+											development = 25
+											}
+							2469 = {
+								has_great_project = {
+									type = gp_dazaralor
+									tier = 2
+								}
+							}
+							}
 		}
-        
+		##
 		effect = {
-			add_country_modifier = {
-                name = mission_destruction_of_ghuun
-                duration = -1
-            }
+		custom_tooltip = zandalari_tooltip_four_two_a
+		set_country_flag = zandalari_merc_d
 		}
-        
         ai_weight   = { factor = 1 }
 		ai_priority = { factor = 1 }
 	}
-    
-    wwu_establish_regional_hegemony = {
-		icon = mission_rastakhan
-        
-		required_missions = { wwu_destroy_ghuun }
+	
+	wwu_zan_four_three = {
+		icon = mission_city_of_gold
+		position = 3
+		required_missions = { wwu_zan_three_two }
 		
-        provinces_to_highlight = {
-            continent = continent_zandalar
-			NOT = { country_or_subject_holds = ROOT }
-            is_empty = no
-		}
-        
 		trigger = {
-            region_zuldazar = {
-                is_empty = no
-                country_or_subject_holds = ROOT
-                is_core = ROOT
-            }
-            region_nazmir = {
-                is_empty = no
-                country_or_subject_holds = ROOT
-                is_core = ROOT
-            }
-            region_voldun = {
-                is_empty = no
-                country_or_subject_holds = ROOT
-                is_core = ROOT
-            }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_zandalar_hegemony
-                duration = -1
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
+		stability = 1
+		is_at_war = no
+		OR = {
+							1122 = {
+											is_claim = A78
+											
+							}
+area_heart_of_darkness = {
+type = all
+owned_by = A78
 }
+area_the_necropolis = {
+type = all
+owned_by = A78
+}
+		}
+		}
+		##
+		effect = {
+		if = {
+limit = {
+		NOT = { exists = NAZ}
+}
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+}
+		if = {
+limit = {
+		exists = NAZ
+}
+custom_tooltip = zandalari_tooltip_four_three_a
+		NAZ = {
+		set_country_flag = zandalar.8
+		}
+		}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_four_four = {
+		icon = mission_city_of_gold
+		position = 4
+		required_missions = { wwu_zan_four_three }
+		
+		trigger = {
+		NOT = { exists = NAZ}
+area_heart_of_darkness = {
+type = all
+owned_by = A78
+}
+area_the_necropolis = {
+type = all
+owned_by = A78
+}
+		}
+		##
+		effect = {
+		add_legitimacy = 10
+		add_prestige = 15
+		custom_tooltip = zandalari_tooltip_four_four_a
+			add_country_modifier = {
+                name = mission_zandalar_blood_defeat
+                duration = 7300
+            }
+			hidden_effect = {
+					every_province = {
+							limit = {
+							AND = {
+							is_empty = yes
+							area = area_nazmir_islands
+}							
+							}
+add_siberian_construction = 900
+   }
+   }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
 
+	wwu_zan_four_five = {
+		icon = mission_city_of_gold
+		position = 5
+		required_missions = { wwu_zan_four_four }
+		
+		trigger = {
+stability = 1
+is_at_war = no
+area_heart_of_darkness = {
+type = all
+AND = {
+is_core = A78
+owned_by = A78
+}
+}
+		}
+		##
+		effect = {
+		custom_tooltip = zandalari_tooltip_four_five_a
+every_country = {
+    limit = {
+	AND = {
+        capital_scope = { continent = continent_zandalar }
+		any_owned_province = { is_claim = A78 }
+		not = {tag = A78}
+		}
+    }
+	set_country_flag = zandalar.9
+}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_four_six = {
+		icon = mission_city_of_gold
+		position = 6
+		required_missions = { wwu_zan_four_five }
+		
+		trigger = {
+		    region_zuldazar = {
+			    type = all
+				OR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes }
+			}
+		    region_nazmir = {
+			    type = all
+				OR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes }
+			}
+		    region_voldun = {
+			    type = all
+				OR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes }
+			}
+		}
+		##
+		effect = {
+		custom_tooltip = zandalari_tooltip_four_six_a
+			add_country_modifier = {
+                name = mission_zandalar_unification
+                duration = 18250
+            }
+			hidden_effect = {
+		}
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_four_nine = {
+		icon = mission_city_of_gold
+		position = 9
+		required_missions = {
+		wwu_zan_four_six
+		wwu_zan_five_eight
+		wwu_zan_three_eight
+		}
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = zandalari_tooltip_four_nine_b
+				has_country_flag = wwu_zan_four_nine
+			}
+		}
+		
+		effect = {
+		custom_tooltip = zandalari_tooltip_four_nine_a
+		hidden_effect = {
+			region_kezan = {
+					type = all
+					add_province_triggered_modifier = goblin_zandalari_provinces
+		}
+        }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_four_ten = {
+		icon = mission_city_of_gold
+		position = 10
+		required_missions = { 
+		wwu_zan_four_nine
+		}
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = zandalari_tooltip_four_ten_b
+				has_country_flag = wwu_zan_four_ten
+			}
+			stability = 2
+		}
+		##
+		effect = {
+		custom_tooltip = zandalari_tooltip_four_six_a
+		country_event = { id = zandalar.13 }
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+}	
+
+##############
+##############
+##############
 wwu_zandalar_column_5 = {
 	slot = 5
 	generic = no
@@ -138,211 +978,172 @@ wwu_zandalar_column_5 = {
 	}
 	has_country_shield = yes
 	
-    wwu_restore_the_zandalari_fleet = {
-		icon = mission_ward_of_loa
-        position = 1
-        
+	wwu_zan_five_one = {
+		icon = mission_city_of_gold
+		position = 1
+		required_missions = {  }
+		
+		trigger = {
+		OR = {
+			adm = 6
+			dip = 6
+			mil = 6
+			}
+			OR = {
+		full_idea_group = wwu_religious_ideas
+		has_idea = zandalari_ideas_3
+		}
+		}
+		##
+		effect = {
+		add_legitimacy = 10
+		custom_tooltip = zandalari_tooltip_five_one_a
+		set_country_flag = zandalari_merc_a
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_five_two = {
+		icon = mission_city_of_gold
+		position = 2
+		required_missions = { wwu_zan_four_one }
+		
+		trigger = {
+		OR = {
+							2470 = {
+											development = 25
+											}
+							2470 = {
+								has_great_project = {
+									type = gp_ataldazar
+									tier = 2
+								}
+							}
+		}
+		}
+		##
+		effect = {
+		custom_tooltip = zandalari_tooltip_five_two_a
+		set_country_flag = zandalari_merc_e
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_five_three = {
+		icon = mission_city_of_gold
+		position = 3
+		required_missions = { 
+		wwu_zan_four_two
+		wwu_zan_five_two
+		}
+		
+		trigger = {
+	1112 = {
+	development = 15
+	OR = {
+	has_building = wow_mine_2
+	has_building = wow_mine_3
+	}
+}
+		}
+		##
+		effect = {
+		1112 = {
+		change_trade_goods = gold}}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+		}
+	
+	wwu_zan_five_five = {
+		icon = mission_city_of_gold
+		position = 5
+		required_missions = { 
+		wwu_zan_five_three
+		}
+		
+		trigger = {
+		2469 = {
+		development = 40
+		}
+		2470 = {
+		development = 40
+		}
+		gold_income = 20
+	num_of_owned_provinces_with = {
+	value = 4
+	trade_goods = gold
+	}
+num_of_mercenaries = 0
+		}
+		##
+		effect = {
+		custom_tooltip = zandalari_tooltip_five_five_a
+		clr_country_flag = zandalari_merc_d
+		clr_country_flag = zandalari_merc_e
+		set_country_flag = zandalari_merc_f
+		set_country_flag = zandalari_merc_g
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+
+	wwu_zan_five_seven = {
+		icon = mission_city_of_gold
+		position = 7
+		required_missions = { 
+		wwu_zan_five_five
+		wwu_zan_four_six
+		}
+		
+		trigger = {
+		full_idea_group = wwu_religious_ideas
+		    region_zuldazar = {
+			    type = all
+				religion = ROOT
+			}
+		    region_nazmir = {
+			    type = all
+				religion = ROOT
+			}
+		    region_voldun = {
+			    type = all
+				religion = ROOT
+			}
+		}
+		##
+		effect = {
+			country_event = { id = zandalar.10 }
+			custom_tooltip = zandalari_tooltip_five_seven_a
+		}
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zan_five_eight = {
+		icon = mission_city_of_gold
+		position = 8
 		required_missions = { }
 		
 		trigger = {
-            num_of_galley = 50
-            num_of_heavy_ship = 30
+			custom_trigger_tooltip = {
+				tooltip = zandalari_tooltip_five_eight_b
+				has_country_flag = wwu_zan_three_eight
+			}
 		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_zandalari_supremacy
-                duration = -1
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-	wwu_jade_incursion = {
-		icon = mission_vivify
-        position = 2
-        
-		required_missions = { wwu_restore_the_city_of_gold }
 		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            OR = {
-                area = area_jade_islands
-                area = area_windward_isle
-                area = area_thunder_islands
-            }
-		}
-        
-		trigger = {
-            any_owned_province = {
-                OR = {
-                    area = area_jade_islands
-                    area = area_windward_isle
-                    area = area_thunder_islands
-                }
-                is_core = ROOT
-            }
-		}
-        
 		effect = {
-			1901 = { add_permanent_claim = ROOT }
-            1722 = { add_permanent_claim = ROOT }
-            1779 = { add_permanent_claim = ROOT}
-            1867 = { add_permanent_claim = ROOT }
+		custom_tooltip = zandalari_tooltip_three_eight_a
+		hidden_effect = {
+			region_kezan = {
+					type = all
+					add_province_triggered_modifier = goblin_zandalari_provinces
 		}
-        
+        }
+		}
         ai_weight   = { factor = 1 }
 		ai_priority = { factor = 1 }
 	}
-    
-    wwu_control_the_serpent = {
-		icon = mission_yulon
-        position = 3
-        
-		required_missions = { }
-		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            province_id = 1722
-		}
-        
-		trigger = {
-            owns_core_province = 1722
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_mojo_of_yulon
-                duration = -1
-            }
-			region_jade_forest = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-    wwu_subjugate_the_tiger = {
-		icon = mission_xuen
-        position = 4
-        
-		required_missions = { }
-		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            province_id = 1901
-		}
-        
-		trigger = {
-            owns_core_province = 1901
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_mojo_of_xuen
-                duration = -1
-            }
-			region_kun_lai_summit = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-    wwu_crush_the_ox = {
-		icon = mission_niuzao
-        position = 5
-        
-		required_missions = { }
-		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            province_id = 1867
-		}
-        
-		trigger = {
-            owns_core_province = 1867
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_mojo_of_niuzao
-                duration = -1
-            }
-			region_townlong_steppes = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-    wwu_enslave_the_crane = {
-		icon = mission_chiji
-        position = 6
-        
-		required_missions = { }
-		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            province_id = 1779
-		}
-        
-		trigger = {
-            owns_core_province = 1779
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_mojo_of_chiji
-                duration = -1
-            }
-			region_krasarang_wilds = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
-    
-    wwu_despoil_the_vale = {
-		icon = mission_touch_of_death
-        position = 7
-        
-		required_missions = { }
-		
-        provinces_to_highlight = {
-			NOT = { owned_by = ROOT }
-            province_id = 1807
-		}
-        
-		trigger = {
-            mission_completed = wwu_control_the_serpent
-            mission_completed = wwu_subjugate_the_tiger
-            mission_completed = wwu_crush_the_ox
-            mission_completed = wwu_enslave_the_crane
-            owns_core_province = 1807
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_despoilers_of_pandaria
-                duration = -1
-            }
-			continent_pandaria = {
-                add_permanent_claim = ROOT
-            }
-		}
-        
-        ai_weight   = { factor = 1 }
-		ai_priority = { factor = 1 }
-	}
+	
 }
