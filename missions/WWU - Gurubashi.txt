@@ -1,0 +1,755 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_gurubashi_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A66
+	}
+    
+	has_country_shield = yes
+	
+	wwu_crush_the_blackwater_cartel = {
+		icon = mission_auction_master
+        position = 4
+        
+		required_missions = { wwu_capture_lower_stranglethorn }
+        
+		trigger = {
+            NOT = { exists = A83 }
+            area_booty_bay = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {  
+            OR = {
+                owned_by = A83
+                area = area_booty_bay
+            }
+		}
+        
+		effect = {
+            996 = {
+                add_base_production = 3
+                add_devastation = -100
+            }
+            
+			add_country_modifier = {
+                name = mission_troll_traders
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_assault_plunder_isle = {
+		icon = mission_bloodsail_raider
+        position = 5
+        
+		required_missions = { wwu_crush_the_blackwater_cartel }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 4
+                
+                all_owned_province = {
+                    region = region_plunder_isle
+                }
+            }
+		}
+		provinces_to_highlight = {  
+            region = region_plunder_isle
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_plunder_isle = {
+                add_permanent_claim = ROOT
+            }
+            
+            add_country_modifier = {
+                name = mission_pirate_plunder
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_gurubashi_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A66
+	}
+    
+	has_country_shield = yes
+	
+	wwu_capture_upper_stranglethorn = {
+		icon = mission_bloodlust
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            area_upper_troll_ruins = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_zul_gurub = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_fort_livingston = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_kurzen_encampment = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_kalai = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_upper_troll_ruins
+                area = area_zul_gurub
+                area = area_fort_livingston
+                area = area_kurzen_encampment
+                area = area_kalai
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			every_owned_province = {
+                limit = {
+                    OR = {
+                        area = area_upper_troll_ruins
+                        area = area_zul_gurub
+                        area = area_fort_livingston
+                        area = area_kurzen_encampment
+                        area = area_kalai
+                    }
+                }
+                
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+		}
+	}
+    
+    wwu_capture_lower_stranglethorn = {
+		icon = mission_bones
+        position = 3
+        
+		required_missions = { wwu_capture_upper_stranglethorn }
+        
+		trigger = {
+            area_gurubashi_arena = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            area_lower_troll_ruins = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_gurubashi_arena
+                area = area_lower_troll_ruins
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			every_owned_province = {
+                limit = {
+                    OR = {
+                        area = area_gurubashi_arena
+                        area = area_lower_troll_ruins
+                    }
+                }
+                
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+            
+            add_country_modifier = {
+                name = mission_dominion_over_stranglethorn
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_secure_the_south = {
+		icon = mission_troll_regen
+        position = 4
+        
+		required_missions = { wwu_capture_lower_stranglethorn }
+        
+		trigger = {
+            area_zulakman = {
+                type = all
+                
+                has_shipyard_building_trigger = yes
+                owned_by = ROOT
+            }
+            area_jaguero_isle = {
+                type = all
+                
+                has_shipyard_building_trigger = yes
+                owned_by = ROOT
+            }
+            area_mistvale = {
+                type = all
+                
+                has_shipyard_building_trigger = yes
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_zulakman
+                area = area_jaguero_isle
+                area = area_mistvale
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_gurubashi_fleet
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_bastion_of_stranglethorn = {
+		icon = mission_troll_hexxer
+        position = 5
+        
+		required_missions = { wwu_secure_the_south }
+        
+		trigger = {
+            area_zul_gurub = {
+                OR = {
+                    has_building = wow_fort_2
+                    has_building = wow_fort_3
+                    has_building = wow_fort_4
+                }
+            }
+            area_the_tainted_land = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            area = area_the_tainted_land
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_yearly_manpower = 1.0
+            
+			add_country_modifier = {
+                name = mission_bastion_of_thorns
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_gurubashi_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A66
+	}
+    
+	has_country_shield = yes
+	
+	wwu_show_strength = {
+		icon = mission_troll_male
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            army_size_percentage = 1.0
+            navy_size_percentage = 1.0
+            stability = 1
+		}
+        
+		effect = {
+            region_stranglethorn_vale = {
+                add_permanent_claim = ROOT
+            }
+        
+			add_country_modifier = {
+                name = mission_gurubashi_settlers
+                duration = 3650
+            }
+		}
+	}
+    
+    wwu_seek_favour_of_the_loa = {
+		icon = mission_paku
+        position = 2
+        
+		required_missions = { wwu_show_strength }
+        
+		trigger = {
+            has_estate = estate_loa
+            num_of_estate_privileges = {
+                estate = estate_loa
+                value = 4
+            }
+            estate_loyalty = {
+                 estate = estate_loa
+                 loyalty = 75
+            }
+            estate_influence = {
+                estate = estate_loa
+                influence = 50
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_loa_confidence
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_glory_of_zul_gurub = {
+		icon = mission_ward_of_loa
+        position = 3
+        
+		required_missions = { wwu_seek_favour_of_the_loa }
+        
+		trigger = {
+            area_zul_gurub = {
+                type = all
+                
+                owned_by = ROOT
+                development = 10
+            }
+		}
+		provinces_to_highlight = {
+            area = area_zul_gurub
+            NOT = { development = 10 }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			change_adm = 1
+            change_dip = 1
+            change_mil = 1
+            
+            custom_tooltip = RULER_IMMORTAL_TT
+            hidden_effect = {
+                set_ruler_flag = is_immortal
+            }
+		}
+	}
+    
+    wwu_restore_ancient_links = {
+		icon = mission_map
+        position = 4
+        
+		required_missions = { wwu_glory_of_zul_gurub }
+        
+		trigger = {
+            OR = {
+                any_owned_province = {
+                    culture = culture_forest_troll
+                }
+                any_known_country = {
+                    alliance_with = ROOT
+                    primary_culture = culture_forest_troll
+                }
+            }
+            OR = {
+                any_owned_province = {
+                    culture = culture_jungle_troll
+                }
+                any_known_country = {
+                    alliance_with = ROOT
+                    primary_culture = culture_jungle_troll
+                }
+            }
+            OR = {
+                any_owned_province = {
+                    culture = culture_sand_troll
+                }
+                any_known_country = {
+                    alliance_with = ROOT
+                    primary_culture = culture_sand_troll
+                }
+            }
+            OR = {
+                any_owned_province = {
+                    culture = culture_frost_troll
+                }
+                any_known_country = {
+                    alliance_with = ROOT
+                    primary_culture = culture_frost_troll
+                }
+            }
+            OR = {
+                any_owned_province = {
+                    culture = culture_zandalari_troll
+                }
+                any_known_country = {
+                    alliance_with = ROOT
+                    primary_culture = culture_zandalari_troll
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                culture = culture_forest_troll
+                culture = culture_jungle_troll
+                culture = culture_sand_troll
+                culture = culture_frost_troll
+                culture = culture_zandalari_troll
+            }
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_ancient_troll_kinship
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_reclaim_the_great_seat = {
+		icon = mission_city_of_gold
+        position = 5
+        
+		required_missions = { wwu_restore_ancient_links }
+        
+		trigger = {
+            area_dazar_alor = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            area = area_dazar_alor
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_adm_power = 250
+            add_dip_power = 250
+            add_mil_power = 250
+        
+			add_country_modifier = {
+                name = mission_usurpation_of_zandalar
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_gurubashi_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A66
+	}
+    
+	has_country_shield = yes
+	
+	wwu_harass_the_humans = {
+		icon = mission_burning_castle
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            OR = {
+                area_ravenhill = {
+                    owned_by = ROOT
+                }
+                area_moonbrook = {
+                    owned_by = ROOT
+                }
+                area_twisting_forest = {
+                    owned_by = ROOT
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_ravenhill
+                area = area_moonbrook
+                area = area_twisting_forest
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			region_duskwood = {
+                add_permanent_claim = ROOT
+            }
+			region_westfall = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_acquire_westfall = {
+		icon = mission_barracks
+        position = 3
+        
+		required_missions = { wwu_harass_the_humans }
+        
+		trigger = {
+            region_westfall = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_westfall
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_westfall_slaves
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_crush_the_human_spirit = {
+		icon = mission_berserk
+        position = 4
+        
+		required_missions = { wwu_acquire_westfall }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = STW }
+                custom_trigger_tooltip = {
+                    tooltip = WIN_WAR_AGAINST_STORMWIND_TT
+                    
+                    has_country_flag = won_war_against_stormwind
+                }
+            }
+		}
+        
+		effect = {
+			add_prestige = 100
+            add_splendor = 200
+            
+            add_country_modifier = {
+                name = mission_might_of_the_trolls
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_a_new_troll_empire = {
+		icon = mission_azerite_essense
+        position = 5
+        
+		required_missions = { wwu_crush_the_human_spirit }
+        
+		trigger = {
+            region_westfall = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            region_duskwood = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            region_elwynn_forest = {
+                type = all
+                
+                owned_by = ROOT
+            }
+            region_stranglethorn_vale = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_westfall
+                region = region_duskwood
+                region = region_elwynn_forest
+                region = region_stranglethorn_vale
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_godking_ambition
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_gurubashi_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A66
+	}
+    
+	has_country_shield = yes
+	
+	wwu_acquire_duskwood = {
+		icon = mission_loa_worship
+        position = 3
+        
+		required_missions = { wwu_harass_the_humans }
+        
+		trigger = {
+            region_duskwood = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_duskwood
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_human_pin_cushions
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_secure_the_pass = {
+		icon = mission_salvage
+        position = 4
+        
+		required_missions = { wwu_acquire_duskwood }
+        
+		trigger = {
+            2162 = {
+                owned_by = ROOT
+            }
+            938 = {
+                owned_by = ROOT
+            }
+            2176 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2162
+                province_id = 938
+                province_id = 2176
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_absolutism = 20
+            
+			938 = {
+                add_or_improve_fort = yes
+            }
+		}
+	}
+    
+    wwu_assimilate_the_hakkari = {
+		icon = mission_blood_corruption
+        position = 5
+        
+		required_missions = { wwu_secure_the_pass }
+        
+		trigger = {
+            region_swamp_of_sorrows = {
+                type = all
+                OR = {
+                    owned_by = ROOT
+                    owned_by = A71 # Atal'ai
+                    owned_by = A72 # Hakkari
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_swamp_of_sorrows
+			NOT = { owned_by = ROOT }
+			NOT = { owned_by = A71 }
+			NOT = { owned_by = A72 }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_hakkari_assimilation
+                duration = -1
+            }
+            
+			if = {
+                limit = {
+                    exists = A71 # Atal'ai
+                }
+                
+                create_subject = {
+                    subject_type = vassal
+                    subject = A71
+                }
+            }
+            if = {
+                limit = {
+                    exists = A72 # Hakkari
+                }
+                
+                create_subject = {
+                    subject_type = vassal
+                    subject = A72
+                }
+            }
+		}
+	}
+}
