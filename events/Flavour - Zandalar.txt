@@ -1,75 +1,12 @@
+namespace = wwu_zandalar
+
 ##################################
-country_event = {
-	id = zandalar_test
-title = "zandalar_test.title"
-	desc = "zandalar_test.desc"
-	picture = EAGLEHORN_BOW_eventPicture
 
-	is_triggered_only = yes
-	
-
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_influence 
-            value = 5
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_influence 
-            value = 20
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_influence 
-            value = -5
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_influence 
-            value = -20
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_power
-            value = 5
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_power
-            value = 20
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_power
-            value = -5
-        }
-	}
-	option = {
-		name = zandalar.12.op1
-				        change_variable = {
-            which = zul_power 
-            value = -20
-        }
-	}
-}
 
 country_event = {
-	id = zandalar.1
-	title = zandalar.1.title
-	desc = zandalar.1.desc
+	id = wwu_zandalar.1
+	title = wwu_zandalar.1.title
+	desc = wwu_zandalar.1.desc
 	picture = EAGLEHORN_BOW_eventPicture
     
 	trigger = {
@@ -687,159 +624,285 @@ NOT = {
 }
 
 country_event = {
-	id = zandalar.2
-	title = zandalar.2.title
-	desc = zandalar.2.desc
+	id = wwu_zandalar.2
+	title = wwu_zandalar.2.title
+	desc = wwu_zandalar.2.desc
 	picture = EAGLEHORN_BOW_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = "zandalar_event.2.a"
 		add_country_modifier = {
-    name = "mission_zandalar_reform_one"
+    name = "mission_zandalar_reformone"
     duration = -1  
 }
 	}
 	option = {
 		name = "zandalar_event.2.b"
 		add_country_modifier = {
-    name = "mission_zandalar_reform_two"
+    name = "mission_zandalar_reformtwo"
     duration = -1  
 }
 	}
 	option = {
 		name = "zandalar_event.2.c"
 		add_country_modifier = {
-    name = "mission_zandalar_reform_three"
+    name = "mission_zandalar_reformthree"
     duration = -1  
 }
 	}
 	}
 	
 country_event = {
-	id = zandalar.3
-	title = zandalar.3.title
-	desc = zandalar.3.desc
+	id = wwu_zandalar.3
+	title = wwu_zandalar.3.title
+	desc = wwu_zandalar.3.desc
 	picture = EAGLEHORN_BOW_eventPicture
 	is_triggered_only = yes
 	option = {
-		name = "zandalar_event.3.a"
-set_country_flag = zandalari_cavalery_a
+		name = "wwu_zandalar.3.op1"
+custom_tooltip = zandalari_event_devilsaur_a
 set_country_flag = zandalari_merc_c
 	}
 	option = {
-		name = "zandalar_event.3.b"
-set_country_flag = zandalari_cavalery_b
+		name = "wwu_zandalar.3.op2"
+custom_tooltip = zandalari_event_devilsaur_b
+set_country_flag = oondasta_egg
+
+	add_country_modifier = {
+    name = "oondasta_cooldown"
+    duration = 120 
+	hidden = yes
+}
+hidden_effect = {
+            set_variable = {
+                which = oondasta_eggs
+                value = 0
+            }
+			}
 	}
 	}
 	
 country_event = {
-	id = zandalar.4
-title = "zandalar.4.title"
-	desc = "zandalar.4.desc"
+	id = wwu_zandalar.4
+title = "wwu_zandalar.4.title"
+	desc = "wwu_zandalar.4.desc"
 	picture = EAGLEHORN_BOW_eventPicture
-fire_only_once = yes
 mean_time_to_happen = {
-		months = 2
+		months = 20
+	}
+	immediate = {
+		hidden_effect = {
+	add_country_modifier = {
+    name = "oondasta_cooldown"
+    duration = 180 
+	hidden = yes
+}
+		}
 	}
 trigger = {
-has_country_flag = zandalari_cavalery_b
+has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
 				area_isle_of_giants = {
 				type = all
 				AND = {
 				country_or_subject_holds = ROOT
 			}
 			}
+        NOT = { 
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
 			}
-	
+
 option = {
-name = "zandalar.1.op1"
-set_country_flag = zandalari_cavalery_c
-		add_adm_power = -100
+name = "wwu_zandalar.4.op1"
+add_years_of_income = -0.5
+oondasta_grow = yes 
+}
+option = {
+name = "wwu_zandalar.4.op2"
+add_yearly_manpower = -0.5
+oondasta_grow = yes 
+}
+option = {
+name = "wwu_zandalar.4.op3"
+add_prestige = -5
 }
 }
 
 country_event = {
-	id = zandalar.5
-title = "zandalar.5.title"
-	desc = "zandalar.5.desc"
+	id = wwu_zandalar.5
+title = "wwu_zandalar.5.title"
+	desc = "wwu_zandalar.5.desc"
 	picture = EAGLEHORN_BOW_eventPicture
-fire_only_once = yes
 mean_time_to_happen = {
-		months = 25
+		months = 30
+	}
+	immediate = {
+		hidden_effect = {
+	add_country_modifier = {
+    name = "oondasta_cooldown"
+    duration = 180 
+	hidden = yes
+}
+		}
 	}
 trigger = {
-has_country_flag = zandalari_cavalery_c
+has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
 				area_isle_of_giants = {
 				type = all
 				AND = {
 				country_or_subject_holds = ROOT
 			}
 			}
+        NOT = { 
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
 			}
-	
+
 option = {
-name = "zandalar.1.op1"
-set_country_flag = zandalari_cavalery_d
-		add_dip_power = -100
+name = "wwu_zandalar.5.op1"
+add_adm_power = -40
+add_dip_power = -40
+add_mil_power = -40
+oondasta_big = yes 
+}
+option = {
+name = "wwu_zandalar.5.op2"
+add_prestige = -5
 }
 }
 
 country_event = {
-	id = zandalar.6
-title = "zandalar.6.title"
-	desc = "zandalar.6.desc"
+	id = wwu_zandalar.6
+title = "wwu_zandalar.6.title"
+	desc = "wwu_zandalar.6.desc"
 	picture = EAGLEHORN_BOW_eventPicture
-fire_only_once = yes
 mean_time_to_happen = {
-		months = 25
+		months = 30
+	}
+	immediate = {
+		hidden_effect = {
+	add_country_modifier = {
+    name = "oondasta_cooldown"
+    duration = 180 
+	hidden = yes
+}
+		}
 	}
 trigger = {
-has_country_flag = zandalari_cavalery_d
+has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
 				area_isle_of_giants = {
 				type = all
 				AND = {
 				country_or_subject_holds = ROOT
 			}
 			}
+            check_variable = {
+                which = oondasta_eggs
+                value = 2
+            }
+        NOT = { 
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
 			}
-	
+
 option = {
-name = "zandalar.1.op1"
-set_country_flag = zandalari_cavalery_e
-		add_mil_power = -100
+name = "wwu_zandalar.6.op1"
+random_list = {
+75 = {
+oondasta_mega = yes 
+		}
+20 = {
+oondasta_back = yes 
+		}
+5 = {
+add_prestige = -10
+custom_tooltip = oondasta_dead
+hidden_effect = {
+clr_country_flag = oondasta_egg}
+
+		}
+}
+}
+option = {
+name = "wwu_zandalar.6.op2"
+add_prestige = -5
 }
 }
 
+###
+
 country_event = {
-	id = zandalar.7
-title = "zandalar.7.title"
-	desc = "zandalar.7.desc"
+	id = wwu_zandalar.7
+title = "wwu_zandalar.7.title"
+	desc = "wwu_zandalar.7.desc"
 	picture = EAGLEHORN_BOW_eventPicture
-fire_only_once = yes
 mean_time_to_happen = {
-		months = 25
+		months = 1
+	}
+	immediate = {
+		hidden_effect = {
+	add_country_modifier = {
+    name = "oondasta_cooldown"
+    duration = 180 
+	hidden = yes
+}
+clr_country_flag = oondasta_egg
+		}
 	}
 trigger = {
-has_country_flag = zandalari_cavalery_e
+has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
 				area_isle_of_giants = {
 				type = all
 				AND = {
 				country_or_subject_holds = ROOT
 			}
 			}
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
 			}
-	
+
 option = {
-name = "zandalar.1.op1"
-set_country_flag = zandalari_merc_b
-		add_prestige = 10
+name = "wwu_zandalar.7.op1"
+
+set_country_flag = zandalari_merc_ba
+add_mil_power = -50
+custom_tooltip = zandalari_event_oondasta_rise_a
+}
+option = {
+name = "wwu_zandalar.7.op2"
+
+set_country_flag = zandalari_merc_bb
+add_mil_power = -100
+custom_tooltip = zandalari_event_oondasta_rise_b
+}
+option = {
+name = "wwu_zandalar.7.op3"
+
+set_country_flag = zandalari_merc_bc
+add_mil_power = -150
+custom_tooltip = zandalari_event_oondasta_rise_c
 }
 }
 
 country_event = {
-	id = zandalar.8
-title = "zandalar.8.title"
-	desc = "zandalar.8.desc"
+	id = wwu_zandalar.8
+title = "wwu_zandalar.8.title"
+	desc = "wwu_zandalar.8.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 	major = yes
 	major_trigger = {
@@ -849,12 +912,12 @@ mean_time_to_happen = {
 		months = 1
 	}
 trigger = {
-has_country_flag = zandalar.8
+has_country_flag = wwu_zandalar.8
 NOT = { has_country_flag = zandalari_zandalar8 }
 			}
 	
 option = {
-name = "zandalar.1.op1"
+name = "wwu_zandalar.1.op1"
 set_country_flag = zandalari_zandalar8
 if = {
 limit = {
@@ -877,7 +940,7 @@ ai_chance = {
 		}
 }
 option = {
-name = "zandalar.1.op1"
+name = "wwu_zandalar.1.op1"
 set_country_flag = zandalari_zandalar8
 		A78 = {
 		create_march = NAZ
@@ -889,9 +952,9 @@ ai_chance = {
 }
 
 country_event = {
-	id = zandalar.9
-title = "zandalar.9.title"
-	desc = "zandalar.9.desc"
+	id = wwu_zandalar.9
+title = "wwu_zandalar.9.title"
+	desc = "wwu_zandalar.9.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 	major = yes
 	major_trigger = {
@@ -902,12 +965,12 @@ mean_time_to_happen = {
 		months = 1
 	}
 trigger = {
-has_country_flag = zandalar.9
+has_country_flag = wwu_zandalar.9
 NOT = { has_country_flag = zandalari_zandalar9 }
 			}
 	
 option = {
-name = "zandalar.9.op1"
+name = "wwu_zandalar.9.op1"
 set_country_flag = zandalari_zandalar9
 if = {
 limit = {
@@ -928,7 +991,7 @@ ai_chance = {
 		}
 }
 option = {
-name = "zandalar.9.op2"
+name = "wwu_zandalar.9.op2"
 set_country_flag = zandalari_zandalar9
 		A78 = {
 		create_march = ROOT
@@ -938,7 +1001,7 @@ ai_chance = {
 		}
 }
 option = {
-name = "zandalar.9.op3"
+name = "wwu_zandalar.9.op3"
 set_country_flag = zandalari_zandalar9
 		A78 = {
 		inherit = ROOT
@@ -950,14 +1013,14 @@ ai_chance = {
 }
 
 country_event = {
-	id = zandalar.10
-title = "zandalar.10.title"
-	desc = "zandalar.10.desc"
+	id = wwu_zandalar.10
+title = "wwu_zandalar.10.title"
+	desc = "wwu_zandalar.10.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 	is_triggered_only = yes
 	
 option = {
-name = "zandalar.10.op1"
+name = "wwu_zandalar.10.op1"
 1127 = {
 		change_province_name = "Spot of Pa'ku"
 		rename_capital = "Spot of Pa'ku"
@@ -969,7 +1032,7 @@ name = "zandalar.10.op1"
 set_country_flag = zandalari_merc_h
 }
 option = {
-name = "zandalar.10.op2"
+name = "wwu_zandalar.10.op2"
 1127 = {
 		change_province_name = "Spot of Gonk"
 		rename_capital = "Spot of Gonk"
@@ -981,7 +1044,7 @@ name = "zandalar.10.op2"
 set_country_flag = zandalari_merc_i
 }
 option = {
-name = "zandalar.10.op3"
+name = "wwu_zandalar.10.op3"
 1127 = {
 		change_province_name = "Spot of Torcali"
 		rename_capital = "Spot of Torcali"
@@ -998,18 +1061,25 @@ set_country_flag = zandalari_merc_j
 
 #####Disaster start
 country_event = {
-	id = zandalar.11
-title = "zandalar.11.title"
-	desc = "zandalar.11.desc"
+	id = wwu_zandalar.11
+title = "wwu_zandalar.11.title"
+	desc = "wwu_zandalar.11.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 
 	is_triggered_only = yes
 	
-	trigger = {
-		tag = A78
-	}	
+	immediate = {
+		hidden_effect = {
+	add_country_modifier = {
+    name = "prophet_zul_start_cooldown"
+    duration = 3650 
+	hidden = yes
+}
+set_country_flag = prophet_zul_here_a
+		}
+	}
 	option = {
-		name = zandalar.11.op1
+		name = wwu_zandalar.11.op1
 		custom_tooltip = zandalari_tooltip_rusty_empire_a
 	add_country_modifier = {
     name = "rusty_empire_one"
@@ -1028,9 +1098,9 @@ title = "zandalar.11.title"
 
 #####Disaster end
 country_event = {
-	id = zandalar.12
-title = "zandalar.12.title"
-	desc = "zandalar.12.desc"
+	id = wwu_zandalar.12
+title = "wwu_zandalar.12.title"
+	desc = "wwu_zandalar.12.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 
 	is_triggered_only = yes
@@ -1042,32 +1112,32 @@ title = "zandalar.12.title"
 	}
 
 	option = {
-		name = zandalar.12.op1
+		name = wwu_zandalar.12.op1
 		add_stability = 1
 	}
 }
 ###############
 
 country_event = {
-	id = zandalar.13
-title = "zandalar.13.title"
-	desc = "zandalar.13.desc"
+	id = wwu_zandalar.13
+title = "wwu_zandalar.13.title"
+	desc = "wwu_zandalar.13.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 	is_triggered_only = yes
 	
 option = {
-name = "zandalar.13.op1"
-set_country_flag = zandalar.13.op1.choose
+name = "wwu_zandalar.13.op1"
+set_country_flag = wwu_zandalar.13.op1.choose
 
 }
 option = {
-name = "zandalar.13.op2"
-set_country_flag = zandalar.13.op2.choose
+name = "wwu_zandalar.13.op2"
+set_country_flag = wwu_zandalar.13.op2.choose
 
 }
 option = {
-name = "zandalar.13.op3"
-set_country_flag = zandalar.13.op3.choose
+name = "wwu_zandalar.13.op3"
+set_country_flag = wwu_zandalar.13.op3.choose
 }
 }
 
@@ -1075,6 +1145,181 @@ set_country_flag = zandalar.13.op3.choose
 
 
 ##############################
-##############################
+##############################Prophet Zul events
 ##############################
 
+country_event = {
+	id = wwu_zandalar.14
+title = "wwu_zandalar.14.title"
+	desc = "wwu_zandalar.14.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+
+	is_triggered_only = yes
+	
+
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_influence 
+            value = 5
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_influence 
+            value = 20
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_influence 
+            value = -5
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_influence 
+            value = -20
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_power
+            value = 5
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_power
+            value = 20
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_power
+            value = -5
+        }
+	}
+	option = {
+		name = wwu_zandalar.14.op1
+				        change_variable = {
+            which = zul_power 
+            value = -20
+        }
+	}
+}
+
+#############################event preopening menu council
+
+country_event = {
+	id = wwu_zandalar.15
+title = "wwu_zandalar.15.title"
+	desc = "wwu_zandalar.15.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 360
+	}
+	
+trigger = {
+has_country_flag = prophet_zul_here_a
+		NOT = { has_country_modifier = prophet_zul_start_cooldown }
+
+
+			}
+	
+
+	option = {
+		name = wwu_zandalar.15.op1
+    custom_tooltip = zandalari_event_prophet_zul_here_already
+hidden_effect = {
+            set_variable = {
+                which = zul_power
+                value = 0
+            }
+			}
+hidden_effect = {
+            set_variable = {
+                which = zul_influence
+                value = 0
+            }
+			}
+set_country_flag = prophet_zul_here_already
+set_country_flag = council_of_zanchul_already
+	}
+	}
+
+#############################opening menu council
+country_event = {
+	id = wwu_zandalar.16
+	title = wwu_zandalar.16.title
+	desc = wwu_zandalar.16.desc
+	picture = EAGLEHORN_BOW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = "wwu_zandalar.16.op1"
+            country_event = { id = wwu_zandalar.17 }
+	}
+
+	}
+	
+########################naga attack
+country_event = {
+	id = wwu_zandalar.17
+	title = wwu_zandalar.17.title
+	desc = wwu_zandalar.17.desc
+	picture = EAGLEHORN_BOW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = "wwu_zandalar.17.op1"
+		add_country_modifier = {
+    name = "zul_technology"
+    duration = 1825
+}
+zul_power_10_a = yes 
+if = {
+limit = {
+NOT = {
+check_variable = {
+            which = zul_influence
+            value = 50
+        }}
+	}
+	hidden_effect = {
+            country_event = { id = wwu_zandalar.17 }}
+	}
+	}
+	option = {
+		name = "wwu_zandalar.17.op2"
+add_adm_power = 75
+add_adm_power = 75
+add_adm_power = 75
+	}
+	option = {
+		name = "wwu_zandalar.17.op3"
+every_rival_country = { 
+add_spy_network_from = {
+    who = A78
+    value = 35
+}
+}
+	}
+	option = {
+		name = "wwu_zandalar.17.op4"
+
+	}
+	option = {
+		name = "wwu_zandalar.17.op5"
+		add_country_modifier = {
+    name = "zul_technology"
+    duration = 1825
+}
+	}
+	}

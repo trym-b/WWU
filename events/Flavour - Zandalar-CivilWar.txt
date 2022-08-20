@@ -1,7 +1,10 @@
+namespace = wwu_zan_civilwarstart
+
+#####################
 country_event = {
-	id = zan_civilwarstart.1
-title = "zan_civilwarstart.1.title"
-	desc = "zan_civilwarstart.1.desc"
+	id = wwu_zan_civilwarstart.1
+title = "wwu_zan_civilwarstart.1.title"
+	desc = "wwu_zan_civilwarstart.1.desc"
 	picture = EAGLEHORN_BOW_eventPicture
 	is_triggered_only = yes
 	option = {
@@ -2221,68 +2224,7 @@ set_country_flag = zandalar_great_war
 #######disaster random events
 ######
 
-country_event = {
-	id = flavor_bur.9
-	title = "flavor_bur.EVTNAME9"
-	desc = "flavor_bur.EVTDESC9"
-	picture = ANGRY_MOB_eventPicture
-	
-	is_triggered_only = yes
 
-	trigger = {
-		any_owned_province = {
-			region = low_countries_region
-			NOT = { controlled_by = REB }
-			NOT = { has_province_flag = dutch_revolt }
-			NOT = { has_province_flag = no_dutch_revolt }
-			OR = {
-				culture = frisian
-				culture = dutch
-				culture = flemish
-			}
-		}
-	}
-	
-	immediate = {
-		hidden_effect = {
-			random_owned_province = {
-				limit = {
-					region = low_countries_region
-					NOT = { controlled_by = REB }
-					NOT = { has_province_flag = dutch_revolt }
-					NOT = { has_province_flag = no_dutch_revolt }
-					OR = {
-						culture = frisian
-						culture = dutch
-						culture = flemish
-					}
-				}
-				save_event_target_as = dutch_rebels_target
-			}
-		}
-	}
-
-	option = {
-		name = "flavor_bur.EVTOPTA9"
-		ai_chance = { factor = 100 }
-		event_target:dutch_rebels_target = {
-			set_province_flag = dutch_revolt
-			spawn_rebels = {
-				type = nationalist_rebels
-				size = 1
-				friend = NED
-			}
-		}
-	}
-	option = {
-		name = "flavor_bur.EVTOPTB9"
-		ai_chance = { factor = 0 }
-		event_target:dutch_rebels_target = {
-			add_local_autonomy = 100
-			set_province_flag = no_dutch_revolt
-		}
-	}
-}
 
 ######
 #######disaster scripted events
