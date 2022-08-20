@@ -4,7 +4,7 @@ Validates that all localisation files are complying with YAML format
 
 from pathlib import Path
 
-from yaml import safe_load
+from pdxloc.util import read_localisation
 
 
 def _main() -> None:
@@ -15,8 +15,7 @@ def _main() -> None:
         raise RuntimeError(f"No localisation files found in {localisation_directory}")
     for localisation_file in localisation_files:
         print(f"Validating yml syntax in file: {localisation_file}", flush=True)
-        with localisation_file.open(encoding="utf-8") as file_pointer:
-            safe_load(file_pointer)
+        read_localisation(localisation_file)
 
 
 if __name__ == "__main__":
