@@ -406,6 +406,7 @@ steal_artifact = {
         set_country_flag = artifact_$artifact$
         
         event_target:artifact_heist_target = {
+            set_country_flag = artifact_$artifact$_stolen
             clr_country_flag = artifact_$artifact$
             clr_country_flag = primary_artifact_$artifact$
         }
@@ -429,21 +430,19 @@ display_artifact_status = {
 save_artifact_location = {
     if = {
         limit = {
-            any_country = {
-                has_country_flag = artifact_$artifact$
-            }
+            has_global_flag = discovered_artifact_$artifact$
         }
         every_country = {
             limit = {
                  has_country_flag = artifact_$artifact$
             }
-            save_event_target_as = owner_$artifact$
+            save_event_target_as = current_artifact_owner
         }
     }
     else = {
-        # Fill the event target with REB for error prevention. However this should never be displayed.
-        REB = {
-            save_event_target_as = owner_$artifact$
+        # Gaia represents no owner
+        GAI = {
+            save_event_target_as = current_artifact_owner
         }
     }
 }
@@ -486,4 +485,20 @@ clear_current_primary_artifact = {
     clr_country_flag = primary_artifact_stromkar
     clr_country_flag = primary_artifact_scale_of_the_earthwarder
     clr_country_flag = primary_artifact_underlight_angler
+}
+
+reset_heist__raider = {
+    clr_country_flag = artifact_heist_active
+    
+    clr_country_flag = artifact_heist_setup_raider
+    clr_country_flag = heist_type_quick
+    clr_country_flag = heist_type_methodical
+}
+
+reset_heist__target = {
+    clr_country_flag = artifact_heist_setup_target
+    clr_country_flag = heist_defence_max
+    clr_country_flag = heist_defence_med
+    clr_country_flag = heist_defence_min
+    clr_country_flag = artifact_heist_target
 }

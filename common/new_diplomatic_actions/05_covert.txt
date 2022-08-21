@@ -483,3 +483,62 @@ claim_port = {
 		always = yes
 	}
 }
+
+#---------------------------------------
+# Steal Artifact
+#---------------------------------------
+steal_artifact = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = steal_artifact_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Only allow 1 heist at any one time
+        NOT = {
+            any_country = {
+                has_country_flag = artifact_heist_active 
+            }
+        }
+        FROM = {
+            has_any_artifact = yes
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 80
+		}
+        FROM = {
+            has_any_artifact = yes
+        }
+	}
+	on_accept = {
+		add_spy_network_in = {
+			who = FROM
+			value = -80
+		}
+		hidden_effect = {
+            set_country_flag = artifact_heist_active
+            FROM = {
+                set_country_flag = artifact_heist_target
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        # Only pirate/bandit AIs will use this
+		OR = {
+            is_bandit_type_nation = yes
+            is_pirate = yes
+        }
+	}
+}
+

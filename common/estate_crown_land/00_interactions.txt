@@ -1,43 +1,4 @@
 interaction = {
-    key = ruler_management
-    random_seed = random
-
-    trigger = {
-        if = {
-            limit = {
-                ai = yes
-            }
-            has_country_flag = ai_can_use_ruler_view
-        }
-        else = {
-            always = yes
-        }
-    }
-
-    effect = {
-		country_event = { id = wwu_ruler_view.1 }
-            
-        hidden_effect = {
-            if = {
-                limit = {
-                    ai = yes
-                }
-                clr_country_flag = ai_can_use_ruler_view
-            }
-        }
-    }
-	ai_will_do = {
-		factor = 1
-        
-        modifier = {
-            factor = 0
-            
-            NOT = { has_country_flag = ai_can_use_ruler_view }
-        }
-	}
-}
-
-interaction = {
     key = building_management
     random_seed = random
 
@@ -674,5 +635,31 @@ interaction = {
     }
 	ai_will_do = {
 		factor = 0 # AI won't do agendas
+	}
+}
+
+interaction = {
+    key = seek_advisor
+    random_seed = random
+
+    trigger = {
+        prestige = 0
+    }
+
+    effect = {
+        add_prestige = -10
+        
+        add_estate_influence_modifier = {
+            estate = all
+            desc = EST_VAL_ESTATE_ADVISOR
+            duration = 7300
+            influence = 5
+            short = yes
+        }
+        
+		country_event = { id = estate_system.10 }
+    }
+	ai_will_do = {
+		factor = 0
 	}
 }

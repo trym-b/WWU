@@ -1,0 +1,2019 @@
+namespace = wwu_artifact_heist
+
+#--------------------------------------------
+# Heist Begins
+#--------------------------------------------
+# ROOT - Country conducting the heist
+# Selects which type of heist will be taken
+
+country_event = {
+	id = wwu_artifact_heist.1
+	title = wwu_artifact_heist.1.title
+	desc = wwu_artifact_heist.1.desc
+	picture = CUTPURSE_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_heist_active
+        NOT = { has_country_flag = artifact_heist_setup_raider }
+        any_country = {
+            has_country_flag = artifact_heist_target
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {   
+            set_country_flag = artifact_heist_setup_raider
+            
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_target
+                }
+                save_event_target_as = artifact_heist_target
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.1.option.a
+        
+        custom_tooltip = HEIST_TYPE_QUICK
+        hidden_effect = {
+            set_country_flag = heist_type_quick
+        }
+        
+        ai_chance = {
+            factor = 25
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.1.option.b
+        
+        custom_tooltip = HEIST_TYPE_METHODICAL
+        hidden_effect = {
+            set_country_flag = heist_type_methodical
+        }
+        
+        ai_chance = {
+            factor = 75
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            event_target:artifact_heist_target = {
+                country_event = { id = wwu_artifact_heist.2 days = 7 }
+            }
+        }
+    }
+}
+
+#--------------------------------------------
+# Target of Heist
+#--------------------------------------------
+# ROOT - Country target of the heist
+# Selects which type of heist defence will be taken
+
+country_event = {
+	id = wwu_artifact_heist.2
+	title = wwu_artifact_heist.2.title
+	desc = wwu_artifact_heist.2.desc
+	picture = DEADLY_SHOT_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = artifact_heist_target
+        NOT = { has_country_flag = artifact_heist_setup_target }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = artifact_heist_setup_target 
+
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_active
+                }
+                save_event_target_as = artifact_heist_raider
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.2.option.a
+        
+        custom_tooltip = HEIST_DEFENCE_MAX
+        hidden_effect = {
+            set_country_flag = heist_defence_max
+        }
+        
+        add_mil_power = -200
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+               
+                NOT = { mil_power = 400 }
+            }
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.2.option.b
+        
+        custom_tooltip = HEIST_DEFENCE_MED
+        hidden_effect = {
+            set_country_flag = heist_defence_med
+        }
+        
+        add_mil_power = -100
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+               
+                NOT = { mil_power = 200 }
+            }
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.2.option.c
+        
+        custom_tooltip = HEIST_DEFENCE_MIN
+        hidden_effect = {
+            set_country_flag = heist_defence_min
+        }
+        
+        ai_chance = {
+            factor = 50
+            
+            modifier = {
+                factor = 0.5
+               
+                mil_power = 400
+            }
+        }
+	}
+    after = {
+        hidden_effect = {
+            event_target:artifact_heist_raider = {
+                country_event = { id = wwu_artifact_heist.3 days = 7 }
+            }
+        }
+    }
+}
+
+#--------------------------------------------
+# The Heist
+#--------------------------------------------
+# ROOT - Country conducting the heist
+# Roll the outcome of the heist
+
+country_event = {
+	id = wwu_artifact_heist.3
+	title = wwu_artifact_heist.3.title
+	desc = wwu_artifact_heist.3.desc
+	picture = DEFIAS_BANDIT_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = artifact_heist_active
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_target
+                }
+                save_event_target_as = artifact_heist_target
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.3.option.a
+        
+        custom_tooltip = HEIST_RESULT
+        
+        # Quick -> Max
+        if = {
+            limit = {
+                has_country_flag = heist_type_quick
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_max
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                30 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                60 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                10 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+        # Quick -> Med
+        else_if = {
+            limit = {
+                has_country_flag = heist_type_quick
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_med
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                30 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                50 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                20 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+        # Quick -> Min
+        else_if = {
+            limit = {
+                has_country_flag = heist_type_quick
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_min
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                5 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                5 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                90 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+        # Methodical -> Max
+        else_if = {
+            limit = {
+                has_country_flag = heist_type_methodical
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_max
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                50 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                30 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                20 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+        # Methodical -> Med
+        else_if = {
+            limit = {
+                has_country_flag = heist_type_methodical
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_med
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                30 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                20 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                50 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+        # Methodical -> Min
+        else_if = {
+            limit = {
+                has_country_flag = heist_type_methodical
+                event_target:artifact_heist_target = {
+                    has_country_flag = heist_defence_min
+                }
+            }
+            
+            random_list = {
+                # Thwarted
+                20 = { 
+                    country_event = { id = wwu_artifact_heist.4 days = 7 } 
+                }
+                # Exposed
+                10 = { 
+                    country_event = { id = wwu_artifact_heist.5 days = 7 } 
+                    
+                    event_target:artifact_heist_target = {
+                        country_event = { id = wwu_artifact_heist.6 } # Show immediately so artifact_heist_target isn't cleared before it shows
+                    }
+                }
+                # Steal
+                70 = { 
+                    hidden_effect = { 
+                        set_country_flag = artifact_heist_complete
+                    }
+                    tooltip = { country_event = { id = wwu_artifact_heist.8 days = 7 } }
+                }
+            }
+        }
+	}
+}
+
+#--------------------------------------------
+# Heist Thwarted
+#--------------------------------------------
+# ROOT - Country conducting the heist
+# Heist fails but not discovered
+
+country_event = {
+	id = wwu_artifact_heist.4
+	title = wwu_artifact_heist.4.title
+	desc = wwu_artifact_heist.4.desc
+	picture = ENTRENCHMENT_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = artifact_heist_active
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {   
+            reset_heist__raider = yes
+            
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_target
+                }
+                save_event_target_as = artifact_heist_target
+                
+                reset_heist__target = yes
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.4.option.a
+        
+        add_prestige = -10
+	}
+}
+
+#--------------------------------------------
+# Heist Exposed
+#--------------------------------------------
+# ROOT - Country conducting the heist
+# Heist fails and is discovered
+
+country_event = {
+	id = wwu_artifact_heist.5
+	title = wwu_artifact_heist.5.title
+	desc = wwu_artifact_heist.5.desc
+	picture = DEFIAS_RINGLEADER_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = artifact_heist_active
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {   
+            reset_heist__raider = yes
+            
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_target
+                }
+                save_event_target_as = artifact_heist_target
+                
+                reset_heist__target = yes
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.5.option.a
+        
+        add_prestige = -25
+	}
+}
+
+#--------------------------------------------
+# Heist Exposed
+#--------------------------------------------
+# ROOT - Country target of the heist
+# Heist is exposed.
+
+country_event = {
+	id = wwu_artifact_heist.6
+	title = wwu_artifact_heist.6.title
+	desc = wwu_artifact_heist.6.desc
+	picture = DEFIAS_RINGLEADER_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = artifact_heist_target
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {   
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_raider
+                }
+                save_event_target_as = artifact_heist_raider
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.6.option.a
+        
+        add_prestige = 25
+	}
+}
+
+#--------------------------------------------
+# Vault Loot
+#--------------------------------------------
+# ROOT - Country conducting the heist
+# Heist is successful, allow selection of artifact
+
+country_event = {
+	id = wwu_artifact_heist.8
+	title = wwu_artifact_heist.8.title
+	desc = wwu_artifact_heist.8.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_heist_active
+        has_country_flag = artifact_heist_complete
+        any_country = {
+            has_country_flag = artifact_heist_target
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            reset_heist__raider = yes
+            
+            every_country = {
+                limit = {
+                    has_country_flag = artifact_heist_target
+                }
+                save_event_target_as = artifact_heist_target
+                
+                reset_heist__target = yes
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_artifact_heist.8.option.apocalypse
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_apocalypse
+            }
+        }
+        
+        steal_artifact = {
+            artifact = apocalypse
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.twinblades_of_the_deceiver
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_twinblades_of_the_deceiver
+            }
+        }
+        
+        steal_artifact = {
+            artifact = twinblades_of_the_deceiver
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.thasdorah
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_thasdorah
+            }
+        }
+        
+        steal_artifact = {
+            artifact = thasdorah
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.aluneth
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_aluneth
+            }
+        }
+        
+        steal_artifact = {
+            artifact = aluneth
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.sheilun
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_sheilun
+            }
+        }
+        
+        steal_artifact = {
+            artifact = sheilun
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.ashbringer
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_ashbringer
+            }
+        }
+        
+        steal_artifact = {
+            artifact = ashbringer
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.xalatath
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_xalatath
+            }
+        }
+        
+        steal_artifact = {
+            artifact = xalatath
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.doomhammer
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_doomhammer
+            }
+        }
+        
+        steal_artifact = {
+            artifact = doomhammer
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.dreadblades
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_dreadblades
+            }
+        }
+        
+        steal_artifact = {
+            artifact = dreadblades
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.skull_of_manari
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_skull_of_manari
+            }
+        }
+        
+        steal_artifact = {
+            artifact = skull_of_manari
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.warswords_of_valarjar
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_warswords_of_valarjar
+            }
+        }
+        
+        steal_artifact = {
+            artifact = warswords_of_valarjar
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.scythe_of_elune
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_scythe_of_elune
+            }
+        }
+        
+        steal_artifact = {
+            artifact = scythe_of_elune
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.maw_of_the_damned
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_maw_of_the_damned
+            }
+        }
+        
+        steal_artifact = {
+            artifact = maw_of_the_damned
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.blades_of_the_fallen_prince
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_blades_of_the_fallen_prince
+            }
+        }
+        
+        steal_artifact = {
+            artifact = blades_of_the_fallen_prince
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.aldrachi_warblades
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_aldrachi_warblades
+            }
+        }
+        
+        steal_artifact = {
+            artifact = aldrachi_warblades
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.fangs_of_ashamane
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_fangs_of_ashamane
+            }
+        }
+        
+        steal_artifact = {
+            artifact = fangs_of_ashamane
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.claws_of_ursoc
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_claws_of_ursoc
+            }
+        }
+        
+        steal_artifact = {
+            artifact = claws_of_ursoc
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.ghanir
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_ghanir
+            }
+        }
+        
+        steal_artifact = {
+            artifact = ghanir
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.titanstrike
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_titanstrike
+            }
+        }
+        
+        steal_artifact = {
+            artifact = titanstrike
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.talonclaw
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_talonclaw
+            }
+        }
+        
+        steal_artifact = {
+            artifact = talonclaw
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.felomelorn
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_felomelorn
+            }
+        }
+        
+        steal_artifact = {
+            artifact = felomelorn
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.ebonchill
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_ebonchill
+            }
+        }
+        
+        steal_artifact = {
+            artifact = ebonchill
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.fu_zan
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_fu_zan
+            }
+        }
+        
+        steal_artifact = {
+            artifact = fu_zan
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.fists_of_the_heavens
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_fists_of_the_heavens
+            }
+        }
+        
+        steal_artifact = {
+            artifact = fists_of_the_heavens
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.silver_hand
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_silver_hand
+            }
+        }
+        
+        steal_artifact = {
+            artifact = silver_hand
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.truthguard
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_truthguard
+            }
+        }
+        
+        steal_artifact = {
+            artifact = truthguard
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.lights_wrath
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_lights_wrath
+            }
+        }
+        
+        steal_artifact = {
+            artifact = lights_wrath
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.tuure
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_tuure
+            }
+        }
+        
+        steal_artifact = {
+            artifact = tuure
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.kingslayers
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_kingslayers
+            }
+        }
+        
+        steal_artifact = {
+            artifact = kingslayers
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.fangs_of_the_devourer
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_fangs_of_the_devourer
+            }
+        }
+        
+        steal_artifact = {
+            artifact = fangs_of_the_devourer
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.fist_of_raden
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_fist_of_raden
+            }
+        }
+        
+        steal_artifact = {
+            artifact = fist_of_raden
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.sharasdal
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_sharasdal
+            }
+        }
+        
+        steal_artifact = {
+            artifact = sharasdal
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.ulthalesh
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_ulthalesh
+            }
+        }
+        
+        steal_artifact = {
+            artifact = ulthalesh
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.scepter_of_sargeras
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_scepter_of_sargeras
+            }
+        }
+        
+        steal_artifact = {
+            artifact = scepter_of_sargeras
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.stromkar
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_stromkar
+            }
+        }
+        
+        steal_artifact = {
+            artifact = stromkar
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.scale_of_the_earthwarder
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_scale_of_the_earthwarder
+            }
+        }
+        
+        steal_artifact = {
+            artifact = scale_of_the_earthwarder
+        }
+	}
+    option = {
+		name = wwu_artifact_heist.8.option.underlight_angler
+        
+        trigger = {
+            event_target:artifact_heist_target = {
+                has_country_flag = artifact_underlight_angler
+            }
+        }
+        
+        steal_artifact = {
+            artifact = underlight_angler
+        }
+	}
+}
+
+#---------------------------
+# Stolen Artifacts
+#---------------------------
+# Occurs when steal_artifact is applied for the country that used to have the artifact
+
+# Apocalypse
+country_event = {
+	id = wwu_artifact_heist.10
+	title = wwu_artifact_heist.10.title
+	desc = wwu_artifact_heist.10.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_apocalypse_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_apocalypse_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_artifact_heist.10.option.a
+	}
+}
+
+# Twinblades of the Deceiver
+country_event = {
+	id = wwu_artifact_heist.11
+	title = wwu_artifact_heist.11.title
+	desc = wwu_artifact_heist.11.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_twinblades_of_the_deceiver_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_twinblades_of_the_deceiver_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.11.option.a
+	}
+}
+
+# Thas'dorah
+country_event = {
+	id = wwu_artifact_heist.12
+	title = wwu_artifact_heist.12.title
+	desc = wwu_artifact_heist.12.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_thasdorah_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_thasdorah_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.12.option.a
+	}
+}
+
+# Aluneth
+country_event = {
+	id = wwu_artifact_heist.13
+	title = wwu_artifact_heist.13.title
+	desc = wwu_artifact_heist.13.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_aluneth_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_aluneth_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.13.option.a
+	}
+}
+
+# Sheilun
+country_event = {
+	id = wwu_artifact_heist.14
+	title = wwu_artifact_heist.14.title
+	desc = wwu_artifact_heist.14.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_sheilun_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_sheilun_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.14.option.a
+	}
+}
+
+# Ashbringer
+country_event = {
+	id = wwu_artifact_heist.15
+	title = wwu_artifact_heist.15.title
+	desc = wwu_artifact_heist.15.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_ashbringer_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_ashbringer_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.15.option.a
+	}
+}
+
+# Xalatath
+country_event = {
+	id = wwu_artifact_heist.16
+	title = wwu_artifact_heist.16.title
+	desc = wwu_artifact_heist.16.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_xalatath_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_xalatath_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.16.option.a
+	}
+}
+
+# Doomhammer
+country_event = {
+	id = wwu_artifact_heist.17
+	title = wwu_artifact_heist.17.title
+	desc = wwu_artifact_heist.17.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_doomhammer_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_doomhammer_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.17.option.a
+	}
+}
+
+# Dreadblades
+country_event = {
+	id = wwu_artifact_heist.18
+	title = wwu_artifact_heist.18.title
+	desc = wwu_artifact_heist.18.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_dreadblades_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_dreadblades_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.18.option.a
+	}
+}
+
+# Skull of Man'ari
+country_event = {
+	id = wwu_artifact_heist.19
+	title = wwu_artifact_heist.19.title
+	desc = wwu_artifact_heist.19.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_skull_of_manari_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_skull_of_manari_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+ 
+	option = {
+		name = wwu_artifact_heist.19.option.a
+	}
+}
+
+# Warswords of Valarjar
+country_event = {
+	id = wwu_artifact_heist.20
+	title = wwu_artifact_heist.20.title
+	desc = wwu_artifact_heist.20.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_warswords_of_valarjar_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_warswords_of_valarjar_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.20.option.a
+	}
+}
+
+# Scythe of Elune
+country_event = {
+	id = wwu_artifact_heist.21
+	title = wwu_artifact_heist.21.title
+	desc = wwu_artifact_heist.21.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_scythe_of_elune_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_scythe_of_elune_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.21.option.a
+	}
+}
+
+# Maw of the Damned
+country_event = {
+	id = wwu_artifact_heist.22
+	title = wwu_artifact_heist.22.title
+	desc = wwu_artifact_heist.22.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_maw_of_the_damned_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_maw_of_the_damned_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.22.option.a
+	}
+}
+
+# Blades of the Fallen Prince
+country_event = {
+	id = wwu_artifact_heist.23
+	title = wwu_artifact_heist.23.title
+	desc = wwu_artifact_heist.23.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_blades_of_the_fallen_prince_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_blades_of_the_fallen_prince_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.23.option.a
+	}
+}
+
+# Aldrachi Warblades
+country_event = {
+	id = wwu_artifact_heist.24
+	title = wwu_artifact_heist.24.title
+	desc = wwu_artifact_heist.24.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_aldrachi_warblades_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_aldrachi_warblades_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.24.option.a
+	}
+}
+
+# Fangs of Ashamane
+country_event = {
+	id = wwu_artifact_heist.25
+	title = wwu_artifact_heist.25.title
+	desc = wwu_artifact_heist.25.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_fangs_of_ashamane_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_fangs_of_ashamane_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.25.option.a
+	}
+}
+
+# Claws of Ursoc
+country_event = {
+	id = wwu_artifact_heist.26
+	title = wwu_artifact_heist.26.title
+	desc = wwu_artifact_heist.26.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_claws_of_ursoc_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_claws_of_ursoc_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.26.option.a
+	}
+}
+
+# G'Hanir
+country_event = {
+	id = wwu_artifact_heist.27
+	title = wwu_artifact_heist.27.title
+	desc = wwu_artifact_heist.27.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_ghanir_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_ghanir_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.27.option.a
+	}
+}
+
+# Titanstrike
+country_event = {
+	id = wwu_artifact_heist.28
+	title = wwu_artifact_heist.28.title
+	desc = wwu_artifact_heist.28.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_titanstrike_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_titanstrike_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.28.option.a
+	}
+}
+
+# Talonclaw
+country_event = {
+	id = wwu_artifact_heist.29
+	title = wwu_artifact_heist.29.title
+	desc = wwu_artifact_heist.29.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_talonclaw_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_talonclaw_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.29.option.a
+	}
+}
+
+# Felo'melorn
+country_event = {
+	id = wwu_artifact_heist.30
+	title = wwu_artifact_heist.30.title
+	desc = wwu_artifact_heist.30.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_felomelorn_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_felomelorn_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.30.option.a
+	}
+}
+
+# Ebonchill
+country_event = {
+	id = wwu_artifact_heist.31
+	title = wwu_artifact_heist.31.title
+	desc = wwu_artifact_heist.31.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_ebonchill_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_ebonchill_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.31.option.a
+	}
+}
+
+# Fu Zan
+country_event = {
+	id = wwu_artifact_heist.32
+	title = wwu_artifact_heist.32.title
+	desc = wwu_artifact_heist.32.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_fu_zan_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_fu_zan_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.32.option.a
+	}
+}
+
+# Fists of the Heavens
+country_event = {
+	id = wwu_artifact_heist.33
+	title = wwu_artifact_heist.33.title
+	desc = wwu_artifact_heist.33.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_fists_of_the_heavens_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_fists_of_the_heavens_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.33.option.a
+	}
+}
+
+# The Silver Hand
+country_event = {
+	id = wwu_artifact_heist.34
+	title = wwu_artifact_heist.34.title
+	desc = wwu_artifact_heist.34.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_silver_hand_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_silver_hand_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.34.option.a
+	}
+}
+
+# Truthguard
+country_event = {
+	id = wwu_artifact_heist.35
+	title = wwu_artifact_heist.35.title
+	desc = wwu_artifact_heist.35.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_truthguard_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_truthguard_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.35.option.a
+	}
+}
+
+# Light's Wrath
+country_event = {
+	id = wwu_artifact_heist.36
+	title = wwu_artifact_heist.36.title
+	desc = wwu_artifact_heist.36.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_lights_wrath_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_lights_wrath_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.36.option.a
+	}
+}
+
+# T'uure
+country_event = {
+	id = wwu_artifact_heist.37
+	title = wwu_artifact_heist.37.title
+	desc = wwu_artifact_heist.37.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_tuure_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_tuure_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.37.option.a
+	}
+}
+
+# Kingslayers
+country_event = {
+	id = wwu_artifact_heist.38
+	title = wwu_artifact_heist.38.title
+	desc = wwu_artifact_heist.38.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_kingslayers_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_kingslayers_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.38.option.a
+	}
+}
+
+# Fangs of the Devourer
+country_event = {
+	id = wwu_artifact_heist.39
+	title = wwu_artifact_heist.39.title
+	desc = wwu_artifact_heist.39.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_fangs_of_the_devourer_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_fangs_of_the_devourer_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.39.option.a
+	}
+}
+
+# Fist of Ra-den
+country_event = {
+	id = wwu_artifact_heist.40
+	title = wwu_artifact_heist.40.title
+	desc = wwu_artifact_heist.40.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_fist_of_raden_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_fist_of_raden_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.40.option.a
+	}
+}
+
+# Sharas'dal
+country_event = {
+	id = wwu_artifact_heist.41
+	title = wwu_artifact_heist.41.title
+	desc = wwu_artifact_heist.41.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_sharasdal_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_sharasdal_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.41.option.a
+	}
+}
+
+# Ulthalesh
+country_event = {
+	id = wwu_artifact_heist.42
+	title = wwu_artifact_heist.42.title
+	desc = wwu_artifact_heist.42.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_ulthalesh_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_ulthalesh_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.42.option.a
+	}
+}
+
+# Scepter of Sargeras
+country_event = {
+	id = wwu_artifact_heist.43
+	title = wwu_artifact_heist.43.title
+	desc = wwu_artifact_heist.43.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_scepter_of_sargeras_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_scepter_of_sargeras_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.43.option.a
+	}
+}
+
+# Strom'kar
+country_event = {
+	id = wwu_artifact_heist.44
+	title = wwu_artifact_heist.44.title
+	desc = wwu_artifact_heist.44.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_stromkar_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_stromkar_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.44.option.a
+	}
+}
+
+# Scale of the Earth-warder
+country_event = {
+	id = wwu_artifact_heist.45
+	title = wwu_artifact_heist.45.title
+	desc = wwu_artifact_heist.45.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_scale_of_the_earthwarder_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_scale_of_the_earthwarder_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.45.option.a
+	}
+}
+
+# Underlight Angler
+country_event = {
+	id = wwu_artifact_heist.46
+	title = wwu_artifact_heist.46.title
+	desc = wwu_artifact_heist.46.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+	trigger = {
+        has_country_flag = artifact_underlight_angler_stolen
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = artifact_underlight_angler_stolen
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_artifact_heist.46.option.a
+	}
+}
