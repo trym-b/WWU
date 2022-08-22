@@ -15,17 +15,6 @@ country_event = {
 	
 	immediate = {
 		hidden_effect = {
-            random_owned_province = {   
-                limit = {
-                    is_valid_digsite = yes
-                }
-                add_province_modifier = {
-                    name = dig_in_progress
-                    duration = -1
-                }
-                save_event_target_as = excavation_province
-            }
-            
             set_country_flag = dig_begins
             set_country_flag = excavation_decision_used
             set_variable = {
@@ -36,9 +25,189 @@ country_event = {
 	}
 	
 	option = {
-		name = wwu_archaeology.1.option.a
+		name = wwu_archaeology.1.option.eastern_kingdoms
 		
-		custom_tooltip = CURRENT_EXCAVATION_PROGRESS
+        trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_eastern_kingdoms
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_EASTERN_KINGDOMS
+        hidden_effect = {
+            set_country_flag = dig_in_eastern_kingdoms
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.kalimdor
+		
+        trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_kalimdor
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_KALIMDOR
+        hidden_effect = {
+            set_country_flag = dig_in_kalimdor
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.northrend
+		
+        trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_northrend
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_NORTHREND
+        hidden_effect = {
+            set_country_flag = dig_in_northrend
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.pandaria
+		
+		trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_pandaria
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_PANDARIA
+        hidden_effect = {
+            set_country_flag = dig_in_pandaria
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.draenor
+		
+        trigger = {
+            NOT = { has_global_flag = setup_outland }
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_draenor
+                }
+            }
+            # Require presence in Draenor if capital is not on Draenor
+            if = {
+                limit = {
+                    capital_scope = {
+                        NOT = { continent = continent_draenor }
+                    }
+                }
+                any_owned_province = {
+                    continent = continent_draenor
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_DRAENOR
+        hidden_effect = {
+            set_country_flag = dig_in_draenor
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.outland
+		
+        trigger = {
+            has_global_flag = setup_outland 
+            
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_outland
+                }
+            }
+            # Require presence in Outland if capital is not on Outland
+            if = {
+                limit = {
+                    capital_scope = {
+                        NOT = { continent = continent_outland }
+                    }
+                }
+                any_owned_province = {
+                    continent = continent_outland
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_OUTLAND
+        hidden_effect = {
+            set_country_flag = dig_in_outland
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.broken_isles
+		
+		trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_broken_isles
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_BROKEN_ISLES
+        hidden_effect = {
+            set_country_flag = dig_in_broken_isles
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.zandalar
+		
+		trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_zandalar
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_ZANDALAR
+        hidden_effect = {
+            set_country_flag = dig_in_zandalar
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.kul_tiras
+		
+		trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_kul_tiras
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_KUL_TIRAS
+        hidden_effect = {
+            set_country_flag = dig_in_kul_tiras
+        }
+	}
+    option = {
+		name = wwu_archaeology.1.option.south_seas
+		
+		trigger = {
+            any_known_country = {
+                capital_scope = {
+                    continent = continent_south_seas
+                }
+            }
+        }
+        
+		custom_tooltip = DIG_REGION_SOUTH_SEAS
+        hidden_effect = {
+            set_country_flag = dig_in_south_sea
+        }
 	}
 }
 
@@ -65,13 +234,6 @@ country_event = {
                 duration = 90
                 hidden = yes
             }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                save_event_target_as = excavation_province
-            }
         }
 	}
 	
@@ -80,13 +242,7 @@ country_event = {
 		
 		increment_dig = yes
         
-        every_owned_province = {
-            limit = {
-                has_province_modifier = dig_in_progress
-            }
-            
-            add_scaled_local_adm_power = -5
-        }
+        add_adm_power = -100
 	}
     option = {
 		name = wwu_archaeology.2.option.b
@@ -118,13 +274,6 @@ country_event = {
                 duration = 90
                 hidden = yes
             }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                save_event_target_as = excavation_province
-            }
         }
 	}
 	
@@ -133,13 +282,7 @@ country_event = {
 		
 		increment_dig = yes
         
-        every_owned_province = {
-            limit = {
-                has_province_modifier = dig_in_progress
-            }
-            
-            add_devastation = 10
-        }
+        add_stability = -1
 	}
     option = {
 		name = wwu_archaeology.3.option.b
@@ -171,13 +314,6 @@ country_event = {
                 duration = 90
                 hidden = yes
             }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                save_event_target_as = excavation_province
-            }
         }
 	}
 	
@@ -186,13 +322,7 @@ country_event = {
 		
 		increment_dig = yes
         
-        every_owned_province = {
-            limit = {
-                has_province_modifier = dig_in_progress
-            }
-            
-            add_local_autonomy = 10
-        }
+        add_prestige = -25
 	}
     option = {
 		name = wwu_archaeology.4.option.b
@@ -223,13 +353,6 @@ country_event = {
                 name = archaeology_dig_event_cooldown
                 duration = 90
                 hidden = yes
-            }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                save_event_target_as = excavation_province
             }
         }
 	}
@@ -264,13 +387,6 @@ country_event = {
                 name = archaeology_dig_event_cooldown
                 duration = 90
                 hidden = yes
-            }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                save_event_target_as = excavation_province
             }
         }
 	}
@@ -1077,13 +1193,6 @@ country_event = {
                 which = excavation_progress
                 value = 0
             }
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = dig_in_progress
-                }
-                
-                remove_province_modifier = dig_in_progress
-            }
         }
 	}
 	
@@ -1091,43 +1200,7 @@ country_event = {
 		name = wwu_archaeology.100.option.a
 		
         reward_artifact = yes
-	}
-}
-
-# Cleanup - If Dig country loses the dig province
-country_event = {
-	id = wwu_archaeology.101
-	title = wwu_archaeology.101.title
-	desc = wwu_archaeology.101.desc
-	picture = MUSEUM_CURATOR_eventPicture
-    
-    hidden = yes
-    
-    trigger = {
-        has_country_flag = dig_begins
-        
-        # Dig province has changed owner
-        NOT = {
-            any_owned_province = {
-                has_province_modifier = dig_in_progress
-            }
-        }
-    }
-
-	mean_time_to_happen = {
-		days = 1
-	}
-	
-	immediate = {
-		hidden_effect = {
-            clr_country_flag = dig_begins
-            clr_country_flag = excavation_decision_used
-        }
-	}
-	
-	option = {
-		name = wwu_archaeology.101.option.a
-
+        clear_dig_regions = yes
 	}
 }
 
