@@ -668,26 +668,23 @@ scourge_cultist_rebels = {
         
         if = {
             limit = {
-                owner = {
-                    tag = P52
+                NOT = {
+                    owner = {
+                        tag = P52
+                    }
                 }
             }
-            owner = { disband_rebels = scourge_cultist_rebels } 
-        }
-        else = {
-            if = {
-                limit = { NOT = { is_core = P52 } }
-                add_core = P52
-                cede_province = P52
-                change_culture = culture_scourge
-                change_religion = cult_of_the_damned
+            hidden_effect = {
+                set_province_flag = primed_for_scourge_conversion
             }
         }
+        change_culture = culture_scourge
+        change_religion = cult_of_the_damned
 	}
 	
 	# Country scope
 	can_negotiate_trigger = {
-		tag = P52
+		always = no
 	}
 	
 	# Country scope
@@ -706,38 +703,30 @@ scourge_cultist_rebels = {
             limit = {
                 tag = P52
             }
-            disband_rebels = scourge_cultist_rebels
         }
         else = {
             add_prestige = -10
         
-            if = {
+            every_owned_province = {
                 limit = {
-                    exists = P52
+                    is_capital = no
+                    has_rebel_faction = REB
                 }
-                every_owned_province = {
+                
+                if = {
                     limit = {
-                        has_rebel_faction = REB
+                        NOT = {
+                            owner = {
+                                tag = P52
+                            }
+                        }
                     }
-                    cede_province = P52
-                    add_core = P52
-                    change_culture = culture_scourge
-                    change_religion = cult_of_the_damned
-                }		
-            }
-            if = {
-                limit = {
-                    NOT = { exists = P52 }
-                }
-                every_owned_province = {
-                    limit = {
-                        has_rebel_faction = REB
+                    hidden_effect = {
+                        set_province_flag = primed_for_scourge_conversion
                     }
-                    cede_province = P52
-                    add_core = P52
-                    change_culture = culture_scourge
-                    change_religion = cult_of_the_damned
                 }
+                change_culture = culture_scourge
+                change_religion = cult_of_the_damned
             }
         }        
 	}
