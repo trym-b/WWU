@@ -411,8 +411,21 @@ country_event = {
 		
 		random_owned_province = {
 			limit = { trade_goods = gold }
-			add_base_production = 3
-			add_base_tax = 1
+            
+            if = {
+                limit = {
+                    NOT = { base_production = 12 }
+                }
+                add_base_production = 3
+            }
+            
+            if = {
+                limit = {
+                    NOT = { base_tax = 12 }
+                }
+                add_base_tax = 1
+            }
+            
 			change_culture = culture_kobold
 		}
 	}

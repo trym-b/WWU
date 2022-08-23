@@ -798,5 +798,356 @@ country_event = {
 	}
 }
 
+# Alliance - Random Leader if existing one is removed
+country_event = {
+	id = wwu_faction_system.60
+	title = wwu_faction_system.60.title
+	desc = wwu_faction_system.60.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = alliance_exists
+        calc_true_if = {
+            amount = 2
+            all_country = {
+                has_country_modifier = member_of_alliance
+            }
+        }
+        
+        has_country_modifier = member_of_alliance
+        NOT = { has_country_modifier = head_of_alliance }
+        all_country = {
+            NOT = { has_country_modifier = head_of_alliance }
+        }
+    }
+    
+    immediate = {
+        random_country = {
+            limit = {
+                has_country_modifier = member_of_alliance
+            }
+            
+            set_head_of_faction = {
+                faction = alliance
+            }
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.60.option.a
+	}
+}
 
+# Hotde - Random Leader if existing one is removed
+country_event = {
+	id = wwu_faction_system.61
+	title = wwu_faction_system.61.title
+	desc = wwu_faction_system.61.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = horde_exists
+        
+        calc_true_if = {
+            amount = 2
+            all_country = {
+                has_country_modifier = member_of_horde
+            }
+        }
+        
+        has_country_modifier = member_of_horde
+        NOT = { has_country_modifier = head_of_horde }
+        all_country = {
+            NOT = { has_country_modifier = head_of_horde }
+        }
+    }
+    
+    immediate = {
+        random_country = {
+            limit = {
+                has_country_modifier = member_of_horde
+            }
+            
+            set_head_of_faction = {
+                faction = horde
+            }
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.61.option.a
+	}
+}
 
+# Old Hotde - Random Leader if existing one is removed
+country_event = {
+	id = wwu_faction_system.62
+	title = wwu_faction_system.62.title
+	desc = wwu_faction_system.62.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = old_horde_exists
+        
+        calc_true_if = {
+            amount = 2
+            all_country = {
+                has_country_modifier = member_of_old_horde
+            }
+        }
+        
+        has_country_modifier = member_of_old_horde
+        NOT = { has_country_modifier = head_of_old_horde }
+        all_country = {
+            NOT = { has_country_modifier = head_of_old_horde }
+        }
+    }
+    
+    immediate = {
+        random_country = {
+            limit = {
+                has_country_modifier = member_of_old_horde
+            }
+            
+            set_head_of_faction = {
+                faction = old_horde
+            }
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.62.option.a
+	}
+}
+
+# Trade Coalition - Random Leader if existing one is removed
+country_event = {
+	id = wwu_faction_system.63
+	title = wwu_faction_system.63.title
+	desc = wwu_faction_system.63.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger  {
+        has_global_flag = trade_coalition_exists
+        calc_true_if = {
+            amount = 2
+            all_country = {
+                has_country_modifier = member_of_trade_coalition
+            }
+        }
+        
+        has_country_modifier = member_of_trade_coalition
+        NOT = { has_country_modifier = head_of_trade_coalition }
+        all_country = {
+            NOT = { has_country_modifier = head_of_trade_coalition }
+        }
+    }
+    
+    immediate = {
+        random_country = {
+            limit = {
+                has_country_modifier = member_of_trade_coalition
+            }
+            
+            set_head_of_faction = {
+                faction = trade_coalition
+            }
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.62.option.a
+	}
+}
+
+# Collapse of Alliance
+country_event = {
+	id = wwu_faction_system.70
+	title = wwu_faction_system.70.title
+	desc = wwu_faction_system.70.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger  {
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = alliance_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_alliance
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_alliance
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        destroy_faction = {
+            faction = alliance
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.70.option.a
+	}
+}
+
+# Collapse of Horde
+country_event = {
+	id = wwu_faction_system.71
+	title = wwu_faction_system.71.title
+	desc = wwu_faction_system.71.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger  {
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = horde_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_horde
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_horde
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        destroy_faction = {
+            faction = horde
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.71.option.a
+	}
+}
+
+# Collapse of Old Horde
+country_event = {
+	id = wwu_faction_system.72
+	title = wwu_faction_system.72.title
+	desc = wwu_faction_system.72.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger  {
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = old_horde_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_old_horde
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        destroy_faction = {
+            faction = old_horde
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.72.option.a
+	}
+}
+
+# Collapse of Trade Coalition
+country_event = {
+	id = wwu_faction_system.73
+	title = wwu_faction_system.73.title
+	desc = wwu_faction_system.73.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger  {
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = trade_coalition_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_trade_coalition
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_trade_coalition
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        destroy_faction = {
+            faction = trade_coalition
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system.73.option.a
+	}
+}
