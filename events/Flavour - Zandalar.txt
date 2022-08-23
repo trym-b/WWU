@@ -652,6 +652,9 @@ country_event = {
 	}
 	}
 	
+	
+#################################oondasta events
+
 country_event = {
 	id = wwu_zandalar.3
 	title = wwu_zandalar.3.title
@@ -1265,12 +1268,196 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = "wwu_zandalar.16.op1"
+		highlight = yes
+		if = {
+		limit = {
+		AND = {
+		NOT = { has_country_modifier = zul_menu_cooldown }
+		NOT = {
+		check_variable = {
+	which = zul_influence 
+	value = 50
+}}
+		}}
+			custom_tooltip = zandalari_event_prophet_zul_open_menu_a
+			hidden_effect = {
             country_event = { id = wwu_zandalar.17 }
+				}
+	}
+		if = {
+		limit = {
+		OR = {
+		has_country_modifier = zul_menu_cooldown
+		check_variable = {
+	which = zul_influence 
+	value = 50
+}
+		}}
+clr_country_flag = council_of_zanchul_already_open
+	}
+		custom_tooltip = zandalari_event_prophet_zul_open_menu_b
+		}
+
+	option = {
+		name = "wwu_zandalar.16.op2"
+		if = {
+		limit = {
+		AND = {
+		crown_land_share = 10
+		NOT = {
+		check_variable = {
+	which = zul_influence 
+	value = 50
+}}
+		}}
+		add_years_of_income = 0.45
+		add_inflation = 0.1
+		change_estate_land_share = {
+    estate = estate_clergy
+    share = 1
+}
+		change_estate_land_share = {
+    estate = estate_nobility
+    share = 1
+}
+zul_power_5_a = yes
+}
+		custom_tooltip = zandalari_event_council_not_ready
+clr_country_flag = council_of_zanchul_already_open
+
+	}
+	option = {
+		name = "wwu_zandalar.16.op3"
+		if = {
+		limit = {
+		AND = {
+		crown_land_share = 10
+		NOT = {
+		check_variable = {
+	which = zul_influence 
+	value = 50
+}}
+		}}
+		create_general = { tradition = 70 }
+		change_estate_land_share = {
+    estate = estate_clergy
+    share = 1.5
+}
+		change_estate_land_share = {
+    estate = estate_nobility
+    share = 1.5
+}
+zul_power_5_a = yes
+}
+		custom_tooltip = zandalari_event_council_not_ready
+clr_country_flag = council_of_zanchul_already_open
+
+	}
+	option = {
+		name = "wwu_zandalar.16.op4"
+		if = {
+		limit = {
+		AND = {
+		crown_land_share = 10
+		NOT = {
+		check_variable = {
+	which = zul_influence 
+	value = 50
+}}
+		}}
+		custom_tooltip = zandalari_event_council_random_dev
+		hidden_effect = {
+					random_province = {
+							limit = {
+							AND = {
+							owned_by = ROOT
+		NOT = {development = 20}
+		}
+							}
+		add_base_tax = 2
+		add_base_production = 2
+		add_base_manpower = 2
+   }}
+
+		change_estate_land_share = {
+    estate = estate_clergy
+    share = 2
+}
+		change_estate_land_share = {
+    estate = estate_nobility
+    share = 2
+}
+zul_power_5_a = yes
+}
+		custom_tooltip = zandalari_event_council_not_ready
+clr_country_flag = council_of_zanchul_already_open
+
+	}
+	option = {
+		name = "wwu_zandalar.16.op5"
+		if = {
+		limit = {
+		AND = {
+		NOT = { has_country_modifier = zul_menu_power_influence_cooldown }
+
+		check_variable = {
+	which = zul_power
+	value = 10
+}}
+		}
+	add_stability = -2
+	add_prestige = -10
+	zul_power_10_b = yes
+		hidden_effect = {
+			add_country_modifier = {
+    name = "zul_menu_power_influence_cooldown"
+    duration = 3650
+	hidden = yes
+}}
+	}
+	
+	custom_tooltip = zandalari_event_council_not_ready_buff
+clr_country_flag = council_of_zanchul_already_open
+
+	}
+	
+	option = {
+		name = "wwu_zandalar.16.op6"
+		if = {
+		limit = {
+		AND = {
+		NOT = { has_country_modifier = zul_menu_power_influence_cooldown }
+
+		check_variable = {
+	which = zul_influence
+	value = 10
+}}
+		}
+	add_corruption = 4
+	add_legitimacy = -10
+	zul_influence_10_b = yes
+	hidden_effect = {
+			add_country_modifier = {
+    name = "zul_menu_power_influence_cooldown"
+    duration = 3650
+	hidden = yes
+}}
+	}
+	
+	custom_tooltip = zandalari_event_council_not_ready_buff
+clr_country_flag = council_of_zanchul_already_open
+
+	}
+	
+	option = {
+		name = "wwu_zandalar.16.op7"
+clr_country_flag = council_of_zanchul_already_open
+
 	}
 
 	}
 	
-########################naga attack
+########################zul menu
 country_event = {
 	id = wwu_zandalar.17
 	title = wwu_zandalar.17.title
@@ -1284,42 +1471,831 @@ country_event = {
     duration = 1825
 }
 zul_power_10_a = yes 
-if = {
-limit = {
-NOT = {
-check_variable = {
-            which = zul_influence
-            value = 50
-        }}
-	}
 	hidden_effect = {
-            country_event = { id = wwu_zandalar.17 }}
-	}
+            country_event = { id = wwu_zandalar.16 }
+			add_country_modifier = {
+    name = "zul_menu_cooldown"
+    duration = 1825 
+	hidden = yes
+}}
 	}
 	option = {
 		name = "wwu_zandalar.17.op2"
 add_adm_power = 75
-add_adm_power = 75
-add_adm_power = 75
+add_dip_power = 75
+add_mil_power = 75
+zul_power_10_a = yes 
+	hidden_effect = {
+            country_event = { id = wwu_zandalar.16 }
+			add_country_modifier = {
+    name = "zul_menu_cooldown"
+    duration = 1825 
+	hidden = yes
+}}
 	}
 	option = {
 		name = "wwu_zandalar.17.op3"
+		custom_tooltip = zandalari_event_zul_spy
+		hidden_effect = {
 every_rival_country = { 
 add_spy_network_from = {
     who = A78
     value = 35
 }
-}
+}}
+zul_power_10_a = yes 
+	hidden_effect = {
+            country_event = { id = wwu_zandalar.16 }
+			add_country_modifier = {
+    name = "zul_menu_cooldown"
+    duration = 1825 
+	hidden = yes
+}}
 	}
 	option = {
 		name = "wwu_zandalar.17.op4"
-
+		add_mana_1 = yes
+zul_power_10_a = yes 
+	hidden_effect = {
+            country_event = { id = wwu_zandalar.16 }
+			add_country_modifier = {
+    name = "zul_menu_cooldown"
+    duration = 1825 
+	hidden = yes
+}}
 	}
+	
 	option = {
 		name = "wwu_zandalar.17.op5"
-		add_country_modifier = {
-    name = "zul_technology"
-    duration = 1825
+	hidden_effect = {
+            country_event = { id = wwu_zandalar.16 }}
+	}
+	}
+	
+	
+#####################################naga attack at coast
+country_event = {
+	id = wwu_zandalar.18
+title = "wwu_zandalar.18.title"
+	desc = "wwu_zandalar.18.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	OR = {
+	2745 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	2744 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	1133 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	2616 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	}
+	NOT = {has_global_flag = zandalari_no_naga_attack}
+	}
+option = {
+name = "wwu_zandalar.18.op1"
+custom_tooltip = zandalari_event_naga_start
+hidden_effect = {
+2745 = {
+cede_province = ZNI
+add_core = ZNI
 }
+2744 = {
+cede_province = ZNI
+add_core = ZNI
+}
+1133 = {
+cede_province = ZNI
+add_core = ZNI
+}
+2616 = {
+cede_province = ZNI
+add_core = ZNI
+}
+ZNI = {
+capital_scope = {
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+infantry = ZNI
+}
+}
+ZNI = {
+            add_country_modifier = {
+                name = zandalar_naga_invasion
+                duration = -1
+            }}
+			ZNI = {
+		create_general = { tradition = 70 }
+		add_treasury = 200
+		add_manpower = 10
+		}
+continent_zandalar = {
+    discover_country = ZNI
+}
+ZNI = {
+set_country_flag = po_destroy_nagas
+}
+			}
+ZNI = {
+declare_war_with_cb = {
+    who = ROOT
+    casus_belli = cb_naga_invasion_on_zandalar
+}
+}
+set_global_flag = zandalari_no_naga_attack
+set_country_flag = zandalari_no_naga_attack_always
+}
+option = {
+name = "wwu_zandalar.18.op2"
+custom_tooltip = zandalari_event_naga_lose
+	hidden_effect = {
+	2745 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2744 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+1133 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2616 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+}
+add_prestige = -10
+add_legitimacy = -10
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_a = yes
+}
+}
+}
+
+country_event = {
+	id = wwu_zandalar.19
+title = "wwu_zandalar.19.title"
+	desc = "wwu_zandalar.19.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+is_triggered_only = yes
+	immediate = {
+clr_country_flag = zandalari_no_naga_attack_always
+	}
+option = {
+name = "wwu_zandalar.19.op1"
+hidden_effect = {
+	2745 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2744 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+1133 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2616 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+}
+custom_tooltip = zandalari_event_naga_win
+add_treasury = 200
+add_prestige = 5
+add_legitimacy = 5
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_b = yes
+}
+}
+
+}
+
+country_event = {
+	id = wwu_zandalar.20
+title = "wwu_zandalar.20.title"
+	desc = "wwu_zandalar.20.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	has_country_flag = zandalari_no_naga_attack_always
+	NOT = {war_with = ZNI}
+	}
+	immediate = {
+		hidden_effect = {
+clr_country_flag = zandalari_no_naga_attack_always
+clr_global_flag = zandalari_no_naga_attack
+		}
+	}
+option = {
+name = "wwu_zandalar.20.op1"
+custom_tooltip = zandalari_event_naga_lose
+	hidden_effect = {
+	2745 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2744 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+1133 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+2616 = {
+cede_province = ---
+remove_core_core = ZNI
+}
+}
+
+add_prestige = -10
+add_legitimacy = -10
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_a = yes
+}
+
+}
+}
+
+#####################################naga attack at nazwatha
+
+country_event = {
+	id = wwu_zandalar.21
+title = "wwu_zandalar.21.title"
+	desc = "wwu_zandalar.21.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	OR = {
+	1129 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	2713 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	2714 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
 	}
 	}
+	NOT = {has_global_flag = nazmir_no_naga_attack}
+	}
+option = {
+name = "wwu_zandalar.21.op1"
+custom_tooltip = zandalari_event_naga_start
+hidden_effect = {
+1129 = {
+cede_province = NNI
+add_core = NNI
+}
+2713 = {
+cede_province = NNI
+add_core = NNI
+}
+2714 = {
+cede_province = NNI
+add_core = NNI
+}
+
+NNI = {
+capital_scope = {
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+infantry = NNI
+}
+}
+NNI = {
+            add_country_modifier = {
+                name = zandalar_naga_invasion
+                duration = -1
+            }}
+			NNI = {
+		create_general = { tradition = 70 }
+		add_treasury = 200
+		add_manpower = 10
+		}
+continent_zandalar = {
+    discover_country = NNI
+}
+NNI = {
+set_country_flag = po_destroy_nagas_N
+}
+			}
+NNI = {
+declare_war_with_cb = {
+    who = ROOT
+    casus_belli = cb_naga_invasion_on_nazmir
+}
+}
+
+set_global_flag = nazmir_no_naga_attack
+set_country_flag = nazmir_no_naga_attack_always
+}
+option = {
+name = "wwu_zandalar.21.op2"
+custom_tooltip = zandalari_event_naga_lose
+	hidden_effect = {
+	1129 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2713 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2714 = {
+cede_province = ---
+remove_core_core = NNI
+}
+}
+add_prestige = -10
+add_legitimacy = -10
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_a = yes
+}
+}
+}
+
+country_event = {
+	id = wwu_zandalar.22
+title = "wwu_zandalar.22.title"
+	desc = "wwu_zandalar.21.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+is_triggered_only = yes
+	immediate = {
+clr_country_flag = nazmir_no_naga_attack_always
+	}
+option = {
+name = "wwu_zandalar.22.op1"
+hidden_effect = {
+	1129 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2713 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2714 = {
+cede_province = ---
+remove_core_core = NNI
+}
+}
+custom_tooltip = zandalari_event_naga_win
+add_treasury = 200
+add_prestige = 5
+add_legitimacy = 5
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_b = yes
+}
+}
+
+}
+
+country_event = {
+	id = wwu_zandalar.23
+title = "wwu_zandalar.23.title"
+	desc = "wwu_zandalar.23.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	has_country_flag = nazmir_no_naga_attack_always
+	NOT = {war_with = NNI}
+	}
+	immediate = {
+		hidden_effect = {
+clr_country_flag = nazmir_no_naga_attack_always
+clr_global_flag = nazmir_no_naga_attack
+		}
+	}
+option = {
+name = "wwu_zandalar.23.op1"
+custom_tooltip = zandalari_event_naga_lose_z
+	hidden_effect = {
+	1129 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2713 = {
+cede_province = ---
+remove_core_core = NNI
+}
+2714 = {
+cede_province = ---
+remove_core_core = NNI
+}
+
+}
+
+add_prestige = -10
+add_legitimacy = -10
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_5_a = yes
+}
+
+}
+}
+
+
+#####################################skeleton pirate defense
+
+country_event = {
+	id = wwu_zandalar.24
+title = "wwu_zandalar.24.title"
+	desc = "wwu_zandalar.24.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	OR = {
+	1114 = {
+	OR = 
+	{colonysize = 20
+	owned_by = ROOT}
+	}
+	}
+	NOT = {has_global_flag = skeleton_troll_pirate_attack}
+	}
+option = {
+name = "wwu_zandalar.24.op1"
+custom_tooltip = zandalari_event_naga_start
+hidden_effect = {
+1114 = {
+cede_province = TSP
+add_core = TSP
+}
+2759 = {
+cede_province = TSP
+add_core = TSP
+}
+TSP = {
+capital_scope = {
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+infantry = TSP
+
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+cavalry = TSP
+
+artillery = TSP
+artillery = TSP
+artillery = TSP
+artillery = TSP
+artillery = TSP
+artillery = TSP
+}
+}
+TSP = {
+            add_country_modifier = {
+                name = skeleton_troll_invasion
+                duration = -1
+            }}
+			TSP = {
+define_ruler = {
+    name = "Zem'lan"
+    adm = 5
+    dip = 5
+    mil = 5
+    age = 55
+    claim = 95
+}
+define_general = {
+	name = "Pirate-King Zem'lan"
+    shock = 5
+    fire = 5
+    manuever = 4
+    siege = 2
+}
+add_treasury = 1000
+add_manpower = 50
+add_prestige = 200
+}
+continent_zandalar = {
+    discover_country = TSP
+}
+continent_pandaria = {
+    discover_country = TSP
+}
+region_zandalar_seas = {
+    discover_country = TSP
+}
+region_pandaria_seas = {
+    discover_country = TSP
+}
+region_paradise_seas = {
+    discover_country = TSP
+}
+region_darkspear_isles = {
+    discover_country = TSP
+}
+TSP = {
+set_country_flag = po_skeleton_troll_pirate
+}
+			}
+TSP = {
+declare_war_with_cb = {
+    who = ROOT
+    casus_belli = cb_skeleton_troll_pirate
+}
+}
+
+set_global_flag = skeleton_troll_pirate_attack
+set_country_flag = skeleton_troll_pirate_attack_always
+}
+option = {
+name = "wwu_zandalar.24.op2"
+custom_tooltip = zandalari_event_skeleton_troll_play
+1114 = {
+cede_province = TSP
+add_core = TSP
+change_trade_goods = gemstones
+}
+2759 = {
+cede_province = TSP
+add_core = TSP
+change_province_name = "Golden Isle"
+rename_capital = "Golden Isle"
+change_trade_goods = gold
+}
+TSP = {
+define_ruler = {
+    name = "Zem'lan"
+    adm = 5
+    dip = 5
+    mil = 5
+    age = 55
+    claim = 100
+}
+add_treasury = 500
+add_prestige = 100
+            add_country_modifier = {
+                name = troll_skeleton_pirate
+                duration = -1
+				picture = "troll_skeleton_pirate"
+            }
+set_country_flag = skeleton_troll_pirate_attack
+}
+
+
+
+hidden_effect = {
+TSP = {
+add_manpower = 10
+capital_scope = {
+    TSP = {
+	galley = PREV
+	galley = PREV
+	galley = PREV
+	galley = PREV
+	galley = PREV
+    }
+}
+
+}
+continent_zandalar = {
+    discover_country = TSP
+}
+continent_pandaria = {
+    discover_country = TSP
+}
+region_zandalar_seas = {
+    discover_country = TSP
+}
+region_pandaria_seas = {
+    discover_country = TSP
+}
+region_paradise_seas = {
+    discover_country = TSP
+}
+region_darkspear_isles = {
+    discover_country = TSP
+}
+switch_tag = TSP
+}
+
+
+set_global_flag = skeleton_troll_pirate_attack
+
+}
+option = {
+name = "wwu_zandalar.24.op3"
+custom_tooltip = zandalari_event_naga_lose
+	hidden_effect = {
+	1114 = {
+cede_province = ---
+remove_core_core = TSP
+}
+	2759 = {
+cede_province = ---
+remove_core_core = TSP
+}
+}
+add_prestige = -5
+
+}
+}
+
+country_event = {
+	id = wwu_zandalar.25
+title = "wwu_zandalar.25.title"
+	desc = "wwu_zandalar.25.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+is_triggered_only = yes
+	immediate = {
+clr_country_flag = skeleton_troll_pirate_attack_always
+	}
+option = {
+name = "wwu_zandalar.25.op1"
+hidden_effect = {
+	1114 = {
+cede_province = ---
+remove_core_core = TSP
+}
+	2759 = {
+cede_province = ---
+remove_core_core = TSP
+}
+}
+custom_tooltip = zandalari_event_naga_win
+add_treasury = 500
+add_prestige = 10
+add_legitimacy = 10
+1114 = {
+cede_province = ROOT
+add_core = ROOT
+change_trade_goods = gemstones }
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+zul_power_10_b = yes
+}
+}
+
+}
+
+country_event = {
+	id = wwu_zandalar.26
+title = "wwu_zandalar.26.title"
+	desc = "wwu_zandalar.26.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+	trigger = {
+	has_country_flag = skeleton_troll_pirate_attack_always
+	NOT = {war_with = TSP}
+	}
+	immediate = {
+		hidden_effect = {
+clr_country_flag = skeleton_troll_pirate_attack_always
+clr_global_flag = skeleton_troll_pirate_attack
+		}
+	}
+option = {
+name = "wwu_zandalar.26.op1"
+custom_tooltip = zandalari_event_naga_lose
+	hidden_effect = {
+	1114 = {
+cede_province = ---
+remove_core_core = TSP
+}
+	2759 = {
+cede_province = ---
+remove_core_core = TSP
+}
+
+}
+
+add_prestige = -5
+if = {
+limit = {
+AND = {
+tag = A78
+has_country_flag = prophet_zul_here_already
+}}
+add_prestige = -5
+zul_power_5_a = yes
+}
+
+}
+}
