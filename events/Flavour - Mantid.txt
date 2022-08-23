@@ -1,0 +1,348 @@
+namespace = wwu_mantid
+
+# The Cycle
+country_event = {
+	id = wwu_mantid.1
+	title = wwu_mantid.1.title
+	desc = wwu_mantid.1.desc
+	picture = XARIL_POISONED_MIND_eventPicture
+    
+	trigger = {
+		primary_culture = culture_mantid
+        NOT = { is_at_war = yes }
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+        
+        modifier = {
+            factor = 3
+            
+            is_at_war = yes
+        }
+	}
+
+	option = {
+		name = wwu_mantid.1.option.a
+        
+		custom_tooltip = MUST_WAR_SOON_TT
+        hidden_effect = {
+            set_country_flag = mantid_peace_timer
+        }
+	}
+}
+
+# Failure to Adhere to the Cycle 
+country_event = {
+	id = wwu_mantid.2
+	title = wwu_mantid.2.title
+	desc = wwu_mantid.2.desc
+	picture = BLOOD_OF_THE_ANCIENT_ONE_eventPicture
+    
+	trigger = {
+		had_country_flag = {
+            flag = mantid_peace_timer
+            days = 3650
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = mantid_peace_timer
+        }
+    }
+
+	option = {
+		name = wwu_mantid.2.option.a
+        
+        add_stability = -3
+	}
+}
+
+# The Cycle Continues
+country_event = {
+	id = wwu_mantid.3
+	title = wwu_mantid.3.title
+	desc = wwu_mantid.3.desc
+	picture = MANTID_QUEEN_eventPicture
+    
+	trigger = {
+		has_country_flag = mantid_peace_timer
+        is_at_war = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = mantid_cycle_war
+            clr_country_flag = mantid_peace_timer
+        }
+    }
+
+	option = {
+		name = wwu_mantid.3.option.a
+        
+        add_stability = 1
+	}
+}
+
+# Lessons from the Cycle
+country_event = {
+	id = wwu_mantid.4
+	title = wwu_mantid.4.title
+	desc = wwu_mantid.4.desc
+	picture = AMBER_eventPicture
+    
+	is_triggered_only = yes
+    
+    trigger = {
+        has_country_flag = mantid_cycle_war
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = mantid_cycle_war
+        }
+    }
+
+	option = {
+		name = wwu_mantid.4.option.a
+        
+        add_country_modifier = {
+            name = mantid_swiftness
+            duration = 9125
+        }
+	}
+    option = {
+		name = wwu_mantid.4.option.b
+        
+        add_country_modifier = {
+            name = mantid_strength
+            duration = 9125
+        }
+	}
+    option = {
+		name = wwu_mantid.4.option.c
+        
+        add_country_modifier = {
+            name = mantid_brutality
+            duration = 9125
+        }
+	}
+}
+
+# Excellent Amber Growth
+country_event = {
+	id = wwu_mantid.5
+	title = wwu_mantid.5.title
+	desc = wwu_mantid.5.desc
+	picture = AMBER_eventPicture
+    
+    trigger = {
+        primary_culture = culture_mantid
+        any_owned_province = {
+            trade_goods = kypari
+        }
+    }
+	
+	mean_time_to_happen = {
+		months = 1200
+        
+        modifier = {
+            factor = 0.9
+            
+            stability = 2
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            stability = 2
+        }
+	}
+    
+	option = {
+		name = wwu_mantid.5.option.a
+        
+        change_price = {
+            trade_goods = kypari
+            key = EXCELLENT_AMBER_GROWTH
+            value = 0.5
+            duration = 9125
+        }
+	}
+}
+
+# Poor Amber Growth
+country_event = {
+	id = wwu_mantid.6
+	title = wwu_mantid.6.title
+	desc = wwu_mantid.6.desc
+	picture = AMBER_eventPicture
+    
+    trigger = {
+        primary_culture = culture_mantid
+        any_owned_province = {
+            trade_goods = kypari
+        }
+    }
+	
+	mean_time_to_happen = {
+		months = 1200
+        
+        modifier = {
+            factor = 0.9
+            
+            NOT = { stability = 0 }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            NOT = { stability = -1 }
+        }
+	}
+    
+	option = {
+		name = wwu_mantid.6.option.a
+        
+        change_price = {
+            trade_goods = kypari
+            key = POOR_AMBER_GROWTH
+            value = -0.5
+            duration = 9125
+        }
+	}
+}
+
+# Mantid Trophies
+country_event = {
+	id = wwu_mantid.7
+	title = wwu_mantid.7.title
+	desc = wwu_mantid.7.desc
+	picture = XARIL_POISONED_MIND_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        primary_culture = culture_mantid
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_mantid.7.option.a
+        
+        add_mil_power = 100
+	}
+    option = {
+		name = wwu_mantid.7.option.b
+        
+        add_army_tradition = 10
+	}
+    option = {
+		name = wwu_mantid.7.option.c
+        
+        add_absolutism = 10
+	}
+}
+
+# Will of the Empress
+country_event = {
+	id = wwu_mantid.8
+	title = wwu_mantid.8.title
+	desc = wwu_mantid.8.desc
+	picture = MANTID_QUEEN_eventPicture
+    
+    trigger = {
+        primary_culture = culture_mantid
+        is_at_war = yes
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+        
+        modifier = {
+            factor = 0.5
+
+            NOT = { war_score = -50 }
+        }
+	}
+    
+	option = {
+		name = wwu_mantid.8.option.a
+        
+        add_yearly_manpower = 0.5
+	}
+    option = {
+		name = wwu_mantid.8.option.b
+        
+        add_war_exhaustion = -2
+	}
+}
+
+# Kunchong Stampede
+country_event = {
+    id = wwu_mantid.9
+	title = wwu_mantid.9.title
+	desc = wwu_mantid.9.desc
+	picture = LAVA_eventPicture
+    goto = target_province
+    
+    trigger = {
+        primary_culture = culture_mantid
+        is_at_war = yes
+        any_province = {
+            owner = {
+                war_with = ROOT
+            }
+            sieged_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_province = { 
+                limit = {
+                    owner = {
+                        war_with = ROOT
+                    }
+                    sieged_by = ROOT
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_mantid.9.option.a
+        
+        event_target:target_province = {
+            change_controller = ROOT
+            add_devastation = 100
+        }
+	}
+    option = {
+		name = wwu_mantid.9.option.b
+        
+        add_mil_power = 20
+	}
+}
