@@ -1,0 +1,163 @@
+namespace = wwu_yaungol
+
+# Yaungol Challenger Appears
+country_event = {
+	id = wwu_yaungol.1
+	title = wwu_yaungol.1.title
+	desc = wwu_yaungol.1.desc
+	picture = YAUNGOL_WARRIOR_eventPicture
+    
+	trigger = {
+        NOT = { has_ruler_flag = ousted_former_yaungol_ruler }
+		primary_culture = culture_yaungol
+        NOT = { is_at_war = yes }
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+        
+        modifier = {
+            factor = 0.5
+            
+            NOT = { stability = 0 }
+        }
+        
+        modifier = {
+            factor = 0.5
+            
+            NOT = { stability = -2 }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            define_exiled_ruler = {
+                exiled_as = challenger_ruler
+                min_age = 30
+                max_age = 60
+                change_mil = 2
+                claim = 100
+            }
+        }
+    }
+
+	option = {
+		name = wwu_yaungol.1.option.a
+        
+        random_list = {
+            50 = {
+                add_prestige = 25
+            }
+            50 = {
+                add_prestige = -25
+                set_ruler = challenger_ruler
+            }
+        }
+	}
+    option = {
+		name = wwu_yaungol.1.option.b
+        
+		add_prestige = -5
+        set_ruler = challenger_ruler
+	}
+}
+
+# Flame of Ordos
+country_event = {
+    id = wwu_yaungol.2
+	title = wwu_yaungol.2.title
+	desc = wwu_yaungol.2.desc
+	picture = DECIMATE_eventPicture
+    
+    trigger = {
+        primary_culture = culture_yaungol
+        NOT = { has_ruler_modifier = flame_of_ordos }
+    }
+	
+	mean_time_to_happen = {
+		years = 100
+	}
+	option = {
+		name = wwu_yaungol.2.option.a
+        
+        add_ruler_modifier = {
+            name = flame_of_ordos
+            duration = -1
+        }
+	}
+}
+
+# Burning Oil
+country_event = {
+    id = wwu_yaungol.3
+	title = wwu_yaungol.3.title
+	desc = wwu_yaungol.3.desc
+	picture = LAVA_eventPicture
+    goto = target_province
+    
+    trigger = {
+        primary_culture = culture_yaungol
+        is_at_war = yes
+        any_province = {
+            owner = {
+                war_with = ROOT
+            }
+            sieged_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = {
+		months = 32
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_province = { 
+                limit = {
+                    owner = {
+                        war_with = ROOT
+                    }
+                    sieged_by = ROOT
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_yaungol.3.option.a
+        
+        event_target:target_province = {
+            change_controller = ROOT
+            add_devastation = 25
+        }
+	}
+}
+
+# Yaungol Pridge
+country_event = {
+    id = wwu_yaungol.4
+	title = wwu_yaungol.4.title
+	desc = wwu_yaungol.4.desc
+	picture = YAUNGOL_WARRIOR_eventPicture
+    
+    trigger = {
+        primary_culture = culture_yaungol
+        is_monarch_leader = yes
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_yaungol.4.option.a
+        
+        add_legitimacy = 5
+        add_republican_tradition = 5
+        add_devotion = 5
+        add_horde_unity = 5
+        add_meritocracy = 5
+	}
+}

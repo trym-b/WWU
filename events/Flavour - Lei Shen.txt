@@ -1,0 +1,210 @@
+namespace = wwu_lei_shen
+
+# Zandalari Allies
+country_event = {
+	id = wwu_lei_shen.1
+	title = wwu_lei_shen.1.title
+	desc = wwu_lei_shen.1.desc
+	picture = ZANDALAR_eventPicture
+    
+    fire_only_once = yes
+    
+	trigger = {
+        tag = P92 # Shan'ze
+        
+        region_isle_of_thunder = {
+            owned_by = ROOT
+        }
+        NOT = { is_rival = A78 } # Zandalar
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+	option = {
+		name = wwu_lei_shen.1.option.a
+        
+        add_dip_power = -100
+        
+        create_alliance = A78
+        add_historical_friend = A78
+        A78 = {
+            add_historical_friend = ROOT
+        }
+        
+        ai_chance = { 
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_lei_shen.1.option.b
+        
+        add_mil_power = 100
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Prophet Khar'zul
+country_event = {
+	id = wwu_lei_shen.2
+	title = wwu_lei_shen.2.title
+	desc = wwu_lei_shen.2.desc
+	picture = ZANDALAR_DOOR_eventPicture
+    
+    fire_only_once = yes
+    
+	trigger = {
+        tag = P92 # Shan'ze
+        
+        alliance_with = A78 # Zandalar
+	}
+	
+	mean_time_to_happen = {
+		months = 360
+	}
+    
+	option = {
+		name = wwu_lei_shen.2.option.a
+        
+        add_adm_power = -200
+        add_dip_power = -200
+        add_mil_power = -200
+        
+        custom_tooltip = LEI_SHEN_RESURRECTION_TT
+        hidden_effect = {
+            country_event = { id = wwu_lei_shen.3 days = 365 }
+        }
+        
+        ai_chance = { 
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_lei_shen.2.option.b
+        
+        add_dip_power = 100
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Resurrection of Lei Shen
+country_event = {
+	id = wwu_lei_shen.3
+	title = wwu_lei_shen.3.title
+	desc = wwu_lei_shen.3.desc
+	picture = THRONE_OF_THUNDER_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = P92 # Shan'ze
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_lei_shen.3.option.a
+        
+        override_country_name = THRONE_OF_THUNDER
+        
+        define_ruler = {
+            name = "Lei Shen"
+            dynasty = "the Thunder King"
+            min_age = 300
+            max_age = 500
+            change_adm = 5
+            change_dip = 5
+            change_mil = 7
+        }
+        
+        add_country_modifier = {
+            name = restoration_of_lei_shen
+            duration = -1
+        }
+        
+        continent_pandaria = {
+            add_permanent_claim = ROOT
+        }
+        
+        change_government = monarchy
+        add_government_reform = autocracy_reform
+        set_government_rank = 3
+        
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+            
+            setup_spellcaster_history = {
+                APTITUDE = 4
+                FINESSE = 4
+                CONCENTRATION = 4
+                MANA = 5
+            }
+        }
+	}
+}
+
+# Submission to Lei Shen
+country_event = {
+	id = wwu_lei_shen.4
+	title = wwu_lei_shen.4.title
+	desc = wwu_lei_shen.4.desc
+	picture = THRONE_OF_THUNDER_eventPicture
+    
+	trigger = {
+        exists = P92
+        P92 = {
+            has_country_modifier = restoration_of_lei_shen
+        }
+        NOT = { tag = P92 }
+        primary_culture = culture_mogu
+        NOT = { has_country_flag = lei_shen_submission }
+	}
+	
+	mean_time_to_happen = {
+		months = 360
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = lei_shen_submission 
+        }
+    }
+    
+	option = {
+		name = wwu_lei_shen.4.option.a
+        
+        P92 = {
+            create_subject = {
+                subject_type = vassal
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = { 
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_lei_shen.4.option.b
+        
+        P92 = {
+            add_opinion = {
+                who = ROOT
+                modifier = refused_submission_to_lei_shen
+            }
+        }
+        
+        ai_chance = { 
+            factor = 0
+        }
+	}
+}
