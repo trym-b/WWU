@@ -1,0 +1,53 @@
+namespace = wwu_diplomatic_actions
+
+# Disrupt Alliance
+country_event = {
+	id = wwu_diplomatic_actions.1
+	title = wwu_diplomatic_actions.1.title
+    desc = wwu_diplomatic_actions.1.desc
+	picture = DEADLY_POISON_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.1.option.a
+		
+        event_target:disrupted_ally = {
+            country_event = { id = wwu_diplomatic_actions.2 }
+        }
+	}
+}
+
+# Engineered Upset
+country_event = {
+	id = wwu_diplomatic_actions.2
+	title = wwu_diplomatic_actions.2.title
+    desc = wwu_diplomatic_actions.2.desc
+	picture = DEADLY_POISON_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.2.option.a
+		
+        event_target:disrupt_target = {
+            add_opinion = {
+                who = ROOT
+                modifier = alliance_disrupted
+            }
+        }
+        
+        add_opinion = {
+            who = event_target:disrupt_target
+            modifier = alliance_disrupted
+        }
+	}
+}

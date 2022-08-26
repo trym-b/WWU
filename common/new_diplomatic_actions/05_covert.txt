@@ -542,3 +542,74 @@ steal_artifact = {
 	}
 }
 
+#---------------------------------------
+# Disrupt Alliance
+#---------------------------------------
+disrupt_alliance = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = disrupt_alliance_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        has_idea = wwu_espionage_ideas_1
+        
+        # Target has more than 0 allies
+        FROM = {
+            num_of_allies = 1
+            
+            any_ally = {
+                NOT = { 
+                    has_opinion_modifier = {
+                        modifier = alliance_disrupted
+                        who = FROM
+                    }
+                }
+            }
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 100
+		}
+	}
+	on_accept = {
+		add_spy_network_in = {
+			who = FROM
+			value = -100
+		}
+        
+        hidden_effect = {
+            FROM = {
+                save_event_target_as = disrupt_target
+                
+                random_ally = {
+                    limit = {
+                        NOT = { 
+                            has_opinion_modifier = {
+                                modifier = alliance_disrupted
+                                who = FROM
+                            }
+                        }
+                    }
+                    save_event_target_as = disrupted_ally
+                }
+            }
+        }
+        
+        country_event = { id = wwu_diplomatic_actions.1 }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        always = no
+	}
+}
+
