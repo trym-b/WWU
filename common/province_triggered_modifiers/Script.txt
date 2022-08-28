@@ -79,3 +79,62 @@ generic_monthly_pulse = {
         
 	}
 }
+
+#----------------------------------------------
+# Yearly Pulse
+#----------------------------------------------
+generic_yearly_pulse = {
+	potential = {
+		always = yes
+	}
+
+    hidden = yes
+    
+	trigger = {
+        is_month = 11
+	}
+
+	#Province scope
+	on_activation = {
+        change_variable = {
+            which = year_tracker
+            value = 1
+        }
+	}
+	
+	on_deactivation = {
+        
+	}
+}
+
+#----------------------------------------------
+# 10 Year Pulse
+#----------------------------------------------
+generic_10_year_pulse = {
+	potential = {
+		always = yes
+	}
+
+    hidden = yes
+    
+	trigger = {
+        is_month = 11
+        check_variable = {
+            which = year_tracker
+            value = 10
+        }
+	}
+
+	#Province scope
+	on_activation = {
+        set_variable = {
+            which = year_tracker
+            value = 0
+        }
+	}
+	
+	on_deactivation = {
+        
+	}
+}
+
