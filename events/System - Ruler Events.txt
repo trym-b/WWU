@@ -12,12 +12,37 @@ country_event = {
 	trigger = {
 	    is_immortal_lifespan = yes
         OR = {
-            NOT = { adm = 6 }
-            NOT = { dip = 6 }
-            NOT = { mil = 6 }
+            NOT = { adm = 7 }
+            NOT = { dip = 7 }
+            NOT = { mil = 7 }
         }
 	}
 
+    mean_time_to_happen = { 
+        months = 1
+       
+        # Reduce chance if stat is already high
+        modifier = {
+            factor = 2
+            
+            OR = {
+                adm = 5
+                dip = 5
+                mil = 5
+            }
+        }
+        
+        modifier = {
+            factor = 2
+            
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+    }
+        
 	option = {
 		name = wwu_ruler.1.option.a
 		
@@ -57,13 +82,34 @@ country_event = {
     is_triggered_only = yes
     
 	trigger = {
-	    is_immortal_lifespan = yes
+        is_immortal_lifespan = yes
         OR = {
             adm = 1
             dip = 1
             mil = 1
         }
 	}
+    
+    mean_time_to_happen = { 
+        months = 1
+       
+        # Reduce chance if stats are already low
+        modifier = {
+            factor = 2
+            
+            NOT = { adm = 2 }
+            NOT = { dip = 2 }
+            NOT = { mil = 2 }
+        }
+        
+        modifier = {
+            factor = 2
+            
+            NOT = { adm = 3 }
+            NOT = { dip = 3 }
+            NOT = { mil = 3 }
+        }
+    }
 
 	option = {
 		name = wwu_ruler.2.option.a
@@ -112,83 +158,482 @@ country_event = {
    mean_time_to_happen = { 
        months = 1200 # 100
        
+       # Monarch Lifespan - Gain
        modifier = {
-           factor = 1.5
+           factor = 1.05
            
-           is_increased_lifespan = yes
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.05
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.1
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.15
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.2
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.25
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.3
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.35
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.4
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.45
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.5
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.55
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.6
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.65
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.7
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.75
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.8
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.85
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.9
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.95
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 1.0
+           }
+       }
+       
+       # Monarch Lifespan - Loss
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.05
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.1
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.15
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.2
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.25
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.3
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.35
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.4
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.45
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.5
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.55
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.6
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.65
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.7
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.75
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.8
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.85
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.9
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.95
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -1.0
+               }
+           }
+       }
+       
+       # Ruler Age - Normal
+       modifier = {
+           factor = 2
+           
+           is_normal_lifespan = yes
+           NOT = { ruler_age = 30 }
        }
        modifier = {
            factor = 2
            
+           is_normal_lifespan = yes
            NOT = { ruler_age = 40 }
        }
        modifier = {
-           factor = 0.5
+           factor = 0.9
            
+           is_normal_lifespan = yes
+           ruler_age = 70
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
+           ruler_age = 80
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
+           ruler_age = 90
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
            ruler_age = 100
        }
        modifier = {
-           factor = 0.5
+           factor = 0.9
            
-           ruler_age = 125
+           is_normal_lifespan = yes
+           ruler_age = 110
        }
        modifier = {
            factor = 0.5
            
+           is_normal_lifespan = yes
+           ruler_age = 120
+       }
+       
+       # Ruler Age - Normal
+       modifier = {
+           factor = 2
+           
+           is_increased_lifespan = yes
+           NOT = { ruler_age = 60 }
+       }
+       modifier = {
+           factor = 2
+           
+           is_increased_lifespan = yes
+           NOT = { ruler_age = 80 }
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
            ruler_age = 150
        }
        modifier = {
-           factor = 0.8
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           ruler_age = 175
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           ruler_age = 200
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           ruler_age = 220
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           ruler_age = 240
+       }
+       modifier = {
+           factor = 0.5
+           
+           is_increased_lifespan = yes
+           ruler_age = 260
+       }
+       
+       # Ruler Circumstances
+       modifier = {
+           factor = 0.9
            
            is_monarch_leader = yes
        }
-       # Boost due to government reform
-       modifier = {
-            factor = 1.25
-            
-            has_government_attribute = enables_monarch_lifespan_boost
-       }
-       # Boost due to government reform
-       modifier = {
-            factor = 1.25
-            
-            has_government_attribute = enables_orc_monarch_lifespan_boost
-       }
-       # Reduce due to Decadence event
-       modifier = {
-            factor = 0.8
-            
-            has_ruler_modifier = decadence_drunk
-       }
-       # Reduce due to Decadence event
-       modifier = {
-            factor = 0.8
-            
-            has_ruler_modifier = decadence_glutton
-       }
-       # Reduce due to government reform
-       modifier = {
-            factor = 0.5
-            
-            has_government_attribute = enables_monarch_lifespan_reduction
-       }
-       # Boost when National Fetish decision is taken
+       
+       # Special: Boost to Ogre ruler when Magi of Stone are in power
        modifier = {
             factor = 1.1
             
-            has_country_modifier = national_fetish
-       }
-       # Boost to Ogre ruler when Magi of Stone are in power
-       modifier = {
-            factor = 1.2
-            
             faction_in_power = faction_magi_of_stone_magic
-       }
-       # Boost to God-King of Zandalar
-       modifier = {
-            factor = 3
-            
-            has_reform = zandalari_empire_reform
        }
    }
    
@@ -216,44 +661,480 @@ country_event = {
    mean_time_to_happen = { 
        months = 1200 # 100
        
+       # Monarch Lifespan - Gain
        modifier = {
-           factor = 1.5
+           factor = 1.05
            
-           is_increased_lifespan = yes
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.05
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.1
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.15
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.2
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.25
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.3
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.35
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.4
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.45
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.5
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.55
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.6
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.65
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.7
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.75
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.8
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.85
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.9
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 0.95
+           }
+       }
+       modifier = {
+           factor = 1.05
+           
+           has_global_modifier_value = {
+                which = monarch_lifespan
+                value = 1.0
+           }
        }
        
+       # Monarch Lifespan - Loss
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.05
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.1
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.15
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.2
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.25
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.3
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.35
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.4
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.45
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.5
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.55
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.6
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.65
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.7
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.75
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.8
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.85
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.9
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -0.95
+               }
+           }
+       }
+       modifier = {
+           factor = 0.95
+           
+           NOT = {
+               has_global_modifier_value = {
+                    which = monarch_lifespan
+                    value = -1.0
+               }
+           }
+       }
+       
+       # Ruler Age - Normal
        modifier = {
            factor = 2
            
+           is_normal_lifespan = yes
+           NOT = { heir_age = 30 }
+       }
+       modifier = {
+           factor = 2
+           
+           is_normal_lifespan = yes
            NOT = { heir_age = 40 }
        }
        modifier = {
-           factor = 0.5
+           factor = 0.9
            
+           is_normal_lifespan = yes
+           heir_age = 70
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
+           heir_age = 80
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
+           heir_age = 90
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_normal_lifespan = yes
            heir_age = 100
        }
        modifier = {
-           factor = 0.5
+           factor = 0.9
            
-           heir_age = 125
+           is_normal_lifespan = yes
+           heir_age = 110
        }
        modifier = {
            factor = 0.5
            
+           is_normal_lifespan = yes
+           heir_age = 120
+       }
+       
+       # Ruler Age - Normal
+       modifier = {
+           factor = 2
+           
+           is_increased_lifespan = yes
+           NOT = { heir_age = 60 }
+       }
+       modifier = {
+           factor = 2
+           
+           is_increased_lifespan = yes
+           NOT = { heir_age = 80 }
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
            heir_age = 150
        }
        modifier = {
-           factor = 0.8
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           heir_age = 175
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           heir_age = 200
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           heir_age = 220
+       }
+       modifier = {
+           factor = 0.9
+           
+           is_increased_lifespan = yes
+           heir_age = 240
+       }
+       modifier = {
+           factor = 0.5
+           
+           is_increased_lifespan = yes
+           heir_age = 260
+       }
+       
+       # Ruler Circumstances
+       modifier = {
+           factor = 0.9
            
            is_heir_leader = yes
        }
+       
+       # Special: Boost to Ogre ruler when Magi of Stone are in power
        modifier = {
             factor = 1.1
-            
-            has_country_modifier = national_fetish
-       }
-       modifier = {
-            factor = 1.2
             
             faction_in_power = faction_magi_of_stone_magic
        }
