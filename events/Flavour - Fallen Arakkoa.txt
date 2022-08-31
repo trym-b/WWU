@@ -1,0 +1,202 @@
+namespace = wwu_fallen_arakkoa
+
+# Aerial Assault
+country_event = {
+	id = wwu_fallen_arakkoa.1
+	title = wwu_fallen_arakkoa.1.title
+	desc = wwu_fallen_arakkoa.1.desc
+	picture = SHADOW_SAGE_ISKAR_eventPicture
+    
+	trigger = {
+        primary_culture = culture_fallen_arrakoa
+        any_neighbor_country = {
+            primary_culture = culture_arrakoa
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+	}
+
+    immediate = {
+        hidden_effect = {
+            random_neighbor_country = {
+                limit = { 
+                    primary_culture = culture_arrakoa
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_fallen_arakkoa.1.option.a
+        
+        random_owned_province = {
+            limit = {
+                culture = culture_fallen_arrakoa
+            }
+            
+            spawn_rebels = {
+                type = noble_rebels
+                friend = event_target:target_country
+                size = 2
+            }
+        }
+	}
+}
+
+# Shadows Gather
+country_event = {
+	id = wwu_fallen_arakkoa.2
+	title = wwu_fallen_arakkoa.2.title
+	desc = wwu_fallen_arakkoa.2.desc
+	picture = DARK_ARAKKOA_eventPicture
+    
+	trigger = {
+        primary_culture = culture_fallen_arrakoa
+        any_neighbor_country = {
+            primary_culture = culture_fallen_arrakoa
+            NOT = {
+                has_opinion_modifier = {
+                    who = ROOT
+                    modifier = shadows_gather
+                }
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 300
+	}
+
+    immediate = {
+        hidden_effect = {
+            random_neighbor_country = {
+                limit = { 
+                    primary_culture = culture_fallen_arrakoa
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_fallen_arakkoa.2.option.a
+        
+        event_target:target_country = {
+            add_opinion = {
+                who = ROOT
+                modifier = shadows_gather
+            }
+        }
+        
+        add_opinion = {
+            who = event_target:target_country
+            modifier = shadows_gather
+        }
+	}
+}
+
+# Outcast Illusions
+country_event = {
+	id = wwu_fallen_arakkoa.3
+	title = wwu_fallen_arakkoa.3.title
+	desc = wwu_fallen_arakkoa.3.desc
+	picture = ARAKKOA_SPLIT_eventPicture
+    
+	trigger = {
+        primary_culture = culture_fallen_arrakoa
+        is_at_war = yes
+        war_exhaustion = 1.0
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.3.option.a
+        
+        add_war_exhaustion = -2
+	}
+}
+
+# Shadows Rise
+country_event = {
+	id = wwu_fallen_arakkoa.4
+	title = wwu_fallen_arakkoa.4.title
+	desc = wwu_fallen_arakkoa.4.desc
+	picture = ARAKKOA_TALONPRIEST_eventPicture
+    goto = target_province
+    
+	trigger = {
+        primary_culture = culture_fallen_arrakoa
+        religion = shadow
+        any_owned_province = {
+            NOT = { religion = shadow }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 300
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = { 
+                    NOT = { religion = shadow }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_fallen_arakkoa.4.option.a
+        
+        event_target:target_province = {
+            limit = {
+                NOT = { religion = shadow }
+            }
+            
+            change_religion = shadow
+        }
+	}
+}
+
+# Spawn of Sethe
+country_event = {
+	id = wwu_fallen_arakkoa.5
+	title = wwu_fallen_arakkoa.5.title
+	desc = wwu_fallen_arakkoa.5.desc
+	picture = ANZU_eventPicture
+
+    fire_only_once = yes
+    
+	trigger = {
+        primary_culture = culture_fallen_arrakoa
+        religion = shadow
+        is_at_war = yes
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.5.option.a
+        
+        define_general = {
+            name = "Spawn of Sethe"
+            shock = 4
+            fire = 4
+            manuever = 6
+            siege = 3
+        }
+	}
+}
+
+
+
