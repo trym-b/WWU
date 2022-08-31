@@ -198,5 +198,116 @@ country_event = {
 	}
 }
 
+# Envoy of the Ravenspeakers
+country_event = {
+	id = wwu_fallen_arakkoa.6
+	title = wwu_fallen_arakkoa.6.title
+	desc = wwu_fallen_arakkoa.6.desc
+	picture = DARK_ARAKKOA_eventPicture
 
+	trigger = {
+        NOT = { has_country_modifier = arakkoa_blessing_of_kaalu }
+        NOT = { has_country_modifier = arakkoa_rejection_of_kaalu }
+        primary_culture = culture_fallen_arrakoa
+        religion = shadow
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.6.option.a
+        
+        add_ruler_modifier = {
+            name = arakkoa_blessing_of_kaalu
+            duration = -1
+        }
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.6.option.b
+        
+        add_ruler_modifier = {
+            name = arakkoa_rejection_of_kaalu
+            duration = -1
+        }
+	}
+}
+
+# Murky Bargain
+country_event = {
+	id = wwu_fallen_arakkoa.7
+	title = wwu_fallen_arakkoa.7.title
+	desc = wwu_fallen_arakkoa.7.desc
+	picture = DRAIN_LIFE_eventPicture
+
+	trigger = {
+        NOT = { has_ruler_flag = shadow_bargain }
+        primary_culture = culture_fallen_arrakoa
+        religion = shadow
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_ruler_flag = shadow_bargain
+        }
+    }
+    
+	option = {
+		name = wwu_fallen_arakkoa.7.option.a
+        
+        change_adm = 1
+        change_dip = 1
+        change_mil = 1
+        
+        add_ruler_modifier = {
+            name = arakkoa_mysterious_pact
+            duration = -1
+        }
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.7.option.b
+        
+        add_legitimacy = 10
+        add_republican_tradition = 10
+        add_devotion = 10
+        add_horde_unity = 10
+	}
+}
+
+# Emergence of the Void
+country_event = {
+	id = wwu_fallen_arakkoa.8
+	title = wwu_fallen_arakkoa.8.title
+	desc = wwu_fallen_arakkoa.8.desc
+	picture = DRAIN_LIFE_eventPicture
+
+	trigger = {
+        has_ruler_modifier = arakkoa_mysterious_pact
+        primary_culture = culture_fallen_arrakoa
+        religion = shadow
+	}
+	
+	mean_time_to_happen = {
+		months = 600
+	}
+    
+	option = {
+		name = wwu_fallen_arakkoa.8.option.a
+        
+        add_stability = -1
+        
+        random_owned_province = {
+            area = {
+                change_religion = void
+            }
+        }
+	}
+}
 
