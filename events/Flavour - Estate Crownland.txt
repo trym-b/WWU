@@ -1,0 +1,104 @@
+namespace = wwu_estate_crownland
+
+# Estate Demands Influence
+country_event = {
+	id = wwu_estate_crownland.1
+	title = wwu_estate_crownland.1.title
+	desc = wwu_estate_crownland.1.desc
+	picture = BETRAYAL_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		has_any_estates = yes
+        crown_land_share = 30 # Only occur if crownland is neutral or good
+	}
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            select_estate_target = yes
+        }
+    }
+	
+	option = {
+		name = wwu_estate_crownland.1.option.a
+		
+        grant_land_to_estate_target = {
+            AMOUNT = 10
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_estate_crownland.1.option.b
+		
+        add_stability = -1
+        
+        apply_loyalty_change_to_estate_target = {
+            AMOUNT = -20
+        }
+        
+        ai_chance = {
+            factor = 20
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { stability = 0 }
+            }
+        }
+	}
+    
+    after = {
+        clear_estate_target = yes
+    }
+}
+
+# Estate Seixes Influence
+country_event = {
+	id = wwu_estate_crownland.2
+	title = wwu_estate_crownland.2.title
+	desc = wwu_estate_crownland.2.desc
+	picture = BETRAYAL_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		has_any_estates = yes
+        crown_land_share = 50 # Only occur if crownland is good
+	}
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            select_estate_target = yes
+        }
+    }
+	
+	option = {
+		name = wwu_estate_crownland.2.option.a
+		
+        add_prestige = -10
+        
+        grant_land_to_estate_target = {
+            AMOUNT = 10
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    
+    after = {
+        clear_estate_target = yes
+    }
+}
