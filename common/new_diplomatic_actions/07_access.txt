@@ -23,6 +23,13 @@ transfer_host_player_status = {
         }
 	}
 	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - transfer_host_player_status"
+            }
+        }
+
         clr_country_flag = host_player
         FROM = {
             set_country_flag = host_player

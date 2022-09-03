@@ -30,9 +30,18 @@ wow_portal = {
 	}
 	
     on_built = {
-		
+        if = { 
+			limit = { has_global_flag = enable_building_logging }
+			log = "DEBUG - [Root.GetName] - wow_portal "
+		}
 	}
+    
 	on_destroyed = {
+        if = { 
+			limit = { has_global_flag = enable_building_logging }
+			log = "DEBUG - [Root.GetName] - wow_portal destroyed"
+		}
+        
 		if = {
             limit = {
                 owner = {
@@ -43,9 +52,6 @@ wow_portal = {
                 add_treasury = 25
             }
         }
-	}
-	on_obsolete = {
-        
 	}
     
 	ai_will_do = {
