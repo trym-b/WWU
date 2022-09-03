@@ -1,0 +1,304 @@
+#--------------------------------------
+# Zem'lan Revenants
+#--------------------------------------
+wwu_zemlan_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TSP
+	}
+	has_country_shield = yes
+	
+	wwu_zemlan_four_two = {
+		icon = mission_zemlan_2
+		position = 2
+		required_missions = { wwu_zemlan_five_one }
+		
+		trigger = {
+            # Port of Zem'lan
+            1114 = {
+                has_privateer_share_in_trade_node = {
+                    who = ROOT
+                    share = 0.1
+                }
+            }
+		}
+		effect = {
+            add_country_modifier = {
+                name = zemlan_charge
+                duration = 7300
+            }
+            area_slithering_gulch = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zemlan_four_three = {
+		icon = mission_zemlan_2
+		position = 3
+		required_missions = { wwu_zemlan_four_two }
+		
+		trigger = {
+            area_slithering_gulch = { 
+                owned_by = ROOT
+            }
+        }
+		
+		effect = {
+            add_country_modifier = {
+                name = zemlan_victory
+                duration = -1
+            
+			}
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+    
+	wwu_zemlan_four_four = {
+		icon = mission_zemlan_3
+		position = 4
+		required_missions = { wwu_zemlan_five_three }
+		
+		trigger = {
+            # Snowblossom Farms
+            4155 = {
+                has_privateer_share_in_trade_node = {
+                    who = ROOT
+                    share = 0.1
+                }
+            }
+		}
+		effect = {
+            area_snowblossom_isle = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zemlan_four_five = {
+		icon = mission_zemlan_3
+		position = 5
+		required_missions = { wwu_zemlan_four_four }
+		
+		trigger = {
+            # Thunder Islands
+            1737 = {
+                has_privateer_share_in_trade_node = {
+                    who = ROOT
+                    share = 0.1
+                }
+            }
+		}
+		effect = {
+            area_thunder_islands = {
+                add_permanent_claim = ROOT
+            }
+            area_windward_isle = {
+                add_permanent_claim = ROOT
+            }
+            area_jade_islands = {
+                add_permanent_claim = ROOT
+            }
+            area_moonwater_islands = {
+                add_permanent_claim = ROOT
+            }
+            area_pawdon_islands = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+}
+	
+wwu_zemlan_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TSP
+	}
+	has_country_shield = yes
+	
+	wwu_zemlan_five_one = {
+		icon = mission_zemlan_1
+		position = 1
+		required_missions = {  }
+		
+		trigger = {
+            # Port of Zem'lan
+            1114 = {
+                OR = {
+                    has_great_project = {
+                        type = gp_port_zemlan
+                        tier = 1
+                    }
+                        has_great_project = {
+                        type = gp_port_zemlan
+                        tier = 2
+                    }
+                        has_great_project = {
+                        type = gp_port_zemlan
+                        tier = 3
+                    }
+                }
+            }
+		}
+		effect = {
+            # Port of Zem'lan
+            1114 = {
+                center_of_trade = 1
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+    
+	wwu_zemlan_five_three = {
+		icon = mission_zemlan_1
+		position = 3
+		required_missions = { wwu_zemlan_five_one }
+		
+		trigger = {
+            # Port of Zem'lan
+            1114 = {
+                has_dock_building_trigger = yes
+                has_shipyard_building_trigger = yes
+                has_trade_building_trigger = yes
+     
+                development = 15
+                
+                OR = {
+                    has_great_project = {
+                        type = gp_port_zemlan
+                        tier = 2
+                    }
+                    has_great_project = {
+                        type = gp_port_zemlan
+                        tier = 3
+                    }
+                }
+            }
+		}
+		effect = {
+            # Port of Zem'lan
+            1114 = {
+                add_permanent_province_modifier = {
+                    name = zemlan_port_1
+                    duration = -1
+                }
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zemlan_five_five = {
+		icon = mission_zemlan_1
+		position = 5
+		required_missions = { wwu_zemlan_five_three }
+		
+		trigger = {
+            # Port of Zem'lan
+            1114 = {
+                OR = {
+                    has_building = wow_dockyard_2
+                    has_building = wow_dockyard_3
+                }
+                OR = {
+                    has_building = wow_shipyard_2
+                    has_building = wow_shipyard_3
+                }
+                OR = {
+                    has_building = wow_market_2
+                    has_building = wow_market_3
+                }
+                
+                development = 20
+                
+                has_great_project = {
+                    type = gp_port_zemlan
+                    tier = 3
+                }
+            }
+		}
+		effect = {
+            # Port of Zem'lan
+            1114 = {
+                if = {
+                    limit = {
+                        has_province_modifier = zemlan_port_1
+                    }
+                    remove_province_modifier = zemlan_port_1
+                }
+                
+                add_permanent_province_modifier = {
+                    name = zemlan_port_2
+                    duration = -1
+                }
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+	
+	wwu_zemlan_five_six = {
+		icon = mission_zemlan_4
+		position = 6
+		required_missions = { wwu_zemlan_five_five }
+		
+		trigger = {
+            ruler_age = 100
+            
+            has_epic_aptitude = yes
+            has_epic_finesse = yes
+            has_epic_concentration = yes
+	
+            adm_power = 200
+            dip_power = 200
+            mil_power = 200
+		}
+		effect = {
+            custom_tooltip = zemlan_tooltip_cast_spell_1
+            
+            add_adm_power = -200
+            add_dip_power = -200
+            add_mil_power = -200
+            set_country_flag = zemlan_cast_curse_1
+            
+            hidden_effect = {
+                # Port of Zem'lan
+                1114 = { 
+                    remove_province_modifier = troll_skeleton_pirate
+                }
+                
+                add_permanent_province_modifier = {
+                    name = troll_skeleton_pirate_better
+                    duration = -1
+                    desc = troll_skeleton_pirate_better_desc
+                }
+            }
+		}
+		
+        ai_weight   = { factor = 1 }
+		ai_priority = { factor = 1 }
+	}
+}
+	
+	

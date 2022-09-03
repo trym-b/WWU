@@ -1,0 +1,130 @@
+namespace = wwu_zan_civilwarstart
+
+# Start
+country_event = {
+	id = wwu_zan_civilwarstart.1
+    title = "wwu_zan_civilwarstart.1.title"
+	desc = "wwu_zan_civilwarstart.1.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+    
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_zan_civilwarstart.1.option.a
+        
+        custom_tooltip = REBELS_OF_ZUL_SPAWN_TT
+        
+        hidden_effect = {
+            set_country_flag = zandalar_great_war
+        
+            # Spawn in Rebels of Zul based on Zul power
+            spawn_rebels_of_zul = yes
+            
+            ZUZ = {
+                define_ruler = {
+                    name = "Zul"
+                    dynasty = "The Dark Prophet"
+                    adm = 6
+                    dip = 6
+                    mil = 6
+                    age = 35
+                    claim = 100
+                }
+                define_ruler_to_general = {
+                    fire = 5
+                    shock = 5
+                    manuever = 4
+                    siege = 3
+                }
+                
+                country_event = { id = wwu_zan_civilwarstart.100 days = 1 }
+            }
+        }
+    }
+}
+
+# Rebels of Zul setup
+country_event = {
+	id = wwu_zan_civilwarstart.100
+	title = "wwu_zan_civilwarstart.100.title"
+	desc = "wwu_zan_civilwarstart.100.desc"
+	picture = ANGRY_MOB_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    option = {
+		name = wwu_zan_civilwarstart.100.option.a
+        
+        discover_kul_tiras = yes
+        discover_zandalar = yes
+        discover_plunder_isle = yes
+        discover_eastern_kingdoms = yes
+        discover_pandaria = yes
+        discover_nazjatar = yes
+        
+        declare_war_with_cb = {
+            who = A78
+            casus_belli = cb_zandalari_great_war
+        }
+        
+        set_capital = 2470
+    }
+}
+
+# End
+country_event = {
+	id = wwu_zan_civilwarstart.2
+	title = "wwu_zan_civilwarstart.2.title"
+	desc = "wwu_zan_civilwarstart.2.desc"
+	picture = ANGRY_MOB_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78
+        
+        # The Great Seat
+        2469 = {
+            controlled_by = ZUZ
+        }
+	}
+    
+	option = {
+		name = wwu_zan_civilwarstart.2.option.a
+        
+        # The Great Seat
+		2469 = {
+            add_devastation = 100
+            add_base_tax = -5
+            add_base_production = -5
+            add_base_manpower = -5
+		}
+        
+        if = {
+            limit = {
+                NOT = {
+                    2469 = {
+                        has_great_project = {
+                            type = gp_dazaralor
+                            tier = 1
+                        }
+                    }
+                }
+            }
+            
+            add_great_project_tier = {
+                type = gp_dazaralor
+                tier = -1
+            }
+        }
+        
+		add_disaster_modifier = {
+            name = "capital_zandalar_in_ruin"
+            duration = -1
+            disaster = internal_conflicts
+        }
+        
+		add_prestige = -100
+	}
+}

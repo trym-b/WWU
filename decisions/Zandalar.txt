@@ -1,0 +1,268 @@
+country_decisions = {
+    # End the Great Zandalar War
+	great_zandalar_war_end = {
+        major = yes
+        
+        potential = {
+			has_country_flag = zandalar_great_war
+        }
+        
+		allow = {
+            stability = 0
+            OR = {
+                NOT = { exists = ZUZ }
+                war_score_against = {
+                    who = ZUZ
+                    value = 95
+                }
+            }
+		}
+        
+		effect = {
+            inherit = ZUZ
+			clr_country_flag = zandalar_great_war
+			set_country_flag = zandalar_great_war_end
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+    # Council of Zanchul
+	call_council_of_zanchul = {
+        major = yes
+        
+        potential = {
+			has_country_flag = council_of_zanchul_already
+			NOT = { has_country_flag = council_of_zanchul_already_open }
+        }
+        
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = zandalari_decision_council_of_zanchul_a
+				has_country_flag = council_of_zanchul_already
+                
+                NOT = {	
+                    check_variable = {
+                        which = zul_influence
+                        value = 80
+                    }
+                }
+			}
+		}
+        
+		effect = {
+            country_event = { id = wwu_zandalar.16 } # Council of Zanchul
+            
+			custom_tooltip = zandalari_decision_council_of_zanchul_b
+			clr_country_flag = zandalar_great_war
+			set_country_flag = council_of_zanchul_already_open
+		}
+        
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+    # Reclaim the Amani Empire
+	zandalar_reclaim_amani = {
+        major = yes
+        
+        potential = {
+            tag = A78 # Zandalar
+            
+            # Amani
+			A58 = {
+                has_country_modifier = amani_refugees
+                march_of = A78 # Zandalar
+			}
+        }
+        
+		allow = {
+            # Amani
+			A58 = {
+                march_of = A78
+                has_country_modifier = amani_refugees
+			}
+			area_zul_aman = {
+			    type = all
+				owned_by = A58 # Amani
+			}
+		}
+        
+		effect = {
+            country_event = { id = wwu_zandalar.34 }
+            
+			add_prestige = 25
+			
+            # Amani
+            A58 = {
+                restore_country_name = yes 
+                remove_country_modifier = amani_refugees
+			}
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+    # Reclaim the Gurubashi Empire
+	zandalar_reclaim_gurubashi = {
+        major = yes
+        
+        potential = {
+            tag = A78 # Zandalar
+            
+            # Gurubashi
+			A66 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = gurubashi_refugees
+			}
+        }
+        
+		allow = {
+            # Gurubashi
+			A66 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = gurubashi_refugees
+			}
+			area_zul_gurub = {
+			    type = all
+				owned_by = A66 # Gurubashi
+			}
+		}
+        
+		effect = {
+            country_event = { id = wwu_zandalar.35 }
+            
+			add_prestige = 25
+			
+            # Gurubashi
+            A66 = {
+                restore_country_name = yes 
+                remove_country_modifier = gurubashi_refugees
+			}
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+    # Reclaim the Drakkari Empire
+	zandalar_reclaim_drakkari = {
+        major = yes
+        
+        potential = {
+            # Drakkari
+			A74 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = drakkari_refugees
+			}
+			
+        }
+        
+		allow = {
+            # Drakkari
+			A74 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = drakkari_refugees
+			}
+			area_gundrak_raid = {
+			    type = all
+				owned_by = A74 # Drakkari
+			}
+		}
+        
+		effect = {
+            country_event = { id = wwu_zandalar.36 }
+            
+			add_prestige = 25
+			
+            # Drakkari
+            A74 = {
+                restore_country_name = yes 
+                remove_country_modifier = drakkari_refugees
+			}
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+    # Reclaim the Farraki tribe
+	zandalar_reclaim_farraki = {
+        major = yes
+        
+        potential = {
+            # Sandfury
+			A73 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = farraki_refugees
+			}
+			
+        }
+        
+		allow = {
+            # Sandfury
+			A73 = {
+                march_of = A78 # Zandalar
+                has_country_modifier = farraki_refugees
+			}
+			area_zulfarrak = {
+			    type = all
+				owned_by = A73 # Sandfury
+			}
+		}
+        
+		effect = {
+            country_event = { id = wwu_zandalar.37 }
+            
+			add_prestige = 25
+			
+            # Sandfury
+            A73 = {
+                restore_country_name = yes 
+                remove_country_modifier = farraki_refugees
+			}
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+    # Start the Uldir raid
+	uldir_complex_start = {
+        major = yes
+        
+        potential = {
+			has_country_flag = uldir_raid_prepare
+        }
+        
+		allow = {
+            # Heart of Darkness
+            1122 = {
+                infantry_in_province = 10
+                owned_by = ROOT
+                is_core = ROOT
+			}
+			is_at_war = no
+		}
+        
+		effect = {
+            #country_event = { id = wwu_zandalar.16 }
+			custom_tooltip = zandalari_decision_council_of_zanchul_b
+			clr_country_flag = zandalar_great_war
+			set_country_flag = council_of_zanchul_already_open
+		}
+        
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}
+    

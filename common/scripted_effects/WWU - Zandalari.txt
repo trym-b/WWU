@@ -112,38 +112,39 @@ oondasta_back = {
     }
 }
 
-#############
-
 zul_power_5_a = {
-if = {
-limit = {
-NOT = {
+    if = {
+        limit = {
+            NOT = {
                 check_variable = {
                     which = zul_power
                     value = 100
-                }}}
-    custom_tooltip = zul_power_5_a
-}
-
-if = {
-limit = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }}
-    custom_tooltip = zul_influence_5_a
-hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = 5
-        }}
-}
+                }
+            }
+        }
+        custom_tooltip = zul_power_5_a
+    }
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
+            }
+        }
+        custom_tooltip = zul_influence_5_a
+        
+        hidden_effect = {
+            change_variable = {
+                which = zul_influence
+                value = 5
+            }
+        }
+    }
     hidden_effect = {
         change_variable = {
             which = zul_power
             value = 5
         }
-        
         
         if = {
             limit = {
@@ -161,35 +162,39 @@ hidden_effect = {
 }
 
 zul_power_10_a = {
-if = {
-limit = {
-NOT = {
+    if = {
+        limit = {
+            NOT = {
                 check_variable = {
                     which = zul_power
                     value = 100
-                }}}
-    custom_tooltip = zul_power_10_a
-}
-
-if = {
-limit = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }}
-    custom_tooltip = zul_influence_10_a
-hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = 10
-        }}
-}
+                }
+            }
+        }
+        custom_tooltip = zul_power_10_a
+    }
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
+            }
+        }
+        
+        custom_tooltip = zul_influence_10_a
+        
+        hidden_effect = {
+            change_variable = {
+                which = zul_influence
+                value = 10
+            }
+        }
+    }
     hidden_effect = {
         change_variable = {
             which = zul_power
             value = 10
         }
-        
         
         if = {
             limit = {
@@ -207,36 +212,40 @@ hidden_effect = {
 }
 
 zul_power_20_a = {
-if = {
-limit = {
-NOT = {
+    if = {
+        limit = {
+            NOT = {
                 check_variable = {
                     which = zul_power
                     value = 100
-                }}}
-    custom_tooltip = zul_power_20_a
-}
-
-if = {
-limit = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }}
-    custom_tooltip = zul_influence_20_a
-hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = 20
-        }}
-}
+                }
+            }
+        }
+        custom_tooltip = zul_power_20_a
+    }
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
+            }
+        }
+        
+        custom_tooltip = zul_influence_20_a
+        
+        hidden_effect = {
+            change_variable = {
+                which = zul_influence
+                value = 20
+            }
+        }
+    }
+    
     hidden_effect = {
         change_variable = {
             which = zul_power
             value = 20
         }
-        
-        
         if = {
             limit = {
                 check_variable = {
@@ -487,6 +496,501 @@ zul_influence_20_b = {
                 which = zul_influence
                 value = 0
             }
+        }
+    }
+}
+
+# VAWSER: applies each stages effects based on Zul Power, cascades to prevent duplication of code
+spawn_rebels_of_zul = { 
+    # Zul Power - Base
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 0
+            }
+        }
+        # Atal'dazar
+        2470 = {
+            cede_province = ZUZ
+            add_core = ZUZ
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 1
+            }
+        }
+    }
+    # Zul Power - +10
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 10
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+
+        # Empty Zuldazar
+        cede_province_to_zul = { PROVINCE_ID = 2471 } # Xibala Ruins
+        cede_province_to_zul = { PROVINCE_ID = 2509 } # Xibala Shore
+        cede_province_to_zul = { PROVINCE_ID = 2612 } # Forgotten Beach
+        cede_province_to_zul = { PROVINCE_ID = 1232 } # Crescent Shore
+        cede_province_to_zul = { PROVINCE_ID = 2760 } # Forgotten Isles
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 2
+            }
+        }
+    }
+    # Zul Power - +20
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 20
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        
+        # Zuldazar Gap
+        cede_province_to_zul = { PROVINCE_ID = 1136 } # The Blood Gate
+        cede_province_to_zul = { PROVINCE_ID = 1108 } # Garden of the Loa
+        cede_province_to_zul = { PROVINCE_ID = 2622 } # Old Merchant Road
+        cede_province_to_zul = { PROVINCE_ID = 2755 } # Verdant Slope
+        cede_province_to_zul = { PROVINCE_ID = 2756 } # Sandscar Breach
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 3
+            }
+        }
+    }
+    # Zul Power - +40
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 40
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        # Skycaller's Spire
+        1119 = {
+            spawn_infantry = {
+                AMOUNT = 20
+                TAG = ZUZ
+            }
+        }
+
+        # Vol'dun
+        cede_province_to_zul = { PROVINCE_ID = 1113 } # Terrace of the Devoted
+        cede_province_to_zul = { PROVINCE_ID = 1118 } # Shatterstone Harbor
+        cede_province_to_zul = { PROVINCE_ID = 1119 } # Skycaller's Spire
+        cede_province_to_zul = { PROVINCE_ID = 2629 } # Slithering Gulch
+        cede_province_to_zul = { PROVINCE_ID = 2628 } # Slithering Burrows
+        cede_province_to_zul = { PROVINCE_ID = 2730 } # Terrace of the Fang
+        cede_province_to_zul = { PROVINCE_ID = 1116 } # Temple of Akunda
+        cede_province_to_zul = { PROVINCE_ID = 2632 } # Arid Basin
+        cede_province_to_zul = { PROVINCE_ID = 1114 } # Port of Zem'lan
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            
+            set_country_flag = zuz_special_merc_1
+            set_variable = {
+                which = zul_strength
+                value = 4
+            }
+        }
+    }
+    # Zul Power - +50
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 50
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        # Devilsaur Isle
+        4123 = {
+            spawn_infantry = {
+                AMOUNT = 5
+                TAG = ZUZ
+            }
+        }
+
+        # Zandalari Islands
+        cede_province_to_zul = { PROVINCE_ID = 4122 } # Boneshorn Coast
+        cede_province_to_zul = { PROVINCE_ID = 4123 } # Devilsaur Isle
+        cede_province_to_zul = { PROVINCE_ID = 1905 } # Isle of Reckoning
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 5
+            }
+        }
+    }
+    # Zul Power - +60
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 60
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+
+        # Isle of Giants
+        cede_province_to_zul = { PROVINCE_ID = 4120 } # Bone Ridge
+        cede_province_to_zul = { PROVINCE_ID = 1920 } # Oondasta's Pit
+        cede_province_to_zul = { PROVINCE_ID = 4119 } # Misty Shores
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 6
+            }
+        }
+    }
+    # Zul Power - +70
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 70
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        # The Necropolis
+        1127 = {
+            spawn_infantry = {
+                AMOUNT = 20
+                TAG = ZUZ
+            }
+        }
+
+        # Nazmir Proper
+        cede_province_to_zul = { PROVINCE_ID = 1123 } # Zul'jan Ruins
+        cede_province_to_zul = { PROVINCE_ID = 2618 } # Rivermarsh
+        cede_province_to_zul = { PROVINCE_ID = 1122 } # Heart of Darkness
+        cede_province_to_zul = { PROVINCE_ID = 1132 } # Zal'amak
+        cede_province_to_zul = { PROVINCE_ID = 1124 } # Terrace of Sorrows
+        cede_province_to_zul = { PROVINCE_ID = 1126 } # Shoaljai Tar Pits
+        cede_province_to_zul = { PROVINCE_ID = 1127 } # The Necropolis
+        cede_province_to_zul = { PROVINCE_ID = 2722 } # Bloodfire Ravine
+        cede_province_to_zul = { PROVINCE_ID = 2623 } # Dreadmire
+        cede_province_to_zul = { PROVINCE_ID = 2624 } # Zo'bal Ruins
+        cede_province_to_zul = { PROVINCE_ID = 2723 } # Xal'vor
+        cede_province_to_zul = { PROVINCE_ID = 2724 } # Sunken Path
+        cede_province_to_zul = { PROVINCE_ID = 2726 } # Natha'vor
+        cede_province_to_zul = { PROVINCE_ID = 2725 } # Ruined Fort
+        cede_province_to_zul = { PROVINCE_ID = 2727 } # The Far Reach
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            
+            set_country_flag = zuz_special_merc_2
+            set_variable = {
+                which = zul_strength
+                value = 7
+            }
+        }
+    }
+    # Zul Power - +80
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 80
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+
+        # Nazmir Islands
+        cede_province_to_zul = { PROVINCE_ID = 1130 } # Krag'wa's Burrow
+        cede_province_to_zul = { PROVINCE_ID = 2716 } # Frogmarsh
+        cede_province_to_zul = { PROVINCE_ID = 2717 } # Kragwa's Shore
+        cede_province_to_zul = { PROVINCE_ID = 1129 } # Nazwatha
+        cede_province_to_zul = { PROVINCE_ID = 2715 } # Gloom Hollow
+        cede_province_to_zul = { PROVINCE_ID = 2713 } # Naz'agal
+        cede_province_to_zul = { PROVINCE_ID = 2714 } # Sundered Span
+        cede_province_to_zul = { PROVINCE_ID = 1128 } # Torga's Rest
+        cede_province_to_zul = { PROVINCE_ID = 2712 } # Razorjaw Coast
+        cede_province_to_zul = { PROVINCE_ID = 2711 } # Mangrove Shore
+        cede_province_to_zul = { PROVINCE_ID = 2710 } # Blood Coast
+        cede_province_to_zul = { PROVINCE_ID = 2709 } # Carrion Nests
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2
+            set_variable = {
+                which = zul_strength
+                value = 8
+            }
+        }
+    }
+    # Zul Power - +90
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 90
+            }
+        }
+        
+        # Atal'dazar
+        2470 = {
+            spawn_infantry = {
+                AMOUNT = 4
+                TAG = ZUZ
+            }
+        }
+        # Garden of the Loa
+        1108 = {
+            spawn_infantry = {
+                AMOUNT = 20
+                TAG = ZUZ
+            }
+        }
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2    
+            
+            set_country_flag = zuz_special_merc_3
+            set_variable = {
+                which = zul_strength
+                value = 9
+            }
+        }
+    }
+    # Zul Power - +100
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
+            }
+        }
+        
+        ZUZ = {
+            add_treasury = 100
+            add_manpower = 2    
+            
+            set_variable = {
+                which = zul_strength
+                value = 10
+            }
+        }
+    }
+    
+    # Apply Civil War modifier
+    ZUZ = {
+        if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 1
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_one
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 2
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_two
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 3
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_three
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 4
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_four
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 5
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_five
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 6
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_six
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 7
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_seven
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 8
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_eight
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 9
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_nine
+                duration = 7200
+            }
+        }
+        else_if = {
+            limit = {
+                is_variable_equal = {
+                    which = zul_strength
+                    value = 10
+                }
+            }
+            add_country_modifier = {
+                name = zandalar_civil_war_ten
+                duration = 7200
+            }
+        }
+    }
+}
+
+cede_province_to_zul = {
+    if = {
+        limit = {
+            $PROVINCE_ID$ = {
+                country_or_non_sovereign_subject_holds = A78 # Zandalar
+            }
+        }
+        $PROVINCE_ID$ = {
+            cede_province = ZUZ
+            add_core = ZUZ
         }
     }
 }
