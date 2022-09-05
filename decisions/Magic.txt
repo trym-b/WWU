@@ -1,9 +1,38 @@
 country_decisions = {
-	invoke_domain_magic = {
+    # Magic Specialization
+    select_magic_specialization = {
+        major = yes
+        
+		potential = {
+			has_country_flag = allow_magic_specialization_decision
+		}
+		
+		allow = {
+			has_country_flag = allow_magic_specialization_decision
+		}
+		
+		effect = {
+            hidden_effect = {
+                clr_country_flag = allow_magic_specialization_decision
+            }
+			country_event = { id = wwu_magic.16 }
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+    # Arcane
+	invoke_arcane_magic = {
         major = yes
         
 		potential = {
 			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 1
+            }
 		}
 		
 		allow = {
@@ -11,7 +40,7 @@ country_decisions = {
 		}
 		
 		effect = {
-			country_event = { id = wwu_magic_menu.1 }
+			country_event = { id = wwu_magic_arcane_menu.1 }
             
             hidden_effect = {
                 if = {
@@ -43,50 +72,836 @@ country_decisions = {
 		}
 	}
     
-    # invoke_field_magic = {
-        # major = yes
+    # Holy
+    invoke_holy_magic = {
+        major = yes
         
-		# potential = {
-			# has_ruler_modifier = spellcaster_capabilities
-		# }
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 2
+            }
+		}
 		
-		# allow = {
-			# has_ruler_modifier = spellcaster_capabilities
-            # any_hired_mercenary_company = {
-                # template = wwu_magic_spellcaster_retinue
-            # }
-		# }
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
 		
-		# effect = {
-			# country_event = { id = wwu_magic_menu.20 }
+		effect = {
+			country_event = { id = wwu_magic_holy_menu.1 }
             
-            # hidden_effect = {
-                # if = {
-                    # limit = {
-                        # ai = yes
-                    # }
-                    # add_country_modifier = {
-                        # name = ai_spell_cooldown
-                        # duration = 3650
-                    # }
-                # }
-            # }
-		# }
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
 		
-		# ai_will_do = {
-			# factor = 1
+		ai_will_do = {
+			factor = 1
             
-            # modifier = {
-                # factor = 0
+            modifier = {
+                factor = 0
             
-                # has_country_modifier = ai_spell_cooldown
-            # }
+                has_country_modifier = ai_spell_cooldown
+            }
             
-            # modifier = {
-                # factor = 0
+            modifier = {
+                factor = 0
                 
-                # has_mana_0 = yes
-            # }
-		# }
-	# }
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Chi
+    invoke_chi_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 3
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_chi_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Voodoo
+    invoke_voodoo_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 4
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_voodoo_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Nature
+    invoke_nature_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 5
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_nature_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Undead
+    invoke_undead_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 6
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_undead_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Shaman
+    invoke_shaman_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 7
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_shaman_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Fel
+    invoke_fel_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 8
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_fel_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Draconic
+    invoke_draconic_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 9
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_draconic_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Old God
+    invoke_old_god_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 10
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_old_god_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Shadow
+    invoke_shadow_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 11
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_shadow_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Titan
+    invoke_titan_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 12
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_titan_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Runic
+    invoke_runic_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 13
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_runic_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Nightmare
+    invoke_nightmare_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 14
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_nightmare_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Earth
+    invoke_earth_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 15
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_earth_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Fire
+    invoke_fire_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 16
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_fire_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Water
+    invoke_water_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 17
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_water_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
+    
+    # Wind
+    invoke_wind_magic = {
+        major = yes
+        
+		potential = {
+			has_ruler_modifier = spellcaster_capabilities
+            is_variable_equal = {
+                which = magic_school
+                value = 18
+            }
+		}
+		
+		allow = {
+			has_ruler_modifier = spellcaster_capabilities
+		}
+		
+		effect = {
+			country_event = { id = wwu_magic_wind_menu.1 }
+            
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_spell_cooldown
+                        duration = 3650
+                    }
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+            
+                has_country_modifier = ai_spell_cooldown
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_mana_0 = yes
+            }
+		}
+	}
 }
