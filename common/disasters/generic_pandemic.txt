@@ -1,5 +1,7 @@
 pandemic_outbreak = {
 	potential = {
+        NOT = { has_country_flag = pandemic_outbreak_occurred }
+        
         # These cultures wouldn't be affected by a pandemic
         NOT = { culture_group = culture_group_old_ones }
         NOT = { culture_group = culture_group_aqir }
@@ -25,30 +27,9 @@ pandemic_outbreak = {
     
 	can_start = {
 		has_any_disaster = no
-        
-		OR = {
-            # First pandemic
-            AND = {
-                NOT = { has_country_flag = pandemic_outbreak_occurred }
-                grown_by_development = 250
-            }
-            # Further pandemics
-            AND = {
-                has_country_flag = pandemic_outbreak_occurred
-                total_development = 300
-                any_owned_province = {
-                    development = 20
-                }
-            }
-            hidden_trigger = {
-                # May occur for AI if any province they own is highly developed
-                AND = {
-                    ai = yes
-                    any_owned_province = {
-                        development = 30
-                    }
-                }
-            }
+		grown_by_development = 250
+        any_owned_province = {
+            development = 10
         }
 	}
 	
