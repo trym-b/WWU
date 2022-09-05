@@ -1,0 +1,766 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_yulon_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P63
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_the_jade_temple = {
+		icon = mission_yulon
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            # Jade Temple 
+            1722 = {
+                owned_by = ROOT
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1722
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            # Jade Temple
+            1722 = {
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+		}
+	}
+    
+    wwu_protect_the_forest_edge = {
+		icon = mission_shock_wave
+        position = 2
+        
+		required_missions = { 
+            wwu_secure_the_jade_temple
+        }
+        
+		trigger = {
+            # Grookin Groves
+            2079 = {
+                owned_by = ROOT
+                has_fort_building_trigger = yes
+            }
+            # Camp Nooka Nooka
+            2077 = {
+                owned_by = ROOT
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2079
+                province_id = 2077
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_jade_defence_network
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_cooperate_with_halfhill = {
+		icon = mission_tools
+        position = 4
+        
+		required_missions = { 
+            wwu_calm_the_jade_forest
+        }
+        
+		trigger = {
+            alliance_with = P84
+		}
+		provinces_to_highlight = {
+            owned_by = P84
+		}
+        
+		effect = {
+            region_valley_of_the_four_winds = {
+                limit = {
+                    NOT = { culture_group = culture_group_pandaren }
+                }
+                
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_secure_the_valley = {
+		icon = mission_pandaria
+        position = 5
+        
+		required_missions = { 
+            wwu_cooperate_with_halfhill
+        }
+        
+		trigger = {
+            region_valley_of_the_four_winds = {
+                type = all
+                owner = {
+                    culture_group = culture_group_pandaren
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_valley_of_the_four_winds
+            NOT = {
+                owner = {
+                    culture_group = culture_group_pandaren
+                }
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_pandaren_farmsteads
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_yulon_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P63
+	}
+    
+	has_country_shield = yes
+	
+	wwu_calm_the_jade_forest = {
+		icon = mission_monk_dragon_kick
+        position = 3
+        
+		required_missions = { 
+            wwu_protect_the_forest_edge 
+            wwu_oust_the_sauroks
+        }
+        
+		trigger = {
+            NOT = {
+                any_country = {
+                    capital_scope = {
+                        region = region_jade_forest
+                    }
+                    OR = {
+                        NOT = { is_subject_of = ROOT }
+                        NOT = { alliance_with = ROOT }
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                capital_scope = {
+                    region = region_jade_forest
+                }
+                OR = {
+                    NOT = { is_subject_of = ROOT }
+                    NOT = { alliance_with = ROOT }
+                }
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            custom_tooltip = UNLOCK_YULON_SPECIALIST
+            
+            hidden_effect = {
+                set_country_flag = unlock_yulon_specialist
+            }
+            
+			add_country_modifier = {
+                name = mission_forest_tranquility
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_assault_the_heart_of_fear = {
+		icon = mission_monk_jade_serpent_breath
+        position = 6
+        
+		required_missions = { 
+            wwu_secure_the_valley
+            wwu_secure_the_summit
+        }
+        
+		trigger = {
+            war_with = P34
+		}
+		provinces_to_highlight = {
+            owned_by = P34
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_pandaren_spirit
+                duration = 3650
+            }
+		}
+	}
+    
+    wwu_purge_the_mantids = {
+		icon = mission_mantid_symbol
+        position = 7
+        
+		required_missions = { 
+            wwu_assault_the_heart_of_fear
+        }
+        
+		trigger = {
+            NOT = {
+                any_country = {
+                    primary_culture = culture_mantid
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_mantid
+            }
+		}
+        
+		effect = {
+            add_prestige = 100
+            
+			add_country_modifier = {
+                name = mission_destruction_of_the_mantids
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_yulon_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P63
+	}
+    
+	has_country_shield = yes
+	
+	wwu_crush_the_gormali = {
+		icon = mission_monk_palm_strike
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            NOT = { exists = P67 } # Gormali
+		}
+		provinces_to_highlight = {
+            owned_by = P67
+		}
+        
+		effect = {
+			region_jade_forest = {
+                limit = {
+                    NOT = { culture_group = culture_group_pandaren }
+                }
+                
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_oust_the_sauroks = {
+		icon = mission_monk_hurricane_strike
+        position = 2
+        
+		required_missions = { wwu_crush_the_gormali }
+        
+		trigger = {
+            NOT = { exists = P71 } # Slitherscale
+		}
+		provinces_to_highlight = {
+            owned_by = P71
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_jade_strength
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_cooperate_with_shadopan = {
+		icon = mission_shado_pan
+        position = 4
+        
+		required_missions = { 
+            wwu_calm_the_jade_forest
+        }
+        
+		trigger = {
+            alliance_with = P37
+		}
+		provinces_to_highlight = {
+            owned_by = P37
+		}
+        
+		effect = {
+            region_kun_lai_summit = {
+                limit = {
+                    NOT = { culture_group = culture_group_pandaren }
+                }
+                
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_secure_the_summit = {
+		icon = mission_panda_monk
+        position = 5
+        
+		required_missions = { 
+            wwu_cooperate_with_shadopan
+        }
+        
+		trigger = {
+            region_kun_lai_summit = {
+                type = all
+                owner = {
+                    culture_group = culture_group_pandaren
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_kun_lai_summit
+            NOT = {
+                owner = {
+                    culture_group = culture_group_pandaren
+                }
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_pandaren_garrisons
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_yulon_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P63
+	}
+    
+	has_country_shield = yes
+	
+	wwu_befriend_the_hozen = {
+		icon = mission_pandaren_kite_1
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            any_country = {
+                primary_culture = culture_forest_hozen
+                alliance_with = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_forest_hozen
+            }
+		}
+        
+		effect = {
+			add_dip_power = 100
+		}
+	}
+    
+    wwu_send_the_hozen_gifts = {
+		icon = mission_reputation
+        position = 2
+        
+		required_missions = { 
+            wwu_befriend_the_hozen
+        }
+        
+		trigger = {
+            any_country = {
+                capital_scope = {
+                    region = region_jade_forest
+                }
+                primary_culture = culture_forest_hozen
+                alliance_with = ROOT
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_forest_hozen
+            }
+		}
+        
+		effect = {
+            hidden_effect = {
+                random_country = {
+                    limit = {
+                        capital_scope = {
+                            region = region_jade_forest
+                        }
+                        primary_culture = culture_forest_hozen
+                        alliance_with = ROOT
+                        has_opinion = {
+                            who = ROOT
+                            value = 180
+                        }
+                    }
+                    save_event_target_as = hozen_ally
+                }
+            }
+                
+            if = {
+                limit = {
+                    has_saved_event_target = hozen_ally
+                }
+                create_subject = {
+                    subject_type = vassal
+                    who = event_target:hozen_ally
+                }
+            }
+            else = {
+                tooltip = {
+                    random_country = {
+                        limit = {
+                            capital_scope = {
+                                region = region_jade_forest
+                            }
+                            primary_culture = culture_forest_hozen
+                            alliance_with = ROOT
+                        }
+                        ROOT = {
+                            create_subject = {
+                                subject_type = vassal
+                                who = PREV
+                            }
+                        }
+                    }
+                }
+            }
+		}
+	}
+    
+    wwu_discuss_the_emperorship = {
+		icon = mission_scroll
+        position = 3
+        
+		required_missions = { }
+        
+		trigger = {
+            emperor = {
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+        
+		effect = {
+			set_allow_female_emperor = yes
+		}
+	}
+    
+    wwu_extol_virtues_of_rule = {
+		icon = mission_monk_touch_of_karma
+        position = 4
+        
+		required_missions = {
+            wwu_discuss_the_emperorship
+        }
+        
+		trigger = {
+            all_elector = {
+                has_opinion = {
+                    who = ROOT
+                    value = 100
+                }
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_virtues_of_rule
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_secure_mogushan_vaults = {
+		icon = mission_keyofthreemoons
+        position = 5
+        
+		required_missions = { wwu_eliminate_the_mogu_remnants }
+        
+		trigger = {
+            NOT = { exists = P41 } # Mogu'shan
+            # Mogu'shan Terrace
+            1902 = {
+                owned_by = ROOT
+            }
+            # Valley of Emperors
+            1915 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                owner = {
+                    tag = P41 # Shan'ze
+                }
+                province_id = 1902 # Mogu'shan Terrace
+                province_id = 1915 # Valley of Emperors
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_destruction_of_mogushan_vaults
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_yulon_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P63
+	}
+    
+	has_country_shield = yes
+	
+	wwu_befriend_the_jinyu = {
+		icon = mission_pandaren_kite_2
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            any_country = {
+                primary_culture = culture_jinyu
+                alliance_with = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_jinyu
+            }
+		}
+        
+		effect = {
+			add_dip_power = 100
+		}
+	}
+    
+    wwu_send_the_jinyu_gifts = {
+		icon = mission_reputation
+        position = 2
+        
+		required_missions = { 
+            wwu_befriend_the_jinyu
+        }
+        
+		trigger = {
+            any_country = {
+                capital_scope = {
+                    region = region_jade_forest
+                }
+                primary_culture = culture_jinyu
+                alliance_with = ROOT
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_jinyu
+            }
+		}
+        
+		effect = {
+            hidden_effect = {
+                random_country = {
+                    limit = {
+                        capital_scope = {
+                            region = region_jade_forest
+                        }
+                        primary_culture = culture_jinyu
+                        alliance_with = ROOT
+                        has_opinion = {
+                            who = ROOT
+                            value = 180
+                        }
+                    }
+                    save_event_target_as = jinyu_ally
+                }
+            }
+                
+            if = {
+                limit = {
+                    has_saved_event_target = jinyu_ally
+                }
+                create_subject = {
+                    subject_type = vassal
+                    who = event_target:jinyu_ally
+                }
+            }
+            else = {
+                tooltip = {
+                    random_country = {
+                        limit = {
+                            capital_scope = {
+                                region = region_jade_forest
+                            }
+                            primary_culture = culture_jinyu
+                            alliance_with = ROOT
+                        }
+                        ROOT = {
+                            create_subject = {
+                                subject_type = vassal
+                                who = PREV
+                            }
+                        }
+                    }
+                }
+            }
+		}
+	}
+    
+    wwu_strike_back_against_the_mogu = {
+		icon = mission_hunter_running_shot
+        position = 3
+        
+		required_missions = { }
+        
+		trigger = {
+            OR = {
+                war_with = P81 # Dojani
+                war_with = P67 # Gormali
+                war_with = P41 # Mogu'shan
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                OR = {
+                    tag = P81 # Dojani
+                    tag = P67 # Gormali
+                    tag = P41 # Mogu'shan
+                }
+            }
+		}
+        
+		effect = {
+			add_mil_power = 250
+		}
+	}
+    
+    wwu_eliminate_the_mogu_remnants = {
+		icon = mission_monk_crane_kick
+        position = 4
+        
+		required_missions = { wwu_strike_back_against_the_mogu }
+        
+		trigger = {
+            NOT = { exists = P81 } # Dojani
+            NOT = { exists = P67 } # Gormali
+		}
+        
+		provinces_to_highlight = {
+            owner = {
+                OR = {
+                    tag = P81 # Dojani
+                    tag = P67 # Gormali
+                }
+            }
+		}
+        
+		effect = {
+            # Mogu'shan
+			P41 = {
+                every_owned_province = {
+                    add_permanent_claim = ROOT
+                }
+            }
+            # Shan'ze
+            P92 = {
+                every_owned_province = {
+                    add_permanent_claim = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_secure_the_throne_of_thunder = {
+		icon = mission_magnetic_rush
+        position = 5
+        
+		required_missions = { wwu_eliminate_the_mogu_remnants }
+        
+		trigger = {
+            NOT = { exists = P92 } # Shan'ze
+            
+            # Throne of Thunder
+            1890 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 1890 # Throne of Thunder
+                owner = {
+                    tag = P92 # Shan'ze
+                }
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_destruction_of_the_thunder_king
+                duration = -1
+            }
+		}
+	}
+}
