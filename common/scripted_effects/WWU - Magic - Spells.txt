@@ -1689,7 +1689,7 @@ ascendance_effect = {
         siege = 10
     }
     
-    country_event = { id = wwu_magic.20 days = 3650 }
+    country_event = { id = wwu_magic_effect.1 days = 3650 }
 }
 
 # Evocation
@@ -1713,6 +1713,107 @@ evocation_effect = {
 #-----------------------------
 # Holy
 #-----------------------------
+allied_favors_effect = {
+    # Legendary
+    if = {
+        limit = {
+            has_legendary_finesse = yes
+        }
+        
+        every_ally = {
+            ROOT = {
+                add_favors = {
+                    who = PREV
+                    amount = 50
+                }
+            }
+        }
+    }
+    # Epic
+    else_if = {
+        limit = {
+            has_epic_finesse = yes
+        }
+        
+        every_ally = {
+            ROOT = {
+                add_favors = {
+                    who = PREV
+                    amount = 40
+                }
+            }
+        }
+    }
+    # Rare
+    else_if = {
+        limit = {
+            has_rare_finesse = yes
+        }
+        
+        every_ally = {
+            ROOT = {
+                add_favors = {
+                    who = PREV
+                    amount = 30
+                }
+            }
+        }
+    }
+    # Common
+    else_if = {
+        limit = {
+            has_common_finesse = yes
+        }
+        
+        every_ally = {
+            ROOT = {
+                add_favors = {
+                    who = PREV
+                    amount = 20
+                }
+            }
+        }
+    }
+    # Poor
+    else_if = {
+        limit = {
+            has_poor_finesse = yes
+        }
+        
+        every_ally = {
+            ROOT = {
+                add_favors = {
+                    who = PREV
+                    amount = 10
+                }
+            }
+        }
+    }
+}
+
+judgment_effect = {
+    custom_tooltip = KILL_ENEMY_UNITS_IN_COUNTRY_TT
+    
+    hidden_effect = {
+        every_owned_province = {
+            kill_units = {
+                who = enemy
+            }
+        }
+    }
+}
+
+avatar_of_the_light_effect = {
+    define_general = {
+        name = "Avatar of the Light"
+        fire = 6
+        shock = 6
+        manuever = 6
+        siege = 6
+    }
+    
+    country_event = { id = wwu_magic_effect.2 days = 9125 } # 25 years
+}
 
 #-----------------------------
 # Chi

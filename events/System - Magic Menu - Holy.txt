@@ -91,109 +91,38 @@ country_event = {
     }
     
     #-------------------------
-    # Basic - Evocation
+    # Basic - Glimmer of Light
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.10.option.evocation
-        
-        trigger = {
-            has_poor_aptitude = yes
-            NOT = { corruption = 99 }
-            NOT = { has_country_modifier = evocation_cooldown }
-        }
-		
-        evocation_effect = yes
-        add_mana_1 = yes
-        
-        ai_chance = {
-            factor = 0
-        }
-	}
-    option = {
-		name = wwu_magic_holy_menu.10.option.evocation.invalid
-        
-        trigger = {
-            OR = {
-                corruption = 99
-                has_country_modifier = evocation_cooldown
-                NOT  = { has_poor_aptitude = yes }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                corruption = 99
-            }
-            custom_tooltip = CORRUPTION_IS_TOO_HIGH
-        }
-        else_if = {
-            limit = {
-                has_country_modifier = evocation_cooldown
-            }
-            custom_tooltip = SPELL_IS_ON_COOLDOWN
-        }
-        else_if = {
-            limit = {
-                NOT = { has_poor_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        tooltip = {
-            evocation_effect = yes
-            add_mana_1 = yes
-        }
-        
-        ai_chance = {
-            factor = 0
-        }
-	}
-    
-    #-------------------------
-    # Basic - Conjure Feast
-    #-------------------------
-    option = {
-		name = wwu_magic_holy_menu.10.option.conjure_feast
+		name = wwu_magic_holy_menu.10.option.glimmer_of_light
         
         trigger = {
             has_poor_aptitude = yes
             has_mana_1 = yes
             NOT = { 
                 has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
+                    MODIFIER = glimmer_of_light
                 }
             }
         }
 		
         lose_mana_1 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = conjure_feast
+            MODIFIER = glimmer_of_light
         }
         
         ai_chance = {
             factor = 1
-            
-            modifier = {
-                factor = 0
-                
-                num_of_free_diplomatic_relations = 3
-            }
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.10.option.conjure_feast.invalid
+		name = wwu_magic_holy_menu.10.option.glimmer_of_light.invalid
         
         trigger = {
             OR = {
                 has_less_than_1_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
+                    MODIFIER = glimmer_of_light
                 }
                 NOT = { has_poor_aptitude = yes }
             }
@@ -209,7 +138,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
+                    MODIFIER = glimmer_of_light
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -229,7 +158,7 @@ country_event = {
         tooltip = {
             lose_mana_1 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = conjure_feast
+                MODIFIER = glimmer_of_light
             }
         }
         
@@ -239,31 +168,31 @@ country_event = {
 	}
     
     #-------------------------
-    # Basic - Soothe Minds
+    # Basic - Execution Sentence
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.10.option.soothe_minds
+		name = wwu_magic_holy_menu.10.option.execution_sentence
         
         trigger = {
             has_mana_2 = yes
-            NOT = { stability = 3 }
+            corruption = 0.01
             has_poor_aptitude = yes
         }
 		
         lose_mana_2 = yes
-        stability_spell_effect = yes
+        remove_corruption_spell_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.10.option.soothe_minds.invalid
+		name = wwu_magic_holy_menu.10.option.execution_sentence.invalid
         
         trigger = {
             OR = {
                 has_less_than_2_mana = yes
-                stability = 3
+                NOT = { corruption = 0.01 }
                 NOT = { has_poor_aptitude = yes }
             }
         }
@@ -277,9 +206,9 @@ country_event = {
         }
         else_if = {
             limit = {
-                stability = 3
+                NOT = { corruption = 0.01 }
             }
-            custom_tooltip = STABILITY_IS_AT_MAX
+            custom_tooltip = CORRUPTION_IS_TOO_LOW
         }
         else_if = {
             limit = {
@@ -295,7 +224,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_2 = yes
-            stability_spell_effect = yes
+            remove_corruption_spell_effect = yes
         }
         
         ai_chance = {
@@ -304,40 +233,32 @@ country_event = {
 	}
     
     #-------------------------
-    # Basic - Polymorph
+    # Basic - Divine Favour
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.10.option.polymorph
+		name = wwu_magic_holy_menu.10.option.divine_favour
         
         trigger = {
             has_mana_2 = yes
+            NOT = { prestige = 100 }
             has_poor_aptitude = yes
-            any_owned_province = {
-                NOT = { culture = ROOT }
-            }
         }
 		
         lose_mana_2 = yes
-        polymorph_effect = yes
-        
-        country_event = { id = wwu_magic.30 }
+        prestige_spell_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.10.option.polymorph.invalid
+		name = wwu_magic_holy_menu.10.option.divine_favour.invalid
         
         trigger = {
             OR = {
-                has_less_than_2_mana = yes  
+                has_less_than_2_mana = yes
+                prestige = 100
                 NOT = { has_poor_aptitude = yes }
-                NOT = {
-                    any_owned_province = {
-                        NOT = { culture = ROOT }
-                    }
-                }
             }
         }
 		
@@ -350,13 +271,9 @@ country_event = {
         }
         else_if = {
             limit = {
-                NOT = {
-                    any_owned_province = {
-                        NOT = { culture = ROOT }
-                    }
-                }
+                prestige = 100
             }
-            custom_tooltip = NO_WRONG_CULTURE_PROVINCES
+            custom_tooltip = PRESTIGE_IS_TOO_HIGH
         }
         else_if = {
             limit = {
@@ -370,10 +287,9 @@ country_event = {
         
         # Preview
         custom_tooltip = PREVIEW_SPELL
-        
         tooltip = {
             lose_mana_2 = yes
-            custom_tooltip = POLYMORPH_FAKE_EFFECT
+            prestige_spell_effect = yes
         }
         
         ai_chance = {
@@ -410,24 +326,24 @@ country_event = {
     }
 
     #-------------------------
-    # Common - Apply Mass Invisibility
+    # Common - Fortifying Aura
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.11.option.apply_mass_invisibility
+		name = wwu_magic_holy_menu.11.option.fortifying_aura
         
         trigger = {
             has_common_aptitude = yes
             has_mana_1 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = fortifying_aura
                 }
             }
         }
 		
         lose_mana_1 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = apply_mass_invisibility
+            MODIFIER = fortifying_aura
         }
         
         ai_chance = {
@@ -441,14 +357,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.11.option.apply_mass_invisibility.invalid
+		name = wwu_magic_holy_menu.11.option.fortifying_aura.invalid
         
         trigger = {
             OR = {
                 NOT = { has_common_aptitude = yes }
                 has_less_than_1_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = fortifying_aura
                 }
             }
         }
@@ -469,7 +385,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = fortifying_aura
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -483,7 +399,7 @@ country_event = {
         tooltip = {
             lose_mana_1 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = apply_mass_invisibility
+                MODIFIER = fortifying_aura
             }
         }
         
@@ -493,10 +409,10 @@ country_event = {
 	}
     
     #-------------------------
-    # Common - Focus Magic
+    # Common - Divine Illumination
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.11.option.focus_magic
+		name = wwu_magic_holy_menu.11.option.divine_illumination
         
         trigger = {
             has_common_aptitude = yes
@@ -504,15 +420,14 @@ country_event = {
         }
 		
         lose_mana_2 = yes
-        army_tradition_spell_effect = yes
-        navy_tradition_spell_effect = yes
+        remove_war_exhaustion_spell_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.11.option.focus_magic.invalid
+		name = wwu_magic_holy_menu.11.option.divine_illumination.invalid
         
         trigger = {
             OR = {
@@ -542,8 +457,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_2 = yes
-            army_tradition_spell_effect = yes
-            navy_tradition_spell_effect = yes
+            remove_war_exhaustion_spell_effect = yes
         }
         
         ai_chance = {
@@ -552,39 +466,45 @@ country_event = {
 	}
     
     #-------------------------
-    # Common - Mirror Image
+    # Common - Light's Decree
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.10.option.mirror_image
+		name = wwu_magic_holy_menu.11.option.lights_decree
         
         trigger = {
-            has_mana_2 = yes
             has_common_aptitude = yes
-            any_owned_province = {
-                NOT = { culture = ROOT }
+            has_mana_2 = yes
+            NOT = {
+                has_modifier_spell_effect = {
+                    MODIFIER = lights_decree
+                }
             }
         }
 		
         lose_mana_2 = yes
-        mirror_image_effect = yes
-        
-        country_event = { id = wwu_magic.31 }
+        apply_modifier_spell_effect = {
+            MODIFIER = lights_decree
+        }
         
         ai_chance = {
             factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { is_at_war = yes }
+            }
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.10.option.mirror_image.invalid
+		name = wwu_magic_holy_menu.11.option.lights_decree.invalid
         
         trigger = {
             OR = {
-                has_less_than_2_mana = yes  
                 NOT = { has_common_aptitude = yes }
-                NOT = {
-                    any_owned_province = {
-                        NOT = { religion = ROOT }
-                    }
+                has_less_than_2_mana = yes
+                has_modifier_spell_effect = {
+                    MODIFIER = lights_decree
                 }
             }
         }
@@ -598,19 +518,17 @@ country_event = {
         }
         else_if = {
             limit = {
-                NOT = {
-                    any_owned_province = {
-                        NOT = { religion = ROOT }
-                    }
-                }
-            }
-            custom_tooltip = NO_WRONG_RELIGION_PROVINCES
-        }
-        else_if = {
-            limit = {
                 NOT = { has_common_aptitude = yes }
             }
             custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                has_modifier_spell_effect = {
+                    MODIFIER = lights_decree
+                }
+            }
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
         }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
@@ -618,10 +536,11 @@ country_event = {
         
         # Preview
         custom_tooltip = PREVIEW_SPELL
-        
         tooltip = {
             lose_mana_2 = yes
-            custom_tooltip = MIRROR_IMAGE_FAKE_EFFECT
+            apply_modifier_spell_effect = {
+                MODIFIER = lights_decree
+            }
         }
         
         ai_chance = {
@@ -662,21 +581,21 @@ country_event = {
     # Rare - Summon Portals
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.12.option.summon_portals
+		name = wwu_magic_holy_menu.12.option.endless_resolve
         
         trigger = {
             has_rare_aptitude = yes
-            has_mana_1 = yes
+            has_mana_2 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
+                    MODIFIER = endless_resolve
                 }
             }
         }
 		
-        lose_mana_1 = yes
+        lose_mana_2 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = summon_portals
+            MODIFIER = endless_resolve
         }
         
         ai_chance = {
@@ -684,14 +603,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.12.option.summon_portals.invalid
+		name = wwu_magic_holy_menu.12.option.endless_resolve.invalid
         
         trigger = {
             OR = {
                 NOT = { has_rare_aptitude = yes }
-                has_less_than_1_mana = yes
+                has_less_than_2_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
+                    MODIFIER = endless_resolve
                 }
             }
         }
@@ -699,7 +618,7 @@ country_event = {
         # Invalid Message
         if = {
             limit = {
-                has_less_than_1_mana = yes
+                has_less_than_2_mana = yes
             }
             custom_tooltip = MANA_IS_TOO_LOW
         }
@@ -712,7 +631,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
+                    MODIFIER = endless_resolve
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -724,9 +643,9 @@ country_event = {
         # Preview
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
-            lose_mana_1 = yes
+            lose_mana_2 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = summon_portals
+                MODIFIER = endless_resolve
             }
         }
         
@@ -736,26 +655,25 @@ country_event = {
 	}
     
     #-------------------------
-    # Rare - Display Prowess
+    # Rare - Ashes to Ashes
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.12.option.display_prowess
+		name = wwu_magic_holy_menu.12.option.ashes_to_ashes
         
         trigger = {
-            has_dlc = "Mandate of Heaven"
             has_rare_aptitude = yes
             has_mana_2 = yes
         }
 		
         lose_mana_2 = yes
-        splendor_spell_effect = yes
+        yearly_manpower_spell_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.12.option.display_prowess.invalid
+		name = wwu_magic_holy_menu.12.option.ashes_to_ashes.invalid
         
         trigger = {
             OR = {
@@ -785,7 +703,72 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_2 = yes
-            splendor_spell_effect = yes
+            yearly_manpower_spell_effect = yes
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Rare - Avenger's Might
+    #-------------------------
+    option = {
+		name = wwu_magic_holy_menu.12.option.avengers_might
+        
+        trigger = {
+            has_rare_aptitude = yes
+            has_mana_2 = yes
+            NOT = { absolutism = 100 }
+        }
+		
+        lose_mana_2 = yes
+        absolutism_spell_effect = yes
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_holy_menu.12.option.avengers_might.invalid
+        
+        trigger = {
+            OR = {
+                NOT = { has_rare_aptitude = yes }
+                has_less_than_2_mana = yes
+                absolutism = 100
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                absolutism = 100
+            }
+            custom_tooltip = ABSOLUTISM_IS_TOO_HIGH
+        }
+        else_if = {
+            limit = {
+                NOT = { has_rare_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_2 = yes
+            absolutism_spell_effect = yes
         }
         
         ai_chance = {
@@ -823,10 +806,10 @@ country_event = {
     }
 
     #-------------------------
-    # Epic - Transmute Gold
+    # Epic - Inspiring Beacon
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.13.option.transmute_gold
+		name = wwu_magic_holy_menu.13.option.inspiring_beacon
         
         trigger = {
             has_epic_aptitude = yes
@@ -834,14 +817,14 @@ country_event = {
         }
 		
         lose_mana_3 = yes
-        years_of_income_spell_effect = yes
+        legitimacy_spell_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.13.option.transmute_gold.invalid
+		name = wwu_magic_holy_menu.13.option.inspiring_beacon.invalid
         
         trigger = {
             OR = {
@@ -871,7 +854,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_3 = yes
-            years_of_income_spell_effect = yes
+            legitimacy_spell_effect = yes
         }
         
         ai_chance = {
@@ -880,46 +863,30 @@ country_event = {
 	}
     
     #-------------------------
-    # Epic - Temporal Sight
+    # Epic - Blessing of Wisdom
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.13.option.temporal_sight
+		name = wwu_magic_holy_menu.13.option.blessing_of_wisdom
         
         trigger = {
             has_epic_aptitude = yes
             has_mana_3 = yes
-            NOT = {
-                has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
-                }
-            }
         }
-
+		
         lose_mana_3 = yes
-        apply_modifier_spell_effect = {
-            MODIFIER = temporal_sight
-        }
+        reform_progress_spell_effect = yes
         
         ai_chance = {
             factor = 1
-            
-            modifier = {
-                factor = 0
-                
-                NOT = { corruption = 10 }
-            }
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.13.option.temporal_sight.invalid
+		name = wwu_magic_holy_menu.13.option.blessing_of_wisdom.invalid
         
         trigger = {
             OR = {
                 NOT = { has_epic_aptitude = yes }
                 has_less_than_3_mana = yes
-                has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
-                }
             }
         }
 		
@@ -936,14 +903,6 @@ country_event = {
             }
             custom_tooltip = APTITUDE_IS_TOO_LOW
         }
-        else_if = {
-            limit = {
-                has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
-                }
-            }
-            custom_tooltip = SPELL_IS_ON_COOLDOWN
-        }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
         }
@@ -952,9 +911,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_3 = yes
-            apply_modifier_spell_effect = {
-                MODIFIER = temporal_sight
-            }
+            reform_progress_spell_effect = yes
         }
         
         ai_chance = {
@@ -963,24 +920,24 @@ country_event = {
 	}
     
     #-------------------------
-    # Epic - Touch of the Magi
+    # Epic - Divine Tempest
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.13.option.touch_of_the_magi
+		name = wwu_magic_holy_menu.13.option.divine_tempest
         
         trigger = {
             has_epic_aptitude = yes
             has_mana_3 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
+                    MODIFIER = divine_tempest
                 }
             }
         }
 
         lose_mana_3 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = touch_of_the_magi
+            MODIFIER = divine_tempest
         }
         
         ai_chance = {
@@ -994,14 +951,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.13.option.touch_of_the_magi.invalid
+		name = wwu_magic_holy_menu.13.option.divine_tempest.invalid
         
         trigger = {
             OR = {
                 NOT = { has_epic_aptitude = yes }
                 has_less_than_3_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
+                    MODIFIER = divine_tempest
                 }
             }
         }
@@ -1022,7 +979,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
+                    MODIFIER = divine_tempest
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -1036,7 +993,7 @@ country_event = {
         tooltip = {
             lose_mana_3 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = touch_of_the_magi
+                MODIFIER = divine_tempest
             }
         }
         
@@ -1075,24 +1032,24 @@ country_event = {
     }
 
     #-------------------------
-    # Legendary - Alter Time
+    # Legendary - Protection of the Light
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.14.option.alter_time
+		name = wwu_magic_holy_menu.14.option.protection_of_the_light
         
         trigger = {
             has_legendary_aptitude = yes
             has_mana_4 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = protection_of_the_light
                 }
             }
         }
 
         lose_mana_4 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = alter_time
+            MODIFIER = protection_of_the_light
         }
         
         ai_chance = {
@@ -1100,14 +1057,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.14.option.alter_time.invalid
+		name = wwu_magic_holy_menu.14.option.protection_of_the_light.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
                 has_less_than_4_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = protection_of_the_light
                 }
             }
         }
@@ -1128,7 +1085,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = protection_of_the_light
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -1142,7 +1099,7 @@ country_event = {
         tooltip = {
             lose_mana_4 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = alter_time
+                MODIFIER = protection_of_the_light
             }
         }
         
@@ -1152,30 +1109,32 @@ country_event = {
 	}
     
     #-------------------------
-    # Legendary - Presence of Mind
+    # Legendary - Share the Burden
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.14.option.presence_of_mind
+		name = wwu_magic_holy_menu.14.option.share_the_burden
         
         trigger = {
             has_legendary_aptitude = yes
             has_mana_4 = yes
+            num_of_allies = 1
         }
 		
         lose_mana_4 = yes
-        monarch_power_spell_effect = yes
+        allied_favors_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.14.option.presence_of_mind.invalid
+		name = wwu_magic_holy_menu.14.option.share_the_burden.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
                 has_less_than_4_mana = yes
+                NOT = { num_of_allies = 1 }
             }
         }
 		
@@ -1185,6 +1144,12 @@ country_event = {
                 has_less_than_4_mana = yes
             }
             custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { num_of_allies = 1 }
+            }
+            custom_tooltip = HAS_NO_ALLY
         }
         else_if = {
             limit = {
@@ -1200,7 +1165,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_4 = yes
-            monarch_power_spell_effect = yes
+            allied_favors_effect = yes
         }
         
         ai_chance = {
@@ -1209,39 +1174,31 @@ country_event = {
 	}
     
     #-------------------------
-    # Cataclysmic - Mind Surge
+    # Cataclysmic - Judgment
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.14.option.mind_surge
+		name = wwu_magic_holy_menu.14.option.judgment
         
         trigger = {
             has_legendary_aptitude = yes
             has_mana_5 = yes
-            NOT = { adm_tech = 39 }
-            NOT = { dip_tech = 39 }
-            NOT = { mil_tech = 39 }
         }
 		
         lose_mana_5 = yes
         cataclysmic_effect = yes
-        random_tech_spell_effect = yes
+        judgment_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.14.option.mind_surge.invalid
+		name = wwu_magic_holy_menu.14.option.judgment.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
                 has_less_than_5_mana = yes
-                AND = {
-                    adm_tech = 39
-                    dip_tech = 39
-                    mil_tech = 39
-                }
             }
         }
 		
@@ -1258,16 +1215,6 @@ country_event = {
             }
             custom_tooltip = APTITUDE_IS_TOO_LOW
         }
-        else_if = {
-            limit = {
-                AND = {
-                    adm_tech = 39
-                    dip_tech = 39
-                    mil_tech = 39
-                }
-            }
-            custom_tooltip = TECH_IS_AT_MAX
-        }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
         }
@@ -1277,7 +1224,7 @@ country_event = {
         tooltip = {
             lose_mana_5 = yes
             cataclysmic_effect = yes
-            random_tech_spell_effect = yes
+            judgment_effect = yes
         }
         
         ai_chance = {
@@ -1286,20 +1233,20 @@ country_event = {
 	}
     
     #-------------------------
-    # Cataclysmic - Ascendance
+    # Cataclysmic - Avatar of the Light
     #-------------------------
     option = {
-		name = wwu_magic_holy_menu.14.option.ascendance
+		name = wwu_magic_holy_menu.14.option.avatar_of_the_light
         
         trigger = {
             has_legendary_aptitude = yes
             has_mana_5 = yes
-            NOT = { has_leader = "Ascended Commander" }
+            NOT = { has_leader = "Avatar of the Light" }
         }
 		
         lose_mana_5 = yes
         cataclysmic_effect = yes
-        ascendance_effect = yes
+        avatar_of_the_light_effect = yes
         
         ai_chance = {
             factor = 1
@@ -1312,13 +1259,13 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_holy_menu.14.option.ascendance.invalid
+		name = wwu_magic_holy_menu.14.option.avatar_of_the_light.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
                 has_less_than_5_mana = yes
-                has_leader = "Ascended Commander"
+                has_leader = "Avatar of the Light"
             }
         }
 		
@@ -1337,9 +1284,9 @@ country_event = {
         }
         else_if = {
             limit = {
-                has_leader = "Ascended Commander"
+                has_leader = "Avatar of the Light"
             }
-            custom_tooltip = ASCENDED_COMMANDER_ALREADY_PRESENT
+            custom_tooltip = AVATAR_OF_LIGHT_ALREADY_PRESENT
         }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
@@ -1350,7 +1297,7 @@ country_event = {
         tooltip = {
             lose_mana_5 = yes
             cataclysmic_effect = yes
-            ascendance_effect = yes
+            avatar_of_the_light_effect = yes
         }
         
         ai_chance = {
