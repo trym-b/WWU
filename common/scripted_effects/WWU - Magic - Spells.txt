@@ -1,3 +1,31 @@
+# List:
+# treasury_spell_effect
+# years_of_income_spell_effect
+# remove_inflation_spell_effect
+# mercantilism_spell_effect
+# adm_power_spell_effect
+# dip_power_spell_effect
+# mil_power_spell_effect
+# monarch_power_spell_effect
+# remove_corruption_spell_effect
+# prestige_spell_effect
+# random_tech_spell_effect
+# splendor_spell_effect
+# stability_spell_effect
+# remove_war_exhaustion_spell_effect
+# army_tradition_spell_effect
+# navy_tradition_spell_effect
+# army_professionalism_spell_effect
+# manpower_spell_effect
+# yearly_manpower_spell_effect
+# sailors_spell_effect
+# yearly_sailors_spell_effect
+# absolutism_spell_effect
+# legitimacy_spell_effect
+# meritocracy_spell_effect
+# reform_progress_spell_effect
+# religious_power_spell_effect
+
 #------------------------
 # Utility
 #------------------------
@@ -330,6 +358,7 @@ evocation_cooldown_effect = {
 #-----------------------------
 # Shared
 #-----------------------------
+
 # Adds modifier based on ruler Aptitude, with its duration determined by Concentration, and its potency by Finesse
 apply_modifier_spell_effect = {    
     scaled_magic_modifier_effect = {
@@ -700,6 +729,60 @@ monarch_power_spell_effect = {
         add_adm_power = 20
         add_dip_power = 20
         add_mil_power = 20
+    }
+}
+
+# Adds ADM/DIP/MIL power based on ruler Finesse (weak)
+weak_monarch_power_spell_effect = {
+    # Legendary
+    if = {
+        limit = {
+            has_legendary_finesse = yes
+        }
+        
+        add_adm_power = 50
+        add_dip_power = 50
+        add_mil_power = 50
+    }
+    # Epic
+    else_if = {
+        limit = {
+            has_epic_finesse = yes
+        }
+        
+        add_adm_power = 40
+        add_dip_power = 40
+        add_mil_power = 40
+    }
+    # Rare
+    else_if = {
+        limit = {
+            has_rare_finesse = yes
+        }
+        
+        add_adm_power = 30
+        add_dip_power = 30
+        add_mil_power = 30
+    }
+    # Common
+    else_if = {
+        limit = {
+            has_common_finesse = yes
+        }
+        
+        add_adm_power = 20
+        add_dip_power = 20
+        add_mil_power = 20
+    }
+    # Poor
+    else_if = {
+        limit = {
+            has_poor_finesse = yes
+        }
+        
+        add_adm_power = 10
+        add_dip_power = 10
+        add_mil_power = 10
     }
 }
 
@@ -1818,6 +1901,119 @@ avatar_of_the_light_effect = {
 #-----------------------------
 # Chi
 #-----------------------------
+expel_harm_effect = {
+    random_owned_province = {
+        spawn_rebels = {
+            type = pretender_rebels
+            size = 1
+        }
+    }
+    
+    custom_tooltip = EVOCATION_TT # This can be used for all types of evocation
+    
+    hidden_effect = {
+        evocation_cooldown_effect = {
+            MODIFIER            = expel_harm_cooldown
+            DURATION_POOR       = 1825
+            DURATION_COMMON     = 1460
+            DURATION_RARE       = 1095
+            DURATION_EPIC       = 730
+            DURATION_LEGENDARY  = 365
+        }
+    }
+}
+
+ring_of_peace_effect = {
+    if = {
+        limit = {
+            has_legendary_concentration = yes
+        }
+        
+        custom_tooltip = PREVENT_WAR_TT_10
+        hidden_effect = {
+            add_ruler_modifier = {
+                name = chi_prevent_war
+                duration = 3650
+                hidden = yes
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_epic_concentration = yes
+        }
+        
+        custom_tooltip = PREVENT_WAR_TT_8
+        hidden_effect = {
+            add_ruler_modifier = {
+                name = chi_prevent_war
+                duration = 2920
+                hidden = yes
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_rare_concentration = yes
+        }
+        
+        custom_tooltip = PREVENT_WAR_TT_6
+        hidden_effect = {
+            add_ruler_modifier = {
+                name = chi_prevent_war
+                duration = 2190
+                hidden = yes
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_common_concentration = yes
+        }
+        
+        custom_tooltip = PREVENT_WAR_TT_4
+        hidden_effect = {
+            add_ruler_modifier = {
+                name = chi_prevent_war
+                duration = 1460
+                hidden = yes
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_poor_concentration = yes
+        }
+        
+        custom_tooltip = PREVENT_WAR_TT_2
+        hidden_effect = {
+            add_ruler_modifier = {
+                name = chi_prevent_war
+                duration = 730
+                hidden = yes
+            }
+        }
+    }
+}
+
+chi_burst_effect = {
+    every_owned_province = {
+        limit = {
+            has_siege = yes
+        }
+        kill_units = {
+            who = enemy
+        }
+    }
+}
+
+touch_of_death_effect = {
+    custom_tooltip = TOUCH_OF_DEATH_TT
+    
+    hidden_effect = {
+        set_country_flag = touch_of_death
+    }
+}
 
 #-----------------------------
 # Voodoo
