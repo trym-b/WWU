@@ -1,0 +1,372 @@
+estate_dragonflight_draconic_governance = {
+	icon = privilege_scroll
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 20
+	loyalty = 0.1
+	influence = 0.1
+    
+	can_select = {
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	benefits = {
+		governing_capacity = 250
+	}
+	ai_will_do = {
+		factor = 25
+		modifier = {
+			factor = 1.4
+			num_of_territories = 5
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 10
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 15
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 25 }
+				estate_influence = {
+					estate = estate_dragonflight
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_dragonflight_draconic_governance }
+		}
+		modifier = {
+			factor = 0
+			NOT = { num_of_territories = 1 }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 40 }
+				AND = {
+					NOT = { crown_land_share = 60 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_dragonflight_draconic_governance }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 30 }
+				AND = {
+					NOT = { crown_land_share = 50 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_dragonflight_draconic_governance }
+		}
+	}
+}
+
+estate_dragonflight_adherence_to_the_aspects = {
+	icon = privilege_dragon_gem
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.1
+	influence = 0.1
+    
+	penalties = {
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_dragonflight_wisdom_of_the_wyrms = {
+	icon = privilege_malygos
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+		
+	}
+	benefits = {
+		advisor_cost = -0.15
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+estate_dragonflight_extraordinary_perception = {
+	icon = privilege_aeonus
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+	}
+	on_granted = {
+	}
+    penalties = {
+		stability_cost_modifier = 0.33
+	}
+	benefits = {
+        technology_cost = -0.1
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_creatures_of_magic = {
+	icon = privilege_cyanigosa
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        has_country_modifier = spellcaster_capabilities
+	}
+	on_granted = {
+        custom_tooltip = MANA_REGENERATION_TT
+	}
+	penalties = {
+        
+	}
+	benefits = {
+        
+	}
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_whelp_flight_training = {
+	icon = privilege_dragon_charge
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        
+	}
+	on_granted = {
+	}
+	modifier_by_land_ownership = {
+		movement_speed = 0.5
+	}
+	penalties = {
+        global_regiment_cost = 0.1
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_protected_brooding_grounds = {
+	icon = privilege_dragon_roar
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        
+	}
+	on_granted = {
+	}
+	modifier_by_land_ownership = {
+		global_manpower_modifier = 0.4
+	}
+	penalties = {
+        land_maintenance_modifier = 0.15
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_dragonfire = {
+	icon = privilege_demolish
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.0
+	influence = 0.0
+    
+	cooldown_years = 5
+    
+	can_select = {
+		any_owned_province = {
+            has_siege = yes
+        }
+	}
+	on_granted = {
+		random_owned_province = {
+            limit = {
+                has_siege = yes
+            }
+            
+            kill_units = {
+                who = enemy
+            }
+        }
+	}
+	penalties = {
+		ae_impact = 0.1
+	}
+    
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_dragonflight_egg_incubators = {
+	icon = privilege_dragon_egg
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	cooldown_years = 5
+    
+	can_select = {
+		NOT = { army_size_percentage = 1.0 }
+	}
+	on_granted = {
+		random_owned_province = {
+            custom_tooltip = SPAWN_DRAGON_CAVALRY_TT
+            
+            hidden_effect = {
+                spawn_cavalry = {
+                    AMOUNT = 5
+                    TAG = ROOT
+                }
+            }
+        }
+	}
+	penalties = {
+		army_tradition_decay = 0.02
+	}
+    
+	benefits = {
+	}
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_dragonflight_ambition_of_the_drakes = {
+	icon = privilege_drake
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_dragonflight_discretion_of_the_dragons }
+        NOT = { has_estate_privilege = estate_dragonflight_foresight_of_the_wyrms }
+	}
+	on_granted = {
+        
+	}
+	benefits = {
+        core_creation = -0.2
+	}
+	penalties = {
+        
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_discretion_of_the_dragons = {
+	icon = privilege_eregos
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_dragonflight_ambition_of_the_drakes }
+        NOT = { has_estate_privilege = estate_dragonflight_foresight_of_the_wyrms }
+	}
+	on_granted = {
+        
+	}
+	benefits = {
+        free_policy = 1
+        embracement_cost = -0.25
+	}
+	penalties = {
+        
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_dragonflight_foresight_of_the_wyrms = {
+	icon = privilege_infinite_dragon
+    
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+        NOT = { has_estate_privilege = estate_dragonflight_ambition_of_the_drakes }
+        NOT = { has_estate_privilege = estate_dragonflight_discretion_of_the_dragons }
+	}
+	on_granted = {
+        
+	}
+	benefits = {
+        ae_impact = -0.2
+        diplomatic_annexation_cost = -0.2
+	}
+	penalties = {
+        
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}

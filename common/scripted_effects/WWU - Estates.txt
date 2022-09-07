@@ -224,6 +224,28 @@ each_estate_effect = {
 			$loa_effect$
 		]
 	}
+    if = {
+		limit = {
+			has_estate = estate_dragonflight
+		}
+		[[effect]
+			$effect$
+		]
+		[[dragonflight_effect]
+			$dragonflight_effect$
+		]
+	}
+    if = {
+		limit = {
+			has_estate = estate_underling
+		}
+		[[effect]
+			$effect$
+		]
+		[[underling_effect]
+			$underling_effect$
+		]
+	}
 }
 
 #Estate Privilege on_action effects
@@ -823,6 +845,15 @@ scaled_estate_skywall_land_share_effect = {
 scaled_estate_loa_land_share_effect = {
 	scaled_estate_land_share_add_effect = { estate = estate_loa }
 }
+
+scaled_estate_dragonflight_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_dragonflight }
+}
+
+scaled_estate_underling_land_share_effect = {
+	scaled_estate_land_share_add_effect = { estate = estate_underling }
+}
+
 #Based on those above, but you can choose which estate you use
 #example of usage: scaled_estate_land_share_add_effect = { estate = estate_nobility }
 scaled_estate_land_share_add_effect = {
@@ -1358,6 +1389,44 @@ spawn_rebels_from_unhappy_estate = {
 				as_if_faction = yes
 			}
 		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_dragonflight
+					NOT = {
+						estate_loyalty = {
+							estate = estate_dragonflight
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_dragonflight
+				as_if_faction = yes
+			}
+		}
+        1 = {
+			trigger = {
+				owner = {
+					has_estate = estate_underling
+					NOT = {
+						estate_loyalty = {
+							estate = estate_underling
+							loyalty = 30
+						}
+					}
+				}
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = $size$
+				estate = estate_underling
+				as_if_faction = yes
+			}
+		}
 	}
 }
 
@@ -1561,6 +1630,26 @@ pick_random_estate_if_present = {
 			set_country_flag = estate_loa_$flag$
 			[[estate_action]
 			$estate_action$ = estate_loa
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_dragonflight
+				NOT = { has_country_flag = estate_dragonflight_$flag$ }
+			}
+			set_country_flag = estate_dragonflight_$flag$
+			[[estate_action]
+			$estate_action$ = estate_dragonflight
+			]
+		}
+        1 = { 
+			trigger = {
+				has_estate = estate_underling
+				NOT = { has_country_flag = estate_underling_$flag$ }
+			}
+			set_country_flag = estate_underling_$flag$
+			[[estate_action]
+			$estate_action$ = estate_underling
 			]
 		}
 	}
@@ -2243,6 +2332,44 @@ give_land_shares_to_estate_impulse = {
 			share = 1
 		}
 	}
+    if = {
+		limit = {
+			has_estate = estate_dragonflight
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_dragonflight
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
+    if = {
+		limit = {
+			has_estate = estate_underling
+			NOT = { 
+				estate_territory = {
+					estate = $estate$
+					territory = $share$
+				} 
+			}
+		}
+		change_estate_land_share = {
+			estate = estate_underling
+			share = -1
+		}
+		change_estate_land_share = {
+			estate = $estate$
+			share = 1
+		}
+	}
 }
 # Take equal amount of shares from each estate and crown land and give them to another $estate$ until they have $share$ amount of share.
 give_land_shares_to_estate = {
@@ -2405,6 +2532,20 @@ select_estate_target = {
             
             set_country_flag = estate_target_loa
         }
+        10 = {
+            trigger = {
+                has_estate = estate_dragonflight
+            }
+            
+            set_country_flag = estate_target_dragonflight
+        }
+        10 = {
+            trigger = {
+                has_estate = estate_underling
+            }
+            
+            set_country_flag = estate_target_underling
+        }
     }
 }
 
@@ -2429,6 +2570,8 @@ clear_estate_target = {
     set_country_flag = estate_target_deepholm
     set_country_flag = estate_target_skywall
     set_country_flag = estate_target_loa
+    set_country_flag = estate_target_dragonflight
+    set_country_flag = estate_target_underling
 }
 
 grant_land_to_estate_target = {
@@ -2551,6 +2694,18 @@ grant_land_to_estate_target = {
         estate_target_loa = {
             change_estate_land_share = {
                 estate = estate_loa
+                share = $AMOUNT$
+            }
+        }
+        estate_target_dragonflight = {
+            change_estate_land_share = {
+                estate = estate_dragonflight
+                share = $AMOUNT$
+            }
+        }
+        estate_target_underling = {
+            change_estate_land_share = {
+                estate = estate_underling
                 share = $AMOUNT$
             }
         }
@@ -2677,6 +2832,18 @@ apply_loyalty_change_to_estate_target = {
         estate_target_loa = {
             add_estate_loyalty = {
                 estate = estate_loa
+                loyalty = $AMOUNT$
+            }
+        }
+        estate_target_dragonflight = {
+            add_estate_loyalty = {
+                estate = estate_dragonflight
+                loyalty = $AMOUNT$
+            }
+        }
+        estate_target_underling = {
+            add_estate_loyalty = {
+                estate = estate_underling
                 loyalty = $AMOUNT$
             }
         }
