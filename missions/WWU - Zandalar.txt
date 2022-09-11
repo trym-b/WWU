@@ -568,7 +568,7 @@ wwu_zandalar_column_3 = {
                 trade_goods = warbeasts
             }
             
-            army_size = 30
+            army_size = 50
             
             OR = {
                 cavalry_fraction = 0.5
@@ -883,44 +883,130 @@ wwu_zandalar_column_4 = {
             is_at_war = no
             
             OR = {
-                # Heart of Darkness
-                1122 = {
+			AND = {
+                area_primal_wetlands = {
                     is_claim = ROOT
                 }
-                area_heart_of_darkness = {
+				area_primal_wetlands = {
+                    type = all
+                    owned_by = NAZ
+                }
+				}
+                area_primal_wetlands = {
                     type = all
                     owned_by = ROOT
                 }
-                area_the_necropolis = {
-                    type = all
-                    owned_by = ROOT
-                }
+			NOT = { exists = NAZ }
             }
 		}
         
 		effect = {
             if = {
                 limit = {
+				OR = {
                     NOT = { exists = NAZ } # Nazmir
+					area_primal_wetlands = {
+                    type = all
+                    owned_by = A78
                 }
-                add_adm_power = 25
-                add_dip_power = 25
-                add_mil_power = 25
-            }
-            else = {
-                custom_tooltip = zandalari_tooltip_four_three_a
-                
-                # Nazmir
-                NAZ = {
-                    set_country_flag = wwu_zandalar_8 
-                    # VAWSER: this is used to trigger an event, since the event lacks the need for indirect firing
-                    # I'd recommend instead using - country_event = { id = wwu_zandalar.8 days = 30 } - as that is clearer to the player
                 }
+				}
+                add_adm_power = 100
+                add_dip_power = 100
+                add_mil_power = 100
             }
+
+            if = {
+                limit = {
+				and = {
+                    NAZ = {
+					ai = yes }
+					OR = {
+				region_zuldazar = {
+					owned_by = NAZ
+                }
+				area_primal_wetlands = {
+					owned_by = NAZ
+			}
+			}
+                }
+				}
+				
+           random_list = {
+            60 = {
+			    region_nazmir = {
+				limit = {
+				owned_by = NAZ}
+                add_permanent_claim = ROOT
+				}
+				region_zuldazar = {
+				limit = {
+				owned_by = NAZ}
+                add_permanent_claim = ROOT
+				}
+	declare_war_with_cb = {
+    who = NAZ
+    casus_belli = cb_against_evil
+}
+            }
+            40 = {
+				region_nazmir = {
+				limit = {
+				owned_by = NAZ}
+                add_permanent_claim = ROOT
+				}
+			    area_primal_wetlands = {
+				limit = {
+				owned_by = NAZ}
+                cede_province = ROOT
+				}
+				region_zuldazar = {
+				limit = {
+				owned_by = NAZ}
+                cede_province = ROOT
+				}
+				add_truce_with = NAZ
+            }
+			}
+			}
+            if = {
+                limit = {
+				and = {
+                    NAZ = {
+					ai = no }
+					OR = {
+				region_zuldazar = {
+					owned_by = NAZ
+                }
+				area_primal_wetlands = {
+					owned_by = NAZ
+			}
+			}
+                }
+				}
+				
+			    region_nazmir = {
+				limit = {
+				owned_by = NAZ}
+                add_permanent_claim = ROOT
+				}
+				region_zuldazar = {
+				limit = {
+				owned_by = NAZ}
+                add_permanent_claim = ROOT
+				}
+	declare_war_with_cb = {
+    who = NAZ
+    casus_belli = cb_against_evil
+}
+            }
+
+			}
+			ai_weight   = { factor = 1 }
 		}
         
-        ai_weight   = { factor = 1 }
-	}
+        
+	
 	
     # End of Nazmir
 	wwu_zan_four_four = {
@@ -931,21 +1017,17 @@ wwu_zandalar_column_4 = {
 		trigger = {
             NOT = { exists = NAZ } # Nazmir
                         
-            area_heart_of_darkness = {
-                type = all
-                owned_by = ROOT
-            }
-            area_the_necropolis = {
-                type = all
-                owned_by = ROOT
-            }
+          			region_nazmir = {
+					type = all
+					owned_by = NAZ
+                }
+
 		}
         
 		effect = {
             add_legitimacy = 10
-            add_prestige = 15
+            add_prestige = 10
             
-            custom_tooltip = zandalari_tooltip_four_four_a
             
 			add_country_modifier = {
                 name = mission_zandalar_blood_defeat
@@ -965,38 +1047,37 @@ wwu_zandalar_column_4 = {
 		trigger = {
             stability = 1
             is_at_war = no
-            
-            area_heart_of_darkness = {
-                type = all
-                
-                is_core = ROOT
-                owned_by = ROOT
-            }
+            army_size = 50
+			monthly_income = 50
+			development_in_provinces = {
+			value = 325
+			continent = continent_zandalar
+			}
+
 		}
         
 		effect = {
             custom_tooltip = zandalari_tooltip_four_five_a
-            
+            hidden_effect = {
             every_country = {
                 limit = {
                     # Is on Zandalar
                     capital_scope = { 
                         continent = continent_zandalar
                     }
-                    
+                    # Is not friend with Zandalar via mission
+					NOT = {has_country_flag = wwu_friend_with_zandalari}
+					
                     # Any owned province is claimed by Zandalar
-                    any_owned_province = { 
-                        is_claim = ROOT 
-                    }
                     
                     # Is not Zandalar itself
                     NOT = { tag = ROOT }
                 }
                 
-                set_country_flag = wwu_zandalar_9
-                # VAWSER: this is used to trigger an event, since the event lacks the need for indirect firing
-                # I'd recommend instead using - country_event = { id = wwu_zandalar.9 days = 30 } - as that is clearer to the player
+                country_event = { id = wwu_zandalar.9 }
+
             }
+			}
 		}
         
         ai_weight   = { factor = 1 }
@@ -1035,9 +1116,7 @@ wwu_zandalar_column_4 = {
 			}
 		}
         
-		effect = {
-            custom_tooltip = zandalari_tooltip_four_six_a
-            
+		effect = {   
 			add_country_modifier = {
                 name = mission_zandalar_unification
                 duration = 18250
@@ -1278,7 +1357,7 @@ wwu_zandalar_column_5 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zandalari_tooltip_five_nine_b
-				has_country_flag = zandalari_cataclism_end
+				has_country_flag = zandalari_troll_meeting_end_mission
 			}
 		}
 		
@@ -1286,37 +1365,73 @@ wwu_zandalar_column_5 = {
             if = {
                 limit = {
                     AND = {
-                        NOT = { has_country_flag = zandalari_cataclism_bad }
-                        NOT = { has_country_flag = zandalari_cataclism_good }
+                        NOT = { has_country_flag = zandalari_troll_meeting_end_mission }
                     }
                 }
                 
                 custom_tooltip = zandalari_tooltip_five_nine_a
 			}
-            
             if = {
                 limit = {
-                    has_country_flag = zandalari_cataclism_bad
+                    has_country_flag = zandalari_troll_meeting_end_mission
                 }
-                
-                add_stability = 1
-            }
-            
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_good
-                }
-                
-                add_stability = 1
-                add_adm_power = 50
-                add_dip_power = 50
-                add_mil_power = 50
                 
                 add_country_modifier = {
-                    name = zandalari_cataclism_restore
-                    duration = 3650
+                    name = zandalari_meeting_reward_zandalar
+                    duration = -1
                 }
             }
+            
+            if = {
+                limit = {
+                    has_country_flag = zandalari_troll_meeting_end_mission
+                }
+                
+                add_country_modifier = {
+                    name = zandalari_meeting_reward_drakkari
+                    duration = 10950
+                }
+				add_manpower = 5000
+				add_sailors = 500
+            }
+            if = {
+                limit = {
+                    has_country_flag = zandalari_troll_meeting_end_mission
+                }
+                
+                add_country_modifier = {
+                    name = zandalari_meeting_reward_farraki
+                    duration = 10950
+                }
+				add_manpower = 5000
+				add_sailors = 500
+            }
+            if = {
+                limit = {
+                    has_country_flag = zandalari_troll_meeting_end_mission
+                }
+                
+                add_country_modifier = {
+                    name = zandalari_meeting_reward_gurubashi
+                    duration = 10950
+                }
+				add_manpower = 5000
+				add_sailors = 500
+            }
+            if = {
+                limit = {
+                    has_country_flag = zandalari_troll_meeting_end_mission
+                }
+                
+                add_country_modifier = {
+                    name = zandalari_meeting_reward_amani
+                    duration = 10950
+                }
+				add_manpower = 5000
+				add_sailors = 500
+            }
+			
+			
         }
         
         ai_weight   = { factor = 1 }
@@ -1331,11 +1446,22 @@ wwu_zandalar_column_5 = {
 		}
 		
 		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = zandalari_tooltip_five_ten_b
-				has_country_flag = zandalari_cataclism_end
+			OR = {
+			any_country = {
+                    capital_scope = { 
+                        area = area_throne_of_thunder
+                    }
+                    culture_group = culture_group_mogu
+                    alliance_with = A78
+                }
+                area_throne_of_thunder = {
+			    type = all
+				owned_by = ROOT
+				}
 			}
-		}
+                
+            }
+		
 		
 		effect = {
             if = {
