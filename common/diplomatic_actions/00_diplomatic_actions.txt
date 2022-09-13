@@ -552,6 +552,16 @@ integrationaction = {
 		}
 	}
     
+    condition = {
+		tooltip = PUINTEGRATIONIMPOSSIBLE
+		potential = {
+			has_government_attribute = cannot_integrate_personal_unions
+		}
+		allow = {
+			NOT = { has_government_attribute = cannot_integrate_personal_unions }
+		}
+	}
+    
     # Block early annexation by AI nations
     condition = {
 		tooltip = AI_BLOCK_ANNEXATION
@@ -1042,6 +1052,26 @@ abandon_union_action = {
             log = "DEBUG - [Root.GetName], [From.GetName] - abandon_union_action"
         }
     }
+    
+    condition = {
+		potential = {
+		}
+		allow = {
+			ROOT = {
+				senior_union_with = FROM
+				is_at_war = no
+			}
+		}
+	}
+	condition = {
+		tooltip = PUABANDONINGIMPOSSIBLE
+		potential = {
+			has_government_attribute = cannot_abandon_personal_unions
+		}
+		allow = {
+			NOT = { has_government_attribute = cannot_abandon_personal_unions }
+		}
+	}
 }
 
 takeondebt = {
