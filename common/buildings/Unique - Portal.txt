@@ -34,12 +34,24 @@ wow_portal = {
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - wow_portal "
 		}
+        
+        add_development_from_building = {
+			building = wow_portal
+			type = manpower
+			value = 1
+		}
 	}
     
 	on_destroyed = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - wow_portal destroyed"
+		}
+        
+        remove_development_from_building = {
+			building = wow_portal
+			type = manpower
+			value = 1
 		}
         
 		if = {

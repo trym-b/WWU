@@ -1,3 +1,74 @@
+#Province effect - used for buildings
+add_development_from_building = {
+	if = {
+		limit = {
+			FROM = { has_country_flag = improve_development_on_buildings_built }
+			NOT = { gained_development_from_building = { building = $building$ } }
+		}
+		add_base_$type$ = $value$
+		hidden_effect = {
+			set_province_flag = built_dev_$building$
+		}
+	}
+}
+#Province effect - used for buildings
+add_development_from_upgrading_or_building = {
+	if = {
+		limit = {
+			FROM = { has_country_flag = improve_development_on_buildings_built }
+			NOT = { gained_development_from_building = { building = $building$ } }
+		}
+		if = {
+			limit = { has_province_flag = built_dev_$obsolete_building$ }
+			add_base_$type$ = $upgrade_value$
+		}
+		else = {
+			add_base_$type$ = $value$
+		}
+		hidden_effect = {
+			set_province_flag = built_dev_$building$
+		}
+	}
+}
+
+#Province effect - used for buildings
+remove_development_from_building = {
+	if = {
+		limit = {
+			FROM = { has_country_flag = improve_development_on_buildings_built }
+			gained_development_from_building = { building = $building$ }
+		}
+		add_base_$type$ = -$value$
+		if = {
+			limit = {
+				NOT = { base_$type$ = 1 }
+			}
+			set_base_$type$ = 1
+		}
+		hidden_effect = {
+			clr_province_flag = built_dev_$building$
+		}
+	}
+}
+
+# Country
+unlock_development_from_building = {
+    [[add]
+        custom_tooltip = UNLOCK_DEVELOPMENT_FROM_BUILDING_TT
+        
+        hidden_effect = {
+            set_country_flag = improve_development_on_buildings_built
+        }
+    ]
+    [[remove]
+        custom_tooltip = REMOVE_DEVELOPMENT_FROM_BUILDING_TT
+        
+        hidden_effect = {
+            clr_country_flag = improve_development_on_buildings_built
+        }
+    ]
+}
+
 #---------------------------
 # Province scope
 #---------------------------

@@ -27,7 +27,22 @@ wow_market_1 = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_market_1 "
+        }
+        
+        add_development_from_building = {
+			building = wow_market_1
+			type = production
+			value = 1
 		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_market_1
+			type = production
+			value = 1
+		}
+	}
+	on_obsolete = {
 	}
     
 	ai_will_do = {
@@ -108,6 +123,23 @@ wow_market_2 = {
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_market_2 "
 		}
+        
+		add_development_from_upgrading_or_building = {
+			building = wow_market_2
+			obsolete_building = wow_market_1
+			type = production
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_market_2
+			type = production
+			value = 2
+		}
+	}
+	on_obsolete = {
 	}
     
 	ai_will_do = {
@@ -188,6 +220,23 @@ wow_market_3 = {
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_market_3 "
 		}
+        
+		add_development_from_upgrading_or_building = {
+			building = wow_market_3
+			obsolete_building = wow_market_2
+			type = production
+			value = 3
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_market_3
+			type = production
+			value = 3
+		}
+	}
+	on_obsolete = {
 	}
     
 	ai_will_do = {

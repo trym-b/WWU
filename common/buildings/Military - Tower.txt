@@ -21,16 +21,33 @@ wow_tower_1 = {
     
 	modifier = {
 		local_defensiveness = 0.25
-        garrison_growth = 0.25
         local_hostile_attrition = 1
         local_hostile_movement_speed = -0.25
+        blockade_force_required = 0.25
+		hostile_disembark_speed = 1.0
+		block_slave_raid = yes
 	}
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_tower_1 "
+        }
+        
+        add_development_from_building = {
+			building = wow_tower_1
+			type = manpower
+			value = 1
 		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_tower_1
+			type = manpower
+			value = 1
+		}
+	}
+	on_obsolete = {
 	}
     
 	ai_will_do = {
@@ -49,10 +66,12 @@ wow_tower_2 = {
     make_obsolete = wow_tower_1
     
 	modifier = {
-		local_defensiveness = 0.5
-        garrison_growth = 0.5
+		local_defensiveness = 0.33
         local_hostile_attrition = 2
         local_hostile_movement_speed = -0.33
+        blockade_force_required = 0.33
+		hostile_disembark_speed = 2.0
+		block_slave_raid = yes
 	}
 	
     on_built = {
@@ -60,6 +79,23 @@ wow_tower_2 = {
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_tower_2 "
 		}
+        
+		add_development_from_upgrading_or_building = {
+			building = wow_tower_2
+			obsolete_building = wow_tower_1
+			type = manpower
+			value = 2
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_tower_2
+			type = manpower
+			value = 2
+		}
+	}
+	on_obsolete = {
 	}
     
 	ai_will_do = {
@@ -78,16 +114,33 @@ wow_tower_3 = {
     make_obsolete = wow_tower_2
     
 	modifier = {
-		local_defensiveness = 0.75
-        garrison_growth = 0.75
+		local_defensiveness = 0.5
         local_hostile_attrition = 3
         local_hostile_movement_speed = -0.5
+        blockade_force_required = 0.5
+		hostile_disembark_speed = 3.0
+		block_slave_raid = yes
 	}
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - on_built - wow_tower_3 "
+		}
+        
+		add_development_from_upgrading_or_building = {
+			building = wow_tower_3
+			obsolete_building = wow_tower_2
+			type = manpower
+			value = 3
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_tower_3
+			type = manpower
+			value = 3
 		}
 	}
     

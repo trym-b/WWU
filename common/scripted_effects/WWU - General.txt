@@ -1138,3 +1138,544 @@ set_great_project_tier_3 = {
 		}
 	}
 }
+
+#Province effect
+remove_random_development = {
+	if = {
+		limit = {
+			base_tax = 2
+			base_production = 2
+			base_manpower = 2
+		}
+		random_list = {
+			33 = {
+				add_base_tax = -1
+			}
+			33 = {
+				add_base_production = -1
+			}
+			33 = {
+				add_base_manpower = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			base_tax = 2
+			base_production = 2
+		}
+		random_list = {
+			50 = {
+				add_base_tax = -1
+			}
+			50 = {
+				add_base_production = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			base_tax = 2
+			base_manpower = 2
+		}
+		random_list = {
+			50 = {
+				add_base_tax = -1
+			}
+			50 = {
+				add_base_manpower = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			base_manpower = 2
+			base_production = 2
+		}
+		random_list = {
+			50 = {
+				add_base_manpower = -1
+			}
+			50 = {
+				add_base_production = -1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			base_tax = 2
+		}
+		add_base_tax = -1
+	}
+	else_if = {
+		limit = {
+			base_production = 2
+		}
+		add_base_production = -1
+	}
+	else_if = {
+		limit = {
+			base_manpower = 2
+		}
+		add_base_manpower = -1
+	}
+}
+
+#Country effect
+add_legitimacy_equivalent = {
+	add_legitimacy = $amount$
+	add_horde_unity = $amount$
+	add_devotion = $amount$
+	add_meritocracy = $amount$
+	add_republican_tradition = $republican_tradition$	#This one is special because of how much republics scale with it
+}
+
+halves_parliament_bribe_costs = {
+    if = {
+        limit = { has_dlc = "Common Sense" }
+        custom_tooltip = halves_parliament_bribe_costs_tt
+    }
+    set_country_flag = halved_parliament_bribe_costs
+}
+
+#Country effect
+add_increase_same_religion_opinion = {
+	custom_tooltip = increase_same_religion_opinion_tt
+	hidden_effect = {
+		set_country_flag = has_increased_religios_opinion
+		every_known_country = {
+			limit = {
+				OR = {
+					ROOT = { has_harmonized_with = PREV }
+					religion = ROOT
+				}
+				NOT = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = increased_same_religion
+					}
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = increased_same_religion
+			}
+			reverse_add_opinion = {
+				who = ROOT
+				modifier = increased_same_religion
+			}
+		}
+	}
+}
+
+#Country effect
+remove_increase_same_religion_opinion = {
+	custom_tooltip = remove_increase_same_religion_opinion_tt
+	hidden_effect = {
+		clr_country_flag = has_increased_religios_opinion
+		every_country = {
+			limit = {
+				has_opinion_modifier = {
+					who = ROOT
+					modifier = increased_same_religion
+				}
+			}
+			remove_opinion = {
+				who = ROOT
+				modifier = increased_same_religion
+			}
+			reverse_remove_opinion = {
+				who = ROOT
+				modifier = increased_same_religion
+			}
+		}
+	}
+}
+
+#Country effect - make sure to add an own custom tooltip in form of: "Every §Y$religion$§! country will have their opinion of [Root.GetName] increased by §G+50§!."
+add_opinion_of_religion = {
+	hidden_effect = {
+		set_country_flag = has_improve_opinion_flag
+		set_country_flag = has_increased_$religion$_opinion
+		every_known_country = {
+			limit = {
+				religion = $religion$
+				NOT = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = increased_religion_opinion
+					}
+				}
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = increased_religion_opinion
+			}
+			reverse_add_opinion = {
+				who = ROOT
+				modifier = increased_religion_opinion
+			}
+		}
+	}
+}
+
+#Country effect - make sure to add a custom localization like: "Remove the opinion bonus of $religion$ countries for §Y[Root.GetName]§!."
+remove_religious_opinion_for_scope = {
+	hidden_effect = {
+		clr_country_flag = has_improve_opinion_flag
+		clr_country_flag = has_increased_$religion$_opinion
+		every_country = {
+			limit = {
+				religion = $religion$
+				has_opinion_modifier = {
+					who = ROOT
+					modifier = increased_religion_opinion
+				}
+			}
+			remove_opinion = {
+				who = ROOT
+				modifier = increased_religion_opinion
+			}
+			reverse_remove_opinion = {
+				who = ROOT
+				modifier = increased_religion_opinion
+			}
+		}
+	}
+}
+
+#Country effect
+add_temporary_colonist = {
+	add_country_modifier = {
+		name = temporary_colonist
+		duration = $duration$
+	}
+	custom_tooltip = add_temporary_colonist_tt
+}
+
+#Country effect
+#Make sure to make your own custom tooltip for it because parameters can't be given as input. Sadly.
+transfer_treasury = {
+	#custom_tooltip = transfer_treasury_tt	#Transfer §Y[$giver$.$variable$.GetValue]§! Ducats to $Y[$taker$.GetName]§!.
+	hidden_effect = {
+		$giver$ = {
+			while = {
+				limit = {
+					check_variable = {
+						which = $variable$
+						value = 1
+					}
+				}
+				$taker$ = {
+					add_treasury = 1
+				}
+				add_treasury = -1
+				subtract_variable = {
+					which = $variable$
+					value = 1
+				}
+			}
+			multiply_variable = {
+				which = $variable$
+				value = 100
+			}
+			while = {
+				limit = {
+					check_variable = {
+						which = $variable$
+						value = 1
+					}
+				}
+				$taker$ = {
+					add_treasury = 0.01
+				}
+				add_treasury = -0.01
+				subtract_variable = {
+					which = $variable$
+					value = 1
+				}
+			}
+		}
+	}
+	[[custom_tooltip]
+		custom_tooltip = $custom_tooltip$
+	]
+}
+
+#Country effect
+set_prestige_to_zero = {
+	custom_tooltip = set_prestige_to_zero_tt
+	hidden_effect = {
+		add_prestige = -200
+		add_prestige = 100
+	}
+}
+
+#Country effect
+disable_annexation_penalty = {
+	custom_tooltip = disable_annexation_penalty_tt
+	hidden_effect = {
+		set_country_flag = no_integrate_penalty
+		remove_country_modifier = annexers_legacy
+	}
+}
+
+#Country effect
+enable_annexation_penalty = {
+	custom_tooltip = enable_annexation_penalty_tt
+	hidden_effect = {
+		clr_country_flag = no_integrate_penalty
+	}
+}
+
+#Country effect
+enable_development_on_buildings_built = {
+	custom_tooltip = enable_development_on_buildings_built_tt
+	hidden_effect = {
+		set_country_flag = improve_development_on_buildings_built
+	}
+}
+
+#Country effect, event target
+select_biggest_country_of_region = {
+	if = {
+		limit = { any_country = { capital_scope = { region = $region$ } } }
+		if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 1000 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 1000 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 900 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 900 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 800 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 800 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 700 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 700 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 600 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 600 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 500 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 500 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 400 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 400 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 300 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 300 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 200 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 200 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } total_development = 100 } }
+			random_country = {
+				limit = { capital_scope = { region = $region$ } total_development = 100 }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		else_if = {
+			limit = { any_country = { capital_scope = { region = $region$ } } }
+			random_country = { 
+				limit = { capital_scope = { region = $region$ } }
+				save_event_target_as = selected_biggest_country_of_region
+			}
+		}
+		set_country_flag = biggest_country_of_region_set
+	}
+}
+
+#Credits for that script goes to Stiopa
+for = {
+    set_variable = {
+        which = ForLoopCounter
+        value = $amount$
+    }
+
+    while = {
+        limit = {
+            check_variable = {
+                which = ForLoopCounter
+                value = 1
+            }
+        }
+        $effect$
+        subtract_variable = {
+            which = ForLoopCounter
+            value = 1
+        }
+    }
+}
+
+add_prestige_or_monarch_power = {
+    tooltip = {
+        add_prestige = $amount$
+    }
+    custom_tooltip = ME_ADD_PRESTIGE_OR_MONARCHPOWER
+    hidden_effect = {
+        for = {
+            amount = $amount$
+            effect = "
+                if = {
+                    limit = {
+                        NOT = { prestige = 100 }
+                    }
+                    add_prestige = 1
+                }
+                else = {
+                    add_adm_power = 1
+                    add_dip_power = 1
+                    add_mil_power = 1
+                }
+            "
+        }
+    }
+}
+
+add_stat_or_monarch_power = {
+    tooltip = {
+        change_$stat$ = $amount$
+    }
+    custom_tooltip = ADD_STAT_OR_POWER_$stat$
+    hidden_effect = {
+		set_variable = {
+			which = ForLoopCounter
+			value = $amount$
+		}
+		while = {
+			limit = {
+				check_variable = {
+					which = ForLoopCounter
+					value = 1
+				}
+			}
+			if = {
+				limit = {
+					NOT = { $stat$ = 6 }
+				}
+				change_$stat$ = 1
+			}
+			else = {
+				add_$stat$_power = 100
+			}
+			subtract_variable = {
+				which = ForLoopCounter
+				value = 1
+			}
+		}
+    }
+}
+
+for_variable_amount = {
+    set_variable = {
+        which = ForLoopCounter
+        which = $variable$
+    }
+
+    while = {
+        limit = {
+            check_variable = {
+                which = ForLoopCounter
+                value = 1
+            }
+        }
+        $effect$
+        subtract_variable = {
+            which = ForLoopCounter
+            value = 1
+        }
+    }
+}
+
+##########################################################
+# Supports following types of units
+# artillery
+# cavalry
+# infantry
+# mercenary_infantry
+# mercenary_cavalry
+# heavy_ship
+# light_ship
+# galley
+# transport
+# <unit name> 
+##########################################################
+#Country effect
+# For tooltip use the following scheme: "§Y<amount>§! of §Y<unit_type>§! will be created in §Y[<province>.GetName]§! for §Y[This.GetName]§!."
+create_units_of_type = {
+	[[custom_tooltip]
+		custom_tooltip = $custom_tooltip$
+	]
+	hidden_effect = {
+		for = {
+			amount = $amount$
+			effect = "
+				$province$ = { $unit_type$ = PREV }
+			"
+		}
+	}
+}
+
+#Province effect
+# For tooltip use the following scheme: "§Y<amount>§! of §Y<unit_type>§! will be created in §Y[This.GetName]§! for §Y[<who>.GetName]§!."
+create_units_of_type_in_province = {
+	[[custom_tooltip]
+		custom_tooltip = $custom_tooltip$
+	]
+	hidden_effect = {
+		$who$ = {
+			for = {
+				amount = $amount$
+				effect = "
+					PREV = { $unit_type$ = $who$ }
+				"
+			}
+		}
+	}
+}
+
+enable_admirals_army_professionalism = {
+	if = {
+		limit = { has_dlc = "Cradle of Civilization" }
+		custom_tooltip = admirals_give_army_professionalism_tt
+	}
+	hidden_effect = {
+		set_country_flag = admirals_give_army_professionalism
+	}
+}
