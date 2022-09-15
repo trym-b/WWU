@@ -989,6 +989,38 @@ request_to_join_federation = {
             log = "DEBUG - [Root.GetName], [From.GetName] - request_to_join_federation"
         }
     }
+    
+    condition = {
+		tooltip = THIER_FEDERATION_TOO_BIG
+		potential = {	
+            # Limit size based on leader development
+            FROM = {
+                if = {
+                    limit = {
+                        is_federation_leader = yes
+                        total_development = 200
+                    }
+                    is_federation_leader = yes
+                    federation_size = 5
+                }
+                else_if = {
+                    limit = {
+                        is_federation_leader = yes
+                        total_development = 100
+                    }
+                    is_federation_leader = yes
+                    federation_size = 4
+                }
+                else = {
+                    is_federation_leader = yes
+                    federation_size = 3
+                }
+            }
+		}
+		allow = {
+			always = no
+		}
+	}
 }
 
 invite_to_federation = {
@@ -998,6 +1030,36 @@ invite_to_federation = {
             log = "DEBUG - [Root.GetName], [From.GetName] - invite_to_federation"
         }
     }
+    
+    condition = {
+		tooltip = OUR_FEDERATION_TOO_BIG
+		potential = {	
+            # Limit size based on leader development
+            if = {
+                limit = {
+                    is_federation_leader = yes
+                    total_development = 200
+                }
+                is_federation_leader = yes
+                federation_size = 5
+            }
+            else_if = {
+                limit = {
+                    is_federation_leader = yes
+                    total_development = 100
+                }
+                is_federation_leader = yes
+                federation_size = 4
+            }
+            else = {
+                is_federation_leader = yes
+                federation_size = 3
+            }
+		}
+		allow = {
+			always = no
+		}
+	}
 }
 
 support_heir = {
