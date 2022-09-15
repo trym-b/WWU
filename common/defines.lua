@@ -1073,7 +1073,7 @@ NCountry = {
 
 	COHESION_FEDERATION_MEMBER_WRONG_CULTURE = 0.05,
 	COHESION_FEDERATION_MEMBER_CORRECT_CULTURE = 0.1,
-	COHESION_FEDERATION_MEMBER_STRONGER = -0.1,
+	COHESION_FEDERATION_MEMBER_STRONGER = -0.2,
 	COHESION_FEDERATION_MEMBER_STRONGER_WRONG_CULTURE = -0.2,
 	COHESION_FEDERATION_SAME_CULTURE_MEMBERS_BONUS_NUMBER = 3,
 	COHESION_FEDERATION_SAME_CULTURE_MEMBERS_BONUS_MODIFIER = 1,
@@ -1844,7 +1844,7 @@ NAI = {
 	DIPLOMATIC_ACTION_KNOWLEDGE_SHARING_ACCEPTANCE_MULT = 3.0, -- AI scoring for knowledge sharing based on willingness to accept it if offered to them
 	DIPLOMATIC_ACTION_SHAREMAP_REGION_SELF_VALUE_MULT = 1.5, -- AI scoring for sharing maps based on "interests in region" for map sharing.
 	DIPLOMATIC_ACTION_SHAREMAP_PRESTIGE_FACTOR = 0.5, --AI scoring for sharing maps factor for current prestige.
-	DIPLOMATIC_ACTION_FEDERATION_ACCEPTANCE_MULT = 3.0, -- AI scoring for alliance based on willingness to accept it if offered to them
+	DIPLOMATIC_ACTION_FEDERATION_ACCEPTANCE_MULT = 1.0, -- AI scoring for alliance based on willingness to accept it if offered to them
 	DIPLOMATIC_ACTION_FEDERATION_ACCEPTANCE_INERTIA = 10, --new score must be at least this much better that current federation's score to move
 	DIPLOMATIC_ACTION_ROYAL_MARRIAGE_ACCEPTANCE_MULT = 2.0, -- AI scoring for royal marriage based on their willingness to accept it if offered to them
 	DIPLOMATIC_ACTION_ROYAL_MARRIAGE_NO_POWER_COST_RELATION_MULT = 0.25, -- AI scoring for royal marriage is multiplied by this if they currently lack a relation with a power cost
