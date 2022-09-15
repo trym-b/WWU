@@ -156,7 +156,8 @@ estate_adventuring_guild_astute_recruitment = {
 	penalties = {
 	}
 	benefits = {
-		mercenary_discipline = 0.05
+		land_morale = 0.1
+        is_banner_modifier = yes
 	}
 	ai_will_do = {
 		factor = 10
@@ -179,7 +180,8 @@ estate_adventuring_guild_encourage_looting = {
         global_unrest = 1
 	}
 	benefits = {
-		merc_maintenance_modifier = -0.1
+		loot_amount = 1.0
+        is_banner_modifier = yes
 	}
 	ai_will_do = {
 		factor = 10
@@ -190,21 +192,40 @@ estate_adventuring_guild_adventurers_in_the_army = {
     
 	max_absolutism = -10
 	influence = 0.2
-	loyalty = -0.1
+	loyalty = 0.05
     
 	can_select = {
 		army_tradition = 30
 	}
 	on_granted = {
+        custom_tooltip = UNLOCK_ADVENTURER_UNIT_TT
+        
 		add_army_tradition = -30
+        
+        hidden_effect = {
+            every_owned_province = {
+                add_permanent_province_modifier = {
+                    name = adventurer_province
+                    duration = -1
+                }
+            }
+        }
 	}
+    on_revoked = {  
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_province_modifier = adventurer_province
+                }
+                remove_province_modifier = adventurer_province
+            }
+        }
+    }
 	penalties = {
-		yearly_army_professionalism = -0.01
+		army_tradition = -1
 	}
 	benefits = {
-		leader_land_manuever = 1
-		land_morale = 0.1
-		general_cost = -0.25
+		has_banners = yes
 	}
     
 	ai_will_do = {
@@ -261,8 +282,8 @@ estate_adventuring_guild_generous_quest_rewards = {
 		global_tax_modifier = -0.1
 	}
 	benefits = {
-		global_unrest = -1
-		mercenary_manpower = 0.1
+        morale_damage_received = -0.1
+		is_banner_modifier = yes
 	}
 	cooldown_years = 10
     
@@ -460,3 +481,4 @@ estate_adventuring_guild_hunt_threats = {
 		factor = 0
 	}
 }
+
