@@ -50,33 +50,78 @@ zandalar_great_war = {
 	}
 	
 	can_start = {
+				custom_trigger_tooltip = {
+				tooltip = greatcivilwar_cooldown_a_tool
+				NOT = {has_country_modifier = greatcivilwar_cooldown_a}
+				}
+	OR = {
+	AND = {
+        check_variable = {
+            which = zul_power 
+            value = 60
+        }
+        check_variable = {
+            which = zul_influence 
+            value = 100
+        }}
+	AND = {
+        check_variable = {
+            which = zul_power 
+            value = 80
+        }
         check_variable = {
             which = zul_influence 
             value = 80
+        }}
+	AND = {
+        check_variable = {
+            which = zul_power 
+            value = 100
         }
+        check_variable = {
+            which = zul_influence 
+            value = 60
+        }}
+		}
 	}
 	
-	can_stop = { 
-        has_any_disaster = yes
+	can_stop = {
+        stability = 3
+		legitimacy = 95
+		NOT = {unrest = -2}
+		NOT = {    check_variable = {
+            which = zul_influence 
+            value = 50
+        }}
 	}
 	
 	progress = {
-        modifier = {
-			factor = 10
-			tag = A78 # Zandalar
+		modifier = {
+			factor = -0.5
+			NOT = {check_variable = {
+                which = zul_influence 
+                value = 60
+            }}
 		}
 		modifier = {
-			factor = 0.25
+			factor = 0.5
 			check_variable = {
                 which = zul_influence 
-                value = 80
+                value = 60
             }
 		}
 		modifier = {
-			factor = 0.25
+			factor = 0.5
 			check_variable = {
                 which = zul_influence 
-                value = 85
+                value = 70
+            }
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+                which = zul_influence 
+                value = 80
             }
 		}
 		modifier = {

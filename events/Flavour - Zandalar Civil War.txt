@@ -8,14 +8,20 @@ country_event = {
 	picture = EAGLEHORN_BOW_eventPicture
     
 	is_triggered_only = yes
-    
+	
+    	immediate = {
+        set_country_flag = zandalar_great_war_start
+	}
+	
 	option = {
-		name = wwu_zan_civilwarstart.1.option.a
+		name = wwu_zan_civilwarstart.1.op1
         
         custom_tooltip = REBELS_OF_ZUL_SPAWN_TT
         
         hidden_effect = {
             set_country_flag = zandalar_great_war
+			clr_country_flag = council_of_zanchul_already
+			clr_country_flag = prophet_zul_here_already
         
             # Spawn in Rebels of Zul based on Zul power
             spawn_rebels_of_zul = yes
@@ -77,7 +83,7 @@ country_event = {
 	id = wwu_zan_civilwarstart.2
 	title = "wwu_zan_civilwarstart.2.title"
 	desc = "wwu_zan_civilwarstart.2.desc"
-	picture = ANGRY_MOB_eventPicture
+	picture = EAGLEHORN_BOW_eventPicture
     
 	fire_only_once = yes
     
@@ -91,40 +97,89 @@ country_event = {
 	}
     
 	option = {
-		name = wwu_zan_civilwarstart.2.option.a
+		name = wwu_zan_civilwarstart.2.op1
         
-        # The Great Seat
-		2469 = {
-            add_devastation = 100
-            add_base_tax = -5
-            add_base_production = -5
-            add_base_manpower = -5
+		if = {
+		limit = {
+        has_country_flag = zandalar_great_war_loose
 		}
-        
-        if = {
-            limit = {
-                NOT = {
-                    2469 = {
-                        has_great_project = {
-                            type = gp_dazaralor
-                            tier = 1
-                        }
-                    }
-                }
-            }
-            
-            add_great_project_tier = {
-                type = gp_dazaralor
-                tier = -1
-            }
-        }
-        
-		add_disaster_modifier = {
-            name = "capital_zandalar_in_ruin"
-            duration = -1
-            disaster = internal_conflicts
-        }
-        
 		add_prestige = -100
+				continent_zandalar = {
+				limit = {
+				country_or_non_sovereign_subject_holds = A78}
+                cede_province = ZUZ
+				add_core = ZUZ
+				}
+		}
+		if = {
+		limit = {
+        has_country_flag = zandalar_great_war_win
+		}
+		add_prestige = 25
+		inherit = ZUZ
+		}
+		            add_country_modifier = {
+                    name = zandalari_great_war_after
+                    duration = 7300
+                }
+				clr_country_flag = zandalar_great_war
+		
+		
+        
+		
 	}
 }
+
+country_event = {
+	id = wwu_zan_civilwarstart.3
+    title = wwu_zan_civilwarstart.3.title
+	desc = wwu_zan_civilwarstart.3.desc
+	picture = ZANDALAR_12_eventPicture
+	fire_only_once = yes
+    hidden = yes
+    trigger = {
+        tag = A78
+		has_country_flag = zandalar_great_war
+		NOT = {has_country_flag = zandalar_great_war_win}
+		is_at_war = no
+    }
+    
+    option = {
+        name = wwu_zan_civilwarstart.3.op1
+        set_country_flag = zandalar_great_war_loose
+		set_country_flag = zandalar_great_war_end
+    }
+	}
+	
+country_event = {
+	id = wwu_zan_civilwarstart.4
+    title = wwu_zan_civilwarstart.4.title
+	desc = wwu_zan_civilwarstart.4.desc
+	picture = ZANDALAR_12_eventPicture
+	fire_only_once = yes
+    trigger = {
+        tag = A78
+		NOT = {has_country_flag = zandalar_great_war_start}
+		NOT = {has_country_modifier = greatcivilwar_cooldown_b}
+		has_country_flag = zandalari_rusty_empire_cd
+
+    }
+    
+    option = {
+        name = wwu_zan_civilwarstart.4.op1
+	 custom_tooltip = zandalari_no_war_tool
+		set_country_flag = zandalari_no_war
+		clr_country_flag = prophet_zul_here_already,
+        
+        hidden_effect = {
+		     set_variable = {
+                which = zul_power
+                value = 0
+            }
+            set_variable = {
+                which = zul_influence
+                value = 0
+            }
+			 }
+    }
+	}

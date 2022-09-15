@@ -1126,6 +1126,53 @@ wwu_zandalar_column_4 = {
         ai_weight   = { factor = 1 }
 	}
 
+    # Rise of the Thunder King
+	wwu_zan_four_twelve = {
+		icon = mission_zan_thunder
+		position = 12
+		required_missions = {
+            wwu_zan_five_eleven
+		}
+		
+		trigger = {
+		OR = {
+		exists = MOE
+			custom_trigger_tooltip = {
+				tooltip = zandalari_event_throw_leishen
+				has_country_flag = zandalari_event_throw_leishen
+			}
+		}
+		}
+		
+		effect = {
+            if = {
+                limit = {
+                    NOT = { exists = MOE }
+                    NOT = { has_country_flag = zandalari_event_throw_leishen }
+                }
+			
+                custom_tooltip = zandalari_tooltip_four_twelve_a
+			}
+            if = {
+                limit = {
+                    has_country_flag = zandalari_event_throw_leishen
+                }
+            add_adm_power = 200
+            add_dip_power = 200
+            add_mil_power = 200
+            }
+            if = {
+                limit = {
+                    exists = MOE
+                }
+                
+				custom_tooltip = zandalari_tooltip_four_twelve_b
+				set_country_flag = zandalari_leishen_gift
+            }
+        }
+        
+        ai_weight   = { factor = 1 }
+    }
 
 }
 
@@ -1466,8 +1513,47 @@ wwu_zandalar_column_5 = {
 		effect = {
 
                 custom_tooltip = zandalari_tooltip_five_ten_a
+				if = {
+				limit = {
+				area_throne_of_thunder = {
+			    type = all
+				owned_by = ROOT
+				}
+				}
+				area_throne_of_thunder = {
+				limit = {
+				owned_by = A78}
+                cede_province = P92
+				}
+			add_trust = {
+            who = P92
+            value = 50
+            mutual = yes
+        }
+		        reverse_add_opinion = {
+            who = P92
+            modifier = mogu_zandalar_aliance
+        }
+		        create_alliance = P92
+				}
 				hidden_effect = {
-				set_country_flag = zandalar_war_against_pandaria
+				set_country_flag = zandalar_war_against_pandaria_preparation
+						                    set_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 0
+                    }
+						                    set_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 0
+                    }
+						                    set_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 0
+                    }
+						                    set_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 0
+                    }
 				}
 			
 
@@ -1487,140 +1573,75 @@ wwu_zandalar_column_5 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zandalari_tooltip_five_eleven_b
-				has_country_flag = zandalari_cataclism_end
+		                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+					                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+					                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+					                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
 			}
 		}
 		
 		effect = {
-            if = {
-                limit = {
-                    NOT = { has_country_flag = zandalari_cataclism_bad }
-                    NOT = { has_country_flag = zandalari_cataclism_good }
-                }
+		if = {
+		limit = {
+		exists = GOL }
+		
                 custom_tooltip = zandalari_tooltip_five_eleven_a
-            }
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_bad
-                }
-                add_stability = 1
-            }
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_good
-                }
-                
-                add_stability = 1
-                
-                add_adm_power = 50
-                add_dip_power = 50
-                add_mil_power = 50
-                add_country_modifier = {
-                    name = zandalari_cataclism_restore
-                    duration = 3650
-                }
-            }
+				hidden_effect = {
+							country_event = { id = wwu_zandalar.61 }
+							}
+							}
+							
+		if = {
+		limit = {
+		not = {exists = GOL} }
+		
+                custom_tooltip = zandalari_tooltip_five_eleven_a_not
+		add_adm_power = 800
+		add_dip_power = 800
+		add_mil_power = 800
+							}
+				clr_country_flag = zandalar_war_against_pandaria_preparation
         }
             
         ai_weight   = { factor = 1 }
     }	
 
-    # Rise of the Thunder King
-	wwu_zan_five_twelve = {
-		icon = mission_zan_thunder
-		position = 12
-		required_missions = {
-            wwu_zan_five_eleven
-		}
-		
-		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = zandalari_tooltip_five_twelve_b
-				has_country_flag = zandalari_cataclism_end
-			}
-		}
-		
-		effect = {
-            if = {
-                limit = {
-                    NOT = { has_country_flag = zandalari_cataclism_bad }
-                    NOT = { has_country_flag = zandalari_cataclism_good }
-                }
-			
-                custom_tooltip = zandalari_tooltip_five_twelve_a
-			}
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_bad
-                }
-            add_stability = 1
-            }
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_good
-                }
-                
-                add_stability = 1
-                add_adm_power = 50
-                add_dip_power = 50
-                add_mil_power = 50
-                
-                add_country_modifier = {
-                    name = zandalari_cataclism_restore
-                    duration = 3650
-                }
-            }
-        }
-        
-        ai_weight   = { factor = 1 }
-    }
 
     # Great Civil War
 	wwu_zan_five_thirteen = {
 		icon = mission_zan_zul
-		position = 13
+		position = 12
 		required_missions = {
-            wwu_zan_five_twelve
+			wwu_zan_five_eleven
 		}
 		
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zandalari_tooltip_five_thirteen_b
-				has_country_flag = zandalari_cataclism_end
+				OR = {
+				has_country_flag = zandalari_no_war
+				has_country_flag = zandalar_great_war_win
+				has_country_flag = zandalar_great_war_loose
+				}
 			}
 		}
 		
 		effect = {
-            if = {
-                limit = {
-                    NOT = { has_country_flag = zandalari_cataclism_bad }
-                    NOT = { has_country_flag = zandalari_cataclism_good }
-                }
-                    
-                custom_tooltip = zandalari_tooltip_five_thirteen_a
-            }
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_bad
-                }
-                
-                add_stability = 1
-            }
-            if = {
-                limit = {
-                    has_country_flag = zandalari_cataclism_good
-                }
-                
-                add_stability = 1
-                
-                add_adm_power = 50
-                add_dip_power = 50
-                add_mil_power = 50
-                add_country_modifier = {
-                    name = zandalari_cataclism_restore
-                    duration = 3650
-                }
-            }
+        add_adm_power = 250
+        add_dip_power = 250
+        add_mil_power = 250
         }
             
         ai_weight   = { factor = 1 }
