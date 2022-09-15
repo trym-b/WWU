@@ -12,22 +12,171 @@ wwu_stromgarde_column_1 = {
     
 	has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
+    # 1. Establish Lordaeron Connections
+	wwu_establish_lordaeron_connections = {
+		icon = mission_brush_it_off
         position = 1
         
 		required_missions = { }
         
 		trigger = {
-            
-		}
-		provinces_to_highlight = {
-            
-			NOT = { owned_by = ROOT }
+            # Lordaeron
+            A08 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
 		}
         
 		effect = {
-			
+			create_alliance = A08 # Lordaeron
+            
+            add_opinion = {
+                who = A08 # Lordaeron
+                modifier = stromic_lordaeron_connections
+            }
+            reverse_add_opinion = {
+                who = A08 # Lordaeron
+                modifier = stromic_lordaeron_connections
+            }
+		}
+	}
+    
+    # 2. Proclaim the Might of Stromgarde
+    wwu_proclaim_the_might_of_stromgarde = {
+		icon = mission_paladin_empowered_seals_justice
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            # Stormwind
+            if = {
+                limit = {
+                    exists = STW
+                }
+                military_strength = {
+                    who = STW
+                    value = 2.0
+                }
+            }
+            # Lordaeron
+            if = {
+                limit = {
+                    exists = A08
+                }
+                military_strength = {
+                    who = A08
+                    value = 2.0
+                }
+            }
+            # Gilneas
+            if = {
+                limit = {
+                    exists = A12
+                }
+                military_strength = {
+                    who = A12
+                    value = 2.0
+                }
+            }
+            # Kul Tiras
+            if = {
+                limit = {
+                    exists = A14
+                }
+                military_strength = {
+                    who = A14
+                    value = 2.0
+                }
+            }
+            # Alterac
+            if = {
+                limit = {
+                    exists = A17
+                }
+                military_strength = {
+                    who = A17
+                    value = 2.0
+                }
+            }
+            # Dalaran
+            if = {
+                limit = {
+                    exists = A18
+                }
+                military_strength = {
+                    who = A18
+                    value = 2.0
+                }
+            }
+		}
+        
+		effect = {
+            add_prestige_or_monarch_power = {
+                amount = 100
+            }
+        
+			add_country_modifier = {
+                name = mission_might_of_stromgarde
+                duration = -1
+            }
+		}
+	}
+    
+    # 3. Restore the Empire of Arathor
+    wwu_restore_the_empire_of_arathor = {
+		icon = mission_paladin_empowered_seals_righteous
+        position = 3
+        
+		required_missions = { }
+        
+		trigger = {
+            tag = FNA
+		}
+        
+		effect = {
+            add_prestige_or_monarch_power = {
+                amount = 100
+            }
+        
+			add_country_modifier = {
+                name = mission_legacy_of_arathor
+                duration = -1
+            }
+		}
+	}
+    
+    # 4. Claim the Mantle of Humanity
+    wwu_claim_the_mantle_of_humanity = {
+		icon = mission_crown_of_heavens
+        position = 4
+        
+		required_missions = { }
+        
+		trigger = {
+            total_development = 1000
+            
+            num_of_owned_provinces_with = {
+                value = 250
+                
+                continent = continent_eastern_kingdoms
+            }
+		}
+        provinces_to_highlight = {
+            continent = continent_eastern_kingdoms
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_splendor = 1000
+            reset_golden_age = yes
+            
+            add_country_modifier = {
+                name = mission_mantle_of_humanity
+                duration = -1
+            }
 		}
 	}
 }
@@ -43,22 +192,175 @@ wwu_stromgarde_column_2 = {
     
 	has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
+    # 1. Insult the Alteraci
+	wwu_insult_the_alteraci = {
+		icon = mission_garrosh_corruption
         position = 1
         
 		required_missions = { }
         
 		trigger = {
+            if = {
+                limit = {
+                    exists = A17 # Alterac
+                }
+                has_country_flag = insulted_alterac
+            }
+            else = {
+                always = yes
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = A17 # Alterac
+		}
+		effect = {
+			add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 10
+            }
+		}
+	}
+    
+    # 2. Punish the Alteraci
+    wwu_punish_the_alteraci = {
+		icon = mission_haymaker
+        position = 2
+        
+		required_missions = { wwu_insult_the_alteraci }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = A17 # Alterac
+                }
+                military_strength = {
+                    who = A17 # Alterac
+                    value = 2.0
+                }
+            }
+            else = {
+                always = yes
+            }
             
+            # Chillwind Ridge
+            3066 = {
+                owned_by = ROOT
+            }
+            # Tarren Mill
+            538 = {
+                owned_by = ROOT
+            }
+            # Southshore Crossing
+            1027 = {
+                owned_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3066 # Chillwind Ridge
+                province_id = 538 # Tarren Mill
+                province_id = 1027 # Southshore Crossing
+            }
+			NOT = { owned_by = ROOT }
+		}
+		effect = {
+            add_mil_power = 200
+            
+			region_alterac_mountains = {
+                limit = {
+                    owned_by = A17 # Alterac
+                }
+                
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    # 3. Mete out Stromic Justice
+    wwu_mete_out_stromic_justice = {
+		icon = mission_pvp_3
+        position = 3
+        
+		required_missions = { wwu_insult_the_alteraci }
+        
+		trigger = {
+            NOT = { exists = A17 } # Alterac
+            area_alterac_headlands = {
+                type = all
+                owned_by = ROOT
+            }
+            area_alterac_heartland = {
+                type = all
+                owned_by = ROOT
+            }
 		}
 		provinces_to_highlight = {
-            
+            OR = {
+                area = area_alterac_headlands
+                area = area_alterac_heartland
+                owned_by = A17 # Alterac
+            }
 			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			
+            add_country_modifier = {
+                name = mission_stromic_justice
+                duration = -1
+            }
+        
+            add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 50
+            }
+		}
+	}
+    
+    # 4. Dominate Baradin Bay
+    wwu_dominate_baradin_bay = {
+		icon = mission_ship_1
+        position = 4
+        
+		required_missions = { 
+            wwu_protect_the_eastern_flank 
+        }
+        
+		trigger = {
+            num_of_owned_provinces_with = {
+                value = 30
+                
+                has_port = yes
+                OR = {
+                    region = region_arathi_highlands
+                    region = region_wetlands
+                    region = region_tol_barad
+                    region = region_hillsbrad_foothills
+                    region = region_gilneas
+                }
+            }
+		}
+		provinces_to_highlight = {
+            has_port = yes
+            OR = {
+                region = region_arathi_highlands
+                region = region_wetlands
+                region = region_tol_barad
+                region = region_hillsbrad_foothills
+                region = region_gilneas
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+        effect = {
+            add_country_modifier = {
+                name = mission_dominance_of_baradin_bay
+                duration = -1
+            }
+            
+            add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 50
+            }
 		}
 	}
 }
@@ -74,22 +376,134 @@ wwu_stromgarde_column_3 = {
     
 	has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
-        position = 1
+    # 3. Protect the Eastern Flank
+	wwu_protect_the_eastern_flank = {
+		icon = mission_sparring_equipment
+        position = 3
         
-		required_missions = { }
+		required_missions = { 
+            wwu_secure_the_stromic_coast
+        }
         
 		trigger = {
+            # Revantusk Outpost
+            1772 = {
+                owned_by = ROOT
+            }
+            # Trollden
+            1771 = {
+                owned_by = ROOT
+            }
+            # Arathi Strand
+            3005 = {
+                owned_by = ROOT
+            }
+            # Thickets of Askar
+            1770 = {
+                owned_by = ROOT
+            }
+            # Northstar Outpost
+            1769 = {
+                owned_by = ROOT
+            }
             
+            OR = {
+                1772 = { has_fort_building_trigger = yes } # Revantusk Outpost
+                1771 = { has_fort_building_trigger = yes } # Trollden
+                3005 = { has_fort_building_trigger = yes } # Arathi Strand
+                1770 = { has_fort_building_trigger = yes } # Thickets of Askar
+                1769 = { has_fort_building_trigger = yes } # Northstar Outpost
+            }
 		}
 		provinces_to_highlight = {
-            
+            OR = {
+                province_id = 1772 # Revantusk Outpost
+                province_id = 1771 # Trollden
+                province_id = 3005 # Arathi Strand
+                province_id = 1770 # Thickets of Askar
+                province_id = 1769 # Northstar Outpost
+            }
 			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			
+            add_mil_power = 200
+            
+			area_revantusk = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    # 4. Establish Wetland Outpost
+    wwu_establish_wetland_outpost = {
+		icon = mission_strand_of_the_ancients
+        position = 4
+        
+		required_missions = { 
+            wwu_protect_the_eastern_flank 
+        }
+        
+		trigger = {
+            num_of_owned_provinces_with = {
+                value = 3
+                
+                region = region_wetlands
+            }
+            any_owned_province = {
+                region = region_wetlands
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            region = region_wetlands
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_mil_power = 100
+            
+            random_owned_province = {
+                limit = {
+                    region = region_wetlands
+                }
+                
+                marine_infantry = ROOT
+                marine_infantry = ROOT
+                marine_infantry = ROOT
+                marine_infantry = ROOT
+                marine_infantry = ROOT
+            }
+		}
+	}
+    
+    # 5. Claim Grim Batol
+    wwu_claim_grim_batol = {
+		icon = mission_gold_pile
+        position = 5
+        
+		required_missions = { 
+            wwu_establish_wetland_outpost 
+        }
+        
+		trigger = {
+            # Grim Batol
+            1061 = {
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1061
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_treasury = 1000
+            
+            add_country_modifier = {
+                name = mission_treasures_of_grim_batol
+                duration = -1
+            }
 		}
 	}
 }
@@ -105,22 +519,177 @@ wwu_stromgarde_column_4 = {
     
 	has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
+    # 1. Restore Stromic Heartland
+	wwu_restore_stromic_hearthland = {
+		icon = mission_paladin_blessed_mending
         position = 1
         
 		required_missions = { }
         
 		trigger = {
-            
+            area_northfold = {
+                type = all
+                owned_by = ROOT
+            }
+            area_stromgarde = {
+                type = all
+                owned_by = ROOT
+            }
+            area_faldirs_cove = {
+                type = all
+                owned_by = ROOT
+            }
+            area_thandol_span = {
+                type = all
+                owned_by = ROOT
+            }
+            area_hammerfall = {
+                type = all
+                owned_by = ROOT
+            }
+            area_refuge_pointe = {
+                type = all
+                owned_by = ROOT
+            }
 		}
 		provinces_to_highlight = {
-            
+            OR = {
+                area = area_northfold
+                area = area_stromgarde
+                area = area_faldirs_cove
+                area = area_thandol_span
+                area = area_hammerfall
+                area = area_refuge_pointe
+            }
 			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			
+            add_prestige = 25
+            
+			area_arathi_strand = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    # 2. Secure the Stromic Coast
+    wwu_secure_the_stromic_coast = {
+		icon = mission_ship_4
+        position = 2
+        
+		required_missions = { wwu_restore_stromic_hearthland }
+        
+		trigger = {
+            area_arathi_strand = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            area = area_arathi_strand
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_yearly_sailors = 1.0
+            
+            random_owned_province = {
+                limit = {
+                    area = area_arathi_strand
+                }
+                
+                galley = ROOT
+                galley = ROOT
+                galley = ROOT
+                galley = ROOT
+                galley = ROOT
+            }
+		}
+	}
+    
+    # 4. Establish Hinterlands Outpost
+    wwu_establish_hinterland_outpost = {
+		icon = mission_war_stomp
+        position = 4
+        
+		required_missions = { 
+            wwu_protect_the_eastern_flank 
+            wwu_protect_the_western_flank
+        }
+        
+		trigger = {
+            num_of_owned_provinces_with = {
+                value = 3
+                
+                region = region_the_hinterlands
+            }
+            any_owned_province = {
+                region = region_the_hinterlands
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            region = region_the_hinterlands
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_facing_the_troll_threat
+                duration = 3650
+            }
+		}
+	}
+    
+    # 5. Oust the Trolls
+    wwu_oust_the_trolls = {
+		icon = mission_voodoo_doll
+        position = 5
+        
+		required_missions = { 
+            wwu_establish_hinterland_outpost 
+        }
+        
+		trigger = {
+            NOT = { exists = A63 } # Firetree
+            NOT = { exists = A64 } # Witherbark
+            NOT = { exists = A60 } # Vilebranch
+            NOT = { exists = A61 } # Revantusk
+            NOT = { exists = A65 } # Smolderthorn
+            
+            num_of_owned_provinces_with = {
+                value = 10
+                
+                region = region_the_hinterlands
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_the_hinterlands
+                owned_by = A63 # Firetree
+                owned_by = A64 # Witherbark
+                owned_by = A60 # Vilebranch
+                owned_by = A61 # Revantusk
+                owned_by = A65 # Smolderthorn
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            add_stat_or_monarch_power = {
+				stat = adm
+				amount = 1
+			}
+            add_stat_or_monarch_power = {
+				stat = mil
+				amount = 2
+			}
+        
+            add_country_modifier = {
+                name = mission_trollbane_blood
+                duration = -1
+            }
 		}
 	}
 }
@@ -136,22 +705,36 @@ wwu_stromgarde_column_5 = {
     
 	has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
-        position = 1
+    # 3. Protect the Western Flank
+	wwu_protect_the_western_flank = {
+		icon = mission_warrior_skirmisher
+        position = 3
         
-		required_missions = { }
+		required_missions = { 
+            wwu_secure_the_stromic_coast
+        }
         
 		trigger = {
-            
+            area_eastpoint = {
+                type = all
+                owned_by = ROOT
+            }
+            any_owned_province = {
+                area = area_eastpoint
+                has_fort_building_trigger = yes
+            }
 		}
 		provinces_to_highlight = {
-            
+            area = area_eastpoint
 			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			
+			add_mil_power = 200
+            
+			area_tarren_mill = {
+                add_permanent_claim = ROOT
+            }
 		}
 	}
 }
