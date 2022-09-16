@@ -1,3 +1,354 @@
+#---------------------------------
+# Estate Triggers
+#---------------------------------
+# Clergy
+# VAWSER: Default estate for non-exlusives
+has_clergy_estate = {
+    NOT = { has_exclusive_estates = yes }
+}
+
+# Traders
+# VAWSER: for races that would engage in trade with othe races
+has_traders_estate = {
+    NOT = { has_exclusive_estates = yes }
+    
+    # Cultures that would send out traders
+    OR = {
+        culture_group = culture_group_human
+        culture_group = culture_group_darnassian
+        culture_group = culture_group_thalassian
+        culture_group = culture_group_vrykul
+        culture_group = culture_group_orc
+        culture_group = culture_group_ogre
+        culture_group = culture_group_draenei
+        culture_group = culture_group_broken
+        culture_group = culture_group_troll
+        culture_group = culture_group_goblin
+        culture_group = culture_group_tauren
+        culture_group = culture_group_jinyu
+        culture_group = culture_group_dragonkin
+        culture_group = culture_group_undead
+        culture_group = culture_group_furbolg
+        culture_group = culture_group_dwarven
+        culture_group = culture_group_grummle
+        culture_group = culture_group_worgen
+        culture_group = culture_group_arrakoa
+        culture_group = culture_group_fallen_arrakoa
+        culture_group = culture_group_tuskarr
+        culture_group = culture_group_pandaren
+        culture_group = culture_group_ethereal
+        culture_group = culture_group_gnomish
+        culture_group = culture_group_mecha_gnomish
+        culture_group = culture_group_hozen
+        culture_group = culture_group_tol_vir
+        culture_group = culture_group_drogbar
+        culture_group = culture_group_shalassian
+        culture_group = culture_group_vulpera
+        culture_group = culture_group_sethrak
+        culture_group = culture_group_tortollan
+    }
+    
+    # Religions that would not engage in trade
+    NOT = { religion = corrupt_dragon_aspect }
+    NOT = { religion = fel }
+    NOT = { religion = sha }
+    NOT = { religion = sporemounds }
+    NOT = { religion = arkkorok }
+    NOT = { religion = cult_of_the_damned }
+    NOT = { religion = bloodmancy }
+    NOT = { religion = cthun }
+    NOT = { religion = nzoth }
+    NOT = { religion = yogg_saron }
+    NOT = { religion = yshaarj }
+    NOT = { religion = twilight_cult }
+    NOT = { religion = nightmare }
+    NOT = { religion = anima }
+    NOT = { religion = void }
+}
+
+# Nobility
+# VAWSER: Default estate for non-exlusives
+has_nobility_estate = {
+    NOT = { has_exclusive_estates = yes }
+}
+
+# Peasants
+# VAWSER: for countries that would support the idea of peasant class
+has_peasants_estate = {
+    NOT = { has_exclusive_estates = yes }
+    NOT = { has_reform = wwu_labor_tier_slavery }
+    
+    OR = {
+        culture_group = culture_group_human
+        culture_group = culture_group_darnassian
+        culture_group = culture_group_thalassian
+        culture_group = culture_group_vrykul
+        culture_group = culture_group_dwarven
+        culture_group = culture_group_worgen
+        culture_group = culture_group_pandaren
+        culture_group = culture_group_tol_vir
+        culture_group = culture_group_shalassian
+    }
+}
+
+# Slaves
+# VAWSER: is limited via peasant estate trigger implicitly
+has_slaves_estate = {
+    NOT = { has_exclusive_estates = yes }
+    has_reform = wwu_labor_tier_slavery
+}
+
+# Tribals
+# VAWSER: for less 'civilized' countries
+has_tribals_estate = {
+    NOT = { has_exclusive_estates = yes }
+    
+    OR = {
+        culture_group = culture_group_murloc
+        culture_group = culture_group_lobstrok
+        culture_group = culture_group_gnoll
+        culture_group = culture_group_centaur
+        culture_group = culture_group_wolvar
+        culture_group = culture_group_gorloc
+        culture_group = culture_group_kobold
+        culture_group = culture_group_magnataur
+        culture_group = culture_group_harpy
+        culture_group = culture_group_quillboar
+        culture_group = culture_group_trogg
+        culture_group = culture_group_taunka
+        culture_group = culture_group_virmen
+        culture_group = culture_group_zangar
+        culture_group = culture_group_pygmy
+        culture_group = culture_group_fungarian
+        culture_group = culture_group_orc
+        culture_group = culture_group_ogre
+        culture_group = culture_group_troll
+        culture_group = culture_group_yaungol
+        culture_group = culture_group_saurok
+        culture_group = culture_group_saberon
+        culture_group = culture_group_gorilla
+        culture_group = culture_group_rock_flayer
+        culture_group = culture_group_djaradin
+    }
+}
+
+# Adventuring Guild
+# VAWSER: for races that would engage with adventurers
+has_adventuring_guild_estate = {
+    NOT = { has_exclusive_estates = yes }
+        
+    # Cultures that would hire adventurers
+    OR = {
+        culture_group = culture_group_human
+        culture_group = culture_group_darnassian
+        culture_group = culture_group_thalassian
+        culture_group = culture_group_vrykul
+        culture_group = culture_group_orc
+        culture_group = culture_group_ogre
+        culture_group = culture_group_draenei
+        culture_group = culture_group_broken
+        culture_group = culture_group_troll
+        culture_group = culture_group_goblin
+        culture_group = culture_group_tauren
+        culture_group = culture_group_jinyu
+        culture_group = culture_group_dragonkin
+        culture_group = culture_group_undead
+        culture_group = culture_group_furbolg
+        culture_group = culture_group_dwarven
+        culture_group = culture_group_grummle
+        culture_group = culture_group_worgen
+        culture_group = culture_group_arrakoa
+        culture_group = culture_group_fallen_arrakoa
+        culture_group = culture_group_tuskarr
+        culture_group = culture_group_pandaren
+        culture_group = culture_group_ethereal
+        culture_group = culture_group_gnomish
+        culture_group = culture_group_mecha_gnomish
+        culture_group = culture_group_hozen
+        culture_group = culture_group_tol_vir
+        culture_group = culture_group_drogbar
+        culture_group = culture_group_shalassian
+        culture_group = culture_group_vulpera
+        culture_group = culture_group_sethrak
+        culture_group = culture_group_tortollan
+    }
+    
+    # Religions that would not use adventurers
+    NOT = { religion = corrupt_dragon_aspect }
+    NOT = { religion = fel }
+    NOT = { religion = sha }
+    NOT = { religion = sporemounds }
+    NOT = { religion = arkkorok }
+    NOT = { religion = cult_of_the_damned }
+    NOT = { religion = bloodmancy }
+    NOT = { religion = cthun }
+    NOT = { religion = nzoth }
+    NOT = { religion = yogg_saron }
+    NOT = { religion = yshaarj }
+    NOT = { religion = twilight_cult }
+    NOT = { religion = nightmare }
+    NOT = { religion = anima }
+    NOT = { religion = void }
+}
+
+# Mercantile Guild
+# VAWSER: unlocked via estate action
+has_mercantile_guild_estate = {
+    has_country_flag = has_estate_mercantile_guild
+}
+
+# Warrior's Guild
+# VAWSER: unlocked via estate action
+has_warriors_guild_estate = {
+    has_country_flag = has_estate_warriors_guild
+}
+
+# Religious Order
+# VAWSER: unlocked via estate action
+has_religious_order_estate = {
+    has_country_flag = has_estate_religious_order
+}
+
+# Criminal Syndicate
+# VAWSER: unlocked via estate action
+has_criminal_syndicate_estate = {
+    has_country_flag = has_estate_criminal_syndicate
+}
+
+# Reliquary
+# VAWSER: unlocked via event
+has_reliquary_estate = {
+    has_country_flag = has_reliquary_estate
+}
+
+# Explorer's League
+# VAWSER: unlocked via event
+has_explorers_league_estate = {
+    has_country_flag = has_explorers_league_estate
+}
+
+# Invention
+# VAWSER: for the 'technological' nations of Azeroth
+has_invention_estate = {
+    # Cultures that would host a Guild of Invention
+    OR = {
+        culture_group = culture_group_gnomish
+        culture_group = culture_group_mecha_gnomish
+        culture_group = culture_group_goblin
+        culture_group = culture_group_dwarven
+    }
+    
+    # Religions that would host a Guild of Invention
+    religion_group = philosophy_group
+}
+
+# Legion
+# VAWSER: for the demonic-backed nations
+has_legion_estate = {
+    culture_group = culture_group_demonic
+    
+}
+
+# Abyssal Maw
+# VAWSER: for the water elemental nations
+has_abyssal_maw_estate = {
+    culture_group = culture_group_water
+}
+
+# Firelands
+# VAWSER: for the fire elemental nations
+has_firelands_estate = {
+    culture_group = culture_group_fire
+}
+
+# Deepholm
+# VAWSER: for the earth elemental nations
+has_deepholm_estate = {
+    culture_group = culture_group_earth
+}
+
+# Skywall
+# VAWSER: for the wind elemental nations
+has_skywall_estate = {
+    culture_group = culture_group_air
+}
+
+# Loa
+# VAWSER: for troll religion nations
+has_loa_estate = {
+    # Religins that are linked to the Loa
+    OR = {
+        religion = voodoo
+        religion = hakkari
+        religion = bloodmancy
+    }
+}
+
+# Dragonflight
+# VAWSER: for the dragonflight nations
+has_dragonflight_estate = {
+    culture_group = culture_group_dragonkin
+}
+
+# Underling
+# VAWSER: for the dragonflight nations
+has_underling_estate = {
+    culture_group = culture_group_dragonkin
+}
+
+# These estates should block the 'default' level estates if present
+has_exclusive_estates = {
+    OR = {
+        has_abyssal_maw_estate = yes
+        has_firelands_estate = yes
+        has_deepholm_estate = yes
+        has_skywall_estate = yes
+        has_dragonflight_estate = yes
+        has_underling_estate = yes
+    }
+}
+
+may_unlock_guild_estates = {
+    # Cultures that would have guilds
+    OR = {
+        culture_group = culture_group_human
+        culture_group = culture_group_darnassian
+        culture_group = culture_group_thalassian
+        culture_group = culture_group_vrykul
+        culture_group = culture_group_orc
+        culture_group = culture_group_ogre
+        culture_group = culture_group_draenei
+        culture_group = culture_group_broken
+        culture_group = culture_group_troll
+        culture_group = culture_group_goblin
+        culture_group = culture_group_tauren
+        culture_group = culture_group_jinyu
+        culture_group = culture_group_dragonkin
+        culture_group = culture_group_undead
+        culture_group = culture_group_furbolg
+        culture_group = culture_group_dwarven
+        culture_group = culture_group_grummle
+        culture_group = culture_group_worgen
+        culture_group = culture_group_arrakoa
+        culture_group = culture_group_fallen_arrakoa
+        culture_group = culture_group_tuskarr
+        culture_group = culture_group_pandaren
+        culture_group = culture_group_ethereal
+        culture_group = culture_group_gnomish
+        culture_group = culture_group_mecha_gnomish
+        culture_group = culture_group_hozen
+        culture_group = culture_group_tol_vir
+        culture_group = culture_group_drogbar
+        culture_group = culture_group_shalassian
+        culture_group = culture_group_vulpera
+        culture_group = culture_group_sethrak
+        culture_group = culture_group_tortollan
+    }
+}
+
+#---------------------------------
+# General Triggers
+#---------------------------------
 has_any_estates = {
 	OR = {
 		has_estate = estate_clergy
@@ -25,6 +376,7 @@ has_any_estates = {
 	}
 }
 
+ 
 has_agenda_estates = {
 	OR = {
 		has_estate = estate_clergy
@@ -50,17 +402,6 @@ has_artifact_guild = {
     OR = {
         has_estate = estate_reliquary
         has_estate = estate_explorers_league
-    }
-}
-
-has_unique_estates = {
-    OR = {
-        tag = B92
-        tag = P24
-        tag = P26
-        tag = P27
-        tag = P28
-        culture_group = culture_group_dragonkin
     }
 }
 
@@ -100,4 +441,14 @@ has_tribals_trade_good_trigger = {
         trade_goods = fish
         trade_goods = slaves
 	}
+}
+
+is_criminal_nation = {
+    OR = {
+        has_reform = criminal_organization_reform
+        tag = A07 # Defias Brotherhood
+        tag = A26 # Syndicate
+        tag = F27 # Elwynn Bandits
+        tag = F40 # Bloodhill Bandits
+    }
 }

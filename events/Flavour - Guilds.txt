@@ -1,0 +1,214 @@
+namespace = wwu_guilds
+
+# Mercantile Opportunity
+country_event = {
+	id = wwu_guilds.1
+	title = wwu_guilds.1.title
+	desc = wwu_guilds.1.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    trigger = {
+        may_unlock_guild_estates = yes
+        NOT = { has_country_flag = has_estate_mercantile_guild }
+        NOT = { has_country_flag = has_estate_warriors_guild }
+        NOT = { has_country_flag = has_estate_religious_order }
+        NOT = { has_country_flag = has_estate_criminal_syndicate }
+        NOT = { has_country_flag = mercantile_guild_offer }
+    }
+
+	mean_time_to_happen = {
+		years = 100
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = mercantile_guild_offer
+        }
+    }
+
+	option = {
+		name = wwu_guilds.1.option.a
+		
+        add_years_of_income = -2.5
+        
+		custom_tooltip = ESTABLISH_MERCANTILE_GUILD_TT
+        hidden_effect = {
+            set_country_flag = has_estate_mercantile_guild
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_guilds.1.option.b
+		
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Military Opportunity
+country_event = {
+	id = wwu_guilds.2
+	title = wwu_guilds.2.title
+	desc = wwu_guilds.2.desc
+	picture = FIERY_WAR_AXE_eventPicture
+	
+    trigger = {
+        may_unlock_guild_estates = yes
+        NOT = { has_country_flag = has_estate_mercantile_guild }
+        NOT = { has_country_flag = has_estate_warriors_guild }
+        NOT = { has_country_flag = has_estate_religious_order }
+        NOT = { has_country_flag = has_estate_criminal_syndicate }
+        NOT = { has_country_flag = warrior_guild_offer }
+    }
+
+	mean_time_to_happen = {
+		years = 100
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = warrior_guild_offer
+        }
+    }
+
+	option = {
+		name = wwu_guilds.2.option.a
+		
+        add_years_of_income = -2.5
+        
+		custom_tooltip = ESTABLISH_WARRIORS_GUILD_TT
+        hidden_effect = {
+            set_country_flag = has_estate_warriors_guild
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_guilds.2.option.b
+		
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Divine Opportunity
+country_event = {
+	id = wwu_guilds.3
+	title = wwu_guilds.3.title
+	desc = wwu_guilds.3.desc
+	picture = HOLY_BOOK_eventPicture
+	
+    trigger = {
+        may_unlock_guild_estates = yes
+        NOT = { has_country_flag = has_estate_mercantile_guild }
+        NOT = { has_country_flag = has_estate_warriors_guild }
+        NOT = { has_country_flag = has_estate_religious_order }
+        NOT = { has_country_flag = has_estate_criminal_syndicate }
+        NOT = { has_country_flag = religious_order_offer }
+    }
+
+	mean_time_to_happen = {
+		years = 100
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = religious_order_offer
+        }
+    }
+
+	option = {
+		name = wwu_guilds.3.option.a
+		
+        add_years_of_income = -2.5
+        
+		custom_tooltip = ESTABLISH_RELIGIOUS_ORDER_TT
+        hidden_effect = {
+            set_country_flag = has_estate_religious_order
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_guilds.3.option.b
+		
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Criminal Opportunity
+country_event = {
+	id = wwu_guilds.4
+	title = wwu_guilds.4.title
+	desc = wwu_guilds.4.desc
+	picture = GANG_UP_eventPicture
+	
+    trigger = {
+        may_unlock_guild_estates = yes
+        NOT = { has_country_flag = has_estate_mercantile_guild }
+        NOT = { has_country_flag = has_estate_warriors_guild }
+        NOT = { has_country_flag = has_estate_religious_order }
+        NOT = { has_country_flag = has_estate_criminal_syndicate }
+        NOT = { has_country_flag = criminal_syndicate_offer }
+    }
+    
+	mean_time_to_happen = {
+		years = 100
+        
+        modifier = {
+            factor = 0.5
+            
+            is_criminal_nation = yes
+        }
+	}
+
+    immediate = {
+        hidden_effect = {
+            set_country_flag = criminal_syndicate_offer
+        }
+    }
+
+
+	option = {
+		name = wwu_guilds.4.option.a
+        
+        if = {
+            limit = {
+                NOT = {
+                    is_criminal_nation = yes
+                }
+            }
+            add_prestige = -50
+        }
+        
+        add_years_of_income = -2
+		
+		custom_tooltip = ESTABLISH_CRIMINAL_SYNDICATE_TT
+        hidden_effect = {
+            set_country_flag = has_estate_criminal_syndicate
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_guilds.4.option.b
+		
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
