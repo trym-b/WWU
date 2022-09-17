@@ -1,0 +1,100 @@
+﻿# ROOT = attacker
+# FROM = target
+
+# --- Types ---
+# - take_colony
+# - take_core
+# - take_border
+# - take_province
+# - take_capital
+# - defend_capital
+# - defend_country
+# - naval_superiority
+# - superiority
+# - take_region
+# - blockade_ports
+
+# --- Peace Terms ---
+# - po_demand_provinces
+# - po_revoke_cores
+# - po_release_vassals
+# - po_release_annexed
+# - po_change_religion
+# - po_form_personal_union
+# - po_gold
+# - po_become_vassal
+# - po_subjugate_vassal (same as become vassal, but for subjugate CB so it's always available and for a fixed war score)
+# - po_concede_defeat
+# - po_annul_treaties
+# - po_change_government
+# - po_revoke_elector
+# - po_trade_power
+# - po_steer_trade
+# - po_humiliate
+# - po_enforce_rebel_demands
+# And any defined in the peace_terms folder.
+
+# wargoal_example = {
+    # type = <type>   # Specific type that affects the war goal conditions, i.e. take_capital means warscore ticks on capital capture
+    
+    # # Opinion modifier to apply - Used by revoke_elector
+    # elector_relation = <string>
+
+    # # Set wargoal conditions for the attacker
+    # attacker = {
+        # badboy_factor = <float>                 # Factor to apply to AE incurred form attacker peace terms
+        # prestige_factor = <float>               # Factor to apply to Prestige gained from attacker peace terms
+        # peace_cost_factor = <float>             # Factor to apply to warscore cost of attacker peace terms
+        # transfer_trade_cost_factor = <float>    # Factor to apply to warscore cost of transfer trade power
+        
+        # # Peace option list
+        # # AI will prioritise the options in the listed order
+        # # Also adds additional options that are specified in the peace_term folder
+        # peace_options = {
+            # <peace term>
+        # }
+        
+        # # Specified peace term must be present before peace can occur
+        # required_treaty_to_take_provinces = {
+            # <peace term>
+        # }
+        
+        # # If 'po_demand_provinces' is on, badboy_factor applies to these provinces.
+        # allowed_provinces = {
+            # <trigger>
+        # }
+        
+        # # If 'po_demand_provinces' is on, badboy_factor applies to these provinces.
+        # allowed_tribal_provinces = {
+            # <trigger>
+        # }
+        
+        # # Allowed provinces now determines which provinces can be taken
+        # allowed_provinces_are_eligible = yes
+        
+        # # Countries allowed for po_demand_provinces - May be in top-level scope too
+        # allowed_countries = {
+            # <trigger>
+        # }
+        
+        # # Always allow po_demand_provinces
+        # allow_annex = yes
+        
+        # # Always deny po_demand_provinces
+        # deny_annex = yes
+        
+        # # Description for po_demand_provinces term
+        # country_desc = <string> 
+        
+        # # Description for po_demand_provinces term
+        # prov_desc = <string>
+    # }
+    
+    # # Set wargoal conditions for the defender
+    # defender = {
+        # <same as attacker>
+    # }
+    
+    # # Name of the war that appears on the war screen
+    # war_name = <string>
+# }

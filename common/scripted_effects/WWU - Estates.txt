@@ -928,535 +928,6 @@ scaled_estate_land_share_reduce_effect = {
 	}
 }
 
-# Expects country scope
-seize_land_effect = {
-	hidden_effect = {
-		set_variable = {
-			which = seize_land_effect_variable
-			value = $scale$
-		}
-		while = {
-			limit = {
-				check_variable = {
-					which = seize_land_effect_variable
-					value = 1
-				}
-			}
-			change_variable = {
-				which = seize_land_effect_variable
-				value = -1
-			}
-			if = {
-				limit = {
-					any_owned_province = {
-						OR = {
-							is_in_capital_area = yes
-							is_state_core = root
-						}
-						is_capital = no
-						NOT = {
-							area_for_scope_province = {
-								owned_by = root
-								has_province_flag = seize_land_spawn_unrest_and_rebels
-							}
-						}
-						area_for_scope_province = {
-							any_neighbor_province = {
-								owned_by = root
-								has_province_flag = seize_land_spawn_unrest_and_rebels
-							}
-						}
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							is_in_capital_area = yes
-							is_state_core = root
-						}
-						is_capital = no
-						NOT = {
-							area_for_scope_province = {
-								owned_by = root
-								has_province_flag = seize_land_spawn_unrest_and_rebels
-							}
-						}
-						area_for_scope_province = {
-							any_neighbor_province = {
-								owned_by = root
-								has_province_flag = seize_land_spawn_unrest_and_rebels
-							}
-						}
-						highest_supply_limit_in_area = yes
-					}
-					spawn_rebels_from_unhappy_estate = { size = 2 }
-					area = {
-						limit = {
-							owned_by = ROOT
-						}
-						set_province_flag = seize_land_spawn_unrest_and_rebels
-						add_named_unrest = { name = estate_land_seized value = 10 }
-					}
-				}
-			}
-			else = {
-				random_owned_province = {
-					limit = {
-						OR = {
-							is_in_capital_area = yes
-							is_state_core = root
-						}
-						NOT = {
-							area_for_scope_province = {
-								owned_by = root
-								has_province_flag = seize_land_spawn_unrest_and_rebels
-							}
-						}
-						highest_supply_limit_in_area = yes
-					}
-					spawn_rebels_from_unhappy_estate = { size = 2 }
-					area = {
-						limit = {
-							owned_by = ROOT
-						}
-						set_province_flag = seize_land_spawn_unrest_and_rebels
-						add_named_unrest = { name = estate_land_seized value = 10 }
-					}
-				}
-			}
-		}
-		every_owned_province = {
-			limit = { has_province_flag = seize_land_spawn_unrest_and_rebels }
-			clr_province_flag = seize_land_spawn_unrest_and_rebels
-		}
-	}
-}
-
-spawn_rebels_from_unhappy_estate = {
-	random_list = {
-		1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_clergy
-					NOT = {
-						estate_loyalty = {
-							estate = estate_clergy
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = anti_tax_rebels
-				size = $size$
-				estate = estate_clergy
-				as_if_faction = yes
-			}
-		}
-		1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_traders
-					NOT = {
-						estate_loyalty = {
-							estate = estate_traders
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = particularist_rebels
-				size = $size$
-				estate = estate_traders
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_nobility
-					NOT = {
-						estate_loyalty = {
-							estate = estate_nobility
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-                type = noble_rebels
-                size = $size$
-                estate = estate_nobility
-                as_if_faction = yes
-            }
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_peasants
-					NOT = {
-						estate_loyalty = {
-							estate = estate_peasants
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-                type = anti_tax_rebels
-                size = $size$
-                estate = estate_peasants
-                as_if_faction = yes
-            }
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_slaves
-					NOT = {
-						estate_loyalty = {
-							estate = estate_slaves
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-                type = anti_tax_rebels
-                size = $size$
-                estate = estate_slaves
-                as_if_faction = yes
-            }
-		}
-		1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_tribals
-					NOT = {
-						estate_loyalty = {
-							estate = estate_tribals
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_tribals
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_adventuring_guild
-					NOT = {
-						estate_loyalty = {
-							estate = estate_adventuring_guild
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_adventuring_guild
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_mercantile_guild
-					NOT = {
-						estate_loyalty = {
-							estate = estate_mercantile_guild
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_mercantile_guild
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_warriors_guild
-					NOT = {
-						estate_loyalty = {
-							estate = estate_warriors_guild
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_warriors_guild
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_religious_order
-					NOT = {
-						estate_loyalty = {
-							estate = estate_religious_order
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_religious_order
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_criminal_syndicate
-					NOT = {
-						estate_loyalty = {
-							estate = estate_criminal_syndicate
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_criminal_syndicate
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_reliquary
-					NOT = {
-						estate_loyalty = {
-							estate = estate_reliquary
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_reliquary
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_explorers_league
-					NOT = {
-						estate_loyalty = {
-							estate = estate_explorers_league
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_explorers_league
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_invention
-					NOT = {
-						estate_loyalty = {
-							estate = estate_invention
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_invention
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_legion
-					NOT = {
-						estate_loyalty = {
-							estate = estate_legion
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_legion
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_abyssal_maw
-					NOT = {
-						estate_loyalty = {
-							estate = estate_abyssal_maw
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_abyssal_maw
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_firelands
-					NOT = {
-						estate_loyalty = {
-							estate = estate_firelands
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_firelands
-				as_if_faction = yes
-			}
-		}
-        
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_deepholm
-					NOT = {
-						estate_loyalty = {
-							estate = estate_deepholm
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_deepholm
-				as_if_faction = yes
-			}
-		}
-        
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_skywall
-					NOT = {
-						estate_loyalty = {
-							estate = estate_skywall
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_skywall
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_loa
-					NOT = {
-						estate_loyalty = {
-							estate = estate_loa
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_loa
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_dragonflight
-					NOT = {
-						estate_loyalty = {
-							estate = estate_dragonflight
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_dragonflight
-				as_if_faction = yes
-			}
-		}
-        1 = {
-			trigger = {
-				owner = {
-					has_estate = estate_underling
-					NOT = {
-						estate_loyalty = {
-							estate = estate_underling
-							loyalty = 30
-						}
-					}
-				}
-			}
-			spawn_rebels = {
-				type = pretender_rebels
-				size = $size$
-				estate = estate_underling
-				as_if_faction = yes
-			}
-		}
-	}
-}
-
 pick_random_estate_if_present = {
 	random_list = {
 		1 = { 
@@ -1783,113 +1254,6 @@ take_estate_land_share_25 = {
 	 change_estate_land_share = {
 		estate = $estate$
 		share = -25
-	}
-}
-
-spawn_rebels_seize_land_switch = {
-	trigger_switch = {
-		on_trigger = num_of_owned_areas
-		1000 = { custom_tooltip = estate_seize_land_interaction_tooltip_1000 seize_land_effect = { scale = 101 } }
-		990 = { custom_tooltip = estate_seize_land_interaction_tooltip_990 seize_land_effect = { scale = 100 } }
-		980 = { custom_tooltip = estate_seize_land_interaction_tooltip_980 seize_land_effect = { scale = 99 } }
-		970 = { custom_tooltip = estate_seize_land_interaction_tooltip_970 seize_land_effect = { scale = 98 } }
-		960 = { custom_tooltip = estate_seize_land_interaction_tooltip_960 seize_land_effect = { scale = 97 } }
-		950 = { custom_tooltip = estate_seize_land_interaction_tooltip_950 seize_land_effect = { scale = 96 } }
-		940 = { custom_tooltip = estate_seize_land_interaction_tooltip_940 seize_land_effect = { scale = 95 } }
-		930 = { custom_tooltip = estate_seize_land_interaction_tooltip_930 seize_land_effect = { scale = 94 } }
-		920 = { custom_tooltip = estate_seize_land_interaction_tooltip_920 seize_land_effect = { scale = 93 } }
-		910 = { custom_tooltip = estate_seize_land_interaction_tooltip_910 seize_land_effect = { scale = 92 } }
-		900 = { custom_tooltip = estate_seize_land_interaction_tooltip_900 seize_land_effect = { scale = 91 } }
-		890 = { custom_tooltip = estate_seize_land_interaction_tooltip_890 seize_land_effect = { scale = 90 } }
-		880 = { custom_tooltip = estate_seize_land_interaction_tooltip_880 seize_land_effect = { scale = 89 } }
-		870 = { custom_tooltip = estate_seize_land_interaction_tooltip_870 seize_land_effect = { scale = 88 } }
-		860 = { custom_tooltip = estate_seize_land_interaction_tooltip_860 seize_land_effect = { scale = 87 } }
-		850 = { custom_tooltip = estate_seize_land_interaction_tooltip_850 seize_land_effect = { scale = 86 } }
-		840 = { custom_tooltip = estate_seize_land_interaction_tooltip_840 seize_land_effect = { scale = 85 } }
-		830 = { custom_tooltip = estate_seize_land_interaction_tooltip_830 seize_land_effect = { scale = 84 } }
-		820 = { custom_tooltip = estate_seize_land_interaction_tooltip_820 seize_land_effect = { scale = 83 } }
-		810 = { custom_tooltip = estate_seize_land_interaction_tooltip_810 seize_land_effect = { scale = 82 } }
-		800 = { custom_tooltip = estate_seize_land_interaction_tooltip_800 seize_land_effect = { scale = 81 } }
-		790 = { custom_tooltip = estate_seize_land_interaction_tooltip_790 seize_land_effect = { scale = 80 } }
-		780 = { custom_tooltip = estate_seize_land_interaction_tooltip_780 seize_land_effect = { scale = 79 } }
-		770 = { custom_tooltip = estate_seize_land_interaction_tooltip_770 seize_land_effect = { scale = 78 } }
-		760 = { custom_tooltip = estate_seize_land_interaction_tooltip_760 seize_land_effect = { scale = 77 } }
-		750 = { custom_tooltip = estate_seize_land_interaction_tooltip_750 seize_land_effect = { scale = 76 } }
-		740 = { custom_tooltip = estate_seize_land_interaction_tooltip_740 seize_land_effect = { scale = 75 } }
-		730 = { custom_tooltip = estate_seize_land_interaction_tooltip_730 seize_land_effect = { scale = 74 } }
-		720 = { custom_tooltip = estate_seize_land_interaction_tooltip_720 seize_land_effect = { scale = 73 } }
-		710 = { custom_tooltip = estate_seize_land_interaction_tooltip_710 seize_land_effect = { scale = 72 } }
-		700 = { custom_tooltip = estate_seize_land_interaction_tooltip_700 seize_land_effect = { scale = 71 } }
-		690 = { custom_tooltip = estate_seize_land_interaction_tooltip_690 seize_land_effect = { scale = 70 } }
-		680 = { custom_tooltip = estate_seize_land_interaction_tooltip_680 seize_land_effect = { scale = 69 } }
-		670 = { custom_tooltip = estate_seize_land_interaction_tooltip_670 seize_land_effect = { scale = 68 } }
-		660 = { custom_tooltip = estate_seize_land_interaction_tooltip_660 seize_land_effect = { scale = 67 } }
-		650 = { custom_tooltip = estate_seize_land_interaction_tooltip_650 seize_land_effect = { scale = 66 } }
-		640 = { custom_tooltip = estate_seize_land_interaction_tooltip_640 seize_land_effect = { scale = 65 } }
-		630 = { custom_tooltip = estate_seize_land_interaction_tooltip_630 seize_land_effect = { scale = 64 } }
-		620 = { custom_tooltip = estate_seize_land_interaction_tooltip_620 seize_land_effect = { scale = 63 } }
-		610 = { custom_tooltip = estate_seize_land_interaction_tooltip_610 seize_land_effect = { scale = 62 } }
-		600 = { custom_tooltip = estate_seize_land_interaction_tooltip_600 seize_land_effect = { scale = 61 } }
-		590 = { custom_tooltip = estate_seize_land_interaction_tooltip_590 seize_land_effect = { scale = 60 } }
-		580 = { custom_tooltip = estate_seize_land_interaction_tooltip_580 seize_land_effect = { scale = 59 } }
-		570 = { custom_tooltip = estate_seize_land_interaction_tooltip_570 seize_land_effect = { scale = 58 } }
-		560 = { custom_tooltip = estate_seize_land_interaction_tooltip_560 seize_land_effect = { scale = 57 } }
-		550 = { custom_tooltip = estate_seize_land_interaction_tooltip_550 seize_land_effect = { scale = 56 } }
-		540 = { custom_tooltip = estate_seize_land_interaction_tooltip_540 seize_land_effect = { scale = 55 } }
-		530 = { custom_tooltip = estate_seize_land_interaction_tooltip_530 seize_land_effect = { scale = 54 } }
-		520 = { custom_tooltip = estate_seize_land_interaction_tooltip_520 seize_land_effect = { scale = 53 } }
-		510 = { custom_tooltip = estate_seize_land_interaction_tooltip_510 seize_land_effect = { scale = 52 } }
-		500 = { custom_tooltip = estate_seize_land_interaction_tooltip_500 seize_land_effect = { scale = 51 } }
-		490 = { custom_tooltip = estate_seize_land_interaction_tooltip_490 seize_land_effect = { scale = 50 } }
-		480 = { custom_tooltip = estate_seize_land_interaction_tooltip_480 seize_land_effect = { scale = 49 } }
-		470 = { custom_tooltip = estate_seize_land_interaction_tooltip_470 seize_land_effect = { scale = 48 } }
-		460 = { custom_tooltip = estate_seize_land_interaction_tooltip_460 seize_land_effect = { scale = 47 } }
-		450 = { custom_tooltip = estate_seize_land_interaction_tooltip_450 seize_land_effect = { scale = 46 } }
-		440 = { custom_tooltip = estate_seize_land_interaction_tooltip_440 seize_land_effect = { scale = 45 } }
-		430 = { custom_tooltip = estate_seize_land_interaction_tooltip_430 seize_land_effect = { scale = 44 } }
-		420 = { custom_tooltip = estate_seize_land_interaction_tooltip_420 seize_land_effect = { scale = 43 } }
-		410 = { custom_tooltip = estate_seize_land_interaction_tooltip_410 seize_land_effect = { scale = 42 } }
-		400 = { custom_tooltip = estate_seize_land_interaction_tooltip_400 seize_land_effect = { scale = 41 } }
-		390 = { custom_tooltip = estate_seize_land_interaction_tooltip_390 seize_land_effect = { scale = 40 } }
-		380 = { custom_tooltip = estate_seize_land_interaction_tooltip_380 seize_land_effect = { scale = 39 } }
-		370 = { custom_tooltip = estate_seize_land_interaction_tooltip_370 seize_land_effect = { scale = 38 } }
-		360 = { custom_tooltip = estate_seize_land_interaction_tooltip_360 seize_land_effect = { scale = 37 } }
-		350 = { custom_tooltip = estate_seize_land_interaction_tooltip_350 seize_land_effect = { scale = 36 } }
-		340 = { custom_tooltip = estate_seize_land_interaction_tooltip_340 seize_land_effect = { scale = 35 } }
-		330 = { custom_tooltip = estate_seize_land_interaction_tooltip_330 seize_land_effect = { scale = 34 } }
-		320 = { custom_tooltip = estate_seize_land_interaction_tooltip_320 seize_land_effect = { scale = 33 } }
-		310 = { custom_tooltip = estate_seize_land_interaction_tooltip_310 seize_land_effect = { scale = 32 } }
-		300 = { custom_tooltip = estate_seize_land_interaction_tooltip_300 seize_land_effect = { scale = 31 } }
-		290 = { custom_tooltip = estate_seize_land_interaction_tooltip_290 seize_land_effect = { scale = 30 } }
-		280 = { custom_tooltip = estate_seize_land_interaction_tooltip_280 seize_land_effect = { scale = 29 } }
-		270 = { custom_tooltip = estate_seize_land_interaction_tooltip_270 seize_land_effect = { scale = 28 } }
-		260 = { custom_tooltip = estate_seize_land_interaction_tooltip_260 seize_land_effect = { scale = 27 } }
-		250 = { custom_tooltip = estate_seize_land_interaction_tooltip_250 seize_land_effect = { scale = 26 } }
-		240 = { custom_tooltip = estate_seize_land_interaction_tooltip_240 seize_land_effect = { scale = 25 } }
-		230 = { custom_tooltip = estate_seize_land_interaction_tooltip_230 seize_land_effect = { scale = 24 } }
-		220 = { custom_tooltip = estate_seize_land_interaction_tooltip_220 seize_land_effect = { scale = 23 } }
-		210 = { custom_tooltip = estate_seize_land_interaction_tooltip_210 seize_land_effect = { scale = 22 } }
-		200 = { custom_tooltip = estate_seize_land_interaction_tooltip_200 seize_land_effect = { scale = 21 } }
-		190 = { custom_tooltip = estate_seize_land_interaction_tooltip_190 seize_land_effect = { scale = 20 } }
-		180 = { custom_tooltip = estate_seize_land_interaction_tooltip_180 seize_land_effect = { scale = 19 } }
-		170 = { custom_tooltip = estate_seize_land_interaction_tooltip_170 seize_land_effect = { scale = 18 } }
-		160 = { custom_tooltip = estate_seize_land_interaction_tooltip_160 seize_land_effect = { scale = 17 } }
-		150 = { custom_tooltip = estate_seize_land_interaction_tooltip_150 seize_land_effect = { scale = 16 } }
-		140 = { custom_tooltip = estate_seize_land_interaction_tooltip_140 seize_land_effect = { scale = 15 } }
-		130 = { custom_tooltip = estate_seize_land_interaction_tooltip_130 seize_land_effect = { scale = 14 } }
-		120 = { custom_tooltip = estate_seize_land_interaction_tooltip_120 seize_land_effect = { scale = 13 } }
-		110 = { custom_tooltip = estate_seize_land_interaction_tooltip_110 seize_land_effect = { scale = 12 } }
-		100 = { custom_tooltip = estate_seize_land_interaction_tooltip_100 seize_land_effect = { scale = 11 } }
-		90 = { custom_tooltip = estate_seize_land_interaction_tooltip_90 seize_land_effect = { scale = 10 } }
-		80 = { custom_tooltip = estate_seize_land_interaction_tooltip_80 seize_land_effect = { scale = 9 } }
-		70 = { custom_tooltip = estate_seize_land_interaction_tooltip_70 seize_land_effect = { scale = 8 } }
-		60 = { custom_tooltip = estate_seize_land_interaction_tooltip_60 seize_land_effect = { scale = 7 } }
-		50 = { custom_tooltip = estate_seize_land_interaction_tooltip_50 seize_land_effect = { scale = 6 } }
-		40 = { custom_tooltip = estate_seize_land_interaction_tooltip_40 seize_land_effect = { scale = 5 } }
-		30 = { custom_tooltip = estate_seize_land_interaction_tooltip_30 seize_land_effect = { scale = 4 } }
-		20 = { custom_tooltip = estate_seize_land_interaction_tooltip_20 seize_land_effect = { scale = 3 } }
-		10 = { custom_tooltip = estate_seize_land_interaction_tooltip_10 seize_land_effect = { scale = 2 } }
-		1 = { custom_tooltip = estate_seize_land_interaction_tooltip_1 seize_land_effect = { scale = 1 } }
 	}
 }
 
@@ -2874,5 +2238,102 @@ apply_loyalty_change_to_estate_target = {
                 loyalty = $AMOUNT$
             }
         }
+    }
+}
+
+#----------------------------------------
+# Seize Land
+#----------------------------------------
+# Take loyalty and land from each estate
+seize_land_from_estate = {
+    if = {
+        limit = {
+            [[has_exception]
+                NOT = { has_estate_privilege = estate_$ESTATE$_exception }
+            ]
+            has_estate = estate_$ESTATE$
+        }
+        take_estate_land_share_medium = { estate = estate_$ESTATE$ }
+        add_estate_loyalty = {
+            estate = estate_$ESTATE$
+            loyalty = -20
+            short = yes
+        }
+    }
+}
+
+# 
+seize_land_effect = {
+	hidden_effect = {
+        spawn_rebels_from_unhappy_estate = { ESTATE = clergy                SIZE = 1    REBEL = estate_clergy_rebels                }
+        spawn_rebels_from_unhappy_estate = { ESTATE = traders               SIZE = 1    REBEL = estate_traders_rebels               }
+        spawn_rebels_from_unhappy_estate = { ESTATE = nobility              SIZE = 1    REBEL = estate_nobility_rebels              }
+        spawn_rebels_from_unhappy_estate = { ESTATE = peasants              SIZE = 1    REBEL = estate_peasants_rebels              }
+        spawn_rebels_from_unhappy_estate = { ESTATE = tribals               SIZE = 1    REBEL = estate_tribals_rebels               }
+        spawn_rebels_from_unhappy_estate = { ESTATE = slaves                SIZE = 1    REBEL = estate_slaves_rebels                }
+        spawn_rebels_from_unhappy_estate = { ESTATE = adventuring_guild     SIZE = 1    REBEL = estate_adventuring_guild_rebels     }
+        spawn_rebels_from_unhappy_estate = { ESTATE = mercantile_guild      SIZE = 1    REBEL = estate_mercantile_guild_rebels      }
+        spawn_rebels_from_unhappy_estate = { ESTATE = warriors_guild        SIZE = 1    REBEL = estate_warriors_guild_rebels        }
+        spawn_rebels_from_unhappy_estate = { ESTATE = religious_order       SIZE = 1    REBEL = estate_religious_order_rebels       }
+        spawn_rebels_from_unhappy_estate = { ESTATE = criminal_syndicate    SIZE = 1    REBEL = estate_criminal_syndicate_rebels    }
+        spawn_rebels_from_unhappy_estate = { ESTATE = reliquary             SIZE = 1    REBEL = estate_reliquary_rebels             }
+        spawn_rebels_from_unhappy_estate = { ESTATE = explorers_league      SIZE = 1    REBEL = estate_explorers_league_rebels      }
+        spawn_rebels_from_unhappy_estate = { ESTATE = invention             SIZE = 1    REBEL = estate_invention_rebels             }
+        spawn_rebels_from_unhappy_estate = { ESTATE = legion                SIZE = 1    REBEL = estate_legion_rebels                }
+        spawn_rebels_from_unhappy_estate = { ESTATE = abyssal_maw           SIZE = 1    REBEL = estate_abyssal_maw_rebels           }
+        spawn_rebels_from_unhappy_estate = { ESTATE = firelands             SIZE = 1    REBEL = estate_firelands_rebels             }
+        spawn_rebels_from_unhappy_estate = { ESTATE = deepholm              SIZE = 1    REBEL = estate_deepholm_rebels              }
+        spawn_rebels_from_unhappy_estate = { ESTATE = skywall               SIZE = 1    REBEL = estate_skywall_rebels               }
+        spawn_rebels_from_unhappy_estate = { ESTATE = loa                   SIZE = 1    REBEL = estate_loa_rebels                   }
+        spawn_rebels_from_unhappy_estate = { ESTATE = dragonflight          SIZE = 1    REBEL = estate_dragonflight_rebels          }
+        spawn_rebels_from_unhappy_estate = { ESTATE = underling             SIZE = 1    REBEL = estate_underling_rebels             }
+	}
+}
+
+spawn_rebels_from_unhappy_estate = {
+    random_owned_province = {
+        limit = {
+            is_in_capital_area = yes
+            NOT = { has_siege = yes } # i.e. rebels are not present
+        }
+        
+        if = {
+            limit = {
+                owner = {
+                    has_estate = estate_$ESTATE$
+					NOT = {
+						estate_loyalty = {
+							estate = estate_$ESTATE$
+							loyalty = 30
+						}
+					}
+                }
+            }
+            
+            add_named_unrest = { 
+                name = estate_land_seized 
+                value = 10 
+            }  
+            
+            spawn_rebels = {
+				type = $REBEL$
+				size = $SIZE$
+			}
+        }
+    }
+}
+
+estate_rebel_effect = {
+    add_estate_loyalty = {
+        estate = estate_$ESTATE$
+        loyalty = 30
+    }
+    change_estate_land_share = {
+        estate = estate_$ESTATE$
+        share = 5
+    }
+    add_country_modifier = {
+        name = estate_$ESTATE$_supremacy
+        duration = 3650
     }
 }
