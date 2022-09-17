@@ -1,0 +1,508 @@
+# Global
+setup_global_on_start = {
+    # Set first player country as executor tag
+    save_global_event_target_as = executor
+    
+    # World State
+    #hre_inheritable = yes
+    #set_papacy_active = no
+    
+    # Initializes variables which are used in on_actions
+    init_variables = yes
+    
+    # Religious and Cultural Unity for ALL NATIONS on start and Core creation.
+    # This will override history files in default setting. See script file to see how to avoid overriding.
+    # init_full_unity = yes
+
+    # Invention Timer
+    set_global_flag = game_duration_timer
+
+    # Names
+    if = {
+        limit = {
+            NOT = { is_year = 592 }
+        }
+        DKS = {
+            override_country_name = GRAND_HAMLET
+        }
+    }
+
+    # Game flags
+    #  Used to detect which bookmark the flag starts in, accounting for time adjustments
+    
+    # Rise of the Horde
+    if = { 
+        limit = {
+            is_year = 546
+        }
+        set_global_flag = rise_of_the_horde
+    }
+    
+    # The First War
+    if = {
+        limit = {
+            is_year = 592
+        }
+        set_global_flag = the_first_war
+        set_global_flag = dark_portal_opened_flag
+        set_global_flag = dark_portal_built
+        
+        set_global_flag = alliance_exists
+        set_global_flag = setup_the_alliance
+        
+        set_global_flag = old_horde_exists
+        set_global_flag = setup_the_old_horde
+        
+        # Disable Old Horde country setup events
+        set_global_flag = old_horde_country_setup
+        
+        3792 = {
+            add_canal = gp_dark_portal_draenor
+        }
+        
+        reveal_first_war_discovery = yes
+    }
+
+    # The Second War
+    if = { 
+        limit = {
+            is_year = 598
+        }
+        set_global_flag = the_second_war
+        set_global_flag = setup_outland
+        
+        # Disable Outland country setup events
+        set_global_flag = outland_country_setup
+        
+        1586 = { add_canal = gp_dark_portal_outland }
+        
+        reveal_second_war_discovery = yes
+    }
+    
+    # Beyond The Dark Portal
+    if = { 
+        limit = {
+            is_year = 600
+        }
+        set_global_flag = beyond_the_dark_portal
+        clr_global_flag = dark_portal_opened_flag
+        set_global_flag = dark_portal_closed_firsttime
+        set_global_flag = sonsoflothar
+        set_global_flag = khadgar
+        
+        1586 = { remove_canal = gp_dark_portal_outland }
+        
+        reveal_all_discovery = yes
+    }
+    
+    # Rise of the Lich King
+    if = { 
+        limit = {
+            is_year = 605
+        }
+        set_global_flag = setup_outland
+    }
+
+    # The Third War
+    if = { 
+        limit = {
+            is_year = 617
+        }
+        set_global_flag = the_third_war 
+        set_global_flag = scourge_of_lordaeron_flag
+        set_global_flag = scourge_invasion # Used for the secondary Scourge tree
+        
+        set_global_flag = setup_outland
+    }
+
+    # The Frozen Throne
+    if = { 
+        limit = {
+            is_year = 618
+        }
+        set_global_flag = the_third_war 
+        set_global_flag = scourge_of_lordaeron_flag
+        set_global_flag = the_frozen_throne
+        set_global_flag = archimonde_dead
+        set_global_flag = eye_of_sargeras
+        set_global_flag = sunfury_arrived
+        set_global_flag = nerzhul_arrived
+    }
+
+    # The Rise of the Qiraji
+    if = { 
+        limit = {
+            is_year = 622
+        }
+        set_global_flag = rise_of_the_qiraji
+        set_global_flag = illidan_frozen_throne
+        
+        set_global_flag = horde_exists
+        set_global_flag = setup_the_horde
+        
+        clr_global_flag = old_horde_exists
+        clr_global_flag = setup_the_old_horde
+        
+        set_global_flag = northgate_rebellion_happened
+    }
+
+    # The Burning Crusade
+    if = { 
+        limit = {
+            is_year = 625
+        }
+        set_global_flag = the_burning_crusade
+    }
+
+    # Wrath of the Lich King
+    if = { 
+        limit = {
+            is_year = 626
+        }
+        set_global_flag = wrath_of_the_lich_king
+    }
+
+    # Cataclysm
+    if = { 
+        limit = {
+            is_year = 631
+        }
+        set_global_flag = cataclysm
+    }
+
+    # Mists of Pandaria
+    if = { 
+        limit = {
+            is_year = 632
+        }
+        set_global_flag = mists_of_pandaria
+    }
+    if = { 
+        limit = {
+            is_year = 700
+        }
+        set_global_flag = doomed_world
+    }
+    
+    # Custom Pulses
+    291 = {
+        add_province_triggered_modifier = generic_daily_pulse
+        add_province_triggered_modifier = generic_monthly_pulse
+        add_province_triggered_modifier = generic_yearly_pulse
+    }
+}
+
+# Each Country
+setup_country_on_start = {
+    # Discover world
+    setup_world_discovery = yes
+    
+    # Add starting classes for rulers that are predefined
+    add_starting_class_for_ruler = yes
+    
+    # Remove starting ideagroups
+    remove_starting_ideagroups = yes
+    
+    # Building Management Settings
+    set_country_flag = gold_buffer_limit_low
+    set_country_flag = auto_build_target_all
+    set_country_flag = auto_destroy_target_all
+    
+    # Archaeology
+    set_variable = { which = artifact_catalogue_carved_figurine     value = 0 }
+    set_variable = { which = artifact_catalogue_golden_tankard      value = 0 }
+    set_variable = { which = artifact_catalogue_notched_sword       value = 0 }
+    set_variable = { which = artifact_catalogue_music_box           value = 0 }
+    set_variable = { which = artifact_catalogue_ancient_crown       value = 0 }
+    set_variable = { which = artifact_catalogue_treasure_chest      value = 0 }
+    
+    #---------------------
+    # Religion
+    #---------------------
+    # Strength of Will
+    if = {
+        limit = {
+            uses_patriarch_authority = yes
+        }
+        
+        random_list = {
+            10 = { }
+            10 = { add_patriarch_authority = 0.1 }
+            10 = { add_patriarch_authority = 0.2 }
+            10 = { add_patriarch_authority = 0.3 }
+            10 = { add_patriarch_authority = 0.4 }
+            10 = { add_patriarch_authority = 0.5 }
+        }
+    }
+    
+    # Elemental Attunemnet
+    if = {
+        limit = {
+            uses_karma = yes
+        }
+        
+        random_list = {
+            10 = { add_karma = -50 }
+            10 = { add_karma = -40 }
+            10 = { add_karma = -30 }
+            10 = { add_karma = -20 }
+            10 = { add_karma = -10 }
+            10 = { }
+            10 = { add_karma = 10 }
+            10 = { add_karma = 20 }
+            10 = { add_karma = 30 }
+            10 = { add_karma = 40 }
+            10 = { add_karma = 50 }
+        }
+    }
+    
+    # Purity
+    if = {
+        limit = {
+            uses_piety = yes
+        }
+        
+        random_list = {
+            10 = { add_piety = -0.5 }
+            10 = { add_piety = -0.4 }
+            10 = { add_piety = -0.3 }
+            10 = { add_piety = -0.2 }
+            10 = { add_piety = -0.1 }
+            10 = { }
+            10 = { add_piety = 0.1 }
+            10 = { add_piety = 0.2 }
+            10 = { add_piety = 0.3 }
+            10 = { add_piety = 0.4 }
+            10 = { add_piety = 0.5 }
+        }
+    }
+    
+    # Aspects
+    if = {
+        limit = {
+            uses_church_aspects = yes
+        }
+        
+        random_list = {
+            10 = { }
+            10 = { add_church_power = 10 }
+            10 = { add_church_power = 20 }
+            10 = { add_church_power = 30 }
+            10 = { add_church_power = 40 }
+            10 = { add_church_power = 50 }
+        }
+    }
+    
+    # Fervor
+    if = {
+        limit = {
+            uses_fervor = yes
+        }
+        
+        random_list = {
+            10 = { }
+            10 = { add_fervor = 20 }
+            10 = { add_fervor = 40 }
+            10 = { add_fervor = 60 }
+            10 = { add_fervor = 80 }
+            10 = { add_fervor = 100 }
+        }
+    }
+    
+    # Unholy Influence
+    if = {
+        limit = {
+            uses_papacy = yes
+        }
+        
+        random_list = {
+            10 = { }
+            10 = { add_papal_influence = 20 }
+            10 = { add_papal_influence = 40 }
+            10 = { add_papal_influence = 60 }
+            10 = { add_papal_influence = 80 }
+            10 = { add_papal_influence = 100 }
+        }
+    }
+    
+    #---------------------
+    # Government
+    #---------------------
+    # For Dragonflight Broods, randomise it based on type
+    if = {
+        limit = {
+            has_reform = dragonflight_brood_reform
+        }
+        
+        if = {
+            limit = {
+                culture_group = culture_black_dragonflight
+            }
+            
+            random_list = {
+                10 = { change_statists_vs_monarchists = -0.1 }
+                10 = { change_statists_vs_monarchists = -0.2 }
+                10 = { change_statists_vs_monarchists = -0.3 }
+                10 = { change_statists_vs_monarchists = -0.4 }
+                10 = { change_statists_vs_monarchists = -0.5 }
+            }
+        }
+        else = {
+            random_list = {
+                10 = { change_statists_vs_monarchists = 0.1 }
+                10 = { change_statists_vs_monarchists = 0.2 }
+                10 = { change_statists_vs_monarchists = 0.3 }
+                10 = { change_statists_vs_monarchists = 0.4 }
+                10 = { change_statists_vs_monarchists = 0.5 }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_reform = withered_reform
+        }
+        
+        random_list = {
+            10 = { change_statists_vs_monarchists = -0.1 }
+            10 = { change_statists_vs_monarchists = -0.2 }
+            10 = { change_statists_vs_monarchists = -0.3 }
+            10 = { change_statists_vs_monarchists = -0.4 }
+            10 = { change_statists_vs_monarchists = -0.5 }
+        }
+    }
+    # Otherwise randomise it
+    else = {
+        random_list = {
+            10 = { change_statists_vs_monarchists = -0.1 }
+            10 = { change_statists_vs_monarchists = -0.2 }
+            10 = { change_statists_vs_monarchists = -0.3 }
+            10 = { change_statists_vs_monarchists = -0.4 }
+            10 = { change_statists_vs_monarchists = -0.5 }
+            10 = { change_statists_vs_monarchists = 0.1 }
+            10 = { change_statists_vs_monarchists = 0.2 }
+            10 = { change_statists_vs_monarchists = 0.3 }
+            10 = { change_statists_vs_monarchists = 0.4 }
+            10 = { change_statists_vs_monarchists = 0.5 }
+        }
+    }
+    
+    #---------------------
+    # AI Cooldowns
+    #---------------------
+    # Randomise the AI limiters so the AI don't use the decisions simultaneously 
+    if = {
+        limit = {
+            ai = yes
+        }
+        
+        random_list = {
+            25 = {
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 3650
+                }
+                add_country_modifier = {
+                    name = ai_personal_chamber_cooldown
+                    duration = 3650
+                }
+            }
+            25 = {
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 7300
+                }
+                add_country_modifier = {
+                    name = ai_personal_chamber_cooldown
+                    duration = 7300
+                }
+            }
+            25 = {
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 10950
+                }
+                add_country_modifier = {
+                    name = ai_personal_chamber_cooldown
+                    duration = 10950
+                }
+            }
+            25 = {
+                add_country_modifier = {
+                    name = ai_spell_cooldown
+                    duration = 1825
+                }
+                add_country_modifier = {
+                    name = ai_personal_chamber_cooldown
+                    duration = 1825
+                }
+            }
+        }
+    }
+    
+    #---------------------
+    # History Adjustments
+    #---------------------
+    # Remove Orcish Horde cores after 600
+    if = {
+        limit = {
+            is_year = 600
+        }
+        every_owned_province = {
+            limit = {
+                is_core = U03
+            }
+            remove_core = U03
+        }
+    }
+    
+    every_owned_province = {
+        limit = {
+            culture_group = culture_group_scourge
+            trade_goods = grain
+        }
+        change_trade_goods = crypts
+    }
+    
+    every_owned_province = {
+        limit = {
+            culture_group = culture_group_undead
+            trade_goods = grain
+        }
+        change_trade_goods = crypts
+    }
+    
+    every_owned_province = {
+        limit = {
+            religion = fel
+            trade_goods = arcane
+        }
+        change_trade_goods = fel
+    }
+    
+    every_owned_province = {
+        limit = {
+            religion = cult_of_the_damned
+            trade_goods = arcane
+        }
+        change_trade_goods = fel
+    }
+    
+    every_owned_province = {
+        limit = {
+            NOT = { religion = fel }
+            NOT = { religion = cult_of_the_damned }
+            trade_goods = fel
+        }
+        change_trade_goods = arcane
+    }
+    
+    if = {
+        limit = {
+            owns = 1671
+        }
+        add_country_modifier = {
+            name = lord_of_outland
+            duration = -1
+        }
+    }
+}
