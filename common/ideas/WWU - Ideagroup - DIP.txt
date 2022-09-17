@@ -273,7 +273,7 @@ wwu_exploration_ideas = {
         
         # Countries
         modifier = {
-            factor = 10
+            factor = 2
             
             OR = {
                 tag = A15 # Bloodsail
@@ -327,6 +327,23 @@ wwu_exploration_ideas = {
 			factor = 0
 			
             government = tribal
+		}
+        
+        # VAWSER: stop the AI picking this once 6 nations have Exploration/Expansion/Imperialism
+        modifier = {
+			factor = 0
+			
+            calc_true_if = {
+                amount = 6
+                
+                all_country = {
+                    OR = {
+                        has_idea_group = wwu_exploration_ideas
+                        has_idea_group = wwu_expansion_ideas
+                        has_idea_group = wwu_imperialism_ideas
+                    }
+                }
+            }
 		}
     }
 }
