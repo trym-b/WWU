@@ -53,16 +53,17 @@ country_decisions = {
             NOT = { current_age = age_rise_of_the_horde }
 
 		    culture_group = culture_group_orc
+            religion = fel
 			capital_scope = {
 				continent = continent_draenor
 			}
 		}
 		allow =  {
-            # Check if Dark Portal on Draenor is controlled by the Alliance, and that they are at war with us
+            # Allow if the owner is not Orc and not Fel
             3792 = {
                 controller = {
-                    has_country_modifier = member_of_alliance
-                    war_with = ROOT
+                    NOT = { culture_group = culture_group_orc }
+                    NOT = { religion = fel }
                 }
             }
             
@@ -80,11 +81,11 @@ country_decisions = {
 		ai_will_do = {
 			factor = 1
             
-            # Don't use this until AI starts to lose
+            # Only Shadowmoon should use this
             modifier = {
                 factor = 0
                 
-                war_score = -25
+                NOT = { tag = A34 }
             }
 		}
 	}
