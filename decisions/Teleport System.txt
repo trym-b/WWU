@@ -64,8 +64,29 @@ country_decisions = {
 					amount = 1
 				}
 			}
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_USED_TUNNELS
+                
+                NOT = { has_country_modifier = tunnel_chaos }
+            }
         }
         effect = {
+            if = {
+                limit = {
+                    is_at_war = yes
+                }
+                
+                custom_tooltip = TUNNEL_COOLDOWN_DURING_WAR_TT
+                
+                hidden_effect = {
+                    add_country_modifier = {
+                        name = tunnel_chaos
+                        duration = 365
+                        hidden = yes
+                    }
+                }
+            }
+            
             custom_tooltip = FAKE_AZJ_EVENT_TT
             
             hidden_effect = {
