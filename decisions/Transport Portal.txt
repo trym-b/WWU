@@ -1,9 +1,13 @@
 country_decisions = {
-   portal_passage = {
+    traverse_portal = {
         potential = {
-            calc_true_if = { 
-                all_owned_province = { has_building = wow_portal } 
-                amount = 2 
+            # Has atleast 2 portals
+            calc_true_if = {
+                amount = 2
+                
+                all_owned_province = {
+                    has_building = wow_portal
+                }
             }
         }
         allow = {
@@ -22,33 +26,7 @@ country_decisions = {
             }
         }
         effect = {
-            random_owned_province = {
-				limit = {
-					has_building = wow_portal
-					num_of_units_in_province = {
-						who = ROOT
-						amount = 1
-					}
-				}
-				save_event_target_as = sender
-				set_province_flag = sender_province
-			}
-            random_owned_province = {
-				limit = {
-					NOT = { has_province_flag = sender_province }
-					has_building = wow_portal
-				}
-				save_event_target_as = receiver
-			}
-			
-            teleport_unit_with_any_amount = yes
-            
-			every_owned_province = {
-				limit = {
-					has_province_flag = sender_province
-				}
-				clr_province_flag = sender_province
-			}
+            country_event = { id = wwu_transport_portal.1 }
             
             if = {
                 limit = {

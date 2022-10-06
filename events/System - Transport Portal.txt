@@ -1,0 +1,501 @@
+namespace = wwu_transport_portal
+
+# Portal: Select Target Army
+country_event = {
+	id = wwu_transport_portal.1
+	title = wwu_transport_portal.1.title
+	desc = wwu_transport_portal.1.desc
+	picture = BLUE_PORTAL_eventPicture
+	
+	is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            # 1
+            random_owned_province = {
+                limit = {
+                    has_building = wow_portal
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 1
+                    }
+                }
+                save_event_target_as = potential_start_portal_1
+                set_province_flag = selected_portal_province
+            }
+            
+            # 2
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 2
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 1
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_start_portal_2
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_b
+            }
+            
+            # 3
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 3
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 1
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_start_portal_3
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_c
+            }
+            
+            # 4
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 4
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 1
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_start_portal_4
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_d
+            }
+            
+            # 5
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 5
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 1
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_start_portal_5
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_e
+            }
+        }
+    }
+	
+    # Portal 1
+	option = {
+		name = wwu_transport_portal.1.option.a
+        goto = potential_start_portal_1
+        
+        hidden_effect = {
+            event_target:potential_start_portal_1 = {
+                save_event_target_as = chosen_portal
+            }
+        }
+        
+        custom_tooltip = SELECTED_THIS_PORTAL_TT
+	}
+    # Portal 2
+	option = {
+		name = wwu_transport_portal.1.option.b
+        goto = potential_start_portal_2
+        
+        trigger = {
+            has_country_flag = show_option_b
+        }
+        
+        hidden_effect = {
+            event_target:potential_start_portal_2 = {
+                save_event_target_as = chosen_portal
+            }
+        }
+        
+        custom_tooltip = SELECTED_THIS_PORTAL_TT
+	}
+    # Portal 3
+	option = {
+		name = wwu_transport_portal.1.option.c
+        goto = potential_start_portal_3
+        
+        trigger = {
+            has_country_flag = show_option_c
+        }
+        
+        hidden_effect = {
+            event_target:potential_start_portal_3 = {
+                save_event_target_as = chosen_portal
+            }
+        }
+        
+        custom_tooltip = SELECTED_THIS_PORTAL_TT
+	}
+    # Portal 4
+	option = {
+		name = wwu_transport_portal.1.option.d
+        goto = potential_start_portal_4
+        
+        trigger = {
+            has_country_flag = show_option_d
+        }
+        
+        hidden_effect = {
+            event_target:potential_start_portal_4 = {
+                save_event_target_as = chosen_portal
+            }
+        }
+        
+        custom_tooltip = SELECTED_THIS_PORTAL_TT
+	}
+    # Portal 5
+	option = {
+		name = wwu_transport_portal.1.option.e
+        goto = potential_start_portal_5
+        
+        trigger = {
+            has_country_flag = show_option_e
+        }
+        
+        hidden_effect = {
+            event_target:potential_start_portal_5 = {
+                save_event_target_as = chosen_portal
+            }
+        }
+        
+        custom_tooltip = SELECTED_THIS_PORTAL_TT
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_transport_portal.2 }
+            clr_country_flag = show_option_b
+            clr_country_flag = show_option_c
+            clr_country_flag = show_option_d
+            clr_country_flag = show_option_e
+            every_owned_province = {
+                clr_province_flag = selected_portal_province
+            }
+        }
+    }
+}
+
+# Portal: Select Target Army
+country_event = {
+	id = wwu_transport_portal.2
+	title = wwu_transport_portal.2.title
+	desc = wwu_transport_portal.2.desc
+	picture = RED_PORTAL_eventPicture
+	
+	is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            # 1
+            random_owned_province = {
+                limit = {
+                    has_building = wow_portal
+                    NOT = {
+                        num_of_units_in_province = {
+                            who = ROOT
+                            amount = 1
+                        }
+                    }
+                }
+                save_event_target_as = potential_destination_portal_1
+                set_province_flag = selected_portal_province
+            }
+            
+            # 2
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 2
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            NOT = {
+                                num_of_units_in_province = {
+                                    who = ROOT
+                                    amount = 1
+                                }
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        NOT = {
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_destination_portal_2
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_b
+            }
+            
+            # 3
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 3
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            NOT = {
+                                num_of_units_in_province = {
+                                    who = ROOT
+                                    amount = 1
+                                }
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        NOT = {
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_destination_portal_3
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_c
+            }
+            
+            # 4
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 4
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            NOT = {
+                                num_of_units_in_province = {
+                                    who = ROOT
+                                    amount = 1
+                                }
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        NOT = {
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_destination_portal_4
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_d
+            }
+            
+            # 5
+            if = {
+                limit = {
+                    calc_true_if = {
+                        amount = 5
+                        
+                        all_owned_province = {
+                            has_building = wow_portal
+                            NOT = {
+                                num_of_units_in_province = {
+                                    who = ROOT
+                                    amount = 1
+                                }
+                            }
+                        }
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        has_building = wow_portal
+                        NOT = {
+                            num_of_units_in_province = {
+                                who = ROOT
+                                amount = 1
+                            }
+                        }
+                        NOT = { has_province_flag = selected_portal_province }
+                    }
+                    save_event_target_as = potential_destination_portal_5
+                    set_province_flag = selected_portal_province
+                }
+                
+                set_country_flag = show_option_e
+            }
+        }
+    }
+	
+    # Portal 1
+	option = {
+		name = wwu_transport_portal.2.option.a
+        goto = potential_destination_portal_1
+        
+        hidden_effect = {
+            event_target:potential_destination_portal_1 = {
+                save_event_target_as = chosen_destination_portal
+            }
+        }
+	}
+    # Portal 2
+	option = {
+		name = wwu_transport_portal.2.option.b
+        goto = potential_destination_portal_2
+        
+        trigger = {
+            has_country_flag = show_option_b
+        }
+        
+        hidden_effect = {
+            event_target:potential_destination_portal_2 = {
+                save_event_target_as = chosen_destination_portal
+            }
+        }
+	}
+    # Portal 3
+	option = {
+		name = wwu_transport_portal.2.option.c
+        goto = potential_destination_portal_3
+        
+        trigger = {
+            has_country_flag = show_option_c
+        }
+        
+        hidden_effect = {
+            event_target:potential_destination_portal_3 = {
+                save_event_target_as = chosen_destination_portal
+            }
+        }
+	}
+    # Portal 4
+	option = {
+		name = wwu_transport_portal.2.option.d
+        goto = potential_destination_portal_4
+        
+        trigger = {
+            has_country_flag = show_option_d
+        }
+        
+        hidden_effect = {
+            event_target:potential_destination_portal_4 = {
+                save_event_target_as = chosen_destination_portal
+            }
+        }
+	}
+    # Portal 5
+	option = {
+		name = wwu_transport_portal.2.option.e
+        goto = potential_destination_portal_5
+        
+        trigger = {
+            has_country_flag = show_option_e
+        }
+        
+        hidden_effect = {
+            event_target:potential_destination_portal_5 = {
+                save_event_target_as = chosen_destination_portal
+            }
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            teleport_unit_with_any_amount = yes
+            clr_country_flag = show_option_b
+            clr_country_flag = show_option_c
+            clr_country_flag = show_option_d
+            clr_country_flag = show_option_e
+            every_owned_province = {
+                clr_province_flag = selected_portal_province
+            }
+        }
+    }
+}
