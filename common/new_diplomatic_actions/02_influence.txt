@@ -396,116 +396,6 @@ start_invasion = {
         }
 	}
 }
-send_invasion_support = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = send_invasion_support_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-		# Capital is in other-worldly plane
-        capital_scope = {
-            OR = {
-                # Elemental Plane
-                continent = continent_skywall
-                continent = continent_deepholm
-                continent = continent_abyssal_maw
-                continent = continent_firelands
-                
-                # Argus
-                continent = continent_argus
-            }
-        }
-        
-        if = {
-            limit = {
-                capital_scope = {
-                    continent = continent_argus
-                }
-            }
-            # Culture is appropirate
-            OR = {
-                culture_group = culture_group_ethereal
-                culture_group = culture_group_demonic
-                primary_culture = culture_lightforged
-            }
-        }
-        
-        FROM = {
-            war_with = ROOT
-        }
-        is_at_war = yes
-	}
-	is_allowed = {
-        NOT = { has_country_modifier = invasion_support_cooldown }
-        mil_power = 100
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - send_invasion_support"
-            }
-        }
-        
-        add_mil_power = -100
-        
-        if = {
-            limit = {
-                OR = {
-                    has_estate_privilege = estate_legion_rapid_strikes
-                    has_estate_privilege = estate_abyssal_maw_fury_of_neptulon
-                    has_estate_privilege = estate_firelands_fury_of_ragnaros
-                    has_estate_privilege = estate_deepholm_fury_of_therazane
-                    has_estate_privilege = estate_skywall_fury_of_alakir
-                }
-            }
-            add_country_modifier = {
-                name = invasion_support_cooldown
-                duration = 1825
-                hidden = yes
-            }
-        }
-        else = {
-            add_country_modifier = {
-                name = invasion_support_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-        
-		FROM = {
-            random_owned_province = {
-                change_controller = ROOT
-                add_core = ROOT
-                
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-            }
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		manpower = 50
-        
-        NOT = { army_size_percentage = 0.75 }
-	}
-}
 
 #---------------------------------------
 # Argus Invasion
@@ -661,80 +551,6 @@ start_argus_invasion = {
 
 	ai_will_do = {
 		always = no
-	}
-}
-send_argus_invasion_support = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = send_argus_invasion_support_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-        has_country_modifier = invasion_action_cooldown
-        
-        FROM = {
-            war_with = ROOT
-            
-            capital_scope = {
-                continent = continent_argus
-            }
-        }
-        
-        is_at_war = yes
-	}
-	is_allowed = {
-        NOT = { has_country_modifier = invasion_support_cooldown }
-        mil_power = 100
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - send_argus_invasion_support"
-            }
-        }
-        
-        add_mil_power = -100
-        
-        add_country_modifier = {
-            name = invasion_support_cooldown
-            duration = 3650
-            hidden = yes
-        }
-        
-		FROM = {
-            random_owned_province = {
-                limit = {
-                    continent = continent_argus
-                }
-                change_controller = ROOT
-                add_core = ROOT
-                
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-            }
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		manpower = 50
-        
-        NOT = { army_size_percentage = 0.75 }
 	}
 }
 
@@ -904,90 +720,6 @@ start_elemental_invasion = {
 		always = no
 	}
 }
-send_elemental_invasion_support = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = send_elemental_invasion_support_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-        has_country_modifier = invasion_action_cooldown
-        
-        FROM = {
-            war_with = ROOT
-            
-            capital_scope = {
-                OR = {
-                    continent = continent_skywall
-                    continent = continent_deepholm
-                    continent = continent_abyssal_maw
-                    continent = continent_firelands
-                }
-            }
-        }
-        
-        is_at_war = yes
-	}
-	is_allowed = {
-        NOT = { has_country_modifier = invasion_support_cooldown }
-        mil_power = 100
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - send_elemental_invasion_support"
-            }
-        }
-        
-        add_mil_power = -100
-        
-        add_country_modifier = {
-            name = invasion_support_cooldown
-            duration = 3650
-            hidden = yes
-        }
-        
-		FROM = {
-            random_owned_province = {
-                limit = {
-                    OR = {
-                        continent = continent_skywall
-                        continent = continent_deepholm
-                        continent = continent_abyssal_maw
-                        continent = continent_firelands
-                    }
-                }
-                change_controller = ROOT
-                add_core = ROOT
-                
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-            }
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		manpower = 50
-        
-        NOT = { army_size_percentage = 0.75 }
-	}
-}
 
 #---------------------------------------
 # Teleport Army
@@ -1086,6 +818,63 @@ teleport_army = {
 	ai_will_do = {  
         # Should reduce usage by the AI to a suitable level
         mil_power = 800
+	}
+}
+
+#---------------------------------------
+# Scout Territory
+#---------------------------------------
+scout_territory = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = scout_territory_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Only available whilst at war with target
+        war_with = FROM
+        FROM = {
+            any_owned_province = {
+                NOT = { has_discovered = ROOT }
+            }
+        }
+	}
+	is_allowed = {
+		dip_power = 250
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - scout_territory"
+            }
+        }
+        
+        add_dip_power = -250
+        
+        # Discover all enemy lands
+        FROM = {
+            every_owned_province = {
+                discover_country = ROOT
+            }
+            every_subject_country = {
+                every_owned_province = {
+                    discover_country = ROOT
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {  
+        # Should reduce usage by the AI to a suitable level
+        dip_power = 800
 	}
 }
 
