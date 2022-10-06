@@ -780,6 +780,17 @@ teleport_army = {
             }
         }
         
+        FROM = {
+            any_owned_province = {
+                NOT = {
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 1
+                    }
+                }
+            }
+        }
+        
         # Hostile portals take considerable resources to conjure
 		mil_power = 100
 	}
@@ -818,6 +829,79 @@ teleport_army = {
 	ai_will_do = {  
         # Should reduce usage by the AI to a suitable level
         mil_power = 800
+	}
+}
+
+#---------------------------------------
+# Traverse Network (Azjol-Nerub variant of Teleport Army)
+#---------------------------------------
+traverse_network = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = traverse_network_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Only available whilst at war with target
+        war_with = FROM
+
+        # Limitations
+        ROOT = {
+            tag = P74 # Azjol-Nerub
+        }
+	}
+	is_allowed = {
+        # Teleport checks so the event is valid
+        any_owned_province = {
+            continent = continent_northrend
+            num_of_units_in_province = {
+                who = ROOT
+                amount = 1
+            }
+        }
+        
+        FROM = {
+            any_owned_province = {
+                continent = continent_northrend
+                NOT = {
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 1
+                    }
+                }
+            }
+        }
+        
+		mil_power = 25
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - teleport_army"
+            }
+            
+            set_country_flag = teleport_type_tunnel
+        }
+        
+        add_mil_power = -25
+        
+        FROM = {
+            save_event_target_as = hostile_country
+        }
+        country_event = { id = wwu_teleport_system.10 }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {  
+        # Should reduce usage by the AI to a suitable level
+        mil_power = 400
 	}
 }
 

@@ -5,14 +5,34 @@ country_event = {
 	id = wwu_teleport_system.1
 	title = wwu_teleport_system.1.title
 	desc = wwu_teleport_system.1.desc
-	picture = BLUE_PORTAL_eventPicture
-	
+    
+    picture = {
+		trigger = { 
+            has_country_flag = teleport_type_tunnel
+        }
+		picture = AZJOL_NERUB_eventPicture
+	}
+    picture = {
+		trigger = { 
+            NOT = { has_country_flag = teleport_type_tunnel } 
+        }
+		picture = BLUE_PORTAL_eventPicture
+	}
+    
 	is_triggered_only = yes
 
     immediate = {
         hidden_effect = {
-            build_start_portal_list = {
-                portal_check = yes
+            if = {
+                limit = {
+                    has_country_flag = teleport_type_tunnel
+                }
+                build_start_portal_list_AZJ = yes
+            }
+            else = {
+                build_start_portal_list = {
+                    portal_check = yes
+                }
             }
         }
     }
@@ -1634,14 +1654,34 @@ country_event = {
 	id = wwu_teleport_system.2
 	title = wwu_teleport_system.2.title
 	desc = wwu_teleport_system.2.desc
-	picture = RED_PORTAL_eventPicture
-	
+
+    picture = {
+		trigger = { 
+            has_country_flag = teleport_type_tunnel
+        }
+		picture = AZJOL_NERUB_eventPicture
+	}
+    picture = {
+		trigger = { 
+            NOT = { has_country_flag = teleport_type_tunnel } 
+        }
+		picture = RED_PORTAL_eventPicture
+	}
+    
 	is_triggered_only = yes
 
     immediate = {
         hidden_effect = {
-            build_end_portal_list = {
-                portal_check = yes
+            if = {
+                limit = {
+                    has_country_flag = teleport_type_tunnel
+                }
+                build_end_portal_list_AZJ = yes
+            }
+            else = {
+                build_end_portal_list = {
+                    portal_check = yes
+                }
             }
         }
     }
@@ -3259,6 +3299,7 @@ country_event = {
             }
             
             reset_teleport_menu = yes
+            reset_teleport_type = yes
         }
     }
 }
@@ -3268,13 +3309,33 @@ country_event = {
 	id = wwu_teleport_system.10
 	title = wwu_teleport_system.10.title
 	desc = wwu_teleport_system.10.desc
-	picture = BLUE_PORTAL_eventPicture
-	
+
+    picture = {
+		trigger = { 
+            has_country_flag = teleport_type_tunnel
+        }
+		picture = AZJOL_NERUB_eventPicture
+	}
+    picture = {
+		trigger = { 
+            NOT = { has_country_flag = teleport_type_tunnel } 
+        }
+		picture = BLUE_PORTAL_eventPicture
+	}
+    
 	is_triggered_only = yes
 
     immediate = {
         hidden_effect = {
-            build_start_portal_list = { }
+            if = {
+                limit = {
+                    has_country_flag = teleport_type_tunnel
+                }
+                build_start_portal_list_AZJ = yes
+            }
+            else = {
+                build_start_portal_list = { }
+            }
         }
     }
 	
@@ -4895,16 +4956,41 @@ country_event = {
 	id = wwu_teleport_system.11
 	title = wwu_teleport_system.11.title
 	desc = wwu_teleport_system.11.desc
-	picture = RED_PORTAL_eventPicture
-	
+
+    picture = {
+		trigger = { 
+            has_country_flag = teleport_type_tunnel
+        }
+		picture = AZJOL_NERUB_eventPicture
+	}
+    picture = {
+		trigger = { 
+            NOT = { has_country_flag = teleport_type_tunnel } 
+        }
+		picture = RED_PORTAL_eventPicture
+	}
+    
 	is_triggered_only = yes
 
     immediate = {
         hidden_effect = {
-            event_target:hostile_country = {
-                build_hostile_end_portal_list = { 
-                    TAG = ROOT
-                    ENEMY_TAG = event_target:hostile_country
+            if = {
+                limit = {
+                    has_country_flag = teleport_type_tunnel
+                }
+                event_target:hostile_country = {
+                    build_hostile_end_portal_list_AZJ = { 
+                        TAG = ROOT
+                        ENEMY_TAG = event_target:hostile_country
+                    }
+                }
+            }
+            else = {
+                event_target:hostile_country = {
+                    build_hostile_end_portal_list = { 
+                        TAG = ROOT
+                        ENEMY_TAG = event_target:hostile_country
+                    }
                 }
             }
         }
@@ -6530,6 +6616,7 @@ country_event = {
             }
             
             reset_teleport_menu = yes
+            reset_teleport_type = yes
             event_target:hostile_country = {
                 reset_teleport_menu = yes
             }
