@@ -989,6 +989,109 @@ send_elemental_invasion_support = {
 	}
 }
 
+#---------------------------------------
+# Teleport Army
+#---------------------------------------
+teleport_army = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = teleport_army_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Only available whilst at war with target
+        war_with = FROM
+
+        # Limitations
+        ROOT = {
+            OR = {
+                # Capital is off-world
+                capital_scope = {
+                    OR = {
+                        continent = continent_skywall
+                        continent = continent_deepholm
+                        continent = continent_abyssal_maw
+                        continent = continent_firelands
+                        continent = continent_argus
+                    }
+                }
+                
+                # Or being attacked by off-world nation
+                FROM = {
+                    capital_scope = {
+                        OR = {
+                            continent = continent_skywall
+                            continent = continent_deepholm
+                            continent = continent_abyssal_maw
+                            continent = continent_firelands
+                            continent = continent_argus
+                        }
+                    }
+                }
+                
+                # Or is skilled spellcaster
+                has_epic_aptitude = yes
+            }
+        }
+	}
+	is_allowed = {
+        # Cooldown for teleport
+        NOT = { has_country_modifier = portal_fatigue }
+        
+        # Teleport checks so the event is valid
+        any_owned_province = {
+            num_of_units_in_province = {
+                who = ROOT
+                amount = 1
+            }
+        }
+        
+        # Hostile portals take considerable resources to conjure
+		mil_power = 100
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - teleport_army"
+            }
+        }
+        
+        add_mil_power = -100
+        
+        FROM = {
+            save_event_target_as = hostile_country
+        }
+        country_event = { id = wwu_teleport_system.10 }
+        
+        if = {
+            limit = {
+                NOT = { has_estate_privilege = estate_invention_dimensional_ripper }
+            }
+            add_country_modifier = {
+                name = portal_fatigue
+                duration = 365
+                hidden = yes
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {  
+        # Should reduce usage by the AI to a suitable level
+        mil_power = 800
+	}
+}
+
+#---------------------------------------
+# Magic
+#---------------------------------------
 # Chi Magic: Touch of Death
 apply_touch_of_death = {
 	category = influence
