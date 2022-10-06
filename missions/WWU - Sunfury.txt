@@ -1,67 +1,19 @@
-wwu_sunfury_column_3 = { 
-	slot = 3
+wwu_sunfury_column_1 = { 
+	slot = 1
 	generic = no
 	ai = yes
-    has_country_shield = yes
     
 	potential = {
 		tag = A93
-	} 
-    
-	wwu_convert_to_fel = { 
-		icon = mission_essence
-		position = 3
-		completed_by = 621.12.31
-        
-		required_missions = { wwu_battle_at_icecrown }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			OR = {
-				B87 = {
-					has_opinion = {
-						who = ROOT
-						value = 150
-					}
-				}
-				B92 = {
-					has_opinion = {
-						who = ROOT
-						value = 75
-					}
-				}
-				num_of_owned_provinces_with = {
-					value = 3
-					religion = fel
-				}		
-				religion = fel
-			}
-		}
-		effect = {
-			remove_country_modifier = no_power_source
-			add_stability = -1
-			add_corruption = 5
-			change_religion = fel
-			set_ruler_religion = fel
-			set_heir_religion = fel
-			every_owned_province = {
-				change_religion = fel
-				add_devastation = 15
-				add_unrest = 5
-				add_local_autonomy = -25
-			}
-			add_army_professionalism = 0.25
-			add_absolutism = 25
-		}
 	}
-	wwu_kiljaedens_favored = { 
-		icon = mission_eradar
-		position = 4
+    
+	has_country_shield = yes
+    
+	wwu_tempest_keep = {
+		icon = mission_draenei_male
+		position = 6
         
-		required_missions = { wwu_convert_to_fel }
+		required_missions = { wwu_sunfury_hold }
 		
 		ai_weight = {
 			factor = 3
@@ -69,108 +21,170 @@ wwu_sunfury_column_3 = {
         
 		trigger = {
 			OR = {
-				papal_influence = 50
-				B92 = {
-					has_opinion = {
-						who = ROOT
-						value = 150
-					}
+				1717 = {
+					owned_by = B92
 				}
+				owns = 1717
 			}
 		}
 		provinces_to_highlight = {
-            owned_by = B92
+            province_id = 1717
         }
 		effect = {
+			1717 = {
+				cede_province = A93
+				change_culture = culture_blood_elf
+				change_religion = fel
+				add_devastation = 25
+				add_unrest = 10
+			}
+			1706 = {
+				add_permanent_claim = A93
+			}
+			1709 = {
+				add_permanent_claim = A93
+			}
+			1715 = {
+				add_permanent_claim = A93
+			}
+			1701 = {
+				add_permanent_claim = A93
+			}
+			1705 = {
+				add_permanent_claim = A93
+			}
+		}
+	}
+	wwu_build_the_manaforges = {
+		icon = mission_blue_essence
+		position = 7
+        
+		required_missions = { wwu_tempest_keep }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			OR = {
+				1706 = {
+					owned_by = B92
+				}
+				owns = 1706
+			}
+			OR = {
+				1709 = {
+					owned_by = B92
+				}
+				owns = 1709
+			}
+			OR = {
+				1715 = {
+					owned_by = B92
+				}
+				owns = 1715
+			}
+			OR = {
+				1701 = {
+					owned_by = B92
+				}
+				owns = 1701
+			}
+			OR = {
+				1705 = {
+					owned_by = B92
+				}
+				owns = 1705
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1706
+				province_id = 1709
+				province_id = 1715
+				province_id = 1701
+				province_id = 1705
+			}
+        }
+		effect = {
+			1717 = {
+				add_base_production = -5
+				add_devastation = 25
+				add_unrest = 10
+				remove_building = wow_market_1
+				remove_building = wow_temple_1
+				remove_building = wow_mine_1
+				remove_building = wow_tavern_1
+			}
+			1706 = {
+				cede_province = A93
+				add_base_production = 2
+				add_or_improve_mine = yes
+			}
+			1709 = {
+				cede_province = A93
+				add_base_production = 2
+				add_or_improve_mine = yes
+			}
+			1715 = {
+				cede_province = A93
+				add_base_production = 2
+				add_or_improve_mine = yes
+			}
+			1701 = {
+				cede_province = A93
+				add_base_production = 2
+				add_or_improve_mine = yes
+			}
+			1705 = {
+				cede_province = A93
+				add_base_production = 2
+				add_or_improve_mine = yes
+			}
+			add_prestige = 50
+			add_stability = 3				
 			add_country_modifier = {
-				name = "kiljaedens_favored"
+				name = "active_manaforges"
 				duration = -1
 			}
-			grant_independence = yes
-			add_army_tradition = 25
-			region_shadowmoon_valley = {
-				add_permanent_claim = A93
-			}
-			add_historical_friend = B92
-			B92 = {
-				add_historical_friend = A93
-				add_trust = {
-					who = A93
-					value = 200
-					mutual = yes
+			region_netherstorm = {
+				add_permanent_province_modifier = {
+					name = manaforge_damage_netherstorm
+					duration = -1
 				}
-			}
-			remove_historical_friend = B87
-			B87 = {
-				remove_historical_friend = A93
 			}
 		}
 	}
-	wwu_shattrath_city = {
-		icon = mission_burning_city
-        position = 7
-		
-		required_missions = { wwu_lord_of_outland }
+	wwu_fortify_tempest_keep = {
+		icon = mission_blacksmithing
+		position = 8
+        
+		required_missions = { wwu_build_the_manaforges }
 		
 		ai_weight = {
 			factor = 3
 		}
         
 		trigger = {
-			OR = {
-				1641 = {
-					owned_by = B92
-				}
-				owns = 1641
-			}
-		}
-		provinces_to_highlight = {
-            province_id = 1641
-        }
-		effect = {
-			1641 = {
-				cede_province = A93
-				change_culture = culture_blood_elf
-				change_religion = fel
-				add_devastation = 25
-				add_unrest = 10
-			}
-			region_nagrand = {
-				add_permanent_claim = A93
-			}
-		}
-	}
-	wwu_develop_shattrath_city = {
-		icon = mission_tools
-        position = 8
-        
-		required_missions = { wwu_shattrath_city }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			owns = 1641
-			is_core = 1641
+			owns = 1717
+			is_core = 1717
 			treasury = 500
-			adm_power = 200
-			dip_power = 200
-			mil_power = 200
+			adm_power = 100
+			dip_power = 100
+			mil_power = 300
 		}
 		provinces_to_highlight = {
-            province_id = 1641
+            province_id = 1717
         }
 		effect = {
 			add_treasury = -500
-			add_adm_power = -200
-			add_dip_power = -200
-			add_mil_power = -200
-			1641 = {
+			add_adm_power = -100
+			add_dip_power = -100
+			add_mil_power = -300
+			1717 = {
 				add_or_improve_fort = yes
-				add_or_improve_marketplace = yes
-				add_or_improve_mine = yes
-                
+				add_or_improve_barracks = yes
+				add_or_improve_arsenal = yes
 				add_base_tax = 2
 				add_base_production = 2
 				add_base_manpower = 4
@@ -182,221 +196,6 @@ wwu_sunfury_column_3 = {
 			}
 		}
 	}
-	wwu_garadar = {
-		icon = mission_burning_city
-        position = 9
-        
-		required_missions = { }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-            mission_completed = wwu_lord_of_outland
-			OR = {
-				1628 = {
-					owned_by = B92
-				}
-				owns = 1628
-			}
-		}
-		provinces_to_highlight = {
-            province_id = 1628
-        }
-		effect = {
-			1628 = {
-				cede_province = A93
-				change_culture = culture_blood_elf
-				change_religion = fel
-				add_devastation = 25
-				add_unrest = 10
-			}
-			add_accepted_culture = culture_maghar_orc
-		}
-	}
-	wwu_develop_garadar = {
-		icon = mission_tools
-        position = 10
-		
-        
-		required_missions = { wwu_garadar }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			owns = 1628
-			is_core = 1628
-			treasury = 500
-			adm_power = 200
-			dip_power = 200
-			mil_power = 200
-		}
-		provinces_to_highlight = {
-            province_id = 1628
-        }
-		effect = {
-			add_treasury = -500
-			add_adm_power = -200
-			add_dip_power = -200
-			add_mil_power = -200
-			1628 = {
-				add_or_improve_fort = yes
-				add_or_improve_marketplace = yes
-				add_or_improve_mine = yes
-				add_base_tax = 2
-				add_base_production = 2
-				add_base_manpower = 4
-				center_of_trade = 2
-				change_trade_goods = adamantite
-				add_permanent_province_modifier = {
-					name = sunfury_regional_capital
-					duration = -1
-				}
-			}
-		}
-	}
-	wwu_invade_northrend = {
-		icon = mission_frozen_throne
-        position = 14
-		
-        
-		required_missions = {
-			wwu_summon_kiljaeden
-			wwu_invade_azeroth_dark_portal
-			}
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			1268 = {
-				owner = {
-					defensive_war_with = A93
-				}
-			}
-		}
-		provinces_to_highlight = {
-            province_id = 1268
-        }
-		effect = {
-			continent_northrend = {
-				add_claim = A93
-			}
-			1268 = {
-				add_permanent_claim = A93
-			}
-		}
-	}
-	wwu_destroy_the_lich_king = {
-		icon = mission_achievement_boss_lichking
-        position = 15
-		
-        
-		required_missions = { wwu_invade_northrend }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			has_global_flag = destroyed_helm_flag
-		}
-		provinces_to_highlight = {
-            province_id = 1268
-        }
-		effect = {
-			add_absolutism = 50
-			add_prestige = 200
-			add_stability = 3
-			add_treasury = 15000
-			add_war_exhaustion = -20
-		}
-	}
-	wwu_burn_the_trees = {
-		icon = mission_world_tree
-        position = 16
-		        
-		required_missions = { wwu_destroy_the_lich_king }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			has_global_flag = nordrassil_burned
-			has_global_flag = teldrassil_burned
-		}
-		provinces_to_highlight = {
-			OR = {
-            province_id = 1334
-            province_id = 1065
-			}
-        }
-		effect = {
-			custom_tooltip = burn_the_world_trees_tt
-			hidden_effect = {
-				every_province = {
-					limit = {
-						NOT = { continent = continent_outland }
-						religion = arcane
-					}
-					change_religion = fel
-					add_devastation = 50
-					add_unrest = 10
-				}
-				every_province = {
-					limit = {
-						NOT = { religion = fel }
-						NOT = { continent = continent_outland }
-						development = 20
-					}
-					add_devastation = 50
-					add_unrest = 10
-					add_base_tax = -2
-					add_base_production = -2
-					add_base_manpower = -2
-				}				
-				every_province = {
-					limit = {
-						NOT = { religion = fel }
-						NOT = { continent = continent_outland }
-						NOT = { development = 20 }
-					}
-					change_religion = fel
-					add_devastation = 100
-					add_unrest = 10
-					add_base_tax = -5
-					add_base_production = -5
-					add_base_manpower = -5
-				}
-				every_country = {
-					limit = {
-						religion = arcane
-						NOT = { continent = continent_outland }
-					}
-					change_religion = fel
-					add_stability = -3
-					add_prestige = -100
-					add_corruption = 10
-					add_war_exhaustion = 15
-				}
-				every_country = {
-					limit = {
-						NOT = { religion = fel }
-						NOT = { continent = continent_outland }
-					}
-					add_stability = -6
-					add_prestige = -200
-					add_corruption = 20
-					add_war_exhaustion = 25
-				}
-			}
-		}
-	}		
 }
 
 wwu_sunfury_column_2 = { 
@@ -409,22 +208,18 @@ wwu_sunfury_column_2 = {
 		tag = A93
 	}
 	
-	wwu_battle_at_icecrown = { 
+	wwu_failure_at_icecrown = { 
 		icon = mission_frozen_throne
 		position = 2
 		completed_by = 621.12.31
         
 		required_missions = { wwu_embrace_illidans_teachings }
 		
-		ai_weight = {
-			factor = 3
-		}
-        
 		trigger = {
-			OR = {
-				has_global_flag = illidan_loser
-				has_global_flag = destroyed_helm_flag
-			}
+			custom_trigger_tooltip = {
+                tooltip = LOSE_FROZEN_THRONE_WAR_TT
+                has_global_flag = illidan_loser
+            }
 		}
 		provinces_to_highlight = {
             owned_by = P11
@@ -440,6 +235,7 @@ wwu_sunfury_column_2 = {
 			}
 		}
 	}
+    
 	wwu_sunfury_hold = {
 		icon = mission_blood_elf_female
 		position = 5
@@ -1165,17 +961,17 @@ wwu_sunfury_column_2 = {
 	}
 }
 
-wwu_sunfury_column_1 = { 
-	slot = 1
+wwu_sunfury_column_3 = { 
+	slot = 3
 	generic = no
 	ai = yes
     has_country_shield = yes
     
 	potential = {
 		tag = A93
-	}
-
-	wwu_embrace_illidans_teachings = { 
+	} 
+    
+    wwu_embrace_illidans_teachings = { 
 		icon = mission_kaelthas
 		position = 1
 		completed_by = 621.12.31
@@ -1208,11 +1004,15 @@ wwu_sunfury_column_1 = {
 			}
 		}
 	}	
-	wwu_tempest_keep = {
-		icon = mission_draenei_male
-		position = 6
+    
+	wwu_convert_to_fel = { 
+		icon = mission_essence
+		position = 3
+		completed_by = 621.12.31
         
-		required_missions = { wwu_sunfury_hold }
+		required_missions = { 
+            wwu_embrace_illidans_teachings
+        }
 		
 		ai_weight = {
 			factor = 3
@@ -1220,170 +1020,156 @@ wwu_sunfury_column_1 = {
         
 		trigger = {
 			OR = {
-				1717 = {
-					owned_by = B92
+				B87 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
 				}
-				owns = 1717
+				B92 = {
+					has_opinion = {
+						who = ROOT
+						value = 75
+					}
+				}
+				num_of_owned_provinces_with = {
+					value = 3
+					religion = fel
+				}		
+				religion = fel
+			}
+		}
+		effect = {
+			remove_country_modifier = no_power_source
+			add_stability = -1
+			add_corruption = 5
+			change_religion = fel
+			set_ruler_religion = fel
+			set_heir_religion = fel
+			every_owned_province = {
+				change_religion = fel
+				add_devastation = 15
+				add_unrest = 5
+				add_local_autonomy = -25
+			}
+			add_army_professionalism = 0.25
+			add_absolutism = 25
+		}
+	}
+	wwu_kiljaedens_favored = { 
+		icon = mission_eradar
+		position = 4
+        
+		required_missions = { wwu_convert_to_fel }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			OR = {
+				papal_influence = 50
+				B92 = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
 			}
 		}
 		provinces_to_highlight = {
-            province_id = 1717
+            owned_by = B92
         }
 		effect = {
-			1717 = {
+			add_country_modifier = {
+				name = "kiljaedens_favored"
+				duration = -1
+			}
+			grant_independence = yes
+			add_army_tradition = 25
+			region_shadowmoon_valley = {
+				add_permanent_claim = A93
+			}
+			add_historical_friend = B92
+			B92 = {
+				add_historical_friend = A93
+				add_trust = {
+					who = A93
+					value = 200
+					mutual = yes
+				}
+			}
+			remove_historical_friend = B87
+			B87 = {
+				remove_historical_friend = A93
+			}
+		}
+	}
+	wwu_shattrath_city = {
+		icon = mission_burning_city
+        position = 7
+		
+		required_missions = { wwu_lord_of_outland }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			OR = {
+				1641 = {
+					owned_by = B92
+				}
+				owns = 1641
+			}
+		}
+		provinces_to_highlight = {
+            province_id = 1641
+        }
+		effect = {
+			1641 = {
 				cede_province = A93
 				change_culture = culture_blood_elf
 				change_religion = fel
 				add_devastation = 25
 				add_unrest = 10
 			}
-			1706 = {
-				add_permanent_claim = A93
-			}
-			1709 = {
-				add_permanent_claim = A93
-			}
-			1715 = {
-				add_permanent_claim = A93
-			}
-			1701 = {
-				add_permanent_claim = A93
-			}
-			1705 = {
+			region_nagrand = {
 				add_permanent_claim = A93
 			}
 		}
 	}
-	wwu_build_the_manaforges = {
-		icon = mission_blue_essence
-		position = 7
+	wwu_develop_shattrath_city = {
+		icon = mission_tools
+        position = 8
         
-		required_missions = { wwu_tempest_keep }
+		required_missions = { wwu_shattrath_city }
 		
 		ai_weight = {
 			factor = 3
 		}
         
 		trigger = {
-			OR = {
-				1706 = {
-					owned_by = B92
-				}
-				owns = 1706
-			}
-			OR = {
-				1709 = {
-					owned_by = B92
-				}
-				owns = 1709
-			}
-			OR = {
-				1715 = {
-					owned_by = B92
-				}
-				owns = 1715
-			}
-			OR = {
-				1701 = {
-					owned_by = B92
-				}
-				owns = 1701
-			}
-			OR = {
-				1705 = {
-					owned_by = B92
-				}
-				owns = 1705
-			}
-		}
-		provinces_to_highlight = {
-			OR = {
-				province_id = 1706
-				province_id = 1709
-				province_id = 1715
-				province_id = 1701
-				province_id = 1705
-			}
-        }
-		effect = {
-			1717 = {
-				add_base_production = -5
-				add_devastation = 25
-				add_unrest = 10
-				remove_building = wow_market_1
-				remove_building = wow_temple_1
-				remove_building = wow_mine_1
-				remove_building = wow_tavern_1
-			}
-			1706 = {
-				cede_province = A93
-				add_base_production = 2
-				add_or_improve_mine = yes
-			}
-			1709 = {
-				cede_province = A93
-				add_base_production = 2
-				add_or_improve_mine = yes
-			}
-			1715 = {
-				cede_province = A93
-				add_base_production = 2
-				add_or_improve_mine = yes
-			}
-			1701 = {
-				cede_province = A93
-				add_base_production = 2
-				add_or_improve_mine = yes
-			}
-			1705 = {
-				cede_province = A93
-				add_base_production = 2
-				add_or_improve_mine = yes
-			}
-			add_prestige = 50
-			add_stability = 3				
-			add_country_modifier = {
-				name = "active_manaforges"
-				duration = -1
-			}
-			region_netherstorm = {
-				add_permanent_province_modifier = {
-					name = manaforge_damage_netherstorm
-					duration = -1
-				}
-			}
-		}
-	}
-	wwu_fortify_tempest_keep = {
-		icon = mission_blacksmithing
-		position = 8
-        
-		required_missions = { wwu_build_the_manaforges }
-		
-		ai_weight = {
-			factor = 3
-		}
-        
-		trigger = {
-			owns = 1717
-			is_core = 1717
+			owns = 1641
+			is_core = 1641
 			treasury = 500
-			adm_power = 100
-			dip_power = 100
-			mil_power = 300
+			adm_power = 200
+			dip_power = 200
+			mil_power = 200
 		}
 		provinces_to_highlight = {
-            province_id = 1717
+            province_id = 1641
         }
 		effect = {
 			add_treasury = -500
-			add_adm_power = -100
-			add_dip_power = -100
-			add_mil_power = -300
-			1717 = {
+			add_adm_power = -200
+			add_dip_power = -200
+			add_mil_power = -200
+			1641 = {
 				add_or_improve_fort = yes
-				add_or_improve_barracks = yes
-				add_or_improve_arsenal = yes
+				add_or_improve_marketplace = yes
+				add_or_improve_mine = yes
+                
 				add_base_tax = 2
 				add_base_production = 2
 				add_base_manpower = 4
@@ -1395,6 +1181,221 @@ wwu_sunfury_column_1 = {
 			}
 		}
 	}
+	wwu_garadar = {
+		icon = mission_burning_city
+        position = 9
+        
+		required_missions = { }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+            mission_completed = wwu_lord_of_outland
+			OR = {
+				1628 = {
+					owned_by = B92
+				}
+				owns = 1628
+			}
+		}
+		provinces_to_highlight = {
+            province_id = 1628
+        }
+		effect = {
+			1628 = {
+				cede_province = A93
+				change_culture = culture_blood_elf
+				change_religion = fel
+				add_devastation = 25
+				add_unrest = 10
+			}
+			add_accepted_culture = culture_maghar_orc
+		}
+	}
+	wwu_develop_garadar = {
+		icon = mission_tools
+        position = 10
+		
+        
+		required_missions = { wwu_garadar }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			owns = 1628
+			is_core = 1628
+			treasury = 500
+			adm_power = 200
+			dip_power = 200
+			mil_power = 200
+		}
+		provinces_to_highlight = {
+            province_id = 1628
+        }
+		effect = {
+			add_treasury = -500
+			add_adm_power = -200
+			add_dip_power = -200
+			add_mil_power = -200
+			1628 = {
+				add_or_improve_fort = yes
+				add_or_improve_marketplace = yes
+				add_or_improve_mine = yes
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 4
+				center_of_trade = 2
+				change_trade_goods = adamantite
+				add_permanent_province_modifier = {
+					name = sunfury_regional_capital
+					duration = -1
+				}
+			}
+		}
+	}
+	wwu_invade_northrend = {
+		icon = mission_frozen_throne
+        position = 14
+		
+        
+		required_missions = {
+			wwu_summon_kiljaeden
+			wwu_invade_azeroth_dark_portal
+			}
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			1268 = {
+				owner = {
+					defensive_war_with = A93
+				}
+			}
+		}
+		provinces_to_highlight = {
+            province_id = 1268
+        }
+		effect = {
+			continent_northrend = {
+				add_claim = A93
+			}
+			1268 = {
+				add_permanent_claim = A93
+			}
+		}
+	}
+	wwu_destroy_the_lich_king = {
+		icon = mission_achievement_boss_lichking
+        position = 15
+		
+        
+		required_missions = { wwu_invade_northrend }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			has_global_flag = destroyed_helm_flag
+		}
+		provinces_to_highlight = {
+            province_id = 1268
+        }
+		effect = {
+			add_absolutism = 50
+			add_prestige = 200
+			add_stability = 3
+			add_treasury = 15000
+			add_war_exhaustion = -20
+		}
+	}
+	wwu_burn_the_trees = {
+		icon = mission_world_tree
+        position = 16
+		        
+		required_missions = { wwu_destroy_the_lich_king }
+		
+		ai_weight = {
+			factor = 3
+		}
+        
+		trigger = {
+			has_global_flag = nordrassil_burned
+			has_global_flag = teldrassil_burned
+		}
+		provinces_to_highlight = {
+			OR = {
+            province_id = 1334
+            province_id = 1065
+			}
+        }
+		effect = {
+			custom_tooltip = burn_the_world_trees_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						NOT = { continent = continent_outland }
+						religion = arcane
+					}
+					change_religion = fel
+					add_devastation = 50
+					add_unrest = 10
+				}
+				every_province = {
+					limit = {
+						NOT = { religion = fel }
+						NOT = { continent = continent_outland }
+						development = 20
+					}
+					add_devastation = 50
+					add_unrest = 10
+					add_base_tax = -2
+					add_base_production = -2
+					add_base_manpower = -2
+				}				
+				every_province = {
+					limit = {
+						NOT = { religion = fel }
+						NOT = { continent = continent_outland }
+						NOT = { development = 20 }
+					}
+					change_religion = fel
+					add_devastation = 100
+					add_unrest = 10
+					add_base_tax = -5
+					add_base_production = -5
+					add_base_manpower = -5
+				}
+				every_country = {
+					limit = {
+						religion = arcane
+						NOT = { continent = continent_outland }
+					}
+					change_religion = fel
+					add_stability = -3
+					add_prestige = -100
+					add_corruption = 10
+					add_war_exhaustion = 15
+				}
+				every_country = {
+					limit = {
+						NOT = { religion = fel }
+						NOT = { continent = continent_outland }
+					}
+					add_stability = -6
+					add_prestige = -200
+					add_corruption = 20
+					add_war_exhaustion = 25
+				}
+			}
+		}
+	}		
 }
 
 wwu_sunfury_column_4 = { 
@@ -1407,6 +1408,29 @@ wwu_sunfury_column_4 = {
 		tag = A93
 	}
 	
+    wwu_victory_at_icecrown = { 
+		icon = mission_frozen_throne
+		position = 2
+		completed_by = 621.12.31
+        
+		required_missions = { wwu_embrace_illidans_teachings }
+		
+		trigger = {
+			custom_trigger_tooltip = {
+                tooltip = WIN_FROZEN_THRONE_WAR_TT
+                has_global_flag = illidan_winner
+            }
+		}
+        
+		effect = {
+            add_adm_power = 200
+            add_dip_power = 200
+            add_mil_power = 200
+            
+			add_stability = 1
+		}
+	}
+    
 	wwu_masters_of_fel = {
 		icon = mission_blood_elf_male
 		position = 5

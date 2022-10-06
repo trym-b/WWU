@@ -1,0 +1,173 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_illidari_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B87
+	}
+    
+	has_country_shield = yes
+	
+    
+}
+
+wwu_illidari_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B87
+	}
+    
+	has_country_shield = yes
+	
+	wwu_illidan_falters = {
+		icon = mission_cannibalize
+        position = 3
+        
+		required_missions = { 
+            wwu_assault_the_frozen_throne
+        }
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = LOSE_FROZEN_THRONE_WAR_TT
+                has_global_flag = illidan_loser
+            }
+		}
+        
+		effect = {
+			add_stability = -1
+		}
+	}
+}
+
+wwu_illidari_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B87
+	}
+    
+	has_country_shield = yes
+	
+	wwu_consolidate_forces = {
+		icon = mission_avatar_of_sargeras
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            stability = 1
+            is_at_war = no
+            army_size_percentage = 0.8
+            manpower_percentage = 0.8
+		}
+        
+		effect = {
+			add_mil_power = 250
+            add_country_modifier = {
+                name = mission_we_are_prepared
+                duration = 10950
+            }
+		}
+	}
+    
+    wwu_assault_the_frozen_throne = {
+		icon = mission_scourge
+        position = 2
+        
+		required_missions = { wwu_consolidate_forces }
+        
+		trigger = {
+            OR = {
+                custom_trigger_tooltip = {
+                    tooltip = SUNFURY_ARRIVED_TT
+                    has_global_flag = sunfury_arrived
+                }
+                NOT = { exists = A93 }
+            }
+            if = {
+                limit = {
+                    exists = P11
+                }
+                exists = P11
+            }
+            else = {
+                always = yes
+            }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = P11
+                }
+                country_event = { id = wwu_mission_illidari.1 days = 30 }
+            }
+            else = {
+                custom_tooltip = SCOURGE_ALREADY_DEAD_TT
+                
+                add_prestige = 25
+                
+                hidden_effect = {
+                    set_global_flag = illidan_winner
+                }
+            }
+			
+		}
+	}
+}
+
+wwu_illidari_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B87
+	}
+    
+	has_country_shield = yes
+	
+	wwu_illidan_victorious = {
+		icon = mission_demonhunter_chaos_strike
+        position = 3
+        
+		required_missions = { 
+            wwu_assault_the_frozen_throne
+        }
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = WIN_FROZEN_THRONE_WAR_TT
+                has_global_flag = illidan_winner
+            }
+		}
+        
+		effect = {
+			add_prestige = 100
+		}
+	}
+}
+
+wwu_illidari_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B87
+	}
+    
+	has_country_shield = yes
+	
+    
+}
