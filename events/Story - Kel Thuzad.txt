@@ -1,0 +1,323 @@
+namespace = wwu_kel_thuzad
+
+# Arrival of Naxxramas
+country_event = {
+	id = wwu_kel_thuzad.1
+	title = wwu_kel_thuzad.1.title
+	desc = wwu_kel_thuzad.1.desc
+	picture = NAXXRAMAS_eventPicture
+	
+	trigger = { 
+        NOT = { has_global_flag = arrival_of_naxxramas }
+        
+        culture_group = culture_group_scourge
+        controls = 3075 # Fields of Stratholme
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = arrival_of_naxxramas
+        }
+    }
+	
+	option = {
+		name = wwu_kel_thuzad.1.option.a
+        
+        # Fields of Stratholme
+		3075 = {
+			add_base_tax = 5
+			add_base_production = 5
+			add_base_manpower = 5
+            
+			change_trade_goods = army_supplies
+            
+			change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            
+			change_province_name = "Naxxramas"
+			rename_capital = "Naxxramas"
+            
+            if = {
+                limit = {
+                    has_dlc = "Leviathan"
+                }
+                
+                add_great_project = {
+                    type = gp_naxxramas
+                }
+            }
+		}
+	}
+}
+
+# Capture of Naxxramas
+country_event = {
+	id = wwu_kel_thuzad.2
+	title = wwu_kel_thuzad.2.title
+	desc = wwu_kel_thuzad.2.desc
+	picture = NAXXRAMAS_eventPicture
+    
+	trigger = { 
+        NOT = { has_global_flag = kelthuzads_phylactery_event }
+        has_global_flag = arrival_of_naxxramas
+        
+        NOT = { culture_group = culture_group_scourge }
+        
+        controls = 3075 # Fields of Stratholme
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = kelthuzads_phylactery_event
+        }
+    }
+	
+    # Destroy It
+	option = {
+		name = wwu_kel_thuzad.2.option.a
+        
+        if = {
+            limit = {
+                exists = P12 # Cult of the Damned
+            }
+            
+            if = {
+                limit = {
+                    P12 = {
+                        has_ruler = "Kel'Thuzad"
+                    }
+                }
+                    
+                kill_ruler = yes
+            }
+            
+            P12 = {
+                add_country_modifier = {
+                    name = destruction_of_kelthuzad
+                    duration = -1
+                }
+                
+                add_stability = -6
+            }
+        }
+        
+        if = {
+            limit = {
+                exists = P52 # Scourge of Lordaeron
+            }
+            
+            add_country_modifier = {
+                name = destruction_of_kelthuzad
+                duration = 36500
+            }
+            
+            add_stability = -6
+        }
+	}
+    
+    # Exploit It
+    option = {
+		name = wwu_kel_thuzad.2.option.b
+        
+        custom_tooltip = SCOURGE_CORRUPTION_TT
+        
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+            set_ruler_flag = scourge_corruption
+        }
+	}
+    
+    # Sell it
+    option = {
+		name = wwu_kel_thuzad.2.option.c
+        
+        add_years_of_income = 5
+	}
+}
+
+# Scourge Corruption
+country_event = {
+	id = wwu_kel_thuzad.3
+	title = wwu_kel_thuzad.3.title
+	desc = wwu_kel_thuzad.3.desc
+	picture = NOTH_THE_PLAGUEBRINGER_eventPicture
+    
+	trigger = { 
+        has_ruler_flag = scourge_corruption
+        any_owned_province = {
+            is_in_capital_area = yes
+            NOT = { religion = cult_of_the_damned }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 360
+        
+        modifier = {
+            factor = 0.9
+            
+            NOT = { stability = 0 }
+        }
+        modifier = {
+            factor = 0.9
+            
+            NOT = { stability = -1 }
+        }
+        modifier = {
+            factor = 0.9
+            
+            NOT = { stability = -2 }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_in_capital_area = yes
+                    NOT = { religion = cult_of_the_damned }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_kel_thuzad.3.option.a
+        goto  = target_province
+        
+        event_target:target_province = {
+            change_culture = culture_cultist
+            change_religion = cult_of_the_damned
+        }
+	}
+    
+    option = {
+		name = wwu_kel_thuzad.3.option.b
+        goto  = target_province
+        
+        add_mil_power = -100
+	}
+}
+
+# Kel'Thuzad's Offer
+country_event = {
+	id = wwu_kel_thuzad.4
+	title = wwu_kel_thuzad.4.title
+	desc = wwu_kel_thuzad.4.desc
+	picture = KELTHUZAD_eventPicture
+    
+	trigger = { 
+        NOT = { has_country_flag = kelthuzads_offer }
+        has_ruler_flag = scourge_corruption
+	}
+	
+	mean_time_to_happen = {
+		months = 1200
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = kelthuzads_offer
+        }
+    }
+	
+	option = {
+		name = wwu_kel_thuzad.4.option.a
+        
+        define_ruler = {
+            name = "Kel'Thuzad" 	 
+            dynasty = "the Damned" 		
+            adm = 6	
+            dip = 5
+            mil = 5
+        }
+        
+        set_ruler_flag = ruler_portrait_portrait_kelthuzad
+        
+        setup_spellcaster_history = {
+            APTITUDE = 5
+            FINESSE = 5
+            CONCENTRATION = 5
+            MANA = 5
+            necromancy = yes
+        }
+        set_ruler_flag = mage_personality
+        add_ruler_personality = cruel_personality
+        set_ruler_flag = is_immortal
+	}
+    
+    option = {
+		name = wwu_kel_thuzad.4.option.b
+        goto  = target_province
+        
+        change_adm = -2
+        change_dip = -2
+        change_mil = -2
+        
+        add_stability = -1
+	}
+}
+
+# Fall of [Root.GetName]
+country_event = {
+	id = wwu_kel_thuzad.5
+	title = wwu_kel_thuzad.5.title
+	desc = wwu_kel_thuzad.5.desc
+	picture = KELTHUZAD_2_eventPicture
+    
+	trigger = { 
+        NOT = { religion = cult_of_the_damned }
+        dominant_religion = cult_of_the_damned
+	}
+	
+	mean_time_to_happen = {
+		months = 120
+        
+        modifier = {
+            factor = 0.5
+            
+            
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = kelthuzads_offer
+        }
+    }
+	
+	option = {
+		name = wwu_kel_thuzad.5.option.a
+        
+        change_technology_group = tech_scourge
+        change_unit_type = tech_scourge
+        
+        change_religion = cult_of_the_damned
+        
+        set_ruler_religion = cult_of_the_damned
+        set_ruler_culture = culture_cultist
+        
+        capital_scope = {
+            change_religion = cult_of_the_damned
+        }
+	}
+    
+    option = {
+		name = wwu_kel_thuzad.5.option.b
+        
+        add_stability = -1
+	}
+}
+
+
+
