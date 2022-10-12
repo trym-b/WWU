@@ -1,0 +1,329 @@
+#-------------------------------------
+# ADM Aspect
+#-------------------------------------
+calm_the_sea_aspect = {
+	cost = 100
+    
+	modifier = {
+		global_unrest = -2
+	}
+    
+	monarch_power = adm
+    
+	ai_will_do = {
+		factor = 10
+        
+		modifier = {
+			factor = 2
+            
+			NOT = { religious_unity = 0.8 }
+		}
+        
+		modifier = {
+			factor = 2
+            
+			unrest = 4
+			NOT = { stability = 0 }
+		}
+	}
+}
+consult_the_tidesages_aspect = {
+	cost = 100
+    
+	modifier = {
+		dip_tech_cost_modifier = -0.1
+	}
+    
+	monarch_power = adm
+    
+	ai_will_do = {
+		factor = 15
+	}
+}
+muster_the_fleet_aspect = {
+	cost = 100
+    
+	modifier = {
+		global_sailors_modifier = 0.1
+        sailors_recovery_speed = 0.1
+	}
+    
+	monarch_power = adm
+    
+	ai_will_do = {
+		factor = 15
+	}
+}
+#-------------------------------------
+# DIP Aspect
+#-------------------------------------
+tirasian_communities_aspect = {
+	cost = 100
+    
+	effect = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = diplomatic_tidesage_opinion
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion_reverse
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = tirasian_roots
+				}
+				remove_province_modifier = tirasian_roots
+			}
+			every_owned_province = {
+				limit = {
+					religion = tidemother
+				}
+				if = {
+					limit = {
+						NOT = { culture_group = ROOT }
+						has_owner_accepted_culture = no
+						has_owner_culture = no
+					}
+					add_province_modifier = {
+						name = tirasian_community_same_culture_group
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						owner = {
+							has_cultural_union = no
+						}
+						culture_group = ROOT
+						has_owner_accepted_culture = no
+					}
+					add_province_modifier = {
+						name = tirasian_community_wrong_culture
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+    
+	modifier = {
+		tolerance_own = 2
+	}
+    
+	monarch_power = dip
+    
+	ai_will_do = {
+		factor = 15
+        
+		modifier = {
+			factor = 10
+			dominant_religion = tidemother
+		}
+        
+		modifier = {
+			factor = 0.01
+			NOT = { dominant_religion = tidemother }
+		}
+	}
+}
+
+insular_tidesages_aspect = {
+	cost = 100
+	effect = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = diplomatic_tidesage_opinion
+					}
+				}
+				remove_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion_reverse
+				}
+			}
+			every_owned_province = {
+				limit = {
+					culture_group = culture_group_human
+				}
+				add_province_modifier = {
+					name = tirasian_roots
+					duration = -1
+				}
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = tirasian_community_wrong_culture
+						has_province_modifier = tirasian_community_same_culture_group
+					}
+				}
+				if = {
+					limit = { has_province_modifier = tirasian_community_wrong_culture }
+					remove_province_modifier = tirasian_community_wrong_culture
+				}
+				if = {
+					limit = { has_province_modifier = tirasian_community_same_culture_group }
+					remove_province_modifier = tirasian_community_same_culture_group
+				}
+			}
+		}
+	}
+	
+    modifier = {
+		prestige_per_development_from_conversion = 0.25
+	}
+	
+    monarch_power = dip
+    
+	ai_will_do = {
+		factor = 15
+		modifier = {
+			factor = 0
+			dominant_religion = tidemother
+		}
+		modifier = {
+			factor = 10
+			NOT = { dominant_religion = tidemother }
+		}
+	}
+}
+
+diplomatic_tidesages_aspect = {
+	cost = 100
+    
+	effect = {
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					culture_group = culture_group_human
+					NOT = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = diplomatic_tidesage_opinion
+						}
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = diplomatic_tidesage_opinion_reverse
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = tirasian_roots
+				}
+				remove_province_modifier = tirasian_roots
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = tirasian_community_wrong_culture
+						has_province_modifier = tirasian_community_same_culture_group
+					}
+				}
+				if = {
+					limit = { has_province_modifier = tirasian_community_wrong_culture }
+					remove_province_modifier = tirasian_community_wrong_culture
+				}
+				if = {
+					limit = { has_province_modifier = tirasian_community_same_culture_group }
+					remove_province_modifier = tirasian_community_same_culture_group
+				}
+			}
+		}
+	}
+    
+	modifier = {
+		development_cost = -0.1
+	}
+    
+	monarch_power = dip
+    
+	ai_will_do = {
+		factor = 15
+	}
+}
+
+#-------------------------------------
+# MIL Aspect
+#-------------------------------------
+tirasian_marines_aspect = {
+	cost = 100
+    
+	modifier = {
+		allowed_marine_fraction = 0.2
+	}
+    
+	monarch_power = mil
+    
+	ai_will_do = {
+		factor = 10
+        
+		modifier = {
+			factor = 2
+			is_at_war = yes
+			NOT = { manpower_percentage = 0.9 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { manpower_percentage = 0.5 }
+		}
+	}
+}
+
+sea_wards_aspect = {
+	cost = 100
+    
+	modifier = {
+		defensiveness = 0.25
+	}
+    
+	monarch_power = mil
+    
+	ai_will_do = {
+		factor = 12
+		modifier = {
+			factor = 2
+			is_at_war = yes
+		}
+	}
+}
+
+pride_of_the_sea_aspect = {
+	cost = 100
+    
+	modifier = {
+		land_morale = 0.05
+		naval_morale = 0.05
+	}
+    
+	monarch_power = mil
+    
+	ai_will_do = {
+		factor = 12
+		modifier = {
+			factor = 2
+			is_at_war = yes
+		}
+	}
+}
