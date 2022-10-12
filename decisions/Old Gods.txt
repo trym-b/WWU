@@ -363,16 +363,24 @@ country_decisions = {
 		
 		ai_will_do = {
 			factor = 1
-			modifier = {
+            
+            # AI will only use this if it has a big surplus of ADM
+            modifier = {
 				factor = 0
-				NOT = { adm = 4 }
+				
+                NOT = { adm_power = 800 }
 			}
+            
+            # AI will only use this if N'Zoth is present in their lands
 			modifier = {
 				factor = 0
-				NOT = { adm_power = 200 }
+				
+                NOT = {
+                    any_owned_province = {
+                        religion = nzoth
+                    }
+                }
 			}
 		}
-		
-		ai_importance = 300
 	}
 }
