@@ -20,7 +20,7 @@ wow_fort_1 = {
 	time = 30
     
 	modifier = {
-		fort_level = 2
+		fort_level = 1
 	}
 	
 	onmap = yes
@@ -81,7 +81,7 @@ wow_fort_2 = {
     make_obsolete = wow_fort_1
     
 	modifier = {
-		fort_level = 4
+		fort_level = 2
 	}
 	
 	onmap = yes
@@ -144,7 +144,7 @@ wow_fort_3 = {
     make_obsolete = wow_fort_2
     
 	modifier = {
-		fort_level = 6
+		fort_level = 3
 	}
 	
 	onmap = yes
@@ -207,7 +207,7 @@ wow_fort_4 = {
     make_obsolete = wow_fort_3
 
 	modifier = {
-		fort_level = 8
+		fort_level = 4
 	}
 	
 	onmap = yes
@@ -231,6 +231,69 @@ wow_fort_4 = {
 	on_destroyed = {
 		remove_development_from_building = {
 			building = wow_fort_4
+			type = manpower
+			value = 4
+		}
+	}
+	on_obsolete = {
+	}
+    
+	ai_will_do = {
+        factor = 1
+        
+        modifier = {
+            factor = 30
+            development = 20
+        }
+        modifier = {
+            factor = 50
+            development = 30
+        }
+        modifier = {
+            factor = 50
+            province_has_center_of_trade_of_level = 1
+        }    
+        modifier = {
+            factor = 70
+            province_has_center_of_trade_of_level = 2
+        }
+        modifier = {
+            factor = 90
+            province_has_center_of_trade_of_level = 3
+        }
+    }
+}
+
+wow_fort_5 = {
+	cost = 2000
+	time = 60
+    make_obsolete = wow_fort_4
+
+	modifier = {
+		fort_level = 5
+	}
+	
+	onmap = yes
+	
+	influencing_fort = yes
+	
+    on_built = {
+        if = { 
+			limit = { has_global_flag = enable_building_logging }
+			log = "DEBUG - [Root.GetName] - on_built - wow_fort_5 "
+		}
+        
+		add_development_from_upgrading_or_building = {
+			building = wow_fort_5
+			obsolete_building = wow_fort_4
+			type = manpower
+			value = 5
+			upgrade_value = 1
+		}
+	}
+	on_destroyed = {
+		remove_development_from_building = {
+			building = wow_fort_5
 			type = manpower
 			value = 4
 		}
