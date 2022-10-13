@@ -1,265 +1,374 @@
-namespace = kul_tiras
+namespace = wwu_kul_tiras
  
-# Loss of Tirasian Heir
+# Appointment of Heir
 country_event = {
-	id = kul_tiras.1
-	title = kul_tiras.1.title
-	desc = kul_tiras.1.desc
+	id = wwu_kul_tiras.1
+	title = wwu_kul_tiras.1.title
+	desc = wwu_kul_tiras.1.desc
 	picture = KUL_TIRAN_SHIP_eventPicture
 	
 	trigger = {
-		tag = A14
+		primary_culture = culture_kul_tiran
 		has_reform = admiralty_reform
-		OR = { 
-			and = { has_country_modifier = kul_tiras_proudmoore not = { dynasty = "Proudmoore" } }
-			and = { has_country_modifier = kul_tiras_waycrest not = { dynasty = "Waycrest" } }
-			and = { has_country_modifier = kul_tiras_stormsong not = { dynasty = "Stormsong" } }
-			and = { has_country_modifier = kul_tiras_ashvane not = { dynasty = "Ashvane" } }
-		}
 		has_heir = no
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		months = 12
 	}
 	
 	option = {
-		name = kul_tiras.1.option.a
+		name = wwu_kul_tiras.1.option.a
 		
-		add_prestige = -10
+        define_heir = {
+            claim = 90
+            dynasty = ROOT
+        }
+        
 		if = {
-			limit = {
-				has_country_modifier = kul_tiras_proudmoore
-			}
-			define_heir = {
-				max_random_mil = 5
-				max_random_adm = 5
-				max_random_dip = 5
-				age = 15
-				claim = 90
-				dynasty = "Proudmoore"
-			}
-		}
-		if = {
-			limit = {
-				has_country_modifier = kul_tiras_stormsong
-			}
-			define_heir = {
-				max_random_mil = 4
-				max_random_adm = 4
-				max_random_dip = 6
-				age = 15
-				claim = 50
-				dynasty = "Stormsong"
-			}
-		}
-		if = {
-			limit = {
-				has_country_modifier = kul_tiras_waycrest
-			}
-			define_heir = {
-				max_random_mil = 6
-				max_random_adm = 4
-				max_random_dip = 4
-				age = 15
-				claim = 50
-				dynasty = "Waycrest"
-			}
-		}
-		if = {
-			limit = {
-				has_country_modifier = kul_tiras_ashvane
-			}
-			define_heir = {
-				max_random_mil = 4
-				max_random_adm = 6
-				max_random_dip = 4
-				age = 15
-				claim = 50
-				dynasty = "Ashvane"
-			}
-		}
+            limit = {
+                dynasty = "Proudmoore"
+            }
+            
+            add_faction_influence = {
+                faction = house_proudmoore
+                influence = 20
+            }
+        }
+        if = {
+            limit = {
+                dynasty = "Stormsong"
+            }
+            
+            add_faction_influence = {
+                faction = house_stormsong
+                influence = 20
+            }
+        }
+        if = {
+            limit = {
+                dynasty = "Ashvane"
+            }
+            
+            add_faction_influence = {
+                faction = house_ashvane
+                influence = 20
+            }
+        }
+        if = {
+            limit = {
+                dynasty = "Waycrest"
+            }
+            
+            add_faction_influence = {
+                faction = house_waycrest
+                influence = 20
+            }
+        }
 	}
 	
 	option = {
-		name = kul_tiras.1.option.b
+		name = wwu_kul_tiras.1.option.b
 		
-		add_prestige = 10
+        trigger = {
+            NOT = { dynasty = "Proudmoore" }
+        }
+        
 		define_heir = {
-			max_random_mil = 5
-			max_random_adm = 5
-			max_random_dip = 5
-			age = 15
-			claim = 50
-			dynasty = "Proudmoore"
-		}
-		if = {
-			limit = { corruption = 10 }
-			random = { 
-				chance = 90 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
-		else_if = {
-			limit = { corruption = 8 }
-			random = { 
-				chance = 80 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
-		else_if = {
-			limit = { corruption = 6 }
-			random = { 
-				chance = 70 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
-		else_if = {
-			limit = { corruption = 4 }
-			random = { 
-				chance = 60 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
-		else_if = {
-			limit = { corruption = 2 }
-			random = { 
-				chance = 50 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
-		else = {
-			random = { 
-				chance = 40 
-				
-				capital_scope = {
-					pretender_rebels = 2
-				}
-			}
-		}
+            claim = 50
+            dynasty = "Proudmoore"
+        }
+        
+		add_faction_influence = {
+            faction = house_proudmoore
+            influence = 20
+        }
+	}
+    
+    option = {
+		name = wwu_kul_tiras.1.option.c
+		
+        trigger = {
+            NOT = { dynasty = "Stormsong" }
+        }
+        
+		define_heir = {
+            claim = 50
+            dynasty = "Stormsong"
+        }
+        
+		add_faction_influence = {
+            faction = house_stormsong
+            influence = 20
+        }
+	}
+    
+    option = {
+		name = wwu_kul_tiras.1.option.d
+		
+        trigger = {
+            NOT = { dynasty = "Ashvane" }
+        }
+        
+		define_heir = {
+            claim = 50
+            dynasty = "Ashvane"
+        }
+        
+		add_faction_influence = {
+            faction = house_ashvane
+            influence = 20
+        }
+	}
+    
+    option = {
+		name = wwu_kul_tiras.1.option.e
+		
+        trigger = {
+            NOT = { dynasty = "Waycrest" }
+        }
+        
+		define_heir = {
+            claim = 50
+            dynasty = "Waycrest"
+        }
+        
+		add_faction_influence = {
+            faction = house_waycrest
+            influence = 20
+        }
 	}
 }
 
-# Loss of Tirasian Heir
+# Proudmoore Arrogance
 country_event = {
-	id = kul_tiras.2
-	title = kul_tiras.2.title
-	desc = kul_tiras.2.desc
-	picture = KUL_TIRAN_SHIP_eventPicture
+	id = wwu_kul_tiras.10
+	title = wwu_kul_tiras.10.title
+	desc = wwu_kul_tiras.10.desc
+	picture = KUL_TIRAS_eventPicture
 	
 	trigger = {
-		NOT = { tag = A14 }
+		primary_culture = culture_kul_tiran
 		has_reform = admiralty_reform
-		has_heir = no
+		has_faction = house_proudmoore
+        faction_influence = {
+            faction = house_proudmoore
+            influence = 60
+        }
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		years = 50
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_proudmoore
+                influence = 80
+            }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_proudmoore
+                influence = 90
+            }
+        }
 	}
 	
 	option = {
-		name = kul_tiras.2.option.a
+		name = wwu_kul_tiras.10.option.a
 		
-		trigger = { has_estate = estate_nobility }
-		define_heir = {
-			max_random_mil = 7
-			max_random_adm = 4
-			max_random_dip = 4
-			claim = 70
-		}
-		add_estate_influence_modifier = {
-			estate = estate_nobility
-			desc = ESTATE_RULE_POWER
-			influence = 20
-			duration = 7300
-		}
-		add_estate_loyalty = {
-			estate = estate_nobility
-			loyalty = 15
-		}
-		#
-		add_estate_loyalty = {
-			estate = estate_clergy
-			loyalty = -10
-		}
-		add_estate_loyalty = {
-			estate = estate_traders
-			loyalty = -10
-		}
+        add_faction_influence = {
+            faction = house_proudmoore
+            influence = -30
+        }
 	}
-	option = {
-		name = kul_tiras.2.option.b
+	
+    option = {
+		name = wwu_kul_tiras.10.option.b
 		
-		trigger = { has_estate = estate_clergy }
-		define_heir = {
-			max_random_mil = 4
-			max_random_adm = 4
-			max_random_dip = 7
-			claim = 70
-		}
-		add_estate_influence_modifier = {
-			estate = estate_nobility
-			desc = ESTATE_RULE_POWER
-			influence = 20
-			duration = 7300
-		}
-		add_estate_loyalty = {
-			estate = estate_clergy
-			loyalty = 15
-		}
-		#
-		add_estate_loyalty = {
-			estate = estate_nobility
-			loyalty = -10
-		}
-		add_estate_loyalty = {
-			estate = estate_traders
-			loyalty = -10
-		}
-	}
-	option = {
-		name = kul_tiras.2.option.c
-		
-		trigger = { has_estate = estate_traders }
-		define_heir = {
-			max_random_mil = 4
-			max_random_adm = 7
-			max_random_dip = 4
-			claim = 70
-		}
-		add_estate_influence_modifier = {
-			estate = estate_traders
-			desc = ESTATE_RULE_POWER
-			influence = 20
-			duration = 7300
-		}
-		add_estate_loyalty = {
-			estate = estate_traders
-			loyalty = 15
-		}
-		#
-		add_estate_loyalty = {
-			estate = estate_nobility
-			loyalty = -10
-		}
-		add_estate_loyalty = {
-			estate = estate_clergy
-			loyalty = -10
-		}
+        add_stability = -1
 	}
 }
+
+# Stormsong Presumption
+country_event = {
+	id = wwu_kul_tiras.11
+	title = wwu_kul_tiras.11.title
+	desc = wwu_kul_tiras.11.desc
+	picture = KUL_TIRAN_CHAPLAIN_eventPicture
+	
+	trigger = {
+		primary_culture = culture_kul_tiran
+		has_reform = admiralty_reform
+		has_faction = house_stormsong
+        faction_influence = {
+            faction = house_stormsong
+            influence = 60
+        }
+        any_owned_province = {
+            continent = continent_kul_tiras
+        }
+	}
+	
+	mean_time_to_happen = {
+		years = 50
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_stormsong
+                influence = 80
+            }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_stormsong
+                influence = 90
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_kul_tiras.11.option.a
+		
+        add_faction_influence = {
+            faction = house_stormsong
+            influence = -30
+        }
+	}
+	
+    option = {
+		name = wwu_kul_tiras.11.option.b
+		
+        random_owned_province = {
+            limit = {
+                continent = continent_kul_tiras
+            }
+            
+            spawn_rebels = {
+                type = pretender_rebels
+                size = 3
+            }
+        }
+	}
+}
+
+# Ashvane Greed
+country_event = {
+	id = wwu_kul_tiras.12
+	title = wwu_kul_tiras.12.title
+	desc = wwu_kul_tiras.12.desc
+	picture = BLACKROCK_FOUNDRY_eventPicture
+	
+	trigger = {
+		primary_culture = culture_kul_tiran
+		has_reform = admiralty_reform
+		has_faction = house_ashvane
+        faction_influence = {
+            faction = house_ashvane
+            influence = 60
+        }
+	}
+	
+	mean_time_to_happen = {
+		years = 50
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_ashvane
+                influence = 80
+            }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_ashvane
+                influence = 90
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_kul_tiras.12.option.a
+		
+        add_faction_influence = {
+            faction = house_ashvane
+            influence = -30
+        }
+	}
+	
+    option = {
+		name = wwu_kul_tiras.12.option.b
+		
+        add_prestige = -25
+	}
+}
+
+# Waycrest Autonomy
+country_event = {
+	id = wwu_kul_tiras.13
+	title = wwu_kul_tiras.13.title
+	desc = wwu_kul_tiras.13.desc
+	picture = BLESSING_OF_MIGHT_eventPicture
+	
+	trigger = {
+		primary_culture = culture_kul_tiran
+		has_reform = admiralty_reform
+		has_faction = house_waycrest
+        faction_influence = {
+            faction = house_waycrest
+            influence = 60
+        }
+	}
+	
+	mean_time_to_happen = {
+		years = 50
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_waycrest
+                influence = 80
+            }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            faction_influence = {
+                faction = house_waycrest
+                influence = 90
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_kul_tiras.13.option.a
+		
+        add_faction_influence = {
+            faction = house_waycrest
+            influence = -30
+        }
+	}
+	
+    option = {
+		name = wwu_kul_tiras.13.option.b
+		
+        add_mil_power = -100
+	}
+}
+
