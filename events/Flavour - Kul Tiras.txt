@@ -372,3 +372,271 @@ country_event = {
 	}
 }
 
+
+# Missions
+country_event = {
+	id = wwu_kul_tiras.100
+	title = wwu_kul_tiras.100.title
+	desc = wwu_kul_tiras.100.desc
+	picture = BARADIN_HOLD_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.100.option.a
+		
+        add_prestige = 25
+        
+        if = {
+            limit = {
+                exists = TOB
+            }
+            
+            region_tol_barad = {
+                limit = {
+                    owned_by = ROOT
+                }
+                
+                cede_province = TOB
+            }
+        }
+        else = {
+            release = TOB
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	
+    option = {
+		name = wwu_kul_tiras.100.option.b
+        
+        if = {
+            limit = {
+                tag = A14 # Kul Tiras
+            }
+            
+            # Stromgarde
+            A16 = {
+                add_opinion = {
+                    who = A14
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+            # Gilneas
+            A12 = {
+                add_opinion = {
+                    who = A14
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+        }
+        if = {
+            limit = {
+                tag = A12 # Gilneas
+            }
+            
+            # Stromgarde
+            A16 = {
+                add_opinion = {
+                    who = A12
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+            # Kul Tiras
+            A14 = {
+                add_opinion = {
+                    who = A12
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+        }
+        if = {
+            limit = {
+                tag = A16 # Stromgarde
+            }
+            
+            # Kul Tiras
+            A14 = {
+                add_opinion = {
+                    who = A16
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+            # Gilneas
+            A12 = {
+                add_opinion = {
+                    who = A16
+                    modifier = refused_to_resolve_tol_barad_dispute
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        # Tol Barad
+        if = {
+            limit = {
+                exists = TOB
+            }
+            TOB = {
+                country_event = { id = wwu_kul_tiras.102 }
+            }
+        }
+    }
+}
+
+# Fate of Tol Barad
+country_event = {
+	id = wwu_kul_tiras.101
+	title = wwu_kul_tiras.101.title
+	desc = wwu_kul_tiras.101.desc
+	picture = BARADIN_HOLD_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.101.option.a
+		
+        add_prestige = -10
+	}
+}
+
+# Tol Barad
+country_event = {
+	id = wwu_kul_tiras.102
+	title = wwu_kul_tiras.102.title
+	desc = wwu_kul_tiras.102.desc
+	picture = BARADIN_HOLD_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.102.option.a
+		
+        add_prestige = 50
+        
+        ai_chance = {
+            factor = 70
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.102.option.b
+		
+        # Kul Tiras
+        A14 = {
+            create_subject = {
+                subject_type = personal_union
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.102.option.c
+		
+        # Gilneas
+        A12 = {
+            create_subject = {
+                subject_type = personal_union
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.102.option.d
+		
+
+        # Stromgarde
+        A16 = {
+            create_subject = {
+                subject_type = personal_union
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+
+# Kul Tiran Pretenders
+country_event = {
+	id = wwu_kul_tiras.103
+	title = wwu_kul_tiras.103.title
+	desc = wwu_kul_tiras.103.desc
+	picture = KUL_TIRAN_SHIP_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.103.option.a
+		
+        define_ruler = {
+            dynasty = A14
+            male = yes
+        }
+        
+        add_opinion = {
+            who = A14
+            modifier = accepted_kul_tiran_ruler
+        }
+        A14 = {
+            add_opinion = {
+                who = ROOT
+                modifier = accepted_kul_tiran_ruler
+            }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.103.option.b
+		
+        add_opinion = {
+            who = A14
+            modifier = rejected_kul_tiran_ruler
+        }
+        A14 = {
+            add_opinion = {
+                who = ROOT
+                modifier = rejected_kul_tiran_ruler
+            }
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
