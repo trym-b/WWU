@@ -1,473 +1,473 @@
-#--------------------------------------
-# Name
-#--------------------------------------
-wwu_kul_tiras_column_1 = {
-	slot = 1
-	generic = no
-	ai = yes
+# #--------------------------------------
+# # Name
+# #--------------------------------------
+# wwu_kul_tiras_column_1 = {
+	# slot = 1
+	# generic = no
+	# ai = yes
     
-	potential = {
-		tag = A14
-	}
+	# potential = {
+		# tag = A14
+	# }
     
-	has_country_shield = yes
+	# has_country_shield = yes
 	
-	wwu_gilnean_diplomacy = {
-		icon = mission_titan_spirits
-        position = 5
+	# wwu_gilnean_diplomacy = {
+		# icon = mission_titan_spirits
+        # position = 5
         
-		required_missions = { wwu_kul_tiras_security }
+		# required_missions = { wwu_kul_tiras_security }
         
-		trigger = {
-            OR = {
-                NOT = { exists = A12 } # Gilneas
-                has_opinion = {
-                    who = A12 # Gilneas
-                    value = 150
-                }
-            }
-		}
+		# trigger = {
+            # OR = {
+                # NOT = { exists = A12 } # Gilneas
+                # has_opinion = {
+                    # who = A12 # Gilneas
+                    # value = 150
+                # }
+            # }
+		# }
         
-		effect = {
-			if = {
-                limit = {
-                    exists = A12
-                }
+		# effect = {
+			# if = {
+                # limit = {
+                    # exists = A12
+                # }
                 
-                create_alliance = A12
-                add_historical_friend = A12 # Gilneas
+                # create_alliance = A12
+                # add_historical_friend = A12 # Gilneas
                 
-                # Gilneas
-                A12 = {
-                    add_historical_friend = ROOT
-                }
-            }
-            else = {
-                add_mil_power = 100
-            }
-		}
-	}
+                # # Gilneas
+                # A12 = {
+                    # add_historical_friend = ROOT
+                # }
+            # }
+            # else = {
+                # add_mil_power = 100
+            # }
+		# }
+	# }
     
-    wwu_stromgarde_diplomacy = {
-		icon = mission_titan_spirits
-        position = 6
+    # wwu_stromgarde_diplomacy = {
+		# icon = mission_titan_spirits
+        # position = 6
         
-		required_missions = { wwu_gilnean_diplomacy }
+		# required_missions = { wwu_gilnean_diplomacy }
         
-		trigger = {
-            OR = {
-                NOT = { exists = A16 } # Stromgarde
-                has_opinion = {
-                    who = A16 # Stromgarde
-                    value = 150
-                }
-            }
-		}
+		# trigger = {
+            # OR = {
+                # NOT = { exists = A16 } # Stromgarde
+                # has_opinion = {
+                    # who = A16 # Stromgarde
+                    # value = 150
+                # }
+            # }
+		# }
         
-		effect = {
-			if = {
-                limit = {
-                    exists = A16
-                }
+		# effect = {
+			# if = {
+                # limit = {
+                    # exists = A16
+                # }
                 
-                create_alliance = A16
-                add_historical_friend = A16 # Stromgarde
+                # create_alliance = A16
+                # add_historical_friend = A16 # Stromgarde
                 
-                # Stromgarde
-                A16 = {
-                    add_historical_friend = ROOT
-                }
-            }
-            else = {
-                add_mil_power = 100
-            }
-		}
-	}
+                # # Stromgarde
+                # A16 = {
+                    # add_historical_friend = ROOT
+                # }
+            # }
+            # else = {
+                # add_mil_power = 100
+            # }
+		# }
+	# }
     
-    wwu_fate_of_tol_barad = {
-		icon = mission_titan_spirits
-        position = 7
+    # wwu_fate_of_tol_barad = {
+		# icon = mission_titan_spirits
+        # position = 7
         
-		required_missions = { wwu_stromgarde_diplomacy }
+		# required_missions = { wwu_stromgarde_diplomacy }
         
-		trigger = {
-            OR = {
-                NOT = { exists = A16 } # Stromgarde
-                NOT = { exists = A12 } # Gilneas
+		# trigger = {
+            # OR = {
+                # NOT = { exists = A16 } # Stromgarde
+                # NOT = { exists = A12 } # Gilneas
                 
-                has_opinion = {
-                    who = A16 # Stromgarde
-                    value = 150
-                }
-                has_opinion = {
-                    who = A12 # Gilneas
-                    value = 150
-                }
-            }
-		}
+                # has_opinion = {
+                    # who = A16 # Stromgarde
+                    # value = 150
+                # }
+                # has_opinion = {
+                    # who = A12 # Gilneas
+                    # value = 150
+                # }
+            # }
+		# }
         
-		effect = {
-            hidden_effect = {
-                # Baradin Hold
-                2010 = {
-                    owner = {
-                        save_event_target_as = tol_barad_owner
-                    }
-                }
-            }
+		# effect = {
+            # hidden_effect = {
+                # # Baradin Hold
+                # 2010 = {
+                    # owner = {
+                        # save_event_target_as = tol_barad_owner
+                    # }
+                # }
+            # }
             
-            if = {
-                limit = {
-                    event_target:tol_barad_owner = {
-                        OR = {
-                            tag = ROOT
-                            tag = A16 # Stromgarde
-                            tag = A12 # Gilneas
-                        }
-                    }
-                }
-                event_target:tol_barad_owner = {
-                    country_event = { id = wwu_kul_tiras.100 days = 3 }
-                }
-            }
-            else = {
-                country_event = { id = wwu_kul_tiras.101 days = 3 }
-            }
-		}
-	}
+            # if = {
+                # limit = {
+                    # event_target:tol_barad_owner = {
+                        # OR = {
+                            # tag = ROOT
+                            # tag = A16 # Stromgarde
+                            # tag = A12 # Gilneas
+                        # }
+                    # }
+                # }
+                # event_target:tol_barad_owner = {
+                    # country_event = { id = wwu_kul_tiras.100 days = 3 }
+                # }
+            # }
+            # else = {
+                # country_event = { id = wwu_kul_tiras.101 days = 3 }
+            # }
+		# }
+	# }
     
-    wwu_gilnean_interest = {
-		icon = mission_titan_spirits
-        position = 8
+    # wwu_gilnean_interest = {
+		# icon = mission_titan_spirits
+        # position = 8
         
-		required_missions = { wwu_fate_of_tol_barad }
+		# required_missions = { wwu_fate_of_tol_barad }
         
-		trigger = {
-            OR = {
-                is_rival = A12 # Gilneas
-                has_opinion = {
-                    who = A12 # Gilneas
-                    value = 175
-                }
-            }
-		}
+		# trigger = {
+            # OR = {
+                # is_rival = A12 # Gilneas
+                # has_opinion = {
+                    # who = A12 # Gilneas
+                    # value = 175
+                # }
+            # }
+		# }
         
-		effect = {
-            # Gilneas
-            A12 = {
-                country_event = { id = wwu_kul_tiras.103 days = 3 }
-            }
-		}
-	}
-}
+		# effect = {
+            # # Gilneas
+            # A12 = {
+                # country_event = { id = wwu_kul_tiras.103 days = 3 }
+            # }
+		# }
+	# }
+# }
 
-wwu_kul_tiras_column_2 = {
-	slot = 2
-	generic = no
-	ai = yes
+# wwu_kul_tiras_column_2 = {
+	# slot = 2
+	# generic = no
+	# ai = yes
     
-	potential = {
-		tag = A14
-	}
+	# potential = {
+		# tag = A14
+	# }
     
-	has_country_shield = yes
+	# has_country_shield = yes
 	
-	wwu_standing_army_of_kul_tiras = {
-		icon = mission_titan_spirits
-        position = 1
+	# wwu_standing_army_of_kul_tiras = {
+		# icon = mission_titan_spirits
+        # position = 1
         
-		required_missions = { }
+		# required_missions = { }
         
-		trigger = {
-            army_size_percentage = 1.0
-		}
+		# trigger = {
+            # army_size_percentage = 1.0
+		# }
         
-		effect = {
-			add_mil_power = 100
+		# effect = {
+			# add_mil_power = 100
             
-            area_brennadam = {
-                add_permanent_claim = ROOT
-            }
-            area_sagehold = {
-                add_permanent_claim = ROOT
-            }
-        }
-	}
+            # area_brennadam = {
+                # add_permanent_claim = ROOT
+            # }
+            # area_sagehold = {
+                # add_permanent_claim = ROOT
+            # }
+        # }
+	# }
     
-    wwu_problems_of_stormsong_valley = {
-		icon = mission_titan_spirits
-        position = 2
+    # wwu_problems_of_stormsong_valley = {
+		# icon = mission_titan_spirits
+        # position = 2
         
-		required_missions = { wwu_standing_army_of_kul_tiras }
+		# required_missions = { wwu_standing_army_of_kul_tiras }
         
-		trigger = {
-            area_brennadam = {
-                type = all
+		# trigger = {
+            # area_brennadam = {
+                # type = all
                 
-                owned_by = ROOT
-            }
-            area_sagehold = {
-                type = all
+                # owned_by = ROOT
+            # }
+            # area_sagehold = {
+                # type = all
                 
-                owned_by = ROOT
-            }
-		}
-		provinces_to_highlight = {
-            OR = {
-                area = area_brennadam
-                area = area_sagehold
-            }
-			NOT = { owned_by = ROOT }
-		}
+                # owned_by = ROOT
+            # }
+		# }
+		# provinces_to_highlight = {
+            # OR = {
+                # area = area_brennadam
+                # area = area_sagehold
+            # }
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
-            add_adm_power = 100
+		# effect = {
+            # add_adm_power = 100
             
-			if = {
-                limit = {
-                    exists = FRE # Freehold
-                }
+			# if = {
+                # limit = {
+                    # exists = FRE # Freehold
+                # }
                 
-                # Freehold
-                FRE = {
-                    every_owned_province = {
-                        limit = {
-                            region = region_kul_tiras
-                        }
+                # # Freehold
+                # FRE = {
+                    # every_owned_province = {
+                        # limit = {
+                            # region = region_kul_tiras
+                        # }
                         
-                        add_permanent_claim = ROOT
-                    }
-                }
-            }
-        }
-	}
+                        # add_permanent_claim = ROOT
+                    # }
+                # }
+            # }
+        # }
+	# }
     
-    wwu_deal_with_the_freehold = {
-		icon = mission_titan_spirits
-        position = 3
+    # wwu_deal_with_the_freehold = {
+		# icon = mission_titan_spirits
+        # position = 3
         
-		required_missions = { wwu_problems_of_stormsong_valley }
+		# required_missions = { wwu_problems_of_stormsong_valley }
         
-		trigger = {
-            OR = {
-                NOT = { exists = FRE } # Freehold
-                FRE = {
-                    is_subject_of = ROOT
-                }
-            }
-		}
-		provinces_to_highlight = {
-            owned_by = FRE
-			NOT = { owned_by = ROOT }
-		}
+		# trigger = {
+            # OR = {
+                # NOT = { exists = FRE } # Freehold
+                # FRE = {
+                    # is_subject_of = ROOT
+                # }
+            # }
+		# }
+		# provinces_to_highlight = {
+            # owned_by = FRE
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
-            if = {
-                limit = {
-                    FRE = {
-                        is_subject_of = ROOT
-                    }
-                }
+		# effect = {
+            # if = {
+                # limit = {
+                    # FRE = {
+                        # is_subject_of = ROOT
+                    # }
+                # }
                 
-                create_subject = {
-                    subject_type = march
-                    subject = FRE
-                }
+                # create_subject = {
+                    # subject_type = march
+                    # subject = FRE
+                # }
                 
-                add_opinion = {
-                    who = FRE
-                    modifier = friendly_freehold
-                }
+                # add_opinion = {
+                    # who = FRE
+                    # modifier = friendly_freehold
+                # }
                 
-                add_country_modifier = {
-                    name = freehold_ports
-                    duration = 9125
-                }
+                # add_country_modifier = {
+                    # name = freehold_ports
+                    # duration = 9125
+                # }
                 
-                FRE = {
-                    define_ruler = {
-                        name = "Flynn"
-                        dynasty = "Fairwind"
-                        dip = 4
-                    }
+                # FRE = {
+                    # define_ruler = {
+                        # name = "Flynn"
+                        # dynasty = "Fairwind"
+                        # dip = 4
+                    # }
                     
-                    add_opinion = {
-                        who = ROOT
-                        modifier = friendly_freehold
-                    }
-                }
-            }
-            else = {
-                every_owned_province = {
-                    limit = {
-                        is_core = FRE
-                    }
+                    # add_opinion = {
+                        # who = ROOT
+                        # modifier = friendly_freehold
+                    # }
+                # }
+            # }
+            # else = {
+                # every_owned_province = {
+                    # limit = {
+                        # is_core = FRE
+                    # }
                     
-                    add_core = ROOT
-                }
+                    # add_core = ROOT
+                # }
             
-                add_stability = 1
-                add_years_of_income = 3
+                # add_stability = 1
+                # add_years_of_income = 3
                 
-                add_country_modifier = {
-                    name = domination_of_freehold
-                    duration = 9125
-                }
-            }
-        }
-	}
+                # add_country_modifier = {
+                    # name = domination_of_freehold
+                    # duration = 9125
+                # }
+            # }
+        # }
+	# }
     
-    wwu_kul_tiras_security = {
-		icon = mission_titan_spirits
-        position = 4
+    # wwu_kul_tiras_security = {
+		# icon = mission_titan_spirits
+        # position = 4
         
-		required_missions = { wwu_deal_with_the_freehold }
+		# required_missions = { wwu_deal_with_the_freehold }
         
-		trigger = {
-            region_kul_tiras = {
-                type = all
-                owned_by = ROOT
-            }
-		}
-		provinces_to_highlight = {
-            region = region_kul_tiras
-			NOT = { owned_by = ROOT }
-		}
+		# trigger = {
+            # region_kul_tiras = {
+                # type = all
+                # owned_by = ROOT
+            # }
+		# }
+		# provinces_to_highlight = {
+            # region = region_kul_tiras
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
-            add_stability = 1
-            change_government_reform_progress = 50
+		# effect = {
+            # add_stability = 1
+            # change_government_reform_progress = 50
             
-            add_country_modifier = {
-                name = kul_tiras_security
-                duration = 9125
-            }
+            # add_country_modifier = {
+                # name = kul_tiras_security
+                # duration = 9125
+            # }
             
-            region_tol_barad = {
-                limit = {
-                    has_port = yes
-                }
+            # region_tol_barad = {
+                # limit = {
+                    # has_port = yes
+                # }
                 
-                add_permanent_claim = ROOT
-            }
+                # add_permanent_claim = ROOT
+            # }
             
-            # Balor
-            4111 = {
-                add_permanent_claim = ROOT
-            }
+            # # Balor
+            # 4111 = {
+                # add_permanent_claim = ROOT
+            # }
             
-            # Crestfall
-            4107 = {
-                add_permanent_claim = ROOT
-            }
+            # # Crestfall
+            # 4107 = {
+                # add_permanent_claim = ROOT
+            # }
             
-            # Menethil Harbor
-            1055 = {
-                add_permanent_claim = ROOT
-            }
+            # # Menethil Harbor
+            # 1055 = {
+                # add_permanent_claim = ROOT
+            # }
             
-            # Southshore
-            991 = {
-                add_permanent_claim = ROOT
-            }
+            # # Southshore
+            # 991 = {
+                # add_permanent_claim = ROOT
+            # }
             
-            # Faldir's Cove
-            506 = {
-                add_permanent_claim = ROOT
-            }
-        }
-	}
-}
+            # # Faldir's Cove
+            # 506 = {
+                # add_permanent_claim = ROOT
+            # }
+        # }
+	# }
+# }
 
-wwu_kul_tiras_column_3 = {
-	slot = 3
-	generic = no
-	ai = yes
+# wwu_kul_tiras_column_3 = {
+	# slot = 3
+	# generic = no
+	# ai = yes
     
-	potential = {
-		tag = A14
-	}
+	# potential = {
+		# tag = A14
+	# }
     
-	has_country_shield = yes
+	# has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
-        position = 1
+	# wwu_mission = {
+		# icon = mission_titan_spirits
+        # position = 1
         
-		required_missions = { }
+		# required_missions = { }
         
-		trigger = {
+		# trigger = {
             
-		}
-		provinces_to_highlight = {
+		# }
+		# provinces_to_highlight = {
             
-			NOT = { owned_by = ROOT }
-		}
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
+		# effect = {
 			
-		}
-	}
-}
+		# }
+	# }
+# }
 
-wwu_kul_tiras_column_4 = {
-	slot = 4
-	generic = no
-	ai = yes
+# wwu_kul_tiras_column_4 = {
+	# slot = 4
+	# generic = no
+	# ai = yes
     
-	potential = {
-		tag = A14
-	}
+	# potential = {
+		# tag = A14
+	# }
     
-	has_country_shield = yes
+	# has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
-        position = 1
+	# wwu_mission = {
+		# icon = mission_titan_spirits
+        # position = 1
         
-		required_missions = { }
+		# required_missions = { }
         
-		trigger = {
+		# trigger = {
             
-		}
-		provinces_to_highlight = {
+		# }
+		# provinces_to_highlight = {
             
-			NOT = { owned_by = ROOT }
-		}
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
+		# effect = {
 			
-		}
-	}
-}
+		# }
+	# }
+# }
 
-wwu_kul_tiras_column_5 = {
-	slot = 5
-	generic = no
-	ai = yes
+# wwu_kul_tiras_column_5 = {
+	# slot = 5
+	# generic = no
+	# ai = yes
     
-	potential = {
-		tag = A14
-	}
+	# potential = {
+		# tag = A14
+	# }
     
-	has_country_shield = yes
+	# has_country_shield = yes
 	
-	wwu_mission = {
-		icon = mission_titan_spirits
-        position = 1
+	# wwu_mission = {
+		# icon = mission_titan_spirits
+        # position = 1
         
-		required_missions = { }
+		# required_missions = { }
         
-		trigger = {
+		# trigger = {
             
-		}
-		provinces_to_highlight = {
+		# }
+		# provinces_to_highlight = {
             
-			NOT = { owned_by = ROOT }
-		}
+			# NOT = { owned_by = ROOT }
+		# }
         
-		effect = {
+		# effect = {
 			
-		}
-	}
-}
+		# }
+	# }
+# }

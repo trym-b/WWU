@@ -1,123 +1,68 @@
-estate_coup = {
+# Clergy
+estate_coup_clergy = {
 	potential = {
-		OR = {
-            AND = {
-                has_estate = estate_clergy
-                estate_influence = { estate = estate_clergy influence = 80 }
-            }
-            AND = {
-                has_estate = estate_traders
-                estate_influence = { estate = estate_traders influence = 80 }
-            }
-            AND = {
-                has_estate = estate_nobility
-                estate_influence = { estate = estate_nobility influence = 80 }
-            }
-            AND = {
-                has_estate = estate_peasants
-                estate_influence = { estate = estate_peasants influence = 80 }
-            }
-            AND = {
-                has_estate = estate_slaves
-                estate_influence = { estate = estate_peasants influence = 80 }
+        has_no_estate_coup = yes
+    
+        has_estate = estate_clergy
+        NOT = {
+            estate_loyalty = {
+                estate = estate_clergy
+                loyalty = 80
             }
         }
+        estate_influence = { estate = estate_clergy influence = 60 }
 	}
 
 	can_start = {
-		OR = {
-            estate_influence = { estate = estate_clergy influence = 95 }
-            estate_influence = { estate = estate_traders influence = 95 }
-            estate_influence = { estate = estate_nobility influence = 95 }
-            estate_influence = { estate = estate_peasants influence = 95 }
-            estate_influence = { estate = estate_tribals influence = 95 }
+        NOT = {
+            estate_loyalty = {
+                estate = estate_clergy
+                loyalty = 80
+            }
         }
+        estate_influence = { estate = estate_clergy influence = 90 }
 	}
 	
 	can_stop = {
-        NOT = {
-            OR = {
-                estate_influence = { estate = estate_clergy influence = 80 }
-                estate_influence = { estate = estate_traders influence = 80 }
-                estate_influence = { estate = estate_nobility influence = 80 }
-                estate_influence = { estate = estate_peasants influence = 80 }
-                estate_influence = { estate = estate_tribals influence = 80 }
-            }
+        estate_loyalty = {
+            estate = estate_clergy
+            loyalty = 95
         }
+        NOT = { estate_influence = { estate = estate_clergy influence = 90 } }
 	}
 	
 	progress = {
-        # 80
         modifier = {
-            factor = 1
+            factor = -1
             
-            has_estate = estate_clergy
-            estate_influence = { estate = estate_clergy influence = 80 }
+            stability = 3
 		}
         modifier = {
             factor = 1
             
-            has_estate = estate_traders
-            estate_influence = { estate = estate_traders influence = 80 }
+            stability = 0
 		}
         modifier = {
             factor = 1
             
-            has_estate = estate_nobility
-            estate_influence = { estate = estate_nobility influence = 80 }
+            NOT = { stability = 0 }
 		}
         modifier = {
             factor = 1
             
-            has_estate = estate_peasants
-            estate_influence = { estate = estate_peasants influence = 80 }
-		}
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_tribals
-            estate_influence = { estate = estate_tribals influence = 80 }
-		}
-        
-        # 90
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_clergy
-            estate_influence = { estate = estate_clergy influence = 90 }
-		}
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_traders
-            estate_influence = { estate = estate_traders influence = 90 }
-		}
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_nobility
-            estate_influence = { estate = estate_nobility influence = 90 }
-		}
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_peasants
-            estate_influence = { estate = estate_peasants influence = 90 }
-		}
-        modifier = {
-            factor = 1
-            
-            has_estate = estate_tribals
-            estate_influence = { estate = estate_tribals influence = 90 }
+            NOT = { stability = -2 }
 		}
 	}
 	
 	can_end = {
-        had_country_flag = {
-            flag = estate_coup_active
-            days = 365
+        OR = {
+            estate_loyalty = {
+                estate = estate_clergy
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_clergy influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
         }
-        NOT = { num_of_rebel_armies = 1 }
 	}
 	
 	modifier = {
@@ -131,9 +76,428 @@ estate_coup = {
 	on_monthly = {
         random_events = { 
 			1000 = 0
-			20 =  wwu_estate_coup.10
-			10 =  wwu_estate_coup.11
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
 		}
 	}
 }
 
+# Traders
+estate_coup_traders = {
+	potential = {
+        has_no_estate_coup = yes
+    
+        has_estate = estate_traders
+        NOT = {
+            estate_loyalty = {
+                estate = estate_traders
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_traders influence = 60 }
+	}
+
+	can_start = {
+        NOT = {
+            estate_loyalty = {
+                estate = estate_traders
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_traders influence = 90 }
+	}
+	
+	can_stop = {
+        estate_loyalty = {
+            estate = estate_traders
+            loyalty = 95
+        }
+        NOT = { estate_influence = { estate = estate_traders influence = 90 } }
+	}
+	
+	progress = {
+        modifier = {
+            factor = -1
+            
+            stability = 3
+		}
+        modifier = {
+            factor = 1
+            
+            stability = 0
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = 0 }
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = -2 }
+		}
+	}
+	
+	can_end = {
+        OR = {
+            estate_loyalty = {
+                estate = estate_traders
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_traders influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
+        }
+	}
+	
+	modifier = {
+        min_autonomy = 25
+        global_unrest = 2
+	}
+
+	on_start = wwu_estate_coup.2
+	on_end = wwu_estate_coup.101
+	
+	on_monthly = {
+        random_events = { 
+			1000 = 0
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
+		}
+	}
+}
+
+# Nobility
+estate_coup_nobility = {
+	potential = {
+        has_no_estate_coup = yes
+    
+        has_estate = estate_nobility
+        NOT = {
+            estate_loyalty = {
+                estate = estate_nobility
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_nobility influence = 60 }
+	}
+
+	can_start = {
+        NOT = {
+            estate_loyalty = {
+                estate = estate_nobility
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_nobility influence = 90 }
+	}
+	
+	can_stop = {
+        estate_loyalty = {
+            estate = estate_nobility
+            loyalty = 95
+        }
+        NOT = { estate_influence = { estate = estate_nobility influence = 90 } }
+	}
+	
+	progress = {
+        modifier = {
+            factor = -1
+            
+            stability = 3
+		}
+        modifier = {
+            factor = 1
+            
+            stability = 0
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = 0 }
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = -2 }
+		}
+	}
+	
+	can_end = {
+        OR = {
+            estate_loyalty = {
+                estate = estate_nobility
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_nobility influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
+        }
+	}
+	
+	modifier = {
+        min_autonomy = 25
+        global_unrest = 2
+	}
+
+	on_start = wwu_estate_coup.3
+	on_end = wwu_estate_coup.102
+	
+	on_monthly = {
+        random_events = { 
+			1000 = 0
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
+		}
+	}
+}
+
+# Peasants
+estate_coup_peasants = {
+	potential = {
+        has_no_estate_coup = yes
+    
+        has_estate = estate_peasants
+        NOT = {
+            estate_loyalty = {
+                estate = estate_peasants
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_peasants influence = 60 }
+	}
+
+	can_start = {
+        NOT = {
+            estate_loyalty = {
+                estate = estate_peasants
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_peasants influence = 90 }
+	}
+	
+	can_stop = {
+        estate_loyalty = {
+            estate = estate_peasants
+            loyalty = 95
+        }
+        NOT = { estate_influence = { estate = estate_peasants influence = 90 } }
+	}
+	
+	progress = {
+        modifier = {
+            factor = -1
+            
+            stability = 3
+		}
+        modifier = {
+            factor = 1
+            
+            stability = 0
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = 0 }
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = -2 }
+		}
+	}
+	
+	can_end = {
+        OR = {
+            estate_loyalty = {
+                estate = estate_peasants
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_peasants influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
+        }
+	}
+	
+	modifier = {
+        min_autonomy = 25
+        global_unrest = 2
+	}
+
+	on_start = wwu_estate_coup.4
+	on_end = wwu_estate_coup.103
+	
+	on_monthly = {
+        random_events = { 
+			1000 = 0
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
+		}
+	}
+}
+
+# Tribals
+estate_coup_tribals = {
+	potential = {
+        has_no_estate_coup = yes
+    
+        has_estate = estate_tribals
+        NOT = {
+            estate_loyalty = {
+                estate = estate_tribals
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_tribals influence = 60 }
+	}
+
+	can_start = {
+        NOT = {
+            estate_loyalty = {
+                estate = estate_tribals
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_tribals influence = 90 }
+	}
+	
+	can_stop = {
+        estate_loyalty = {
+            estate = estate_tribals
+            loyalty = 95
+        }
+        NOT = { estate_influence = { estate = estate_tribals influence = 90 } }
+	}
+	
+	progress = {
+        modifier = {
+            factor = -1
+            
+            stability = 3
+		}
+        modifier = {
+            factor = 1
+            
+            stability = 0
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = 0 }
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = -2 }
+		}
+	}
+	
+	can_end = {
+        OR = {
+            estate_loyalty = {
+                estate = estate_tribals
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_tribals influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
+        }
+	}
+	
+	modifier = {
+        min_autonomy = 25
+        global_unrest = 2
+	}
+
+	on_start = wwu_estate_coup.5
+	on_end = wwu_estate_coup.104
+	
+	on_monthly = {
+        random_events = { 
+			1000 = 0
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
+		}
+	}
+}
+
+# Slaves
+estate_coup_slaves = {
+	potential = {
+        has_no_estate_coup = yes
+    
+        has_estate = estate_slaves
+        NOT = {
+            estate_loyalty = {
+                estate = estate_slaves
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_slaves influence = 60 }
+	}
+
+	can_start = {
+        NOT = {
+            estate_loyalty = {
+                estate = estate_slaves
+                loyalty = 80
+            }
+        }
+        estate_influence = { estate = estate_slaves influence = 90 }
+	}
+	
+	can_stop = {
+        estate_loyalty = {
+            estate = estate_slaves
+            loyalty = 95
+        }
+        NOT = { estate_influence = { estate = estate_slaves influence = 90 } }
+	}
+	
+	progress = {
+        modifier = {
+            factor = -1
+            
+            stability = 3
+		}
+        modifier = {
+            factor = 1
+            
+            stability = 0
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = 0 }
+		}
+        modifier = {
+            factor = 1
+            
+            NOT = { stability = -2 }
+		}
+	}
+	
+	can_end = {
+        OR = {
+            estate_loyalty = {
+                estate = estate_slaves
+                loyalty = 95
+            }
+            NOT = { estate_influence = { estate = estate_slaves influence = 90 } }
+            NOT = { num_of_rebel_armies = 1 }
+        }
+	}
+	
+	modifier = {
+        min_autonomy = 25
+        global_unrest = 2
+	}
+
+	on_start = wwu_estate_coup.6
+	on_end = wwu_estate_coup.105
+	
+	on_monthly = {
+        random_events = { 
+			1000 = 0
+			20 =  wwu_estate_coup.50
+			10 =  wwu_estate_coup.51
+		}
+	}
+}
