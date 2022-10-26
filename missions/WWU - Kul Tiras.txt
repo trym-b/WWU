@@ -159,6 +159,71 @@ wwu_kul_tiras_column_1 = {
             }
 		}
 	}
+    
+    wwu_restoration_of_old_ties = {
+		icon = mission_titan_spirits
+        position = 9
+        
+		required_missions = { wwu_gilnean_interest }
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = KUL_TIRAN_PRETENDER_TT
+                has_global_flag = kul_tiras_pretenders
+            }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    # Gilneas
+                    A12 = {
+                        dynasty = ROOT
+                    }
+                }
+                
+                A12 = {
+                    country_event = { id = wwu_kul_tiras.104 days = 3 }
+                }
+            }
+            else = {
+                add_casus_belli = {
+                    target = A12 # Gilneas
+                    type = cb_restore_personal_union_mission
+                }
+            }
+		}
+	}
+    
+    wwu_tirasian_union = {
+		icon = mission_titan_spirits
+        position = 10
+        
+		required_missions = { wwu_restoration_of_old_ties }
+        
+		trigger = {
+            A12 = {
+                is_subject_of = ROOT
+                is_subject_of_type = personal_union
+            }
+		}
+        
+		effect = {
+            add_prestige = 100
+            add_legitimacy = 100
+            
+            add_opinion = {
+                who = A12
+                modifier = shared_dynasties
+            }
+            A12 = {
+                add_opinion = {
+                    who = ROOT
+                    modifier = shared_dynasties
+                }
+            }
+		}
+	}
 }
 
 wwu_kul_tiras_column_2 = {
@@ -375,6 +440,220 @@ wwu_kul_tiras_column_2 = {
             506 = {
                 add_permanent_claim = ROOT
             }
+        }
+	}
+    
+    wwu_continental_alliance = {
+		icon = mission_titan_spirits
+        position = 5
+        
+		required_missions = { wwu_kul_tiras_security }
+        
+		trigger = {
+            OR = {
+                alliance_with = A08 # Lordaeron
+                alliance_with = A12 # Gilneas
+                alliance_with = A16 # Stromgarde
+                alliance_with = A17 # Alterace
+            }
+		}
+        
+		effect = {
+            add_prestige = 10
+            
+            # Lordaeron
+            if = {
+                limit = {
+                    alliance_with = A08 
+                }
+                
+                add_opinion = {
+                    who = A08 
+                    modifier = continental_alliance
+                }
+                
+                A08 = {
+                    add_opinion = {
+                        who = ROOT
+                        modifier = continental_alliance
+                    }
+                }
+            }
+            
+            # Gilneas
+            if = {
+                limit = {
+                    alliance_with = A12 
+                }
+                
+                add_opinion = {
+                    who = A12 
+                    modifier = continental_alliance
+                }
+                
+                A12 = {
+                    add_opinion = {
+                        who = ROOT
+                        modifier = continental_alliance
+                    }
+                }
+            }
+            
+            # Stromgarde
+            if = {
+                limit = {
+                    alliance_with = A16 
+                }
+                
+                add_opinion = {
+                    who = A16 
+                    modifier = continental_alliance
+                }
+                
+                A16 = {
+                    add_opinion = {
+                        who = ROOT
+                        modifier = continental_alliance
+                    }
+                }
+            }
+            
+            # Alterac
+            if = {
+                limit = {
+                    alliance_with = A17 
+                }
+                
+                add_opinion = {
+                    who = A17 
+                    modifier = continental_alliance
+                }
+                
+                A17 = {
+                    add_opinion = {
+                        who = ROOT
+                        modifier = continental_alliance
+                    }
+                }
+            }
+        }
+	}
+    
+    wwu_dalaran_embassy = {
+		icon = mission_titan_spirits
+        position = 6
+        
+		required_missions = { wwu_continental_alliance }
+        
+		trigger = {
+            # Dalaran
+            A18 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 150
+                }
+            }
+		}
+        
+		effect = {
+            add_opinion = {
+                who = A18 # Dalaran
+                modifier = dalaran_embassy
+            }
+            
+            # Dalaran
+            A18 = {
+                add_opinion = {
+                    who = ROOT
+                    modifier = kul_tiran_embassy
+                }
+            }
+            
+            custom_tooltip = JAINA_MAGE_TT
+            hidden_effect = {
+                set_global_flag = jaina_in_dalaran
+            }
+        }
+	}
+    
+    wwu_town_of_drisburg = {
+		icon = mission_titan_spirits
+        position = 7
+        
+		required_missions = { wwu_dalaran_embassy }
+        
+		trigger = {
+            owns = 3010 # Drisburg
+            owns = 168 # The Brineworks
+            
+            # Khaz Modan
+            A29 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
+            
+            # Gnomeregan
+            A32 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = dwarven_technology_kul_tiras
+                duration = -1
+            }
+            add_country_modifier = {
+                name = gnomish_technology_kul_tiras
+                duration = -1
+            }
+            
+            add_accepted_culture = culture_ironforge
+            add_accepted_culture = culture_gnome
+            
+            # Drisburg
+            3010 = {
+                change_culture = culture_ironforge
+            }
+            
+            # The Brineworks
+            168 = {
+                change_culture = culture_gnome
+            }
+        }
+	}
+    
+    wwu_member_of_the_alliance = {
+		icon = mission_titan_spirits
+        position = 8
+        
+		required_missions = { wwu_town_of_drisburg }
+        
+		trigger = {
+            any_country = {
+                has_country_modifier = head_of_alliance
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+                alliance_with = ROOT
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = member_of_alliance
+                duration = -1
+            }
+            
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 100
         }
 	}
 }

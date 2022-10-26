@@ -197,6 +197,7 @@ horde_reform = {
     
     potential = {
 		has_country_modifier = head_of_horde
+        NOT = { tag = OGR }
 	}
     
 	conditional = {
@@ -217,6 +218,60 @@ horde_reform = {
         prestige_decay = -0.01
 		advisor_cost = -0.1
         advisor_pool = 1
+	}
+    
+	ai = { factor = 0 }
+    
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+	allow_convert = no              # Can be converted to via peace term
+    lock_level_when_selected = yes
+    
+	valid_for_nation_designer = no
+	nation_designer_cost = 0
+}
+
+# Used by Head of Old Horde of Gorian Ogre
+gorian_horde_reform = {
+	icon = "horde"
+	legacy_equivalent = gorian_horde_legacy
+    
+    potential = {
+		has_country_modifier = head_of_old_horde
+        tag = OGR
+	}
+    
+	conditional = {
+		heir = no
+		queen = yes
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+
+    factions = {
+        faction_council_of_sorcerers
+        faction_magi_of_stone_magic
+        faction_magic_breakers
+    }
+    
+    generals_become_rulers = yes
+        
+	custom_attributes = {
+		locked_government_type = yes
+	}
+	
+	modifiers = {
+        technology_cost = -0.05
+        innovativeness_gain = 0.1
+        
+        mil_advisor_cost = -0.1
+        mil_tech_cost_modifier = -0.1
+		land_morale = 0.05
+        
+        global_unrest = 1
+        max_absolutism = 20
 	}
     
 	ai = { factor = 0 }
