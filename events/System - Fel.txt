@@ -1,0 +1,41 @@
+namespace = wwu_fel_pope
+
+# This gives the Burning Legion the papal controller position automatically after they have invested.
+country_event = {
+	id = wwu_fel_pope.1
+	title = wwu_fel_pope.1.title
+	desc = wwu_fel_pope.1.desc
+	picture = MAGIC_TOME_eventPicture
+	
+	hidden = yes
+    
+    trigger = {
+        tag = B92
+        FLD = {
+            is_papal_controller = yes
+        }
+        invested_papal_influence = 10
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	immediate = {
+		1231 = {
+            cede_province = FLD
+        }
+        
+        FLD = {
+            kill_ruler = yes
+        }
+        
+        1231 = {
+            cede_province = ---
+        }
+	}
+	
+	option = {
+		name = wwu_fel_pope.1.option.a
+	}
+}

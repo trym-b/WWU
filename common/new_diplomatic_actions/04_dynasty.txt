@@ -13,8 +13,17 @@ corrupt_ruler = {
         religion = fel
 	}
 	is_allowed = {
-        reform_desire = 0.5
-        papal_influence = 50 
+        OR = {
+            AND = {
+                tag = B92
+                papal_influence = 10
+            }
+            AND = {
+                NOT = { tag = B92 }
+                reform_desire = 0.5
+                papal_influence = 50 
+            }
+        }
         
         FROM = {
             has_regency = no
@@ -36,7 +45,16 @@ corrupt_ruler = {
             }
         }
         
-		add_papal_influence = -50
+        if = {
+            limit = {
+                NOT = { tag = B92 }
+            }
+            add_papal_influence = -50
+        }
+        else = {
+            add_papal_influence = -10
+        }
+        
 		FROM = {
 			country_event = { id = wwu_fel.2 }
 		}
