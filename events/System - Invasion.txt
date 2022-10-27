@@ -1,245 +1,12 @@
 namespace = wwu_invasion
 
-# sargerite_keystone_triggerpoint
+# Elemental Rift
 country_event = {
 	id = wwu_invasion.1
 	title = wwu_invasion.1.title
 	desc = wwu_invasion.1.desc
-	picture = TREASURE_VAULT_eventPicture
-	
-    hidden = yes
     
-	trigger = {
-        NOT = { has_global_flag = sargerite_keystone_triggerpoint }
-        capital_scope = {
-            continent = continent_argus
-        }
-        num_of_owned_provinces_with = {
-            value = 10
-            
-            NOT = { continent = continent_argus }
-        }
-    }
-    
-    mean_time_to_happen = {
-		days = 1
-	}
-    
-	option = {
-		name = wwu_invasion.1.option.a
-        
-        set_global_flag = sargerite_keystone_triggerpoint
-	}
-}
-
-# elemental_riftstone_triggerpoint
-country_event = {
-	id = wwu_invasion.2
-	title = wwu_invasion.2.title
-	desc = wwu_invasion.2.desc
-	picture = TREASURE_VAULT_eventPicture
-	
-    hidden = yes
-    
-	trigger = {
-        NOT = { has_global_flag = elemental_riftstone_triggerpoint }
-        capital_scope = {
-            OR = {
-                continent = continent_skywall
-                continent = continent_deepholm
-                continent = continent_abyssal_maw
-                continent = continent_firelands
-            }
-        }
-        num_of_owned_provinces_with = {
-            value = 10
-            
-            NOT = { continent = continent_skywall }
-            NOT = { continent = continent_deepholm }
-            NOT = { continent = continent_abyssal_maw }
-            NOT = { continent = continent_firelands }
-        }
-    }
-    
-    mean_time_to_happen = {
-		days = 1
-	}
-    
-	option = {
-		name = wwu_invasion.2.option.a
-        
-        set_global_flag = elemental_riftstone_triggerpoint
-	}
-}
-
-# Demonic Invasion Failed
-country_event = {
-	id = wwu_invasion.3
-	title = wwu_invasion.3.title
-	desc = wwu_invasion.3.desc
-	picture = BALNAZZAR_eventPicture
-	
-	trigger = {
-        capital_scope = {
-            continent = continent_argus
-        }
-                
-        has_country_flag = is_invading
-        is_at_war = yes
-        
-        NOT = {
-            continent_eastern_kingdoms = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_kalimdor = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_northrend = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_pandaria = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_outland = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_draenor = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_broken_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_zandalar = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_kul_tiras = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_vashjir = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_nazjatar = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_south_seas = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_plunder_isle = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_dragon_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_paradise_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_skywall = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_deepholm = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_abyssal_maw = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_firelands = {
-                controlled_by = ROOT
-            }
-        }
-    }
-    
-    mean_time_to_happen = {
-		days = 1
-	}
-    
-	option = {
-		name = wwu_invasion.3.option.a
-        
-        every_country = {
-            limit = {
-                has_country_flag = is_invaded
-            }
-            hidden_effect = {
-                clr_country_flag = is_invaded
-            }
-            
-            white_peace = ROOT
-            
-            country_event = { id = wwu_invasion.4 }
-        }
-        
-        hidden_effect = {
-            clr_country_flag = is_invading
-        }
-	}
-}
-
-# Invasion Repelled
-country_event = {
-	id = wwu_invasion.4
-	title = wwu_invasion.4.title
-	desc = wwu_invasion.4.desc
-	picture = SILVERMOON_BALCONY_eventPicture
-	
-    is_triggered_only = yes
-    
-    mean_time_to_happen = {
-		days = 1
-	}
-    
-	option = {
-		name = wwu_invasion.4.option.a
-        
-        add_prestige = 25
-        add_adm_power = 100
-        add_dip_power = 100
-        add_mil_power = 100
-	}
-}
-
-# Demonic Invasion Failed
-country_event = {
-	id = wwu_invasion.5
-	title = wwu_invasion.5.title
-	desc = wwu_invasion.5.desc
-	
-    picture = {
+	picture = {
 		picture = RAGNAROS_eventPicture
         
 		trigger = {
@@ -311,153 +78,27 @@ country_event = {
 	}
 	
 	trigger = {
-        capital_scope = {
-           OR = {
-                continent = continent_skywall
-                continent = continent_deepholm
-                continent = continent_abyssal_maw
-                continent = continent_firelands
-            } 
+        NOT = { has_country_flag = invasion_spawn_done }
+        is_in_war = {
+            casus_belli = cb_elemental_invasion
+            attackers = ROOT
         }
-        
-        has_country_flag = is_invading
-        is_at_war = yes
-        
-        NOT = {
-            continent_eastern_kingdoms = {
-                controlled_by = ROOT
-            }
+        any_country = {
+            war_with = ROOT
         }
-        NOT = {
-            continent_kalimdor = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_northrend = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_pandaria = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_outland = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_draenor = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_broken_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_zandalar = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_kul_tiras = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_vashjir = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_nazjatar = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_south_seas = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_plunder_isle = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_dragon_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_paradise_isles = {
-                controlled_by = ROOT
-            }
-        }
-        NOT = {
-            continent_argus = {
-                controlled_by = ROOT
-            }
-        }
-        
-        if = {
-            limit = {
-                NOT = {
-                    capital_scope = {
-                        continent = continent_skywall
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
                     }
                 }
-            }
-            NOT = {
-                continent_skywall = {
-                    controlled_by = ROOT
-                }
-            }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    capital_scope = {
-                        continent = continent_deepholm
-                    }
-                }
-            }
-            NOT = {
-                continent_deepholm = {
-                    controlled_by = ROOT
-                }
-            }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    capital_scope = {
-                        continent = continent_abyssal_maw
-                    }
-                }
-            }
-            NOT = {
-                continent_abyssal_maw = {
-                    controlled_by = ROOT
-                }
-            }
-        }
-        if = {
-            limit = {
-                NOT = {
-                    capital_scope = {
-                        continent = continent_firelands
-                    }
-                }
-            }
-            NOT = {
-                continent_firelands = {
-                    controlled_by = ROOT
-                }
+                save_event_target_as = target_country
             }
         }
     }
@@ -467,46 +108,604 @@ country_event = {
 	}
     
 	option = {
-		name = wwu_invasion.5.option.a
+		name = wwu_invasion.1.option.a
         
-        every_country = {
-            limit = {
-                has_country_flag = is_invaded
-            }
-            hidden_effect = {
-                clr_country_flag = is_invaded
-            }
-            
-            white_peace = ROOT
-            
-            country_event = { id = wwu_invasion.6 }
-        }
-        
+        custom_tooltip = FREE_TELEPORT_ARMY_TT
         hidden_effect = {
-            clr_country_flag = is_invading
+            set_country_flag = free_army_teleport
         }
 	}
+    
+    after = {
+        hidden_effect = {
+            set_country_flag = invasion_spawn_done
+        }
+    }
 }
 
-# Elemental Invasion Repelled
+# Demonic Rift
 country_event = {
-	id = wwu_invasion.6
-	title = wwu_invasion.6.title
-	desc = wwu_invasion.6.desc
-    picture = SILVERMOON_BALCONY_eventPicture
+	id = wwu_invasion.2
+	title = wwu_invasion.2.title
+	desc = wwu_invasion.2.desc
+	picture = BALNAZZAR_eventPicture
+	
+	trigger = {
+        NOT = { has_country_flag = invasion_spawn_done }
+        is_in_war = {
+            casus_belli = cb_demonic_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+        }
+    }
     
-    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_demonic_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
     
     mean_time_to_happen = {
 		days = 1
 	}
     
 	option = {
-		name = wwu_invasion.6.option.a
+		name = wwu_invasion.2.option.a
         
-        add_prestige = 25
-        add_adm_power = 100
-        add_dip_power = 100
-        add_mil_power = 100
+        custom_tooltip = FREE_TELEPORT_ARMY_TT
+        hidden_effect = {
+            set_country_flag = free_army_teleport
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            set_country_flag = invasion_spawn_done
+        }
+    }
+}
+
+# Fury of Ragnaros
+country_event = {
+	id = wwu_invasion.10
+	title = wwu_invasion.10.title
+	desc = wwu_invasion.10.desc
+    picture = RAGNAROS_eventPicture
+	
+	trigger = {
+        tag = P26
+        is_in_war = {
+            casus_belli = cb_elemental_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+            any_owned_province = {
+                units_in_province = PREV
+            }
+        }
+        NOT = { has_country_modifier = elemental_fatigue }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.10.option.a
+        
+        event_target:target_country = {
+            random_owned_province = {
+                limit = {
+                    units_in_province = event_target:target_country
+                }
+                kill_units = { 
+                    who = owner
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = elemental_fatigue
+            duration = 3650
+        }
+	}
+    
+    option = {
+		name = wwu_invasion.10.option.b
+        
+        add_mil_power = 25
+	}
+}
+
+# Might of Therazane
+country_event = {
+	id = wwu_invasion.11
+	title = wwu_invasion.11.title
+	desc = wwu_invasion.11.desc
+    picture = THERAZANE_eventPicture
+	
+	trigger = {
+        tag = P27
+        is_in_war = {
+            casus_belli = cb_elemental_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+            any_owned_province = {
+                units_in_province = PREV
+            }
+        }
+        NOT = { has_country_modifier = elemental_fatigue }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.11.option.a
+        
+        event_target:target_country = {
+            random_owned_province = {
+                limit = {
+                    units_in_province = event_target:target_country
+                }
+                kill_units = { 
+                    who = owner
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = elemental_fatigue
+            duration = 3650
+        }
+	}
+    
+    option = {
+		name = wwu_invasion.11.option.b
+        
+        add_mil_power = 25
+	}
+}
+
+# Tides of Neptulon
+country_event = {
+	id = wwu_invasion.12
+	title = wwu_invasion.12.title
+	desc = wwu_invasion.12.desc
+    picture = NEPTULON_eventPicture
+	
+	trigger = {
+        tag = P24
+        is_in_war = {
+            casus_belli = cb_elemental_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+            any_owned_province = {
+                units_in_province = PREV
+            }
+        }
+        NOT = { has_country_modifier = elemental_fatigue }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.12.option.a
+        
+        event_target:target_country = {
+            random_owned_province = {
+                limit = {
+                    units_in_province = event_target:target_country
+                }
+                kill_units = { 
+                    who = owner
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = elemental_fatigue
+            duration = 3650
+        }
+	}
+    
+    option = {
+		name = wwu_invasion.12.option.b
+        
+        add_mil_power = 25
+	}
+}
+
+# Storm of Al'Akir
+country_event = {
+	id = wwu_invasion.13
+	title = wwu_invasion.13.title
+	desc = wwu_invasion.13.desc
+    picture = ALAKIR_THE_WINDLORD_eventPicture
+	
+	trigger = {
+        tag = P28
+        is_in_war = {
+            casus_belli = cb_elemental_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+            any_owned_province = {
+                units_in_province = PREV
+            }
+        }
+        NOT = { has_country_modifier = elemental_fatigue }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.13.option.a
+        
+        event_target:target_country = {
+            random_owned_province = {
+                limit = {
+                    units_in_province = event_target:target_country
+                }
+                kill_units = { 
+                    who = owner
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = elemental_fatigue
+            duration = 3650
+        }
+	}
+    
+    option = {
+		name = wwu_invasion.13.option.b
+        
+        add_mil_power = 25
+	}
+}
+
+# AI - Invasion Helper - Elemental
+country_event = {
+	id = wwu_invasion.100
+	title = wwu_invasion.100.title
+	desc = wwu_invasion.100.desc
+    picture = BESTIARY_eventPicture
+	
+    hidden = yes
+    
+	trigger = {
+        ai = yes
+        OR = {
+            tag = P28
+            tag = P26
+            tag = P24
+            tag = P27
+        }
+        is_at_war = no
+    }
+
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.100.option.a
+        
+        random_list = {
+            # Easy Target
+            50 = {
+                random_country = {
+                    limit = {
+                        NOT = { total_development = 200 }
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_elemental_invasion
+                        }
+                    }
+                }
+            }
+            # Medium Target
+            30 = {
+                random_country = {
+                    limit = {
+                        total_development = 200
+                        NOT = { total_development = 400 }
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_elemental_invasion
+                        }
+                    }
+                }
+            }
+            # Hard Target
+            20 = {
+                random_country = {
+                    limit = {
+                        total_development = 400
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_elemental_invasion
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
+
+# AI - Invasion Helper - Demonic
+country_event = {
+	id = wwu_invasion.101
+	title = wwu_invasion.101.title
+	desc = wwu_invasion.101.desc
+    picture = BESTIARY_eventPicture
+	
+    hidden = yes
+    
+	trigger = {
+        ai = yes
+        OR = {
+            tag = B92
+        }
+        is_at_war = no
+    }
+
+    mean_time_to_happen = {
+		years = 25
+	}
+    
+	option = {
+		name = wwu_invasion.101.option.a
+        
+        random_list = {
+            # Easy Target
+            50 = {
+                random_country = {
+                    limit = {
+                        NOT = { total_development = 200 }
+                        NOT = { religion = fel }
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_demonic_invasion
+                        }
+                    }
+                }
+            }
+            # Medium Target
+            30 = {
+                random_country = {
+                    limit = {
+                        total_development = 200
+                        NOT = { total_development = 400 }
+                        NOT = { religion = fel }
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_demonic_invasion
+                        }
+                    }
+                }
+            }
+            # Hard Target
+            20 = {
+                random_country = {
+                    limit = {
+                        total_development = 400
+                        NOT = { religion = fel }
+                        num_of_cities = 5
+                    }
+                    
+                    ROOT = {
+                        declare_war_with_cb = {
+                            who = PREV
+                            casus_belli = cb_demonic_invasion
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
+
+# AI - Invasion Helper - Teleport Army
+country_event = {
+	id = wwu_invasion.110
+	title = wwu_invasion.110.title
+	desc = wwu_invasion.110.desc
+    picture = BESTIARY_eventPicture
+	
+    hidden = yes
+    
+	trigger = {
+        ai = yes
+        NOT = { has_country_modifier = ai_teleport_cooldown }
+        
+        OR = {  
+            is_in_war = {
+                casus_belli = cb_demonic_invasion
+                attackers = ROOT
+            }
+            is_in_war = {
+                casus_belli = cb_elemental_invasion
+                attackers = ROOT
+            }
+        }
+        
+        any_owned_province = {
+            num_of_units_in_province = {
+                who = ROOT
+                amount = 1
+            }
+        }
+        
+        any_country = {
+            war_with = ROOT
+            OR = {  
+                is_in_war = {
+                    casus_belli = cb_demonic_invasion
+                    defenders = THIS
+                }
+                is_in_war = {
+                    casus_belli = cb_elemental_invasion
+                    defenders = THIS
+                }
+            }
+            any_owned_province = {
+                NOT = {
+                    num_of_units_in_province = {
+                        who = PREV
+                        amount = 1
+                    }
+                }
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            add_country_modifier = {
+                name = ai_teleport_cooldown
+                duration = 365
+            }
+            
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    OR = {  
+                        is_in_war = {
+                            casus_belli = cb_demonic_invasion
+                            defenders = THIS
+                        }
+                        is_in_war = {
+                            casus_belli = cb_elemental_invasion
+                            defenders = THIS
+                        }
+                    }
+                    any_owned_province = {
+                        NOT = {
+                            num_of_units_in_province = {
+                                who = PREV
+                                amount = 1
+                            }
+                        }
+                    }
+                }
+                
+                save_event_target_as = hostile_country
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_invasion.110.option.a
+        
+        country_event = { id = wwu_teleport_system.10 }
 	}
 }

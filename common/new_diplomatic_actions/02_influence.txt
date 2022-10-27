@@ -1,727 +1,4 @@
 #---------------------------------------
-# Invasion
-#---------------------------------------
-start_invasion = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = start_invasion_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-        # Capital is in other-worldly plane
-        capital_scope = {
-            OR = {
-                # Elemental Plane
-                continent = continent_skywall
-                continent = continent_deepholm
-                continent = continent_abyssal_maw
-                continent = continent_firelands
-                
-                # Argus
-                continent = continent_argus
-            }
-        }
-        
-        if = {
-            limit = {
-                capital_scope = {
-                    continent = continent_argus
-                }
-            }
-            # Culture is appropirate
-            OR = {
-                culture_group = culture_group_ethereal
-                culture_group = culture_group_demonic
-                primary_culture = culture_lightforged
-            }
-        }
-        
-        # Target has atleast 2 provinces
-        FROM = {
-            num_of_cities = 2
-            
-            # Target is not in the same plane as ROOT
-            if = {
-                limit = {
-                    ROOT = {
-                        capital_scope = {
-                            continent = continent_skywall
-                        }
-                    }
-                }
-                NOT = {
-                    capital_scope = {
-                        continent = continent_skywall
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    ROOT = {
-                        capital_scope = {
-                            continent = continent_deepholm
-                        }
-                    }
-                }
-                NOT = {
-                    capital_scope = {
-                        continent = continent_deepholm
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    ROOT = {
-                        capital_scope = {
-                            continent = continent_abyssal_maw
-                        }
-                    }
-                }
-                NOT = {
-                    capital_scope = {
-                        continent = continent_abyssal_maw
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    ROOT = {
-                        capital_scope = {
-                            continent = continent_firelands
-                        }
-                    }
-                }
-                NOT = {
-                    capital_scope = {
-                        continent = continent_firelands
-                    }
-                }
-            }
-            if = {
-                limit = {
-                    ROOT = {
-                        capital_scope = {
-                            continent = continent_argus
-                        }
-                    }
-                }
-                NOT = {
-                    capital_scope = {
-                        continent = continent_argus
-                    }
-                }
-            }
-        }
-        
-        # Not currently at war
-        is_at_war = no
-	}
-	is_allowed = {
-		is_at_war = no
-        
-        NOT = { has_country_modifier = invasion_action_cooldown }
-        
-        
-        if = {
-            limit = {
-                OR = {
-                    has_estate_privilege = estate_legion_invasion_preparations
-                    has_estate_privilege = estate_abyssal_maw_invasion_preparation
-                    has_estate_privilege = estate_firelands_invasion_preparation
-                    has_estate_privilege = estate_deepholm_invasion_preparation
-                    has_estate_privilege = estate_skywall_invasion_preparation
-                }
-            }
-            if = {
-                limit = {
-                    FROM = {
-                        total_development = 1000
-                    }
-                }
-                mil_power = 400
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 750
-                    }
-                }
-                mil_power = 300
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 500
-                    }
-                }
-                mil_power = 200
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 250
-                    }
-                }
-                mil_power = 100
-            }
-            else = {
-                mil_power = 50
-            }
-        }
-        else = {
-            if = {
-                limit = {
-                    FROM = {
-                        total_development = 1000
-                    }
-                }
-                mil_power = 800
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 750
-                    }
-                }
-                mil_power = 700
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 500
-                    }
-                }
-                mil_power = 600
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 250
-                    }
-                }
-                mil_power = 400
-            }
-            else = {
-                mil_power = 200
-            }
-        }
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - start_invasion"
-            }
-        }
-        
-        if = {
-            limit = {
-                OR = {
-                    has_estate_privilege = estate_legion_invasion_preparations
-                    has_estate_privilege = estate_abyssal_maw_invasion_preparation
-                    has_estate_privilege = estate_firelands_invasion_preparation
-                    has_estate_privilege = estate_deepholm_invasion_preparation
-                    has_estate_privilege = estate_skywall_invasion_preparation
-                }
-            }
-            if = {
-                limit = {
-                    FROM = {
-                        total_development = 1000
-                    }
-                }
-                add_mil_power = -400
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 750
-                    }
-                }
-                add_mil_power = -300
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 500
-                    }
-                }
-                add_mil_power = -200
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 250
-                    }
-                }
-                add_mil_power = -100
-            }
-            else = {
-                add_mil_power = -50
-            }
-        }
-        else = {
-            if = {
-                limit = {
-                    FROM = {
-                        total_development = 1000
-                    }
-                }
-                add_mil_power = -800
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 750
-                    }
-                }
-                add_mil_power = -700
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 500
-                    }
-                }
-                add_mil_power = -600
-            }
-            else_if = {
-                limit = {
-                    FROM = {
-                        total_development = 250
-                    }
-                }
-                add_mil_power = -400
-            }
-            else = {
-                add_mil_power = -200
-            }
-        }
-        
-        declare_war_with_cb = {
-            who = FROM
-            casus_belli = cb_invasion
-        }
-        
-		FROM = {
-            random_owned_province = {
-                change_controller = ROOT
-                add_core = ROOT
-                
-                # 10
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-                
-                if = {
-                    limit = {
-                        ROOT = {
-                            OR = {
-                                has_estate_privilege = estate_legion_merciless_invasion
-                                has_estate_privilege = estate_abyssal_maw_overwhelming_force
-                                has_estate_privilege = estate_firelands_overwhelming_force
-                                has_estate_privilege = estate_deepholm_overwhelming_force
-                                has_estate_privilege = estate_skywall_overwhelming_force
-                            }
-                        }
-                    }
-                    
-                    # 10
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    cavalry = ROOT
-                    cavalry = ROOT
-                    cavalry = ROOT
-                    artillery = ROOT
-                    artillery = ROOT
-                    
-                    # 10
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    infantry = ROOT
-                    cavalry = ROOT
-                    cavalry = ROOT
-                    cavalry = ROOT
-                    artillery = ROOT
-                    artillery = ROOT
-                }
-            }
-            
-            hidden_effect = { set_country_flag = is_invaded }
-        }
-        
-        hidden_effect = { set_country_flag = is_invading }
-        
-        add_country_modifier = {
-            name = invasion_action_cooldown
-            duration = 3650
-            hidden = yes
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-        # AI will not do it with these tags
-        NOT = { tag = ARL }
-        NOT = { tag = SDG }
-        
-		mil_power = 500
-        
-        # AI will only do it to other AI
-        FROM = {
-            ai = yes
-        }
-        
-        # AI will only do it to weaker nations
-        FROM = {
-            NOT = { total_development = 250 }
-        }
-	}
-}
-
-#---------------------------------------
-# Argus Invasion
-#---------------------------------------
-start_argus_invasion = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = start_argus_invasion_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-        FROM = {
-            num_of_cities = 2
-            
-            capital_scope = {
-                continent = continent_argus
-            }
-            
-            OR = {
-                war_with = ROOT
-                ROOT = { 
-                    has_country_modifier = sargerite_keystone
-                }
-            }
-        }
-        
-        # Not currently at war
-        is_at_war = no
-	}
-	is_allowed = {
-		is_at_war = no
-        
-        NOT = { has_country_modifier = invasion_action_cooldown }
-        
-        if = {
-            limit = {
-                FROM = {
-                    total_development = 1000
-                }
-            }
-            mil_power = 800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
-                }
-            }
-            mil_power = 700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
-                }
-            }
-            mil_power = 600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
-                }
-            }
-            mil_power = 400
-        }
-        else = {
-            mil_power = 200
-        }
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - start_argus_invasion"
-            }
-        }
-        
-        if = {
-            limit = {
-                FROM = {
-                    total_development = 1000
-                }
-            }
-            add_mil_power = -800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
-                }
-            }
-            add_mil_power = -700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
-                }
-            }
-            add_mil_power = -600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
-                }
-            }
-            add_mil_power = -400
-        }
-        else = {
-            add_mil_power = -200
-        }
-        
-        declare_war_with_cb = {
-            who = FROM
-            casus_belli = cb_invasion
-        }
-		FROM = {
-            random_owned_province = {
-                limit = {
-                    continent = continent_argus
-                }
-                change_controller = ROOT
-                add_core = ROOT
-                
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-            }
-        }
-        
-        add_country_modifier = {
-            name = invasion_action_cooldown
-            duration = 3650
-            hidden = yes
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		always = no
-	}
-}
-
-#---------------------------------------
-# Elemental Invasion
-#---------------------------------------
-start_elemental_invasion = {
-	category = influence
-	
-	alert_index = 40
-	alert_tooltip = start_elemental_invasion_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-        FROM = {
-            num_of_cities = 2
-            
-            capital_scope = {
-                OR = {
-                    continent = continent_skywall
-                    continent = continent_deepholm
-                    continent = continent_abyssal_maw
-                    continent = continent_firelands
-                }
-            }
-            
-            OR = {
-                war_with = ROOT
-                ROOT = { 
-                    has_country_modifier = elemental_riftstone
-                }
-            }
-        }
-        
-        # Not currently at war
-        is_at_war = no
-	}
-	is_allowed = {
-		is_at_war = no
-        
-        NOT = { has_country_modifier = invasion_action_cooldown }
-        
-        if = {
-            limit = {
-                FROM = {
-                    total_development = 1000
-                }
-            }
-            mil_power = 800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
-                }
-            }
-            mil_power = 700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
-                }
-            }
-            mil_power = 600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
-                }
-            }
-            mil_power = 400
-        }
-        else = {
-            mil_power = 200
-        }
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - start_elemental_invasion"
-            }
-        }
-        
-        if = {
-            limit = {
-                FROM = {
-                    total_development = 1000
-                }
-            }
-            add_mil_power = -800
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 750
-                }
-            }
-            add_mil_power = -700
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 500
-                }
-            }
-            add_mil_power = -600
-        }
-        else_if = {
-            limit = {
-                FROM = {
-                    total_development = 250
-                }
-            }
-            add_mil_power = -400
-        }
-        else = {
-            add_mil_power = -200
-        }
-        
-        declare_war_with_cb = {
-            who = FROM
-            casus_belli = cb_invasion
-        }
-		FROM = {
-            random_owned_province = {
-                limit = {
-                    OR = {
-                        continent = continent_skywall
-                        continent = continent_deepholm
-                        continent = continent_abyssal_maw
-                        continent = continent_firelands
-                    }
-                }
-                change_controller = ROOT
-                add_core = ROOT
-                
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                artillery = ROOT
-                artillery = ROOT
-            }
-        }
-        
-        add_country_modifier = {
-            name = invasion_action_cooldown
-            duration = 3650
-            hidden = yes
-        }
-	}
-	on_decline = { 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		always = no
-	}
-}
-
-#---------------------------------------
 # Teleport Army
 #---------------------------------------
 teleport_army = {
@@ -787,15 +64,27 @@ teleport_army = {
             any_owned_province = {
                 NOT = {
                     num_of_units_in_province = {
-                        who = ROOT
+                        who = PREV
                         amount = 1
                     }
                 }
             }
         }
         
-        # Hostile portals take considerable resources to conjure
-		mil_power = 100
+        
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = free_army_teleport
+                    has_country_flag = remove_teleport_army_cost
+                }
+            }
+            
+            # No Cost
+        }
+        else = {
+            mil_power = 100
+        }
 	}
 	on_accept = {
         hidden_effect = {
@@ -805,7 +94,21 @@ teleport_army = {
             }
         }
         
-        add_mil_power = -100
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = free_army_teleport
+                    has_country_flag = remove_teleport_army_cost
+                }
+            }
+            
+            hidden_effect = {
+                clr_country_flag = free_army_teleport
+            }
+        }
+        else = {
+            add_mil_power = -100
+        }
         
         FROM = {
             save_event_target_as = hostile_country
@@ -814,8 +117,22 @@ teleport_army = {
         
         if = {
             limit = {
-                NOT = { has_estate_privilege = estate_invention_dimensional_ripper }
+                has_estate_privilege = estate_invention_dimensional_ripper
             }
+            
+            # No cooldown
+        }
+        else_if = {
+            limit = {
+                has_country_flag = reduce_teleport_army_cooldown
+            }
+            add_country_modifier = {
+                name = portal_fatigue
+                duration = 30
+                hidden = yes
+            }
+        }
+        else = {
             add_country_modifier = {
                 name = portal_fatigue
                 duration = 365
@@ -829,9 +146,8 @@ teleport_army = {
 	ai_acceptance = { 
 	}
 
-	ai_will_do = {  
-        # Should reduce usage by the AI to a suitable level
-        mil_power = 800
+	ai_will_do = {     
+        always = no # Handled via event
 	}
 }
 
@@ -873,7 +189,7 @@ traverse_network = {
                 continent = continent_northrend
                 NOT = {
                     num_of_units_in_province = {
-                        who = ROOT
+                        who = PREV
                         amount = 1
                     }
                 }
@@ -914,8 +230,7 @@ traverse_network = {
 	}
 
 	ai_will_do = {  
-        # Should reduce usage by the AI to a suitable level
-        mil_power = 400
+        always = no # AI doesn't need to use this
 	}
 }
 
@@ -971,8 +286,7 @@ scout_territory = {
 	}
 
 	ai_will_do = {  
-        # Should reduce usage by the AI to a suitable level
-        dip_power = 800
+        always = no # AI doesn't need to use this
 	}
 }
 

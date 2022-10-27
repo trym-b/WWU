@@ -267,6 +267,10 @@ on_war_lost = {
 		hidden = yes
 	}
     
+    # Reset Invasion flag
+    clr_country_flag = invasion_spawn_done
+    clr_country_flag = first_core_of_invasion
+    
 	events = {
         wwu_dragon_aspects.2
 		on_action_special.2
@@ -635,6 +639,52 @@ on_siege_won_country = {
             chance = 10
             
             country_event = { id = wwu_tribal.5 }
+        }
+    }
+    
+    # Invasion - Add core to first province sieged
+    if = {
+        limit = {
+            NOT = { has_country_flag = first_core_of_invasion }
+            
+            OR = {
+                technology_group = tech_elemental_fire
+                technology_group = tech_elemental_water
+                technology_group = tech_elemental_earth
+                technology_group = tech_elemental_wind
+                technology_group = tech_demon
+            }
+            
+            capital_scope = {
+                OR = {
+                    continent = continent_skywall
+                    continent = continent_deepholm
+                    continent = continent_abyssal_maw
+                    continent = continent_firelands
+                    continent = continent_argus
+                }
+            }
+            
+            OR = {
+                is_in_war = {
+                    casus_belli = cb_demonic_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_elemental_invasion
+                    attackers = ROOT
+                }
+            }
+            
+            FROM = {
+                NOT = { is_core = ROOT }
+            }
+        }
+        
+        set_country_flag = first_core_of_invasion
+        
+        FROM = {
+            add_core = ROOT
         }
     }
     
