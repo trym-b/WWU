@@ -691,10 +691,493 @@ country_event = {
 	}
 }
 
-# Negotiations over Menethil Habour
+# Menethil Harbor - Kul Tiras
+country_event = {
+	id = wwu_kul_tiras.110
+	title = wwu_kul_tiras.110.title
+	desc = wwu_kul_tiras.110.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = province_bargain_menethil_harbor }
+        # Menethil Habor
+        1055 = {
+            owner = {
+                OR = {
+                    alliance_with = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+        treasury = 300
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+    immediate = {
+        hidden_effect = {
+            1055 = {
+                owner = {
+                    save_event_target_as = target_country
+                }
+            }
+            set_country_flag = province_bargain_menethil_harbor
+        }
+    }
+	
+	option = {
+		name = wwu_kul_tiras.110.option.a
+		
+        add_treasury = -500
+        
+        event_target:target_country = {
+            country_event = { id = wwu_kul_tiras.111 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.110.option.b
+		
+        1055 = {
+            add_permanent_claim = ROOT
+        }
 
-# Negotiations over Balor
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
 
-# Negotiations over Southshore
+# Menethil Harbor - Owner
+country_event = {
+	id = wwu_kul_tiras.111
+	title = wwu_kul_tiras.111.title
+	desc = wwu_kul_tiras.111.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.111.option.a
+		
+        add_treasury = 500
+        
+        # Menethil Harbor
+        1055 = {
+            cede_province = A14 # Kul Tiras
+        }
+        
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.118 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.111.option.b
+		
+        add_prestige = 25
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.119 }
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
 
-# Negotiations over Thandol Span
+# Balor - Kul Tiras
+country_event = {
+	id = wwu_kul_tiras.112
+	title = wwu_kul_tiras.112.title
+	desc = wwu_kul_tiras.112.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = province_bargain_balor }
+        # Balor
+        4111 = {
+            owner = {
+                OR = {
+                    alliance_with = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+        treasury = 300
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+    immediate = {
+        hidden_effect = {
+            4111 = {
+                owner = {
+                    save_event_target_as = target_country
+                }
+            }
+            set_country_flag = province_bargain_balor
+        }
+    }
+	
+	option = {
+		name = wwu_kul_tiras.112.option.a
+		
+        add_treasury = -500
+        
+        event_target:target_country = {
+            country_event = { id = wwu_kul_tiras.113 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.112.option.b
+		
+        4111 = {
+            add_permanent_claim = ROOT
+        }
+
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Balor - Owner
+country_event = {
+	id = wwu_kul_tiras.113
+	title = wwu_kul_tiras.113.title
+	desc = wwu_kul_tiras.113.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.113.option.a
+		
+        add_treasury = 500
+        
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.118 }
+        }
+        
+        # Balor
+        4111 = {
+            cede_province = A14 # Kul Tiras
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.113.option.b
+		
+        add_prestige = 25
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.119 }
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Southshore - Kul Tiras
+country_event = {
+	id = wwu_kul_tiras.114
+	title = wwu_kul_tiras.114.title
+	desc = wwu_kul_tiras.114.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = province_bargain_southshore }
+        # Southshore
+        991 = {
+            owner = {
+                OR = {
+                    alliance_with = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+        treasury = 300
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+    immediate = {
+        hidden_effect = {
+            991 = {
+                owner = {
+                    save_event_target_as = target_country
+                }
+            }
+            set_country_flag = province_bargain_southshore
+        }
+    }
+	
+	option = {
+		name = wwu_kul_tiras.114.option.a
+		
+        add_treasury = -500
+        
+        event_target:target_country = {
+            country_event = { id = wwu_kul_tiras.115 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.114.option.b
+		
+        991 = {
+            add_permanent_claim = ROOT
+        }
+
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Southshore - Owner
+country_event = {
+	id = wwu_kul_tiras.115
+	title = wwu_kul_tiras.115.title
+	desc = wwu_kul_tiras.115.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.115.option.a
+		
+        add_treasury = 500
+        
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.118 }
+        }
+        
+        # Southshore
+        991 = {
+            cede_province = A14 # Kul Tiras
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.115.option.b
+		
+        add_prestige = 25
+    
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.119 }
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Thandol Span - Kul Tiras
+country_event = {
+	id = wwu_kul_tiras.116
+	title = wwu_kul_tiras.116.title
+	desc = wwu_kul_tiras.116.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = province_bargain_thandol_span }
+        # Thandol Span
+        1933 = {
+            owner = {
+                OR = {
+                    alliance_with = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 50
+                    }
+                }
+            }
+        }
+        treasury = 300
+    }
+	
+	mean_time_to_happen = {
+		months = 120
+	}
+    
+    immediate = {
+        hidden_effect = {
+            1933 = {
+                owner = {
+                    save_event_target_as = target_country
+                }
+            }
+            set_country_flag = province_bargain_thandol_span
+        }
+    }
+	
+	option = {
+		name = wwu_kul_tiras.116.option.a
+		
+        add_treasury = -500
+        
+        event_target:target_country = {
+            country_event = { id = wwu_kul_tiras.117 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.116.option.b
+		
+        1933 = {
+            add_permanent_claim = ROOT
+        }
+
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Thandol Span - Owner
+country_event = {
+	id = wwu_kul_tiras.117
+	title = wwu_kul_tiras.117.title
+	desc = wwu_kul_tiras.117.desc
+	picture = BLUBBER_BARON_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.117.option.a
+		
+        add_treasury = 500
+        
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.118 }
+        }
+        
+        # Thandol Span
+        1933 = {
+            cede_province = A14 # Kul Tiras
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_kul_tiras.117.option.b
+		
+        add_prestige = 25
+        
+        # Kul Tiras
+        A14 = {
+            country_event = { id = wwu_kul_tiras.119 }
+        }
+
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Deal Accepted
+country_event = {
+	id = wwu_kul_tiras.119
+	title = wwu_kul_tiras.119.title
+	desc = wwu_kul_tiras.119.desc
+	picture = ILLUMINATOR_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.117.option.a
+	}
+}
+
+# Deal Refused
+country_event = {
+	id = wwu_kul_tiras.119
+	title = wwu_kul_tiras.119.title
+	desc = wwu_kul_tiras.119.desc
+	picture = GARR_eventPicture
+	
+    is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_kul_tiras.117.option.a
+		
+        add_treasury = 500
+	}
+}
+
+
+
