@@ -1,0 +1,277 @@
+#--------------------------------------
+# Burning Legion
+#--------------------------------------
+wwu_burning_legion_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B92
+	}
+    
+	has_country_shield = yes
+	
+	wwu_endless_legions = {
+		icon = mission_titan_spirits
+        position = 3
+        
+		required_missions = { wwu_forges_of_destruction }
+        
+		trigger = {
+            manpower = 100
+            manpower_percentage = 1.0
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_unbreakable_will
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_burning_legion_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B92
+	}
+    
+	has_country_shield = yes
+	
+	wwu_forges_of_destruction = {
+		icon = mission_titan_spirits
+        position = 2
+        
+		required_missions = { wwu_dominate_argus }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 8
+                
+                all_owned_province = {
+                    has_production_building_trigger = yes
+                }
+            }
+		}
+		provinces_to_highlight = {
+            NOT = { has_production_building_trigger = yes }
+            owned_by = ROOT
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_forges_of_destruction
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_the_burning_throne = {
+		icon = mission_titan_spirits
+        position = 4
+        
+		required_missions = { 
+            wwu_endless_legions
+            wwu_felfire_armories
+        }
+        
+		trigger = {
+            # Antorus
+            2768 = {
+                development = 36
+                has_fort_building_trigger = yes
+            }
+            
+            continent_argus = {
+                type = all
+                
+                religion = fel
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            NOT = { religion = fel }
+            owned_by = ROOT
+		}
+        
+		effect = {
+            hidden_effect = {
+                every_owned_province = {
+                    limit = {
+                        continent = continent_argus
+                    }
+                    
+                    add_permanent_province_modifier = {
+                        name = mission_demonic_world
+                        duration = -1
+                    }
+                }
+            }
+            
+            custom_tooltip = DEMONIC_WORLD_TT
+            tooltip = {
+                add_country_modifier = {
+                    name = mission_demonic_world
+                    duration = -1
+                }
+            }
+		}
+	}
+}
+
+wwu_burning_legion_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B92
+	}
+    
+	has_country_shield = yes
+	
+	wwu_dominate_argus = {
+		icon = mission_titan_spirits
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = SDG }
+                SDG = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = demonic_vassal
+                }
+            }
+            OR = {
+                NOT = { exists = ARR }
+                ARR = {
+                    is_subject_of = ROOT
+                    is_subject_of_type = demonic_vassal
+                }
+            }
+            NOT = { exists = ARL }
+		}
+		provinces_to_highlight = {
+            OR = {
+                owned_by = SDG
+                owned_by = ARL
+                owned_by = ARR
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_mil_power = 600
+            
+            region_eredath = {
+                limit = {
+                    is_empty = yes
+                }
+                
+                cede_province = ROOT
+                add_core = ROOT
+            }
+		}
+	}
+    
+    wwu_felfire_armories = {
+		icon = mission_titan_spirits
+        position = 3
+        
+		required_missions = { wwu_forges_of_destruction }
+        
+		trigger = {
+            army_size = 100
+            army_size_percentage = 1.0
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_ceaseless_munitions
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_burning_legion_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B92
+	}
+    
+	has_country_shield = yes
+	
+	wwu_demonic_assault = {
+		icon = mission_titan_spirits
+        position = 2
+        
+		required_missions = { wwu_dominate_argus }
+        
+		trigger = {
+            is_in_war = {
+                casus_belli = cb_demonic_invasion
+                attacker_leader = ROOT
+            }
+            any_country = {
+                capital_scope = {
+                    NOT = { continent = continent_argus }
+                }
+                war_with = ROOT
+            }
+		}
+        
+		effect = {
+            add_yearly_manpower = 1.0
+            
+			capital_scope = {
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+            }
+		}
+	}
+}
+
+wwu_burning_legion_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = B92
+	}
+    
+	has_country_shield = yes
+	
+	wwu_mission = {
+		icon = mission_titan_spirits
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            
+		}
+		provinces_to_highlight = {
+            
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			
+		}
+	}
+}
