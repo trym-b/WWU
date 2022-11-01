@@ -13,7 +13,7 @@ wwu_burning_legion_column_1 = {
 	has_country_shield = yes
 	
 	wwu_endless_legions = {
-		icon = mission_titan_spirits
+		icon = mission_demonhunter_fel_rush
         position = 3
         
 		required_missions = { wwu_forges_of_destruction }
@@ -44,7 +44,7 @@ wwu_burning_legion_column_2 = {
 	has_country_shield = yes
 	
 	wwu_forges_of_destruction = {
-		icon = mission_titan_spirits
+		icon = mission_demonhunter_sigil
         position = 2
         
 		required_missions = { wwu_dominate_argus }
@@ -72,7 +72,7 @@ wwu_burning_legion_column_2 = {
 	}
     
     wwu_the_burning_throne = {
-		icon = mission_titan_spirits
+		icon = mission_eredar_female
         position = 4
         
 		required_missions = { 
@@ -136,7 +136,7 @@ wwu_burning_legion_column_3 = {
 	has_country_shield = yes
 	
 	wwu_dominate_argus = {
-		icon = mission_titan_spirits
+		icon = mission_fel_immolation
         position = 1
         
 		required_missions = { }
@@ -182,7 +182,7 @@ wwu_burning_legion_column_3 = {
 	}
     
     wwu_felfire_armories = {
-		icon = mission_titan_spirits
+		icon = mission_fel_flamestrike
         position = 3
         
 		required_missions = { wwu_forges_of_destruction }
@@ -199,6 +199,27 @@ wwu_burning_legion_column_3 = {
             }
 		}
 	}
+    
+    wwu_foothold_in_kalimdor = {
+		icon = mission_fel_boar
+        position = 5
+        
+		required_missions = { wwu_subjects_of_the_legion }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 5
+                
+                all_owned_province = {
+                    continent = continent_kalimdor
+                }
+            }
+		}
+        
+		effect = {
+            add_mil_power = 250
+		}
+	}
 }
 
 wwu_burning_legion_column_4 = {
@@ -213,7 +234,7 @@ wwu_burning_legion_column_4 = {
 	has_country_shield = yes
 	
 	wwu_demonic_assault = {
-		icon = mission_titan_spirits
+		icon = mission_eredar_guard_1
         position = 2
         
 		required_missions = { wwu_dominate_argus }
@@ -243,35 +264,77 @@ wwu_burning_legion_column_4 = {
             }
 		}
 	}
+    
+    wwu_subjects_of_the_legion = {
+		icon = mission_eredar_guard_2
+        position = 4
+        
+		required_missions = { wwu_demonic_assault }
+        
+		trigger = {
+            demonic_vassal = 3
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_demonic_subjects
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_tomb_of_sargeras = {
+		icon = mission_fel_reaver_2
+        position = 5
+        
+		required_missions = { wwu_subjects_of_the_legion }
+        
+		trigger = {
+            area_tomb_of_sargeras = {
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_tomb_of_sargeras
+                duration =-1
+            }
+		}
+	}
 }
 
-# wwu_burning_legion_column_5 = {
-	# slot = 5
-	# generic = no
-	# ai = yes
+wwu_burning_legion_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
     
-	# potential = {
-		# tag = B92
-	# }
+	potential = {
+		tag = B92
+	}
     
-	# has_country_shield = yes
+	has_country_shield = yes
 	
-	# wwu_mission = {
-		# icon = mission_titan_spirits
-        # position = 1
+	wwu_foothold_in_the_eastern_kingdoms = {
+		icon = mission_fel_orc
+        position = 5
         
-		# required_missions = { }
+		required_missions = { wwu_subjects_of_the_legion }
         
-		# trigger = {
-            
-		# }
-		# provinces_to_highlight = {
-            
-			# NOT = { owned_by = ROOT }
-		# }
+		trigger = {
+            calc_true_if = {
+                amount = 5
+                
+                all_owned_province = {
+                    continent = continent_eastern_kingdoms
+                }
+            }
+		}
         
-		# effect = {
-			
-		# }
-	# }
-# }
+		effect = {
+            add_mil_power = 250
+		}
+	}
+}
