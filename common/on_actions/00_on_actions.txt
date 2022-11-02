@@ -179,27 +179,35 @@ on_war_won = {
         set_country_flag = won_war_against_stormwind
     }
     
+    # War ends - these should only apply if the war end causes the winner to end the war
     if = {
         limit = {
-            is_nomad = yes
+            is_at_war = no
         }
         
-        add_horde_unity = 20
-    }
-    
-    if = {
-        limit = {
-            has_estate_privilege = estate_tribals_spoils_of_war
+        if = {
+            limit = {
+                is_nomad = yes
+            }
+            
+            add_horde_unity = 20
         }
-        add_estate_loyalty = {
-            estate = estate_tribals
-            loyalty = 20
+        
+        if = {
+            limit = {
+                has_estate_privilege = estate_tribals_spoils_of_war
+            }
+            add_estate_loyalty = {
+                estate = estate_tribals
+                loyalty = 20
+            }
+        }
+        
+        # Reset Invasion flag
+            clr_country_flag = invasion_spawn_done
+            clr_country_flag = first_core_of_invasion
         }
     }
-    
-    # Reset Invasion flag
-    clr_country_flag = invasion_spawn_done
-    clr_country_flag = first_core_of_invasion
     
 	events = {
         wwu_dragon_aspects.1
@@ -271,9 +279,16 @@ on_war_lost = {
 		hidden = yes
 	}
     
-    # Reset Invasion flag
-    clr_country_flag = invasion_spawn_done
-    clr_country_flag = first_core_of_invasion
+    # War ends - these should only apply if the war end causes the loser to end the war
+    if = {
+        limit = {
+            is_at_war = no
+        }
+        
+        # Reset Invasion flag
+        clr_country_flag = invasion_spawn_done
+        clr_country_flag = first_core_of_invasion
+    }
     
 	events = {
         wwu_dragon_aspects.2
