@@ -676,3 +676,343 @@ disrupt_alliance = {
 	}
 }
 
+#---------------------------------------
+# Provoke Rebels
+#---------------------------------------
+provoke_rebels = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = provoke_rebels_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_neighbor_of = FROM
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 50
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - provoke_rebels"
+            }
+        }
+        
+		add_spy_network_in = {
+			who = FROM
+			value = -50
+		}
+        
+        if = {
+            limit = {
+                has_idea = wwu_espionage_ideas_4
+            }
+            if = {
+                limit = {
+                    DIP = 6
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 8
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 6 }
+                    DIP = 4
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 7
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 4 }
+                    DIP = 2
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 6
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 2 }
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 4
+                            win = yes
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            if = {
+                limit = {
+                    DIP = 6
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 6
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 6 }
+                    DIP = 4
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 5
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 4 }
+                    DIP = 2
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 4
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 2 }
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = anti_tax_rebels
+                            size = 2
+                            win = yes
+                        }
+                    }
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        always = no
+	}
+}
+
+#---------------------------------------
+# Provoke Pretenders
+#---------------------------------------
+provoke_pretenders = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = provoke_pretenders_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_neighbor_of = FROM
+        FROM = {
+            NOT = {
+                government = republic
+            }
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 75
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - provoke_pretenders"
+            }
+        }
+        
+		add_spy_network_in = {
+			who = FROM
+			value = -75
+		}
+        
+        if = {
+            limit = {
+                has_idea = wwu_espionage_ideas_4
+            }
+            if = {
+                limit = {
+                    DIP = 6
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 8
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 6 }
+                    DIP = 4
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 6
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 4 }
+                    DIP = 2
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 6
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 2 }
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 4
+                            win = yes
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            if = {
+                limit = {
+                    DIP = 6
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 6
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 6 }
+                    DIP = 4
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 5
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 4 }
+                    DIP = 2
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 4
+                            win = yes
+                        }
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { DIP = 2 }
+                }
+                FROM = {
+                    random_owned_province = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 2
+                            win = yes
+                        }
+                    }
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        always = no
+	}
+}

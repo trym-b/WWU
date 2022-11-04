@@ -326,3 +326,55 @@ apply_touch_of_death = {
 		always = yes
 	}
 }
+
+#---------------------------------------
+# Intimidate
+#---------------------------------------
+intimidate_enemy = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = intimidate_enemy_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_savage = yes
+        FROM = {
+            is_civil = yes
+        }
+	}
+	is_allowed = {
+        mil_power = 100
+        same_continent = FROM
+	}
+	on_accept = {
+        add_mil_power = -100
+        
+        FROM = {
+            hidden_effect = {
+                ROOT = {
+                    save_event_target_as = intimidator
+                }
+            }
+            country_event = { id = wwu_diplomatic_actions.3 }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = {   
+	}
+
+	ai_will_do = {
+        mil_power = 500
+        
+        # Only do it against threats
+		FROM = {
+            military_strength = {
+                who = ROOT
+                value = 1.0
+            }
+        }
+	}
+}

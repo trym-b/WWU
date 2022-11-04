@@ -51,3 +51,199 @@ country_event = {
         }
 	}
 }
+
+# Intimidation
+country_event = {
+	id = wwu_diplomatic_actions.3
+	title = wwu_diplomatic_actions.3.title
+    desc = wwu_diplomatic_actions.3.desc
+	picture = ABERRATION_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            export_to_variable = {
+                which = our_MIL
+                who = ROOT
+                value = trigger_value:MIL
+            }
+            export_to_variable = {
+                which = enemy_MIL
+                who = event_target:intimidator
+                value = trigger_value:MIL
+            }
+            
+            set_variable = {
+                which = diff_MIL
+                value = 0
+            }
+            change_variable = {
+                which = diff_MIL
+                which = our_MIL
+            }
+            subtract_variable = {
+                which = diff_MIL
+                which = enemy_MIL
+            }
+        }
+    }
+
+	option = {
+		name = wwu_diplomatic_actions.3.option.a
+		
+        # Good (+2 or higher)
+        if = {
+            limit = {
+                check_variable = {
+                    which = diff_MIL
+                    value = 2
+                }
+            }
+            
+            # Success Roll
+            random_list = {
+                # Intimidated
+                50 = {
+                    event_target:intimidator = {
+                        add_truce_with = ROOT
+                    }
+                
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.4 }
+                    }
+                }
+                # Unfazed
+                50 = {
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.5 }
+                    }
+                }
+            }
+        }
+        # Neutral (1 to -1)
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = diff_MIL
+                        value = 2
+                    }
+                }
+                check_variable = {
+                    which = diff_MIL
+                    value = -1
+                }
+            }
+            
+            # Success Roll
+            random_list = {
+                # Intimidated
+                75 = {
+                    event_target:intimidator = {
+                        add_truce_with = ROOT
+                    }
+                
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.4 }
+                    }
+                }
+                # Unfazed
+                25 = {
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.5 }
+                    }
+                }
+            }
+        }
+        # Bad
+        else_if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = diff_MIL
+                        value = -1
+                    }
+                }
+            }
+            
+            # Success Roll
+            random_list = {
+                # Intimidated
+                90 = {
+                    event_target:intimidator = {
+                        add_truce_with = ROOT
+                    }
+                
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.4 }
+                    }
+                }
+                # Unfazed
+                10 = {
+                    event_target:intimidator = {
+                        country_event = { id = wwu_diplomatic_actions.5 }
+                    }
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    option = {
+		name = wwu_diplomatic_actions.3.option.b
+        
+        event_target:intimidator = {
+            country_event = { id = wwu_diplomatic_actions.5 }
+        }
+        
+        add_dip_power = -250
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Target Intimidated
+country_event = {
+	id = wwu_diplomatic_actions.4
+	title = wwu_diplomatic_actions.4.title
+    desc = wwu_diplomatic_actions.4.desc
+	picture = ABERRATION_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.4.option.a
+	}
+}
+
+# Target Unfazed
+country_event = {
+	id = wwu_diplomatic_actions.5
+	title = wwu_diplomatic_actions.5.title
+    desc = wwu_diplomatic_actions.5.desc
+	picture = ACOLYTE_OF_PAIN_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.5.option.a
+	}
+}
