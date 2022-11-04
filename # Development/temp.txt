@@ -1,0 +1,51 @@
+﻿namespace = wwu_event
+
+# Replace <province id> with the actual province ID
+# Replace <tag> with the actual tag you want to 'release'
+# Replace <flag> with an unique string. 
+
+country_event = {
+    id = wwu_event.1
+    title = wwu_event.1.title
+    desc = wwu_event.1.desc
+    picture = SYLVANAS_WINDRUNNER_eventPicture
+
+    trigger = { 
+        NOT = { has_global_flag = <flag> }
+        owns_core_province = <province id>
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = <flag> # This is used to prevent the event from firing multiple times.
+        }
+    }
+    
+    # Cede land to Subject
+    option = {
+        name = wwu_event.1.option.a
+        
+        # This cedes the land and adds a core for the 'released' tag
+        <province id> = {
+            cede_province = <tag>
+            add_core = <tag>
+        }
+        
+        # This makes the 'released' tag ROOT's subject
+        create_subject = {
+            subject_type = <type> # Replace <type> with the subject_type name, i.e. vassal
+            subject = <tag>
+        }
+    }
+    
+    # Do nothing
+    option = {
+        name = wwu_event.1.option.b
+
+        
+    }
+}
