@@ -102,14 +102,17 @@ wwu_lordaeron_column_2 = {
 		required_missions = { wwu_arthas_crusade } 
                 		
 		trigger = {
+            # Scourge of Lordaeron
 			P52 = {
                 num_of_cities = 15
             }
             OR = {
+                owns = 642 # Stratholme
+                
+                # Scourge of Lordaeron
                 P52 = {
-                    owns = 642
+                    owns = 642 # Stratholme
                 }
-                owns = 642
             }
 		}
 		provinces_to_highlight = {
@@ -135,12 +138,24 @@ wwu_lordaeron_column_2 = {
 		required_missions = { wwu_the_culling } 
                 		
 		trigger = {
+            # Scourge of Lordaeron
 			P52 = {
                 num_of_cities = 20
             }
 		}
-		effect = {
-            country_event = { id = wwu_arthas_expedition.1 }
+		effect = {  
+            if = {
+                limit = {
+                    NOT = { has_global_flag = valgarde_spawned }
+                }
+                country_event = { id = wwu_arthas_expedition.1 }
+                hidden_effect = {
+                    set_global_flag = valgarde_spawned
+                }
+            }
+            else = {
+                add_prestige = 5
+            }
         }
     }
 }

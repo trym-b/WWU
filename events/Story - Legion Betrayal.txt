@@ -40,72 +40,15 @@ country_event = {
 	option = {
 		name = wwu_legion_betrayal.2.option.a
     
+        # Karazhan
         953 = {
-            cede_province = DVG
-            add_core = DVG
+            cede_province = B92 # Burning Legion
+            add_core = B92 # Burning Legion
             change_culture = culture_eredar
             change_religion = fel
             add_base_tax = 4
             add_base_production = 4
             add_base_manpower = 8
-        }
-    }
-    
-    after = {
-        hidden_effect = {
-            DVG = {
-                country_event = { id = wwu_legion_betrayal.3 }
-            }
-        }
-    }
-}
-
-# Archimonde's Arrival
-country_event = {
-	id = wwu_legion_betrayal.3
-	title = wwu_legion_betrayal.3.title
-	desc = wwu_legion_betrayal.3.desc
-	picture = ARCHIMONDE_eventPicture
-
-	is_triggered_only = yes
-	
-	mean_time_to_happen = { 
-        days = 1
-    }
-    
-	option = {
-		name = wwu_legion_betrayal.3.option.a
-        
-        DVG = {
-            define_ruler = {
-                name = "Archimonde" 
-                dynasty = "the Defiler"
-                adm = 7
-                dip = 7
-                mil = 7
-            }
-            set_ruler_flag = is_immortal
-            set_ruler_flag = warlock_personality
-            add_ruler_personality = ruthless_personality
-            
-            set_ruler_flag = ruler_portrait_archimonde
-    
-            setup_spellcaster_history = {
-                APTITUDE = 5
-                FINESSE = 5
-                CONCENTRATION = 5
-                MANA = 5
-                fel = yes
-            }
-    
-            add_country_modifier = {
-                name = is_evil
-                duration = -1
-            }
-            
-            add_treasury = 10000
-            add_manpower = 100
-            add_mil_tech = 2
         }
     }
 }
@@ -187,30 +130,37 @@ country_event = {
 		name = wwu_legion_betrayal.6.option.a
 
         area_upper_groves = {
-            cede_province = DVG
-            add_core = DVG
+            cede_province = B92 # Burning Legion
+            add_core = B92 # Burning Legion
             change_culture = culture_demonspawn
             change_religion = fel
         }
         
         area_nordrassil = {
-            cede_province = DVG
-            add_core = DVG
+            cede_province = B92 # Burning Legion
+            add_core = B92 # Burning Legion
             change_culture = culture_demonspawn
             change_religion = fel
         }
         
+        # Nordrassil Settlements
         1334 = {
             change_culture = culture_eredar
         }
         
-        DVG = {
-            set_capital = 1334
+        if = {
+            limit = {
+                exists = A95 # Keepers of the Grove
+            }
+            declare_war_with_cb = {
+                who = A95 # Keepers of the Grove
+                casus_belli = cb_demonic_invasion
+            }
         }
     }
 }
 
-# Nordrassil's Sacrifice - For the Demonic Vanguard
+# Nordrassil's Sacrifice - For the Burning Legion
 country_event = {
 	id = wwu_legion_betrayal.7
 	title = wwu_legion_betrayal.7.title
@@ -219,6 +169,10 @@ country_event = {
 
 	is_triggered_only = yes
 	
+    trigger = {
+        NOT = { has_global_flag = archimonde_dead }
+    }
+    
 	mean_time_to_happen = { 
         days = 1
     }
@@ -258,13 +212,13 @@ country_event = {
         area_upper_groves = {
             cede_province = G02
             add_core = G02
-            remove_core = DVG
+            remove_core = B92
         }
         
         area_nordrassil = {
             cede_province = G02
             add_core = G02
-            remove_core = DVG
+            remove_core = B92
         }
     }
     
