@@ -1482,6 +1482,22 @@ request_to_join_federation = {
 		}
 	}
     
+    # Block federations for the 1st year so the AI doesn't auto-make them before the player can toggle the feature.
+    condition = {
+		tooltip = DISABLED_MECHANIC
+		potential = {	
+            NOT = {
+                had_global_flag = {
+                    flag = game_duration_timer
+                    days = 365
+                }
+            }
+		}
+		allow = {
+			always = no
+		}
+	}
+    
     condition = {
 		tooltip = THIER_FEDERATION_TOO_BIG
 		potential = {	
@@ -1529,6 +1545,22 @@ invite_to_federation = {
 		tooltip = DISABLED_MECHANIC
 		potential = {	
             NOT = { has_global_flag = enabled_federations }
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block federations for the 1st year so the AI doesn't auto-make them before the player can toggle the feature.
+    condition = {
+		tooltip = DISABLED_MECHANIC
+		potential = {	
+            NOT = {
+                had_global_flag = {
+                    flag = game_duration_timer
+                    days = 365
+                }
+            }
 		}
 		allow = {
 			always = no

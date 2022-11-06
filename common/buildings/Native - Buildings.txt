@@ -1,7 +1,3 @@
-###
-# North American Natives
-###
-
 # Do not change tags in here without changing every other reference to them.
 # If adding new buildings, make sure they are uniquely named.
 
@@ -17,26 +13,68 @@
 # FROM = owner
 # ROOT = province
 
-native_earthwork = {
-	cost = 50
+#--------------------------------------
+# Used by Taurens/Centaurs
+#--------------------------------------
+# Farm
+wow_native_farm = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		local_defensiveness = 0.25
+		local_development_cost = -0.1
+		trade_goods_size_modifier = 0.1
 	}
-	government_specific = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_earthwork "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_farm "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
+		modifier = {
+			factor = 2.0
+			is_capital = yes
+		}
+	}
+}
+
+# Mine
+wow_native_mine = {
+	cost = 100
+	time = 12
+    
+	government_specific = yes
+    allow_in_gold_provinces = no
+    
+	build_trigger = {
+		owner = { government = native }
+	}
+    
+	modifier = {
+		local_production_efficiency = 0.25
+	}
+    
+    on_built = {
+        if = { 
+			limit = { has_global_flag = enable_building_logging }
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_mine"
+		}
+	}
+    
+	ai_will_do = {
+		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -44,29 +82,31 @@ native_earthwork = {
 	}
 }
 
-native_palisade = {
-	cost = 50
+# Market
+wow_native_market = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		fort_level = 1
+		province_trade_power_modifier = 0.25
 	}
-	government_specific = yes
-	influencing_fort = yes
-	
-	onmap = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_palisade "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_market "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -74,48 +114,22 @@ native_palisade = {
 	}
 }
 
-native_fortified_house = {
-	cost = 50
+# Fire Pit
+wow_native_fire_pit = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
-	}
-	modifier = {
-		land_forcelimit = 10
-	}
-	one_per_country = yes
-	government_specific = yes
-	
-    on_built = {
-        if = { 
-			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_fortified_house "
-		}
 	}
     
-	ai_will_do = {
-		factor = 100
-		modifier = {
-			factor = 2.0
-			is_capital = yes
-		}				
-	}
-}
-
-
-
-native_ceremonial_fire_pit = {
-	cost = 50
-	time = 12
-	build_trigger = {
-		owner = { government = native }
-	}
 	modifier = {
-		advisor_cost = -0.50
+		local_monthly_devastation = -0.05
+        local_autonomy = -0.025
 	}
-	one_per_country = yes
-	government_specific = yes
-	
+    
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
@@ -125,6 +139,7 @@ native_ceremonial_fire_pit = {
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -132,26 +147,32 @@ native_ceremonial_fire_pit = {
 	}
 }
 
-native_irrigation = {
-	cost = 50
+# Village Hall
+wow_native_hall = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		local_tax_modifier = 0.5
+		local_governing_cost = -0.25
+		local_state_maintenance_modifier = -0.1
 	}
-	government_specific = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_irrigation "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_hall "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -159,26 +180,31 @@ native_irrigation = {
 	}
 }
 
-native_storehouse = {
-	cost = 50
+# Barracks
+wow_native_barracks = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		local_production_efficiency = 0.5
+		local_manpower_modifier = 0.25
 	}
-	government_specific = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_storehouse "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_barracks "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -186,27 +212,32 @@ native_storehouse = {
 	}
 }
 
-native_longhouse = {
-	cost = 50
+# Arsenal
+wow_native_arsenal = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		tax_income = 1
+		land_forcelimit = 1
+        supply_limit_modifier = 0.25
 	}
-	one_per_country = yes
-	government_specific = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_longhouse "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_arsenal "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -214,27 +245,32 @@ native_longhouse = {
 	}
 }
 
-native_sweat_lodge = {
-	cost = 50
+# Tower
+wow_native_tower = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		diplomatic_reputation = 1
+        local_hostile_attrition = 1
+        local_hostile_movement_speed = -0.25
 	}
-	one_per_country = yes
-	government_specific = yes
 	
     on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_sweat_lodge "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_tower "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
@@ -242,54 +278,32 @@ native_sweat_lodge = {
 	}
 }
 
-native_great_trail = {
-	cost = 50
+# Training Ground
+wow_native_training_ground = {
+	cost = 100
 	time = 12
+    
+	government_specific = yes
+    
 	build_trigger = {
 		owner = { government = native }
 	}
+    
 	modifier = {
-		local_manpower_modifier = 0.5
+		local_regiment_cost = -0.25
+        regiment_recruit_speed = -0.25
 	}
-	government_specific = yes
 
 	on_built = {
         if = { 
 			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_great_trail "
+			log = "DEBUG - [Root.GetName] - on_built - wow_native_training_ground "
 		}
 	}
     
 	ai_will_do = {
 		factor = 100
-		modifier = {
-			factor = 2.0
-			is_capital = yes
-		}				
-	}
-}
-
-
-native_three_sisters_field = {
-	cost = 50
-	time = 12
-	build_trigger = {
-		owner = { government = native }
-	}
-	modifier = {
-		trade_goods_size_modifier = 0.5
-	}
-	government_specific = yes
-	
-    on_built = {
-        if = { 
-			limit = { has_global_flag = enable_building_logging }
-			log = "DEBUG - [Root.GetName] - on_built - native_three_sisters_field "
-		}
-	}
-    
-	ai_will_do = {
-		factor = 100
+        
 		modifier = {
 			factor = 2.0
 			is_capital = yes
