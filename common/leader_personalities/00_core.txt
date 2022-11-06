@@ -3,173 +3,393 @@
 #  <base chance> * <army tradition gained in battle>
 # Modifiers apply only to the stack lead by the leader.
 
-###############################################
+#---------------------------------
 # General Traits
-###############################################
-
+#---------------------------------
+# Glory Seeker
 glory_seeker_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	prestige_from_land = 0.25
-	army_tradition_from_battle = 0.25
+	prestige_from_land = 0.5
+	army_tradition_from_battle = 0.5
+}
+elite_glory_seeker_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	prestige_from_land = 1.0
+	army_tradition_from_battle = 1.0
 }
 
+# Born to the Saddle
 born_to_the_saddle_personality = {
 	allow = {
 		cavalry_fraction = 0.2
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	cavalry_flanking = 0.25
+	cavalry_flanking = 0.5
+}
+elite_born_to_the_saddle_personality = {
+	allow = {
+		cavalry_fraction = 0.2
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	cavalry_flanking = 1.0
 }
 
+# Defensive Planner
 defensive_planner_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	shock_damage_received = -0.05
+	shock_damage_received = -0.1
+}
+elite_defensive_planner_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	shock_damage_received = -0.2
 }
 
+# Battlefield Medic
 battlefield_medic_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	reinforce_speed = 0.1
+	reinforce_speed = 0.15
+}
+elite_battlefield_medic_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	reinforce_speed = 0.3
 }
 
+# Ruthless
 ruthless_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	fire_damage = 0.05
+	fire_damage = 0.1
+}
+elite_ruthless_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	fire_damage = 0.2
 }
 
+# Inspirational Leader
 inspirational_leader_general_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	recover_army_morale_speed = 0.05
+	recover_army_morale_speed = 0.1
+}
+elite_inspirational_leader_general_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	recover_army_morale_speed = 0.2
 }
 
+# Master of Arms
 master_of_arms_personality = {
 	allow = {
 		infantry_fraction = 0.2
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	infantry_power = 0.05
+	infantry_power = 0.1
+}
+elite_master_of_arms_personality = {
+	allow = {
+		infantry_fraction = 0.2
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	infantry_power = 0.2
 }
 
+# Goal-oriented
 goal_oriented_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	movement_speed = 0.05
+	movement_speed = 0.15
+}
+elite_goal_oriented_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	movement_speed = 0.3
 }
 
+# Hardy Warrior
 hardy_warrior_personality = {
 	allow = {
 		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	land_attrition = -0.1
+	land_attrition = -0.25
+}
+elite_hardy_warrior_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	land_attrition = -0.5
 }
 
+# Siege Specialist
 siege_specialist_personality = {
 	allow = {
 		is_admiral = no
 		artillery_fraction = 0.01 # "any cannons"
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	siege_ability = 0.05
+	siege_ability = 0.1
+}
+elite_siege_specialist_personality = {
+	allow = {
+		is_admiral = no
+		artillery_fraction = 0.01 # "any cannons"
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	siege_ability = 0.2
 }
 
+# Cannoneer
 cannoneer_personality = {
 	allow = {
 		is_admiral = no
 		artillery_fraction = 0.01 # "any cannons"
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
 	}
-	artillery_power = 0.05
+	artillery_power = 0.1
+}
+elite_cannoneer_personality = {
+	allow = {
+		is_admiral = no
+		artillery_fraction = 0.01 # "any cannons"
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	artillery_power = 0.2
 }
 
+# Enforcer
+enforcer_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { NOT = { has_reform = wwu_military_elitism } }
+	}
+	discipline = 0.05
+}
+elite_enforcer_personality = {
+	allow = {
+		is_admiral = no
+        unit_owner = { has_reform = wwu_military_elitism }
+	}
+	discipline = 0.1
+}
 
-###############################################
+#---------------------------------
 # Admiral personalities
-###############################################
-
+#---------------------------------
+# Extortioner
 extortioner_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	global_ship_trade_power = 0.1
+	global_ship_trade_power = 0.15
+}
+elite_extortioner_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	global_ship_trade_power = 0.3
 }
 
+# Ruthless Blockader
 ruthless_blockader_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	blockade_efficiency = 0.1
+	blockade_efficiency = 0.15
+}
+elite_ruthless_blockader_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	blockade_efficiency = 0.3
 }
 
+# Buccaneer
 buccaneer_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	privateer_efficiency = 0.1
+	privateer_efficiency = 0.15
+}
+elite_buccaneer_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	privateer_efficiency = 0.3
 }
 
+# Prize Hunter
 prize_hunter_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
 	capture_ship_chance = 0.1
 }
+elite_prize_hunter_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	capture_ship_chance = 0.2
+}
 
+# Ironside
 ironside_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	ship_durability = 0.05
+	ship_durability = 0.1
+}
+elite_ironside_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	ship_durability = 0.2
 }
 
+# Naval Engineer
 naval_engineer_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	local_ship_repair = 0.25
+	local_ship_repair = 0.5
+}
+elite_naval_engineer_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	local_ship_repair = 1.0
 }
 
+# Naval Showman
 naval_showman_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
 	prestige_from_naval = 0.5
 	naval_tradition_from_battle = 0.5
 }
+elite_naval_showman_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	prestige_from_naval = 1.0
+	naval_tradition_from_battle = 1.0
+}
 
+# Ram Raider
 ram_raider_personality = {
 	allow = {
 		is_admiral = yes
 		galley_fraction = 0.2
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	galley_power = 0.05
+	galley_power = 0.1
+}
+elite_ram_raider_personality = {
+	allow = {
+		is_admiral = yes
+		galley_fraction = 0.2
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	galley_power = 0.2
 }
 
+# Naval Gunner
 naval_gunner_personality = {
 	allow = {
 		heavy_ship_fraction = 0.1
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	heavy_ship_power = 0.05
+	heavy_ship_power = 0.1
+}
+elite_naval_gunner_personality = {
+	allow = {
+		heavy_ship_fraction = 0.1
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	heavy_ship_power = 0.2
 }
 
+# Accomplished Sailor
 accomplished_sailor_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	movement_speed = 0.05
+	movement_speed = 0.15
+}
+elite_accomplished_sailor_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	movement_speed = 0.3
 }
 
+# Level Headed
 level_headed_personality = {
 	allow = {
 		is_admiral = yes
+        unit_owner = { NOT = { has_reform = wwu_naval_elitism } }
 	}
-	sunk_ship_morale_hit_recieved = -0.05
+	sunk_ship_morale_hit_recieved = -0.1
 }
+elite_level_headed_personality = {
+	allow = {
+		is_admiral = yes
+        unit_owner = { has_reform = wwu_naval_elitism }
+	}
+	sunk_ship_morale_hit_recieved = -0.2
+}
+
