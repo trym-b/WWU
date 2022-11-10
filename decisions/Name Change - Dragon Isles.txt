@@ -1,0 +1,91 @@
+country_decisions = {
+    # Form Draenor
+	form_dragon_isles_nation = {
+		major = yes
+        
+		potential = { 
+            # NOT = { has_country_flag = enacted_final_tag_formation }
+            
+			NOT = { has_country_flag = is_dragon_isles_flag }
+            
+			OR = {
+			    culture_group = culture_group_centaur
+				culture_group = culture_group_djaradin
+				culture_group = culture_group_dragonkin
+				culture_group = culture_group_tuskarr
+				culture_group = culture_group_furbolg
+				culture_group = culture_group_titan
+				culture_group = culture_group_gnoll
+			}
+            
+			capital_scope = {
+                continent = continent_dragon_isles
+            }
+		}
+        provinces_to_highlight = {
+			OR = {			
+                region = region_azure_span
+                region = region_forbidden_reach
+                region = region_ohnahran_plains
+                region = region_thaldrasszus
+                region = region_waking_shores
+			}
+			NOT = { owned_by = ROOT }
+		}
+        
+		allow = {
+			is_free_or_tributary_trigger = yes
+
+            OR = {
+                culture = culture_maruuk_centaur
+				culture = culture_djaradin
+				culture = culture_tuskarr
+				culture = culture_furbolg
+				culture = culture_tyrhold
+				culture = culture_gnoll
+				culture_group = culture_group_dragonkin
+				
+			}
+
+            region_azure_span = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_forbidden_reach = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_ohnahran_plains = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_thaldrasszus = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_waking_shores = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            
+			is_at_war = no
+			stability = 2
+            
+            prestige = 80
+		}
+		effect = {            
+            hidden_effect = {
+                set_country_flag = is_dragon_isles_flag
+            }
+            
+			override_country_name = DRAGON_ISLES
+            
+            add_formable_bonus = yes
+            #trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
