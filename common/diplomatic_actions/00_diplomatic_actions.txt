@@ -1432,20 +1432,28 @@ form_coalition = {
         }
     }
     
+    condition = {
+		tooltip = TOO_SMALL_TO_COALITION
+		potential = {
+            # Target of Coalition
+            FROM = {
+                NOT = { total_development = 200 }
+            }
+		}
+		allow = {
+			always = no
+		}
+	}
+    
 	condition = {
-		tooltip = MINAGGRESSIVEEXPANSION
+		tooltip = WWU_MINAGGRESSIVEEXPANSION
 		potential = {	
 		}
 		allow = {
-			has_opinion_modifier = {
-				modifier = aggressive_expansion
-				who = FROM
-				value = -50
-			}		
 			NOT = {
 				has_opinion_modifier = {
 					modifier = aggressive_expansion
-					who = FROM
+					who = FROM # Target of Coalition
 					value = -50
 				}
 			}
