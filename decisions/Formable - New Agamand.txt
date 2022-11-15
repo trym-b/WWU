@@ -1,0 +1,78 @@
+country_decisions = {
+    form_new_agamand = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+            # Exclusions
+			NOT = { exists = NAG }
+            NOT = { tag = P14 }
+            # Requisites
+			tag = A96
+			
+		}
+        
+        provinces_to_highlight = {
+		    NOT = { owned_by = ROOT }
+		    OR = {
+			    area = area_new_agamand   
+			    area = area_vengeance_landing
+			}
+		}
+        
+		allow = {
+            # Ownership
+			area_new_agamand = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+            area_vengeance_landing = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			
+            # General
+			adm_tech = 8
+			is_at_war = no	
+			stability = 1
+			total_development = 150
+            
+			# Cost
+            adm_power = 200
+			dip_power = 200
+			mil_power = 200
+		}
+        
+		effect = {
+            # Cost
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
+            
+            # Switch
+			change_tag = NAG
+			change_government = monarchy
+			set_capital = 546
+            every_owned_province = { 
+                limit = {
+                    continent = continent_northrend
+					culture = culture_scourge
+                    NOT = { culture = culture_forsaken }
+                }
+                change_culture = culture_forsaken 
+            }
+            
+			# Bonus
+            add_formable_bonus = yes
+            #trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_final_tag_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
