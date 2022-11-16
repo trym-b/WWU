@@ -1,0 +1,73 @@
+country_decisions = {
+    form_dire_maul = {
+		major = yes
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+            # Exclusions
+			NOT = { exists = DRM }
+            
+            # Requisites
+			tag = A52
+            
+		}
+        
+        provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+            OR = {
+                area = area_diremaul
+                area = area_diremaul_interior
+				area = area_high_wilderness
+            }
+		}
+        
+		allow = {
+            # Ownership
+			area_diremaul = {
+				type = all
+				owned_by = ROOT
+			}
+			area_diremaul_interior = {
+                type = all
+				owned_by = ROOT
+			}
+            area_high_wilderness = {
+                type = all
+				owned_by = ROOT
+			}
+			
+			# General
+			is_at_war = no	
+			stability = 1
+            
+            # Cost
+            adm_power = 250
+			dip_power = 250
+			mil_power = 250
+		}
+		effect = {
+            # Cost
+			add_adm_power = -250
+			add_dip_power = -250
+            add_mil_power = -250
+            
+            # Switch
+			change_tag = DRM
+            change_government = monarchy
+			set_capital = 1252                   
+            
+            # Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_final_tag_status = yes
+		}
+		
+		ai_importance = 300
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
