@@ -1,5 +1,7 @@
 namespace = wwu_subject_management
 
+# This system does not support usage by the AI.
+
 #-------------------------
 # Adminstration of X
 #-------------------------
@@ -7,7 +9,7 @@ country_event = {
 	id = wwu_subject_management.1
 	title = wwu_subject_management.1.title
 	desc = wwu_subject_management.1.desc
-	picture = GATHER_YOUR_PARTY_eventPicture
+	picture = MYSTERIOUS_TOME_eventPicture
 	
 	is_triggered_only = yes
     
@@ -25,19 +27,19 @@ country_event = {
         country_event = { id = wwu_subject_management.3 }
 	}
     
-    # # Subject Assistance
-	# option = {
-		# name = wwu_subject_management.1.option.subject_assistance
+    # Subject Assistance
+	option = {
+		name = wwu_subject_management.1.option.subject_assistance
         
-        # country_event = { id = wwu_subject_management.4 }
-	# }
+        country_event = { id = wwu_subject_management.4 }
+	}
     
-    # # Subject Extraction
-	# option = {
-		# name = wwu_subject_management.1.option.subject_extraction
+    # Subject Extraction
+	option = {
+		name = wwu_subject_management.1.option.subject_extraction
         
-        # country_event = { id = wwu_subject_management.5 }
-	# }
+        country_event = { id = wwu_subject_management.5 }
+	}
     
     # Exit
     option = {
@@ -995,6 +997,360 @@ country_event = {
     # Return
     option = {
 		name = wwu_subject_management.3.option.return
+        
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_subject_management.1 }
+        }
+    }
+}
+
+#-------------------------
+# Subject Assistance
+#-------------------------
+country_event = {
+	id = wwu_subject_management.4
+	title = wwu_subject_management.4.title
+	desc = wwu_subject_management.4.desc
+	picture = MUSTER_FOR_BATTLE_eventPicture
+	
+	is_triggered_only = yes
+
+    # Stability - VALID
+	option = {
+		name = wwu_subject_management.4.option.stability
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            adm_power = 100
+        }
+        
+        add_adm_power = -100
+        
+        event_target:current_subject = {
+            add_stability = 1
+            
+            add_country_modifier = {
+                name = subject_assist_cooldown
+                duration = 365
+            }
+            add_liberty_desire = -2
+        }
+        
+        custom_tooltip = SUBJECT_ASSIST_COOLDOWN_TT
+	}
+    # Stability - INVALID
+    option = {
+		name = wwu_subject_management.4.option.stability.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            NOT = { adm_power = 100 }
+        }
+        
+        custom_tooltip = STABILITY_ASSIST_LACK_TT
+	}
+    # Corruption - VALID
+	option = {
+		name = wwu_subject_management.4.option.corruption
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            years_of_income = 1
+        }
+        
+        add_years_of_income = -1
+        
+        event_target:current_subject = {
+            add_corruption = -5
+            
+            add_country_modifier = {
+                name = subject_assist_cooldown
+                duration = 365
+            }
+            add_liberty_desire = -2
+        }
+        
+        custom_tooltip = SUBJECT_ASSIST_COOLDOWN_TT
+	}
+    # Corruption - INVALID
+    option = {
+		name = wwu_subject_management.4.option.corruption.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            NOT = { years_of_income = 1 }
+        }
+        
+        custom_tooltip = CORRUPTION_ASSIST_LACK_TT
+	}
+    # Manpower - VALID
+	option = {
+		name = wwu_subject_management.4.option.manpower
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            manpower = 10
+        }
+        
+        add_manpower = -10
+        
+        event_target:current_subject = {
+            add_manpower = 10
+            
+            add_country_modifier = {
+                name = subject_assist_cooldown
+                duration = 365
+            }
+            add_liberty_desire = -2
+        }
+        
+        custom_tooltip = SUBJECT_ASSIST_COOLDOWN_TT
+	}
+    # Manpower - INVALID
+    option = {
+		name = wwu_subject_management.4.option.manpower.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            NOT = { manpower = 10 }
+        }
+        
+        custom_tooltip = MANPOWER_ASSIST_LACK_TT
+	}
+    # Sailors - VALID
+	option = {
+		name = wwu_subject_management.4.option.sailors
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            sailors = 1000
+        }
+        
+        add_sailors = -1000
+        
+        event_target:current_subject = {
+            add_sailors = 1000
+            
+            add_country_modifier = {
+                name = subject_assist_cooldown
+                duration = 365
+            }
+            add_liberty_desire = -2
+        }
+        
+        custom_tooltip = SUBJECT_ASSIST_COOLDOWN_TT
+	}
+    # Sailors - INVALID
+    option = {
+		name = wwu_subject_management.4.option.sailors.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_assist_cooldown }
+            }
+            NOT = { sailors = 1000 }
+        }
+        
+        custom_tooltip = SAILORS_ASSIST_LACK_TT
+	}
+    
+    # Return
+    option = {
+		name = wwu_subject_management.4.option.return
+        
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_subject_management.1 }
+        }
+    }
+}
+
+#-------------------------
+# Subject Extraction
+#-------------------------
+country_event = {
+	id = wwu_subject_management.5
+	title = wwu_subject_management.5.title
+	desc = wwu_subject_management.5.desc
+	picture = PILOTED_SHREDDER_eventPicture
+	
+	is_triggered_only = yes
+
+    # Prestige - VALID
+	option = {
+		name = wwu_subject_management.5.option.prestige
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                prestige = 25
+            }
+        }
+        
+        add_prestige = 25
+        
+        event_target:current_subject = {
+            add_prestige = -25
+            
+            add_country_modifier = {
+                name = subject_extract_cooldown
+                duration = 365
+            }
+            add_liberty_desire = 5
+        }
+        
+        custom_tooltip = SUBJECT_EXTRACT_COOLDOWN_TT
+	}
+    # Prestige - INVALID
+    option = {
+		name = wwu_subject_management.5.option.prestige.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                NOT = { prestige = 25 }
+            }
+        }
+        
+        custom_tooltip = PRESTIGE_EXTRACT_LACK_TT
+	}
+    # Army Tradition - VALID
+	option = {
+		name = wwu_subject_management.5.option.army_tradition
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                army_tradition = 10
+            }
+        }
+        
+        add_army_tradition = 10
+        
+        event_target:current_subject = {
+            add_army_tradition = -10
+            
+            add_country_modifier = {
+                name = subject_extract_cooldown
+                duration = 365
+            }
+            add_liberty_desire = 5
+        }
+        
+        custom_tooltip = SUBJECT_EXTRACT_COOLDOWN_TT
+	}
+    # Army Tradition - INVALID
+    option = {
+		name = wwu_subject_management.5.option.army_tradition.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                NOT = { army_tradition = 10 }
+            }
+        }
+        
+        custom_tooltip = ARMY_TRADITION_EXTRACT_LACK_TT
+	}
+    # Manpower - VALID
+	option = {
+		name = wwu_subject_management.5.option.manpower
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                manpower = 5
+            }
+        }
+        
+        add_manpower = 5
+        
+        event_target:current_subject = {
+            add_manpower = -5
+            
+            add_country_modifier = {
+                name = subject_extract_cooldown
+                duration = 365
+            }
+            add_liberty_desire = 5
+        }
+        
+        custom_tooltip = SUBJECT_EXTRACT_COOLDOWN_TT
+	}
+    # Manpower - INVALID
+    option = {
+		name = wwu_subject_management.5.option.army_tradition.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                NOT = { manpower = 5 }
+            }
+        }
+        
+        custom_tooltip = MANPOWER_EXTRACT_LACK_TT
+	}
+    # Sailors - VALID
+	option = {
+		name = wwu_subject_management.5.option.sailors
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                sailors = 500
+            }
+        }
+        
+        add_sailors = 500
+        
+        event_target:current_subject = {
+            add_sailors = -500
+            
+            add_country_modifier = {
+                name = subject_extract_cooldown
+                duration = 365
+            }
+            add_liberty_desire = 5
+        }
+        
+        custom_tooltip = SUBJECT_EXTRACT_COOLDOWN_TT
+	}
+    # Sailors - INVALID
+    option = {
+		name = wwu_subject_management.5.option.sailors.invalid
+        
+        trigger = {
+            event_target:current_subject = {
+                NOT = { has_country_modifier = subject_extract_cooldown }
+                NOT = { sailors = 500 }
+            }
+        }
+        
+        custom_tooltip = SAILORS_EXTRACT_LACK_TT
+	}
+    
+    # Return
+    option = {
+		name = wwu_subject_management.5.option.return
         
 	}
     
