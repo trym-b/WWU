@@ -1,0 +1,261 @@
+namespace = wwu_doctrine
+
+# This system does not support usage by the AI.
+
+#-------------------------
+# Doctrine
+#-------------------------
+country_event = {
+	id = wwu_doctrine.1
+	title = wwu_doctrine.1.title
+	desc = wwu_doctrine.1.desc
+	picture = MYSTERIOUS_TOME_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Siege Doctrine
+	option = {
+		name = wwu_doctrine.1.option.siege_doctrine
+        
+        country_event = { id = wwu_doctrine.2 }
+	}
+    
+    # Exit
+    option = {
+		name = wwu_doctrine.1.option.exit
+        
+	}
+}
+
+# Ideas:
+# Homeland Doctrine
+ # Respond on enemy siege
+ # Resignation: normal behavior
+ # Martyrdom: drain 1,000 manpower, but kill 1 unit in enemy stack
+ # Enduring Loyalty: drain 50 MIL power, but auto-kill rebel sieges
+
+#-------------------------
+# Siege Doctrine
+#-------------------------
+country_event = {
+	id = wwu_doctrine.2
+	title = wwu_doctrine.2.title
+	desc = wwu_doctrine.2.desc
+	picture = FLAME_CANNON_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Standard - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.standard
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_1 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_STANDARD_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_1
+        }
+    }
+    # Standard - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.standard.selected
+    
+        trigger = {
+            has_country_flag = siege_type_1
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_STANDARD_TT
+    }
+    # Standard - INVALID
+	option = {
+		name = wwu_doctrine.2.option.standard.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_1 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_STANDARD_TT
+    }
+    
+    # Sow Terror - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.sow_terror
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_2 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SOW_TERROR_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_2
+        }
+    }
+    # Sow Terror - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.sow_terror.selected
+    
+        trigger = {
+            has_country_flag = siege_type_2
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SOW_TERROR_TT
+    }
+    # Sow Terror - INVALID
+	option = {
+		name = wwu_doctrine.2.option.sow_terror.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_2 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SOW_TERROR_TT
+    }
+    
+    # Slash and Burn - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.slash_and_burn
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_3 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SLASH_AND_BURN_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_3
+        }
+    }
+    # Slash and Burn - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.slash_and_burn.selected
+    
+        trigger = {
+            has_country_flag = siege_type_3
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SLASH_AND_BURN_TT
+    }
+    # Slash and Burn - INVALID
+	option = {
+		name = wwu_doctrine.2.option.slash_and_burn.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_3 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SLASH_AND_BURN_TT
+    }
+    
+    # Coup de Grace - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.coup_de_grace
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_4 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_4
+        }
+    }
+    # Coup de Grace - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.coup_de_grace.selected
+    
+        trigger = {
+            has_country_flag = siege_type_4
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+    }
+    # Coup de Grace - INVALID
+	option = {
+		name = wwu_doctrine.2.option.coup_de_grace.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = siege_type_4 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+    }
+    
+    # Exit
+    option = {
+		name = wwu_doctrine.2.option.return
+        
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_doctrine.1 }
+        }
+    }
+}
+
+#-------------------------
+# Defaults
+#-------------------------
+country_event = {
+	id = wwu_doctrine.100
+	title = wwu_doctrine.100.title
+	desc = wwu_doctrine.100.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_doctrine.100.option.a
+    
+        # Default for all
+        set_country_flag = siege_type_1
+        
+        # Add setup for AI in this section if you want the AI to use a non-default type. (AI will not use the menu directly).
+    }
+}
