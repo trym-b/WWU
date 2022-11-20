@@ -13,6 +13,13 @@ country_event = {
 	
 	is_triggered_only = yes
     
+    # Homeland Doctrine
+	option = {
+		name = wwu_doctrine.1.option.homeland_doctrine
+        
+        country_event = { id = wwu_doctrine.3 }
+	}
+    
     # Siege Doctrine
 	option = {
 		name = wwu_doctrine.1.option.siege_doctrine
@@ -26,13 +33,6 @@ country_event = {
         
 	}
 }
-
-# Ideas:
-# Homeland Doctrine
- # Respond on enemy siege
- # Resignation: normal behavior
- # Martyrdom: drain 1,000 manpower, but kill 1 unit in enemy stack
- # Enduring Loyalty: drain 50 MIL power, but auto-kill rebel sieges
 
 #-------------------------
 # Siege Doctrine
@@ -238,6 +238,214 @@ country_event = {
     }
 }
 
+
+# Ideas:
+# Homeland Doctrine
+ # Respond on enemy siege
+ # Resignation: normal behavior
+ # Martyrdom: drain 1,000 manpower, but kill 1 unit in enemy stack
+ # Enduring Loyalty: drain 50 MIL power, but auto-kill rebel sieges
+#-------------------------
+# Homeland Doctrine
+#-------------------------
+country_event = {
+	id = wwu_doctrine.3
+	title = wwu_doctrine.3.title
+	desc = wwu_doctrine.3.desc
+	picture = AVENGE_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Resignation - NOT SELECTED
+	option = {
+		name = wwu_doctrine.3.option.resignation
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_1 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_RESIGNATION_TT
+        
+        hidden_effect = {
+            clear_homeland_doctrine_flags = yes
+            set_country_flag = homeland_type_1
+        }
+    }
+    # Resignation - SELECTED
+	option = {
+		name = wwu_doctrine.3.option.resignation.selected
+    
+        trigger = {
+            has_country_flag = homeland_type_1
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_RESIGNATION_TT
+    }
+    # Resignation - INVALID
+	option = {
+		name = wwu_doctrine.3.option.resignation.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_1 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_RESIGNATION_TT
+    }
+    
+    # Martyrdom - NOT SELECTED
+	option = {
+		name = wwu_doctrine.3.option.martyrdom
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_2 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
+        
+        hidden_effect = {
+            clear_homeland_doctrine_flags = yes
+            set_country_flag = homeland_type_2
+        }
+    }
+    # Martyrdom - SELECTED
+	option = {
+		name = wwu_doctrine.3.option.martyrdom.selected
+    
+        trigger = {
+            has_country_flag = homeland_type_2
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
+    }
+    # Martyrdom - INVALID
+	option = {
+		name = wwu_doctrine.3.option.martyrdom.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_2 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
+    }
+    
+    # Loyalist Provocation - NOT SELECTED
+	option = {
+		name = wwu_doctrine.3.option.loyalist_provocation
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_3 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+        
+        hidden_effect = {
+            clear_homeland_doctrine_flags = yes
+            set_country_flag = homeland_type_3
+        }
+    }
+    # Loyalist Provocation - SELECTED
+	option = {
+		name = wwu_doctrine.3.option.loyalist_provocation.selected
+    
+        trigger = {
+            has_country_flag = homeland_type_3
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+    }
+    # Loyalist Provokation - INVALID
+	option = {
+		name = wwu_doctrine.3.option.loyalist_provocation.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_3 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+    }
+    
+    # Exit
+    option = {
+		name = wwu_doctrine.2.option.return
+        
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_doctrine.1 }
+        }
+    }
+}
+
+#-------------------------
+# Helper Events
+#-------------------------
+# Martyrdom
+province_event = {
+	id = wwu_doctrine.50
+	title = wwu_doctrine.50.title
+	desc = wwu_doctrine.50.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_doctrine.50.option.a
+    
+        kill_units = {
+            amount = 1
+        }
+    }
+}
+# Loyalist Provocation
+province_event = {
+	id = wwu_doctrine.51
+	title = wwu_doctrine.51.title
+	desc = wwu_doctrine.51.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_doctrine.51.option.a
+    
+        kill_units = { 
+            who = REB
+            amount = 10
+        }
+    }
+}
+
+
 #-------------------------
 # Defaults
 #-------------------------
@@ -265,6 +473,7 @@ country_event = {
     
         # Default for all
         set_country_flag = siege_type_1
+        set_country_flag = homeland_type_1
         
         # Add setup for AI in this section if you want the AI to use a non-default type. (AI will not use the menu directly).
     }
