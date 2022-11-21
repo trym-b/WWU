@@ -9,13 +9,17 @@
  # Events
  #-----------------------------------
  wwu_doctrine.1.title: "Doctrinal Thought"
- wwu_doctrine.1.desc: "Determine the doctrine followed across various aspects of our nation."
+ wwu_doctrine.1.desc: "Determine the doctrine followed across various aspects of our nation.\n\nArmy Doctrine: [Root.GetArmyDoctrine]\nHomeland Doctrine: [Root.GetHomelandDoctrine]\nSiege Doctrine: [Root.GetSiegeDoctrine]"
+ wwu_doctrine.1.option.army_doctrine: "Army Doctrine"
+ wwu_doctrine.1.option.army_doctrine.invalid: "§gArmy Doctrine§!"
  wwu_doctrine.1.option.homeland_doctrine: "Homeland Doctrine"
+ wwu_doctrine.1.option.homeland_doctrine.invalid: "§gHomeland Doctrine§!"
  wwu_doctrine.1.option.siege_doctrine: "Siege Doctrine"
+ wwu_doctrine.1.option.siege_doctrine.invalid: "§gSiege Doctrine§!"
  wwu_doctrine.1.option.exit: "Exit"
  
  wwu_doctrine.2.title: "Siege Doctrine"
- wwu_doctrine.2.desc: "Switch the type of siege doctrine that our military follows. This changes how our sieges occur within enemy land.\n\nThe current Siege Doctrine of [Root.GetName] is [Root.GetSiegeDoctrine]."
+ wwu_doctrine.2.desc: "Switch the type of siege doctrine that our military follows. This changes how our sieges occur within enemy land."
  wwu_doctrine.2.option.standard: "Standard Procedure"
  wwu_doctrine.2.option.standard.invalid: "§gStandard Procedure§!"
  wwu_doctrine.2.option.standard.selected: "§GStandard Procedure§!"
@@ -31,7 +35,7 @@
  wwu_doctrine.2.option.return: "Return"
  
  wwu_doctrine.3.title: "Homeland Doctrine"
- wwu_doctrine.3.desc: "Switch the type of homeland doctrine that our military follows. This changes how enemy sieges occur within our land.\n\nThe current Homeland Doctrine of [Root.GetName] is [Root.GetHomelandDoctrine]."
+ wwu_doctrine.3.desc: "Switch the type of homeland doctrine that our military follows. This changes how enemy sieges occur within our land."
  wwu_doctrine.3.option.resignation: "Resignation"
  wwu_doctrine.3.option.resignation.invalid: "§gResignation§!"
  wwu_doctrine.3.option.resignation.selected: "§GResignation§!"
@@ -43,6 +47,41 @@
  wwu_doctrine.3.option.loyalist_provocation.selected: "§GLoyalist Provocation§!"
  wwu_doctrine.3.option.return: "Return"
  
+ wwu_doctrine.4.title: "Army Doctrine"
+ wwu_doctrine.4.desc: "Switch the type of army doctrine that our military follows. This changes the effectiveness of our army in various circumstances"
+ wwu_doctrine.4.option.jack_of_trades: "Jack of Trades"
+ wwu_doctrine.4.option.jack_of_trades.invalid: "§gJack of Trades§!"
+ wwu_doctrine.4.option.jack_of_trades.selected: "§GJack of Trades§!"
+ wwu_doctrine.4.option.overwhelming_firepower: "Overwhelming Firepower"
+ wwu_doctrine.4.option.overwhelming_firepower.invalid: "§gOverwhelming Firepower§!"
+ wwu_doctrine.4.option.overwhelming_firepower.selected: "§GOverwhelming Firepower§!"
+ wwu_doctrine.4.option.mobile_warfare: "Mobile Warfare"
+ wwu_doctrine.4.option.mobile_warfare.invalid: "§gMobile Warfare§!"
+ wwu_doctrine.4.option.mobile_warfare.selected: "§GMobile Warfare§!"
+ wwu_doctrine.4.option.mass_assault: "Mass Assault"
+ wwu_doctrine.4.option.mass_assault.invalid: "§gMass Assault§!"
+ wwu_doctrine.4.option.mass_assault.selected: "§GMass Assault§!"
+ wwu_doctrine.4.option.thundering_onslaught: "Thundering Onslaught"
+ wwu_doctrine.4.option.thundering_onslaught.invalid: "§gThundering Onslaught§!"
+ wwu_doctrine.4.option.thundering_onslaught.selected: "§GThundering Onslaught§!"
+ wwu_doctrine.4.option.return: "Return"
+ 
+ wwu_doctrine.60.title: "WARNING: Sow Terror"
+ wwu_doctrine.60.desc: "[enemy_country.GetName] is using the Sow Terror siege doctrine, and as such we should be aware of the difference this will make during our war."
+ wwu_doctrine.60.option.a: "Understood"
+ 
+ wwu_doctrine.61.title: "WARNING: Slash and Burn"
+ wwu_doctrine.61.desc: "[enemy_country.GetName] is using the Slash and Burn siege doctrine, and as such we should be aware of the difference this will make during our war."
+ wwu_doctrine.61.option.a: "Understood"
+ 
+ wwu_doctrine.62.title: "WARNING: Coup de Grâce"
+ wwu_doctrine.62.desc: "[enemy_country.GetName] is using the Coup de Grâce siege doctrine, and as such we should be aware of the difference this will make during our war."
+ wwu_doctrine.62.option.a: "Understood"
+ 
+ wwu_doctrine.63.title: "WARNING: Martyrdom"
+ wwu_doctrine.63.desc: "[enemy_country.GetName] is using the Martyrdom homeland doctrine, and as such we should be aware of the difference this will make during our war."
+ wwu_doctrine.63.option.a: "Understood"
+ 
  wwu_doctrine.100.title: "Defaults"
  wwu_doctrine.100.desc: ""
  wwu_doctrine.100.option.a: "OK"
@@ -50,24 +89,23 @@
  #-----------------------------------
  # Modifiers
  #-----------------------------------
+ doctrine_overwhelming_firepower: "Overwhelming Firepower"
+ desc_doctrine_overwhelming_firepower: ""
+ 
+ doctrine_mobile_warfare: "Mobile Warfare"
+ desc_doctrine_mobile_warfare: ""
+ 
+ doctrine_mass_assault: "Mass Assault"
+ desc_doctrine_mass_assault: ""
+ 
+ doctrine_thundering_onslaught: "Thundering Onslaught"
+ desc_doctrine_thundering_onslaught: ""
  
  #-----------------------------------
  # Tooltips
  #-----------------------------------
  ALREADY_CHOSEN_TT: "This doctrine is already active."
- 
- SIEGE_DOCTRINE_STANDARD_TT: "Set §YSiege Doctrine§! to §YStandard Procedure§!.\nSuccessful sieges will act as normal."
- 
- SIEGE_DOCTRINE_SOW_TERROR_TT: "Set §YSiege Doctrine§! to §YSow Terror§!.\nSuccessful sieges will cede control of all non-fortified neighboring provinces, assuming the province belongs to the enemy.\n\nSuccessful sieges will drain §R10§! Military Power while this doctrine is selected.\n\nEffect is inactive if §R10§! Military Power cannot be spent."
- 
- SIEGE_DOCTRINE_SLASH_AND_BURN_TT: "Set §YSiege Doctrine§! to §YSlash and Burn§!.\nSuccessful sieges will apply an additional §R50§! devastation to the enemy province.\n\nSuccessful sieges will drain §R10§! Military Power while this doctrine is selected.\n\nEffect is inactive if §R10§! Military Power cannot be spent."
- 
- SIEGE_DOCTRINE_COUP_DE_GRACE_TT: "Set §YSiege Doctrine§! to §YCoup de Grâce§!.\nSuccessful siege of the enemy capital will cause all enemy capital area provinces to cede control to us too.\n\nSuccessful capital sieges will drain Military Power, starting from a minimum of §R100§! Military Power, scaling up to a maximum of §R500§! Military Power while this doctrine is selected."
- 
- SIEGE_DOCTRINE_STANDARD: "Standard Procedure"
- SIEGE_DOCTRINE_SOW_TERROR: "Sow Terror"
- SIEGE_DOCTRINE_SLASH_AND_BURN: "Slash and Burn"
- SIEGE_DOCTRINE_COUP_DE_GRACE: "Coup de Grâce"
+ DOCTRINE_CHANGE_BLOCKED_TT: "You cannot change doctrines whilst at war."
  
  DOCTRINE_SPACER: "------------------------------------"
  
@@ -75,11 +113,50 @@
  DOCTRINE_LACK_DIP_COST_TT: "You lack the §Y100§! Diplomatic Power required to switch doctrine."
  DOCTRINE_LACK_MIL_COST_TT: "You lack the §Y100§! Military Power required to switch doctrine."
  
- HOMELAND_DOCTRINE_RESIGNATION: "Resignation"
- HOMELAND_DOCTRINE_MARTYRDOM: "Martyrdom"
- HOMELAND_DOCTRINE_LOYALIST_PROVOCATION: "Loyalist Provocation"
+ # Army Doctrine
+ ARMY_DOCTRINE_JACK_OF_TRADES: "Jack of Trades"
+ ARMY_DOCTRINE_JACK_OF_TRADES_TT: "Set §YArmy Doctrine§! to §YJack of Trades§!.\nLand units are treated as is."
  
+ ARMY_DOCTRINE_OVERWHELMING_FIREPOWER: "Overwhelming Firepower"
+ ARMY_DOCTRINE_OVERWHELMING_FIREPOWER_TT: "Set §YArmy Doctrine§! to §YOverwhelming Firepower§!.\nBoosts Fire Damage by §G33%§!\nBoosts Backrow Artillery Damage by §G33%§!\nIncreases Fire Damage Received by §R20%§!.\nIncreases Shock Damage Received by §R20%§!."
+ HAS_DOCTRINE_OVERWHELMING_FIREPOWER: "Has §YOverwhelming Firepower§! doctrine selected."
+ 
+ ARMY_DOCTRINE_MOBILE_WARFARE: "Mobile Warfare"
+ ARMY_DOCTRINE_MOBILE_WARFARE_TT: "Set §YArmy Doctrine§! to §YMobile Warfare§!.\nBoosts Movement Speed by §G33%§!\nBoosts Reinforcement Speed by §G25%§!\nReduces Defensiveness by §R33%§!\nReduces Defending Dice Roll by §R1§!"
+ HAS_DOCTRINE_MOBILE_WARFARE: "Has §YMobile Warfare§! doctrine selected."
+ 
+ ARMY_DOCTRINE_MASS_ASSAULT: "Mass Assault"
+ ARMY_DOCTRINE_MASS_ASSAULT_TT: "Set §YArmy Doctrine§! to §YMass Assault§!.\nReduces Unit Construction Cost by §G33%§!\nBoosts Manpower Recovery Speed by §G33%§!\nReduces Discipline by §R5%§!\nIncreases War Exhaustion Cost by §R25%§!"
+ HAS_DOCTRINE_MASS_ASSAULT: "Has §YMass Assault§! doctrine selected."
+ 
+ ARMY_DOCTRINE_THUNDERING_ONSLAUGHT: "Thundering Onslaught"
+ ARMY_DOCTRINE_THUNDERING_ONSLAUGHT_TT: "Set §YArmy Doctrine§! to §YThundering Onslaught§!.\nBoosts Shock Damage by §G33%§!\nBoosts Morale Damage by §G33%§!\nIncreases Fire Damage Received by §R20%§!.\nIncreases Morale Damage Received by §R20%§!."
+ HAS_DOCTRINE_THUNDERING_ONSLAUGHT: "Has §YThundering Onslaught§! doctrine selected."
+ 
+ # Siege Doctrine
+ SIEGE_DOCTRINE_STANDARD: "Standard Procedure"
+ SIEGE_DOCTRINE_STANDARD_TT: "Set §YSiege Doctrine§! to §YStandard Procedure§!.\nSuccessful sieges will act as normal."
+ 
+ SIEGE_DOCTRINE_SOW_TERROR: "Sow Terror"
+ SIEGE_DOCTRINE_SOW_TERROR_TT: "Set §YSiege Doctrine§! to §YSow Terror§!.\nSuccessful sieges will cede control of all non-fortified neighboring provinces, assuming the province belongs to the enemy.\n\nSuccessful sieges will drain §R10§! Military Power while this doctrine is selected.\n\nEffect is inactive if §R10§! Military Power cannot be spent."
+ SIEGE_DOCTRINE_SOW_TERROR_ENEMY_TT: "Successful sieges against us will cede control of our non-fortified neighboring provinces to the enemy."
+ 
+ SIEGE_DOCTRINE_SLASH_AND_BURN: "Slash and Burn"
+ SIEGE_DOCTRINE_SLASH_AND_BURN_TT: "Set §YSiege Doctrine§! to §YSlash and Burn§!.\nSuccessful sieges will apply an additional §R50§! devastation to the enemy province.\n\nSuccessful sieges will drain §R10§! Military Power while this doctrine is selected.\n\nEffect is inactive if §R10§! Military Power cannot be spent."
+ SIEGE_DOCTRINE_SLASH_AND_BURN_ENEMY_TT: "Successful sieges against us will apply an additional §R50§! devastation to our province."
+ 
+ SIEGE_DOCTRINE_COUP_DE_GRACE: "Coup de Grâce"
+ SIEGE_DOCTRINE_COUP_DE_GRACE_TT: "Set §YSiege Doctrine§! to §YCoup de Grâce§!.\nSuccessful siege of the enemy capital will cause all enemy capital area provinces to cede control to us too.\n\nSuccessful capital sieges will drain Military Power, starting from a minimum of §R100§! Military Power, scaling up to a maximum of §R500§! Military Power while this doctrine is selected."
+ SIEGE_DOCTRINE_COUP_DE_GRACE_ENEMY_TT: "Successful siege of our capital will cause all our capital area provinces to cede control to our enemy."
+ 
+ # Homeland Doctrine
+ HOMELAND_DOCTRINE_RESIGNATION: "Resignation"
  HOMELAND_DOCTRINE_RESIGNATION_TT: "Set §YHomeland Doctrine§! to §YResignation§!.\nSuccessful enemy sieges will occur as normal."
+ 
+ HOMELAND_DOCTRINE_MARTYRDOM: "Martyrdom"
  HOMELAND_DOCTRINE_MARTYRDOM_TT: "Set §YHomeland Doctrine§! to §YMartyrdom§!.\nSuccessful enemy sieges will drain §R5§! Military Power, but the enemy nation will lose §G1,000§! Manpower."
+ HOMELAND_DOCTRINE_MARTYRDOM_ENEMY_TT: "Successful sieges against our enemy will cause us to lose §G1,000§! Manpower."
+ 
+ HOMELAND_DOCTRINE_LOYALIST_PROVOCATION: "Loyalist Provocation"
  HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT: "Set §YHomeland Doctrine§! to §YLoyalist Provocation§!.\nSuccessful enemy sieges by rebels will drain §R20§! Military Power, but the rebel unit will lost §G10§! units."
  

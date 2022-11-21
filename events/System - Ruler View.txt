@@ -296,14 +296,16 @@ country_event = {
     option = {
 		name = wwu_ruler_view.1.option.retire
         
-        trigger = {
-            NOT = { legitimacy_equivalent = 50 }
-        }
-        
         exile_ruler_as = { 
             name = former_ruler
         }
-        add_stability = 1
+        
+        if = {
+            limit = {
+                NOT = { legitimacy_equivalent = 50 }
+            }
+            add_stability = 1
+        }
         
         ai_chance = {
             factor = 0
