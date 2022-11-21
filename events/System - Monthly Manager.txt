@@ -1,0 +1,51 @@
+namespace = wwu_monthly_manager
+
+# Handles all systems that want to use on_monthly (as the on_action currently does not work)
+country_event = {
+	id = wwu_monthly_manager.1
+	title = wwu_monthly_manager.1.title
+	desc = wwu_monthly_manager.1.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+    hidden = yes
+    
+    trigger = {
+        exists = ROOT
+    }
+    
+    mean_time_to_happen = {
+		days = 30
+	}
+    
+	option = {
+		name = wwu_monthly_manager.1.option.a
+        
+        # Used to randomise results in script locations that don't properly support random_list/random scopes.
+        clr_country_flag = random_flag_0
+        clr_country_flag = random_flag_1
+        clr_country_flag = random_flag_2
+        clr_country_flag = random_flag_3
+        clr_country_flag = random_flag_4
+        clr_country_flag = random_flag_5
+        clr_country_flag = random_flag_6
+        clr_country_flag = random_flag_7
+        clr_country_flag = random_flag_8
+        clr_country_flag = random_flag_9
+        
+        random_list = {
+            10 = { set_country_flag = random_flag_0 }
+            10 = { set_country_flag = random_flag_1 }
+            10 = { set_country_flag = random_flag_2 }
+            10 = { set_country_flag = random_flag_3 }
+            10 = { set_country_flag = random_flag_4 }
+            10 = { set_country_flag = random_flag_5 }
+            10 = { set_country_flag = random_flag_6 }
+            10 = { set_country_flag = random_flag_7 }
+            10 = { set_country_flag = random_flag_8 }
+            10 = { set_country_flag = random_flag_9 }
+        }
+        
+        # Auto-Missionary
+        country_event = { id = wwu_auto_missionary.1 }
+	}
+}
