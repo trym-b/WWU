@@ -13,4 +13,33 @@ country_decisions = {
 			factor = 0
 		}
 	}
+    
+    view_doctrine_menu_ai = {
+		potential = {
+            ai = yes
+			NOT = { has_country_modifier = doctrine_ai_cooldown }
+		}
+		allow = {
+            # Only change in valid circumstances
+            is_at_war = no
+            NOT = { num_of_rebel_armies = 1 }
+            mil_power = 400 # Enough to afford 4 changes
+		}
+		effect = {  
+            # AI will only re-assess its doctrines every 50 years
+            add_country_modifier = {
+                name = doctrine_ai_cooldown
+                duration = 18250 # 50 years
+            }
+            
+            # Done directly to avoid AI issues with menu traversal
+            country_event = { id = wwu_doctrine.2 } # Siege
+            country_event = { id = wwu_doctrine.3 } # Homeland
+            country_event = { id = wwu_doctrine.4 } # Army
+            country_event = { id = wwu_doctrine.5 } # Insurrection
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
