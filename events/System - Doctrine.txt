@@ -86,6 +86,31 @@ country_event = {
         }
 	}
     
+    # Insurrection Doctrine
+	option = {
+		name = wwu_doctrine.1.option.rebel_doctrine
+        
+        trigger = {
+            NOT = { num_of_rebel_armies = 1 }
+        }
+        
+        country_event = { id = wwu_doctrine.5 }
+	}
+    # Insurrection Doctrine - INVALID
+	option = {
+		name = wwu_doctrine.1.option.rebel_doctrine.invalid
+        
+        trigger = {
+            num_of_rebel_armies = 1
+        }
+        
+        custom_tooltip = DOCTRINE_CHANGE_BLOCKED_REBELS_TT
+        
+        hidden_effect = {
+            country_event = { id = wwu_doctrine.52 }
+        }
+	}
+    
     # Exit
     option = {
 		name = wwu_doctrine.1.option.exit
@@ -443,6 +468,51 @@ country_event = {
         custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
     }
     
+    # Slander - NOT SELECTED
+	option = {
+		name = wwu_doctrine.3.option.slander
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_4 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_SLANDER_TT
+        
+        hidden_effect = {
+            clear_homeland_doctrine_flags = yes
+            set_country_flag = homeland_type_3
+        }
+    }
+    # Slander - SELECTED
+	option = {
+		name = wwu_doctrine.3.option.slander.selected
+    
+        trigger = {
+            has_country_flag = homeland_type_4
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_SLANDER_TT
+    }
+    # Slander - INVALID
+	option = {
+		name = wwu_doctrine.3.option.slander.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = homeland_type_4 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_SLANDER_TT
+    }
+    
     # Exit
     option = {
 		name = wwu_doctrine.3.option.return
@@ -706,6 +776,210 @@ country_event = {
 }
 
 #-------------------------
+# Insurrection Doctrine
+#-------------------------
+country_event = {
+	id = wwu_doctrine.5
+	title = wwu_doctrine.5.title
+	desc = wwu_doctrine.5.desc
+	picture = DEFIAS_BANDIT_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Conflict - NOT SELECTED
+	option = {
+		name = wwu_doctrine.5.option.conflict
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_1 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CONFLICT_TT
+        
+        hidden_effect = {
+            clear_rebel_doctrine_flags = yes
+            set_country_flag = rebel_doctrine_type_1
+        }
+    }
+    # Conflict - SELECTED
+	option = {
+		name = wwu_doctrine.5.option.conflict.selected
+    
+        trigger = {
+            has_country_flag = rebel_doctrine_type_1
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CONFLICT_TT
+    }
+    # Conflict - INVALID
+	option = {
+		name = wwu_doctrine.5.option.conflict.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_1 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CONFLICT_TT
+    }
+    
+    # Bribery - NOT SELECTED
+	option = {
+		name = wwu_doctrine.5.option.bribery
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_2 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_BRIBERY_TT
+        
+        hidden_effect = {
+            clear_rebel_doctrine_flags = yes
+            set_country_flag = rebel_doctrine_type_2
+        }
+    }
+    # Bribery - SELECTED
+	option = {
+		name = wwu_doctrine.5.option.bribery.selected
+    
+        trigger = {
+            has_country_flag = rebel_doctrine_type_2
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_BRIBERY_TT
+    }
+    # Bribery - INVALID
+	option = {
+		name = wwu_doctrine.5.option.bribery.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_2 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_BRIBERY_TT
+    }
+    
+    # Corruption - NOT SELECTED
+	option = {
+		name = wwu_doctrine.5.option.corruption
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_3 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CORRUPTION_TT
+        
+        hidden_effect = {
+            clear_rebel_doctrine_flags = yes
+            set_country_flag = rebel_doctrine_type_3
+        }
+    }
+    # Corruption - SELECTED
+	option = {
+		name = wwu_doctrine.5.option.corruption.selected
+    
+        trigger = {
+            has_country_flag = rebel_doctrine_type_3
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CORRUPTION_TT
+    }
+    # Corruption - INVALID
+	option = {
+		name = wwu_doctrine.5.option.corruption.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_3 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CORRUPTION_TT
+    }
+    
+    # Garrison - NOT SELECTED
+	option = {
+		name = wwu_doctrine.5.option.garrison
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_4 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_GARRISON_TT
+        
+        hidden_effect = {
+            clear_rebel_doctrine_flags = yes
+            set_country_flag = rebel_doctrine_type_4
+        }
+    }
+    # Garrison - SELECTED
+	option = {
+		name = wwu_doctrine.5.option.garrison.selected
+    
+        trigger = {
+            has_country_flag = rebel_doctrine_type_4
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_GARRISON_TT
+    }
+    # Garrison - INVALID
+	option = {
+		name = wwu_doctrine.5.option.garrison.invalid
+    
+        trigger = {
+            NOT = { has_country_flag = rebel_doctrine_type_4 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_GARRISON_TT
+    }
+    
+    # Exit
+    option = {
+		name = wwu_doctrine.5.option.return
+        
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_doctrine.1 }
+        }
+    }
+}
+
+#-------------------------
 # Helper Events
 #-------------------------
 # These are to delay the kill_units effect so it doesn't occur in the same frame as the province controller change, which causes a CTD
@@ -726,6 +1000,22 @@ province_event = {
         kill_units = { 
             who = REB
         }
+    }
+}
+# Rebel Occupation Revert
+province_event = {
+	id = wwu_doctrine.51
+	title = wwu_doctrine.51.title
+	desc = wwu_doctrine.51.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_doctrine.51.option.a
+    
+        change_controller = owner
     }
 }
 
@@ -961,6 +1251,47 @@ country_event = {
     }
 }
 
+# Notification: Slander
+country_event = {
+	id = wwu_doctrine.65
+	title = wwu_doctrine.65.title
+	desc = wwu_doctrine.65.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = doctrine_notify_slander }
+        is_at_war = yes
+        any_country = {
+            war_with = ROOT
+            has_country_flag = homeland_type_4
+        }
+    }
+
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    has_country_flag = homeland_type_4
+                }
+                save_event_target_as = enemy_country
+            }
+            
+            set_country_flag = doctrine_notify_slander
+        }
+    }
+    
+	option = {
+		name = wwu_doctrine.64.option.a
+    
+        custom_tooltip = HOMELAND_DOCTRINE_SLANDER_ENEMY_TT
+    }
+}
+
 # Reset Notification flags
 country_event = {
 	id = wwu_doctrine.99
@@ -984,6 +1315,7 @@ country_event = {
         clr_country_flag = doctrine_notify_coup_de_grace
         clr_country_flag = doctrine_notify_martyrdom
         clr_country_flag = doctrine_notify_sabotage
+        clr_country_flag = doctrine_notify_slander
     }
 }
 
@@ -1016,6 +1348,7 @@ country_event = {
         set_country_flag = siege_type_1
         set_country_flag = homeland_type_1
         set_country_flag = army_doctrine_type_1
+        set_country_flag = rebel_doctrine_type_1
         
         # Add setup for AI in this section if you want the AI to use a non-default type. (AI will not use the menu directly).
     }
