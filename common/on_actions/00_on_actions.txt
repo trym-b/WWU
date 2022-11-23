@@ -767,31 +767,35 @@ on_siege_won_province = {
             }
         }
     }
-    # Homeland Doctrine: Loyalist Provocation
+    # Homeland Doctrine: Sabotage
     if = {
         limit = {
             FROM = {
                 has_country_flag = homeland_type_3
             }
-            # Only trigger for rebel controllers
+            # Don't trigger for self-sieges
             controller = {
-                tag = REB
+                NOT = { tag = FROM }
             }
         }
         
         if = {
             limit = {
                 FROM = {
-                    mil_power = 20
+                    mil_power = 5
+                }
+                controller = {
+                    treasury = 25
                 }
             }
             
             FROM = {
-                add_mil_power = -20
+                add_mil_power = -5
             }
         
-            # Placed kill_units within province_event so it fires after controller switch, prevents CTD
-            province_event = { id = wwu_doctrine.51 days = 3 }
+            controller = {
+                add_treasury = -25
+            }
         }
     }
 }

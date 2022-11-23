@@ -398,9 +398,9 @@ country_event = {
         custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
     }
     
-    # Loyalist Provocation - NOT SELECTED
+    # Sabotage - NOT SELECTED
 	option = {
-		name = wwu_doctrine.3.option.loyalist_provocation
+		name = wwu_doctrine.3.option.sabotage
     
         trigger = {
             NOT = { has_country_flag = homeland_type_3 }
@@ -410,16 +410,16 @@ country_event = {
         add_mil_power = -100
         
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+        custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
         
         hidden_effect = {
             clear_homeland_doctrine_flags = yes
             set_country_flag = homeland_type_3
         }
     }
-    # Loyalist Provocation - SELECTED
+    # Sabotage - SELECTED
 	option = {
-		name = wwu_doctrine.3.option.loyalist_provocation.selected
+		name = wwu_doctrine.3.option.sabotage.selected
     
         trigger = {
             has_country_flag = homeland_type_3
@@ -427,11 +427,11 @@ country_event = {
         
         custom_tooltip = ALREADY_CHOSEN_TT
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+        custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
     }
-    # Loyalist Provokation - INVALID
+    # Sabotage - INVALID
 	option = {
-		name = wwu_doctrine.3.option.loyalist_provocation.invalid
+		name = wwu_doctrine.3.option.sabotage.invalid
     
         trigger = {
             NOT = { has_country_flag = homeland_type_3 }
@@ -440,7 +440,7 @@ country_event = {
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = HOMELAND_DOCTRINE_LOYALIST_PROVOCATION_TT
+        custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
     }
     
     # Exit
@@ -710,7 +710,7 @@ country_event = {
 #-------------------------
 # These are to delay the kill_units effect so it doesn't occur in the same frame as the province controller change, which causes a CTD
 
-# Martyrdom
+# Rebel Kill
 province_event = {
 	id = wwu_doctrine.50
 	title = wwu_doctrine.50.title
@@ -723,31 +723,15 @@ province_event = {
 	option = {
 		name = wwu_doctrine.50.option.a
     
-        kill_units = {
-            amount = 1
-        }
-    }
-}
-# Loyalist Provocation
-province_event = {
-	id = wwu_doctrine.51
-	title = wwu_doctrine.51.title
-	desc = wwu_doctrine.51.desc
-	picture = EQUALITY_eventPicture
-	
-    hidden = yes
-	is_triggered_only = yes
-
-	option = {
-		name = wwu_doctrine.51.option.a
-    
         kill_units = { 
             who = REB
-            amount = 10
         }
     }
 }
 
+#-------------------------
+# Loop Events
+#-------------------------
 # This is to loop the initial menu event
 country_event = {
 	id = wwu_doctrine.52
@@ -936,6 +920,47 @@ country_event = {
     }
 }
 
+# Notification: Sabotage
+country_event = {
+	id = wwu_doctrine.64
+	title = wwu_doctrine.64.title
+	desc = wwu_doctrine.64.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    trigger = {
+        NOT = { has_country_flag = doctrine_notify_sabotage }
+        is_at_war = yes
+        any_country = {
+            war_with = ROOT
+            has_country_flag = homeland_type_3
+        }
+    }
+
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    has_country_flag = homeland_type_3
+                }
+                save_event_target_as = enemy_country
+            }
+            
+            set_country_flag = doctrine_notify_sabotage
+        }
+    }
+    
+	option = {
+		name = wwu_doctrine.64.option.a
+    
+        custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_ENEMY_TT
+    }
+}
+
 # Reset Notification flags
 country_event = {
 	id = wwu_doctrine.99
@@ -958,6 +983,7 @@ country_event = {
         clr_country_flag = doctrine_notify_slash_and_burn
         clr_country_flag = doctrine_notify_coup_de_grace
         clr_country_flag = doctrine_notify_martyrdom
+        clr_country_flag = doctrine_notify_sabotage
     }
 }
 
