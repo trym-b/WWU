@@ -107,7 +107,7 @@ estate_tribals_tribal_primacy = {
 	penalties = {
 	}
 	benefits = {
-		mil_tech_cost_modifier = -0.2
+		global_manpower_modifier = 0.25
 	}
 	ai_will_do = {
 		factor = 12
@@ -215,7 +215,7 @@ estate_tribals_tribal_host = {
 	influence = 0.1
     
 	benefits = {
-		global_manpower_modifier = 0.1
+		land_forcelimit_modifier = 0.1
 	}
 	ai_will_do = {
 		factor = 10
@@ -227,12 +227,14 @@ estate_tribals_tribal_unity = {
 
     # Costs
     max_absolutism = -5
-	land_share = 0
+	land_share = 5
 	loyalty = 0.05
-	influence = 0.1
+	influence = 0.05
     
 	benefits = {
-		horde_unity = 0.5
+        legitimacy = 1.0
+        devotion = 1.0
+		horde_unity = 1.0
 	}
 	ai_will_do = {
 		factor = 10
@@ -257,11 +259,11 @@ estate_tribals_muster_host = {
         custom_tooltip = estate_tribals_muster_host_tooltip
         hidden_effect = {
             capital_scope = {
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
-                cavalry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
+                infantry = ROOT
             }
         }
 	}
@@ -294,6 +296,156 @@ estate_tribals_spoils_of_war = {
 	}
 	ai_will_do = {
 		factor = 1
+	}
+}
+
+estate_tribals_wanderlust = {
+	icon = privilege_spyglass
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	benefits = {
+		colonists = 1
+	}
+    penalties = {
+        production_efficiency = -0.1
+	}
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { num_of_ports = 3 }
+        }
+	}
+}
+
+estate_tribals_brutal_regime = {
+	icon = privilege_sap
+
+    # Costs
+    max_absolutism = 5
+	land_share = 0
+	loyalty = -0.05
+	influence = -0.05
+    
+	benefits = {
+		years_of_nationalism = -5
+        harsh_treatment_cost = -0.25
+	}
+    penalties = {
+        stability_cost_modifier = 0.5
+	}
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_tribals_tribal_connections = {
+	icon = privilege_preparation
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    cooldown_years = 20
+	on_cooldown_expires = {
+		
+	}
+    
+    on_granted = {
+        custom_tooltip = TRIBAL_CONNECTIONS_TT
+        hidden_effect = {
+            every_known_country = {
+                limit = {
+                    primary_culture = ROOT
+                }
+                add_opinion = {
+                    who = ROOT
+                    modifier = tribal_connections
+                }
+                ROOT = {
+                    add_opinion = {
+                        who = PREV
+                        modifier = tribal_connections
+                    }
+                }
+            }
+        }
+	}
+	on_revoked = {
+		
+	}
+    
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = {
+                any_known_country = {
+                    primary_culture = ROOT
+                }
+            }
+        }
+	}
+}
+
+estate_tribals_tight_knit_communities = {
+	icon = privilege_master_of_subtelty
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    benefits = {
+        global_spy_defence = 0.33
+    }
+    penalties = {
+        diplomatic_reputation = -2
+    }
+    
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+estate_tribals_cull_the_weak = {
+	icon = privilege_nuke
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    cooldown_years = 20
+    on_granted = {
+        add_yearly_manpower = -5
+        
+        create_general = {
+            tradition = 75
+        }
+    }
+    
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            NOT = { manpower = 20 }
+        }
 	}
 }
 
