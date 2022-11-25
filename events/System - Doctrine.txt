@@ -1123,6 +1123,82 @@ country_event = {
         }
     }
     
+    # Defensive Posture - NOT SELECTED
+	option = {
+		name = wwu_doctrine.4.option.defensive_posture
+    
+        trigger = {
+            full_idea_group = wwu_defensive_ideas
+            NOT = { has_country_flag = army_doctrine_type_6 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = ARMY_DOCTRINE_DEFENSIVE_POSTURE_TT
+        
+        hidden_effect = {
+            clear_army_doctrine_flags = yes
+            set_country_flag = army_doctrine_type_6
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Defensive Posture - SELECTED
+	option = {
+		name = wwu_doctrine.4.option.defensive_posture.selected
+    
+        trigger = {
+            full_idea_group = wwu_defensive_ideas
+            has_country_flag = army_doctrine_type_6
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = ARMY_DOCTRINE_DEFENSIVE_POSTURE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Defensive Posture - INVALID
+	option = {
+		name = wwu_doctrine.4.option.defensive_posture.invalid
+    
+        trigger = {
+            full_idea_group = wwu_defensive_ideas
+            NOT = { has_country_flag = army_doctrine_type_6 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = ARMY_DOCTRINE_DEFENSIVE_POSTURE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Defensive Posture - NOT UNLOCKED
+	option = {
+		name = wwu_doctrine.4.option.defensive_posture.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_defensive_ideas }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_DEFENSIVE_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = ARMY_DOCTRINE_DEFENSIVE_POSTURE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    
     # Exit
     option = {
 		name = wwu_doctrine.4.option.return
