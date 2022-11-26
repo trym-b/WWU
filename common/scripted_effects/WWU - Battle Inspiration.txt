@@ -1,0 +1,260 @@
+# Starting Battle Inspiration
+unlock_initial_cults = {
+    if = {
+        limit = {
+            uses_cults = yes
+        }
+        
+        # Order
+        if = {
+            limit = { 
+                religion_group = order_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = order }
+        }
+        # Disorder
+        if = {
+            limit = { 
+                religion_group = disorder_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = disorder }
+        }
+        # Life
+        if = {
+            limit = { 
+                religion_group = life_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = life }
+        }
+        # Death
+        if = {
+            limit = { 
+                religion_group = death_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = death }
+        }
+        # Light
+        if = {
+            limit = { 
+                religion_group = light_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = light }
+        }
+        # Shadow
+        if = {
+            limit = { 
+                religion_group = shadow_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = shadow }
+        }
+        # Philosophy
+        if = {
+            limit = { 
+                religion_group = philosophy_group
+            }
+            unlock_battle_inspiration_on_start = { NAME = philosophy }
+        }
+        # Elemental - Mixed
+        if = {
+            limit = { 
+                OR = {
+                    religion = tauren_shamanism
+                    religion = shamanism
+                    religion = primalist
+                }
+            }
+            unlock_battle_inspiration_on_start = { NAME = elemental }
+        }
+        # Elemental - Fire
+        if = {
+            limit = { 
+                OR = {
+                    religion = ordos
+                    religion = fire
+                }
+            }
+            unlock_battle_inspiration_on_start = { NAME = elemental }
+            unlock_cult = fire_inspiration_1
+        }
+        # Elemental - Fire
+        if = {
+            limit = { 
+                OR = {
+                    religion = deep_mother
+                    religion = tidemother
+                    religion = water
+                }
+            }
+            unlock_battle_inspiration_on_start = { NAME = elemental }
+            unlock_cult = water_inspiration_1
+        }
+        # Elemental - Wind
+        if = {
+            limit = { 
+                religion = wind
+            }
+            unlock_battle_inspiration_on_start = { NAME = elemental }
+            unlock_cult = wind_inspiration_1
+        }
+        # Elemental - Earth
+        if = {
+            limit = { 
+                religion = earth
+            }
+            unlock_battle_inspiration_on_start = { NAME = elemental }
+            unlock_cult = earth_inspiration_1
+        }
+    }
+}
+# root = loser country, from = winner country
+battle_cult_spreading_effect = {
+    if = {
+        limit = {
+            FROM = { uses_cults = yes }
+        }
+        
+        # Order
+        if = {
+            limit = { 
+                religion_group = order_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = order }
+        }
+        # Disorder
+        if = {
+            limit = { 
+                religion_group = disorder_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = disorder }
+        }
+        # Life
+        if = {
+            limit = { 
+                religion_group = life_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = life }
+        }
+        # Death
+        if = {
+            limit = { 
+                religion_group = death_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = death }
+        }
+        # Light
+        if = {
+            limit = { 
+                religion_group = light_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = light }
+        }
+        # Shadow
+        if = {
+            limit = { 
+                religion_group = shadow_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = shadow }
+        }
+        # Philosophy
+        if = {
+            limit = { 
+                religion_group = philosophy_group
+            }
+            unlock_battle_inspiration_by_tier = { NAME = philosophy }
+        }
+        # Elemental - Mixed
+        if = {
+            limit = { 
+                OR = {
+                    religion = tauren_shamanism
+                    religion = shamanism
+                    religion = primalist
+                }
+            }
+            unlock_battle_inspiration_by_tier = { NAME = elemental }
+        }
+        # Elemental - Fire
+        if = {
+            limit = { 
+                OR = {
+                    religion = ordos
+                    religion = fire
+                }
+            }
+            unlock_cult = fire_inspiration_1
+            unlock_battle_inspiration_by_tier = { NAME = elemental }
+        }
+        # Elemental - Fire
+        if = {
+            limit = { 
+                OR = {
+                    religion = deep_mother
+                    religion = tidemother
+                    religion = water
+                }
+            }
+            unlock_cult = water_inspiration_1
+            unlock_battle_inspiration_by_tier = { NAME = elemental }
+        }
+        # Elemental - Wind
+        if = {
+            limit = { 
+                religion = wind
+            }
+            unlock_cult = wind_inspiration_1
+            unlock_battle_inspiration_by_tier = { NAME = elemental }
+        }
+        # Elemental - Earth
+        if = {
+            limit = { 
+                religion = earth
+            }
+            unlock_cult = earth_inspiration_1
+            unlock_battle_inspiration_by_tier = { NAME = elemental }
+        }
+    }
+}
+
+
+unlock_battle_inspiration_by_tier = {
+    FROM = {
+        if = {
+            limit = {
+                NOT = { has_unlocked_cult = $NAME$_inspiration_1 }
+            }
+            unlock_cult = $NAME$_inspiration_1
+        }
+        else_if = {
+            limit = {
+                NOT = { has_unlocked_cult = $NAME$_inspiration_2 }
+            }
+            unlock_cult = $NAME$_inspiration_2
+        }
+        else_if = {
+            limit = {
+                NOT = { has_unlocked_cult = $NAME$_inspiration_3 }
+            }
+            unlock_cult = $NAME$_inspiration_3
+        }
+        else_if = {
+            limit = {
+                NOT = { has_unlocked_cult = $NAME$_inspiration_4 }
+            }
+            unlock_cult = $NAME$_inspiration_4
+        }
+        else_if = {
+            limit = {
+                NOT = { has_unlocked_cult = $NAME$_inspiration_5 }
+            }
+            unlock_cult = $NAME$_inspiration_5
+        }
+    }
+}
+
+unlock_battle_inspiration_on_start = {
+    unlock_cult = $NAME$_inspiration_1
+    unlock_cult = $NAME$_inspiration_2
+    unlock_cult = $NAME$_inspiration_3
+    unlock_cult = $NAME$_inspiration_4
+    unlock_cult = $NAME$_inspiration_5
+}
