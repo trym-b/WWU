@@ -90,6 +90,7 @@ establish_diplomatic_links = {
 	require_acceptance = yes
     
 	is_visible = {
+        NOT = { has_country_modifier = cooldown_diplomatic_links }
         NOT = { has_country_modifier = enforced_isolation }
             
         FROM = { 
@@ -224,6 +225,17 @@ establish_diplomatic_links = {
                 modifier = diplomatic_links
             }
         }
+        
+        if = {
+            limit = {
+                ai = yes
+            }
+            
+            add_country_modifier = {
+                name = cooldown_diplomatic_links
+                duration = 1825
+            }
+        }
 	}
 	on_decline = {
         hidden_effect = {
@@ -234,6 +246,17 @@ establish_diplomatic_links = {
         }
         
         add_prestige = -5
+        
+        if = {
+            limit = {
+                ai = yes
+            }
+            
+            add_country_modifier = {
+                name = cooldown_diplomatic_links
+                duration = 1825
+            }
+        }
 	}
 	
 	ai_acceptance = {
