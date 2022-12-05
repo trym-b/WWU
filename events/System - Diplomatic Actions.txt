@@ -247,3 +247,96 @@ country_event = {
 		name = wwu_diplomatic_actions.5.option.a
 	}
 }
+
+# [Root.GetName] turns to [aggressor.Religion.GetName]
+province_event = {
+	id = wwu_diplomatic_actions.10
+	title = wwu_diplomatic_actions.10.title
+    desc = wwu_diplomatic_actions.10.desc
+	picture = ANCIENT_HARBINGER_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.10.option.a
+        
+        change_religion = event_target:aggressor
+	}
+}
+
+# Manpower Stolen
+country_event = {
+	id = wwu_diplomatic_actions.11
+	title = wwu_diplomatic_actions.11.title
+    desc = wwu_diplomatic_actions.11.desc
+	picture = BLUBBER_BARON_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.11.option.a
+        
+        add_manpower = -5
+	}
+}
+
+# Adventurers Loose!
+country_event = {
+	id = wwu_diplomatic_actions.12
+	title = wwu_diplomatic_actions.12.title
+    desc = wwu_diplomatic_actions.12.desc
+	picture = BRAWL_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.12.option.a
+        
+        random_owned_province = {
+            spawn_rebels = {
+                type = adventurer_rebels
+                size = 3
+                friend = ROOT
+                win = yes
+            }
+        }
+	}
+}
+
+# Bribery Discovered
+country_event = {
+	id = wwu_diplomatic_actions.13
+	title = wwu_diplomatic_actions.13.title
+    desc = wwu_diplomatic_actions.13.desc
+	picture = CHEAT_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.13.option.a
+        
+        event_target:aggressor = {
+            add_spy_network_in = {
+                who = ROOT
+                value = 25
+            }
+        }
+	}
+}
+

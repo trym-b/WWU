@@ -1,152 +1,4 @@
 #---------------------------------------
-# Bribe Administration
-#---------------------------------------
-bribe_administration = {
-	category = covert
-	
-	alert_index = 40
-	alert_tooltip = bribe_administration_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-		has_estate = estate_mercantile_guild
-	}
-	is_allowed = {
-		years_of_income = 1
-		FROM = { NOT = { has_country_modifier = bribed } }
-        FROM = { 
-            custom_trigger_tooltip = {
-                tooltip = RECENTLY_TARGET_OF_BRIBE_ADMINISTRATION
-                NOT = { has_country_modifier = cooldown_bribe_administration }
-            }
-        }
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - bribe_administration"
-            }
-        }
-        
-		add_years_of_income = -1
-		add_spy_network_in = {
-			who = FROM
-			value = 25
-		}
-		add_country_modifier = { 
-			name = bribed
-			duration = 365
-		}
-        FROM = {
-            hidden_effect = {
-                add_country_modifier = {
-                    name = cooldown_bribe_administration
-                    duration = 3650
-                    hidden = yes
-                }
-            }
-        }
-	}
-	on_decline = 	{ 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		years_of_income = 4
-	}
-}
-
-
-#---------------------------------------
-# Conduct Raid
-#---------------------------------------
-form_raid = {
-	category = covert
-	
-	alert_index = 40
-	alert_tooltip = form_raid_tooltip
-	
-	require_acceptance = no # Whether the recipient gets an option to decline
-	
-	is_visible = {
-		has_estate = estate_adventuring_guild
-        NOT = { has_country_modifier = is_evil }
-        FROM = {
-            has_country_modifier = is_evil
-        }
-	}
-	is_allowed = {
-		has_spy_network_in = {
-			who = FROM
-			value = 50
-		}
-        custom_trigger_tooltip = {
-            tooltip = NO_ACTIVE_RAID
-            NOT = {
-                has_global_flag = active_raid
-            }
-        }
-		FROM = { 
-            custom_trigger_tooltip = {
-                tooltip = RECENTLY_TARGET_OF_CONDUCT_RAID
-                NOT = { has_country_modifier = cooldown_conduct_raid }
-            }
-        }
-	}
-	on_accept = {
-        hidden_effect = {
-            if = { 
-                limit = { has_global_flag = enable_diplomacy_logging }
-                log = "DEBUG - [Root.GetName], [From.GetName] - form_raid"
-            }
-        }
-        
-        hidden_effect = {
-            set_global_flag = active_raid
-            set_country_flag = raid_owner
-            
-            FROM = {
-                set_country_flag = raid_target
-            }
-        }
-		add_spy_network_in = {
-			who = FROM
-			value = -50
-		}
-		FROM = {
-			random_owned_province = {
-				spawn_rebels = {
-					type = adventurer_rebels
-					size = 3
-					friend = ROOT
-                    win = yes
-				}
-			}
-            hidden_effect = {
-                add_country_modifier = {
-                    name = cooldown_conduct_raid
-                    duration = 3650
-                    hidden = yes
-                }
-            }
-		}
-	}
-	on_decline = 	{ 
-	}
-	
-	ai_acceptance = { 
-	}
-
-	ai_will_do = {
-		is_enemy = FROM
-	}
-}
-
-#---------------------------------------
 # Assassinate Ruler
 #---------------------------------------
 assassinate_ruler = {
@@ -261,6 +113,156 @@ assassinate_ruler = {
 }
 
 #---------------------------------------
+# Bribe Administration
+#---------------------------------------
+bribe_administration = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = bribe_administration_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		has_estate = estate_mercantile_guild
+	}
+	is_allowed = {
+		years_of_income = 1
+		FROM = { NOT = { has_country_modifier = bribed } }
+        FROM = { 
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_BRIBE_ADMINISTRATION
+                NOT = { has_country_modifier = cooldown_bribe_administration }
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - bribe_administration"
+            }
+        }
+        
+		add_years_of_income = -1
+		add_country_modifier = { 
+			name = bribed
+			duration = 365
+		}
+        
+        hidden_effect = {
+            save_event_target_as = aggressor
+        }
+        
+        FROM = {
+            country_event = { id = wwu_diplomatic_actions.13 days = 1 }
+            
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_bribe_administration
+                    duration = 3650
+                    hidden = yes
+                }
+            }
+        }
+	}
+	on_decline = 	{ 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		years_of_income = 4
+	}
+}
+
+
+#---------------------------------------
+# Conduct Raid
+#---------------------------------------
+form_raid = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = form_raid_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		has_estate = estate_adventuring_guild
+        NOT = { has_country_modifier = is_evil }
+        FROM = {
+            has_country_modifier = is_evil
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 50
+		}
+        custom_trigger_tooltip = {
+            tooltip = NO_ACTIVE_RAID
+            NOT = {
+                has_global_flag = active_raid
+            }
+        }
+		FROM = { 
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_CONDUCT_RAID
+                NOT = { has_country_modifier = cooldown_conduct_raid }
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - form_raid"
+            }
+        }
+        
+        hidden_effect = {
+            set_global_flag = active_raid
+            set_country_flag = raid_owner
+            
+            FROM = {
+                set_country_flag = raid_target
+            }
+        }
+		add_spy_network_in = {
+			who = FROM
+			value = -50
+		}
+        
+        hidden_effect = {
+            save_event_target_as = aggressor
+        }
+        
+		FROM = {
+			country_event = { id = wwu_diplomatic_actions.12 days = 1 }
+            
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_conduct_raid
+                    duration = 3650
+                    hidden = yes
+                }
+            }
+		}
+	}
+	on_decline = 	{ 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		is_enemy = FROM
+	}
+}
+
+#---------------------------------------
 # Recruit Manpower
 #---------------------------------------
 recruit_manpower = {
@@ -300,8 +302,14 @@ recruit_manpower = {
 			value = -35
 		}
 		add_manpower = 5
+        
+        hidden_effect = {
+            save_event_target_as = aggressor
+        }
+        
 		FROM = { 
-            add_manpower = -5 
+            country_event = { id = wwu_diplomatic_actions.11 days = 1 }
+            
             hidden_effect = {
                 add_country_modifier = {
                     name = cooldown_recruit_manpower
@@ -364,15 +372,20 @@ spread_religion = {
 			who = FROM
 			value = -50
 		}
+        
+        hidden_effect = {
+            save_event_target_as = aggressor
+        }
+        
 		FROM = {
 			random_owned_province = {
-				limit = { NOT = { religion = ROOT } }
-				change_religion = ROOT
+				limit = { 
+                    NOT = { religion = ROOT } 
+                }
+				
+                province_event = { id = wwu_diplomatic_actions.10 days = 1 }
 			}
-			random_owned_province = {
-				limit = { NOT = { religion = ROOT } }
-				change_religion = ROOT
-			}
+            
             hidden_effect = {
                 add_country_modifier = {
                     name = cooldown_spread_religion
@@ -439,8 +452,10 @@ spread_fel = {
 		}
 		FROM = {
 			random_owned_province = {
-				limit = { NOT = { religion = ROOT } }
-				province_event = { id = wwu_fel.1 }
+				limit = { 
+                    NOT = { religion = ROOT } 
+                }
+				province_event = { id = wwu_fel.1 days = 1 }
 			}
             hidden_effect = {
                 add_country_modifier = {
