@@ -1,48 +1,41 @@
 namespace = wwu_exodar
 
+# The Exodar
 country_event = {
 	id = wwu_exodar.1
 	title = wwu_exodar.1.title
 	desc = wwu_exodar.1.desc
-	picture = EXCAVATED_EVIL_eventPicture
-	#picture = EXODAR_eventPicture
+	picture = PRIDE_OF_EXODAR_eventPicture
     
 	major = yes
     
 	is_triggered_only = yes
 
-
 	option = {
-		name = wwu_exodar.1.opt1
+		name = wwu_exodar.1.option.a
 		
-		clr_country_flag = complete_stasis
-        
-		1087 = {
+		area_exodar = {
 			cede_province = ROOT
 			add_core = ROOT
 			change_culture = ROOT
 			change_religion = ROOT
-            
 			set_province_flag = exodar_ship
-			hidden_effect = {
-				add_base_tax = -100
-				add_base_production = -100
-				add_base_manpower = -100
-			}
-			add_base_tax = 7
-			add_base_production = 7
-			add_base_manpower = 7
 		}
-		1717 = {
-			remove_core = ROOT
-			clr_province_flag = exodar_ship
-			cede_province = ---
-		}
+        
+        # Exodar
+        1087 = {
+            set_base_tax = 6
+			set_base_production = 4
+			set_base_manpower = 6
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
 	}
 	option = {
-		name = wwu_exodar.1.opt2
+		name = wwu_exodar.1.option.b
 		
-		clr_country_flag = complete_stasis
 		random_province = {
 			limit = {
 				OR = { 
@@ -53,24 +46,31 @@ country_event = {
 					ai = yes
 				}
 			}
-			cede_province = ROOT
-			add_core = ROOT
-			change_culture = ROOT
-			change_religion = ROOT
-			set_province_flag = exodar_ship
-			hidden_effect = {
-				add_base_tax = -100
-				add_base_production = -100
-				add_base_manpower = -100
-			}
-			add_base_tax = 7
-			add_base_production = 7
-			add_base_manpower = 7
+            
+			set_base_tax = 6
+			set_base_production = 4
+			set_base_manpower = 6
+            
+            area = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+                set_province_flag = exodar_ship
+            }
 		}
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+    
+    after = {
+        # Tempest Keep
 		1717 = {
 			remove_core = ROOT
 			clr_province_flag = exodar_ship
 			cede_province = ---
 		}
-	}
+    }
 }
