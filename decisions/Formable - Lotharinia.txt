@@ -1,0 +1,74 @@
+country_decisions = {
+    found_kingdom_of_lotharinia = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+            # Exclusions
+			NOT = { exists = LTR }
+            
+            # Requisites
+			tag = SOL
+            
+            any_owned_province = {
+                region = region_hellfire_peninsula
+            }
+		}
+        
+        provinces_to_highlight = {
+			NOT = { owned_by = ROOT }
+			OR = {
+                region = region_hellfire_peninsula
+            }
+		}
+        
+		allow = {
+            # Ownership
+		    region_hellfire_peninsula = {
+				type = all
+				owned_by = ROOT
+			}
+			
+            # General
+			is_at_war = no	
+			stability = 2
+            total_development = 200
+            
+            # Cost
+            adm_power = 200
+			dip_power = 200
+			mil_power = 200
+		}
+		effect = {
+            # Cost
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
+            
+            # Switch
+			change_tag = LTR
+			change_government = monarchy			
+			set_government_rank = 2
+			change_primary_culture = culture_arathorian
+            every_owned_province = { 
+                limit = {
+                    continent = continent_outland
+                    NOT = { culture = culture_arathorian }
+                }
+                change_culture = culture_arathorian 
+            }
+
+			# Bonus
+            add_formable_bonus = yes
+            #trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_final_tag_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}

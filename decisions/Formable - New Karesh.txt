@@ -1,5 +1,5 @@
 country_decisions = {
-    form_brotherhood_of_lost = {
+    form_new_karesh = {
 		major = yes
         ai_importance = 300
         
@@ -7,50 +7,46 @@ country_decisions = {
             NOT = { has_country_flag = enacted_final_tag_formation }
             
             # Exclusions
-            NOT = { exists = BOL }
+			NOT = { exists = KAE }
             
             # Requisites
-			primary_culture = culture_lost_one
-            
-		}
+			OR = {
+			    tag = F80
+				tag = P18
+				tag = P21
+				tag = PRT
+			}
+		}        
         
 		allow = {
-            calc_true_if = {
-			    num_of_allies = 2
-				any_ally = {
-                    primary_culture = culture_lost_one					
-				}
-				amount = 2
-			}
             # General
+			adm_tech = 14
 			is_at_war = no	
 			stability = 1
-			total_development = 100
+			total_development = 1000
             
 			# Cost
-            adm_power = 100
-			dip_power = 100
-			mil_power = 100
+            adm_power = 200
+			dip_power = 200
+			mil_power = 200
 		}
         
 		effect = {
             # Cost
-			add_adm_power = -100
-			add_dip_power = -100
-            add_mil_power = -100
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
             
             # Switch
-			every_ally = {
+			change_tag = KAE
+			set_government_rank = 3
+            every_owned_province = { 
                 limit = {
-                    primary_culture = culture_lost_one
+					continent = continent_outland
+                    NOT = { culture = culture_ethereal }
                 }
-                ROOT = {
-                    inherit = PREV
-                }
+                change_culture = culture_ethereal 
             }
-			change_tag = BOL
-			set_government_rank = 2
-			change_government = republic
             
 			# Bonus
             add_formable_bonus = yes
