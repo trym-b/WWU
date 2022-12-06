@@ -340,3 +340,316 @@ country_event = {
 	}
 }
 
+# Bribe for [bribe_target.GetName]
+country_event = {
+	id = wwu_diplomatic_actions.20
+	title = wwu_diplomatic_actions.20.title
+    desc = wwu_diplomatic_actions.20.desc
+	picture = BLUBBER_BARON_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    # Small
+	option = {
+		name = wwu_diplomatic_actions.20.option.a
+        
+        add_treasury = -100
+        
+        hidden_effect = {
+            event_target:bribe_target = { 
+                set_country_flag = small_bribe
+                country_event = { id = wwu_diplomatic_actions.21 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 25
+        }
+	}
+    # Medium
+    option = {
+		name = wwu_diplomatic_actions.20.option.b
+        
+        trigger = {
+            treasury = 300
+        }
+        
+        add_treasury = -300
+        
+        hidden_effect = {
+            event_target:bribe_target = { 
+                set_country_flag = medium_bribe
+                country_event = { id = wwu_diplomatic_actions.21 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { treasury = 1000 }
+            }
+        }
+	}
+    # Large
+    option = {
+		name = wwu_diplomatic_actions.20.option.c
+        
+        trigger = {
+            treasury = 500
+        }
+        
+        add_treasury = -500
+        
+        hidden_effect = {
+            event_target:bribe_target = { 
+                set_country_flag = large_bribe
+                country_event = { id = wwu_diplomatic_actions.21 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { treasury = 2000 }
+            }
+        }
+	}
+    # Huge
+    option = {
+		name = wwu_diplomatic_actions.20.option.d
+        
+        trigger = {
+            treasury = 1000
+        }
+        
+        add_treasury = -1000
+        
+        hidden_effect = {
+            event_target:bribe_target = { 
+                set_country_flag = huge_bribe
+                country_event = { id = wwu_diplomatic_actions.21 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 25
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { treasury = 3000 }
+            }
+        }
+	}
+    
+    # Exit
+    option = {
+		name = wwu_diplomatic_actions.20.option.e
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# A Bribe for Peace
+country_event = {
+	id = wwu_diplomatic_actions.21
+	title = wwu_diplomatic_actions.21.title
+    desc = wwu_diplomatic_actions.21.desc
+	picture = SACK_OF_COINS_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    # Accept
+	option = {
+		name = wwu_diplomatic_actions.21.option.a
+        
+        if = {
+            limit = {
+                has_country_flag = small_bribe
+            }
+            add_treasury = 100
+        }
+        if = {
+            limit = {
+                has_country_flag = medium_bribe
+            }
+            add_treasury = 300
+        }
+        if = {
+            limit = {
+                has_country_flag = large_bribe
+            }
+            add_treasury = 500
+        }
+        if = {
+            limit = {
+                has_country_flag = huge_bribe
+            }
+            add_treasury = 1000
+        }
+        
+        event_target:briber = {
+            country_event = { id = wwu_diplomatic_actions.22 days = 1 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    # Reject
+    option = {
+		name = wwu_diplomatic_actions.21.option.b
+        
+        # Some of the bribe is 'lost' if rejected
+        if = {
+            limit = {
+                has_country_flag = small_bribe
+            }
+            add_treasury = 75
+        }
+        if = {
+            limit = {
+                has_country_flag = medium_bribe
+            }
+            add_treasury = 250
+        }
+        if = {
+            limit = {
+                has_country_flag = large_bribe
+            }
+            add_treasury = 400
+        }
+        if = {
+            limit = {
+                has_country_flag = huge_bribe
+            }
+            add_treasury = 800
+        }
+        
+        event_target:briber = {
+            country_event = { id = wwu_diplomatic_actions.23 days = 1 }
+        }
+        
+        ai_chance = {
+            factor = 20
+            
+            # Boost if bribe is too small
+            modifier = {
+                factor = 2
+                
+                total_development = 300
+                has_country_flag = small_bribe
+            }
+            
+            # Boost if bribe is too small
+            modifier = {
+                factor = 2
+                
+                total_development = 500
+                OR = {
+                    has_country_flag = small_bribe
+                    has_country_flag = medium_bribe
+                }
+            }
+            
+            # Reduce if bribe is huge and nation isn't massive
+            modifier = {
+                factor = 0.5
+                
+                NOT = { total_development = 1000 }
+                has_country_flag = huge_bribe
+            }
+            
+            # Reduce if bribe is huge and nation isn't massive
+            modifier = {
+                factor = 0.5
+                
+                NOT = { total_development = 500 }
+                has_country_flag = huge_bribe
+            }
+            
+            # Reduce if bribe is huge and nation isn't massive
+            modifier = {
+                factor = 0.5
+                
+                NOT = { total_development = 250 }
+                OR = {
+                    has_country_flag = large_bribe
+                    has_country_flag = huge_bribe
+                }
+            }
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = small_bribe
+            clr_country_flag = medium_bribe
+            clr_country_flag = large_bribe
+            clr_country_flag = huge_bribe
+        }
+    }
+}
+
+# Bribery - Bribe Accepted
+country_event = {
+	id = wwu_diplomatic_actions.22
+	title = wwu_diplomatic_actions.22.title
+    desc = wwu_diplomatic_actions.22.desc
+	picture = BLINGTRON_3000_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.22.option.a
+        
+        event_target:bribe_target = {
+            add_truce_with = event_target:briber
+        }
+	}
+}
+
+# Bribery - Bribe Rejected
+country_event = {
+	id = wwu_diplomatic_actions.23
+	title = wwu_diplomatic_actions.23.title
+    desc = wwu_diplomatic_actions.23.desc
+	picture = BLOOD_FURY_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_diplomatic_actions.23.option.a
+        
+        event_target:bribe_target = {
+            add_opinion = {
+                who = event_target:briber
+                modifier = bribe_rejected
+            }
+        }
+	}
+}

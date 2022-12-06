@@ -347,6 +347,9 @@ intimidate_enemy = {
 	is_allowed = {
         mil_power = 100
         same_continent = FROM
+        FROM = {
+            NOT = { truce_with = ROOT }
+        }
 	}
 	on_accept = {
         add_mil_power = -100
@@ -368,5 +371,61 @@ intimidate_enemy = {
 
 	ai_will_do = {
         always = no
+	}
+}
+
+#---------------------------------------
+# Bribe
+#---------------------------------------
+bribe_enemy = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = bribe_enemy_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Groups that would use bribery to keep the peace
+        OR = {
+            culture_group = culture_group_goblin
+            culture_group = culture_group_grummle
+            culture_group = culture_group_tuskarr
+            culture_group = culture_group_ethereal
+            culture_group = culture_group_gnomish
+            culture_group = culture_group_vulpera
+            culture_group = culture_group_tortollan
+        }
+        FROM = {
+            NOT = { truce_with = ROOT }
+        }
+	}
+	is_allowed = {
+        dip_power = 50
+        treasury = 100
+        same_continent = FROM
+	}
+	on_accept = {
+        add_dip_power = -50
+        
+        hidden_effect = {
+            save_event_target_as = briber
+            FROM = {
+                save_event_target_as = bribe_target
+            }
+        }
+        
+        country_event = { id = wwu_diplomatic_actions.20 }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = {   
+	}
+
+	ai_will_do = {
+        treasury = 1000
+        dip_power = 300
+        is_enemy = FROM
 	}
 }
