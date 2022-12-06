@@ -8,12 +8,61 @@ country_event = {
 	picture = PRIDE_OF_EXODAR_eventPicture
     
 	major = yes
-    
 	is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            random_province = {
+                limit = {
+                    continent = continent_eastern_kingdoms
+                    
+                    owner = {
+                        ai = yes
+                    }
+                }
+                
+                save_event_target_as = east_province
+            }
+            random_province = {
+                limit = {
+                    continent = continent_kalimdor
+                    
+                    owner = {
+                        ai = yes
+                    }
+                }
+                
+                save_event_target_as = west_province
+            }
+            random_province = {
+                limit = {
+                    continent = continent_northrend
+                    
+                    owner = {
+                        ai = yes
+                    }
+                }
+                
+                save_event_target_as = north_province
+            }
+            random_province = {
+                limit = {
+                    continent = continent_pandaria
+                    
+                    owner = {
+                        ai = yes
+                    }
+                }
+                
+                save_event_target_as = south_province
+            }
+        }
+    }
 
 	option = {
 		name = wwu_exodar.1.option.a
-		
+		goto = 1087
+        
 		area_exodar = {
 			cede_province = ROOT
 			add_core = ROOT
@@ -33,20 +82,13 @@ country_event = {
             factor = 80
         }
 	}
+   
+    # East
 	option = {
 		name = wwu_exodar.1.option.b
-		
-		random_province = {
-			limit = {
-				OR = { 
-					continent = continent_eastern_kingdoms
-					continent = continent_kalimdor
-				}
-				owner = {
-					ai = yes
-				}
-			}
-            
+		goto = east_province
+        
+		event_target:east_province = {
 			set_base_tax = 6
 			set_base_production = 4
 			set_base_manpower = 6
@@ -61,7 +103,79 @@ country_event = {
 		}
         
         ai_chance = {
-            factor = 20
+            factor = 10
+        }
+	}
+    
+    # North
+	option = {
+		name = wwu_exodar.1.option.c
+		goto = north_province
+        
+		event_target:north_province = {
+			set_base_tax = 6
+			set_base_production = 4
+			set_base_manpower = 6
+            
+            area = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+                set_province_flag = exodar_ship
+            }
+		}
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+    
+    # West
+	option = {
+		name = wwu_exodar.1.option.d
+		goto = west_province
+        
+		event_target:west_province = {
+			set_base_tax = 6
+			set_base_production = 4
+			set_base_manpower = 6
+            
+            area = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+                set_province_flag = exodar_ship
+            }
+		}
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+    
+    # South
+	option = {
+		name = wwu_exodar.1.option.e
+        goto = south_province
+		
+		event_target:south_province = {
+			set_base_tax = 6
+			set_base_production = 4
+			set_base_manpower = 6
+            
+            area = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = ROOT
+                change_religion = ROOT
+                set_province_flag = exodar_ship
+            }
+		}
+        
+        ai_chance = {
+            factor = 10
         }
 	}
     
