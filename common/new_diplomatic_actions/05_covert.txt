@@ -19,11 +19,7 @@ assassinate_ruler = {
 		}
 		custom_trigger_tooltip = {
 			tooltip = DIP_ALREADY_HAS_PLOT
-			NOT = { 
-                any_country = {
-                    ROOT = { has_country_flag = plotting_assassination_of@PREV }
-                } 
-            }
+			NOT = { has_country_flag = assassination_plot_active }
 		}
 		FROM = { 
             has_regency = no
@@ -45,6 +41,7 @@ assassinate_ruler = {
 			who = FROM
 			value = -70
 		}
+        
         FROM = {
             hidden_effect = {
                 add_country_modifier = {
@@ -54,54 +51,21 @@ assassinate_ruler = {
                 }
             }
         }
-		hidden_effect = {
-			set_country_flag = plotting_assassination_of@FROM
-			random_list = {
-				1 = {
-					set_country_flag = poison_plot
-				}
-				1 = {
-					set_country_flag = snake_plot
-				}
-				1 = {
-					set_country_flag = stab_plot
-				}
-				1 = {
-					set_country_flag = hunting_plot
-                    
-                    trigger = {
-                        FROM = {
-                            NOT = {
-                                OR = {
-                                    culture_group = culture_group_darnassian
-                                    has_ruler_flag = druid_personality
-                                }
-                            }
-                        }
-                    }
-				}
-				1 = {
-					set_country_flag = fall_plot
-                    
-                    trigger = {
-                        FROM = {
-                            NOT = {
-                                heir_age = 20
-                                OR = {
-                                    culture_group = culture_group_dragonkin
-                                    culture_group = culture_group_arrakoa
-                                    culture_group = culture_group_titan
-                                    culture_group = culture_group_harpy
-                                    culture_group = culture_group_ethereal
-                                }
-                            }
-                        }
-                    }
-				}
-			}
-		}
+        
+        custom_tooltip = PLOT_STARTS_TT
+        
+        hidden_effect = {
+            set_country_flag = assassination_plot_active
+            
+            save_event_target_as = plotter
+            FROM = {
+                save_event_target_as = plot_victim
+            }
+            
+            country_event = { id = assassination.100 }
+        }
 	}
-	on_decline = 	{ 
+	on_decline = { 
 	}
 	
 	ai_acceptance = { 

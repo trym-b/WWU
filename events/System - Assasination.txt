@@ -1,609 +1,1129 @@
 namespace = assassination
 
+# Preparation
 country_event = {
-	id = assassination.1
-	title = assassination.1.title
-	desc = {
-		trigger = { has_country_flag = poison_plot }
-		desc = assassination.1.desc.poison
-	}
-	desc = {
-		trigger = { has_country_flag = snake_plot }
-		desc = assassination.1.desc.snake
-	}
-	desc = {
-		trigger = { has_country_flag = bomb_plot }
-		desc = assassination.1.desc.bomb
-	}
-	desc = {
-		trigger = { has_country_flag = hunting_plot }
-		desc = assassination.1.desc.hunting
-	}
-	desc = {
-		trigger = { has_country_flag = fall_plot }
-		desc = assassination.1.desc.fall
+	id = assassination.100
+	title = assassination.100.title
+    desc = assassination.100.desc
+	picture = GATHER_YOUR_PARTY_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
 	}
     
-	picture = ASSASSINATE_eventPicture
-	
-	trigger = {
-		any_country = {
-			ROOT = { has_country_flag = plotting_assassination_of@PREV }
-		}
-	}
-	
-	mean_time_to_happen = {
-		months = 36
-	}
-	
-	immediate = {
-		hidden_effect = {
-			random_country = {
-				limit = {
-					ROOT = {
-						has_country_flag = plotting_assassination_of@PREV
-					}
-				}
-				save_event_target_as = victim
-				log = "Saved target as [event_target:victim]"
-			}
-		}
-	}
-	
 	option = {
-		name = assassination.1.opt.poison
-		custom_tooltip = assassination.1.opt.poison.tt
-		trigger = { has_country_flag = poison_plot }
-		if = {
+		name = assassination.100.option.a
+        
+        custom_tooltip = ASSASSINATION_TIME_TT
+        
+        # Cost
+        if = {
 			limit = { has_ruler_flag = rogue_personality }
-			add_years_of_income = -0.3
+			add_treasury = -100
 		}
 		else = {
-			add_years_of_income = -0.6
+			add_treasury = -200
 		}
-		hidden_effect = {
-			event_target:victim = {
-				country_event = { id = assassination.2 }
-			}
-		}
-	}
-	
-	option = {
-		name = assassination.1.opt.bomb
-		custom_tooltip = assassination.1.opt.bomb.tt
-		trigger = { has_country_flag = bomb_plot }
-		add_years_of_income = -0.5
-		hidden_effect = {
-			event_target:victim = {
-				country_event = { id = assassination.2 }
-			}
-		}
-	}
-	
-	option = {
-		name = assassination.1.opt.snake
-		custom_tooltip = assassination.1.opt.snake.tt
-		trigger = { has_country_flag = snake_plot }
-		if = {
-			limit = { has_ruler_flag = hunter_personality }
-			add_years_of_income = -0.3
+        
+        hidden_effect = {
+            event_target:plotter = {
+                country_event = { id = assassination.10 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+    }
+    option = {
+		name = assassination.100.option.b
+        
+        custom_tooltip = ASSASSINATION_TIME_TT
+        
+        # Cost
+        if = {
+			limit = { has_ruler_flag = rogue_personality }
+			add_treasury = -100
 		}
 		else = {
-			add_years_of_income = -0.6
+			add_treasury = -200
 		}
-		hidden_effect = {
-			event_target:victim = {
-				country_event = { id = assassination.2 }
-			}
+        
+        hidden_effect = {
+            event_target:plotter = {
+                country_event = { id = assassination.11 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 5
+        }
+    }
+    option = {
+		name = assassination.100.option.c
+        
+        custom_tooltip = ASSASSINATION_TIME_TT
+        
+        # Cost
+        if = {
+			limit = { has_ruler_flag = rogue_personality }
+			add_treasury = -100
 		}
-	}
-	
-	option = {
-		name = assassination.1.opt.hunting
-		custom_tooltip = assassination.1.opt.hunting.tt
-		trigger = { has_country_flag = hunting_plot }
-		add_years_of_income = -0.5
-		hidden_effect = {
-			event_target:victim = {
-				country_event = { id = assassination.2 }
-			}
+		else = {
+			add_treasury = -200
 		}
-	}
-	
-	option = {
-		name = assassination.1.opt.fall
-		custom_tooltip = assassination.1.opt.fall.tt
-		trigger = { has_country_flag = fall_plot }
-		add_years_of_income = -0.5
-		hidden_effect = {
-			event_target:victim = {
-				country_event = { id = assassination.2 }
-			}
+        
+        hidden_effect = {
+            event_target:plotter = {
+                country_event = { id = assassination.12 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 5
+        }
+    }
+    option = {
+		name = assassination.100.option.d
+        
+        custom_tooltip = ASSASSINATION_TIME_TT
+        
+        # Cost
+        if = {
+			limit = { has_ruler_flag = rogue_personality }
+			add_treasury = -100
 		}
-	}
-	
-	option = {
-		name = assassination.1.opt.postpone
-		custom_tooltip = assassination.1.opt.postpone.tt
-	}
-	
-	option = {
-		name = assassination.1.opt.giveup
-		custom_tooltip = assassination.1.opt.giveup.tt
-		hidden_effect = {
-			every_country = {
-				limit = {
-					ROOT = {
-						has_country_flag = plotting_assassination_of@PREV
-					}
-				}
-				ROOT = {
-					clr_country_flag = plotting_assassination_of@PREV
-				}
-			}
+		else = {
+			add_treasury = -200
 		}
-	}
-}
-country_event = {
-	id = assassination.2
-	title = assassination.2.title
-	desc = {
-		trigger = { FROM = { has_country_flag = poison_plot } }
-		desc = assassination.2.desc.poison
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = snake_plot } }
-		desc = assassination.2.desc.snake
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = bomb_plot } }
-		desc = assassination.2.desc.bomb
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = hunting_plot } }
-		desc = assassination.2.desc.hunting
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = fall_plot } }
-		desc = assassination.2.desc.fall
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = poison_plot } government = monarchy }
-		picture = PRIEST_OF_THE_FEAST_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = poison_plot } government = republic }
-		picture = PRIEST_OF_THE_FEAST_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = poison_plot } government = theocracy }
-		picture = PRIEST_OF_THE_FEAST_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = snake_plot } }
-		picture = PIT_SNAKE_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = bomb_plot } }
-		picture = LIGHTBOMB_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = hunting_plot } }
-		picture = BETRAYAL_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = fall_plot } }
-		picture = SILVERMOON_BALCONY_eventPicture
-	}
-    
-    is_triggered_only = yes
-	
-	immediate = {
-	}
-	
-	option = {
-		name = assassination.2.opt.poison
-		trigger = { FROM = { has_country_flag = poison_plot } }
-		hidden_effect = {
-			random_list = {
-				1 = { set_country_flag = plan_failed }
-				1 = { set_country_flag = plan_success }
-			}
-			random = {
-				chance = 50
-				set_country_flag = plotter_revealed
-			}
+        
+        hidden_effect = {
+            event_target:plotter = {
+                country_event = { id = assassination.13 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 5
+        }
+    }
+    option = {
+		name = assassination.100.option.e
+        
+        custom_tooltip = ASSASSINATION_TIME_TT
+        
+        # Cost
+        if = {
+			limit = { has_ruler_flag = rogue_personality }
+			add_treasury = -100
 		}
-	}
-	option = {
-		name = assassination.2.opt.snake
-		trigger = { FROM = { has_country_flag = snake_plot } }
-		hidden_effect = {
-			random_list = {
-				1 = { set_country_flag = plan_failed }
-				1 = { set_country_flag = plan_success }
-			}
-			random = {
-				chance = 50
-				set_country_flag = plotter_revealed
-			}
+		else = {
+			add_treasury = -200
 		}
-	}
-	option = {
-		name = assassination.2.opt.bomb
-		trigger = { FROM = { has_country_flag = bomb_plot } }
-		hidden_effect = {
-			random_list = {
-				1 = { set_country_flag = plan_failed }
-				1 = { set_country_flag = plan_success }
-			}
-			random = {
-				chance = 50
-				set_country_flag = plotter_revealed
-			}
-		}
-	}
-	option = {
-		name = assassination.2.opt.hunting
-		trigger = { FROM = { has_country_flag = hunting_plot } }
-		hidden_effect = {
-			random_list = {
-				1 = { set_country_flag = plan_failed }
-				1 = { set_country_flag = plan_success }
-			}
-			random = {
-				chance = 50
-				set_country_flag = plotter_revealed
-			}
-		}
-	}
-	option = {
-		name = assassination.2.opt.fall
-		trigger = { FROM = { has_country_flag = fall_plot } }
-		hidden_effect = {
-			random_list = {
-				1 = { set_country_flag = plan_failed }
-				1 = { set_country_flag = plan_success }
-			}
-			random = {
-				chance = 50
-				set_country_flag = plotter_revealed
-			}
-		}
-	}
-	
-	after = {
-		hidden_effect = {
-			country_event = { id = assassination.3 } # outcome event 
-			FROM = { country_event = { id = assassination.4 } } # notifying plotter.
-		}
-	}
-}
-country_event = {
-	id = assassination.3
-	title = assassination.3.title
-	desc = {
-		trigger = { FROM = { has_country_flag = poison_plot } has_country_flag = plan_failed }
-		desc = assassination.3.desc.poison.failed
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = snake_plot } has_country_flag = plan_failed }
-		desc = assassination.3.desc.snake.failed
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = bomb_plot } has_country_flag = plan_failed }
-		desc = assassination.3.desc.bomb.failed
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = hunting_plot } has_country_flag = plan_failed }
-		desc = assassination.3.desc.hunting.failed
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = fall_plot } has_country_flag = plan_failed }
-		desc = assassination.3.desc.fall.failed
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = poison_plot } has_country_flag = plan_success }
-		desc = assassination.3.desc.poison.success
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = snake_plot } has_country_flag = plan_success }
-		desc = assassination.3.desc.snake.success
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = bomb_plot } has_country_flag = plan_success }
-		desc = assassination.3.desc.bomb.success
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = hunting_plot } has_country_flag = plan_success }
-		desc = assassination.3.desc.hunting.success
-	}
-	desc = {
-		trigger = { FROM = { has_country_flag = fall_plot } has_country_flag = plan_success }
-		desc = assassination.3.desc.fall.success
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = poison_plot } }
-		picture = PRIEST_OF_THE_FEAST_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = snake_plot } }
-		picture = PIT_SNAKE_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = bomb_plot } }
-		picture = LIGHTBOMB_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = hunting_plot } }
-		picture = BETRAYAL_eventPicture
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = fall_plot } }
-		picture = SILVERMOON_BALCONY_eventPicture
-	}
-    
-    is_triggered_only = yes
-	
-	immediate = {
-		hidden_effect = {
-			random_country = {
-				limit = {
-					has_country_flag = plotting_assassination_of@ROOT
-				}
-				save_event_target_as = plotter
-			}
-		}
-	}
-	
-	option = {
-		name = assassination.3.opt1
-		trigger = { has_country_flag = plan_success NOT = { has_country_flag = plotter_revealed } }
-		kill_ruler = yes
-	}
-	
-	option = {
-		name = assassination.3.opt2
-		trigger = { has_country_flag = plan_success has_country_flag = plotter_revealed }
-		kill_ruler = yes
-		add_opinion = {
-			who = event_target:plotter
-			modifier = ruler_assassinated
-		}
-	}
-	
-	option = {
-		name = assassination.3.opt3
-		trigger = { has_country_flag = plan_failed NOT = { has_country_flag = plotter_revealed } }
-	}
-	
-	option = {
-		name = assassination.3.opt4
-		trigger = { has_country_flag = plan_failed has_country_flag = plotter_revealed }
-		add_opinion = {
-			who = event_target:plotter
-			modifier = ruler_assassinated
-		}
-	}
-	
-	after = {
-		clr_country_flag = plan_success
-		clr_country_flag = plan_failed
-		clr_country_flag = plotter_revealed
-	}
-}
-country_event = {
-	id = assassination.4
-	title = assassination.4.title
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_failed } }
-		desc = assassination.4.desc.poison.failed
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_failed } }
-		desc = assassination.4.desc.snake.failed
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_failed } }
-		desc = assassination.4.desc.bomb.failed
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_failed } }
-		desc = assassination.4.desc.hunting.failed
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_failed } }
-		desc = assassination.4.desc.fall.failed
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_success } }
-		desc = assassination.4.desc.poison.success
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_success } }
-		desc = assassination.4.desc.snake.success
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_success } }
-		desc = assassination.4.desc.bomb.success
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_success } }
-		desc = assassination.4.desc.hunting.success
-	}
-	desc = {
-		trigger = { has_country_flag = poison_plot FROM = { has_country_flag = plan_success } }
-		desc = assassination.4.desc.fall.success
-	}
-	picture = {
-		trigger = { FROM = { has_country_flag = plan_failed } }
-		picture = BACKSTAB_eventPicture
-	}
-    
-    picture = {
-		trigger = { has_country_flag = poison_plot FROM = { NOT = { has_country_flag = plan_failed } } }
-		picture = PRIEST_OF_THE_FEAST_eventPicture
-	}
-	picture = {
-		trigger = { has_country_flag = snake_plot FROM = { NOT = { has_country_flag = plan_failed } } }
-		picture = PIT_SNAKE_eventPicture
-	}
-	picture = {
-		trigger = { has_country_flag = bomb_plot FROM = { NOT = { has_country_flag = plan_failed } } }
-		picture = LIGHTBOMB_eventPicture
-	}
-	picture = {
-		trigger = { has_country_flag = hunting_plot FROM = { NOT = { has_country_flag = plan_failed } } }
-		picture = BETRAYAL_eventPicture
-	}
-	picture = {
-		trigger = { has_country_flag = fall_plot FROM = { NOT = { has_country_flag = plan_failed } } }
-		picture = SILVERMOON_BALCONY_eventPicture
-	}
-
-    is_triggered_only = yes
-	
-	immediate = {
-		FROM = {
-			save_event_target_as = victim
-		}
-	}
-	
-	option = {
-		trigger = { FROM = { has_country_flag = plan_success NOT = { has_country_flag = plotter_revealed } } }
-		name = assassination.4.opt1
-	}
-	option = {
-		trigger = { FROM = { has_country_flag = plan_success has_country_flag = plotter_revealed } }
-		name = assassination.4.opt2
-	}
-	option = {
-		trigger = { FROM = { has_country_flag = plan_failed has_country_flag = plotter_revealed } }
-		name = assassination.4.opt3
-	}
-	option = {
-		trigger = { FROM = { has_country_flag = plan_failed NOT = { has_country_flag = plotter_revealed } } }
-		name = assassination.4.opt4
-	}
-	
-	after = {
-		clr_country_flag = plotting_assassination_of@FROM
-		clr_country_flag = poison_plot
-		clr_country_flag = snake_plot
-		clr_country_flag = bomb_plot
-		clr_country_flag = hunting_plot
-		clr_country_flag = fall_plot
-	}
+        
+        hidden_effect = {
+            event_target:plotter = {
+                country_event = { id = assassination.14 days = 1 }
+            }
+        }
+        
+        ai_chance = {
+            factor = 5
+        }
+    }
+    option = {
+		name = assassination.100.option.f
+        
+        custom_tooltip = ASSASSINATION_STOP_TT
+        
+        hidden_effect = {
+            clr_country_flag = assassination_plot_active
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
 }
 
+#--------------------------------------------------------
+# Plotter
+#--------------------------------------------------------
+# Poisoning of X
 country_event = {
-	id = assassination.5
-	title = assassination.5.title
-	desc = assassination.5.desc
+	id = assassination.10
+	title = assassination.10.title
+    desc = assassination.10.desc
+	picture = DEADLY_POISON_eventPicture
 	
-	picture = EYE_FOR_AN_EYE_eventPicture
-	
-	trigger = {
-		any_country = { has_country_flag = plotting_assassination_of@PREV }
-	}
-	
+	is_triggered_only = yes
+    
 	mean_time_to_happen = {
-		months = 48
+		days = 1
 	}
-	
-	immediate = {
-		random_country = {
-			limit = { has_country_flag = plotting_assassination_of@PREV }
-			
-			save_event_target_as = plotter
-		}
-	}
-	
+    
 	option = {
-		name = assassination.5.opt1
-		country_event = { id = assassination.6 tooltip = assassination.5.opt1.tt }
-		add_opinion = {
+		name = assassination.10.option.a
+        
+        custom_tooltip = ASSASSINATION_POISON_TT
+        
+        event_target:plot_victim = {
+            country_event = { id = assassination.20 days = 1 }
+        }
+    }
+}
+
+# Snaking of X
+country_event = {
+	id = assassination.11
+	title = assassination.11.title
+    desc = assassination.11.desc
+	picture = SNAKE_TRAP_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.11.option.a
+        
+        custom_tooltip = ASSASSINATION_SNAKE_TT
+        
+        event_target:plot_victim = {
+            country_event = { id = assassination.21 days = 1 }
+        }
+    }
+}
+
+# Bombing of X
+country_event = {
+	id = assassination.12
+	title = assassination.12.title
+    desc = assassination.12.desc
+	picture = DYNAMITE_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.12.option.a
+        
+        custom_tooltip = ASSASSINATION_BOMB_TT
+        
+        event_target:plot_victim = {
+            country_event = { id = assassination.22 days = 1 }
+        }
+    }
+}
+
+# X's Accident
+country_event = {
+	id = assassination.13
+	title = assassination.13.title
+    desc = assassination.13.desc
+	picture = COBRA_SHOT_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.13.option.a
+        
+        custom_tooltip = ASSASSINATION_HUNT_TT
+        
+        event_target:plot_victim = {
+            country_event = { id = assassination.23 days = 1 }
+        }
+    }
+}
+
+# X's Fall
+country_event = {
+	id = assassination.14
+	title = assassination.14.title
+    desc = assassination.14.desc
+	picture = SILVERMOON_BALCONY_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.14.option.a
+        
+        custom_tooltip = ASSASSINATION_FALL_TT
+        
+        event_target:plot_victim = {
+            country_event = { id = assassination.24 days = 1 }
+        }
+    }
+}
+
+#--------------------------------------------------------
+# Plot Victim - Situation
+#--------------------------------------------------------
+# A Grand Feast
+country_event = {
+	id = assassination.20
+	title = assassination.20.title
+    desc = assassination.20.desc
+	picture = DEADLY_POISON_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                25 = { set_country_flag = fatal_option_a }
+                25 = { set_country_flag = fatal_option_b }
+                25 = { set_country_flag = fatal_option_c }
+                25 = { set_country_flag = fatal_option_d }
+            }
+        }
+    }
+    
+	option = {
+		name = assassination.20.option.a
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_a
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.20.option.b
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_b
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.20.option.c
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_c
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.20.option.d
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_d
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = fatal_option_a
+            clr_country_flag = fatal_option_b
+            clr_country_flag = fatal_option_c
+            clr_country_flag = fatal_option_d
+        }
+    }
+}
+
+# Snakes in the Bed
+country_event = {
+	id = assassination.21
+	title = assassination.21.title
+    desc = assassination.21.desc
+	picture = SNAKE_TRAP_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                25 = { set_country_flag = fatal_option_a }
+                25 = { set_country_flag = fatal_option_b }
+                25 = { set_country_flag = fatal_option_c }
+                25 = { set_country_flag = fatal_option_d }
+            }
+        }
+    }
+    
+	option = {
+		name = assassination.21.option.a
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_a
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.21.option.b
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_b
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.21.option.c
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_c
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.21.option.d
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_d
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = fatal_option_a
+            clr_country_flag = fatal_option_b
+            clr_country_flag = fatal_option_c
+            clr_country_flag = fatal_option_d
+        }
+    }
+}
+
+# A Big Stink
+country_event = {
+	id = assassination.22
+	title = assassination.22.title
+    desc = assassination.22.desc
+	picture = DYNAMITE_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                25 = { set_country_flag = fatal_option_a }
+                25 = { set_country_flag = fatal_option_b }
+                25 = { set_country_flag = fatal_option_c }
+                25 = { set_country_flag = fatal_option_d }
+            }
+        }
+    }
+    
+	option = {
+		name = assassination.22.option.a
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_a
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.22.option.b
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_b
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.22.option.c
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_c
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.22.option.d
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_d
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = fatal_option_a
+            clr_country_flag = fatal_option_b
+            clr_country_flag = fatal_option_c
+            clr_country_flag = fatal_option_d
+        }
+    }
+}
+
+# A Hunting Accident
+country_event = {
+	id = assassination.23
+	title = assassination.23.title
+    desc = assassination.23.desc
+	picture = COBRA_SHOT_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                25 = { set_country_flag = fatal_option_a }
+                25 = { set_country_flag = fatal_option_b }
+                25 = { set_country_flag = fatal_option_c }
+                25 = { set_country_flag = fatal_option_d }
+            }
+        }
+    }
+    
+	option = {
+		name = assassination.23.option.a
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_a
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.23.option.b
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_b
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.23.option.c
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_c
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.23.option.d
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_d
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = fatal_option_a
+            clr_country_flag = fatal_option_b
+            clr_country_flag = fatal_option_c
+            clr_country_flag = fatal_option_d
+        }
+    }
+}
+
+# A Quiet Night
+country_event = {
+	id = assassination.24
+	title = assassination.24.title
+    desc = assassination.24.desc
+	picture = SILVERMOON_BALCONY_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_list = {
+                25 = { set_country_flag = fatal_option_a }
+                25 = { set_country_flag = fatal_option_b }
+                25 = { set_country_flag = fatal_option_c }
+                25 = { set_country_flag = fatal_option_d }
+            }
+        }
+    }
+    
+	option = {
+		name = assassination.24.option.a
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_a
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.24.option.b
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_b
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.24.option.c
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_c
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    option = {
+		name = assassination.24.option.d
+        
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = fatal_option_d
+                }
+                
+                country_event = { id = assassination.30 }
+                event_target:plotter = {
+                    country_event = { id = assassination.31 }
+                }
+            }
+            else = {
+                country_event = { id = assassination.32 }
+                event_target:plotter = {
+                    country_event = { id = assassination.33 }
+                }
+            }
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            clr_country_flag = fatal_option_a
+            clr_country_flag = fatal_option_b
+            clr_country_flag = fatal_option_c
+            clr_country_flag = fatal_option_d
+        }
+    }
+}
+
+#--------------------------------------------------------
+# Plot - Assassination Failure - Plot Victim
+#--------------------------------------------------------
+country_event = {
+	id = assassination.30
+	title = assassination.30.title
+    desc = assassination.30.desc
+	picture = ANCIENT_SHADE_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.30.option.a
+        
+        kill_ruler = yes
+    }
+    option = {
+		name = assassination.30.option.b
+        
+        kill_ruler = yes
+        add_treasury = -100
+        custom_tooltip = PLOT_INVESTIGATION_TT
+        
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    country_event = { id = assassination.40 days = 7 }
+                    event_target:plotter = {
+                        country_event = { id = assassination.41 days = 7 }
+                    }
+                }
+                50 = {
+                    country_event = { id = assassination.42 days = 7 }
+                    event_target:plotter = {
+                        country_event = { id = assassination.43 days = 7 }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#--------------------------------------------------------
+# Plot - Assassination Success - Plotter
+#--------------------------------------------------------
+country_event = {
+	id = assassination.31
+	title = assassination.31.title
+    desc = assassination.31.desc
+	picture = ANCIENT_SHADE_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.31.option.a
+        
+        add_prestige = 10
+    }
+}
+
+#--------------------------------------------------------
+# Plot - Assassination Success - Plot Victim
+#--------------------------------------------------------
+country_event = {
+	id = assassination.32
+	title = assassination.32.title
+    desc = assassination.32.desc
+	picture = ANCIENT_MAGE_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.32.option.a
+        
+        add_prestige = 10
+    }
+    option = {
+		name = assassination.32.option.b
+        
+        add_treasury = -100
+        custom_tooltip = PLOT_INVESTIGATION_TT
+        
+        hidden_effect = {
+            random_list = {
+                50 = {
+                    country_event = { id = assassination.40 days = 7 }
+                    event_target:plotter = {
+                        country_event = { id = assassination.41 days = 7 }
+                    }
+                }
+                50 = {
+                    country_event = { id = assassination.42 days = 7 }
+                    event_target:plotter = {
+                        country_event = { id = assassination.43 days = 7 }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#--------------------------------------------------------
+# Plot - Assassination Failure - Plotter
+#--------------------------------------------------------
+country_event = {
+	id = assassination.33
+	title = assassination.33.title
+    desc = assassination.33.desc
+	picture = CAULDRON_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.60.option.a
+        
+        add_prestige = -10
+    }
+}
+
+#--------------------------------------------------------
+# Plot Discovered - Plot Victim
+#--------------------------------------------------------
+country_event = {
+	id = assassination.40
+	title = assassination.40.title
+    desc = assassination.40.desc
+	picture = ACOLYTE_OF_PAIN_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = assassination.40.option.a
+        
+        add_opinion = {
 			who = event_target:plotter
 			modifier = ruler_assassinated
 		}
-	}
+    }
 }
 
+#--------------------------------------------------------
+# Plot Discovered - Plotter
+#--------------------------------------------------------
 country_event = {
-	id = assassination.6
-	title = assassination.6.title
-	desc = assassination.6.desc
-	
-	picture = EYE_FOR_AN_EYE_eventPicture
+	id = assassination.41
+	title = assassination.41.title
+    desc = assassination.41.desc
+	picture = ABUSIVE_SERGEANT_eventPicture
 	
 	is_triggered_only = yes
-	
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
 	option = {
-		name = assassination.6.opt1
-		custom_tooltip = assassination.6.opt1.tt
-		add_spy_network_in = {
-			who = FROM
-			value = -100
-		}
-	}
-	
-	after = {
-		clr_country_flag = plotting_assassination_of@FROM
-		clr_country_flag = poison_plot
-		clr_country_flag = snake_plot
-		clr_country_flag = bomb_plot
-		clr_country_flag = hunting_plot
-		clr_country_flag = fall_plot
-	}
+		name = assassination.41.option.a
+        
+        add_prestige = -25
+    }
 }
-# Clean everything. Triggered upon monarch death.
+
+#--------------------------------------------------------
+# Plot not Discovered - Plot Victim
+#--------------------------------------------------------
 country_event = {
-	id = assassination.7
-	title = e_l
-	desc = e_l
-	
-	picture = EYE_FOR_AN_EYE_eventPicture
+	id = assassination.42
+	title = assassination.42.title
+    desc = assassination.42.desc
+	picture = ALARM_O_BOT_eventPicture
 	
 	is_triggered_only = yes
-	hidden = yes
-	
-	trigger = {
-		any_country = { has_country_flag = plotting_assassination_of@PREV }
+    
+	mean_time_to_happen = {
+		days = 1
 	}
-	
-	immediate = {
-		random_country = {
-			limit = { has_country_flag = plotting_assassination_of@PREV }
-			
-			save_event_target_as = plotter
-		}
-	}
-	
+    
 	option = {
-		name = e_l
-		event_target:plotter = {
-			clr_country_flag = plotting_assassination_of@FROM
-			clr_country_flag = poison_plot
-			clr_country_flag = snake_plot
-			clr_country_flag = bomb_plot
-			clr_country_flag = hunting_plot
-			clr_country_flag = fall_plot
-			country_event = { id = assassination.8 }
-		}
-	}
+		name = assassination.42.option.a
+        
+    }
 }
-# Notify plotter that monarch died by other means.
+
+#--------------------------------------------------------
+# Plot not Discovered - Plotter
+#--------------------------------------------------------
 country_event = {
-	id = assassination.8
-	title = assassination.8.title
-	desc = assassination.8.desc
-	
-	picture = ROYAL_TOMB_eventPicture
+	id = assassination.43
+	title = assassination.43.title
+    desc = assassination.43.desc
+	picture = ALARM_O_BOT_eventPicture
 	
 	is_triggered_only = yes
-	
-	option = {
-		name = assassination.8.opt1
-		
+    
+	mean_time_to_happen = {
+		days = 1
 	}
+    
+	option = {
+		name = assassination.43.option.a
+        
+    }
 }
