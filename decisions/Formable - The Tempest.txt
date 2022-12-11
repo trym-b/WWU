@@ -1,0 +1,73 @@
+country_decisions = {
+    found_the_tempest = {
+		major = yes
+        ai_importance = 300
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+            # Exclusions
+			NOT = { exists = TTP }
+            
+            # Requisites
+			tag = A93
+            
+            any_owned_province = {
+                area = area_tempest_keep
+            }
+		}
+        
+        provinces_to_highlight = {
+			NOT = { owned_by = ROOT }
+			OR = {
+                area = area_tempest_keep
+            }
+		}
+        
+		allow = {
+            # Ownership
+		    area_tempest_keep = {
+				type = all
+				owned_by = ROOT
+			}
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 300
+            
+            # Cost
+            adm_power = 150
+			dip_power = 150
+			mil_power = 150
+		}
+		effect = {
+            # Cost
+			add_adm_power = -150
+			add_dip_power = -150
+            add_mil_power = -150
+            
+            # Switch
+			change_tag = TTP	
+			set_government_rank = 2
+			change_primary_culture = culture_felblood_elf
+            every_owned_province = { 
+                limit = {
+                    continent = continent_outland
+					culture_group = culture_group_thalassian
+                    NOT = { culture = culture_felblood_elf }
+                }
+                change_culture = culture_felblood_elf 
+            }
+
+			# Bonus
+            add_formable_bonus = yes
+            #trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
