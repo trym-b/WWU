@@ -176,6 +176,59 @@ country_event = {
     }
 }
 
+# Mawsworn Invasion
+country_event = {
+	id = wwu_invasion.3
+	title = wwu_invasion.3.title
+	desc = wwu_invasion.3.desc
+	picture = AMGAM_RAGER_eventPicture
+	
+	trigger = {
+        NOT = { has_country_flag = invasion_spawn_done }
+        is_in_war = {
+            casus_belli = cb_mawsworn_invasion
+            attackers = ROOT
+        }
+        any_country = {
+            war_with = ROOT
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    is_in_war = {
+                        casus_belli = cb_mawsworn_invasion
+                        defenders = THIS
+                    }
+                }
+                save_event_target_as = target_country
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_invasion.3.option.a
+        
+        custom_tooltip = FREE_TELEPORT_ARMY_TT
+        hidden_effect = {
+            set_country_flag = free_army_teleport
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            set_country_flag = invasion_spawn_done
+        }
+    }
+}
+
 # Fury of Ragnaros
 country_event = {
 	id = wwu_invasion.10

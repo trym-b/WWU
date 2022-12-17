@@ -1,0 +1,29 @@
+expose_shadowlands = {
+    custom_tooltip = SHADOWLANDS_EXPOSED_TT
+    
+    hidden_effect = {
+        set_global_flag = shadowlands_exposed
+        
+        # All Shadowlands nations can now see all of the map
+        every_country = {
+            limit = {
+                capital_scope = {
+                    continent = continent_shadowlands
+                }
+            }
+            
+            reveal_all_discovery = yes
+        }
+        
+        # All non-Shadowlands nations can now see the Shadowlands
+        every_country = {
+            limit = {
+                capital_scope = {
+                    NOT = { continent = continent_shadowlands }
+                }
+            }
+            
+            discover_shadowlands = yes
+        }
+    }
+}

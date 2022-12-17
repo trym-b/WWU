@@ -13,7 +13,7 @@ country_decisions = {
         }
         effect = {
             add_dip_power = -50
-            add_piety = 0.05
+            add_piety = 0.15
             
             custom_tooltip = DREAM_SUPPORT_TT
             hidden_effect = {
@@ -45,6 +45,7 @@ country_decisions = {
         potential = {
             religion = druidism
             has_advisor = yes
+            NOT = { has_country_modifier = dream_support_cooldown }
         }
         allow = {
             religion = druidism
@@ -63,7 +64,7 @@ country_decisions = {
         effect = {
             kill_advisor = random
             
-            add_piety = 0.1
+            add_piety = 0.25
             
             custom_tooltip = DREAM_SUPPORT_TT
             hidden_effect = {
@@ -190,6 +191,31 @@ country_decisions = {
         }
 		ai_will_do = {
 			factor = 1
+		}
+	}
+    
+    summon_forth_emerald_spirits = {
+        potential = {
+            piety = 0.0
+            religion = druidism
+		}
+		allow = {
+            ruler_religion = ROOT
+            piety = 0.25
+		}
+        effect = {
+            add_piety = -0.25
+            
+            add_yearly_manpower = 1.0
+        }
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { piety = 0.75 }
+            }
 		}
 	}
     
