@@ -254,8 +254,7 @@ NDiplomacy = {
 	--- WWU: religion should not tweak AE as religion is more varied in WWU
 	AE_HRE_INTERNAL = 1.0,
 	--- WWU: adjusted for Empire of Pandaria.
-	AE_ATTACKER_DEVELOPMENT = 0.05,	
-	--- WWU: increased to make attackers accrue more AE
+	AE_ATTACKER_DEVELOPMENT = 0.03,
 	AE_DEFENDER_DEVELOPMENT = 0.01,	 
 	AE_DISTANCE_BASE = 0.75,
 	AE_SAME_OVERLORD = 0.5,
@@ -264,7 +263,7 @@ NDiplomacy = {
 	AE_PRIMITIVES = -0.75, -- less AE from primitives
 
 	-- Peace Option Effects, base values for the winner. The loser gets the inverse.
-	PO_DEMAND_PROVINCES_AE = 2.0, 				-- _DDEF_PO_DEMAND_PROVINCES_AE = 10, (Per development)
+	PO_DEMAND_PROVINCES_AE = 1.5, 				-- _DDEF_PO_DEMAND_PROVINCES_AE = 10, (Per development)
 	--- WWU: increased to make conquest cause more upset.
 	PO_RETURN_CORES_AE = 0.5, 					-- (Per core, only applied if returning cores to vassals of winner)
 	--- WWU: increased to make conquest cause more upset.
