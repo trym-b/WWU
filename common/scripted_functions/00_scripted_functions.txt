@@ -157,27 +157,19 @@ can_burn_colony = {
 }
 
 can_colonize_province = {
-}
-
-can_colonize_province_siberian_frontier = {
-}
-
-can_add_seat_in_parliament = {
-}
-
-can_add_estate = {
-}
-
-can_expel_minority_from = {
-	condition = {
+    # Block 'removed content' provinces from being colonised
+    condition = {
 		tooltip = "WOW_UNCOLONIZABLE"
+        
 		potential = {
-			province_group = pg_uncolonizable
+			has_province_flag = block_colonisation
 		}
 		allow = {
 			always = no
 		}
 	}
+    
+    # Block Teldrassil colonisation until the tree is grown
 	condition = {
 		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
 		potential = {
@@ -188,6 +180,8 @@ can_expel_minority_from = {
 			always = no
 		}
 	}
+    
+    # Block Teldrassil colonisation if it is burnt down
     condition = {
 		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
 		potential = {
@@ -198,22 +192,157 @@ can_expel_minority_from = {
 			always = no
 		}
 	}
+    
+    # Block Broken Shore colonisation until flag is cleared
+	# condition = {
+		# tooltip = "WOW_UNCOLONIZABLE_BROKENSHORE"
+		# potential = {
+			# has_province_flag = broken_shore_uncolonizable
+		# }
+		# allow = {
+			# always = no
+		# }
+	# }
+    
+    # Block AI Scourge from colonisation
 	condition = {
-		tooltip = "WOW_UNCOLONIZABLE_BROKENSHORE"
+		tooltip = "WOW_UNCIVILIZED"
 		potential = {
-			has_province_flag = broken_shore_uncolonizable
+			FROM = {
+                ai = yes
+                technology_group = tech_scourge
+            }
 		}
 		allow = {
 			always = no
 		}
 	}
+}
+
+can_colonize_province_siberian_frontier = {
+    # Block 'removed content' provinces from being colonised
+    condition = {
+		tooltip = "WOW_UNCOLONIZABLE"
+        
+		potential = {
+			has_province_flag = block_colonisation
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Teldrassil colonisation until the tree is grown
+	condition = {
+		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
+		potential = {
+			region = region_teldrassil
+			NOT = { has_global_flag = seeds_of_teldrassil }
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Teldrassil colonisation if it is burnt down
+    condition = {
+		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
+		potential = {
+			region = region_teldrassil
+            has_global_flag = teldrassil_burned
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Broken Shore colonisation until flag is cleared
+	# condition = {
+		# tooltip = "WOW_UNCOLONIZABLE_BROKENSHORE"
+		# potential = {
+			# has_province_flag = broken_shore_uncolonizable
+		# }
+		# allow = {
+			# always = no
+		# }
+	# }
+    
+    # Block AI Scourge from colonisation
 	condition = {
 		tooltip = "WOW_UNCIVILIZED"
 		potential = {
 			FROM = {
-                OR = {
-                    technology_group = tech_scourge
-                }
+                ai = yes
+                technology_group = tech_scourge
+            }
+		}
+		allow = {
+			always = no
+		}
+	}
+}
+
+can_add_seat_in_parliament = {
+}
+
+can_add_estate = {
+}
+
+can_expel_minority_from = {
+	# Block 'removed content' provinces from being colonised
+    condition = {
+		tooltip = "WOW_UNCOLONIZABLE"
+        
+		potential = {
+			has_province_flag = block_colonisation
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Teldrassil colonisation until the tree is grown
+	condition = {
+		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
+		potential = {
+			region = region_teldrassil
+			NOT = { has_global_flag = seeds_of_teldrassil }
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Teldrassil colonisation if it is burnt down
+    condition = {
+		tooltip = "WOW_UNCOLONIZABLE_TELDRASSIL"
+		potential = {
+			region = region_teldrassil
+            has_global_flag = teldrassil_burned
+		}
+		allow = {
+			always = no
+		}
+	}
+    
+    # Block Broken Shore colonisation until flag is cleared
+	# condition = {
+		# tooltip = "WOW_UNCOLONIZABLE_BROKENSHORE"
+		# potential = {
+			# has_province_flag = broken_shore_uncolonizable
+		# }
+		# allow = {
+			# always = no
+		# }
+	# }
+    
+    # Block AI Scourge from colonisation
+	condition = {
+		tooltip = "WOW_UNCIVILIZED"
+		potential = {
+			FROM = {
+                ai = yes
+                technology_group = tech_scourge
             }
 		}
 		allow = {
