@@ -1,0 +1,376 @@
+namespace = wwu_forsaken
+
+#Confront Nathanos Blightcaller
+country_event = {
+    id = wwu_forsaken.3
+    title = wwu_forsaken.3.title
+    desc = wwu_forsaken.3.desc
+    picture = HOOK_eventPicture
+
+    trigger = {
+        P14 = {
+            owns_core_province = 875
+        }
+    }
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    hidden_effect = {
+        set_global_flag = nathanos_liberated
+    }
+
+    option = {
+        name = wwu_forsaken.3.option.a
+
+        define_advisor = {
+            type = commandant
+            name = "Nathanos Blightcaller"
+            skill = 3
+            location = <875>
+            discount = yes
+            female = no
+            culture = culture_undead
+            religion = forgotten_shadow
+        }
+    }
+    option = {
+        name = wwu_forsaken.3.option.b
+
+        add_treasury = 300
+        add_mil_power = -5
+
+        hidden_effect = {
+            set_global_flag = nathanos_slain
+        }
+    }
+
+#Send Vengance Expedition to Northrend
+country_event = {
+    id = wwu_forsaken.4
+    title = wwu_forsaken.4.title
+    desc = wwu_forsaken.4.desc
+    picture = THRONE_ROOM_eventPicture
+
+    fire_only_once = yes
+
+    trigger = {
+        NOT = {has_global_flag = send_vengance_expedition}
+        mission_completed = wwu_bring_the_war_to_northrend
+
+
+        714 = {
+            is_empty = yes
+            NOT = {
+                owned_by = ROOT
+            }
+        }
+        867 = {
+            is_empty = yes
+            NOT = {
+                owned_by = ROOT
+            }
+        }
+        2468 = {
+            is_empty = yes
+            NOT = {
+                owned_by = ROOT
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+        months = 48
+    }
+
+    option = {
+            name = wwu_forsaken.4.option.a
+
+            714 = {
+                cede_province = ROOT
+            }
+            867 = {
+                cede_province = ROOT
+            }
+            2468 = {
+                cede_province = ROOT
+            }
+
+            add_treasury = -600
+            add_dip_power = -150
+                hidden_effect = {
+                    set_global_flag = send_vengance_expedition
+                }
+    }
+    option = {
+        name = wwu_forsaken.4.option.b
+    }
+}
+
+#Hand of Vengance
+country_event = {
+    name = wwu_forsaken.5
+    title = wwu_forsaken.5.title
+    desc = wwu_forsaken.5.desc
+    picture = WAILING_SOUL_eventPicture
+}
+    trigger = {
+        NOT = { A96 = exists }
+        NOT = { has_global_flag = hand_of_vengance_created}
+
+        owns_core_province = 714
+        owns_core_province = 867
+        owns_core_province = 2468
+    }
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+        }
+    }
+    option = {
+        name = wwu_forsaken.5.option.a
+
+        714 = {
+            cede_province = A96
+            add_core = A96
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 2
+        }
+        867 = {
+            cede_province = A96
+            add_core = A96
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 2
+        }
+        2468 = {
+            cede_province = A96
+            add_core = A96
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 2
+        }
+
+        create_subject = {
+            subject_type = personal_union
+    }
+
+        immediate = {
+            hidden_effect = {
+                set_global_flag = hand_of_vengance_created}
+        }
+    }
+    option = {
+        name = wwu_forsaken.5.option.b
+    }
+
+
+
+#Koltira Deathweaver
+country_event = {
+    name = wwu_forsaken.6
+    title = wwu_forsaken.6.title
+    desc = wwu_forsaken.6.desc.
+    picture = DEATHLORD_eventPicture
+
+    fire_only_once = yes
+
+    trigger = {
+        P13 = { alliance_with = P14}
+
+        688 = {
+            owned_by = ROOT
+        }
+    }
+
+    mean_time_to_happen = {
+        months = 12
+    }
+    option = {
+        name = wwu_forsaken.6.option.a
+        define_general = {
+            shock = 4
+            fire = 4
+            manuever = 5
+            siege = 2
+            name = "Koltira Deathweaver"
+            female = no
+            trait = master_of_arms_personality
+        }
+    }
+}
+
+#Establish Tranquillen
+country_event = {
+    name = wwu_forsaken.7
+    title = wwu_forsaken.7.title
+    desc = wwu_forsaken.7.desc
+    picture = SILVERMOON_BALCONY_eventPicture
+
+    fire_only_once = yes
+
+    trigger = {
+        P13 = { alliance_with = A91 }
+        NOT = { FRT = exists }
+
+        owns_core_province = 2517
+        owns_core_province = 808
+        owns_core_province = 2977
+
+    }
+
+    mean_time_to_happen = {
+        month = 1
+    }
+
+    immediate = {
+        hidden_effect = {
+            set_global_flag = tranquillen_created
+        }
+    }
+
+    option = {
+        name = wwu_forsaken.7.option.a
+
+        2517 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_undead
+            change_religion = forgotten_shadow
+        }
+        808 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_undead
+            change_religion = forgotten_shadow
+        }
+        2977 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_undead
+            change_religion = forgotten_shadow
+        }
+        791 = {
+            add_core = FRT
+        }
+        860 = {
+            add_core = FRT
+        }
+        844 = {
+            add_core = FRT
+        }
+
+        create_subject = {
+            subject_type = vassal
+        }
+    }
+
+    option = {
+        name = wwu_forsaken.7.option.b
+
+        2517 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_blood_elf
+            change_religion = arcane
+        }
+        808 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_blood_elf
+            change_religion = arcane
+        }
+        2977 = {
+            cede_province = FRT
+            add_core = FRT
+            change_culture = culture_blood_elf
+            change_religion = arcane
+        }
+        791 = {
+            add_core = FRT
+        }
+        860 = {
+            add_core = FRT
+        }
+        844 = {
+            add_core = FRT
+        }
+
+        create_subject = {
+            subject_type = tributary_state
+        }
+    }
+
+    option = {
+        name = wwu_forsaken.7.option.c
+    }
+}
+
+#Establish New Stromgarde
+country_event = {
+    name = wwu_forsaken.8
+    title = wwu_forsaken.8.title
+    desc = wwu_forsaken.8.desc
+    picture = SHADOWFANG_KEEP_eventPicture
+
+    fire_only_once = yes
+
+    trigger = {
+        NOT = { A16 = exists}
+    }
+
+    owns_core_province = 966
+    }
+
+    mean_time_to_happen = {
+        month = 1
+    }
+
+    immediate = {
+        hidden_effect = {
+            set_global_flag = new_stromgarde_created
+        }
+    }
+
+    option = {
+        name = wwu_forsaken.8.option.a
+
+        966 = {
+            cede_province = H12
+            add_core = H12
+            change_culture = culture_undead
+            change_religion = forgotten_shadow
+            change_province_name = "Galen's Fall"
+        }
+    
+        area_northford = {
+            add_permanent_claim = H12
+        }
+
+        area_stromgarde = {
+            add_permanent_claim = H12
+        }
+
+        area_thandol_span = {
+            add_permanent_claim = H12
+        }
+
+        area_refuge_point = {
+            add_permanent_claim = H12
+        }
+
+
+        create_subject = {
+            subject_type = vassal
+        }
+    }
+
+    option = {
+        name = wwu_forsaken.8.option.b
+    }
