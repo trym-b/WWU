@@ -1,0 +1,74 @@
+country_decisions = {
+    declare_the_cold_dark_legion = {
+        major = yes
+        ai_importance = 100
+
+        potential = {
+            NOT = { has_country_flag = enacted_final_tag_formation }
+
+            # Exclusions 
+            NOT = { exists = LCD }
+
+            # Requisites
+            OR = {
+            tag = P52
+            tag = P12
+            tag = F21
+            tag = P13
+            OR = {
+            culture_group = culture_group_scourge
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+            region = eastern_plaguelands
+            region = western_plaguelands
+            }
+
+        allow = {
+            # Ownership
+            region_easter_plaguelands = {
+                type = all
+                owned_by = ROOT
+            }
+            region_western_plaguelands = {
+                type = all
+                owned_by = ROOT
+            }
+
+            # General
+            adm_tech = 12
+            mil_tech = 12
+            is_at_war = no
+            stability = 1
+            is_subject = no
+
+            # Cost
+            adm_power = 200
+            mil_power = 200
+        }
+        effect = {
+            # Cost
+            add_adm_power = -200
+            add_mil_power = -200
+
+            #Switch
+            change_tag = LCD
+            set_government_rank = 2
+            change_government = monarchy
+            add_government_reform = scourge_domain_reform
+
+            #Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            trigger_mission_switch = yes
+            set_final_tag_status = yes
+        }
+
+        ai_will_do = {
+            factor = 1
+        }
+    }
+}
