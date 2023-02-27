@@ -29,7 +29,7 @@ country_event = {
             location = 875
             discount = yes
             female = no
-            culture = culture_undead
+            culture = culture_forsaken
             religion = forgotten_shadow
         }
 	}
@@ -120,7 +120,7 @@ country_event = {
     picture = WAILING_SOUL_eventPicture
 	
     trigger = {
-        NOT = { A96 = exists }
+        NOT = { A96 = { exists = yes } }
         NOT = { has_global_flag = hand_of_vengance_created}
 
         owns_core_province = 714
@@ -131,6 +131,12 @@ country_event = {
     mean_time_to_happen = {
         months = 1
     }
+	
+	immediate = {
+		hidden_effect = {
+			set_global_flag = hand_of_vengance_created 
+		}
+	}
 
     option = {
         name = wwu_forsaken.5.option.a
@@ -159,13 +165,8 @@ country_event = {
 
         create_subject = {
             subject_type = personal_union
+			subject = A96
 		}
-
-        immediate = {
-            hidden_effect = {
-                set_global_flag = hand_of_vengance_created 
-			}
-        }
     }
     option = {
         name = wwu_forsaken.5.option.b
@@ -177,7 +178,7 @@ country_event = {
 country_event = {
     id = wwu_forsaken.6
     title = wwu_forsaken.6.title
-    desc = wwu_forsaken.6.desc.
+    desc = wwu_forsaken.6.desc
     picture = DEATHLORD_eventPicture
 
     fire_only_once = yes
@@ -217,7 +218,7 @@ country_event = {
     fire_only_once = yes
 
     trigger = {
-        NOT = { FRT = exists }
+        NOT = { FRT = { exists = yes } }
 
         owns_core_province = 2517
         owns_core_province = 808
@@ -240,19 +241,19 @@ country_event = {
         2517 = {
             cede_province = FRT
             add_core = FRT
-            change_culture = culture_undead
+            change_culture = culture_forsaken
             change_religion = forgotten_shadow
         }
         808 = {
             cede_province = FRT
             add_core = FRT
-            change_culture = culture_undead
+            change_culture = culture_forsaken
             change_religion = forgotten_shadow
         }
         2977 = {
             cede_province = FRT
             add_core = FRT
-            change_culture = culture_undead
+            change_culture = culture_forsaken
             change_religion = forgotten_shadow
         }
         791 = {
@@ -267,6 +268,7 @@ country_event = {
 
         create_subject = {
             subject_type = vassal
+			subject = FRT
         }
     }
 
@@ -303,6 +305,7 @@ country_event = {
 
         create_subject = {
             subject_type = tributary_state
+			subject = FRT
         }
     }
 
@@ -321,7 +324,7 @@ country_event = {
     fire_only_once = yes
 
     trigger = {
-        NOT = { A16 = exists }
+        NOT = { A16 = { exists = yes } }
 		owns_core_province = 966
     }
 
@@ -341,12 +344,12 @@ country_event = {
         966 = {
             cede_province = H12
             add_core = H12
-            change_culture = culture_undead
+            change_culture = culture_forsaken
             change_religion = forgotten_shadow
             change_province_name = "Galen's Fall"
         }
     
-        area_northford = {
+        area_northfold = {
             add_permanent_claim = H12
         }
 
@@ -358,13 +361,14 @@ country_event = {
             add_permanent_claim = H12
         }
 
-        area_refuge_point = {
+        area_refuge_pointe = {
             add_permanent_claim = H12
         }
 
 
         create_subject = {
             subject_type = vassal
+			subject = H12
         }
     }
 
