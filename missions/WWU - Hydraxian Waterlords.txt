@@ -1,0 +1,246 @@
+# #--------------------------------------
+# # Hydraxian Waterlords
+# #--------------------------------------
+wwu_hydraxian_waterlords_column_4 = {
+    slot = 4 
+    generic = no
+    ai = yes
+
+    potential = {
+        tag = P25
+    }
+
+    has_country_shield = yes
+
+    wwu_abyssal_maw_relations = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { wwu_summon_the_hydraxian_army }
+
+        trigger = {
+            who = P24
+            value = 150
+        }
+
+        effect = {
+            add_historical_friend = P24
+            create_alliance = P24
+
+            # Abyssal Maw
+            P24 = {
+                add_historical_friend = P25
+            }
+
+            add_stability = 1
+            add_adm_power = 50
+            add_dip_power = 50
+
+            area_blackrock_mountain = {
+                add_permanent_claim = ROOT
+            }
+            area_blackrock_exterior = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    wwu_deal_with_ragnaros_allies = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { wwu_abyssal_maw_relations }
+
+        trigger = {
+            NOT = { exists = A30 }
+
+            owns_core_province = 3155 # Molten Core
+            owns_core_province = 1962 # Blackrock Depths
+        }
+
+        effect = {
+            add_mil_power = 100
+            add_prestige = 20
+        }
+    }
+    wwu_end_of_ragnaros = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { wwu_deal_with_ragnaros_allies }
+
+        trigger = {
+            NOT = { exists = P26 }
+            
+            # Sulfuron Keep
+            2601 = {
+                OR = {
+                    owned_by = ROOT
+                    owned_by = P24
+                }
+            }
+        }
+        effect = {
+            add_stability = 1
+            add_prestige = 25
+
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 200
+
+            add_country_modifier = {
+                name = victory_over_ragnaros
+                duration = 7300
+            }
+        }
+    }
+}
+
+wwu_hydraxian_waterlords_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = P25
+	}
+    
+	has_country_shield = yes
+	
+	wwu_summon_the_hydraxian_army = {
+		icon = mission_titan_spirits
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            army_size_percentage = 1.0
+		}
+        
+		effect = {
+            add_mil_power = 100
+
+            discover_country = region_broken_isles
+            discover_country = region_abyssal_maw
+            discover_country = region_firelands
+
+            region_vashjir = {
+                add_permanent_claim = ROOT
+            }
+            area_balor = {
+                add_permanent_claim = ROOT
+            }			
+            area_frostsabre = {
+                add_permanent_claim = ROOT
+            }
+
+            define_general = {
+                shock = 4
+                fire = 2
+                manuever = 3
+                siege = 1
+                name = "Champion Aquaclease"
+                female = no
+            }
+        }
+	}
+    wwu_crush_the_vashjir_naga = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { wwu_summon_the_hydraxian_army }
+
+        provinces_to_highlight = {
+            owned_by = VHJ
+        }
+
+        trigger = {
+                NOT = { exists = VHJ }
+		}
+
+        effect = {
+            add_stability = 1
+            add_prestige = 15
+            add_mil_power = 100
+
+            discover_provinces = region_nazjatar
+
+            add_country_modifier = {
+                name = victory_in_vashjir
+                duration = 7300
+            }
+
+            area_eye_of_the_storm = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    wwu_crush_the_hatecoil_naga = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { wwu_crush_the_vashjir_naga }
+
+        provinces_to_highlight = {
+            owned_by = HAT
+        }
+
+        trigger = {
+            NOT = { exists = HAT }
+            
+            owns_core_province = 2666 # Eye of the Storm
+        }
+
+        effect = {
+            add_prestige = 25
+            add_adm_power = 50
+            add_dip_power = 50
+            add_mil_power = 100
+
+            add_country_modifier = {
+                name = victory_over_hatecoil
+                duration = 7300
+            }
+
+            region_nazjatar = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    wwu_to_the_depths_of_madness = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { wwu_crush_the_hatecoil_naga }
+
+        provinces_to_highlight = {
+            region = region_nazjatar
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+
+        trigger = {
+            NOT = { exists = NJZ }
+            region_nazjatar = {
+                type = all
+                owned_by = ROOT
+            }
+        }
+
+        effect = {
+            add_stability = 1
+            add_prestige = 50
+
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 200
+
+            add_accepted_culture = culture_vashjari
+            add_accepted_culture = culture_azsharan
+            add_accepted_culture = culture_nazja
+
+            add_country_modifier = {
+                name = conqueror_of_nazjatar
+                duration = -1
+            }
+        }
+    }
+}
