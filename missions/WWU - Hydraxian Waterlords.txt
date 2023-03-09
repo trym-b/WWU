@@ -19,8 +19,8 @@ wwu_hydraxian_waterlords_column_4 = {
         required_missions = { wwu_summon_the_hydraxian_army }
 
         trigger = {
-            who = P24
-            value = 150
+			has_opinion = { who = P24 value = 150 }
+			reverse_has_opinion = { who = P24 value = 150 }
         }
 
         effect = {
@@ -118,10 +118,20 @@ wwu_hydraxian_waterlords_column_5 = {
         
 		effect = {
             add_mil_power = 100
-
-            discover_country = region_broken_isles
-            discover_country = region_abyssal_maw
-            discover_country = region_firelands
+			
+			# There is no such region
+			#region_broken_isles = {
+			region_broken_isles_seas = {
+				discover_country = ROOT
+			}
+			
+			region_abyssal_maw = {
+				discover_country = ROOT
+			}
+			
+			region_firelands = {
+				discover_country = ROOT
+			}
 
             region_vashjir = {
                 add_permanent_claim = ROOT
@@ -161,9 +171,11 @@ wwu_hydraxian_waterlords_column_5 = {
             add_stability = 1
             add_prestige = 15
             add_mil_power = 100
-
-            discover_provinces = region_nazjatar
-
+			
+			region_nazjatar = {
+				discover_country = ROOT
+			}
+			
             add_country_modifier = {
                 name = victory_in_vashjir
                 duration = 7300
