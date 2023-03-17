@@ -1,0 +1,103 @@
+#--------------------------------------
+# Army of the Light
+#--------------------------------------
+wwu_army_of_the_light_column_4 = {
+    slot = 4
+	generic = no
+	ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = ARL
+    }
+}
+
+wwu_securing_friends = {
+    icon = mission_titan_spirits
+    position = 1
+
+    required_missions = {}
+
+    trigger = {
+        has_opinion = {
+            who = ARR # Argusian Reach
+            value = 50
+        }
+    }
+
+    effect = {
+        if = {
+            limit = {
+                exists = ARR
+            }
+
+            create_alliance = ARR
+            add_historical_friend = ARR
+            add_accepted_culture = culture_broken
+
+            # Argusian Reach
+            ARR = {
+                add_historical_friend = ROOT
+                add_accepted_culture = culture_lightforged
+            }
+            else = {
+                add_mil_power = 150
+            }
+        }
+    }
+
+    wwu_contact_the_draenei = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { wwu_securing_friends }
+
+        trigger = {
+            OR = {
+                has_opinion = {
+                    who = A54 # Shattarah
+                    value = 100
+                }
+                else = {
+                    has_opinion = {
+                        who = A56 # Exodar
+                        value = 100
+                    }
+                }
+            }
+        }
+
+        effect = {
+            if = {
+                limit = {
+                    exists = A54
+                }
+                create_alliance = A54
+                add_historical_friend = A54
+            }
+
+            # Shattarah
+            A54 = {
+                add_historical_friend = ROOT
+            }
+            else = {
+                add_mil_power = 100
+            }
+            else = {
+                if = {
+                    exists = A56 # Exodar
+                }
+                create_alliance = A56
+                add_historical_friend = A56
+            }
+
+            # Exodar
+            A56 = {
+                add_historical_friend = ROOT
+            }
+            else = {
+                add_mil_power = 100
+            }
+        }
+    } 
+}
