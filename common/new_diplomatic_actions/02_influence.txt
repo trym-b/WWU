@@ -433,3 +433,54 @@ bribe_enemy = {
         is_enemy = FROM
 	}
 }
+
+#---------------------------------------
+# Recall
+#---------------------------------------
+recall_army = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = recall_army_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        # Any units owned by us that are in foreign territory
+        FROM = {
+            any_owned_province = {
+                units_in_province = ROOT
+            }
+        }
+        mil_power = 100
+        is_at_war = no
+	}
+	is_allowed = {
+        always = yes
+	}
+	on_accept = {
+        add_mil_power = -100
+        
+        FROM = {
+            random_owned_province = {
+                limit = {
+                    units_in_province = ROOT
+                }
+                save_event_target_as = chosen_start_portal
+            }
+        }
+        capital_scope = {
+            save_event_target_as = chosen_end_portal
+        }
+        teleport_unit_with_any_amount = yes
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = yes
+	}
+}
