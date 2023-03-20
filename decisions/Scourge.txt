@@ -849,6 +849,87 @@ country_decisions = {
 			factor = 1
 		}
 	}
+    
+    # Resurrect the Lich King
+    resurrect_the_lich_king = {
+		potential = {
+            tag = P11
+			if = {
+                limit = {
+                    has_global_flag = lich_king_is_arthas
+                }
+                NOT = { has_ruler = "Arthas" }
+            }
+            else = {
+                NOT = { has_ruler = "Ner'zhul" }
+            }
+		}
+		allow = {
+			adm_power = 25
+			dip_power = 25
+			mil_power = 25
+		}
+		effect = {
+            add_adm_power = -25
+			add_dip_power = -25
+			add_mil_power = -25
+            
+            if = {
+                limit = {
+                    has_global_flag = lich_king_is_arthas
+                }
+                define_ruler = {
+                    name = "Arthas" 
+                    dynasty = "Menethil" 	
+                    adm = 6
+                    dip = 6
+                    mil = 6
+                }
+                
+                hidden_effect = {
+                    set_ruler_flag = ruler_portrait_lich_king
+        
+                    setup_spellcaster_history = {
+                        APTITUDE = 3
+                        FINESSE = 3
+                        CONCENTRATION = 2
+                        MANA = 3
+                        necromancy = yes
+                    }
+                    set_ruler_flag = is_immortal
+                    set_ruler_flag = death_knight_personality
+                    add_ruler_personality = ruthless_personality
+                }
+            }
+            else = {
+                define_ruler = {
+                    name = "Ner'zhul"
+                    dynasty = "Shadowmoon" 	
+                    adm = 6
+                    dip = 6	
+                    mil = 6	
+                }
+                
+                hidden_effect = {
+                    set_ruler_flag = ruler_portrait_nerzhul
+                    
+                    setup_spellcaster_history = {
+                        APTITUDE = 4
+                        FINESSE = 4
+                        CONCENTRATION = 5
+                        MANA = 5
+                        necromancy = yes
+                    }
+                    set_ruler_flag = is_immortal
+                    set_ruler_flag = warlock_personality
+                    add_ruler_personality = ruthless_personality
+                }
+            }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
 
 
