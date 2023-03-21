@@ -1,135 +1,7 @@
 #--------------------------------------
-# Deeprun Tram
-#--------------------------------------
-gp_deeprun_tram_eastern_kingdoms = {
-    type = canal
-    
-	start = 2505
-
-	date = 500.01.01
-	can_be_moved = no
-	move_days_per_unit_distance = 10
-    
-    build_cost = 100
-	time = {
-		months = 120 # Tier 3 Time
-	}
-
-	starting_tier = 1
-
-    # Construction
-	build_trigger = {
-        FROM = {
-			owns_or_vassal_of = 2505
-		}
-	}
-	on_built = {
-		add_canal = gp_deeprun_tram_eastern_kingdoms
-	}
-	on_destroyed = {
-		remove_canal = gp_deeprun_tram_eastern_kingdoms
-	}
-    
-    # Conditions
-	can_use_modifiers_trigger = {
-		FROM = {
-			owns_or_vassal_of = 2505
-		}
-	}
-	can_upgrade_trigger = {
-		FROM = {
-			owns_or_vassal_of = 2505
-		}
-	}
-	keep_trigger = { always = yes }
-
-	# Tiers
-	tier_0 = {
-		upgrade_time = {
-			months = 12
-		}
-		cost_to_upgrade = {
-			factor = 100
-		}
-		province_modifiers = {
-            local_monthly_devastation = -0.025
-		}
-		area_modifier = {
-            trade_goods_size_modifier = 0.125
-		}
-		country_modifiers = {
-            movement_speed = 0.025
-		}
-		on_upgraded = {
-			owner = { add_prestige = 25 }
-		}
-	}
-	tier_1 = {
-		upgrade_time = {
-			months = 32 # Tier 1 Time
-		}
-		cost_to_upgrade = {
-			factor = 1000 # Tier 3 Cost
-		}
-        province_modifiers = {
-            local_monthly_devastation = -0.05
-		}
-		area_modifier = {
-            trade_goods_size_modifier = 0.25
-		}
-		country_modifiers = {
-            movement_speed = 0.05
-		}
-		on_upgraded = {
-			owner = { add_prestige = 25 }
-		}
-	}
-	tier_2 = {
-		upgrade_time = {
-			months = 64 # Tier 2 Time
-		}
-		cost_to_upgrade = {
-			factor = 2500
-		}
-        province_modifiers = {
-            local_monthly_devastation = -0.075
-		}
-		area_modifier = {
-            trade_goods_size_modifier = 0.33
-		}
-		country_modifiers = {
-            movement_speed = 0.075
-		}
-		on_upgraded = {
-			owner = { add_prestige = 25 }
-		}
-	}
-	tier_3 = {
-		upgrade_time = {
-			months = 120 # Tier 3 Time
-		}
-		cost_to_upgrade = {
-			factor = 5000
-		}
-        province_modifiers = {
-            local_monthly_devastation = -0.1
-		}
-		area_modifier = {
-            trade_goods_size_modifier = 0.5
-		}
-		country_modifiers = {
-            movement_speed = 0.1
-		}
-		on_upgraded = {
-			owner = { add_prestige = 25 }
-		}
-	}
-}
-
-#--------------------------------------
 # Dark Portal: Outland
 #--------------------------------------
-gp_dark_portal_outland = {
+dark_portal_outland = {
     type = canal
     
 	start = 1586
@@ -144,20 +16,24 @@ gp_dark_portal_outland = {
 		months = 1
 	}
 
-	starting_tier = 3
+	starting_tier = 1
 
     # Construction
 	build_trigger = {
-		is_year = 591
+        NOT = { has_country_modifier = dark_portal_closed_cooldown }
+		OR = {
+            is_year = 591
+            has_global_flag = dark_portal_built
+        }
         FROM = {
 			owns_or_vassal_of = 1586
 		}
 	}
 	on_built = {
-		add_canal = gp_dark_portal_outland
+		add_canal = dark_portal_outland
 	}
 	on_destroyed = {
-		remove_canal = gp_dark_portal_outland
+		remove_canal = dark_portal_outland
 	}
     
     # Conditions
@@ -259,7 +135,7 @@ gp_dark_portal_outland = {
 #--------------------------------------
 # Dark Portal: Draenor
 #--------------------------------------
-gp_dark_portal_draenor = {
+dark_portal_draenor = {
     type = canal
     
 	start = 3792
@@ -274,20 +150,24 @@ gp_dark_portal_draenor = {
 		months = 1
 	}
 
-	starting_tier = 3
+	starting_tier = 1
 
     # Construction
 	build_trigger = {
-		is_year = 591
+        NOT = { has_country_modifier = dark_portal_closed_cooldown }
+		OR = {
+            is_year = 591
+            has_global_flag = dark_portal_built
+        }
         FROM = {
 			owns_or_vassal_of = 3792
 		}
 	}
 	on_built = {
-		add_canal = gp_dark_portal_draenor
+		add_canal = dark_portal_draenor
 	}
 	on_destroyed = {
-		remove_canal = gp_dark_portal_draenor
+		remove_canal = dark_portal_draenor
 	}
     
     # Conditions
@@ -385,4 +265,3 @@ gp_dark_portal_draenor = {
 		}
 	}
 }
-
