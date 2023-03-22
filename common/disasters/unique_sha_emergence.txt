@@ -1,7 +1,6 @@
 sha_emergence = {
 	potential = {
 		NOT = { has_global_flag = sha_emergence_over }
-        is_emperor = yes
 		capital_scope = {
 			continent = continent_pandaria
 		}
@@ -9,11 +8,9 @@ sha_emergence = {
 	}
 
 	can_start = {
+        is_at_war = yes
         OR = {
-            AND = {
-                total_development = 200
-                is_at_war = yes
-            }
+            total_development = 200
             has_global_flag = yshaarj_active
         }
 	}
@@ -21,23 +18,23 @@ sha_emergence = {
 	progress = {
 		modifier = {
 			factor = 1
-			total_development = 300
+            war_exhaustion = 2
 		}
 		modifier = {
 			factor = 1
-			total_development = 400
+            war_exhaustion = 4
 		}
         modifier = {
 			factor = 1
-			total_development = 500
+            war_exhaustion = 6
 		}
         modifier = {
 			factor = 1
-			total_development = 750
+            war_exhaustion = 8
 		}
         modifier = {
 			factor = 1
-			total_development = 1000
+            war_exhaustion = 10
 		}
 	}
 	
@@ -52,7 +49,7 @@ sha_emergence = {
                 flag = sha_emergence
                 days = 9125
             }
-            # End after 10 years if no reform center remains
+            # End after 10 years if no province is Sha
             AND = {
                 had_global_flag = {
                     flag = sha_emergence
@@ -60,7 +57,7 @@ sha_emergence = {
                 }
                 NOT = {
                     continent_pandaria = {
-                        is_reformation_center = yes
+                        religion = sha
                     }
                 }
             }
