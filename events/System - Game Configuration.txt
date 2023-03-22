@@ -30,6 +30,13 @@ country_event = {
         country_event = { id = wwu_game_configuration.4 }
 	}
     
+    # AI Boost Configuration
+    option = {
+		name = wwu_game_configuration.1.option.ai_boost
+		
+        country_event = { id = wwu_game_configuration.5 }
+	}
+    
     # Finalize Configuration
     option = {
 		name = wwu_game_configuration.1.option.finalize
@@ -850,6 +857,53 @@ country_event = {
 	}
 }
 
+# AI Boost Configuration
+country_event = {
+	id = wwu_game_configuration.5
+	title = wwu_game_configuration.5.title
+	desc = wwu_game_configuration.5.desc
+	picture = MAGIC_TOME_eventPicture
+    
+	is_triggered_only = yes
+
+    # Factions
+    option = {
+		name = wwu_game_configuration.5.option.scourge_boost.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_ai_scourge_boost }
+        }
+        
+        custom_tooltip = SCOURGE_BOOST_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_ai_scourge_boost
+            country_event = { id = wwu_game_configuration.23 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.5.option.scourge_boost.off
+		
+        trigger = {
+            has_global_flag = enabled_ai_scourge_boost
+        }
+        
+        custom_tooltip = SCOURGE_BOOST_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_ai_scourge_boost
+            country_event = { id = wwu_game_configuration.23 }
+        }
+	}
+    
+    # Exit
+    option = {
+		name = wwu_game_configuration.2.option.exit
+		
+        country_event = { id = wwu_game_configuration.1 }
+	}
+}
+
 # Loop event - Features
 country_event = {
 	id = wwu_game_configuration.20
@@ -901,6 +955,23 @@ country_event = {
 	}
 }
 
+# Loop event - AI Boost
+country_event = {
+	id = wwu_game_configuration.23
+	title = wwu_game_configuration.23.title
+	desc = wwu_game_configuration.23.desc
+	picture = MAGIC_TOME_eventPicture
+    
+    hidden = yes
+	is_triggered_only = yes
+
+    option = {
+		name = wwu_game_configuration.23.option.a
+		
+        country_event = { id = wwu_game_configuration.5 }
+	}
+}
+
 
 # Defaults
 country_event = {
@@ -948,6 +1019,9 @@ country_event = {
         set_global_flag = enable_content_dragon_isles
         set_global_flag = enable_content_elemental_realms
         set_global_flag = enable_content_argus
+        
+        # AI Boost
+        # set_global_flag = enabled_ai_scourge_boost
 	}
 }
 
