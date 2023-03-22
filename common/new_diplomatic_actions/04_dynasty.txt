@@ -329,3 +329,74 @@ establish_diplomatic_links = {
 	}
 }
 
+#---------------------------------------
+# Revoke Diplomatic Links
+#---------------------------------------
+revoke_diplomatic_links = {
+	category = dynasty
+	
+	alert_index = 40
+	alert_tooltip = revoke_diplomatic_links_tooltip
+	require_acceptance = no
+    
+	is_visible = { 
+        OR = {
+            FROM = { 
+                has_opinion_modifier = {
+                    who = ROOT
+                    modifier = diplomatic_links
+                }
+            }
+            has_opinion_modifier = {
+                who = FROM
+                modifier = diplomatic_links
+            }
+        }
+	}
+	is_allowed = {
+        OR = {
+            FROM = { 
+                has_opinion_modifier = {
+                    who = ROOT
+                    modifier = diplomatic_links
+                }
+            }
+            has_opinion_modifier = {
+                who = FROM
+                modifier = diplomatic_links
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - establish_diplomatic_links - accepted"
+            }
+        }
+        
+        remove_opinion = {
+            who = FROM
+            modifier = diplomatic_links
+        }
+        FROM = {
+            remove_opinion = {
+                who = ROOT
+                modifier = diplomatic_links
+            }
+        }
+	}
+	on_decline = { }
+	
+	ai_acceptance = { }
+
+	ai_will_do = {  
+        NOT = {
+            has_opinion = {
+                who = FROM
+                value = 0
+            }
+        }
+	}
+}
+
