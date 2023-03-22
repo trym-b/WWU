@@ -239,7 +239,7 @@ NDiplomacy = {
 	SLANDER_MERCHANTS_DURATION = 60,
 
 	AE_OTHER_CONTINENT = 10,
-    --- WWU: 
+    --- WWU: obsolete
 	AE_SAME_CULTURE = 0.0,
     --- WWU: culture should not tweak AE as culture is more varied in WWU
 	AE_SAME_CULTURE_GROUP = 0.0,

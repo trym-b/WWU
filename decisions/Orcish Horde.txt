@@ -34,4 +34,230 @@ country_decisions = {
 			factor = 0
 		}
 	}
+    
+    # Allow a player orc nation to form the Orcish Horde through force
+    form_the_orcish_horde = {
+        potential = {
+			ai = no
+            
+            NOT = { exists = U03 }
+            
+            primary_culture = culture_orc
+            
+            capital_scope = {
+                continent = continent_draenor
+            }
+		}
+		allow =  {
+            NOT = { exists = U03 }
+            
+            # Shadowmoon
+            if = {
+                limit = {
+                    NOT = { tag = A43 }
+                }
+                OR = {
+                    NOT = { exists = A34 }
+                    A34 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Warsong
+            if = {
+                limit = {
+                    NOT = { tag = A35 }
+                }
+                OR = {
+                    NOT = { exists = A35 }
+                    A35 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Shattered Hand
+            if = {
+                limit = {
+                    NOT = { tag = A36 }
+                }
+                OR = {
+                    NOT = { exists = A36 }
+                    A36 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Thunderlord
+            if = {
+                limit = {
+                    NOT = { tag = A37 }
+                }
+                OR = {
+                    NOT = { exists = A37 }
+                    A37 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Laughing Skull
+            if = {
+                limit = {
+                    NOT = { tag = A38 }
+                }
+                OR = {
+                    NOT = { exists = A38 }
+                    A38 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Bonechewer
+            if = {
+                limit = {
+                    NOT = { tag = A39 }
+                }
+                OR = {
+                    NOT = { exists = A39 }
+                    A39 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Bleeding Hollow
+            if = {
+                limit = {
+                    NOT = { tag = A40 }
+                }
+                OR = {
+                    NOT = { exists = A40 }
+                    A40 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Blackrock
+            if = {
+                limit = {
+                    NOT = { tag = A41 }
+                }
+                OR = {
+                    NOT = { exists = A41 }
+                    A41 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Burning Blade
+            if = {
+                limit = {
+                    NOT = { tag = A44 }
+                }
+                OR = {
+                    NOT = { exists = A44 }
+                    A44 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Dragonmaw
+            if = {
+                limit = {
+                    NOT = { tag = A45 }
+                }
+                OR = {
+                    NOT = { exists = A45 }
+                    A45 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Frostwolf
+            if = {
+                limit = {
+                    NOT = { tag = A46 }
+                }
+                OR = {
+                    NOT = { exists = A46 }
+                    A46 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # MokNathal
+            if = {
+                limit = {
+                    NOT = { tag = A47 }
+                }
+                OR = {
+                    NOT = { exists = A47 }
+                    A47 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+            
+            # Twilights Hammer
+            if = {
+                limit = {
+                    NOT = { tag = A43 }
+                }
+                OR = {
+                    NOT = { exists = A43 }
+                    A43 = {
+                        is_subject_of = ROOT
+                    }
+                }
+            }
+		}
+	  	effect = {
+			change_tag = U03
+            
+            every_subject_country = {
+                limit = {
+                    OR = {
+                        tag = A34
+                        tag = A35
+                        tag = A36
+                        tag = A37
+                        tag = A38
+                        tag = A39
+                        tag = A40
+                        tag = A41
+                        tag = A44
+                        tag = A45
+                        tag = A46
+                        tag = A47
+                        tag = A43
+                    }
+                }
+                
+                ROOT = {
+                    inherit = PREV
+                }
+            }
+            
+            set_head_of_faction = {
+                faction = old_horde
+            }
+            
+            hidden_effect = { 
+                set_country_flag = orcish_horde_primary_nation 
+                country_event = { id = wwu_country_switch.2 }
+            }
+		}
+		ai_will_do = {
+			factor = 0
+		}
+    }
 }
