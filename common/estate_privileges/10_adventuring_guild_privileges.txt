@@ -28,7 +28,7 @@ estate_adventuring_guild_advancement_of_adventurers = {
 	max_absolutism = -5
 	loyalty = 0.05
 	land_share = 5
-	influence = 0.05
+	influence = 0.1
     
 	can_select = {
 		has_estate = estate_nobility
@@ -145,7 +145,7 @@ estate_adventuring_guild_astute_recruitment = {
     
     # Costs
     max_absolutism = -5
-	land_share = 5
+	land_share = 0
 	loyalty = 0.05
 	influence = 0.05
     
@@ -177,7 +177,7 @@ estate_adventuring_guild_encourage_looting = {
 	on_granted = {
 	}
 	penalties = {
-        global_unrest = 1
+        harsh_treatment_cost = 0.25
 	}
 	benefits = {
 		loot_amount = 1.0
@@ -190,9 +190,9 @@ estate_adventuring_guild_encourage_looting = {
 estate_adventuring_guild_adventurers_in_the_army = {
 	icon = privilege_crown
     
-	max_absolutism = -10
-	influence = 0.2
-	loyalty = 0.05
+	max_absolutism = -5
+	influence = 0.1
+	loyalty = 0.1
     
 	can_select = {
 		army_tradition = 30
@@ -222,7 +222,7 @@ estate_adventuring_guild_adventurers_in_the_army = {
         }
     }
 	penalties = {
-		army_tradition = -1
+		army_tradition = -0.5
 	}
 	benefits = {
 		has_banners = yes
@@ -271,7 +271,7 @@ estate_adventuring_guild_generous_quest_rewards = {
 	max_absolutism = -5
 	loyalty = 0.1
 	influence = 0.1
-	land_share = 5
+	land_share = 0
     
 	can_select = {
 	}
@@ -279,7 +279,7 @@ estate_adventuring_guild_generous_quest_rewards = {
 		custom_tooltip = BOOST_ADVENTURER_SUCCESS_PRIVILEGE_TT
 	}
 	penalties = {
-		global_tax_modifier = -0.1
+		global_tax_modifier = -0.05
 	}
 	benefits = {
         morale_damage_received = -0.1
@@ -304,11 +304,11 @@ estate_adventuring_guild_advisors = {
 	icon = privilege_salvage_yard
     
 	max_absolutism = -10
-	influence = 0.1
+	influence = 0.05
 	loyalty = 0.05
     
 	penalties = {
-		stability_cost_modifier = 0.25
+		stability_cost_modifier = 0.15
 	}
 	benefits = {
 		advisor_cost = -0.1
@@ -352,7 +352,7 @@ estate_adventuring_guild_sponsor_bandit_hunters = {
 	loyalty = 0.1
     
 	penalties = {
-		global_autonomy = 0.05
+		harsh_treatment_cost = 0.2
 	}
 	benefits = {
 		
@@ -372,7 +372,7 @@ estate_adventuring_guild_sponsor_orc_hunters = {
 	loyalty = 0.1
     
 	penalties = {
-		global_autonomy = 0.05
+		harsh_treatment_cost = 0.2
 	}
 	benefits = {
 		
@@ -392,7 +392,7 @@ estate_adventuring_guild_sponsor_murloc_hunters = {
 	loyalty = 0.1
     
 	penalties = {
-		global_autonomy = 0.05
+		harsh_treatment_cost = 0.2
 	}
 	benefits = {
 		
@@ -412,7 +412,7 @@ estate_adventuring_guild_sponsor_gnoll_hunters = {
 	loyalty = 0.1
     
 	penalties = {
-		global_autonomy = 0.05
+		harsh_treatment_cost = 0.2
 	}
 	benefits = {
 		
@@ -432,7 +432,7 @@ estate_adventuring_guild_sponsor_worgen_hunters = {
 	loyalty = 0.1
     
 	penalties = {
-		global_autonomy = 0.05
+		harsh_treatment_cost = 0.2
 	}
 	benefits = {
 		
@@ -452,16 +452,18 @@ estate_adventuring_guild_hunt_threats = {
     max_absolutism = -5
 	land_share = 0
 	loyalty = 0.05
-	influence = 0.1
+	influence = 0.05
     
-	cooldown_years = 5
+	cooldown_years = 1
     
 	can_select = {
 		any_owned_province = {
             has_any_type_of_local_concern = yes
         }
+        treasury = 50
 	}
 	on_granted = {
+        add_treasury = -50
 		random_owned_province = {
             limit = {
                 has_any_type_of_local_concern = yes
@@ -471,7 +473,7 @@ estate_adventuring_guild_hunt_threats = {
         }
 	}
 	penalties = {
-		global_tax_modifier = -0.1
+		global_tax_modifier = -0.05
 	}
     
 	benefits = {
