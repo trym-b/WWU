@@ -1,7 +1,7 @@
 #-------------------------------
-# Attack of Nagas on Zandalar
+# Drive out the Vilescale
 #-------------------------------
-po_destroy_nagas = {
+po_drive_out_the_vilescale = {
 	category = 6
 	power_projection = vassalized_rival 
 	power_cost_base = 1.0
@@ -24,19 +24,21 @@ po_destroy_nagas = {
 	requires_is_allowed = no
 	
 	is_visible = {
-        war_with = ZNI
+        tag = A78 # Zandalar
         FROM = {
-            has_country_flag = po_destroy_nagas
+            tag = NNI
         }
 	}
 	is_allowed = {
         war_score_against = {
-            who = ZNI
+            who = NNI
             value = 100
         }
 	}
 	effect = {
-        country_event = { id = wwu_zandalar.19 }
+        hidden_effect = {
+            set_country_flag = victory_over_vilescale
+        }
 	}
 	ai_weight = {
 		export_to_variable = {
@@ -45,4 +47,3 @@ po_destroy_nagas = {
 		}
 	}
 }
-

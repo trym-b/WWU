@@ -1,7 +1,7 @@
 #-------------------------------
-# Attack of Nagas on Nazmir
+# Drive out the Nazeshi
 #-------------------------------
-po_destroy_nagas_N = {
+po_drive_out_the_nazeshi = {
 	category = 6
 	power_projection = vassalized_rival 
 	power_cost_base = 1.0
@@ -24,19 +24,21 @@ po_destroy_nagas_N = {
 	requires_is_allowed = no
 	
 	is_visible = {
-        war_with = NNI
+        tag = A78 # Zandalar
         FROM = {
-            has_country_flag = po_destroy_nagas_N
+            tag = ZNI
         }
 	}
 	is_allowed = {
         war_score_against = {
-            who = NNI
+            who = ZNI
             value = 100
         }
 	}
 	effect = {
-        country_event = { id = wwu_zandalar.22 }
+        hidden_effect = {
+            set_country_flag = victory_over_nazeshi
+        }
 	}
 	ai_weight = {
 		export_to_variable = {

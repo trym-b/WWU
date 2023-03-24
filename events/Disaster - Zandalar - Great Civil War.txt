@@ -1,0 +1,169 @@
+namespace = wwu_zandalar_great_civil_war
+
+# Start
+country_event = {
+	id = wwu_zandalar_great_civil_war.1
+    title = "wwu_zandalar_great_civil_war.1.title"
+	desc = "wwu_zandalar_great_civil_war.1.desc"
+	picture = EAGLEHORN_BOW_eventPicture
+    
+	is_triggered_only = yes
+	
+    immediate = {
+        set_country_flag = zandalar_great_civil_war_occured
+	}
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_zandalar_great_civil_war.1.op1
+        
+        custom_tooltip = REBELS_OF_ZUL_SPAWN_TT
+        
+        hidden_effect = {
+            # Remove Council of Zanchul mechanic
+			clr_country_flag = has_council_of_zanchul
+        
+            # Spawn in Rebels of Zul based on Zul power
+            spawn_rebels_of_zul = yes
+            
+            ZUZ = {
+                define_ruler = {
+                    name = "Zul"
+                    dynasty = "the Dark Prophet"
+                    adm = 6
+                    dip = 6
+                    mil = 6
+                    age = 35
+                    claim = 100
+                }
+                define_ruler_to_general = {
+                    fire = 5
+                    shock = 5
+                    manuever = 4
+                    siege = 3
+                }
+                
+                country_event = { id = wwu_zandalar_great_civil_war.10 days = 1 }
+            }
+        }
+    }
+}
+
+# End of the Great Civil War
+country_event = {
+	id = wwu_zandalar_great_civil_war.100
+	title = wwu_zandalar_great_civil_war.100.title
+	desc = wwu_zandalar_great_civil_war.100.desc
+	picture = EAGLEHORN_BOW_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78
+        has_country_flag = zandalar_great_war_end
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_zandalar_great_civil_war.100.option.a
+        
+		if = {
+            limit = {
+                has_country_flag = zandalar_great_war_lost
+            }
+            add_prestige = -100
+            continent_zandalar = {
+                limit = {
+                    country_or_non_sovereign_subject_holds = A78
+                }
+                cede_province = ZUZ
+                add_core = ZUZ
+            }
+        }
+        
+        if = {
+            limit = {
+                has_country_flag = zandalar_great_war_neutral
+            }
+            
+            add_prestige = -25
+        }
+        
+        if = {
+            limit = {
+                has_country_flag = zandalar_great_war_won
+            }
+            
+            add_prestige = 25
+            inherit = ZUZ
+        }
+        
+        add_country_modifier = {
+            name = zandalari_great_war_after
+            duration = 7300
+        }
+        
+        clr_country_flag = zandalar_great_civil_war_occured
+	}
+}
+
+# Threat of Civil War Dissipates
+country_event = {
+	id = wwu_zandalar_great_civil_war.2
+    title = wwu_zandalar_great_civil_war.2.title
+	desc = wwu_zandalar_great_civil_war.2.desc
+	picture = ZANDALAR_12_eventPicture
+    
+    trigger = {
+        tag = A78
+		NOT = { has_country_flag = zandalar_great_war_won }
+		has_country_flag = zandalar_great_civil_war_occured
+		is_at_war = no
+    }
+	
+	mean_time_to_happen = {
+		months = 64
+	}
+    
+    option = {
+        name = wwu_zandalar_great_civil_war.2.option.a
+        
+        set_country_flag = zandalar_great_war_neutral
+		set_country_flag = zandalar_great_war_end
+    }
+}
+
+# Rebels of Zul setup
+country_event = {
+	id = wwu_zandalar_great_civil_war.10
+	title = "wwu_zandalar_great_civil_war.10.title"
+	desc = "wwu_zandalar_great_civil_war.10.desc"
+	picture = ANGRY_MOB_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    option = {
+		name = wwu_zandalar_great_civil_war.10.option.a
+        
+        discover_kul_tiras = yes
+        discover_zandalar = yes
+        discover_plunder_isle = yes
+        discover_eastern_kingdoms = yes
+        discover_pandaria = yes
+        discover_nazjatar = yes
+        
+        declare_war_with_cb = {
+            who = A78
+            casus_belli = cb_zandalari_great_war
+        }
+        
+        set_capital = 2470
+    }
+}

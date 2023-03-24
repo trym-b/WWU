@@ -1,0 +1,324 @@
+namespace = wwu_zandalar_pirate_invasion
+
+# Port of Zem'lan
+country_event = {
+	id = wwu_zandalar_pirate_invasion.1
+    title = wwu_zandalar_pirate_invasion.1.title
+	desc = wwu_zandalar_pirate_invasion.1.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	trigger = {
+        tag = A78 # Zandalar
+        NOT = { has_global_flag = zemlan_invasion }
+        
+        OR = {
+            # Port of Zem'lan
+            1114 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Zem'lan Isles
+            2759 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Arid Basin
+            2632 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Crescent Shore
+            1232 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+        }
+	}
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = zemlan_invasion
+         
+            # Port of Zem'lan
+            if = {
+                limit = {
+                    1114 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                1114 = {
+                    cede_province = TSP
+                    add_core = TSP
+                }
+            }
+            # Zem'lan Isles
+            if = {
+                limit = {
+                    2759 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2759 = {
+                    cede_province = TSP
+                    add_core = TSP
+                }
+            }
+            # Arid Basin
+            if = {
+                limit = {
+                    2632 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2632 = {
+                    cede_province = TSP
+                    add_core = TSP
+                }
+            }
+            # Crescent Shore
+            if = {
+                limit = {
+                    1232 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                1232 = {
+                    cede_province = TSP
+                    add_core = TSP
+                }
+            }
+            
+            TSP = {
+                capital_scope = {
+                    spawn_infantry = {
+                        AMOUNT = 26
+                        TAG = TSP
+                    }
+                    spawn_cavalry = {
+                        AMOUNT = 4
+                        TAG = TSP
+                    }
+                    spawn_artillery = {
+                        AMOUNT = 5
+                        TAG = TSP
+                    }
+                }
+                
+                add_country_modifier = {
+                    name = skeleton_troll_invasion
+                    duration = -1
+                }
+                
+                define_ruler = {
+                    name = "Zem'lan"
+                    dynasty = "the Undying"
+                    adm = 4
+                    dip = 4
+                    mil = 4
+                    age = 55
+                    claim = 95
+                }
+                set_ruler_flag = is_immortal
+                
+                define_general = {
+                    name = "Pirate-King Zem'lan"
+                    shock = 5
+                    fire = 5
+                    manuever = 4
+                    siege = 2
+                }
+                
+                add_treasury = 3000
+                add_manpower = 50
+                add_prestige = 200
+            }
+            
+            continent_zandalar = {
+                discover_country = TSP
+            }
+            continent_pandaria = {
+                discover_country = TSP
+            }
+            region_zandalar_seas = {
+                discover_country = TSP
+            }
+            region_pandaria_seas = {
+                discover_country = TSP
+            }
+            region_paradise_seas = {
+                discover_country = TSP
+            }
+            region_paradise_isles = {
+                discover_country = TSP
+            }
+        }
+    }
+            
+    # Let us finish their service!
+    option = {
+        name = wwu_zandalar_pirate_invasion.1.option.a
+        
+        custom_tooltip = zandalari_zemlan_invasion_tt
+        
+        TSP = {
+            declare_war_with_cb = {
+                who = ROOT
+                casus_belli = cb_skeleton_troll_pirate
+            }
+        }
+        
+        ai_chance = { factor = 75 }
+    }
+
+    # Let's join the Zem'lan crew!
+    option = {
+        name = wwu_zandalar_pirate_invasion.1.option.b
+        
+        custom_tooltip = zandalari_event_zemlan_play_tt
+        
+        # Port of Zem'lan
+        1114 = {
+            change_trade_goods = gemstones
+            
+            add_permanent_province_modifier = {
+                name = troll_skeleton_pirate
+                duration = -1
+                desc = troll_skeleton_pirate_desc
+            }
+        }
+        
+        # Zem'lan Isles
+        2759 = {
+            change_province_name = "Golden Isle"
+            rename_capital = "Golden Isle"
+            change_trade_goods = gold
+        }
+        
+        switch_tag = TSP
+
+        ai_chance = { factor = 0 }
+    }
+    
+    option = {
+        name = wwu_zandalar_pirate_invasion.1.option.c
+        
+        custom_tooltip = zandalari_zemlan_ignore_tt
+        
+        add_prestige = -5
+        
+        ai_chance = { factor = 25 }
+    }
+}
+
+# Port of Zem'lan has been cleared
+country_event = {
+	id = wwu_zandalar_pirate_invasion.2
+    title = wwu_zandalar_pirate_invasion.2.title
+	desc = wwu_zandalar_pirate_invasion.2.desc
+	picture = ZANDALAR_10_eventPicture
+    
+    fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = victory_over_zemlan
+    }
+        
+    mean_time_to_happen = { 
+        days = 1
+    }
+        
+    option = {
+        name = wwu_zandalar_pirate_invasion.2.option.a
+        
+        custom_tooltip = zandalari_zemlan_invasion_crushed_tt
+        
+        TSP = {
+            every_owned_province = {
+                cede_province = ROOT
+            }
+        }
+        
+        add_treasury = 500
+        add_prestige = 10
+        add_legitimacy = 10
+        
+        # Port of Zem'lan
+        1114 = {
+            change_trade_goods = gemstones 
+        }
+        
+        if = {
+            limit = {
+                tag = A78
+                has_country_flag = has_council_of_zanchul
+            }
+            decrease_zul_power_by_10 = yes
+        }
+    }
+}
+
+# Humiliated by the Pirate-king
+country_event = {
+	id = wwu_zandalar_pirate_invasion.3
+    title = wwu_zandalar_pirate_invasion.3.title
+	desc = wwu_zandalar_pirate_invasion.3.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = humilated_by_zemlan
+	}
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+
+    option = {
+        name = wwu_zandalar_pirate_invasion.3.option.a
+        
+        custom_tooltip = zandalari_zemlan_ignore_tt
+
+        add_prestige = -5
+        
+        if = {
+            limit = {
+                tag = A78
+                has_country_flag = has_council_of_zanchul
+            }
+            
+            add_prestige = -5
+            increase_zul_power_by_5 = yes
+        }
+    }
+}

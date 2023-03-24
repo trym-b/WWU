@@ -1,0 +1,206 @@
+namespace = wwu_zemlan_pirates
+
+# Zem'lan Pirates - Reduce Ruler Stats
+country_event = {
+	id = wwu_zemlan_pirates.1
+    title = wwu_zemlan_pirates.1.title
+	desc = wwu_zemlan_pirates.1.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	trigger = {
+        tag = TSP
+        ai = no
+        
+        # Port of Zem'lan
+        1114 = {
+            owned_by = TSP
+            has_province_modifier = troll_skeleton_pirate
+        }
+        
+        OR = {
+            adm = 5
+            dip = 5
+            mil = 5
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zemlan_pirates.1.option.a
+
+        if = {
+            limit = {
+                adm = 7
+            }
+            change_adm = -3
+        }
+        if = {
+            limit = {
+                adm = 6
+            }
+            change_adm = -2
+        }
+        if = {
+            limit = {
+                adm = 5
+            }
+            change_adm = -1
+        }
+        
+        if = {
+            limit = {
+                dip = 7
+            }
+            change_dip = -3
+        }
+        if = {
+            limit = {
+                dip = 6
+            }
+            change_dip = -2
+        }
+        if = {
+            limit = {
+                dip = 5
+            }
+            change_dip = -1
+        }
+        
+        if = {
+            limit = {
+                mil = 7
+            }
+            change_mil = -3
+        }
+        if = {
+            limit = {
+                mil = 6
+            }
+            change_mil = -2
+        }
+        if = {
+            limit = {
+                mil = 5
+            }
+            change_mil = -1
+        }
+    }
+}
+
+# Zem'lan Revenants - Handle Ruler State - Improved Curse
+country_event = {
+	id = wwu_zemlan_pirates.2
+    title = wwu_zemlan_pirates.2.title
+	desc = wwu_zemlan_pirates.2.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	hidden = yes
+    
+	trigger = {
+        tag = TSP
+            
+        # Port of Zem'lan
+        1114 = {
+            owned_by = TSP
+            has_province_modifier = troll_skeleton_pirate_better
+        }
+        
+        OR = {
+            adm = 7
+            dip = 7
+            mil = 7
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = "wwu_zandalar.28.op1"
+
+        if = {
+            limit = {
+                adm = 7
+            }
+            change_adm = -1
+        }
+        
+        if = {
+            limit = {
+                dip = 7
+            }
+            change_dip = -1
+        }
+        
+        if = {
+            limit = {
+                mil = 7
+            }
+            change_mil = -1
+        }
+    }
+}
+
+# No access to the curse!
+country_event = {
+	id = wwu_zemlan_pirates.3
+    title = wwu_zemlan_pirates.3.title
+	desc = wwu_zemlan_pirates.3.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	trigger = {
+        tag = TSP
+        has_ruler_flag = is_immortal
+        
+        # Port of Zem'lan
+        1114 = {
+            NOT = { owned_by = TSP }
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zemlan_pirates.3.option.a
+        
+        kill_ruler = yes
+    }
+}
+
+# The Undying Zem'lan Curse
+country_event = {
+	id = wwu_zemlan_pirates.4
+    title = wwu_zemlan_pirates.4.title
+	desc = wwu_zemlan_pirates.4.desc
+	picture = ZANDALAR_10_eventPicture
+    
+	trigger = {
+        tag = TSP
+        NOT = { has_ruler_flag = is_immortal }
+        
+        # Port of Zem'lan
+        1114 = {
+            owned_by = TSP
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zemlan_pirates.4.option.a
+        
+        custom_tooltip = zemlan_ruler_is_immortal_tt
+        
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+        }
+    }
+}

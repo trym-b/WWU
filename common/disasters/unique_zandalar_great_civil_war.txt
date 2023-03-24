@@ -1,0 +1,132 @@
+zandalar_great_war = {
+	potential = {
+		has_country_flag = prophet_zul_present
+        NOT = { has_country_flag = civil_war_threat_ended }
+		NOT = { has_country_flag = zandalar_great_war_end }
+		tag = A78 # Zandalar
+	}
+	
+	can_start = {
+        custom_trigger_tooltip = {
+            tooltip = zandalar_great_civil_war_years_passed_tt
+            
+            # Had Council for 100 years
+            had_country_flag = {
+                flag = display_council_of_zanchul_menu
+                days = 36500
+            }
+        }
+        OR = {
+            AND = {
+                check_variable = {
+                    which = zul_power 
+                    value = 60
+                }
+                check_variable = {
+                    which = zul_influence 
+                    value = 100
+                }
+            }
+            AND = {
+                check_variable = {
+                    which = zul_power 
+                    value = 80
+                }
+                check_variable = {
+                    which = zul_influence 
+                    value = 80
+                }
+            }
+            AND = {
+                check_variable = {
+                    which = zul_power 
+                    value = 100
+                }
+                check_variable = {
+                    which = zul_influence 
+                    value = 60
+                }
+            }
+		}
+	}
+	
+	can_stop = {
+        stability = 3
+		legitimacy = 95
+		NOT = { unrest = -2 }
+        
+		NOT = { 
+            check_variable = {
+                which = zul_influence 
+                value = 50
+            }
+        }
+	}
+	
+	progress = {
+		modifier = {
+			factor = -0.5
+			NOT = {
+                check_variable = {
+                    which = zul_influence 
+                    value = 60
+                }
+            }
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+                which = zul_influence 
+                value = 60
+            }
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+                which = zul_influence 
+                value = 70
+            }
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+                which = zul_influence 
+                value = 80
+            }
+		}
+		modifier = {
+			factor = 0.5
+			check_variable = {
+                which = zul_influence 
+                value = 90
+            }
+		}
+		modifier = {
+			factor = 1
+			check_variable = {
+                which = zul_influence 
+                value = 100
+            }
+		}
+	}
+	
+	can_end = {
+		has_country_flag = zandalar_great_war_end
+	}
+
+	modifier = {
+		legitimacy = -2
+		global_unrest = 5
+	}
+	
+	on_start = wwu_zandalar_great_civil_war.1
+	on_end = wwu_zandalar_great_civil_war.100
+	
+	on_monthly = {
+		events = {
+            wwu_zandalar_great_civil_war.2
+		}
+		random_events = {
+		}
+	}
+}

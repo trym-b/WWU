@@ -1,145 +1,7 @@
-oondasta_grow = {
-    custom_tooltip = oondasta_grow_little
+# Council of Zanchul: Power
+increase_zul_power_by_5 = {
+    custom_tooltip = var_zul_power_increase_5_tt
     
-    hidden_effect = {
-        change_variable = {
-            which = oondasta_eggs
-            value = 1
-        }
-        
-        
-        if = {
-            limit = {
-                check_variable = {
-                    which = oondasta_eggs
-                    value = 10
-                }
-            }
-            set_variable = {
-                which = oondasta_eggs
-                value = 10
-            }
-        }
-    }
-}
-
-oondasta_big = {
-    custom_tooltip = oondasta_grow_big
-    
-    hidden_effect = {
-        change_variable = {
-            which = oondasta_eggs
-            value = 2
-        }
-        
-        
-        if = {
-            limit = {
-                check_variable = {
-                    which = oondasta_eggs
-                    value = 10
-                }
-            }
-            set_variable = {
-                which = oondasta_eggs
-                value = 10
-            }
-        }
-    }
-}
-
-oondasta_mega = {
-    custom_tooltip = oondasta_grow_mega
-    
-    hidden_effect = {
-        change_variable = {
-            which = oondasta_eggs
-            value = 3
-        }
-        
-        
-        if = {
-            limit = {
-                check_variable = {
-                    which = oondasta_eggs
-                    value = 10
-                }
-            }
-            set_variable = {
-                which = oondasta_eggs
-                value = 10
-            }
-        }
-    }
-}
-
-oondasta_back = {
-    custom_tooltip = oondasta_back
-    
-    hidden_effect = {
-        change_variable = {
-            which = oondasta_eggs
-            value = -2
-        }
-        
-        
-        if = {
-            limit = {
-                check_variable = {
-                    which = oondasta_eggs
-                    value = 10
-                }
-            }
-            set_variable = {
-                which = oondasta_eggs
-                value = 10
-            }
-        }
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = oondasta_eggs
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = oondasta_eggs
-                value = 0
-            }
-        }
-    }
-}
-
-zul_power_5_a = {
-    if = {
-        limit = {
-            NOT = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }
-            }
-        }
-        custom_tooltip = zul_power_5_a
-    }
-    if = {
-        limit = {
-            check_variable = {
-                which = zul_power
-                value = 100
-            }
-        }
-        custom_tooltip = zul_influence_5_a
-        
-        hidden_effect = {
-            change_variable = {
-                which = zul_influence
-                value = 5
-            }
-        }
-    }
     hidden_effect = {
         change_variable = {
             which = zul_power
@@ -160,36 +22,9 @@ zul_power_5_a = {
         }
     }
 }
-
-zul_power_10_a = {
-    if = {
-        limit = {
-            NOT = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }
-            }
-        }
-        custom_tooltip = zul_power_10_a
-    }
-    if = {
-        limit = {
-            check_variable = {
-                which = zul_power
-                value = 100
-            }
-        }
-        
-        custom_tooltip = zul_influence_10_a
-        
-        hidden_effect = {
-            change_variable = {
-                which = zul_influence
-                value = 10
-            }
-        }
-    }
+increase_zul_power_by_10 = {
+    custom_tooltip = var_zul_power_increase_10_tt
+    
     hidden_effect = {
         change_variable = {
             which = zul_power
@@ -210,42 +45,15 @@ zul_power_10_a = {
         }
     }
 }
-
-zul_power_20_a = {
-    if = {
-        limit = {
-            NOT = {
-                check_variable = {
-                    which = zul_power
-                    value = 100
-                }
-            }
-        }
-        custom_tooltip = zul_power_20_a
-    }
-    if = {
-        limit = {
-            check_variable = {
-                which = zul_power
-                value = 100
-            }
-        }
-        
-        custom_tooltip = zul_influence_20_a
-        
-        hidden_effect = {
-            change_variable = {
-                which = zul_influence
-                value = 20
-            }
-        }
-    }
+increase_zul_power_by_15 = {
+    custom_tooltip = var_zul_power_increase_15_tt
     
     hidden_effect = {
         change_variable = {
             which = zul_power
-            value = 20
+            value = 15
         }
+        
         if = {
             limit = {
                 check_variable = {
@@ -260,20 +68,68 @@ zul_power_20_a = {
         }
     }
 }
-
-zul_power_5_b = {
-    custom_tooltip = zul_power_5_b
+decrease_zul_power_by_5 = {
+    custom_tooltip = var_zul_power_decrease_5_tt
     
     hidden_effect = {
-        change_variable = {
+        subtract_variable = {
             which = zul_power
-            value = -5
+            value = 5
         }
-        
         
         if = {
             limit = {
-                NOT = { 
+                NOT = {
+                    check_variable = {
+                        which = zul_power
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = zul_power
+                value = 0
+            }
+        }
+    }
+}
+decrease_zul_power_by_10 = {
+    custom_tooltip = var_zul_power_decrease_10_tt
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = zul_power
+            value = 10
+        }
+        
+        if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zul_power
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = zul_power
+                value = 0
+            }
+        }
+    }
+}
+decrease_zul_power_by_15 = {
+    custom_tooltip = var_zul_power_decrease_15_tt
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = zul_power
+            value = 15
+        }
+        
+        if = {
+            limit = {
+                NOT = {
                     check_variable = {
                         which = zul_power
                         value = 0
@@ -288,72 +144,16 @@ zul_power_5_b = {
     }
 }
 
-zul_power_10_b = {
-    custom_tooltip = zul_power_10_b
+# Council of Zanchul: Influence
+increase_zul_influence_by_5 = {
+    custom_tooltip = var_zul_influence_increase_5_tt
     
-    hidden_effect = {
-        change_variable = {
-            which = zul_power
-            value = -10
-        }
-        
-        
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = zul_power
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = zul_power
-                value = 0
-            }
-        }
-    }
-}
-
-zul_power_20_b = {
-    custom_tooltip = zul_power_20_b
-    
-    hidden_effect = {
-        change_variable = {
-            which = zul_power
-            value = -20
-        }
-        
-        
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = zul_power
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = zul_power
-                value = 0
-            }
-        }
-    }
-}
-
-
-#############
-
-zul_influence_5_a = {
-    custom_tooltip = zul_influence_5_a
     hidden_effect = {
         change_variable = {
             which = zul_influence
             value = 5
         }
         
-        
         if = {
             limit = {
                 check_variable = {
@@ -368,9 +168,8 @@ zul_influence_5_a = {
         }
     }
 }
-
-zul_influence_10_a = {
-    custom_tooltip = zul_influence_10_a
+increase_zul_influence_by_10 = {
+    custom_tooltip = var_zul_influence_increase_10_tt
     
     hidden_effect = {
         change_variable = {
@@ -378,6 +177,28 @@ zul_influence_10_a = {
             value = 10
         }
         
+        if = {
+            limit = {
+                check_variable = {
+                    which = zul_influence
+                    value = 100
+                }
+            }
+            set_variable = {
+                which = zul_influence
+                value = 100
+            }
+        }
+    }
+}
+increase_zul_influence_by_15 = {
+    custom_tooltip = var_zul_influence_increase_15_tt
+    
+    hidden_effect = {
+        change_variable = {
+            which = zul_influence
+            value = 15
+        }
         
         if = {
             limit = {
@@ -393,110 +214,116 @@ zul_influence_10_a = {
         }
     }
 }
-
-zul_influence_20_a = {
-    custom_tooltip = zul_influence_20_a
+decrease_zul_influence_by_5 = {
+    custom_tooltip = var_zul_influence_decrease_5_tt
     
     hidden_effect = {
-        change_variable = {
+        subtract_variable = {
             which = zul_influence
-            value = 20
+            value = 5
         }
-        
         
         if = {
             limit = {
-                check_variable = {
-                    which = zul_influence
-                    value = 100
+                NOT = {
+                    check_variable = {
+                        which = zul_influence
+                        value = 0
+                    }
                 }
             }
             set_variable = {
                 which = zul_influence
+                value = 0
+            }
+        }
+    }
+}
+decrease_zul_influence_by_10 = {
+    custom_tooltip = var_zul_influence_decrease_10_tt
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = zul_influence
+            value = 10
+        }
+        
+        if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zul_influence
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = zul_influence
+                value = 0
+            }
+        }
+    }
+}
+decrease_zul_influence_by_15 = {
+    custom_tooltip = var_zul_influence_decrease_15_tt
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = zul_influence
+            value = 15
+        }
+        
+        if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zul_influence
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = zul_influence
+                value = 0
+            }
+        }
+    }
+}
+
+increase_zul_influence_by_5_if_power_is_at_max = {
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
                 value = 100
             }
         }
+        
+        increase_zul_influence_by_5 = yes
     }
 }
-
-zul_influence_5_b = {
-    custom_tooltip = zul_influence_5_b
-    
-    hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = -5
-        }
-        
-        
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = zul_influence
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = zul_influence
-                value = 0
+increase_zul_influence_by_10_if_power_is_at_max = {
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
             }
         }
+        
+        increase_zul_influence_by_10 = yes
     }
 }
-
-zul_influence_10_b = {
-    custom_tooltip = zul_influence_10_b
-    
-    hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = -10
-        }
-        
-        
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = zul_influence
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = zul_influence
-                value = 0
+increase_zul_influence_by_15_if_power_is_at_max = {
+    if = {
+        limit = {
+            check_variable = {
+                which = zul_power
+                value = 100
             }
         }
-    }
-}
-
-zul_influence_20_b = {
-    custom_tooltip = zul_influence_20_b
-    
-    hidden_effect = {
-        change_variable = {
-            which = zul_influence
-            value = -20
-        }
         
-        
-        if = {
-            limit = {
-                NOT = { 
-                    check_variable = {
-                        which = zul_influence
-                        value = 0
-                    }
-                }
-            }
-            set_variable = {
-                which = zul_influence
-                value = 0
-            }
-        }
+        increase_zul_influence_by_15 = yes
     }
 }
 
@@ -1117,6 +944,120 @@ cede_province_to_zul = {
         $PROVINCE_ID$ = {
             cede_province = ZUZ
             add_core = ZUZ
+        }
+    }
+}
+
+oondasta_grow = {
+    custom_tooltip = oondasta_grow_little
+    
+    hidden_effect = {
+        change_variable = {
+            which = oondasta_eggs
+            value = 1
+        }
+        
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = oondasta_eggs
+                    value = 10
+                }
+            }
+            set_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+}
+
+oondasta_big = {
+    custom_tooltip = oondasta_grow_big
+    
+    hidden_effect = {
+        change_variable = {
+            which = oondasta_eggs
+            value = 2
+        }
+        
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = oondasta_eggs
+                    value = 10
+                }
+            }
+            set_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+}
+
+oondasta_mega = {
+    custom_tooltip = oondasta_grow_mega
+    
+    hidden_effect = {
+        change_variable = {
+            which = oondasta_eggs
+            value = 3
+        }
+        
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = oondasta_eggs
+                    value = 10
+                }
+            }
+            set_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+}
+
+oondasta_back = {
+    custom_tooltip = oondasta_back
+    
+    hidden_effect = {
+        change_variable = {
+            which = oondasta_eggs
+            value = -2
+        }
+        
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = oondasta_eggs
+                    value = 10
+                }
+            }
+            set_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+        if = {
+            limit = {
+                NOT = { 
+                    check_variable = {
+                        which = oondasta_eggs
+                        value = 0
+                    }
+                }
+            }
+            set_variable = {
+                which = oondasta_eggs
+                value = 0
+            }
         }
     }
 }

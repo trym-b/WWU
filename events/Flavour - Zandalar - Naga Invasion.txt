@@ -1,0 +1,513 @@
+namespace = wwu_zandalar_naga_invasion
+
+# Nazeshi Invasion!
+country_event = {
+	id = wwu_zandalar_naga_invasion.10
+    title = wwu_zandalar_naga_invasion.10.title
+	desc = wwu_zandalar_naga_invasion.10.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+	trigger = {
+        tag = A78 # Zandalar
+        NOT = { has_global_flag = nazeshi_invasion }
+        
+        OR = {
+            # Backwater Beach
+            2745 = {
+                OR =  {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Seeker's Outpost
+            2744 = {
+                OR =  {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Dreadpearl Shallows
+            1133 = {
+                OR =  {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Covescale Rise
+            2616 = {
+                OR =  {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+        }
+	}
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = nazeshi_invasion
+
+            # Backwater Beach
+            if = {
+                limit = {
+                    2745 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2745 = {
+                    cede_province = ZNI
+                    add_core = ZNI
+                }
+            }
+            # Seeker's Outpost
+            if = {
+                limit = {
+                    2744 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2744 = {
+                    cede_province = ZNI
+                    add_core = ZNI
+                }
+            }
+            # Dreadpearl Shallows
+            if = {
+                limit = {
+                    1133 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                1133 = {
+                    cede_province = ZNI
+                    add_core = ZNI
+                }
+            }
+            # Covescale Rise
+            if = {
+                limit = {
+                    2616 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2616 = {
+                    cede_province = ZNI
+                    add_core = ZNI
+                }
+            }
+            
+            ZNI = {
+                capital_scope = {
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                    infantry = ZNI
+                }
+                
+                add_country_modifier = {
+                    name = zandalar_naga_invasion
+                    duration = -1
+                }
+                
+                create_general = { tradition = 70 }
+                
+                add_treasury = 2000
+                add_manpower = 30
+            }
+            
+            continent_zandalar = {
+                discover_country = ZNI
+            }
+        }
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.10.option.a
+        
+        custom_tooltip = zandalari_nazeshi_invasion_tt
+        
+        ZNI = {
+            declare_war_with_cb = {
+                who = ROOT
+                casus_belli = cb_naga_invasion_on_zandalar
+            }
+        }
+    }
+
+    option = {
+        name = wwu_zandalar_naga_invasion.10.option.b
+        
+        custom_tooltip = zandalari_nazeshi_ignore_tt
+        
+        add_prestige = -10
+        add_legitimacy = -10
+        
+        if = {
+            limit = {   
+                tag = A78 # Zandalar
+                has_country_flag = has_council_of_zanchul
+            }
+            increase_zul_power_by_5 = yes
+        }
+    }
+}
+
+# Nazeshi Driven Out!
+country_event = {
+	id = wwu_zandalar_naga_invasion.11
+    title = wwu_zandalar_naga_invasion.11.title
+	desc = wwu_zandalar_naga_invasion.11.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+    fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = victory_over_nazeshi
+    }
+        
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.11.option.a
+        
+        ZNI = {
+            every_owned_province = {
+                cede_province = ROOT
+            }
+        }
+        
+        custom_tooltip = zandalari_nazeshi_invasion_crushed_tt
+        
+        add_treasury = 200
+        add_prestige = 5
+        add_legitimacy = 5
+        
+        if = {
+            limit = {
+                tag = A78 # Zandalar
+                has_country_flag = has_council_of_zanchul
+            }
+            decrease_zul_power_by_5 = yes
+        }
+    }
+}
+
+# Defeated by the Nazeshi
+country_event = {
+	id = wwu_zandalar_naga_invasion.12
+    title = wwu_zandalar_naga_invasion.12.title
+	desc = wwu_zandalar_naga_invasion.12.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+    fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = humilated_by_nazeshi
+	}
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.12.option.a
+        
+        custom_tooltip = zandalari_nazeshi_ignore_tt
+
+        add_prestige = -10
+        add_legitimacy = -10
+        
+        if = {
+            limit = {
+                tag = A78 # Zandalar
+                has_country_flag = has_council_of_zanchul
+            }
+            increase_zul_power_by_5 = yes
+        }
+    }
+}
+
+# Vilescale Naga invasion!
+country_event = {
+	id = wwu_zandalar_naga_invasion.20
+    title = wwu_zandalar_naga_invasion.20.title
+	desc = wwu_zandalar_naga_invasion.20.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+	trigger = {
+        tag = A78 # Zandalar
+        NOT = { has_global_flag = vilescale_invasion }
+        
+        OR = {
+            # Nazwatha
+            1129 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Naz'agal
+            2713 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+            # Sundered Span
+            2714 = {
+                OR = {
+                    colonysize = 20
+                    owned_by = ROOT
+                }
+            }
+        }
+	}
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = vilescale_invasion
+            
+            # Nazwatha
+            if = {
+                limit = {
+                    1129 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                1129 = {
+                    cede_province = NNI
+                    add_core = NNI
+                }
+            }
+            # Naz'agal
+            if = {
+                limit = {
+                    2713 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2713 = {
+                    cede_province = NNI
+                    add_core = NNI
+                }
+            }
+            # Sundered Span
+            if = {
+                limit = {
+                    2714 = {
+                        OR =  {
+                            is_empty = yes
+                            colonysize = 20
+                            owned_by = ROOT
+                        }
+                    }
+                }
+                2714 = {
+                    cede_province = NNI
+                    add_core = NNI
+                }
+            }
+
+            NNI = {
+                capital_scope = {
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                    infantry = NNI
+                }
+            }
+            
+            NNI = {
+                add_country_modifier = {
+                    name = zandalar_naga_invasion
+                    duration = -1
+                }
+                
+                create_general = { tradition = 70 }
+                add_treasury = 2000
+                add_manpower = 30
+            }
+            
+            continent_zandalar = {
+                discover_country = NNI
+            }
+        }
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.20.option.a
+        
+        custom_tooltip = zandalari_vilescale_invasion_tt
+        
+        NNI = {
+            declare_war_with_cb = {
+                who = ROOT
+                casus_belli = cb_naga_invasion_on_nazmir
+            }
+        }
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.20.option.b
+        
+        custom_tooltip = zandalari_vilescale_ignore_tt
+        
+        add_prestige = -10
+        add_legitimacy = -10
+        
+        if = {
+            limit = {
+                tag = A78
+                has_country_flag = has_council_of_zanchul
+            }
+            increase_zul_power_by_5 = yes
+        }
+    }
+}
+
+# Vilescale Driven Out!
+country_event = {
+	id = wwu_zandalar_naga_invasion.21
+    title = wwu_zandalar_naga_invasion.21.title
+	desc = wwu_zandalar_naga_invasion.21.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+    fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = victory_over_vilescale
+    }
+        
+    option = {
+        name = wwu_zandalar_naga_invasion.21.option.a
+        
+        custom_tooltip = zandalari_vilescale_invasion_crushed_tt
+        
+        NNI = {
+            every_owned_province = {
+                cede_province = ROOT
+            }
+        }
+        
+        add_treasury = 200
+        add_prestige = 5
+        add_legitimacy = 5
+        
+        if = {
+            limit = {
+                tag = A78
+                has_country_flag = has_council_of_zanchul
+            }
+            
+            decrease_zul_power_by_5 = yes
+        }
+    }
+}
+
+# Defeated by the Vilescale
+country_event = {
+	id = wwu_zandalar_naga_invasion.22
+    title = wwu_zandalar_naga_invasion.22.title
+	desc = wwu_zandalar_naga_invasion.22.desc
+	picture = HUNGRY_NAGA_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        has_country_flag = humilated_by_vilescale
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = wwu_zandalar_naga_invasion.22.option.a
+        
+        custom_tooltip = zandalari_vilescale_ignore_tt
+
+        add_prestige = -10
+        add_legitimacy = -10
+        
+        if = {
+            limit = {
+                tag = A78
+                has_country_flag = has_council_of_zanchul
+            }
+            
+            increase_zul_power_by_5 = yes
+        }
+    }
+}
+
+

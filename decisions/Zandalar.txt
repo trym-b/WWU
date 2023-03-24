@@ -1,12 +1,50 @@
 country_decisions = {
-    # End the Great Zandalar War
+    # Council of Zanchul
+	call_council_of_zanchul = {
+        major = yes
+        
+        potential = {
+			NOT = { has_country_flag = zandalar_great_war_start }
+			has_country_flag = display_council_of_zanchul_menu
+        }
+        
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = council_of_zanchul_is_loyal_tt
+                NOT = {	
+                    check_variable = {
+                        which = zul_influence
+                        value = 80
+                    }
+                }
+			}
+		}
+        
+		effect = {
+			custom_tooltip = var_zul_power_tt
+			custom_tooltip = var_zul_influence_tt
+            
+            country_event = { id = wwu_council_of_zanchul.1 } # Council of Zanchul
+            
+            hidden_effect = {
+                clr_country_flag = zandalar_great_war
+            }
+		}
+        
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+    # End the Great Zandalar War - Win Button for Rebels of Zul
 	great_zandalar_war_end = {
         major = yes
         
         potential = {
-			A78 = {
-			has_country_flag = zandalar_great_war}
 			tag = ZUZ
+			A78 = {
+                has_country_flag = zandalar_great_war
+            }
         }
         
 		allow = {
@@ -22,52 +60,14 @@ country_decisions = {
 		effect = {
             white_peace = A78
 			A78 = {
-			clr_country_flag = zandalar_great_war
-			set_country_flag = zandalar_great_war_end
-			set_country_flag = zandalar_great_war_loose
+                clr_country_flag = zandalar_great_war
+                set_country_flag = zandalar_great_war_lost
+                set_country_flag = zandalar_great_war_end
 			}
-
 		}
         
 		ai_will_do = {
 			factor = 1
-		}
-	}
-
-    # Council of Zanchul
-	call_council_of_zanchul = {
-        major = yes
-        
-        potential = {
-			NOT = {has_country_flag = zandalar_great_war_start}
-			has_country_flag = council_of_zanchul_already
-			NOT = { has_country_flag = council_of_zanchul_already_open }
-        }
-        
-		allow = {
-			custom_trigger_tooltip = {
-				tooltip = zandalari_decision_council_of_zanchul_a
-				has_country_flag = council_of_zanchul_already
-                
-                NOT = {	
-                    check_variable = {
-                        which = zul_influence
-                        value = 80
-                    }
-                }
-			}
-		}
-        
-		effect = {
-            country_event = { id = wwu_zandalar.16 } # Council of Zanchul
-            
-			custom_tooltip = zandalari_decision_council_of_zanchul_b
-			clr_country_flag = zandalar_great_war
-			set_country_flag = council_of_zanchul_already_open
-		}
-        
-		ai_will_do = {
-			factor = 0
 		}
 	}
     

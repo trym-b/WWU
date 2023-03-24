@@ -1,0 +1,2879 @@
+namespace = wwu_zandalar
+
+# A Show of Strength
+country_event = {
+	id = wwu_zandalar.1
+	title = wwu_zandalar.1.title
+	desc = wwu_zandalar.1.desc
+	picture = ZANDALAR_1_eventPicture
+    
+	trigger = {
+		tag = A78 # Zandalar
+        
+        NOT = {
+            check_variable = {
+                which = zul_domination
+                value = 3
+            }
+        }
+		
+        # VAWSER: replaced old method with a flexible method of detection that persists beyond year 999
+        had_country_flag = {
+            flag = zandalar_show_strength_interval
+            days = 1460 # 4 years
+        }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = zandalar_show_strength_interval
+        }
+    }
+    
+	option = {
+		name = wwu_zandalar.1.op1
+        
+		add_treasury = -100
+        add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+        
+        # Random troll country
+		random_country = {
+            limit = {
+                NOT = {
+                    tag = A78
+                }
+                culture_group = culture_group_troll
+            }
+            add_treasury = 100
+            add_adm_power = 25
+            add_dip_power = 25
+            add_mil_power = 25
+		}
+        
+		zul_domination_effect = yes
+	}
+    
+	option = {
+		name = wwu_zandalar.1.op2
+        
+        add_prestige = -5
+	}
+}
+
+# Zandalar Fleet Reform
+country_event = {
+	id = wwu_zandalar.2
+	title = wwu_zandalar.2.title
+	desc = wwu_zandalar.2.desc
+	picture = ZANDALAR_5_eventPicture
+    
+	is_triggered_only = yes
+    
+	option = {
+		name = "wwu_zandalar.2.op1"
+        
+		add_country_modifier = {
+            name = "mission_zandalar_reformone"
+            duration = -1  
+        }
+	}
+	option = {
+		name = "wwu_zandalar.2.op2"
+        
+		add_country_modifier = {
+            name = "mission_zandalar_reformtwo"
+            duration = -1  
+        }
+	}
+	option = {
+		name = "wwu_zandalar.2.op3"
+        
+		add_country_modifier = {
+            name = "mission_zandalar_reformthree"
+            duration = -1  
+        }
+	}
+}
+
+#------------------------
+# Oondasta Events
+#------------------------
+# Rise of the King of the Jungle
+country_event = {
+	id = wwu_zandalar.3
+	title = wwu_zandalar.3.title
+	desc = wwu_zandalar.3.desc
+	picture = ZANDALAR_7_eventPicture
+    
+	is_triggered_only = yes
+    
+	option = {
+		name = "wwu_zandalar.3.op1"
+        
+        custom_tooltip = z_merc_company_devilsaur_tt
+        set_country_flag = zandalari_merc_c
+	}
+    
+	option = {
+		name = "wwu_zandalar.3.op2"
+        
+        custom_tooltip = zandalari_event_oondasta_event_chain_tt
+        set_country_flag = oondasta_egg
+
+        add_country_modifier = {
+            name = "oondasta_cooldown"
+            duration = 120 
+            hidden = yes
+        }
+        
+        hidden_effect = {
+            set_variable = {
+                which = oondasta_eggs
+                value = 0
+            }
+        }
+	}
+}
+
+# Growth of Oondasta
+country_event = {
+	id = wwu_zandalar.4
+    title = "wwu_zandalar.4.title"
+	desc = "wwu_zandalar.4.desc"
+	picture = ZANDALAR_6_eventPicture
+    
+    trigger = {
+        has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
+        
+        area_isle_of_giants = {
+            type = all
+            country_or_subject_holds = ROOT
+        }
+        NOT = {
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+		months = 20
+	}
+    
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = "oondasta_cooldown"
+                duration = 180 
+                hidden = yes
+            }
+		}
+	}
+
+    option = {
+        name = "wwu_zandalar.4.op1"
+        
+        add_years_of_income = -0.5
+        oondasta_grow = yes 
+    }
+    
+    option = {
+        name = "wwu_zandalar.4.op2"
+        
+        add_yearly_manpower = -0.5
+        oondasta_grow = yes 
+    }
+    
+    option = {
+        name = "wwu_zandalar.4.op3"
+        
+        add_prestige = -5
+    }
+}
+
+# A Sudden Breakthrough in Growth
+country_event = {
+	id = wwu_zandalar.5
+    title = "wwu_zandalar.5.title"
+	desc = "wwu_zandalar.5.desc"
+	picture = ZANDALAR_6_eventPicture
+    
+    trigger = {
+        has_country_flag = oondasta_egg
+		NOT = { has_country_modifier = oondasta_cooldown }
+        
+        area_isle_of_giants = {
+            type = all
+            country_or_subject_holds = ROOT
+        }
+        
+        NOT = { 
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+            
+    mean_time_to_happen = {
+		months = 30
+	}
+    
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = "oondasta_cooldown"
+                duration = 180 
+                hidden = yes
+            }
+		}
+    }
+
+    option = {
+        name = "wwu_zandalar.5.op1"
+        
+        add_adm_power = -40
+        add_dip_power = -40
+        add_mil_power = -40
+        
+        oondasta_big = yes 
+    }
+    
+    option = {
+        name = "wwu_zandalar.5.op2"
+        
+        add_prestige = -5
+    }
+}
+
+# Fighting on the Island of Giants
+country_event = {
+	id = wwu_zandalar.6
+    title = "wwu_zandalar.6.title"
+	desc = "wwu_zandalar.6.desc"
+	picture = ZANDALAR_6_eventPicture
+    
+    trigger = {
+        has_country_flag = oondasta_egg
+        NOT = { has_country_modifier = oondasta_cooldown }
+        
+        area_isle_of_giants = {
+            type = all
+            country_or_subject_holds = ROOT
+        }
+        check_variable = {
+            which = oondasta_eggs
+            value = 2
+        }
+        NOT = { 
+            check_variable = {
+                which = oondasta_eggs
+                value = 10
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		months = 30
+	}
+    
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = "oondasta_cooldown"
+                duration = 180 
+                hidden = yes
+            }
+		}
+	}
+    
+    option = {
+        name = "wwu_zandalar.6.op1"
+        
+        random_list = {
+            75 = {
+                oondasta_mega = yes 
+            }
+            20 = {
+                oondasta_back = yes 
+            }
+            5 = {
+                add_prestige = -10
+                custom_tooltip = oondasta_dead
+                hidden_effect = {
+                    clr_country_flag = oondasta_egg
+                }
+            }
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.6.op2"
+        
+        add_prestige = -5
+    }
+}
+
+# Oondasta is ready for Armor
+country_event = {
+	id = wwu_zandalar.7
+    title = "wwu_zandalar.7.title"
+	desc = "wwu_zandalar.7.desc"
+	picture = ZANDALAR_8_eventPicture
+    
+    trigger = {
+        has_country_flag = oondasta_egg
+        NOT = { has_country_modifier = oondasta_cooldown }
+        
+        area_isle_of_giants = {
+            type = all
+            country_or_subject_holds = ROOT
+        }
+        
+        check_variable = {
+            which = oondasta_eggs
+            value = 10
+        }
+    }
+
+    mean_time_to_happen = {
+		months = 1
+	}
+    
+	immediate = {
+		hidden_effect = {
+            add_country_modifier = {
+                name = "oondasta_cooldown"
+                duration = 180 
+                hidden = yes
+            }
+            clr_country_flag = oondasta_egg
+		}
+	}
+    
+    option = {
+        name = "wwu_zandalar.7.op1"
+
+        add_mil_power = -50
+        
+        set_country_flag = zandalari_merc_ba
+        custom_tooltip = z_merc_company_oondasta_a_tt
+    }
+    
+    option = {
+        name = "wwu_zandalar.7.op2"
+
+        add_mil_power = -100
+        
+        set_country_flag = zandalari_merc_bb
+        custom_tooltip = z_merc_company_oondasta_b_tt
+    }
+    
+    option = {
+        name = "wwu_zandalar.7.op3"
+
+        add_mil_power = -150
+        
+        set_country_flag = zandalari_merc_bc
+        custom_tooltip = z_merc_company_oondasta_c_tt
+    }
+}
+
+# Space for future event
+#country_event = {
+#	id = wwu_zandalar.8
+#    title = "wwu_zandalar.8.title"
+#	desc = "wwu_zandalar.8.desc"
+#	picture = ULDIR_1_eventPicture
+#    
+#    
+#	is_triggered_only = yes
+#    
+#    option = {
+#        name = wwu_zandalar.8.option.a
+#       
+#    }
+#}
+
+# Surrender to Zandalar
+country_event = {
+	id = wwu_zandalar.9
+    title = "wwu_zandalar.9.title"
+	desc = "wwu_zandalar.9.desc"
+	picture = ULDIR_1_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.9.option.a
+        
+        if = {
+            limit = {
+                ai = yes
+            }
+		 
+            random_list = {
+                30 = {
+                    A78 = {
+                        create_march = ROOT
+                    }
+                }
+                70 = {
+                    every_owned_province = {
+                        add_permanent_claim = A78
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Promotion of another Loa
+country_event = {
+	id = wwu_zandalar.10
+    title = "wwu_zandalar.10.title"
+	desc = "wwu_zandalar.10.desc"
+	picture = ZANDALAR_9_eventPicture
+    
+	is_triggered_only = yes
+	
+    option = {
+        name = "wwu_zandalar.10.op1"
+        
+        set_country_flag = zandalari_merc_h
+        custom_tooltip = z_merc_company_paku
+        
+        # The Necropolis
+        1127 = {
+            change_province_name = "Spot of Pa'ku"
+            rename_capital = "Spot of Pa'ku"
+            change_trade_goods = flying_mounts
+        }
+        
+        # Terrace of Sorrows
+        1124 = {
+            change_trade_goods = grain
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.10.op2"
+        
+        set_country_flag = zandalari_merc_i
+        custom_tooltip = z_merc_company_gonk
+        
+        # The Necropolis
+        1127 = {
+            change_province_name = "Spot of Gonk"
+            rename_capital = "Spot of Gonk"
+            change_trade_goods = warbeasts
+        }
+        
+        # Terrace of Sorrows
+        1124 = {
+            change_trade_goods = grain
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.10.op3"
+        
+        set_country_flag = zandalari_merc_j
+        custom_tooltip = z_merc_company_torcali
+        
+        # The Necropolis
+        1127 = {
+            change_province_name = "Spot of Torcali"
+            rename_capital = "Spot of Torcali"
+            change_trade_goods = warbeasts
+        }
+        
+        # Terrace of Sorrows
+        1124 = {
+            change_trade_goods = grain
+        }
+    }
+}
+
+
+# Amani Destroyed
+country_event = {
+	id = wwu_zandalar.30
+    title = "wwu_zandalar.30.title"
+	desc = "wwu_zandalar.30.desc"
+	picture = ZANDALAR_3_eventPicture
+    goto = target_province
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+        NOT = { exists = A58 } # Amani
+        
+        NOT = {
+            any_owned_province = {
+                region = region_zulaman
+            }
+        }
+        
+        any_owned_province = {
+            has_port = yes
+            region = region_zuldazar
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                    region = region_zuldazar
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = "wwu_zandalar.30.op1"
+        
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            cede_province = A58 # Amani
+            add_core = A58 # Amani
+            change_culture = culture_forest_troll
+        }
+        
+        # Amani
+        A58 = {
+            override_country_name = amani_refugees
+            add_country_modifier = {
+                name = amani_refugees
+                duration = -1
+            }
+        }
+        
+        create_march = A58 # Amani
+        area_zul_aman = {
+            add_core = A58 # Amani
+        }
+        
+        add_country_modifier = {
+            name = amani_refugees_boom
+            duration = 3650
+        }
+    }
+
+    option = {
+        name = "wwu_zandalar.30.op2"
+
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            set_local_autonomy = 75
+            change_culture = culture_forest_troll
+        }
+        
+        add_manpower = 25
+        add_country_modifier = {
+            name = amani_refugees_boom
+            duration = 9125
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.30.op3"
+        
+        add_prestige = -25
+        
+        reverse_add_opinion = {
+            who = A66 # Gurubashi
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A74 # Drakkari
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A73 # Sandfury
+            modifier = refused_troll_refugees
+        }
+    }
+
+}
+
+# Gurubashi Destroyed
+country_event = {
+	id = wwu_zandalar.31
+    title = "wwu_zandalar.31.title"
+	desc = "wwu_zandalar.31.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        NOT = { exists = A66 } # Gurubashi
+        
+        NOT = {
+            any_owned_province = {
+                region = region_stranglethorn_vale
+            }
+        }
+        
+        any_owned_province = {
+            has_port = yes
+            region = region_zuldazar
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                    region = region_zuldazar
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = "wwu_zandalar.31.op1"
+        
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            cede_province = A66 # Gurubashi
+            add_core = A66 # Gurubashi
+            change_culture = culture_jungle_troll
+        }
+        
+        # Gurubashi
+        A66 = {
+            override_country_name = gurubashi_refugees
+            add_country_modifier = {
+                name = gurubashi_refugees
+                duration = -1
+            }
+        }
+        
+        create_march = A66 # Gurubashi
+        area_zul_gurub = {
+            add_core = A66 # Gurubashi
+        }
+        
+        add_country_modifier = {
+            name = gurubashi_refugees_boom
+            duration = 3650
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.31.op2"
+
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            set_local_autonomy = 75
+            change_culture = culture_jungle_troll
+        }
+        
+        add_manpower = 25
+        add_country_modifier = {
+            name = gurubashi_refugees_boom
+            duration = 9125
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.31.op3"
+        
+        add_prestige = -25
+        
+        reverse_add_opinion = {
+            who = A58 # Amani
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A74 # Drakkari
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A73 # Sandfury
+            modifier = refused_troll_refugees
+        }
+    }
+}
+
+# Drakkari Destroyed
+country_event = {
+	id = wwu_zandalar.32
+    title = "wwu_zandalar.32.title"
+	desc = "wwu_zandalar.32.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        NOT = { exists = A74 } # Drakkari
+        
+        NOT = {
+            any_owned_province = {
+                region = region_zuldrak
+            }
+        }
+        
+        any_owned_province = {
+            has_port = yes
+            region = region_zuldazar
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                    region = region_zuldazar
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = "wwu_zandalar.32.op1"
+        
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            cede_province = A74 # Drakkari
+            add_core = A74 # Drakkari
+            change_culture = culture_frost_troll
+        }
+        
+        # Drakkari
+        A74 = {
+            override_country_name = drakkari_refugees
+            add_country_modifier = {
+                name = drakkari_refugees
+                duration = -1
+            }
+        }
+        
+        create_march = A74 # Drakkari
+        area_gundrak_raid = {
+            add_core = A74 # Drakkari
+        }
+        
+        add_country_modifier = {
+            name = drakkari_refugees_boom
+            duration = 3650
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.32.op2"
+
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            set_local_autonomy = 75
+            change_culture = culture_frost_troll
+        }
+        
+        add_manpower = 25
+        add_country_modifier = {
+            name = drakkari_refugees_boom
+            duration = 9125
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.32.op3"
+        
+        add_prestige = -25
+        
+        reverse_add_opinion = {
+            who = A66 # Gurubashi
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A73 # Sandfury
+            modifier = refused_troll_refugees
+        }
+    }
+}
+
+# Farraki Destroyed
+country_event = {
+	id = wwu_zandalar.33
+    title = "wwu_zandalar.33.title"
+	desc = "wwu_zandalar.33.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        NOT = { exists = A73 } # Sandfury
+        
+        NOT = {
+            any_owned_province = {
+                region = region_tanaris
+            }
+        }
+        
+        any_owned_province = {
+            has_port = yes
+            region = region_zuldazar
+        }
+    }
+    
+     immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                    region = region_zuldazar
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    option = {
+        name = "wwu_zandalar.33.op1"
+        
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            cede_province = A73 # Sandfury
+            add_core = A73 # Sandfury
+            change_culture = culture_sand_troll
+        }
+        
+        # Sandfury
+        A73 = {
+            override_country_name = farraki_refugees
+            add_country_modifier = {
+                name = farraki_refugees
+                duration = -1
+            }
+        }
+        
+        create_march = A73 # Sandfury
+        area_zulfarrak = {
+            add_core = A73 # Sandfury
+        }
+        
+        add_country_modifier = {
+            name = farraki_refugees_boom
+            duration = 3650
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.33.op2"
+
+        event_target:target_province = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+            set_local_autonomy = 75
+            change_culture = culture_sand_troll
+        }
+        
+        add_manpower = 25
+        add_country_modifier = {
+            name = farraki_refugees_boom
+            duration = 9125
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.33.op3"
+        
+        add_prestige = -25
+        
+        reverse_add_opinion = {
+            who = A66 # Gurubashi
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A74 # Drakkari
+            modifier = refused_troll_refugees
+        }
+        reverse_add_opinion = {
+            who = A58 # Amani
+            modifier = refused_troll_refugees
+        }
+    }
+}
+
+# Reclaim Amani - Fired via decision
+country_event = {
+	id = wwu_zandalar.34
+    title = "wwu_zandalar.34.title"
+	desc = "wwu_zandalar.34.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = "wwu_zandalar.34.op1"
+        
+        add_absolutism = 10
+        
+        # Amani
+		A58 = {
+            capital_scope = {
+                cede_province = ROOT
+                remove_core = A58
+            }
+        }
+        reverse_add_opinion = {
+            who = A58 # Amani
+            modifier = troll_no_refugees_2
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.34.op2"
+        
+        # Amani
+        A58 = {
+            grant_independence = yes
+        }
+        
+        create_alliance = A58 # Amani
+		A58 = {
+            capital_scope = {
+                cede_province = ROOT
+                remove_core = A58
+            }
+        }
+        reverse_add_opinion = {
+            who = A58 # Amani
+            modifier = troll_no_refugees_1
+        }
+        add_trust = {
+            who = A58 # Amani
+            value = 100
+            mutual = yes
+        }
+        add_favors = {
+           who = A58 # Amani
+           amount = 100
+        }
+    }
+}
+
+# Reclaim Gurubashi - Fired via decision
+country_event = {
+	id = wwu_zandalar.35
+    title = "wwu_zandalar.35.title"
+	desc = "wwu_zandalar.35.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = "wwu_zandalar.35.op1"
+        
+        add_absolutism = 10
+		A66 = {
+		capital_scope = {
+		    cede_province = ROOT
+            remove_core = A66
+		}}
+        reverse_add_opinion = {
+            who = A66 # Gurubashi
+            modifier = troll_no_refugees_2
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.35.op2"
+        
+        # Gurubashi
+        A66 = {
+            grant_independence = yes
+        }
+        create_alliance = A66 # Gurubashi
+		A66 = {
+            capital_scope = {
+                cede_province = ROOT
+                remove_core = A66
+            }
+        }
+        reverse_add_opinion = {
+            who = A66 # Gurubashi
+            modifier = troll_no_refugees_1
+        }
+        add_trust = {
+            who = A66 # Gurubashi
+            value = 100
+            mutual = yes
+        }
+        add_favors = {
+           who = A66 # Gurubashi
+           amount = 100
+        }
+    }
+}
+
+# Reclaim Drakkari - Fired via decision
+country_event = {
+	id = wwu_zandalar.36
+    title = "wwu_zandalar.36.title"
+	desc = "wwu_zandalar.36.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = "wwu_zandalar.36.op1"
+        
+        add_absolutism = 10
+		A74 = {
+            capital_scope = {
+                cede_province = ROOT
+                remove_core = A74
+            }
+        }
+        reverse_add_opinion = {
+            who = A74 # Drakkari
+            modifier = troll_no_refugees_2
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.36.op2"
+        
+        # Drakkari
+        A74 = {
+            grant_independence = yes
+        }
+        
+        create_alliance = A74 # Drakkari
+        A74 = {
+            capital_scope = {
+                cede_province = ROOT
+                remove_core = A74
+            }
+        }
+        reverse_add_opinion = {
+            who = A74 # Drakkari
+            modifier = troll_no_refugees_1
+        }
+        add_trust = {
+            who = A74 # Drakkari
+            value = 100
+            mutual = yes
+        }
+        add_favors = {
+           who = A74 # Drakkari
+           amount = 100
+        }
+    }
+}
+
+# Reclaim Farraki - Fired via decision
+country_event = {
+	id = wwu_zandalar.37
+    title = "wwu_zandalar.37.title"
+	desc = "wwu_zandalar.37.desc"
+	picture = ZANDALAR_3_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = "wwu_zandalar.37.op1"
+        
+        add_absolutism = 10
+		A73 = {
+		capital_scope = {
+		    cede_province = ROOT
+            remove_core = A73
+		}}
+        reverse_add_opinion = {
+            who = A73 # Sandfury
+            modifier = troll_no_refugees_2
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.37.op2"
+        
+        # Sandfury
+        A73 = {
+            grant_independence = yes
+        }
+        
+        create_alliance = A73 # Sandfury
+		A73 = {
+		capital_scope = {
+		    cede_province = ROOT
+            remove_core = A73
+		}}
+        reverse_add_opinion = {
+            who = A73 # Sandfury
+            modifier = troll_no_refugees_1
+        }
+        add_trust = {
+            who = A73 # Sandfury
+            value = 100
+            mutual = yes
+        }
+        add_favors = {
+           who = A73 # Sandfury
+           amount = 100
+        }
+    }
+}
+
+# Birth of Talanji
+country_event = {
+	id = wwu_zandalar.42
+    title = "wwu_zandalar.42.title"
+	desc = "wwu_zandalar.42.desc"
+	picture = ZANDALAR_4_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+        has_ruler = "Rastakhan"
+        is_year = 620
+        NOT = { is_year = 630 }
+        NOT = { has_female_heir = yes }
+	}
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = "wwu_zandalar.42.op1"
+        
+		if = {
+            limit = {
+                has_heir = yes 
+            }
+            remove_heir = { allow_new_heir = no }
+		}
+        
+		define_heir = {
+            name = "Talanji"
+            dynasty = ROOT
+            age = 0
+            adm = 5
+            dip = 5
+            mil = 5
+            claim = 90
+            female = yes
+        }
+    }
+    
+    option = {
+        name = "wwu_zandalar.42.op2"
+        
+		add_legitimacy = 10
+    }
+}
+
+# The Prophet demands access to the Golden Fleet
+country_event = {
+	id = wwu_zandalar.51
+    title = "wwu_zandalar.51.title"
+	desc = "wwu_zandalar.51.desc"
+	picture = ZANDALAR_2_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_cataclysm_over
+        
+		NOT = { has_country_flag = cataclysm_visions_zul_given_fleet }
+        
+        had_country_flag = {
+            flag = cataclysm_aftermath_zul_requests_fleet_tracker
+            days = 1825
+        }
+	}
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = "wwu_zandalar.51.op1"
+        
+        custom_tooltip = rise_of_the_zandalari_tt
+        
+        hidden_effect = {
+            set_country_flag = cataclysm_visions_zul_given_fleet
+		}
+        
+        add_mil_power = -200
+        add_sailors = -3000
+        add_years_of_income = -1.75
+    }
+    option = {
+        name = "wwu_zandalar.51.op2"
+        
+        custom_tooltip = zandalari_skip_to_civil_war_tt
+		complete_mission = wwu_zan_five_nine
+		complete_mission = wwu_zan_five_ten
+		complete_mission = wwu_zan_five_eleven
+		complete_mission = wwu_zan_four_twelve
+        increase_zul_influence_by_10 = yes
+    }
+}	
+	
+# Rise of the Zandalari
+country_event = {
+	id = wwu_zandalar.52
+    title = "wwu_zandalar.52.title"
+	desc = "wwu_zandalar.52.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	immediate = {
+        hidden_effect = {
+            region_south_seas = {
+                discover_country = A78
+            }
+            118 = {
+                discover_country = A78
+            }
+            region_tanaris = {
+                discover_country = A78
+            }
+            region_zuldrak = {
+                discover_country = A78
+            }
+        }
+    }
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_cataclysm_over
+		has_country_flag = cataclysm_visions_zul_given_fleet
+        
+        had_country_flag = {
+            flag = cataclysm_aftermath_rise_of_the_zandalari_tracker
+            days = 3650
+        }
+	}
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = "wwu_zandalar.52.op1"
+        
+		custom_tooltip = zandalari_troll_meeting_main_tt
+        
+        hidden_effect = {
+            set_country_flag = zandalari_troll_meeting_a
+        }
+    }
+}	
+
+# Troll meeting p1
+country_event = {
+	id = wwu_zandalar.53
+    title = "wwu_zandalar.53.title"
+	desc = "wwu_zandalar.53.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_meeting_a
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+ 
+    option = {
+        name = "wwu_zandalar.53.op1"
+        
+		custom_tooltip = zandalari_troll_meeting_a
+
+hidden_effect = {
+		country_event = { id = wwu_zandalar.54 }
+            set_variable = {
+                which = zandalari_troll_drakkari_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_farraki_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_gurubashi_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_amani_help
+                value = 0
+            }
+
+		}
+    }
+}	
+
+# Troll meeting p2 - drakkari
+country_event = {
+	id = wwu_zandalar.54
+    title = "wwu_zandalar.54.title"
+	desc = "wwu_zandalar.54.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+	
+    option = {
+        name = "wwu_zandalar.54.op1"
+		if = {
+		limit = {
+		AND = {
+		exists = A74
+		A74 = {
+		NOT = { is_subject = yes}}
+		}}
+        set_country_flag = zandalari_troll_drakkari
+		custom_tooltip = zandalari_troll_meeting_drakkari_a
+		}
+		if = {
+		limit = {
+		OR = {
+		NOT = {exists = A74}
+		A74 = {
+		is_subject = yes}
+		}}
+		custom_tooltip = zandalari_troll_meeting_drakkari_b
+		}
+		hidden_effect = {
+		country_event = { id = wwu_zandalar.55 }}
+    }
+}
+
+# Troll meeting p3 - farraki
+country_event = {
+	id = wwu_zandalar.55
+    title = "wwu_zandalar.55.title"
+	desc = "wwu_zandalar.55.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+ 
+    option = {
+        name = "wwu_zandalar.55.op1"
+		if = {
+		limit = {
+		AND = {
+		exists = A73
+		A73 = {
+		NOT = { is_subject = yes}}
+		}}
+        set_country_flag = zandalari_troll_farraki
+		custom_tooltip = zandalari_troll_meeting_farraki_a
+		}
+		if = {
+		limit = {
+		OR = {
+		NOT = {exists = A73}
+		A73 = {
+		is_subject = yes}
+		}}
+		custom_tooltip = zandalari_troll_meeting_farraki_b
+		}
+		hidden_effect = {
+		country_event = { id = wwu_zandalar.56 }}
+    }
+}
+
+# Troll meeting p3 - gurubashi
+country_event = {
+	id = wwu_zandalar.56
+    title = "wwu_zandalar.56.title"
+	desc = "wwu_zandalar.56.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+ 
+    option = {
+        name = "wwu_zandalar.56.op1"
+		if = {
+		limit = {
+		AND = {
+		exists = A66
+		A66 = {
+		NOT = { is_subject = yes}}
+		}}
+        set_country_flag = zandalari_troll_gurubashi
+		custom_tooltip = zandalari_troll_meeting_gurubashi_a
+		}
+		if = {
+		limit = {
+		OR = {
+		NOT = {exists = A66}
+		A66 = {
+		is_subject = yes}
+		}}
+		custom_tooltip = zandalari_troll_meeting_gurubashi_b
+		}
+		hidden_effect = {
+		country_event = { id = wwu_zandalar.57 }}
+    }
+}
+
+# Troll meeting p4 - amani
+country_event = {
+	id = wwu_zandalar.57
+    title = "wwu_zandalar.57.title"
+	desc = "wwu_zandalar.57.desc"
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	is_triggered_only = yes
+ 
+    option = {
+        name = "wwu_zandalar.57.op1"
+		if = {
+		limit = {
+		AND = {
+		exists = A58
+		A58 = {
+		NOT = { is_subject = yes}}
+		}}
+        set_country_flag = zandalari_troll_amani
+		custom_tooltip = zandalari_troll_meeting_amani_a
+		}
+		if = {
+		limit = {
+		OR = {
+		NOT = {exists = A58}
+		A58 = {
+		is_subject = yes}
+		}}
+		custom_tooltip = zandalari_troll_meeting_amani_b
+		}
+		hidden_effect = {
+		set_country_flag = zandalari_troll_meeting_end_event
+		                add_country_modifier = {
+                    name = zandalari_troll_meeting_end_cooldown
+                    duration = 1825
+                    hidden = yes
+                }
+    }
+    }
+}
+
+# Troll meeting p5 - end of meeting
+country_event = {
+	id = wwu_zandalar.58
+    title = "wwu_zandalar.58.title"
+	desc = "wwu_zandalar.58.desc"
+	picture = ZANDALAR_13_eventPicture
+	fire_only_once = yes
+	trigger = {
+        has_country_flag = zandalari_troll_meeting_end_event
+		NOT = { has_country_modifier = zandalari_troll_meeting_end_cooldown }
+	}
+	
+	mean_time_to_happen = {
+		months = 24 
+	}
+ 
+    option = {
+        name = "wwu_zandalar.58.op1"
+custom_tooltip = zandalari_troll_meeting_end_talk
+set_country_flag = zandalari_troll_meeting_end_mission
+set_country_flag = zandalari_troll_meeting_end_time
+if = {
+limit = {
+			            is_variable_equal = {
+                        which = zandalari_troll_drakkari_help
+                        value = 10
+                    }		
+	}
+custom_tooltip = zandalari_troll_meeting_drakkari_join
+create_alliance = A74
+add_trust = {
+    who = A74
+    value = 100
+    mutual = yes
+}
+add_favors = {
+   who = A74
+   amount = 50
+}
+set_country_flag = zandalari_troll_meeting_drakkari_joined
+}
+
+if = {
+limit = {
+			            is_variable_equal = {
+                        which = zandalari_troll_farraki_help
+                        value = 10
+                    }		
+	}
+custom_tooltip = zandalari_troll_meeting_farraki_join
+create_alliance = A73
+add_trust = {
+    who = A73
+    value = 100
+    mutual = yes
+}
+add_favors = {
+   who = A73
+   amount = 50
+}
+set_country_flag = zandalari_troll_meeting_farraki_joined
+}
+if = {
+limit = {
+			            is_variable_equal = {
+                        which = zandalari_troll_gurubashi_help
+                        value = 10
+                    }		
+	}
+custom_tooltip = zandalari_troll_meeting_gurubashi_join
+create_alliance = A66
+add_trust = {
+    who = A66
+    value = 100
+    mutual = yes
+}
+add_favors = {
+   who = A66
+   amount = 50
+}
+set_country_flag = zandalari_troll_meeting_gurubashi_joined
+}
+if = {
+limit = {
+			            is_variable_equal = {
+                        which = zandalari_troll_drakkari_help
+                        value = 10
+                    }		
+	}
+custom_tooltip = zandalari_troll_meeting_amani_join
+create_alliance = A58
+add_trust = {
+    who = A58
+    value = 100
+    mutual = yes
+}
+add_favors = {
+   who = A58
+   amount = 50
+}
+set_country_flag = zandalari_troll_meeting_amani_joined
+}
+
+}
+}
+
+country_event = {
+	id = wwu_zandalar.59
+	title = wwu_zandalar.59.title
+	desc = wwu_zandalar.59.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    # Przygotowania do wyprawy po trumne
+	option = {
+		name = "wwu_zandalar.59.op1"
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+					}
+					adm_power = 25
+					dip_power = 25
+					mil_power = 25
+                }
+            
+			custom_tooltip = zandalar_mogu_war_prep_1_a
+
+			hidden_effect = {
+			            add_adm_power = -25
+            add_dip_power = -25
+            add_mil_power = -25
+                country_event = { id = wwu_zandalar.60 }
+			change_variable = {
+            which = zandalar_mogu_war_prep_1
+            value = 1
+        }
+            }
+        }
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+					}
+					NOT = {
+					adm_power = 25
+					dip_power = 25
+					mil_power = 25}
+                }
+            
+			custom_tooltip = zandalar_mogu_war_prep_1_b
+			clr_country_flag = mogu_prepare_to_war_already_open
+        }
+		if = {
+            limit = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+					}
+		custom_tooltip = zandalar_mogu_war_prep_1_c
+		clr_country_flag = mogu_prepare_to_war_already_open
+		}
+        
+        
+    }
+	
+    # Przygotowania zolnierzy
+	option = {
+		name = "wwu_zandalar.59.op2"
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+                }
+				2611 = {
+				infantry_in_province = 10
+				}
+            }
+			custom_tooltip = zandalar_mogu_war_prep_2_a
+
+			hidden_effect = {
+				2611 = {
+            kill_units = {
+			who = ROOT
+			type = infantry	
+			amount = 10
+				}
+			}
+                country_event = { id = wwu_zandalar.60 }
+			change_variable = {
+            which = zandalar_mogu_war_prep_2
+            value = 1
+        }
+            }
+        }
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+                }
+				not = {2611 = {
+				infantry_in_province = 10
+				}}
+            }
+			custom_tooltip = zandalar_mogu_war_prep_2_b
+		clr_country_flag = mogu_prepare_to_war_already_open
+        }
+		if = {
+            limit = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+					}
+			custom_tooltip = zandalar_mogu_war_prep_2_c
+		clr_country_flag = mogu_prepare_to_war_already_open
+		}
+        
+        
+    }
+
+    # Przygotowania manpower
+	option = {
+		name = "wwu_zandalar.59.op3"
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+                }
+			manpower = 10
+            }
+			custom_tooltip = zandalar_mogu_war_prep_3_a
+
+			hidden_effect = {
+			add_manpower = -10
+                country_event = { id = wwu_zandalar.60 }
+			change_variable = {
+            which = zandalar_mogu_war_prep_3
+            value = 1
+        }
+            }
+        }
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+                }
+				not = {manpower = 10}
+            }
+			custom_tooltip = zandalar_mogu_war_prep_3_b
+		clr_country_flag = mogu_prepare_to_war_already_open
+        }
+		if = {
+            limit = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+					}
+			custom_tooltip = zandalar_mogu_war_prep_3_c
+		clr_country_flag = mogu_prepare_to_war_already_open
+		}
+        
+        
+    }
+	
+    # Przygotowania treasury
+	option = {
+		name = "wwu_zandalar.59.op4"
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
+                }
+			treasury = 200
+            }
+			custom_tooltip = zandalar_mogu_war_prep_4_a
+
+			hidden_effect = {
+			add_treasury = -200
+                country_event = { id = wwu_zandalar.60 }
+			change_variable = {
+            which = zandalar_mogu_war_prep_4
+            value = 1
+        }
+            }
+        }
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
+                }
+				not = {treasury = 200}
+            }
+			custom_tooltip = zandalar_mogu_war_prep_4_b
+		clr_country_flag = mogu_prepare_to_war_already_open
+        }
+		if = {
+            limit = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
+					}
+			custom_tooltip = zandalar_mogu_war_prep_4_c
+		clr_country_flag = mogu_prepare_to_war_already_open
+		}
+        
+        
+    }
+	
+    # Back
+	option = {
+		name = "wwu_zandalar.59.op5"
+        
+        clr_country_flag = mogu_prepare_to_war_already_open
+	}
+}
+
+country_event = {
+	id = wwu_zandalar.60
+	title = wwu_zandalar.60.title
+	desc = wwu_zandalar.60.desc
+	picture = ZANDALAR_12_eventPicture
+    hidden = yes
+	is_triggered_only = yes
+    
+    # Advice of the Prophet Zul
+	option = {
+		name = "wwu_zandalar.60.op1"
+		            country_event = { id = wwu_zandalar.59 } # Council of Zanchul
+					}
+					}
+					
+country_event = {
+	id = wwu_zandalar.61
+	title = wwu_zandalar.61.title
+	desc = wwu_zandalar.61.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    # Zandalari invasion
+	option = {
+		name = "wwu_zandalar.61.op1"
+		custom_tooltip = zandalar_mogu_war_start
+		hidden_effect = {
+				1904 = {
+                cede_province = ZFC
+                add_core = ZFC
+            }
+			ZFC = {
+			capital_scope = {
+            spawn_infantry = {
+                AMOUNT = 80
+                TAG = ZFC
+            }
+			   spawn_cavalry = {
+                AMOUNT = 10
+                TAG = ZFC
+            }
+			   spawn_artillery = {
+                AMOUNT = 10
+                TAG = ZFC
+            }
+			}
+			define_general = {
+			shock = 6
+			fire = 5
+			manuever = 4
+			siege = 5
+			name = "Vilnak'dor"
+			}
+			define_ruler = {
+    name = "Prophet Zul"
+    dynasty = "Zandalar"
+    adm = 6
+    dip = 6
+    mil = 6
+    age = 50
+    claim = 95
+}
+add_treasury = 2000
+add_manpower = 100
+        add_country_modifier = {
+            name = zandalar_invasion_force_upgrade
+            duration = 7000
+            hidden = yes
+        }
+			}
+        add_country_modifier = { 
+            name = thunderking_lookingfor_cooldown
+            duration = 700
+            hidden = yes
+        }
+            continent_zandalar = {
+                discover_country = ZFC
+            }
+            continent_pandaria = {
+                discover_country = ZFC
+            }
+            region_zandalar_seas = {
+                discover_country = ZFC
+            }
+            region_pandaria_seas = {
+                discover_country = ZFC
+            }
+            region_paradise_seas = {
+                discover_country = ZFC
+            }
+            region_paradise_isles = {
+                discover_country = ZFC
+            }
+            
+			create_march = ZFC
+            set_country_flag = zandalar_war_against_pandaria_started
+            
+            declare_war_with_cb = {
+                who = GOL
+                casus_belli = cb_zandalar_war_against_pandaria
+            }
+            
+			every_country = {
+                limit = {
+                    OR = {
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_pandaren
+                    }
+                }
+                join_all_defensive_wars_of = GOL
+            }
+            
+			every_country = {
+			limit = {
+                OR = {
+                    culture_group = culture_group_mogu
+                    has_country_flag = zandalari_troll_meeting_drakkari_joined
+                    has_country_flag = zandalari_troll_meeting_farraki_joined
+                    has_country_flag = zandalari_troll_meeting_gurubashi_joined
+                    has_country_flag = zandalari_troll_meeting_amani_joined
+				}
+			}
+			join_all_offensive_wars_of = A78
+				}
+			}
+        }
+			
+    }
+					
+					
+country_event = {
+	id = wwu_zandalar.62
+    title = wwu_zandalar.62.title
+	desc = wwu_zandalar.62.desc
+	picture = ZANDALAR_12_eventPicture
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78
+		has_country_flag = zandalar_war_against_pandaria_started
+		is_at_war = no
+    }
+	
+	mean_time_to_happen = {
+		months = 24 
+	}
+    
+    option = {
+        name = wwu_zandalar.62.op1
+        
+        inherit = ZFC
+		
+		hidden_effect = {
+						1904 = {
+                remove_core = ZFC
+            }
+			}
+		if = {
+		limit = {
+		has_country_flag = zandalar_war_against_pandaria_win
+		}
+		    add_country_modifier = { 
+            name = zandalari_mogu_win_war_for_zandalar
+            duration = 18250
+        }
+		country_event = { id = wwu_zandalar.63 }
+		}
+		if = {
+		limit = {
+		NOT = {has_country_flag = zandalar_war_against_pandaria_win}
+		}
+		add_stability = -1
+		increase_zul_power_by_15 = yes
+		increase_zul_influence_by_10 = yes
+		}
+    }
+	}
+	# shadowpan
+country_event = {
+	id = wwu_zandalar.63
+    title = wwu_zandalar.63.title
+	desc = wwu_zandalar.63.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.63.op1
+		country_event = { id = wwu_zandalar.64 }
+        if = {
+		limit = {
+		exists = P37
+		}
+		create_march = P37
+		P37 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P37}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.63.op2
+		country_event = { id = wwu_zandalar.64 }
+        if = {
+		limit = {
+		exists = P37
+		exists = P92
+		}
+		P92 = {
+		create_march = P37}
+		P37 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P37
+		exists = MOE
+		}
+		MOE = {
+		create_march = P37}
+		P37 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# order of xuen
+country_event = {
+	id = wwu_zandalar.64
+    title = wwu_zandalar.64.title
+	desc = wwu_zandalar.64.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.64.op1
+		country_event = { id = wwu_zandalar.65 }
+        if = {
+		limit = {
+		exists = P66
+		}
+		create_march = P66
+		P66 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P66}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.64.op2
+		country_event = { id = wwu_zandalar.65 }
+        if = {
+		limit = {
+		exists = P66
+		exists = P92
+		}
+		P92 = {
+		create_march = P66}
+		P66 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P66
+		exists = MOE
+		}
+		MOE = {
+		create_march = P66}
+		P66 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# order of yulon
+country_event = {
+	id = wwu_zandalar.65
+    title = wwu_zandalar.65.title
+	desc = wwu_zandalar.65.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.65.op1
+		country_event = { id = wwu_zandalar.66 }
+        if = {
+		limit = {
+		exists = P63
+		}
+		create_march = P63
+		P63 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P63}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.65.op2
+		country_event = { id = wwu_zandalar.66 }
+        if = {
+		limit = {
+		exists = P63
+		exists = P92
+		}
+		P92 = {
+		create_march = P63}
+		P63 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P63
+		exists = MOE
+		}
+		MOE = {
+		create_march = P63}
+		P63 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# order of chiji
+country_event = {
+	id = wwu_zandalar.66
+    title = wwu_zandalar.66.title
+	desc = wwu_zandalar.66.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.66.op1
+		country_event = { id = wwu_zandalar.67 }
+        if = {
+		limit = {
+		exists = P65
+		}
+		create_march = P65
+		P65 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P65}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.66.op2
+		country_event = { id = wwu_zandalar.67 }
+        if = {
+		limit = {
+		exists = P65
+		exists = P92
+		}
+		P92 = {
+		create_march = P65}
+		P65 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P65
+		exists = MOE
+		}
+		MOE = {
+		create_march = P65}
+		P65 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# order of niuzao
+country_event = {
+	id = wwu_zandalar.67
+    title = wwu_zandalar.67.title
+	desc = wwu_zandalar.67.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.67.op1
+		country_event = { id = wwu_zandalar.68 }
+        if = {
+		limit = {
+		exists = P64
+		}
+		create_march = P64
+		P64 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P64}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.67.op2
+		country_event = { id = wwu_zandalar.68 }
+        if = {
+		limit = {
+		exists = P64
+		exists = P92
+		}
+		P92 = {
+		create_march = P64}
+		P64 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P64
+		exists = MOE
+		}
+		MOE = {
+		create_march = P64}
+		P64 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# tiller union
+country_event = {
+	id = wwu_zandalar.68
+    title = wwu_zandalar.68.title
+	desc = wwu_zandalar.68.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.68.op1
+		country_event = { id = wwu_zandalar.69 }
+        if = {
+		limit = {
+		exists = P84
+		}
+		create_march = P84
+		P84 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		NOT = {exists = P84}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.68.op2
+		country_event = { id = wwu_zandalar.69 }
+        if = {
+		limit = {
+		exists = P84
+		exists = P92
+		}
+		P92 = {
+		create_march = P84}
+		P84 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+        if = {
+		limit = {
+		exists = P84
+		exists = MOE
+		}
+		MOE = {
+		create_march = P84}
+		P84 = {
+        add_country_modifier = { 
+            name = zandalar_mogu_win_war_liberty
+            duration = 18250
+        }}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+# golden lotus
+country_event = {
+	id = wwu_zandalar.69
+    title = wwu_zandalar.69.title
+	desc = wwu_zandalar.69.desc
+	picture = ZANDALAR_12_eventPicture
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar.69.op1
+		#dismantle_hre = yes
+        if = {
+		limit = {
+		exists = GOL
+		}
+		inherit = GOL
+		}
+        if = {
+		limit = {
+		NOT = {exists = GOL}
+		}
+		add_adm_power = 300
+		add_dip_power = 300
+		add_mil_power = 300
+		}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+    option = {
+        name = wwu_zandalar.69.op2
+		#dismantle_hre = yes
+        if = {
+		limit = {
+		exists = GOL
+		exists = P92
+		}
+		P92 = {
+		inherit = GOL}
+		
+		}
+        if = {
+		limit = {
+		exists = GOL
+		exists = MOE
+		}
+				MOE = {
+		inherit = GOL}}
+		if = {
+		limit = {
+		exists = MOE
+		}
+		    reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+		if = {
+		limit = {
+		exists = P92
+		}
+		    reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+}
+
+country_event = {
+	id = wwu_zandalar.70
+    title = wwu_zandalar.70.title
+	desc = wwu_zandalar.70.desc
+	picture = ZANDALAR_11_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalar_war_against_pandaria_started
+		NOT = { has_country_modifier = thunderking_lookingfor_cooldown }
+    }
+    
+    mean_time_to_happen = {
+		months = 12
+	}
+    
+    option = {
+        name = wwu_zandalar.70.op1
+        
+        custom_tooltip = zandalari_event_thunderking_a
+        set_country_flag = zandalari_found_thunderking
+        
+         if = {
+            limit = {
+                exists = P92 # Shan'ze
+            }
+            
+		    reverse_add_opinion = {
+                who = P92 # Shan'ze
+                modifier = mogu_zandalar_found_thunder_king_a
+            }
+        }
+    }
+	
+    option = {
+        name = wwu_zandalar.70.op2
+        
+		set_country_flag = zandalari_event_throw_leishen
+        
+        if = {
+            limit = {
+                exists = P92 # Shan'ze
+            }
+            
+		    reverse_add_opinion = {
+                who = P92 # Shan'ze
+                modifier = mogu_zandalar_found_thunder_king_b
+            }
+        }
+				
+        every_country = {
+			limit = {
+                culture_group = culture_group_mogu
+            }
+            
+			join_all_defensive_wars_of = GOL
+        }
+    }
+}
+	
+country_event = {
+	id = wwu_zandalar.71
+    title = wwu_zandalar.71.title
+	desc = wwu_zandalar.71.desc
+	picture = ZANDALAR_11_eventPicture
+    
+	is_triggered_only = yes
+	
+    major = yes
+	major_trigger = {
+		grown_by_development = 50
+	}
+    
+    option = {
+        name = wwu_zandalar.71.op1
+        
+        define_ruler = {
+            name = "Lei Shen"
+            dynasty = "Thunder King"
+            adm = 7
+            dip = 7
+            mil = 7
+            age = 655
+            claim = 100
+        }
+        
+        set_ruler_flag = is_immortal
+        add_ruler_modifier = { 
+            name = mogu_thunder_king_rise
+            duration = -1  
+        }
+            
+        custom_tooltip = zandalari_event_thunderking_rise_army
+        hidden_effect = {
+            capital_scope = {
+                spawn_infantry = {
+                    AMOUNT = 50
+                    TAG = MOE # Mogu Empire
+                }
+            }
+        }
+
+    }
+}
+	
+# Startup Event
+country_event = {
+	id = wwu_zandalar.100
+    title = wwu_zandalar.100.title
+	desc = wwu_zandalar.100.desc
+	picture = ZANDALAR_3_eventPicture
+    
+	is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+    }
+    
+    option = {
+        name = wwu_zandalar.100.option.a
+        
+
+    }
+}
+
+# VAWER: added hidden tracker event, applies flag that is then checked for duration in Show Strength event
+# Zandalar - Show Strength interval tracker
+country_event = {
+	id = wwu_zandalar.101
+    title = wwu_zandalar.101.title
+	desc = wwu_zandalar.101.desc
+	picture = ZANDALAR_3_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+        is_year = 550 # Only start applying after 550
+        NOT = { has_country_flag = zandalar_show_strength_interval }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar.101.option.a
+        
+        set_country_flag = zandalar_show_strength_interval
+    }
+}
+
+
