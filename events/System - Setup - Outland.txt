@@ -45,6 +45,7 @@ country_event = {
     immediate = {
         hidden_effect = {
 			set_global_flag = setup_outland
+            
             every_country = {
                 limit = {
                     any_owned_province = {
@@ -54,6 +55,47 @@ country_event = {
                 }
                 white_peace = THIS
             }
+            
+            # All countries with knowledge of Draenor can now see Outland
+            every_country = {
+                limit = {
+                    continent_draenor = {
+                        has_discovered = PREV
+                    }
+                }
+                outland_superregion = {
+                    discover_country = PREV
+                }
+                outland_lakes = {
+                    discover_country = PREV
+                }
+                outland_wasteland = {
+                    discover_country = PREV
+                }
+                outland_void_wasteland = {
+                    discover_country = PREV
+                }
+            }
+            
+            # Draenor is hidden for all countries
+            every_country = {
+                draenor_superregion = {
+                    undiscover_country = PREV
+                }
+                region_draenor_seas = {
+                    undiscover_country = PREV
+                }
+                draenor_lakes = {
+                    undiscover_country = PREV
+                }
+                draenor_wasteland = {
+                    undiscover_country = PREV
+                }
+                draenor_ocean_wasteland = {
+                    undiscover_country = PREV
+                }
+            }
+            
             convert_ashran = yes
             convert_shadowmoon_valley = yes
             convert_spires_of_arak = yes

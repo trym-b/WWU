@@ -100,3 +100,146 @@ country_event = {
         discover_draenor = yes
 	}
 }
+
+# Discovery of Draenor
+country_event = {
+	id = wwu_discovery.4
+	title = wwu_discovery.4.title
+	desc = wwu_discovery.4.desc
+	picture = EXPLORERS_HAT_eventPicture
+    
+    trigger = {
+        NOT = { has_country_flag = discovery_of_draenor }
+        
+        capital_scope = {
+            continent = continent_eastern_kingdoms
+        }
+        
+        # Dark Portal has been built
+        3792 = {
+            has_great_project = {
+                type = dark_portal_draenor
+            }
+        }
+    }
+    
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = discovery_of_draenor
+        }
+    }
+    
+	option = {
+		name = wwu_discovery.4.option.a
+		
+        discover_draenor = yes
+	}
+}
+
+# Discovery of Outland
+country_event = {
+	id = wwu_discovery.5
+	title = wwu_discovery.5.title
+	desc = wwu_discovery.5.desc
+	picture = EXPLORERS_HAT_eventPicture
+    
+    trigger = {
+        NOT = { has_country_flag = discovery_of_outland }
+        
+        capital_scope = {
+            continent = continent_eastern_kingdoms
+        }
+        
+        # Dark Portal has been built
+        1586 = {
+            has_great_project = {
+                type = dark_portal_outland
+            }
+        }
+    }
+    
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = discovery_of_outland
+        }
+    }
+    
+	option = {
+		name = wwu_discovery.5.option.a
+		
+        discover_outland = yes
+	}
+}
+
+# Discovery of Azeroth
+country_event = {
+	id = wwu_discovery.6
+	title = wwu_discovery.6.title
+	picture = EXPLORERS_HAT_eventPicture
+    
+    desc = {
+        trigger = {
+            primary_culture = culture_orc
+        }
+        desc = wwu_discovery.6.desc.orc
+    }
+    desc = {
+        trigger = {
+            primary_culture = culture_orc
+        }
+        desc = wwu_discovery.6.desc
+    }
+    
+    trigger = {
+        primary_culture = culture_orc
+        NOT = { has_country_flag = discovery_of_azeroth }
+        
+        capital_scope = {
+            OR = {
+                continent = continent_draenor
+                continent = continent_outland
+            }
+        }
+        
+        # Dark Portal has been built
+        OR = {
+            1586 = {
+                has_great_project = {
+                    type = dark_portal_outland
+                }
+            }
+            # Dark Portal has been built
+            3792 = {
+                has_great_project = {
+                    type = dark_portal_draenor
+                }
+            }
+        }
+    }
+    
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = discovery_of_azeroth
+        }
+    }
+    
+	option = {
+		name = wwu_discovery.6.option.a
+		
+        discover_eastern_kingdoms = yes
+        discover_plunder_isle = yes
+        discover_kul_tiras = yes
+	}
+}
