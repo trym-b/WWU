@@ -1,0 +1,484 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_nazjatar_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	wwu_curtail_the_zinazshari_elites = {
+		icon = mission_brimstone
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            crown_land_share = 40
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_curtailed_zinazshari_elite
+                duration = 3650
+            }
+		}
+	}
+    wwu_pride_of_azshara = {
+		icon = mission_ancient_tablet
+        position = 2
+        
+		required_missions = { 
+            wwu_curtail_the_zinazshari_elites
+        }
+        
+		trigger = {
+            continent_nazjatar = {
+                type = all
+                
+                base_tax = 4
+                base_production = 4
+                base_manpower = 4
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = ROOT
+            continent = continent_nazjatar
+            NOT = { base_tax = 4 }
+            NOT = { base_production = 4 }
+            NOT = { base_manpower = 4 }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_glory_of_nazjatar
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_nazjatar_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	wwu_uncover_lost_artifacts = {
+		icon = mission_ancient_sword
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            has_any_artifact = yes
+		}
+        
+		effect = {
+			add_prestige = 25
+            add_country_modifier = {
+                name = mission_rarified_treasures
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_discover_vashijir = {
+		icon = mission_ship_8
+        position = 2
+        
+		required_missions = { 
+            
+        }
+        
+		trigger = {
+            any_owned_province = {
+                OR = {
+                    continent = continent_kul_tiras
+                    continent = continent_zandalar
+                }
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                continent = continent_kul_tiras
+                continent = continent_zandalar
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			discover_vashjir = yes
+		}
+	}
+    
+    wwu_vashjir_connections = {
+		icon = mission_rolled_scroll
+        position = 3
+        
+		required_missions = { 
+            wwu_discover_vashijir
+        }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = VHJ }
+                VHJ = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+		}
+        provinces_to_highlight = {
+            owned_by = VHJ
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = VHJ
+                }
+                create_subject = {
+                    subject_type = vassal
+                    subject = VHJ
+                }
+            }
+            else = {
+                vashjir_superregion = {
+                    add_claim = ROOT
+                }
+            }
+		}
+	}
+    
+    wwu_long_tail_of_the_serpent = {
+		icon = mission_lady_vashj
+        position = 4
+        
+		required_missions = { 
+            wwu_vashjir_connections
+        }
+        
+		trigger = {
+            vashjir_superregion = { 
+                type = all
+                
+                owned_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            superregion = vashjir_superregion
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			custom_tooltip = enable_naga_cb_east_tt
+            hidden_effect = {
+                set_country_flag = naga_invasion_cb_east
+            }
+		}
+	}
+}
+
+wwu_nazjatar_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	wwu_protect_nazjatars_waters = {
+		icon = mission_ship_1
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            navy_size_percentage = 0.8
+            heavy_ship_fraction = 0.2
+            galley_fraction = 0.3
+		}
+        
+		effect = {
+			add_stability = 1
+            add_mil_power = 100
+		}
+	}
+    
+    wwu_rise_of_nazjatar = {
+		icon = mission_hunter_rapid_killing
+        position = 2
+        
+		required_missions = { 
+            wwu_protect_nazjatars_waters
+        }
+        
+		trigger = {
+            army_size_percentage = 0.8
+            artillery_fraction = 0.25
+		}
+        
+		effect = {
+			country_event = { id = wwu_nazjatar.1 days = 1 }
+		}
+	}
+    
+    wwu_birth_of_the_nazjatar_empire = {
+		icon = mission_azerite_essense
+        position = 3
+        
+		required_missions = { 
+            wwu_rise_of_nazjatar
+        }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 3
+                all_owned_province = {
+                    OR = {
+                        continent = continent_broken_isles
+                        continent = continent_zandalar
+                        continent = continent_paradise_isles
+                        continent = continent_south_seas
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                continent = continent_broken_isles
+                continent = continent_zandalar
+                continent = continent_paradise_isles
+                continent = continent_south_seas
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            discover_kalimdor = yes
+            discover_eastern_kingdoms = yes
+		}
+	}
+    
+    wwu_long_arm_of_the_serpent = {
+		icon = mission_azshara
+        position = 4
+        
+		required_missions = { 
+            wwu_birth_of_the_nazjatar_empire
+        }
+        
+		trigger = {
+            any_owned_province = {
+                continent = continent_kalimdor
+            }
+		}
+		provinces_to_highlight = {
+            continent = continent_kalimdor
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            custom_tooltip = enable_naga_cb_west_tt
+            hidden_effect = {
+                set_country_flag = naga_invasion_cb_west
+            }
+		}
+	}
+}
+
+wwu_nazjatar_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	wwu_shadows_of_the_deep = {
+		icon = mission_void_walker
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            any_country = {
+                total_development = 100
+                has_spy_network_from = {
+                    who = ROOT
+                    value = 80
+                }
+            }
+		}
+		provinces_to_highlight = {
+            has_discovered = ROOT
+            owner = {
+                any_country = {
+                    total_development = 100
+                }
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_naga_infiltrators
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_nzoths_touch = {
+		icon = mission_ancient_tome
+        position = 2
+        
+		required_missions = { 
+            wwu_shadows_of_the_deep
+        }
+        
+		trigger = {
+            continent_eastern_kingdoms = {
+                religion = nzoth
+            }
+            continent_kalimdor = {
+                religion = nzoth
+            }
+		}
+		provinces_to_highlight = {
+            has_discovered = ROOT
+            OR = {
+                continent = continent_eastern_kingdoms
+                continent = continent_kalimdor
+            }
+            NOT = { religion = nzoth }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_nzoths_favour
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_nzoth_tendrils = {
+		icon = mission_curse
+        position = 3
+        
+		required_missions = { 
+            wwu_nzoths_touch
+        }
+        
+		trigger = {
+            continent_northrend = {
+                religion = nzoth
+            }
+            continent_pandaria = {
+                religion = nzoth
+            }
+            continent_zandalar = {
+                religion = nzoth
+            }
+		}
+		provinces_to_highlight = {
+            has_discovered = ROOT
+            OR = {
+                continent = continent_northrend
+                continent = continent_pandaria
+                continent = continent_zandalar
+            }
+            NOT = { religion = nzoth }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_nzoths_tenacity
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_empire_of_nzoth = {
+		icon = mission_demonhunter_darkness
+        position = 4
+        
+		required_missions = { 
+            wwu_nzoth_tendrils
+        }
+        
+		trigger = {
+            OR = {
+                calc_true_if = {
+                    amount = 8
+                    all_country = {
+                        religion = nzoth
+                    }
+                }
+                calc_true_if = {
+                    amount = 50
+                    all_province = {
+                        religion = nzoth
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            has_discovered = ROOT
+            NOT = { religion = nzoth }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_nzoths_wisdom
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_nazjatar_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	wwu_illidans_call = {
+		icon = mission_demonhunter_imprison
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            exists = B87
+		}
+        
+		effect = {
+			discover_outland = yes
+            create_alliance = B87
+		}
+	}
+}
