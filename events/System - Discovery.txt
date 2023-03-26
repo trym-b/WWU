@@ -191,19 +191,25 @@ country_event = {
     }
     desc = {
         trigger = {
-            primary_culture = culture_orc
+            NOT = { primary_culture = culture_orc }
         }
         desc = wwu_discovery.6.desc
     }
     
     trigger = {
-        primary_culture = culture_orc
         NOT = { has_country_flag = discovery_of_azeroth }
         
-        capital_scope = {
-            OR = {
-                continent = continent_draenor
-                continent = continent_outland
+        OR = {
+            # Covers Orcish Horde having its capital on Azeroth
+            any_owned_province = {
+                continent = continent_eastern_kingdoms
+            }
+            # Covers the other clans
+            capital_scope = {
+                OR = {
+                    continent = continent_draenor
+                    continent = continent_outland
+                }
             }
         }
         

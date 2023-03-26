@@ -95,25 +95,29 @@ wwu_shared_orc_column_1 = {
         completed_by = 592.1.1
         
 		trigger = {
-            NOT = { has_global_flag = dark_portal_built }
+            owns_core_province = 3792
+            3792 = {
+                NOT = {
+                    has_great_project = {
+                        type = dark_portal_draenor
+                    }
+                }
+            }
+            
             religion = fel
-			owns_core_province = 3792
-            is_year = 575
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                grown_by_development = 20
+            }
 		}
         provinces_to_highlight = {
             province_id = 3792
             NOT = { owned_by = ROOT }
         }
 		effect = {
-            hidden_effect = {
-                # Grant 1 year exclusive timer for Dark Portal builder to use Establish Foothold mission
-                set_country_flag = can_trigger_establish_foothold_mission
-                
-                set_global_flag = the_first_war
-                set_global_flag = dark_portal_built
-                set_global_flag = dark_portal_opened_flag
-            }
-            
 			add_yearly_manpower = -1.0
             
             continent_draenor = {
@@ -139,18 +143,11 @@ wwu_shared_orc_column_1 = {
         completed_by = 592.1.1
         
 		trigger = {
-            if = {
-                limit = {
-                    NOT = { has_country_flag = can_trigger_establish_foothold_mission }
+            owns_core_province = 3792
+            3792 = {
+                has_great_project = {
+                    type = dark_portal_draenor
                 }
-                custom_trigger_tooltip = {
-                    tooltip = DID_NOT_BUILD_DARK_PORTAL_TT
-                }
-            }
-        
-            # Only allow for Dark Portal builder, or any nation after 1 year of Dark Portal mission
-            hidden_trigger = {
-                has_country_flag = can_trigger_establish_foothold_mission
             }
             
             NOT = { exists = U03 }
@@ -160,7 +157,6 @@ wwu_shared_orc_column_1 = {
                 }
             }
             
-            has_global_flag = dark_portal_built
             religion = fel
             
             region_blasted_lands = {

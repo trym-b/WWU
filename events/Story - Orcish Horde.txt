@@ -411,41 +411,9 @@ country_event = {
             spawn_orcish_horde_self = yes
         }
         
-        ai_chance ={
+        ai_chance = {
             factor = 0
         }
     }
 }
  
-#----------------------------------
-# Utility - Free "Establish Foothold" mission for non-Dark Portal builder nations
-#----------------------------------
-country_event = {
-	id = wwu_orcish_horde.100
-	title = wwu_orcish_horde.100.title
-	desc = wwu_orcish_horde.100.desc
-	picture = OLD_HORDE_eventPicture
-    
-    hidden = yes
-    
-    trigger = {
-        NOT = { has_global_flag = establish_foothold_mission_propagation }
-        has_country_flag = can_trigger_establish_foothold_mission
-    }
-    
-    mean_time_to_happen = {
-		months = 12
-	}
-    
-    immediate = {
-        hidden_effect = { set_global_flag = establish_foothold_mission_propagation }
-    }
-    
-    option = {
-		name = wwu_orcish_horde.2.option.a
-        
-        every_country = {
-            set_country_flag = can_trigger_establish_foothold_mission
-        }
-    }
-}
