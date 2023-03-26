@@ -1,0 +1,131 @@
+namespace = wwu_golden_lotus
+
+# Shado-Pan Contract
+country_event = {
+	id = wwu_golden_lotus.10
+	title = wwu_golden_lotus.10.title
+	desc = wwu_golden_lotus.10.desc
+	picture = PANDA_TARAN_ZHU_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_golden_lotus.10.option.a
+        
+        add_treasury = -100
+        
+        P37 = {
+            hidden_effect = { set_country_flag = shado_pan_contract_sweetened }
+            country_event = { id = wwu_golden_lotus.11 days = 3 random = 14 }
+        }
+        
+        ai_chance = {
+            factor = 90
+        }
+    }
+    option = {
+		name = wwu_golden_lotus.10.option.b
+        
+        P37 = {
+            country_event = { id = wwu_golden_lotus.11 days = 3 random = 14 }
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
+
+# Golden Lotus Protection Contract
+country_event = {
+	id = wwu_golden_lotus.11
+	title = wwu_golden_lotus.11.title
+	desc = wwu_golden_lotus.11.desc
+	picture = PANDAREN_SCOUT_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_golden_lotus.11.option.a
+        
+        GOL = {
+            country_event = { id = wwu_golden_lotus.12 }
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+    }
+    option = {
+		name = wwu_golden_lotus.11.option.b
+        
+        GOL = {
+            country_event = { id = wwu_golden_lotus.13 }
+        }
+        
+        ai_chance = {
+            factor = 20
+            
+            modifier = {
+                factor = 0
+                
+                has_country_flag = shado_pan_contract_sweetened
+            }
+        }
+    }
+}
+
+# Contract Accepted
+country_event = {
+	id = wwu_golden_lotus.12
+	title = wwu_golden_lotus.12.title
+	desc = wwu_golden_lotus.12.desc
+	picture = PANDAREN_SCOUT_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_golden_lotus.12.option.a
+        
+        create_alliance = FROM
+        FROM = {
+            set_ai_attitude = {
+                attitude = attitude_friendly
+                who = ROOT
+                locked = yes
+            }
+        }
+    }
+}
+
+# Contract Rejected
+country_event = {
+	id = wwu_golden_lotus.13
+	title = wwu_golden_lotus.13.title
+	desc = wwu_golden_lotus.13.desc
+	picture = PANDAREN_SCOUT_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_golden_lotus.13.option.a
+        
+        add_prestige = -10
+    }
+}

@@ -1,0 +1,773 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_golden_lotus_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = GOL
+	}
+    
+	has_country_shield = yes
+	
+	wwu_formalise_shado_pan_contract = {
+		icon = mission_gladiator_medallion
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = P37 }
+                P37 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 80
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital = yes
+            owner = {
+                tag = P37
+            }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = P37
+                }
+                
+                country_event = { id = wwu_golden_lotus.10 days = 1 }
+            }
+		}
+	}
+    
+    wwu_contain_the_mantid_threat = {
+		icon = mission_mantid_advisor
+        position = 2
+        
+		required_missions = { wwu_formalise_shado_pan_contract }
+        
+		trigger = {
+            custom_trigger_tooltip = { 
+                tooltip = no_mantids_in_townlong_steppes_tt
+            
+                region_townlong_steppes = {
+                    type = all
+                    
+                    NOT = { 
+                        owner = {
+                            primary_culture = culture_mantid
+                        }
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_townlong_steppes
+            owner = { primary_culture = culture_mantid }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_pandaren_unity
+                duration = -1
+            }
+            region_dread_wastes = {
+                add_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_quell_the_heart_of_fear = {
+		icon = mission_mantid_queen
+        position = 3
+        
+		required_missions = { wwu_contain_the_mantid_threat }
+        
+		trigger = {
+            1839 = {
+                sieged_by = ROOT
+                devastation = 25
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1839
+		}
+        
+		effect = {
+            1839 = {
+                set_base_tax = 2
+                set_base_production = 2
+                set_base_manpower = 2
+            }
+        
+            custom_tooltip = mantid_weakened_heart_tt
+            hidden_effect = {
+                every_country = {
+                    limit = {
+                        primary_culture = culture_mantid
+                        capital_scope = {
+                            continent = continent_pandaria
+                        }
+                    }
+                    every_owned_province = {
+                        add_province_modifier = {
+                            name = mission_weakened_heart
+                            duration = 9125
+                        }
+                    }
+                }
+            }
+		}
+	}
+}
+
+wwu_golden_lotus_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = GOL
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_the_gate_of_the_setting_sun = {
+		icon = mission_monk_touch_of_karma
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            1819 = {
+                owned_by = ROOT
+                is_core = ROOT
+                
+                base_tax = 3
+                base_production = 3
+                base_manpower = 3
+                
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1819
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_yearly_manpower = 3.0
+            add_stability = 1
+		}
+	}
+    
+    wwu_end_the_mantid_threat = {
+		icon = mission_mantid_symbol
+        position = 4
+        
+		required_missions = { 
+            wwu_secure_the_gate_of_the_setting_sun
+            wwu_quell_the_heart_of_fear
+        }
+        
+		trigger = {
+            NOT = { exists = P34 }
+            NOT = { exists = ZNT }
+            NOT = { exists = SKT }
+            NOT = { exists = KIT }
+            NOT = { exists = KRT }
+            NOT = { exists = SRA }
+            NOT = { exists = MNE }
+		}
+		provinces_to_highlight = {
+            OR = {
+                owned_by = P34
+                owned_by = ZNT
+                owned_by = SKT
+                owned_by = KIT
+                owned_by = KRT
+                owned_by = SRA
+                owned_by = MNE
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_pax_pandaria
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_golden_lotus_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = GOL
+	}
+    
+	has_country_shield = yes
+	
+	wwu_protect_the_vale = {
+		icon = mission_monk_mighty_ox_kick
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            region_vale_of_eternal_blossoms = {
+                type = all
+                owned_by = ROOT
+                is_core = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_vale_of_eternal_blossoms
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_prestige = 25
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 100
+		}
+	}
+    
+    wwu_formalise_temple_contracts = {
+		icon = mission_monk_drunken_haze
+        position = 2
+        
+		required_missions = { 
+            wwu_protect_the_vale
+        }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = P66 }
+                P66 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 80
+                    }
+                }
+            }
+            OR = {
+                NOT = { exists = P63 }
+                P63 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 80
+                    }
+                }
+            }
+            OR = {
+                NOT = { exists = P65 }
+                P65 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 80
+                    }
+                }
+            }
+            OR = {
+                NOT = { exists = P64 }
+                P64 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 80
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital = yes
+            owner = {
+                OR = {
+                    tag = P66
+                    tag = P63
+                    tag = P65
+                    tag = P64
+                }
+            }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = P66
+                }
+                
+                P66 = {
+                    create_alliance = ROOT
+                    set_ai_attitude = {
+                        attitude = attitude_friendly
+                        who = ROOT
+                        locked = yes
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = P63
+                }
+                
+                P63 = {
+                    create_alliance = ROOT
+                    set_ai_attitude = {
+                        attitude = attitude_friendly
+                        who = ROOT
+                        locked = yes
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = P65
+                }
+                
+                P65 = {
+                    create_alliance = ROOT
+                    set_ai_attitude = {
+                        attitude = attitude_friendly
+                        who = ROOT
+                        locked = yes
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = P64
+                }
+                
+                P64 = {
+                    create_alliance = ROOT
+                    set_ai_attitude = {
+                        attitude = attitude_friendly
+                        who = ROOT
+                        locked = yes
+                    }
+                }
+            }
+		}
+	}
+    
+    wwu_restore_mogushan_palace = {
+		icon = mission_monk_chi_wave
+        position = 3
+        
+		required_missions = { 
+            wwu_formalise_temple_contracts
+        }
+        
+		trigger = {
+            1807 = {
+                owned_by = ROOT
+                is_core = ROOT
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+            }
+            1809 = {
+                owned_by = ROOT
+                is_core = ROOT
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+            }
+            1808 = {
+                owned_by = ROOT
+                is_core = ROOT
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 1807
+                province_id = 1809
+                province_id = 1808
+            }
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_restored_palace
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_revive_the_pandaren_empire = {
+		icon = mission_monk_serenity
+        position = 4
+        
+		required_missions = { 
+            wwu_restore_mogushan_palace
+        }
+        
+		trigger = {
+            region_jade_forest = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            region_valley_of_the_four_winds = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            region_krasarang_wilds = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            region_vale_of_eternal_blossoms = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            region_townlong_steppes = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            region_kun_lai_summit = {
+                type = all
+                owner = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                NOT = {
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+            }
+            
+            OR = {
+                region = region_jade_forest
+                region = region_valley_of_the_four_winds
+                region = region_krasarang_wilds
+                region = region_vale_of_eternal_blossoms
+                region = region_townlong_steppes
+                region = region_kun_lai_summit
+            }
+		}
+        
+		effect = {
+			change_tag = PAN
+			change_government = monarchy
+			set_government_rank = 3
+            
+            every_country = {
+                limit = {
+                    is_subject = no
+                    has_opinion = {
+                        who = ROOT
+                        value = 10
+                    }
+                    OR = {
+                        culture_group = culture_group_pandaren
+                        culture_group = culture_group_hozen
+                        culture_group = culture_group_jinyu
+                        culture_group = culture_group_grummle
+                    }
+                }
+                ROOT = {
+                    create_subject = {
+                        subject_type = vassal
+                        subject = PREV
+                    }
+                }
+            }
+            
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            set_final_tag_status = yes
+		}
+	}
+}
+
+wwu_golden_lotus_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = GOL
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_the_golden_stairs = {
+		icon = mission_monk_legsweep
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            1818 = {
+                owned_by = ROOT
+                is_core = ROOT
+                
+                base_tax = 3
+                base_production = 3
+                base_manpower = 3
+                
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1819
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_yearly_manpower = 3.0
+            add_stability = 1
+		}
+	}
+    
+    wwu_subdue_the_mogushan = {
+		icon = mission_monk_sparring
+        position = 2
+        
+		required_missions = { 
+            wwu_secure_the_golden_stairs
+        }
+        
+		trigger = {
+            NOT = { exists = P41 }
+		}
+		provinces_to_highlight = {
+            owned_by = P41
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_peace_in_kunlai
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_claim_the_throne_of_thunder = {
+		icon = mission_monk_clashing_ox
+        position = 3
+        
+		required_missions = { 
+            wwu_subdue_the_mogushan
+        }
+        
+		trigger = {
+            owns_core_province = 1890
+            NOT = { exists = P92 }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 1890
+                owned_by = P92
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_thunder_king_corpse_secured
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_golden_lotus_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = GOL
+	}
+    
+	has_country_shield = yes
+	
+	wwu_befriend_the_tillers = {
+		icon = mission_tools
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = P84 }
+                P84 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital = yes
+            owner = { tag = P84 }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = P84
+                }
+                
+                P84 = {
+                    create_alliance = ROOT
+                    set_ai_attitude = {
+                        attitude = attitude_friendly
+                        who = ROOT
+                        locked = yes
+                    }
+                }
+            }
+		}
+	}
+    
+    wwu_secure_the_valley_GOL = {
+		icon = mission_salvage
+        position = 2
+        
+		required_missions = { 
+            wwu_befriend_the_tillers
+        }
+        
+		trigger = {
+            region_valley_of_the_four_winds = {
+                type = all
+                
+                OR = {
+                    owned_by = P84
+                    owned_by = ROOT
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_valley_of_the_four_winds
+            OR = {
+                NOT = { owned_by = P84 }
+                NOT = { owned_by = ROOT }
+            }
+		}
+        
+		effect = {
+            custom_tooltip = mistfall_tunnel_tt
+			hidden_effect = {
+                set_country_flag = can_build_mistfall_tunnel
+            }
+		}
+	}
+    
+    wwu_dissuade_the_zandalari = {
+		icon = mission_ward_of_loa
+        position = 3
+        
+		required_missions = { 
+            wwu_subdue_the_mogushan
+        }
+        
+		trigger = {
+            navy_size_percentage = 1.0
+            navy_size = 30
+            naval_strength = {
+                who = A78
+                value = 1.0
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_glorious_pandaren_fleet
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_oust_the_zandalari = {
+		icon = mission_zan_zandalar
+        position = 4
+        
+		required_missions = { 
+            wwu_dissuade_the_zandalari
+        }
+        
+		trigger = {
+            region_isle_of_giants = {
+                type = all
+                owned_by = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_isle_of_giants
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_pandaren_explorers
+                duration = -1
+            }
+		}
+	}
+}
