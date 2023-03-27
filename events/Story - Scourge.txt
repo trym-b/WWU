@@ -18,7 +18,7 @@ country_event = {
         ai = no
         
         # Only occur in starts before Rise of the Lich King
-        is_year = 604
+        is_year = 603
         NOT = { is_year = 605 }
 	}
 	
@@ -40,23 +40,31 @@ country_event = {
             1268 = {
                 cede_province = P11
                 add_core = P11
+                
                 add_base_tax = 8
                 add_base_production = 8
                 add_base_manpower = 8
+                
                 add_building = wow_fort_1
+                
                 change_religion = cult_of_the_damned
                 change_culture = culture_scourge
                 change_trade_goods = saronite
-                infantry = P11
-                infantry = P11
-                infantry = P11
-                infantry = P11
-                infantry = P11
-                cavalry = P11
-                cavalry = P11
-                artillery = P11
     
                 add_province_triggered_modifier = seat_of_the_lich_king
+                
+                spawn_infantry = {
+                    AMOUNT = 22
+                    TAG = ROOT
+                }
+                spawn_cavalry = {
+                    AMOUNT = 4
+                    TAG = ROOT
+                }
+                spawn_artillery = {
+                    AMOUNT = 6
+                    TAG = ROOT
+                }
             }
             
             area_icecrown_interior = {
@@ -112,11 +120,11 @@ country_event = {
                 
                 set_capital = 1268
                 
-                add_adm_power = 300
-                add_dip_power = 300
-                add_mil_power = 300
-                add_treasury = 1000
-                add_manpower = 25
+                add_adm_power = 800
+                add_dip_power = 800
+                add_mil_power = 800
+                add_treasury = 5000
+                add_manpower = 100
                 
                 add_country_modifier = {
                     name = helm_of_domination
@@ -131,6 +139,16 @@ country_event = {
                 add_country_modifier = {
                     name = nerzhuls_fervor
                     duration = 10950
+                }
+                
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_scourge_boost
+                        duration = 9125 # 25 years
+                    }
                 }
             }
         }
