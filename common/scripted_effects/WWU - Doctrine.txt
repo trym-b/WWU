@@ -42,8 +42,13 @@ siege_doctrine_effect = {
         
             every_neighbor_province = {
                 limit = {   
+                    # Only affect war enemies
+                    owner = {
+                        war_with = FROM
+                    }
                     NOT = { fort_level = 1 }
                     NOT = { controlled_by = FROM }
+                    controlled_by = owner # Affect only those owner still controls
                 }
                 
                 change_controller = FROM
@@ -88,74 +93,110 @@ siege_doctrine_effect = {
             }
         }
         
-        # All enemy provinces in their capital area become ours
-        owner = {
-            every_owned_province = {
-                limit = {
-                    is_in_capital_area = yes
-                }
-                
-                change_controller = FROM
-            }
-        }
-        
-        # MIL Power cost
         if = {
             limit = {
-                owner = {
-                    NOT = { total_development = 200 }
+                if = {
+                    limit = {
+                        owner = {
+                            NOT = { total_development = 200 }
+                        }
+                    }
+                    FROM = {
+                        mil_power = 200
+                    }
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            total_development = 200
+                            NOT = { total_development = 400 }
+                        }
+                    }
+                    FROM = {
+                        mil_power = 400
+                    }
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            total_development = 400
+                            NOT = { total_development = 600 }
+                        }
+                    }
+                    FROM = {
+                        mil_power = 600
+                    }
+                }
+                else_if = {
+                    limit = {
+                        owner = {
+                            total_development = 600
+                        }
+                    }
+                    FROM = {
+                        mil_power = 800
+                    }
+                }
+            }
+        
+            # MIL Power cost
+            if = {
+                limit = {
+                    owner = {
+                        NOT = { total_development = 200 }
+                    }
+                }
+                
+                FROM = {
+                    add_mil_power = -200
+                }
+            }
+            else_if = {
+                limit = {
+                    owner = {
+                        total_development = 200
+                        NOT = { total_development = 400 }
+                    }
+                }
+                
+                FROM = {
+                    add_mil_power = -400
+                }
+            }
+            else_if = {
+                limit = {
+                    owner = {
+                        total_development = 400
+                        NOT = { total_development = 600 }
+                    }
+                }
+                
+                FROM = {
+                    add_mil_power = -600
+                }
+            }
+            else_if = {
+                limit = {
+                    owner = {
+                        total_development = 600
+                    }
+                }
+                
+                FROM = {
+                    add_mil_power = -800
                 }
             }
             
-            FROM = {
-                add_mil_power = -100
-            }
-        }
-        else_if = {
-            limit = {
-                owner = {
-                    total_development = 200
-                    NOT = { total_development = 400 }
+            # All enemy provinces in their capital area become ours
+            owner = {
+                every_owned_province = {
+                    limit = {
+                        is_in_capital_area = yes
+                        controlled_by = owner # Affect only those owner still controls
+                    }
+                    
+                    change_controller = FROM
                 }
-            }
-            
-            FROM = {
-                add_mil_power = -200
-            }
-        }
-        else_if = {
-            limit = {
-                owner = {
-                    total_development = 400
-                    NOT = { total_development = 600 }
-                }
-            }
-            
-            FROM = {
-                add_mil_power = -300
-            }
-        }
-        else_if = {
-            limit = {
-                owner = {
-                    total_development = 600
-                    NOT = { total_development = 800 }
-                }
-            }
-            
-            FROM = {
-                add_mil_power = -400
-            }
-        }
-        else_if = {
-            limit = {
-                owner = {
-                    total_development = 800
-                }
-            }
-            
-            FROM = {
-                add_mil_power = -500
             }
         }
     }
