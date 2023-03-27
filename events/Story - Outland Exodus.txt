@@ -1,0 +1,447 @@
+namespace = wwu_outland_exodus
+
+# Covers the creation of Sunfury and Coilskar in Outland after the Third War.
+
+# The Uneasy Alliance
+country_event = {
+	id = wwu_outland_exodus.1
+	title = wwu_outland_exodus.1.title
+	desc = wwu_outland_exodus.1.desc
+	picture = GARITHOS_eventPicture
+
+	trigger = {
+        NOT = { has_global_flag = kaelthas_uneasy_alliance }
+		OR = {
+            tag = A90 # Quel'Thalas
+            tag = A91 # Silvermoon
+            tag = F54 # Farstriders
+        }
+        
+        # The Lich King assaults Quel'Thalas, 
+        # or as fall check if Scourge presence in the homeland of Quel'Thalas
+        OR = {
+            has_global_flag = quelthalas_assaulted_by_lich_king
+            region_eversong_woods = {
+                OR = {
+                    owner = {
+                        religion = cult_of_the_damned
+                    }
+                }
+            }
+            region_isle_of_quel_danas = {
+                OR = {
+                    owner = {
+                        religion = cult_of_the_damned
+                    }
+                }
+            }
+            region_eversong_woods = {
+                OR = {
+                    owner = {
+                        religion = cult_of_the_damned
+                    }
+                }
+            }
+        }
+        
+        exists = P52 # Scourge of Lordaeron
+        exists = A25 # Lordaeron Remnants
+	}
+	
+	mean_time_to_happen = { 
+        months = 1 
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = kaelthas_uneasy_alliance }
+    }
+	
+	option = {
+		name = wwu_outland_exodus.1.option.a
+		
+        create_alliance = A25 # Lordaeron Remnants
+	}
+}
+
+# Garithos's Betrayal
+country_event = {
+	id = wwu_outland_exodus.2
+	title = wwu_outland_exodus.2.title
+	desc = wwu_outland_exodus.2.desc
+	picture = ABUSIVE_SERGEANT_eventPicture
+
+	trigger = {
+        NOT = { has_global_flag = kaelthas_garithos_betrayal }
+        
+		OR = {
+            tag = A90 # Quel'Thalas
+            tag = A91 # Silvermoon
+            tag = F54 # Farstriders
+        }
+        
+        OR = {
+            war_with = P52 # Scourge of Lordaeron
+            war_with = F21 # Deatholme
+        }
+        alliance_with = A25 # Lordaeron Remnants
+	}
+	
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = kaelthas_garithos_betrayal }
+    }
+	
+	option = {
+		name = wwu_outland_exodus.2.option.a
+		
+        trigger = {
+            exists = NJZ
+        }
+        
+        create_alliance = NJZ # Nazjatar
+        break_alliance = A25 # Lordaeron Remnants
+	}
+    option = {
+		name = wwu_outland_exodus.2.option.b
+		
+        add_country_modifier = {
+            name = event_massacred_by_the_scourge
+            duration = 9125
+        }
+	}
+}
+
+# Exodus to Outland (Blood Elf)
+country_event = {
+	id = wwu_outland_exodus.3
+	title = wwu_outland_exodus.3.title
+	desc = wwu_outland_exodus.3.desc
+	picture = UNSTABLE_PORTAL_eventPicture
+
+	trigger = {
+        has_global_flag = kaelthas_garithos_betrayal
+        NOT = { has_global_flag = kaelthas_exodus_to_outland }
+        
+		OR = {
+            tag = A90 # Quel'Thalas
+            tag = A91 # Silvermoon
+            tag = F54 # Farstriders
+        }
+        
+        # Outland has formed
+        has_global_flag = setup_outland
+        
+        # Illidari exists
+        exists = B87
+	}
+	
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = kaelthas_exodus_to_outland }
+    }
+	
+	option = {
+		name = wwu_outland_exodus.3.option.a
+        
+        hidden_effect = {
+            break_alliance = NJZ
+        }
+        
+        # Firewing Point
+        1644 = {
+            cede_province = A93
+            add_core = A93
+            
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 4
+            
+            change_religion = arcane
+            change_culture = culture_blood_elf
+            
+            add_or_improve_fort = yes
+        }
+        # Sanctum of the Stars
+        1666 = {
+            cede_province = A93
+            add_core = A93
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 2
+            
+            change_religion = arcane
+            change_culture = culture_blood_elf
+        }
+        # Falcon Watch
+        1597 = {
+            cede_province = A93
+            add_core = A93
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_religion = arcane
+            change_culture = culture_blood_elf
+        }
+	}
+    
+    after = {
+        A93 = {
+            country_event = { id = wwu_outland_exodus.4 days = 3 }
+        }
+        
+        country_event = { id = wwu_player_switch.108 days = 7 }
+    }
+}
+
+# The Sunfury
+country_event = {
+	id = wwu_outland_exodus.4
+	title = wwu_outland_exodus.4.title
+	desc = wwu_outland_exodus.4.desc
+	picture = UNSTABLE_PORTAL_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_outland_exodus.4.option.a
+        
+        reveal_all_discovery = yes
+        discover_outland = yes
+        
+        define_ruler = {
+            name = "Kael'thas"
+            dynasty = "Sunstrider"
+            adm = 6
+            dip = 6
+            mil = 6
+            age = 26
+            claim = 100
+        }
+        set_ruler_flag = is_immortal
+        set_ruler_flag = mage_personality
+        
+        add_ruler_spellcasting = yes
+        
+        set_capital = 1644
+        
+        add_country_modifier = {
+            name = "no_power_source"
+            duration = -1
+        }
+        
+        # Government
+        change_government = theocracy
+        add_government_reform = sunfury_command_reform
+        
+        # Spawn Boost
+        add_treasury = 8000
+        add_manpower = 50
+        add_adm_power = 800
+        add_dip_power = 800
+        add_mil_power = 800
+        
+        # Coilskar
+        if = {
+            limit = {
+                exists = P02
+            }
+            
+            create_alliance = P02
+            add_historical_friend = P02
+            
+            P02 = {
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+        
+        # Illidari
+        if = {
+            limit = {
+                exists = B87
+            }
+            
+            create_alliance = B87
+            add_historical_friend = B87
+            
+            B87 = { 
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+	}
+}
+
+# Exodus to Outland (Naga)
+country_event = {
+	id = wwu_outland_exodus.10
+	title = wwu_outland_exodus.10.title
+	desc = wwu_outland_exodus.10.desc
+	picture = UNSTABLE_PORTAL_eventPicture
+
+	trigger = {
+        NOT = { has_global_flag = lady_vashj_exodus_to_outland }
+        
+		tag = NJZ # Nazjatar
+        
+        # Coilskar created by Nazjatar contacting Illidan
+        has_global_flag = coilskar_created
+        
+        # Outland has formed
+        has_global_flag = setup_outland
+        
+        # Illidari exists
+        exists = B87
+	}
+	
+	mean_time_to_happen = { 
+        months = 12
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = lady_vashj_exodus_to_outland }
+    }
+	
+	option = {
+		name = wwu_outland_exodus.10.option.a
+        
+        # Coilskar Point
+        1668 = {
+            cede_province = P02
+            add_core = P02
+            
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 4
+            
+            change_religion = nzoth
+            change_culture = culture_vashjari
+        }
+        # Altar of Sha'tar
+        1670 = {
+            cede_province = P02
+            add_core = P02
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_religion = nzoth
+            change_culture = culture_vashjari
+        }
+	}
+    
+    after = {
+        P02 = {
+            country_event = { id = wwu_outland_exodus.11 }
+        }
+        
+        country_event = { id = wwu_player_switch.109 days = 7 }
+    }
+}
+
+# The Coilskar
+country_event = {
+	id = wwu_outland_exodus.11
+	title = wwu_outland_exodus.11.title
+	desc = wwu_outland_exodus.11.desc
+	picture = NAGA_SEA_WITCH_eventPicture
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_outland_exodus.11.option.a
+        
+        reveal_all_discovery = yes
+        discover_outland = yes
+        
+        define_ruler = {
+            name = "Vashj"
+            adm = 5
+            dip = 6
+            mil = 4
+            age = 100
+            claim = 100
+            female = yes
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = mage_personality
+        
+        add_ruler_spellcasting = yes
+        
+        # Government
+        change_government = theocracy
+        add_government_reform = coilskar_command_reform
+        
+        # Spawn Boost
+        add_treasury = 8000
+        add_manpower = 50
+        add_adm_power = 800
+        add_dip_power = 800
+        add_mil_power = 800
+        
+        # Sunfury
+        if = {
+            limit = {
+                exists = A93
+            }
+            
+            create_alliance = A93
+            add_historical_friend = A93
+            
+            A93 = {
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+        
+        # Illidari
+        if = {
+            limit = {
+                exists = B87
+            }
+            
+            create_alliance = B87
+            add_historical_friend = B87
+            
+            B87 = { 
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+	}
+}

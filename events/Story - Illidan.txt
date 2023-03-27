@@ -1,0 +1,762 @@
+namespace = wwu_illidan
+
+# Covers the creation of the Illidari and Ashtongue Deathsworn after the Third War, plus the story events regarding Illidan and Eye of Sargeras
+
+# Kil'jaeden's Bargain
+# -> Flavour event to indicate Illidan has started his Outland saga
+country_event = {
+	id = wwu_illidan.1
+	title = wwu_illidan.1.title
+	desc = wwu_illidan.1.desc
+	picture = ILLIDAN_STORMRAGE_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = illidan_kiljaeden_bargain }
+		ai = no # Show to the player
+        
+        # Archimonde is killed at Mt. Hyjal
+        has_global_flag = archimonde_dead
+        
+        # Outland exists
+        has_global_flag = setup_outland
+        
+        exists = P11 # Scourge exists
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = illidan_kiljaeden_bargain }
+    }
+	
+	option = {
+		name = wwu_illidan.1.option.a
+		
+        custom_tooltip = illidan_call_tt
+        
+        hidden_effect = {
+            set_global_flag = illidans_call
+        }
+	}
+}
+
+# Illidan's Naga
+# -> Flavour event to indicate that the Coilskar will be created in Outland
+country_event = {
+	id = wwu_illidan.2
+	title = wwu_illidan.2.title
+	desc = wwu_illidan.2.desc
+	picture = HUNGRY_NAGA_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = illidan_naga }
+		ai = no # Show to the player
+        
+        # Nazjatar has answered Illidan's Call
+        has_global_flag = coilskar_created
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = illidan_naga }
+    }
+	
+	option = {
+		name = wwu_illidan.2.option.a
+		
+        custom_tooltip = illidan_naga_tt
+	}
+}
+
+# The Eye of Sargeras
+# -> Flavour event to indicate Illidan has the Eye of Sargeras, and to allow the Scourge to respond
+country_event = {
+	id = wwu_illidan.3
+	title = wwu_illidan.3.title
+	desc = wwu_illidan.3.desc
+	picture = DEMONS_BITE_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = illidan_eye_of_sargeras_retrieved }
+		ai = no # Show to the player
+        
+        # 5 years after Illidan's Call
+        had_global_flag = {
+            flag = illidans_call
+            days = 3650
+        }
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = illidan_eye_of_sargeras_retrieved }
+    }
+	
+	option = {
+		name = wwu_illidan.3.option.a
+		
+        custom_tooltip = illidan_eye_of_sargeras_tt
+	}
+}
+
+# Illidan and the Eye of Sargeras
+# -> Event for Scourge to respond to the Eye of Sargeras, changes the chance of a good outcome if they spend manpower
+country_event = {
+	id = wwu_illidan.4
+	title = wwu_illidan.4.title
+	desc = wwu_illidan.4.desc
+	picture = INNER_DEMON_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = scourge_response_eye_of_sargeras }
+		tag = P11
+        
+        has_global_flag = illidan_eye_of_sargeras_retrieved
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = scourge_response_eye_of_sargeras }
+    }
+	
+	option = {
+		name = wwu_illidan.4.option.a
+        
+        custom_tooltip = illidan_scourge_assault_in_dalaran_tt
+        
+        add_manpower = -50
+        
+        hidden_effect = {
+            set_global_flag = scourge_disruption_to_illidan
+        }
+        
+        ai_chance = {
+            factor = 80
+        }
+	}
+    option = {
+		name = wwu_illidan.4.option.b
+		
+        custom_tooltip = illidan_scourge_ignore_tt
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+# Eye of Sargeras Unleashed
+# -> Applies the Eye of Sargeras effect, depending on whether Illidan manages to cast the spell.
+country_event = {
+	id = wwu_illidan.5
+	title = wwu_illidan.5.title
+	desc = wwu_illidan.5.desc
+	picture = DEMONIC_ILLIDAN_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = illidan_used_eye_of_sargeras }
+		ai = no # Show to player
+        
+        had_global_flag = {
+            flag = scourge_response_eye_of_sargeras
+            days = 365
+        }
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { 
+            set_global_flag = illidan_used_eye_of_sargeras 
+        
+            if = {
+                limit = {
+                    has_global_flag = scourge_disruption_to_illidan
+                }
+                random_list = {
+                    90 = {
+                        set_global_flag = eye_of_sargeras_disrupted
+                    }
+                    10 = {
+                        set_global_flag = eye_of_sargeras_worked
+                    }
+                }
+            }
+            else = {
+                random_list = {
+                    50 = {
+                        set_global_flag = eye_of_sargeras_disrupted
+                    }
+                    50 = {
+                        set_global_flag = eye_of_sargeras_worked
+                    }
+                }
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_illidan.5.option.a
+        
+        trigger = {
+            has_global_flag = eye_of_sargeras_disrupted
+        }
+        
+        custom_tooltip = illidan_eye_of_sargeras_disrupted_tt
+	}
+    option = {
+		name = wwu_illidan.5.option.b
+        
+        trigger = {
+            has_global_flag = eye_of_sargeras_worked
+        }
+        
+        custom_tooltip = illidan_eye_of_sargeras_worked_tt
+	}
+}
+
+# Frozen Throne Survives!
+# -> Event for Scourge if the Eye of Sargeras fails
+country_event = {
+	id = wwu_illidan.6
+	title = wwu_illidan.6.title
+	desc = wwu_illidan.6.desc
+	picture = INNER_DEMON_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = scourge_frozen_throne_safe }
+		tag = P11
+        
+        has_global_flag = eye_of_sargeras_disrupted
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = scourge_frozen_throne_safe }
+    }
+	
+	option = {
+		name = wwu_illidan.6.option.a
+        
+        add_stability = 1
+	}
+}
+
+# Frozen Throne Crumbles...
+# -> Event for Scourge if the Eye of Sargeras works
+country_event = {
+	id = wwu_illidan.7
+	title = wwu_illidan.7.title
+	desc = wwu_illidan.7.desc
+	picture = INNER_DEMON_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = scourge_frozen_throne_destroyed }
+		tag = P11
+        
+        has_global_flag = eye_of_sargeras_worked
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = scourge_frozen_throne_destroyed }
+    }
+	
+	option = {
+		name = wwu_illidan.7.option.a
+        
+        add_country_modifier = {
+            name = sargeras_eye_damage
+            duration = -1
+        }
+        
+        every_owned_province = {
+            add_devastation = 50
+        }
+        
+        # Scourge of Lordaeron
+        if = {
+            limit = {
+                exists = P52
+            }
+            P52 = {
+                add_country_modifier = {
+                    name = sargeras_eye_damage_arthas
+                    duration = -1
+                }
+            }
+        }
+	}
+}
+
+# Escape to Outland
+# -> Spawn event for the Illidari
+country_event = {
+	id = wwu_illidan.10
+	title = wwu_illidan.10.title
+	desc = wwu_illidan.10.desc
+	picture = DARK_PORTAL_eventPicture
+
+    major = yes
+    
+	trigger = {
+        NOT = { has_global_flag = illidari_spawned }
+		ai = no # Show to player
+        
+        had_global_flag = {
+            flag = illidan_used_eye_of_sargeras
+            days = 365
+        }
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { 
+            set_global_flag = illidari_spawned 
+        }
+    }
+	
+	option = {
+		name = wwu_illidan.10.option.a
+        
+        # Fel Wastes
+        1678 = {
+            cede_province = B87
+            add_core = B87
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_culture = culture_illidari
+            change_religion = fel
+        }
+        # Warden's Cage
+        1677 = {
+            cede_province = B87
+            add_core = B87
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_culture = culture_illidari
+            change_religion = fel
+        }
+        # Eclipse Point
+        1665 = {
+            cede_province = B87
+            add_core = B87
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_culture = culture_illidari
+            change_religion = fel
+        }
+        # Hand of Gul'dan
+        1669 = {
+            cede_province = B87
+            add_core = B87
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_culture = culture_illidari
+            change_religion = fel
+        }
+        # Sanctum of Stars
+        1666 = {
+            cede_province = B87
+            add_core = B87
+            
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+            
+            change_culture = culture_blood_elf
+            change_religion = fel
+        }
+	}
+    
+    after = {
+        B87 = {
+            country_event = { id = wwu_illidan.11 days = 3 }
+        }
+    }
+}
+
+# The Illidari
+country_event = {
+	id = wwu_illidan.11
+	title = wwu_illidan.11.title
+	desc = wwu_illidan.11.desc
+	picture = DEMONIC_ILLIDAN_eventPicture
+
+    is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_illidan.11.option.a
+        
+        reveal_all_discovery = yes
+        discover_outland = yes
+        
+        define_ruler = {
+            name = "Illidan" 
+            dynasty = "Stormrage" 
+            adm = 7
+            dip = 7
+            mil = 7
+            age = 100
+            claim = 100
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = demon_hunter_personality
+        
+        add_ruler_spellcasting = yes
+        
+        set_capital = 1678
+        
+        # Goverment
+        change_government = theocracy
+        add_government_reform = illidari_command_reform
+
+        # Spawn Boost
+        add_treasury = 8000
+        add_manpower = 50
+        add_adm_power = 800
+        add_dip_power = 800
+        add_mil_power = 800
+        
+        # Sunfury
+        if = {
+            limit = {
+                exists = A93
+            }
+            
+            create_alliance = A93
+            add_historical_friend = A93
+            
+            A93 = {
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+        
+        # Coilskar
+        if = {
+            limit = {
+                exists = P02
+            }
+            
+            create_alliance = P02
+            add_historical_friend = P02
+            
+            P02 = {
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+	}
+}
+
+# Akama and the Ashtongue Deathsworn
+country_event = {
+	id = wwu_illidan.12
+	title = wwu_illidan.12.title
+	desc = wwu_illidan.12.desc
+	picture = BLACK_TEMPLE_eventPicture
+
+    trigger = {
+        NOT = { has_global_flag = ashtongue_deathsworn_spawned }
+        tag = B87
+        owns = 4806 # Ruins of Karabor
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        set_global_flag = ashtongue_deathsworn_spawned 
+    }
+    
+	option = {
+		name = wwu_illidan.12.option.a
+        
+        # Ruins of Karabor
+        4806 = {
+            cede_province = A57
+            add_core = A57
+            
+            change_religion = shamanism
+            change_culture = culture_broken
+        }    
+    }
+    
+    after = {
+        A57 = {
+            country_event = { id = wwu_illidan.13 days = 3 }
+        }
+    }
+}
+
+# Ashtongue Deathsworn
+country_event = {
+	id = wwu_illidan.13
+	title = wwu_illidan.13.title
+	desc = wwu_illidan.13.desc
+	picture = BLACK_TEMPLE_eventPicture
+
+    is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_illidan.13.option.a
+        
+        define_ruler = {
+            name = "Akama"
+            dynasty = "of Karabor" 
+            adm = 5
+            dip = 6
+            mil = 5
+            age = 100
+            claim = 100
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = rogue_personality
+        
+        add_ruler_spellcasting = yes
+        
+        # Government
+        change_government = theocracy
+        add_government_reform = ashtongue_command_reform
+        
+        # Spawn Boost
+        add_treasury = 8000
+        add_manpower = 50
+        add_adm_power = 800
+        add_dip_power = 800
+        add_mil_power = 800
+        
+        # Illidari
+        if = {
+            limit = {
+                exists = B87
+            }
+            
+            create_alliance = B87
+            add_historical_friend = B87
+            
+            B87 = {
+                add_historical_friend = ROOT
+                set_ai_attitude = {
+                    attitude = attitude_friendly
+                    who = ROOT
+                    locked = yes
+                }
+            }
+        }
+    }
+}          
+
+# Magtheridon and the Fel Horde
+country_event = {
+	id = wwu_illidan.20
+	title = wwu_illidan.20.title
+	desc = wwu_illidan.20.desc
+	picture = PIT_LORD_eventPicture
+
+    major = yes
+    
+    trigger = {
+        NOT = { has_global_flag = fel_horde_spawned }
+        NOT = { exists = B89 }
+        
+        # Illidan's Story begins
+        has_global_flag = illidan_kiljaeden_bargain
+        
+        # Outland exists
+        has_global_flag = setup_outland
+        
+        # Show to the owner of Block Temple, or if it is empty, any nation in Outland
+        if = {
+            limit = {
+                1671 = {
+                    NOT = { is_empty = yes }
+                }
+            }
+            owns = 1671
+        }
+        else = {
+            any_country = {
+                capital_scope = {
+                    continent = continent_outland
+                }
+            }
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        set_global_flag = fel_horde_spawned 
+    }
+    
+	option = {
+		name = wwu_illidan.20.option.a
+        
+        # The Black Temple
+        1671 = {
+            cede_province = B89
+            add_core = B89
+            
+            change_religion = fel
+            change_culture = culture_fel_orc
+        }
+        # Ata'mal Terrace
+        4805 = {
+            cede_province = B89
+            add_core = B89
+            
+            change_religion = fel
+            change_culture = culture_fel_orc
+        }
+        # Black Temple Approach
+        4807 = {
+            cede_province = B89
+            add_core = B89
+            
+            change_religion = fel
+            change_culture = culture_fel_orc
+        }
+        # Ruins of Karabor
+        4806 = {
+            cede_province = B89
+            add_core = B89
+            
+            change_religion = fel
+            change_culture = culture_fel_orc
+        }    
+    }
+    
+    after = {
+        B89 = {
+            country_event = { id = wwu_illidan.21 days = 3 }
+        }
+    }
+}
+
+# Pit Lord Magtheridon
+country_event = {
+	id = wwu_illidan.21
+	title = wwu_illidan.21.title
+	desc = wwu_illidan.21.desc
+	picture = PIT_LORD_eventPicture
+
+    is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_illidan.21.option.a
+        
+        reveal_all_discovery = yes
+        discover_outland = yes
+        
+        define_ruler = { 
+            name = "Magtheridon" 
+            dynasty = "the Annihilan" 
+            adm = 5
+            dip = 4
+            mil = 6
+            age = 500
+            culture = culture_pit_lord
+        }
+        
+        setup_spellcaster_history = {
+            APTITUDE = 2
+            FINESSE = 2
+            CONCENTRATION = 2
+            MANA = 5
+            fel = yes
+        }
+        
+        set_ruler_flag = is_immortal
+        set_ruler_flag = warrior_personality
+        
+        set_capital = 1671
+        
+        # Government
+        change_government = tribal
+        add_government_reform = orc_clan_reform
+        add_government_reform = wwu_tribal_established_warband_reform
+
+        
+        # Spawn Boost
+        add_treasury = 8000
+        add_manpower = 50
+        add_adm_power = 800
+        add_dip_power = 800
+        add_mil_power = 800
+    }
+}   

@@ -469,16 +469,26 @@ wwu_nazjatar_column_5 = {
 	wwu_illidans_call = {
 		icon = mission_demonhunter_imprison
         position = 1
+        completed_by = 622.1.1 # Should not be usable after Frozen Throne date
         
 		required_missions = { }
         
 		trigger = {
-            exists = B87
+            had_global_flag = {
+                flag = illidans_call
+                days = 365
+            }
+            stability = 1
 		}
         
 		effect = {
 			discover_outland = yes
-            create_alliance = B87
+            
+            custom_tooltip = coilskar_faction_tt
+            
+            hidden_effect = {
+                set_global_flag = coilskar_created
+            }
 		}
 	}
 }
