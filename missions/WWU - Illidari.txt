@@ -8,11 +8,100 @@ wwu_illidari_column_1 = {
     
 	potential = {
 		tag = B87
+        NOT = { has_global_flag = illidan_lord_of_outland }
 	}
     
 	has_country_shield = yes
 	
+	wwu_seal_the_blood_elf_pact = {
+		icon = mission_ancient_tome
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            alliance_with = A93 # Sunfury
+            A93 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                tag = A93
+            }
+            is_capital = yes
+		}
+        
+		effect = {
+			create_subject = {
+                subject_type = vassal
+                subject = A93
+            }
+		}
+	}
     
+    wwu_seal_the_naga_pact = {
+		icon = mission_bones
+        position = 2
+        
+		required_missions = { }
+        
+		trigger = {
+            alliance_with = P02 # Coilskar
+            P02 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                tag = P02
+            }
+            is_capital = yes
+		}
+        
+		effect = {
+			create_subject = {
+                subject_type = vassal
+                subject = P02
+            }
+		}
+	}
+    
+    wwu_seal_akama_pact = {
+		icon = mission_curse
+        position = 3
+        
+		required_missions = { }
+        
+		trigger = {
+            alliance_with = A57 # Ashtongue Deathsworn
+            A57 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                tag = A57
+            }
+            is_capital = yes
+		}
+        
+		effect = {
+			create_subject = {
+                subject_type = vassal
+                subject = A57
+            }
+		}
+	}
 }
 
 wwu_illidari_column_2 = {
@@ -22,27 +111,57 @@ wwu_illidari_column_2 = {
     
 	potential = {
 		tag = B87
+        NOT = { has_global_flag = illidan_lord_of_outland }
 	}
     
 	has_country_shield = yes
 	
-	wwu_illidan_falters = {
-		icon = mission_cannibalize
-        position = 3
+	wwu_oust_the_remnants_of_magtheridon = {
+		icon = mission_demonhunter_eye_of_leotheras
+        position = 2
         
 		required_missions = { 
-            wwu_assault_the_frozen_throne
+            wwu_assault_the_black_temple
         }
         
 		trigger = {
-            custom_trigger_tooltip = {
-                tooltip = LOSE_FROZEN_THRONE_WAR_TT
-                has_global_flag = illidan_loser
+            region_shadowmoon_valley = {
+                type = all
+                owned_by = ROOT
             }
+		}
+		provinces_to_highlight = {
+            region = region_shadowmoon_valley
+			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			add_stability = -1
+			add_country_modifier = {
+                name = mission_black_temple_supremacy
+                duration = 9125
+            }
+		}
+	}
+    
+    wwu_are_we_prepared = {
+		icon = mission_demonhunter_felblade
+        position = 5
+        
+		required_missions = { 
+            wwu_prepare_the_rift
+        }
+        
+		trigger = {
+            army_size_percentage = 0.8
+            army_size = 30
+            manpower_percentage = 0.8
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_we_are_prepared
+                duration = 9125
+            }
 		}
 	}
 }
@@ -54,77 +173,135 @@ wwu_illidari_column_3 = {
     
 	potential = {
 		tag = B87
+        NOT = { has_global_flag = illidan_lord_of_outland }
 	}
     
 	has_country_shield = yes
 	
-	wwu_consolidate_forces = {
-		icon = mission_avatar_of_sargeras
+	wwu_assault_the_black_temple = {
+		icon = mission_demonhunter_eyebeam
         position = 1
+        completed_by = 622.1.1
         
-		required_missions = { }
+        required_missions = { }
         
 		trigger = {
-            stability = 1
-            is_at_war = no
-			current_age = age_burning_legion
-            army_size_percentage = 0.8
-            manpower_percentage = 0.8
+            owns_core_province = 1671
+		}
+		provinces_to_highlight = {
+            province_id = 1671
+			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
-			add_mil_power = 250
-            add_country_modifier = {
-                name = mission_we_are_prepared
-                duration = 10950
+            # Shattered Halls
+			4423 = {
+                cede_province = ROOT
+                add_core = ROOT
+            }
+            # Magtheridon's Lair
+            4422 = {
+                cede_province = ROOT
+                add_core = ROOT
+                
+                add_permanent_province_modifier = {
+                    name = mission_imprisoned_magtheridon
+                    duration = -1
+                }
+            }
+            # Hellfire Ramparts 
+            1591 = {
+                cede_province = ROOT
+                add_core = ROOT
+            }
+		}
+	}
+    
+    wwu_trick_kiljaeden = {
+		icon = mission_demonhunter_metamorphasis
+        position = 3
+        completed_by = 622.1.1
+        
+		required_missions = { 
+            wwu_oust_the_remnants_of_magtheridon
+            wwu_secure_the_illidari
+        }
+        
+		trigger = {
+            army_size_percentage = 0.8
+            owns_core_province = 1671 # Black Temple
+		}
+        
+		effect = {
+            country_event = { id = wwu_mission_illidari.1 days = 3 }
+		}
+	}
+    
+    wwu_prepare_the_rift = {
+		icon = mission_fel_immolation
+        position = 4
+        
+		required_missions = { 
+            wwu_trick_kiljaeden
+        }
+        
+		trigger = {
+            owns_core_province = 1665 # Eclipse Point
+		}
+        
+		effect = {
+            custom_tooltip = can_build_demonic_rift_conflagration_tt
+            
+            hidden_effect = {
+                set_country_flag = can_build_demonic_rift_conflagration
             }
 		}
 	}
     
     wwu_assault_the_frozen_throne = {
-		icon = mission_scourge
-        position = 2
+		icon = mission_demonhunter_imprison
+        position = 6
         
-		required_missions = { wwu_consolidate_forces }
+		required_missions = { 
+            wwu_are_we_prepared
+            wwu_expand_illidans_grasp
+        }
         
 		trigger = {
-            OR = {
-                custom_trigger_tooltip = {
-                    tooltip = SUNFURY_ARRIVED_TT
-                    has_global_flag = sunfury_arrived
+            1665 = {
+                has_great_project = {
+                    type = demonic_rift_conflagration
                 }
-                NOT = { exists = A93 }
             }
-            if = {
-                limit = {
-                    exists = P11
-                }
-                exists = P11
-            }
-            else = {
-                always = yes
-            }
+            exists = P11
 		}
         
 		effect = {
-            if = {
-                limit = {
-                    exists = P11
-                }
-                country_event = { id = wwu_mission_illidari.1 days = 30 }
+            country_event = { id = wwu_mission_illidari.2 days = 3 }
+            
+            P11 = {
+                country_event = { id = wwu_mission_illidari.3 days = 3 }
             }
-            else = {
-                custom_tooltip = SCOURGE_ALREADY_DEAD_TT
-                
-                add_prestige = 25
-                
-                hidden_effect = {
-                    set_global_flag = illidan_winner
-                }
-            }
-			
 		}
 	}
+    
+    # TODO: add the secondary tree
+    # wwu_illidari_lord_of_outland = {
+		# icon = mission_demonhunter_sigil
+        # position = 7
+        
+		# required_missions = { 
+            # wwu_assault_the_frozen_throne
+        # }
+        
+		# trigger = {
+            # has_global_flag = illidan_lord_of_outland
+		# }
+        
+		# effect = {
+            # swap_non_generic_missions = yes
+		# }
+	# }
 }
 
 wwu_illidari_column_4 = {
@@ -134,27 +311,79 @@ wwu_illidari_column_4 = {
     
 	potential = {
 		tag = B87
+        NOT = { has_global_flag = illidan_lord_of_outland }
 	}
     
 	has_country_shield = yes
 	
-	wwu_illidan_victorious = {
-		icon = mission_demonhunter_chaos_strike
-        position = 3
+	wwu_secure_the_illidari = {
+		icon = mission_demonhunter_fel_rush
+        position = 2
         
 		required_missions = { 
-            wwu_assault_the_frozen_throne
+            wwu_assault_the_black_temple
         }
         
 		trigger = {
-            custom_trigger_tooltip = {
-                tooltip = WIN_FROZEN_THRONE_WAR_TT
-                has_global_flag = illidan_winner
+            owns_core_province = 1674 # Shadowed Wastes 
+            owns_core_province = 1671 # Black Temple
+            
+            # Shadowed Wastes 
+            1674 = {
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+                
+                has_fort_building_trigger = yes
+            }
+            
+            # The Black Temple
+            1671 = {
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+                
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 1674
+                province_id = 1671
             }
 		}
         
 		effect = {
-			add_prestige = 100
+			add_stability = 1
+            add_prestige = 25
+            add_yearly_manpower = 3.0
+		}
+	}
+    
+    wwu_expand_illidans_grasp = {
+		icon = mission_demonhunter_consume_magic
+        position = 5
+        
+		required_missions = { 
+            wwu_prepare_the_rift
+        }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 20
+                
+                all_province = {
+                    owned_by = ROOT
+                    continent = continent_outland
+                }
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_illidans_grasp
+                duration = -1
+            }
 		}
 	}
 }
@@ -166,9 +395,140 @@ wwu_illidari_column_5 = {
     
 	potential = {
 		tag = B87
+        NOT = { has_global_flag = illidan_lord_of_outland }
 	}
     
 	has_country_shield = yes
 	
+	wwu_undermine_the_fel_orcs = {
+		icon = mission_demonhunter_chaos_strike
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 3
+                
+                all_country = {
+                    has_spy_network_from = {
+                        who = ROOT
+                        value = 50
+                    }
+                    primary_culture = culture_fel_orc
+                    religion = fel
+                    capital_scope = {
+                        continent = continent_outland
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                primary_culture = culture_fel_orc
+                religion = fel
+                capital_scope = {
+                    continent = continent_outland
+                }
+            }
+		}
+        
+		effect = {
+			every_country = {
+                limit = {
+                    primary_culture = culture_fel_orc
+                    religion = fel
+                    capital_scope = {
+                        continent = continent_outland
+                    }
+                }
+                
+                capital_scope = {
+                    spawn_rebels = {
+                        type = pretender_rebels
+                        size = 3
+                    }
+                }
+            }
+		}
+	}
     
+    wwu_purge_demonic_influence = {
+		icon = mission_fel_orc
+        position = 2
+        
+		required_missions = { 
+            wwu_undermine_the_fel_orcs
+        }
+        
+		trigger = {
+            region_terokkar_forest = {
+                type = all
+                owner = {
+                    NOT = { primary_culture = culture_fel_orc }
+                    NOT = { religion = fel }
+                }
+            }
+            region_shadowmoon_valley = {
+                type = all
+                owner = {
+                    NOT = { primary_culture = culture_fel_orc }
+                    NOT = { religion = fel }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                region = region_terokkar_forest
+                region = region_shadowmoon_valley
+            }
+            owner = {
+                primary_culture = culture_fel_orc
+                religion = fel
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_waning_demonic_influence
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_master_of_the_dark_portal = {
+		icon = mission_dark_portal
+        position = 3
+        
+		required_missions = { 
+            wwu_purge_demonic_influence
+        }
+        
+		trigger = {
+            owns_core_province = 1586 # Dark Portal
+            
+            region_hellfire_peninsula = {
+                type = all
+                owner = {
+                    NOT = { primary_culture = culture_fel_orc }
+                    NOT = { religion = fel }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_hellfire_peninsula
+            
+            owner = {
+                primary_culture = culture_fel_orc
+                religion = fel
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_lord_of_outland
+                duration = -1
+            }
+		}
+	}
 }

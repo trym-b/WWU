@@ -1,192 +1,107 @@
 namespace = wwu_mission_illidari
 
-# Illidan Assaults the Frozen Throne
+# Covers the events for Illidari once he is established in Outland
+
+# Illidan's Trickery
 country_event = {
 	id = wwu_mission_illidari.1
 	title = wwu_mission_illidari.1.title
 	desc = wwu_mission_illidari.1.desc
-	picture = UNDEAD_ASSAULT_eventPicture
-
-    major = yes
+	picture = DEMONIC_PRESENCE_eventPicture
+    
 	is_triggered_only = yes
 
 	mean_time_to_happen = { 
         days = 1 
     }
     
-    immediate = {
-        hidden_effect = {
-            # Reveal Northrend and EK
-            discover_eastern_kingdoms = yes
-            discover_northrend = yes
-            
-            # Scourge
-            P11 = {
-                country_event = { id = wwu_mission_illidari.2 }
-            }
-            
-            # Scourge of Lordaeron
-            if = {
-                limit = {
-                    exists = P52
-                }
-                P52 = {
-                    country_event = { id = wwu_mission_illidari.3 }
-                }
-            }
-            
-            # Cult of the Damned
-            if = {
-                limit = {
-                    exists = P12
-                }
-                P12 = {
-                    country_event = { id = wwu_mission_illidari.4 }
-                }
-            }
-        }
-    }
-    
-	option = {
+    option = {
 		name = wwu_mission_illidari.1.option.a
-		
-        # Declare war upon the Scourge
-        declare_war = P11
         
-        # Make Illidan a general
-        define_ruler_to_general = {
-            fire = 6
-            shock = 6
-            manuever = 7
-            siege = 4
-        }
-        
-        # Coilskar
-        if = {
-            limit = {
-                exists = P02
-            }
-            P02 = {
-                country_event = { id = wwu_mission_illidari.5 }
-            }
-        }
-        
-        # Sunfury
-        if = {
-            limit = {
-                exists = A93
-            }
-            A93 = {
-                country_event = { id = wwu_mission_illidari.5 }
-            }
-        }
-        
-        # The Conflagration
-        3256 = {
-            spawn_infantry = {
-                AMOUNT = 12
-                TAG = ROOT
-            }
-            spawn_cavalry = {
-                AMOUNT = 2
-                TAG = ROOT
-            }
-            spawn_artillery = {
-                AMOUNT = 2
-                TAG = ROOT
-            }
-        }
-        
-        # The Fleshwerks
-        726 = {
-            if = {
-                limit = {
-                    exists = A93 # Sunfury
-                }
-                
-                spawn_infantry = {
-                    AMOUNT = 8
-                    TAG = A93
-                }
-                spawn_cavalry = {
-                    AMOUNT = 2
-                    TAG = A93
-                }
-                spawn_artillery = {
-                    AMOUNT = 2
-                    TAG = A93
-                }
-            }
-        }
-        
-        # The Conflagration Entrance
-        523 = {
-            if = {
-                limit = {
-                    exists = P02 # Coilskar
-                }
-                
-                spawn_infantry = {
-                    AMOUNT = 8
-                    TAG = P02
-                }
-                spawn_cavalry = {
-                    AMOUNT = 2
-                    TAG = P02
-                }
-                spawn_artillery = {
-                    AMOUNT = 2
-                    TAG = P02
-                }
-            }
-        }
-	}
-        
-    after = {
-        hidden_effect = { set_global_flag = illidan_monitor_war }
+        add_prestige = 25
     }
 }
 
-# Illidan's Assault (Scourge)
+# Assault the Frozen Throne
 country_event = {
 	id = wwu_mission_illidari.2
 	title = wwu_mission_illidari.2.title
 	desc = wwu_mission_illidari.2.desc
 	picture = ILLIDAN_STORMRAGE_eventPicture
     
-    is_triggered_only = yes
-    
-    mean_time_to_happen = { 
+	is_triggered_only = yes
+
+	mean_time_to_happen = { 
         days = 1 
     }
     
-	option = {
+    option = {
 		name = wwu_mission_illidari.2.option.a
         
-        add_stability = -1
+        # Make Illidan a general (not linked to ruler so he doesn't die)
+        define_general = {
+            name = "Illidan"
+            fire = 6
+            shock = 6
+            manuever = 7
+            siege = 4
+        }
+        
+        declare_war_with_cb = {
+            who = P11
+            casus_belli = cb_illidans_assault
+        }
+        
+        hidden_effect = {
+            set_global_flag = illidan_monitor_war
+        }
+    }
+}
+
+# Illidan's Assault
+country_event = {
+	id = wwu_mission_illidari.3
+	title = wwu_mission_illidari.3.title
+	desc = wwu_mission_illidari.3.desc
+	picture = INNER_DEMON_eventPicture
+    
+	is_triggered_only = yes
+
+	mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    option = {
+		name = wwu_mission_illidari.3.option.a
+        
         define_heir = {
-            male = yes
-            age = 30
-            dynasty = "Menethil"
             name = "Arthas"
+            dynasty = "Menethil"
+            age = 30
             claim = 100
             adm = 6
             dip = 6
             mil = 6
+            male = yes
         }
+        
         set_heir_flag = is_immortal
         set_heir_flag = death_knight_personality
         add_heir_personality = ruthless_personality
+        
         add_country_modifier = {
             name = frostmourne
             duration = -1
         }
-        define_heir_to_general = {
+        
+        define_general = {
+            name = "Arthas Menethil"
             shock = 6
             fire = 6
             manuever = 6
             siege = 6
         }
+        
         define_general = {
             name = "Anub'Arak"
             shock = 7
@@ -194,145 +109,7 @@ country_event = {
             manuever = 7
             siege = 5
         }
-        
-        # The Frozen Throne
-        1268 = {
-            spawn_infantry = {
-                AMOUNT = 10
-                TAG = ROOT
-            }
-            spawn_cavalry = {
-                AMOUNT = 4
-                TAG = ROOT
-            }
-            spawn_artillery = {
-                AMOUNT = 3
-                TAG = ROOT
-            }
-        }
-        
-        # Lose control over most Northrend lands
-        every_owned_province = {
-            limit = {
-                continent = continent_northrend
-                NOT = { area = area_icecrown_interior }
-            }
-            change_controller = B87 # Illidari
-        }
-        
-        # Restore control of Icecrown Citadel lands if they are not controlled by ROOT
-        area_icecrown_approach = {
-            change_controller = P11 # Scourge
-        }
-	}
-}
-
-# Illidan's Assault (Scourge of Lordaeron)
-country_event = {
-	id = wwu_mission_illidari.3
-	title = wwu_mission_illidari.3.title
-	desc = wwu_mission_illidari.3.desc
-	picture = ILLIDAN_STORMRAGE_eventPicture
-    
-    is_triggered_only = yes
-    
-    mean_time_to_happen = { 
-        days = 1 
     }
-    
-	option = {
-		name = wwu_mission_illidari.3.option.a
-        
-        remove_country_modifier = frostmourne
-        remove_country_modifier = sargeras_eye_damage_arthas
-        
-        define_ruler = {
-            name = "Kel'Thuzad"
-            adm = 6
-            dip = 6
-            mil = 6
-        }
-        set_ruler_flag = is_immortal
-        set_ruler_flag = mage_personality
-        add_ruler_personality = cruel_personality
-	}
-}
-
-# Illidan's Assault (Cult of the Damned)
-country_event = {
-	id = wwu_mission_illidari.4
-	title = wwu_mission_illidari.4.title
-	desc = wwu_mission_illidari.4.desc
-	picture = ILLIDAN_STORMRAGE_eventPicture
-    
-    is_triggered_only = yes
-    
-    mean_time_to_happen = { 
-        days = 1 
-    }
-    
-	option = {
-		name = wwu_mission_illidari.4.option.a
-        
-        if = {
-            limit = {
-                has_ruler = "Kel'Thuzad"
-            }
-            kill_ruler = yes
-        }
-	}
-}
-
-# Illidan's Assault (Allies)
-country_event = {
-	id = wwu_mission_illidari.5
-	title = wwu_mission_illidari.5.title
-	desc = wwu_mission_illidari.5.desc
-	picture = ILLIDAN_STORMRAGE_eventPicture
-    
-    is_triggered_only = yes
-    
-    mean_time_to_happen = { 
-        days = 1 
-    }
-    
-	option = {
-		name = wwu_mission_illidari.5.option.a
-        
-        if = {
-            limit = {
-                tag = A93 # Sunfury
-            }
-            
-            define_ruler_to_general = {
-                fire = 6
-                shock = 6
-                manuever = 5
-                siege = 5
-            }
-        }
-        
-        if = {
-            limit = {
-                tag = P02 # Coilskar
-            }
-            
-            define_ruler_to_general = {
-                fire = 7
-                shock = 4
-                manuever = 5
-                siege = 3
-            }
-        }
-        
-        join_all_offensive_wars_of = B87 # Illidari
-        
-        # Reveal Northrend and EK
-        hidden_effect = {
-            discover_eastern_kingdoms = yes
-            discover_northrend = yes
-        }
-	}
 }
 
 # Failure in Icecrown
@@ -363,6 +140,10 @@ country_event = {
 		name = wwu_mission_illidari.10.option.a
         
         add_prestige = -25
+        
+        hidden_effect = {
+            set_global_flag = illidan_lord_of_outland
+        }
 	}
 }
 
@@ -393,7 +174,17 @@ country_event = {
 	option = {
 		name = wwu_mission_illidari.11.option.a
         
+        add_prestige = 200
+        add_mil_power = 800
+        
+        # This dismantles the Scourge
         destroy_helm_of_domination = yes
+        
+        # This allows Shadowlands to interact with Azeroth
         expose_shadowlands = yes
+        
+        hidden_effect = {
+            set_global_flag = illidan_lord_of_outland
+        }
 	}
 }
