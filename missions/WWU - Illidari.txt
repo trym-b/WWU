@@ -50,8 +50,8 @@ wwu_illidari_column_1 = {
 		required_missions = { }
         
 		trigger = {
-            alliance_with = P02 # Coilskar
-            P02 = {
+            alliance_with = COL # Coilfang
+            COL = {
                 has_opinion = {
                     who = ROOT
                     value = 180
@@ -60,7 +60,7 @@ wwu_illidari_column_1 = {
 		}
 		provinces_to_highlight = {
             owner = {
-                tag = P02
+                tag = COL
             }
             is_capital = yes
 		}
@@ -68,7 +68,7 @@ wwu_illidari_column_1 = {
 		effect = {
 			create_subject = {
                 subject_type = vassal
-                subject = P02
+                subject = COL
             }
 		}
 	}
@@ -407,46 +407,34 @@ wwu_illidari_column_5 = {
 		required_missions = { }
         
 		trigger = {
-            calc_true_if = {
-                amount = 3
-                
-                all_country = {
+            OR = {
+                B89 = {
                     has_spy_network_from = {
                         who = ROOT
-                        value = 25
-                    }
-                    primary_culture = culture_fel_orc
-                    religion = fel
-                    capital_scope = {
-                        continent = continent_outland
+                        value = 50
                     }
                 }
+                NOT = { exists = B89 }
             }
 		}
 		provinces_to_highlight = {
+            is_capital = yes
             owner = {
-                primary_culture = culture_fel_orc
-                religion = fel
-                capital_scope = {
-                    continent = continent_outland
-                }
+                tag = B89
             }
 		}
         
 		effect = {
-			every_country = {
+            if = {
                 limit = {
-                    primary_culture = culture_fel_orc
-                    religion = fel
-                    capital_scope = {
-                        continent = continent_outland
-                    }
+                    exists = B89
                 }
-                
-                capital_scope = {
-                    spawn_rebels = {
-                        type = pretender_rebels
-                        size = 3
+                B89 = {
+                    capital_scope = {
+                        spawn_rebels = {
+                            type = pretender_rebels
+                            size = 3
+                        }
                     }
                 }
             }
@@ -462,35 +450,16 @@ wwu_illidari_column_5 = {
         }
         
 		trigger = {
-            region_terokkar_forest = {
-                type = all
-                owner = {
-                    NOT = { primary_culture = culture_fel_orc }
-                    OR = {
-                        NOT = { religion = fel }
-                        tag = ROOT
-                    }
-                }
-            }
-            region_shadowmoon_valley = {
-                type = all
-                owner = {
-                    NOT = { primary_culture = culture_fel_orc }
-                    OR = {
-                        NOT = { religion = fel }
-                        tag = ROOT
-                    }
-                }
-            }
+            NOT = { exists = A39 }
+            NOT = { exists = A34 }
 		}
 		provinces_to_highlight = {
-            OR = {
-                region = region_terokkar_forest
-                region = region_shadowmoon_valley
-            }
+            is_capital = yes
             owner = {
-                primary_culture = culture_fel_orc
-                religion = fel
+                OR = {
+                    tag = A39
+                    tag = A34
+                }
             }
 		}
         
@@ -512,24 +481,17 @@ wwu_illidari_column_5 = {
         
 		trigger = {
             owns_core_province = 1586 # Dark Portal
-            
-            region_hellfire_peninsula = {
-                type = all
-                owner = {
-                    NOT = { primary_culture = culture_fel_orc }
-                    OR = {
-                        NOT = { religion = fel }
-                        tag = ROOT
-                    }
-                }
-            }
+            NOT = { exists = B89 }
 		}
 		provinces_to_highlight = {
-            region = region_hellfire_peninsula
-            
-            owner = {
-                primary_culture = culture_fel_orc
-                religion = fel
+            OR = {
+                AND = {
+                    is_capital = yes
+                    owner = {
+                        tag = B89
+                    }
+                }
+                province_id = 1586
             }
 		}
         
