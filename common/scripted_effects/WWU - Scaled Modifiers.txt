@@ -1,0 +1,57 @@
+# Usage
+# set_variable = { which = example_var value = 0.01 }
+# apply_scaling_modifier = yes
+
+# Example
+apply_example_scaling_modifier = {
+    if = {
+        limit = {
+            check_variable = { which = example_var value = 0.001 }
+        }
+        
+        set_variable        = { which = example_var_disp which = example_var }
+        multiply_variable   = { which = example_var_disp value = 0.1 }
+        multiply_variable   = { which = example_var_disp value = 1000 }
+        
+        add_country_modifier = { name = example_display duration = -1 }
+        
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.128 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.64 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.32 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.16 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.08 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.04 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.02 }
+        apply_scaling_mod_inner = { mod = example var = example_var num = 0.01 }
+    } 
+    else_if = {
+        limit = { 
+            has_country_modifier = example_display 
+        }
+        
+        set_variable = { which = example_var_disp value = 0 }
+        
+        remove_country_modifier = example_display
+        remove_country_modifier = example_0.128
+        remove_country_modifier = example_0.64
+        remove_country_modifier = example_0.32
+        remove_country_modifier = example_0.16
+        remove_country_modifier = example_0.08
+        remove_country_modifier = example_0.04
+        remove_country_modifier = example_0.02
+        remove_country_modifier = example_0.01
+    }
+}
+
+apply_scaling_mod_inner = {
+    if = {
+        limit = { 
+            check_variable = { which = $var$ value = $num$ } 
+        }
+        subtract_variable = { which = $var$ value = $num$ }
+        add_country_modifier = { name = $mod$_$num$ duration = -1 hidden = yes }
+    } 
+    else = {
+        remove_country_modifier = $mod$_$num$
+    }
+}
