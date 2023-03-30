@@ -43,6 +43,7 @@ on_startup = {
         wwu_zandalar.100    # Zandalar Setup
         wwu_game_configuration.100 # Default Configuration
         wwu_doctrine.100    # Default
+        wwu_terrain_affinity.100
 	}
 }
 
@@ -1728,6 +1729,9 @@ on_monthly_pulse = {
 		log = "DEBUG - [Root.GetName]: on_monthly_pulse "
 	}
     
+    events = {
+        wwu_terrain_affinity.100
+    }
 }
 
 on_yearly_pulse = {
@@ -2084,15 +2088,6 @@ on_thri_yearly_pulse_2 = {
 		log = "DEBUG - [Root.GetName]: on_thri_yearly_pulse_2 "
 	}
     
-    random_events = {
-		50 = 0
-
-        # Local Concern events
-		100 = wwu_lc_bandits.2  
-		100 = wwu_lc_orcs.2     
-		100 = wwu_lc_murlocs.2  
-		100 = wwu_lc_gnolls.2   
-	}
 }
 
 on_thri_yearly_pulse_3 = {
@@ -2279,9 +2274,6 @@ on_four_year_pulse_2 = {
 		log = "DEBUG - [Root.GetName]: on_four_year_pulse_2 "
 	}
     
-	events = {
-        wwu_lc_main.1 # Local Concern Spawner
-    }
 }
 
 on_four_year_pulse_3 = {
@@ -3061,6 +3053,8 @@ on_province_owner_change = {
     on_province_owner_change_estate_privileges_effect = yes
     update_government_reforms_on_province_change = yes
     
+    remove_terrain_affinity = yes
+    
 	owner = {
 		change_variable = {
 			which = provinces_gained
@@ -3837,6 +3831,8 @@ on_conquest = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_conquest "
 	}
     
+    remove_terrain_affinity = yes
+    
 	remove_named_unrest = estate_land_seized
 	clr_province_flag = has_estate_unrest_flag
 }
@@ -3847,6 +3843,9 @@ on_country_creation = {
 		log = "DEBUG - [Root.GetName]: on_country_creation "
 	}
     
+    events = {
+        wwu_terrain_affinity.100
+    }
 }
 
 on_federation_leader_change = {
