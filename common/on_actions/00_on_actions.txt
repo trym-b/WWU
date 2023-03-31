@@ -610,7 +610,42 @@ on_siege_won_country = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_siege_won_country "
 	}
     
-    
+    if = {
+        limit = {
+            has_country_flag = relentless_conqueror_flag
+        }
+        
+        if = {
+            limit = {
+                FROM = {
+                    NOT = { is_capital = yes }
+                    owner = {
+                        war_with = ROOT
+                    }
+                }
+            }
+            FROM = {
+                cede_province = ROOT
+            }
+            
+            # Add AE with every nation currently at war, or on the same continent as ROOT
+            every_country = {
+                limit = {
+                    NOT = { alliance_with = ROOT }
+                    OR = {
+                        war_with = ROOT
+                        same_continent = ROOT
+                    }
+                }
+                
+                add_aggressive_expansion = {
+                    who = ROOT
+                    value = 2
+                    apply_calc = yes
+                }
+            }
+        }
+    }
     
     if = {
         limit = {

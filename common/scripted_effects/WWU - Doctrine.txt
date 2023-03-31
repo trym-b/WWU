@@ -52,6 +52,35 @@ siege_doctrine_effect = {
                 }
                 
                 change_controller = FROM
+                
+                # Relentless Conquest
+                if = {
+                    limit = {
+                        FROM = {
+                            has_country_flag = relentless_conqueror_flag
+                        }
+                        NOT = { is_capital = yes }
+                    }
+                    
+                    cede_province = FROM
+                    
+                    # Add AE with every nation currently at war, or on the same continent as ROOT
+                    every_country = {
+                        limit = {
+                            NOT = { alliance_with = FROM }
+                            OR = {
+                                war_with = FROM
+                                same_continent = FROM
+                            }
+                        }
+                        
+                        add_aggressive_expansion = {
+                            who = FROM
+                            value = 2
+                            apply_calc = yes
+                        }
+                    }
+                }
             }
         }
     }
@@ -196,6 +225,35 @@ siege_doctrine_effect = {
                     }
                     
                     change_controller = FROM
+                    
+                    # Relentless Conquest
+                    if = {
+                        limit = {
+                            FROM = {
+                                has_country_flag = relentless_conqueror_flag
+                            }
+                            NOT = { is_capital = yes }
+                        }
+                        
+                        cede_province = FROM
+                        
+                        # Add AE with every nation currently at war, or on the same continent as ROOT
+                        every_country = {
+                            limit = {
+                                NOT = { alliance_with = FROM }
+                                OR = {
+                                    war_with = FROM
+                                    same_continent = FROM
+                                }
+                            }
+                            
+                            add_aggressive_expansion = {
+                                who = FROM
+                                value = 2
+                                apply_calc = yes
+                            }
+                        }
+                    }
                 }
             }
         }
