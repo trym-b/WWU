@@ -1,0 +1,786 @@
+namespace = wwu_zandalar_pandaria_invasion
+
+# War Preparations
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.1
+	title = wwu_zandalar_pandaria_invasion.1.title
+	desc = wwu_zandalar_pandaria_invasion.1.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    # Resources for expeditions to Lei Shen's tomb
+	option = {
+		name = wwu_zandalar_pandaria_invasion.1.option.a
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+                }
+                adm_power = 25
+                dip_power = 25
+                mil_power = 25
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_1_a
+
+			hidden_effect = {
+                add_adm_power = -25
+                add_dip_power = -25
+                add_mil_power = -25
+                
+                change_variable = {
+                    which = zandalar_mogu_war_prep_1
+                    value = 1
+                }
+                
+                country_event = { id = wwu_zandalar_pandaria_invasion.100 }
+            }
+        }
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_1
+                        value = 4
+                    }
+			    }
+                NOT = {
+                    adm_power = 25
+                    dip_power = 25
+                    mil_power = 25
+                }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_1_b
+			clr_country_flag = mogu_prepare_to_war_already_open
+        }
+        
+		if = {
+            limit = {
+                check_variable = {
+                    which = zandalar_mogu_war_prep_1
+                    value = 4
+                }
+            }
+            
+            custom_tooltip = zandalar_mogu_war_prep_1_c
+            clr_country_flag = mogu_prepare_to_war_already_open
+		}
+    }
+	
+    # Sending troops to garrisons
+	option = {
+		name = wwu_zandalar_pandaria_invasion.1.option.b
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+                }
+                
+                # Warport Rastari
+				2611 = {
+                    infantry_in_province = 10
+				}
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_2_a
+
+			hidden_effect = {
+                # Warport Rastari
+				2611 = {
+                    kill_units = {
+                        who = ROOT
+                        type = infantry	
+                        amount = 10
+                    }
+                }
+                
+                country_event = { id = wwu_zandalar_pandaria_invasion.100 }
+                
+                change_variable = {
+                    which = zandalar_mogu_war_prep_2
+                    value = 1
+                }
+            }
+        }
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_2
+                        value = 10
+                    }
+                }
+				NOT = {
+                    # Warport Rastari
+                    2611 = {
+                        infantry_in_province = 10
+                    }
+                }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_2_b
+            clr_country_flag = mogu_prepare_to_war_already_open
+        }
+        
+		if = {
+            limit = {
+                check_variable = {
+                    which = zandalar_mogu_war_prep_2
+                    value = 10
+                }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_2_c
+            clr_country_flag = mogu_prepare_to_war_already_open
+		}
+    }
+
+    # Sending reservists to garrisons
+	option = {
+		name = wwu_zandalar_pandaria_invasion.1.option.c
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+                }
+                manpower = 10
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_3_a
+
+			hidden_effect = {
+                add_manpower = -10
+                
+                change_variable = {
+                    which = zandalar_mogu_war_prep_3
+                    value = 1
+                }
+                
+                country_event = { id = wwu_zandalar_pandaria_invasion.100 }
+            }
+        }
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_3
+                        value = 10
+                    }
+                }
+				NOT = { manpower = 10 }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_3_b
+            clr_country_flag = mogu_prepare_to_war_already_open
+        }
+        
+		if = {
+            limit = {
+                check_variable = {
+                    which = zandalar_mogu_war_prep_3
+                    value = 10
+                }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_3_c
+            clr_country_flag = mogu_prepare_to_war_already_open
+		}
+    }
+	
+    # Accumulation of funds
+	option = {
+		name = wwu_zandalar_pandaria_invasion.1.option.d
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
+                }
+                treasury = 200
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_4_a
+
+			hidden_effect = {
+                add_treasury = -200
+                
+                change_variable = {
+                    which = zandalar_mogu_war_prep_4
+                    value = 1
+                }
+                
+                country_event = { id = wwu_zandalar_pandaria_invasion.100 }
+            }
+        }
+        
+		if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                        which = zandalar_mogu_war_prep_4
+                        value = 10
+                    }
+                }
+				NOT = { treasury = 200 }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_4_b
+            clr_country_flag = mogu_prepare_to_war_already_open
+        }
+        
+		if = {
+            limit = {
+                check_variable = {
+                    which = zandalar_mogu_war_prep_4
+                    value = 10
+                }
+            }
+            
+			custom_tooltip = zandalar_mogu_war_prep_4_c
+            clr_country_flag = mogu_prepare_to_war_already_open
+		}
+    }
+	
+    # Back
+	option = {
+		name = wwu_zandalar_pandaria_invasion.1.option.x
+        
+        clr_country_flag = mogu_prepare_to_war_already_open
+	}
+}
+			
+# Pandaria's Great War            
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.10
+	title = wwu_zandalar_pandaria_invasion.10.title
+	desc = wwu_zandalar_pandaria_invasion.10.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_zandalar_pandaria_invasion.10.option.a
+        
+		custom_tooltip = zandalar_mogu_war_start_tt
+        
+		hidden_effect = {
+            # Zouchin Village
+            1904 = {
+                cede_province = ZFC
+                add_core = ZFC
+            }
+            
+			create_march = ZFC
+            
+            add_country_modifier = { 
+                name = thunderking_lookingfor_cooldown
+                duration = 700
+                hidden = yes
+            }
+            
+            discover_zandalar = yes
+            discover_pandaria = yes
+            discover_paradise_isles = yes
+        }
+    }
+    
+    after = {
+        ZFC = {
+            country_event = { id = wwu_zandalar_pandaria_invasion.11 days = 1 }
+        }
+        
+        country_event = { id = wwu_zandalar_pandaria_invasion.12 days = 60 }
+    }
+}          
+		
+# Zul's Expedition
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.11
+    title = wwu_zandalar_pandaria_invasion.11.title
+	desc = wwu_zandalar_pandaria_invasion.11.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    trigger = {
+        tag = ZFC
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+        
+    option = {
+        name = wwu_zandalar_pandaria_invasion.11.option.a
+        
+        capital_scope = {
+            spawn_infantry = {
+                AMOUNT = 80
+                TAG = ZFC
+            }
+            spawn_cavalry = {
+                AMOUNT = 10
+                TAG = ZFC
+            }
+            spawn_artillery = {
+                AMOUNT = 10
+                TAG = ZFC
+            }
+        }
+    
+        define_general = {
+            shock = 6
+            fire = 5
+            manuever = 4
+            siege = 5
+            name = "Vilnak'dor"
+        }
+        
+        define_ruler = {
+            name = "Prophet Zul"
+            dynasty = "Zandalar"
+            adm = 6
+            dip = 6
+            mil = 6
+            age = 50
+            claim = 95
+        }
+        
+        add_treasury = 5000
+        add_manpower = 100
+        
+        add_country_modifier = {
+            name = zandalar_invasion_force_upgrade
+            duration = 7000
+            hidden = yes
+        }
+    }
+}
+
+# War in Pandaria
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.12
+    title = wwu_zandalar_pandaria_invasion.12.title
+	desc = wwu_zandalar_pandaria_invasion.12.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+        
+    option = {
+        name = wwu_zandalar_pandaria_invasion.12.option.a
+        
+        set_country_flag = zandalar_war_against_pandaria_started
+            
+        declare_war_with_cb = {
+            who = GOL
+            casus_belli = cb_zandalar_war_against_pandaria
+        }
+        
+        every_country = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_jinyu
+                    culture_group = culture_group_hozen
+                    culture_group = culture_group_pandaren
+                }
+            }
+            join_all_defensive_wars_of = GOL
+        }
+        
+        every_country = {
+            limit = {
+                OR = {
+                    is_subject_of = ROOT
+                    culture_group = culture_group_mogu
+                    has_country_flag = zandalari_troll_meeting_drakkari_joined
+                    has_country_flag = zandalari_troll_meeting_farraki_joined
+                    has_country_flag = zandalari_troll_meeting_gurubashi_joined
+                    has_country_flag = zandalari_troll_meeting_amani_joined
+                }
+            }
+            join_all_offensive_wars_of = A78
+        }
+    }
+}
+
+# Partition of Pandaria
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.20
+    title = wwu_zandalar_pandaria_invasion.20.title
+	desc = wwu_zandalar_pandaria_invasion.20.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78
+        has_country_flag = zandalar_war_against_pandaria_started
+        
+		is_at_war = no
+        
+		OR = {
+            has_country_flag = zandalar_war_against_pandaria_win
+            has_country_flag = zandalar_war_against_pandaria_lost
+        }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.20.option.a
+        
+        inherit = ZFC
+		
+		hidden_effect = {
+            # Zouchin Village
+            1904 = {
+                remove_core = ZFC
+            }
+        }
+        
+		if = {
+            limit = {
+                has_country_flag = zandalar_war_against_pandaria_win
+            }
+            
+		    add_country_modifier = { 
+                name = zandalari_mogu_win_war_for_zandalar
+                duration = 18250
+            }
+            
+            # Fate of X
+            country_event = { id = wwu_zandalar_pandaria_invasion.21 days = 3 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.22 days = 6 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.23 days = 9 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.24 days = 12 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.25 days = 15 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.26 days = 18 }
+            country_event = { id = wwu_zandalar_pandaria_invasion.27 days = 21 }
+		}
+		if = {
+            limit = {
+                has_country_flag = zandalar_war_against_pandaria_lost
+            }
+            
+            add_stability = -1
+            
+            increase_zul_power_by_15 = yes
+            increase_zul_influence_by_10 = yes
+        }
+    }
+}
+    
+# Fate of the Shado-Pan
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.21
+    title = wwu_zandalar_pandaria_invasion.21.title
+	desc = wwu_zandalar_pandaria_invasion.21.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.21.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P37 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.21.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P37 }
+    }
+}
+
+# Fate of Xu'en
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.22
+    title = wwu_zandalar_pandaria_invasion.22.title
+	desc = wwu_zandalar_pandaria_invasion.22.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.22.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P66 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.22.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P66 }
+    }
+}
+
+# Fate of Yu'lon
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.23
+    title = wwu_zandalar_pandaria_invasion.23.title
+	desc = wwu_zandalar_pandaria_invasion.23.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.23.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P63 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.23.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P63 }
+    }
+}
+
+# Fate of Chi'ji
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.24
+    title = wwu_zandalar_pandaria_invasion.24.title
+	desc = wwu_zandalar_pandaria_invasion.24.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.24.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P65 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.24.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P65 }
+    }
+}
+
+# Fate of Niuzao
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.25
+    title = wwu_zandalar_pandaria_invasion.25.title
+	desc = wwu_zandalar_pandaria_invasion.25.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.25.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P64 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.25.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P64 }
+    }
+}
+
+# Fate of the Tiller's Union
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.26
+    title = wwu_zandalar_pandaria_invasion.26.title
+	desc = wwu_zandalar_pandaria_invasion.26.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.26.option.a
+        
+        partition_pandaria_nation_for_trolls = { TAG = P84 }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.26.option.b
+        
+        partition_pandaria_nation_for_mogu = { TAG = P84 }
+    }
+}
+
+# Fate of the Golden Lotus
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.27
+    title = wwu_zandalar_pandaria_invasion.27.title
+	desc = wwu_zandalar_pandaria_invasion.27.desc
+	picture = ZANDALAR_12_eventPicture
+    
+	is_triggered_only = yes
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.27.option.a
+
+        inherit_pandaria_nation_for_trolls = { TAG = GOL }
+    }
+
+    option = {
+        name = wwu_zandalar_pandaria_invasion.27.option.b
+		
+        inherit_pandaria_nation_for_mogu = { TAG = GOL }
+    }
+}
+
+# Lei Shen's Body
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.30
+    title = wwu_zandalar_pandaria_invasion.30.title
+	desc = wwu_zandalar_pandaria_invasion.30.desc
+	picture = ZANDALAR_11_eventPicture
+    
+	fire_only_once = yes
+    
+    trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalar_war_against_pandaria_started
+		NOT = { has_country_modifier = thunderking_lookingfor_cooldown }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.30.option.a
+        
+        custom_tooltip = zandalari_event_thunderking_a
+        set_country_flag = zandalari_found_thunderking
+        
+         if = {
+            limit = {
+                exists = P92 # Shan'ze
+            }
+            
+		    reverse_add_opinion = {
+                who = P92 # Shan'ze
+                modifier = mogu_zandalar_found_thunder_king_a
+            }
+        }
+    }
+	
+    option = {
+        name = wwu_zandalar_pandaria_invasion.30.option.b
+        
+        custom_tooltip = zandalari_ruler_immortal_tt
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+        }
+        
+        if = {
+            limit = {
+                exists = P92 # Shan'ze
+            }
+            
+		    reverse_add_opinion = {
+                who = P92 # Shan'ze
+                modifier = mogu_zandalar_found_thunder_king_b
+            }
+        }
+				
+        every_country = {
+			limit = {
+                culture_group = culture_group_mogu
+            }
+            
+			join_all_defensive_wars_of = GOL
+        }
+    }
+}
+
+# Rise of the Thunder King
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.31
+    title = wwu_zandalar_pandaria_invasion.31.title
+	desc = wwu_zandalar_pandaria_invasion.31.desc
+	picture = ZANDALAR_11_eventPicture
+    
+	is_triggered_only = yes
+	
+    major = yes
+	major_trigger = {
+		capital_scope = {
+            OR = {
+                continent = continent_pandaria
+                continent = continent_zandalar
+            }
+        }
+	}
+    
+    option = {
+        name = wwu_zandalar_pandaria_invasion.31.option.a
+        
+        define_ruler = {
+            name = "Lei Shen"
+            dynasty = "Thunder King"
+            adm = 7
+            dip = 7
+            mil = 7
+            age = 655
+            claim = 100
+        }
+        
+        set_ruler_flag = is_immortal
+        
+        add_ruler_modifier = { 
+            name = mogu_thunder_king_rise
+            duration = -1  
+        }
+            
+        custom_tooltip = zandalari_event_thunderking_rise_army
+        
+        hidden_effect = {
+            capital_scope = {
+                spawn_infantry = {
+                    AMOUNT = 50
+                    TAG = ROOT
+                }
+            }
+        }
+    }
+}
+	
+# Menu Loop
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.100
+	title = wwu_zandalar_pandaria_invasion.100.title
+	desc = wwu_zandalar_pandaria_invasion.100.desc
+	picture = ZANDALAR_12_eventPicture
+    
+    hidden = yes
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_zandalar_pandaria_invasion.100.option.a
+        
+        country_event = { id =wwu_zandalar_pandaria_invasion.1 }
+    }
+}

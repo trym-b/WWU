@@ -809,7 +809,7 @@ spawn_rebels_of_zul = {
 }
 
 zandalari_help_drakkari_now = {
-    custom_tooltip = zandalari_help_drakkari_now_b
+    custom_tooltip = zandalari_help_amani_tt
     
     hidden_effect = {
         change_variable = {
@@ -834,7 +834,7 @@ zandalari_help_drakkari_now = {
 }
 
 zandalari_help_farraki_now = {
-    custom_tooltip = zandalari_help_farraki_now_b
+    custom_tooltip = zandalari_help_farraki_tt
     
     hidden_effect = {
         change_variable = {
@@ -859,7 +859,7 @@ zandalari_help_farraki_now = {
 }
 
 zandalari_help_gurubashi_now = {
-    custom_tooltip = zandalari_help_gurubashi_now_b
+    custom_tooltip = zandalari_help_gurubashi_tt
     
     hidden_effect = {
         change_variable = {
@@ -884,7 +884,7 @@ zandalari_help_gurubashi_now = {
 }
 
 zandalari_help_amani_now = {
-    custom_tooltip = zandalari_help_amani_now_b
+    custom_tooltip = zandalari_help_drakkari_tt
     
     hidden_effect = {
         change_variable = {
@@ -1058,6 +1058,189 @@ oondasta_back = {
                 which = oondasta_eggs
                 value = 0
             }
+        }
+    }
+}
+
+partition_pandaria_nation_for_trolls = {
+    if = {
+        limit = {
+            exists = $TAG$
+        }
+        
+        create_march = $TAG$
+        
+        $TAG$ = {
+            add_country_modifier = { 
+                name = zandalar_mogu_win_war_liberty
+                duration = 18250
+            }
+        }
+    }
+    else = {
+        add_adm_power = 100
+        add_dip_power = 100
+        add_mil_power = 100
+    }
+    
+    # Mogu Empire
+    if = {
+        limit = {
+            exists = MOE
+        }
+        
+        reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+    
+    # Shan'ze
+    if = {
+        limit = {
+            exists = P92
+        }
+        reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+partition_pandaria_nation_for_mogu = {
+    if = {
+        limit = {
+            exists = $TAG$
+            exists = P92 # Shan'ze
+        }
+        
+        # Shan'ze
+        P92 = {
+            create_march = $TAG$
+        }
+        $TAG$ = {
+            add_country_modifier = { 
+                name = zandalar_mogu_win_war_liberty
+                duration = 18250
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            exists = $TAG$
+            exists = MOE
+        }
+        MOE = {
+            create_march = $TAG$
+        }
+        $TAG$ = {
+            add_country_modifier = { 
+                name = zandalar_mogu_win_war_liberty
+                duration = 18250
+            }
+        }
+    }
+    
+    if = {
+        limit = {
+            exists = MOE
+        }
+        reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+    if = {
+        limit = {
+            exists = P92
+        }
+        reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_like
+        }
+    }
+}
+
+inherit_pandaria_nation_for_trolls = {
+    if = {
+        limit = {
+            exists = $TAG$
+        }
+        
+        inherit = $TAG$
+    }
+    else = {
+        add_adm_power = 300
+        add_dip_power = 300
+        add_mil_power = 300
+    }
+    
+    # Mogu Empire
+    if = {
+        limit = {
+            exists = MOE
+        }
+        
+        reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+    
+    # Shan'ze
+    if = {
+        limit = {
+            exists = P92
+        }
+        reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+}
+
+inherit_pandaria_nation_for_mogu = {
+    if = {
+        limit = {
+            exists = $TAG$
+            exists = P92
+        }
+        
+        P92 = {
+            inherit = $TAG$
+        }
+    }
+    else_if = {
+        limit = {
+            exists = $TAG$
+            exists = MOE
+        }
+        
+        MOE = {
+            inherit = $TAG$
+        }
+    }
+    
+    # Mogu Empire
+    if = {
+        limit = {
+            exists = MOE
+        }
+        
+        reverse_add_opinion = {
+            who = MOE
+            modifier = mogu_pandaria_zan_dislike
+        }
+    }
+    
+    # Shan'ze
+    if = {
+        limit = {
+            exists = P92
+        }
+        reverse_add_opinion = {
+            who = P92
+            modifier = mogu_pandaria_zan_dislike
         }
     }
 }

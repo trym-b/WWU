@@ -1503,75 +1503,79 @@ wwu_zandalar_column_5 = {
 	wwu_zan_five_ten = {
 		icon = mission_zan_mogu
 		position = 10
+        
 		required_missions = {
             wwu_zan_five_nine
 		}
 		
 		trigger = {
 			OR = {
-			any_country = {
+                any_country = {
                     capital_scope = { 
                         area = area_throne_of_thunder
                     }
                     culture_group = culture_group_mogu
-                    alliance_with = A78
+                    alliance_with = A78 # Zandalar
                 }
                 area_throne_of_thunder = {
-			    type = all
-				owned_by = ROOT
-				}
-			}
-                
-            }
+                    type = all
+                    owned_by = ROOT
+                }
+            }   
+        }
 		
 		
 		effect = {
-
-                custom_tooltip = zandalari_tooltip_five_ten_a
-				if = {
+            custom_tooltip = zandalari_tooltip_five_ten_a
+            
+            if = {
 				limit = {
+                    area_throne_of_thunder = {
+                        type = all
+                        owned_by = ROOT
+                    }
+				}
+                
 				area_throne_of_thunder = {
-			    type = all
-				owned_by = ROOT
+                    limit = {
+                        owned_by = A78 # Zandalar
+                    }
+                    cede_province = P92 # Shan'ze
 				}
-				}
-				area_throne_of_thunder = {
-				limit = {
-				owned_by = A78}
-                cede_province = P92
-				}
-			add_trust = {
-            who = P92
-            value = 50
-            mutual = yes
-        }
+                
+                add_trust = {
+                    who = P92 # Shan'ze
+                    value = 50
+                    mutual = yes
+                }
+                
 		        reverse_add_opinion = {
-            who = P92
-            modifier = mogu_zandalar_aliance
-        }
-		        create_alliance = P92
-				}
-				hidden_effect = {
+                    who = P92 # Shan'ze
+                    modifier = mogu_zandalar_aliance
+                }
+		        create_alliance = P92 # Shan'ze
+            }
+            
+            hidden_effect = {
 				set_country_flag = zandalar_war_against_pandaria_preparation
-						                    set_variable = {
-                        which = zandalar_mogu_war_prep_1
-                        value = 0
-                    }
-						                    set_variable = {
-                        which = zandalar_mogu_war_prep_2
-                        value = 0
-                    }
-						                    set_variable = {
-                        which = zandalar_mogu_war_prep_3
-                        value = 0
-                    }
-						                    set_variable = {
-                        which = zandalar_mogu_war_prep_4
-                        value = 0
-                    }
-				}
-			
-
+                
+                set_variable = {
+                    which = zandalar_mogu_war_prep_1
+                    value = 0
+                }
+                set_variable = {
+                    which = zandalar_mogu_war_prep_2
+                    value = 0
+                }
+                set_variable = {
+                    which = zandalar_mogu_war_prep_3
+                    value = 0
+                }
+                set_variable = {
+                    which = zandalar_mogu_war_prep_4
+                    value = 0
+                }
+            }
         }
         
         ai_weight   = { factor = 1 }
@@ -1588,46 +1592,51 @@ wwu_zandalar_column_5 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zandalari_tooltip_five_eleven_b
-		                    check_variable = {
-                        which = zandalar_mogu_war_prep_1
-                        value = 4
-                    }
-					                    check_variable = {
-                        which = zandalar_mogu_war_prep_2
-                        value = 10
-                    }
-					                    check_variable = {
-                        which = zandalar_mogu_war_prep_3
-                        value = 10
-                    }
-					                    check_variable = {
-                        which = zandalar_mogu_war_prep_4
-                        value = 10
-                    }
+                
+                check_variable = {
+                    which = zandalar_mogu_war_prep_1
+                    value = 4
+                }
+                check_variable = {
+                    which = zandalar_mogu_war_prep_2
+                    value = 10
+                }
+                check_variable = {
+                    which = zandalar_mogu_war_prep_3
+                    value = 10
+                }
+                check_variable = {
+                    which = zandalar_mogu_war_prep_4
+                    value = 10
+                }
 			}
 		}
 		
 		effect = {
-		if = {
-		limit = {
-		exists = GOL }
+            if = {
+                limit = {
+                    exists = GOL # Golden Lotus
+                }
 		
                 custom_tooltip = zandalari_tooltip_five_eleven_a
+                
 				hidden_effect = {
-							country_event = { id = wwu_zandalar.61 }
-							}
-							}
+                    country_event = { id = wwu_zandalar_pandaria_invasion.10 }
+                }
+            }
 							
-		if = {
-		limit = {
-		not = {exists = GOL} }
-		
+            if = {
+                limit = {
+                    NOT = { exists = GOL } 
+                }
+            
                 custom_tooltip = zandalari_tooltip_five_eleven_a_not
-		add_adm_power = 800
-		add_dip_power = 800
-		add_mil_power = 800
-							}
-				clr_country_flag = zandalar_war_against_pandaria_preparation
+                add_adm_power = 800
+                add_dip_power = 800
+                add_mil_power = 800
+            }
+            
+            clr_country_flag = zandalar_war_against_pandaria_preparation
         }
             
         ai_weight   = { factor = 1 }
@@ -1645,18 +1654,19 @@ wwu_zandalar_column_5 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zandalari_tooltip_five_thirteen_b
+                
 				OR = {
-				has_country_flag = zandalari_no_war
-				has_country_flag = zandalar_great_war_win
-				has_country_flag = zandalar_great_war_loose
+                    has_country_flag = zandalari_no_war
+                    has_country_flag = zandalar_great_war_win
+                    has_country_flag = zandalar_great_war_loose
 				}
 			}
 		}
 		
 		effect = {
-        add_adm_power = 250
-        add_dip_power = 250
-        add_mil_power = 250
+            add_adm_power = 250
+            add_dip_power = 250
+            add_mil_power = 250
         }
             
         ai_weight   = { factor = 1 }

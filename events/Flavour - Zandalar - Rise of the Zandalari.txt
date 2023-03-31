@@ -1,0 +1,457 @@
+namespace = wwu_zandalar_rise_of_the_zandalari
+
+# The Prophet demands access to the Golden Fleet
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.1
+    title = wwu_zandalar_rise_of_the_zandalari.1.title
+	desc = wwu_zandalar_rise_of_the_zandalari.1.desc
+	picture = ZANDALAR_2_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_cataclysm_over
+        
+		NOT = { has_country_flag = cataclysm_visions_zul_given_fleet }
+        
+        had_country_flag = {
+            flag = cataclysm_aftermath_zul_requests_fleet_tracker
+            days = 1825
+        }
+	}
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.1.option.a
+        
+        custom_tooltip = rise_of_the_zandalari_tt
+        
+        hidden_effect = {
+            set_country_flag = cataclysm_visions_zul_given_fleet
+		}
+        
+        add_mil_power = -200
+        add_sailors = -3000
+        add_years_of_income = -1.75
+    }
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.1.option.b
+        
+        custom_tooltip = zandalari_skip_to_civil_war_tt
+		complete_mission = wwu_zan_five_nine
+		complete_mission = wwu_zan_five_ten
+		complete_mission = wwu_zan_five_eleven
+		complete_mission = wwu_zan_four_twelve
+        increase_zul_influence_by_10 = yes
+    }
+}	
+	
+# Rise of the Zandalari
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.2
+    title = wwu_zandalar_rise_of_the_zandalari.2.title
+	desc = wwu_zandalar_rise_of_the_zandalari.2.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	immediate = {
+        hidden_effect = {
+            region_south_seas = {
+                discover_country = A78
+            }
+            118 = {
+                discover_country = A78
+            }
+            region_tanaris = {
+                discover_country = A78
+            }
+            region_zuldrak = {
+                discover_country = A78
+            }
+        }
+    }
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_cataclysm_over
+		has_country_flag = cataclysm_visions_zul_given_fleet
+        
+        had_country_flag = {
+            flag = cataclysm_aftermath_rise_of_the_zandalari_tracker
+            days = 3650
+        }
+	}
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.2.option.a
+        
+		custom_tooltip = zandalari_troll_meeting_main_tt
+        
+        hidden_effect = {
+            set_country_flag = zandalari_troll_initial_meeting
+        }
+    }
+}	
+
+# Meeting of the Trolls
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.3
+    title = wwu_zandalar_rise_of_the_zandalari.3.title
+	desc = wwu_zandalar_rise_of_the_zandalari.3.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_initial_meeting
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+ 
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.3.option.a
+        
+		custom_tooltip = zandalari_troll_meeting_initial_tt
+
+        hidden_effect = {
+            set_variable = {
+                which = zandalari_troll_drakkari_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_farraki_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_gurubashi_help
+                value = 0
+            }
+            set_variable = {
+                which = zandalari_troll_amani_help
+                value = 0
+            }
+		}
+    }
+    
+    after = {
+        country_event = { id = wwu_zandalar_rise_of_the_zandalari.4 days = 30 }
+    }
+}	
+
+# Words to the Drakkari
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.4
+    title = wwu_zandalar_rise_of_the_zandalari.4.title
+	desc = wwu_zandalar_rise_of_the_zandalari.4.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_initial_meeting
+	}
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.4.option.a
+        
+		if = {
+            limit = {
+                AND = {
+                    exists = A74 # Drakkari
+                    A74 = {
+                        NOT = { is_subject = yes }
+                    }
+                }
+            }
+            set_country_flag = zandalari_troll_drakkari
+            custom_tooltip = zandalari_meet_drakkari_accept_tt
+		}
+        else = {
+            custom_tooltip = zandalari_meet_drakkari_reject_tt
+		}
+    }
+    
+    after = {
+        country_event = { id = wwu_zandalar_rise_of_the_zandalari.5 days = 30 }
+    }
+}
+
+# Words to the Farraki
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.5
+    title = wwu_zandalar_rise_of_the_zandalari.5.title
+	desc = wwu_zandalar_rise_of_the_zandalari.5.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_initial_meeting
+	}
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+ 
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.5.option.a
+        
+        if = {
+            limit = {
+                AND = {
+                    exists = A73 # Sandfury
+                    A73 = {
+                        NOT = { is_subject = yes }
+                    }
+                }
+            }
+            set_country_flag = zandalari_troll_farraki
+            custom_tooltip = zandalari_meet_sandfury_accept_tt
+		}
+        else = {
+            custom_tooltip = zandalari_meet_sandfury_reject_tt
+		}
+    }
+    
+    after = {
+        country_event = { id = wwu_zandalar_rise_of_the_zandalari.6 days = 30 }
+    }
+}
+
+# Words to the Gurubashi
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.6
+    title = wwu_zandalar_rise_of_the_zandalari.6.title
+	desc = wwu_zandalar_rise_of_the_zandalari.6.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_initial_meeting
+	}
+ 
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.6.option.a
+        
+        if = {
+            limit = {
+                AND = {
+                    exists = A66 # Gurubashi
+                    A66 = {
+                        NOT = { is_subject = yes }
+                    }
+                }
+            }
+            set_country_flag = zandalari_troll_gurubashi
+            custom_tooltip = zandalari_meet_gurubashi_accept_tt
+		}
+        else = {
+            custom_tooltip = zandalari_meet_gurubashi_reject_tt
+		}
+    }
+    
+    after = {
+        country_event = { id = wwu_zandalar_rise_of_the_zandalari.7 days = 30 }
+    }
+}
+
+# Words to the Amani
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.7
+    title = wwu_zandalar_rise_of_the_zandalari.7.title
+	desc = wwu_zandalar_rise_of_the_zandalari.7.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		has_country_flag = zandalari_troll_initial_meeting
+	}
+ 
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.7.option.a
+        
+        if = {
+            limit = {
+                AND = {
+                    exists = A58 # Amani
+                    A58 = {
+                        NOT = { is_subject = yes }
+                    }
+                }
+            }
+            set_country_flag = zandalari_troll_amani
+            custom_tooltip = zandalari_meet_amani_accept_tt
+		}
+        else = {
+            custom_tooltip = zandalari_meet_amani_reject_tt
+		}
+    }
+    
+    after = {
+        country_event = { id = wwu_zandalar_rise_of_the_zandalari.8 days = 30 }
+    }
+}
+
+# End of the Meet
+country_event = {
+	id = wwu_zandalar_rise_of_the_zandalari.8
+    title = wwu_zandalar_rise_of_the_zandalari.8.title
+	desc = wwu_zandalar_rise_of_the_zandalari.8.desc
+	picture = ZANDALAR_13_eventPicture
+    
+	fire_only_once = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        tag = A78 # Zandalar
+		had_country_flag = {
+            flag = zandalari_troll_initial_meeting
+            days = 1825
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+ 
+    option = {
+        name = wwu_zandalar_rise_of_the_zandalari.8.option.a
+        
+        custom_tooltip = zandalari_troll_meeting_end_tt
+        
+        set_country_flag = zandalari_troll_meeting_end_mission
+        set_country_flag = zandalari_troll_meeting_end_time
+        
+        if = {
+            limit = {
+                is_variable_equal = {
+                    which = zandalari_troll_drakkari_help
+                    value = 10
+                }		
+            }
+            
+            custom_tooltip = zandalari_troll_meeting_drakkari_join
+            create_alliance = A74
+            
+            add_trust = {
+                who = A74
+                value = 100
+                mutual = yes
+            }
+            
+            add_favors = {
+               who = A74
+               amount = 50
+            }
+            
+            set_country_flag = zandalari_troll_meeting_drakkari_joined
+        }
+
+        if = {
+            limit = {
+                is_variable_equal = {
+                    which = zandalari_troll_farraki_help
+                    value = 10
+                }		
+            }
+            custom_tooltip = zandalari_troll_meeting_farraki_join_tt
+            create_alliance = A73
+            
+            add_trust = {
+                who = A73
+                value = 100
+                mutual = yes
+            }
+            
+            add_favors = {
+               who = A73
+               amount = 50
+            }
+            
+            set_country_flag = zandalari_troll_meeting_farraki_joined
+        }
+        
+        if = {
+            limit = {
+                is_variable_equal = {
+                    which = zandalari_troll_gurubashi_help
+                    value = 10
+                }		
+            }
+            
+            custom_tooltip = zandalari_troll_meeting_gurubashi_join
+            create_alliance = A66
+            
+            add_trust = {
+                who = A66
+                value = 100
+                mutual = yes
+            }
+            
+            add_favors = {
+               who = A66
+               amount = 50
+            }
+            
+            set_country_flag = zandalari_troll_meeting_gurubashi_join
+        }
+        
+        if = {
+            limit = {
+                is_variable_equal = {
+                    which = zandalari_troll_drakkari_help
+                    value = 10
+                }		
+            }
+            
+            custom_tooltip = zandalari_troll_meeting_amani_join
+            create_alliance = A58
+            
+            add_trust = {
+                who = A58
+                value = 100
+                mutual = yes
+            }
+            add_favors = {
+               who = A58
+               amount = 50
+            }
+            
+            set_country_flag = zandalari_troll_meeting_amani_joined
+        }
+    }
+}
