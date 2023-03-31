@@ -1012,3 +1012,64 @@ provoke_pretenders = {
         always = no
 	}
 }
+
+#---------------------------------------
+# Sway the People
+#---------------------------------------
+sway_the_people = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = sway_the_people_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        has_idea_group = wwu_propaganda_ideas
+        FROM = {
+            NOT = {
+                has_opinion_modifier = {
+                    modifier = swayed_the_people
+                    who = ROOT
+                }
+            }
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 30
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - sway_the_people"
+            }
+        }
+        
+		add_spy_network_in = {
+			who = FROM
+			value = -30
+		}
+        
+        add_opinion = {
+            who = FROM
+            modifier = swayed_the_people
+        }
+        reverse_add_opinion = {
+            who = FROM
+            modifier = swayed_the_people
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        always = yes
+	}
+}

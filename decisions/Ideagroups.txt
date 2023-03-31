@@ -1,0 +1,153 @@
+country_decisions = {
+    # Give a Patriotic Speech
+    propaganda_patriotic_speech = {
+		potential = {
+			has_idea_group = wwu_propaganda_ideas
+            NOT = { has_country_modifier = patriotic_speech }
+		}
+		
+		allow = {
+			adm_power = 100
+            mil_power = 100
+		}
+		
+		effect = {
+            add_adm_power = -100
+            add_mil_power = -100
+            
+			add_country_modifier = {
+                name = patriotic_speech
+                duration = 3650
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                manpower_percentage = 0.5
+            }
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                
+                NOT = { mil_power = 300 }
+            }
+		}
+	}
+    
+    # Spread Propaganda amoung Population
+    propaganda_spread_propaganda = {
+		potential = {
+			has_idea_group = wwu_propaganda_ideas
+            NOT = { has_country_modifier = patriotic_propaganda }
+		}
+		
+		allow = {
+			adm_power = 100
+		}
+		
+		effect = {
+            add_adm_power = -100
+            
+			add_country_modifier = {
+                name = patriotic_propaganda
+                duration = 3650
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { average_unrest = 2 }
+            }
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 300 }
+            }
+		}
+	}
+    
+    # Incite Religious Conflict
+    propaganda_spread_conflict = {
+		potential = {
+			has_idea_group = wwu_propaganda_ideas
+            NOT = { 
+                any_owned_province = {
+                    has_province_modifier = spread_religious_conflict
+                }
+            }
+		}
+		
+		allow = {
+			adm_power = 100
+		}
+		
+		effect = {
+            add_adm_power = -100
+            
+            every_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                add_province_modifier = {
+                    name = spread_religious_conflict
+                    duration = 1825
+                }
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                religious_unity = 0.75
+            }
+		}
+	}
+    
+    # Organise Spy Hunt
+    propaganda_organise_spy_hunt = {
+		potential = {
+			has_idea_group = wwu_propaganda_ideas
+            NOT = { has_country_modifier = spy_hunt }
+		}
+		
+		allow = {
+			adm_power = 100
+		}
+		
+		effect = {
+            add_adm_power = -100
+            
+            add_country_modifier = {
+                name = spy_hunt
+                duration = -1
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+            
+            # Small nations shouldn't bother with catching spies
+            modifier = {
+                factor = 0
+                
+                NOT = { total_development = 250 }
+            }
+		}
+	}
+}
