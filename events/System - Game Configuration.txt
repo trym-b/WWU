@@ -268,6 +268,36 @@ country_event = {
         }
 	}
     
+    # Player Switch
+    option = {
+		name = wwu_game_configuration.2.option.player_switch.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_player_switch_events }
+        }
+        
+        custom_tooltip = PLAYER_SWITCH_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_player_switch_events
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.2.option.player_switch.off
+		
+        trigger = {
+            has_global_flag = enabled_player_switch_events
+        }
+        
+        custom_tooltip = PLAYER_SWITCH_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_player_switch_events
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    
     # Exit
     option = {
 		name = wwu_game_configuration.2.option.exit
@@ -311,6 +341,36 @@ country_event = {
         
         hidden_effect = {
             clr_global_flag = enabled_vanquisher_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    
+    # Relentless Conquest System
+    option = {
+		name = wwu_game_configuration.3.option.relentless_conquest.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_relentless_conquest_system }
+        }
+        
+        custom_tooltip = RELENTLESS_CONQUEST_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_relentless_conquest_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.3.option.relentless_conquest.off
+		
+        trigger = {
+            has_global_flag = enabled_relentless_conquest_system
+        }
+        
+        custom_tooltip = RELENTLESS_CONQUEST_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_relentless_conquest_system
             country_event = { id = wwu_game_configuration.21 }
         }
 	}
@@ -918,16 +978,18 @@ country_event = {
     option = {
 		name = wwu_game_configuration.100.option.a
 		
-        # Enabled by Default
+        # Features
         set_global_flag = enabled_isolation_mechanics
         set_global_flag = enabled_federations
         set_global_flag = enabled_racial_modifiers
         set_global_flag = enabled_magic_mechanics
         set_global_flag = enabled_archaeology_mechanics
         set_global_flag = enabled_faction_mechanics
-        
-        # Disabled by Default
+        set_global_flag = enabled_player_switch_events
         #set_global_flag = enabled_lore_diplomacy_mechanics
+        
+        # Difficulty
+        set_global_flag = enabled_relentless_conquest_system
         #set_global_flag = enabled_vanquisher_system
         
         # Content
@@ -947,6 +1009,7 @@ country_event = {
         set_global_flag = enable_content_dragon_isles
         set_global_flag = enable_content_elemental_realms
         set_global_flag = enable_content_argus
+        set_global_flag = enable_content_shadowlands
         
 	}
 }
