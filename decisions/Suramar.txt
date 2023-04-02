@@ -1,0 +1,44 @@
+country_decisions = {
+	weaken_the_veil_of_suramar = {
+		major = yes
+		
+		potential = {
+			tag = SUR
+            has_disaster = veil_of_suramar
+            custom_trigger_tooltip = {
+                tooltip = SURAMAR_VEIL_NOT_LIFTED_TT
+                NOT = { has_country_flag = suramar_veil_lifted }
+            }
+		}
+		allow = {
+            adm_power = 500
+            dip_power = 500
+            mil_power = 500
+            custom_trigger_tooltip = {
+                tooltip = SURAMAR_VEIL_NOT_LIFTED_TT
+                NOT = { has_country_flag = suramar_veil_lifted }
+            }
+		}
+		effect = {
+            add_adm_power = -500
+            add_dip_power = -500
+            add_mil_power = -500
+            
+            custom_tooltip = SURAMAR_VEIL_IS_LIFTED_TT
+            
+            hidden_effect = {
+                set_country_flag = suramar_veil_lifted
+            }
+		}
+		ai_will_do = {
+			factor = 1
+            
+            # AI Suramar should wait until it can expand
+            modifier = {
+                factor = 0
+                
+                NOT = { is_year = 650 }
+            }
+		}
+	}
+}
