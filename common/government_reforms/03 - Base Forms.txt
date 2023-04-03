@@ -327,11 +327,12 @@ old_horde_reform = {
 
 # Used by Vrykul nations
 vrykul_kingdom_reform = {
-	icon = "salvage_yard"
+	icon = "vrykul"
 	legacy_equivalent = vrykul_kingdom_legacy
     
     potential = {
 		technology_group = tech_vrykul
+        NOT = { tag = VLJ }
 	}
     
     maintain_dynasty = yes
@@ -347,9 +348,49 @@ vrykul_kingdom_reform = {
 	}
     
 	modifiers = {
-        core_creation = -0.05
-        army_tradition_decay = -0.01
+        infantry_power = 0.1
+        army_tradition_decay = -0.02
         max_absolutism = 10
+	}
+    
+	ai = { factor = 0 }
+    
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+	allow_convert = no              # Can be converted to via peace term
+    lock_level_when_selected = yes
+    
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+}
+
+# Used by Valarjar
+halls_of_valor_reform = {
+	icon = "odyn_rune"
+	legacy_equivalent = halls_of_valor_legacy
+    
+    potential = {
+		tag = VLJ
+	}
+    
+    maintain_dynasty = yes
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    # GOVERNMENT POWER 1.35
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+	modifiers = {
+        prestige = 1.0
+        discipline = 0.05
+        max_absolutism = 20
 	}
     
 	ai = { factor = 0 }
@@ -3763,6 +3804,124 @@ primal_dominion_reform = {
 	
     valid_for_nation_designer = yes
     nation_designer_cost = 0
+}
+
+# For Troggs
+trogg_clan_reform = {
+	icon = "gift_of_earth"
+    legacy_equivalent = trogg_clan_legacy
+    
+    monarchy = yes
+    
+	#republican_name = yes
+    
+    queen = no
+    heir = yes
+    
+    raze_province = yes
+    
+    # GOVERNMENT_POWER 1.35
+    
+    potential = {
+		culture_group = culture_group_trogg
+	}
+    
+	modifiers = {
+		reinforce_cost_modifier = -0.2
+        infantry_shock = 1.0
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+	 
+	ai = { factor = 0 }
+    
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+	lock_level_when_selected = yes
+	
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
+
+# For Quillboar
+kraul_reform = {
+	icon = "quillboar"
+    legacy_equivalent = kraul_legacy
+    
+    monarchy = yes
+    
+	#republican_name = yes
+    
+    queen = no
+    heir = yes
+    
+    # GOVERNMENT_POWER 1.35
+    
+    potential = {
+		culture_group = culture_group_quillboar
+	}
+    
+	modifiers = {
+		defensiveness = 0.2
+        fire_damage_received = -0.1
+        shock_damage_received = -0.1
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+	 
+	ai = { factor = 0 }
+    
+    valid_for_new_country = yes     # Can be converted to via nation release
+    allow_normal_conversion = yes   # Can be picked as a new reform
+    allow_convert = yes             # Can be converted to via peace term
+	lock_level_when_selected = yes
+	
+    valid_for_nation_designer = yes
+    nation_designer_cost = 0
+}
+
+# For minor Vrykul nations
+vrykul_clan_reform = {
+	icon = "vrykul"
+	legacy_equivalent = vrykul_kingdom_legacy
+    
+    potential = {
+		OR = {
+            tag = DRJ
+            tag = VLK
+            tag = BON
+            tag = JAN
+        }
+	}
+    
+    maintain_dynasty = yes
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    # GOVERNMENT_POWER 1.35
+    
+	modifiers = {
+        infantry_power = 0.05
+        mil_advisor_cost = -0.1
+        max_absolutism = 10
+	}
+    
+	ai = { factor = 0 }
+    
+    valid_for_new_country = no      # Can be converted to via nation release
+    allow_normal_conversion = no    # Can be picked as a new reform
+	allow_convert = no              # Can be converted to via peace term
+    lock_level_when_selected = yes
+    
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
 }
 
 #--------------------------------------------
