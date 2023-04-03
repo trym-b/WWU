@@ -128,42 +128,93 @@ province_event = {
         
         trigger = {
             NOT = { culture = event_target:owner_nation }
+            
+            owner = {
+                # Evil/Savage have by default, others require reform
+                OR = {
+                    is_savage = yes
+                    is_pure_evil = yes
+                    has_reform = wwu_diplomacy_domination
+                }
+            }
         }
         
         if = {
             limit = {
                 if = {
                     limit = {
-                        development = 30
+                        owner = {
+                            has_reform = wwu_ascendancy_cultural
+                        }
                     }
-                    owner = { mil_power = 300 }
-                }
-                else_if = {
-                    limit = {
-                        development = 25
+                    if = {
+                        limit = {
+                            development = 30
+                        }
+                        owner = { mil_power = 60 }
                     }
-                    owner = { mil_power = 250 }
-                }
-                else_if = {
-                    limit = {
-                        development = 20
+                    else_if = {
+                        limit = {
+                            development = 25
+                        }
+                        owner = { mil_power = 50 }
                     }
-                    owner = { mil_power = 200 }
-                }
-                else_if = {
-                    limit = {
-                        development = 15
+                    else_if = {
+                        limit = {
+                            development = 20
+                        }
+                        owner = { mil_power = 40 }
                     }
-                    owner = { mil_power = 150 }
-                }
-                else_if = {
-                    limit = {
-                        development = 10
+                    else_if = {
+                        limit = {
+                            development = 15
+                        }
+                        owner = { mil_power = 30 }
                     }
-                    owner = { mil_power = 100 }
+                    else_if = {
+                        limit = {
+                            development = 10
+                        }
+                        owner = { mil_power = 20 }
+                    }
+                    else = {
+                        owner = { mil_power = 10 }
+                    }
                 }
                 else = {
-                    owner = { mil_power = 50 }
+                    if = {
+                        limit = {
+                            development = 30
+                        }
+                        owner = { mil_power = 300 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 25
+                        }
+                        owner = { mil_power = 250 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 20
+                        }
+                        owner = { mil_power = 200 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 15
+                        }
+                        owner = { mil_power = 150 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 10
+                        }
+                        owner = { mil_power = 100 }
+                    }
+                    else = {
+                        owner = { mil_power = 50 }
+                    }
                 }
             }
             
@@ -187,36 +238,78 @@ province_event = {
             # Cost
             if = {
                 limit = {
-                    development = 30
+                    owner = {
+                        has_reform = wwu_ascendancy_cultural
+                    }
                 }
-                owner = { add_mil_power = -300 }
-            }
-            else_if = {
-                limit = {
-                    development = 25
+                if = {
+                    limit = {
+                        development = 30
+                    }
+                    owner = { add_mil_power = -60 }
                 }
-                owner = { add_mil_power = -250 }
-            }
-            else_if = {
-                limit = {
-                    development = 20
+                else_if = {
+                    limit = {
+                        development = 25
+                    }
+                    owner = { add_mil_power = -50 }
                 }
-                owner = { add_mil_power = -200 }
-            }
-            else_if = {
-                limit = {
-                    development = 15
+                else_if = {
+                    limit = {
+                        development = 20
+                    }
+                    owner = { add_mil_power = -40 }
                 }
-                owner = { add_mil_power = -150 }
-            }
-            else_if = {
-                limit = {
-                    development = 10
+                else_if = {
+                    limit = {
+                        development = 15
+                    }
+                    owner = { add_mil_power = -30 }
                 }
-                owner = { add_mil_power = -100 }
+                else_if = {
+                    limit = {
+                        development = 10
+                    }
+                    owner = { add_mil_power = -20 }
+                }
+                else = {
+                    owner = { add_mil_power = -10 }
+                }
             }
             else = {
-                owner = { add_mil_power = -50 }
+                if = {
+                    limit = {
+                        development = 30
+                    }
+                    owner = { add_mil_power = -300 }
+                }
+                else_if = {
+                    limit = {
+                        development = 25
+                    }
+                    owner = { add_mil_power = -250 }
+                }
+                else_if = {
+                    limit = {
+                        development = 20
+                    }
+                    owner = { add_mil_power = -200 }
+                }
+                else_if = {
+                    limit = {
+                        development = 15
+                    }
+                    owner = { add_mil_power = -150 }
+                }
+                else_if = {
+                    limit = {
+                        development = 10
+                    }
+                    owner = { add_mil_power = -100 }
+                }
+                else = {
+                    owner = { add_mil_power = -50 }
+                }
             }
               
             add_devastation = 25
@@ -236,42 +329,93 @@ province_event = {
         
         trigger = {
             NOT = { religion = event_target:owner_nation }
+            
+            owner = {
+                # Evil/Savage have by default, others require reform
+                OR = {
+                    is_savage = yes
+                    is_pure_evil = yes
+                    has_reform = wwu_religion_fanaticism
+                }
+            }
         }
         
         if = {
             limit = {
                 if = {
                     limit = {
-                        development = 30
+                        owner = {
+                            has_reform = wwu_ascendancy_religious
+                        }
                     }
-                    owner = { mil_power = 300 }
-                }
-                else_if = {
-                    limit = {
-                        development = 25
+                    if = {
+                        limit = {
+                            development = 30
+                        }
+                        owner = { mil_power = 60 }
                     }
-                    owner = { mil_power = 250 }
-                }
-                else_if = {
-                    limit = {
-                        development = 20
+                    else_if = {
+                        limit = {
+                            development = 25
+                        }
+                        owner = { mil_power = 50 }
                     }
-                    owner = { mil_power = 200 }
-                }
-                else_if = {
-                    limit = {
-                        development = 15
+                    else_if = {
+                        limit = {
+                            development = 20
+                        }
+                        owner = { mil_power = 40 }
                     }
-                    owner = { mil_power = 150 }
-                }
-                else_if = {
-                    limit = {
-                        development = 10
+                    else_if = {
+                        limit = {
+                            development = 15
+                        }
+                        owner = { mil_power = 30 }
                     }
-                    owner = { mil_power = 100 }
+                    else_if = {
+                        limit = {
+                            development = 10
+                        }
+                        owner = { mil_power = 20 }
+                    }
+                    else = {
+                        owner = { mil_power = 10 }
+                    }
                 }
                 else = {
-                    owner = { mil_power = 50 }
+                    if = {
+                        limit = {
+                            development = 30
+                        }
+                        owner = { mil_power = 300 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 25
+                        }
+                        owner = { mil_power = 250 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 20
+                        }
+                        owner = { mil_power = 200 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 15
+                        }
+                        owner = { mil_power = 150 }
+                    }
+                    else_if = {
+                        limit = {
+                            development = 10
+                        }
+                        owner = { mil_power = 100 }
+                    }
+                    else = {
+                        owner = { mil_power = 50 }
+                    }
                 }
             }
             
@@ -295,41 +439,143 @@ province_event = {
             # Cost
             if = {
                 limit = {
+                    owner = {
+                        has_reform = wwu_ascendancy_religious
+                    }
+                }
+                if = {
+                    limit = {
+                        development = 30
+                    }
+                    owner = { add_mil_power = -60 }
+                }
+                else_if = {
+                    limit = {
+                        development = 25
+                    }
+                    owner = { add_mil_power = -50 }
+                }
+                else_if = {
+                    limit = {
+                        development = 20
+                    }
+                    owner = { add_mil_power = -40 }
+                }
+                else_if = {
+                    limit = {
+                        development = 15
+                    }
+                    owner = { add_mil_power = -30 }
+                }
+                else_if = {
+                    limit = {
+                        development = 10
+                    }
+                    owner = { add_mil_power = -20 }
+                }
+                else = {
+                    owner = { add_mil_power = -10 }
+                }
+            }
+            else = {
+                if = {
+                    limit = {
+                        development = 30
+                    }
+                    owner = { add_mil_power = -300 }
+                }
+                else_if = {
+                    limit = {
+                        development = 25
+                    }
+                    owner = { add_mil_power = -250 }
+                }
+                else_if = {
+                    limit = {
+                        development = 20
+                    }
+                    owner = { add_mil_power = -200 }
+                }
+                else_if = {
+                    limit = {
+                        development = 15
+                    }
+                    owner = { add_mil_power = -150 }
+                }
+                else_if = {
+                    limit = {
+                        development = 10
+                    }
+                    owner = { add_mil_power = -100 }
+                }
+                else = {
+                    owner = { add_mil_power = -50 }
+                }
+            }
+            
+            add_devastation = 25
+            
+            change_religion = event_target:owner_nation
+            
+            # Religion Bonus from Conversion
+            if = {
+                limit = {
                     development = 30
                 }
-                owner = { add_mil_power = -300 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 6 
+                    }
+                }
             }
             else_if = {
                 limit = {
                     development = 25
                 }
-                owner = { add_mil_power = -250 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 5
+                    }
+                }
             }
             else_if = {
                 limit = {
                     development = 20
                 }
-                owner = { add_mil_power = -200 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 4
+                    }
+                }
             }
             else_if = {
                 limit = {
                     development = 15
                 }
-                owner = { add_mil_power = -150 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 3
+                    }
+                }
             }
             else_if = {
                 limit = {
                     development = 10
                 }
-                owner = { add_mil_power = -100 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 2
+                    }
+                }
             }
             else = {
-                owner = { add_mil_power = -50 }
+                owner = {
+                    add_religion_power_based_on_development = { 
+                        AMOUNT = 1 
+                    }
+                }
             }
-              
-            add_devastation = 25
-            
-            change_religion = event_target:owner_nation
+       
         }
         else = {
             owner = {
