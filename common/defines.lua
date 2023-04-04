@@ -745,9 +745,9 @@ NCountry = {
 	--- WWU: adjusted to fit around 1 year reduction per click
 	GREAT_PROJECT_MOVE_COST_PER_DAY = 3, --how much to move a great project for one day
 	COUNTRIES_GETTING_SCORE = 10,
-	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 3,			-- extra expense for being above forcelimit
+	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 10,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive troops
-	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 3,			-- extra expense for being above forcelimit
+	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 10,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive ships
 	REPUBLICAN_TRADITION_YEARLY_INCREASE = 1,		-- how much it increases each year.
 	PIETY_PERCENTAGE_AT_NEW_RULER = 0.25,			-- percentage of piety kept at new ruler.
