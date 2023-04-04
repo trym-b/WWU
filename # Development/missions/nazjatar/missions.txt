@@ -1,370 +1,357 @@
-1. Rise of the Naga
+#------------------------
+# 1
+#------------------------
+1   wwu_illidans_call
 
-Trigger:
--Has Chosen the “The Naga Empire” path
+2   wwu_burning_legion_pact
+    Trigger:
+    Below 100 development (for AI)
+    Opinion of Burning Legion > 100 (for Player)
 
-Effect:
--Special Units Available +25%
--Changes Gov. Type to “Nazjatar Empire” (adds ability to Establish Tributaries and May Perform Slave Raids)
--Second Gov. Reform “Slavery” is enacted.
--Unlock “Empire of Azshara” name change decision.
--Colonist +1
--(AI ONLY) Ruler becomes Militaristic
+    Effect:
+    Alliance with Burning Legion
+    Become Fel
+    
+4   wwu_defeat_the_hydraxian_threat
+    Trigger:
+    - Hydraxian Waterlords(P25) does not exists
+    - entire Vash’jir region is owned by Nazjatar or its subject
 
-2. Settle the Isles of Paradise
+    Effect:
+    ”Lord Hydraxis”, 5/3/5/2, becomes a general for Nazjatar
+    Gain permanent claims on Vashjir region
+    
+    add_prestige = 10
+    Vashjir:
+        add_stability = 1
+        add_prestige = 20
+   
+    Add claims on the Abyssal Maw
 
-Trigger:
--Controls at least 10 provinces in Paradise Isles region
+5   wwu_invasion_into_the_abyssal_maw
+    Trigger:
+    war_with = Abyssal Maw
+    Control capital of Abyssal Maw
 
-Effect:
--Gets Permanent Claims over all of Paradise Isles region
--Gets “Paradise Domain” modifier, giving for 25 years:
-	-global_settler_growth = 20
-	-colonist = 1
-	-native_uprising_chance = -25%
-	-colonist_placement_chance = 0.05
+    Effect:
+    Make Abyssal Maw a vassal
+    Add Water Elemental as an accepted culture
 
-3. Subjugate the Sea Witch
+6   wwu_queen_of_the_tides
+    Trigger:
+    Abyssal Maw is a subject and loyal
+    Nazjatar has a hegemony claim
+        total_development > 1000 for non-DLC
 
-Trigger:
--Underwater Minions (UNM) is a subject of Nazjatar Empire
+    Effect:
+    add_prestige = 100
+    Add modifier "True Ruler of the Sea" for -1
+        prestige = 1.0
+        monthly_splendor = 5.0
+        land_morale = 0.1
+        naval_morale = 0.1
+       
+       
+    Add "scepter_of_the_queen" artifact
 
-Effect:
--Underwater Minions becomes a Personal Union under Nazjatar(if its impossible, change to March, and ignore advisor part below)
--”Zar’jira the Sea Witch” becomes lvl 3, 75% off MIL advisor with Recruitmaster trait
--Murlock becomes an Accepted Culture
--Underwater Minions gets claims all over Paradise Isle Region
--Underwater Minions gets colonist +1
+7   wwu_confront_nzoth
+    Trigger:
+    N'Zoth is still dormant
+    stability = 3
+    army_size = 100
+    navy_size = 100
 
-4. The Dark Tide
+    Effect:
+    Fire "Call of N'Zoth"
 
-Trigger:
--Underwater Minions relation with Nazjatar is at least 180
--Nazjatar relation with Underwater Minions is at least 180
--All of Paradise Isles region is controled by Nazjatar or its subject
+8   wwu_subjugate_the_jinyu
+    Trigger:
+    Any Jinyu subject
 
-Effect:
--Gets Permanent Claim over Kezan and the Lost Isles regions
--Unlock Decision “Send Zhahara Darksquall on the Expedition” (allows Pearl of Pandaria chain event)
--Reveals Pandaria Superregion (I would add Terra Incognita over it in general, cause the mist. It could be timed global event to have it be revealed after game starts for everyone)
+    Effect:
+    Gain "Subjugation" CB on al Jinyu nations in Pandaria
 
-5. Establish Dominance Over Pandaria
+#------------------------
+# 2
+#------------------------
+3   wwu_commune_with_vashjir
+    Trigger:
+    Vashj’ir opinion of Nazjatar is at least 180
 
-Trigger:
--Has Bigger Army than Any Nation from Pandaria
--Has Bigger Navy than Any Nation from Pandaria
--Has at least 20 provinces in Pandaria Superregion
+    Effect:
+    -Vashj’ir becomes March of Nazjatar
+    -Vashj’ir gets Permanent Claim on entire Vash’jir region
 
-Effect:
--All cored provinces in Pandaria owned by Nazjatar get “Nazjatar Domination” modifier, giving:
-				*province_trade_power_modifier = 0.2
-				*province_trade_size_modifier = 0.2
-				*trade_value_modifier = 0.2
-				If Province has a trade center, upgrade it by 1.
+4   wwu_drown_plunder_isle
+    Trigger: 
+    3 ports owned in Plunder Isle
 
--Gets permanent claims on all nations with a coast in Pandaria Superregion(alternative, gets From the Sea CB)
+    Effect:
+    Add Terrain Affinity buff to the Plunder Isle provinces (add exception in the Terrain Affinity event)
+    
+6   wwu_search_for_the_pearl_of_pandaria
+    Trigger:
+    Any owned province in Pandaria
+    
+    Effect:
+    Enable "Pearl of Pandaria" event chain
+        This is a series of events that eventually unlock the "Pearl of Pandaria" artifact
+        
+7   wwu_dominate_pandaria
+    Trigger:
+    Stronger than any Pandaria nation
+    Own atleast 10 Pandaria provinces (ports only)
+    
+    Effect:
+    Add 1/1/1 development to all port provinces in Pandaria
+    Add permanent claim over all of Pandaria
+    
+#------------------------
+# 3
+#------------------------
+1   wwu_pride_of_zinazshari
 
-6. Subjugate the Jinyu
+2   wwu_rise_of_the_naga
+    Trigger:
+        Own any province outside of Underwater region
+    
+    Effect:
+        Add "Rise of the Naga" modifier for -1:
+            special_unit_forcelimit = 0.25
+            
+        Enable the Slaves estate (link to Rise of the Naga modifier), replace Peasants estate.
+        Enable "Become the Empire of Azshara" cosmetic decision
+        AI: force ruler to be Militarist
+    
+3   wwu_persuade_the_sea_witch
+    Trigger:
+    Underwater Minions opinion of Nazjatar > 180
+    
+    Effect:
+    Underwater Minions becomes March
+    Gain "Outpost in Paradise" for 30 years
+        colonists = 1
+        global_colonial_growth = 15
+        native_uprising_chance = -0.25
+        
+4   wwu_paradise_domain
+    Trigger:
+    Own 10 provinces in Paradise Isles
+    
+    Effect:
+    Gain "Zar’jira the Sea Witch" as a special general
+    Add Murloc as accepted culture
+    Underwater Minions gain "Murloc Settlers" modifier for -1:
+        colonists = 1
+        global_colonial_growth = 25
+    
+5   wwu_the_dark_tide
+    Trigger:
+    Paradise Isles owned by Nazjatar or Underwater Minions
+    
+    Effect:
+    Reveal Pandaria
+    Reveal South Seas
+    Gain claims on South Seas region (ports only)
+    Gain claims on Pandaria region (ports only)
+    
+6   wwu_confront_farondis
+    Trigger:
+    war_with = Court of Farondis (COF)
+    Control capital of COF
 
-Trigger:
-At least 1 nation with culture = culture_jinyu is subject of Nazjatar
+    Effect:
+    Fire Azshara Confronts Prince Farondis event (for COF)
 
-Effect:
--Gets “Subjugation” (or Establish Tributary) CB on nations in Superregion Pandaria that are Jinyu
+7   wwu_eradicate_the_wardens
+    Trigger:
+    The Wardens (WRD) does not exists
+    Warden Isle (area) and Warden Stand(area) is owned by Nazjatar or its vassal.
 
-7. Drown Kezan and the Lost Isles
+    Effect:
+    add_prestige = 25
+    Add modifier "Prison of the Wardens" modifier for -1
 
-Trigger:
-Kezan and Lost Isles regions are owned by Nazjatar
+8   wwu_search_for_the_tidestone_of_golganneth
+    Trigger:
+    Azsuna(region) is owned by Nazjatar or its subject
 
-Effect:
--Provinces in Kezan and the Lost Isles regions get “Taken by the Ocean” Modifier, giving the buff naga receive in underwater provinces +
-*local_culture_conversion_cost = -0.9
-*local_years_of_separatism = -10
-*local_autonomy = -0.05 (assuming it defines tick, I don’t understand it, if its flat, than -25%)
+    Effect:
+    Fire "Search for the Tidestone" event chain
 
--Gets Permanent claims on land in South Sea region
+9   wwu_invasion_of_suramar
+    Trigger:
+    war_with = Suramar
+    
+    Effect:
+    Enable triggered modifier "Ancient Tactics" whilst at war with Suramar:
+        fire_damage_received = -0.1
+        shock_damage_received = -0.1
+        
+10  wwu_fate_of_suramar
+    Trigger:
+    Control Suramar capital
+    Suramar below 300 development
+    
+    Effect:
+    Fire "Fate of Suramar" event
 
+#------------------------
+# 4
+#------------------------
+3   wwu_commune_with_hatecoil
+    Trigger:
+    Hatecoil opinion > 180
 
-8. Commune with the Vashj’ir
+    Effect:
+    Hatecoil becomes March of Nazjatar
+    Hatecoil gets permanent claims on Azsuna region
 
-Trigger:
-Vashj’ir opinion of Nazjatar is at least 190
+4   wwu_subjugate_the_murlocs
+    Trigger:
+    All of the following is true:
+    -Underlight(ULT) is a subject of Nazjatar or does not exists
+    -Cavemoss(SKE) is a subject of Nazjatar or does not exists
 
-Effect:
--Vashj’ir becomes March of Nazjatar
--Vashj’ir gets Permanent Claim on entire Vash’jir region
+    Effect:
+    -Adds Murloc as Accepted Culture(if it isn’t)
+    -Gives 5k manpower for each murloc tribe that is a subject
 
-9. Defeat Hydraxian Waterlords
+5   wwu_reclaim_the_temple_of_elune
+    Trigger:
+    Temple of Elune(2651) is owned by Nazjatar or its subject
 
-Trigger:
--Hydraxian Waterlords(P25) does not exists
--entire Vash’jir region is owned by Nazjatar or its subject
+    Effect:
+    Stability +1
+    MIL power +200
 
-Effect:
--”Lord Hydraxis”, 5/3/5/2, becomes a general for Nazjatar
--Nazjatar gets 10 prestige
--Vashj’ir gets 1 stability and 20 prestige
--Nazjatar gets permanent claims on Abyssal Maw region
+6   wwu_drown_the_goblins
+    Trigger:
+    Kezan and Lost Isles regions are owned by Nazjatar
 
-10. Drown the Plunder Isles
+    Effect:
+    Add Terrain Affinity buff to the South Seas provinces (add exception in the Terrain Affinity event)
 
-Trigger:
+#------------------------
+# 5
+#------------------------
+1   wwu_shadows_of_the_deep
+2   wwu_nzoths_touch
+3   wwu_nzoth_tendrils
+4   wwu_empire_of_nzoth
 
-Effect:
--Provinces in Plunder Isle region get “Taken by the Ocean” Modifier, giving the buff naga receive in underwater provinces +
-*local_culture_conversion_cost = -0.9
-*local_years_of_separatism = -10
-*local_autonomy = -0.05 (assuming it defines tick, I don’t understand it, if its flat, than -25%)
+#------------------------
+# Artifacts
+#------------------------
+pearl_of_pandaria
 
-Or:
-If any nation on Plunder Isle: is Murlock and Subject of Nazjatar
-Release Bloodsail as Murlock Pirate Republic as March of Nazjatar
+scepter_of_the_queen
 
-11. Invasion of Abyssal Maw
+tidestone_of_golganneth
+    global_naval_engagement_modifier = 0.1 
+    own_coast_naval_combat_bonus = 1.0
 
-Trigger:
--Is at War with Abyssal Maw
--Controls Capital of Abyssal Maw
--Warscore is at least 75%
+#------------------------
+# Decisions
+#------------------------
+# Become the Empire of Azshara
+become_the_empire_of_azshara
+    Change name to "Empire of Azshara"
+    Do this via event, ask the player if they want the change, or to ignore the change and remove the decision
 
-Effect:
--Event “Subjegation of Neptulon” happens
+#------------------------
+# Events
+#------------------------
+# Call of N’zoth
+# N’zoth, the Great Corruptor and the Creator of the Naga race, has cried out from his prison, demanding his naga to serve him, as the hour of his freedom is near. Soon, he will fully awaken, and bring the era of darkness to the world of Azeroth.
 
-Event: Subjegation of Naptulon
+1. Obey the Master
+custom_tooltip = "The Hour of Twilight is now, and from the Depths of the Ocean, shall the Black Empire be reborn."
 
-Effect:
--Makes Abyssal Maw Personal Union under Nazjatar
--Add Water as Accepted Culture
+Start N'Zoth awakening stuff
 
-12. Queen of the Tides
+2. Break the Deal with N’zoth
+custom-tooltip = "Proclaiming her Nazjatar Empier, and growing both strong and skillful enough to be able to keep the Naga Race as her own, Azshara defiles her master call, and declares war against him, wishing to consolidate all power under her own grasp."
 
-Trigger:
--Abyssal Maw is a subject of Nazjatar and is loyal
--Nazjatar is a Hegemony
+Start "Wrath of N'Zoth" disaster:
+    Spawns "Minions of N'Zoth" rebels (with potent general)
+        50, 20, 20, 10
 
-Effect:
--Stability +1
--Prestige +50
--Nazjatar gets “True Rulers of the Seas” modifier, until the end of the game, giving them:
-		*prestige = 2
-		*monthly_splendor = 2
-		*stability_cost_modifier = -0.2
-		*land_morale = 0.1
-		*naval_morale = 0.2
+    Ends if Nazjatar survives 10 years without the capital being sieged.
+    
+    Capital sieged:
+        Disaster ends
+        Cede all rebel provinces to Nyalotha (ruled by N'Zoth)
+        Change name to Azsharan Remnants
+        Kill Azshara
 
--Receive Artifact “Scepter of the Queen”, giving advisor_cost – 0.2 and naval_attrition -0.5
+    Win:
+        Fire "Azshara's Freedom" event
 
-13. Confrontation with N’zoth
+# Azshara's Freedom
+# "With our defilement of N’zoth, and the war that followed won, we were able to repair the cracks of his prison, and make sure he cannot be awakes, his presence remaining but a dark memory. However, with the dawn of the new era for the Naga, we must turn to new path, new system of values and belives."
 
-Trigger:
--N’zoth is not summoned
--Nazjatar stability = 3
--Nazjatar has at least 100k army
--Nazjatar has at least 100 ships
-
-Effect:
--Event “Call of N’zoth” happens in 3 months
-
-Event: “Call of N’zoth”
-
-Loc_desc: “N’zoth, the Great Corruptor and the Creator of the Naga Race, has cried out from his prison, demanding his naga to serve him, as the hour of his freedom is near. Soon, he will fully awaken, and bring the era of darkness to the world of Azeroth.”
-
-Option 1 – “Obey the Master”
-
-Loc_desc: “The Hour of Twilight is now, and from the Depths of the Ocean, shall the Black Empire be reborn.
-
-Effect:
--“Awakening of N’zoth” decision will automatically begun.
--Nazjatar gets “Awakening of the Naga” modifier, until the end of the game, giving:
-		*global_manpower_modifier = 0.2
-		*manpower_recovery_speed = 0.2
-		*land_forcelimit_modifier = 0.2
-(once we implement the N’zoth path in the future, will allow us tree change event)
-
-Option 2 – “Break the Deal with N’zoth”
-
-Loc_desc: “Proclaiming her Nazjatar Empier, and growing both strong and skillful enough to be able to   keep the Naga Race as her own, Azshara defiles her master call, and declares war against him, wishing to consolidate all power under her own grasp.”
-
-Effect:
--Disaster “Wrath of N’zoth” triggers, active for 10 years, spawning “Minions of N’zoth” around Nazjatar and giving temporary negative effects, equal to stepping over 100% Overextention
--100K Stack of N’zoth Minions spawn in Nazjatar Area, under “True Herald of N’zoth” 6/6/6/6 General.
-
-Outcome:
--If you survive for 10 years and you control your own capital, disaster ends. Event “Fate on N’zoth and new path for the Naga” triggers after 3 months.
--If at least 75% of your total dev is controlled by N’zoth forces, you change tag to Azsharan’s Remnants, a tag spawning in remaining provinces you controlled, under random ruler, with permanent claims all over Nazjatar. N’zoth takes over Nazjatar, all of Nazjatar Subjects gets Independence, Changes Nazjatar name to Nyalotha, and Azshara is Killed.
-
-Event:
-“Fate of N’zoth and new path for the Naga”
-
-loc_desc: “With our defilement of N’zoth, and the war that followed won, we were able to repair the cracks of his prison, and make sure he cannot be awakes, his presence remaining but a dark memory. However, with the dawn of the new era for the Naga, we must turn to new path, new system of values and belives.”
-
-Option 1.
-“With N’zoth gone, the Tidemother, the mythical ruler of the ocean, is what will represent the naga.”
+1. Align with the Tidemother
 Changes religion to Tidemother
 
-Option 2.
-“Water is domain of the Naga, and so, shall remain only aspect of its faith.”
+1. Align with the Ocean
 Changes religion to Water
 
-Option 3.
-“Deep Mother watches over us, whenever she is.”
+1. Align with the Deep Mother
 Changes religion to Deep Mother
 
-Option 4.
-“With the Fall of N’zoth, the Age of Azshara is upon us. The Legacy of the Highborn calls, and so shall Arcane Power that build it.”
+1. Align with the Arcane
 Changes religion to Arcane.
 
-Option 5.
-“Long ago, the highborn had caused a terrible tragedy, turning to the Arcane, abandoning their true goddes. Elune, hear out call!”
+1. Align with Elune
 Changes religion to Elune.
 
-14. Commune with the Hatecoil
+# Azshara Confronts Prince Farondis
+# Queen Azshara, upon taking over Farondis main center of power, confronted spirit of the Prince personally, offering him servitude under her, for letting them exist.
 
-Trigger:
-Hatecoil opinion of Nazjatar is at least 190
+1. Fight against Queen Azshara
+    Minor debuff to Nazjatar
 
-Effect:
--Hatecoil becomes March of Nazjatar
--Hatecoil gets permanent claims on Azsuna region
+2. Submit to Queen Azshara
+    Court of Farondis(COF) becomes vassal of Nazjatar.
+    Minor buff to Nazjatar
 
-15. Subjegate the Broken Isle Murlocks
+# Fate of Suramar
+# 
 
-Trigger:
-All of the following is true:
--Underlight(ULT) is a subject of Nazjatar or does not exists
--Cavemoss(SKE) is a subject of Nazjatar or does not exists
+1. Follow the standard
+No effect
 
-Effect:
--Adds Murlock as Accepted Culture(if it isn’t)
--Gives 5k manpower for each murlock tribe that is a subject
+2. Enforce tribute
+Peace out Suramar
+Any owned lands in Suramar become Suramar's again
+Suramar becomes our Tributary
++30 AE with all of the Broken Isles
 
-16. Confront Farondis
+3. Enforce vassalage
+Peace out Suramar
+Any owned lands in Suramar become Suramar's again
+Suramar becomes our Vassal
++60 AE with all of the Broken Isles
 
-Trigger:
--Is at War with Court of Farondis(COF)
--Capital of COF is occuptied by Nazjatar or its subject
+4. Drown the Nightborne
+Inherit Suramar
+Add Suramar region to Terrain Affinity for Underwater.
++90 AE with all of the Broken Isles
 
-Effect:
--Event “Azshara Confronts Prince Farondis” happens to COF
+#------------------------
+# WIP
+#------------------------
 
-loc_desc: “Queen Azshara, upon taking over Farondis main center of power, confronted spirit of the Prince personally, offering him servitude under her, for letting them exist.”
 
-Event: Azshara Confronts Prince Farondis”
 
-Option 1. - Fight against Queen Azshara
-“We will not ally ourselves with Monster like her.”
 
-Effect:
--Continues the War
--Nazjatar gets event “Farondis declines our offer.”(gives like -5 prestige, that’s all)
 
-Option 2. - Submit to Queen Azshara
-“We cannot continue this war. We shall surrender, and bow before the Queen.”
 
-Effect:
--Court of Farondis(COF) becomes vassal of Nazjatar.
--Nazjarar gets event “Farondis accepts”(gives 5 prestige and informs player)
 
-17. Eradicate the Wardens
 
-Trigger:
--The Wardens(WRD) does not exists
--Warden Isle(area) and Warden Stand(area) is owned by Nazjatar or its vassal.
 
-Effect:
--Prestige +15
--MIL power +50
 
-18. Reclaim the Temple of Elune
-
-Trigger:
--Temple of Elune(2651) is owned by Nazjatar or its subject
-
-Effect:
--Stability +1
--MIL power +100
-
-19. Search for the Tidestone of Golganneth
-
-Trigger:
--Azsuna(region) is owned by Nazjatar or its subject
-
-Effect:
--ADM power +50
--Unlock Decision “Search for the Tidestone” (event chain like archeology)(gives artifact “Tidestone of Golganneth”, giving global_naval_engagement_modifier = 0.1 and own_coast_naval_combat_bonus = 1.0 )
-
-20. Invasion of Suramar
-
-Trigger:
--Is at War with Suramar(SUR)
-
-Effect:
--Nazjatar gets “Fighting against the Highborne” for the duration of the war, getting fire_damage_recived = -0.1 and shock_damage_recived = -0.1
-
-21. The Fate of Suramar
-
-Trigger:
--Occupies Suramar Capital
--Has more than 90% warscore
--Suramar dev is lower than 400
-
-Effect:
--Event “Fate of Suramar” happens
-
-Event: Fate of Suramar
-
-Option 1. - Play it Safe
--Doesn’t do anything, allows normal peace deal.
-
-Option 2 – Make Suramar our tribute.
--Gives Peace to Suramar
--Suramar becomes Tributary of Nazjatar
--Adds +75 to Aggressive Expansion with whole of Broken Isles
--If owns any provinces of Suramar city(west, central or east Suramar) returns them to Suramar
-
-Option 3 – Highborne are our people, we shall rule over them.
--Gives Peace to Suramar
--Makes Suramar Vassal of Nazjatar
--Add +150 to Agressive Expansion with whole of Broken Isles
--If owns any provinces of Suramar city(west, central or east Suramar) returns them to Suramar
-
-Option 4 – Highborn shall become the Naga. Drown the Suramar.
--Gives Peace to Suramar
--Makes Suramar a March
--Adds 90% devastation to all provinces of Suramar
--Changes Suramar Culture to Nazja
--Changes Suramar Religion to ROOT
--Adds +225 to Agressive Expansion with whole of Broken Isles
--If owns any provinces of Suramar city(west, central or east Suramar) returns them to Suramar
-
-22. Conquest of the Broken Isles
-
-Trigger:
-All of Superregion Broken Isles is owned by Nazjatar or its subject
-
-Effect:
-Stability +2
-Prestige +50
-ADM, DIP and MIL +200
-
-23. Claim the Broken Shore
-
-Trigger:
-Owns All of Broken Shore
-
-Effect:
-Prestige +20
-ADM +100
-
-24. Pact with the Burning Legion (its for desperate times)
-
-Trigger:
-Nazjatar Dev is less than 200dev
-
-Effect:
-Nazjatar creates alliance with the Burning Legion
-Nazjatar becomes Fel
 
 
 

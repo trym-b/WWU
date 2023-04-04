@@ -12,52 +12,62 @@ wwu_nazjatar_column_1 = {
     
 	has_country_shield = yes
 	
-	wwu_curtail_the_zinazshari_elites = {
-		icon = mission_brimstone
+	wwu_illidans_call = {
+		icon = mission_demonhunter_imprison
         position = 1
+        completed_by = 622.1.1 # Should not be usable after Frozen Throne date
         
 		required_missions = { }
         
 		trigger = {
-            crown_land_share = 40
+            had_global_flag = {
+                flag = illidans_call
+                days = 365
+            }
+            stability = 1
 		}
         
 		effect = {
-			add_country_modifier = {
-                name = mission_curtailed_zinazshari_elite
-                duration = 3650
+			discover_outland = yes
+            
+            custom_tooltip = coilfang_faction_tt
+            
+            hidden_effect = {
+                set_global_flag = coilfang_created
             }
 		}
 	}
-    wwu_pride_of_azshara = {
-		icon = mission_ancient_tablet
+    
+    wwu_burning_legion_pact = {
+		icon = mission_demonhunter_imprison
         position = 2
         
-		required_missions = { 
-            wwu_curtail_the_zinazshari_elites
-        }
+		required_missions = { }
         
 		trigger = {
-            region_nazjatar = {
-                type = all
-                
-                base_tax = 4
-                base_production = 4
-                base_manpower = 4
+            if = {
+                limit = {
+                    ai = yes
+                }
+                NOT = { total_development = 100 }
             }
-		}
-        provinces_to_highlight = {
-            owned_by = ROOT
-            region = region_nazjatar
-            NOT = { base_tax = 4 }
-            NOT = { base_production = 4 }
-            NOT = { base_manpower = 4 }
+            else = {
+                B92 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 150
+                    }
+                }
+            }
 		}
         
 		effect = {
-			add_country_modifier = {
-                name = mission_glory_of_nazjatar
-                duration = -1
+			create_alliance = B92
+            change_religion = fel
+            capital_scope = {
+                area = {
+                    change_religion = fel
+                }
             }
 		}
 	}
@@ -74,121 +84,7 @@ wwu_nazjatar_column_2 = {
     
 	has_country_shield = yes
 	
-	wwu_uncover_lost_artifacts = {
-		icon = mission_ancient_sword
-        position = 1
-        
-		required_missions = { }
-        
-		trigger = {
-            has_any_artifact = yes
-		}
-        
-		effect = {
-			add_prestige = 25
-            add_country_modifier = {
-                name = mission_rarified_treasures
-                duration = -1
-            }
-		}
-	}
     
-    wwu_rein_in_vashijir = {
-		icon = mission_ship_8
-        position = 2
-        
-		required_missions = { 
-            
-        }
-        
-		trigger = {
-            any_owned_province = {
-                region = region_vashjir
-            }
-		}
-        provinces_to_highlight = {
-            region = region_vashjir
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_vashjir_riches
-                duration = -1
-            }
-		}
-	}
-    
-    wwu_vashjir_connections = {
-		icon = mission_rolled_scroll
-        position = 3
-        
-		required_missions = { 
-            wwu_rein_in_vashijir
-        }
-        
-		trigger = {
-            OR = {
-                NOT = { exists = VHJ }
-                VHJ = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 180
-                    }
-                }
-            }
-		}
-        provinces_to_highlight = {
-            owned_by = VHJ
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-			if = {
-                limit = {
-                    exists = VHJ
-                }
-                create_subject = {
-                    subject_type = vassal
-                    subject = VHJ
-                }
-            }
-            else = {
-                region_vashjir = {
-                    add_claim = ROOT
-                }
-            }
-		}
-	}
-    
-    wwu_long_tail_of_the_serpent = {
-		icon = mission_lady_vashj
-        position = 4
-        
-		required_missions = { 
-            wwu_vashjir_connections
-        }
-        
-		trigger = {
-            region_vashjir = { 
-                type = all
-                
-                owned_by = ROOT
-            }
-		}
-        provinces_to_highlight = {
-            region = region_vashjir
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-			custom_tooltip = enable_naga_cb_east_tt
-            
-            hidden_effect = {
-                set_country_flag = naga_invasion_cb_east
-            }
-		}
-	}
 }
 
 wwu_nazjatar_column_3 = {
@@ -202,16 +98,14 @@ wwu_nazjatar_column_3 = {
     
 	has_country_shield = yes
 	
-	wwu_protect_nazjatars_waters = {
+	wwu_pride_of_zinazshari = {
 		icon = mission_ship_1
         position = 1
         
 		required_missions = { }
         
 		trigger = {
-            navy_size_percentage = 0.8
-            heavy_ship_fraction = 0.2
-            galley_fraction = 0.3
+            navy_size_percentage = 0.95
 		}
         
 		effect = {
@@ -220,92 +114,129 @@ wwu_nazjatar_column_3 = {
 		}
 	}
     
-    wwu_rise_of_nazjatar = {
-		icon = mission_hunter_rapid_killing
+    wwu_rise_of_the_naga = {
+		icon = mission_ship_1
         position = 2
         
 		required_missions = { 
-            wwu_protect_nazjatars_waters
+            wwu_pride_of_zinazshari
         }
         
 		trigger = {
-            army_size_percentage = 0.8
-            artillery_fraction = 0.25
+            any_owned_province = {
+                NOT { superregion = underwater_superregion }
+            }
 		}
         
 		effect = {
 			add_country_modifier = {
-                name = mission_nazjatar_rising
-                duration = 9125
+                name = mission_rise_of_the_naga
+                duration = -1
+            }
+            
+            custom_tooltip = NJZ_ENABLE_SLAVE_ESTATE_TT
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                set_ai_personality = {
+                    personality = ai_militarist
+                    locked = yes
+                }
             }
 		}
 	}
     
-    wwu_emergence_of_nazjatar = {
-		icon = mission_azerite_essense
+    wwu_persuade_the_sea_witch = {
+		icon = mission_ship_1
         position = 3
         
 		required_missions = { 
-            wwu_rise_of_nazjatar
+            wwu_rise_of_the_naga
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    NOT = { exists = UNM }
+                }
+                owns_core_province = 4141
+            }
+            else = {
+                UNM = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = UNM
+                }
+                
+                create_subject = {
+                    subject = UNM
+                    subject_type = march
+                }
+            }
+            else = {
+                add_prestige = 10
+            }
+            
+            add_country_modifier = {
+                name = mission_outpost_in_paradise
+                duration = 10950
+            }
+		}
+	}
+    
+    wwu_paradise_domain = {
+		icon = mission_ship_1
+        position = 4
+        
+		required_missions = { 
+            wwu_persuade_the_sea_witch
         }
         
 		trigger = {
             calc_true_if = {
                 amount = 10
                 all_owned_province = {
-                    OR = {
-                        superregion = broken_isles_superregion
-                        superregion = zandalar_superregion
-                        superregion = south_seas_superregion
-                        superregion = paradise_isles_superregion
+                    superregion = paradise_isles_superregion
+                }
+            }
+		}
+        
+		effect = {
+			define_conquistador = {
+                name = "Zar’jira the Sea Witch"
+                female = yes
+                
+                shock = 5
+                fire = 5
+                manuever = 6
+                siege = 2
+            }
+            
+            add_accepted_culture = culture_murloc
+            
+            if = {
+                limit = {
+                    exists = UNM
+                }
+                
+                UNM = {
+                    add_country_modifier = {
+                        name = mission_murloc_settlers
+                        duration = -1
                     }
                 }
-            }
-		}
-		provinces_to_highlight = {
-            OR = {
-                superregion = broken_isles_superregion
-                superregion = zandalar_superregion
-                superregion = south_seas_superregion
-                superregion = paradise_isles_superregion
-            }
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-            add_country_modifier = {
-                name = mission_terror_from_the_sea
-                duration = -1
-            }
-		}
-	}
-    
-    wwu_long_arm_of_the_serpent = {
-		icon = mission_azshara
-        position = 4
-        
-		required_missions = { 
-            wwu_emergence_of_nazjatar
-        }
-        
-		trigger = {
-            calc_true_if = {
-                amount = 5
-                all_owned_province = {
-                    superregion = kalimdor_superregion
-                }
-            }
-		}
-		provinces_to_highlight = {
-            superregion = kalimdor_superregion
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-            custom_tooltip = enable_naga_cb_west_tt
-            
-            hidden_effect = {
-                set_country_flag = naga_invasion_cb_west
             }
 		}
 	}
@@ -313,6 +244,20 @@ wwu_nazjatar_column_3 = {
 
 wwu_nazjatar_column_4 = {
 	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = NJZ
+	}
+    
+	has_country_shield = yes
+	
+	
+}
+
+wwu_nazjatar_column_5 = {
+	slot = 5
 	generic = no
 	ai = yes
     
@@ -457,44 +402,6 @@ wwu_nazjatar_column_4 = {
 			add_country_modifier = {
                 name = mission_nzoths_wisdom
                 duration = -1
-            }
-		}
-	}
-}
-
-wwu_nazjatar_column_5 = {
-	slot = 5
-	generic = no
-	ai = yes
-    
-	potential = {
-		tag = NJZ
-	}
-    
-	has_country_shield = yes
-	
-	wwu_illidans_call = {
-		icon = mission_demonhunter_imprison
-        position = 1
-        completed_by = 622.1.1 # Should not be usable after Frozen Throne date
-        
-		required_missions = { }
-        
-		trigger = {
-            had_global_flag = {
-                flag = illidans_call
-                days = 365
-            }
-            stability = 1
-		}
-        
-		effect = {
-			discover_outland = yes
-            
-            custom_tooltip = coilfang_faction_tt
-            
-            hidden_effect = {
-                set_global_flag = coilfang_created
             }
 		}
 	}
