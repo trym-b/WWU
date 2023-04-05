@@ -1,0 +1,932 @@
+#--------------------------------------------
+# Tribal
+#--------------------------------------------
+# Generic
+tribal_federation_reform = {
+	icon                        = "ancestral_call"
+    legacy_equivalent           = tribal_federation_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    
+	queen = yes
+    
+	modifiers = {
+		global_tax_modifier = 0.1
+        improve_relation_modifier = 0.05
+		reinforce_speed = 0.1
+        
+        max_absolutism = -10
+	}
+	
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
+	ai = { factor = 1 }
+}
+
+# Generic
+tribal_despotism_reform = {
+	icon                        = "hunger_for_blood"
+    legacy_equivalent           = tribal_despotism_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    
+	queen = yes
+    
+	modifiers = {
+		core_creation = -0.1
+		global_unrest = -1
+        morale_damage = 0.1
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+	
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Nightfallen
+withered_reform = {
+	icon                        = "arcane_pattern"
+    legacy_equivalent           = withered_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    generals_become_rulers  = yes
+	heir = no
+    
+    modifiers = {
+        advisor_pool = 1
+        free_policy = 1
+        development_cost = -0.05
+        relation_with_heretics = -25
+        relation_with_heathens = -25
+        relation_with_same_religion = -25
+        
+        land_forcelimit = -3
+        naval_forcelimit = -3
+        
+        governing_capacity = -100
+        
+        max_absolutism = -10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Res Publica" }
+        
+		states_general_mechanic = {
+			sg_withered = {
+                global_tax_modifier = -0.25
+                production_efficiency = -0.25
+                global_manpower_modifier = -0.25
+                all_power_cost = 0.1
+			}
+
+			sg_restored = {
+				reform_progress_growth = 1.0
+			}
+		}
+	}
+	    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		primary_culture = culture_withered
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Orc nations
+orc_clan_reform = {
+	icon                        = "blood_frenzy"
+    legacy_equivalent           = orc_clan_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    nomad                   = yes
+    monarchy                = no
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+		land_morale = 0.1
+        global_regiment_cost = -0.1
+        manpower_in_own_culture_provinces = 0.15
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -150
+        
+        max_absolutism = 20
+	}
+		
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		OR = {
+            technology_group = tech_fel_orc
+            technology_group = tech_orc
+        }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Yaungol tribes
+yaungol_tribe_reform = {
+	icon                        = "dirty_deeds"
+    legacy_equivalent           = yaungol_tribe_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    nomad                   = yes
+    monarchy                = no
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+	modifiers = {
+        global_regiment_cost = -0.1
+        unjustified_demands = -0.1
+		army_tradition_from_battle = 0.33
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+		
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		culture_group = culture_group_yaungol
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Gnoll Horde
+gnoll_horde_reform = {
+	icon                        = "challenge"
+    legacy_equivalent           = gnoll_horde_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    nomad                   = yes
+    monarchy                = no
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+        global_manpower_modifier = 0.1
+        province_warscore_cost = -0.1
+        infantry_shock = 1.0
+        
+        land_forcelimit = 10
+        
+        governing_capacity = -200
+        
+        max_absolutism = 20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = GHR
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Saurok tribes
+saurok_pod_reform = {
+	icon                        = "dirty_deeds"
+    legacy_equivalent           = saurok_pod_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    nomad                   = yes
+    monarchy                = no
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+        core_creation = -0.1
+        harsh_treatment_cost = -0.2
+        infantry_power = 0.1
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -250
+        
+        max_absolutism = 20
+	}
+		
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		culture_group = culture_group_saurok
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Giant tribes
+giant_tribe_reform = {
+	icon                        = "accretion"
+    legacy_equivalent           = giant_tribe_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir                    = no
+    generals_become_rulers  = yes
+    
+    modifiers = {
+        build_cost = -0.1
+		defensiveness = 0.15
+        hostile_attrition = 2
+        
+        land_forcelimit = 3
+        
+        governing_capacity = -150
+        
+        max_absolutism = 10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_reform = giant_tribe_reform
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Draenei/Broken tribes
+draenei_clan_reform = {
+	icon                        = "ancestral_guardian"
+    legacy_equivalent           = draenei_clan_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+		tolerance_own = 1
+        reform_progress_growth = 0.15
+		global_unrest = -2
+        
+        land_forcelimit = -3
+        naval_forcelimit = -3
+        
+        governing_capacity = -100
+        
+        max_absolutism = -20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+	potential = {
+		OR = {
+            culture_group = culture_group_draenei
+            culture_group = culture_group_broken
+        }
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used by Mogu nations
+ancient_clan_reform = {
+	icon                        = "ancient_history"
+    legacy_equivalent           = ancient_clan_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+        core_creation = -0.1
+        yearly_absolutism = 1.0
+		discipline = 0.05
+        
+        land_forcelimit = 5
+        
+        max_absolutism = 10
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+	potential = {
+		culture_group = culture_group_mogu
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used for splinter groups of important nations
+expeditionary_force_reform = {
+	icon                        = "return_to_camp"
+    legacy_equivalent           = expeditionary_force_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	heir = no
+    generals_become_rulers  = yes
+    
+	modifiers = {
+        colonists = 1
+		global_regiment_cost = -0.1
+        global_regiment_recruit_speed = -0.2
+        
+        land_forcelimit = 3
+        naval_forcelimit = 3
+        
+        governing_capacity = -250
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_reform = expeditionary_force_reform
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used for Criminal nations
+criminal_organization_reform = {
+	icon                        = "shadow_reflection"
+	legacy_equivalent           = criminal_organization_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+        spy_offence = 0.33
+        rebel_support_efficiency = 1.0
+		loot_amount = 0.25
+        
+        governing_capacity = -100
+        
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_reform = criminal_organization_reform
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used for Dwarven clans
+dwarven_clan_reform = {
+	icon                        = "dwarf"
+    legacy_equivalent           = dwarven_clan_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	queen = yes
+    
+    modifiers = {
+        global_prosperity_growth = 0.25
+		defensiveness = 0.2
+		siege_ability = 0.1
+        
+        land_forcelimit = 3
+        
+        governing_capacity = -100
+        
+        max_absolutism = -10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_dwarven
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used for Satyr nations
+satyr_sect_reform = {
+	icon                        = "satyr"
+    legacy_equivalent           = satyr_sect_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monarchy                = no
+    nomad                   = yes
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+		papal_influence = 1
+        culture_conversion_cost = -0.2
+        global_attacker_dice_roll_bonus = 1
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -150
+        
+        max_absolutism = 20
+	}
+	
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_satyr
+    }
+
+	ai = { factor = 0 }
+}
+
+# Used for Centaur nations
+centaur_khanate_reform = {
+	icon                        = "centaur"
+    legacy_equivalent           = centaur_khanate_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir                    = no
+    monarchy                = no
+    nomad                   = yes
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+        harsh_treatment_cost = -0.2
+		cavalry_power = 0.1
+        raze_power_gain = 0.33
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    potential = {
+		culture_group = culture_group_centaur
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}    
+    
+	ai = { factor = 0 }
+}
+
+# Used for Mantid vassals
+mantid_swarm_reform = {
+	icon                        = "mantid"
+    legacy_equivalent           = mantid_swarm_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir                    = no
+	republican_name         = yes
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+    modifiers = {
+        free_mil_policy = 1
+        province_warscore_cost = -0.1
+		manpower_recovery_speed = 0.33
+        
+        land_forcelimit = 10
+        
+        max_absolutism = 20
+	}
+	
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	} 
+    
+    potential = {
+		culture_group = culture_group_mantid
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used for Tauren nations
+tauren_tribe_reform = {
+	icon                        = "tauren_bull_rush"
+    legacy_equivalent           = tauren_tribe_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	queen = yes
+    
+    modifiers = {
+		development_cost = -0.1
+        improve_relation_modifier = 0.1
+        global_unrest = -1
+        
+        governing_capacity = -100
+        
+        max_absolutism = -20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_tauren
+    }
+    
+    ai = { factor = 0 }
+}
+
+# For Rustbolt Resistance
+junkyard_reform = {
+	icon                        = "rearm"
+    legacy_equivalent           = junkyard_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+        production_efficiency = 0.1
+		technology_cost = -0.05
+        manpower_recovery_speed = 0.1
+        
+        governing_capacity = -100
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        tag = RBR
+    }
+    
+	ai = { factor = 0 }
+}
+
+# For feral worgens
+worgen_pack_reform = {
+	icon                        = "worgen"
+    legacy_equivalent           = worgen_pack_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    nomad                   = yes
+    monarchy                = no
+    heir                    = no
+    raze_province           = yes
+    generals_become_rulers  = yes
+    
+    modifiers = {
+        years_of_nationalism = -5
+        culture_conversion_cost = -0.15
+		shock_damage = 0.15
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -200
+        
+        max_absolutism = 20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			tribal_federation_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}  
+    
+    potential = {
+		culture_group = culture_group_worgen
+	}
+    
+	ai = { factor = 0 }
+}
+
+# For Botani
+primal_dominion_reform = {
+	icon                        = "genesaur"
+    legacy_equivalent           = primal_dominion_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    raze_province                   = yes
+    free_concentrate_development    = yes
+    
+	modifiers = {
+        culture_conversion_cost = -0.2
+        diplomatic_annexation_cost = -0.1
+		manpower_recovery_speed = 0.2
+        
+        land_forcelimit = 5
+        
+        max_absolutism = 15
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+	
+    potential = {
+		culture_group = culture_group_botani
+	}
+    
+	ai = { factor = 0 }
+}
+
+# For Troggs
+trogg_clan_reform = {
+	icon                        = "gift_of_earth"
+    legacy_equivalent           = trogg_clan_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    raze_province   = yes
+    
+    modifiers = {
+        core_creation = -0.05
+        fabricate_claims_cost = -0.25
+		reinforce_cost_modifier = -0.2
+        
+        land_forcelimit = 3
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		culture_group = culture_group_trogg
+	}
+    
+	ai = { factor = 0 }
+}
+
+# For Quillboar
+kraul_reform = {
+	icon                        = "quillboar"
+    legacy_equivalent           = kraul_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+        global_monthly_devastation = -0.03
+        province_warscore_cost = -0.1
+        hostile_attrition = 3
+        
+        land_forcelimit = 3
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		culture_group = culture_group_quillboar
+	}
+    
+	ai = { factor = 0 }
+}
+
+# For minor Vrykul nations
+vrykul_clan_reform = {
+	icon                        = "vrykul"
+	legacy_equivalent           = vrykul_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    maintain_dynasty    = yes
+    
+    modifiers = {
+        global_autonomy = -0.03
+        unjustified_demands = -0.05
+        infantry_power = 0.05
+
+        land_forcelimit = 5
+        naval_forcelimit = 5
+
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		OR = {
+            tag = DRJ
+            tag = VLK
+            tag = BON
+            tag = JAN
+        }
+	}
+
+	ai = { factor = 0 }
+}
+

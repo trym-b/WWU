@@ -1,0 +1,1281 @@
+#--------------------------------------------
+# Monarchy
+#--------------------------------------------
+# Generic
+autocracy_reform = {
+	icon                        = "control_is_king"
+	legacy_equivalent           = autocracy_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    
+	modifiers = {
+        years_of_nationalism = -3
+        province_warscore_cost = -0.05
+        army_tradition_decay = -0.01
+        
+        max_absolutism = 5
+	}
+	
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
+	ai = { factor = 1 }
+}
+
+# Generic
+feudalism_reform = {
+	icon                        = "barracks"
+    legacy_equivalent           = feudalism_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    
+	modifiers = {
+        vassal_income = 0.25
+        diplomatic_upkeep = 1
+        vassal_forcelimit_bonus = 0.25
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			iqta_mechanic
+		}
+	}
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
+	ai = { factor = 1 }
+}
+
+# Generic / Kul Tiras
+admiralty_reform = {
+	icon                        = "admiral_hat"
+    legacy_equivalent           = admiralty_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    
+	modifiers = {
+        navy_tradition = 1
+        global_ship_cost = -0.1
+        allowed_marine_fraction = 0.2
+        
+        naval_forcelimit = 15
+
+        max_absolutism = 10
+	}
+	
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+		OR = {
+            num_of_ports = 20
+            primary_culture = culture_kul_tiran
+        }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used for HRE Free City mechanic - Imperial Order
+free_city_reform = {
+	icon                        = "city_of_gold"
+    legacy_equivalent           = free_city_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    free_city   = yes
+    heir        = yes
+	queen       = yes
+
+	modifiers = {
+
+	}
+
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		always = no
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Head of Alliance
+alliance_reform = {
+	icon                        = "alliance"
+	legacy_equivalent           = alliance_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    maintain_dynasty = yes
+    
+	modifiers = {
+        prestige_decay = -0.01
+        improve_relation_modifier = 0.1
+        military_tactics = 0.25
+
+        land_forcelimit = 10
+        naval_forcelimit = 10
+
+        governing_capacity = 250
+
+        max_absolutism = 10
+	}
+    
+	assimilation_cultures = {
+		culture_group_human = {
+			ship_durability = 0.05
+		}
+		culture_group_darnassian = {
+			free_leader_pool = 1
+		}
+		culture_group_vrykul = {
+			land_attrition = -0.1
+		}
+		culture_group_broken = {
+			state_maintenance_modifier = -0.1
+		}
+		culture_group_draenei = {
+			missionaries = 1
+		}
+		culture_group_furbolg = {
+			global_trade_goods_size_modifier = 0.05
+		}
+		culture_group_wolvar = {
+			production_efficiency = 0.05
+		}
+		culture_group_gorloc = {
+			diplomats = 1
+		}
+		culture_group_kobold = {
+			global_institution_spread = 0.1
+		}
+		culture_group_harpy = {
+			core_creation = -0.05
+		}
+		culture_group_worgen = {
+			advisor_cost = -0.1
+		}
+		culture_group_pandaren = {
+			land_morale = 0.05
+		}
+		culture_group_tauren = {
+			idea_cost = -0.05
+		}
+		culture_group_orc = {
+			discipline = 0.05
+		}
+		culture_group_thalassian = {
+			merchants = 1
+		}
+		culture_group_goblin = {
+			movement_speed = 0.05
+		}
+		culture_group_gnoll = {
+			mil_advisor_cost = -0.1
+		}
+		culture_group_centaur = {
+			caravan_power = 0.1
+		}
+		culture_group_naga = {
+			prestige_decay = -0.005
+		}
+		culture_group_dragonkin = {
+			global_autonomy = -0.005
+		}
+		culture_group_demonic = {
+			leader_land_fire = 1
+		}
+		culture_group_satyr = {
+			trade_efficiency = 0.05
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_country_modifier = head_of_alliance
+	}
+    
+	ai = { factor = 0 }	
+}
+
+# Used by Head of Horde
+horde_reform = {
+	icon                        = "horde"
+	legacy_equivalent           = horde_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    generals_become_rulers = yes
+    
+	modifiers = {
+        core_creation = -0.1
+        diplomatic_reputation = 1
+        global_regiment_cost = -0.1
+
+        land_forcelimit = 10
+        naval_forcelimit = 10
+
+        governing_capacity = 150
+
+        max_absolutism = 20
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_country_modifier = head_of_horde
+        NOT = { tag = OGR }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Head of Old Horde of Gorian Ogre
+gorian_horde_reform = {
+	icon                        = "horde"
+	legacy_equivalent           = gorian_horde_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    generals_become_rulers = yes
+    
+	modifiers = {
+        technology_cost = -0.1
+        global_spy_defence = 0.15
+        land_morale = 0.1
+        
+        land_forcelimit = 10
+        naval_forcelimit = 10
+
+        governing_capacity = 150
+        max_absolutism = 20
+	}
+    
+    factions = {
+        faction_council_of_sorcerers
+        faction_magi_of_stone_magic
+        faction_magic_breakers
+    }
+    
+	conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_country_modifier = head_of_old_horde
+        tag = OGR
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Head of Old Horde
+old_horde_reform = {
+	icon                        = "old_horde"
+	legacy_equivalent           = old_horde_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    generals_become_rulers = yes
+	
+	modifiers = {
+        mil_advisor_cost = -0.2
+        province_warscore_cost = -0.1
+        infantry_power = 0.1
+
+        land_forcelimit = 20
+        naval_forcelimit = 20
+
+        max_absolutism = 30
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		has_country_modifier = head_of_old_horde
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Vrykul nations
+vrykul_kingdom_reform = {
+	icon                        = "vrykul"
+	legacy_equivalent           = vrykul_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    maintain_dynasty = yes
+    
+	modifiers = {
+        free_mil_policy = 1
+        unjustified_demands = -0.15
+        war_exhaustion = -0.03
+
+        land_forcelimit = 10
+        naval_forcelimit = 10
+
+        max_absolutism = 20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		technology_group = tech_vrykul
+        NOT = { tag = VLJ }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Valarjar
+halls_of_valor_reform = {
+	icon                        = "odyn_rune"
+	legacy_equivalent           = halls_of_valor_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    maintain_dynasty = yes
+    
+	modifiers = {
+        prestige = 1.0
+        diplomats = 1.0
+        leader_cost = -0.25
+
+        land_forcelimit = 20
+
+        governing_capacity = 250
+
+        max_absolutism = 30
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = VLJ
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by ancient Highborne nations
+ancient_kingdom_reform = {
+	icon                        = "ancient_history"
+	legacy_equivalent           = ancient_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    maintain_dynasty = yes
+    
+	modifiers = {
+        advisor_cost = -0.15
+        ae_impact = -0.1
+        all_power_cost = -0.05
+
+        land_forcelimit = -3
+        naval_forcelimit = -3
+
+        governing_capacity = -100
+
+        max_absolutism = -10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		is_ancient = yes
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by main Scourge nation
+scourge_reform = {
+	icon                        = "lich_king"
+    legacy_equivalent           = scourge_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    royal_marriage      = no
+    maintain_dynasty    = no
+    
+	modifiers = {
+        years_of_nationalism = -5
+        province_warscore_cost = -0.1
+        war_exhaustion = -0.1
+
+        land_forcelimit = 30
+
+        governing_capacity = 250
+
+        max_absolutism = 50
+	}
+    
+    factions = {
+		faction_lichs
+		faction_darkfallen
+		faction_death_knights
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Res Publica" }
+        
+		states_general_mechanic = {
+			sg_lichborne = {
+				infantry_power = 0.2
+                siege_ability = 0.2
+			}
+
+			sg_stitched = {
+				global_manpower_modifier = 0.25
+                manpower_recovery_speed = 0.25
+			}
+		}
+	}
+
+	custom_attributes = {
+        locked_government_type = yes
+        succession_scourge = yes
+        heir_selection_scourge = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        have_had_reform = scourge_reform
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by lesser Scourge nations
+scourge_domain_reform = {
+    icon                        = "undead_male"
+    legacy_equivalent           = scourge_domain_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen = no
+    
+	modifiers = {
+        years_of_nationalism = -5
+        province_warscore_cost = -0.1
+        war_exhaustion = -0.1
+
+        land_forcelimit = 15
+
+        governing_capacity = 100
+
+        max_absolutism = 25
+	}
+
+    conditional = {
+		allow = { has_dlc = "Res Publica" }
+        
+		states_general_mechanic = {
+			sg_lichborne = {
+				infantry_power = 0.2
+                siege_ability = 0.2
+			}
+
+			sg_stitched = {
+				global_manpower_modifier = 0.25
+                manpower_recovery_speed = 0.25
+			}
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        heir_selection_scourge = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+		technology_group = tech_scourge
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Suramar
+nighthold_reform = {
+	icon                        = "purple_arcane_barrage"
+    legacy_equivalent           = nighthold_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        global_autonomy = -0.05
+        envoy_travel_time = -0.2
+        technology_cost = -0.1
+
+        governing_capacity = 300
+        
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+        locked_government_type = yes
+		succession_new_rulership = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+		have_had_reform = nighthold_reform
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by High elf nations (except Silvermoon/Quel'Thalas)
+kingdom_of_magic_reform = {
+	icon                        = "kirin_tor"
+    legacy_equivalent           = kingdom_of_magic_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir = no
+    
+	modifiers = {
+        advisor_cost = -0.1
+        global_foreign_trade_power = 0.1
+        military_tactics = 0.25
+        
+        max_absolutism = -10
+	}
+    
+    factions = {
+        faction_magisters
+        faction_farstriders
+    }
+    
+	custom_attributes = {
+        locked_government_type = yes
+		succession_new_rulership = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+		have_had_reform = kingdom_of_magic_reform
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Silvermoon/Quel'Thalas
+convocation_of_silvermoon_reform = {
+	icon                        = "arcane_pattern"
+    legacy_equivalent           = convocation_of_silvermoon_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir = no
+    
+	modifiers = {
+        advisor_cost = -0.15
+        female_advisor_chance = 0.5
+        global_spy_defence = 0.25
+        military_tactics = 0.25
+        
+        max_absolutism = -10
+	}
+	
+    factions = {
+        faction_magisters
+        faction_farstriders
+    }
+    
+    custom_attributes = {
+        locked_government_type = yes
+        succession_new_rulership = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+		OR = {
+            primary_culture = culture_high_elf
+            primary_culture = culture_blood_elf
+            primary_culture = culture_void_elf
+		}
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Heart of Fear
+mantid_empire_reform = {
+	icon                        = "mantid"
+    legacy_equivalent           = mantid_empire_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir                                = no
+    queen                               = no
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -50
+    
+	modifiers = {
+        administrative_efficiency = 0.05
+		global_manpower_modifier = 0.1
+        manpower_recovery_speed = 0.1
+        
+        land_forcelimit = 10
+        
+        governing_capacity = 250
+        
+        max_absolutism = 20
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        succession_mantid = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        tag = P34
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Nazjatar
+naga_empire_reform = {
+	icon                        = "azshara"
+    legacy_equivalent           = naga_empire_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir                                = no
+    queen                               = no
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -50
+    
+	modifiers = {
+		technology_cost = -0.1
+        global_trade_goods_size_modifier = 0.1
+        own_territory_dice_roll_bonus = 1
+        
+        land_forcelimit = 10
+        naval_forcelimit = 10
+        
+        governing_capacity = 250
+        
+        max_absolutism = 20
+	}
+	
+    factions = {
+        faction_warlords
+        faction_mistresses
+        faction_harbingers
+    }
+    
+    conditional = {
+		allow = { has_dlc = "Origins" }
+		
+        allow_cawa = yes
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_naga = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        tag = NJZ
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Naga nations
+naga_domain_reform = {
+    icon                        = "warlord_kalithresh"
+    legacy_equivalent           = naga_domain_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir    = no
+    queen   = no
+    
+	modifiers = {
+        warscore_cost_vs_other_religion = -0.1
+        global_sailors_modifier = 0.15
+        global_attacker_dice_roll_bonus = 1
+
+        land_forcelimit = 10
+        naval_forcelimit = 10
+
+        max_absolutism = 20
+	}
+    
+    factions = {
+        faction_warlords
+        faction_mistresses
+        faction_harbingers
+    }
+    
+    conditional = {
+		allow = { has_dlc = "Origins" }
+		
+        allow_cawa = yes
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_naga = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+		culture_group = culture_group_naga
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Troll nations
+troll_kingdom_reform = {
+	icon                        = "troll_male"
+    legacy_equivalent           = troll_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen                   = no
+    heir                    = no
+    generals_become_rulers  = yes
+    raze_province           = yes
+    
+	modifiers = {
+        core_creation = -0.1
+        unjustified_demands = -0.05
+        infantry_power = 0.1
+        
+        land_forcelimit = 10
+        
+        max_absolutism = 15
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+	potential = {
+        have_had_reform = troll_kingdom_reform
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Scarlet Crusade
+scarlet_monarchy_reform = {
+	icon                        = "scarlet_monarchy"
+    legacy_equivalent           = scarlet_monarchy_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen                   = no
+    rulers_can_be_generals  = yes
+	heirs_can_be_generals   = yes
+    
+	modifiers = {
+        missionaries = 1
+		warscore_cost_vs_other_religion = -0.25
+        war_exhaustion = -0.1
+        
+        land_forcelimit = 10
+
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+	
+    potential = {
+        religion = scarlet_light
+    }
+    
+    ai = { factor = 0 }
+}
+
+# Used by Gorian Empire
+gorian_empire_reform = {
+	icon                        = "goria"
+    legacy_equivalent           = gorian_empire_legacy
+	valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+     
+    heir                    = no
+    generals_become_rulers  = yes
+   
+    modifiers = {
+        technology_cost = -0.1
+        diplomatic_annexation_cost = -0.1
+        leader_siege = 1
+
+        land_forcelimit = 15
+
+        governing_capacity = 100
+
+        max_absolutism = 20
+	}
+    
+    factions = {
+        faction_council_of_sorcerers
+        faction_magi_of_stone_magic
+        faction_magic_breakers
+    }
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+	
+    potential = {
+		tag = OGR
+	}
+    
+	ai = { factor = 0 }
+	
+}
+
+# Used by Zandalar
+zandalari_empire_reform = {
+	icon                        = "city_of_gold"
+    legacy_equivalent           = zandalari_empire_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir = no
+    
+	modifiers = {
+		administrative_efficiency = 0.05
+        monarch_lifespan = 1.0
+        manpower_in_own_culture_provinces = 0.15
+
+        land_forcelimit = 15
+        naval_forcelimit = 15
+
+        governing_capacity = 250
+
+        max_absolutism = 10
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        enables_decadence_event = yes
+        succession_zanchuli_council = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        tag = A78
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used for Pandaren nations
+pandaren_union_reform = {
+	icon = "jack_of_all_trades"
+    legacy_equivalent = pandaren_union_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+	
+    queen = no
+    
+	modifiers = {
+        production_efficiency = 0.15
+        monthly_favor_modifier = 0.25
+        manpower_recovery_speed = 0.05
+
+        governing_capacity = -100
+
+        max_absolutism = -30
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_pandaren
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used for Shado-pan
+shado_pan_order_reform = {
+	icon                        = "ancestral_guardian"
+    legacy_equivalent           = shado_pan_order_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	queen = no
+    
+	modifiers = {
+        mil_advisor_cost = -0.15
+        spy_offence = 0.33 
+        discipline = 0.05
+
+        land_forcelimit = 10
+
+        governing_capacity = -100
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        tag = P37
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used by Nightfallen
+nightfallen_reform = {
+	icon                        = "arcane_pattern"
+    legacy_equivalent           = nightfallen_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	queen = no
+    
+	modifiers = {
+        reform_progress_growth = 1.0
+        rival_change_cost = -0.5
+        all_power_cost = -0.05
+
+        governing_capacity = -100
+        
+        max_absolutism = -10
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		primary_culture = culture_nightfallen
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Mechagon
+mechagon_reform = {
+	icon                        = "rearm"
+    legacy_equivalent           = mechagon_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen = no
+    
+	modifiers = {
+        technology_cost = -0.1
+        province_warscore_cost = -0.1
+        infantry_shock = 1.0
+        
+        max_absolutism = 15
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        tag = ARF
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Nerubian nations
+nerubian_empire_reform = {
+	icon                        = "nerubian"
+    legacy_equivalent           = nerubian_empire_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir    = no
+    queen   = no
+    
+	modifiers = {
+        technology_cost = -0.1
+		innovativeness_gain = 0.25
+        global_manpower_modifier = 0.2
+        
+        land_forcelimit = 10
+        
+        governing_capacity = 250
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        succession_nerubian = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = nerubian_empire_reform
+            culture_group = culture_group_nerubian
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Aqir nations
+aqir_kingdom_reform = {
+	icon                        = "aqir"
+    legacy_equivalent           = aqir_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir    = no
+    queen   = no
+    
+	modifiers = {
+        global_manpower_modifier = 0.1
+		province_warscore_cost = -0.1
+        recover_army_morale_speed = 0.1
+        
+        land_forcelimit = 10
+        
+        governing_capacity = 100
+        
+        max_absolutism = 20
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        succession_qiraji = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = aqir_kingdom_reform
+            culture_group = culture_group_aqir
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Tol'vir nations
+tolvir_kingdom_reform = {
+	icon                        = "tolvir_arena"
+    legacy_equivalent           = tolvir_kingdom_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen = no
+    heir = no
+     
+	modifiers = {
+        production_efficiency = 0.05
+        trade_efficiency = 0.05
+        missionary_maintenance_cost = -0.1
+        
+        governing_capacity = 100
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_tolvir = yes
+        block_pretenders = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = tolvir_kingdom_reform
+            culture_group = culture_group_tol_vir
+        }
+    }
+    
+	ai = { factor = 0 }
+}

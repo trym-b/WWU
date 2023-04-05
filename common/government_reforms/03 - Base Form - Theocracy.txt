@@ -1,0 +1,1195 @@
+#--------------------------------------------
+# Theocracy
+#--------------------------------------------
+# Generic
+theocracy_reform = {
+	icon                        = "clarity_of_purpose"
+    legacy_equivalent           = theocracy_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    different_religion_acceptance       = -20
+	different_religion_group_acceptance = -50
+    
+	modifiers = {
+        prestige_per_development_from_conversion = 0.1
+        tolerance_own = 2
+        morale_damage_received = -0.1
+
+        max_absolutism = -10
+	}
+
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+    custom_attributes = {
+        succession_theocracy = yes
+	}
+    
+    potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+    
+	ai = { factor = 1 }
+}
+
+# Generic
+monastic_order_reform = {
+	icon                        = "clarity_of_will"
+    legacy_equivalent           = monastic_order_legacy
+    valid_for_new_country       = yes 
+    allow_normal_conversion     = yes 
+	allow_convert               = yes 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                            = yes
+    rulers_can_be_generals              = yes
+	different_religion_acceptance       = -20
+	different_religion_group_acceptance = -50
+    
+	modifiers = {
+        global_unrest = -1
+        improve_relation_modifier = 0.1
+        land_morale = 0.1
+
+        land_forcelimit = 5
+
+        governing_capacity = -100
+
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+        succession_theocracy = yes
+	}
+    
+	potential = {
+        NOT = { has_government_attribute = locked_government_type }
+    }
+	
+    ai = { factor = 0 }
+}
+
+# Used by Night Elves
+ancient_theocracy_reform = {
+	icon                        = "ancient_history"
+	legacy_equivalent           = ancient_theocracy_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    different_religion_acceptance       = 10
+	different_religion_group_acceptance = -25
+    
+	modifiers = {
+        global_missionary_strength = 0.03
+        tolerance_own = 1
+        infantry_power = 0.1
+
+        governing_capacity = 250
+
+        max_absolutism = -20
+    }
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_theocracy = yes
+	}
+    
+    potential = {
+		is_ancient = yes
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Scarlet Crusade
+scarlet_crusade_reform = {
+	icon                        = "scarlet_crusade"
+    legacy_equivalent           = scarlet_crusade_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                            = yes
+	rulers_can_be_generals              = yes
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -100
+    
+	modifiers = {
+        missionaries = 1
+		warscore_cost_vs_other_religion = -0.25
+        war_exhaustion = -0.1
+        
+        land_forcelimit = 10
+        
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_theocracy = yes
+	}
+	
+    potential = {
+        religion = scarlet_light
+    }
+    
+    ai = { factor = 0 }
+}
+
+# Used by Argent Crusade
+argent_crusade_reform = {
+	icon                        = "argent_crusade"
+    legacy_equivalent           = argent_crusade_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                            = yes
+	rulers_can_be_generals              = yes
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -100
+    
+	modifiers = {
+        missionaries = 1
+		warscore_cost_vs_other_religion = -0.25
+        free_mil_policy = 1
+        
+        land_forcelimit = 10
+
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_theocracy = yes
+	}
+	
+    potential = {
+        religion = argent_light
+    }
+    
+    ai = { factor = 0 }
+}
+
+# Used by Fel nations
+demonic_order_reform = {
+	icon                        = "demonic_power"
+    legacy_equivalent           = demonic_order_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                = yes
+	rulers_can_be_generals  = yes
+    raze_province           = yes
+    
+	modifiers = {
+        papal_influence = 1.0
+        relation_with_same_religion = 50
+        relation_with_heretics = -50
+        relation_with_heathens = -50
+        warscore_cost_vs_other_religion = -0.2
+
+        land_forcelimit = 10
+
+        governing_capacity = 100
+
+        max_absolutism = 25
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_demonic = yes
+	}
+    
+    potential = {
+		religion = fel
+        NOT = { tag = B92 }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Burning Legion
+burning_legion_reform = {
+	icon                        = "fel_skull"
+    legacy_equivalent           = burning_legion_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                = yes
+	rulers_can_be_generals  = yes
+    raze_province           = yes
+    
+	modifiers = {
+        papal_influence = 3.0
+        relation_with_same_religion = 100
+        relation_with_heretics = -50
+        relation_with_heathens = -50
+        land_maintenance_modifier = -0.2
+
+        land_forcelimit = 20
+
+        governing_capacity = 250
+
+        max_absolutism = 50
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_demonic = yes
+	}
+    
+    potential = {
+		tag = B92
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Druidic nations
+druidic_circle_reform = {
+	icon                        = "cylone"
+    legacy_equivalent           = druidic_circle_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    monastic                            = yes
+	rulers_can_be_generals              = yes
+    different_religion_acceptance       = 10
+	different_religion_group_acceptance = -25
+    
+	modifiers = {
+        advisor_pool = 2
+        diplomatic_reputation = 2
+        manpower_in_own_culture_provinces = 0.2
+        
+        max_absolutism = -20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_druidic = yes
+	}
+    
+    potential = {
+        OR = {
+            religion = druidism
+            religion = shamanism
+            religion = tauren_shamanism
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Elemental nations
+elemental_cult_reform = {
+	icon                        = "echo_of_the_elements"
+    legacy_equivalent           = elemental_cult_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance = -25
+	different_religion_group_acceptance = -50
+    
+	modifiers = {
+        development_cost_modifier = -0.05
+        years_of_nationalism = -5
+		warscore_cost_vs_other_religion = -0.1
+
+        land_forcelimit = 5
+        naval_forcelimit = 5
+
+        max_absolutism = 15
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_elemental = yes
+	}
+    
+    potential = {
+        OR = {
+            culture_group = culture_group_earth
+            culture_group = culture_group_fire
+            culture_group = culture_group_water
+            culture_group = culture_group_air
+            culture_group = culture_group_nature
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Shadow nations
+shadow_cult_reform = {
+	icon                        = "clarity_of_power"
+    legacy_equivalent           = shadow_cult_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance       = -25
+	different_religion_group_acceptance = -100
+    
+    modifiers = {
+        missionaries = 1
+        culture_conversion_cost = -0.1
+        war_exhaustion = -0.05
+        
+        governing_capacity = -100
+
+        max_absolutism = 10
+	}
+
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+        succession_shadow = yes
+	}
+	
+    potential = {
+        religion = shadow
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Hakkari
+cult_of_hakkar_reform = {
+	icon                        = "hakkar"
+    legacy_equivalent           = cult_of_hakkar_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance       = -25
+	different_religion_group_acceptance = -50
+    
+    modifiers = {
+		global_missionary_strength = 0.025
+        relation_with_same_religion = 50
+        hostile_attrition = 2
+
+        land_forcelimit = 5
+
+        governing_capacity = -100
+
+        max_absolutism = 10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_hakkar = yes
+	}
+    
+	potential = {
+        OR = {
+            have_had_reform = cult_of_hakkar_reform
+            AND = {
+                religion = hakkari
+                primary_culture = culture_jungle_troll
+            }
+        }
+    }
+	
+	ai = { factor = 0 }
+}
+
+# Used by Dragonflights
+dragonflight_brood_reform = {
+	icon                        = "valithra"
+    legacy_equivalent           = dragonflight_brood_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen                   = yes
+    heir                    = yes
+    rulers_can_be_generals  = yes
+    
+    modifiers = {
+		prestige = 1.0
+        stability_cost_modifier = -0.25
+        movement_speed = 0.2
+        
+        governing_capacity = -100
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Res Publica" }
+        
+		states_general_mechanic = {
+			sg_bad_dragon = {
+                core_creation = -0.1
+                discipline = 0.05
+                max_absolutism = 10
+			}
+
+			sg_good_dragon = {
+                diplomatic_reputation = 2
+                diplomatic_upkeep = 2
+                ae_impact = -0.2
+			}
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_dragon = yes
+	}
+    
+	potential = {
+		OR = {
+            have_had_reform = dragonflight_brood_reform
+            culture_group = culture_group_dragonkin
+        }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Titan nations
+titan_facility_reform = {
+	icon                        = "tribunal_of_ages"
+    legacy_equivalent           = titan_facility_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+		defensiveness = 0.33
+        prestige_decay = -0.01
+        infantry_power = 0.1
+        
+        governing_capacity = -250
+        
+        max_absolutism = -10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_titan = yes
+	}
+    
+	potential = {
+        OR = {
+            have_had_reform = titan_facility_reform
+            culture_group = culture_group_titan
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used for Pandaren nations
+celestial_order_reform = {
+	icon                        = "one_with_nature"
+    legacy_equivalent           = celestial_order_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	potential = {
+        culture_group = culture_group_pandaren
+	}
+    
+	modifiers = {
+        tolerance_own = 2
+        improve_relation_modifier = 0.15
+        fort_maintenance_modifier = -0.15
+
+        land_forcelimit = 10
+
+        max_absolutism = -20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    ai = { factor = 0 }
+}
+
+# Used by Nazmir
+blood_matriarchy_reform = {
+	icon                        = "blood_frenzy"
+    legacy_equivalent           = blood_matriarchy_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -100
+    
+	modifiers = {
+        global_manpower_modifier = 0.1
+		manpower_recovery_speed = 0.1
+        global_regiment_recruit_speed = -0.15
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 20
+	}
+	
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			feudal_theocracy_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_ghuuns_chosen = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = blood_matriarchy_reform
+            AND = {
+                religion = bloodmancy
+                primary_culture = culture_blood_troll
+            }
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by the four Covenant nations
+soul_covenant_reform = {
+	icon                        = "astral_shift"
+    legacy_equivalent           = soul_covenant_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        culture_conversion_cost = -0.1
+		stability_cost_modifier = -0.2
+        global_spy_defence = 0.2
+        
+        governing_capacity = 100
+        
+        max_absolutism = -20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        OR = {
+            culture_group = culture_group_maldraxxi
+            culture_group = culture_group_kyrian
+            culture_group = culture_group_venthyr
+            culture_group = culture_group_night_fae
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Mawsworn
+cult_of_domination_reform = {
+	icon                        = "shadow_reflection"
+    legacy_equivalent           = cult_of_domination_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance       = -100
+	different_religion_group_acceptance = -100
+    
+	modifiers = {
+        yearly_absolutism = 1.0
+        core_creation = -0.2
+        years_of_nationalism = -10
+        
+        land_forcelimit = 10
+        
+        governing_capacity = 100
+        
+		max_absolutism = 30
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_mawsworn
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Oribos
+eternal_city_reform = {
+	icon                        = "flight_form"
+    legacy_equivalent           = eternal_city_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        global_trade_power = 0.2
+        development_cost = -0.1
+        advisor_cost = -0.1
+        
+        governing_capacity = 100
+        
+        max_absolutism = -20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        culture_group = culture_group_broker
+    }
+    
+	ai = { factor = 0 }
+}
+
+# Used by Night Elves
+sisterhood_reform = {
+	icon                        = "tyrande"
+	legacy_equivalent           = sisterhood_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+		ae_impact = -0.05
+		diplomatic_reputation = 0.5
+        stability_cost_modifier = -0.1
+        
+        governing_capacity = 100
+        
+        max_absolutism = -20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+	custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		primary_culture = culture_night_elf
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Night Elves
+sisterhood_of_elune_reform = {
+	icon                        = "elune"
+	legacy_equivalent           = sisterhood_of_elune_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        ae_impact = -0.1
+		diplomatic_reputation = 1
+        stability_cost_modifier = -0.2
+        
+        governing_capacity = 250
+        
+        max_absolutism = -20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		OR = {
+            tag = A94
+            tag = H01
+        }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Wardens
+sisterhood_of_watchers_reform = {
+	icon                        = "warden"
+	legacy_equivalent           = sisterhood_of_watchers_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    modifiers = {
+        discipline = 0.05
+        global_unrest = -2
+        years_of_nationalism = -5
+        
+        land_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+	potential = {
+		tag = WRD
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Draenei
+exarchate_reform = {
+	icon                        = "naaru"
+	legacy_equivalent           = exarchate_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance = 25
+    
+	modifiers = {
+        tolerance_own = 1
+        religious_unity = 0.1
+        ae_impact = -0.1
+        
+        governing_capacity = 100
+        
+        max_absolutism = -10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		primary_culture = culture_draenei
+        NOT = { religion = fel }
+        NOT = { tag = A54 }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Draenei
+grand_exarchate_reform = {
+	icon                        = "velen"
+	legacy_equivalent           = grand_exarchate_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	different_religion_acceptance = 25
+    
+	modifiers = {
+        tolerance_own = 2
+        religious_unity = 0.2
+        ae_impact = -0.2
+        
+        governing_capacity = 250
+        
+        max_absolutism = -20
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = A54
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by the Draenei
+fallen_exarchate_reform = {
+	icon                        = "dark_fist"
+	legacy_equivalent           = fallen_exarchate_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        tolerance_own = 1
+        unjustified_demands = -0.15
+        warscore_cost_vs_other_religion = -0.1
+        
+        max_absolutism = 10
+	}
+    
+    conditional = {
+		allow = { has_dlc = "Cradle of Civilization" }
+        
+		government_abilities = {
+			mamluk_mechanic
+		}
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		primary_culture = culture_draenei
+        religion = fel
+        NOT = { tag = A54 }
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Illidari
+illidari_command_reform = {
+	icon                        = "illidan"
+	legacy_equivalent           = illidari_command_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        army_tradition_decay = -0.02
+        morale_damage = 0.2
+        global_spy_defence = 0.33
+        
+        land_forcelimit = 5
+        naval_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = B87
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Sunfury
+sunfury_command_reform = {
+	icon                        = "kaelthas"
+	legacy_equivalent           = sunfury_command_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        country_military_power = 1
+        idea_cost = -0.05
+        fire_damage = 0.1
+        
+        land_forcelimit = 5
+        naval_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = A93
+	}
+}
+
+# Used by Ashtongue Deathsworn
+ashtongue_command_reform = {
+	icon                        = "soul_engine"
+	legacy_equivalent           = ashtongue_command_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        stability_cost_modifier = -0.1
+        spy_offence = 0.2
+        military_tactics = 0.25
+        
+        land_forcelimit = 5
+        naval_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 10
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = A57
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Coilskar
+coilskar_command_reform = {
+	icon                        = "azshara"
+	legacy_equivalent           = coilskar_command_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        infantry_power = 0.1
+        shock_damage = 0.1
+        years_of_nationalism = -5
+        
+        land_forcelimit = 5
+        naval_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = P02
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Coilfang
+coilfang_command_reform = {
+	icon                        = "vashj"
+	legacy_equivalent           = coilfang_command_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        years_of_nationalism = -5
+        production_efficiency = 0.1
+        shock_damage = 0.1
+        
+        land_forcelimit = 5
+        naval_forcelimit = 5
+        
+        governing_capacity = -100
+        
+        max_absolutism = 20
+	}
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+		tag = COL
+	}
+    
+	ai = { factor = 0 }
+}
+
