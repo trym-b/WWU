@@ -23,6 +23,24 @@ country_event = {
             name = kiljaedens_favour
             duration = -1
         }
+        
+        ai_chance = {
+            factor = 100
+        }
+    }
+    option = {
+		name = rise_of_the_horde.1.option.b
+        
+        add_stability = -1
+        
+        add_country_modifier = {
+            name = integrity_of_the_shamans
+            duration = -1
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
     }
 }
 
@@ -361,12 +379,27 @@ country_event = {
 			set_global_flag = contact_with_medivh 
 		}
         
-        3792 = {
-            cede_province = ROOT
-			add_core = ROOT
-			change_culture = culture_orc
-			change_religion = fel
-		}
+        if = {
+            limit = {
+                3792 = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+            }
+            3792 = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = culture_orc
+                change_religion = fel
+            }
+        }
+        else = {
+            3792 = {
+                change_culture = culture_orc
+                change_religion = fel
+            }
+        }
     }
 }
 
@@ -393,6 +426,76 @@ country_event = {
 		
         set_head_of_faction = {
             faction = old_horde
+        }
+    }
+}
+
+#----------------------------------
+# Question of Faith
+#----------------------------------
+country_event = {
+	id = rise_of_the_horde.10
+	title = rise_of_the_horde.10.title
+	desc = rise_of_the_horde.10.desc
+	picture = DEMONIC_PRESENCE_eventPicture
+    
+    is_triggered_only = yes
+	
+    mean_time_to_happen = {
+		days = 1
+    }
+    
+	option = {
+		name = rise_of_the_horde.10.option.a
+		
+        capital_scope = {
+            spawn_rebels = {
+                type = pretender_rebels
+                size = 1
+            }
+        }
+    
+        change_religion = fel
+        
+        every_owned_province = {
+            change_religion = fel
+        }
+        
+        ai_chance = {
+            factor = 90
+            
+            modifier = {
+                factor = 2
+                
+                dominant_religion = fel
+            }
+            
+            modifier = {
+                factor = 0
+                
+                tag = A46 # Frostwolf
+            }
+        }
+    }
+    option = {
+		name = rise_of_the_horde.10.option.b
+		
+        add_country_modifier = {
+            name = cleansing_waters
+            duration = 10950
+        }
+        
+        ai_chance = {
+            factor = 10
+            
+            modifier = {
+                factor = 0
+                
+                OR = {
+                    tag = B88 # Shadow Council
+                    tag = A34 # Shadowmoon
+                }
+            }
         }
     }
 }

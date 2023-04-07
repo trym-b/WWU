@@ -37,32 +37,9 @@ wwu_shared_orc_column_1 = {
             any_owned_province = {
                 religion = fel
             }
-            
-            if = {
-                limit = {
-                    ai = yes
-                    
-                    # These should always use this immediately
-                    NOT = { tag = B88 } # Shadow Council
-                    NOT = { tag = A34 } # Shadowmoon
-                }
-                
-                dominant_religion = fel
-            }
 		}
 		effect = {
-            capital_scope = {
-                spawn_rebels = {
-                    type = pretender_rebels
-                    size = 1
-                }
-            }
-        
-            change_religion = fel
-            
-            every_owned_province = {
-                change_religion = fel
-            }
+            country_event = { id = rise_of_the_horde.10 days = 7 }
 		}
 	}
     
@@ -89,11 +66,26 @@ wwu_shared_orc_column_1 = {
 		effect = {
 			add_mil_power = -200
             
-            3792 = {
-                cede_province = ROOT
-                add_core = ROOT
-                change_culture = ROOT
-                change_religion = ROOT
+            if = {
+                limit = {
+                    3792 = {
+                        owner = {
+                            ai = yes
+                        }
+                    }
+                }
+                3792 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                    change_culture = ROOT
+                    change_religion = ROOT
+                }
+            }
+            else = {
+                3792 = {
+                    change_culture = ROOT
+                    change_religion = ROOT
+                }
             }
 		}
 	}
@@ -105,6 +97,8 @@ wwu_shared_orc_column_1 = {
         completed_by = 592.1.1
         
 		trigger = {
+            is_year = 550 # This is just so the player can't immediately build it on game start
+            
             owns_core_province = 3792
             3792 = {
                 NOT = {
@@ -113,8 +107,6 @@ wwu_shared_orc_column_1 = {
                     }
                 }
             }
-            
-            #religion = fel
             
             if = {
                 limit = {
