@@ -204,13 +204,16 @@ wwu_sentinels_column_3 = {
 		required_missions = { }
         
 		trigger = {
-            alliance_with = H02
-            H02 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 180
-                }
-            }
+			OR = {
+				alliance_with = H02
+				H02 = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				NOT = { H02 = { exists = yes } }
+			}
 		}
         
 		effect = {
