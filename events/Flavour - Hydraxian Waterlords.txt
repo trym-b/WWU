@@ -5,16 +5,16 @@ country_event = {
     id = wwu_hydraxia_waterlords.1
     title = wwu_hydraxia_waterlords.1.title
     desc = wwu_hydraxia_waterlords.1.desc
-    icon = AZSHARA_eventPicture
-
-    trigger = {
-        4091 = {
-            NOT = { owned_by = ROOT }
-            year = 605
-        }
-    }
+    picture = AZSHARA_eventPicture
 
     fire_only_once = yes
+    
+    trigger = {
+        tag = P25
+        is_year = 605
+        
+        NOT = { owns = 4091 }
+    }
 
     mean_time_to_happen = {
         months = 1
@@ -22,30 +22,32 @@ country_event = {
 
     option = {
         name = wwu_hydraxia_waterlords.1.option.a
-    }
 
-    add_mil_power = -50
-    add_adm_power = -50
+        add_mil_power = -50
+        add_adm_power = -50
 
-    4091 = {
-        add_core = ROOT
-        control = ROOT
-        change_culture = culture_water
-        change_religion = ROOT
-        add_building = wow_portal
-        add_building = wow_shipyard
-    }
+        4091 = {
+            cede_province = ROOT
+            add_core = ROOT
+            
+            change_culture = culture_water
+            change_religion = ROOT
+            
+            add_building = wow_portal
+            add_building = wow_shipyard
+        }
 
-    region_azshara = {
-        add_claim = ROOT
+        region_azshara = {
+            add_claim = ROOT
+        }
     }
     
     option = {
         name = wwu_hydraxia_waterlords.1.option.b
-    }
 
-    4091 = {
-        add_permanent_claim = ROOT
+        4091 = {
+            add_permanent_claim = ROOT
+        }
     }
 }
 
@@ -54,23 +56,30 @@ country_event = {
     id = wwu_hydraxia_waterlords.2
     title = wwu_hydraxia_waterlords.2.title
     desc = wwu_hydraxia_waterlords.2.desc
-    icon = NEPTULON_eventPicture
+    picture = NEPTULON_eventPicture
 
     fire_only_once = yes
 
     trigger = {
+        tag = P25
         
+        development = 400
+        stability = 1
+        prestige = 50
+        
+        # Abyssal Maw
         P24 = {
-            has_opinion = [ who = P25 value = 190 ]
-            reverse_has_opinion = [ who = P25 value = 190 ]
             prestige = -50
             stability = -2
-        }
-
-        P25 = {
-            development = 400
-            stability = 1
-            prestige = 50
+            
+            has_opinion = { 
+                who = ROOT
+                value = 190
+            }
+            reverse_has_opinion = {
+                who = ROOT
+                value = 190
+            }
         }
     }
     
@@ -80,13 +89,11 @@ country_event = {
 
     option = {
         name = wwu_hydraxia_waterlords.2.option.a
-    }
 
-        P25 = {
-            add_casus_belli = {
-                target = P24 # Abyssal Maw
-                type = cb_restore_personal_union
-                months = 300
+        add_casus_belli = {
+            target = P24 # Abyssal Maw
+            type = cb_restore_personal_union
+            months = 300
         }
     }
 }
