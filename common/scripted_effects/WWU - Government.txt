@@ -1,3 +1,63 @@
+init_default_government_state = {
+    # For Dragonflight Broods, randomise it based on type
+    if = {
+        limit = {
+            has_reform = dragonflight_brood_reform
+        }
+        
+        if = {
+            limit = {
+                primary_culture = culture_black_dragonflight
+            }
+            
+            random_list = {
+                10 = { change_statists_vs_monarchists = -0.1 }
+                10 = { change_statists_vs_monarchists = -0.2 }
+                10 = { change_statists_vs_monarchists = -0.3 }
+                10 = { change_statists_vs_monarchists = -0.4 }
+                10 = { change_statists_vs_monarchists = -0.5 }
+            }
+        }
+        else = {
+            random_list = {
+                10 = { change_statists_vs_monarchists = 0.1 }
+                10 = { change_statists_vs_monarchists = 0.2 }
+                10 = { change_statists_vs_monarchists = 0.3 }
+                10 = { change_statists_vs_monarchists = 0.4 }
+                10 = { change_statists_vs_monarchists = 0.5 }
+            }
+        }
+    }
+    else_if = {
+        limit = {
+            has_reform = withered_reform
+        }
+        
+        random_list = {
+            10 = { change_statists_vs_monarchists = -0.1 }
+            10 = { change_statists_vs_monarchists = -0.2 }
+            10 = { change_statists_vs_monarchists = -0.3 }
+            10 = { change_statists_vs_monarchists = -0.4 }
+            10 = { change_statists_vs_monarchists = -0.5 }
+        }
+    }
+    # Otherwise randomise it
+    else = {
+        random_list = {
+            10 = { change_statists_vs_monarchists = -0.1 }
+            10 = { change_statists_vs_monarchists = -0.2 }
+            10 = { change_statists_vs_monarchists = -0.3 }
+            10 = { change_statists_vs_monarchists = -0.4 }
+            10 = { change_statists_vs_monarchists = -0.5 }
+            10 = { change_statists_vs_monarchists = 0.1 }
+            10 = { change_statists_vs_monarchists = 0.2 }
+            10 = { change_statists_vs_monarchists = 0.3 }
+            10 = { change_statists_vs_monarchists = 0.4 }
+            10 = { change_statists_vs_monarchists = 0.5 }
+        }
+    }
+}
+
 award_pirate_retirement_bonuses = { 
     # 1 ADM
     if = {

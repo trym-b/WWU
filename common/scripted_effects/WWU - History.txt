@@ -1,0 +1,711 @@
+init_history_adjustments = {
+    #------------------------
+    # Initial Resources
+    #------------------------
+    # Initial Variance
+    random_list = {
+        33 = { }
+        33 = { add_yearly_manpower = 1 }
+        33 = { add_yearly_manpower = 2 }
+        33 = { add_yearly_manpower = 3 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_yearly_sailors = 1 }
+        33 = { add_yearly_sailors = 2 }
+        33 = { add_yearly_sailors = 3 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_army_tradition = 5 }
+        33 = { add_army_tradition = 10 }
+        33 = { add_army_tradition = 15 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_navy_tradition = 5 }
+        33 = { add_navy_tradition = 10 }
+        33 = { add_navy_tradition = 15 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_adm_power = 25 }
+        33 = { add_adm_power = 50 }
+        33 = { add_adm_power = 75 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_dip_power = 25 }
+        33 = { add_dip_power = 50 }
+        33 = { add_dip_power = 75 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_mil_power = 25 }
+        33 = { add_mil_power = 50 }
+        33 = { add_mil_power = 75 }
+    }
+    random_list = {
+        33 = { }
+        33 = { add_years_of_income = 1 }
+        33 = { add_years_of_income = 2 }
+        33 = { add_years_of_income = 3 }
+    }
+    
+    # Bookmark Variance
+    if = {
+        limit = {
+            is_year = 592.1.1
+        }
+        
+        add_yearly_manpower = 3
+        add_yearly_sailors = 3
+        change_government_reform_progress = 1104
+        add_absolutism = 20
+    }
+    else_if = {
+        limit = {
+            is_year = 598.1.1
+        }
+        
+        add_yearly_manpower = 4
+        add_yearly_sailors = 4
+        change_government_reform_progress = 1248
+        add_absolutism = 22
+    }
+    else_if = {
+        limit = {
+            is_year = 600.1.1
+        }
+        
+        add_yearly_manpower = 5
+        add_yearly_sailors = 5
+        change_government_reform_progress = 1296
+        add_absolutism = 25
+    }
+    else_if = {
+        limit = {
+            is_year = 605.1.1
+        }
+        
+        add_yearly_manpower = 6
+        add_yearly_sailors = 6
+        change_government_reform_progress = 1416
+        add_absolutism = 26
+    }
+    else_if = {
+        limit = {
+            is_year = 617.1.1
+        }
+        
+        add_yearly_manpower = 7
+        add_yearly_sailors = 7
+        change_government_reform_progress = 1704
+        add_absolutism = 28
+    }
+    else_if = {
+        limit = {
+            is_year = 618.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 1728
+        add_absolutism = 29
+    }
+    else_if = {
+        limit = {
+            is_year = 622.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 1824
+        add_absolutism = 30
+    }
+    else_if = {
+        limit = {
+            is_year = 625.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 1896
+        add_absolutism = 32
+    }
+    else_if = {
+        limit = {
+            is_year = 626.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 1920
+        add_absolutism = 34
+    }
+    else_if = {
+        limit = {
+            is_year = 631.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 2040
+        add_absolutism = 36
+    }
+    else_if = {
+        limit = {
+            is_year = 632.1.1
+        }
+        
+        add_yearly_manpower = 8
+        add_yearly_sailors = 8
+        change_government_reform_progress = 2064
+        add_absolutism = 38
+    }
+    
+    # Conditional Variance
+    if = {
+        limit = {
+            is_civil = yes
+        }
+        
+        add_absolutism = -10
+        add_mercantilism = 10
+        add_years_of_income = 1
+        
+        # Only apply after initial bookmark
+        if = {
+            limit = {
+                is_year = 592.1.1
+            }
+            change_government_reform_progress = 250
+        }
+    }
+    
+    if = {
+        limit = {
+            is_savage = yes
+        }
+        
+        add_absolutism = 10
+        add_army_tradition = 10
+        
+        # Only apply after initial bookmark
+        if = {
+            limit = {
+                is_year = 592.1.1
+            }
+            change_government_reform_progress = -250
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = 10
+        }
+        
+        add_yearly_sailors = 2
+        add_navy_tradition = 10
+    }
+    
+    if = {
+        limit = {
+            has_reform = mercantile_republic_reform
+        }
+        
+        add_mercantilism = 10
+        add_years_of_income = 2
+    }
+    
+    #------------------------
+    # Names
+    #------------------------
+    # Darkshore
+    if = {
+        limit = {
+            tag = DKS # Darkshore
+            NOT = { is_year = 592 }
+        }
+        
+        override_country_name = GRAND_HAMLET
+    }
+
+    #------------------------
+    # Factions
+    #------------------------
+    # Kul Tiras
+    if = {
+        limit = {
+            tag = A14
+        }
+        
+        add_faction = faction_house_proudmoore
+        add_faction = faction_house_stormsong
+        add_faction = faction_house_ashvane
+        add_faction = faction_house_waycrest
+        
+        add_faction_influence = {
+            faction = faction_house_stormsong
+            influence = 20
+        }
+        add_faction_influence = {
+            faction = faction_house_ashvane
+            influence = 30
+        }
+        add_faction_influence = {
+            faction = faction_house_waycrest
+            influence = 10
+        }
+    }
+    
+    #------------------------
+    # Cores
+    #------------------------
+    # Remove Orcish Horde cores after 600
+    if = {
+        limit = {
+            is_year = 600
+        }
+        every_owned_province = {
+            limit = {
+                is_core = U03
+            }
+            remove_core = U03
+        }
+    }
+    
+    #------------------------
+    # Trade Goods
+    #------------------------
+    every_owned_province = {
+        limit = {
+            culture_group = culture_group_scourge
+            trade_goods = grain
+        }
+        change_trade_goods = crypts
+    }
+    
+    every_owned_province = {
+        limit = {
+            culture_group = culture_group_undead
+            trade_goods = grain
+        }
+        change_trade_goods = crypts
+    }
+    
+    every_owned_province = {
+        limit = {
+            religion = fel
+            trade_goods = arcane_source
+        }
+        change_trade_goods = fel_source
+    }
+    
+    every_owned_province = {
+        limit = {
+            religion = cult_of_the_damned
+            trade_goods = arcane_source
+        }
+        change_trade_goods = fel_source
+    }
+    
+    every_owned_province = {
+        limit = {
+            NOT = { religion = fel }
+            NOT = { religion = cult_of_the_damned }
+            trade_goods = fel_source
+        }
+        change_trade_goods = arcane_source
+    }
+    
+    #------------------------
+    # Misc
+    #------------------------
+    if = {
+        limit = {
+            owns = 1671
+        }
+        add_country_modifier = {
+            name = lord_of_outland
+            duration = -1
+        }
+    }
+}
+
+# Add some existing buildings to countries past the initial bookmark
+init_building_adjustments = {
+    if = {  
+        limit = {
+            is_year = 592
+        }
+        
+        # Farm
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_farm_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_farm_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        
+        # Temple
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_temple_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_temple_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        
+        # Mine
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_mine_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_temple_1 
+                tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+            }
+        }
+        
+        # Market
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_market_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_market_1 
+                tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+            }
+        }
+        
+        # Tavern
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_tavern_1 
+                tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+            }
+        }
+        
+        # Town Hall
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_town_hall_1 
+                tier_0 = 8  tier_1 = 16  tier_2 = 24  tier_3 = 32 tier_4 = 40 tier_5 = 48
+            }
+        }
+        
+        # Barracks
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_barracks_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_barracks_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+        
+        # Arsenal
+        add_building_based_on_province_count = { 
+            added_building = wow_arsenal_1 
+            tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+        }
+        
+        # Shipyard
+        if = {
+            limit = {
+                num_of_ports = 12
+            }
+            add_building_based_on_port_count = { 
+                added_building = wow_shipyard_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+        else = {
+            add_building_based_on_port_count = { 
+                added_building = wow_shipyard_1 
+                tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+            }
+        }
+        
+        # Dockyard
+        if = {
+            limit = {
+                num_of_ports = 12
+            }
+            add_building_based_on_port_count = { 
+                added_building = wow_dockyard_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+        else = {
+            add_building_based_on_port_count = { 
+                added_building = wow_dockyard_1 
+                tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+            }
+        }
+        
+        # Tower
+        add_building_based_on_province_count = { 
+            added_building = wow_tower_1 
+            tier_0 = 6  tier_1 = 12  tier_2 = 18  tier_3 = 24 tier_4 = 30 tier_5 = 36
+        }
+        
+        # Training Ground
+        if = {
+            limit = {
+                is_civil = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_training_ground_1 
+                tier_0 = 5  tier_1 = 10  tier_2 = 15  tier_3 = 20 tier_4 = 25 tier_5 = 30
+            }
+        }
+        if = {
+            limit = {
+                is_savage = yes
+            }
+            add_building_based_on_province_count = { 
+                added_building = wow_training_ground_1 
+                tier_0 = 3  tier_1 = 6  tier_2 = 9  tier_3 = 12 tier_4 = 15 tier_5 = 18
+            }
+        }
+    }
+} 
+  
+add_building_based_on_province_count = {
+    # Farm
+    if = {
+        limit = {
+            num_of_cities = $tier_0$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_cities = $tier_1$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_cities = $tier_2$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_cities = $tier_3$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_cities = $tier_4$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_cities = $tier_5$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+}
+
+add_building_based_on_port_count = {
+    # Farm
+    if = {
+        limit = {
+            num_of_ports = $tier_0$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = $tier_1$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = $tier_2$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = $tier_3$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = $tier_4$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+    
+    if = {
+        limit = {
+            num_of_ports = $tier_5$
+        }
+        random_owned_province = {
+            limit = { 
+                num_free_building_slots = 1
+                has_port = yes
+                NOT = { has_building = $added_building$ }
+            }
+            
+            add_building = $added_building$
+        }
+    }
+}
