@@ -656,3 +656,44 @@ country_event = {
         }
 	}
 }
+
+# Demonic Bombardment
+country_event = {
+	id = wwu_diplomatic_actions.24
+	title = wwu_diplomatic_actions.24.title
+    desc = wwu_diplomatic_actions.24.desc
+	picture = DEMONWRATH_eventPicture
+    goto = demonic_bombardment_province
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            every_country = {
+                limit = {
+                    is_papal_controller = yes
+                }
+                save_event_target_as = grand_warlock
+            }
+            
+            random_owned_province = {
+                save_event_target_as = demonic_bombardment_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_diplomatic_actions.24.option.a
+        
+        event_target:demonic_bombardment_province = {
+            spawn_rebels = {
+                type = demonic_rebels
+                size = 3
+            }
+        }
+	}
+}

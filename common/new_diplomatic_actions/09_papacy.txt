@@ -1,0 +1,186 @@
+#---------------------------------------
+# Corrupt Ruler
+#---------------------------------------
+corrupt_ruler = {
+	category = papacy
+	
+	alert_index = 40
+	alert_tooltip = corrupt_ruler_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_papal_controller = yes
+	}
+	is_allowed = {
+        papal_influence = 50
+        
+        FROM = {
+            has_regency = no
+            NOT = { religion = fel }
+            NOT = { ruler_religion = fel }
+
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_CORRUPT_RULER
+                NOT = { has_country_modifier = cooldown_corrupt_ruler }
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - corrupt_ruler"
+            }
+        }
+        
+        add_papal_influence = -50
+        
+		FROM = {
+			country_event = { id = wwu_fel.2 }
+		}
+        FROM = {
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_corrupt_ruler
+                    duration = 3650
+                    hidden = yes
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = no
+	}
+}
+
+#---------------------------------------
+# Demonic Bombardment
+#---------------------------------------
+conduct_demonic_bombardment = {
+	category = papacy
+	
+	alert_index = 40
+	alert_tooltip = conduct_demonic_bombardment_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+		is_papal_controller = yes
+        FROM = {
+            NOT = { religion = fel }
+        }
+	}
+	is_allowed = {
+        mil_power = 50
+		FROM = {
+            NOT = { religion = fel }
+        }
+        custom_trigger_tooltip = {
+            tooltip = RECENTLY_USED_DEMONIC_BOMBARDMENT
+            NOT = { has_country_modifier = cooldown_demonic_bombardment }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - conduct_demonic_bombardment"
+            }
+        }
+        
+        add_mil_power = -50
+        
+        hidden_effect = {
+            save_event_target_as = aggressor
+
+            add_country_modifier = {
+                name = cooldown_demonic_bombardment
+                duration = 1825
+                hidden = yes
+            }
+        }
+        
+        FROM = {
+            country_event = { id = wwu_diplomatic_actions.24 days = 1 }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		mil_power = 500
+	}
+}
+
+#---------------------------------------
+# Purge Dissidence
+#---------------------------------------
+purge_dissidence = {
+	category = papacy
+	
+	alert_index = 40
+	alert_tooltip = purge_dissidence_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        is_papal_controller = yes
+	}
+	is_allowed = {
+        papal_influence = 20
+        
+        FROM = {
+            religion = fel
+
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_PURGE_DISSIDENCE
+                NOT = { has_country_modifier = cooldown_purge_dissidence }
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - purge_dissidence"
+            }
+        }
+        
+        add_papal_influence = -50
+        
+		FROM = {
+			add_aggressive_expansion = {
+                who = ROOT
+                value = -1000
+            }
+		}
+        FROM = {
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_purge_dissidence
+                    duration = 3650
+                    hidden = yes
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		papal_influence = 100
+	}
+}
