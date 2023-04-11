@@ -1034,6 +1034,12 @@ sway_the_people = {
                 }
             }
         }
+        FROM = { 
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_SWAYED_THE_PEOPLE
+                NOT = { has_country_modifier = cooldown_swayed_the_people }
+            }
+        }
 	}
 	is_allowed = {
 		has_spy_network_in = {
@@ -1062,6 +1068,16 @@ sway_the_people = {
             who = FROM
             modifier = swayed_the_people
         }
+        
+        FROM = {
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_swayed_the_people
+                    duration = 3650
+                    hidden = yes
+                }
+            }
+        }
 	}
 	on_decline = { 
 	}
@@ -1071,5 +1087,84 @@ sway_the_people = {
 
 	ai_will_do = {
         always = yes
+	}
+}
+
+#---------------------------------------
+# Manipulate Opinion
+#---------------------------------------
+manipulate_opinion = {
+	category = covert
+	
+	alert_index = 40
+	alert_tooltip = manipulate_opinion_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        FROM = { 
+            custom_trigger_tooltip = {
+                tooltip = RECENTLY_TARGET_OF_MANIPULATE_OPINION
+                NOT = { has_country_modifier = cooldown_manipulate_opinion }
+            }
+        }
+	}
+	is_allowed = {
+		has_spy_network_in = {
+			who = FROM
+			value = 50
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - manipulate_opinion"
+            }
+        }
+        
+		add_spy_network_in = {
+			who = FROM
+			value = -50
+		}
+        
+        FROM = {
+            add_aggressive_expansion = {
+                who = ROOT
+                value = -20
+            }
+            
+            if = {
+                limit = {
+                    ROOT = {
+                        has_idea_group = wwu_espionage_ideas
+                    }
+                }
+                
+                add_aggressive_expansion = {
+                    who = ROOT
+                    value = -10
+                }
+            }
+        }
+        
+        FROM = {
+            hidden_effect = {
+                add_country_modifier = {
+                    name = cooldown_manipulate_opinion
+                    duration = 1825
+                    hidden = yes
+                }
+            }
+        }
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+        always = no
 	}
 }
