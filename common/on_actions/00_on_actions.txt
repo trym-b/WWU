@@ -1042,36 +1042,42 @@ on_monarch_death = {
         value = 0
     }
     
+    # Succession
+    # The 'succession_occuring' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
+    if = {
+        limit = {
+            NOT = { has_country_flag = succession_occuring }
+        }
+        
+        country_event = { id = wwu_government.15 } # Tribal Vote
+        
+        # Succession
+        country_event = { id = wwu_government_succession.10 } # Zanchuli Council
+        country_event = { id = wwu_government_succession.11 } # G'huun's Chosen
+        country_event = { id = wwu_government_succession.12 } # Theocratic Selection
+        country_event = { id = wwu_government_succession.13 } # Naga Succession
+        country_event = { id = wwu_government_succession.14 } # Mantid Succession
+        country_event = { id = wwu_government_succession.15 } # Nerubian Succession
+        country_event = { id = wwu_government_succession.16 } # Aqir Leadership
+        country_event = { id = wwu_government_succession.17 } # Tol'vir Succession
+        country_event = { id = wwu_government_succession.18 } # Titanic Succession
+        country_event = { id = wwu_government_succession.19 } # Brood Selection
+        country_event = { id = wwu_government_succession.20 } # Hakkar's Chosen
+        country_event = { id = wwu_government_succession.21 } # High Priest Selection
+        country_event = { id = wwu_government_succession.22 } # Elemental Succession
+        country_event = { id = wwu_government_succession.23 } # Druidic Selection
+        country_event = { id = wwu_government_succession.24 } # Demonic Succession
+        country_event = { id = wwu_government_succession.25 } # New Rulership
+        country_event = { id = wwu_government_succession.26 } # Fall of the Lich King
+    }
+    else = {
+        clr_country_flag = succession_occuring
+    }
+    
 	events = {
 		wwu_loa.1 # Influence of X
-        
-        # Event
         wwu_shamanism.1 # Passing of Great Leader
-        
-        # Reforms
         wwu_government.11 # Gavelkind Succession
-        wwu_government.15 # Tribal Vote
-        
-        # Monarchy
-        wwu_government_succession.10 # Zanchuli Council
-        
-        # Theocracy
-        wwu_government_succession.12 # Theocratic Selection
-        wwu_government_succession.11 # G'huun's Chosen
-        wwu_government_succession.13 # Naga Succession
-        wwu_government_succession.14 # Mantid Succession
-        wwu_government_succession.15 # Nerubian Succession
-        wwu_government_succession.16 # Aqir Leadership
-        wwu_government_succession.17 # Tol'vir Succession
-        wwu_government_succession.18 # Titanic Succession
-        wwu_government_succession.19 # Brood Selection
-        wwu_government_succession.20 # Hakkar's Chosen
-        wwu_government_succession.21 # High Priest Selection
-        wwu_government_succession.22 # Elemental Succession
-        wwu_government_succession.23 # Druidic Selection
-        wwu_government_succession.24 # Demonic Succession
-        wwu_government_succession.25 # New Rulership
-        wwu_government_succession.26 # Fall of the Lich King
 	}
     
     random_events = {
@@ -1782,9 +1788,7 @@ on_monthly_pulse = {
 		log = "DEBUG - [Root.GetName]: on_monthly_pulse "
 	}
     
-    events = {
-        wwu_terrain_affinity.100
-    }
+    # DOES NOT FIRE: use generic_monthly_pulse instead
 }
 
 on_yearly_pulse = {
