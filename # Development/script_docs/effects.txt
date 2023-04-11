@@ -34,8 +34,6 @@ add_canal = <name>
 
 # 1.35
 restore_country_color = yes
-
-# 1.35
 change_country_color = {
     # Set color to that of target tag
     country = <scope>
@@ -47,6 +45,10 @@ change_country_color = {
         <b>
     }
 }
+
+# 1.35
+release_all_possible_countries = <bool> # Releases all possible countries from current scope.
+remove_country = <bool> # Removes current scope fully
 
 #--------------------------------------------------------------------------------
 # Country-scope Effects
@@ -85,6 +87,12 @@ add_country_modifier = {
 }
 remove_country_modifier = <modifier>    # Removes a country modifier, if it exists, from the country
 
+# Extends an existing modifier by X days 1.35
+extend_country_modifier = {
+    name = <modifier>
+    duration = <days>
+}
+
 complete_mission = <mission>
 swap_non_generic_missions = yes
 
@@ -93,6 +101,12 @@ set_capital = <province>
 add_power_projection = {
     type = mission_rewards_power_projection
     amount = 25
+}
+
+# 1.35
+remove_power_projection = {
+    key = <id>
+    amount = <int> # Optional
 }
 
 # ----- Government -----
@@ -121,14 +135,45 @@ set_legacy_government = <string>
 remove_government_reform = <string>
 adopt_reform_progress = <scope>                 # Adopts reform progress from specified scope (not tags)
 
+# 1.35
 remove_hegemon = <scope>
 
-# DLC - Third Rome / Cradle of Civilization
+# Regenerate Government Power UI - 1.35
+regenerate_government_mechanics = <yes>
+
+# 1.35
 add_government_power = {
-    government_mechanic = <mechanic>            # russian_mechanic, feudal_theocracy_mechanic, tribal_federation_mechanic, mamluk_mechanic, iqta_mechanic
-    which = <power type>                        # ADM, DIP, MIL
-    amount = <int>
+    mechanic_type = <mechanic>
+    power_type = <id>
+    value = <float>
 }
+
+# 1.35
+add_government_power_scaled_to_seats = {
+    mechanic_type = <mechanic>
+    power_type = <id>
+    value = <float>
+}
+
+# 1.35
+set_government_power = {
+    mechanic_type = <mechanic>
+    power_type = <id>
+    value = <float>
+}
+
+# 1.35
+freeze_government_power = {
+    mechanic_type = <mechanic>
+    power_type = <id>
+}
+
+# 1.35
+unfreeze_government_power = {
+    mechanic_type = <mechanic>
+    power_type = <id>
+}
+
 
 # DLC - Common Sense
 set_government_and_rank = { 
@@ -168,6 +213,7 @@ remove_defender_of_the_faith = {
 }
 
 # --- Papacy
+set_papal_controller = <scope> # 1.35
 add_papal_influence = <int>             
 add_reform_desire = <int>
 excommunicate = <scope>                         # Excommunicates <scope>. Removes if already applied.
@@ -295,10 +341,28 @@ add_years_of_owned_provinces_production_income = {
     custom_tooltip = <string>
 }
 
-# DLC - Emperor
-add_great_project_tier = {
-    type = <type>
-    tier = <int>
+# 1.35
+# Adds dcuats based on development of defined subject (trigger defines which subjects to account for)
+add_subjects_development_ducats = {
+    multiplier = <float>
+    age_multiplier = <float>
+    custom_tooltip = <string>
+    
+    trigger = {
+        <triggers>
+    }
+}
+
+# 1.35
+# Adds ducats based on the development of owned provinces (trigger defines which provinces to account for). 
+add_owned_provinces_development_ducats = {
+    multiplier = <float>
+    age_multiplier = <float>
+    custom_tooltip = <string>
+    
+    trigger = {
+        <triggers>
+    }
 }
 
 # ----- Court -----
@@ -324,6 +388,23 @@ define_advisor = {
     culture = <culture>             # optional, sets advisor culture
     religion = <religion>           # optional, sets advisor religion
     cost_multiplier = <float>
+    age = <int> # 1.35
+    min_age = <int> # 1.35
+    max_age = <int> # 1.35
+}
+
+# 1.35
+hire_advisor = {
+    type = <advisor>
+    cost_multiplier = <float>
+    skill = <int>
+    name = <string>
+    religion = <religion>
+    culture = <culture>
+    female = <bool>
+    location = <province id>
+    age = <int>
+    max_age = <int>
 }
 
 # ----- Stability -----
@@ -333,6 +414,12 @@ add_liberty_desire = <int>
 
 disband_rebels = <rebel type>   # Disbands all rebels within owned provinces
 collapse_nation = <yes>         # Causes owned cores to be released as nations and take a percentage of your owned provinces. 
+
+# 1.35
+add_rebel_progress = {
+    rebel_type = <id>
+    value = <int>
+}
 
 add_disaster_modifier = { 
     name = <key>                # Used to localize disaster modifier
@@ -671,8 +758,9 @@ reverse_remove_opinion = {      # Removes an opinion modifier against current sc
 }
 
 create_alliance = <scope>
-break_alliance = <scope>       # 1.34
+break_alliance = <scope> 
 create_guarantee = <scope>
+remove_guarantee = <scope> # 1.35
 create_march = <scope>
 create_marriage = <scope>
 create_union = <scope>
@@ -698,6 +786,7 @@ add_truce_with = <scope>            # Uses default truce length. Applies after o
 white_peace = <scope>               # Forces a white peace against <scope>
 form_coalition_against = <scope>
 support_independence_of = <scope>
+steer_trade = <scope> # 1.35
 
 add_casus_belli = {
     target = <scope>
@@ -751,6 +840,30 @@ add_manpower = <float>                  # 1 == 1000
 add_sailors = <int>                     # 1 == 1
 add_yearly_manpower = <float>           # 0.1 == 10%
 add_yearly_sailors = <float>
+
+# 1.35
+# Adds manpower based on the development of owned provinces (trigger defines which provinces to account for). 
+add_owned_provinces_development_manpower = {
+    multiplier = <float>
+    age_multiplier = <float>
+    custom_tooltip = <string>
+    
+    trigger = {
+        <triggers>
+    }
+}
+
+# 1.35
+# Adds manpower based on the subject development (trigger defines which subjects to account for). 
+add_subjects_development_manpower = {
+    multiplier = <float>
+    age_multiplier = <float>
+    custom_tooltip = <string>
+    
+    trigger = {
+        <triggers>
+    }
+}
 
 add_years_of_owned_provinces_manpower = {
     years = <int>
@@ -851,8 +964,6 @@ infantry = <scope>
 mercenary_infantry = <scope>    # Is a mercenary unit
 mercenary_cavalry = <scope>     # Is a mercenary unit
 
-marine_infantry = <scope>
-
 heavy_ship = <scope>
 light_ship = <scope>
 transport = <scope>
@@ -860,6 +971,10 @@ galley = <scope>
 
 # You can spawn specific units, i.e. british_redcoat
 <unit_name> = <scope>
+
+disband_all_units = <bool> # 1.35
+disband_all_regiments = <bool> # 1.35
+disband_all_ships = <bool> # 1.35
 
 # ----- Tribal -----
 settle_province = <scope>                   # DLC - Conquest of Paradise - Change tribal land into normal province
@@ -993,7 +1108,7 @@ add_scaled_local_mil_power = <int>      # 1 power per point of yearly base manpo
 add_core_construction = <yes>           # Starts core creation
 cancel_construction = <yes>             # Works for all constructions
 
-add_construction_progress = <float>     # Only for Great Project construction
+add_construction_progress = <float>     # Only for Great Project construction, for all buildings in 1.35
 
 add_building = <building>               # Found in common/buildings/*.txt
 remove_building = <building>
@@ -1011,6 +1126,12 @@ add_great_project = {
     instant = <bool>
 }
 
+# DLC - Emperor
+add_great_project_tier = {
+    type = <type>
+    tier = <int>
+}
+
 # DLC - Leviathan
 destroy_great_project = {
     type = <string>
@@ -1026,8 +1147,13 @@ create_advisor = <advisor>
 
 change_national_focus = <type>              # DLC - Res Publica - ADM/DIP/MIL/NONE
 
+start_debate = <id> # 1.35
+cancel_current_debate = <yes> # 1.35
 set_seat_in_parliament = <yes/no>           # DLC - Common Sense
 back_current_issue = <yes/no>               # DLC - Common Sense
+remove_enacted_issue = <yes> # 1.35
+enact_issue = <id> # 1.35
+end_current_debate = <bool> # 1.35
 
 change_culture =  <culture/scope>
 change_original_culture = <culture/scope>
@@ -1129,20 +1255,47 @@ remove_core = <scope>
 remove_territorial_core = <scope>
 
 # ----- Military -----
-# The unit's stat base is your currently selected one
-artillery = <scope>
-cavalry = <scope>
-galley = <scope>
-heavy_ship = <scope>
+# Land Units
 infantry = <scope>
-light_ship = <scope>
-transport = <scope>
+cavalry = <scope>
+artillery = <scope>
+
 mercenary_infantry = <scope>    # Is a mercenary unit
 mercenary_cavalry = <scope>     # Is a mercenary unit
+
 cossack_cavalry = <scope>       
 streltsy_infantry = <scope>      
 rajput_infantry = <scope>       
 cawa_infantry = <scope>
+marine_infantry = <scope>
+janissary_infantry = <scope> # 1.35
+revolutionary_guard_infantry = <scope> # 1.35
+revolutionary_guard_cavalry = <scope> # 1.35
+revolutionary_guard_artillery = <scope> # 1.35 
+tercio_infantry = <scope> # 1.35
+musketeer_infantry = <scope> # 1.35
+samurai_infantry = <scope> # 1.35
+
+# Naval Units
+heavy_ship = <scope>
+light_ship = <scope>
+galley = <scope>
+transport = <scope>
+
+geobukseon_galley = <scope> # 1.35
+man_of_war_heavy = <scope> # 1.35
+man_of_war_light = <scope> # 1.35
+galleon_heavy = <scope> # 1.35
+galleass_galley = <scope> # 1.35
+caravel_light = <scope> # 1.35
+voc_indiamen_light = <scope> # 1.35
+
+# Create special units up to a forcelimit % 1.35
+create_unit_forcelimit_percentage = {
+    type = <unit type>
+    special_unit_category = <special unit type>
+    force_limit_percentage = <float>
+}
 
 # Creates flagship
 create_flagship = {
