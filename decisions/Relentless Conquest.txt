@@ -1,16 +1,18 @@
 country_decisions = {
     enable_relentless_conquest = {
         potential = {
-            NOT = { has_reform = wwu_ascendancy_conqueror }
             # Nations that can use Relentless Conquest
             OR = {
+                has_country_flag = can_use_relentless_conqueror
                 culture_group = culture_group_scourge
                 culture_group = culture_group_orc
                 culture_group = culture_group_troll
                 culture_group = culture_group_aqir
                 culture_group = culture_group_mantid
             }
-            NOT = { has_country_flag = relentless_conqueror_flag }
+            
+            NOT = { has_country_modifier = cooldown_relentless_conquest }
+            NOT = { has_country_modifier = relentless_conquest_active }
         }
         allow = {
             adm_power = 50
@@ -24,13 +26,16 @@ country_decisions = {
             
             custom_tooltip = enable_relentless_conquest_tt
             
-            add_country_modifier = {
-                name = relentless_conqueror
-                duration = -1
-            }
-            
             hidden_effect = {
-                set_country_flag = relentless_conqueror_flag
+                add_country_modifier = {
+                    name = relentless_conquest_active
+                    duration = 365
+                }
+            
+                add_country_modifier = {
+                    name = cooldown_relentless_conquest
+                    duration = 3650
+                }
             }
         }
         ai_will_do = {
@@ -42,33 +47,6 @@ country_decisions = {
                 
                 NOT = { tag = P11 }
             }
-        }
-    }
-    
-    disable_relentless_conquest = {
-        potential = {
-            has_country_flag = relentless_conqueror_flag
-        }
-        allow = {
-            adm_power = 50
-            dip_power = 50
-            mil_power = 50
-        }
-        effect = {
-			add_adm_power = -50
-            add_dip_power = -50
-            add_mil_power = -50
-            
-            custom_tooltip = disable_relentless_conquest_tt
-            
-            remove_country_modifier = relentless_conqueror
-            
-            hidden_effect = {
-                clr_country_flag = relentless_conqueror_flag
-            }
-        }
-        ai_will_do = {
-            factor = 0
         }
     }
 }

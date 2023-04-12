@@ -176,7 +176,7 @@ decrement_dig = {
             which = excavation_progress
             value = 1
         }
-        
+ 
         if = {
             limit = {
                 NOT = { 
@@ -186,10 +186,9 @@ decrement_dig = {
                     }
                 }
             }
-            set_variable = {
-                which = excavation_progress
-                value = 0
-            }
+            
+            # End the dig if it is reduced to 0
+            end_dig = yes
         }
     }
 }
@@ -217,6 +216,20 @@ clear_dig_regions = {
     clr_country_flag = dig_in_kul_tiras
     clr_country_flag = dig_in_south_sea
     clr_country_flag = dig_in_dragon_isles
+}
+
+end_dig = {
+    country_event = { id = wwu_archaeology.501 }
+    
+    hidden_effect = {   
+        clear_dig_regions = yes
+        clr_country_flag = dig_begins
+        clr_country_flag = excavation_decision_used
+        set_variable = {
+            which = excavation_progress
+            value = 0
+        }
+    }
 }
 
 reward_artifact = {
