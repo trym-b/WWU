@@ -21,8 +21,6 @@ def build_event(name, event_id):
 
     outputFile = open(output_name, "wt")
 
-    event_id = 47
-
     for entry in input_list:
         new_entry = template_file.format(event_id=event_id, artifact=entry[0], artifact_name=entry[1])
         new_entry = new_entry.replace( "[", "{")
@@ -171,7 +169,7 @@ def build_specific_reward_list(event_id):
     outputFile.close()
 
 def main():
-    event_id = 10
+    event_id = 75
 
     # GFX
     build_icons()
