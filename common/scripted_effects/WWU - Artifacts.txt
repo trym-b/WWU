@@ -97,6 +97,22 @@ start_dig = {
             which = excavation_progress
             value = 0
         }
+        set_variable = {
+            which = excavation_progress_cap
+            value = 8
+        }
+        
+        # If a specific focus is chosen, make the dig harder
+        if = {
+            limit = {
+                NOT = { has_country_flag = artifact_focus_random }
+            }
+            
+            set_variable = {
+                which = excavation_progress_cap
+                value = 12
+            }
+        }
     }
 }
 
@@ -135,12 +151,12 @@ increment_dig = {
             limit = {
                 check_variable = {
                     which = excavation_progress
-                    value = 5
+                    which = excavation_progress_cap
                 }
             }
             set_variable = {
                 which = excavation_progress
-                value = 5
+                which = excavation_progress_cap
             }
         }
     }
@@ -181,12 +197,12 @@ increment_dig_massively = {
             limit = {
                 check_variable = {
                     which = excavation_progress
-                    value = 5
+                    which = excavation_progress_cap
                 }
             }
             set_variable = {
                 which = excavation_progress
-                value = 5
+                which = excavation_progress_cap
             }
         }
     }
