@@ -2,30 +2,23 @@ namespace = wwu_archaeology
 
 # Excavation Begins
 country_event = {
-	id = wwu_archaeology.1
-	title = wwu_archaeology.1.title
-	desc = wwu_archaeology.1.desc
+	id = wwu_archaeology.300
+	title = wwu_archaeology.300.title
+	desc = wwu_archaeology.300.desc
 	picture = FORGOTTEN_TORCH_eventPicture
     
 	is_triggered_only = yes
 	
+    immediate = {
+        clear_artifact_focus = yes
+        clear_dig_regions = yes
+    }
 	mean_time_to_happen = {
 		days = 1
 	}
 	
-	immediate = {
-		hidden_effect = {
-            set_country_flag = dig_begins
-            set_country_flag = excavation_decision_used
-            set_variable = {
-                which = excavation_progress
-                value = 0
-            }
-        }
-	}
-	
 	option = {
-		name = wwu_archaeology.1.option.eastern_kingdoms
+		name = wwu_archaeology.300.option.eastern_kingdoms
 		
         trigger = {
             any_known_country = {
@@ -38,10 +31,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_EASTERN_KINGDOMS
         hidden_effect = {
             set_country_flag = dig_in_eastern_kingdoms
+            country_event = { id = wwu_archaeology.301 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.kalimdor
+		name = wwu_archaeology.300.option.kalimdor
 		
         trigger = {
             any_known_country = {
@@ -54,10 +48,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_KALIMDOR
         hidden_effect = {
             set_country_flag = dig_in_kalimdor
+            country_event = { id = wwu_archaeology.302 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.northrend
+		name = wwu_archaeology.300.option.northrend
 		
         trigger = {
             any_known_country = {
@@ -70,10 +65,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_NORTHREND
         hidden_effect = {
             set_country_flag = dig_in_northrend
+            country_event = { id = wwu_archaeology.303 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.pandaria
+		name = wwu_archaeology.300.option.pandaria
 		
 		trigger = {
             any_known_country = {
@@ -86,10 +82,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_PANDARIA
         hidden_effect = {
             set_country_flag = dig_in_pandaria
+            country_event = { id = wwu_archaeology.304 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.draenor
+		name = wwu_archaeology.300.option.draenor
 		
         trigger = {
             NOT = { has_global_flag = setup_outland }
@@ -114,10 +111,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_DRAENOR
         hidden_effect = {
             set_country_flag = dig_in_draenor
+            country_event = { id = wwu_archaeology.305 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.outland
+		name = wwu_archaeology.300.option.outland
 		
         trigger = {
             has_global_flag = setup_outland 
@@ -143,10 +141,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_OUTLAND
         hidden_effect = {
             set_country_flag = dig_in_outland
+            country_event = { id = wwu_archaeology.306 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.broken_isles
+		name = wwu_archaeology.300.option.broken_isles
 		
 		trigger = {
             any_known_country = {
@@ -159,10 +158,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_BROKEN_ISLES
         hidden_effect = {
             set_country_flag = dig_in_broken_isles
+            country_event = { id = wwu_archaeology.307 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.zandalar
+		name = wwu_archaeology.300.option.zandalar
 		
 		trigger = {
             any_known_country = {
@@ -175,10 +175,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_ZANDALAR
         hidden_effect = {
             set_country_flag = dig_in_zandalar
+            country_event = { id = wwu_archaeology.308 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.kul_tiras
+		name = wwu_archaeology.300.option.kul_tiras
 		
 		trigger = {
             any_known_country = {
@@ -191,10 +192,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_KUL_TIRAS
         hidden_effect = {
             set_country_flag = dig_in_kul_tiras
+            country_event = { id = wwu_archaeology.309 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.south_seas
+		name = wwu_archaeology.300.option.south_seas
 		
 		trigger = {
             any_known_country = {
@@ -207,10 +209,11 @@ country_event = {
 		custom_tooltip = DIG_REGION_SOUTH_SEAS
         hidden_effect = {
             set_country_flag = dig_in_south_sea
+            country_event = { id = wwu_archaeology.310 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.dragon_isles
+		name = wwu_archaeology.300.option.dragon_isles
 		
         trigger = {
             any_known_country = {
@@ -223,13 +226,1150 @@ country_event = {
 		custom_tooltip = DIG_REGION_DRAGON_ISLES
         hidden_effect = {
             set_country_flag = dig_in_dragon_isles
-            set_country_flag = dig_in_eastern_kingdoms # Remove once Dragon Isles have their own artifacts
+            country_event = { id = wwu_archaeology.311 }
         }
 	}
     option = {
-		name = wwu_archaeology.1.option.exit
+		name = wwu_archaeology.300.option.exit
 		
 		end_dig = yes
+	}
+}
+
+# Focus in the Eastern Kingdoms
+country_event = {
+	id = wwu_archaeology.301
+	title = wwu_archaeology.301.title
+	desc = wwu_archaeology.301.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.301.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.apocalypse
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_apocalypse }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_apocalypse
+        hidden_effect = {
+            set_country_flag = artifact_focus_apocalypse
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.thasdorah
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_thasdorah }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_thasdorah
+        hidden_effect = {
+            set_country_flag = artifact_focus_thasdorah
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.xalatath
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_xalatath }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_xalatath
+        hidden_effect = {
+            set_country_flag = artifact_focus_xalatath
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.dreadblades
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_dreadblades }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_dreadblades
+        hidden_effect = {
+            set_country_flag = artifact_focus_dreadblades
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.felomelorn
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_felomelorn }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_felomelorn
+        hidden_effect = {
+            set_country_flag = artifact_focus_felomelorn
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.silver_hand
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_silver_hand }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_silver_hand
+        hidden_effect = {
+            set_country_flag = artifact_focus_silver_hand
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.kingslayers
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_kingslayers }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_kingslayers
+        hidden_effect = {
+            set_country_flag = artifact_focus_kingslayers
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.ulthalesh
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_ulthalesh }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_ulthalesh
+        hidden_effect = {
+            set_country_flag = artifact_focus_ulthalesh
+        }
+	}
+    option = {
+		name = wwu_archaeology.301.option.stromkar
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_stromkar }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_stromkar
+        hidden_effect = {
+            set_country_flag = artifact_focus_stromkar
+        }
+	}
+}
+
+# Focus in Kalimdor
+country_event = {
+	id = wwu_archaeology.302
+	title = wwu_archaeology.302.title
+	desc = wwu_archaeology.302.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.302.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.scythe_of_elune
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_scythe_of_elune }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_scythe_of_elune
+        hidden_effect = {
+            set_country_flag = artifact_focus_scythe_of_elune
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.fangs_of_ashamane
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fangs_of_ashamane }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fangs_of_ashamane
+        hidden_effect = {
+            set_country_flag = artifact_focus_fangs_of_ashamane
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.claws_of_ursoc
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_claws_of_ursoc }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_claws_of_ursoc
+        hidden_effect = {
+            set_country_flag = artifact_focus_claws_of_ursoc
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.ghanir
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_ghanir }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_ghanir
+        hidden_effect = {
+            set_country_flag = artifact_focus_ghanir
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.fists_of_the_heavens
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fists_of_the_heavens }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fists_of_the_heavens
+        hidden_effect = {
+            set_country_flag = artifact_focus_fists_of_the_heavens
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.glaive_of_the_aspects
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_glaive_of_the_aspects }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_glaive_of_the_aspects
+        hidden_effect = {
+            set_country_flag = artifact_focus_glaive_of_the_aspects
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.scimitar_of_sirocco
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_scimitar_of_sirocco }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_scimitar_of_sirocco
+        hidden_effect = {
+            set_country_flag = artifact_focus_scimitar_of_sirocco
+        }
+	}
+    option = {
+		name = wwu_archaeology.302.option.staff_of_ammunae
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_staff_of_ammunae }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_staff_of_ammunae
+        hidden_effect = {
+            set_country_flag = artifact_focus_staff_of_ammunae
+        }
+	}
+}
+
+# Focus in Northrend
+country_event = {
+	id = wwu_archaeology.303
+	title = wwu_archaeology.303.title
+	desc = wwu_archaeology.303.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.303.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.303.option.aluneth
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_aluneth }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_aluneth
+        hidden_effect = {
+            set_country_flag = artifact_focus_aluneth
+        }
+	}
+    option = {
+		name = wwu_archaeology.303.option.titanstrike
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_titanstrike }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_titanstrike
+        hidden_effect = {
+            set_country_flag = artifact_focus_titanstrike
+        }
+	}
+    option = {
+		name = wwu_archaeology.303.option.dustbringer
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_dustbringer }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_dustbringer
+        hidden_effect = {
+            set_country_flag = artifact_focus_dustbringer
+        }
+	}
+    option = {
+		name = wwu_archaeology.303.option.valanyr
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_valanyr }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_valanyr
+        hidden_effect = {
+            set_country_flag = artifact_focus_valanyr
+        }
+	}
+    option = {
+		name = wwu_archaeology.303.option.puzzle_box_of_yogg_saron
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_puzzle_box_of_yogg_saron }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_puzzle_box_of_yogg_saron
+        hidden_effect = {
+            set_country_flag = artifact_focus_puzzle_box_of_yogg_saron
+        }
+	}
+}
+
+# Focus in Pandaria
+country_event = {
+	id = wwu_archaeology.304
+	title = wwu_archaeology.304.title
+	desc = wwu_archaeology.304.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.304.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.sheilun
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_sheilun }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_sheilun
+        hidden_effect = {
+            set_country_flag = artifact_focus_sheilun
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.fu_zan
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fu_zan }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fu_zan
+        hidden_effect = {
+            set_country_flag = artifact_focus_fu_zan
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.fist_of_raden
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fist_of_raden }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fist_of_raden
+        hidden_effect = {
+            set_country_flag = artifact_focus_fist_of_raden
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.twirling_longbow
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_twirling_longbow }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_twirling_longbow
+        hidden_effect = {
+            set_country_flag = artifact_focus_twirling_longbow
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.spear_of_xuen
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_spear_of_xuen }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_spear_of_xuen
+        hidden_effect = {
+            set_country_flag = artifact_focus_spear_of_xuen
+        }
+	}
+    option = {
+		name = wwu_archaeology.304.option.umbrella_of_chiji
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_umbrella_of_chiji }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_umbrella_of_chiji
+        hidden_effect = {
+            set_country_flag = artifact_focus_umbrella_of_chiji
+        }
+	}
+}
+
+# Focus in Draenor
+country_event = {
+	id = wwu_archaeology.305
+	title = wwu_archaeology.305.title
+	desc = wwu_archaeology.305.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.305.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.amulet_of_rukhmar
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_amulet_of_rukhmar }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_amulet_of_rukhmar
+        hidden_effect = {
+            set_country_flag = artifact_focus_amulet_of_rukhmar
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.dream_of_argus
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_dream_of_argus }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_dream_of_argus
+        hidden_effect = {
+            set_country_flag = artifact_focus_dream_of_argus
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.grimoire_of_the_nameless_void
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_grimoire_of_the_nameless_void }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_grimoire_of_the_nameless_void
+        hidden_effect = {
+            set_country_flag = artifact_focus_grimoire_of_the_nameless_void
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.gronnsbane
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_gronnsbane }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_gronnsbane
+        hidden_effect = {
+            set_country_flag = artifact_focus_gronnsbane
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.gutreks_cleaver
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_gutreks_cleaver }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_gutreks_cleaver
+        hidden_effect = {
+            set_country_flag = artifact_focus_gutreks_cleaver
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.headdress_of_the_first_shaman
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_headdress_of_the_first_shaman }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_headdress_of_the_first_shaman
+        hidden_effect = {
+            set_country_flag = artifact_focus_headdress_of_the_first_shaman
+        }
+	}
+    option = {
+		name = wwu_archaeology.305.option.warmaul_of_the_warmaul_chieftain
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_warmaul_of_the_warmaul_chieftain }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_warmaul_of_the_warmaul_chieftain
+        hidden_effect = {
+            set_country_flag = artifact_focus_warmaul_of_the_warmaul_chieftain
+        }
+	}
+}
+
+# Focus in Outland
+country_event = {
+	id = wwu_archaeology.306
+	title = wwu_archaeology.306.title
+	desc = wwu_archaeology.306.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.306.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.306.option.twinblades_of_the_deceiver
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_twinblades_of_the_deceiver }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_twinblades_of_the_deceiver
+        hidden_effect = {
+            set_country_flag = artifact_focus_twinblades_of_the_deceiver
+        }
+	}
+    option = {
+		name = wwu_archaeology.306.option.beakbreaker_of_terokk
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_beakbreaker_of_terokk }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_beakbreaker_of_terokk
+        hidden_effect = {
+            set_country_flag = artifact_focus_beakbreaker_of_terokk
+        }
+	}
+}
+
+# Focus in the Broken Isles
+country_event = {
+	id = wwu_archaeology.307
+	title = wwu_archaeology.307.title
+	desc = wwu_archaeology.307.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.307.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.warswords_of_valarjar
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_warswords_of_valarjar }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_warswords_of_valarjar
+        hidden_effect = {
+            set_country_flag = artifact_focus_warswords_of_valarjar
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.talonclaw
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_talonclaw }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_talonclaw
+        hidden_effect = {
+            set_country_flag = artifact_focus_talonclaw
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.ebonchill
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_ebonchill }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_ebonchill
+        hidden_effect = {
+            set_country_flag = artifact_focus_ebonchill
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.truthguard
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_truthguard }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_truthguard
+        hidden_effect = {
+            set_country_flag = artifact_focus_truthguard
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.sharasdal
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_sharasdal }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_sharasdal
+        hidden_effect = {
+            set_country_flag = artifact_focus_sharasdal
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.scepter_of_sargeras
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_scepter_of_sargeras }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_scepter_of_sargeras
+        hidden_effect = {
+            set_country_flag = artifact_focus_scepter_of_sargeras
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.scale_of_the_earthwarder
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_scale_of_the_earthwarder }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_scale_of_the_earthwarder
+        hidden_effect = {
+            set_country_flag = artifact_focus_scale_of_the_earthwarder
+        }
+	}
+    option = {
+		name = wwu_archaeology.307.option.underlight_angler
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_underlight_angler }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_underlight_angler
+        hidden_effect = {
+            set_country_flag = artifact_focus_underlight_angler
+        }
+	}
+}
+
+# Focus in Zandalar
+country_event = {
+	id = wwu_archaeology.308
+	title = wwu_archaeology.308.title
+	desc = wwu_archaeology.308.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.308.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.308.option.zinrokh
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_zinrokh }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_zinrokh
+        hidden_effect = {
+            set_country_flag = artifact_focus_zinrokh
+        }
+	}
+    option = {
+		name = wwu_archaeology.308.option.fetish_of_hireek
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fetish_of_hireek }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fetish_of_hireek
+        hidden_effect = {
+            set_country_flag = artifact_focus_fetish_of_hireek
+        }
+	}
+    option = {
+		name = wwu_archaeology.308.option.bwonsamdi_voodoo_mask
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_bwonsamdi_voodoo_mask }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_bwonsamdi_voodoo_mask
+        hidden_effect = {
+            set_country_flag = artifact_focus_bwonsamdi_voodoo_mask
+        }
+	}
+    option = {
+		name = wwu_archaeology.308.option.rezan_idol
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_rezan_idol }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_rezan_idol
+        hidden_effect = {
+            set_country_flag = artifact_focus_rezan_idol
+        }
+	}
+}
+
+# Focus in Kul Tiras
+country_event = {
+	id = wwu_archaeology.309
+	title = wwu_archaeology.309.title
+	desc = wwu_archaeology.309.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.309.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.309.option.jagged_blade_of_the_drust
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_jagged_blade_of_the_drust }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_jagged_blade_of_the_drust
+        hidden_effect = {
+            set_country_flag = artifact_focus_jagged_blade_of_the_drust
+        }
+	}
+    option = {
+		name = wwu_archaeology.309.option.soul_coffer
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_soul_coffer }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_soul_coffer
+        hidden_effect = {
+            set_country_flag = artifact_focus_soul_coffer
+        }
+	}
+    option = {
+		name = wwu_archaeology.309.option.fetish_of_the_tormented_mind
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_fetish_of_the_tormented_mind }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_fetish_of_the_tormented_mind
+        hidden_effect = {
+            set_country_flag = artifact_focus_fetish_of_the_tormented_mind
+        }
+	}
+    option = {
+		name = wwu_archaeology.309.option.ritual_fetish
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_ritual_fetish }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_ritual_fetish
+        hidden_effect = {
+            set_country_flag = artifact_focus_ritual_fetish
+        }
+	}
+}
+
+# Focus in South Sea Islands
+country_event = {
+	id = wwu_archaeology.310
+	title = wwu_archaeology.310.title
+	desc = wwu_archaeology.310.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.310.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
+	}
+    option = {
+		name = wwu_archaeology.310.option.blade_of_northern_kings
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_blade_of_northern_kings }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_blade_of_northern_kings
+        hidden_effect = {
+            set_country_flag = artifact_focus_blade_of_northern_kings
+        }
+	}
+    option = {
+		name = wwu_archaeology.310.option.brinebeards_shanker
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_brinebeards_shanker }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_brinebeards_shanker
+        hidden_effect = {
+            set_country_flag = artifact_focus_brinebeards_shanker
+        }
+	}
+    option = {
+		name = wwu_archaeology.310.option.crimson_captains_hat
+		
+        trigger = {
+            NOT = { has_global_flag = discovered_artifact_crimson_captains_hat }
+            has_artifact_focus_cost = yes
+        }
+        
+        artifact_focus_cost = yes
+        
+        custom_tooltip = ARTIFACT_FOCUS_crimson_captains_hat
+        hidden_effect = {
+            set_country_flag = artifact_focus_crimson_captains_hat
+        }
+	}
+}
+
+# Focus in the Dragon Isles
+country_event = {
+	id = wwu_archaeology.311
+	title = wwu_archaeology.311.title
+	desc = wwu_archaeology.311.desc
+	picture = HARRISON_JONES_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    after = {
+        start_dig = yes
+    }
+    
+	option = {
+		name = wwu_archaeology.311.option.random
+		
+		custom_tooltip = ARTIFACT_FOCUS_random
+        hidden_effect = {
+            set_country_flag = artifact_focus_random
+        }
 	}
 }
 

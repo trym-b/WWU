@@ -150,8 +150,28 @@ def build_reward_list(event_id):
 
     outputFile.close()
 
+def build_specific_reward_list(event_id):
+    os.chdir(getScriptPath())
+
+    template = "template_specific_reward_list.txt"
+    output_name = "output_specific_reward_list.txt"
+
+    input_list = com.get_csv_list("input.txt", ";")
+    template_file = com.get_file_as_string(template)
+
+    outputFile = open(output_name, "wt")
+
+    for entry in input_list:
+        new_entry = template_file.format(event_id=event_id, artifact=entry[0])
+        new_entry = new_entry.replace("[", "{")
+        new_entry = new_entry.replace("]", "}")
+        outputFile.write(new_entry)
+        event_id = event_id + 1
+
+    outputFile.close()
+
 def main():
-    event_id = 47
+    event_id = 10
 
     # GFX
     build_icons()
@@ -177,6 +197,7 @@ def main():
 
     # Reward List
     build_reward_list(event_id)
+    build_specific_reward_list(event_id)
 
     input_list = com.get_csv_list("input.txt", ";")
 
