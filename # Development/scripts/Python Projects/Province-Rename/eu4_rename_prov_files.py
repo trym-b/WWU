@@ -96,17 +96,17 @@ for prov in prov_names:
         os.rename(os.path.join(sys.argv[1], "history", "provinces", wrong_filename), os.path.join(sys.argv[1], "history", "provinces", correct_filename))
         # for now, to test
 
-        for i in range(len(definitions)):
-            # 4665;18;225;17;Anbennar4665_#12e111;x
-            # note space becomes _, so stupid stuff like 1;128;34;64;Far_Isle_#802240;x
-            # is possible, ugh
-            def_id, r, g, b, type, name, b1, b2, b3, b4 = definitions[i].split(";")
+    for i in range(len(definitions)):
+        def_id = definitions[i].split(";")[0]
+        r = definitions[i].split(";")[1]
+        g = definitions[i].split(";")[2]
+        b = definitions[i].split(";")[3]
 
-            if prov_id == def_id:
-                definitions[i] = ";".join((def_id, r, g, b, name, ";;;;;"))
-                break
+        if prov_id == def_id:
+            definitions[i] = ";".join((def_id, r, g, b, prov_name, ";;;;;"))
+            break
 
 # write back to definitions.csv -
 # (also note this is \r\n - windows newline splitting - keep that consistent)
 with open(os.path.join(sys.argv[1], "map", "definition.csv"), "w") as f:
-    f.write("\r\n".join(definitions))
+    f.write("\n".join(definitions))
