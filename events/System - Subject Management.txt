@@ -227,6 +227,60 @@ country_event = {
         custom_tooltip = MAKE_TRIBUTARY_COST_INVALID_TT
 	}
     
+    # Establish Subjugation Contract - VALID
+	option = {
+		name = wwu_subject_management.2.option.make_subjugated_vassal
+        
+        trigger = {
+            full_idea_group = wwu_subjugation_ideas
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = client_march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            adm_power = 250
+        }
+        
+        add_adm_power = -250
+        
+        create_subject = {
+            subject_type = subjugated_vassal
+            subject = event_target:current_subject
+        }
+        
+        event_target:current_subject = {
+            add_liberty_desire = 10
+        }
+        
+        hidden_effect = {
+            event_target:current_subject = {
+                set_country_flag = ignore_tributary_vassal_event
+            }
+        }
+	}
+    # Establish Subjugation Contract - INVALID
+    option = {
+		name = wwu_subject_management.2.option.make_subjugated_vassal.invalid
+        
+        trigger = {
+            full_idea_group = wwu_subjugation_ideas
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = client_march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            NOT = { adm_power = 250 }
+        }
+        
+        custom_tooltip = MAKE_VASSAL_COST_INVALID_TT
+	}
+    
     # Return
     option = {
 		name = wwu_subject_management.2.option.return
