@@ -201,7 +201,7 @@ wwu_hydraxian_waterlords_column_5 = {
         }
 
         effect = {
-            add_prestige = 25
+            add_prestige = 10
             add_adm_power = 50
             add_dip_power = 50
             add_mil_power = 50
@@ -237,7 +237,7 @@ wwu_hydraxian_waterlords_column_5 = {
 
         effect = {
             add_stability = 1
-            add_prestige = 25
+            add_prestige = 20
 
             add_adm_power = 100
             add_dip_power = 100
@@ -253,9 +253,56 @@ wwu_hydraxian_waterlords_column_5 = {
             }
         }
     }
-    wwu_control_eastern_kingdom_islands = {
+    wwu_consolidate_vashjir_holdings = {
         icon = mission_titan_spirits
         position = 5
+
+        provinces_to_highlight = {
+            region = region_vashjir
+        }
+        trigger = {
+            region = region_vashjir = {
+                type = all
+                owned_by = ROOT
+            }
+
+            # Abyssal Maw
+            3175 = {
+                development = 20
+
+                has_fort_building_trigger = yes
+            }
+
+            P25 = {
+                stability = 1
+                prestige = 50
+                devotion = 90
+                army_size_percentage = 1.0
+                navy_size_percentage = 1.0
+            }
+        }
+        effect = {
+            3175 = {
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+
+            add_country_modifier = {
+                name = rule_of_vashjir
+                duration = -1
+            }
+
+            area_moonbrook_shoreline = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    wwu_control_eastern_kingdom_islands = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { wwu_consolidate_vashjir_holdings }
 
         provinces_to_highlight = {
             OR = {
@@ -307,7 +354,7 @@ wwu_hydraxian_waterlords_column_5 = {
     }
     wwu_control_of_tirasian_isles = {
         icon = mission_titan_spirits
-        position = 6
+        position = 7
 
         required_missions = { wwu_control_eastern_kingdom_islands }
 
