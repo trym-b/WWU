@@ -56,10 +56,17 @@ global_setup_story_progress = {
         # Disable Old Horde country setup events
         set_global_flag = old_horde_country_setup
         
-        3792 = {
-            add_great_project = {
-                type = dark_portal_draenor
-                instant = yes
+        # Add Draenor portal (ignore if past year 600)
+        if = {
+            limit = {
+                NOT = { is_year = 600 }
+            }
+            
+            3792 = {
+                add_great_project = {
+                    type = dark_portal_draenor
+                    instant = yes
+                }
             }
         }
     }
@@ -69,19 +76,8 @@ global_setup_story_progress = {
         limit = {
             is_year = 598
         }
+        
         set_global_flag = the_second_war
-        set_global_flag = setup_outland
-        
-        # Disable Outland country setup events
-        set_global_flag = outland_country_setup
-        
-        
-        1586 = { 
-            add_great_project = {
-                type = dark_portal_outland
-                instant = yes
-            }
-        }
     }
     
     # Beyond The Dark Portal
@@ -89,15 +85,22 @@ global_setup_story_progress = {
         limit = {
             is_year = 600
         }
+        
+        # Disable Outland country setup events
+        set_global_flag = setup_outland
+        set_global_flag = outland_country_setup
+        
         set_global_flag = beyond_the_dark_portal
         clr_global_flag = dark_portal_opened_flag
         set_global_flag = dark_portal_closed_firsttime
         set_global_flag = sonsoflothar
         set_global_flag = khadgar
         
+        # Add Outland portal
         1586 = {
-            destroy_great_project = {
+            add_great_project = {
                 type = dark_portal_outland
+                instant = yes
             }
         }
     }
