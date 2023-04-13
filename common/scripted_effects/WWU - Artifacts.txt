@@ -113,6 +113,38 @@ start_dig = {
                 value = 12
             }
         }
+        
+        # Conditional Modifiers
+        if = {
+            limit = { 
+                has_country_flag = excavation_progress_boost
+            }
+            
+            subtract_variable = {
+                which = excavation_progress_cap
+                value = 2
+            }
+        }
+        if = {
+            limit = { 
+                has_country_modifier = dwarf_administration
+            }
+            
+            subtract_variable = {
+                which = excavation_progress_cap
+                value = 2
+            }
+        }
+        if = {
+            limit = { 
+                has_reform = wwu_labor_tier_archaeological_society
+            }
+            
+            subtract_variable = {
+                which = excavation_progress_cap
+                value = 2
+            }
+        }
     }
 }
 
@@ -123,28 +155,6 @@ increment_dig = {
         change_variable = {
             which = excavation_progress
             value = 1
-        }
-        
-        if = {
-            limit = { 
-                has_country_flag = excavation_progress_boost
-            }
-            
-            change_variable = {
-                which = excavation_progress
-                value = 1
-            }
-        }
-        
-        if = {
-            limit = { 
-                has_country_modifier = dwarf_administration
-            }
-            
-            change_variable = {
-                which = excavation_progress
-                value = 1
-            }
         }
         
         if = {
@@ -169,28 +179,6 @@ increment_dig_massively = {
         change_variable = {
             which = excavation_progress
             value = 3
-        }
-        
-        if = {
-            limit = { 
-                has_country_flag = excavation_progress_boost
-            }
-            
-            change_variable = {
-                which = excavation_progress
-                value = 1
-            }
-        }
-        
-        if = {
-            limit = { 
-                has_country_modifier = dwarf_administration
-            }
-            
-            change_variable = {
-                which = excavation_progress
-                value = 1
-            }
         }
         
         if = {
@@ -3623,6 +3611,7 @@ artifact_focus_cost = {
 }
 
 clear_artifact_focus = {
+    clr_country_flag = artifact_focus_random
     clr_country_flag = artifact_focus_apocalypse
     clr_country_flag = artifact_focus_twinblades_of_the_deceiver
     clr_country_flag = artifact_focus_thasdorah
