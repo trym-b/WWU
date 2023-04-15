@@ -149,5 +149,69 @@ country_decisions = {
                 NOT = { total_development = 250 }
             }
 		}
-	}
+    }
+    
+    # Enact Equal Supply Act
+    defensive_enact_supply_act = {
+        potential = {
+            has_idea_group = wwu_defensove_ideas
+            NOT = { has_country_modifier = supply_act }
+        }
+
+        allow = {
+            mil_power = 100
+            adm_power = 50
+        }
+
+        effect = {
+            add_mil_power = -100
+            add_adm_power = -50
+
+            add_country_modifier = {
+                name = supply_act
+                duration = 7305
+            }
+        }
+
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+
+                NOT = { is_at_war = no }
+            }
+        }
+    }
+
+    # Declare Desperate Defence
+    defensive_desperate_defence = {
+        potential = {
+            has_idea_group = wwu_defensove_ideas
+            NOT = { has_country_modifier = desperate_defence }
+        }
+
+        allow = {
+            mil_power = 100
+        }
+
+        effect = {
+            add_mil_power = -100
+
+            add_country_modifier = {
+                name = desperate_defence
+                duration = 3652
+            }
+        }
+
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+
+                NOT = { is_at_war = no }
+            }
+        }
+    }
 }
