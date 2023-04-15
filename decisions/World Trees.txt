@@ -49,32 +49,34 @@ country_decisions = {
     # Burn Nordrassil
     burn_nordrassil = {
         potential = {
-            NOT = { tag = B92 } # Does it via mission tree instead
-            
-            # Is Evil inclined
-			OR = {
-				religion = fel
-				religion_group = death_group
-				religion_group = shadow_group
-			}
-            
+            controls = 1334
             NOT = { has_country_modifier = burning_nordrassil }
             NOT = { has_country_flag = burning_nordrassil_timer }
             NOT = { has_country_modifier = destroyer_of_nordrassil }
-
-            controls = 1334
         }
         
         allow = {
             controls = 1334
             
-            stability = 0
-            adm_power = 250
-            dip_power = 250
-            mil_power = 250
+            if = { 
+                limit = {
+                    NOT = {
+                        has_country_flag = free_nordrassil_burn
+                    }
+                }
+                
+                stability = 0
+                adm_power = 250
+                dip_power = 250
+                mil_power = 250
+            }
         }
         
         effect = {
+            hidden_effect = {
+                set_country_flag = burnt_nordrassil
+            }
+        
             # Gain Evil Intent, causing non-Evil nations to gain the Against Evil CB
             if = {
                 limit = {
@@ -86,10 +88,18 @@ country_decisions = {
                 }
             }
             
-            add_stability = -1
-            add_adm_power = -250
-            add_dip_power = -250
-            add_mil_power = -250
+            if = { 
+                limit = {
+                    NOT = {
+                        has_country_flag = free_nordrassil_burn
+                    }
+                }
+                
+                add_stability = -1
+                add_adm_power = -250
+                add_dip_power = -250
+                add_mil_power = -250
+            }
             
             add_country_modifier = {
                 name = burning_nordrassil
@@ -116,7 +126,8 @@ country_decisions = {
             modifier = {
                 factor = 0
                 
-                NOT = { tag = B92 }
+                NOT = { religion = fel }
+                NOT = { has_country_modifier = is_evil }
             }
         }
     }
@@ -124,7 +135,7 @@ country_decisions = {
     # Douse Nordrassil
     douse_nordrassil = {
         potential = {
-            NOT = { religion = fel }
+            NOT = { has_country_flag = burnt_nordrassil }
             
             # Nordrassil is owned by the burner
             1334 = {
@@ -179,6 +190,15 @@ country_decisions = {
         
         ai_will_do = {
             factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                OR = {
+                    religion = fel
+                    has_country_modifier = is_evil
+                }
+            }
         }
     }
     
@@ -188,30 +208,35 @@ country_decisions = {
     # Burn Teldrassil
     burn_teldrassil = {
         potential = {
-            # Is Evil inclined
-			OR = {
-				religion = fel
-				religion_group = death_group
-				religion_group = shadow_group
-			}
-            
+            controls = 1073
             NOT = { has_country_modifier = burning_teldrassil }
             NOT = { has_country_flag = burning_teldrassil_timer }
             NOT = { has_country_modifier = destroyer_of_teldrassil }
 
-            controls = 1073
         }
         
         allow = {
             controls = 1073
             
-            stability = 0
-            adm_power = 250
-            dip_power = 250
-            mil_power = 250
+            if = { 
+                limit = {
+                    NOT = {
+                        has_country_flag = free_teldrassil_burn
+                    }
+                }
+                
+                stability = 0
+                adm_power = 250
+                dip_power = 250
+                mil_power = 250
+            }
         }
         
         effect = {
+            hidden_effect = {
+                set_country_flag = burnt_teldrassil
+            }
+            
             # Gain Evil Intent, causing non-Evil nations to gain the Against Evil CB
             if = {
                 limit = {
@@ -223,10 +248,18 @@ country_decisions = {
                 }
             }
             
-            add_stability = -1
-            add_adm_power = -250
-            add_dip_power = -250
-            add_mil_power = -250
+            if = { 
+                limit = {
+                    NOT = {
+                        has_country_flag = free_teldrassil_burn
+                    }
+                }
+                
+                add_stability = -1
+                add_adm_power = -250
+                add_dip_power = -250
+                add_mil_power = -250
+            }
             
             add_country_modifier = {
                 name = burning_teldrassil
@@ -249,13 +282,20 @@ country_decisions = {
         
         ai_will_do = {
             factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { religion = fel }
+                NOT = { has_country_modifier = is_evil }
+            }
         }
     }
 
     # Douse Teldrassil
     douse_teldrassil = {
         potential = {
-            NOT = { religion = fel }
+            NOT = { has_country_flag = burnt_teldrassil }
             
             # Teldrassil is owned by the burner
             1073 = {
@@ -296,6 +336,15 @@ country_decisions = {
         
         ai_will_do = {
             factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                OR = {
+                    religion = fel
+                    has_country_modifier = is_evil
+                }
+            }
         }
     }
 }
