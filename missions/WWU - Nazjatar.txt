@@ -60,6 +60,10 @@ wwu_nazjatar_column_1 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital = yes
+            owned_by = B92
+        }
         
 		effect = {
 			create_alliance = B92
@@ -69,6 +73,179 @@ wwu_nazjatar_column_1 = {
                     change_religion = fel
                 }
             }
+		}
+	}
+    
+    wwu_defeat_the_hydraxian_threat = {
+		icon = mission_demonhunter_imprison
+        position = 4
+        
+		required_missions = { 
+            wwu_commune_with_vashjir
+        }
+        
+		trigger = {
+            NOT = { exists = P25 } # Hydraxian Waterlords
+            region_vashjir = {
+                type = all
+                country_or_subject_holds = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                owned_by = P25
+                region = region_vashjir
+            }
+            NOT = { country_or_subject_holds = ROOT }
+        }
+        
+		effect = {
+			define_general = {
+                name = "Lord Hydraxis"
+                fire = 5
+                shock = 3
+                manuever = 5
+                siege = 2
+            }
+            
+            add_prestige = 20
+            
+            if = {
+                limit = {
+                    exists = VHJ
+                }
+                VHJ = {
+                    add_stability = 1
+                    add_prestige = 20
+                }
+            }
+            
+            discover_abyssal_maw = yes
+            
+            region_abyssal_maw = {
+                add_claim = ROOT
+            }
+            
+            # Halls of Water
+            2548 = {
+                add_great_project = {
+                    type = abyssal_maw_rift_vashjir
+                    instant = yes
+                }
+            }
+		}
+	}
+    
+    wwu_invasion_into_the_abyssal_maw = {
+		icon = mission_demonhunter_imprison
+        position = 5
+        
+		required_missions = { 
+            wwu_defeat_the_hydraxian_threat
+        }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = P24 } # Abyssal Maw
+                war_with = P24
+            }
+            2554 = {
+                controlled_by = ROOT
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                owned_by = P24
+                province_id = 2554
+            }
+            NOT = { country_or_subject_holds = ROOT }
+        }
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = P24
+                }
+                
+                if = {
+                    limit = {
+                        war_with = P24
+                    }
+                    
+                    white_peace = P24
+                }
+                
+                create_subject = {
+                    subject_type = vassal
+                    subject = P24
+                }
+            }
+            
+            add_accepted_culture = culture_water
+		}
+	}
+    
+    wwu_queen_of_the_tides = {
+		icon = mission_demonhunter_imprison
+        position = 6
+        
+		required_missions = { 
+            wwu_invasion_into_the_abyssal_maw
+        }
+        
+		trigger = {
+            P24 = {
+                is_subject_of = ROOT
+                NOT = { liberty_desire = 10 }
+            }
+            
+            if = {
+                limit = {
+                    has_dlc = "Emperor"
+                }
+                
+                is_hegemon = yes
+            }
+            else = {
+                total_development = 1000
+            }
+		}
+        
+		effect = {
+			add_prestige = 100
+            
+            add_country_modifier = {
+                name = mission_true_ruler_of_the_sea
+                duration = -1
+            }
+            
+            if = {
+                limit = {
+                    NOT = { has_global_flag = discovered_artifact_anu_azshara }
+                }
+                
+                country_event = { id = wwu_archaeology.81 }
+            }
+		}
+	}
+    
+    wwu_confront_nzoth = {
+		icon = mission_demonhunter_imprison
+        position = 7
+        
+		required_missions = { 
+            wwu_queen_of_the_tides
+        }
+        
+		trigger = {
+            NOT = { has_global_flag = nzoth_active }
+            stability = 3
+            army_size = 100
+            navy_size = 100
+		}
+        
+		effect = {
+			country_event = { id = wwu_nazjatar.1 }
 		}
 	}
 }
@@ -84,7 +261,205 @@ wwu_nazjatar_column_2 = {
     
 	has_country_shield = yes
 	
+    wwu_commune_with_vashjir = {
+		icon = mission_demonhunter_imprison
+        position = 3
+        
+		required_missions = { 
+            wwu_rise_of_the_naga
+        }
+        
+		trigger = {
+            OR = {
+                NOT = { exists = VHJ }
+                VHJ = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+		}
+        provinces_to_highlight = {
+            is_capital = yes
+            owned_by = VHJ
+        }
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = VHJ
+                }
+                
+                create_subject = {
+                    subject_type = march
+                    subject = VHJ
+                }
+                
+                 region_vashjir = {
+                    add_permanent_claim = VHJ
+                }
+            }
+		}
+	}
     
+    wwu_drown_plunder_isle = {
+		icon = mission_demonhunter_imprison
+        position = 4
+        
+		required_missions = { 
+            wwu_commune_with_vashjir
+        }
+        
+		trigger = {
+            calc_true_if = {
+                all_owned_province = {
+                    region = region_plunder_isle
+                    has_port = yes
+                }
+                
+                amount = 3
+            }
+		}
+        provinces_to_highlight = {
+            region = region_plunder_isle
+            has_port = yes
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            custom_tooltip = DROWNED_PROVINCE_TT
+            
+			region_plunder_isle = {
+                add_permanent_province_modifier = {
+                    name = mission_drowned_province
+                    duration = -1
+                }
+            }
+		}
+	}
+    
+    wwu_search_for_the_pearl_of_pandaria = {
+		icon = mission_demonhunter_imprison
+        position = 6
+        
+		required_missions = { 
+            #wwu_the_dark_tide
+        }
+        
+		trigger = {
+            any_owned_province = {
+                superregion = pandaria_superregion
+                has_port = yes
+            }
+		}
+        provinces_to_highlight = {
+            superregion = pandaria_superregion
+            has_port = yes
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            custom_tooltip = PEARL_OF_PANDARIA_EVENT_TT
+            hidden_effect = {
+                set_country_flag = pearl_of_pandaria_search
+            }
+		}
+	}
+    
+    wwu_subjugate_the_jinyu = {
+		icon = mission_demonhunter_imprison
+        position = 7
+        
+		required_missions = { 
+            wwu_search_for_the_pearl_of_pandaria
+        }
+        
+		trigger = {
+            any_subject_country = {
+                primary_culture = culture_jinyu
+            }
+		}
+        provinces_to_highlight = {
+            owner = {
+                culture = culture_jinyu
+            }
+        }
+        
+		effect = {
+            every_country = {
+                limit = {
+                    primary_culture = culture_jinyu
+                }
+                
+                ROOT = {
+                    add_casus_belli = {
+                        target = PREV
+                        type = cb_vassalize_mission
+                        months = 600
+                    }
+                }
+            }
+		}
+	}
+    
+    wwu_dominate_pandaria = {
+		icon = mission_demonhunter_imprison
+        position = 7
+        
+		required_missions = { 
+            wwu_subjugate_the_jinyu
+        }
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = NO_ARMY_IS_BIGGER_TT
+                
+                NOT = {
+                    any_country = {
+                        capital_scope = {
+                            superregion = pandaria_superregion
+                        }
+                        army_size = ROOT
+                    }
+                }
+            }
+            
+            calc_true_if = {
+                all_owned_province = {
+                    superregion = pandaria_superregion
+                    has_port = yes
+                }
+                
+                amount = 10
+            }
+		}
+        provinces_to_highlight = {
+            owner = {
+                capital_scope = {
+                    superregion = pandaria_superregion
+                }
+                army_size = ROOT
+            }
+        }
+        
+		effect = {
+            every_owned_province = {
+                limit = {
+                    superregion = pandaria_superregion
+                    has_port = yes
+                }
+                
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+            
+            pandaria_superregion = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
 }
 
 wwu_nazjatar_column_3 = {
@@ -105,7 +480,7 @@ wwu_nazjatar_column_3 = {
 		required_missions = { }
         
 		trigger = {
-            navy_size_percentage = 0.95
+            navy_size_percentage = 0.8
 		}
         
 		effect = {
@@ -274,6 +649,7 @@ wwu_nazjatar_column_5 = {
 		required_missions = { }
         
 		trigger = {
+            religion = nzoth
             any_country = {
                 total_development = 100
                 has_spy_network_from = {
@@ -308,6 +684,7 @@ wwu_nazjatar_column_5 = {
         }
         
 		trigger = {
+            religion = nzoth
             eastern_kingdom_superregion = {
                 religion = nzoth
             }
@@ -341,6 +718,7 @@ wwu_nazjatar_column_5 = {
         }
         
 		trigger = {
+            religion = nzoth
             northrend_superregion = {
                 religion = nzoth
             }
@@ -378,6 +756,7 @@ wwu_nazjatar_column_5 = {
         }
         
 		trigger = {
+            religion = nzoth
             OR = {
                 calc_true_if = {
                     amount = 8

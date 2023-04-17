@@ -1,0 +1,52 @@
+wrath_of_nzoth = {
+	potential = {
+		has_country_flag = start_wrath_of_nzoth
+        NOT = { has_country_flag = wrath_of_nzoth_over }
+	}
+	
+	can_start = {
+        has_country_flag = start_wrath_of_nzoth
+	}
+	
+	can_stop = {
+        always = no
+	}
+	
+	progress = {
+		modifier = {
+			factor = 100
+            
+            always = yes
+		}
+	}
+	
+	can_end = {
+		OR = {
+            capital_scope = {
+                controlled_by = REB
+            }
+            had_country_flag = {
+                flag = start_wrath_of_nzoth
+                days = 3650
+            }
+        }
+	}
+
+	modifier = {
+		stability_cost_modifier = 1.0
+        global_unrest = 10
+	}
+	
+	on_start = wwu_wrath_of_nzoth.1
+	on_end = wwu_wrath_of_nzoth.100
+	
+	on_monthly = {
+		events = {
+            
+		}
+		random_events = {
+            50 = wwu_wrath_of_nzoth.10
+            1000 = 0
+		}
+	}
+}

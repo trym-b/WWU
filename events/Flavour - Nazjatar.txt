@@ -29,3 +29,76 @@ country_event = {
         
     }
 }
+
+# Call of N’zoth
+country_event = {
+	id = wwu_nazjatar.1
+	title = wwu_nazjatar.1.title
+	desc = wwu_nazjatar.1.desc
+	picture = NZOTH_AWAKENED_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_nazjatar.1.option.a
+        
+        custom_tooltip = HOUR_OF_TWILIGHT_NZOTH_TT
+        
+        # Gain Evil Intent, causing non-Evil nations to gain the Against Evil CB
+        add_country_modifier = {
+            name = is_evil
+            duration = -1
+        }
+        
+        add_country_modifier = {
+            name = awakening_nzoth
+            duration = 3650
+        }
+        
+        hidden_effect = {
+            set_country_flag = awakening_nzoth_timer
+        }
+        
+        custom_tooltip = AWAKEN_OLD_GOD_TT
+    }
+    option = {
+		name = wwu_nazjatar.1.option.b
+        
+        custom_tooltip = BREAK_FROM_NZOTH_TT
+        custom_tooltip = WRATH_OF_NZOTH_DISASTER_TT
+        
+        hidden_effect = {
+            set_country_flag = start_wrath_of_nzoth
+        }
+    }
+}
+
+# Pearl of Pandaria - Handler
+country_event = {
+	id = wwu_nazjatar.2
+	title = wwu_nazjatar.2.title
+	desc = wwu_nazjatar.2.desc
+	picture = NZOTH_AWAKENED_eventPicture
+
+    hidden = yes
+    
+    trigger = {
+        has_country_flag = pearl_of_pandaria_search
+        NOT = { has_global_flag = discovered_artifact_pearl_of_pandaria }
+    }
+    
+	mean_time_to_happen = { 
+        years = 50
+    }
+    
+	option = {
+		name = wwu_nazjatar.2.option.a
+        
+        country_event = { id = wwu_archaeology.85 }
+    }
+}
+

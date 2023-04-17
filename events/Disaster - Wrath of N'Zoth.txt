@@ -1,0 +1,259 @@
+namespace = wwu_wrath_of_nzoth
+
+# Wrath of N'Zoth
+country_event = {
+	id = wwu_wrath_of_nzoth.1
+	title = wwu_wrath_of_nzoth.1.title
+	desc = wwu_wrath_of_nzoth.1.desc
+	picture = NZOTH_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_wrath_of_nzoth.1.option.a
+        
+		add_stability = -3
+        
+        random_owned_province = {
+            limit = {
+                is_capital = no
+            }
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 3
+                leader = "Commander of N'Zoth"
+                win = yes
+			}
+        }
+        random_owned_province = {
+            limit = {
+                is_capital = no
+            }
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 3
+                win = yes
+			}
+        }
+        random_owned_province = {
+            limit = {
+                is_capital = no
+            }
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 2
+                win = yes
+			}
+        }
+        random_owned_province = {
+            limit = {
+                is_capital = no
+            }
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 2
+                win = yes
+			}
+        }
+        random_owned_province = {
+            limit = {
+                is_capital = no
+            }
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 1
+                win = yes
+			}
+        }
+	}
+}
+
+# Wrath of N'Zoth - End Hdndler
+country_event = {
+	id = wwu_wrath_of_nzoth.100
+	title = wwu_wrath_of_nzoth.100.title
+	desc = wwu_wrath_of_nzoth.100.desc
+	picture = NZOTH_eventPicture
+	
+	is_triggered_only = yes
+	hidden = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = wrath_of_nzoth_over
+        }
+    }
+	
+	option = {
+		name = wwu_wrath_of_nzoth.100.option.a
+		
+		if = {
+            limit = {
+                capital_scope = {
+                    controlled_by = REB
+                }
+            }
+            
+            country_event = { id = wwu_wrath_of_nzoth.101 }
+        }
+        else = {
+            country_event = { id = wwu_wrath_of_nzoth.102 }
+        }
+	}
+}
+
+# Nyalotha Arises!
+country_event = {
+	id = wwu_wrath_of_nzoth.101
+	title = wwu_wrath_of_nzoth.101.title
+	desc = wwu_wrath_of_nzoth.101.desc
+	picture = NZOTH_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_wrath_of_nzoth.101.option.a
+		
+		override_country_name = AZSHARAN_REMNANTS
+        
+        kill_ruler = yes
+        
+        every_owned_province = {
+            limit = {
+                controlled_by = REB
+            }
+            
+            cede_province = NYA
+            add_core = NYA
+        }
+	}
+}
+
+# Azshara's Freedom
+country_event = {
+	id = wwu_wrath_of_nzoth.102
+	title = wwu_wrath_of_nzoth.102.title
+	desc = wwu_wrath_of_nzoth.102.desc
+	picture = ENRAGED_NAGA_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_wrath_of_nzoth.102.option.a
+		
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            change_religion = tidemother
+        }
+        
+		change_religion = tidemother
+	}
+    option = {
+		name = wwu_wrath_of_nzoth.102.option.b
+		
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            change_religion = water
+        }
+        
+		change_religion = water
+	}
+    option = {
+		name = wwu_wrath_of_nzoth.102.option.c
+		
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            change_religion = deep_mother
+        }
+        
+		change_religion = deep_mother
+	}
+    option = {
+		name = wwu_wrath_of_nzoth.102.option.d
+		
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            change_religion = arcane
+        }
+        
+		change_religion = arcane
+	}
+    option = {
+		name = wwu_wrath_of_nzoth.102.option.e
+		
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            change_religion = elune
+        }
+        
+		change_religion = elune
+	}
+}
+
+# Minions of N'Zoth
+country_event = {
+	id = wwu_wrath_of_nzoth.10
+	title = wwu_wrath_of_nzoth.10.title
+	desc = wwu_wrath_of_nzoth.10.desc
+	picture = TENTACLE_OF_NZOTH_eventPicture
+    goto = target_province
+	
+	trigger = {
+		manpower_percentage = 0.25
+	}
+
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_capital = no
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_wrath_of_nzoth.10.option.a
+		
+		event_target:target_province = {
+            spawn_rebels = {
+				type = nzoth_rebels
+				size = 1
+                win = yes
+			}
+        }
+	}
+}
