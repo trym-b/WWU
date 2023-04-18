@@ -150,6 +150,21 @@ declarewar = {
     }
     
     condition = {
+		tooltip = AI_CANNOT_DECLARE_WHEN_STABILITY_LOSS
+		potential = {
+			ai = yes
+		}
+		allow = {
+			ai = yes
+			NOT = {
+				has_global_modifier_value = {
+					which = stability_cost_to_declare_war
+					value = 1
+				}
+			}
+		}
+	}
+    condition = {
         tooltip = PREVENT_WAR_DIP_TT
         
         potential = {
@@ -567,6 +582,27 @@ allianceaction = {
 		}
 		allow = {
 			always = no
+		}
+	}
+    
+    condition = {
+		tooltip = CANNOT_MAKE_ALLIANCES
+		potential = {
+			has_government_attribute = cannot_form_alliances
+		}
+		allow = {
+			NOT = { has_government_attribute = cannot_form_alliances }
+		}
+	}
+	condition = {
+		tooltip = FROM_CANNOT_MAKE_ALLIANCES
+		potential = {
+			FROM = {
+				has_government_attribute = cannot_form_alliances
+			}
+		}
+		allow = {
+			NOT = { FROM = { has_government_attribute = cannot_form_alliances } }
 		}
 	}
 }
