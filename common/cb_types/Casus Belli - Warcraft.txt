@@ -1,31 +1,15 @@
 #--------------------------------------------
-# Triggered
-#--------------------------------------------
-cb_pirates = {
-	is_triggered_only = yes
-	months = 120
-
-	war_goal = blockade_ports
-}
-
-cb_restore_personal_union_mission = {
-	valid_for_subject = no
-
-	is_triggered_only = yes
-	months = 240
-    
-	war_goal = take_capital_personal_union
-}
-
-#--------------------------------------------
 # Preequisitie
 #--------------------------------------------
 cb_distant_conquest = {
 	valid_for_subject = no
 
-    prerequisites = {
+    prerequisites_self = {
         has_idea = wwu_expansion_ideas_2
 		is_free_or_tributary_trigger = yes
+    }
+    
+    prerequisites = {
         FROM = {
             NOT = {
                 capital_scope = { continent = ROOT }
@@ -39,20 +23,26 @@ cb_distant_conquest = {
 cb_scourge = {
 	valid_for_subject = no
 
+    prerequisites_self = {
+		religion = cult_of_the_damned
+    }
+    
 	prerequisites = {
 		is_neighbor_of = FROM
 		FROM = {
 			NOT = { religion = cult_of_the_damned }
 		}
-		religion = cult_of_the_damned
 	}
 	
 	war_goal = superiority_horde
 }
 
 cb_silvermoon_land = {
-    prerequisites = {   
+    prerequisites_self = { 
         tag = A91
+    }
+    
+    prerequisites = {  
 		OR = {
             region_isle_of_quel_danas = {
                 owned_by = FROM
@@ -75,7 +65,7 @@ cb_silvermoon_land = {
 cb_draenei_scum = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = { 
 		capital_scope = { superregion = draenor_superregion }
         culture_group = culture_group_orc
         OR = {
@@ -83,6 +73,9 @@ cb_draenei_scum = {
             has_country_flag = joined_guldan
             has_country_flag = accepted_the_demonsblood
         }
+    }
+    
+	prerequisites = {
 		FROM = {
 			capital_scope = { superregion = draenor_superregion }
             culture_group = culture_group_draenei
@@ -95,10 +88,13 @@ cb_draenei_scum = {
 cb_orc_scum = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = { 
 		capital_scope = { superregion = draenor_superregion }
         culture_group = culture_group_orc
         has_country_flag = accepted_the_demonsblood
+    }
+    
+	prerequisites = {
 		FROM = {
 			capital_scope = { superregion = draenor_superregion }
             culture_group = culture_group_orc
@@ -113,23 +109,26 @@ cb_orc_scum = {
 cb_the_dying_times = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = { 
+        has_global_flag = the_dying_times
 		capital_scope = { superregion = draenor_superregion }
         culture_group = culture_group_orc
         government = tribal
+    }
+    
+	prerequisites = {
 		FROM = {
 			capital_scope = { superregion = draenor_superregion }
             culture_group = culture_group_orc
             government = tribal
 		}
-        has_global_flag = the_dying_times
 	}
 	
 	war_goal = superiority_horde
 }
 
 cb_azeroth_assault = {
-	prerequisites = {
+    prerequisites_self = { 
         OR = {
             current_age = age_rise_of_the_horde
             current_age = age_orcish_horde
@@ -139,7 +138,9 @@ cb_azeroth_assault = {
         any_owned_province = {
             superregion = eastern_kingdom_superregion
         }
-        
+    }
+    
+	prerequisites = {
 		FROM = {
 			capital_scope = { superregion = eastern_kingdom_superregion }
 		}
@@ -151,9 +152,12 @@ cb_azeroth_assault = {
 cb_against_evil = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
 		NOT = { has_country_modifier = is_evil }
         NOT = { government = tribal }
+    }
+    
+	prerequisites = {
 		FROM = {
 			has_country_modifier = is_evil
 			capital_scope = { continent = ROOT }
@@ -166,8 +170,11 @@ cb_against_evil = {
 cb_for_the_alliance = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
 		has_country_modifier = head_of_alliance
+    }
+    
+	prerequisites = {
 		FROM = {
 			OR = {
                 has_country_modifier = head_of_horde
@@ -182,11 +189,14 @@ cb_for_the_alliance = {
 cb_for_the_horde = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
 		OR = {
             has_country_modifier = head_of_horde
             has_country_modifier = head_of_old_horde
         }
+    }
+    
+	prerequisites = {
 		FROM = {
 			has_country_modifier = head_of_alliance
 		}
@@ -218,7 +228,7 @@ cb_legion_invasion = {
 	valid_for_subject = no
 	is_triggered_only = yes
 	
-	prerequisites = {
+	prerequisites_self = {
 		tag = B92
 	}
 	
@@ -242,11 +252,9 @@ cb_invasion = {
 cb_justified_war = {
 	valid_for_subject = no
 
-    prerequisites = {
+    prerequisites_self = {
 		is_free_or_tributary_trigger = yes
-        FROM = {
-            capital_scope = { continent = ROOT }
-        }
+    
         # Nations that start isolated
         capital_scope = {
             OR = {
@@ -256,6 +264,11 @@ cb_justified_war = {
                 superregion = kul_tiras_superregion
             }
         }
+    }
+    prerequisites = {
+        FROM = {
+            capital_scope = { continent = ROOT }
+        }
 	}
 
 	war_goal = take_capital_justified
@@ -264,7 +277,7 @@ cb_justified_war = {
 cb_merciless_war = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
         has_idea = wwu_imperialism_ideas_7
 		is_free_or_tributary_trigger = yes
 	}
@@ -275,8 +288,11 @@ cb_merciless_war = {
 cb_reclaim_mulgore = {
 	valid_for_subject = no
 
-    prerequisites = {
+    prerequisites_self = {
         culture_group = culture_group_tauren
+    }
+
+    prerequisites = {
         FROM = {
             culture_group = culture_group_centaur
             any_owned_province = {
@@ -291,11 +307,13 @@ cb_reclaim_mulgore = {
 cb_subjugate_lesser_trolls = {
     valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         culture_group = culture_group_troll
         has_country_modifier = mission_amani_subjugation
+    }
+    
+	prerequisites = {
         provinces_on_capital_continent_of = FROM
-        
         FROM = {
             culture_group = culture_group_troll
             is_subject = no
@@ -308,10 +326,12 @@ cb_subjugate_lesser_trolls = {
 cb_cleanse_evil = {
     valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         has_reform = wwu_ambition_a_just_world
         is_considered_good = yes
-        
+    }
+    
+	prerequisites = {
         FROM = {
             is_considered_evil = yes
         }
@@ -323,9 +343,11 @@ cb_cleanse_evil = {
 cb_cultural_unification = {
     valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         has_reform = wwu_ambition_unification
-        
+    }
+
+	prerequisites = {
         FROM = {
             culture_group = ROOT
         }
@@ -337,9 +359,11 @@ cb_cultural_unification = {
 cb_religious_unification = {
     valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         has_reform = wwu_ambition_one_faith
-        
+    }
+    
+	prerequisites = {
         FROM = {
             NOT = { religion_group = ROOT }
         }
@@ -351,7 +375,7 @@ cb_religious_unification = {
 cb_mantid_supremacy = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
 		has_country_modifier = mission_domination_of_pandaria
 		tag = P34
 	}
@@ -362,17 +386,18 @@ cb_mantid_supremacy = {
 cb_claim_leadership_of_the_aspects = {
     valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
 		has_dlc = "Mandate of Heaven"
+		culture_group = culture_group_dragonkin
 		is_subject = no
-        
+		is_revolutionary = no
+    }
+
+	prerequisites = {
 		FROM = { 
             is_emperor_of_china = yes 
         }
-        
-		culture_group = culture_group_dragonkin
 		NOT = { truce_with = FROM }
-		is_revolutionary = no
 	}
 
 	war_goal = take_capital_take_mandate
@@ -381,7 +406,7 @@ cb_claim_leadership_of_the_aspects = {
 cb_draconic_fury = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
         OR = {
             has_country_modifier = mission_galakrond_wc_b03
             has_country_modifier = mission_galakrond_wc_wya
@@ -395,16 +420,19 @@ cb_draconic_fury = {
 cb_usurp_warchief = {
 	valid_for_subject = no
 
+    prerequisites_self = {
+        OR = {
+            has_country_modifier = member_of_horde
+            has_country_modifier = member_of_old_horde
+        }
+    }
+
 	prerequisites = {
         FROM = {
             OR = {
                 has_country_modifier = head_of_horde
                 has_country_modifier = head_of_old_horde
             }
-        }
-        OR = {
-            has_country_modifier = member_of_horde
-            has_country_modifier = member_of_old_horde
         }
 	}
 
@@ -414,65 +442,18 @@ cb_usurp_warchief = {
 cb_infestation = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
 		has_country_flag = unlock_infestation_cb
 	}
 
 	war_goal = take_capital_merciless
 }
 
-cb_zandalari_great_war = {
-	valid_for_subject = no
-
-	is_triggered_only = yes
-	months = 12
-
-	war_goal = zandalar_civil_war
-}
-
-#Blue Scarf Rebellion
-cb_naga_invasion_on_zandalar = { 
-	valid_for_subject = no 
-	ai_peace_desire = -200 
-	
-	is_triggered_only = yes
- 
-	war_goal = naga_invasion_on_zandalar
-} 
-cb_naga_invasion_on_nazmir = { 
-	valid_for_subject = no 
-	ai_peace_desire = -200 
-	
-	is_triggered_only = yes
- 
-	war_goal = naga_invasion_on_nazmir
-} 
-
-cb_skeleton_troll_pirate = { 
-	valid_for_subject = no 
-	ai_peace_desire = -200 
-	
-	
-	is_triggered_only = yes
- 
-	war_goal = skeleton_troll_pirate
-} 
-
-cb_zandalar_war_against_pandaria = { 
-	valid_for_subject = no 
-	ai_peace_desire = -200 
-	
-	
-	is_triggered_only = yes
- 
-	war_goal = zandalar_war_against_pandaria
-} 
-
 # Elemental Invasion
 cb_elemental_invasion = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
         NOT = {
             is_in_war = {
                 casus_belli = cb_elemental_invasion
@@ -501,7 +482,7 @@ cb_elemental_invasion = {
 cb_demonic_invasion = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
         NOT = {
             is_in_war = {
                 casus_belli = cb_demonic_invasion
@@ -522,7 +503,7 @@ cb_demonic_invasion = {
 cb_mawsworn_invasion = {
 	valid_for_subject = no
 
-	prerequisites = {
+	prerequisites_self = {
         NOT = {
             is_in_war = {
                 casus_belli = cb_mawsworn_invasion
@@ -551,9 +532,12 @@ cb_mawsworn_invasion = {
 cb_scourge_rebellion = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         has_country_modifier = scourge_serving_legion
         tag = P11 # Scourge
+    }
+
+	prerequisites = {
         FROM = {
             tag = B92 # Burning Legion
         }
@@ -566,12 +550,15 @@ cb_scourge_rebellion = {
 cb_from_the_sea = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         OR = {
             culture_group = culture_group_murloc
             culture_group = culture_group_naga
         }
         num_of_ports = 1
+    }
+
+	prerequisites = {
         FROM = {
             num_of_ports = 1
         }
@@ -595,7 +582,7 @@ cb_illidans_assault = {
 
     is_triggered_only = yes
     
-	prerequisites = {
+	prerequisites_self = {
         tag = B87 # Illidari
 		is_free_or_tributary_trigger = yes
 	}
@@ -607,8 +594,11 @@ cb_illidans_assault = {
 cb_enforce_religion = {
 	valid_for_subject = no
 
-	prerequisites = {
+    prerequisites_self = {
         has_government_attribute = enables_enforce_religion_cb
+    }
+
+	prerequisites = {
         FROM = {
             NOT = { religion = ROOT }
         }
