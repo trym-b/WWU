@@ -745,24 +745,7 @@ on_siege_won_country = {
         limit = {
             NOT = { has_country_flag = first_core_of_invasion }
             
-            OR = {
-                technology_group = tech_elemental_fire
-                technology_group = tech_elemental_water
-                technology_group = tech_elemental_earth
-                technology_group = tech_elemental_wind
-                technology_group = tech_demon
-            }
-            
-            capital_scope = {
-                OR = {
-                    region = region_skywall
-                    region = region_deepholm
-                    region = region_abyssal_maw
-                    region = region_firelands
-                    superregion = argus_superregion
-                }
-            }
-            
+            # Is one of the invader nations
             OR = {
                 is_in_war = {
                     casus_belli = cb_demonic_invasion
@@ -770,6 +753,10 @@ on_siege_won_country = {
                 }
                 is_in_war = {
                     casus_belli = cb_elemental_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_mawsworn_invasion
                     attackers = ROOT
                 }
             }
