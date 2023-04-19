@@ -604,6 +604,23 @@ on_battle_lost_province = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_battle_lost_province "
 	}
+    
+    # Bloodlust - Add power on battle win
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = bloodlust_mechanic
+            }
+        }
+        
+        FROM = {
+            add_government_power = {
+                mechanic_type = bloodlust_mechanic
+                power_type = bloodlust
+                value = 5
+            }
+        }
+    }
 }
 
 # country
@@ -805,6 +822,16 @@ on_siege_lost_province =  {
 	}
     
     siege_doctrine_effect = yes
+    
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = bloodlust_scorch_the_earth
+            }
+        }
+            
+        add_devastation = 25
+    }
 }
 
 # province
