@@ -1,0 +1,134 @@
+feudal_authority_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 5
+	available = {
+		has_dlc = "Cradle of Civilization"
+	}
+
+	powers = {
+		feudal_authority = {
+			max = 100
+            default = 0
+			reset_on_new_ruler = yes
+			base_monthly_growth = 0.0
+			development_scaled_monthly_growth = 0.0
+            
+			scaled_modifier = {
+				modifier = {
+                    vassal_income = 0.25
+                    vassal_manpower_bonus = 0.25
+                    vassal_sailors_bonus = 0.25
+                    accept_vassalization_reasons = 100
+				}
+			}
+		}
+	}
+	
+	interactions = {
+        feudal_authority_demand_gold = {
+			icon = GFX_feudal_authority_ability_ADM
+			cost_type = feudal_authority
+			cost = 25
+            
+			cooldown_years = 5
+            
+			trigger = {
+                any_country = {
+                    is_subject_of = ROOT
+                }
+			}
+            
+			effect = {
+				add_subjects_development_ducats = {
+					multiplier = 1
+				}
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = feudal_authority_mechanic
+                            power_type = feudal_authority
+                            value = 50
+                        }
+                    }
+                }
+			}
+		}
+		feudal_authority_minimise_interference = {
+			icon = GFX_feudal_authority_ability_DIP
+			cost_type = feudal_authority
+			cost = 25
+            
+			cooldown_years = 5
+            
+			trigger = {
+                any_country = {
+                    is_subject_of = ROOT
+                }
+			}
+            
+			effect = {
+				every_subject_country = {
+                    add_liberty_desire = -10
+                }
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = feudal_authority_mechanic
+                            power_type = feudal_authority
+                            value = 50
+                        }
+                    }
+                }
+			}
+		}
+        feudal_authority_demand_soldiers = {
+			icon = GFX_feudal_authority_ability_MIL
+			cost_type = feudal_authority
+			cost = 25
+            
+			cooldown_years = 5
+            
+			trigger = {
+                any_country = {
+                    is_subject_of = ROOT
+                }
+			}
+            
+			effect = {
+				add_subjects_development_manpower = {
+					multiplier = 0.1
+				}
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = feudal_authority_mechanic
+                            power_type = feudal_authority
+                            value = 50
+                        }
+                    }
+                }
+			}
+		}
+	}
+}
