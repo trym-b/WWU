@@ -28,6 +28,7 @@ country_event = {
         }
     }
 
+    # It would be good for this to actually look for P13 religion, cause its different in other bookmarks, while event might still fire
     option = {
         name = wwu_knights_of_the_ebon_blade_f.1.option.a
 
@@ -83,3 +84,132 @@ country_event = {
     }
 }
 
+country_event = {
+    id = wwu_knights_of_the_ebon_blade_f.2
+    title = wwu_knights_of_the_ebon_blade_f.2.title
+    desc = wwu_knights_of_the_ebon_blade_f.2.desc
+    picture = DEATHCHARGER_eventPicture
+
+    trigger = {
+        tag = P13
+
+        any_core_province = {
+            trade_goods = mounts
+            base_production = 10
+        }
+        NOT = { has_country_modifier = deathcharger_production }
+    }
+
+    mean_time_to_happen = { days = 1 }
+
+    option = {
+        name = wwu_knights_of_the_ebon_blade_f.2.option.a
+
+    add_country_modifier = {
+        name = deathcharger_production
+        duration = -1
+        }
+    }
+}
+
+country_event = {
+    id = wwu_knights_of_the_ebon_blade_f.3
+    title = wwu_knights_of_the_ebon_blade_f.3.title
+    desc = wwu_knights_of_the_ebon_blade_f.3.desc
+    picture = ANCIENT_POWER_eventPicture
+
+    trigger = {
+        tag = P13
+
+        any_core_province = {
+            trade_goods = flying_mounts
+            base_production = 10
+        }
+        NOT = { has_country_modifier = undead_gryphon_production }
+    }
+
+    mean_time_to_happen = { days = 1 }
+
+    option = {
+        name = wwu_knights_of_the_ebon_blade_f.3.option.a
+
+    add_country_modifier = {
+        name = undead_gryphon_production
+        duration = -1
+        }
+    }
+}
+
+country_event = {
+    id = wwu_knights_of_the_ebon_blade_f.4
+    title = wwu_knights_of_the_ebon_blade_f.title
+    desc = wwu_knights_of_the_ebon_blade_f.4.desc
+    picture = LIGHTS_HOPE_CHAPEL_eventPicture
+
+    is_triggered_only = yes
+
+    trigger = {
+        # Light's Hope Chaptel
+        557 = {
+            controlled_by = P13
+        }
+    }
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_knights_of_the_ebon_blade_f.4.option.a
+
+        P11 = {
+            release = P13
+            add_historical_rival = P13
+            add_casus_belli = {
+                target = P13
+                type = cb_annex
+                months = 240
+            }
+        }
+
+        P13 = {
+            add_historical_rival = P11
+            change_religion = forgotten_shadow
+
+            add_country_modifier = {
+                name = free_from_the_lich_king
+                duration = 3650
+            }
+        }
+
+        area_new_avalon = {
+            add_claim = P52
+        }
+        area_tuskcross = {
+            add_claim = P52
+        }
+    }
+
+    option = {
+        name = wwu_knights_of_the_ebon_blade_f.4.option.b
+
+        922 = {
+            cede_province = P13
+            add_core = P13
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+
+            change_province_name = "Ruins of Light's Chope Chapel"
+
+            add_province_modifier = {
+                name = ruined_lights_hope
+                duration = -1
+            }
+
+            add_country_modifier = {
+                name = victory_at_lights_hope
+                duration = -1
+            }
+        }
+    }
+}
