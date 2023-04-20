@@ -1063,10 +1063,10 @@ on_monarch_death = {
     }
     
     # Succession
-    # The 'succession_occuring' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
+    # The 'skip_next_succession_event' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
     if = {
         limit = {
-            NOT = { has_country_flag = succession_occuring }
+            NOT = { has_country_flag = skip_next_succession_event }
         }
         
         country_event = { id = wwu_government.15 } # Tribal Vote
@@ -1091,7 +1091,7 @@ on_monarch_death = {
         country_event = { id = wwu_government_succession.26 } # Fall of the Lich King
     }
     else = {
-        clr_country_flag = succession_occuring
+        clr_country_flag = skip_next_succession_event
     }
     
 	events = {
@@ -1806,8 +1806,18 @@ on_monthly_pulse = {
 		log = "DEBUG - [Root.GetName]: on_monthly_pulse "
 	}
     
-    add_stability = 1 # TEST
-    # DOES NOT FIRE: use generic_pulse_two_monthly instead
+    country_event = { id = wwu_terrain_affinity.100 }
+    country_event = { id = wwu_auto_missionary.1 }
+    country_event = { id = wwu_random_seed.1 }
+    
+    # Mana Regeneration
+    update_mana_regeneration = yes
+    
+    # Ambient Objects
+    update_ambient_objects = yes
+    
+    # Consort - Monarch Power Generation
+    generate_monarch_power_from_consort = yes
 }
 
 on_yearly_pulse = {

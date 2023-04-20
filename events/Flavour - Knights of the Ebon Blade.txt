@@ -1,84 +1,85 @@
 namespace = wwu_knights_of_the_ebon_blade_f
 
-    # Conquest of Tyr's Hand
-    country_event = {
-        id = wwu_knights_of_the_ebon_blade_f.1
-        title = wwu_knights_of_the_ebon_blade_f.1.title
-        desc = wwu_knights_of_the_ebon_blade_f.1.desc
-        picture = TYRS_HAND_eventPicture
+# Conquest of Tyr's Hand
+country_event = {
+    id = wwu_knights_of_the_ebon_blade_f.1
+    title = wwu_knights_of_the_ebon_blade_f.1.title
+    desc = wwu_knights_of_the_ebon_blade_f.1.desc
+    picture = TYRS_HAND_eventPicture
 
-        trigger = {
-            area_new_avalon = {
-                type = all
-                controlled_by = P13
-            }
-        }
-
-        mean_time_to_happen = {
-            days = 1
-        }
-
-        option = {
-            name = wwu_knights_of_the_ebon_blade_f.1.option.a
-
-            # Havenshire
-            1011 = {
-                cede_province = P13
-                add_core = P13
-                change_culture = culture_death_knight
-                change_religion = cult_of_the_damned
-            }
-
-            # King's Harbor
-            519 = {
-                cede_province = P13
-                add_core = P13
-                change_culture = culture_death_knight
-                change_religion = cult_of_the_damned
-            }
-
-            # Suntouched Glade
-            915 = {
-                cede_province = P13
-                add_core = P13
-                change_culture = culture_death_knight
-                change_religion = cult_of_the_damned
-            }
-
-            # New Avalon
-            1028 = {
-                cede_province = P13
-                add_core = P13
-                change_culture = culture_death_knight
-                change_religion = cult_of_the_damned
-            }
-
-            # Fletcher's Hollow
-            539 = {
-                cede_province = P13
-                add_core = P13
-                change_culture = culture_death_knight
-                change_religion = cult_of_the_damned
-            }
-
-            # Acherus
-            992 = {
-                add_base_tax = 1
-                add_base_production = 1
-                add_base_manpower = 1
-            }
-
-            add_prestige = 20
-
-            add_manpower = 10
-
-            hidden_effect = {
-                    set_global_flag = fall_of_tyrs_hand
-            }
-            
-            hidden_effect = {
-                    set_global_flag = ebon_blade_tyrs_hand_victory
-            }
+    trigger = {
+        NOT = { has_global_flag = fall_of_tyrs_hand }
+        tag = P13
+        
+        area_new_avalon = {
+            type = all
+            controlled_by = P13
         }
     }
+
+    mean_time_to_happen = {
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = fall_of_tyrs_hand
+            set_global_flag = ebon_blade_tyrs_hand_victory
+        }
+    }
+
+    option = {
+        name = wwu_knights_of_the_ebon_blade_f.1.option.a
+
+        add_prestige = 20
+        add_manpower = 10  
+        
+        # Havenshire
+        1011 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+        }
+
+        # King's Harbor
+        519 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+        }
+
+        # Suntouched Glade
+        915 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+        }
+
+        # New Avalon
+        1028 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+        }
+
+        # Fletcher's Hollow
+        539 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_death_knight
+            change_religion = cult_of_the_damned
+        }
+
+        # Acherus
+        992 = {
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+        }
+    }
+}
 
