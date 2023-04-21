@@ -1,0 +1,133 @@
+namespace = wwu_government_mechanics
+
+#-------------------------------------
+# Criminal Acumen
+#-------------------------------------
+# Criminal Acumen (Siege) - Notify
+country_event = {
+	id = wwu_government_mechanics.1
+	title = wwu_government_mechanics.1.title
+	desc = wwu_government_mechanics.1.desc
+	picture = ASSASSINS_BLADE_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        has_government_mechanic = criminal_acumen_mechanic
+		NOT = { has_country_flag = notified_about_criminal_acumen_on_siege }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = notified_about_criminal_acumen_on_siege
+        }
+    }
+	
+	option = {
+		name = wwu_government_mechanics.1.option.a
+		
+		custom_tooltip = CRIMINAL_ACUMEN_ON_SIEGE_TT
+	}
+}
+
+# Criminal Acumen (Spying) - Notify
+country_event = {
+	id = wwu_government_mechanics.2
+	title = wwu_government_mechanics.2.title
+	desc = wwu_government_mechanics.2.desc
+	picture = ASSASSINS_BLADE_eventPicture
+	
+	trigger = {
+        has_government_mechanic = criminal_acumen_mechanic
+		NOT = { has_country_flag = notified_about_criminal_acumen_on_spying }
+        any_country = {
+            has_spy_network_from = {
+                who = ROOT
+                value = 10
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = notified_about_criminal_acumen_on_spying
+        }
+    }
+	
+	option = {
+		name = wwu_government_mechanics.1.option.a
+		
+		custom_tooltip = CRIMINAL_ACUMEN_ON_SPY_TT
+	}
+}
+
+# Criminal Acumen (Spying) - Mechanic
+country_event = {
+	id = wwu_government_mechanics.3
+	title = wwu_government_mechanics.3.title
+	desc = wwu_government_mechanics.3.desc
+	picture = ASSASSINS_BLADE_eventPicture
+	
+    hidden = yes
+    
+	trigger = {
+        has_government_mechanic = criminal_acumen_mechanic
+        
+        any_country = {
+            has_spy_network_from = {
+                who = ROOT
+                value = 30
+            }
+        }
+	}
+	
+	mean_time_to_happen = {
+		months = 12
+        
+        modifier = {
+            factor = 0.8
+            
+            calc_true_if = {
+                amount = 3
+                all_country = {
+                    has_spy_network_from = {
+                        who = ROOT
+                        value = 30
+                    }
+                }
+            }
+        }
+        
+        modifier = {
+            factor = 0.8
+            
+            calc_true_if = {
+                amount = 5
+                all_country = {
+                    has_spy_network_from = {
+                        who = ROOT
+                        value = 30
+                    }
+                }
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_government_mechanics.3.option.a
+		
+		add_government_power = {
+            mechanic_type = criminal_acumen_mechanic
+            power_type = criminal_acumen
+            value = 5
+        }
+	}
+}
