@@ -423,3 +423,216 @@ establish_azeroth_clan = {
         always = no
 	}
 }
+
+# Bequeath Gold
+bequeath_gold = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = bequeath_gold_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        has_country_modifier = head_of_alliance
+        FROM = {
+            has_country_modifier = member_of_alliance
+        }
+	}
+    
+	is_allowed = {
+        treasury = 100
+        NOT = {
+            has_country_modifier = faction_gold_boost_cooldown
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - bequeath_gold"
+            }
+        }
+        
+        add_treasury = -100
+        
+        hidden_effect = {
+            add_country_modifier = {
+                name = faction_gold_boost_cooldown
+                duration = 365
+            }
+        }
+        
+        if = {
+            limit = {
+                has_government_mechanic = faction_authority_alliance_mechanic
+            }
+            
+            add_government_power = {
+                mechanic_type = faction_authority_alliance_mechanic
+                power_type = faction_authority_alliance
+                value = 10
+            }
+        }
+        
+        FROM = {
+            add_treasury = 100
+        }
+	}
+	on_decline = { }
+	
+	ai_acceptance = {
+        add_entry = {
+			name = BASE
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+	}
+	ai_will_do = {
+        always = no
+	}
+}
+
+# Bequeath Sailors
+bequeath_sailors = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = bequeath_sailors_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        has_country_modifier = head_of_alliance
+        FROM = {
+            any_owned_province = {
+                has_port = yes
+            }
+            has_country_modifier = member_of_alliance
+        }
+	}
+    
+	is_allowed = {
+        sailors = 1000
+        NOT = {
+            has_country_modifier = faction_sailor_boost_cooldown
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - bequeath_sailors"
+            }
+        }
+        
+        add_sailors = -1000
+        
+        hidden_effect = {
+            add_country_modifier = {
+                name = faction_sailor_boost_cooldown
+                duration = 365
+            }
+        }
+        
+        if = {
+            limit = {
+                has_government_mechanic = faction_authority_alliance_mechanic
+            }
+            
+            add_government_power = {
+                mechanic_type = faction_authority_alliance_mechanic
+                power_type = faction_authority_alliance
+                value = 10
+            }
+        }
+        
+        FROM = {
+            add_sailors = 1000
+        }
+	}
+	on_decline = { }
+	
+	ai_acceptance = {
+        add_entry = {
+			name = BASE
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+	}
+	ai_will_do = {
+        always = no
+	}
+}
+
+# Bequeath Soldiers
+bequeath_soliders = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = bequeath_soliders_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        has_country_modifier = head_of_alliance
+        FROM = {
+            has_country_modifier = member_of_alliance
+        }
+	}
+    
+	is_allowed = {
+        manpower = 5
+        NOT = {
+            has_country_modifier = faction_manpower_boost_cooldown
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - bequeath_soliders"
+            }
+        }
+        
+        add_manpower = -5
+        
+        hidden_effect = {
+            add_country_modifier = {
+                name = faction_manpower_boost_cooldown
+                duration = 365
+            }
+        }
+        
+        if = {
+            limit = {
+                has_government_mechanic = faction_authority_alliance_mechanic
+            }
+            
+            add_government_power = {
+                mechanic_type = faction_authority_alliance_mechanic
+                power_type = faction_authority_alliance
+                value = 10
+            }
+        }
+        
+        FROM = {
+            add_manpower = 5
+        }
+	}
+	on_decline = { }
+	
+	ai_acceptance = {
+        add_entry = {
+			name = BASE
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+	}
+	ai_will_do = {
+        always = no
+	}
+}
