@@ -146,21 +146,85 @@ country_event = {
     
 	trigger = {
         NOT = { has_country_flag = war_support_faction_leader }
-        has_country_modifier = head_of_alliance
-        has_government_mechanic = faction_authority_alliance_mechanic
-        is_at_war = yes
-      
-        any_country = {
-            has_country_modifier = member_of_alliance
-            
-            OR = {
-                is_in_war = {
-                    attackers = THIS
-                    attackers = ROOT
+        OR = {
+            AND = {
+                has_country_modifier = head_of_alliance
+                has_government_mechanic = faction_authority_alliance_mechanic
+                is_at_war = yes
+              
+                any_country = {
+                    has_country_modifier = member_of_alliance
+                    
+                    OR = {
+                        is_in_war = {
+                            attackers = THIS
+                            attackers = ROOT
+                        }
+                        is_in_war = {
+                            defenders = THIS
+                            defenders = ROOT
+                        }
+                    }
                 }
-                is_in_war = {
-                    defenders = THIS
-                    defenders = ROOT
+            }
+            AND = {
+                has_country_modifier = head_of_horde
+                has_government_mechanic = faction_authority_horde_mechanic
+                is_at_war = yes
+              
+                any_country = {
+                    has_country_modifier = member_of_horde
+                    
+                    OR = {
+                        is_in_war = {
+                            attackers = THIS
+                            attackers = ROOT
+                        }
+                        is_in_war = {
+                            defenders = THIS
+                            defenders = ROOT
+                        }
+                    }
+                }
+            }
+            AND = {
+                has_country_modifier = head_of_old_horde
+                has_government_mechanic = faction_authority_old_horde_mechanic
+                is_at_war = yes
+              
+                any_country = {
+                    has_country_modifier = member_of_old_horde
+                    
+                    OR = {
+                        is_in_war = {
+                            attackers = THIS
+                            attackers = ROOT
+                        }
+                        is_in_war = {
+                            defenders = THIS
+                            defenders = ROOT
+                        }
+                    }
+                }
+            }
+            AND = {
+                has_country_modifier = head_of_trade_coalition
+                has_government_mechanic = faction_authority_trade_coalition_mechanic
+                is_at_war = yes
+              
+                any_country = {
+                    has_country_modifier = member_of_trade_coalition
+                    
+                    OR = {
+                        is_in_war = {
+                            attackers = THIS
+                            attackers = ROOT
+                        }
+                        is_in_war = {
+                            defenders = THIS
+                            defenders = ROOT
+                        }
+                    }
                 }
             }
         }
@@ -191,14 +255,54 @@ country_event = {
     hidden = yes
     
 	trigger = {
-        has_government_mechanic = faction_authority_alliance_mechanic
-        has_country_modifier = head_of_alliance
-        
-        any_country = {
-            has_country_modifier = member_of_alliance
-            has_opinion = {
-                who = ROOT
-                value = 180
+        OR = {
+            AND = {
+                has_government_mechanic = faction_authority_alliance_mechanic
+                has_country_modifier = head_of_alliance
+                
+                any_country = {
+                    has_country_modifier = member_of_alliance
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            AND = {
+                has_government_mechanic = faction_authority_horde_mechanic
+                has_country_modifier = head_of_horde
+                
+                any_country = {
+                    has_country_modifier = member_of_horde
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            AND = {
+                has_government_mechanic = faction_authority_old_horde_mechanic
+                has_country_modifier = head_of_old_horde
+                
+                any_country = {
+                    has_country_modifier = member_of_old_horde
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            AND = {
+                has_government_mechanic = faction_authority_trade_coalition_mechanic
+                has_country_modifier = head_of_trade_coalition
+                
+                any_country = {
+                    has_country_modifier = member_of_trade_coalition
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
             }
         }
 	}
@@ -209,10 +313,45 @@ country_event = {
     
     immediate = {
         hidden_effect = {
-            add_government_power = {
-                mechanic_type = faction_authority_alliance_mechanic
-                power_type = faction_authority_alliance
-                value = 5
+            if = {
+                limit = {
+                    has_government_mechanic = faction_authority_alliance_mechanic
+                }
+                add_government_power = {
+                    mechanic_type = faction_authority_alliance_mechanic
+                    power_type = faction_authority_alliance
+                    value = 5
+                }
+            }
+            if = {
+                limit = {
+                    has_government_mechanic = faction_authority_horde_mechanic
+                }
+                add_government_power = {
+                    mechanic_type = faction_authority_horde_mechanic
+                    power_type = faction_authority_horde
+                    value = 5
+                }
+            }
+            if = {
+                limit = {
+                    has_government_mechanic = faction_authority_old_horde_mechanic
+                }
+                add_government_power = {
+                    mechanic_type = faction_authority_old_horde_mechanic
+                    power_type = faction_authority_old_horde
+                    value = 5
+                }
+            }
+            if = {
+                limit = {
+                    has_government_mechanic = faction_authority_trade_coalition_mechanic
+                }
+                add_government_power = {
+                    mechanic_type = faction_authority_trade_coalition_mechanic
+                    power_type = faction_authority_trade_coalition
+                    value = 5
+                }
             }
         }
     }
