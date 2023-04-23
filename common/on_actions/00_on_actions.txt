@@ -55,43 +55,7 @@ on_religion_change = {
 	}
     
     on_religion_change_estate_privileges_effect = yes
-    
-    # Remove Dreaming state on switch
-    if = {
-        limit = {
-            has_country_modifier = dreaming
-        }
-        remove_country_modifier = dreaming
-    }
-    
-	if = {
-		limit = {
-			has_heir = yes
-		}
-		set_heir_religion = ROOT
-	}
-	if = {
-		limit = {
-			has_regency = no
-		}
-		set_ruler_religion = ROOT
-	}
-	if = {
-		limit = {
-			has_dlc = "Rights of Man"
-			has_consort = yes
-		}
-		set_consort_religion = ROOT
-	}
-    add_country_modifier = {
-		name = recently_changed_religion_dummy
-		duration = 10
-		hidden = yes
-	}
-    
-	events = {
-		#propagate_religion_events.7 #Propagated Country is now Muslim
-	}
+    on_religion_change_effect = yes
 }
 
 # country.
@@ -120,8 +84,6 @@ on_colonial_liberation = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName]: on_colonial_liberation "
 	}
-    
-    # country_event = { id = colonial_nation.90 days = 1 }
 }
 
 # country
@@ -130,8 +92,6 @@ on_colonial_reintegration = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName]: on_colonial_reintegration "
 	}
-    
-	# events = { colonial_nation.91 }
 }
 
 # country
@@ -140,9 +100,6 @@ on_peace_actor = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName]: on_peace_actor "
 	}
-    
-	events = {
-	}
 }
 
 # country
@@ -150,9 +107,6 @@ on_peace_recipient = {
 	if = { 
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName]: on_peace_recipient "
-	}
-    
-	events = {
 	}
 }
 
@@ -163,32 +117,13 @@ on_war_won = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_war_won "
 	}
-    
-	ROOT = { 
-		country_event = { id = tributary_events.32 }
-		change_variable = {
-			which = war_won
-			value = 1
-		}
-        
-        # Doctrine Notification Reset
-        country_event = { id = wwu_doctrine.99 days = 3 }
-	}
-    
-    FROM = {
-        # Doctrine Notification Reset
-        country_event = { id = wwu_doctrine.99 days = 3 }
+
+    change_variable = {
+        which = war_won
+        value = 1
     }
     
-    if = {
-        limit = {
-            tag = A66 # Gurubashi
-            FROM = {
-                tag = STW
-            }
-        }
-        set_country_flag = won_war_against_stormwind
-    }
+    doctrine_on_war_won_effect = yes
     
     # War ends - these should only apply if the war end causes the winner to end the war
     if = {
@@ -196,106 +131,14 @@ on_war_won = {
             is_at_war = no
         }
         
-        adjust_aggressive_expansion = yes
-        
-        if = {
-            limit = {
-                is_nomad = yes
-            }
-            
-            add_horde_unity = 20
-        }
-        
-        if = {
-            limit = {
-                has_estate_privilege = estate_tribals_spoils_of_war
-            }
-            add_estate_loyalty = {
-                estate = estate_tribals
-                loyalty = 20
-            }
-        }
-        
-        # Zandalar
-        if = {
-            limit = {
-                FROM = { has_country_flag = zandalar_war_against_pandaria_started }
-            }
-            FROM = {
-                set_country_flag = zandalar_war_against_pandaria_lost
-            }
-        }
-        
-        # Reset Invasion flag
-        clr_country_flag = invasion_spawn_done
-        clr_country_flag = first_core_of_invasion
-    }
-    
-    # Alliance - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_alliance_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_alliance_mechanic
-            power_type = faction_authority_alliance
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Horde - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_horde_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_horde_mechanic
-            power_type = faction_authority_horde
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Old Horde - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_old_horde_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_old_horde_mechanic
-            power_type = faction_authority_old_horde
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Trade Coalition - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_trade_coalition_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_trade_coalition_mechanic
-            power_type = faction_authority_trade_coalition
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
+        aggressive_expansion_on_war_won_effect = yes
+        mission_on_war_won_effect = yes
+        invasion_on_war_won_effect = yes
+        government_on_war_won_effect = yes
     }
     
 	events = {
+        tributary_events.32
         wwu_dragon_aspects.1
 		on_action_special.2
         wwu_elemental_attunement.1 # Triumph of the Elements 
@@ -331,32 +174,6 @@ on_war_lost = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_war_lost "
 	}
     
-	ROOT = { country_event = { id = tributary_events.32 } }
-    
-    if = {
-        limit = {
-            has_global_flag = illidan_monitor_war
-            tag = B87 # Illidari
-            FROM = {
-                tag = P11 # Scourge
-            }
-        }
-        
-        B87 = { country_event = { id = wwu_mission_illidari.10 } }
-    }
-    
-    if = {
-        limit = {
-            has_global_flag = illidan_monitor_war
-            tag = P11 # Scourge
-            FROM = {
-                tag = B87 # Illidari
-            }
-        }
-        
-        B87 = { country_event = { id = wwu_mission_illidari.11 } }
-    }
-    
 	change_variable = {
 		which = war_lost
 		value = 1
@@ -367,18 +184,11 @@ on_war_lost = {
 		hidden = yes
 	}
     
-    # War ends - these should only apply if the war end causes the loser to end the war
-    if = {
-        limit = {
-            is_at_war = no
-        }
-        
-        # Reset Invasion flag
-        clr_country_flag = invasion_spawn_done
-        clr_country_flag = first_core_of_invasion
-    }
+    mission_on_war_lost_effect = yes
+    invasion_on_war_lost_effect = yes
     
 	events = {
+        tributary_events.32
         wwu_dragon_aspects.2
 		on_action_special.2
         wwu_elemental_attunement.2 # Sorrow of the Elements
@@ -409,74 +219,6 @@ on_battle_won_country = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_battle_won_country "
 	}
 
-    # Faction: Alliance Fervor
-    if = {
-        limit = {
-            has_country_modifier = member_of_alliance
-            FROM = {
-                OR = {
-                    has_country_modifier = member_of_horde
-                    has_country_modifier = member_of_old_horde
-                }
-            }
-        }
-        
-        add_country_modifier = {
-            name = factional_fervor
-            duration = 365
-        }
-    }
-
-    # Faction: Horde Fervor
-    if = {
-        limit = {
-            OR = {
-                has_country_modifier = member_of_horde
-                has_country_modifier = member_of_old_horde
-            }
-            FROM = {
-                has_country_modifier = member_of_alliance
-            }
-        }
-        
-        add_country_modifier = {
-            name = factional_fervor
-            duration = 365
-        }
-    }
-    
-    # Government: Nomad
-    if = {
-        limit = {
-            is_nomad = yes
-            FROM = {
-                NOT = { tag = REB }
-            }
-        }
-        
-        add_horde_unity = 5
-    }
-    
-    # Reform: War Propaganda
-    if = {
-        limit = {
-            has_estate_privilege = estate_peasants_war_propaganda
-        }
-        
-        add_prestige = 5
-    }
-
-    # Reform: Idealism
-    if = {
-        limit = {
-            has_reform = wwu_idealism_glory
-        }
-        add_power_projection = {
-            type = mission_rewards_power_projection
-            amount = 5
-        }
-    }
-
 	if = {
 		limit = {
 			FROM = { tag = REB }
@@ -487,9 +229,13 @@ on_battle_won_country = {
 		}
 	}
     
-    # Raise the Dead
-    country_event = { id = wwu_scourge_estate.3 }
-    country_event = { id = wwu_scourge_estate.4 }
+    government_on_battle_won_country_effect = yes
+    faction_on_battle_won_country_effect = yes
+    
+    events = {
+        wwu_scourge_estate.3 # Raise the Dead
+        wwu_scourge_estate.4 # Raise the Dead
+    }
     
     random_events = {
         2000 = 0
@@ -507,84 +253,14 @@ on_battle_lost_country = {
 	}
     
 	battle_cult_spreading_effect = yes
-    
-    # Artifact: Strom'kar
-    if = {
-        limit = {
-            # Loser has a general
-            has_leaders = {
-                value = 1
-                type = general
-                include_monarch = no
-                include_heir = no
-            }
-            
-            # Loser is troll
-            culture_group = culture_group_troll
-            
-            # Winner has Strom'kar
-            FROM = {
-                custom_trigger_tooltip = {
-                    tooltip = IS_PRIMARY_ARTIFACT_stromkar
-                    has_country_flag = primary_artifact_stromkar
-                }
-            }
-        }
-        
-        # Loser
-        country_event = { id = wwu_archaeology.511 }
-        
-        # Winner event
-        FROM = {
-            country_event = { id = wwu_archaeology.510 }
-        }
-    }
-    
-    # Ideagroup: Trial by Combat
-    if = {
-        limit = {
-            # Loser has a general
-            has_leaders = {
-                value = 1
-                type = general
-                include_monarch = no
-                include_heir = no
-            }
-            
-            # Winner has Trial by Combat
-            FROM = {
-                has_idea = wwu_law_ideas_2
-            }
-        }
-        
-        random_list = {
-            25 = {
-                # Loser event
-                country_event = { id = wwu_ideagroups.15 }
-                
-                # Winner event
-                FROM = {
-                    country_event = { id = wwu_ideagroups.14 }
-                }
-            }
-            75 = { }
-        }
-    }
-    
-    # Government Reform: War Propaganda
-    if = {
-        limit = {
-            has_estate_privilege = estate_peasants_war_propaganda
-        }
-        
-        add_prestige = -5
-    }
+    artifact_on_battle_lost_country_effect = yes
+    ideagroups_on_battle_lost_country_effect = yes
+    government_on_battle_lost_country_effect = yes
     
 	random_events = {
 		12 = 0
 		2 = friendship_events.1 #Historical Friendship Broken
 	}
-	
 }
 
 # province
@@ -669,22 +345,7 @@ on_battle_lost_province = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_battle_lost_province "
 	}
     
-    # Bloodlust - Add power on battle win
-    if = {
-        limit = {
-            FROM = {
-                has_government_mechanic = tribal_bloodlust_mechanic
-            }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = tribal_bloodlust_mechanic
-                power_type = tribal_bloodlust
-                value = 5
-            }
-        }
-    }
+    government_on_on_battle_lost_province_effect = yes
 }
 
 # country
@@ -695,166 +356,8 @@ on_siege_won_country = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_siege_won_country "
 	}
     
-    if = {
-        limit = {
-            has_global_flag = enabled_relentless_conquest_system
-            has_country_modifier = relentless_conquest_active
-        }
-        
-        if = {
-            limit = {
-                FROM = {
-                    NOT = { is_capital = yes }
-                    owner = {
-                        war_with = ROOT
-                    }
-                }
-            }
-            FROM = {
-                cede_province = ROOT
-            }
-            
-            # Add AE with every nation currently at war, or on the same continent as ROOT
-            every_country = {
-                limit = {
-                    NOT = { alliance_with = ROOT }
-                    OR = {
-                        war_with = ROOT
-                        same_continent = ROOT
-                    }
-                }
-                
-                add_aggressive_expansion = {
-                    who = ROOT
-                    value = 2
-                    apply_calc = yes
-                }
-            }
-        }
-    }
-    
-    if = {
-        limit = {
-            has_government_attribute = enables_automatic_conversion
-        }
-        random = {
-            chance = 33
-            
-            FROM = { change_religion = ROOT }
-        }
-    }
-    
-    # Ransom Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_ransom_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.1 }
-        }
-    }
-    
-    # Enslave Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_enslave_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.2 }
-        }
-    }
-    
-    # Integrate Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_integrate_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.3 }
-        }
-    }
-    
-    # Execute Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_execute_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.4 }
-        }
-    }
-    
-    # Conscript Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_conscript_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.5 }
-        }
-    }
-    
-    # Invasion - Add core to first province sieged
-    if = {
-        limit = {
-            NOT = { has_country_flag = first_core_of_invasion }
-            
-            # Is one of the invader nations
-            OR = {
-                is_in_war = {
-                    casus_belli = cb_demonic_invasion
-                    attackers = ROOT
-                }
-                is_in_war = {
-                    casus_belli = cb_elemental_invasion
-                    attackers = ROOT
-                }
-                is_in_war = {
-                    casus_belli = cb_mawsworn_invasion
-                    attackers = ROOT
-                }
-                is_in_war = {
-                    casus_belli = cb_interdimensional_invasion
-                    attackers = ROOT
-                }
-            }
-            
-            FROM = {
-                NOT = { is_core = ROOT }
-            }
-        }
-        
-        set_country_flag = first_core_of_invasion
-        
-        FROM = {
-            add_core = ROOT
-        }
-    }
-    
-    # Criminal Acumen
-    if = {
-        limit = {
-            has_government_mechanic = criminal_acumen_mechanic
-        }
-        
-        country_event = { id = wwu_government_mechanics.1 }
-        
-        add_government_power = {
-            mechanic_type = criminal_acumen_mechanic
-            power_type = criminal_acumen
-            value = 1
-        }
-    }
+    government_on_siege_won_country_effect = yes
+    invasion_on_siege_won_country_effect = yes
     
     random_events = {
 		10 = army_professionalism_events.1 # City Sacked
@@ -891,17 +394,9 @@ on_siege_lost_province =  {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_siege_lost_province "
 	}
     
+    government_on_siege_lost_province_effect = yes
+    relentless_conquest_on_siege_effect = yes
     siege_doctrine_effect = yes
-    
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = tribal_bloodlust_scorch_the_earth
-            }
-        }
-            
-        add_devastation = 25
-    }
 }
 
 # province
@@ -933,102 +428,7 @@ on_new_monarch = {
 		log = "DEBUG - [Root.GetName]: on_new_monarch "
 	}
     
-    reset_spellcaster_skills = yes
-    
-    # Jaina
-    if = {
-        limit = {
-            has_ruler = "Jaina"
-            dynasty = "Proudmoore"
-            has_global_flag = jaina_in_dalaran
-        }
-        
-        add_ruler_spellcasting = yes
-        set_variable = {
-            which = ruler_magic_aptitude
-            value = 2
-        }
-        set_variable = {
-            which = ruler_magic_finesse
-            value = 2
-        }
-        set_variable = {
-            which = ruler_magic_concentration
-            value = 2
-        }
-    }
-    
-    # Add the Spellcaster mechanic automatically for these monarchs
-    if = {
-        limit = {
-            OR = {
-                has_reform = magocracy_reform
-                has_reform = kingdom_of_magic_reform
-            }
-        }
-        add_ruler_spellcasting = yes
-    
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 3
-                }
-            }
-        }
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 3
-                }
-            }
-        }
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 3
-                }
-            }
-        }
-    }
+    magic_on_new_monarch_effect = yes
     
     #---------------
     # Consort
@@ -1111,67 +511,9 @@ on_monarch_death = {
 		log = "DEBUG - [Root.GetName]: on_monarch_death "
 	}
     
-    if = {
-        limit = {
-            has_reform = wwu_assembly_absolute_rule
-        }
-        
-        add_stability = -1
-    }
-    
-    if = {
-        limit = {
-            has_country_modifier = head_of_old_horde
-        }
-        
-        country_event = { id = wwu_faction_system.20 }
-    }
-    
-    if = {
-        limit = {
-            has_country_modifier = head_of_horde
-        }
-        
-        country_event = { id = wwu_faction_system.21 }
-    }
-    
-    # Reset Spellcaster training
-    set_variable = {
-        which = ruler_magic_training
-        value = 0
-    }
-    
-    # Succession
-    # The 'skip_next_succession_event' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
-    if = {
-        limit = {
-            NOT = { has_country_flag = skip_next_succession_event }
-        }
-        
-        country_event = { id = wwu_government.15 } # Tribal Vote
-        
-        # Succession
-        country_event = { id = wwu_government_succession.10 } # Zanchuli Council
-        country_event = { id = wwu_government_succession.11 } # G'huun's Chosen
-        country_event = { id = wwu_government_succession.12 } # Theocratic Selection
-        country_event = { id = wwu_government_succession.13 } # Naga Succession
-        country_event = { id = wwu_government_succession.14 } # Mantid Succession
-        country_event = { id = wwu_government_succession.15 } # Nerubian Succession
-        country_event = { id = wwu_government_succession.16 } # Aqir Leadership
-        country_event = { id = wwu_government_succession.17 } # Tol'vir Succession
-        country_event = { id = wwu_government_succession.18 } # Titanic Succession
-        country_event = { id = wwu_government_succession.19 } # Brood Selection
-        country_event = { id = wwu_government_succession.20 } # Hakkar's Chosen
-        country_event = { id = wwu_government_succession.21 } # High Priest Selection
-        country_event = { id = wwu_government_succession.22 } # Elemental Succession
-        country_event = { id = wwu_government_succession.23 } # Druidic Selection
-        country_event = { id = wwu_government_succession.24 } # Demonic Succession
-        country_event = { id = wwu_government_succession.25 } # New Rulership
-        country_event = { id = wwu_government_succession.26 } # Fall of the Lich King
-    }
-    else = {
-        clr_country_flag = skip_next_succession_event
-    }
+    government_on_monarch_death_effect = yes
+    magic_on_monarch_death_effect = yes
+    faction_on_monarch_death_effect = yes
     
 	events = {
 		wwu_loa.1 # Influence of X
@@ -1181,7 +523,6 @@ on_monarch_death = {
     
     random_events = {
         100 = wwu_government.12 # Puppet Ruler
-        
         200 = 0
     }
 	
@@ -1228,13 +569,7 @@ on_death_election = {
 		log = "DEBUG - [Root.GetName]: on_death_election "
 	}
     
-	if = {
-		limit = {
-			has_reform = pirate_republic_reform
-		}
-		set_country_flag = pirate_death_election
-		country_event = { id = pirates.1 }
-	}
+	government_on_death_election_effect = yes
     
 	events = {
 		wwu_government.1    # On Death Election
@@ -1280,12 +615,13 @@ on_diplomatic_annex = {
 		log = "DEBUG - [Root.GetName]: on_diplomatic_annex "
 	}
     
-	events = {
-		wwu_integration.1
-	}
 	change_variable = {
 		which = diplo_annexed_nation
 		value = 1
+	}
+    
+	events = {
+		wwu_integration.1
 	}
 }
 
@@ -1437,9 +773,6 @@ on_weak_heir_claim = {
 		log = "DEBUG - [Root.GetName]: on_weak_heir_claim "
 	}
     
-	events = {
-        
-	}
 }
 
 # country : no heir in theocracy
@@ -1678,7 +1011,6 @@ on_annexed = {
 		limit = { has_global_flag = enable_onaction_logging }
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_annexed "
 	}
-    on_annexed_estate_privileges_effect = yes
     
     # Leadership of the Dragon Aspects
     country_event = { id = wwu_dragon_aspects.30 }
@@ -1688,41 +1020,8 @@ on_annexed = {
 		value = 1
 	}
     
-    # If Head of faction is annexed, re-assign leadership
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = head_of_alliance
-            }
-        }
-        country_event = { id = wwu_faction_system.30 }
-    }
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = head_of_old_horde
-            }
-        }
-        country_event = { id = wwu_faction_system.31 }
-    }
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = head_of_horde
-            }
-        }
-        country_event = { id = wwu_faction_system.32 }
-    }
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = head_of_trade_coalition
-            }
-        }
-        country_event = { id = wwu_faction_system.33 }
-    }
-    
-    # Artifacts
+    on_annexed_estate_privileges_effect = yes
+    faction_on_annexed_effect = yes
     transfer_artifacts = yes
 }
 
@@ -1735,9 +1034,6 @@ on_chinese_empire_dismantled = {
 	}
     
 	clear_global_event_target = celestial_emperor
-	events = {
-
-	}
 }
 
 # When a nation gains the Mandate of Heaven (becomes the Emperor of China)
@@ -3171,38 +2467,7 @@ on_province_religion_converted = {
 		}
 	}
     
-    if = {
-        limit = {
-            has_province_modifier = religious_persecution
-        }
-        remove_province_modifier = religious_persecution
-    }
-	
-	if = {
-		limit = {
-			religion = fel
-			trade_goods = arcane_source
-		}
-		change_trade_goods = fel_source
-	}
-	
-	if = {
-		limit = {
-			religion = cult_of_the_damned
-			trade_goods = arcane_source
-		}
-		change_trade_goods = fel_source
-	}
-	
-	if = {
-		limit = {
-			NOT = { religion = fel }
-			NOT = { religion = cult_of_the_damned }
-			trade_goods = fel_source
-		}
-		change_trade_goods = arcane_source
-	}
-    
+    on_province_religion_converted_effect = yes
     on_province_religion_converted_estate_privileges_effect = yes
 }
 
@@ -3231,30 +2496,7 @@ on_province_culture_converted = {
 		}
 	}
 	
-	if = {
-		limit = {
-			culture_group = culture_group_scourge
-			trade_goods = grain
-		}
-		change_trade_goods = crypts
-	}
-	
-	if = {
-		limit = {
-			culture_group = culture_group_undead
-			trade_goods = grain
-		}
-		change_trade_goods = crypts
-	}
-	
-#	if = {
-#		limit = {
-#			NOT = { culture_group = culture_group_scourge }
-#			trade_goods = crypts
-#		}
-#		change_trade_goods = grain
-#	}
-	
+	on_province_culture_converted_effect = yes
 }
 
 on_province_culture_changed = {
@@ -3282,11 +2524,6 @@ on_province_owner_change = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_province_owner_change "
 	}
     
-    on_province_owner_change_estate_privileges_effect = yes
-    update_government_reforms_on_province_change = yes
-    
-    remove_terrain_affinity = yes
-    
 	owner = {
 		change_variable = {
 			which = provinces_gained
@@ -3294,68 +2531,11 @@ on_province_owner_change = {
 		}
 	}
     
-	if = {
-		limit = {
-			culture_group = culture_group_scourge
-			trade_goods = grain
-		}
-		change_trade_goods = crypts
-	}
-	
-	if = {
-		limit = {
-			culture_group = culture_group_undead
-			trade_goods = grain
-		}
-		change_trade_goods = crypts
-	}
-	
-#	if = {
-#		limit = {
-#			NOT = { culture_group = culture_group_scourge }
-#			trade_goods = crypts
-#		}
-#		change_trade_goods = grain
-#	}
-	
-	if = {
-		limit = {
-			religion = fel
-			trade_goods = arcane_source
-		}
-		change_trade_goods = fel_source
-	}
-	
-	if = {
-		limit = {
-			religion = cult_of_the_damned
-			trade_goods = arcane_source
-		}
-		change_trade_goods = fel_source
-	}
-	
-	if = {
-		limit = {
-			NOT = { religion = fel }
-			NOT = { religion = cult_of_the_damned }
-			trade_goods = fel_source
-		}
-		change_trade_goods = arcane_source
-	}
-	
-	if = {
-		limit = {
-			province_id = 1671
-		}
-		owner = {
-			add_country_modifier = {
-				name = lord_of_outland
-				duration = -1
-			}
-		}
-		FROM = { remove_country_modifier = lord_of_outland }
-	}
-	
+    update_government_reforms_on_province_change = yes
+    remove_terrain_affinity = yes
+    
+    on_province_owner_change_effect = yes
+    on_province_owner_change_estate_privileges_effect = yes
     on_province_owner_change_update_goods_production = yes
 }
 
@@ -4006,26 +3186,7 @@ on_country_released = {
 		log = "DEBUG - [Root.GetName]. [From.GetName]: on_country_released "
 	}
     
-    FROM = {
-        if = {
-            limit = {
-                has_reform = wwu_idealism_honor
-            }
-            add_adm_power = 100
-            add_dip_power = 100
-            add_mil_power = 100
-        }
-    }
-    
-    # Northshire
-    if = {
-        limit = {
-            tag = NHS
-            NOT = { government = theocracy }
-        }
-        
-        change_government = theocracy 
-    }
+    government_on_country_released_effect = yes
 }
 
 # ROOT = province, FROM = country
@@ -4347,22 +3508,6 @@ on_force_conversion = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_force_conversion "
 	}
     
-	#if = {	#Commented out for now because Catholicism has received a lot of buffs already.
-	#	limit = {
-	#		FROM = { religion = catholic }
-	#	}
-	#	if = {
-	#		limit = { ROOT = { government_rank = 3 } }
-	#		FROM = { add_papal_influence = 20 }
-	#	}
-	#	else_if = {
-	#		limit = { ROOT = { government_rank = 2 } }
-	#		FROM = { add_papal_influence = 10 }
-	#	}
-	#	else = {
-	#		FROM = { add_papal_influence = 5 }
-	#	}
-	#}
 }
 
 on_institution_embracement = {

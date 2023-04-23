@@ -1,0 +1,110 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Province, FROM = Winning Country
+relentless_conquest_on_siege_effect = {
+    # Relentless Conquest
+    if = {
+        limit = {
+            FROM = {
+                has_global_flag = enabled_relentless_conquest_system
+                has_country_modifier = relentless_conquest_active
+            }
+        }
+        
+        if = {
+            limit = {
+                NOT = { is_capital = yes }
+                owner = {
+                    war_with = FROM
+                }
+            }
+            
+            cede_province = FROM
+            
+            # Add AE with every nation currently at war, or on the same continent as ROOT
+            every_country = {
+                limit = {
+                    NOT = { alliance_with = FROM }
+                    OR = {
+                        war_with = FROM
+                        same_continent = FROM
+                    }
+                }
+                
+                add_aggressive_expansion = {
+                    who = FROM
+                    value = 2
+                    apply_calc = yes
+                }
+            }
+        }
+    }
+}
+
+#-----------------------------------
+# Doctrines
+#-----------------------------------
+# Triggered via siege_doctrine_effect
+relentless_conquest_effect_sow_terror = {
+    if = {
+        limit = {
+            has_global_flag = enabled_relentless_conquest_system
+            FROM = {
+                has_country_modifier = relentless_conquest_active
+            }
+            NOT = { is_capital = yes }
+        }
+        
+        cede_province = FROM
+        
+        # Add AE with every nation currently at war, or on the same continent as ROOT
+        every_country = {
+            limit = {
+                NOT = { alliance_with = FROM }
+                OR = {
+                    war_with = FROM
+                    same_continent = FROM
+                }
+            }
+            
+            add_aggressive_expansion = {
+                who = FROM
+                value = 5
+                apply_calc = yes
+            }
+        }
+    }
+}
+
+# Triggered via siege_doctrine_effect
+relentless_conquest_effect_coup_de_grace = {
+    if = {
+        limit = {
+            has_global_flag = enabled_relentless_conquest_system
+            FROM = {
+                has_country_modifier = relentless_conquest_active
+            }
+            NOT = { is_capital = yes }
+        }
+        
+        cede_province = FROM
+        
+        # Add AE with every nation currently at war, or on the same continent as ROOT
+        every_country = {
+            limit = {
+                NOT = { alliance_with = FROM }
+                OR = {
+                    war_with = FROM
+                    same_continent = FROM
+                }
+            }
+            
+            add_aggressive_expansion = {
+                who = FROM
+                value = 2
+                apply_calc = yes
+            }
+        }
+    }
+}

@@ -44,6 +44,104 @@ destroy_faction = {
     clr_global_flag = $faction$_exists
 }
 
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Winning Country, FROM = Losing Country
+faction_on_battle_won_country_effect = {
+    # Faction: Alliance Fervor
+    if = {
+        limit = {
+            has_country_modifier = member_of_alliance
+            FROM = {
+                OR = {
+                    has_country_modifier = member_of_horde
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = factional_fervor
+            duration = 365
+        }
+    }
+
+    # Faction: Horde Fervor
+    if = {
+        limit = {
+            OR = {
+                has_country_modifier = member_of_horde
+                has_country_modifier = member_of_old_horde
+            }
+            FROM = {
+                has_country_modifier = member_of_alliance
+            }
+        }
+        
+        add_country_modifier = {
+            name = factional_fervor
+            duration = 365
+        }
+    }
+}
+
+# ROOT = Country
+faction_on_monarch_death_effect = {
+    if = {
+        limit = {
+            has_country_modifier = head_of_old_horde
+        }
+        
+        country_event = { id = wwu_faction_system.20 }
+    }
+    
+    if = {
+        limit = {
+            has_country_modifier = head_of_horde
+        }
+        
+        country_event = { id = wwu_faction_system.21 }
+    }
+}
+
+# ROOT = Country, FROM = Annexed Country
+faction_on_annexed_effect = {
+    # If Head of faction is annexed, re-assign leadership
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = head_of_alliance
+            }
+        }
+        country_event = { id = wwu_faction_system.30 }
+    }
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = head_of_old_horde
+            }
+        }
+        country_event = { id = wwu_faction_system.31 }
+    }
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = head_of_horde
+            }
+        }
+        country_event = { id = wwu_faction_system.32 }
+    }
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = head_of_trade_coalition
+            }
+        }
+        country_event = { id = wwu_faction_system.33 }
+    }
+}
+
 #--------------------------
 # Roster
 #--------------------------

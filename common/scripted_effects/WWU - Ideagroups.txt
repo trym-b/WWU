@@ -39,3 +39,40 @@ remove_starting_ideagroups = {
     remove_idea_group = wwu_militarization_ideas
     remove_idea_group = wwu_tyranny_ideas
 }
+
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Losing Country, FROM = Winning Country
+ideagroups_on_battle_lost_country_effect = {
+    # Ideagroup: Trial by Combat
+    if = {
+        limit = {
+            # Loser has a general
+            has_leaders = {
+                value = 1
+                type = general
+                include_monarch = no
+                include_heir = no
+            }
+            
+            # Winner has Trial by Combat
+            FROM = {
+                has_idea = wwu_law_ideas_2
+            }
+        }
+        
+        random_list = {
+            25 = {
+                # Loser event
+                country_event = { id = wwu_ideagroups.15 }
+                
+                # Winner event
+                FROM = {
+                    country_event = { id = wwu_ideagroups.14 }
+                }
+            }
+            75 = { }
+        }
+    }
+}

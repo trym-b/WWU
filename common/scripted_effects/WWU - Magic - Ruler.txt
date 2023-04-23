@@ -1,0 +1,111 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Country
+magic_on_new_monarch_effect = {
+    reset_spellcaster_skills = yes
+    
+    # Jaina
+    if = {
+        limit = {
+            has_ruler = "Jaina"
+            dynasty = "Proudmoore"
+            has_global_flag = jaina_in_dalaran
+        }
+        
+        add_ruler_spellcasting = yes
+        set_variable = {
+            which = ruler_magic_aptitude
+            value = 2
+        }
+        set_variable = {
+            which = ruler_magic_finesse
+            value = 2
+        }
+        set_variable = {
+            which = ruler_magic_concentration
+            value = 2
+        }
+    }
+    
+    # Add the Spellcaster mechanic automatically for these monarchs
+    if = {
+        limit = {
+            OR = {
+                has_reform = magocracy_reform
+                has_reform = kingdom_of_magic_reform
+            }
+        }
+        add_ruler_spellcasting = yes
+    
+        random_list = {
+            33 = {
+                set_variable = {
+                    which = ruler_magic_aptitude
+                    value = 1
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_aptitude
+                    value = 2
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_aptitude
+                    value = 3
+                }
+            }
+        }
+        random_list = {
+            33 = {
+                set_variable = {
+                    which = ruler_magic_finesse
+                    value = 1
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_finesse
+                    value = 2
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_finesse
+                    value = 3
+                }
+            }
+        }
+        random_list = {
+            33 = {
+                set_variable = {
+                    which = ruler_magic_concentration
+                    value = 1
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_concentration
+                    value = 2
+                }
+            }
+            33 = {
+                set_variable = {
+                    which = ruler_magic_concentration
+                    value = 3
+                }
+            }
+        }
+    }
+}
+
+# ROOT = Country
+magic_on_monarch_death_effect = {
+    # Reset Spellcaster training
+    set_variable = {
+        which = ruler_magic_training
+        value = 0
+    }
+}

@@ -78,6 +78,47 @@
 # vision_of_demise
 # pearl_of_pandaria
 
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Losing Country, FROM = Winning Country
+artifact_on_battle_lost_country_effect = {
+    # Artifact: Strom'kar
+    if = {
+        limit = {
+            # Loser has a general
+            has_leaders = {
+                value = 1
+                type = general
+                include_monarch = no
+                include_heir = no
+            }
+            
+            # Loser is troll
+            culture_group = culture_group_troll
+            
+            # Winner has Strom'kar
+            FROM = {
+                custom_trigger_tooltip = {
+                    tooltip = IS_PRIMARY_ARTIFACT_stromkar
+                    has_country_flag = primary_artifact_stromkar
+                }
+            }
+        }
+        
+        # Loser
+        country_event = { id = wwu_archaeology.511 }
+        
+        # Winner event
+        FROM = {
+            country_event = { id = wwu_archaeology.510 }
+        }
+    }
+}
+
+#-----------------------------------
+# Core
+#-----------------------------------
 init_artifact_defaults = {
     # Archaeology
     set_variable = { which = artifact_catalogue_carved_figurine     value = 0 }
@@ -88,7 +129,9 @@ init_artifact_defaults = {
     set_variable = { which = artifact_catalogue_treasure_chest      value = 0 }
 }
 
-
+#-----------------------------------
+# Archaeology System
+#-----------------------------------
 start_dig = {
     hidden_effect = {
         set_country_flag = dig_begins
@@ -260,6 +303,9 @@ end_dig = {
     }
 }
 
+#-----------------------------------
+# Artifact Core
+#-----------------------------------
 unlock_artifact = {
     custom_tooltip = UNLOCK_ARTIFACT_$artifact$
     

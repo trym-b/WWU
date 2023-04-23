@@ -164,3 +164,42 @@ add_religion_power_based_on_development = {
         add_doom = $AMOUNT$
     }
 }
+
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_religion_change_effect = {
+    # Remove Dreaming state on switch
+    if = {
+        limit = {
+            has_country_modifier = dreaming
+        }
+        remove_country_modifier = dreaming
+    }
+    
+	if = {
+		limit = {
+			has_heir = yes
+		}
+		set_heir_religion = ROOT
+	}
+	if = {
+		limit = {
+			has_regency = no
+		}
+		set_ruler_religion = ROOT
+	}
+	if = {
+		limit = {
+			has_dlc = "Rights of Man"
+			has_consort = yes
+		}
+		set_consort_religion = ROOT
+	}
+    
+    add_country_modifier = {
+		name = recently_changed_religion_dummy
+		duration = 10
+		hidden = yes
+	}
+}

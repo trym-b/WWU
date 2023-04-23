@@ -5,3 +5,67 @@ unlock_interdimensional_invasion = {
         set_country_flag = unlocked_interdimensional_invasion
     }
 }
+
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Winning Country, FROM = Province
+invasion_on_siege_won_country_effect = {
+    # Invasion - Add core to first province sieged
+    if = {
+        limit = {
+            NOT = { has_country_flag = first_core_of_invasion }
+            
+            # Is one of the invader nations
+            OR = {
+                is_in_war = {
+                    casus_belli = cb_demonic_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_elemental_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_mawsworn_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_interdimensional_invasion
+                    attackers = ROOT
+                }
+            }
+            
+            FROM = {
+                NOT = { is_core = ROOT }
+            }
+        }
+        
+        set_country_flag = first_core_of_invasion
+        
+        FROM = {
+            add_core = ROOT
+        }
+    }
+}
+
+# ROOT = Losing Country, FROM = Winning Country
+invasion_on_war_lost_effect = {
+    # War ends - these should only apply if the war end causes the loser to end the war
+    if = {
+        limit = {
+            is_at_war = no
+        }
+        
+        # Reset Invasion flag
+        clr_country_flag = invasion_spawn_done
+        clr_country_flag = first_core_of_invasion
+    }
+}
+
+# ROOT = Winning Country, FROM = Losing Country
+invasion_on_war_won_effect = {  
+    # Reset Invasion flag
+    clr_country_flag = invasion_spawn_done
+    clr_country_flag = first_core_of_invasion
+}
