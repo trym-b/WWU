@@ -70,7 +70,10 @@ country_event = {
     }
     
     immediate = {
-        set_global_flag = collapse_of_the_alliance
+        hidden_effect = {
+            set_global_flag = collapse_of_the_alliance
+            set_global_flag = alliance_dismantled
+        }
     }
     
 	option = {
@@ -100,6 +103,7 @@ country_event = {
 	picture = VARIAN_WRYNN_eventPicture
     
     trigger = {
+        NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_alliance
         has_country_modifier = head_of_alliance
@@ -127,6 +131,7 @@ country_event = {
 	picture = LOTHAR_FLEES_STORMWIND_eventPicture
     
     trigger = { 
+        NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_alliance
         NOT = { has_country_modifier = head_of_alliance }
@@ -152,6 +157,7 @@ country_event = {
 	picture = WARCHIEF_THRALL_eventPicture
     
     trigger = {
+        NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_horde
         has_country_modifier = head_of_horde
@@ -178,6 +184,7 @@ country_event = {
 	picture = RISE_OF_THE_HORDE_eventPicture
     
     trigger = {
+        NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_horde
         NOT = { has_country_modifier = head_of_horde }
@@ -204,6 +211,7 @@ country_event = {
 	picture = HORDE_TRIAL_eventPicture
     
     trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_old_horde
         has_country_modifier = head_of_old_horde
@@ -232,6 +240,7 @@ country_event = {
 	picture = RISE_OF_THE_HORDE_eventPicture
     
     trigger = { 
+        NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_old_horde
         NOT = { has_country_modifier = head_of_old_horde }
@@ -267,6 +276,7 @@ country_event = {
 	picture = HORDE_TRIAL_eventPicture
     
     trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_old_horde
         has_country_modifier = head_of_old_horde
@@ -349,7 +359,10 @@ country_event = {
     }
     
     immediate = {
-        set_global_flag = collapse_the_old_horde
+        hidden_effect = {
+            set_global_flag = collapse_the_old_horde
+            set_global_flag = old_horde_dismantled
+        }
     }
     
 	option = {
@@ -387,7 +400,10 @@ country_event = {
     }
     
     immediate = {
-        set_global_flag = collapse_the_horde
+        hidden_effect = {
+            set_global_flag = collapse_the_horde
+            set_global_flag = horde_dismantled
+        }
     }
     
 	option = {
@@ -425,7 +441,10 @@ country_event = {
     }
     
     immediate = {
-        set_global_flag = collapse_the_trade_coalition
+        hidden_effect = {
+            set_global_flag = collapse_the_trade_coalition
+            set_global_flag = trade_coalition_dismantled
+        }
     }
     
 	option = {
@@ -459,6 +478,7 @@ country_event = {
     major = yes
     
     trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = head_of_old_horde
         NOT = { has_country_flag = ignore_horde_vote }
@@ -531,6 +551,7 @@ country_event = {
     major = yes
     
     trigger = { 
+        NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = head_of_horde
         NOT = { has_country_flag = ignore_horde_vote }
@@ -913,6 +934,7 @@ country_event = {
     hidden = yes
     
     trigger = {
+        NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = alliance_exists
         calc_true_if = {
@@ -960,6 +982,7 @@ country_event = {
     hidden = yes
     
     trigger = {
+        NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = horde_exists
         
@@ -998,7 +1021,7 @@ country_event = {
 	}
 }
 
-# Old Hotde - Random Leader if existing one is removed
+# Old Horde - Random Leader if existing one is removed
 country_event = {
 	id = wwu_faction_system.62
 	title = wwu_faction_system.62.title
@@ -1008,6 +1031,7 @@ country_event = {
     hidden = yes
     
     trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = old_horde_exists
         
@@ -1056,6 +1080,7 @@ country_event = {
     hidden = yes
     
     trigger = {
+        NOT = { has_global_flag = trade_coalition_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = trade_coalition_exists
         calc_true_if = {
@@ -1123,8 +1148,11 @@ country_event = {
     }
     
     immediate = {
-        destroy_faction = {
-            faction = alliance
+        hidden_effect = {
+            destroy_faction = {
+                faction = alliance
+            }
+            set_global_flag = alliance_dismantled
         }
     }
 	
@@ -1167,8 +1195,11 @@ country_event = {
     }
     
     immediate = {
-        destroy_faction = {
-            faction = horde
+        hidden_effect = {
+            destroy_faction = {
+                faction = horde
+            }
+            set_global_flag = horde_dismantled
         }
     }
 	
@@ -1211,8 +1242,11 @@ country_event = {
     }
     
     immediate = {
-        destroy_faction = {
-            faction = old_horde
+        hidden_effect = {
+            destroy_faction = {
+                faction = old_horde
+            }
+            set_global_flag = old_horde_dismantled
         }
     }
 	
@@ -1255,8 +1289,11 @@ country_event = {
     }
     
     immediate = {
-        destroy_faction = {
-            faction = trade_coalition
+        hidden_effect = {
+            destroy_faction = {
+                faction = trade_coalition
+            }
+            set_global_flag = trade_coalition_dismantled
         }
     }
 	
@@ -1266,5 +1303,60 @@ country_event = {
     
 	option = {
 		name = wwu_faction_system.73.option.a
+	}
+}
+
+# Leader of the Trade Coalition
+country_event = {
+	id = wwu_faction_system.80
+	title = wwu_faction_system.80.title
+	desc = wwu_faction_system.80.desc
+	picture = AUCTIONMASTER_eventPicture
+    
+    trigger = {
+        NOT = { has_global_flag = trade_coalition_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_trade_coalition
+        has_country_modifier = head_of_trade_coalition
+        NOT = { has_reform = trade_coalition_reform }
+        
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system.80.option.a
+		
+        change_government = republic
+        add_government_reform = trade_coalition_reform
+	}
+}
+
+# Demotion
+country_event = {
+	id = wwu_faction_system.81
+	title = wwu_faction_system.81.title
+	desc = wwu_faction_system.81.desc
+	picture = ANGRY_CHICKEN_eventPicture
+    
+    trigger = { 
+        NOT = { has_global_flag = trade_coalition_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_trade_coalition
+        NOT = { has_country_modifier = head_of_trade_coalition }
+        has_reform = trade_coalition_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system.81.option.a
+		
+        change_government = republic
+        add_government_reform = mercantile_republic_reform
 	}
 }
