@@ -1,0 +1,281 @@
+namespace = wwu_faction_system_government
+
+#-----------------------------
+# Promotion
+#-----------------------------
+# Promotion - Alliance
+country_event = {
+	id = wwu_faction_system_government.1
+	title = wwu_faction_system_government.1.title
+	desc = wwu_faction_system_government.1.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = alliance_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_alliance
+        has_country_modifier = head_of_alliance
+        NOT = { has_reform = alliance_reform }
+        
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.3.option.a
+		
+        change_government = monarchy
+        add_government_reform = alliance_reform
+	}
+}
+
+# Promotion - Horde
+country_event = {
+	id = wwu_faction_system_government.2
+	title = wwu_faction_system_government.2.title
+	desc = wwu_faction_system_government.2.desc
+	picture = WARCHIEF_THRALL_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = horde_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_horde
+        has_country_modifier = head_of_horde
+        NOT = { has_reform = horde_reform }
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.2.option.a
+		
+        change_government = monarchy
+        add_government_reform = horde_reform
+	}
+}
+
+# Promotion - Old Horde
+country_event = {
+	id = wwu_faction_system_government.3
+	title = wwu_faction_system_government.3.title
+	desc = wwu_faction_system_government.3.desc
+	picture = HORDE_TRIAL_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_old_horde
+        has_country_modifier = head_of_old_horde
+        NOT = { has_reform = old_horde_reform }
+        NOT = { tag = OGR }
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.3.option.a
+		
+        change_government = tribal
+        add_government_reform = old_horde_reform
+        add_government_reform = wwu_tribal_old_horde_warband_reform
+	}
+}
+
+# Warchief of the Old Horde (Gorian)
+country_event = {
+	id = wwu_faction_system_government.4
+	title = wwu_faction_system_government.4.title
+	desc = wwu_faction_system_government.4.desc
+	picture = HORDE_TRIAL_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = old_horde_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_old_horde
+        has_country_modifier = head_of_old_horde
+        NOT = { has_reform = gorian_horde_reform }
+        tag = OGR
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.4.option.a
+		
+        change_government = monarchy
+        add_government_reform = gorian_horde_reform
+	}
+}
+
+# Leader of the Trade Coalition
+country_event = {
+	id = wwu_faction_system_government.5
+	title = wwu_faction_system_government.5.title
+	desc = wwu_faction_system_government.5.desc
+	picture = AUCTIONMASTER_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = trade_coalition_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_trade_coalition
+        has_country_modifier = head_of_trade_coalition
+        NOT = { has_reform = trade_coalition_reform }
+        
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.5.option.a
+		
+        change_government = republic
+        add_government_reform = trade_coalition_reform
+	}
+}
+
+#-----------------------------
+# Demotion
+#-----------------------------
+# Demotion - Alliance
+country_event = {
+	id = wwu_faction_system_government.10
+	title = wwu_faction_system_government.10.title
+	desc = wwu_faction_system_government.10.desc
+	picture = LOTHAR_FLEES_STORMWIND_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = { 
+        NOT = { has_global_flag = alliance_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_alliance
+        NOT = { has_country_modifier = head_of_alliance }
+        has_reform = alliance_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.10.option.a
+		
+        apply_alliance_demotion = yes
+	}
+}
+
+# Demotion - Horde
+country_event = {
+	id = wwu_faction_system_government.11
+	title = wwu_faction_system_government.11.title
+	desc = wwu_faction_system_government.11.desc
+	picture = RISE_OF_THE_HORDE_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = horde_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_horde
+        NOT = { has_country_modifier = head_of_horde }
+        has_reform = horde_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.11.option.a
+		
+        change_government = monarchy
+        add_government_reform = autocracy_reform
+	}
+}
+
+# Demotion - Old Horde
+country_event = {
+	id = wwu_faction_system_government.12
+	title = wwu_faction_system_government.12.title
+	desc = wwu_faction_system_government.12.desc
+	picture = RISE_OF_THE_HORDE_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = { 
+        NOT = { has_global_flag = old_horde_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_old_horde
+        NOT = { has_country_modifier = head_of_old_horde }
+        has_reform = horde_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.12.option.a
+		
+        if = {
+            limit = {
+                technology_group = tech_orc
+            }
+            change_government = tribal
+            add_government_reform = orc_clan_reform
+        }
+        else = {
+            change_government = tribal
+            add_government_reform = tribal_despotism_reform
+        }
+	}
+}
+
+# Demotion - Trade Coalition
+country_event = {
+	id = wwu_faction_system_government.13
+	title = wwu_faction_system_government.13.title
+	desc = wwu_faction_system_government.13.desc
+	picture = ANGRY_CHICKEN_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = { 
+        NOT = { has_global_flag = trade_coalition_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_trade_coalition
+        NOT = { has_country_modifier = head_of_trade_coalition }
+        has_reform = trade_coalition_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.13.option.a
+		
+        change_government = republic
+        add_government_reform = mercantile_republic_reform
+	}
+}

@@ -161,7 +161,7 @@ faction_authority_horde_mechanic = {
 			cost = 100
             
 			trigger = { 
-                NOT = { has_global_flag = annexed_the_horde }
+                NOT = { has_global_flag = unified_the_horde }
                 has_global_flag = faction_horde_cultivation_of_the_land_1
                 has_global_flag = faction_horde_cultivation_of_the_land_2
                 has_global_flag = faction_horde_cultivation_of_the_land_3
@@ -182,29 +182,7 @@ faction_authority_horde_mechanic = {
 			effect = {
                 custom_tooltip = FACTION_AUTHORITY_HORDE_SOURCES_TT
                 
-                custom_tooltip = HORDE_MEMBERS_ANNEXED_TT
-                
-                hidden_effect = {
-                    set_global_flag = annexed_the_horde
-                    set_country_flag = united_the_horde
-
-                    every_country = {
-                        limit = {
-                            has_country_modifier = member_of_horde
-                            has_opinion = {
-                                who = ROOT
-                                value = 0
-                            }
-                            ai = yes
-                        }
-                        
-                        ROOT = {
-                            inherit = PREV
-                        }
-                    }
-                    
-                    country_event = { id = wwu_faction_system.12 }
-                }
+                country_event = { id = wwu_faction_system_unification.2 }
 			}
             
 			ai_chance = {

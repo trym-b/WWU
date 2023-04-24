@@ -161,7 +161,7 @@ faction_authority_alliance_mechanic = {
 			cost = 100
             
 			trigger = { 
-                NOT = { has_global_flag = annexed_the_alliance }
+                NOT = { has_global_flag = unified_the_alliance }
                 has_global_flag = faction_alliance_priority_of_the_fair_1
                 has_global_flag = faction_alliance_priority_of_the_fair_2
                 has_global_flag = faction_alliance_priority_of_the_fair_3
@@ -182,29 +182,7 @@ faction_authority_alliance_mechanic = {
 			effect = {
                 custom_tooltip = FACTION_AUTHORITY_ALLIANCE_SOURCES_TT
                 
-                custom_tooltip = ALLIANCE_MEMBERS_ANNEXED_TT
-                
-                hidden_effect = {
-                    set_global_flag = annexed_the_alliance
-                    set_country_flag = united_the_alliance
-                    
-                    every_country = {
-                        limit = {
-                            has_country_modifier = member_of_alliance
-                            has_opinion = {
-                                who = ROOT
-                                value = 0
-                            }
-                            ai = yes
-                        }
-                        
-                        ROOT = {
-                            inherit = PREV
-                        }
-                    }
-                    
-                    country_event = { id = wwu_faction_system.2 }
-                }
+                country_event = { id = wwu_faction_system_unification.1 }
 			}
             
 			ai_chance = {

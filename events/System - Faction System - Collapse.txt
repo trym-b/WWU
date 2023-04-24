@@ -1,0 +1,357 @@
+namespace = wwu_faction_system_collapse
+
+# Collapse - Alliance
+# Disband the Alliance if the current Head's capital is sieged down
+country_event = {
+	id = wwu_faction_system_collapse.1
+	title = wwu_faction_system_collapse.1.title
+	desc = wwu_faction_system_collapse.1.desc
+	picture = LOTHAR_FLEES_STORMWIND_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = collapse_of_the_alliance
+            set_global_flag = alliance_dismantled
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_collapse.1.option.a
+		
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_alliance
+            }
+            remove_country_modifier = head_of_alliance
+        }
+        
+        every_country = {
+            limit = {
+                has_country_modifier = member_of_alliance
+            }
+            remove_country_modifier = member_of_alliance
+        }
+	}
+}
+
+# Collapse - Horde
+# Disband the Horde if the current Head's capital is sieged down
+country_event = {
+	id = wwu_faction_system_collapse.2
+	title = wwu_faction_system_collapse.2.title
+	desc = wwu_faction_system_collapse.2.desc
+	picture = HELLFIRE_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+	
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = collapse_the_horde
+            set_global_flag = horde_dismantled
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_collapse.2.option.a
+		
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_horde
+            }
+            remove_country_modifier = head_of_horde
+        }
+        
+        every_country = {
+            limit = {
+                has_country_modifier = member_of_horde
+            }
+            remove_country_modifier = member_of_horde
+        }
+	}
+}
+
+# Collapse - Old Horde
+# Disband the Old Horde if the current Head's capital is sieged down
+country_event = {
+	id = wwu_faction_system_collapse.3
+	title = wwu_faction_system_collapse.3.title
+	desc = wwu_faction_system_collapse.3.desc
+	picture = HELLFIRE_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+	
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = collapse_the_old_horde
+            set_global_flag = old_horde_dismantled
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_collapse.3.option.a
+		
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_old_horde
+            }
+            remove_country_modifier = head_of_old_horde
+        }
+        
+        every_country = {
+            limit = {
+                has_country_modifier = member_of_old_horde
+            }
+            remove_country_modifier = member_of_old_horde
+        }
+	}
+}
+
+# Collapse - Trade Coalition
+# Disband the Trade Coalition if the current Head's capital is sieged down
+country_event = {
+	id = wwu_faction_system_collapse.4
+	title = wwu_faction_system_collapse.4.title
+	desc = wwu_faction_system_collapse.4.desc
+	picture = HELLFIRE_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+	
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = collapse_the_trade_coalition
+            set_global_flag = trade_coalition_dismantled
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_collapse.4.option.a
+		
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_trade_coalition
+            }
+            remove_country_modifier = head_of_trade_coalition
+        }
+        
+        every_country = {
+            limit = {
+                has_country_modifier = member_of_trade_coalition
+            }
+            remove_country_modifier = member_of_trade_coalition
+        }
+	}
+}
+
+#-----------------------
+# Cleanup 
+#-----------------------
+# Collapse of Alliance
+country_event = {
+	id = wwu_faction_system_collapse.10
+	title = wwu_faction_system_collapse.10.title
+	desc = wwu_faction_system_collapse.10.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+        
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = alliance_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_alliance
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_alliance
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            destroy_faction = {
+                faction = alliance
+            }
+            set_global_flag = alliance_dismantled
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system_collapse.10.option.a
+	}
+}
+
+# Collapse of Horde
+country_event = {
+	id = wwu_faction_system_collapse.11
+	title = wwu_faction_system_collapse.11.title
+	desc = wwu_faction_system_collapse.11.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+        
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = horde_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_horde
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_horde
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            destroy_faction = {
+                faction = horde
+            }
+            set_global_flag = horde_dismantled
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system_collapse.11.option.a
+	}
+}
+
+# Collapse of Old Horde
+country_event = {
+	id = wwu_faction_system_collapse.12
+	title = wwu_faction_system_collapse.12.title
+	desc = wwu_faction_system_collapse.12.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+        
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = old_horde_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_old_horde
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_old_horde
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            destroy_faction = {
+                faction = old_horde
+            }
+            set_global_flag = old_horde_dismantled
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system_collapse.12.option.a
+	}
+}
+
+# Collapse of Trade Coalition
+country_event = {
+	id = wwu_faction_system_collapse.13
+	title = wwu_faction_system_collapse.13.title
+	desc = wwu_faction_system_collapse.13.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+        
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = trade_coalition_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_trade_coalition
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_trade_coalition
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            destroy_faction = {
+                faction = trade_coalition
+            }
+            set_global_flag = trade_coalition_dismantled
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system_collapse.13.option.a
+	}
+}
+
