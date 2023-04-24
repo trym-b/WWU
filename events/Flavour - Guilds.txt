@@ -212,3 +212,53 @@ country_event = {
 	}
 }
 
+# Adventuring Opportunity
+country_event = {
+	id = wwu_guilds.5
+	title = wwu_guilds.5.title
+	desc = wwu_guilds.5.desc
+	picture = FORGOTTEN_TORCH_eventPicture
+	
+    trigger = {
+        may_unlock_guild_estates = yes
+        NOT = { has_country_flag = has_estate_adventuring_guild }
+        NOT = { has_country_flag = has_estate_warriors_guild }
+        NOT = { has_country_flag = has_estate_religious_order }
+        NOT = { has_country_flag = has_estate_criminal_syndicate }
+        NOT = { has_country_flag = adventuring_guild_offer }
+    }
+    
+	mean_time_to_happen = {
+		years = 100
+	}
+
+    immediate = {
+        hidden_effect = {
+            set_country_flag = adventuring_guild_offer
+        }
+    }
+
+
+	option = {
+		name = wwu_guilds.5.option.a
+        
+        add_years_of_income = -1
+		
+		custom_tooltip = ESTABLISH_ADVENTURING_GUILD_TT
+        hidden_effect = {
+            set_country_flag = has_estate_adventuring_guild
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_guilds.5.option.b
+		
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
