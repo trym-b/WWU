@@ -1,19 +1,21 @@
-namespace = wwu_knights_of_the_ebon_blade_f
+namespace = wwu_ebon_blade_flavour
 
 # Conquest of Tyr's Hand
 country_event = {
-    id = wwu_knights_of_the_ebon_blade_f.1
-    title = wwu_knights_of_the_ebon_blade_f.1.title
-    desc = wwu_knights_of_the_ebon_blade_f.1.desc
+    id = wwu_ebon_blade_flavour.1
+    title = wwu_ebon_blade_flavour.1.title
+    desc = wwu_ebon_blade_flavour.1.desc
     picture = TYRS_HAND_eventPicture
 
     trigger = {
         NOT = { has_global_flag = fall_of_tyrs_hand }
-        tag = P13
+        
+        is_scourge_story_tag = yes
+        religion = cult_of_the_damned
         
         area_new_avalon = {
             type = all
-            controlled_by = P13
+            controlled_by = ROOT
         }
     }
 
@@ -30,7 +32,7 @@ country_event = {
 
     # It would be good for this to actually look for P13 religion, cause its different in other bookmarks, while event might still fire
     option = {
-        name = wwu_knights_of_the_ebon_blade_f.1.option.a
+        name = wwu_ebon_blade_flavour.1.option.a
 
         add_prestige = 20
         add_manpower = 10  
@@ -84,54 +86,76 @@ country_event = {
     }
 }
 
+# Deathcharger Access
 country_event = {
-    id = wwu_knights_of_the_ebon_blade_f.2
-    title = wwu_knights_of_the_ebon_blade_f.2.title
-    desc = wwu_knights_of_the_ebon_blade_f.2.desc
+    id = wwu_ebon_blade_flavour.2
+    title = wwu_ebon_blade_flavour.2.title
+    desc = wwu_ebon_blade_flavour.2.desc
     picture = DEATHCHARGER_eventPicture
 
     trigger = {
-        tag = P13
+        NOT = { has_country_flag = deathcharger_access }
+        
+        is_scourge_story_tag = yes
+        religion = cult_of_the_damned
 
-        any_core_province = {
+        any_owned_province = {
             trade_goods = mounts
             base_production = 10
         }
-        NOT = { has_country_modifier = deathcharger_production }
     }
 
-    mean_time_to_happen = { days = 1 }
+    mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = deathcharger_access
+        }
+    }
 
     option = {
-        name = wwu_knights_of_the_ebon_blade_f.2.option.a
+        name = wwu_ebon_blade_flavour.2.option.a
 
-    add_country_modifier = {
-        name = deathcharger_production
-        duration = -1
+        add_country_modifier = {
+            name = deathcharger_production
+            duration = -1
         }
     }
 }
 
+# Undead Gryphon Access
 country_event = {
-    id = wwu_knights_of_the_ebon_blade_f.3
-    title = wwu_knights_of_the_ebon_blade_f.3.title
-    desc = wwu_knights_of_the_ebon_blade_f.3.desc
+    id = wwu_ebon_blade_flavour.3
+    title = wwu_ebon_blade_flavour.3.title
+    desc = wwu_ebon_blade_flavour.3.desc
     picture = ANCIENT_POWER_eventPicture
 
     trigger = {
-        tag = P13
+        NOT = { has_country_flag = undead_gryphon_access }
+        
+        is_scourge_story_tag = yes
+        religion = cult_of_the_damned
 
-        any_core_province = {
+        any_owned_province = {
             trade_goods = flying_mounts
             base_production = 10
         }
-        NOT = { has_country_modifier = undead_gryphon_production }
     }
 
-    mean_time_to_happen = { days = 1 }
+    mean_time_to_happen = { 
+        days = 1
+    }
 
+    immediate = {
+        hidden_effect = {
+            set_country_flag = undead_gryphon_access
+        }
+    }
+    
     option = {
-        name = wwu_knights_of_the_ebon_blade_f.3.option.a
+        name = wwu_ebon_blade_flavour.3.option.a
 
     add_country_modifier = {
         name = undead_gryphon_production
@@ -140,18 +164,22 @@ country_event = {
     }
 }
 
+# Battle for Light's Hope Chapel
 country_event = {
-    id = wwu_knights_of_the_ebon_blade_f.4
-    title = wwu_knights_of_the_ebon_blade_f.title
-    desc = wwu_knights_of_the_ebon_blade_f.4.desc
+    id = wwu_ebon_blade_flavour.4
+    title = wwu_ebon_blade_flavour.title
+    desc = wwu_ebon_blade_flavour.4.desc
     picture = LIGHTS_HOPE_CHAPEL_eventPicture
 
-    is_triggered_only = yes
-
     trigger = {
+         NOT = { has_country_flag = battle_for_lights_hope_chapel }
+        
+        is_scourge_story_tag = yes
+        religion = cult_of_the_damned
+        
         # Light's Hope Chaptel
         557 = {
-            controlled_by = P13
+            controlled_by = ROOT
         }
     }
 
@@ -159,55 +187,67 @@ country_event = {
         days = 1
     }
 
-    option = {
-        name = wwu_knights_of_the_ebon_blade_f.4.option.a
-
-        P11 = {
-            release = P13
-            add_historical_rival = P13
-            add_casus_belli = {
-                target = P13
-                type = cb_annex
-                months = 240
-            }
+    immediate = {
+        hidden_effect = {
+            set_country_flag = battle_for_lights_hope_chapel
         }
+    }
+    
+    option = {
+        name = wwu_ebon_blade_flavour.4.option.a
 
-        P13 = {
+        if = {
+            limit = {
+                tag = P13 # Ebon Blade
+                is_subject_of = P11 # Scourge
+            }
+            
+            grant_independence = yes
             add_historical_rival = P11
+            
             change_religion = forgotten_shadow
 
             add_country_modifier = {
                 name = free_from_the_lich_king
                 duration = 3650
             }
+            
+            P11 = {
+                add_historical_rival = ROOT
+                add_casus_belli = {
+                    target = ROOT
+                    type = cb_annex
+                    months = 240
+                }
+            }
         }
 
         area_new_avalon = {
-            add_claim = P52
+            add_claim = ROOT
         }
         area_tuskcross = {
-            add_claim = P52
+            add_claim = ROOT
         }
     }
 
     option = {
-        name = wwu_knights_of_the_ebon_blade_f.4.option.b
+        name = wwu_ebon_blade_flavour.4.option.b
 
+        add_country_modifier = {
+            name = victory_at_lights_hope
+            duration = -1
+        }
+        
         922 = {
-            cede_province = P13
-            add_core = P13
+            cede_province = ROOT
+            add_core = ROOT
             change_culture = culture_death_knight
             change_religion = cult_of_the_damned
 
-            change_province_name = "Ruins of Light's Chope Chapel"
+            change_province_name = "Ruins of Light's Hope Chapel"
 
             add_province_modifier = {
                 name = ruined_lights_hope
-                duration = -1
-            }
-
-            add_country_modifier = {
-                name = victory_at_lights_hope
                 duration = -1
             }
         }
