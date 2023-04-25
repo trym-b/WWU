@@ -378,34 +378,6 @@ estate_clergy_statutory_rights = {
 }
 
 
-estate_clergy_splendiferous_investment = {
-	icon = privilege_blessed_hands
-
-    # Costs
-    max_absolutism = -5
-	land_share = 0
-	loyalty = 0.2
-	influence = 0.05
-    
-	is_valid = {
-		monthly_income = 10
-	}
-	can_select = {
-		monthly_income = 30
-	}
-	penalties = {
-		missionary_maintenance_cost = 5.0
-	}
-	benefits = {
-        missionaries = 2
-        global_missionary_strength = 0.05
-	}
-    
-	ai_will_do = {
-		factor = 0
-	}
-}
-
 # Evangelism
 estate_clergy_evangelism = {
 	icon = privilege_cascade
@@ -529,6 +501,38 @@ estate_clergy_laissez_faire_conversion = {
 	}
 }
 
+estate_clergy_religious_ambivalence = {
+	icon = privilege_vigor
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+		any_owned_province = {
+            NOT = { religion = ROOT }
+        }
+	}
+	penalties = {
+		global_missionary_strength = -0.03
+	}
+	benefits = {
+        religious_unity = 0.33
+	}
+    
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 0
+            
+            religious_unity = 0.25
+        }
+	}
+}
+
 #-------------------------------------------
 # Unique
 #-------------------------------------------
@@ -538,7 +542,7 @@ estate_clergy_arcane_supremacy = {
     # Costs
     max_absolutism = -5
 	land_share = 0
-	loyalty = 0.0
+	loyalty = 0.05
 	influence = 0.05
     
 	is_valid = {
@@ -551,9 +555,18 @@ estate_clergy_arcane_supremacy = {
 		tolerance_heathen = -1
         tolerance_heretic = -1
 	}
-	benefits = {
+    benefits = {
         missionaries = 1
-        missionary_maintenance_cost = -0.05
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            always = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            missionary_maintenance_cost = -0.2
+        }
 	}
     
 	ai_will_do = {
@@ -573,7 +586,7 @@ estate_clergy_ancient_diplomats = {
     # Costs
     max_absolutism = -5
 	land_share = 0
-	loyalty = 0.0
+	loyalty = 0.05
 	influence = 0.05
     
 	is_valid = {
@@ -585,9 +598,18 @@ estate_clergy_ancient_diplomats = {
 	penalties = {
 		global_missionary_strength = -0.02
 	}
-	benefits = {
-        diplomatic_reputation = 1
+    benefits = {
         diplomatic_upkeep = 1
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            always = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            diplomatic_reputation = 3
+        }
 	}
     
 	ai_will_do = {
@@ -632,6 +654,112 @@ estate_clergy_necromantic_resurrection = {
     penalties = {
         ae_impact = 0.2
     }
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_clergy_servants_of_fel = {
+	icon = privilege_fel_skull
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	is_valid = {
+		religion = fel
+	}
+	can_select = {
+		religion = fel
+	}
+	loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            always = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            papal_influence = 3.0
+        }
+	}
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+estate_clergy_influential_clergy = {
+	icon = privilege_balance_of_power
+
+    # Costs
+    max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	is_valid = {
+		OR = {
+            uses_church_aspects = yes
+        }
+	}
+	can_select = {
+		OR = {
+            uses_church_aspects = yes
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_church_aspects = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_church_power = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_fervor = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_fervor_increase = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_piety = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_piety = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_karma = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_karma = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_patriarch_authority = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            yearly_patriarch_authority = 3.0
+        }
+	}
     
 	ai_will_do = {
 		factor = 1
