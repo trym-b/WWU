@@ -1,0 +1,50 @@
+namespace = wwu_flavour_maw
+
+# Deal with Sire Denethius
+country_event = {
+    id = wwu_flavour_maw.1
+    title = wwu_flavour_maw.1.title
+    desc = wwu_flavour_maw.1.desc
+    picture = SHIFTING_SHADE_eventPicture
+
+    fire_only_once = yes
+
+    trigger = {
+        has_opinion = {
+            who = RVD
+            value = 75
+        }
+
+        RVD = {
+            has_opinion = {
+                who = MAW
+                value = 150
+            }
+        }
+    }
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_flavour_maw.1.option.a
+
+        create_alliance = RVD
+        add_historical_friend = RVD
+
+        RVD = {
+            add_historical_friend = MAW
+        }
+    }
+
+    option = {
+        name = wwu_flavour_maw.1.option.b
+
+        add_casus_belli = {
+            target = RVD
+            type = cb_vassalize_mission
+            months = 60
+        }
+    }
+}
