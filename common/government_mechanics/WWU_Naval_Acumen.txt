@@ -1,0 +1,139 @@
+naval_acumen_mechanic = {
+  alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 5
+    
+	available = {
+		has_dlc = "Domination"
+	}
+
+	powers = {
+		naval_acumen = {
+			max = 100
+			base_monthly_growth = 0
+            
+			scaled_modifier = {
+				modifier = {
+                    naval_morale = 0.2
+					global_ship_trade_power = 0.25
+					disengagement_chance = 0.1
+					number_of_cannons_modifier = 0.1
+					monthly_naval_acumen = -1
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		naval_acumen_boost = {
+			icon = GFX_naval_acumen_ability_1
+            
+			trigger = {
+				dip_power_cost = 50
+				NOT = {
+					has_government_power = {
+						mechanic_type = naval_acumen_mechanic
+						power_type = naval_acumen
+						value = 100
+					}
+				}
+			}
+			effect = { 
+				dip_power_cost = 50
+				add_government_power = {
+					mechanic_type = naval_acumen_mechanic
+					power_type = naval_acumen
+					value = 10
+				}
+			}
+			cooldown_years = 0
+            
+			ai_chance = {
+				factor = 0
+                
+				modifier = {
+					factor = 10
+                    
+					NOT = {
+						has_government_power = {
+							mechanic_type = naval_acumen_mechanic
+							power_type = naval_acumen
+							value = 90
+						}
+					}
+					dip_power = 500
+				}
+			}
+		}
+        naval_acumen_slacken_standards = {
+			icon = GFX_naval_acumen_ability_2
+			cost_type = naval_acumen
+			cost = 20
+            
+			cooldown_years = 1
+            
+			trigger = {
+                NOT = { sailors_percentage = 1.0 }
+			} 
+            
+			effect = {
+				add_yearly_sailors = 5
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    sailors_percentage = 0.75
+                }
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = naval_acumen_mechanic
+                            power_type = naval_acumen
+                            value = 80
+                        }
+                    }
+                }
+			}
+		}
+        naval_acumen_extend_service_duty = {
+			icon = GFX_naval_acumen_ability_3
+			cost_type = naval_acumen
+			cost = 20
+            
+			cooldown_years = 5
+            
+			trigger = {
+                NOT = { has_country_modifier = extended_service_duty }
+			} 
+            
+			effect = {
+				add_country_modifier = {
+                    name = extended_service_duty
+                    duration = 1800
+                }
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = naval_acumen_mechanic
+                            power_type = naval_acumen
+                            value = 80
+                        }
+                    }
+                }
+			}
+		}
+	}
+}
