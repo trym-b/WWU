@@ -1,0 +1,92 @@
+vordrassil_corruption = {
+	potential = {
+		culture = culture_snow_furbolg
+        
+        has_country_flag = growing_nightmares
+		
+        
+        area_grizzlemaw = {
+            owned_by = ROOT
+        }
+	}
+
+	can_start = {
+        has_any_disaster = no
+        culture = culture_snow_furbolg
+        
+        has_country_flag = growing_nightmares
+        
+        area_grizzlemaw = {
+            owned_by = ROOT
+        }
+        NOT = { stability = 0 }
+	}
+	
+	progress = {
+	    modifier = {
+			factor = 0.5
+			NOT = { stability = 0 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { stability = -1 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { stability = -2 }
+		}
+		modifier = {
+			factor = 0.5
+			num_of_loans = 10
+		}
+        modifier = {
+			factor = 1
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 1
+			NOT = { religious_unity = 90 }
+		}
+		modifier = {
+			factor = 1
+			is_year = 600
+		}
+		modifier = {
+			factor = -1
+			stability = 1
+		}
+	}
+	
+	can_stop = {
+        always = no
+	}
+	
+	can_end = {
+        has_country_flag = the_choice_dreams_or_nightmares
+		NOT = { num_of_rebel_controlled_provinces = 1 }
+		NOT = {
+			has_spawned_rebels = yogg_saron_rebels
+		}
+	}
+	
+	modifier = {
+        stability_cost_modifier = 1.0
+		global_unrest = 5
+		yearly_corruption = 0.1
+	}
+
+	on_start = flavor_nf.2
+	on_end = flavor_nf.3
+	
+	on_monthly = {
+        random_events = {
+            1000 = 0
+            100 = flavor_nf.4  # Furbolg Usurpers
+            100 = flavor_nf.5  # Spawns of Madness
+            100 = flavor_nf.6  # Sacrifice to Patron Gods
+        }
+	}
+}
+
+
+

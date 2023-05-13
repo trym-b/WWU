@@ -1,0 +1,181 @@
+#Northrend Furbolg Mission Tree Events
+namespace = flavor_nf
+
+#Form Grizzlemaw
+country_event = {
+	id = flavor_nf.1
+	title = flavor_nf.1.t
+	desc = flavor_nf.1.desc
+	picture = 
+	
+	fire_only_once = yes
+    major = no
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {
+		name = flavor_nf.1.a
+		change_tag = GZM
+		set_capital = 833
+		add_formable_bonus = yes
+		add_prestige = 25
+		if = {
+			limit = {
+				has_custom_ideas = no
+				NOT = { has_idea_group = gzm_ideas }
+			}
+			trigger_ni_switch = yes
+		}
+		set_country_flag = formed_grizzlemaw
+
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_nf.1.b
+		custom_tooltip = flavor_nf.1.b.tt
+		hidden_effect = {
+			set_country_flag = grizzlemaw_formation_available
+		}
+
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Vordrassil Corruption
+#Vordrassil Corruption Disaster Start-End
+country_event = {
+	id = flavor_nf.2
+	title = flavor_nf.2.t
+	desc = flavor_nf.2.desc
+	picture = 
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = flavor_nf.2.option.a
+		
+        add_stability = -3  
+		
+        area_gnomeregan = {
+            spawn_rebels = {
+				type = yogg_saron_rebels
+				size = 5
+			}
+        }
+        
+	}
+}
+country_event = {
+	id = flavor_nf.3
+	title = flavor_nf.3.t
+	desc = flavor_nf.3.desc
+	picture = 
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = flavor_nf.3.option.a
+		
+        add_stability = 3  
+	}
+}
+#Vordrassil Disaster Events
+#Furbolg Usurpers
+country_event = {
+	id = flavor_nf.4
+	title = flavor_nf.4.t
+	desc = flavor_nf.4.desc
+	picture = 
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = flavor_nf.4.option.a
+        
+        random_owned_province = {
+            limit = {
+                region = region_grizzly_hills
+                is_capital = no
+            }
+            
+            spawn_rebels = {
+				type = tribal_rebels
+				size = 3
+			}
+        }
+	}
+}
+#Spawns of Madness
+country_event = {
+	id = flavor_nf.5
+	title = flavor_nf.5.t
+	desc = flavor_nf.5.desc
+	picture = 
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = flavor_nf.5.option.a
+        
+        random_owned_province = {
+            limit = {
+                region = region_grizzly_hills
+                is_capital = no
+            }
+            
+            spawn_rebels = {
+				type = yogg_saron_rebels
+				size = 3
+			}
+        }
+	}
+}
+#Sacrifice to Patron Gods
+country_event = {
+	id = flavor_nf.6
+	title = flavor_nf.6.t
+	desc = flavor_nf.6.desc
+	picture = 
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = flavor_nf.5.option.a
+        
+        add_mil_power = 100
+		add_adm_power = 100
+		add_country_modifier = {
+            name = event_sacrificed_to_yogg_saron #Give Reinforcements, Discipline and Morale
+            duration = 365
+        }
+	}
+}

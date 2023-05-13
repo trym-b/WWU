@@ -1,0 +1,873 @@
+#--------------------------------------
+# Northrend Furbolgs
+#--------------------------------------
+wwu_northrend_furbolg_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+	    OR = {
+		    tag = B45
+			tag = B46
+			tag = SOG
+			tag = SOW
+			tag = WEP
+			tag = GZM
+		}
+	}
+	has_country_shield = yes
+	
+	wwu_vordrassil_nf = {
+	    icon = mission_blueprint
+		position = 2
+		required_missions = { wwu_furbolg_instincts_nf }
+		
+		trigger = {
+			833 = {
+				has_great_project = {
+                    type = gp_vordrassil
+                    tier = 1
+                }
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_rise_of_vordrassil_nf
+                duration = -1
+            }
+			set_country_flag = growing_nightmares
+		}
+	}
+	wwu_whispers_from_bellow_nf = {
+	    icon = mission_blueprint
+		position = 3
+		required_missions = { wwu_vordrassil_nf }
+		
+		trigger = {
+			has_disaster = vordrassil_corruption			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_corruption_looming_nf
+                duration = -1
+            }
+			country_event = {
+				id = flavor_nf.4
+            }	
+			country_event = {
+				id = flavor_nf.5
+            }	
+		}
+	}
+	wwu_madness_consumes_nf = {
+	    icon = mission_blueprint
+		position = 4
+		required_missions = { wwu_whispers_from_bellow_nf }
+		
+		trigger = {
+		    NOT = { num_of_rebel_controlled_provinces = 1 }
+		    NOT = { has_spawned_rebels = yogg_saron_rebels }
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_corruption_manifest_nf
+                duration = -1
+            }
+			country_event = {
+				id = flavor_nf.5
+            }			
+			clr_country_flag = growing_nightmares
+		}
+	}
+	wwu_sons_of_ursoc_nf = {
+	    icon = mission_blueprint
+		position = 5
+		required_missions = { wwu_madness_consumes_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_wild_god_ursoc_nf
+                duration = -1
+            }
+			set_country_flag = the_choice_dreams_or_nightmares
+		}
+	}
+}
+
+wwu_northrend_furbolg_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+	    OR = {
+		    tag = B45
+			tag = B46
+			tag = SOG
+			tag = SOW
+			tag = WEP
+			tag = GZM
+		}
+	}
+	has_country_shield = yes
+	
+    wwu_furbolg_instincts_nf = {
+	    icon = mission_blueprint
+		required_missions = { }
+		
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.6
+			num_of_generals = 1
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_northrend_dangers_nf
+                duration = -1
+            }
+			change_government_reform_progress = 100
+			add_army_tradition = 20
+		}
+	}	
+	wwu_tribal_feud_nf = {
+	    icon = mission_blueprint
+		position = 2
+		required_missions = { wwu_furbolg_instincts_nf }
+		
+		trigger = {
+			OR = {
+				NOT = { exists = SOG }
+				NOT = { exists = SOW }
+				NOT = { exists = WEP }
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_furbolg_wars_nf
+                duration = -1
+            }
+			area_grizzlemaw = {
+                add_permanent_claim = ROOT
+			}
+			area_heartwood = {
+                add_permanent_claim = ROOT
+			}
+			area_camp_oneqwah = {
+                add_permanent_claim = ROOT
+			}
+			area_amberpine_lodge = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_grizzly_hills_civil_war_nf = {
+	    icon = mission_blueprint
+		position = 3
+		required_missions = { wwu_tribal_feud_nf }
+		
+		trigger = {
+			OR = {
+				NOT = { exists = B45 }
+				NOT = { exists = B46 }
+			}
+		}
+		
+		effect = {
+		    if = {
+                limit = {
+                    833 = {
+                        is_empty = yes
+                    }
+                }
+                833 = {
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
+            }
+            else = {
+                833 = {
+                    add_core = ROOT
+                }
+            }
+			add_country_modifier = {
+                name = mission_eternal_rivals_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_one_furbolg_to_rule_them_all_nf = {
+	    icon = mission_blueprint
+		position = 4
+		required_missions = { wwu_grizzly_hills_civil_war_nf }
+		
+		trigger = {
+			calc_true_if = {               
+				area_grizzlemaw = {
+				    culture = culture_snow_furbolg
+					owned_by = ROOT
+					type = all
+			    }
+				area_heartwood = {				    
+				    culture = culture_snow_furbolg
+					owned_by = ROOT
+					type = all
+			    }
+				area_amberpine_lodge = {				    
+				    culture = culture_snow_furbolg
+					owned_by = ROOT
+					type = all
+			    }
+                amount = 3
+            }
+		}
+		
+		effect = {
+		    change_adm = 1
+			change_mil = 1
+			add_dip_power = 100
+			add_country_modifier = {
+                name = mission_grizzlemaw_united_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_nation_of_grizzlemaw_nf = {
+	    icon = mission_blueprint
+		position = 5
+		required_missions = { wwu_one_furbolg_to_rule_them_all_nf }
+		
+		trigger = {
+			833 = {
+			    development = 20
+				has_great_project = {
+                type = gp_grizzlemaw
+                tier = 1
+                }
+			}
+			prestige = 60
+			power_projection = 50
+			army_size = 20
+		}
+		
+		effect = {
+		    country_event = {
+				id = flavor_nf.1
+            }
+			add_country_modifier = {
+                name = mission_grizzlemaw_supreme_nf
+                duration = -1
+            }
+			add_mil_power = 100
+			add_adm_power = 100
+			add_dip_power = 100
+			change_government_reform_progress = 100
+			region_grizzly_hills = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_ancestral_faith_nf = {
+	    icon = mission_blueprint
+		position = 7
+		required_missions = { wwu_nation_of_grizzlemaw_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_grizzlemaw_supreme_nf
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_northrend_furbolg_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+	    OR = {
+		    tag = B45
+			tag = B46
+			tag = SOG
+			tag = SOW
+			tag = WEP
+			tag = GZM
+		}
+	}
+	has_country_shield = yes
+	
+	wwu_foreign_threats_nf = {
+	    icon = mission_blueprint
+		position = 2
+		required_missions = { wwu_furbolg_instincts_nf }
+		
+		trigger = {
+		    OR = {
+			    is_rival = B76
+				is_rival = A77
+				is_rival = A74
+			}
+			has_embargo_rivals = yes
+		}
+		
+		effect = {
+		    add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 25
+            }
+			add_country_modifier = {
+                name = mission_enemies_at_bay_nf
+                duration = -1
+            }
+			area_venture_bay = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_drakkari_threat_nf = {
+	    icon = mission_blueprint
+		position = 3
+		required_missions = { wwu_foreign_threats_nf }
+		
+		trigger = {
+			area_granite_springs = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_troll_invaders_nf
+                duration = -1
+            }
+			area_zeb_halak = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_secure_the_gates_nf = {
+	    icon = mission_blueprint
+		position = 5
+		required_missions = { wwu_drakkari_threat_nf }
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				has_fort_building_trigger = yes
+				OR = {
+					province_id = 2484
+					province_id = 2485
+					province_id = 2444
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_drive_trolls_beyond_our_lands_nf
+                duration = -1
+            }
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_id = 3053
+						province_id = 1747
+						province_id = 3052
+					}
+					has_fort_building_trigger = yes
+				}
+                add_or_improve_fort = yes
+			}
+		}
+	}
+	wwu_push_to_drak_tharon_keep_nf = {
+	    icon = mission_blueprint
+		position = 6
+		required_missions = { wwu_secure_the_gates_nf wwu_nation_of_grizzlemaw_nf}
+		
+		trigger = {
+			area_zeb_halak = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_draktharon_keep = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+		    add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			add_country_modifier = {
+                name = mission_drak_tharon_keep_nf
+                duration = -1
+            }
+			region_zuldrak = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_fall_of_the_drakkari_nf = {
+	    icon = mission_blueprint
+		position = 7
+		required_missions = { wwu_push_to_drak_tharon_keep_nf }
+		
+		trigger = {
+			NOT = { exists = A74 }
+			NOT = { exists = A77 }
+			area_gundrak = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_gundrak_raid = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+		add_prestige = 50
+		add_splendor = 50
+		change_government_reform_progress = 100
+		add_army_tradition = 10
+			add_country_modifier = {
+                name = mission_fall_of_an_empire_nf
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_northrend_furbolg_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+	    OR = {
+		    tag = B45
+			tag = B46
+			tag = SOG
+			tag = SOW
+			tag = WEP
+			tag = GZM
+		}
+	}
+	has_country_shield = yes
+	
+	wwu_thor_modan_nf = {
+	    icon = mission_blueprint
+		position = 3
+		required_missions = { wwu_foreign_threats_nf }
+		
+		trigger = {
+			NOT = { exists = OWA }
+			OR = {
+			    B76 = {
+				    NOT = {
+                        has_opinion = {
+                            who = ROOT
+                            value = -100
+					    }
+					}
+                }
+			    B76 = {
+				    NOT = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 100
+					    }
+					}
+                }
+            }
+		}
+		
+		effect = {
+		    if = {
+                limit = {
+				    NOT = {
+                        B76 = {
+					        has_opinion = {
+                                who = ROOT
+                                value = 100
+						    }
+					    }
+					}
+                }
+                create_alliance = B76
+            }
+			else_if = {
+                limit = {
+				    B76 = {
+					    NOT = {
+					        has_opinion = {
+                                who = ROOT
+                                value = -100
+						    }
+						}
+					}
+				}
+				area_thor_modan = {
+                    add_permanent_claim = ROOT
+			    }
+				area_redwood = {
+                    add_permanent_claim = ROOT
+			    }
+            }
+			add_country_modifier = {
+                name = mission_armies_of_iron_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_resolution_nf = {
+	    icon = mission_blueprint
+		position = 4
+		required_missions = { wwu_thor_modan_nf }
+		
+		trigger = {
+		    calc_true_if = {
+                alliance_with = B76
+			    trust = {
+                    who = B76
+                    value = 60
+                }
+				area_thor_modan = {
+				    type = all
+				    country_or_non_sovereign_subject_holds = ROOT
+			    }
+				area_redwood = {
+				    type = all
+				    country_or_non_sovereign_subject_holds = ROOT
+			    }
+                amount = 2
+            }
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_end_of_eastern_threat_nf
+                duration = -1
+            }
+			area_dun_argol = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_vrykul_raids_nf = {
+	    icon = mission_blueprint
+		position = 5
+		required_missions = { wwu_resolution_nf }
+		
+		trigger = {
+			area_skorn = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_ember_clutch = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+		    add_adm_power = 100
+			add_mil_power = 100
+			add_country_modifier = {
+                name = mission_vrykuls_of_howling_fjords_nf
+                duration = -1
+            }
+			area_utgarde_keep = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_utgarde_keep_nf = {
+	    icon = mission_blueprint
+		position = 6
+		required_missions = { wwu_vrykul_raids_nf }
+		
+		trigger = {
+			area_utgarde_keep = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+		    add_splendor = 50
+			change_government_reform_progress = 50
+			add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 25
+            }
+			add_country_modifier = {
+                name = mission_secure_south_frontier_nf
+                duration = -1
+            }
+			region_howling_fjord = {
+                add_permanent_claim = ROOT
+			}
+		}
+	}
+	wwu_totem_of_wind_nf = {
+	    icon = mission_blueprint
+		position = 8
+		required_missions = { wwu_totem_of_water_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_wind_nf
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_northrend_furbolg_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+	    OR = {
+		    tag = B45
+			tag = B46
+			tag = SOG
+			tag = SOW
+			tag = WEP
+			tag = GZM
+		}
+	}
+	has_country_shield = yes
+	
+	wwu_grizzlemaw_nf = {
+	    icon = mission_blueprint
+		required_missions = { }
+		
+		provinces_to_highlight = {
+		    province_id = 833
+		}
+		
+		trigger = {
+			833 = {
+				owned_by = ROOT
+			    has_great_project = {
+                    type = gp_grizzlemaw
+                    tier = 1
+			    }
+            }
+		}
+		
+		effect = {
+		    add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+			833 = {
+				add_great_project_tier = {
+					type = gp_grizzlemaw
+					tier = 2
+				}
+			}
+			add_country_modifier = {
+                name = mission_grizzlemaw_architecture_nf
+                duration = -1
+            }
+		}
+	}	
+	wwu_grizzlemaw_b_nf = {
+	    icon = mission_blueprint
+		position = 2
+		required_missions = { wwu_grizzlemaw_nf }
+		
+		provinces_to_highlight = {
+		    province_id = 833
+		}
+		
+		trigger = {
+			833 = {
+				owned_by = ROOT
+				development = 25
+			    has_great_project = {
+                    type = gp_grizzlemaw
+                    tier = 2
+				}
+            }
+		}
+		
+		effect = {
+		    add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+			833 = {
+				add_great_project_tier = {
+					type = gp_grizzlemaw
+					tier = 3
+				}
+			}
+			add_country_modifier = {
+                name = mission_grizzlemaw_architecture_b_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_homeland_of_all_furbolgs_nf = {
+	    icon = mission_blueprint
+		position = 3
+		required_missions = { wwu_grizzlemaw_b_nf }
+		
+		provinces_to_highlight = {
+		    province_id = 833
+		}
+		
+		trigger = {
+			833 = {
+				owned_by = ROOT
+				development = 30
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+                has_building = wow_training_ground_2
+                has_building = wow_headquarters
+			}
+			833 = {
+			    has_great_project = {
+                    type = gp_grizzlemaw
+                    tier = 3
+                }
+			}
+			
+		}
+		
+		effect = {
+		    change_adm = 1
+            change_dip = 1
+            change_mil = 1
+			add_splendor = 100
+			add_absolutism = 10
+			add_country_modifier = {
+                name = mission_furbolg_homeland_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_blessing_of_ursoc_nf = {
+	    icon = mission_blueprint
+		position = 4
+		required_missions = { }
+		
+		provinces_to_highlight = {
+		    province_id = 811
+		}
+		
+		trigger = {
+			811 = {
+				owned_by = ROOT
+				religion = druidism
+				development = 15
+			}
+			
+		}
+		
+		effect = {
+			add_splendor = 50
+			add_country_modifier = {
+                name = mission_druitic_blessing_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_blessing_of_yogg_saron_nf = {
+	    icon = mission_blueprint
+		position = 5
+		required_missions = { }
+		
+		provinces_to_highlight = {
+		    province_id = 833
+		}
+		
+		trigger = {
+			833 = {
+				owned_by = ROOT
+				religion = yogg_saron
+			}
+			OR = {
+			    alliance_with = B73
+			    alliance_with = B86
+			}
+		}
+		
+		effect = {
+			add_splendor = 50
+			add_country_modifier = {
+                name = mission_blessing_of_old_gods_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_totem_of_earth_nf = {
+	    icon = mission_blueprint
+		position = 6
+		required_missions = { }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_earth_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_totem_of_water_nf = {
+	    icon = mission_blueprint
+		position = 7
+		required_missions = { wwu_totem_of_earth_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_water_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_totem_of_fire_nf = {
+	    icon = mission_blueprint
+		position = 8
+		required_missions = { wwu_totem_of_water_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_fire_nf
+                duration = -1
+            }
+		}
+	}
+}
