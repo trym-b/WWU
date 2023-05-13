@@ -165,9 +165,9 @@ NDiplomacy = {
 	--- WWU: reduced scaled truce length to allow for quicker conquest.
 	REQUEST_HEIR_TRUCE = 5,
 	REQUEST_HEIR_AE = 20,
-	WARNING_YEARS = 20,								-- Years before warning expire
+	WARNING_YEARS = 10,								-- Years before warning expire
 	ANNUL_TREATIES_YEARS = 10,						-- Years before annul treaties expire
-	COALITION_YEARS = 20,							-- Years before coalition expire
+	COALITION_YEARS = 10,							-- Years before coalition expire
 	REVANCHISM_MONTHLY_DECAY = 0.833,			-- about 20 years to decay all of it.
 	MONARCH_GOV_CHANGE_LEGITIMACY_PENALTY = 0.0,	-- Penalty(%) on the legitimacy when changing gov type to the monarchy
 	EXTEND_REGENCY_LEGITIMACY_PENALTY = 10,  		-- Penalty for extending a regency
@@ -440,7 +440,7 @@ NDiplomacy = {
 	BREAK_ALLIANCE_PENALTY_MONTHS = 120,			-- Break Alliance causes resentment for this many months.
 	BREAK_ALLIANCE_PENALTY_SCALER = -0.85,			-- Break Alliance resentment is scaled by this value but is capped at -100.
 	BREAK_ALLIANCE_DIPLOREP_FACTOR = 3,				-- AI acceptance factor per diplomatic reputation
-	AE_COALITION_THRESHOLD = -50,					-- Coalitions can form below this amount of AE opinion
+	AE_COALITION_THRESHOLD = -75,					-- Coalitions can form below this amount of AE opinion
 	
 	ABANDON_UNION_PRESTIGE = -25,					-- The change in prestige for the overlord when abandoning a personal union.
 
