@@ -265,7 +265,7 @@ NDiplomacy = {
 	AE_PRIMITIVES = -0.75, -- less AE from primitives
 
 	-- Peace Option Effects, base values for the winner. The loser gets the inverse.
-	PO_DEMAND_PROVINCES_AE = 1.5, 				-- _DDEF_PO_DEMAND_PROVINCES_AE = 10, (Per development)
+	PO_DEMAND_PROVINCES_AE = 1.2, 				-- _DDEF_PO_DEMAND_PROVINCES_AE = 10, (Per development)
 	--- WWU: increased to make conquest cause more upset.
 	PO_RETURN_CORES_AE = 0.5, 					-- (Per core, only applied if returning cores to vassals of winner)
 	--- WWU: increased to make conquest cause more upset.
