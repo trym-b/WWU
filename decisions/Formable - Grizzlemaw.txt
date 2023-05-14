@@ -3,55 +3,65 @@ country_decisions = {
 		major = yes
         ai_importance = 10
         
-		potential = { 
-            NOT = { has_country_flag = enacted_final_tag_formation }
-            
+		potential = {
+		    has_country_flag = grizzlemaw_formation_available
+			
 			# Exclusions
 			NOT = { exists = GZM } # Grizzlemaw
             
             # Requisites
 			OR = {
-			    tag = B45
-				tag = B46
+			    tag = B45 # Frostpaw
+				tag = B46 # Redfang
+				tag = SOG # Snowflurry
+			    tag = SOW # Snowspring
+			    tag = WEP # Winterpaw
 			}
-            
-            any_owned_province = {
-                area = area_grizzlemaw
-            }
 		}
         
         provinces_to_highlight = {
             NOT = { owned_by = ROOT }
-			area = area_grizzlemaw
+			region = region_grizzly_hills
 		}
         
-		allow = {   
+		allow = {
+            owns_core_province = 833
+            
+            if = {
+                limit = {
+                    tag = B45 # Frostpaw
+                }
+                NOT = { exists = B46 } # Redfang
+            }
+            if = {
+                limit = {
+                    tag = B46 # Redfang
+                }
+                NOT = { exists = B45 } # Frostpaw
+            }
+            if = {
+                limit = {
+				    OR = {
+                        tag = SOG # Snowflurry
+						tag = SOW # Snowspring
+						tag = WEP # Winterpaw
+					}
+                }
+                NOT = { exists = B45 } # Frostpaw
+				NOT = { exists = B46 } # Redfang
+            }
             # Ownership
-		    area_grizzlemaw = {
+		    region_grizzly_hills = {
                 type = all
                 owned_by = ROOT
             }
-            OR = {
-			    NOT = { exists = B45 }
-				NOT = { exists = B46 }
-			}
 			
 			# General
 			is_at_war = no	
-			stability = 1
-            total_development = 160
-            
-            # Cost
-            adm_power = 150
-			dip_power = 150
-			mil_power = 150
+			stability = 2         
 		}
         
 		effect = {
-            # Cost
-			add_adm_power = -150
-			add_dip_power = -150
-            add_mil_power = -150
         
             # Switch
 			change_tag = GZM
@@ -63,8 +73,6 @@ country_decisions = {
             #trigger_mission_switch = yes
             set_final_tag_status = yes
 		}
-		
-		
 		
 		ai_will_do = {
 			factor = 1
