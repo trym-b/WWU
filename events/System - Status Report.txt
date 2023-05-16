@@ -1,0 +1,200 @@
+namespace = wwu_status_report
+
+# Realm Management
+country_event = {
+	id = wwu_status_report.1
+	title = wwu_status_report.1.title
+	desc = wwu_status_report.1.desc
+	picture = RULER_VIEW_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Cast Magic
+    option = {
+		name = wwu_status_report.1.option.ruler_magic
+        
+        trigger = {
+            has_ruler_modifier = spellcaster_capabilities
+            NOT = { has_country_flag = allow_magic_specialization_decision } # If this is set, it means magic school has not been chosen yet
+        }
+        
+        if = { limit = { is_variable_equal = { which = magic_school value = 1  } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 2  } } country_event = { id = wwu_magic_holy_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 3  } } country_event = { id = wwu_magic_chi_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 4  } } country_event = { id = wwu_magic_voodoo_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 5  } } country_event = { id = wwu_magic_nature_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 6  } } country_event = { id = wwu_magic_undead_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 7  } } country_event = { id = wwu_magic_shaman_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 8  } } country_event = { id = wwu_magic_fel_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 9  } } country_event = { id = wwu_magic_draconic_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 10 } } country_event = { id = wwu_magic_old_god_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 11 } } country_event = { id = wwu_magic_shadow_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 12 } } country_event = { id = wwu_magic_titan_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 13 } } country_event = { id = wwu_magic_runic_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 14 } } country_event = { id = wwu_magic_nightmare_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 15 } } country_event = { id = wwu_magic_earth_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 16 } } country_event = { id = wwu_magic_fire_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 17 } } country_event = { id = wwu_magic_water_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 18 } } country_event = { id = wwu_magic_wind_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 19 } } country_event = { id = wwu_magic_domination_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 20 } } country_event = { id = wwu_magic_soul_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 21 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 22 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 23 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 24 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 25 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 26 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 27 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 28 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 29 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 30 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        if = { limit = { is_variable_equal = { which = magic_school value = 31 } } country_event = { id = wwu_magic_arcane_menu.1 } }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Select Magic Specialization
+    option = {
+		name = wwu_status_report.1.option.ruler_magic_specialization
+        
+        trigger = {
+            has_global_flag = enabled_magic_mechanics
+			has_country_flag = allow_magic_specialization_decision
+        }
+        
+        hidden_effect = {
+            clr_country_flag = allow_magic_specialization_decision
+        }
+        country_event = { id = wwu_magic.16 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Invest in Ruler
+    option = {
+		name = wwu_status_report.1.option.ruler_investment
+        
+        if = {
+            limit = {
+                has_country_modifier = ruler_investment_cooldown
+            }
+            custom_tooltip = RULER_INVESTMENT_COOLDOWN_TT
+        }
+        else = {
+            country_event = { id = wwu_ruler_investment.10 }
+            hidden_effect = {
+                if = {
+                    limit = {
+                        ai = yes
+                    }
+                    add_country_modifier = {
+                        name = ai_ruler_investment_look_cooldown
+                        duration = 365
+                        hidden = yes
+                    }
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 800 }
+                NOT = { dip_power = 800 }
+                NOT = { mil_power = 800 }
+            }
+            
+            modifier = {
+                factor = 0
+                
+                has_country_modifier = ai_ruler_investment_look_cooldown
+            }
+        }
+	}
+    
+    # Retire [Root.Monarch.GetName]
+    option = {
+		name = wwu_status_report.1.option.retire
+        
+        trigger = {
+            months_of_ruling = 64 # Must have ruled for 5 years minimum. Prevents exploitative ruler cycling
+        }
+        
+        kill_ruler = yes
+        
+        if = {
+            limit = {
+                NOT = { legitimacy_equivalent = 50 }
+            }
+            add_stability = 1
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # Adjust National Color
+    option = {
+		name = wwu_status_report.1.option.adjust_national_color
+        
+        country_event = { id = wwu_color_picker.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # View Doctrines
+    option = {
+		name = wwu_status_report.1.option.view_doctrines
+        
+        country_event = { id = wwu_doctrine.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # View Artifacts
+    option = {
+		name = wwu_status_report.1.option.view_artifacts
+        
+        trigger = {
+            has_global_flag = enabled_archaeology_mechanics
+        }
+        
+        country_event = { id = wwu_artifact_repository.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    # View Factions
+    option = {
+		name = wwu_status_report.1.option.view_factions
+        
+        country_event = { id = wwu_faction_report.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    option = {
+		name = wwu_status_report.1.option.exit
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+}
+
