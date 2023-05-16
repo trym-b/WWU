@@ -228,70 +228,70 @@ ruler_succession_rebel_spawn_legitimacy = {
     hidden_effect = {
         if = {
             limit = {
-                NOT = { legitimacy = 15 }
+                NOT = { has_country_modifier = pretenders_on_succession_cooldown }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            if = {
+                limit = {
+                    NOT = { legitimacy = 15 }
                 }
-                pretender_rebels = 3
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            else_if = {
+                limit = {
+                    NOT = { legitimacy = 30 }
                 }
-                pretender_rebels = 2
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { legitimacy = 45 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { legitimacy = 60 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 2
+                }
+            }
+            else_if = { 
+                limit = {
+                    NOT = { legitimacy = 80 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 1
+                }
             }
         }
-        else_if = {
-            limit = {
-                NOT = { legitimacy = 30 }
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 3
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 1
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { legitimacy = 45 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 3
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { legitimacy = 60 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 2
-            }
-        }
-        else_if = { 
-            limit = {
-                NOT = { legitimacy = 80 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 1
-            }
+        
+        # Pretenders will only occur once every 5 years, preventing pretender spirals
+        add_country_modifier = {
+            name = pretenders_on_succession_cooldown
+            duration = 1800
+            hidden = yes
         }
     }
 }
@@ -301,6 +301,7 @@ ruler_succession_rebel_spawn_devotion = {
         if = {
             limit = {
                 uses_devotion = yes
+                NOT = { has_country_modifier = pretenders_on_succession_cooldown }
             }
             if = {
                 limit = {
@@ -312,12 +313,6 @@ ruler_succession_rebel_spawn_devotion = {
                     }
                     pretender_rebels = 3
                 }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 2
-                }
             }
             else_if = {
                 limit = {
@@ -328,12 +323,6 @@ ruler_succession_rebel_spawn_devotion = {
                         is_in_capital_area = yes
                     }
                     pretender_rebels = 3
-                }
-                random_owned_province = {
-                    limit = { 
-                        is_in_capital_area = yes
-                    }
-                    pretender_rebels = 1
                 }
             }
             else_if = {
@@ -370,6 +359,13 @@ ruler_succession_rebel_spawn_devotion = {
                 }
             }
         }
+        
+        # Pretenders will only occur once every 5 years, preventing pretender spirals
+        add_country_modifier = {
+            name = pretenders_on_succession_cooldown
+            duration = 1800
+            hidden = yes
+        }
     }
 }
 
@@ -377,70 +373,70 @@ ruler_succession_rebel_spawn_republican_tradition = {
     hidden_effect = {
         if = {
             limit = {
-                NOT = { republican_tradition = 15 }
+                NOT = { has_country_modifier = pretenders_on_succession_cooldown }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            if = {
+                limit = {
+                    NOT = { republican_tradition = 15 }
                 }
-                pretender_rebels = 3
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            else_if = {
+                limit = {
+                    NOT = { republican_tradition = 30 }
                 }
-                pretender_rebels = 2
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { republican_tradition = 45 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { republican_tradition = 60 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 2
+                }
+            }
+            else_if = { 
+                limit = {
+                    NOT = { republican_tradition = 80 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 1
+                }
             }
         }
-        else_if = {
-            limit = {
-                NOT = { republican_tradition = 30 }
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 3
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 1
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { republican_tradition = 45 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 3
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { republican_tradition = 60 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 2
-            }
-        }
-        else_if = { 
-            limit = {
-                NOT = { republican_tradition = 80 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 1
-            }
+        
+        # Pretenders will only occur once every 5 years, preventing pretender spirals
+        add_country_modifier = {
+            name = pretenders_on_succession_cooldown
+            duration = 1800
+            hidden = yes
         }
     }
 }
@@ -449,70 +445,70 @@ ruler_succession_rebel_spawn_horde_unity = {
     hidden_effect = {
         if = {
             limit = {
-                NOT = { horde_unity = 15 }
+                NOT = { has_country_modifier = pretenders_on_succession_cooldown }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            if = {
+                limit = {
+                    NOT = { horde_unity = 15 }
                 }
-                pretender_rebels = 3
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
             }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
+            else_if = {
+                limit = {
+                    NOT = { horde_unity = 30 }
                 }
-                pretender_rebels = 2
+                random_owned_province = {
+                    limit = { 
+                        is_in_capital_area = yes
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { horde_unity = 45 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 3
+                }
+            }
+            else_if = {
+                limit = {
+                    NOT = { horde_unity = 60 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 2
+                }
+            }
+            else_if = { 
+                limit = {
+                    NOT = { horde_unity = 80 }
+                }
+                random_owned_province = {
+                    limit = { 
+                        NOT = { is_in_capital_area = yes }
+                    }
+                    pretender_rebels = 1
+                }
             }
         }
-        else_if = {
-            limit = {
-                NOT = { horde_unity = 30 }
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 3
-            }
-            random_owned_province = {
-                limit = { 
-                    is_in_capital_area = yes
-                }
-                pretender_rebels = 1
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { horde_unity = 45 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 3
-            }
-        }
-        else_if = {
-            limit = {
-                NOT = { horde_unity = 60 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 2
-            }
-        }
-        else_if = { 
-            limit = {
-                NOT = { horde_unity = 80 }
-            }
-            random_owned_province = {
-                limit = { 
-                    NOT = { is_in_capital_area = yes }
-                }
-                pretender_rebels = 1
-            }
+        
+        # Pretenders will only occur once every 5 years, preventing pretender spirals
+        add_country_modifier = {
+            name = pretenders_on_succession_cooldown
+            duration = 1800
+            hidden = yes
         }
     }
 }
