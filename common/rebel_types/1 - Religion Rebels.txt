@@ -4949,13 +4949,13 @@ sporemounds_rebels = {
 	}
 }
 #---------------------------------
-# Primitive
+# Ogre Idolatry
 #---------------------------------
-primitive_rebels = {
+ogre_idolatry_rebels = {
 	color = { 69 217 252 }
 	area = nation 					# Sticks to provinces of their nation
 	government = theocracy 			# Desires Theocracy
-	religion = primitive
+	religion = ogre_idolatry
 	defection = none				# Will not defect
 	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
 	independence = none				# Does not strive for independence
@@ -4993,7 +4993,7 @@ primitive_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			NOT = { religion = primitive }
+			NOT = { religion = ogre_idolatry }
 		}
 		modifier = {
 			factor = 0.001
@@ -5034,21 +5034,21 @@ primitive_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			religion = primitive
-			owner = { religion = primitive }
+			religion = ogre_idolatry
+			owner = { religion = ogre_idolatry }
 		}
 		modifier = {
 			factor = 2.0
-			NOT = { religion = primitive }
+			NOT = { religion = ogre_idolatry }
 			any_neighbor_province = {
-	 			religion = primitive
+	 			religion = ogre_idolatry
 	 			NOT = { has_province_modifier = "forced_conversion" }
 	 		}
 	 	}
 		modifier = {
 			factor = 5
 			has_missionary = yes
-			religion = primitive
+			religion = ogre_idolatry
 		}
 		modifier = {
 			factor = 1.5
@@ -5075,10 +5075,10 @@ primitive_rebels = {
 		hidden_effect = {
 			if = {
 				limit = {
-					NOT = { religion = primitive }
-					NOT = { owner = { religion = primitive } }
+					NOT = { religion = ogre_idolatry }
+					NOT = { owner = { religion = ogre_idolatry } }
 				}
-				change_religion = primitive
+				change_religion = ogre_idolatry
 				add_province_modifier = {
 					name = "forced_conversion"
 					duration = 730
@@ -5106,7 +5106,7 @@ primitive_rebels = {
 
 	# Country scope
 	can_negotiate_trigger = {
-        dominant_religion = primitive
+        dominant_religion = ogre_idolatry
 	}
 
 	# Country scope
@@ -5115,7 +5115,7 @@ primitive_rebels = {
 	}
 
 	# Localisation for their demands
-	demands_description = "primitive_rebels_demand"
+	demands_description = "ogre_idolatry_rebels_demand"
 
 	# Country Scope
 	demands_enforced_effect = {
@@ -5128,7 +5128,7 @@ primitive_rebels = {
 		}
 		if = {
 			limit = {
-				religion = primitive
+				religion = ogre_idolatry
 			}
 			add_country_modifier = {
 				name = "religious_intolerance_enforced"
@@ -5137,10 +5137,406 @@ primitive_rebels = {
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = primitive }
-				dominant_religion = primitive
+				NOT = { religion = ogre_idolatry }
+				dominant_religion = ogre_idolatry
 			}
-			change_religion = primitive
+			change_religion = ogre_idolatry
+			force_converted = yes
+		}
+		else = { add_stability = -1 } 
+	}
+}
+#---------------------------------
+# Wolvar Idolatry
+#---------------------------------
+wolvar_idolatry_rebels = {
+	color = { 69 217 252 }
+	area = nation 					# Sticks to provinces of their nation
+	government = theocracy 			# Desires Theocracy
+	religion = wolvar_idolatry
+	defection = none				# Will not defect
+	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
+	independence = none				# Does not strive for independence
+	unit_transfer = no
+	gfx_type = culture_province
+	will_relocate = yes
+
+	resilient = no
+	reinforcing = yes
+	general = yes
+	smart = yes
+
+	artillery = 0.0
+	infantry = 0.7
+	cavalry = 0.3
+
+	morale = 0.75
+
+	# Possible handle actions
+	handle_action_negotiate = yes
+	handle_action_stability = yes
+	handle_action_build_core = yes
+	handle_action_send_missionary = yes
+
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			is_overseas = yes
+		}
+		modifier = {
+			factor = 0.0
+			owner = { religion = ROOT }
+		}
+		modifier = {
+			factor = 0.0
+			NOT = { religion = wolvar_idolatry }
+		}
+		modifier = {
+			factor = 0.001
+			tolerance_to_this = 5
+		}
+		modifier = {
+			factor = 0.5
+			tolerance_to_this = 2
+		}
+		modifier = {
+			factor = 2000
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = 1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -2 }
+		}
+	}
+
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 0.0
+			religion = wolvar_idolatry
+			owner = { religion = wolvar_idolatry }
+		}
+		modifier = {
+			factor = 2.0
+			NOT = { religion = wolvar_idolatry }
+			any_neighbor_province = {
+	 			religion = wolvar_idolatry
+	 			NOT = { has_province_modifier = "forced_conversion" }
+	 		}
+	 	}
+		modifier = {
+			factor = 5
+			has_missionary = yes
+			religion = wolvar_idolatry
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+
+ 	# Province Scope
+ 	siege_won_trigger = {
+		NOT = {
+			is_capital = yes
+		}
+ 	}
+	siege_won_effect = {
+		custom_tooltip = religious_rebels_seige_effect_tooltip
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { religion = wolvar_idolatry }
+					NOT = { owner = { religion = wolvar_idolatry } }
+				}
+				change_religion = wolvar_idolatry
+				add_province_modifier = {
+					name = "forced_conversion"
+					duration = 730
+				}
+			}
+		}
+		owner = {
+            if = {
+				limit = { 
+                    has_estate = estate_clergy 
+                    NOT = {
+                        estate_loyalty = {
+                            estate = estate_clergy
+                            loyalty = 30.0
+                        }
+                    }
+                }
+				change_estate_land_share = {
+					estate = estate_clergy
+					share = 1.0
+				}
+			}
+		}
+	}
+
+	# Country scope
+	can_negotiate_trigger = {
+        dominant_religion = wolvar_idolatry
+	}
+
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+
+	# Localisation for their demands
+	demands_description = "wolvar_idolatry_rebels_demand"
+
+	# Country Scope
+	demands_enforced_effect = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = just_lost_to_rebels
+				duration = 10
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				religion = wolvar_idolatry
+			}
+			add_country_modifier = {
+				name = "religious_intolerance_enforced"
+				duration = 3650
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion = wolvar_idolatry }
+				dominant_religion = wolvar_idolatry
+			}
+			change_religion = wolvar_idolatry
+			force_converted = yes
+		}
+		else = { add_stability = -1 } 
+	}
+}
+#---------------------------------
+# Tuskarr Idolatry
+#---------------------------------
+tuskarr_idolatry_rebels = {
+	color = { 69 217 252 }
+	area = nation 					# Sticks to provinces of their nation
+	government = theocracy 			# Desires Theocracy
+	religion = tuskarr_idolatry
+	defection = none				# Will not defect
+	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
+	independence = none				# Does not strive for independence
+	unit_transfer = no
+	gfx_type = culture_province
+	will_relocate = yes
+
+	resilient = no
+	reinforcing = yes
+	general = yes
+	smart = yes
+
+	artillery = 0.0
+	infantry = 0.7
+	cavalry = 0.3
+
+	morale = 0.75
+
+	# Possible handle actions
+	handle_action_negotiate = yes
+	handle_action_stability = yes
+	handle_action_build_core = yes
+	handle_action_send_missionary = yes
+
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			is_overseas = yes
+		}
+		modifier = {
+			factor = 0.0
+			owner = { religion = ROOT }
+		}
+		modifier = {
+			factor = 0.0
+			NOT = { religion = tuskarr_idolatry }
+		}
+		modifier = {
+			factor = 0.001
+			tolerance_to_this = 5
+		}
+		modifier = {
+			factor = 0.5
+			tolerance_to_this = 2
+		}
+		modifier = {
+			factor = 2000
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = 1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -2 }
+		}
+	}
+
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 0.0
+			religion = tuskarr_idolatry
+			owner = { religion = tuskarr_idolatry }
+		}
+		modifier = {
+			factor = 2.0
+			NOT = { religion = tuskarr_idolatry }
+			any_neighbor_province = {
+	 			religion = tuskarr_idolatry
+	 			NOT = { has_province_modifier = "forced_conversion" }
+	 		}
+	 	}
+		modifier = {
+			factor = 5
+			has_missionary = yes
+			religion = tuskarr_idolatry
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+
+ 	# Province Scope
+ 	siege_won_trigger = {
+		NOT = {
+			is_capital = yes
+		}
+ 	}
+	siege_won_effect = {
+		custom_tooltip = religious_rebels_seige_effect_tooltip
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { religion = tuskarr_idolatry }
+					NOT = { owner = { religion = tuskarr_idolatry } }
+				}
+				change_religion = tuskarr_idolatry
+				add_province_modifier = {
+					name = "forced_conversion"
+					duration = 730
+				}
+			}
+		}
+		owner = {
+            if = {
+				limit = { 
+                    has_estate = estate_clergy 
+                    NOT = {
+                        estate_loyalty = {
+                            estate = estate_clergy
+                            loyalty = 30.0
+                        }
+                    }
+                }
+				change_estate_land_share = {
+					estate = estate_clergy
+					share = 1.0
+				}
+			}
+		}
+	}
+
+	# Country scope
+	can_negotiate_trigger = {
+        dominant_religion = tuskarr_idolatry
+	}
+
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+
+	# Localisation for their demands
+	demands_description = "tuskarr_idolatry_rebels_demand"
+
+	# Country Scope
+	demands_enforced_effect = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = just_lost_to_rebels
+				duration = 10
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				religion = tuskarr_idolatry
+			}
+			add_country_modifier = {
+				name = "religious_intolerance_enforced"
+				duration = 3650
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion = tuskarr_idolatry }
+				dominant_religion = tuskarr_idolatry
+			}
+			change_religion = tuskarr_idolatry
 			force_converted = yes
 		}
 		else = { add_stability = -1 } 
@@ -9099,6 +9495,188 @@ sha_rebels = {
 				dominant_religion = sha
 			}
 			change_religion = sha
+			force_converted = yes
+		}
+		else = { add_stability = -1 } 
+	}
+}
+
+#---------------------------------
+# Primalist
+#---------------------------------
+primalist_rebels = {
+	color = { 226 218 97 }
+	area = nation 					# Sticks to provinces of their nation
+	government = theocracy 			# Desires Tribalism
+	religion = primalist
+	defection = none				# Will not defect
+	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
+	independence = none				# Does not strive for independence
+	unit_transfer = no
+	gfx_type = culture_province
+	will_relocate = yes
+
+	resilient = no
+	reinforcing = yes
+	general = yes
+	smart = yes
+
+	artillery = 0.0
+	infantry = 0.9
+	cavalry = 0.1
+
+	morale = 1.1
+
+	# Possible handle actions
+	handle_action_negotiate = yes
+	handle_action_stability = yes
+	handle_action_build_core = yes
+	handle_action_send_missionary = yes
+
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 1
+        
+		modifier = {
+			factor = 0.5
+			is_overseas = yes
+		}
+		modifier = {
+			factor = 0.0
+			owner = { religion = ROOT }
+		}
+		modifier = {
+			factor = 0.0
+			NOT = { religion = primalist }
+		}
+		modifier = {
+			factor = 0.001
+			tolerance_to_this = 5
+		}
+		modifier = {
+			factor = 0.5
+			tolerance_to_this = 2
+		}
+		modifier = {
+			factor = 2000
+			has_missionary = yes
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = 1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -1 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { tolerance_to_this = -2 }
+		}
+	}
+
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.5
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 0.0
+			religion = primalist
+			owner = { religion = primalist }
+		}
+		modifier = {
+			factor = 2.0
+			NOT = { religion = primalist }
+			any_neighbor_province = {
+	 			religion = primalist
+	 			NOT = { has_province_modifier = "forced_conversion" }
+	 		}
+	 	}
+		modifier = {
+			factor = 5
+			has_missionary = yes
+			religion = primalist
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+
+ 	# Province Scope
+ 	siege_won_trigger = {
+		NOT = {
+			is_capital = yes
+		}
+ 	}
+	siege_won_effect = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { religion = primalist }
+					NOT = { owner = { religion = primalist } }
+				}
+				change_religion = primalist
+				add_province_modifier = {
+					name = "forced_conversion"
+					duration = 730
+				}
+			}
+		}
+	}
+
+	# Country scope
+	can_negotiate_trigger = {
+        dominant_religion = primalist
+	}
+
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+
+	# Localisation for their demands
+	demands_description = "primalist_demand"
+
+	# Country Scope
+	demands_enforced_effect = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = just_lost_to_rebels
+				duration = 10
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				religion = primalist
+			}
+			add_country_modifier = {
+				name = "religious_intolerance_enforced"
+				duration = 3650
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = { religion = primalist }
+				dominant_religion = primalist
+			}
+			change_religion = primalist
 			force_converted = yes
 		}
 		else = { add_stability = -1 } 
