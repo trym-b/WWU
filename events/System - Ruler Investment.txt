@@ -14,6 +14,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.a
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             NOT = { adm = 7 }
             
             if = {
@@ -157,6 +158,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.b
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             NOT = { dip = 7 }
             
             if = {
@@ -300,6 +302,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.c
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             NOT = { mil = 7 }
             
             if = {
@@ -443,6 +446,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.class_training
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             NOT = { has_assigned_ruler_class = yes }
             NOT = { has_ruler_flag = ruler_is_training }
             
@@ -467,6 +471,15 @@ country_event = {
         
         country_event = { id = wwu_ruler_training.1 }
         
+        custom_tooltip = RULER_INVESTMENT_DURATION_TT
+        hidden_effect = {
+            add_country_modifier = {
+                name = ruler_investment_cooldown
+                duration = 1800
+                hidden = yes
+            }
+        }
+        
         ai_chance = {
             factor = 1
             
@@ -485,6 +498,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.class_training.lack_requirement
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             NOT = { has_assigned_ruler_class = yes }
             NOT = { has_ruler_flag = ruler_is_training }
             
@@ -505,6 +519,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.magical_training
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             has_global_flag = enabled_magic_mechanics
             NOT = { has_ruler_modifier = spellcaster_capabilities }
             NOT = { has_ruler_modifier = magical_training }
@@ -588,6 +603,15 @@ country_event = {
             country_event = { id = wwu_magic.12 days = 3650 }
         }
         
+        custom_tooltip = RULER_INVESTMENT_DURATION_TT
+        hidden_effect = {
+            add_country_modifier = {
+                name = ruler_investment_cooldown
+                duration = 1800
+                hidden = yes
+            }
+        }
+        
         # Add free points based on monarch skill
         # Only do it for the first instance of the decision
         hidden_effect = {
@@ -637,6 +661,7 @@ country_event = {
 		name = wwu_ruler_investment.10.option.magical_training.lack_requirement
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             has_global_flag = enabled_magic_mechanics
             NOT = { has_ruler_modifier = spellcaster_capabilities }
             NOT = { has_ruler_modifier = magical_training }
@@ -711,12 +736,22 @@ country_event = {
 		name = wwu_ruler_investment.10.option.magical_skill_training
         
         trigger = {
+            NOT = { has_country_modifier = ruler_investment_cooldown }
             has_global_flag = enabled_magic_mechanics
             has_ruler_modifier = spellcaster_capabilities
             NOT = { has_ruler_modifier = recently_trained_magic }
         }
         
         country_event = { id = wwu_magic.60 }
+        
+        custom_tooltip = RULER_INVESTMENT_DURATION_TT
+        hidden_effect = {
+            add_country_modifier = {
+                name = ruler_investment_cooldown
+                duration = 1800
+                hidden = yes
+            }
+        }
         
         ai_chance = {
             factor = 1
