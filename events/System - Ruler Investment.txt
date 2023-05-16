@@ -469,6 +469,10 @@ country_event = {
             add_mil_power = -50
         }
         
+        hidden_effect = {
+            set_country_flag = skip_status_report_return
+        }
+        
         country_event = { id = wwu_ruler_training.1 }
         
         custom_tooltip = RULER_INVESTMENT_DURATION_TT
@@ -742,6 +746,10 @@ country_event = {
             NOT = { has_ruler_modifier = recently_trained_magic }
         }
         
+        hidden_effect = {
+            set_country_flag = skip_status_report_return
+        }
+        
         country_event = { id = wwu_magic.60 }
         
         custom_tooltip = RULER_INVESTMENT_DURATION_TT
@@ -775,6 +783,15 @@ country_event = {
 	}
     
     after = {
-        country_event = { id = wwu_status_report.1 }
+        if = {
+            limit = {
+                has_country_flag = skip_status_report_return
+            }
+            
+            clr_country_flag = skip_status_report_return
+        }
+        else = {
+            country_event = { id = wwu_status_report.1 }
+        }
     }
 }
