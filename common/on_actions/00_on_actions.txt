@@ -230,6 +230,18 @@ on_battle_won_country = {
 		}
 	}
     
+    if = {
+        limit = {
+            has_country_modifier = chaos_demonic_annihilation
+            FROM = {
+                culture_group = culture_group_demonic
+            }
+        }
+        
+        add_prestige = 5
+        add_mil_power = 5
+    }
+    
     government_on_battle_won_country_effect = yes
     faction_on_battle_won_country_effect = yes
     
@@ -3850,10 +3862,21 @@ on_slacken_start = {
 		log = "DEBUG - [Root.GetName]: on_slacken_start "
 	}
     
-	add_country_modifier = {
-		name = slackening_modifier
-		duration = -1
-	}
+    if = {
+        limit = {
+            has_country_modifier = chaos_demon_hunter_fury
+        }
+        add_country_modifier = {
+            name = slackening_modifier_illidari
+            duration = -1
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = slackening_modifier
+            duration = -1
+        }
+    }
 }
 on_slacken_stop = {
     if = { 
@@ -3862,6 +3885,7 @@ on_slacken_stop = {
 	}
     
 	remove_country_modifier = slackening_modifier
+	remove_country_modifier = slackening_modifier_illidari
 }
 
 #ROOT - Province

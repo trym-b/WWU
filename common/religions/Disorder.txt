@@ -29,7 +29,7 @@ disorder_group = {
             recover_army_morale_speed = 0.05
 		}
 		province = {
-			local_missionary_strength = -0.05
+			local_missionary_strength = -0.03
 		}
         
 		on_convert = {
@@ -331,6 +331,47 @@ disorder_group = {
 					factor = 1
 				}				
 			}
+		}
+        
+        heretic = { HERETIC }
+	}
+    
+    chaos = {
+		color = { 160 255 29 }
+		icon = 71
+		allow_female_defenders_of_the_faith = yes
+		
+		country = {
+			prestige = 1.0
+            discipline = 0.05
+		}
+        country_as_secondary = {
+			prestige = 0.5
+            discipline = 0.025
+		}
+		province = {
+			local_missionary_strength = -0.03
+		}
+        
+        uses_anglican_power = yes
+		aspects = {
+			chaos_aspect_1
+            chaos_aspect_2
+            chaos_aspect_3
+            chaos_aspect_4
+            chaos_aspect_5
+            chaos_aspect_6
+		}
+		aspects_name = CHAOS_ASPECTS
+        
+		on_convert = {
+			change_religion = chaos
+			add_prestige = -100
+
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
 		}
         
         heretic = { HERETIC }
