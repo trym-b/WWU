@@ -1,415 +1,11 @@
 country_decisions = {
-	indoctrinate_vassal = {
-		potential = {
-			tag = P11
-			any_subject_country = {
-				NOT = { all_owned_province = { religion = cult_of_the_damned } }
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = indoctrinated }
-			}
-		}
-		allow = {
-			tag = P11
-			church_power = 25
-			any_subject_country = {
-				NOT = { all_owned_province = { religion = cult_of_the_damned } }
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = indoctrinated }
-			}
-		}
-		effect = {
-			add_church_power = -25
-			every_subject_country = {
-				limit = {
-					NOT = { culture_group = culture_group_scourge }
-					NOT = { culture_group = culture_group_undead }
-					NOT = { primary_culture = culture_cultist }
-					NOT = { culture_group = culture_group_nerubian }
-					NOT = { culture_group = culture_group_crypt_fiends }
-					NOT = { culture_group = culture_group_vrykul }
-					NOT = { has_country_flag = indoctrinated }
-				}
-				change_religion = cult_of_the_damned
-				set_ruler_religion = cult_of_the_damned
-				set_heir_religion = cult_of_the_damned
-				set_country_flag = indoctrinated
-				capital_scope = {
-					change_religion = cult_of_the_damned
-				}
-				add_stability = -2
-				add_country_modifier = {
-					name = is_evil
-					duration = -1
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	prepare_the_granaries_vassal = {
-		color = { 156 158 33 }
-		
-		potential = {
-			any_subject_country = {
-				NOT = { all_owned_province = { religion = cult_of_the_damned } }
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = granariesbuilt }
-				has_country_flag = indoctrinated
-			}
-		}
-		allow = {
-			adm_power = 100
-			any_subject_country = {
-				NOT = { all_owned_province = { religion = cult_of_the_damned } }
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = granariesbuilt }
-				has_country_flag = indoctrinated
-			}
-		}
-		effect = {
-			add_adm_power = -100
-			every_subject_country = {
-				limit = {
-					NOT = { culture_group = culture_group_scourge }
-					NOT = { culture_group = culture_group_undead }
-					NOT = { primary_culture = culture_cultist }
-					NOT = { culture_group = culture_group_nerubian }
-					NOT = { culture_group = culture_group_crypt_fiends }
-					NOT = { culture_group = culture_group_vrykul }
-					NOT = { has_country_flag = granariesbuilt }
-					has_country_flag = indoctrinated
-				}
-				
-				set_country_flag = granariesbuilt
-				
-				if = {
-					limit = {
-							grain_silo = 1
-						}
-					add_accepted_culture = culture_cultist
-					every_owned_province = {
-						limit = {
-							trade_goods = grain_silo
-						}
-						change_religion = cult_of_the_damned
-						change_culture = culture_cultist
-						add_base_tax = -2
-						add_base_manpower = -2
-						add_base_production = 10
-						add_local_autonomy = 25
-					}
-				}
-				else_if = {
-					limit = {
-							NOT = { grain_silo = 1 }
-							grain = 1
-						}
-					add_accepted_culture = culture_cultist
-					random_owned_province = {
-						limit = {
-							trade_goods = grain
-						}
-						change_trade_goods = grain_silo
-						change_religion = cult_of_the_damned
-						change_culture = culture_cultist
-						add_base_tax = -2
-						add_base_manpower = -2
-						add_base_production = 10
-						add_local_autonomy = 25
-					}
-				}
-				else = {
-					add_accepted_culture = culture_cultist
-					random_owned_province = {
-						limit = {
-							NOT = { is_capital = yes }
-						}
-						change_trade_goods = grain_silo
-						change_religion = cult_of_the_damned
-						change_culture = culture_cultist
-						add_base_tax = -2
-						add_base_manpower = -2
-						add_base_production = 10
-						add_local_autonomy = 25
-					}
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	spread_scourge_infection_vassal = {
-		potential = {
-			any_subject_country = {
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = scourgeinfection }
-				has_country_flag = granariesbuilt
-			}
-		}
-		allow = {
-			dip_power = 100
-			any_subject_country = { 
-				NOT = { culture_group = culture_group_scourge }
-				NOT = { culture_group = culture_group_undead }
-				NOT = { primary_culture = culture_cultist }
-				NOT = { culture_group = culture_group_nerubian }
-				NOT = { culture_group = culture_group_crypt_fiends }
-				NOT = { culture_group = culture_group_vrykul }
-				NOT = { has_country_flag = scourgeinfection }
-				has_country_flag = granariesbuilt
-			}
-		}
-		effect = {
-			add_dip_power = -100
-			every_subject_country = {
-				limit = {
-					NOT = { culture_group = culture_group_scourge }
-					NOT = { culture_group = culture_group_undead }
-					NOT = { primary_culture = culture_cultist }
-					NOT = { culture_group = culture_group_nerubian }
-					NOT = { culture_group = culture_group_crypt_fiends }
-					NOT = { culture_group = culture_group_vrykul }
-					NOT = { has_country_flag = scourgeinfection }
-					has_country_flag = granariesbuilt
-				}
-				add_accepted_culture = culture_scourge
-				set_country_flag = scourgeinfection
-				capital_scope = {
-					change_religion = cult_of_the_damned
-					change_culture = culture_scourge
-					add_devastation = 50
-					add_base_tax = -2
-					add_base_production = -2
-					add_base_manpower = -6
-				}
-				custom_tooltip = scourge_infection_tt
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							trade_goods = grain
-						}
-						change_religion = cult_of_the_damned
-						change_culture = culture_scourge
-						add_devastation = 50
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -2
-					}
-					random_owned_province = {
-						limit = {
-							NOT = { culture = culture_cultist }
-						}
-						change_religion = cult_of_the_damned
-						change_culture = culture_scourge
-						add_devastation = 50
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -2
-					}
-					random_owned_province = {
-						limit = {
-							NOT = { culture = culture_cultist }
-						}
-						change_religion = cult_of_the_damned
-						change_culture = culture_scourge
-						add_devastation = 50
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -2
-					}
-					random_owned_province = {
-						limit = {
-							NOT = { culture = culture_cultist }
-						}
-						change_religion = cult_of_the_damned
-						change_culture = culture_scourge
-						add_devastation = 50
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -2
-					}
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	rise_of_death_knights_vassal = {
-		potential = {
-			stability = 1
-			any_subject_country = {
-				NOT = { has_country_flag = deathknightsarise }
-				has_country_flag = scourgeinfection
-			}
-		}
-		allow = {
-			stability = 1
-			church_power = 25
-		}
-		effect = {
-			add_church_power = -25
-			every_subject_country = {
-				limit = {
-					NOT = { has_country_flag = deathknightsarise }
-					has_country_flag = scourgeinfection
-				}
-				change_primary_culture = culture_death_knight
-				change_government = monarchy
-				add_government_reform = scourge_domain_reform
-				set_ruler_culture = culture_death_knight
-				set_ruler_flag = death_knight_personality
-                
-				set_heir_culture = culture_death_knight
-				set_heir_flag = death_knight_personality
-                
-				set_country_flag = deathknightsarise
-				add_stability = 3
-				capital_scope = {
-					change_culture = culture_death_knight
-					add_devastation = -25
-					add_base_tax = 3
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	animate_the_dead_vassal = {
-		color = { 156 158 33 }
-		
-		potential = {
-			any_subject_country = {
-				NOT = { has_country_flag = animatedthedead }
-				has_country_flag = deathknightsarise
-			}
-		}
-		allow = {
-			church_power = 25
-			any_subject_country = {
-				NOT = { has_country_flag = animatedthedead }
-				has_country_flag = deathknightsarise
-			}
-		}
-		effect = {
-			add_church_power = -25
-			every_subject_country = {
-				limit = {
-					NOT = { has_country_flag = animatedthedead }
-					has_country_flag = deathknightsarise
-				}
-				set_country_flag = animatedthedead
-				capital_scope = {
-					add_devastation = -25
-					add_base_production = 4
-					add_base_manpower = 6
-				}
-				custom_tooltip = reanimated_scourge_tt
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							culture_group = culture_group_scourge
-						}
-						add_devastation = -25
-						add_base_tax = 2
-						add_base_production = 2
-						add_base_manpower = 3
-					}
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-
-	hunt_down_remainder_vassal = {
-		potential = {
-			any_subject_country = {
-				NOT = { has_country_flag = huntedremainder }
-				has_country_flag = animatedthedead
-			}
-		}
-		allow = {
-			mil_power = 100
-			any_subject_country = {
-				NOT = { has_country_flag = huntedremainder }
-				has_country_flag = animatedthedead
-			}
-		}
-		effect = {
-			add_mil_power = -100
-			custom_tooltip = hunted_remainder_tt
-			hidden_effect = {
-				every_subject_country = {
-					limit = {
-						NOT = { has_country_flag = huntedremainder }
-						has_country_flag = animatedthedead
-					}
-					set_country_flag = huntedremainder
-					every_owned_province = {
-						limit = {
-							NOT = { culture_group = culture_group_scourge }
-							NOT = { culture_group = culture_group_undead }
-							NOT = { culture = culture_cultist }
-							NOT = { culture_group = culture_group_nerubian }
-							NOT = { culture_group = culture_group_crypt_fiends }
-							NOT = { culture_group = culture_group_vrykul }
-						}
-						change_culture = culture_scourge
-						change_religion = cult_of_the_damned
-						add_devastation = 25
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = 4
-					}
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-	}
-    
     #--------------------------------------
     # Necropolis Construction
     #--------------------------------------
     # Malykriss
     construct_the_malykriss_necropolis = {
 		potential = {
-			mission_completed = wwu_corrupt_the_ascension
+			owns = 2369
             tag = P11
             2369 = {
                 NOT = {
@@ -418,10 +14,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Malvkriss
-			2369 = {
-				owned_by = P11 # The Scourge
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -464,7 +56,7 @@ country_decisions = {
     # Naxxanar
     construct_the_naxxanar_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 2344
             tag = P11
             2344 = {
                 NOT = {
@@ -472,11 +64,7 @@ country_decisions = {
                 }
             }
 		}
-		allow = {
-			# Naxxanar
-			2344 = {
-				owned_by = P11 # The Scourge
-			}
+		allow = {=
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -519,7 +107,7 @@ country_decisions = {
     # Talramas
     construct_the_talramas_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 2118
             tag = P11
             2118 = {
                 NOT = {
@@ -528,10 +116,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Talramas
-			2118 = {
-				owned_by = P11 # The Scourge
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -574,7 +158,7 @@ country_decisions = {
     # Naxxramas
     construct_the_naxxramas_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 599
             tag = P11
             599 = {
                 NOT = {
@@ -583,10 +167,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Naxxramas
-			599 = {
-				owned_by = P11 # The Scourge
-			}
 			adm_power = 200
 			dip_power = 200
 			mil_power = 300
@@ -629,7 +209,7 @@ country_decisions = {
     # Zeramas
     construct_the_zeramas_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 649
             tag = P11
             649 = {
                 NOT = {
@@ -638,10 +218,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Zeramas
-			649 = {
-				owned_by = P11 # The Scourge
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -684,7 +260,7 @@ country_decisions = {
     # Voltarus
     construct_the_voltarus_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 598
             tag = P11
             598 = {
                 NOT = {
@@ -693,10 +269,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Voltarus
-			598 = {
-				owned_by = P11 # The Scourge
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -745,7 +317,7 @@ country_decisions = {
     # Kolramas
     construct_the_kolramas_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 2428
             tag = P11
             2428 = {
                 NOT = {
@@ -754,10 +326,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Kolramas
-			2428 = {
-				owned_by = P11
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -798,7 +366,7 @@ country_decisions = {
     # Acherus
     construct_the_acherus_necropolis = {
 		potential = {
-			mission_completed = wwu_create_the_crypt_fiends
+			owns = 992
             tag = P11
             992 = {
                 NOT = {
@@ -807,10 +375,6 @@ country_decisions = {
             }
 		}
 		allow = {
-			# Acherus
-			992 = {
-				owned_by = P11
-			}
 			adm_power = 100
 			dip_power = 100
 			mil_power = 150
@@ -850,6 +414,9 @@ country_decisions = {
 		}
 	}
     
+    #--------------------------------------
+    # Lich King
+    #--------------------------------------
     # Resurrect the Lich King
     resurrect_the_lich_king = {
 		potential = {

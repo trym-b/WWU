@@ -846,17 +846,39 @@ cataclysmic_effect = {
     custom_tooltip = RISKY_EFFECT_TT
     
     hidden_effect = {
-        random_list = {
-            30 = { }
-            30 = { 
-                country_event = { id = wwu_magic.50 }
+        # Use the random flags to determine the result
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = random_flag_0
+                    has_country_flag = random_flag_1
+                }
             }
-            30 = { 
-                country_event = { id = wwu_magic.51 }
+            
+            country_event = { id = wwu_magic.50 }
+        }
+        else_if = {
+            limit = {
+                OR = {
+                    has_country_flag = random_flag_2
+                    has_country_flag = random_flag_3
+                }
             }
-            30 = { 
-                country_event = { id = wwu_magic.52 }
+            
+            country_event = { id = wwu_magic.51 }
+        }
+        else_if = {
+            limit = {
+                OR = {
+                    has_country_flag = random_flag_4
+                    has_country_flag = random_flag_5
+                }
             }
+            
+            country_event = { id = wwu_magic.52 }
+        }
+        else = {
+            # Nothing
         }
     }
 }
