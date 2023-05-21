@@ -12,8 +12,8 @@ wwu_scourge_column_1 = {
     #-----------------------------------------
     # VRYKUL PATH
     #-----------------------------------------
-    wwu_infiltrate_jotunheim = { 
-		icon = mission_masquerade
+    wwu_corrupt_jotunheim = { 
+		icon = mission_paladin_blade_of_justice_2
         position = 1
 		completed_by = 616.12.31
         
@@ -26,7 +26,7 @@ wwu_scourge_column_1 = {
                 }
                 has_spy_network_in = {
                     who = P17 # Jotunheim
-                    value = 50
+                    value = 30
                 }
             }
             else = {
@@ -42,9 +42,9 @@ wwu_scourge_column_1 = {
                     exists = P17
                 }
       
-                # Jotunheim
-                P17 = {
-                    country_event = { id = wwu_scourge.10 }
+                create_subject = {
+                    subject_type = scourge_vassal
+                    who = P17
                 }
             }
             else = {
@@ -52,103 +52,15 @@ wwu_scourge_column_1 = {
             }
 		}
 	}
-	wwu_bless_jotunheim = { 
-		icon = mission_life_drain
+	wwu_corrupt_dragonflayer = { 
+		icon = mission_paladin_blade_of_justice_2
         position = 2
 		completed_by = 616.12.31
         
-		required_missions = { wwu_infiltrate_jotunheim } 
+		required_missions = { 
+            wwu_corrupt_jotunheim
+        } 
                 		
-		trigger = {
-            # Jotunheim is friendly
-            if = {
-                limit = {
-                    exists = P17
-                    P17 = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-                # Jotunheim
-				P17 = {
-					has_opinion = {
-						who = ROOT
-						value = 100
-					}
-				}
-            }
-            # Jotunheim is hostile
-            else_if = {
-				limit = {
-					exists = P17
-				}
-                P17 = {
-                    NOT = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-            }
-            # Jotunheim is gone
-            else = {
-                always = yes
-            }
-		}
-        provinces_to_highlight = {
-            owned_by = P17 # Jotunheim
-        }
-		effect = {
-            # Jotunheim is friendly
-            if = {
-                limit = {
-                    exists = P17
-                    P17 = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-                
-                P17 = {
-                    country_event = { id = wwu_scourge.11 }
-                }
-            }
-            # Jotunheim is hostile
-            else_if = {
-                limit = {
-                    exists = P17
-                    P17 = {
-                        NOT = {
-                            has_opinion = {
-                                who = ROOT
-                                value = 0
-                            }
-                        }
-                    }
-                }
-                
-                P17 = {
-                    country_event = { id = wwu_scourge.12 }
-                }
-            }
-            # Jotunheim is gone
-            else = {
-                add_prestige = 5
-            }
-		}
-	}
-	wwu_infiltrate_dragonflayer = { 
-		icon = mission_masquerade
-        position = 3
-		completed_by = 616.12.31
-        
-		required_missions = { wwu_bless_jotunheim } 
-		
 		trigger = {
             if = {
                 limit = {
@@ -156,7 +68,7 @@ wwu_scourge_column_1 = {
                 }
                 has_spy_network_in = {
                     who = B08 # Dragonflayer
-                    value = 50
+                    value = 30
                 }
             }
             else = {
@@ -172,101 +84,11 @@ wwu_scourge_column_1 = {
                     exists = B08
                 }
       
-                # Dragonflayer
-                B08 = {
-                    country_event = { id = wwu_scourge.10 }
+                create_subject = {
+                    subject_type = scourge_vassal
+                    who = B08
                 }
             }
-            else = {
-                add_prestige = 5
-            }
-		}
-	}
-	wwu_bless_dragonflayer = { 
-		icon = mission_life_drain
-        position = 4
-		completed_by = 616.12.31
-        
-		required_missions = { wwu_infiltrate_dragonflayer } 
-                		
-		trigger = {
-            # Dragonflayer is friendly
-            if = {
-                limit = {
-                    exists = B08
-                    B08 = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-                # Dragonflayer
-				B08 = {
-					has_opinion = {
-						who = ROOT
-						value = 100
-					}
-				}
-            }
-            # Dragonflayer is hostile
-            else_if = {
-				limit = {
-					exists = B08
-				}
-                B08 = {
-                    NOT = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-            }
-            # Dragonflayer is gone
-            else = {
-                always = yes
-            }
-		}
-		provinces_to_highlight = {
-            owned_by = B08 # Dragonflayer
-        }
-		effect = {
-            # Dragonflayer is friendly
-            if = {
-                limit = {
-                    exists = B08
-                    B08 = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 0
-                        }
-                    }
-                }
-                
-                B08 = {
-                    country_event = { id = wwu_scourge.11 }
-                }
-            }
-            # Dragonflayer is hostile
-            else_if = {
-                limit = {
-                    exists = B08
-                    B08 = {
-                        NOT = {
-                            has_opinion = {
-                                who = ROOT
-                                value = 0
-                            }
-                        }
-                    }
-                }
-                
-                B08 = {
-                    country_event = { id = wwu_scourge.12 }
-                }
-            }
-            # Dragonflayer is gone
             else = {
                 add_prestige = 5
             }
@@ -274,10 +96,10 @@ wwu_scourge_column_1 = {
 	}
 	wwu_corrupt_the_ascension = { 
 		icon = mission_axe_and_sword
-        position = 5
+        position = 3
         
 		required_missions = {
-			wwu_bless_dragonflayer
+			wwu_corrupt_dragonflayer
 		} 
                 		
 		trigger = {
@@ -306,17 +128,7 @@ wwu_scourge_column_1 = {
 		provinces_to_highlight = {
             owned_by = P17 # Jotunheim
         }
-		effect = {  
-            if = {
-                limit = {
-                    exists = P17
-                }
-                create_march = P17 # Jotunheim
-            }
-            else = {
-                add_stability = 1
-            }
-            
+		effect = {
 			add_accepted_culture = culture_vrykul
 			add_accepted_culture = culture_vargul
             
@@ -345,8 +157,8 @@ wwu_scourge_column_1 = {
                         owned_by = P17 # Jotunheim
                     }
                     
-                    cede_province = P11 # The Scourge
-                    add_core = P11 # The Scourge
+                    cede_province = ROOT
+                    add_core = ROOT
                 }
 
                 if = {
@@ -355,6 +167,8 @@ wwu_scourge_column_1 = {
                     }
                     # Jotunheim
                     P17 = { 
+                        add_historical_friend = ROOT
+                        
                         change_religion = cult_of_the_damned
                         
                         every_owned_province = {
@@ -369,11 +183,15 @@ wwu_scourge_column_1 = {
                     }
                     # Dragonflayer
                     B08 = {
+                        add_historical_friend = ROOT
+                        
                         change_religion = cult_of_the_damned
                         
                         every_owned_province = {
                             change_religion = cult_of_the_damned
                         }
+                        
+                        country_event = { id = wwu_scourge.3 } # Ymiron's Ascension
                     }
                 }
 			}
@@ -402,35 +220,32 @@ wwu_scourge_column_2 = {
 		required_missions = { wwu_stabilize_the_frozen_throne }
         
 		trigger = {
-            if = {
-                limit = {
-                    exists = P15
-                }
-                OR = {
-                    claim = P15
-                    core_claim = P15
-                }
-            }
-            else = {
-                always = yes
-            }
+            NOT = { exists = P15 }
+            owns_core_province = 3229
+            owns_core_province = 3228
+            owns_core_province = 947
 		}
 		provinces_to_highlight = {
             owned_by = P15
         }
 		effect = {
-            add_prestige = 10
+            # culture_vargul
+            3229 = {
+                change_culture = ROOT
+                change_religion = ROOT
+            }
+            3228 = {
+                change_culture = ROOT
+                change_religion = ROOT
+            }
+            947 = {
+                change_culture = ROOT
+                change_religion = ROOT
+            }
             
-            if = {
-                limit = {
-                    exists = P15
-                }
-                add_historical_rival = P15 # Ymirjar
-                
-                # Ymirjar
-                P15 = {
-                    add_historical_rival = P11
-                }
+            add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 10
             }
 		}
 	}
@@ -683,13 +498,13 @@ wwu_scourge_column_3 = {
         }
 		effect = {  
 			area_north_valley_of_lost_hope = {
-				add_permanent_claim = P11 # The Scourge
+				add_permanent_claim = ROOT
 			}
 			area_south_valley_of_lost_hope = {
-				add_permanent_claim = P11 # The Scourge
+				add_permanent_claim = ROOT
 			}
 			area_the_broken_front = {
-				add_permanent_claim = P11 # The Scourge
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -800,7 +615,7 @@ wwu_scourge_column_4 = {
     #-----------------------------------------
     # INTERNAL PATH
     #-----------------------------------------
-    wwu_rival_the_nerubians = { 
+    wwu_rival_the_nerubians = {
 		icon = mission_scarab
         position = 2
         
@@ -829,19 +644,9 @@ wwu_scourge_column_4 = {
             owned_by = P74
         }
 		effect = {
-            add_prestige = 10
-            
-            if = {
-                limit = {
-                    exists = P74
-                }
-                
-                add_historical_rival = P74 # Azjol'Nerub
-                
-                # Azjol'Nerub
-                P74 = {
-                    add_historical_rival = P11
-                }
+            custom_tooltip = WAR_OF_THE_SPIDER_TT
+            hidden_effect = {
+                set_country_flag = war_of_the_spider_cb
             }
 		}
 	}
@@ -859,7 +664,7 @@ wwu_scourge_column_4 = {
 		trigger = {
             # The Fleshwerks
 			726 = {
-				owned_by = P11 # The Scourge
+				owned_by = ROOT
                 base_production = 5
 			}
 		}
@@ -971,12 +776,13 @@ wwu_scourge_column_5 = {
                     exists = P74
                 }
                 is_in_war = {
-                    attacker_leader = P11 # The Scourge
+                    casus_belli = cb_war_of_the_spider
+                    attacker_leader = ROOT
                     defender_leader = P74 # Azjol'Nerub
                 }
             }
             else = {
-                always = no
+                always = yes
             }
 		}
 		provinces_to_highlight = {
@@ -987,12 +793,10 @@ wwu_scourge_column_5 = {
                 limit = {
                     exists = P74
                 }
-                # Azjol Nerub
-                995 = {
-                    add_permanent_claim = P11
-                }
-                area_naxxanar = {
-                    add_permanent_claim = P11
+                P74 = {
+                    every_owned_province = {
+                        add_permanent_claim = ROOT
+                    }
                 }
             }
             else = {
@@ -1000,7 +804,7 @@ wwu_scourge_column_5 = {
             }
 		}
 	}
-	wwu_create_the_crypt_fiends = { 
+	wwu_fate_of_the_nerubians = { 
 		icon = mission_scourge
         position = 2
 		completed_by = 616.12.31
@@ -1018,44 +822,63 @@ wwu_scourge_column_5 = {
                     995 = { owned_by = ROOT }
                 }
 			}
-            
-			num_of_owned_provinces_with = {
-				value = 5
-				culture = culture_nerubian
-			}
 		}
 		provinces_to_highlight = {
             province_id = 995 # Azjol Nerub
         }
 		effect = {
-			add_accepted_culture = culture_crypt_fiend
-            
-			every_owned_province = {
-				limit = {
-					culture = culture_nerubian
-				}
-				change_culture = culture_crypt_fiend
-				change_religion = cult_of_the_damned
-			}
-            
-            # Azjol Nerub
-			995 = {
-				add_base_tax = 2
-				add_base_production = 2
-				add_base_manpower = 4
-			}
+            if = {
+                limit = {
+                    P74 = { is_subject_of = ROOT }
+                }
+                
+                P74 = {
+                    change_primary_culture = culture_crypt_fiend
+                    change_religion = cult_of_the_damned
+                    
+                    every_owned_province = {
+                        change_culture = culture_crypt_fiend
+                        change_religion = cult_of_the_damned
+                    }
+                    
+                    every_owned_province = {
+                        limit = {
+                            NOT = { region = region_azjol_nerub }
+                        }
+                        
+                        cede_province = ROOT
+                        add_core = ROOT
+                    }
+                }
+            }
+            else = {
+                add_accepted_culture = culture_crypt_fiend
+                
+                every_owned_province = {
+                    limit = {
+                        culture = culture_nerubian
+                    }
+                    change_culture = culture_crypt_fiend
+                    change_religion = cult_of_the_damned
+                }
+            }
 		}
 	}
-    wwu_might_of_anub_arak = {
+    wwu_exploitation_of_the_nerubians = {
 		icon = mission_yogg_saron
         position = 3
 		completed_by = 616.12.31
         
-		required_missions = { wwu_create_the_crypt_fiends } 
+		required_missions = { wwu_fate_of_the_nerubians } 
 
 		trigger = {
-            995 = { owned_by = ROOT }
-			army_size_percentage = 0.75
+            OR = {
+                995 = { owned_by = ROOT }
+                P74 = { 
+                    is_subject_of = ROOT 
+                    NOT = { liberty_desire = 10 }
+                }
+            }
 		}
 		effect = {
 			define_general = {
@@ -1065,10 +888,13 @@ wwu_scourge_column_5 = {
 				manuever = 7
 				siege = 5
 			}
-			add_country_modifier = {
-				name = crypt_fiends
-				duration = -1
-			}
+            
+            define_advisor = {
+                name = "Elder Nadox"
+                type = philosopher
+                skill = 3
+                cost_multiplier = 0.25
+            }
 		}
 	}
 }
