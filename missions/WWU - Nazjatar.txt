@@ -548,6 +548,10 @@ wwu_nazjatar_column_3 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            province_id = 4141
+            NOT = { owned_by = ROOT }
+        }
         
 		effect = {
 			if = {
@@ -582,11 +586,21 @@ wwu_nazjatar_column_3 = {
 		trigger = {
             calc_true_if = {
                 amount = 10
-                all_owned_province = {
+                
+                all_province = {
                     superregion = paradise_isles_superregion
+                    OR = {
+                        owned_by = ROOT
+                        owned_by_subject_of = ROOT
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            superregion = paradise_isles_superregion
+            NOT = { owned_by = ROOT }
+            NOT = { owned_by_subject_of = ROOT }
+        }
         
 		effect = {
 			define_conquistador = {
