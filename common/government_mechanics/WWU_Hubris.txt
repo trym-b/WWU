@@ -1,0 +1,132 @@
+hubris_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 5
+	available = {
+		has_dlc = "Cradle of Civilization"
+	}
+
+	powers = {
+		hubris = {
+			max = 100
+			reset_on_new_ruler = no
+			base_monthly_growth = 0.0
+			is_good = no
+			
+			scaled_modifier = {
+				modifier = {
+					technology_cost = 1
+					reform_progress_growth = -1
+					idea_cost = 1
+                    years_of_nationalism = 30
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		hubris_sacrifice_prestige = {
+			icon = GFX_hubris_ability_1
+			cost_type = hubris
+			cost = 10
+            
+			cooldown_years = 5
+            
+			trigger = {
+                prestige = 25
+			}
+            
+			effect = {
+				add_prestige = -25
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = hubris_mechanic
+                            power_type = hubris
+                            value = 50
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0
+                    
+                    NOT = { prestige = 50 }
+                }
+			}
+		}
+        
+        hubris_cede_to_corruption = {
+			icon = GFX_hubris_ability_2
+			cost_type = hubris
+			cost = 10
+            
+			cooldown_years = 5
+            
+			trigger = {
+                NOT = { corruption = 99 }
+			}
+            
+			effect = {
+				add_corruption = 2
+			}
+            
+			ai_chance = {
+				factor = 0
+			}
+		}
+        
+        hubris_admit_fault = {
+			icon = GFX_hubris_ability_3
+			cost_type = hubris
+			cost = 10
+            
+			cooldown_years = 5
+            
+			trigger = {
+                OR = {
+                    legitimacy = 10
+                    republican_tradition = 10
+                    devotion = 10
+                    horde_unity = 10
+                }
+			}
+            
+			effect = {
+				add_legitimacy = -10
+                add_republican_tradition = -10
+                add_devotion = -10
+                add_horde_unity = -10
+			}
+            
+			ai_chance = {
+				factor = 1
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = {
+                        has_government_power = {
+                            mechanic_type = hubris_mechanic
+                            power_type = hubris
+                            value = 50
+                        }
+                    }
+                }
+                modifier = {
+                    factor = 0
+                    
+                    NOT = { legitimacy = 50 }
+                    NOT = { republican_tradition = 50 }
+                    NOT = { devotion = 50 }
+                    NOT = { horde_unity = 50 }
+                }
+			}
+		}
+	}
+}

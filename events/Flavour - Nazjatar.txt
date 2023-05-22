@@ -102,3 +102,179 @@ country_event = {
     }
 }
 
+# Fate of Suramar
+country_event = {
+	id = wwu_nazjatar.3
+	title = wwu_nazjatar.3.title
+	desc = wwu_nazjatar.3.desc
+	picture = SURAMAR_GARDEN_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_nazjatar.3.option.a
+        
+        # This is to prevent the player from peacing out and then getting the event effect as a bonus.
+        if = {
+            limit = {
+                war_with = SUR
+            }
+            
+            hidden_effect = {
+                white_peace = SUR
+            }
+            
+            inherit = SUR
+            
+            custom_tooltip = DROWNED_PROVINCE_TT
+            
+			region_suramar = {
+                add_permanent_province_modifier = {
+                    name = mission_drowned_province
+                    duration = -1
+                }
+            }
+            
+            every_country = {
+                limit = {
+                    capital_scope = {
+                        superregion = broken_isles_superregion
+                    }
+                }
+                
+                add_aggressive_expansion = {
+                    who = ROOT
+                    value = 50
+                    apply_calc = yes
+                }
+            }
+        }
+    }
+    option = {
+		name = wwu_nazjatar.3.option.b
+        
+        # This is to prevent the player from peacing out and then getting the event effect as a bonus.
+        if = {
+            limit = {
+                war_with = SUR
+            }
+            
+            hidden_effect = {
+                white_peace = SUR
+            }
+            
+            create_subject = {
+                subject_type = vassal
+                subject = SUR
+            }
+            
+            every_country = {
+                limit = {
+                    capital_scope = {
+                        superregion = broken_isles_superregion
+                    }
+                }
+                
+                add_aggressive_expansion = {
+                    who = ROOT
+                    value = 30
+                    apply_calc = yes
+                }
+            }
+        }
+    }
+    
+}
+
+# Azshara's Taunt
+country_event = {
+	id = wwu_nazjatar.4
+	title = wwu_nazjatar.4.title
+	desc = wwu_nazjatar.4.desc
+	picture = NAGA_SEA_WITCH_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_nazjatar.4.option.a
+        
+        NJZ = {
+            country_event = { id = wwu_nazjatar.5 days = 1 }
+        }
+        
+        ai_chance = {
+            factor = 60
+        }
+    }
+    option = {
+		name = wwu_nazjatar.4.option.b
+        
+        NJZ = {
+            country_event = { id = wwu_nazjatar.6 days = 1 }
+        }
+        
+        ai_chance = {
+            factor = 40
+        }
+    }
+}
+
+# Prince's Defiance
+country_event = {
+	id = wwu_nazjatar.5
+	title = wwu_nazjatar.5.title
+	desc = wwu_nazjatar.5.desc
+	picture = COURT_OF_STARS_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_nazjatar.5.option.a
+        
+        add_country_modifier = {
+            name = mission_princes_defiance
+            duration = 1800
+        }
+    }
+}
+
+# Prince's Submission
+country_event = {
+	id = wwu_nazjatar.6
+	title = wwu_nazjatar.6.title
+	desc = wwu_nazjatar.6.desc
+	picture = COURT_OF_STARS_eventPicture
+
+    is_triggered_only = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_nazjatar.6.option.a
+        
+        create_subject = {
+            subject_type = vassal
+            subject = COF
+        }
+        
+        add_country_modifier = {
+            name = mission_princes_submission
+            duration = 1800
+        }
+    }
+}
+

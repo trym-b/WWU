@@ -13,7 +13,7 @@ wwu_nazjatar_column_1 = {
 	has_country_shield = yes
 	
 	wwu_illidans_call = {
-		icon = mission_demonhunter_imprison
+		icon = mission_demonhunter_eyebeam
         position = 1
         completed_by = 622.1.1 # Should not be usable after Frozen Throne date
         
@@ -77,7 +77,7 @@ wwu_nazjatar_column_1 = {
 	}
     
     wwu_defeat_the_hydraxian_threat = {
-		icon = mission_demonhunter_imprison
+		icon = mission_water
         position = 4
         
 		required_missions = { 
@@ -137,7 +137,7 @@ wwu_nazjatar_column_1 = {
 	}
     
     wwu_invasion_into_the_abyssal_maw = {
-		icon = mission_demonhunter_imprison
+		icon = mission_water_elemental
         position = 5
         
 		required_missions = { 
@@ -186,7 +186,7 @@ wwu_nazjatar_column_1 = {
 	}
     
     wwu_queen_of_the_tides = {
-		icon = mission_demonhunter_imprison
+		icon = mission_azshara
         position = 6
         
 		required_missions = { 
@@ -230,7 +230,7 @@ wwu_nazjatar_column_1 = {
 	}
     
     wwu_confront_nzoth = {
-		icon = mission_demonhunter_imprison
+		icon = mission_nzoth
         position = 7
         
 		required_missions = { 
@@ -262,7 +262,7 @@ wwu_nazjatar_column_2 = {
 	has_country_shield = yes
 	
     wwu_commune_with_vashjir = {
-		icon = mission_demonhunter_imprison
+		icon = mission_naga_4
         position = 3
         
 		required_missions = { 
@@ -304,7 +304,7 @@ wwu_nazjatar_column_2 = {
 	}
     
     wwu_drown_plunder_isle = {
-		icon = mission_demonhunter_imprison
+		icon = mission_goblin_captain
         position = 4
         
 		required_missions = { 
@@ -340,11 +340,11 @@ wwu_nazjatar_column_2 = {
 	}
     
     wwu_search_for_the_pearl_of_pandaria = {
-		icon = mission_demonhunter_imprison
+		icon = mission_portal
         position = 6
         
 		required_missions = { 
-            #wwu_the_dark_tide
+            wwu_the_dark_tide
         }
         
 		trigger = {
@@ -368,7 +368,7 @@ wwu_nazjatar_column_2 = {
 	}
     
     wwu_subjugate_the_jinyu = {
-		icon = mission_demonhunter_imprison
+		icon = mission_jinyu_3
         position = 7
         
 		required_missions = { 
@@ -404,7 +404,7 @@ wwu_nazjatar_column_2 = {
 	}
     
     wwu_dominate_pandaria = {
-		icon = mission_demonhunter_imprison
+		icon = mission_panda_monk
         position = 7
         
 		required_missions = { 
@@ -479,18 +479,32 @@ wwu_nazjatar_column_3 = {
         
 		required_missions = { }
         
-		trigger = {
+		trigger = { 
+            prestige = 50
             navy_size_percentage = 0.8
+            any_owned_province = {
+                has_port = yes
+            }
 		}
         
 		effect = {
-			add_stability = 1
-            add_mil_power = 100
+            add_mil_power = 200
+            
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                }
+                
+                create_flagship = {
+                    name = "Pride of Zinazshari"
+                    type = heavy_ship
+                }
+            }
 		}
 	}
     
     wwu_rise_of_the_naga = {
-		icon = mission_ship_1
+		icon = mission_naga_3
         position = 2
         
 		required_missions = { 
@@ -511,6 +525,8 @@ wwu_nazjatar_column_3 = {
             
             custom_tooltip = NJZ_ENABLE_SLAVE_ESTATE_TT
             
+            discover_paradise_isles = yes
+            
             if = {
                 limit = {
                     ai = yes
@@ -525,7 +541,7 @@ wwu_nazjatar_column_3 = {
 	}
     
     wwu_persuade_the_sea_witch = {
-		icon = mission_ship_1
+		icon = mission_naga_2
         position = 3
         
 		required_missions = { 
@@ -576,7 +592,7 @@ wwu_nazjatar_column_3 = {
 	}
     
     wwu_paradise_domain = {
-		icon = mission_ship_1
+		icon = mission_murloc_1
         position = 4
         
 		required_missions = { 
@@ -629,6 +645,166 @@ wwu_nazjatar_column_3 = {
             }
 		}
 	}
+    
+    wwu_the_dark_tide = {
+		icon = mission_naga_centaur
+        position = 5
+        
+		required_missions = { 
+            wwu_paradise_domain
+        }
+        
+		trigger = {
+            any_subject_country = {
+                OR = {
+                    is_subject_of_type = colony
+                    is_subject_of_type = crown_colony
+                    is_subject_of_type = private_enterprise
+                    is_subject_of_type = self_governing_colony
+                }
+                num_of_cities = 12
+                capital_scope = {
+                    superregion = paradise_isles_superregion
+                }
+            }
+		}
+        provinces_to_highlight = {
+            superregion = paradise_isles_superregion
+            NOT = { owned_by = ROOT }
+            NOT = { owned_by_subject_of = ROOT }
+        }
+        
+		effect = {
+			discover_pandaria = yes
+            discover_south_seas = yes
+            
+            pandaria_superregion = {
+                limit = {
+                    has_port = yes
+                }
+                add_permanent_claim = ROOT
+            }
+            south_seas_superregion = {
+                limit = {
+                    has_port = yes
+                }
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_search_for_the_tidestone_of_golganneth = {
+		icon = mission_ancient_tablet
+        position = 6
+        
+		required_missions = { 
+            wwu_the_dark_tide
+        }
+        
+		trigger = {
+            owns_core_province = 3178
+            owns_core_province = 2659
+            owns_core_province = 2658
+            owns_core_province = 3179
+            owns_core_province = 2691
+            owns_core_province = 2664
+            owns_core_province = 2662
+		}
+        
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3178
+                province_id = 2659
+                province_id = 2658
+                province_id = 3179
+                province_id = 2691
+                province_id = 2664
+                province_id = 2662
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_tidestone_of_golganneth
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_invasion_of_suramar = {
+		icon = mission_shadow_twilight
+        position = 7
+        
+		required_missions = { 
+            wwu_search_for_the_tidestone_of_golganneth
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = SUR
+                }
+                war_with = SUR
+            }
+            else = {
+                owns_core_province = 3182
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_ancient_highborne_tactics
+                duration = 5475
+            }
+		}
+	}
+    
+    wwu_fate_of_suramar = {
+		icon = mission_suramar_garden
+        position = 8
+        
+		required_missions = { 
+            wwu_invasion_of_suramar
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = SUR
+                }
+                war_with = SUR
+                SUR = {
+                    capital_scope = {
+                        controlled_by = ROOT
+                    }
+                }
+                SUR = {
+                    NOT = {
+                        military_strength = {
+                            who = ROOT
+                            value = 1.0
+                        }
+                    }
+                }
+            }
+            else = {
+                owns_core_province = 3182
+            }
+		}
+        
+		effect = {
+			if = {
+                limit = {
+                    exists = SUR
+                }
+                country_event = { id = wwu_nazjatar.3 }
+            }
+            else = {
+                add_prestige = 10
+            }
+		}
+	}
 }
 
 wwu_nazjatar_column_4 = {
@@ -642,7 +818,137 @@ wwu_nazjatar_column_4 = {
     
 	has_country_shield = yes
 	
-	
+	wwu_commune_with_hatecoil = {
+		icon = mission_naga_1
+        position = 3
+        
+		required_missions = { 
+            wwu_rise_of_the_naga
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = HAT
+                }
+                
+                HAT = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            else = {
+                area_eye_of_the_storm = {
+                    type = all
+                    
+                    owned_by = ROOT
+                }
+            }
+		}
+        provinces_to_highlight = {
+            area = area_eye_of_the_storm
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			create_subject = {
+                subject_type = vassal
+                subject = HAT
+            }
+            
+            region_azsuna = {
+                add_permanent_claim = HAT
+            }
+		}
+	}
+    
+    wwu_subjugate_the_murlocs = {
+		icon = mission_murloc_3
+        position = 4
+        
+		required_missions = { 
+            wwu_commune_with_hatecoil
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = ULT
+                }
+                ULT = {
+                    is_subject_of = ROOT
+                }
+            }
+            else = {
+                owns_core_province = 2644
+            }
+            if = {
+                limit = {
+                    exists = SKE
+                }
+                SKE = {
+                    is_subject_of = ROOT
+                }
+            }
+            else = {
+                owns_core_province = 2634
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2644
+                province_id = 2634
+            }
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+			add_yearly_manpower = 3.0
+            
+            add_country_modifier = {
+                name = mission_murloc_minions
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_drown_the_goblins = {
+		icon = mission_goblin_head
+        position = 6
+        
+		required_missions = { 
+            wwu_the_dark_tide
+        }
+        
+		trigger = {
+            calc_true_if = {
+                all_owned_province = {
+                    superregion = south_seas_superregion
+                    has_port = yes
+                }
+                
+                amount = 3
+            }
+		}
+        provinces_to_highlight = {
+            superregion = south_seas_superregion
+            has_port = yes
+            NOT = { owned_by = ROOT }
+        }
+        
+		effect = {
+            custom_tooltip = DROWNED_PROVINCE_TT
+            
+			south_seas_superregion = {
+                add_permanent_province_modifier = {
+                    name = mission_drowned_province
+                    duration = -1
+                }
+            }
+		}
+	}
 }
 
 wwu_nazjatar_column_5 = {
@@ -690,7 +996,7 @@ wwu_nazjatar_column_5 = {
 	}
     
     wwu_nzoths_touch = {
-		icon = mission_ancient_tome
+		icon = mission_tentacle
         position = 2
         
 		required_missions = { 
@@ -762,7 +1068,7 @@ wwu_nazjatar_column_5 = {
 	}
     
     wwu_empire_of_nzoth = {
-		icon = mission_demonhunter_darkness
+		icon = mission_nzoth_awakened
         position = 4
         
 		required_missions = { 
@@ -794,6 +1100,107 @@ wwu_nazjatar_column_5 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_nzoths_wisdom
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_reclaim_the_temple_of_elune = {
+		icon = mission_night_elf_archer
+        position = 5
+        
+		required_missions = { 
+            wwu_subjugate_the_murlocs
+        }
+        
+		trigger = {
+            # Temple of Elune
+            2651 = {
+                OR = {
+                    owned_by = ROOT
+                    owned_by_subject_of = ROOT
+                }
+            }
+		}
+        provinces_to_highlight = {
+            province_id = 2651
+            NOT = { owned_by = ROOT }
+            NOT = { owned_by_subject_of = ROOT }
+        }
+        
+		effect = {
+			add_stability = 1
+            add_mil_power = 200
+            
+            add_country_modifier = {
+                name = mission_defilement_of_elune_temple
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_confront_farondis = {
+		icon = mission_nightborne_male
+        position = 6
+        
+		required_missions = { 
+            wwu_reclaim_the_temple_of_elune
+        }
+        
+		trigger = {
+            war_with = COF
+            COF = {
+                capital_scope = {
+                    controlled_by = ROOT
+                }
+            }
+		}
+        
+		effect = {
+			country_event = { id = wwu_nazjatar.4 days = 1 }
+		}
+	}
+    
+    wwu_eradicate_the_wardens = {
+		icon = mission_warden
+        position = 7
+        
+		required_missions = { 
+            wwu_confront_farondis
+        }
+        
+		trigger = {
+            NOT = { exists = WRD }
+            area_wardens_isle = {
+                type = all
+                
+                OR = {
+                    owned_by = ROOT
+                    owned_by_subject_of = ROOT
+                }
+            }
+            area_warden_stand = {
+                type = all
+                
+                OR = {
+                    owned_by = ROOT
+                    owned_by_subject_of = ROOT
+                }
+            }
+		}
+        provinces_to_highlight = {
+            OR = {
+                area = area_wardens_isle
+                area = area_warden_stand
+            }
+            NOT = { owned_by = ROOT }
+            NOT = { owned_by_subject_of = ROOT }
+        }
+        
+		effect = {
+			add_prestige = 25
+            add_country_modifier = {
+                name = mission_prison_of_the_wardens
                 duration = -1
             }
 		}
