@@ -1,0 +1,101 @@
+mojo_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 5
+	available = {
+		has_dlc = "Cradle of Civilization"
+	}
+
+	powers = {
+		mojo = {
+			max = 100
+			reset_on_new_ruler = yes
+			base_monthly_growth = 0.0
+			
+			scaled_modifier = {
+				modifier = {
+					technology_cost = -0.1
+                    idea_cost = -0.1
+                    development_cost = -0.1
+				}
+			}
+		}
+	}
+	
+	interactions = {
+        # Encourage Troll Regeneration
+        mojo_encourage_troll_regeneration = {
+			icon = GFX_mojo_ability_1
+			cost_type = mojo
+			cost = 50
+            
+			cooldown_years = 5
+            
+			trigger = {
+                NOT = { has_country_modifier = mojo_troll_regeneration_mod }
+			}
+            
+			effect = {
+                add_yearly_manpower = 5.0
+                
+				add_country_modifier = {
+                    name = mojo_troll_regeneration_mod
+                    duration = 1800
+                }
+			}
+            
+			ai_chance = {
+				factor = 10
+			}
+		}
+        
+        # Cannibalise Enemies
+        mojo_cannibalise_enemies = {
+			icon = GFX_mojo_ability_2
+			cost_type = mojo
+			cost = 50
+            
+			cooldown_years = 5
+            
+			trigger = {
+                NOT = { has_country_modifier = mojo_cannibalise_enemies }
+			}
+            
+			effect = {
+                custom_tooltip = CANNIBALISE_ENEMIES_TT
+                
+				add_country_modifier = {
+                    name = mojo_cannibalise_enemies
+                    duration = 1800
+                }
+			}
+            
+			ai_chance = {
+				factor = 10
+			}
+		}
+        
+        # Summon Hydra
+        mojo_summon_hydra = {
+			icon = GFX_mojo_ability_3
+			cost_type = mojo
+			cost = 25
+            
+			cooldown_years = 2
+            
+			trigger = {
+                NOT = { has_country_modifier = mojo_hydras }
+			}
+            
+			effect = {
+                add_country_modifier = {
+                    name = mojo_hydras
+                    duration = 730
+                }
+			}
+            
+			ai_chance = {
+				factor = 10
+			}
+		}
+    }
+}

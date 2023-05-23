@@ -1009,6 +1009,50 @@ government_on_on_battle_lost_province_effect = {
             }
         }
     }
+    
+    # Mojo - Gain
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = mojo_mechanic
+            }
+        }
+        
+        FROM = {
+            add_government_power = {
+                mechanic_type = mojo_mechanic
+                power_type = mojo
+                value = 5
+            }
+        }
+    }
+    
+    # Mojo - Loss
+    if = {
+        limit = {
+            has_government_mechanic = mojo_mechanic
+        }
+        
+        add_government_power = {
+            mechanic_type = mojo_mechanic
+            power_type = mojo
+            value = -2
+        }
+    }
+    
+    # Mojo - Cannibal
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = mojo_mechanic
+                has_country_modifier = mojo_cannibalise_enemies
+            }
+        }
+        
+        FROM = {
+            add_yearly_manpower = 0.25
+        }
+    }
 }
 
 # ROOT = Winning Country, FROM = Province
