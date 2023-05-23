@@ -23,36 +23,56 @@ wwu_scourge_invasion_column_1 = {
 		trigger = {
             exists = P12
             
+            # Trigger: Player
             if = {
                 limit = {
-                    exists = A08
-                    A08 = {
-                        owns = 931
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                        A08 = {
+                            owns = 931
+                        }
+                    }
+                    has_spy_network_in = {
+                        who = A08
+                        value = 30
                     }
                 }
-                has_spy_network_in = {
-                    who = A08
-                    value = 100
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
 		}
 		effect = {  
+            # Effect: Player
             if = {
                 limit = {
-                    exists = A08
-                    A08 = {
-                        owns = 931
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                        A08 = {
+                            owns = 931
+                        }
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -30
                     }
                 }
-                add_spy_network_in = {
-                    who = A08
-                    value = -100
-                }
             }
-
+            # Effect: AI
+            else = {
+                add_mil_power = -100
+            }
+            
             # Brill
 			931 = {
 				province_event = { id = wwu_scourge.34 }
@@ -198,14 +218,23 @@ wwu_scourge_invasion_column_2 = {
 		}
 		
 		trigger = {
-			owns = 2413
-			owns = 1284
+            army_size_percentage = 0.8
+            
+            # Meant to check for ownership of any province in this region
+			region_dragonblight = {
+                owned_by = ROOT
+            }
+            region_zuldrak = {
+                owned_by = ROOT
+            }
 		}
 		effect = {
 			add_prestige = 25
             
             # Frostmourne Cavern
 			2413 = {
+                cede_province = ROOT
+                add_core = ROOT
 				convert_province_to_scourge = yes
 				change_trade_goods = artifacts
 				add_base_manpower = 5
@@ -213,6 +242,8 @@ wwu_scourge_invasion_column_2 = {
             
             # Drak'Tharon Keep
 			1284 = {
+                cede_province = ROOT
+                add_core = ROOT
 				convert_province_to_scourge = yes
 			}
             
@@ -234,23 +265,53 @@ wwu_scourge_invasion_column_2 = {
 		}
 		
 		trigger = {
+            # Trigger: Player
             if = {
                 limit = {
-                    exists = A18
+                    ai = no
                 }
-                has_spy_network_in = {
-                    who = A18
-                    value = 100
+                if = {
+                    limit = {
+                        exists = A18
+                    }
+                    has_spy_network_in = {
+                        who = A18
+                        value = 30
+                    }
+                }
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
 		}
 		provinces_to_highlight = {
             owned_by = A18 # Dalaran
         }
 		effect = {
+            # Effect: Player
+            if = {
+                limit = {
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -30
+                    }
+                }
+            }
+            # Effect: AI
+            else = {
+                add_mil_power = -100
+            }
+            
             country_event = { id = wwu_scourge.30 }
             
             if = {
@@ -277,24 +338,56 @@ wwu_scourge_invasion_column_2 = {
 		}
 		
 		trigger = {
-			if = {
+            # Trigger: Player
+            if = {
                 limit = {
-                    exists = A08
-                    A08 = {
-                        owns = 790
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                        A08 = {
+                            owns = 790
+                        }
+                    }
+                    has_spy_network_in = {
+                        who = A08
+                        value = 50
                     }
                 }
-                has_spy_network_in = {
-                    who = A08
-                    value = 100
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
+            
+            faction_in_power = faction_lichs
 		}
         
 		effect = {
+            # Effect: Player
+            if = {
+                limit = {
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -50
+                    }
+                }
+            }
+            # Effect: AI
+            else = {
+                add_mil_power = -100
+            }
+            
             if = {
                 limit = {
                     exists = A08
@@ -302,10 +395,7 @@ wwu_scourge_invasion_column_2 = {
                         owns = 790
                     }
                 }
-                add_spy_network_in = {
-                    who = A08
-                    value = -100
-                }
+                
                 A08 = {
                     country_event = { id = wwu_scourge.32 }
                 }
@@ -334,28 +424,48 @@ wwu_scourge_invasion_column_2 = {
 		trigger = {
             exists = P12
             
+            # Trigger: Player
             if = {
                 limit = {
-                    exists = A08
+                    ai = no
                 }
-                has_spy_network_in = {
-                    who = A08
-                    value = 100
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    has_spy_network_in = {
+                        who = A08
+                        value = 30
+                    }
+                }
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
 		}
 		effect = {
+            # Effect: Player
             if = {
                 limit = {
-                    exists = A08
+                    ai = no
                 }
-                add_spy_network_in = {
-                    who = A08
-                    value = -100
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -30
+                    }
                 }
+            }
+            # Effect: AI
+            else = {
+                add_mil_power = -100
             }
             
             # Andorhal
@@ -387,28 +497,48 @@ wwu_scourge_invasion_column_2 = {
 		trigger = {
             exists = P12
             
+            # Trigger: Player
             if = {
                 limit = {
-                    exists = A08
+                    ai = no
                 }
-                has_spy_network_in = {
-                    who = A08
-                    value = 100
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    has_spy_network_in = {
+                        who = A08
+                        value = 50
+                    }
+                }
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
 		}
 		effect = {
+            # Effect: Player
             if = {
                 limit = {
-                    exists = A08
+                    ai = no
                 }
-                add_spy_network_in = {
-                    who = A08
-                    value = -100
+                if = {
+                    limit = {
+                        exists = A08
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -50
+                    }
                 }
+            }
+            # Effect: AI
+            else = {
+                add_mil_power = -100
             }
             
             # Northpass Tower
@@ -451,16 +581,11 @@ wwu_scourge_invasion_column_2 = {
             exists = P52
             
             P52 = {
-                num_of_cities = 15
-                owns = 642
+                total_development = 100
             }
 		}
 		effect = {
             custom_tooltip = SCOURGE_OF_LORDAERON_TT
-            
-            P52 = {
-                country_event = { id = wwu_scourge.39 }
-            }
             
             hidden_effect = {
                 set_global_flag = scourge_of_lordaeron_flag
@@ -468,8 +593,15 @@ wwu_scourge_invasion_column_2 = {
             }
             
             642 = {
+                cede_province = P52
+                add_core = P52
+                
 				province_event = { id = wwu_scourge.38 }
 			}
+            
+            P52 = {
+                country_event = { id = wwu_scourge.39 }
+            }
 		}
 	}
     
@@ -486,6 +618,8 @@ wwu_scourge_invasion_column_2 = {
                     exists = A08
                 }
                 exists = A08
+                
+                mil_power = 300
             }
             else = {
                 region_tirisfal_glades = {
@@ -512,6 +646,8 @@ wwu_scourge_invasion_column_2 = {
             }
 		}
 		effect = {
+            add_mil_power = -300
+            
             if = {
                 limit = {
                     exists = A08
@@ -890,64 +1026,84 @@ wwu_scourge_invasion_column_3 = {
 		trigger = {
             exists = P12
             
+            # Trigger: Player
             if = {
                 limit = {
-                    exists = A08
-                    exists = A10
-                    A10 = {
-                        owns = 642
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                        exists = A10
+                        A10 = {
+                            owns = 642
+                        }
+                    }
+                    has_spy_network_in = {
+                        who = A10
+                        value = 30
                     }
                 }
-                has_spy_network_in = {
-                    who = A10
-                    value = 100
-                }
-            }
-            else_if = {
-                limit = {
-                    exists = A08
-                    NOT = { exists = A10 }
-                    A08 = {
-                        owns = 642
+                else_if = {
+                    limit = {
+                        exists = A08
+                        NOT = { exists = A10 }
+                        A08 = {
+                            owns = 642
+                        }
+                    }
+                    has_spy_network_in = {
+                        who = A08
+                        value = 30
                     }
                 }
-                has_spy_network_in = {
-                    who = A08
-                    value = 100
+                else = {
+                    always = yes
                 }
             }
+            # Trigger: AI
             else = {
-                always = yes
+                mil_power = 200
             }
 		}
 		effect = {  
+            # Effect: Player
             if = {
                 limit = {
-                    exists = A08
-                    exists = A10
-                    A10 = {
-                        owns = 642
+                    ai = no
+                }
+                if = {
+                    limit = {
+                        exists = A08
+                        exists = A10
+                        A10 = {
+                            owns = 642
+                        }
+                    }
+                    add_spy_network_in = {
+                        who = A10
+                        value = -30
                     }
                 }
-                add_spy_network_in = {
-                    who = A10
-                    value = -100
-                }
-            }
-            else_if = {
-                limit = {
-                    exists = A08
-                    NOT = { exists = A10 }
-                    A08 = {
-                        owns = 642
+                else_if = {
+                    limit = {
+                        exists = A08
+                        NOT = { exists = A10 }
+                        A08 = {
+                            owns = 642
+                        }
+                    }
+                    add_spy_network_in = {
+                        who = A08
+                        value = -30
                     }
                 }
-                add_spy_network_in = {
-                    who = A08
-                    value = -100
-                }
             }
-
+            # Effect: AI
+            else = {
+                add_mil_power = -100
+            }
+            
             # Stratholme
 			642 = {
 				province_event = { id = wwu_scourge.34 }
