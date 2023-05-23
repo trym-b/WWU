@@ -197,6 +197,123 @@ wwu_scourge_column_1 = {
 			}
 		}
 	}
+    
+    wwu_resurrect_sindragosa_brood = { 
+		icon = mission_sindragosa
+        position = 5
+        
+		required_missions = { wwu_advance_the_front } 
+                		
+		ai_weight = {
+			factor = 3
+		}
+		
+		trigger = {
+            if = {
+                limit = {
+                    NOT = { exists = SNB }
+                }
+                # Sindragosa's Fall
+                777 = {
+                    owned_by = ROOT
+                }
+                # East Sindragosa's Peaks
+                895 = {
+                    owned_by = ROOT
+                }
+                # West Sindragosa's Peaks
+                3261 = {
+                    owned_by = ROOT
+                }
+                # Sindragosa's Fall Nest
+                3257 = {
+                    owned_by = ROOT
+                }
+            }
+            else = {
+                SNB = {
+                    is_subject_of = ROOT
+                }
+                # Sindragosa's Fall
+                777 = {
+                    owned_by = SNB
+                }
+                # East Sindragosa's Peaks
+                895 = {
+                    owned_by = SNB
+                }
+                # West Sindragosa's Peaks
+                3261 = {
+                    owned_by = SNB
+                }
+                # Sindragosa's Fall Nest
+                3257 = {
+                    owned_by = SNB
+                }
+            }
+		}
+		provinces_to_highlight = {
+			owned_by = SNB # Sindragosa's Brood
+        }
+		effect = {
+            if = {
+                limit = {
+                    exists = SNB
+                }
+                
+                SNB = {
+                    custom_tooltip = FROSTBROOD_SNB_TT
+                    
+                    add_country_modifier = {
+                        name = frostbrood
+                        duration = -1
+                    }
+                    
+                    hidden_effect = {
+                        change_primary_culture = culture_scourge
+                        change_religion = cult_of_the_damned
+                        
+                        every_owned_province = {
+                            add_base_manpower = 1
+                            change_culture = culture_scourge
+                            change_religion = cult_of_the_damned
+                            change_trade_goods = flying_mounts
+                        }
+                    }
+                }
+            }
+            
+            custom_tooltip = MISSION_SPACER_TT
+            
+            define_general = {
+                name = "Frost Queen Sindragosa"
+                shock = 6
+                fire = 6
+                manuever = 8
+                siege = 8
+                female = yes
+            }
+            
+            custom_tooltip = MISSION_SPACER_TT
+            
+            if = {
+                limit = {
+                    has_country_modifier = frostwyrms
+                }
+                
+                add_country_modifier = {
+                    name = additional_frostwyrms
+                    duration = -1
+                }
+            }
+            else = {
+                add_country_modifier = {
+                    name = frostwyrms
+                    duration = -1
+                }
+            }
+		}
+	}
 }
 
 wwu_scourge_column_2 = { 
@@ -509,71 +626,9 @@ wwu_scourge_column_3 = {
 		}
 	}
     
-    wwu_resurrect_sindragosa_brood = { 
-		icon = mission_sindragosa
-        position = 5
-        
-		required_missions = { wwu_advance_the_front } 
-                		
-		ai_weight = {
-			factor = 3
-		}
-		
-		trigger = {
-            if = {
-                limit = {
-                    NOT = { exists = SNB }
-                }
-                # Sindragosa's Fall
-                777 = {
-                    owned_by = ROOT
-                }
-                # East Sindragosa's Peaks
-                895 = {
-                    owned_by = ROOT
-                }
-                # West Sindragosa's Peaks
-                3261 = {
-                    owned_by = ROOT
-                }
-                # Sindragosa's Fall Nest
-                3257 = {
-                    owned_by = ROOT
-                }
-            }
-            else = {
-                SNB = {
-                    is_subject_of = ROOT
-                }
-                # Sindragosa's Fall
-                777 = {
-                    owned_by = SNB
-                }
-                # East Sindragosa's Peaks
-                895 = {
-                    owned_by = SNB
-                }
-                # West Sindragosa's Peaks
-                3261 = {
-                    owned_by = SNB
-                }
-                # Sindragosa's Fall Nest
-                3257 = {
-                    owned_by = SNB
-                }
-            }
-		}
-		provinces_to_highlight = {
-			owned_by = SNB # Sindragosa's Brood
-        }
-		effect = {
-            country_event = { id = wwu_scourge.14 }
-		}
-	}
-    
     wwu_the_scourge_invasion = { 
 		icon = mission_achievement_boss_lichking
-        position = 6
+        position = 5
         
 		required_missions = { } 
                 		
@@ -894,6 +949,98 @@ wwu_scourge_column_5 = {
                 type = philosopher
                 skill = 3
                 cost_multiplier = 0.25
+            }
+		}
+	}
+    
+    wwu_resurrect_sapphiron_brood = { 
+		icon = mission_sindragosa
+        position = 5
+        
+		required_missions = { wwu_advance_the_front } 
+                		
+		ai_weight = {
+			factor = 3
+		}
+		
+		trigger = {
+            if = {
+                limit = {
+                    NOT = { exists = SPB }
+                }
+                # Wintergrasp Fortress
+                834 = {
+                    owned_by = ROOT
+                }
+            }
+            else = {
+                SPB = {
+                    is_subject_of = ROOT
+                }
+                # Wintergrasp Fortress
+                834 = {
+                    owned_by = SPB
+                }
+            }
+		}
+		provinces_to_highlight = {
+			owned_by = SNB # Sindragosa's Brood
+        }
+		effect = {
+            if = {
+                limit = {
+                    exists = SPB
+                }
+                
+                SPB = {
+                    custom_tooltip = FROSTBROOD_SPB_TT
+                    hidden_effect = {
+                        change_primary_culture = culture_scourge
+                        change_religion = cult_of_the_damned
+                        
+                        every_owned_province = {
+                            add_base_manpower = 1
+                            change_culture = culture_scourge
+                            change_religion = cult_of_the_damned
+                            change_trade_goods = flying_mounts
+                        }
+                    }
+                    
+                    add_country_modifier = {
+                        name = frostbrood
+                        duration = -1
+                    }
+                }
+            }
+            
+            custom_tooltip = MISSION_SPACER_TT
+            
+            define_general = {
+                name = "Frost Queen Sapphiron"
+                shock = 4
+                fire = 4
+                manuever = 6
+                siege = 6
+                female = yes
+            }
+            
+            custom_tooltip = MISSION_SPACER_TT
+            
+            if = {
+                limit = {
+                    has_country_modifier = frostwyrms
+                }
+                
+                add_country_modifier = {
+                    name = additional_frostwyrms
+                    duration = -1
+                }
+            }
+            else = {
+                add_country_modifier = {
+                    name = frostwyrms
+                    duration = -1
+                }
             }
 		}
 	}
