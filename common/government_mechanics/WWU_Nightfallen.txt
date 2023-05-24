@@ -1,0 +1,103 @@
+nightfallen_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 5
+	available = {
+		has_dlc = "Cradle of Civilization"
+	}
+
+	powers = {
+		nightfallen_mana = {
+			max = 100
+            default = 100
+			reset_on_new_ruler = no
+			base_monthly_growth = -0.1
+			
+			reverse_scaled_modifier = {
+				modifier = {
+					min_autonomy = 50.0
+				}
+			}
+		}
+	}
+	
+	interactions = {
+        # Stem Mana Consumption
+        nightfallen_stem_mana_consumption = {
+			icon = GFX_nightfallen_ability_1
+			cost_type = nightfallen_mana
+			cost = 10
+            
+			cooldown_years = 6
+            
+			trigger = {
+                NOT = { has_country_modifier = nightfallen_mana_conservation }
+			}
+            
+			effect = {
+				add_country_modifier = {
+                    name = nightfallen_mana_conservation
+                    duration = 1800
+                }
+			}
+            
+			ai_chance = {
+				factor = 10
+			}
+		}
+        # Heal the Withered
+        nightfallen_heal_the_withered = {
+			icon = GFX_nightfallen_ability_2
+			cost_type = nightfallen_mana
+			cost = 20
+            
+			cooldown_years = 2
+            
+			trigger = {
+                
+			}
+            
+			effect = {
+				add_yearly_manpower = 3.0
+			}
+            
+			ai_chance = {
+				factor = 10
+                
+                modifier = {
+                    factor = 0
+                    
+                    manpower_percentage = 0.25
+                }
+			}
+		}
+        # Restore Leyline Connections
+        nightfallen_restore_leyline_connections = {
+			icon = GFX_nightfallen_ability_3
+			cost_type = nightfallen_mana
+			cost = 20
+            
+			cooldown_years = 5
+            
+			trigger = {
+                NOT = { has_country_modifier = nightfallen_leyline_teleports }
+			}
+            
+			effect = {
+				add_country_modifier = {
+                    name = nightfallen_leyline_teleports
+                    duration = 1800
+                }
+			}
+            
+			ai_chance = {
+				factor = 10
+                
+                modifier = {
+                    factor = 0
+                    
+                    NOT = { is_at_war = yes }
+                }
+			}
+		}
+    }
+}

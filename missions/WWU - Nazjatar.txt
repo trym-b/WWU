@@ -1148,16 +1148,32 @@ wwu_nazjatar_column_5 = {
         }
         
 		trigger = {
-            war_with = COF
-            COF = {
-                capital_scope = {
-                    controlled_by = ROOT
+            if = {
+                limit = {
+                    exists = COF
                 }
+                war_with = COF
+                COF = {
+                    capital_scope = {
+                        controlled_by = ROOT
+                    }
+                }
+            }
+            else = {
+                always = yes
             }
 		}
         
 		effect = {
-			country_event = { id = wwu_nazjatar.4 days = 1 }
+            if = {
+                limit = {
+                    exists = COF
+                }
+                COF = { country_event = { id = wwu_nazjatar.4 days = 1 } }
+            }
+            else = {
+                add_prestige = 5
+            }
 		}
 	}
     
