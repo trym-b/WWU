@@ -153,6 +153,36 @@ country_event = {
 	}
 }
 
+# Leader of the Dragon Aspects
+country_event = {
+	id = wwu_faction_system_government.6
+	title = wwu_faction_system_government.6.title
+	desc = wwu_faction_system_government.6.desc
+	picture = HUNGRY_DRAGON_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_dragon_aspects
+        has_country_modifier = head_of_dragon_aspects
+        NOT = { has_reform = dragon_aspects_reform }
+        
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.6.option.a
+		
+        change_government = monarchy
+        add_government_reform = dragon_aspects_reform
+	}
+}
+
 #-----------------------------
 # Demotion
 #-----------------------------
@@ -277,5 +307,34 @@ country_event = {
 		
         change_government = republic
         add_government_reform = mercantile_republic_reform
+	}
+}
+
+# Demotion - Dragon Aspects
+country_event = {
+	id = wwu_faction_system_government.14
+	title = wwu_faction_system_government.14.title
+	desc = wwu_faction_system_government.14.desc
+	picture = DRAGON_SOUL_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = { 
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_dragon_aspects
+        NOT = { has_country_modifier = head_of_dragon_aspects }
+        has_reform = dragon_aspects_reform
+    }
+    
+    mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_faction_system_government.14.option.a
+		
+        change_government = monarchy
+        add_government_reform = dragonflight_brood_reform
 	}
 }

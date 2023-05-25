@@ -164,6 +164,47 @@ country_event = {
 	}
 }
 
+# Collapse - Dragon Aspects
+# Disband the Dragon Aspects if the current Head's capital is sieged down
+country_event = {
+	id = wwu_faction_system_collapse.5
+	title = wwu_faction_system_collapse.5.title
+	desc = wwu_faction_system_collapse.5.desc
+	picture = HELLFIRE_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+	
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = collapse_the_dragon_aspects
+            set_global_flag = dragon_aspects_dismantled
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_collapse.5.option.a
+		
+        every_country = {
+            limit = {
+                has_country_modifier = head_of_dragon_aspects
+            }
+            remove_country_modifier = head_of_dragon_aspects
+        }
+        
+        every_country = {
+            limit = {
+                has_country_modifier = member_of_dragon_aspects
+            }
+            remove_country_modifier = member_of_dragon_aspects
+        }
+	}
+}
+
 #-----------------------
 # Cleanup 
 #-----------------------
@@ -352,6 +393,53 @@ country_event = {
     
 	option = {
 		name = wwu_faction_system_collapse.13.option.a
+	}
+}
+
+# Collapse of Dragon Aspects
+country_event = {
+	id = wwu_faction_system_collapse.14
+	title = wwu_faction_system_collapse.14.title
+	desc = wwu_faction_system_collapse.14.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    hidden = yes
+    
+    trigger = {
+        has_global_flag = enabled_faction_mechanics
+        
+        # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
+        had_global_flag = {
+            flag = dragon_aspects_exists
+            days = 365
+        }
+        
+        has_country_modifier = member_of_dragon_aspects
+        NOT = {
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    has_country_modifier = member_of_dragon_aspects
+                }
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            destroy_faction = {
+                faction = dragon_aspects
+            }
+            set_global_flag = dragon_aspects_dismantled
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_faction_system_collapse.14.option.a
 	}
 }
 

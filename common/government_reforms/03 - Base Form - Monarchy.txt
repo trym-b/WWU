@@ -1781,3 +1781,96 @@ alterac_kingdom_reform = {
     
 	ai = { factor = 0 }
 }
+
+# Used by the Dragon Aspects leader
+dragon_aspects_reform = {
+	icon                        = "red_glyph"
+    legacy_equivalent           = dragon_aspects_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen                   = yes
+    heir                    = yes
+    rulers_can_be_generals  = yes
+    
+    modifiers = {
+		monthly_splendor = 2.0
+        yearly_corruption = -0.05
+        discipline = 0.05
+        
+        governing_capacity = 250
+	}
+    
+    conditional = {
+        allow = {
+            has_dlc = "Cradle of Civilization"
+        }
+        
+        government_abilities = {
+            faction_authority_dragon_aspects_mechanic
+        }
+    }
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_dragon = yes
+	}
+    
+	potential = {
+		has_country_modifier = head_of_dragon_aspects
+	}
+    
+	ai = { factor = 0 }
+}
+
+# Used by Dragonflights
+dragonflight_brood_reform = {
+	icon                        = "valithra"
+    legacy_equivalent           = dragonflight_brood_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    queen                   = yes
+    heir                    = yes
+    rulers_can_be_generals  = yes
+    
+    modifiers = {
+		monthly_splendor = 1.0
+        stability_cost_modifier = -0.25
+        movement_speed = 0.2
+        
+        governing_capacity = -100
+	}
+    
+    # conditional = {
+        # allow = {
+            # has_dlc = "Cradle of Civilization"
+        # }
+        
+        # government_abilities = {
+            # dragon_brood_mechanic
+        # }
+    # }
+    
+    custom_attributes = {
+		locked_government_type = yes
+        succession_dragon = yes
+	}
+    
+	potential = {
+		OR = {
+            have_had_reform = dragonflight_brood_reform
+            culture_group = culture_group_dragonkin
+        }
+	}
+    
+	ai = { factor = 0 }
+}

@@ -7,11 +7,24 @@
 # Decisions
 - Added "Call upon the Monkey King" decision for the Hozen with Celestial religion.
   
+# Buildings
+- Arsenals now have land_forcelimit = 0.5 / 0.75 / 1
+- Shipyards now have naval_forcelimit = 0.5 / 0.75 / 1
+
+# Disaster
+- Added "House Feud" disaster for Kul Tiras. 
+ - Applies min_autonomy = 50 whilst active.
+ - It is active for 30 years from game start.
+ - Random events will either sway faction influence to a non-Proudmoore house or lose prestige.
+
 # Ages
 - Restored the age indicator mark to the Age interface.
 - Fixed the age icons in the Age interface so they show the Age condition tooltip again.
-- Changed the Age bonuses to use a new system that grants much more flexibility to the selection of bonuses:
- - Each of the buttons now represents a category:
+
+- The age abilities have been changed to a more dynamic system:
+ - Each ability is now a 'Card', which you unlock with splendor as normal.
+ - Once unlocked, the Deck of Wonder event will fire on the next monthly tick.
+ - Within this menu, you can browse 11 categories:
   - Administrative
   - Court
   - Economic
@@ -22,10 +35,10 @@
   - Colonial
   - Army
   - Navy
-  - Actions
- - Once 'purchased', an event will appear on the monthly tick allowing you to select a bonus from a list of modifiers that are associated with the category name.
- - Actions is slightly different, it instead offers one-time actions such as "Reset Golden Age", "Accrue Army Tradition", etc.
- - Each bonus can only be selected once. However, bonuses now persist through Age changes.
+  - Action
+ - Each category has an array of bonuses to select from. Once a bonus has been selected, the menu will close.
+ - For each age, only one bonus from each category can be selected, i.e. if you pick an Administrative bonus, the next unlock will not show the Administrative category in the menu.
+ - These bonuses will persist between ages however.
   
 # Status Report
 - Changed Ruler View to instead be Status Report.
@@ -39,15 +52,8 @@
 
 - Ruler Investment is now its own menu and contains the ADM/DIP/MIL boosts, plus the Class and Magic training actions.
 
-# Buildings
-- Arsenals now have land_forcelimit = 0.5 / 0.75 / 1
-- Shipyards now have naval_forcelimit = 0.5 / 0.75 / 1
-
-# Disaster
-- Added "House Feud" disaster for Kul Tiras. 
- - Applies min_autonomy = 50 whilst active.
- - It is active for 30 years from game start.
- - Random events will either sway faction influence to a non-Proudmoore house or lose prestige.
+# Factions
+- Added the "Dragon Aspects" faction for the dragonflight nations that would belong to it.
 
 # Government
 - Removed usage of the states general mechanic.
@@ -98,6 +104,13 @@
  - Added "Stem Mana Consumption" action: reduces Mana by 10, but adds monthly_nightfallen_mana = 0.1 for 10 years.
  - Added "Heal the Withered" action: reduces Mana by 20, but adds 3 years of manpower.
  - Added "Restore Leyline Connections" action: reduces Mana by 20, but adds monthly_nightfallen_mana = 0.05, movement_speed = 0.2, shock_damage = 0.1 for 5 years.
+ 
+- Added "Faction Authority" mechanic to the "Dragon Aspects" reform:
+ - Faction Authority is built up by:
+  - Maintaing high relations with Dragon Aspect members as the leader.
+  - Winning wars with Dragon Aspect members as war allies.
+ - Added "XXX" action: adds XXX modifier to all Dragon Aspect members. Can be stacked up to XXX
+ - Added "Unite the Dragon Aspects" action: if all other actions have been completed, then the Dragon Aspect leader can choose to annex or vassalize all Dragon Aspect members with relations above 0. Annexation will dismantle the faction however: leader will retain the modifiers and the government form, but the rest of the faction stuff will be disabled.
  
 # Subject Types
 - Added Scourge Vassal subject type:

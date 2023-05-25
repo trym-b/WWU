@@ -1312,6 +1312,296 @@ invite_to_trade_coalition = {
 }
 
 #---------------------------------------
+# Invite - Dragon Aspects
+#---------------------------------------
+# ROOT - Faction Leader
+invite_to_dragon_aspects = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = invite_to_dragon_aspects_tooltip
+	require_acceptance = yes
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+		has_country_modifier = head_of_dragon_aspects
+        FROM = {
+            NOT = { has_country_modifier = member_of_dragon_aspects }
+			NOT = { cannot_join_dragon_aspects = yes }
+			NOT = { has_country_modifier = recent_faction_interaction }
+		}
+	}
+	is_allowed = {
+		has_country_modifier = head_of_dragon_aspects
+		FROM = {
+			NOT = { cannot_join_dragon_aspects = yes }
+			NOT = { has_country_modifier = recent_faction_interaction }
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - invite_to_dragon_aspects - accepted"
+            }
+        }
+        
+		FROM = {
+            set_member_of_faction = {
+                faction = dragon_aspects
+            }
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 365
+            }
+        }
+	}
+	on_decline = { 
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - invite_to_dragon_aspects - declined"
+            }
+        }
+        
+        FROM = {
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 365
+            }
+        }
+	}
+	
+	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_ROOTPRESTIGE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = prestige
+			}
+			subtract_variable = { which = ai_value value = 25 }
+			divide_variable = { which = ai_value value = 2 }
+		}
+		add_entry = {
+			name = INV_OPINION
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			subtract_variable = { which = ai_value value = 25 }
+		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_DRAGON_ASPECTS
+			limit = {
+				FROM = { religion = dragon_aspects }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        add_entry = {
+			name = INV_RELIGION_CORRUPT_DRAGON_ASPECT
+			limit = {
+				FROM = { religion = corrupt_dragon_aspect }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_DRAGON_ASPECTS
+			limit = {
+				FROM = {
+                    is_dragon_aspects_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_DRAGON_ASPECTS
+			limit = {
+				FROM = {
+                    NOT = { is_dragon_aspects_culture = yes }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+				FROM = {
+                    is_non_factional_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+				FROM = {
+                    is_alien_culture = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_5_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 5
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_10_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 10
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 15
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_HISTORICAL_MEMBER
+			limit = {
+				FROM = { is_historical_dragon_aspects_member = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 200
+			}
+		}
+		add_entry = {
+			name = INV_ALLIANCE_WITH_MEMBER
+			limit = {
+				any_country = {
+                    has_country_modifier = member_of_dragon_aspects
+                    alliance_with = FROM
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+		add_entry = {
+			name = INV_CANNOT_JOIN_DRAGON_ASPECTS
+			limit = {
+				FROM = {
+					cannot_join_dragon_aspects = yes
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+		add_entry = {
+			name = INV_NOT_ON_AZEROTH
+			limit = {
+				FROM = {
+                    NOT = {
+                        is_capital_on_azeroth = yes
+                    }
+				}
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+	}
+
+	ai_will_do = {
+		# AI will stop after 8 members
+        NOT = {
+            calc_true_if = {
+                amount = 8
+                all_country = {
+                    has_country_modifier = member_of_dragon_aspects
+                }
+            }
+        }
+	}
+}
+
+#---------------------------------------
 # Join - Alliance
 #---------------------------------------
 # ROOT - Potential Member
@@ -2423,6 +2713,255 @@ join_the_trade_coalition = {
 }
 
 #---------------------------------------
+# Join - Dragon Aspects
+#---------------------------------------
+# ROOT - Potential Member
+join_the_dragon_aspects = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = join_the_dragon_aspects_tooltip
+	require_acceptance = yes
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+		NOT = { has_country_modifier = member_of_dragon_aspects }
+        NOT = { cannot_join_dragon_aspects = yes }
+        FROM = { 
+            has_country_modifier = head_of_dragon_aspects
+        }
+	}
+	is_allowed = {
+		NOT = { has_country_modifier = member_of_dragon_aspects }
+        NOT = { cannot_join_dragon_aspects = yes }
+        NOT = { has_country_modifier = recent_faction_interaction }
+        FROM = { 
+            has_country_modifier = head_of_dragon_aspects
+        }
+	}
+	on_accept = {   
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - join_the_dragon_aspects - accepted"
+            }
+        }
+        
+		set_member_of_faction = {
+            faction = dragon_aspects
+        }
+        add_country_modifier = {
+            name = recent_faction_interaction
+            duration = 365
+        }
+	}
+	on_decline = { 
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - join_the_dragon_aspects - declined"
+            }
+        }
+        
+        add_country_modifier = {
+            name = recent_faction_interaction
+            duration = 365
+        }
+	}
+	
+	ai_acceptance = {
+        #----------------------
+        # Standard
+        #----------------------
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_ROOTPRESTIGE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = prestige
+			}
+			subtract_variable = { which = ai_value value = 25 }
+			divide_variable = { which = ai_value value = 2 }
+		}
+		add_entry = {
+			name = INV_OPINION
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = ROOT
+				with = FROM
+			}
+			subtract_variable = { which = ai_value value = 25 }
+		}
+        
+        #----------------------
+        # Religion Weights
+        #----------------------
+        add_entry = {
+			name = INV_RELIGION_DRAGON_ASPECTS
+			limit = {
+				religion = dragon_aspects
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 25
+			}
+		}
+        add_entry = {
+			name = INV_RELIGION_CORRUPT_DRAGON_ASPECT
+			limit = {
+				religion = corrupt_dragon_aspect
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Cultural Weights
+        #----------------------
+		add_entry = {
+			name = INV_NATURAL_DRAGON_ASPECTS
+			limit = {
+                is_dragon_aspects_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 50
+			}
+		}
+		add_entry = {
+			name = INV_NOT_NATURAL_DRAGON_ASPECTS
+			limit = {
+                NOT = { is_dragon_aspects_culture = yes }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_IS_NOT_FACTIONAL
+			limit = {
+                is_non_factional_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -25
+			}
+		}
+		add_entry = {
+			name = INV_DOES_NOT_JOIN_FACTIONS
+			limit = {
+                is_alien_culture = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+        
+        #----------------------
+        # Factional Weights
+        #----------------------
+		add_entry = {
+			name = INV_OVER_5_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 5
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_10_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 10
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_OVER_15_MEMBERS
+			limit = {
+				calc_true_if = {
+                    amount = 15
+                    all_country = {
+                        has_country_modifier = member_of_dragon_aspects
+                    }
+                }
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -50
+			}
+		}
+		add_entry = {
+			name = INV_HISTORICAL_MEMBER
+			limit = {
+                is_historical_dragon_aspects_member = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = 200
+			}
+		}
+		add_entry = {
+			name = INV_CANNOT_JOIN_DRAGON_ASPECTS
+			limit = {
+				cannot_join_dragon_aspects = yes
+			}
+			export_to_variable = {
+				which = ai_value
+				value = -1000
+			}
+		}
+	}
+
+	ai_will_do = {
+		# AI will stop after 8 members
+        NOT = {
+            calc_true_if = {
+                amount = 8
+                all_country = {
+                    has_country_modifier = member_of_dragon_aspects
+                }
+            }
+        }
+	}
+}
+
+#---------------------------------------
 # Kick - Alliance
 #---------------------------------------
 # ROOT - Faction Leader
@@ -2729,6 +3268,85 @@ kick_from_trade_coalition = {
 				is_subject = yes
 				overlord = {
 					NOT = { has_country_modifier = member_of_trade_coalition }
+				}
+			}
+        }
+	}
+}
+
+#---------------------------------------
+# Kick - Dragon Aspects
+#---------------------------------------
+# ROOT - Faction Leader
+kick_from_dragon_aspects = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = kick_from_dragon_aspects_tooltip
+	require_acceptance = no
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+		has_country_modifier = head_of_dragon_aspects
+        FROM = {
+			has_country_modifier = member_of_dragon_aspects
+		}
+	}
+	is_allowed = {
+		has_country_modifier = head_of_dragon_aspects
+		FROM = {
+			has_country_modifier = member_of_dragon_aspects
+		}
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - kick_from_dragon_aspects"
+            }
+        }
+        
+		FROM = {
+            remove_country_modifier = member_of_dragon_aspects
+            country_event = { id = wwu_faction_system.44 }
+            hidden_effect = { set_country_flag = clear_dragon_aspects_homeland }
+        }
+	}
+	on_decline = { 
+        FROM = {
+            remove_country_modifier = member_of_dragon_aspects
+            country_event = { id = wwu_faction_system.44 }
+        }
+	}
+	
+	ai_acceptance = {
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
+	}
+
+	ai_will_do = {
+        OR = {
+            # AI will kick if the leader's opinion of them is very low
+            NOT = {
+                has_opinion = {
+                    who = FROM
+                    value = -150
+                }
+            }
+            # Target is a subject to a non-member overlord
+            FROM = {
+				is_subject = yes
+				overlord = {
+					NOT = { has_country_modifier = member_of_dragon_aspects }
 				}
 			}
         }
@@ -3048,6 +3666,85 @@ leave_the_trade_coalition = {
 }
 
 #---------------------------------------
+# Leave - Dragon Aspects
+#---------------------------------------
+# ROOT - Potential Member
+leave_the_dragon_aspects = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = leave_the_dragon_aspects_tooltip
+	require_acceptance = no
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_dragon_aspects
+        FROM = { 
+            has_country_modifier = head_of_dragon_aspects
+        }
+	}
+	is_allowed = {
+		has_country_modifier = member_of_dragon_aspects
+        FROM = { 
+            has_country_modifier = head_of_dragon_aspects
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - leave_the_dragon_aspects"
+            }
+        }
+        
+		remove_country_modifier = member_of_dragon_aspects
+        FROM = {
+            country_event = { id = wwu_faction_system.54 }
+            hidden_effect = { set_country_flag = clear_dragon_aspects_homeland }
+        }
+	}
+	on_decline = { 
+        remove_country_modifier = member_of_dragon_aspects
+        FROM = {
+            country_event = { id = wwu_faction_system.54 }
+        }
+	}
+	
+	ai_acceptance = {
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
+	}
+
+	ai_will_do = {
+		OR = {
+            # AI will leave if opinion of leader is very low
+            NOT = {
+                has_opinion = {
+                    who = FROM
+                    value = -180
+                }
+            }
+            # AI is a subject to a non-member overlord
+            AND = {
+                is_subject = yes
+                overlord = {
+                    NOT = { has_country_modifier = member_of_dragon_aspects }
+                }
+            }
+        }
+	}
+}
+
+#---------------------------------------
 # Pass Leadership - Alliance
 #---------------------------------------
 # ROOT - Faction Leader
@@ -3172,6 +3869,80 @@ pass_the_trade_coalition_leadership = {
         FROM = {
             set_head_of_faction = {
                 faction = trade_coalition
+            }
+        }
+	}
+	
+	ai_acceptance = {
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
+	}
+
+	ai_will_do = {
+        # AI should never do this normally
+		always = no
+	}
+}
+
+#---------------------------------------
+# Pass Leadership - Dragon Aspects
+#---------------------------------------
+# ROOT - Faction Leader
+pass_the_dragon_aspects_leadership = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = pass_the_dragon_aspects_leadership_tooltip
+	require_acceptance = no
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = head_of_dragon_aspects
+        FROM = { 
+            has_country_modifier = member_of_dragon_aspects
+        }
+	}
+	is_allowed = {
+		has_country_modifier = head_of_dragon_aspects
+        FROM = { 
+            has_country_modifier = member_of_dragon_aspects
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - pass_the_dragon_aspects_leadership"
+            }
+        }
+        
+		remove_country_modifier = head_of_dragon_aspects
+        set_member_of_faction = {
+            faction = dragon_aspects
+        }
+        FROM = {
+            set_head_of_faction = {
+                faction = dragon_aspects
+            }
+        }
+	}
+	on_decline = { 
+        remove_country_modifier = head_of_dragon_aspects
+        set_member_of_faction = {
+            faction = dragon_aspects
+        }
+        FROM = {
+            set_head_of_faction = {
+                faction = dragon_aspects
             }
         }
 	}
@@ -3500,6 +4271,82 @@ request_the_trade_coalition_leadership = {
 }
 
 #---------------------------------------
+# Request Leadership - Dragon Aspects
+#---------------------------------------
+# ROOT - Faction Member
+request_the_dragon_aspects_leadership = {
+	category = alliance
+	
+	alert_index = 3
+	alert_tooltip = request_the_dragon_aspects_leadership_tooltip
+	require_acceptance = no
+    
+	is_visible = {
+        NOT = { has_global_flag = dragon_aspects_dismantled }
+        ai = no
+        has_global_flag = enabled_faction_mechanics
+        has_country_modifier = member_of_dragon_aspects
+        FROM = { 
+            ai = yes
+            has_country_modifier = head_of_dragon_aspects
+        }
+	}
+	is_allowed = {
+        has_opinion = {
+            who = FROM
+            value = 180
+        }
+        FROM = { 
+            has_opinion = {
+                who = ROOT
+                value = 180
+            }
+        }
+        dip_power = 400
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - request_the_dragon_aspects_leadership"
+            }
+        }
+        
+        add_dip_power = -400
+        
+        set_head_of_faction = {
+            faction = dragon_aspects
+        }
+        
+        FROM = {
+            remove_country_modifier = head_of_dragon_aspects
+            set_member_of_faction = {
+                faction = dragon_aspects
+            }
+        } 
+	}
+	on_decline = { }
+	
+	ai_acceptance = {
+		add_entry = {
+			name = INV_BASE
+			limit = {
+				always = yes
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
+	}
+
+	ai_will_do = {
+        # AI should never do this normally
+		always = no
+	}
+}
+
+#---------------------------------------
 # Call to War - Faction
 #---------------------------------------
 # ROOT - Faction Leader
@@ -3561,6 +4408,17 @@ call_to_war_faction = {
             NOT = { has_global_flag = trade_coalition_dismantled }
             FROM = { 
                 has_country_modifier = member_of_trade_coalition
+            }
+        }
+        # Dragon Aspects
+        else_if = {
+            limit = {
+                has_country_modifier = head_of_dragon_aspects
+            }
+            
+            NOT = { has_global_flag = dragon_aspects_dismantled }
+            FROM = { 
+                has_country_modifier = member_of_dragon_aspects
             }
         }
         # Otherwise block usage
@@ -3776,6 +4634,18 @@ request_aid_faction = {
             NOT = { has_global_flag = trade_coalition_dismantled }
             FROM = { 
                 has_country_modifier = member_of_trade_coalition
+            }
+        }
+        # Dragon Aspects
+        else_if = {
+            limit = {
+                NOT = { has_country_modifier = head_of_dragon_aspects }
+                has_country_modifier = member_of_dragon_aspects
+            }
+            
+            NOT = { has_global_flag = dragon_aspects_dismantled }
+            FROM = { 
+                has_country_modifier = member_of_dragon_aspects
             }
         }
         # Otherwise block usage

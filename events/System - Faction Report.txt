@@ -9,6 +9,34 @@ country_event = {
 	
 	is_triggered_only = yes
     
+    # Dragon Aspects
+    option = {
+		name = wwu_faction_report.1.option.dragon_aspects_view
+        
+        trigger = {
+            has_global_flag = enabled_faction_mechanics
+            has_global_flag = dragon_aspects_exists
+            NOT = { has_global_flag = dragon_aspects_dismantled }
+            
+            OR = {
+                any_country = {
+                    has_country_modifier = head_of_dragon_aspects
+                    has_country_modifier = member_of_dragon_aspects
+                }
+                AND = {
+                    has_country_modifier = head_of_dragon_aspects
+                    has_country_modifier = member_of_dragon_aspects
+                }
+            }
+        }
+        
+        country_event = { id = wwu_faction_roster.104 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
     # Trade Coalition
     option = {
 		name = wwu_faction_report.1.option.trade_coalition_view
