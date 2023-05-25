@@ -80,15 +80,22 @@ wwu_northrend_furbolg_column_1 = {
 				id = flavor_nf.5
             }			
 			clr_country_flag = growing_nightmares
+			set_country_flag = the_choice_dreams_or_nightmares
 		}
 	}
 	wwu_sons_of_ursoc_nf = {
 	    icon = mission_blueprint
-		position = 5
+		position = 7
 		required_missions = { wwu_madness_consumes_nf }
 		
 		trigger = {
-			
+		    has_global_flag = seeds_of_teldrassil
+			religious_unity = 0.9
+			area_heartwood = {
+				owned_by = ROOT
+				development = 10
+				type = all
+			}
 		}
 		
 		effect = {
@@ -96,7 +103,94 @@ wwu_northrend_furbolg_column_1 = {
                 name = mission_wild_god_ursoc_nf
                 duration = -1
             }
-			set_country_flag = the_choice_dreams_or_nightmares
+			country_event = {
+				id = flavor_nf.7
+            }			
+		}
+	}
+	wwu_one_with_nature_nf = {
+	    icon = mission_blueprint
+		position = 8
+		required_missions = { wwu_sons_of_ursoc_nf }
+		
+		trigger = {
+			has_country_flag = the_dream
+			833 = {
+			    owned_by = ROOT
+			    religion = druidism
+			}
+			religious_unity = 0.75
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_druidic_roots_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_return_of_the_druids_nf = {
+	    icon = mission_blueprint
+		position = 9
+		required_missions = { wwu_one_with_nature_nf }
+		
+		trigger = {
+			region_grizzly_hills = {
+			    religion = druidism
+				owned_by = ROOT
+				type = all
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_druidic_practices_nf
+                duration = -1
+            }
+			country_event = {
+				id = flavor_nf.11
+            }
+		}
+	}
+	wwu_vordrassil_restoration_nf = {
+	    icon = mission_blueprint
+		position = 10
+		required_missions = { wwu_return_of_the_druids_nf }
+		
+		trigger = {
+			piety = 1
+			833 = {
+				has_great_project = {
+                type = gp_vordrassil
+                tier = 3
+                }
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_vordrassil_sampling_nf
+                duration = -1
+            }
+			country_event = {
+				id = flavor_nf.12
+            }
+		}
+	}
+	wwu_bough_shadow_nf = {
+	    icon = mission_blueprint
+		position = 11
+		required_missions = { wwu_open_the_emerald_gateways_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_emerald_gateways_a_nf
+                duration = -1
+            }
 		}
 	}
 }
@@ -237,7 +331,9 @@ wwu_northrend_furbolg_column_2 = {
                 name = mission_grizzlemaw_united_nf
                 duration = -1
             }
+			# Personal Union/Subjucation CBs to all snow furbolgs
 		}
+	    
 	}
 	wwu_nation_of_grizzlemaw_nf = {
 	    icon = mission_blueprint
@@ -272,6 +368,7 @@ wwu_northrend_furbolg_column_2 = {
 			region_grizzly_hills = {
                 add_permanent_claim = ROOT
 			}
+			#integrate vassals with event or through this mission
 		}
 	}
 	wwu_ancestral_faith_nf = {
@@ -280,12 +377,138 @@ wwu_northrend_furbolg_column_2 = {
 		required_missions = { wwu_nation_of_grizzlemaw_nf }
 		
 		trigger = {
-			
+			has_country_flag = the_ancestors
+			833 = {
+			    owned_by = ROOT
+			    religion = shamanism
+			}
+			religious_unity = 0.75
 		}
 		
 		effect = {
 			add_country_modifier = {
                 name = mission_grizzlemaw_supreme_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_the_lucid_dream_nf = {
+	    icon = mission_blueprint
+		position = 8
+		required_missions = { wwu_sons_of_ursoc_nf }
+		
+		trigger = {
+			has_country_flag = the_nightmare
+			833 = {
+			    owned_by = ROOT
+			    religion = nightmare
+			}
+			religious_unity = 0.75
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_loyal_to_yogg_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_the_fortress_of_ulduar_nf = {
+	    icon = mission_blueprint
+		position = 9
+		required_missions = { wwu_the_lucid_dream_nf }
+		
+		trigger = {
+		    OR = {
+			    B86 = {
+			    	has_opinion = {
+                        who = ROOT
+                        value = 100
+			    	}
+					development = 200
+                }
+				B73 = {
+			    	has_opinion = {
+                        who = ROOT
+                        value = 100
+			    	}
+					religion = yogg_saron
+					development = 200
+					NOT = { exists = B86 }
+                }
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_spreading_madness_nf
+                duration = -1
+            }
+			if = {
+                limit = {
+				    B86 = {
+                        NOT = {
+					        has_opinion = {
+                                who = ROOT
+                                value = 100
+						    }
+					    }
+					}
+                }
+                create_alliance = B86
+            }
+			if = {
+                limit = {
+				    B73 = {
+					    NOT = {
+					        has_opinion = {
+                                who = ROOT
+                                value = 100
+						    }
+						}
+					}
+				}
+				create_alliance = B73
+			}
+		}
+	}
+	wwu_new_vordrassil_corruption_nf = {
+	    icon = mission_blueprint
+		position = 10
+		required_missions = { wwu_the_fortress_of_ulduar_nf }
+		
+		trigger = {
+			num_of_aspects = 3
+			833 = {
+				has_great_project = {
+                type = gp_vordrassil
+                tier = 3
+                }
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_fate_of_vordrassil_sampling_nf
+                duration = -1
+            }
+			country_event = {
+				id = flavor_nf.13
+            }
+		}
+	}
+	wwu_the_dreamgrove_nf = {
+	    icon = mission_blueprint
+		position = 11
+		required_missions = { wwu_open_the_emerald_gateways_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_emerald_gateways_b_nf
                 duration = -1
             }
 		}
@@ -451,6 +674,60 @@ wwu_northrend_furbolg_column_3 = {
             }
 		}
 	}
+	wwu_totem_of_wind_nf = {
+	    icon = mission_blueprint
+		position = 9
+		required_missions = { wwu_totem_of_earth_nf }
+		
+		trigger = {
+			950 = {
+				owned_by = ROOT
+				development = 15
+				has_building = wow_manufactory
+				has_building = wow_temple_2
+				has_building = wow_road_2
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_wind_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_seradane_nf = {
+	    icon = mission_blueprint
+		position = 11
+		required_missions = { wwu_open_the_emerald_gateways_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_emerald_gateways_c_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_future_of_dragon_isles_nf = {
+	    icon = mission_blueprint
+		position = 13
+		required_missions = { wwu_exodus_of_snow_furbolgs_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_dragon_isles_nf
+                duration = -1
+            }
+		}
+	}
 }
 
 wwu_northrend_furbolg_column_4 = {
@@ -499,8 +776,8 @@ wwu_northrend_furbolg_column_4 = {
 		effect = {
 		    if = {
                 limit = {
-				    NOT = {
-                        B76 = {
+				    B76 = {
+                        NOT = {
 					        has_opinion = {
                                 who = ROOT
                                 value = 100
@@ -623,11 +900,58 @@ wwu_northrend_furbolg_column_4 = {
                 add_permanent_claim = ROOT
 			}
 		}
-	}
-	wwu_totem_of_wind_nf = {
+	}	
+	wwu_totem_of_earth_nf = {
 	    icon = mission_blueprint
 		position = 8
-		required_missions = { wwu_totem_of_water_nf }
+		required_missions = { }
+		
+		trigger = {
+			2111 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_manufactory
+				has_building = wow_mine_2
+				has_building = wow_market_2
+				has_building = wow_training_ground_2
+			}
+			mission_completed = wwu_ancestral_faith_nf
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_earth_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_totem_of_water_nf = {
+	    icon = mission_blueprint
+		position = 9
+		required_missions = { wwu_totem_of_earth_nf }
+		
+		trigger = {
+			1289 = {
+				owned_by = ROOT
+				development = 15
+				has_building = wow_shipyard_2
+				has_building = wow_dockyard_2
+				has_building = wow_naval_barracks
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_water_nf
+                duration = -1
+            }
+		}
+	}
+	
+	wwu_open_the_emerald_gateways_nf = {
+	    icon = mission_blueprint
+		position = 10
+		required_missions = { }
 		
 		trigger = {
 			
@@ -635,7 +959,57 @@ wwu_northrend_furbolg_column_4 = {
 		
 		effect = {
 			add_country_modifier = {
-                name = mission_wind_nf
+                name = mission_all_roads_lead_to_emerald_dream_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_twilight_grove_nf = {
+	    icon = mission_blueprint
+		position = 11
+		required_missions = { wwu_open_the_emerald_gateways_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_emerald_gateways_d_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_exodus_of_snow_furbolgs_nf = {
+	    icon = mission_blueprint
+		position = 12
+		required_missions = { }
+		
+		trigger = {
+			was_player = yes
+			current_age = age_rise_of_the_horde
+			NOT = { mission_completed = wwu_furbolg_instincts_nf }
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_an_intriguing_offer_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_masters_of_azure_span_nf = {
+	    icon = mission_blueprint
+		position = 13
+		required_missions = { wwu_exodus_of_snow_furbolgs_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_new_land_of_the_furbolgs_nf
                 duration = -1
             }
 		}
@@ -677,10 +1051,10 @@ wwu_northrend_furbolg_column_5 = {
 		}
 		
 		effect = {
+		    add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
 			833 = {
-				add_base_tax = 1
-				add_base_production = 1
-				add_base_manpower = 1
 				add_great_project_tier = {
 					type = gp_grizzlemaw
 					tier = 2
@@ -713,10 +1087,10 @@ wwu_northrend_furbolg_column_5 = {
 		}
 		
 		effect = {
+		    add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
 			833 = {
-				add_base_tax = 1
-				add_base_production = 1
-				add_base_manpower = 1
 				add_great_project_tier = {
 					type = gp_grizzlemaw
 					tier = 3
@@ -781,6 +1155,7 @@ wwu_northrend_furbolg_column_5 = {
 			811 = {
 				owned_by = ROOT
 				religion = druidism
+				
 				development = 15
 			}
 			
@@ -789,7 +1164,7 @@ wwu_northrend_furbolg_column_5 = {
 		effect = {
 			add_splendor = 50
 			add_country_modifier = {
-                name = mission_druitic_blessing_nf
+                name = mission_druidic_blessing_nf
                 duration = -1
             }
 		}
@@ -821,51 +1196,58 @@ wwu_northrend_furbolg_column_5 = {
                 duration = -1
             }
 		}
-	}
-	wwu_totem_of_earth_nf = {
+	}	
+	wwu_totem_of_fire_nf = {
 	    icon = mission_blueprint
-		position = 6
-		required_missions = { }
-		
-		trigger = {
-			
-		}
-		
-		effect = {
-			add_country_modifier = {
-                name = mission_earth_nf
-                duration = -1
-            }
-		}
-	}
-	wwu_totem_of_water_nf = {
-	    icon = mission_blueprint
-		position = 7
+		position = 9
 		required_missions = { wwu_totem_of_earth_nf }
 		
 		trigger = {
-			
-		}
-		
-		effect = {
-			add_country_modifier = {
-                name = mission_water_nf
-                duration = -1
-            }
-		}
-	}
-	wwu_totem_of_fire_nf = {
-	    icon = mission_blueprint
-		position = 8
-		required_missions = { wwu_totem_of_water_nf }
-		
-		trigger = {
-			
+			2451 = {
+				owned_by = ROOT
+				development = 15
+				has_building = wow_headquarters
+				has_building = wow_arsenal_2
+				has_building = wow_temple_2
+				has_building = wow_tower_2
+			}			
 		}
 		
 		effect = {
 			add_country_modifier = {
                 name = mission_fire_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_dream_bough_nf = {
+	    icon = mission_blueprint
+		position = 11
+		required_missions = { wwu_open_the_emerald_gateways_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_emerald_gateways_e_nf
+                duration = -1
+            }
+		}
+	}
+	wwu_druidic_isles_nf = {
+	    icon = mission_blueprint
+		position = 13
+		required_missions = { wwu_exodus_of_snow_furbolgs_nf }
+		
+		trigger = {
+			
+		}
+		
+		effect = {
+			add_country_modifier = {
+                name = mission_the_mirror_of_dragon_isles_nf
                 duration = -1
             }
 		}
