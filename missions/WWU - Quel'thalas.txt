@@ -28,6 +28,9 @@ wwu_quelthalas_column_4 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A58
+        }
 		effect = { 
             add_mil_power = 100
             
@@ -47,11 +50,11 @@ wwu_quelthalas_column_4 = {
 		trigger = {
             region_eversong_woods = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             region_ghostlands = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
@@ -59,6 +62,7 @@ wwu_quelthalas_column_4 = {
                 region = region_eversong_woods
                 region = region_ghostlands
             }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
 			add_country_modifier = {
@@ -78,11 +82,12 @@ wwu_quelthalas_column_4 = {
 		trigger = {
             region_zulaman = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
             region = region_zulaman
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
 			add_country_modifier = {
@@ -109,14 +114,25 @@ wwu_quelthalas_column_5 = {
 		required_missions = {  } 
         
 		trigger = {
-            alliance_with = A18
-            A18 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 150
+            if = {
+                limit = {
+                    exists = A18
+                }
+                alliance_with = A18
+                A18 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 150
+                    }
                 }
             }
+            else = {
+                always = yes
+            }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A18
+        }
 		effect = { 
 			add_country_modifier = {
                 name = mission_kirin_tor_support
@@ -130,14 +146,25 @@ wwu_quelthalas_column_5 = {
 		required_missions = { } 
         
 		trigger = {
-            alliance_with = A08
-            A08 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 150
+            if = {
+                limit = {
+                    exists = A08
+                }
+                alliance_with = A08
+                A08 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 150
+                    }
                 }
             }
+            else = {
+                always = yes
+            }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A08
+        }
 		effect = { 
 			add_country_modifier = {
                 name = mission_lordaeron_border_agreement

@@ -61,12 +61,22 @@ wwu_wyrmrest_accord_column_1 = {
 		position = 3
 		
 		trigger = {
-			owns_or_non_sovereign_subject_of = 545
-			owns_or_non_sovereign_subject_of = 1233
-			owns_or_non_sovereign_subject_of = 2418
-			owns_or_non_sovereign_subject_of = 529
-			owns_or_non_sovereign_subject_of = 1018
+            545 = { country_or_non_sovereign_subject_holds = ROOT }
+            1233 = { country_or_non_sovereign_subject_holds = ROOT }
+            2418 = { country_or_non_sovereign_subject_holds = ROOT }
+            529 = { country_or_non_sovereign_subject_holds = ROOT }
+            1018 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 545
+                province_id = 1233
+                province_id = 2418
+                province_id = 529
+                province_id = 1018
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			add_prestige = 20
 			capital_scope = {
@@ -91,16 +101,6 @@ wwu_wyrmrest_accord_column_1 = {
 		required_missions = { wwu_link_of_all_dragons_wya }
 		position = 4
 		
-		provinces_to_highlight = {
-		    OR = {
-			    area = area_south_hearthglen
-		        area = area_moakai_harbor
-				area = area_north_hearthglen
-				area = area_moonrest_gardens
-				area = area_stars_rest
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
             area_moakai_harbor = {
 				type = all
@@ -123,6 +123,16 @@ wwu_wyrmrest_accord_column_1 = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+		provinces_to_highlight = {
+		    OR = {
+			    area = area_south_hearthglen
+		        area = area_moakai_harbor
+				area = area_north_hearthglen
+				area = area_moonrest_gardens
+				area = area_stars_rest
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 		effect = {
 			add_country_modifier = {
                 name = mission_dragon_dragonblight_wya
@@ -135,15 +145,15 @@ wwu_wyrmrest_accord_column_1 = {
 		required_missions = { wwu_expanding_into_dragonblight_wya }
 		position = 5
 		
-		provinces_to_highlight = {
-			region = region_dragonblight
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
             region_dragonblight = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			region = region_dragonblight
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 		    add_prestige = 20
@@ -165,16 +175,19 @@ wwu_wyrmrest_accord_column_1 = {
 		required_missions = { wwu_dragonblight_masters_wya }
 		position = 6
 		
-		provinces_to_highlight = {
-			area = area_coldarra
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 		    area_coldarra = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			NOT = { exists = B01 } #Blue Dragonflight
+		}
+		provinces_to_highlight = {
+			OR = {
+                owned_by = B01
+                area = area_coldarra
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         effect = {
 			add_mil_power = 200
@@ -190,15 +203,15 @@ wwu_wyrmrest_accord_column_1 = {
 		required_missions = { wwu_danger_from_nexus_wya }
 		position = 7
 		
-		provinces_to_highlight = {
-			region = region_howling_fjord
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 		    region_howling_fjord = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			region = region_howling_fjord
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         effect = {
 			add_mil_power = 200
@@ -225,16 +238,15 @@ wwu_wyrmrest_accord_column_2 = {
 		required_missions = { wwu_dragonblight_masters_wya }
 		position = 6
 		
-		provinces_to_highlight = {
-		    area = area_ulduar
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-		
 		trigger = {
 			area_ulduar = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+		    area = area_ulduar
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = { 
 		    add_dip_power = 200
@@ -250,15 +262,15 @@ wwu_wyrmrest_accord_column_2 = {
 		required_missions = { wwu_strike_at_ulduar_wya }
 		position = 7
 
-		provinces_to_highlight = {
-			area = area_ulduar				
-			NOT = { religion = ROOT }
-		}
 		trigger = {
 		    area_ulduar = {
 				type = all
 				religion = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			area = area_ulduar				
+			NOT = { religion = ROOT }
 		}
 		effect = {
 			add_country_modifier = {
@@ -272,15 +284,16 @@ wwu_wyrmrest_accord_column_2 = {
 		icon = mission_black_dragonflight
 		required_missions = { wwu_heal_old_god_corruption_wya }
 		position = 8
-		provinces_to_highlight = {
-			region = region_deepholm
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
+		
 		trigger = {
 			region_deepholm = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+        provinces_to_highlight = {
+			region = region_deepholm
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_prestige = 20
@@ -340,12 +353,18 @@ wwu_wyrmrest_accord_column_3 = {
 		
 		trigger = {
 			calc_true_if = {
-			    all_owned_province = {
+				amount = 20
+            
+			    all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
 			        religion = ROOT
 				}
-				amount = 20
 			}
 		}
+        provinces_to_highlight = {
+            country_or_non_sovereign_subject_holds = ROOT
+            NOT = { religion = ROOT }
+        }
 		effect = {
 			add_country_modifier = {
 				name = mission_dragon_aspect_dragonblight_wya
@@ -359,33 +378,61 @@ wwu_wyrmrest_accord_column_3 = {
 		position = 4
 		
 		trigger = {
-		    OR = {
-			    BD1 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 60
-					}
+		    OR = {  
+                if = {
+                    limit = {
+                        exists = BD1
+                    }
+                    BD1 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 60
+                        }
+                    }
                 }
-				BD2 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 60
-					}
+                if = {
+                    limit = {
+                        exists = BD2
+                    }
+                    BD2 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 60
+                        }
+                    }
                 }
-				BD3 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 60
-					}
+                if = {
+                    limit = {
+                        exists = BD3
+                    }
+                    BD3 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 60
+                        }
+                    }
                 }
-				BD4 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 60
-					}
+                if = {
+                    limit = {
+                        exists = BD4
+                    }
+                    BD4 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 60
+                        }
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = BD1
+                is_capital_of = BD2
+                is_capital_of = BD3
+                is_capital_of = BD4
+            }
+        }
 		effect = {
 			3241 = {
 				change_religion = corrupt_dragon_aspect
@@ -403,12 +450,17 @@ wwu_wyrmrest_accord_column_3 = {
 		
         trigger = {
 			calc_true_if = {
-			    all_owned_province = {
+			    all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
 			        religion = corrupt_dragon_aspect
 				}
 				amount = 15
 			}
 		}
+        provinces_to_highlight = {
+            country_or_non_sovereign_subject_holds = ROOT
+            NOT = { religion = corrupt_dragon_aspect }
+        }
 		effect = {
 			change_religion = corrupt_dragon_aspect
             change_tag = CHR			
@@ -489,15 +541,24 @@ wwu_wyrmrest_accord_column_4 = {
 	
     	trigger = {
 	        NOT = { mission_completed = wwu_turn_to_the_old_ways_wya }
-	        NOT = { exists = A99}
-		    NOT = { exists = B01}
-		    NOT = { exists = B02}
-		    NOT = { exists = B03}
-		    NOT = { exists = B04}
+	        NOT = { exists = A99 }
+		    NOT = { exists = B01 }
+		    NOT = { exists = B02 }
+		    NOT = { exists = B03 }
+		    NOT = { exists = B04 }
 			prestige = 100
 			legitimacy_equivalent = 90
 			stability = 2
 		}
+        provinces_to_highlight = {
+            OR = {
+                owned_by = A99
+                owned_by = B01
+                owned_by = B02
+                owned_by = B03
+                owned_by = B04
+            }
+        }
 		effect = {
 			add_country_modifier = {
                 name = mission_one_dragonflight_wya
@@ -521,29 +582,39 @@ wwu_wyrmrest_accord_column_4 = {
 	        region_dragonblight = {
 				type = all
 		        culture = culture_aspects
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			region_borean_tundra = {
 				type = all
 		        culture = culture_aspects
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			region_grizzly_hills = {
 				type = all
 		        culture = culture_aspects
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			region_crystalsong = {
 				type = all
 		        culture = culture_aspects
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			region_howling_fjord = {
 				type = all
 		        culture = culture_aspects
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+        provinces_to_highlight = {
+            OR = {
+                region = region_dragonblight
+                region = region_borean_tundra
+                region = region_grizzly_hills
+                region = region_crystalsong
+                region = region_howling_fjord
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 		    add_prestige = 100
 			add_stability = 1
@@ -575,17 +646,17 @@ wwu_wyrmrest_accord_column_5 = {
 		position = 2
 		required_missions = { wwu_mission_tree_warning_wya }
 		
-		provinces_to_highlight = {
-			region = region_dragonblight
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 		    NOT = { mission_completed = wwu_organising_the_faith_wya }
             region_dragonblight = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-		}		
+		}
+		provinces_to_highlight = {
+			region = region_dragonblight
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 		effect = {
 		    add_prestige = 20
 			add_country_modifier = {
@@ -601,12 +672,18 @@ wwu_wyrmrest_accord_column_5 = {
 		
         trigger = {
 			calc_true_if = {
-			    all_owned_province = {
+				amount = 20
+                
+			    all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
 			        culture = ROOT
 				}
-				amount = 20
 			}
 		}
+        provinces_to_highlight = {
+            country_or_non_sovereign_subject_holds = ROOT
+            NOT = { culture = ROOT }
+        }
 		effect = {
 		    add_prestige = 20
 			add_country_modifier = {
@@ -620,15 +697,15 @@ wwu_wyrmrest_accord_column_5 = {
 		required_missions = { wwu_dragonblight_for_dragonflights_wya }
 		position = 4
 		
-		provinces_to_highlight = {
-		    province_id = 733
-		    NOT = { owned_by = ROOT }
-		}
         trigger = {
 		    NOT = { mission_completed = wwu_unite_the_dragonflights_wya }
-			owns_core_province = 733
+			733 = { country_or_non_sovereign_subject_holds = ROOT }
 			prestige = 60
 			stability = 2
+		}
+		provinces_to_highlight = {
+		    province_id = 733
+		    NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 		    add_prestige = 20
@@ -646,13 +723,20 @@ wwu_wyrmrest_accord_column_5 = {
 		
         trigger = {
 			calc_true_if = {
-				all_owned_province = {
+				amount = 20
+                
+				all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
 					region = region_dragonblight
 					culture = culture_proto_drake
 				}
-				amount = 20
 			}
 		}
+        provinces_to_highlight = {
+            country_or_non_sovereign_subject_holds = ROOT
+            region = region_dragonblight
+            NOT = { culture = culture_proto_drake }
+        }
 		effect = {
 			add_country_modifier = {
                 name = mission_proto_drake_sepremacy_wya
@@ -666,8 +750,15 @@ wwu_wyrmrest_accord_column_5 = {
 		position = 6
 		
         trigger = {
-			733 = { development = 20 }
+			733 = { 
+                country_or_non_sovereign_subject_holds = ROOT
+                development = 20 
+            }
 		}
+        provinces_to_highlight = {
+            province_id = 733
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 		    change_tag = GKS
 			add_country_modifier = {

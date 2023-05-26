@@ -20,38 +20,39 @@ wwu_sunfury_column_1 = {
 		}
         
 		trigger = {
-			OR = {
-				1717 = {
-					owned_by = B92
-				}
-				owns = 1717
-			}
+            1717 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
 		}
 		provinces_to_highlight = {
             province_id = 1717
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			1717 = {
-				cede_province = A93
+				cede_province = ROOT
 				change_culture = culture_blood_elf
 				change_religion = fel
 				add_devastation = 25
 				add_unrest = 10
 			}
 			1706 = {
-				add_permanent_claim = A93
+				add_permanent_claim = ROOT
 			}
 			1709 = {
-				add_permanent_claim = A93
+				add_permanent_claim = ROOT
 			}
 			1715 = {
-				add_permanent_claim = A93
+				add_permanent_claim = ROOT
 			}
 			1701 = {
-				add_permanent_claim = A93
+				add_permanent_claim = ROOT
 			}
 			1705 = {
-				add_permanent_claim = A93
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -66,36 +67,36 @@ wwu_sunfury_column_1 = {
 		}
         
 		trigger = {
-			OR = {
-				1706 = {
-					owned_by = B92
-				}
-				owns = 1706
-			}
-			OR = {
-				1709 = {
-					owned_by = B92
-				}
-				owns = 1709
-			}
-			OR = {
-				1715 = {
-					owned_by = B92
-				}
-				owns = 1715
-			}
-			OR = {
-				1701 = {
-					owned_by = B92
-				}
-				owns = 1701
-			}
-			OR = {
-				1705 = {
-					owned_by = B92
-				}
-				owns = 1705
-			}
+            1706 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
+            1709 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
+            1715 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
+            1701 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
+            1705 = {
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    owned_by = B92
+                }
+            }
 		}
 		provinces_to_highlight = {
 			OR = {
@@ -105,6 +106,7 @@ wwu_sunfury_column_1 = {
 				province_id = 1701
 				province_id = 1705
 			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			1717 = {
@@ -117,27 +119,27 @@ wwu_sunfury_column_1 = {
 				remove_building = wow_tavern_1
 			}
 			1706 = {
-				cede_province = A93
+				cede_province = ROOT
 				add_base_production = 2
 				add_or_improve_mine = yes
 			}
 			1709 = {
-				cede_province = A93
+				cede_province = ROOT
 				add_base_production = 2
 				add_or_improve_mine = yes
 			}
 			1715 = {
-				cede_province = A93
+				cede_province = ROOT
 				add_base_production = 2
 				add_or_improve_mine = yes
 			}
 			1701 = {
-				cede_province = A93
+				cede_province = ROOT
 				add_base_production = 2
 				add_or_improve_mine = yes
 			}
 			1705 = {
-				cede_province = A93
+				cede_province = ROOT
 				add_base_production = 2
 				add_or_improve_mine = yes
 			}
@@ -166,8 +168,7 @@ wwu_sunfury_column_1 = {
 		}
         
 		trigger = {
-			owns = 1717
-			is_core = 1717
+            1717 = { owned_by = ROOT }
 			treasury = 500
 			adm_power = 100
 			dip_power = 100
@@ -175,12 +176,14 @@ wwu_sunfury_column_1 = {
 		}
 		provinces_to_highlight = {
             province_id = 1717
+            NOT = { owned_by = ROOT }
         }
 		effect = {
 			add_treasury = -500
 			add_adm_power = -100
 			add_dip_power = -100
 			add_mil_power = -300
+            
 			1717 = {
 				add_or_improve_fort = yes
 				add_or_improve_barracks = yes
@@ -225,16 +228,15 @@ wwu_sunfury_column_2 = {
 			dip_power = 100
 			mil_power = 200
 		}
-		provinces_to_highlight = {
-            province_id = 1707
-        }
+        
 		effect = {
 			add_manpower = -50
 			add_adm_power = -100
 			add_dip_power = -100
 			add_mil_power = -200
+            
 			1707 = {
-				cede_province = A93
+				cede_province = ROOT
 				change_culture = culture_blood_elf
 				change_religion = fel
 				add_or_improve_fort = yes
@@ -304,13 +306,13 @@ wwu_sunfury_column_2 = {
 		}
         
 		trigger = {
-			owns = 1593
-			is_core = 1593
+            1593 = { country_or_non_sovereign_subject_holds = ROOT }
 			stability = 3
 			papal_influence = 50
 		}
 		provinces_to_highlight = {
-            owned_by = SOL
+            province_id = 1593
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			change_primary_culture = culture_felblood_elf
@@ -341,24 +343,33 @@ wwu_sunfury_column_2 = {
 		}
         
 		trigger = {
-            
 			OR = {
-				F54 = {
-					has_opinion = {
-						who = A93
-						value = 50
-					}
-				}
-				A91 = {
-					has_opinion = {
-						who = A93
-						value = 50
-					}
-				}
+                if = {
+                    limit = {
+                        exists = F54
+                    }
+                    F54 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 50
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        exists = A91
+                    }
+                    A91 = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 50
+                        }
+                    }
+                }
 				660 = {
 					owner = {
 						has_spy_network_from = {
-							who = A93
+							who = ROOT
 							value = 15
 						}
 					}
@@ -366,13 +377,16 @@ wwu_sunfury_column_2 = {
 			}
 		}
 		provinces_to_highlight = {
-            owned_by = F54
-			province_id = 660
+            OR = {
+                is_capital_of = F54
+                is_capital_of = A91
+                province_id = 660
+            }
         }
 		effect = {
 			add_historical_friend = F54
 			F54 = {
-				add_historical_friend = A93
+				add_historical_friend = ROOT
 			}
 			add_trust = {
 				who = F54
@@ -381,7 +395,7 @@ wwu_sunfury_column_2 = {
 			}
 			add_historical_friend = A91
 			A91 = {
-				add_historical_friend = A93
+				add_historical_friend = ROOT
 			}
 			add_trust = {
 				who = A91
@@ -402,7 +416,7 @@ wwu_sunfury_column_2 = {
                         NOT = { owned_by = A91 }
                     }
                 }
-                660 = { add_permanent_claim = A93 }
+                660 = { add_permanent_claim = ROOT }
             }
             
 			create_alliance = F54
@@ -429,26 +443,26 @@ wwu_sunfury_column_2 = {
 				660 = {
 					NOT = { owned_by = F54 }
 					NOT = { owned_by = A91 }
-					NOT = { owned_by = A93 }
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
 				}
 				676 = {
 					NOT = { owned_by = F54 }
 					NOT = { owned_by = A91 }
-					NOT = { owned_by = A93 }
+					NOT = { country_or_non_sovereign_subject_holds = ROOT }
 				}
 				OR = {
 					660 = {
 						OR = {
 							owned_by = F54
 							owned_by = A91
-							owned_by = A93
+							country_or_non_sovereign_subject_holds = ROOT
 						}
 					}
 					676 = {
 						OR = {
 							owned_by = F54
 							owned_by = A91
-							owned_by = A93
+							country_or_non_sovereign_subject_holds = ROOT
 						}
 					}
 				}	
@@ -456,8 +470,8 @@ wwu_sunfury_column_2 = {
 		}
 		provinces_to_highlight = {
 			OR = {
-			province_id = 660
-			province_id = 676
+                province_id = 660
+                province_id = 676
 			}
         }
 		effect = {
@@ -467,7 +481,7 @@ wwu_sunfury_column_2 = {
 					660 = {
 						NOT = { owned_by = F54 }
 						NOT = { owned_by = A91 }
-						NOT = { owned_by = A93 }
+						NOT = { country_or_non_sovereign_subject_holds = ROOT }
 					}
 				}
 				660 = {
@@ -483,7 +497,7 @@ wwu_sunfury_column_2 = {
 					676 = {
 						NOT = { owned_by = F54 }
 						NOT = { owned_by = A91 }
-						NOT = { owned_by = A93 }
+						NOT = { country_or_non_sovereign_subject_holds = ROOT }
 					}
 				}
 				676 = {
@@ -528,8 +542,8 @@ wwu_sunfury_column_2 = {
 		}
 		provinces_to_highlight = {
 			OR = {
-			province_id = 660
-			province_id = 676
+                province_id = 660
+                province_id = 676
 			}
         }
 		effect = {
@@ -608,7 +622,7 @@ wwu_sunfury_column_2 = {
 		trigger = {
 			OR = {
 				2990 = {
-					controlled_by = A93
+					controlled_by = ROOT
 				}
 				2990 = {
 					controlled_by = B92
@@ -625,7 +639,7 @@ wwu_sunfury_column_2 = {
 			}
 			OR = {
 				760 = {
-					controlled_by = A93
+					controlled_by = ROOT
 				}
 				760 = {
 					controlled_by = B92
@@ -642,7 +656,7 @@ wwu_sunfury_column_2 = {
 			}
 			OR = {
 				724 = {
-					controlled_by = A93
+					controlled_by = ROOT
 				}
 				724 = {
 					controlled_by = B92
@@ -660,9 +674,9 @@ wwu_sunfury_column_2 = {
 		}
 		provinces_to_highlight = {
 			OR = {
-			province_id = 2990
-			province_id = 760
-			province_id = 724
+                province_id = 2990
+                province_id = 760
+                province_id = 724
 			}
         }
 		effect = {
@@ -721,16 +735,16 @@ wwu_sunfury_column_2 = {
 		trigger = {
 			OR = {
 				2991 = {
-					owned_by = A93
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				2991 = {
-					owned_by = B92
+					country_or_non_sovereign_subject_holds = B92
 				}
 				2991 = {
-					owned_by = A91
+					country_or_non_sovereign_subject_holds = A91
 				}
 				2991 = {
-					owned_by = F54
+					country_or_non_sovereign_subject_holds = F54
 				}
 			}
 			adm_power = 200
@@ -743,8 +757,8 @@ wwu_sunfury_column_2 = {
 			add_adm_power = -200
 			add_papal_influence = -50
 			2991 = {
-				cede_province = A93
-				add_core = A93
+				cede_province = ROOT
+				add_core = ROOT
 				change_culture = culture_blood_elf
 				change_religion = fel
 				add_devastation = 25
@@ -768,12 +782,13 @@ wwu_sunfury_column_2 = {
 			stability = 3
 			papal_influence = 100
 			2991 = {
-				owned_by = A93
+				country_or_non_sovereign_subject_holds = ROOT
 				religion = fel
 			}
 		}
 		provinces_to_highlight = {
 			province_id = 2991
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_stability = -1

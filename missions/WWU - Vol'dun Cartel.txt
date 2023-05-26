@@ -18,16 +18,16 @@ wwu_voldun_column_4 = {
 		required_missions = {  }
 		
 		trigger = {
-            owns_core_province = 1117
             1117 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 is_capital = yes
                 has_fort_building_trigger = yes
             }
 		}
             
         provinces_to_highlight = {
-            NOT = { owned_by = ROOT }
             province_id = 1117
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -50,13 +50,20 @@ wwu_voldun_column_4 = {
 		required_missions = { wwu_bolster_the_hideaway }
 		
 		trigger = {
-            has_opinion = {
-                who = A78
-                value = 100
+            if = {
+                limit = {
+                    exists = A78
+                }
+                has_opinion = {
+                    who = A78
+                    value = 100
+                }
+                alliance_with = A78
             }
-            alliance_with = A78
 		}
-        
+        provinces_to_highlight = {
+            is_capital_of = A78
+        }
 		effect = {
 			1126 = {
                 add_permanent_claim = ROOT
@@ -143,12 +150,12 @@ wwu_voldun_column_5 = {
 		required_missions = {  }
 		
 		trigger = {
-            owns = 1113
+            1113 = { owned_by = ROOT }
 		}
             
         provinces_to_highlight = {
-            NOT = { owned_by = ROOT }
             province_id = 1113
+            NOT = { owned_by = ROOT }
         }
         
 		effect = {
@@ -185,12 +192,12 @@ wwu_voldun_column_5 = {
 		required_missions = { wwu_push_back_the_sethrak }
 		
 		trigger = {
-            owns_core_province = 1126
+            1126 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
             
         provinces_to_highlight = {
-            NOT = { owned_by = ROOT }
             province_id = 1126
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -230,20 +237,25 @@ wwu_voldun_column_5 = {
                 NOT = { exists = TOR }
                 alliance_with = TOR
             }
-            owns_core_province = 1118
-            owns_core_province = 1122
-            owns_core_province = 1127
-            owns_core_province = 1115
+            
+            1118 = { country_or_non_sovereign_subject_holds = ROOT }
+            1122 = { country_or_non_sovereign_subject_holds = ROOT }
+            1127 = { country_or_non_sovereign_subject_holds = ROOT }
+            1115 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
             
         provinces_to_highlight = {
-            NOT = { owned_by = ROOT }
             OR = {
+                owned_by = A78
+                owned_by = TOR
+                owned_by = SEK
+                owned_by = NAZ
                 province_id = 1118
                 province_id = 1122
                 province_id = 1127
                 province_id = 1115
             }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {

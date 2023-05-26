@@ -75,11 +75,11 @@ wwu_sentinels_column_2 = {
 		required_missions = { wwu_unity_with_cenarion_circle }
         
 		trigger = {
-            4677 = { owned_by = ROOT }
-            2228 = { owned_by = ROOT }
-            4676 = { owned_by = ROOT }
-            4669 = { owned_by = ROOT }
-            1309 = { owned_by = ROOT }
+            4677 = { country_or_non_sovereign_subject_holds = ROOT }
+            2228 = { country_or_non_sovereign_subject_holds = ROOT }
+            4676 = { country_or_non_sovereign_subject_holds = ROOT }
+            4669 = { country_or_non_sovereign_subject_holds = ROOT }
+            1309 = { country_or_non_sovereign_subject_holds = ROOT }
             NOT = { exists = F94 }
 		}
 		provinces_to_highlight = {
@@ -89,8 +89,9 @@ wwu_sentinels_column_2 = {
                 province_id = 4676
                 province_id = 4669
                 province_id = 1309
+                owned_by = F94
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -108,10 +109,10 @@ wwu_sentinels_column_2 = {
 		required_missions = { wwu_oust_thistlefur }
         
 		trigger = {
-            2251 = { owned_by = ROOT }
-            4686 = { owned_by = ROOT }
-            4685 = { owned_by = ROOT }
-            2252 = { owned_by = ROOT }
+            2251 = { country_or_non_sovereign_subject_holds = ROOT }
+            4686 = { country_or_non_sovereign_subject_holds = ROOT }
+            4685 = { country_or_non_sovereign_subject_holds = ROOT }
+            2252 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             OR = {
@@ -120,7 +121,7 @@ wwu_sentinels_column_2 = {
                 province_id = 4685
                 province_id = 2252
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -146,7 +147,6 @@ wwu_sentinels_column_2 = {
                 owned_by = B30
                 owned_by = BAL
             }
-			NOT = { owned_by = ROOT }
 		}
         
 		effect = {
@@ -167,14 +167,15 @@ wwu_sentinels_column_2 = {
             NOT = { exists = DYL }
             region_darkshore = {    
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             OR = {
                 owned_by = DYL
+                region = region_darkshore
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -204,17 +205,22 @@ wwu_sentinels_column_3 = {
 		required_missions = { }
         
 		trigger = {
-			OR = {
-				alliance_with = H02
+            if = {
+                limit = {
+                    exists = H02
+                }
+                alliance_with = H02
 				H02 = {
 					has_opinion = {
 						who = ROOT
 						value = 180
 					}
 				}
-				NOT = { H02 = { exists = yes } }
-			}
+            }
 		}
+        provinces_to_highlight = {
+            is_capital_of = H02
+        }
         
 		effect = {
 			add_country_modifier = {
@@ -234,11 +240,16 @@ wwu_sentinels_column_3 = {
             calc_true_if = {
                 amount = 3
                 
-                all_owned_province = {
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     region = region_felwood
                 }
             }
 		}
+        provinces_to_highlight = {
+            region = region_felwood
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
 			region_felwood = {
@@ -265,17 +276,15 @@ wwu_sentinels_column_3 = {
             calc_true_if = {
                 amount = 10
                 
-                all_owned_province = {
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     region = region_felwood
                 }
             }
 		}
         provinces_to_highlight = {
-            region = region_felwood
-            owner = {
-                culture_group = culture_group_satyr
-            }  
-			NOT = { owned_by = ROOT }
+			region = region_felwood
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_country_modifier = {
@@ -306,27 +315,27 @@ wwu_sentinels_column_4 = {
 		trigger = {
             area_ordil_aran = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_thistlefur = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_maestras_post = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_aessina = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_stardust = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_astranaar = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -338,7 +347,7 @@ wwu_sentinels_column_4 = {
                 area = area_stardust
                 area = area_astranaar
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -363,13 +372,18 @@ wwu_sentinels_column_4 = {
                     }
                 }
             }
+            calc_true_if = {
+                amount = 10
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_ashenvale
+                }
+            }
 		}
 		provinces_to_highlight = {
             region = region_ashenvale
-            owner = {
-                culture_group = culture_group_satyr
-            }  
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -423,12 +437,16 @@ wwu_sentinels_column_5 = {
             calc_true_if = {
                 amount = 3
                 
-                all_owned_province = {
+                all_province = {
                     region = region_azshara
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
 		}
-        
+        provinces_to_highlight = {
+            region = region_azshara
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			region_azshara = {
                 add_permanent_claim = ROOT
@@ -454,11 +472,16 @@ wwu_sentinels_column_5 = {
             calc_true_if = {
                 amount = 10
                 
-                all_owned_province = {
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     region = region_azshara
                 }
             }
 		}
+        provinces_to_highlight = {
+            region = region_azshara
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
 			add_country_modifier = {

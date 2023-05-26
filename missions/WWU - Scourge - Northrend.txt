@@ -215,19 +215,19 @@ wwu_scourge_column_1 = {
                 }
                 # Sindragosa's Fall
                 777 = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 # East Sindragosa's Peaks
                 895 = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 # West Sindragosa's Peaks
                 3261 = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 # Sindragosa's Fall Nest
                 3257 = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
             else = {
@@ -338,12 +338,18 @@ wwu_scourge_column_2 = {
         
 		trigger = {
             NOT = { exists = P15 }
-            owns_core_province = 3229
-            owns_core_province = 3228
-            owns_core_province = 947
+            3229 = { country_or_non_sovereign_subject_holds = ROOT }
+            3228 = { country_or_non_sovereign_subject_holds = ROOT }
+            947 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
-            owned_by = P15
+            OR = {
+                owned_by = P15
+                province_id = 3229
+                province_id = 3228
+                province_id = 947
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             # culture_vargul
@@ -378,10 +384,9 @@ wwu_scourge_column_2 = {
 		}
 		
 		trigger = {
-            owns_core_province = 1267
-            
             # Corp'rethar
             1267 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 base_manpower = 5
                 
 				has_fort_building_trigger = yes
@@ -389,6 +394,7 @@ wwu_scourge_column_2 = {
 		}
 		provinces_to_highlight = {
             province_id = 1267 # Corp'rethar
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {    
 			add_country_modifier = {
@@ -414,10 +420,9 @@ wwu_scourge_column_2 = {
 		}
 		
 		trigger = {
-            owns_core_province = 1269
-            
             # The Shadow Vault
 			1269 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 base_tax = 5
                 base_production = 5
                 base_manpower = 5
@@ -425,6 +430,7 @@ wwu_scourge_column_2 = {
 		}
 		provinces_to_highlight = {
             province_id = 1269
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -450,10 +456,9 @@ wwu_scourge_column_2 = {
 		}
 		
 		trigger = {
-            owns_core_province = 998
-            
             # Mord'rethar
             998 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 base_manpower = 5
                 
 				has_fort_building_trigger = yes
@@ -461,6 +466,7 @@ wwu_scourge_column_2 = {
 		}
 		provinces_to_highlight = {
             province_id = 998  # Mord'rethar
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -542,11 +548,13 @@ wwu_scourge_column_3 = {
 		trigger = {
             # Icecrown Citadel
 			1268 = {
+                country_or_non_sovereign_subject_holds = ROOT
 				has_temple_building_trigger = yes
 			}
 		}
 		provinces_to_highlight = {
             province_id = 1268
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
             # General
@@ -578,6 +586,7 @@ wwu_scourge_column_3 = {
 		}
 		provinces_to_highlight = {
             area = area_icecrown_interior
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			area_the_conflagration = {
@@ -606,12 +615,11 @@ wwu_scourge_column_3 = {
 		
 		trigger = {
             # Aldur'thar Rampart
-            2375 = {
-				owned_by = ROOT
-			}
+            2375 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 2375 # Aldur'thar Rampart
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {  
 			area_north_valley_of_lost_hope = {
@@ -719,12 +727,13 @@ wwu_scourge_column_4 = {
 		trigger = {
             # The Fleshwerks
 			726 = {
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
                 base_production = 5
 			}
 		}
 		provinces_to_highlight = {
             province_id = 726 # The Fleshwerks
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             add_country_modifier = {
@@ -751,12 +760,14 @@ wwu_scourge_column_4 = {
 		
 		trigger = {
             # Aldur'thar Rampart
-            2375 = {
+            2375 = {        
+                country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
 			}
 		}
 		provinces_to_highlight = {
             province_id = 2375 # Aldur'thar Rampart
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -783,12 +794,13 @@ wwu_scourge_column_4 = {
 		
 		trigger = {
 			2407 = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
                 has_fort_building_trigger = yes
 			}
 		}
 		provinces_to_highlight = {
             province_id = 2407
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -874,7 +886,7 @@ wwu_scourge_column_5 = {
                 # Azjol Nerub province owned by Scourge
 				AND = {
                     NOT = { exists = P74 }
-                    995 = { owned_by = ROOT }
+                    995 = { country_or_non_sovereign_subject_holds = ROOT }
                 }
 			}
 		}
@@ -928,13 +940,22 @@ wwu_scourge_column_5 = {
 
 		trigger = {
             OR = {
-                995 = { owned_by = ROOT }
+                995 = { country_or_non_sovereign_subject_holds = ROOT }
                 P74 = { 
                     is_subject_of = ROOT 
                     NOT = { liberty_desire = 10 }
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                AND = {
+                    province_id = 995
+                    NOT = { country_or_non_sovereign_subject_holds = ROOT }
+                }
+                is_capital_of = P74
+            }
+        }
 		effect = {
 			define_general = {
 				name = "Anub'Arak"
@@ -969,9 +990,7 @@ wwu_scourge_column_5 = {
                     NOT = { exists = SPB }
                 }
                 # Wintergrasp Fortress
-                834 = {
-                    owned_by = ROOT
-                }
+                834 = { country_or_non_sovereign_subject_holds = ROOT }
             }
             else = {
                 SPB = {

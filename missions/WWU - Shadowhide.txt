@@ -25,12 +25,20 @@ wwu_shadowhide_mission_column_1 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			num_of_owned_provinces_with = {
-                value = 5
+            calc_true_if = {
+                amount = 5
                 
+                country_or_non_sovereign_subject_holds = ROOT
                 has_manpower_building_trigger = yes
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                area = area_lakeshire
+                area = area_lakeshire_highway
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			add_dip_power = 200
 			add_country_modifier = {
@@ -121,19 +129,35 @@ wwu_shadowhide_mission_column_2 = {
 		
 		trigger = {
             prestige = 50
-			B17 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+			if = {
+                limit = {
+                    exists = B17
+                }
+                B17 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
-			B15 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = B15
+                }
+                B15 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = B17
+                is_capital_of = B15
+            }
+        }
 		effect = {
 			add_mil_power = 100
 			add_country_modifier = {
@@ -200,13 +224,6 @@ wwu_shadowhide_mission_column_2 = {
 		position = 5
 		required_missions = { wwu_general_fangore }		
 		
-		provinces_to_highlight = {
-			OR = {
-				area = area_eastvale
-				area = area_northshire
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_eastvale = {
 				type = all
@@ -216,6 +233,13 @@ wwu_shadowhide_mission_column_2 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = area_eastvale
+				area = area_northshire
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_mil_power = 200
@@ -243,13 +267,6 @@ wwu_shadowhide_mission_column_2 = {
 		required_missions = { wwu_eat_the_weak_sdh }
 		position = 6
 		
-		provinces_to_highlight = {
-			OR = {
-				area = area_westfall_farmland
-				area = area_sentinel_hill
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_westfall_farmland = {
 				type = all
@@ -259,6 +276,13 @@ wwu_shadowhide_mission_column_2 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = area_westfall_farmland
+				area = area_sentinel_hill
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_dip_power = 200
@@ -275,21 +299,29 @@ wwu_shadowhide_mission_column_2 = {
 		icon = mission_garrison_epic_armor_upgrade
 		required_missions = { wwu_raiding_westfall_sdh }
 		position = 7
-		provinces_to_highlight = {
-			area = area_moonbrook
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
+		
 		trigger = {
 			area_moonbrook = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			num_of_owned_provinces_with = {
-				value = 5
-				
-                has_manpower_building_trigger = yes
-				region = region_westfall
-			}
+            
+            calc_true_if = {
+                amount = 5
+                
+                all_province = {
+                    region = region_westfall
+                    country_or_non_sovereign_subject_holds = ROOT
+                    has_manpower_building_trigger = yes
+                }
+            }
+		}
+        provinces_to_highlight = {
+			OR = {
+                region = region_westfall
+                area = area_moonbrook
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_dip_power = 200
@@ -319,14 +351,6 @@ wwu_shadowhide_mission_column_3 = {
 		required_missions = { wwu_eat_the_weak_sdh }
 		position = 6
 		
-		provinces_to_highlight = {
-			OR = {
-				area = area_goldshire
-				area = area_westbrook
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-		
 		trigger = {
 			area_goldshire = {
 				type = all
@@ -337,6 +361,14 @@ wwu_shadowhide_mission_column_3 = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+		provinces_to_highlight = {
+			OR = {
+				area = area_goldshire
+				area = area_westbrook
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		effect = {
 			add_mil_power = 200
 			add_country_modifier = {
@@ -368,14 +400,6 @@ wwu_shadowhide_mission_column_3 = {
 		required_missions = { wwu_raiding_elwynn_sdh }
 		position = 7
 		
-		provinces_to_highlight = {
-			OR = {
-				area = area_stormwind_coast
-				area = area_stormwind
-				area = area_lower_stormwind
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_stormwind = {
 				type = all
@@ -389,6 +413,14 @@ wwu_shadowhide_mission_column_3 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = area_stormwind_coast
+				area = area_stormwind
+				area = area_lower_stormwind
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 		    add_prestige = 50
@@ -406,12 +438,16 @@ wwu_shadowhide_mission_column_3 = {
 		
 		trigger = {
 		    1022 = {
-                owned_by = ROOT
-                is_core = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
+                
                 development = 30
 				culture = ROOT
             }	
 		}
+        provinces_to_highlight = {
+            province_id = 1022
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			set_capital = 1022
 			capital_scope = {

@@ -17,35 +17,43 @@ wwu_nerubian_column_1 = {
         required_missions = { wwu_nerubian_two_three }
  
         trigger = {
-            num_of_owned_provinces_with = {
-                value = 10
-                region = region_icecrown
+            calc_true_if = {
+                amount = 10
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_icecrown
+                }
             }
+        }
+        provinces_to_highlight = {
+            region = region_icecrown
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  		effect = {
             custom_tooltip = nerubian_tooltip_one_four_a
 			custom_tooltip = nerubian_tooltip_one_four_b
 			
-            
             hidden_effect = {
-			every_owned_province = {
-                limit = {
-					region = region_icecrown
+                every_province = {
+                    limit = {
+                        country_or_non_sovereign_subject_holds = ROOT
+                        region = region_icecrown
+                    }
+                    add_province_modifier = { 
+                        name = nerubian_convert_culture
+                        duration = 7300
+                    }
                 }
-				add_province_modifier = { 
-                    name = nerubian_convert_culture
-                    duration = 7300
-                }
-            }
-			if = {
-                limit = {
-                    has_country_flag = nerubian_two_four
-                    has_country_flag = nerubian_three_four
-                }
-            area_wyrmrest_temple = {
-                add_claim = ROOT
-            }
-				set_country_flag = nerubian_one_four_extra
+                if = {
+                    limit = {
+                        has_country_flag = nerubian_two_four
+                        has_country_flag = nerubian_three_four
+                    }
+                    area_wyrmrest_temple = {
+                        add_claim = ROOT
+                    }
+                    set_country_flag = nerubian_one_four_extra
 				}
                 set_country_flag = nerubian_one_four
             }
@@ -105,55 +113,57 @@ wwu_nerubian_column_2 = {
         required_missions = { wwu_nerubian_two_one }
  
         trigger = {
-            2367 = {
-                owned_by = ROOT
-            }
-            2361 = {
-                owned_by = ROOT
-            }
+            2367 = { country_or_non_sovereign_subject_holds = ROOT }
+            2361 = { country_or_non_sovereign_subject_holds = ROOT }
             grown_by_development = 20
+        }
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2367
+                province_id = 2361
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  
         effect = {
-		custom_tooltip = nerubian_tooltip_two_three_a
+            custom_tooltip = nerubian_tooltip_two_three_a
 			
             hidden_effect = {
-            area_naxxanar = {
-                add_permanent_claim = ROOT
-            }
-            area_the_geyser_fields = {
-                add_permanent_claim = ROOT
-            }
-            area_kaskala = {
-                add_permanent_claim = ROOT
-            }
-            area_sapphire_hive = {
-                add_permanent_claim = ROOT
-            }
-            area_the_lifeblood_pillar = {
-                add_permanent_claim = ROOT
-            }
-            area_the_glimmering_pillar = {
-                add_permanent_claim = ROOT
-            }
-            area_jotunheim = {
-                add_permanent_claim = ROOT
-            }
-            area_the_conflagration = {
-                add_permanent_claim = ROOT
-            }
-            area_wintergrasp = {
-                add_permanent_claim = ROOT
-            }
-            area_vault_of_archavon = {
-                add_permanent_claim = ROOT
-            }
+                area_naxxanar = {
+                    add_permanent_claim = ROOT
+                }
+                area_the_geyser_fields = {
+                    add_permanent_claim = ROOT
+                }
+                area_kaskala = {
+                    add_permanent_claim = ROOT
+                }
+                area_sapphire_hive = {
+                    add_permanent_claim = ROOT
+                }
+                area_the_lifeblood_pillar = {
+                    add_permanent_claim = ROOT
+                }
+                area_the_glimmering_pillar = {
+                    add_permanent_claim = ROOT
+                }
+                area_jotunheim = {
+                    add_permanent_claim = ROOT
+                }
+                area_the_conflagration = {
+                    add_permanent_claim = ROOT
+                }
+                area_wintergrasp = {
+                    add_permanent_claim = ROOT
+                }
+                area_vault_of_archavon = {
+                    add_permanent_claim = ROOT
+                }
 			}
             add_country_modifier = {
                 name = nerubian_war_on_surface
                 duration = 7300
             }
-			
         }
  
         ai_weight   = { factor = 1 }
@@ -165,35 +175,43 @@ wwu_nerubian_column_2 = {
         required_missions = { wwu_nerubian_two_three }
  
         trigger = {
-            num_of_owned_provinces_with = {
-                value = 10
-                region = region_wintergrasp
+            calc_true_if = {
+                amount = 10
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_wintergrasp
+                }
             }
+        }
+        provinces_to_highlight = {
+            region = region_wintergrasp
+            NOT = { country_or_non_sovereign_subject_holds = ROOT}
         }
  		effect = {
             custom_tooltip = nerubian_tooltip_two_four_a
 			custom_tooltip = nerubian_tooltip_two_four_b
 			
-            
             hidden_effect = {
-			every_owned_province = {
-                limit = {
-					region = region_wintergrasp
+                every_province = {
+                    limit = {
+                        country_or_non_sovereign_subject_holds = ROOT
+                        region = region_wintergrasp
+                    }
+                    add_province_modifier = { 
+                        name = nerubian_convert_culture
+                        duration = 7300
+                    }
                 }
-				add_province_modifier = { 
-                    name = nerubian_convert_culture
-                    duration = 7300
-                }
-            }
-			if = {
-                limit = {
-                    has_country_flag = nerubian_one_four
-                    has_country_flag = nerubian_three_four
-                }
-            area_wyrmrest_temple = {
-                add_claim = ROOT
-            }
-				set_country_flag = nerubian_one_four_extra
+                if = {
+                    limit = {
+                        has_country_flag = nerubian_one_four
+                        has_country_flag = nerubian_three_four
+                    }
+                    area_wyrmrest_temple = {
+                        add_claim = ROOT
+                    }
+                    set_country_flag = nerubian_one_four_extra
 				}
                 set_country_flag = nerubian_two_four
             }
@@ -212,9 +230,13 @@ wwu_nerubian_column_2 = {
         }
  
         trigger = {
-		area_wyrmrest_temple = {
-		owned_by = ROOT
-		}
+            area_wyrmrest_temple = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        provinces_to_highlight = {
+            area = area_wyrmrest_temple
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
 			custom_tooltip = nerubian_tooltip_two_five_a
@@ -222,15 +244,16 @@ wwu_nerubian_column_2 = {
 			
             
             hidden_effect = {
-			every_owned_province = {
-                limit = {
-					region = region_dragonblight
+                every_province = {
+                    limit = {
+                        country_or_non_sovereign_subject_holds = ROOT
+                        region = region_dragonblight
+                    }
+                    add_province_modifier = { 
+                        name = nerubian_convert_culture
+                        duration = 7300
+                    }
                 }
-				add_province_modifier = { 
-                    name = nerubian_convert_culture
-                    duration = 7300
-                }
-            }
                 set_country_flag = nerubian_two_five
             }
         }
@@ -248,13 +271,23 @@ wwu_nerubian_column_2 = {
  
         trigger = {
             grown_by_development = 1000
-            num_of_owned_provinces_with = {
-                value = 200
-                superregion = northrend_superregion
-            }
 			NOT = { great_power_rank = 3 }
             adm_tech = 15
+            
+            calc_true_if = {
+                amount = 200
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    superregion = northrend_superregion
+                }
+            }
         }
+        provinces_to_highlight = {
+            superregion = northrend_superregion
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
         effect = {
 			override_country_name = nerubian_empire
 			set_government_rank = 3
@@ -264,22 +297,23 @@ wwu_nerubian_column_2 = {
 			custom_tooltip = nerubian_tooltip_two_six_c
             
             hidden_effect = {
-			set_country_flag = nerub_merc_1
- 			every_province = {
-                limit = {
-					 superregion = northrend_superregion
+                set_country_flag = nerub_merc_1
+                every_province = {
+                    limit = {
+                         superregion = northrend_superregion
+                    }
+                    add_permanent_claim = ROOT 
                 }
-				 add_permanent_claim = ROOT 
-            }
-			every_owned_province = {
-                limit = {
-					 superregion = northrend_superregion
+                every_province = {
+                    limit = {
+                        country_or_non_sovereign_subject_holds = ROOT
+                         superregion = northrend_superregion
+                    }
+                    add_province_modifier = { 
+                        name = nerubian_convert_culture
+                        duration = 7300
+                    }
                 }
-				add_province_modifier = { 
-                    name = nerubian_convert_culture
-                    duration = 7300
-                }
-            }
                 set_country_flag = nerubian_two_six
             }
         }
@@ -311,9 +345,14 @@ wwu_nerubian_column_3 = {
         trigger = {
             region_azjol_nerub = {
                 type = all
+                
                 development = 5
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+        provinces_to_highlight = {
+            region = region_azjol_nerub
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  
         effect = {
@@ -373,21 +412,21 @@ wwu_nerubian_column_3 = {
                     value = 4
                 }
             }
-            4789 = {
-                owned_by = ROOT
-            }
+            4789 = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        provinces_to_highlight = {
+            province_id = 4789
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  
         effect = {
             4789 = {
                 add_province_triggered_modifier = nerubian_eggs
+ 
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
             }
-                # Pit
-                4789 = {
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
-                }
         }
  
         ai_weight   = { factor = 1 }
@@ -399,35 +438,43 @@ wwu_nerubian_column_3 = {
         required_missions = { wwu_nerubian_two_three }
  
         trigger = {
-            num_of_owned_provinces_with = {
-                value = 10
-                region = region_borean_tundra
+            calc_true_if = {
+                amount = 10
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_borean_tundra
+                }
             }
+        }
+        provinces_to_highlight = {
+            region = region_borean_tundra
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  		effect = {
             custom_tooltip = nerubian_tooltip_three_four_a
 			custom_tooltip = nerubian_tooltip_three_four_b
-
             
             hidden_effect = {
-			every_owned_province = {
-                limit = {
-					region = region_borean_tundra
+                every_province = {
+                    limit = {
+                        country_or_non_sovereign_subject_holds = ROOT
+                        region = region_borean_tundra
+                    }
+                    add_province_modifier = { 
+                        name = nerubian_convert_culture
+                        duration = 7300
+                    }
                 }
-				add_province_modifier = { 
-                    name = nerubian_convert_culture
-                    duration = 7300
-                }
-            }
-			if = {
-                limit = {
-                    has_country_flag = nerubian_one_four
-                    has_country_flag = nerubian_two_four
-                }
-				set_country_flag = nerubian_one_four_extra
-            area_wyrmrest_temple = {
-                add_claim = ROOT
-            }
+                if = {
+                    limit = {
+                        has_country_flag = nerubian_one_four
+                        has_country_flag = nerubian_two_four
+                    }
+                    set_country_flag = nerubian_one_four_extra
+                    area_wyrmrest_temple = {
+                        add_claim = ROOT
+                    }
 				}
                 set_country_flag = nerubian_three_four
             }
@@ -450,16 +497,19 @@ wwu_nerubian_column_3 = {
                     value = 10
                 }
             }
-             4788 = {
-                owned_by = ROOT
-            }
+            
+            4788 = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        provinces_to_highlight = {
+            province_id = 4788
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
 		    4788 = {
-            change_province_name = "Throne of the Spider"
-            rename_capital = "Throne of the Spider"
-        }
-		country_event = { id = wwu_azjol.9 }
+                change_province_name = "Throne of the Spider"
+                rename_capital = "Throne of the Spider"
+            }
+            country_event = { id = wwu_azjol.9 }
         }
  
         ai_weight   = { factor = 1 }
@@ -525,8 +575,12 @@ wwu_nerubian_column_4 = {
  
             region_azjol_nerub = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+        provinces_to_highlight = {
+            region = region_azjol_nerub
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  
         effect = {
@@ -552,9 +606,11 @@ wwu_nerubian_column_4 = {
                     value = 5
                 }
             }
-            4792 = {
-                owned_by = ROOT
-            }
+            4792 = { owned_by = ROOT }
+        }
+        provinces_to_highlight = {
+            province_id = 4792
+            NOT = { owned_by = ROOT }
         }
  
         effect = {
@@ -655,8 +711,12 @@ wwu_nerubian_column_4 = {
  
             region_azjol_nerub = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+        provinces_to_highlight = {
+            region = region_azjol_nerub
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
  
         effect = {
@@ -699,9 +759,11 @@ wwu_nerubian_column_5 = {
                     value = 6
                 }
             }
-            4787 = {
-                owned_by = ROOT
-            }
+            4787 = { owned_by = ROOT }
+        }
+        provinces_to_highlight = {
+            province_id = 4787
+            NOT = { owned_by = ROOT }
         }
  
         effect = {
@@ -767,15 +829,18 @@ wwu_nerubian_column_5 = {
                     value = 10
                 }
             }
-            4787 = {
-                owned_by = ROOT
-            }
-				adm_tech = 15
-				dip_tech = 15
-				mil_tech = 15
+            adm_tech = 15
+            dip_tech = 15
+            mil_tech = 15
+            
+            4787 = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        provinces_to_highlight = {
+            province_id = 4787
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
- 		country_event = { id = wwu_azjol.10 }
+            country_event = { id = wwu_azjol.10 }
         }
  
         ai_weight   = { factor = 1 }

@@ -20,14 +20,22 @@ wwu_stromgarde_column_1 = {
 		required_missions = { }
         
 		trigger = {
-            # Lordaeron
-            A08 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 120
+            if = {
+                limit = {
+                    exists = A08
+                }
+                # Lordaeron
+                A08 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 120
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A08
+        }
         
 		effect = {
 			create_alliance = A08 # Lordaeron
@@ -112,6 +120,16 @@ wwu_stromgarde_column_1 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = STW
+                is_capital_of = A08
+                is_capital_of = A12
+                is_capital_of = A14
+                is_capital_of = A17
+                is_capital_of = A18
+            }
+        }
         
 		effect = {
             add_prestige_or_monarch_power = {
@@ -158,15 +176,18 @@ wwu_stromgarde_column_1 = {
 		trigger = {
             total_development = 1000
             
-            num_of_owned_provinces_with = {
-                value = 250
+            calc_true_if = {
+                amount = 250
                 
-                superregion = eastern_kingdom_superregion
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    superregion = eastern_kingdom_superregion
+                }
             }
 		}
         provinces_to_highlight = {
             superregion = eastern_kingdom_superregion
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -211,9 +232,6 @@ wwu_stromgarde_column_2 = {
                     }
                 }
             }
-            else = {
-                always = yes
-            }
 		}
         provinces_to_highlight = {
             owned_by = A17 # Alterac
@@ -243,22 +261,13 @@ wwu_stromgarde_column_2 = {
                     value = 2.0
                 }
             }
-            else = {
-                always = yes
-            }
             
             # Chillwind Ridge
-            3066 = {
-                owned_by = ROOT
-            }
+            3066 = { country_or_non_sovereign_subject_holds = ROOT }
             # Tarren Mill
-            538 = {
-                owned_by = ROOT
-            }
+            538 = { country_or_non_sovereign_subject_holds = ROOT }
             # Southshore Crossing
-            1027 = {
-                owned_by = ROOT
-            }
+            1027 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         provinces_to_highlight = {
             OR = {
@@ -266,7 +275,7 @@ wwu_stromgarde_column_2 = {
                 province_id = 538 # Tarren Mill
                 province_id = 1027 # Southshore Crossing
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
             add_mil_power = 200
@@ -292,11 +301,11 @@ wwu_stromgarde_column_2 = {
             NOT = { exists = A17 } # Alterac
             area_alterac_headlands = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_alterac_heartland = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -305,7 +314,7 @@ wwu_stromgarde_column_2 = {
                 area = area_alterac_heartland
                 owned_by = A17 # Alterac
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -331,16 +340,19 @@ wwu_stromgarde_column_2 = {
         }
         
 		trigger = {
-            num_of_owned_provinces_with = {
-                value = 30
+            calc_true_if = {
+                amount = 30
                 
-                has_port = yes
-                OR = {
-                    region = region_arathi_highlands
-                    region = region_wetlands
-                    region = region_tol_barad
-                    region = region_hillsbrad_foothills
-                    region = region_gilneas
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    has_port = yes
+                    OR = {
+                        region = region_arathi_highlands
+                        region = region_wetlands
+                        region = region_tol_barad
+                        region = region_hillsbrad_foothills
+                        region = region_gilneas
+                    }
                 }
             }
 		}
@@ -353,7 +365,7 @@ wwu_stromgarde_column_2 = {
                 region = region_hillsbrad_foothills
                 region = region_gilneas
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
         effect = {
@@ -392,25 +404,15 @@ wwu_stromgarde_column_3 = {
         
 		trigger = {
             # Revantusk Outpost
-            1772 = {
-                owned_by = ROOT
-            }
+            1772 = { country_or_non_sovereign_subject_holds = ROOT }
             # Trollden
-            1771 = {
-                owned_by = ROOT
-            }
+            1771 = { country_or_non_sovereign_subject_holds = ROOT }
             # Arathi Strand
-            3005 = {
-                owned_by = ROOT
-            }
+            3005 = { country_or_non_sovereign_subject_holds = ROOT }
             # Thickets of Askar
-            1770 = {
-                owned_by = ROOT
-            }
+            1770 = { country_or_non_sovereign_subject_holds = ROOT }
             # Northstar Outpost
-            1769 = {
-                owned_by = ROOT
-            }
+            1769 = { country_or_non_sovereign_subject_holds = ROOT }
             
             OR = {
                 1772 = { has_fort_building_trigger = yes } # Revantusk Outpost
@@ -428,7 +430,7 @@ wwu_stromgarde_column_3 = {
                 province_id = 1770 # Thickets of Askar
                 province_id = 1769 # Northstar Outpost
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -450,19 +452,23 @@ wwu_stromgarde_column_3 = {
         }
         
 		trigger = {
-            num_of_owned_provinces_with = {
-                value = 3
+            calc_true_if = {
+                amount = 3
                 
-                region = region_wetlands
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_wetlands
+                }
             }
-            any_owned_province = {
+            any_province = {
+                country_or_non_sovereign_subject_holds = ROOT
                 region = region_wetlands
                 has_fort_building_trigger = yes
             }
 		}
 		provinces_to_highlight = {
             region = region_wetlands
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -493,13 +499,11 @@ wwu_stromgarde_column_3 = {
         
 		trigger = {
             # Grim Batol
-            1061 = {
-                owned_by = ROOT
-            }
+            1061 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 1061
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -534,27 +538,27 @@ wwu_stromgarde_column_4 = {
 		trigger = {
             area_northfold = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_stromgarde = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_faldirs_cove = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_thandol_span = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_hammerfall = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_refuge_pointe = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -566,7 +570,7 @@ wwu_stromgarde_column_4 = {
                 area = area_hammerfall
                 area = area_refuge_pointe
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -588,12 +592,12 @@ wwu_stromgarde_column_4 = {
 		trigger = {
             area_arathi_strand = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             area = area_arathi_strand
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -624,10 +628,13 @@ wwu_stromgarde_column_4 = {
         }
         
 		trigger = {
-            num_of_owned_provinces_with = {
-                value = 3
+            calc_true_if = {
+                amount = 3
                 
-                region = region_the_hinterlands
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_the_hinterlands
+                }
             }
             any_owned_province = {
                 region = region_the_hinterlands
@@ -636,7 +643,7 @@ wwu_stromgarde_column_4 = {
 		}
 		provinces_to_highlight = {
             region = region_the_hinterlands
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -663,10 +670,13 @@ wwu_stromgarde_column_4 = {
             NOT = { exists = A61 } # Revantusk
             NOT = { exists = A65 } # Smolderthorn
             
-            num_of_owned_provinces_with = {
-                value = 10
+            calc_true_if = {
+                amount = 10
                 
-                region = region_the_hinterlands
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_the_hinterlands
+                }
             }
 		}
 		provinces_to_highlight = {
@@ -678,7 +688,7 @@ wwu_stromgarde_column_4 = {
                 owned_by = A61 # Revantusk
                 owned_by = A65 # Smolderthorn
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -722,7 +732,7 @@ wwu_stromgarde_column_5 = {
 		trigger = {
             area_eastpoint = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             any_owned_province = {
                 area = area_eastpoint
@@ -731,7 +741,7 @@ wwu_stromgarde_column_5 = {
 		}
 		provinces_to_highlight = {
             area = area_eastpoint
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {

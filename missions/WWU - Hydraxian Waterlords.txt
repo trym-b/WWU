@@ -53,8 +53,16 @@ wwu_hydraxian_waterlords_column_4 = {
         trigger = {
             NOT = { exists = A30 }
 
-            owns_core_province = 3155 # Molten Core
-            owns_core_province = 1962 # Blackrock Depths
+            3155 = { country_or_non_sovereign_subject_holds = ROOT } # Molten Core
+            1962 = { country_or_non_sovereign_subject_holds = ROOT } # Blackrock Depths
+        }
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3155
+                province_id = 1962
+                owned_by = A30
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 
         effect = {
@@ -74,10 +82,18 @@ wwu_hydraxian_waterlords_column_4 = {
             # Sulfuron Keep
             2601 = {
                 OR = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                     owned_by = P24
                 }
             }
+        }
+        provinces_to_highlight = {
+            OR = {
+                owned_by = P26
+                province_id = 2601
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+            NOT = { owned_by = P24 }
         }
         effect = {
             add_stability = 1
@@ -157,13 +173,13 @@ wwu_hydraxian_waterlords_column_5 = {
 
         required_missions = { wwu_summon_the_hydraxian_army }
 
+        trigger = {
+            NOT = { exists = VHJ }
+		}
         provinces_to_highlight = {
             owned_by = VHJ
         }
 
-        trigger = {
-                NOT = { exists = VHJ }
-		}
 
         effect = {
             add_stability = 1
@@ -190,14 +206,13 @@ wwu_hydraxian_waterlords_column_5 = {
 
         required_missions = { wwu_crush_the_vashjir_naga }
 
-        provinces_to_highlight = {
-            owned_by = HAT
-        }
-
         trigger = {
             NOT = { exists = HAT }
             
             owns_core_province = 2666 # Eye of the Storm
+        }
+        provinces_to_highlight = {
+            owned_by = HAT
         }
 
         effect = {
@@ -222,17 +237,16 @@ wwu_hydraxian_waterlords_column_5 = {
 
         required_missions = { wwu_crush_the_hatecoil_naga }
 
-        provinces_to_highlight = {
-            region = region_nazjatar
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-
         trigger = {
             NOT = { exists = NJZ }
             region_nazjatar = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+        provinces_to_highlight = {
+            region = region_nazjatar
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 
         effect = {
@@ -257,17 +271,15 @@ wwu_hydraxian_waterlords_column_5 = {
         icon = mission_titan_spirits
         position = 5
 
-        provinces_to_highlight = {
-            region = region_vashjir
-        }
         trigger = {
             region_vashjir = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 
             # Abyssal Maw
             3175 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 development = 20
 
                 has_fort_building_trigger = yes
@@ -280,6 +292,13 @@ wwu_hydraxian_waterlords_column_5 = {
                 army_size_percentage = 1.0
                 navy_size_percentage = 1.0
             }
+        }
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3175
+                region = region_vashjir
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
             3175 = {
@@ -310,15 +329,6 @@ wwu_hydraxian_waterlords_column_5 = {
 
         required_missions = { wwu_consolidate_vashjir_holdings }
 
-        provinces_to_highlight = {
-            OR = {
-                area = area_balor
-                area = area_frostsabre
-                area = area_drisburg
-                area = area_purgation_isle
-            }
-            NOT = { owned_by = ROOT }
-        }
         trigger = {
             OR = {
                 area_balor = {
@@ -338,6 +348,15 @@ wwu_hydraxian_waterlords_column_5 = {
                     country_or_non_sovereign_subject_holds = ROOT
                 }
             }
+        }
+        provinces_to_highlight = {
+            OR = {
+                area = area_balor
+                area = area_frostsabre
+                area = area_drisburg
+                area = area_purgation_isle
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
             add_mil_power = 50
@@ -364,14 +383,6 @@ wwu_hydraxian_waterlords_column_5 = {
 
         required_missions = { wwu_control_eastern_kingdom_islands }
 
-        provinces_to_highlight = {
-            OR = {
-                area = area_tol_dagor
-                area = area_zul_dare
-                area = area_isle_of_pirates
-            }
-            NOT = { owned_by = ROOT }
-        }
         trigger = {
             OR = {
                 area_isle_of_pirates = {
@@ -387,6 +398,14 @@ wwu_hydraxian_waterlords_column_5 = {
                     country_or_non_sovereign_subject_holds = ROOT
                 }
             }
+        }
+        provinces_to_highlight = {
+            OR = {
+                area = area_tol_dagor
+                area = area_zul_dare
+                area = area_isle_of_pirates
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
             add_dip_power = 150

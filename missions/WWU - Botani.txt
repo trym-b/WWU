@@ -35,12 +35,12 @@ wwu_botani_column_2 = {
             area_everbloom_wilds = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_highpass = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -48,7 +48,7 @@ wwu_botani_column_2 = {
                 area = area_everbloom_wilds
                 area = area_highpass
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -68,12 +68,12 @@ wwu_botani_column_2 = {
             area_tangleheart = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_bastion_rise = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -81,7 +81,7 @@ wwu_botani_column_2 = {
                 area = area_tangleheart
                 area = area_bastion_rise
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -101,12 +101,12 @@ wwu_botani_column_2 = {
             area_stonemaul_arena = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_magnarok = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -114,7 +114,7 @@ wwu_botani_column_2 = {
                 area = area_stonemaul_arena
                 area = area_magnarok
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -134,17 +134,17 @@ wwu_botani_column_2 = {
             area_gromgar = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_frostwall = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_orunai = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -153,7 +153,7 @@ wwu_botani_column_2 = {
                 area = area_frostwall
                 area = area_orunai
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -186,7 +186,7 @@ wwu_botani_column_2 = {
             area_highmaul = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -199,7 +199,7 @@ wwu_botani_column_2 = {
                     culture_group = culture_group_ogre
                 }
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -220,7 +220,8 @@ wwu_botani_column_2 = {
             calc_true_if = {
                 amount = 12
                 
-                all_owned_province = {
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     OR = {  
                         area = area_orunai
                         area = area_shattrath_draenor
@@ -246,34 +247,39 @@ wwu_botani_column_2 = {
                 area = area_throne_of_elements
                 area = area_ring_of_blood
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
-            every_owned_province = {
+            every_province = {
                 limit = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    has_port = yes
+                    OR = {  
+                        area = area_shattrath_draenor
+                        area = area_worgol
+                        area = area_throne_of_elements
+                    }
+                }
+                
+                change_culture = culture_sporeling
+            }
+            
+            every_province = {
+                limit = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     has_port = yes
                     OR = {  
                         area = area_orunai
-                        area = area_shattrath_draenor
                         area = area_frostwall
-                        area = area_worgol
                         area = area_daggermaw
-                        area = area_throne_of_elements
                         area = area_ring_of_blood
                     }
                 }
                 
-                random_list = {
-                    50 = {
-                        change_culture = culture_sporeling
-                    }
-                    50 = {
-                        change_culture = culture_fungal_giant
-                    }
-                }
+                change_culture = culture_fungal_giant
             }
-        
+            
 			add_country_modifier = {
                 name = mission_sporemound_creation
                 duration = -1
@@ -302,7 +308,8 @@ wwu_botani_column_3 = {
         }
         
 		trigger = {
-            any_owned_province = {
+            any_province = {
+                country_or_non_sovereign_subject_holds = ROOT
                 OR = {
                     culture_group = culture_group_orc
                     culture_group = culture_group_draenei
@@ -315,7 +322,7 @@ wwu_botani_column_3 = {
                 culture_group = culture_group_orc
                 culture_group = culture_group_draenei
             } 
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -341,12 +348,12 @@ wwu_botani_column_3 = {
             area_blackrock_foundry = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_gronn_canyon = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -354,7 +361,7 @@ wwu_botani_column_3 = {
                 area = area_blackrock_foundry
                 area = area_gronn_canyon
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -423,15 +430,15 @@ wwu_botani_column_3 = {
             area_temple_of_shanaar = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_zethgol = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             3786 = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -440,7 +447,7 @@ wwu_botani_column_3 = {
                 area = area_temple_of_shanaar
                 area = area_zethgol
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -625,12 +632,12 @@ wwu_botani_column_3 = {
             region_blasted_lands = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             region_swamp_of_sorrows = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -638,7 +645,7 @@ wwu_botani_column_3 = {
                 region = region_blasted_lands
                 region = region_swamp_of_sorrows
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -674,6 +681,7 @@ wwu_botani_column_4 = {
         
 		trigger = {
             region_farahlon = {
+                country_or_non_sovereign_subject_holds = ROOT
                 has_fort_building_trigger = yes
             }
 		}
@@ -682,7 +690,7 @@ wwu_botani_column_4 = {
             NOT = {
                 has_fort_building_trigger = yes
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_stability = 1
@@ -701,6 +709,7 @@ wwu_botani_column_4 = {
             area_everbloom_wilds = {    
                 type = all
                 
+                country_or_non_sovereign_subject_holds = ROOT
                 has_tax_building_trigger = yes
             }
 		}
@@ -709,7 +718,7 @@ wwu_botani_column_4 = {
             NOT = {
                 has_tax_building_trigger = yes
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -732,12 +741,12 @@ wwu_botani_column_4 = {
             region_farahlon = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             region_tanaan_jungle = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -745,7 +754,7 @@ wwu_botani_column_4 = {
                 region = region_farahlon
                 region = region_tanaan_jungle
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -766,17 +775,17 @@ wwu_botani_column_4 = {
             area_shattrath_draenor = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_auchindoun_draenor = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_tuurem_draenor = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -785,7 +794,7 @@ wwu_botani_column_4 = {
                 area = area_auchindoun_draenor
                 area = area_tuurem_draenor
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -808,7 +817,7 @@ wwu_botani_column_4 = {
             area_skyreach = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             NOT = {
                 any_country = { 
@@ -827,7 +836,7 @@ wwu_botani_column_4 = {
                 }
                 culture_group = culture_group_arrakoa
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {

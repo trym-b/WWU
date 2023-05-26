@@ -26,8 +26,13 @@ wwu_orcish_horde_column_1 = {
             }
 		}
         provinces_to_highlight = {
-            owned_by = P60
-            NOT = { owned_by = ROOT }
+            OR = {
+                is_capital_of = P60
+                AND = {
+                    owned_by = A66
+                    NOT = { country_or_non_sovereign_subject_holds = ROOT }
+                }
+            }
         }
 		effect = {
 			add_country_modifier = {
@@ -57,11 +62,11 @@ wwu_orcish_horde_column_2 = {
 		required_missions = { wwu_orcish_horde_prepare_assault }
         
 		trigger = {
-			owns_core_province = 3078
+			3078 = { country_or_non_sovereign_subject_holds = ROOT}
 		}
         provinces_to_highlight = {
             province_id = 3078
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			region_stranglethorn_vale = {
@@ -84,7 +89,7 @@ wwu_orcish_horde_column_2 = {
 		}
         provinces_to_highlight = {
             owned_by = A66
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -100,15 +105,15 @@ wwu_orcish_horde_column_2 = {
 		required_missions = { wwu_orcish_horde_make_them_tremble }
         
 		trigger = {
-			owns_core_province = 1021
-            owns_core_province = 637
+			1021 = { country_or_non_sovereign_subject_holds = ROOT }
+            637 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         provinces_to_highlight = {
             OR = {
                 province_id = 1021
                 province_id = 637
             }
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -160,6 +165,14 @@ wwu_orcish_horde_column_3 = {
                 war_with = STW
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = P59
+                is_capital_of = DKS
+                is_capital_of = WST
+                is_capital_of = STW
+            }
+        }
 		effect = {
 			1022 = {
                 add_permanent_claim = ROOT
@@ -177,6 +190,9 @@ wwu_orcish_horde_column_3 = {
 		trigger = {
 			army_size = STW
 		}
+        provinces_to_highlight = {
+            is_capital_of = STW
+        }
 		effect = {
 			add_prestige = 25
             add_horde_unity = 25
@@ -191,12 +207,12 @@ wwu_orcish_horde_column_3 = {
 		trigger = {
 			region_deadwind_pass = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
             region = region_deadwind_pass
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -223,7 +239,7 @@ wwu_orcish_horde_column_3 = {
 		}
         provinces_to_highlight = {
             province_id = 1022
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			country_event = { id = first_war.5 }
@@ -252,12 +268,12 @@ wwu_orcish_horde_column_4 = {
 		trigger = {
 			region_swamp_of_sorrows = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
             region = region_swamp_of_sorrows
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -273,7 +289,8 @@ wwu_orcish_horde_column_4 = {
 		required_missions = { wwu_orcish_horde_secure_the_swamp }
         
 		trigger = {
-			any_owned_province = {
+			any_province = {
+                country_or_non_sovereign_subject_holds = ROOT
                 OR = {
                     area = area_redridge_trail
                     area = area_shalewind_bluffs
@@ -287,7 +304,7 @@ wwu_orcish_horde_column_4 = {
                 area = area_shalewind_bluffs
                 area = area_redridge_heights
             }
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -306,9 +323,9 @@ wwu_orcish_horde_column_4 = {
 		required_missions = { wwu_orcish_horde_make_them_tremble }
         
 		trigger = {
-			owns_core_province = 737
-            owns_core_province = 717
-            owns_core_province = 800
+            737 = { country_or_non_sovereign_subject_holds = ROOT }
+            717 = { country_or_non_sovereign_subject_holds = ROOT }
+            800 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         provinces_to_highlight = {
             OR = {
@@ -316,7 +333,7 @@ wwu_orcish_horde_column_4 = {
                 province_id = 717
                 province_id = 800
             }
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			add_country_modifier = {

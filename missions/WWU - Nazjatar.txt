@@ -61,8 +61,7 @@ wwu_nazjatar_column_1 = {
             }
 		}
         provinces_to_highlight = {
-            is_capital = yes
-            owned_by = B92
+            is_capital_of = B92
         }
         
 		effect = {
@@ -88,7 +87,7 @@ wwu_nazjatar_column_1 = {
             NOT = { exists = P25 } # Hydraxian Waterlords
             region_vashjir = {
                 type = all
-                country_or_subject_holds = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
@@ -96,7 +95,7 @@ wwu_nazjatar_column_1 = {
                 owned_by = P25
                 region = region_vashjir
             }
-            NOT = { country_or_subject_holds = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -158,7 +157,7 @@ wwu_nazjatar_column_1 = {
                 owned_by = P24
                 province_id = 2554
             }
-            NOT = { country_or_subject_holds = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -210,6 +209,9 @@ wwu_nazjatar_column_1 = {
                 total_development = 1000
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = P24
+        }
         
 		effect = {
 			add_prestige = 100
@@ -270,8 +272,10 @@ wwu_nazjatar_column_2 = {
         }
         
 		trigger = {
-            OR = {
-                NOT = { exists = VHJ }
+            if = {
+                limit = {
+                    exists = VHJ
+                }
                 VHJ = {
                     has_opinion = {
                         who = ROOT
@@ -279,10 +283,12 @@ wwu_nazjatar_column_2 = {
                     }
                 }
             }
+            else = {
+                always = yes
+            }
 		}
         provinces_to_highlight = {
-            is_capital = yes
-            owned_by = VHJ
+            is_capital_of = VHJ
         }
         
 		effect = {
@@ -300,6 +306,9 @@ wwu_nazjatar_column_2 = {
                     add_permanent_claim = VHJ
                 }
             }
+            else = {
+                add_prestige = 5
+            }
 		}
 	}
     
@@ -313,9 +322,10 @@ wwu_nazjatar_column_2 = {
         
 		trigger = {
             calc_true_if = {
-                all_owned_province = {
+                all_province = {
                     region = region_plunder_isle
                     has_port = yes
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 
                 amount = 3
@@ -324,7 +334,7 @@ wwu_nazjatar_column_2 = {
         provinces_to_highlight = {
             region = region_plunder_isle
             has_port = yes
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -348,15 +358,16 @@ wwu_nazjatar_column_2 = {
         }
         
 		trigger = {
-            any_owned_province = {
+            any_province = {
                 superregion = pandaria_superregion
                 has_port = yes
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
             superregion = pandaria_superregion
             has_port = yes
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -426,9 +437,10 @@ wwu_nazjatar_column_2 = {
             }
             
             calc_true_if = {
-                all_owned_province = {
+                all_province = {
                     superregion = pandaria_superregion
                     has_port = yes
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 
                 amount = 10
@@ -444,10 +456,11 @@ wwu_nazjatar_column_2 = {
         }
         
 		effect = {
-            every_owned_province = {
+            every_province = {
                 limit = {
                     superregion = pandaria_superregion
                     has_port = yes
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 
                 add_base_tax = 1
@@ -512,10 +525,15 @@ wwu_nazjatar_column_3 = {
         }
         
 		trigger = {
-            any_owned_province = {
+            any_province = {
                 NOT = { superregion = underwater_superregion }
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
+        provinces_to_highlight = {
+            NOT = { superregion = underwater_superregion }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
 			add_country_modifier = {
@@ -553,7 +571,9 @@ wwu_nazjatar_column_3 = {
                 limit = {
                     NOT = { exists = UNM }
                 }
-                owns_core_province = 4141
+                4141 = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
             }
             else = {
                 UNM = {
@@ -566,7 +586,7 @@ wwu_nazjatar_column_3 = {
 		}
         provinces_to_highlight = {
             province_id = 4141
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -605,17 +625,13 @@ wwu_nazjatar_column_3 = {
                 
                 all_province = {
                     superregion = paradise_isles_superregion
-                    OR = {
-                        owned_by = ROOT
-                        owned_by_subject_of = ROOT
-                    }
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
 		}
         provinces_to_highlight = {
             superregion = paradise_isles_superregion
-            NOT = { owned_by = ROOT }
-            NOT = { owned_by_subject_of = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -670,8 +686,7 @@ wwu_nazjatar_column_3 = {
 		}
         provinces_to_highlight = {
             superregion = paradise_isles_superregion
-            NOT = { owned_by = ROOT }
-            NOT = { owned_by_subject_of = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -702,13 +717,13 @@ wwu_nazjatar_column_3 = {
         }
         
 		trigger = {
-            owns_core_province = 3178
-            owns_core_province = 2659
-            owns_core_province = 2658
-            owns_core_province = 3179
-            owns_core_province = 2691
-            owns_core_province = 2664
-            owns_core_province = 2662
+            3178 = { country_or_non_sovereign_subject_holds = ROOT }
+            2659 = { country_or_non_sovereign_subject_holds = ROOT }
+            2658 = { country_or_non_sovereign_subject_holds = ROOT }
+            3179 = { country_or_non_sovereign_subject_holds = ROOT }
+            2691 = { country_or_non_sovereign_subject_holds = ROOT }
+            2664 = { country_or_non_sovereign_subject_holds = ROOT }
+            2662 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
         provinces_to_highlight = {
@@ -721,7 +736,7 @@ wwu_nazjatar_column_3 = {
                 province_id = 2664
                 province_id = 2662
             }
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -748,9 +763,15 @@ wwu_nazjatar_column_3 = {
                 war_with = SUR
             }
             else = {
-                owns_core_province = 3182
+                3182 = { country_or_non_sovereign_subject_holds = ROOT }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = SUR
+                province_id = 3182
+            }
+        }
         
 		effect = {
 			add_country_modifier = {
@@ -789,9 +810,15 @@ wwu_nazjatar_column_3 = {
                 }
             }
             else = {
-                owns_core_province = 3182
+                3182 = { country_or_non_sovereign_subject_holds = ROOT }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = SUR
+                province_id = 3182
+            }
+        }
         
 		effect = {
 			if = {
@@ -843,13 +870,13 @@ wwu_nazjatar_column_4 = {
                 area_eye_of_the_storm = {
                     type = all
                     
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
 		}
         provinces_to_highlight = {
             area = area_eye_of_the_storm
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -882,7 +909,7 @@ wwu_nazjatar_column_4 = {
                 }
             }
             else = {
-                owns_core_province = 2644
+                2644 = { country_or_non_sovereign_subject_holds = ROOT }
             }
             if = {
                 limit = {
@@ -893,7 +920,7 @@ wwu_nazjatar_column_4 = {
                 }
             }
             else = {
-                owns_core_province = 2634
+                2634 = { country_or_non_sovereign_subject_holds = ROOT }
             }
 		}
         provinces_to_highlight = {
@@ -901,7 +928,7 @@ wwu_nazjatar_column_4 = {
                 province_id = 2644
                 province_id = 2634
             }
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -924,9 +951,10 @@ wwu_nazjatar_column_4 = {
         
 		trigger = {
             calc_true_if = {
-                all_owned_province = {
+                all_province = {
                     superregion = south_seas_superregion
                     has_port = yes
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 
                 amount = 3
@@ -935,7 +963,7 @@ wwu_nazjatar_column_4 = {
         provinces_to_highlight = {
             superregion = south_seas_superregion
             has_port = yes
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -971,7 +999,10 @@ wwu_nazjatar_column_5 = {
 		trigger = {
             religion = nzoth
             any_country = {
-                total_development = 100
+                custom_trigger_tooltip = {
+                    tooltip = MISSION_TARGET_HAS_100_DEV_TT
+                    total_development = 100
+                }
                 has_spy_network_from = {
                     who = ROOT
                     value = 80
@@ -1079,13 +1110,13 @@ wwu_nazjatar_column_5 = {
             religion = nzoth
             OR = {
                 calc_true_if = {
-                    amount = 8
+                    amount = 10
                     all_country = {
                         religion = nzoth
                     }
                 }
                 calc_true_if = {
-                    amount = 50
+                    amount = 150
                     all_province = {
                         religion = nzoth
                     }
@@ -1115,17 +1146,11 @@ wwu_nazjatar_column_5 = {
         
 		trigger = {
             # Temple of Elune
-            2651 = {
-                OR = {
-                    owned_by = ROOT
-                    owned_by_subject_of = ROOT
-                }
-            }
+            2651 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         provinces_to_highlight = {
             province_id = 2651
-            NOT = { owned_by = ROOT }
-            NOT = { owned_by_subject_of = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -1163,7 +1188,9 @@ wwu_nazjatar_column_5 = {
                 always = yes
             }
 		}
-        
+        provinces_to_highlight = {
+            is_capital_of = COF
+        }
 		effect = {
             if = {
                 limit = {
@@ -1190,18 +1217,12 @@ wwu_nazjatar_column_5 = {
             area_wardens_isle = {
                 type = all
                 
-                OR = {
-                    owned_by = ROOT
-                    owned_by_subject_of = ROOT
-                }
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_warden_stand = {
                 type = all
                 
-                OR = {
-                    owned_by = ROOT
-                    owned_by_subject_of = ROOT
-                }
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
         provinces_to_highlight = {
@@ -1209,8 +1230,7 @@ wwu_nazjatar_column_5 = {
                 area = area_wardens_isle
                 area = area_warden_stand
             }
-            NOT = { owned_by = ROOT }
-            NOT = { owned_by_subject_of = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {

@@ -22,11 +22,21 @@ wwu_zandalar_column_1 = {
                 num_of_heavy_ship = 5
                 navy_size = 30
             }
-            num_of_owned_provinces_with = {
-                value = 3 
-                has_shipyard_building_trigger = yes
+            
+            calc_true_if = {
+                amount = 3
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    has_shipyard_building_trigger = yes
+                }
             }
 		}
+        provinces_to_highlight = {
+            has_port = yes
+            country_or_non_sovereign_subject_holds = ROOT
+            NOT = { has_shipyard_building_trigger = yes }
+        }
 		effect = {
             define_explorer = {
                 shock = 2
@@ -55,7 +65,9 @@ wwu_zandalar_column_1 = {
 				has_discovered = ROOT
 			}
         }
-        
+        provinces_to_highlight = {
+            region = region_paradise_isles
+        }
 		effect = {
             region_paradise_isles = {
                 add_permanent_claim = ROOT
@@ -77,11 +89,15 @@ wwu_zandalar_column_1 = {
 		    region_paradise_isles = {
 				type = all
 				OR = {
-                    owned_by = ROOT 
+                    country_or_non_sovereign_subject_holds = ROOT
                     is_empty = yes
                 }
             }
 		}
+        provinces_to_highlight = {
+            region = region_paradise_isles
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             # Volcanic Runof
@@ -117,13 +133,9 @@ wwu_zandalar_column_1 = {
 		trigger = {
             OR = {
                 # Volcanic Runof
-                4087 = {
-                    owned_by = ROOT 
-                }
-                # # Mount Kaja
-                4088 = {
-                    owned_by = ROOT 
-                }
+                4087 = { country_or_non_sovereign_subject_holds = ROOT }
+                # Mount Kaja
+                4088 = { country_or_non_sovereign_subject_holds = ROOT }
             }
             OR = {
                 area_port_kajaro = {
@@ -140,7 +152,13 @@ wwu_zandalar_column_1 = {
                 }
             }
 		}
-        
+        provinces_to_highlight = {
+            OR = {
+                province_id = 4087
+                province_id = 4088
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			region_kezan = {
 				limit = {
@@ -163,9 +181,13 @@ wwu_zandalar_column_1 = {
 		trigger = {
             region_kezan = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
+        provinces_to_highlight = {
+            region = region_kezan
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		
 		effect = {
             custom_tooltip = zandalari_tooltip_one_six_a
@@ -190,13 +212,12 @@ wwu_zandalar_column_1 = {
             area_covescale_rise = { 
                 type = all
                 
-                owned_by = A78
-                is_core = A78
+                country_or_non_sovereign_subject_holds = ROOT
             }
         }
 		provinces_to_highlight = {
-            NOT = { owned_by = ROOT }
             area = area_covescale_rise
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
@@ -224,9 +245,12 @@ wwu_zandalar_column_1 = {
             area_nazwatha = { 
                 type = all
                 
-                owned_by = A78
-                is_core = A78
+                country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+		provinces_to_highlight = {
+            area = area_nazwatha
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		
 		effect = {
@@ -252,8 +276,7 @@ wwu_zandalar_column_1 = {
 		trigger = {
             # Port of Zem'lan
             1114 = { 
-                owned_by = A78
-                is_core = A78
+                country_or_non_sovereign_subject_holds = ROOT
 
                 OR = {
                     has_great_project = {
@@ -271,7 +294,10 @@ wwu_zandalar_column_1 = {
                 }
             }
         }
-        
+        provinces_to_highlight = {
+            province_id = 1114
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
             # Port of Zem'lan
             1114 = {
@@ -349,11 +375,14 @@ wwu_zandalar_column_2 = {
             area_isle_of_giants = {
                 type = all
                 
-                country_or_subject_holds = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
                 development = 9
             }
 		}
-        
+        provinces_to_highlight = {
+            area = area_isle_of_giants
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
             area_isle_of_giants = {
                 limit = {
@@ -380,17 +409,25 @@ wwu_zandalar_column_2 = {
 		required_missions = { wwu_zan_one_two }
 		
 		trigger = {
-			num_of_owned_provinces_with = {
-                value = 5
+            calc_true_if = {
+                amount = 5
                 
+                country_or_non_sovereign_subject_holds = ROOT
                 is_overseas = yes
-                
                 OR = {
                     has_dock_building_trigger = yes
                     has_shipyard_building_trigger = yes
                 }
             }
 		}
+        provinces_to_highlight = {
+            country_or_non_sovereign_subject_holds = ROOT
+            is_overseas = yes
+            OR = {
+                NOT = { has_dock_building_trigger = yes }
+                NOT = { has_shipyard_building_trigger = yes }
+            }
+        }
         
 		effect = {
             add_country_modifier = {
@@ -511,10 +548,11 @@ wwu_zandalar_column_3 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = zul_domination_a
-				check_variable = {
-                which = zul_domination
-                value = 3
-            }
+                
+                check_variable = {
+                    which = zul_domination
+                    value = 3
+                }
 			}
             
             employed_advisor = {
@@ -606,6 +644,8 @@ wwu_zandalar_column_3 = {
 		trigger = {
             # Warport Rastari
             2611 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                
                 OR = {
                     AND = {
                         development = 20
@@ -620,6 +660,10 @@ wwu_zandalar_column_3 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            province_id = 2611
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
             add_navy_tradition = 25
             if = {
@@ -678,34 +722,41 @@ wwu_zandalar_column_3 = {
 		trigger = {
             # The Great Seat
             2469 = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
                 religion = ROOT
                 culture = ROOT
             }
             # Nazwatha
             1129 = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
                 religion = ROOT
                 culture = ROOT
             }
             # Atul'aman
             1115 = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
                 religion = ROOT
                 culture = ROOT
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2469
+                province_id = 1129
+                province_id = 1115
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
-		add_adm_power = 25
-		add_dip_power = 25
-		add_mil_power = 25
-		
-		1122 = {
-		change_province_name = "Uldir Complex"
-		rename_capital = "Uldir Complex"
-			add_province_triggered_modifier = zandalar_complex
-		}	
-
+            add_adm_power = 25
+            add_dip_power = 25
+            add_mil_power = 25
+            
+            1122 = {
+                change_province_name = "Uldir Complex"
+                rename_capital = "Uldir Complex"
+                add_province_triggered_modifier = zandalar_complex
+            }	
 		}
         
         ai_weight   = { factor = 1 }
@@ -728,6 +779,9 @@ wwu_zandalar_column_3 = {
                 navy_size = A14 # Kul Tiras
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A14
+        }
         
 		effect = {
             create_admiral = { 
@@ -765,10 +819,17 @@ wwu_zandalar_column_3 = {
 		trigger = {
 		    region_kul_tiras = {
 			    type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
             NOT = { exists = A14 } # Kul Tiras
 		}
+        provinces_to_highlight = {
+            OR = {
+                owned_by = A14
+                region = region_kul_tiras
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             add_prestige = 25
@@ -810,6 +871,7 @@ wwu_zandalar_column_4 = {
 		trigger = {
             # The Great Seat
             2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 has_tax_building_trigger = yes
                 has_trade_building_trigger = yes
                 has_temple_building_trigger = yes
@@ -836,6 +898,10 @@ wwu_zandalar_column_4 = {
                 category = ADM
             }
 		}
+        provinces_to_highlight = {
+            province_id = 2469
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             add_adm_power = 100
@@ -861,6 +927,8 @@ wwu_zandalar_column_4 = {
 		trigger = {
             # The Great Seat
             2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                
                 OR = {
                     development = 25
                     has_great_project = {
@@ -870,6 +938,10 @@ wwu_zandalar_column_4 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            province_id = 2469
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             custom_tooltip = z_merc_company_construct_1_tt
@@ -910,13 +982,13 @@ wwu_zandalar_column_4 = {
 		effect = {
             if = {
                 limit = {
-				OR = {
-                    NOT = { exists = NAZ } # Nazmir
-					area_primal_wetlands = {
-                    type = all
-                    owned_by = A78
-                }
-                }
+                    OR = {
+                        NOT = { exists = NAZ } # Nazmir
+                        area_primal_wetlands = {
+                            type = all
+                            owned_by = A78
+                        }
+                    }
 				}
                 add_adm_power = 100
                 add_dip_power = 100
@@ -925,96 +997,101 @@ wwu_zandalar_column_4 = {
 
             if = {
                 limit = {
-				and = {
-                    NAZ = {
-					ai = yes }
-					OR = {
-				region_zuldazar = {
-					owned_by = NAZ
-                }
-				area_primal_wetlands = {
-					owned_by = NAZ
-			}
-			}
-                }
+                    AND = {
+                        NAZ = {
+                            ai = yes 
+                        }
+                        OR = {
+                            region_zuldazar = {
+                                owned_by = NAZ
+                            }
+                            area_primal_wetlands = {
+                                owned_by = NAZ
+                            }
+                        }
+                    }
 				}
 				
-           random_list = {
-            60 = {
-			    region_nazmir = {
-				limit = {
-				owned_by = NAZ}
-                add_permanent_claim = ROOT
-				}
-				region_zuldazar = {
-				limit = {
-				owned_by = NAZ}
-                add_permanent_claim = ROOT
-				}
-	declare_war_with_cb = {
-    who = NAZ
-    casus_belli = cb_against_evil
-}
+                random_list = {
+                    60 = {
+                        region_nazmir = {
+                            limit = {
+                                owned_by = NAZ
+                            }
+                            add_permanent_claim = ROOT
+                        }
+                        region_zuldazar = {
+                            limit = {
+                                owned_by = NAZ
+                            }
+                            add_permanent_claim = ROOT
+                        }
+                        declare_war_with_cb = {
+                            who = NAZ
+                            casus_belli = cb_against_evil
+                        }
+                    }
+                    40 = {
+                        region_nazmir = {
+                            limit = {
+                                owned_by = NAZ
+                            }
+                            add_permanent_claim = ROOT
+                        }
+                        area_primal_wetlands = {
+                            limit = {
+                                owned_by = NAZ
+                            }
+                            cede_province = ROOT
+                        }
+                        region_zuldazar = {
+                            limit = {
+                                owned_by = NAZ
+                            }
+                            cede_province = ROOT
+                        }
+                        add_truce_with = NAZ
+                    }
+                }
             }
-            40 = {
-				region_nazmir = {
-				limit = {
-				owned_by = NAZ}
-                add_permanent_claim = ROOT
-				}
-			    area_primal_wetlands = {
-				limit = {
-				owned_by = NAZ}
-                cede_province = ROOT
-				}
-				region_zuldazar = {
-				limit = {
-				owned_by = NAZ}
-                cede_province = ROOT
-				}
-				add_truce_with = NAZ
-            }
-			}
-			}
             if = {
                 limit = {
-				and = {
-                    NAZ = {
-					ai = no }
-					OR = {
-				region_zuldazar = {
-					owned_by = NAZ
-                }
-				area_primal_wetlands = {
-					owned_by = NAZ
-			}
-			}
-                }
+                    AND = {
+                        NAZ = {
+                            ai = no 
+                        }
+                        OR = {
+                            region_zuldazar = {
+                                owned_by = NAZ
+                            }
+                            area_primal_wetlands = {
+                                owned_by = NAZ
+                            }
+                        }
+                    }
 				}
 				
 			    region_nazmir = {
-				limit = {
-				owned_by = NAZ}
-                add_permanent_claim = ROOT
-				}
+                    limit = {
+                        owned_by = NAZ
+                    }
+                    add_permanent_claim = ROOT
+                }
 				region_zuldazar = {
-				limit = {
-				owned_by = NAZ}
-                add_permanent_claim = ROOT
+                    limit = {
+                        owned_by = NAZ
+                    }
+                    add_permanent_claim = ROOT
 				}
-	declare_war_with_cb = {
-    who = NAZ
-    casus_belli = cb_against_evil
-}
+                declare_war_with_cb = {
+                    who = NAZ
+                    casus_belli = cb_against_evil
+                }
             }
+        }
+        ai_weight   = { factor = 1 }
+    }
 
-			}
-			ai_weight   = { factor = 1 }
-		}
-        
-        
-	
-	
     # End of Nazmir
 	wwu_zan_four_four = {
 		icon = mission_zan_nazmir
@@ -1032,8 +1109,11 @@ wwu_zandalar_column_4 = {
                     is_empty = yes 
                 }
 			}
-
 		}
+        provinces_to_highlight = {
+            region = region_nazmir
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             add_legitimacy = 10
@@ -1060,33 +1140,36 @@ wwu_zandalar_column_4 = {
             is_at_war = no
             army_size = 50
 			monthly_income = 50
+            
 			development_in_provinces = {
                 value = 325
                 superregion = zandalar_superregion
 			}
 		}
+        provinces_to_highlight = {
+            superregion = zandalar_superregion
+        }
         
 		effect = {
             custom_tooltip = zandalari_tooltip_four_five_a
             hidden_effect = {
-            every_country = {
-                limit = {
-                    # Is on Zandalar
-                    capital_scope = { 
-                        superregion = zandalar_superregion
+                every_country = {
+                    limit = {
+                        # Is on Zandalar
+                        capital_scope = { 
+                            superregion = zandalar_superregion
+                        }
+                        # Is not friend with Zandalar via mission
+                        NOT = {has_country_flag = wwu_friend_with_zandalari}
+                        
+                        # Any owned province is claimed by Zandalar
+                        
+                        # Is not Zandalar itself
+                        NOT = { tag = ROOT }
                     }
-                    # Is not friend with Zandalar via mission
-					NOT = {has_country_flag = wwu_friend_with_zandalari}
-					
-                    # Any owned province is claimed by Zandalar
                     
-                    # Is not Zandalar itself
-                    NOT = { tag = ROOT }
+                     country_event = { id = wwu_zandalar.9 }
                 }
-                
-                 country_event = { id = wwu_zandalar.9 }
-
-            }
 			}
 		}
         
@@ -1125,6 +1208,14 @@ wwu_zandalar_column_4 = {
                 }
 			}
 		}
+        provinces_to_highlight = {
+            OR = {
+                region = region_zuldazar
+                region = region_nazmir
+                region = region_voldun
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {   
 			add_country_modifier = {
@@ -1145,15 +1236,14 @@ wwu_zandalar_column_4 = {
 		}
 		
 		trigger = {
-		OR = {
-		exists = MOE
-			custom_trigger_tooltip = {
-				tooltip = zandalari_event_throw_leishen
-				has_country_flag = zandalari_event_throw_leishen
-			}
+            OR = {
+                exists = MOE
+                custom_trigger_tooltip = {
+                    tooltip = zandalari_event_throw_leishen
+                    has_country_flag = zandalari_event_throw_leishen
+                }
+            }
 		}
-		}
-		
 		effect = {
             if = {
                 limit = {
@@ -1235,6 +1325,7 @@ wwu_zandalar_column_5 = {
 		trigger = {
             # Atal'dazar
             2470 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 OR = {
                     development = 25
                     has_great_project = {
@@ -1244,6 +1335,10 @@ wwu_zandalar_column_5 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            province_id = 2470
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             custom_tooltip = z_merc_company_construct_2_tt
@@ -1265,6 +1360,7 @@ wwu_zandalar_column_5 = {
 		trigger = {
             # Atal'gral
             1112 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 development = 15
                 OR = {
                     has_building = wow_mine_2
@@ -1272,7 +1368,10 @@ wwu_zandalar_column_5 = {
                 }
             }
 		}
-        
+        provinces_to_highlight = {
+            province_id = 1112
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
             # Atal'gral
             1112 = {
@@ -1294,22 +1393,35 @@ wwu_zandalar_column_5 = {
 		trigger = {
             # The Great Seat
             2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 development = 40
             }
             # Atal'dazar
             2470 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 development = 40
             }
             
             gold_income = 20
             
-            num_of_owned_provinces_with = {
-                value = 3
-                trade_goods = gold
+            calc_true_if = {
+                amount = 3
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    trade_goods = gold
+                }
             }
             
             NOT = { num_of_mercenaries = 1 }
 		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2469
+                province_id = 2470
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             custom_tooltip = zandalari_tooltip_five_five_a
@@ -1347,6 +1459,15 @@ wwu_zandalar_column_5 = {
 				religion = ROOT
 			}
 		}
+        provinces_to_highlight = {
+            OR = {
+                region = region_zuldazar
+                region = region_nazmir
+                region = region_voldun
+            }
+            country_or_non_sovereign_subject_holds = ROOT
+            NOT = { religion = rOOT }
+        }
         
 		effect = {
 			country_event = { id = wwu_zandalar.10 }
@@ -1518,11 +1639,14 @@ wwu_zandalar_column_5 = {
                 }
                 area_throne_of_thunder = {
                     type = all
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }   
         }
-		
+		provinces_to_highlight = {
+            area = area_throne_of_thunder
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		
 		effect = {
             custom_tooltip = zandalari_tooltip_five_ten_a

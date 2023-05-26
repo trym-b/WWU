@@ -23,13 +23,12 @@ wwu_kul_tiras_column_1 = {
             NOT = { stability = 0 }
 
         }
-            effect = {
-                A14 = {
-                    country_event = { id = wwu_kul_tiras.200 days = 1}
-                }
+        effect = {
+            A14 = {
+                country_event = { id = wwu_kul_tiras.200 days = 1 }
             }
         }
-
+    }
 	
 	wwu_gilnean_diplomacy = {
 		icon = mission_titan_spirits
@@ -38,14 +37,22 @@ wwu_kul_tiras_column_1 = {
 		required_missions = { wwu_kul_tiras_security }
         
 		trigger = {
-            OR = {
-                NOT = { exists = A12 } # Gilneas
+            if = {
+                limit = {
+                    exists = A12
+                }
                 has_opinion = {
                     who = A12 # Gilneas
                     value = 100
                 }
             }
+            else = {
+                always = yes
+            }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A12
+        }
         
 		effect = {
 			if = {
@@ -74,14 +81,22 @@ wwu_kul_tiras_column_1 = {
 		required_missions = { wwu_gilnean_diplomacy }
         
 		trigger = {
-            OR = {
-                NOT = { exists = A16 } # Stromgarde
+            if = {
+                limit = {
+                    exists = A16
+                }
                 has_opinion = {
                     who = A16 # Stromgarde
                     value = 100
                 }
             }
+            else = {
+                always = yes
+            }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A16
+        }
         
 		effect = {
 			if = {
@@ -110,13 +125,18 @@ wwu_kul_tiras_column_1 = {
 		required_missions = { wwu_stromgarde_diplomacy }
         
 		trigger = {
-            OR = {
-                NOT = { exists = A16 } # Stromgarde
-                NOT = { exists = A12 } # Gilneas
-                
+            if = {
+                limit = {
+                    exists = A16
+                }
                 has_opinion = {
                     who = A16 # Stromgarde
                     value = 150
+                }
+            }
+            if = {
+                limit = {
+                    exists = A12
                 }
                 has_opinion = {
                     who = A12 # Gilneas
@@ -124,6 +144,12 @@ wwu_kul_tiras_column_1 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = A16
+                is_capital_of = A12
+            }
+        }
         
 		effect = {
             hidden_effect = {
@@ -170,6 +196,9 @@ wwu_kul_tiras_column_1 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A12
+        }
         
 		effect = {
             # Gilneas
@@ -226,6 +255,9 @@ wwu_kul_tiras_column_1 = {
                 is_subject_of_type = personal_union
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A12
+        }
         
 		effect = {
             add_prestige = 100
@@ -291,17 +323,17 @@ wwu_kul_tiras_column_2 = {
             area_brennadam = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_briaback_kraul = {
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_clearcut = {
                 type = all
 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -310,7 +342,7 @@ wwu_kul_tiras_column_2 = {
                 area = area_briaback_kraul
                 area = area_clearcut
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -342,16 +374,21 @@ wwu_kul_tiras_column_2 = {
 		required_missions = { wwu_problems_of_stormsong_valley }
         
 		trigger = {
-            OR = {
-                NOT = { exists = FRE } # Freehold
+            if = {
+                limit = {
+                    exists = FRE
+                }
                 FRE = {
                     is_subject_of = ROOT
                 }
             }
+            else = {
+                always = yes
+            }
 		}
 		provinces_to_highlight = {
             owned_by = FRE
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -424,12 +461,12 @@ wwu_kul_tiras_column_2 = {
 		trigger = {
             region_kul_tiras = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_kul_tiras
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -490,6 +527,14 @@ wwu_kul_tiras_column_2 = {
                 alliance_with = A17 # Alterace
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = A08
+                is_capital_of = A12
+                is_capital_of = A16
+                is_capital_of = A17
+            }
+        }
         
 		effect = {
             add_prestige = 10
@@ -579,32 +624,51 @@ wwu_kul_tiras_column_2 = {
 		required_missions = { wwu_continental_alliance }
         
 		trigger = {
-            # Dalaran
-            A18 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = A18
                 }
+                # Dalaran
+                A18 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+            else = {
+                always = yes
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A18
+        }
         
 		effect = {
-            add_opinion = {
-                who = A18 # Dalaran
-                modifier = dalaran_embassy
-            }
-            
-            # Dalaran
-            A18 = {
+            if = {
+                limit = {
+                    exists = A18
+                }
                 add_opinion = {
-                    who = ROOT
-                    modifier = kul_tiran_embassy
+                    who = A18 # Dalaran
+                    modifier = dalaran_embassy
+                }
+                
+                # Dalaran
+                A18 = {
+                    add_opinion = {
+                        who = ROOT
+                        modifier = kul_tiran_embassy
+                    }
+                }
+                
+                custom_tooltip = JAINA_MAGE_TT
+                hidden_effect = {
+                    set_global_flag = jaina_in_dalaran
                 }
             }
-            
-            custom_tooltip = JAINA_MAGE_TT
-            hidden_effect = {
-                set_global_flag = jaina_in_dalaran
+            else = {
+                add_prestige = 5
             }
         }
 	}
@@ -616,8 +680,8 @@ wwu_kul_tiras_column_2 = {
 		required_missions = { wwu_dalaran_embassy }
         
 		trigger = {
-            owns = 3010 # Drisburg
-            owns = 168 # The Brineworks
+            3010 = { country_or_non_sovereign_subject_holds = ROOT }
+            168 = { country_or_non_sovereign_subject_holds = ROOT }
             
             # Khaz Modan
             A29 = {
@@ -635,6 +699,13 @@ wwu_kul_tiras_column_2 = {
                 }
             }
 		}
+        provinces_to_highlight = {
+            OR = {
+                province_id = 3010
+                province_id = 168
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
 		effect = {
             add_country_modifier = {
@@ -677,6 +748,12 @@ wwu_kul_tiras_column_2 = {
                 alliance_with = ROOT
             }
 		}
+        provinces_to_highlight = {
+            owner = {
+                is_capital = yes
+                has_country_modifier = head_of_alliance
+            }
+        }
         
 		effect = {
             add_country_modifier = {
@@ -713,11 +790,11 @@ wwu_kul_tiras_column_3 = {
                 tooltip = MENEHTIL_DEAL_EVENT_TT
             }
             
-            owns_core_province = 1055 # Menethil Harbor
+            1055 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 1055
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -737,11 +814,11 @@ wwu_kul_tiras_column_3 = {
                 tooltip = BALOR_DEAL_EVENT_TT
             }
             
-            owns_core_province = 4111 # Balor
+            4111 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 4111
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -761,11 +838,11 @@ wwu_kul_tiras_column_3 = {
                 tooltip = SOUTHSHORE_DEAL_EVENT_TT
             }
             
-            owns_core_province = 991 # Southshore
+            991 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 991
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -791,11 +868,11 @@ wwu_kul_tiras_column_3 = {
                 tooltip = THANDOL_DEAL_EVENT_TT
             }
             
-            owns_core_province = 1933 # Thandol Span
+            1933 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 1933
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -860,8 +937,8 @@ wwu_kul_tiras_column_5 = {
 		required_missions = { wwu_kul_tiras_security }
         
 		trigger = {
-                num_of_colonists = 1
-            }    
+            num_of_colonists = 1
+        }    
 
 		effect = {
 			define_explorer = {
@@ -904,21 +981,20 @@ wwu_kul_tiras_column_5 = {
 
         required_missions = { wwu_gathering_of_the_ships }
 
+        trigger = {
+            region_mechagon = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_kul_tiras = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
         provinces_to_highlight = {
             region = region_mechagon
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
-
-        trigger = {
-                region_mechagon = {
-                    type = all
-                    country_or_non_sovereign_subject_holds = ROOT
-                }
-                region_kul_tiras = {
-                    type = all
-                    country_or_non_sovereign_subject_holds = ROOT
-                }
-            }
 
         effect = {
             region_paradise_isles = {
@@ -948,15 +1024,6 @@ wwu_kul_tiras_column_5 = {
 
         required_missions = { wwu_first_colonial_venture }
 
-        provinces_to_highlight = {
-			OR = {
-				region = region_kezan
-				region = region_lost_isles
-				region = region_south_sea_islands
-			}
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-
         trigger = {
             region_kezan = {
                 type = all
@@ -970,6 +1037,14 @@ wwu_kul_tiras_column_5 = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
+        }
+        provinces_to_highlight = {
+			OR = {
+				region = region_kezan
+				region = region_lost_isles
+				region = region_south_sea_islands
+			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 
         effect = {
@@ -1004,14 +1079,6 @@ wwu_kul_tiras_column_5 = {
 
         required_missions = { wwu_south_seas_expansion }
 
-        provinces_to_highlight = {
-			OR = {
-				province_id = 3406 #Tiragarde Shore
-				province_id = 1382 #Tiragarde Keep
-			}
-			NOT = { owned_by = ROOT }
-        }
-
         trigger = {
             owns_core_province = 3406 # Tiragarde Shore
             owns_core_province = 1382 # Tiragarde Keep
@@ -1023,8 +1090,16 @@ wwu_kul_tiras_column_5 = {
                 base_production = 4
                 base_manpower = 6
                 has_fort_building_trigger = yes
-                }
             }
+        }
+        provinces_to_highlight = {
+			OR = {
+                owned_by = TIR
+				province_id = 3406 #Tiragarde Shore
+				province_id = 1382 #Tiragarde Keep
+			}
+			NOT = { owned_by = ROOT }
+        }
 
         effect = {
             A14 = {
@@ -1046,14 +1121,6 @@ wwu_kul_tiras_column_5 = {
 
         required_missions = { wwu_tiragarde_outpost }
 
-        provinces_to_highlight = {
-			OR = {
-				province_id = 1439 # Northwatch Hold
-				province_id = 2949 # Northwatch Port
-			}
-			NOT = { owned_by = ROOT }
-        }
-
         trigger = {
             owns_core_province = 1439
             owns_core_province = 2949
@@ -1067,6 +1134,15 @@ wwu_kul_tiras_column_5 = {
                 has_fort_building_trigger = yes
             }
         }
+        provinces_to_highlight = {
+			OR = {
+                owned_by = G06
+				province_id = 1439 # Northwatch Hold
+				province_id = 2949 # Northwatch Port
+			}
+			NOT = { owned_by = ROOT }
+        }
+
 
         effect = {
             A14 = {
@@ -1088,16 +1164,6 @@ wwu_kul_tiras_column_5 = {
 
         required_missions = { wwu_barrens_expansion }
 
-        provinces_to_highlight = {
-			OR = {
-				province_id = 3478 
-				province_id = 1456
-				province_id = 3477
-				province_id = 2951
-			}
-			NOT = { owned_by = ROOT }
-        }
-
         trigger = {
             owns_core_province = 3478
             owns_core_province = 1456
@@ -1112,6 +1178,16 @@ wwu_kul_tiras_column_5 = {
                 base_manpower = 6
                 has_fort_building_trigger = yes
             }
+        }
+        provinces_to_highlight = {
+			OR = {
+                owned_by = A23
+				province_id = 3478 
+				province_id = 1456
+				province_id = 3477
+				province_id = 2951
+			}
+			NOT = { owned_by = ROOT }
         }
 
         effect = {

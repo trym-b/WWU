@@ -46,27 +46,29 @@ wwu_blackwater_column_1 = {
             region_jade_forest = { 
                 province_has_center_of_trade_of_level = 1
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_jade_forest
             province_has_center_of_trade_of_level = 1
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
             if = {
                 limit = {
-                    any_owned_province = {
+                    any_province = {
                         region = region_jade_forest
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                 }
-                random_owned_province = {
+                random_province = {
                     limit = {
                         region = region_jade_forest
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                     add_permanent_province_modifier = {
                         name = mission_pandarian_connections
@@ -101,12 +103,12 @@ wwu_blackwater_column_2 = {
         
 		trigger = {
             region_plunder_isle = {
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_plunder_isle
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -128,12 +130,12 @@ wwu_blackwater_column_2 = {
             region_plunder_isle = { 
                 type = all
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_plunder_isle
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -155,27 +157,29 @@ wwu_blackwater_column_2 = {
             region_kul_tiras = { 
                 province_has_center_of_trade_of_level = 1
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_kul_tiras
             province_has_center_of_trade_of_level = 1
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
             if = {
                 limit = {
-                    any_owned_province = {
+                    any_province = {
                         region = region_kul_tiras
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                 }
-                random_owned_province = {
+                random_province = {
                     limit = {
                         region = region_kul_tiras
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                     add_permanent_province_modifier = {
                         name = mission_tirasian_connections
@@ -199,27 +203,29 @@ wwu_blackwater_column_2 = {
             region_zuldazar = { 
                 province_has_center_of_trade_of_level = 1
                 
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
             region = region_zuldazar
             province_has_center_of_trade_of_level = 1
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
             if = {
                 limit = {
-                    any_owned_province = {
+                    any_province = {
                         region = region_zuldazar
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                 }
-                random_owned_province = {
+                random_province = {
                     limit = {
                         region = region_zuldazar
                         province_has_center_of_trade_of_level = 1
+                        country_or_non_sovereign_subject_holds = ROOT
                     }
                     add_permanent_province_modifier = {
                         name = mission_zandalari_connections
@@ -252,10 +258,10 @@ wwu_blackwater_column_3 = {
 		required_missions = { }
         
 		trigger = {
-            owns = 996
             num_of_infantry = 10
             num_of_light_ship = 12
             996 = {
+                country_or_non_sovereign_subject_holds = ROOT
                 has_fort_building_trigger = yes
             }
 		}
@@ -326,7 +332,12 @@ wwu_blackwater_column_3 = {
 		required_missions = { wwu_loyalty_of_the_merchants }
         
 		trigger = {
+            any_owned_province = {
+                has_port = yes
+            }
             996 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                
                 has_shipyard_building_trigger = yes
                 has_dock_building_trigger = yes 
                 has_trade_building_trigger = yes
@@ -473,19 +484,19 @@ wwu_blackwater_column_4 = {
 		trigger = {
             area_booty_bay = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_mistvale = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_jaguero_isle = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
             area_lower_troll_ruins = {
                 type = all
-                owned_by = ROOT
+                country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
@@ -495,7 +506,7 @@ wwu_blackwater_column_4 = {
                 area = area_jaguero_isle
                 area = area_lower_troll_ruins
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -541,30 +552,14 @@ wwu_blackwater_column_4 = {
 		required_missions = { wwu_secure_lower_stranglethorn }
         
 		trigger = {
-            883 = {
-                owned_by = ROOT
-            }
-            937 = {
-                owned_by = ROOT
-            }
-            969 = {
-                owned_by = ROOT
-            }
-            1003 = {
-                owned_by = ROOT
-            }
-            681 = {
-                owned_by = ROOT
-            }
-            697 = {
-                owned_by = ROOT
-            }
-            715 = {
-                owned_by = ROOT
-            }
-            735 = {
-                owned_by = ROOT
-            }
+            883 = { country_or_non_sovereign_subject_holds = ROOT }
+            937 = { country_or_non_sovereign_subject_holds = ROOT }
+            969 = { country_or_non_sovereign_subject_holds = ROOT } 
+            1003 = { country_or_non_sovereign_subject_holds = ROOT }
+            681 = { country_or_non_sovereign_subject_holds = ROOT }
+            697 = { country_or_non_sovereign_subject_holds = ROOT }
+            715 = { country_or_non_sovereign_subject_holds = ROOT }
+            735 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             OR = {
@@ -577,7 +572,7 @@ wwu_blackwater_column_4 = {
                 province_id = 715
                 province_id = 735
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -602,30 +597,14 @@ wwu_blackwater_column_4 = {
 		required_missions = { wwu_dominate_the_stranglethorn_coast }
         
 		trigger = {
-            2169 = {
-                owned_by = ROOT
-            }
-            799 = {
-                owned_by = ROOT
-            }
-            612 = {
-                owned_by = ROOT
-            }
-            815 = {
-                owned_by = ROOT
-            }
-            2154 = {
-                owned_by = ROOT
-            }
-            837 = {
-                owned_by = ROOT
-            }
-            627 = {
-                owned_by = ROOT
-            }
-            904 = {
-                owned_by = ROOT
-            }
+            2169 = { country_or_non_sovereign_subject_holds = ROOT }
+            799 = { country_or_non_sovereign_subject_holds = ROOT }
+            612 = { country_or_non_sovereign_subject_holds = ROOT }
+            815 = { country_or_non_sovereign_subject_holds = ROOT }
+            2154 = { country_or_non_sovereign_subject_holds = ROOT }
+            837 = { country_or_non_sovereign_subject_holds = ROOT }
+            627 = { country_or_non_sovereign_subject_holds = ROOT }
+            904 = {country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             OR = {
@@ -638,7 +617,7 @@ wwu_blackwater_column_4 = {
                 province_id = 627
                 province_id = 904
             }
-			NOT = { owned_by = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
@@ -661,7 +640,8 @@ wwu_blackwater_column_4 = {
             calc_true_if = {
                 amount = 20
                 
-                all_owned_province = {
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
                     has_port = yes
                     
                     OR = {
@@ -675,7 +655,7 @@ wwu_blackwater_column_4 = {
 		}
 		provinces_to_highlight = {
             has_port = yes
-            
+            country_or_non_sovereign_subject_holds = ROOT
             OR = {
                 region = region_stranglethorn_vale
                 region = region_westfall

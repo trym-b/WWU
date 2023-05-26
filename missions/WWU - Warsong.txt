@@ -147,11 +147,11 @@ wwu_warsong_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-			owns_core_province = 3755
+			3755 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         provinces_to_highlight = {
             province_id = 3755
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			region_nagrand_draenor = {
@@ -167,7 +167,12 @@ wwu_warsong_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-			alliance_with = A51 
+            if = {
+                limit = {
+                    exists = A54
+                }
+                alliance_with = A51 
+            }
 		}
 		effect = {
 			add_country_modifier = {
@@ -189,10 +194,9 @@ wwu_warsong_column_5 = {
 		}
         provinces_to_highlight = {
             OR = {
-                is_core = SBM
-                is_core = SRP
+                owned_by = SBM
+                owned_by = SRP
             }
-            NOT = { owned_by = ROOT }
         }
 		effect = {
 			add_country_modifier = {
@@ -212,8 +216,7 @@ wwu_warsong_column_5 = {
 			NOT = { exists = OGR }
 		}
         provinces_to_highlight = {
-            is_core = OGR
-            NOT = { owned_by = ROOT }
+            owned_by = OGR
         }
 		effect = {
 			add_country_modifier = {

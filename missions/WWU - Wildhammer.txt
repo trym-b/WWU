@@ -33,8 +33,12 @@ wwu_wildhammer_column_1 = {
 		position = 2
 		
 		trigger = {
-            owns_or_non_sovereign_subject_of = 1061
+            1061 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
+        provinces_to_highlight = {
+            province_id = 1061
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			add_mil_power = 150
 			add_prestige = 10
@@ -50,8 +54,15 @@ wwu_wildhammer_column_1 = {
 		position = 3
 		
 		trigger = {
-            1061 = { religion = ROOT }
+            1061 = { 
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = ROOT 
+            }
 		}
+        provinces_to_highlight = {
+            province_id = 1061
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			add_adm_power = 200
 			add_country_modifier = {
@@ -66,8 +77,15 @@ wwu_wildhammer_column_1 = {
 		position = 4
 		
 		trigger = {
-			1061 = { development = 30 }
+			1061 = { 
+                country_or_non_sovereign_subject_holds = ROOT
+                development = 30 
+            }
 		}
+        provinces_to_highlight = {
+            province_id = 1061
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 		effect = {
 			set_capital = 1061
 			1061 = {
@@ -85,15 +103,15 @@ wwu_wildhammer_column_1 = {
 		required_missions = { wwu_capital_grim_batol_a28 }
 		position = 5
 		
-		provinces_to_highlight = {
-		    area = area_grim_batol
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_grim_batol = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+		    area = area_grim_batol
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_prestige = 20
@@ -108,15 +126,15 @@ wwu_wildhammer_column_1 = {
 		required_missions = { wwu_glory_of_wildhammer_clan_a28 }
 		position = 6
 		
-		provinces_to_highlight = {
-		    area = area_ironforge
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_ironforge = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+		    area = area_ironforge
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_stability = 1
@@ -142,15 +160,6 @@ wwu_wildhammer_column_2 = {
 		icon = mission_gnoll
 		required_missions = {  }
 		
-		provinces_to_highlight = {
-			OR = {
-                area = area_maw_of_madness
-                area = area_dragonmaw_port
-				area = area_thundermar
-				area = area_kirkhaven
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
             area_thundermar = {
 				type = all
@@ -168,6 +177,15 @@ wwu_wildhammer_column_2 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			OR = {
+                area = area_maw_of_madness
+                area = area_dragonmaw_port
+				area = area_thundermar
+				area = area_kirkhaven
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_adm_power = 100
@@ -188,13 +206,6 @@ wwu_wildhammer_column_2 = {
 		required_missions = { wwu_secure_northern_highlands_a28 }
 		position = 2
 		
-		provinces_to_highlight = {
-			OR = {
-                area = area_obsidian_scar
-                area = area_twilight_shore
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
             area_obsidian_scar = {
 				type = all
@@ -204,6 +215,13 @@ wwu_wildhammer_column_2 = {
 			    type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			OR = {
+                area = area_obsidian_scar
+                area = area_twilight_shore
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_mil_power = 100
@@ -221,15 +239,15 @@ wwu_wildhammer_column_2 = {
 		required_missions = { wwu_secure_foothold_in_south_highlands_a28 }
 		position = 3
 		
-		provinces_to_highlight = {
-			area = area_bastion_of_twilight
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
             area_bastion_of_twilight = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			area = area_bastion_of_twilight
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_mil_power = 100
@@ -251,6 +269,13 @@ wwu_wildhammer_column_2 = {
 			NOT = { exists = BD3 }
 			NOT = { exists = BD4 }
 		}
+		provinces_to_highlight = {
+			OR = {
+                owned_by = BD2
+                owned_by = BD3
+                owned_by = BD4
+            }
+		}
 		effect = {
 			add_country_modifier = {
                 name = mission_corrupt_dragonflights_a28
@@ -263,14 +288,6 @@ wwu_wildhammer_column_2 = {
 		required_missions = { wwu_hunting_down_the_harbringers_of_corruption_a28 }
 		position = 5
 		
-		provinces_to_highlight = {
-		    OR = {
-		        area = area_blackrock_mountain
-				area = area_dun_modr
-				area = area_fuselight
-			}
-			NOT = { religion = ROOT }
-		}
 		trigger = {
 		    area_blackrock_mountain = {
 				type = all
@@ -284,6 +301,14 @@ wwu_wildhammer_column_2 = {
 				type = all
 				religion = ROOT
 			}			
+		}
+		provinces_to_highlight = {
+		    OR = {
+		        area = area_blackrock_mountain
+				area = area_dun_modr
+				area = area_fuselight
+			}
+			NOT = { religion = ROOT }
 		}
 		effect = {	    
 			add_country_modifier = {
@@ -308,13 +333,6 @@ wwu_wildhammer_column_3 = {
 		icon = mission_drake_red
 		required_missions = { }
 		
-		provinces_to_highlight = {
-		    OR = {
-			    area = area_grim_batol
-				area = area_vermillion_redoubt
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_grim_batol = {
 				type = all
@@ -324,6 +342,13 @@ wwu_wildhammer_column_3 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+		    OR = {
+			    area = area_grim_batol
+				area = area_vermillion_redoubt
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_mil_power = 100
@@ -344,13 +369,6 @@ wwu_wildhammer_column_3 = {
 		required_missions = { wwu_prepare_the_wetlands_front_a28 }
 		position = 2
 		
-		provinces_to_highlight = {
-		    OR = {
-			    area = area_dun_modr
-				area = area_lower_wetlands
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_dun_modr = {
 				type = all
@@ -360,6 +378,13 @@ wwu_wildhammer_column_3 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+		    OR = {
+			    area = area_dun_modr
+				area = area_lower_wetlands
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_mil_power = 150
@@ -374,14 +399,22 @@ wwu_wildhammer_column_3 = {
 		required_missions = { wwu_wetlands_offensive_a28 }
 		position = 3
 		
-        trigger = {
-            P22 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+        trigger = { 
+            if = {
+                limit = {
+                    exists = P22
+                }
+                P22 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = P22
+        }
 		effect = {
 			add_dip_power = 100
 			add_prestige = 10
@@ -389,7 +422,13 @@ wwu_wildhammer_column_3 = {
                 name = mission_relations_aerie_peak_a28
                 duration = -1
             }
-			create_alliance = P22
+            
+            if = {
+                limit = {
+                    exists = P22
+                }
+                create_alliance = P22
+            }
 	    }
 	}
 	wwu_restore_relations_with_ironforge_a28 = {
@@ -398,13 +437,21 @@ wwu_wildhammer_column_3 = {
 		position = 4
 		
         trigger = {
-            A29 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = A29
+                }
+                A29 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A29
+        }
 		effect = {
 			add_dip_power = 200
 			add_prestige = 10
@@ -412,7 +459,13 @@ wwu_wildhammer_column_3 = {
                 name = mission_relations_ironforge_a28
                 duration = -1
             }
-			create_alliance = A29
+            
+            if = {
+                limit = {
+                    exists = A29
+                }
+                create_alliance = A29
+            }
 	    }
 	}
 	
@@ -422,14 +475,21 @@ wwu_wildhammer_column_3 = {
 		position = 5
 		
         trigger = {
-            A16 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = A16
+                }
+                A16 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
-			NOT = { is_rival = A16 }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A16
+        }
 		effect = {
 			add_dip_power = 150
 			add_country_modifier = {
@@ -453,6 +513,20 @@ wwu_wildhammer_column_3 = {
 		required_missions = { wwu_human_allies_a28 }
 		position = 6
 		
+		trigger = {
+			area_aerie_peak = {
+				type = all
+				country_or_non_sovereign_subject_holds = P22
+			}
+			area_troll_lowlands = {
+				type = all
+				country_or_non_sovereign_subject_holds = P22
+			}
+			area_lonesome_den = {
+				type = all
+				country_or_non_sovereign_subject_holds = P22
+			}
+		}
         provinces_to_highlight = {
 		    OR = {
 			    area = area_aerie_peak
@@ -460,20 +534,6 @@ wwu_wildhammer_column_3 = {
 				area = area_lonesome_den
 			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-		trigger = {
-			area_aerie_peak = {
-				type = all
-				owned_by = P22
-			}
-			area_troll_lowlands = {
-				type = all
-				owned_by = P22
-			}
-			area_lonesome_den = {
-				type = all
-				owned_by = P22
-			}
 		}
 		effect = {
 			add_dip_power = 200
@@ -508,15 +568,15 @@ wwu_wildhammer_column_4 = {
 		required_missions = { wwu_restore_relations_with_ironforge_a28 }
 		position = 5
 		
-		provinces_to_highlight = {
-			area = area_uldaman
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
 		trigger = {
 			area_uldaman = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+		provinces_to_highlight = {
+			area = area_uldaman
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_adm_power = 100

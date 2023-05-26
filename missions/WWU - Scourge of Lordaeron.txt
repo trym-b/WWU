@@ -17,29 +17,38 @@ wwu_scourge_of_lordaeron_column_1 = {
                 		
 		trigger = {
             # Andorhal
-            688 = {
-                owned_by = ROOT
-            }
+            688 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 688
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
-			add_country_modifier = {
-                name = remains_of_kelthuzad
-                duration = -1
+            # Silver Hand
+            if = {
+                limit = {
+                    exists = SVH
+                }
+                SVH = {
+                    country_event = { id = silver_hand.4 }
+                }
+            }
+            
+			688 = {
+                owner = {
+                    add_country_modifier = {
+                        name = remains_of_kelthuzad
+                        duration = -1
+                    }
+                }
             }
             
 			SVH = {
-				country_event = { id = silver_hand.4 }
-			}
-			every_owned_province = {
-				limit = {
-					owned_by = SVH
-				}
-				add_permanent_claim = ROOT
-			}
+                every_owned_province = {
+                    add_permanent_claim = ROOT
+                    add_permanent_claim = P11
+                }
+            }
 		}
 	}
     
@@ -52,12 +61,11 @@ wwu_scourge_of_lordaeron_column_1 = {
         
 		trigger = {
             # Thas'alah Roots
-			1039 = { 
-                owned_by = ROOT 
-            }
+			1039 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 1039
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
 			1039 = {
@@ -95,27 +103,29 @@ wwu_scourge_of_lordaeron_column_2 = {
             }
             else = {
                 region_tirisfal_glades = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 region_eastern_plaguelands = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
                 region_western_plaguelands = {
-                    owned_by = ROOT
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
 		}
+        provinces_to_highlight = {
+            is_capital_of = A08
+        }
 		effect = {
             if = {
                 limit = {
                     exists = A08
                 }
                 hidden_effect = {
-                    every_owned_province = {
-                        limit = {
-                            owned_by = A08
+                    A08 = {
+                        every_owned_province = {
+                            add_permanent_claim = ROOT
                         }
-                        add_permanent_claim = ROOT
                     }
                 }
                 
@@ -219,6 +229,9 @@ wwu_scourge_of_lordaeron_column_2 = {
                 stability = 3
             }
 		}
+        provinces_to_highlight = {
+            owned_by = A25
+        }
 		effect = {
             if = {
                 limit = {
@@ -251,12 +264,12 @@ wwu_scourge_of_lordaeron_column_2 = {
 		trigger = {
 			area_thalassian_pass = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		provinces_to_highlight = {
             area = area_thalassian_pass
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             if = {
@@ -287,12 +300,12 @@ wwu_scourge_of_lordaeron_column_2 = {
 		trigger = {
 			area_silvermoon = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		provinces_to_highlight = {
             area = area_silvermoon
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             if = {
@@ -327,13 +340,11 @@ wwu_scourge_of_lordaeron_column_2 = {
 
 		trigger = {
             # Sunwell
-			2991 = { 
-                owned_by = ROOT
-            }
+			2991 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		provinces_to_highlight = {
             province_id = 2991
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             remove_country_modifier = remains_of_kelthuzad
@@ -404,13 +415,13 @@ wwu_scourge_of_lordaeron_column_3 = {
                 		
 		trigger = {
 			area_sanctum_of_the_moon = {
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			area_andaroth = {
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			area_tranquillien = {
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		provinces_to_highlight = {
@@ -419,7 +430,7 @@ wwu_scourge_of_lordaeron_column_3 = {
 				area = area_andaroth
 				area = area_tranquillien
 			}
-            NOT = { owned_by = ROOT }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = {
             if = {
