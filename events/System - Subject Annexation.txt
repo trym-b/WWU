@@ -1,0 +1,136 @@
+namespace = wwu_subject_annexation
+
+# Integration finished for [current_subject.GetName]
+country_event = {
+	id = wwu_subject_annexation.1
+	title = wwu_subject_annexation.1.title
+	desc = wwu_subject_annexation.1.desc
+	picture = BESTIARY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_subject_annexation.1.option.a
+		
+        hidden_effect = {
+            remove_country_modifier = subject_annexation_started__overlord
+            event_target:current_subject = {
+                remove_country_modifier = subject_annexation_started__subject
+            }
+        }
+        inherit = event_target:current_subject
+	}
+}
+
+# Integration Progress for [current_subject.GetName]
+country_event = {
+	id = wwu_subject_annexation.10
+	title = wwu_subject_annexation.10.title
+	desc = wwu_subject_annexation.10.desc
+	picture = BESTIARY_eventPicture
+
+	is_triggered_only = yes
+
+    immediate = {
+        hidden_effect = {
+            export_to_variable = {
+                which = diplomatic_loss
+                value = trigger_value:diplomatic_reputation
+                who = ROOT
+            }
+            
+            # Round < 1 Diplomatic Reputation to 1 (if it is still positive).
+            if = {
+                limit = {
+                    NOT = {
+                        check_variable = {
+                            which = diplomatic_loss
+                            value = 1
+                        }
+                    }
+                    check_variable = {
+                        which = diplomatic_loss
+                        value = 0
+                    }
+                }
+                
+                set_variable = {
+                    which = diplomatic_loss
+                    value = 1
+                }
+            }
+        }
+    }
+
+	option = {
+		name = wwu_subject_annexation.10.option.hasten
+		
+        trigger = {
+            dip_power = 100
+        }
+        
+        add_dip_power = -100
+        
+        event_target:current_subject = {
+            change_variable = {
+                which = integration_progress
+                value = 10
+            }
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_subject_annexation.11 }
+        }
+	}
+    option = {
+		name = wwu_subject_annexation.10.option.hasten.invalid
+		
+        trigger = {
+            NOT = { dip_power = 100 }
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_subject_annexation.11 }
+        }
+        
+        custom_tooltip = HASTEN_INTEGRATION_LACK_TT
+	}
+    option = {
+		name = wwu_subject_annexation.10.option.cancel
+		
+        remove_country_modifier = subject_annexation_started__overlord
+        event_target:current_subject = {
+            remove_country_modifier = subject_annexation_started__subject
+        }
+	}
+    option = {
+		name = wwu_subject_annexation.10.option.update
+		
+        hidden_effect = {
+            country_event = { id = wwu_subject_annexation.11 }
+        }
+        
+        ai_chance = { factor = 0 }
+	}
+    option = {
+		name = wwu_subject_annexation.10.option.x
+		
+	}
+}
+
+# Menu Loop
+country_event = {
+	id = wwu_subject_annexation.11
+	title = wwu_subject_annexation.11.title
+	desc = wwu_subject_annexation.11.desc
+	picture = BESTIARY_eventPicture
+
+	is_triggered_only = yes
+    hidden = yes
+    
+	option = {
+		name = wwu_subject_annexation.11.option.a
+		
+        country_event = { id = wwu_subject_annexation.10 }
+	}
+}

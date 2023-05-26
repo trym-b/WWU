@@ -56,7 +56,131 @@ manage_vassal = {
 }
 
 #---------------------------------------
-# Misc
+# Integrate Subject
+#---------------------------------------
+integrate_subject = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = integrate_subject_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        FROM = {    
+            NOT = { has_country_modifier = subject_annexation_started__subject }
+            is_subject_of = ROOT
+            
+            # These are the new subjects that this systems adds integration for.
+            OR = {
+                is_subject_of_type = demonic_vassal
+                is_subject_of_type = scourge_vassal
+            }
+        }
+	}
+    
+	is_allowed = {
+        NOT = { has_country_modifier = subject_annexation_started__overlord }
+        FROM = {
+            has_opinion = {
+                who = ROOT
+                value = 180
+            }
+            NOT = { liberty_desire = 50 }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - integrate_subject"
+            }
+        }
+        
+        hidden_effect = {
+            FROM = {
+                add_country_modifier = {
+                    name = subject_annexation_started__subject
+                    duration = -1
+                }
+                
+                set_variable = {
+                    which = integration_progress
+                    value = 0
+                }
+                export_to_variable = {
+                    which = integration_goal
+                    value = trigger_value:total_development
+                }
+            }
+            
+            add_country_modifier = {
+                name = subject_annexation_started__overlord
+                duration = -1
+            }
+        }
+	}
+    
+	on_decline = {
+        
+	}
+	
+	ai_acceptance = {
+        
+	}
+	ai_will_do = {
+        always = no # AI won't use this for now
+	}
+}
+
+#---------------------------------------
+# View Integration Progress
+#---------------------------------------
+view_subject_integration = {
+	category = relation
+	alert_index = 3
+	alert_tooltip = view_subject_integration_tooltip
+	
+	require_acceptance = no
+	
+	is_visible = {
+        FROM = { 
+            has_country_modifier = subject_annexation_started__subject
+        }
+	}
+    
+	is_allowed = {
+        always = yes
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - view_subject_integration"
+            }
+        }
+        
+        hidden_effect = {
+            FROM = {
+                save_event_target_as = current_subject
+            }
+        }
+        country_event = { id = wwu_subject_annexation.10 }
+	}
+    
+	on_decline = {
+        
+	}
+	
+	ai_acceptance = {
+        
+	}
+	ai_will_do = {
+        always = no # AI won't use this for now
+	}
+}
+
+#---------------------------------------
+# Abandon Subject
 #---------------------------------------
 abandon_subject = {
 	category = relation
