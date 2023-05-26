@@ -637,8 +637,7 @@ NCountry = {
 	ESTATE_CROWNLAND_FROM_DEV = 0.2,			-- How much crownland you gain from developing a province.
 
 	ESTATE_PRIVILEGE_ADMIN_COST = 0,			-- Cost of granting a privilege
-	ESTATE_PRIVILEGES_MAX_CONCURRENT = 8,		-- Max. number of privileges active at the same time
-	--- WWU: increased to match new privilege slot count
+	ESTATE_PRIVILEGES_MAX_CONCURRENT = 6,		-- Max. number of privileges active at the same time
 
 	ESTATE_AGENDA_DEFAULT_MAX_ACTIVE_DAYS = 7300, -- Default max amount of days an agenda can stay active
 	ESTATE_AGENDA_ABOUT_TO_EXPIRE_WARNING = 1095, -- How many days it should start warning for agenda about to expire
