@@ -7,7 +7,7 @@ country_event = {
 	desc = gnoll_battle_tactics.desc
 	picture = GNOLL_eventPicture
     
-	fire_only_once = no
+	is_triggered_only = yes
 	
 	trigger = {
 		culture_group = culture_group_gnoll
@@ -20,7 +20,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 	
 	option = {
@@ -30,20 +30,20 @@ country_event = {
 			limit = {
 				war_with = ROOT
 			}
-			add_manpower = -1
+			add_manpower = -10
 		}
 	}
 	
 	option = {
 		name = gnoll_battle_tactics.opt2
 		
-		add_war_exhaustion = -1
+		add_war_exhaustion = -2
 	}
 	
 	option = {
 		name = gnoll_battle_tactics.opt3
 		
-		add_army_tradition = 5
+		add_army_tradition = 10
 	}
 }
 
@@ -54,6 +54,8 @@ country_event = {
 	desc = gnoll_kidnapping.desc
 	picture = HOGGER_eventPicture
 	
+    is_triggered_only = yes
+    
 	trigger = {
 		culture_group = culture_group_gnoll
         any_neighbor_country = {
@@ -62,7 +64,7 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 
 	immediate = {
@@ -118,49 +120,66 @@ country_event = {
 	desc = gnoll_rotten_meat.desc
 	picture = MASSIVE_GNOLL_eventPicture
     
-	fire_only_once = no
+	is_triggered_only = yes
 	
 	trigger = {
 		culture_group = culture_group_gnoll
 	}
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 	
 	option = {
 		name = gnoll_rotten_meat.opt1
 		
-		random = { 
-			chance = 10
-			kill_heir = { }
-		}
-		random = { 
-			chance = 10
-            kill_ruler_or_debuff_immortal_ruler = yes
-		}
-		random = { 
-			chance = 10
-			remove_consort = yes
-		}
-		random = { 
-			chance = 10
-			kill_advisor = random
-		}
+        random_list = {
+            10 = {
+                trigger = {
+                    has_heir = yes
+                }
+                
+                kill_heir = { }
+            }
+            10 = {
+                trigger = {
+                    has_regency = no
+                }
+                
+                kill_ruler_or_debuff_immortal_ruler = yes
+            }
+            10 = {
+                trigger = {
+                    has_consort = yes
+                }
+                
+                remove_consort = yes
+            }
+            10 = {
+                trigger = {
+                    has_advisor = yes
+                }
+                
+                kill_advisor = random
+            }
+            10 = {
+                add_stability = -1
+            }
+        }
 	}
 	
 	option = {
 		name = gnoll_rotten_meat.opt2
 		
 		random_owned_province = {
-            add_devastation = -5
-            add_unrest = 5
+            add_devastation = -33
+            add_unrest = 10
         }
 	}
 	
 	option = {
 		name = gnoll_rotten_meat.opt3
 		
-		add_prestige = -10
+		add_prestige = -33
 	}
 }

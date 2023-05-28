@@ -1,0 +1,393 @@
+namespace = wwu_missionaries
+
+# Province Event Manager
+country_event = {
+	id = wwu_missionaries.100
+	title = wwu_missionaries.100.title
+	desc = wwu_missionaries.100.desc
+	picture = JUNGLE_GIANTS_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            has_missionary = yes
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = { has_missionary = yes }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_missionaries.1.option.a
+        
+        event_target:target_province = {
+            random_list = {
+                10 = { province_event = { id = wwu_missionaries.1 } }
+                10 = { province_event = { id = wwu_missionaries.2 } }
+                10 = { province_event = { id = wwu_missionaries.3 } }
+                10 = { province_event = { id = wwu_missionaries.4 } }
+                10 = { province_event = { id = wwu_missionaries.5 } }
+                10 = { province_event = { id = wwu_missionaries.6 } }
+                10 = { province_event = { id = wwu_missionaries.7 } }
+                10 = { province_event = { id = wwu_missionaries.8 } }
+            }
+        }
+	}
+}
+
+# Missionary Falls Ill
+province_event = {
+	id = wwu_missionaries.1
+	title = wwu_missionaries.1.title
+	desc = wwu_missionaries.1.desc
+	picture = SHADOW_MADNESS_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		NOT = { has_building = wow_temple_1 }
+		NOT = { has_province_modifier = missionary_falls_ill }
+		owner = { adm_power = 25 }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.1.option.a
+		
+		ai_chance = { factor = 65 }
+		owner = {
+			add_adm_power = -25
+			add_piety = 0.05
+		}
+	}
+	option = {
+		name = wwu_missionaries.1.option.b
+		
+		ai_chance = { factor = 35 }
+		add_province_modifier = {
+			name = "missionary_falls_ill"
+			duration = 1825
+		}
+		owner = { add_piety = -0.05 }
+	}
+}
+
+# Religious Resistance
+province_event = {
+	id = wwu_missionaries.2
+	title = wwu_missionaries.2.title
+	desc = wwu_missionaries.2.desc
+	picture = SHADOW_BOLT_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		is_core = ROOT
+		any_neighbor_province = {
+			owned_by = ROOT
+			has_owner_religion = no
+		}
+		NOT = { has_province_modifier = missionary_failure }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.2.option.a
+		
+		ai_chance = { factor = 55 }
+		heretic_rebels = 1
+		owner = {
+			add_piety = 0.05
+		}
+	}
+	option = {
+		name = wwu_missionaries.2.option.b
+		
+		ai_chance = { factor = 45 }
+		add_province_modifier = {
+			name = "missionary_failure"
+			duration = 1825
+		}
+		owner = {
+			add_piety = -0.05
+		}
+	}
+}
+
+# Native Attack
+province_event = {
+	id = wwu_missionaries.3
+	title = wwu_missionaries.3.title
+	desc = wwu_missionaries.3.desc
+	picture = RIVER_CROCOLISK_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		is_core = ROOT
+		any_neighbor_province = {
+			native_size = 1
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.3.option.a
+		
+		ai_chance = { factor = 55 }
+		infantry = owner
+		owner = {
+			add_treasury = -25
+			add_piety = 0.05
+		}
+	}
+	option = {
+		name = wwu_missionaries.3.option.b
+		
+		ai_chance = { factor = 45 }
+		
+        heretic_rebels = 1
+        
+		owner = { add_piety = -0.05 }
+	}
+}
+
+# Religious Uproar
+province_event = {
+	id = wwu_missionaries.4
+	title = wwu_missionaries.4.title
+	desc = wwu_missionaries.4.desc
+	picture = REPENTANCE_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		is_city = yes
+		is_core = ROOT
+		owner = { NOT = { advisor = theologian } }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.4.option.a
+		
+		ai_chance = { factor = 55 }
+		infantry = owner
+		add_unrest = 10
+		owner = { add_piety = 0.05 }		
+	}
+	option = {
+		name = wwu_missionaries.4.option.b
+		
+		ai_chance = { factor = 45 }
+		random = {
+			chance = 40
+			heretic_rebels = 1
+		}
+		owner = { add_piety = -0.05 }
+	}
+}
+
+# Wicked Rumours
+province_event = {
+	id = wwu_missionaries.5
+	title = wwu_missionaries.5.title
+	desc = wwu_missionaries.5.desc
+	picture = PATIENT_ASSASSIN_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		owner = { NOT = { adm = 2 } }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.5.option.a
+		
+		ai_chance = { factor = 55 }
+		random = {
+			chance = 60
+			add_unrest = 15
+		}
+		owner = { add_piety = -0.05 }
+	}
+	option = {
+		name = wwu_missionaries.5.option.b
+		
+		ai_chance = { factor = 45 }
+		owner = { add_treasury = -25 }
+		owner = { add_piety = 0.05 }
+	}
+}
+
+# Religious Tensions
+province_event = {
+	id = wwu_missionaries.6
+	title = wwu_missionaries.6.title
+	desc = wwu_missionaries.6.desc
+	picture = NATALIE_SELINE_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+
+	trigger = {
+		has_missionary = yes
+		has_owner_culture = no
+		NOT = { has_province_modifier = religious_tensions }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.6.option.a
+		
+		ai_chance = { factor = 45 }
+		
+        add_unrest = 10
+	}
+	option = {
+		name = wwu_missionaries.6.option.b
+		
+		ai_chance = { factor = 55 }
+		add_province_modifier = {
+			name = "religious_tensions"
+			duration = 365
+		}
+	}
+}
+
+# Neighbour Disrupting the Peace
+province_event = {
+	id = wwu_missionaries.7
+	title = wwu_missionaries.7.title
+	desc = wwu_missionaries.7.desc
+	picture = MIRROR_IMAGE_2_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		owner = { is_at_war = no }
+		any_neighbor_province = {
+			owner = {
+				is_at_war = yes
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.7.option.a
+		
+		ai_chance = { factor = 20 }
+		
+        add_unrest = -3
+        
+		owner = {
+			add_years_of_income = -0.2
+			add_piety = 0.05
+		}
+	}
+	option = {
+		name = wwu_missionaries.7.option.b
+		
+		ai_chance = { factor = 50 }
+		
+        add_unrest = -3
+        
+		owner = {
+			add_adm_power = -20
+			add_piety = 0.1
+		}
+	}
+	option = {
+		name = wwu_missionaries.7.option.c
+		
+		ai_chance = { factor = 30 }
+		
+        add_unrest = 5
+	}
+}
+
+# Missionary Activities
+province_event = {
+	id = wwu_missionaries.8
+	title = wwu_missionaries.8.title
+	desc = wwu_missionaries.8.desc
+	picture = MASS_DISPEL_eventPicture
+    goto = ROOT
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		has_missionary = yes
+		owner = {
+			advisor = theologian
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_missionaries.8.option.a
+		
+		ai_chance = { factor = 20 }
+		owner = { add_adm_power = -33 }
+		owner = { add_piety = 0.1 }		
+	}
+	option = {
+		name = wwu_missionaries.8.option.b
+		
+		ai_chance = { factor = 50 }
+		random = {
+			chance = 30
+			add_unrest = 3
+		}		
+		owner = { add_piety = -0.05 }		
+	}
+}

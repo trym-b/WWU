@@ -1,0 +1,1306 @@
+namespace = wwu_government
+
+# On Death election
+country_event = {
+	id = wwu_government.1
+	title = wwu_government.1.title
+	desc = wwu_government.1.desc
+	picture = ROYAL_TOMB_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		government = republic
+        NOT = { has_states_general_mechanic = yes }
+		NOT = { has_government_attribute = lottery_election }
+        NOT = { has_reform = despotic_republic_reform }
+	}
+	
+	option = {
+		name = wwu_government.1.option.a
+
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 4
+			dip = 1
+			mil = 1
+			hide_skills = yes
+		}
+		
+        add_republican_tradition = 5
+        
+		if = {
+			limit = { has_estate = estate_peasants }
+				
+			add_estate_loyalty = {
+				estate = estate_peasants
+				loyalty = 5
+			}
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = wwu_government.1.option.b
+
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 1
+			dip = 4
+			mil = 1
+			hide_skills = yes
+		}
+
+        add_republican_tradition = 5
+        
+		if = {
+			limit = { has_estate = estate_traders }
+				
+			add_estate_loyalty = {
+				estate = estate_traders
+				loyalty = 5
+			}
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = wwu_government.1.option.c
+
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 1
+			dip = 1
+			mil = 4
+			hide_skills = yes
+		}
+		
+        add_republican_tradition = 5
+        
+		if = {
+			limit = { has_estate = estate_nobility }
+				
+			add_estate_loyalty = {
+				estate = estate_nobility
+				loyalty = 5
+			}
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = wwu_government.2.option.d
+		trigger = {
+			has_government_attribute = enables_family_candidate_for_elections
+		}
+		ai_chance = { factor = 10 }
+        
+		add_scaled_republican_tradition = -4
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+        define_ruler = {
+            mil = -2
+            adm = -2
+            dip = -2
+            min_age = 30
+            max_age = 50
+            name = "lastname"
+            random_gender = yes # Allows random gender for republics
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                has_reform = wwu_election_cycle_puppet_masters
+            }
+            
+            country_event = { id = wwu_government.13 days = 7 }
+        }
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_spoiled_victor_event
+            }
+            
+            country_event = { id = wwu_pirate_government.1 days = 7 }
+        }
+    }
+}
+
+# On Term Election
+country_event = {
+	id = wwu_government.2
+	title = wwu_government.2.title
+    desc = wwu_government.2.desc
+	picture = ANCIENT_MAGE_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		government = republic
+        NOT = { has_states_general_mechanic = yes }
+		NOT = { has_government_attribute = lottery_election }
+        NOT = { has_reform = despotic_republic_reform }
+	}
+
+	option = {
+		name = wwu_government.2.option.a
+		ai_chance = { factor = 20 }
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 4
+			dip = 1
+			mil = 1
+			hide_skills = yes
+		}
+        
+        add_republican_tradition = 5
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_pirate_retirement
+            }
+            
+            award_pirate_retirement_bonuses = yes
+        }
+	}
+	option = {
+		name = wwu_government.2.option.b
+		ai_chance = { factor = 20 }
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 1
+			dip = 4
+			mil = 1
+			hide_skills = yes
+		}
+
+        add_republican_tradition = 5
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_pirate_retirement
+            }
+            
+            award_pirate_retirement_bonuses = yes
+        }
+	}
+	option = {
+		name = wwu_government.2.option.c
+		ai_chance = { factor = 20 }
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+			adm = 1
+			dip = 1
+			mil = 4
+			hide_skills = yes
+		}
+        
+        add_republican_tradition = 5
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_pirate_retirement
+            }
+            
+            award_pirate_retirement_bonuses = yes
+        }
+	}
+    option = {
+		name = wwu_government.2.option.d
+        
+		trigger = {
+			has_regency = no
+		}
+		ai_chance = { 
+			factor = 60
+			modifier = {
+				factor = 0
+				NOT = { republican_tradition = 25 }
+			}	
+			modifier = {
+				factor = 0.5
+				NOT = { republican_tradition = 50 }
+			}				
+			modifier = {
+				factor = 0.5
+				NOT = { republican_tradition = 75 }
+			}	
+			modifier = {
+				factor = 2.0
+				republican_tradition = 90
+			}		
+		}
+		custom_tooltip = remains_ruler_tt
+		change_adm = 1
+		change_dip = 1
+		change_mil = 1
+        
+		if = {
+			limit = {
+				OR = {
+                    has_reform = noble_republic_reform
+                    has_reform = mercantile_republic_reform
+                }
+				NOT = { republican_tradition = 20 }
+			}
+			add_government_reform = despotic_republic_reform	
+		}	
+        
+		add_scaled_republican_tradition = -10
+        
+		random_list = {
+			10 = {
+				add_adm_power = 50
+			}
+			10 = {
+				add_dip_power = 50
+			}
+			10 = {
+				add_mil_power = 50
+			}
+		}
+	}
+    option = {
+		name = wwu_government.2.option.e
+		trigger = {
+			has_government_attribute = enables_family_candidate_for_elections
+		}
+		ai_chance = { factor = 10 }
+        
+		add_scaled_republican_tradition = -4
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+        define_ruler = {
+            mil = -2
+            adm = -2
+            dip = -2
+            min_age = 30
+            max_age = 50
+            name = "lastname"
+            random_gender = yes # Allows random gender for republics
+        }
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_pirate_retirement
+            }
+            
+            award_pirate_retirement_bonuses = yes
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                has_reform = wwu_election_cycle_puppet_masters
+            }
+            
+            country_event = { id = wwu_government.13 days = 7 }
+        }
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_spoiled_victor_event
+            }
+            
+            country_event = { id = wwu_pirate_government.1 days = 7 }
+        }
+    }
+}
+
+# On Replace Governor
+country_event = {
+	id = wwu_government.3
+	title = wwu_government.3.title
+	desc = wwu_government.3.desc
+	picture = QUEST_FOR_EPIC_LOOT_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_government.3.option.a
+		ai_chance = { factor = 20 }
+		FROM = {
+            # This prevents the normal succession event from occuring
+            hidden_effect = {
+                set_country_flag = skip_next_succession_event
+            }
+            
+			define_ruler = {
+                adm = 4
+                dip = 1
+                mil = 1
+                hide_skills = yes
+            }
+			set_ruler_flag = appointed_by_overlord
+            
+            add_republican_tradition = 5
+		}
+	}
+	option = {
+		name = wwu_government.3.option.b
+		ai_chance = { factor = 20 }
+		FROM = {
+            # This prevents the normal succession event from occuring
+            hidden_effect = {
+                set_country_flag = skip_next_succession_event
+            }
+        
+			define_ruler = {
+                adm = 1
+                dip = 4
+                mil = 1
+                hide_skills = yes
+            }
+			set_ruler_flag = appointed_by_overlord
+            
+            add_republican_tradition = 5
+		}
+	}
+	option = {
+		name = wwu_government.3.option.c
+		ai_chance = { factor = 20 }
+		FROM = {
+            # This prevents the normal succession event from occuring
+            hidden_effect = {
+                set_country_flag = skip_next_succession_event
+            }
+            
+			define_ruler = {
+                adm = 1
+                dip = 1
+                mil = 4
+                hide_skills = yes
+            }
+			set_ruler_flag = appointed_by_overlord
+            
+            add_republican_tradition = 5
+		}
+	}
+    
+    after = {
+        if = {
+            limit = {
+                has_reform = wwu_election_cycle_puppet_masters
+            }
+            
+            country_event = { id = wwu_government.13 days = 7 }
+        }
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_spoiled_victor_event
+            }
+            
+            country_event = { id = wwu_pirate_government.1 days = 7 }
+        }
+    }
+}
+
+# Ruled by Despot
+country_event = {
+	id = wwu_government.4
+	title = wwu_government.4.title
+	desc = wwu_government.4.desc
+	picture = EYE_FOR_AN_EYE_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		government = republic
+		is_colonial_nation = no
+		OR = {
+			AND = {
+				NOT = { republican_tradition = 40 }
+				has_dlc = "Res Publica"
+			}
+			NOT = { republican_tradition = 1 }
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+        
+		modifier = {
+			factor = 1.5
+			NOT = { republican_tradition = 30 }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { republican_tradition = 20 }
+		}
+		modifier = {
+			factor = 1.5
+			NOT = { republican_tradition = 10 }
+		}		
+		modifier = {
+			factor = 99
+			NOT = { republican_tradition = 1 }
+		}			
+	}
+	
+	immediate = {
+		hidden_effect = {
+			add_government_reform = despotic_republic_reform
+		}
+	}
+	
+	option = {
+		name = wwu_government.4.option.a
+		tooltip = {
+			add_government_reform = despotic_republic_reform
+		}
+	}
+}
+
+# Lottery Election
+country_event = {
+	id = wwu_government.5
+	title = wwu_government.5.title
+	desc = wwu_government.5.desc
+	picture = ANCIENT_POWER_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = lottery_election
+	}
+	
+	immediate = {
+		hidden_effect = {
+			define_exiled_ruler = {
+                exiled_as = lottery_candidate_a_@ROOT
+                random_gender = yes
+                min_age = 50
+                max_age = 75
+                adm = 2
+                dip = -1
+                mil = -1
+                option = 0
+            }
+            define_exiled_ruler = {
+                exiled_as = lottery_candidate_b_@ROOT
+                min_age = 50
+                max_age = 75
+                adm = -1
+                dip = 2
+                mil = -1
+                random_gender = yes
+                option = 1
+            }
+            define_exiled_ruler = {
+                exiled_as = lottery_candidate_c_@ROOT
+                min_age = 50
+                max_age = 75
+                adm = -1
+                dip = -1
+                mil = 2
+                random_gender = yes
+                option = 2
+            }
+		}
+	}
+	
+	option = {
+		name = wwu_government.5.option.a
+		ai_chance = {
+			factor = 0
+		}
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		set_ruler = lottery_candidate_a_@ROOT
+		add_republican_tradition = -25
+		custom_tooltip = lottery_candidate_bonus_one
+	}
+	option = {
+		name = wwu_government.5.option.b
+		ai_chance = {
+			factor = 0
+		}
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		set_ruler = lottery_candidate_b_@ROOT
+		add_republican_tradition = -25
+		custom_tooltip = lottery_candidate_bonus_one
+	}
+	option = {
+		name = wwu_government.5.option.c
+		ai_chance = {
+			factor = 0
+		}
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		set_ruler = lottery_candidate_c_@ROOT
+		add_republican_tradition = -25
+		custom_tooltip = lottery_candidate_bonus_one
+	}
+	option = { # lottery
+		name = wwu_government.5.option.d
+		ai_chance = {
+			factor = 90
+		}
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		random_list = {
+			33 = { 
+				set_ruler = lottery_candidate_a_@ROOT 
+			}
+			33 = { 
+				set_ruler = lottery_candidate_b_@ROOT 
+			}
+			33 = { 
+				set_ruler = lottery_candidate_c_@ROOT 
+			}
+		}
+		custom_tooltip = lottery_candidate_bonus_plural
+	}
+	option = {
+		name = wwu_government.5.option.e
+		trigger = {
+			has_government_attribute = enables_family_candidate_for_elections
+		}
+		ai_chance = { factor = 10 }
+        
+        add_republican_tradition = -15
+		
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+            min_age = 30
+            max_age = 50
+            mil = -1
+            adm = -1
+            dip = -1
+            name = "lastname"
+            random_gender = yes
+        }
+	}
+    
+    after = {
+		clear_exiled_ruler = lottery_candidate_a_@ROOT
+		clear_exiled_ruler = lottery_candidate_b_@ROOT
+		clear_exiled_ruler = lottery_candidate_c_@ROOT
+		
+        if = {
+            limit = {
+                has_reform = wwu_election_cycle_puppet_masters
+            }
+            
+            country_event = { id = wwu_government.13 days = 7 }
+        }
+        
+        if = {
+            limit = {
+                has_government_attribute = enables_spoiled_victor_event
+            }
+            
+            country_event = { id = wwu_pirate_government.1 days = 7 }
+        }
+    }
+}
+
+# "Call for Abdication"
+country_event = {
+	id = wwu_government.6
+	title = wwu_government.6.title
+	desc = wwu_government.6.desc
+	picture = ACOLYTE_OF_PAIN_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		OR = {
+            has_reform = ancient_theocracy_reform
+            has_reform = ancient_clan_reform
+        }
+        
+		months_of_ruling = 120
+        
+        NOT = { legitimacy_equivalent = 50 }
+        NOT = { stability = 1 }
+        
+		if = {
+            limit = {
+                has_estate = estate_nobility
+            }
+            
+            NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 35
+				}
+			}
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+        
+		# Stability
+		modifier = {
+			NOT = { stability = 0 }
+			
+			factor = 1.1
+		}
+		modifier = {
+			NOT = { stability = -1 }
+			
+			factor = 1.1
+		}
+		modifier = {
+			NOT = { stability = -2 }
+			
+			factor = 1.1
+		}
+		# Elders
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 40
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 35
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 30
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 25
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 20
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 15
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 10
+				}
+			}
+			factor = 1.05
+		}
+		modifier = {
+			NOT = { 
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 5
+				}
+			}
+			factor = 1.05
+		}
+		
+	}
+	
+	option = {
+		name = wwu_government.6.option.a
+		
+		exile_ruler_as = {
+            name = old_ruler 
+        }
+		custom_tooltip = ancient_ruler_abdicates_tt
+	}
+	
+	option = {
+		name = wwu_government.6.option.b
+		
+		add_prestige = -10
+		add_stability = -1
+		ai_chance = { factor = 0 }
+	}
+}
+
+# "Court Disposition"
+country_event = {
+	id = wwu_government.8
+	title = wwu_government.8.title
+	desc = wwu_government.8.desc
+	picture = ELISE_STARSEEKER_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_court_disposition_event
+	}
+
+	option = {
+		name = wwu_government.8.option.a
+        
+		add_ruler_modifier = {
+            name = administrative_council
+            duration = -1
+        }
+	}
+	
+	option = {
+		name = wwu_government.8.option.b
+        
+        add_ruler_modifier = {
+            name = diplomatic_council
+            duration = -1
+        }
+	}
+	
+	option = {
+		name = wwu_government.8.option.c
+        
+		add_ruler_modifier = {
+            name = war_council
+            duration = -1
+        }
+	}
+	
+	option = {
+		name = wwu_government.8.option.d
+        
+		add_ruler_modifier = {
+            name = religious_council
+            duration = -1
+        }
+	}
+    
+    option = {
+		name = wwu_government.8.option.e
+        
+		add_ruler_modifier = {
+            name = occult_council
+            duration = -1
+        }
+	}
+}
+
+# "Decadence"
+country_event = {
+	id = wwu_government.9
+	title = wwu_government.9.title
+	desc = wwu_government.9.desc
+	picture = APEXIS_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_decadence_event
+	}
+
+    # Drunk and Disorderly
+	option = {
+		name = wwu_government.9.option.a
+        
+		add_ruler_modifier = {
+            name = decadence_drunk
+            duration = 3650
+        }
+	}
+	
+    # Degenerate Behavior
+	option = {
+		name = wwu_government.9.option.b
+        
+        add_ruler_modifier = {
+            name = decadence_degenerate
+            duration = 3650
+        }
+	}
+	
+    # Gluttonous Appetite
+	option = {
+		name = wwu_government.9.option.c
+        
+		add_ruler_modifier = {
+            name = decadence_glutton
+            duration = 3650
+        }
+	}
+	
+    # Vain Attitude
+	option = {
+		name = wwu_government.9.option.d
+        
+		add_ruler_modifier = {
+            name = decadence_vain
+            duration = -1
+        }
+	}
+}
+
+# "Heir Apparent"
+country_event = {
+	id = wwu_government.10
+	title = wwu_government.10.title
+	desc = wwu_government.10.desc
+	picture = YOUNG_ANDUIN_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_heir_apparent_event
+	}
+
+    # Support the elder heir
+	option = {
+		name = wwu_government.10.option.a
+        
+		define_heir = {
+            age = 40
+            claim = 100
+            hide_skills = yes
+        }
+	}
+	
+    # Continue with the current heir
+	option = {
+		name = wwu_government.10.option.b
+        
+        add_heir_claim = -50
+        add_stability = -1
+	}
+}
+
+# "Gavelkind Succession"
+country_event = {
+	id = wwu_government.11
+	title = wwu_government.11.title
+	desc = wwu_government.11.desc
+	picture = ANCESTRAL_KNOWLEDGE_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_gavelkind_succession_event
+	}
+
+    # Grant shares of the estate fully
+	option = {
+		name = wwu_government.11.option.a
+        
+		every_owned_province = {
+            limit = {
+                NOT = { is_capital = yes }
+            }
+            add_local_autonomy = 50
+        }
+	}
+	
+    # Grant shares of the estate in part
+	option = {
+		name = wwu_government.11.option.b
+        
+        every_owned_province = {
+            limit = {
+                NOT = { is_capital = yes }
+            }
+            add_local_autonomy = 25
+        }
+        
+        add_stability = -1
+	}
+    
+    # Refuse to grant shares of the estate
+	option = {
+		name = wwu_government.11.option.c
+        
+        add_stability = -6
+	}
+}
+
+# "Puppet Ruler"
+country_event = {
+	id = wwu_government.12
+	title = wwu_government.12.title
+	desc = wwu_government.12.desc
+	picture = CUTPURSE_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_puppet_event
+	}
+
+	option = {
+		name = wwu_government.12.option.a
+        
+		add_ruler_modifier = {
+            name = puppet_ruler
+            duration = -1
+        }
+	}
+}
+
+# "Power Brokers"
+country_event = {
+	id = wwu_government.13
+	title = wwu_government.13.title
+	desc = wwu_government.13.desc
+	picture = MAIDEN_OF_THE_LAKE_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_bonus_on_relection_event
+	}
+    
+    immediate = {
+        # Remove old focus upon re-election
+        hidden_effect = {
+            remove_country_modifier = power_broker_espionage
+            remove_country_modifier = power_broker_foreign_influence
+            remove_country_modifier = power_broker_conquest
+            remove_country_modifier = power_broker_domination
+        }
+    }
+
+	option = {
+		name = wwu_government.13.option.a
+        
+		add_ruler_modifier = {
+            name = power_broker_espionage
+            duration = -1
+        }
+	}
+    
+    option = {
+		name = wwu_government.13.option.b
+        
+		add_ruler_modifier = {
+            name = power_broker_foreign_influence
+            duration = -1
+        }
+	}
+    
+    option = {
+		name = wwu_government.13.option.c
+        
+		add_ruler_modifier = {
+            name = power_broker_conquest
+            duration = -1
+        }
+	}
+    
+    option = {
+		name = wwu_government.13.option.d
+        
+		add_ruler_modifier = {
+            name = power_broker_domination
+            duration = -1
+        }
+	}
+}
+
+# "Organisational Focus"
+country_event = {
+	id = wwu_government.14
+	title = wwu_government.14.title
+	desc = wwu_government.14.desc
+	picture = MAGIC_TOME_eventPicture
+
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government_attribute = enables_organisational_focus_event
+	}
+    
+    immediate = {
+        # Remove old focus upon re-firing
+        hidden_effect = {
+            remove_country_modifier = organisational_focus_espionage
+            remove_country_modifier = organisational_focus_welfare
+            remove_country_modifier = organisational_focus_economy
+            remove_country_modifier = organisational_focus_politics
+            remove_country_modifier = organisational_focus_military
+            remove_country_modifier = organisational_focus_diplomacy
+        }
+    }
+
+	option = {
+		name = wwu_government.14.option.a
+        
+		add_ruler_modifier = {
+            name = organisational_focus_espionage
+            duration = 1825
+        }
+	}
+    
+    option = {
+		name = wwu_government.14.option.b
+        
+		add_ruler_modifier = {
+            name = organisational_focus_welfare
+            duration = 1825
+        }
+	}
+    
+    option = {
+		name = wwu_government.14.option.c
+        
+		add_ruler_modifier = {
+            name = organisational_focus_economy
+            duration = 1825
+        }
+	}
+    
+    option = {
+		name = wwu_government.14.option.d
+        
+		add_ruler_modifier = {
+            name = organisational_focus_politics
+            duration = 1825
+        }
+	}
+    
+    option = {
+		name = wwu_government.14.option.e
+        
+		add_ruler_modifier = {
+            name = organisational_focus_military
+            duration = 1825
+        }
+	}
+    
+    option = {
+		name = wwu_government.14.option.f
+        
+		add_ruler_modifier = {
+            name = organisational_focus_diplomacy
+            duration = 1825
+        }
+	}
+}
+
+# Tribal Vote
+country_event = {
+	id = wwu_government.15
+	title = wwu_government.15.title
+	desc = wwu_government.15.desc
+	picture = GOREHOWL_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_government_attribute = enables_tribal_vote
+	}
+	
+    immediate = {
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+    }
+    
+	option = {
+		name = wwu_government.15.option.a
+
+		define_ruler = {
+			adm = 4
+			dip = 2
+			mil = 2
+			hide_skills = yes
+            age = 40
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+    option = {
+		name = wwu_government.15.option.b
+
+		define_ruler = {
+			adm = 3
+			dip = 3
+			mil = 3
+			hide_skills = yes
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+    option = {
+		name = wwu_government.15.option.c
+
+		define_ruler = {
+			adm = 1
+			dip = 1
+			mil = 5
+			hide_skills = yes
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+    after = {
+        # Fire these after this event since they should only apply to the actual new ruler
+        country_event = { id = wwu_ruler_education.1 days = 7 } # The Education of [Root.Monarch.GetName]
+        country_event = { id = wwu_government.8 days = 7 }      # Court Disposition
+    }
+}
+
+# Warsong!
+country_event = {
+	id = wwu_government.16
+	title = wwu_government.16.title
+	desc = wwu_government.16.desc
+	picture = GROMMASH_HELLSCREAM_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_government_attribute = enables_warsong_event
+	}
+	
+	option = {
+		name = wwu_government.16.option.a
+
+		add_country_modifier = {
+            name = song_of_unity
+            duration = 1800
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    option = {
+		name = wwu_government.16.option.b
+
+		add_country_modifier = {
+            name = song_of_war
+            duration = 1800
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    option = {
+		name = wwu_government.16.option.c
+
+		add_country_modifier = {
+            name = song_of_victory
+            duration = 1800
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    option = {
+		name = wwu_government.16.option.d
+
+		add_country_modifier = {
+            name = song_of_battle
+            duration = 1800
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+}
+

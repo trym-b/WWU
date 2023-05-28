@@ -1,15 +1,16 @@
 namespace = cataclysm
 
+# Discontent in the Horde
 country_event = {
 	id = cataclysm.1
 	title = cataclysm.1.title
 	desc = cataclysm.1.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = discontent_in_the_horde }
 		current_age = age_burning_legion # Change to Shattering when implemented
 		has_country_modifier = head_of_horde
 		any_ally = {
@@ -18,79 +19,90 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 24
+		days = 1
 	}
 	
 	immediate = {
-		# pick & save random allied horde country
-		random_ally = {
-			limit = {
-				has_country_modifier = member_of_horde
-			}
-			save_event_target_as = fellow_horde
-		}
+        hidden_effect = {
+            set_global_flag = discontent_in_the_horde 
+            # pick & save random allied horde country
+            random_ally = {
+                limit = {
+                    has_country_modifier = member_of_horde
+                }
+                save_event_target_as = fellow_horde
+            }
+        }
 	}
 	
 	# If random picked allied horde country has male ruler
 	option = {
-		# "Watch your clever mouth, prick!"
 		name = cataclysm.1.opt1
+        
 		trigger = {
 			event_target:fellow_horde = { is_female = no }
 		}
+        
 		event_target:fellow_horde = {
 			add_opinion = {
 				who = ROOT
 				modifier = insulted
 			}
 		}
+        
 		add_prestige = 10
 	}
 	option = {
-		# "Watch your clever mouth, bitch!"
 		name = cataclysm.1.opt2
+        
 		trigger = {
 			event_target:fellow_horde = { is_female = yes }
 		}
+        
 		event_target:fellow_horde = {
 			add_opinion = {
 				who = ROOT
 				modifier = insulted
 			}
 		}
+        
 		add_prestige = 10
 	}
 	option = {
-		# Break royal ties
 		name = cataclysm.1.opt3
+        
 		trigger = {
 			event_target:fellow_horde = {
 				marriage_with = ROOT
 			}
 		}
+        
 		event_target:fellow_horde = {
 			ROOT = {
 				break_marriage = PREV
 			}
 		}
+        
 		add_prestige = 20
 	}
 	option = {
-		# Let this aggression slide
 		name = cataclysm.1.opt4
+        
 		add_prestige = -10
 	}
 }
+
+# Duel of Honour
 country_event = {
 	id = cataclysm.2
 	title = cataclysm.2.title
 	desc = cataclysm.2.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = duel_of_honour }
 		current_age = age_burning_legion # Change to Shattering when implemented
 		has_country_modifier = head_of_horde
 		any_ally = {
@@ -99,22 +111,25 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 12
+		days = 1
 	}
 	
 	immediate = {
-		# pick & save random allied horde country
-		random_ally = {
-			limit = {
-				has_country_modifier = member_of_horde
-			}
-			save_event_target_as = fellow_horde
-		}
+        hidden_effect = {
+            set_global_flag = duel_of_honour
+            # pick & save random allied horde country
+            random_ally = {
+                limit = {
+                    has_country_modifier = member_of_horde
+                }
+                save_event_target_as = fellow_horde
+            }
+        }
 	}
 	
 	option = {
-		# Accept duel.
 		name = cataclysm.2.opt1
+        
 		random_list = {
 			2 = {
 				event_target:fellow_horde = {
@@ -148,38 +163,48 @@ country_event = {
 	}
 	
 	option = {
-		# Refuse duel.
 		name = cataclysm.2.opt2
+        
 		add_prestige = -30
+        
 		ai_chance = { 
 			factor = 10
 		}
 	}
 }
+
+# Life purpose fullfilled!
 country_event = {
 	id = cataclysm.3
 	title = cataclysm.3.title
 	desc = cataclysm.3.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
-	trigger = {
+	trigger = { 
+        NOT = { has_global_flag = forsaken_purpose }
 		current_age = age_burning_legion # Change to Shattering when implemented
 		tag = P14
+        NOT = { exists = P11 }
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = forsaken_purpose
+        }
+    }
 	
 	option = {
-		# Suicide?
 		name = cataclysm.3.opt1
 		ai_chance = { 
 			factor = 100
 		}
+        
 		custom_tooltip = cataclysm.3.opt1.tooltip
 		hidden_effect = {
 			country_event = { 
@@ -189,72 +214,70 @@ country_event = {
 	}
 	
 	option = {
-		# Don't suicide
 		name = cataclysm.3.opt1
+        
 		ai_chance = { 
 			factor = 0
 		}
+        
 		add_ruler_personality = babbling_buffoon_personality
 		add_prestige = 5
 	}
 }
+
+# In The Void!
 country_event = {
 	id = cataclysm.4
 	title = cataclysm.4.title
 	desc = cataclysm.4.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = yes
 	is_triggered_only = yes
     
-	trigger = {
-	}
-	
 	mean_time_to_happen = {
 		days = 1
 	}
-	
-	immediate = {
-	}
-	
+    
 	option = {
 		name = cataclysm.4.opt1
 		
-		ai_chance = { 
-			factor = 0.96
-		}
 		add_country_modifier = { 
 			name = pact_with_valkyr
 			duration = -1
+		}
+        
+		ai_chance = { 
+			factor = 0.96
 		}
 	}
 	
 	option = {
 		name = cataclysm.4.opt2
 		
-		ai_chance = { 
-			factor = 0.04
-		}
 		custom_tooltip = cataclysm.4.opt2.tooltip
 		hidden_effect  = {
 			exile_ruler_as = {
                 name = dead_forsaken_ruler
             }
 		}
+        
+		ai_chance = { 
+			factor = 0.04
+		}
 	}
 }
+
+# Power to Reanimate
 country_event = {
 	id = cataclysm.5
 	title = cataclysm.5.title
 	desc = cataclysm.5.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = no
-	is_triggered_only = no
+	is_triggered_only = yes
     
 	trigger = {
+        tag = P14
 		has_country_modifier = pact_with_valkyr
 		ROOT = {
 			NOT = {
@@ -264,40 +287,37 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
+        
 		modifier = {
-			factor = 0.8
+			factor = 1.2
 			NOT = { manpower_percentage = 0.40 }
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1.2
 			NOT = { manpower_percentage = 0.30 }
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1.2
 			NOT = { manpower_percentage = 0.20 }
 		}
 		modifier = {
-			factor = 0.8
+			factor = 1.2
 			NOT = { manpower_percentage = 0 }
 		}
-	}
-	
-	immediate = {
 	}
 	
 	option = {
 		name = cataclysm.5.opt1
 		
-		ai_chance = { 
-			factor = 33
-		}
 		add_prestige = -5
 		add_yearly_manpower = 0.3
+        
 		random_owned_province = {
 			add_unrest = 2
 			add_devastation = 2
 		}
+        
 		every_ally = {
 			limit = {
 				NOT = {
@@ -313,18 +333,20 @@ country_event = {
 				modifier = dishonorable_act
 			}
 		}
+        
+		ai_chance = { 
+			factor = 33
+		}
 	}
 	option = {
 		name = cataclysm.5.opt2
 		
-		ai_chance = { 
-			factor = 33
-		}
 		every_province = {
 			limit = {
 				controlled_by = ROOT
 				NOT = { owned_by = ROOT }
 			}
+            
 			add_devastation = 2
 			ROOT = {
 				add_yearly_manpower = 0.1
@@ -337,6 +359,7 @@ country_event = {
 				}
 			}
 		}
+        
 		every_ally = {
 			limit = {
 				NOT = {
@@ -352,6 +375,10 @@ country_event = {
 				modifier = dishonorable_act
 			}
 		}
+        
+		ai_chance = { 
+			factor = 33
+		}
 	}
 	option = {
 		name = cataclysm.5.opt3
@@ -362,25 +389,30 @@ country_event = {
 		add_prestige = 2
 	}
 }
+
+# Migration of Gilneans
 country_event = {
 	id = cataclysm.6
 	title = cataclysm.6.title
 	desc = cataclysm.6.desc
 	picture = ORC_FORT_eventPicture
-	#picture = ORC_THRONE_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
 	
-	trigger = {
+	trigger = { 
+        NOT = { has_global_flag = migration_of_gilneans }
 		NOT = { exists = A12 }
 		has_country_modifier = member_of_alliance
 	}
 	
 	mean_time_to_happen = {
-		months = 1
+		days = 1
 	}
 	
 	immediate = {
+        hidden_effect = {
+            set_global_flag = migration_of_gilneans 
+        }
 	}
 	
 	option = {

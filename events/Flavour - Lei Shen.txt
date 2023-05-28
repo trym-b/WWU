@@ -7,9 +7,10 @@ country_event = {
 	desc = wwu_lei_shen.1.desc
 	picture = ZANDALAR_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_country_flag = zandalari_allies }
         tag = P92 # Shan'ze
         
         region_isle_of_thunder = {
@@ -19,8 +20,14 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = zandalari_allies 
+        }
+    }
     
 	option = {
 		name = wwu_lei_shen.1.option.a
@@ -55,17 +62,24 @@ country_event = {
 	desc = wwu_lei_shen.2.desc
 	picture = ZANDALAR_DOOR_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_country_flag = prophet_kharzul }
         tag = P92 # Shan'ze
         
         alliance_with = A78 # Zandalar
 	}
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = prophet_kharzul 
+        }
+    }
     
 	option = {
 		name = wwu_lei_shen.2.option.a
@@ -165,18 +179,20 @@ country_event = {
 	desc = wwu_lei_shen.4.desc
 	picture = THRONE_OF_THUNDER_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
+        NOT = { has_country_flag = lei_shen_submission }
         exists = P92
         P92 = {
             has_country_modifier = restoration_of_lei_shen
         }
         NOT = { tag = P92 }
         primary_culture = culture_mogu
-        NOT = { has_country_flag = lei_shen_submission }
 	}
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
     
     immediate = {

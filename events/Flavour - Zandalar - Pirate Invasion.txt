@@ -7,6 +7,8 @@ country_event = {
 	desc = wwu_zandalar_pirate_invasion.1.desc
 	picture = ZANDALAR_10_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         tag = A78 # Zandalar
         NOT = { has_global_flag = zemlan_invasion }
@@ -250,15 +252,22 @@ country_event = {
 	desc = wwu_zandalar_pirate_invasion.2.desc
 	picture = ZANDALAR_10_eventPicture
     
-    fire_only_once = yes
+    is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = port_of_zemlan_cleared }
         tag = A78 # Zandalar
         has_country_flag = victory_over_zemlan
     }
         
     mean_time_to_happen = { 
         days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = port_of_zemlan_cleared
+        }
     }
         
     option = {
@@ -298,9 +307,10 @@ country_event = {
 	desc = wwu_zandalar_pirate_invasion.3.desc
 	picture = ZANDALAR_10_eventPicture
     
-	fire_only_once = yes
+	is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = humiliated_by_zemlan }
         tag = A78 # Zandalar
         has_country_flag = humilated_by_zemlan
 	}
@@ -308,7 +318,13 @@ country_event = {
     mean_time_to_happen = { 
         days = 1
     }
-
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = humiliated_by_zemlan
+        }
+    }
+    
     option = {
         name = wwu_zandalar_pirate_invasion.3.option.a
         

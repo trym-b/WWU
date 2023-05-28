@@ -156,7 +156,8 @@ country_event = {
 	title = wwu_fel.13.title
 	desc = wwu_fel.13.desc
 	picture = ANCIENT_SECRETS_eventPicture
-	
+	goto = target_province
+    
     is_triggered_only = yes
     
 	trigger = {
@@ -169,6 +170,19 @@ country_event = {
         }
 	}
     
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    religion = fel
+                    has_cardinal = no
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
 	option = {
 		name = wwu_fel.13.option.a
         
@@ -177,11 +191,7 @@ country_event = {
 	option = {
 		name = wwu_fel.13.option.b
         
-        random_owned_province = {
-            limit = { 
-                religion = fel
-                has_cardinal = no
-            }
+        event_target:target_province = {
             add_cardinal = yes
         }
 	}
@@ -193,7 +203,8 @@ country_event = {
 	title = wwu_fel.20.title
 	desc = wwu_fel.20.desc
 	picture = BLOOD_IMP_eventPicture
-	
+	goto = target_province
+    
     is_triggered_only = yes
     
 	trigger = {
@@ -201,13 +212,22 @@ country_event = {
         reform_desire = 1.0
 	}
     
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    controlled_by = ROOT
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
 	option = {
 		name = wwu_fel.20.option.a
         
-        random_owned_province = {
-            limit = {
-                controlled_by = ROOT
-            }
+        event_target:target_province = {
             infantry = ROOT
             infantry = ROOT
             infantry = ROOT

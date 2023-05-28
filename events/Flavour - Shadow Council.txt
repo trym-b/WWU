@@ -8,15 +8,22 @@ country_event = {
 	picture = GULDAN_eventPicture
     
 	major = yes
-    fire_only_once = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = shadow_council_setup }
         tag = B88
 	}
 	
 	mean_time_to_happen = {
 		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = shadow_council_setup 
+        }
+    }
     
 	option = {
 		name = wwu_shadow_council.1.option.a
@@ -70,7 +77,10 @@ country_event = {
 	desc = wwu_shadow_council.2.desc
 	picture = HORDE_TRIAL_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
+        NOT = { has_global_flag = shadow_council_claim_horde }
         ai = no
         tag = B88
         any_country = {
@@ -81,6 +91,12 @@ country_event = {
 	mean_time_to_happen = {
 		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = shadow_council_claim_horde
+        }
+    }
     
 	option = {
 		name = wwu_shadow_council.2.option.a

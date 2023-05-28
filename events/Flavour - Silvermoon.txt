@@ -8,11 +8,12 @@ country_event = {
 	picture = KAELTHAS_eventPicture
 	
 	major = yes
+    is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = government_of_silvermoon }
         tag = A91
         current_age = age_burning_legion
-        NOT = { has_global_flag = government_of_silvermoon }
     }
 	
     mean_time_to_happen = {
@@ -123,9 +124,10 @@ country_event = {
 	desc = wwu_silvermoon.2.desc
 	picture = BLOOD_KNIGHT_eventPicture
 	
-	fire_only_once = yes
+	is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_country_flag = blood_knights_added }
         tag = A91
         2991 = {
             NOT = { has_province_modifier = power_of_the_sunwell }
@@ -135,6 +137,12 @@ country_event = {
     mean_time_to_happen = {
 		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = blood_knights_added 
+        }
+    }
     
 	option = {
 		name = wwu_silvermoon.2.option.a
@@ -150,9 +158,10 @@ country_event = {
 	desc = wwu_silvermoon.3.desc
 	picture = SURAMAR_eventPicture
 	
-	fire_only_once = yes
+	is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_country_flag = blood_knights_removed }
         has_faction = faction_blood_knights
         2991 = {
             has_province_modifier = power_of_the_sunwell
@@ -162,6 +171,12 @@ country_event = {
     mean_time_to_happen = {
 		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = blood_knights_removed 
+        }
+    }
     
 	option = {
 		name = wwu_silvermoon.3.option.a

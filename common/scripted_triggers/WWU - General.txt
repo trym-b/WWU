@@ -128,52 +128,6 @@ ally_or_subject_or_overlord_with = {
 	}
 }
 
-was_at_same_side_of_war = {
-	OR = {
-		any_country = {
-			$who$ = {
-				has_country_flag = declared_war_to@PREV
-			}
-			$with$ = {
-				has_country_flag = declared_war_to@PREV
-			}
-		}
-		any_country = {
-			has_country_flag = declared_war_to@$who$
-			has_country_flag = declared_war_to@$with$
-		}
-	}
-}
-
-was_at_same_side_of_war_against = {
-	OR = {
-		AND = {
-			$who$ = {
-				has_country_flag = declared_war_to@$against$
-			}
-			$with$ = {
-				has_country_flag = declared_war_to@$against$
-			}
-			ally_or_subject_or_overlord_with = {
-				who = $who$
-				with = $with$
-			}
-		}
-		AND = {
-			$against$ = {
-				has_country_flag = declared_war_to@$who$
-			}
-			$against$ = {
-				has_country_flag = declared_war_to@$with$
-			}
-			ally_or_subject_or_overlord_with = {
-				who = $who$
-				with = $with$
-			}
-		}
-	}
-}
-
 same_region = {
 	$prov_1$ = {
 		region_for_scope_province = {

@@ -1,0 +1,577 @@
+# VAWSER: update the state of Azjol Nerub's tunnel network based on their mission completion
+update_nerubian_tunnel_network = {
+    if = {
+        limit = {
+            tag = P74
+        }
+        
+        every_owned_province = {
+            limit = {
+                NOT = { has_province_modifier = nerubian_tunnel_0 }
+                culture_group = culture_group_nerubian
+                development = 10
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_one_four }
+                    region = region_icecrown
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_two_four }
+                    region = region_wintergrasp
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_three_four }
+                    region = region_borean_tundra
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_one_four_extra }
+                    region = region_sholazar_basin
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_two_five }
+                    region = region_dragonblight
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_two_four }
+                    region = region_wintergrasp
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_two_six }
+                    superregion = northrend_superregion
+                    NOT = { region = region_azjol_nerub }
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+            
+            if = {
+                limit = {
+                    owner = { has_country_flag = nerubian_tunnel_end }
+                    superregion = northrend_superregion
+                }
+                
+                add_province_triggered_modifier = nerubian_tunnel_0
+            }
+        }
+    }
+}
+
+improve_nerubian_tunnel_province = {
+    hidden_effect = {
+        add_country_modifier = {
+            name = dig_tunnel_cooldown
+            duration = 365
+            hidden = yes
+        }
+    }
+    
+    add_adm_power = -50
+    add_dip_power = -50
+    add_mil_power = -50
+    
+    if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 0
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_0
+			add_province_triggered_modifier = nerubian_tunnel_1
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 1
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_1
+			add_province_triggered_modifier = nerubian_tunnel_2
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 2
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_2
+			add_province_triggered_modifier = nerubian_tunnel_3
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 3
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_3
+			add_province_triggered_modifier = nerubian_tunnel_4
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 4
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_4
+			add_province_triggered_modifier = nerubian_tunnel_5
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 5
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_5
+			add_province_triggered_modifier = nerubian_tunnel_6
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 6
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_6
+			add_province_triggered_modifier = nerubian_tunnel_7
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 7
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_7
+			add_province_triggered_modifier = nerubian_tunnel_8
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 8
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_8
+			add_province_triggered_modifier = nerubian_tunnel_9
+        }
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = {
+                which = nerubian_tunnel_$NUMBER$_depth
+                value = 9
+            }
+        }
+        
+        $PROVINCE_ID$ = {
+			remove_province_triggered_modifier = nerubian_tunnel_9
+			add_province_triggered_modifier = nerubian_tunnel_10
+        }
+    }
+    
+    # Increment depth variable
+    if = {
+        limit = {
+            NOT = {
+                check_variable = {
+                    which = nerubian_tunnel_$NUMBER$_depth
+                    value = 10
+                }
+            }
+        }
+        change_variable = {
+            which = nerubian_tunnel_$NUMBER$_depth
+            value = 1
+        }
+    }
+}
+
+# VAWSER: 
+select_combined_nerubian_knowledge_modifier = {
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_1"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_2"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_3"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_4"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_5"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_6"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_7"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_8"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_a
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_9"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_10"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_11"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_12"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_13"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_14"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_15"
+            duration = -1  
+        }
+    }
+
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_16"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_17"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_b
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_18"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_19"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_20"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_a
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_21"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_22"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_23"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_b
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_24"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_a
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_25"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_b
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_26"
+            duration = -1  
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = nerubian_tooltip_10_c
+            has_country_flag = nerubian_tooltip_11_c
+            has_country_flag = nerubian_tooltip_12_c
+        }
+        add_country_modifier = {
+            name = "nerubian_archives_power_27"
+            duration = -1  
+        }
+    }
+}

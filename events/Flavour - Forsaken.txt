@@ -1,19 +1,20 @@
 namespace = wwu_forsaken
 
-#Confront Nathanos Blightcaller
+# Confront Nathanos Blightcaller
 country_event = {
     id = wwu_forsaken.3
     title = wwu_forsaken.3.title
     desc = wwu_forsaken.3.desc
     picture = HOOK_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
+        tag = P14
         P14 = {
             owns_core_province = 875
         }
     }
-
-    fire_only_once = yes
 
     mean_time_to_happen = {
         days = 1
@@ -57,13 +58,14 @@ country_event = {
     desc = wwu_forsaken.4.desc
     picture = THRONE_ROOM_eventPicture
 
-    fire_only_once = yes
+    is_triggered_only = yes
 
     trigger = {
-        NOT = {has_global_flag = send_vengance_expedition}
+        tag = P14
+        NOT = { has_global_flag = vengence_expedition_choice }
+        NOT = { has_global_flag = send_vengance_expedition }
         mission_completed = wwu_bring_the_war_to_northrend
-
-
+        
         714 = {
             is_empty = yes
             NOT = {
@@ -85,27 +87,34 @@ country_event = {
     }
 
     mean_time_to_happen = {
-        months = 12
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = vengence_expedition_choice 
+        }
     }
 
     option = {
-            name = wwu_forsaken.4.option.a
+        name = wwu_forsaken.4.option.a
 
-            714 = {
-                cede_province = ROOT
-            }
-            867 = {
-                cede_province = ROOT
-            }
-            2468 = {
-                cede_province = ROOT
-            }
+        714 = {
+            cede_province = ROOT
+        }
+        867 = {
+            cede_province = ROOT
+        }
+        2468 = {
+            cede_province = ROOT
+        }
 
-            add_treasury = -600
-            add_dip_power = -150
-                hidden_effect = {
-                    set_global_flag = send_vengance_expedition
-                }
+        add_treasury = -600
+        add_dip_power = -150
+        
+        hidden_effect = {
+            set_global_flag = send_vengance_expedition
+        }
     }
     option = {
         name = wwu_forsaken.4.option.b
@@ -119,19 +128,20 @@ country_event = {
     desc = wwu_forsaken.5.desc
     picture = WAILING_SOUL_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
-        NOT = { A96 = { exists = yes } }
-        NOT = { has_global_flag = hand_of_vengance_created}
+        NOT = { has_global_flag = hand_of_vengance_created }
+        NOT = { exists = A96 }
 
         tag = DEF
-
         owns_core_province = 714
         owns_core_province = 867
         owns_core_province = 2468
     }
 
     mean_time_to_happen = {
-        months = 1
+        days = 1
     }
 	
 	immediate = {
@@ -183,10 +193,12 @@ country_event = {
     desc = wwu_forsaken.6.desc
     picture = DEATHLORD_eventPicture
 
-    fire_only_once = yes
+    is_triggered_only = yes
 
     trigger = {
-        P13 = { alliance_with = P14}
+        NOT = { has_global_flag = koltira_deathweaver }
+        tag = P14
+        alliance_with = P13
 
         688 = {
             owned_by = ROOT
@@ -194,8 +206,15 @@ country_event = {
     }
 
     mean_time_to_happen = {
-        months = 12
+        days = 1
     }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = koltira_deathweaver 
+        }
+    }
+    
     option = {
         name = wwu_forsaken.6.option.a
         define_general = {
@@ -217,20 +236,19 @@ country_event = {
     desc = wwu_forsaken.7.desc
     picture = SILVERMOON_BALCONY_eventPicture
 
-    fire_only_once = yes
+    is_triggered_only = yes
 
     trigger = {
-        NOT = { FRT = { exists = yes } }
-
+        NOT = { has_global_flag = tranquillen_created }
+        NOT = { exists = FRT }
         tag = DEF
-
         owns_core_province = 2517
         owns_core_province = 808
         owns_core_province = 2977
     }
 
     mean_time_to_happen = {
-        months = 1
+        days = 1
     }
 
     immediate = {
@@ -325,16 +343,17 @@ country_event = {
     desc = wwu_forsaken.8.desc
     picture = SHADOWFANG_KEEP_eventPicture
 
-    fire_only_once = yes
+    is_triggered_only = yes
 
     trigger = {
+        NOT = { has_global_flag = new_stromgarde_created }
         tag = DEF
         NOT = { exists = A16 }
 		owns_core_province = 966
     }
 
     mean_time_to_happen = {
-        months = 1
+        days = 1
     }
 
     immediate = {

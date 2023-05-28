@@ -36,11 +36,12 @@ country_event = {
 	title = wwu_loa.10.title
 	desc = wwu_loa.10.desc
 	picture = GURUBASHI_BERSERKER_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
     
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
         
@@ -51,30 +52,28 @@ country_event = {
         treasury = 100
 	}
     
+	mean_time_to_happen = {
+		days = 1
+	}
+    
     immediate = {
         hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
+            random_owned_province = {
+                limit = { 
+                    NOT = { has_province_modifier = shrine_to_loa }   
+                }
+                
+                save_event_target_as = target_province
             }
         }
     }
-	
-	mean_time_to_happen = {
-		months = 120
-	}
 		
 	option = {
 		name = wwu_loa.10.option.a
 		
 		add_treasury = -100
         
-		random_owned_province = {
-			limit = { 
-                NOT = { has_province_modifier = shrine_to_loa }   
-            }
-            
+		event_target:target_province = {
 			add_permanent_province_modifier = {
 				name = shrine_to_loa
 				duration = 18250
@@ -100,26 +99,15 @@ country_event = {
 	desc = wwu_loa.11.desc
 	picture = EAGLEHORN_BOW_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
-        
 		has_any_loa = yes
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 		
 	option = {
@@ -146,26 +134,15 @@ country_event = {
 	desc = wwu_loa.12.desc
 	picture = DARKSPEAR_HUNTER_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
-        
 		has_any_loa = yes
 	}
-	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
+
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 		
 	option = {
@@ -213,26 +190,15 @@ country_event = {
 	desc = wwu_loa.13.desc
 	picture = BLADED_CULTIST_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
-        
 		has_any_loa = yes
 	}
-	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
+    
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 	
 	option = {
@@ -290,30 +256,23 @@ country_event = {
 	desc = wwu_loa.14.desc
 	picture = FIERY_BAT_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
         NOT = { has_country_modifier = loa_harmed_by_another }
         NOT = { has_country_modifier = loa_victorious_over_another }
-        
 		has_any_loa = yes
 	}
 	
 	immediate = {
         hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-            
             set_warring_loa = yes
         }
     }
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 		
 	option = {
@@ -371,11 +330,10 @@ country_event = {
 	desc = wwu_loa.15.desc
 	picture = DECIMATE_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = { 
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
-        
 		has_any_loa = yes
         
         treasury = 100
@@ -390,12 +348,6 @@ country_event = {
 	
 	immediate = {
         hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-            
             random_owned_province = {
                 save_event_target_as = own_province
                 
@@ -407,7 +359,7 @@ country_event = {
     }
 	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 		
 	option = {
@@ -454,27 +406,16 @@ country_event = {
 	desc = wwu_loa.16.desc 
 	picture = AMANI_BERSERKER_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
-        
 		has_any_loa = yes
 		has_advisor = yes
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 		
 	option = {
@@ -547,26 +488,16 @@ country_event = {
 	desc = wwu_loa.17.desc
 	picture = DEADLY_POISON_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        
-        NOT = { has_country_modifier = loa_event_cooldown }
         NOT = { has_country_modifier = loa_forbidden_worship }
 		has_any_loa = yes
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 		
 	option = {
@@ -606,25 +537,16 @@ country_event = {
 	desc = wwu_loa.18.desc
 	picture = MADAME_LAZUL_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
-        NOT = { has_country_modifier = loa_event_cooldown }
 		has_any_loa = yes
 		has_ruler_modifier = loa_forbidden_worship
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 		
 	option = {
@@ -660,31 +582,22 @@ country_event = {
 	desc = wwu_loa.19.desc
 	picture = MANA_SPRING_TOTEM_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = {
         has_estate = estate_loa
 		OR = {
             has_estate_privilege = estate_loa_overwhelming_influence
             has_estate_privilege = estate_loa_high_influence
         }
-        NOT = { has_country_modifier = loa_event_cooldown }
 		has_any_loa = yes
         any_owned_province = {
             development = 10
         }
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 120
+		days = 1
 	}
 		
 	option = {
@@ -713,30 +626,21 @@ country_event = {
 	desc = wwu_loa.20.desc
 	picture = PANTHER_eventPicture
     
+    is_triggered_only = yes
+    
 	trigger = { 
         has_estate = estate_loa
 		OR = {
             has_estate_privilege = estate_loa_overwhelming_influence
             has_estate_privilege = estate_loa_high_influence
         }
-        NOT = { has_country_modifier = loa_event_cooldown }
         
 		has_any_loa = yes
 		has_ruler_modifier = loa_forbidden_worship
 	}
 	
-	immediate = {
-        hidden_effect = {
-            add_country_modifier = {
-                name = loa_event_cooldown
-                duration = 3650
-                hidden = yes
-            }
-        }
-    }
-	
 	mean_time_to_happen = {
-		months = 360
+		days = 1
 	}
 		
 	option = {

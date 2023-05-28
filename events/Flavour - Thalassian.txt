@@ -7,9 +7,10 @@ country_event = {
 	desc = thalassian.1.desc
 	picture = SURAMAR_eventPicture
 	
-	fire_only_once = yes
+	is_triggered_only = yes
 	
 	trigger = {
+        NOT = { has_global_flag = sunwell_restored }
 		culture_group = culture_group_thalassian
 		NOT = { religion = fel }
 		NOT = { religion = shadow }
@@ -26,8 +27,14 @@ country_event = {
 	}
 	
 	mean_time_to_happen = {
-		months = 12
+		days = 1
 	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = sunwell_restored 
+        }
+    }
 	
 	option = { 
 		name = thalassian.1.option.a

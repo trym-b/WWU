@@ -1,4803 +1,860 @@
 namespace = wwu_azjol
 
+# Nerubian Tunnel Network
 country_event = {
 	id = wwu_azjol.1
 	title = wwu_azjol.1.title
 	desc = wwu_azjol.1.desc
 	picture = ANIM_NER3_eventPicture
+    
 	is_triggered_only = yes
-	#1
+    
+    #------------------------------
+    # Forlorn Tunnel
+    #------------------------------
 	option = {
-		name = "wwu_azjol.1.op1"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 1
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4786 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
+		name = wwu_azjol.1.dig.forlorn_tunnel
 
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4786 = {
+                owned_by = ROOT
+                development = 10
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 2
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4786 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 1
+            PROVINCE_ID = 4786
         }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 3
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4786 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 4
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4786 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 5
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4786 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 6
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4786 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 7
-                    }
-					
-				4786 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4786 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 8
-                    }
-					
-				4786 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4786 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 9
-                    }
-					
-				4786 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4786 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_1
-
-			hidden_effect = {
-			4786 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_1
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4786 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4786 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_1
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_1
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
     }
-	#2
-	option = {
-		name = "wwu_azjol.1.op2"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 1
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4787 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
+    option = {
+		name = wwu_azjol.1.dig.forlorn_tunnel.invalid
 
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4786 = {
+                owned_by = ROOT
+                development = 10
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 2
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4787 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 3
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4787 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 4
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4787 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 5
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4787 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 6
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4787 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 7
-                    }
-					
-				4787 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4787 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 8
-                    }
-					
-				4787 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4787 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 9
-                    }
-					
-				4787 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4787 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_2
-
-			hidden_effect = {
-			4787 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_2
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4787 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4787 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_2
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_2
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
     }
-	#3
-	option = {
-		name = "wwu_azjol.1.op3"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 1
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4788 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
+    option = {
+		name = wwu_azjol.1.dig.forlorn_tunnel.invalid
 
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4786 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 2
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4788 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 3
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4788 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 4
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4788 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 5
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4788 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 6
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4788 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 7
-                    }
-					
-				4788 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4788 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 8
-                    }
-					
-				4788 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4788 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 9
-                    }
-					
-				4788 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4788 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_3
-
-			hidden_effect = {
-			4788 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_3
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4788 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4788 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_3
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_3
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
     }
-	#4
-	option = {
-		name = "wwu_azjol.1.op4"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 1
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4789 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
+    option = {
+		name = wwu_azjol.1.dig.forlorn_tunnel.invalid
 
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4786 = {
+                owned_by = ROOT
+                development = 10
             }
+        
+            NOT = { adm_power = 50 }
+            NOT = { dip_power = 50 } 
+            NOT = { mil_power = 50 }
         }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 2
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4789 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 3
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4789 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 4
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4789 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 5
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4789 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 6
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4789 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 7
-                    }
-					
-				4789 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4789 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 8
-                    }
-					
-				4789 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4789 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 9
-                    }
-					
-				4789 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4789 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_4
-
-			hidden_effect = {
-			4789 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_4
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4789 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4789 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_4
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_4
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
     }
-	#5
-	option = {
-		name = "wwu_azjol.1.op5"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 1
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4790 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
+    
+    #------------------------------
+    # Royal Archives
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.royal_archives
 
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4787 = {
+                owned_by = ROOT
+                development = 10
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 2
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4790 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 2
+            PROVINCE_ID = 4787
         }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 3
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4790 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 4
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4790 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 5
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4790 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 6
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4790 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 7
-                    }
-					
-				4790 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4790 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 8
-                    }
-					
-				4790 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4790 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 9
-                    }
-					
-				4790 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4790 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_5
-
-			hidden_effect = {
-			4790 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_5
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4790 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4790 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_5
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_5
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
     }
-	#6
-	option = {
-		name = "wwu_azjol.1.op6"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 1
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4791 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
+    option = {
+		name = wwu_azjol.1.dig.royal_archives.invalid
 
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4787 = {
+                owned_by = ROOT
+                development = 10
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 2
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4791 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 3
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4791 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 4
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4791 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 5
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4791 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 6
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4791 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 7
-                    }
-					
-				4791 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4791 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 8
-                    }
-					
-				4791 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4791 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 9
-                    }
-					
-				4791 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4791 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_6
-
-			hidden_effect = {
-			4791 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_6
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4791 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4791 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_6
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_6
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
     }
-	#7
-	option = {
-		name = "wwu_azjol.1.op7"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 1
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4792 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
+    option = {
+		name = wwu_azjol.1.dig.royal_archives.invalid
 
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4787 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
             }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 2
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4792 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
             
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 3
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4792 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 4
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4792 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 5
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4792 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 6
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4792 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 7
-                    }
-					
-				4792 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4792 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 8
-                    }
-					
-				4792 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4792 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 9
-                    }
-					
-				4792 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4792 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_7
-
-			hidden_effect = {
-			4792 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_7
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4792 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4792 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_7
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_7
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
     }
-	#8
-	option = {
-		name = "wwu_azjol.1.op8"
-				if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 1
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_1
-				}
-				4793 = {
-				development = 10
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
+    option = {
+		name = wwu_azjol.1.dig.royal_archives.invalid
 
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_1
-			add_province_triggered_modifier = nerubian_tunnel_2}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4787 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
             }
         }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 1
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 10
-				} }
-					}
-                }
-				
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 2
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_2
-				}
-				4793 = {
-				development = 15
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_2
-			add_province_triggered_modifier = nerubian_tunnel_3}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 2
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 15
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 3
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_3
-				}
-				4793 = {
-				development = 20
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_3
-			add_province_triggered_modifier = nerubian_tunnel_4}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 3
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 20
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 4
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_4
-				}
-				4793 = {
-				development = 25
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_4
-			add_province_triggered_modifier = nerubian_tunnel_5}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 4
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 25
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 5
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_5
-				}
-				4793 = {
-				development = 30
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_5
-			add_province_triggered_modifier = nerubian_tunnel_6}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 5
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 30
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 6
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_6
-				}
-				4793 = {
-				development = 35
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_6
-			add_province_triggered_modifier = nerubian_tunnel_7}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 6
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 35
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 7
-                    }
-					
-				4793 = {
-				owned_by = ROOT
-				has_province_modifier = nerubian_tunnel_7
-				}
-				4793 = {
-				development = 40
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_7
-			add_province_triggered_modifier = nerubian_tunnel_8}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 7
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 40
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 8
-                    }
-					
-				4793 = {
-				has_province_modifier = nerubian_tunnel_8
-				owned_by = ROOT
-				}
-				4793 = {
-				development = 45
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_8
-			add_province_triggered_modifier = nerubian_tunnel_9}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 8
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 45
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 9
-                    }
-					
-				4793 = {
-				has_province_modifier = nerubian_tunnel_9
-				owned_by = ROOT
-				}
-				4793 = {
-				development = 50
-				}
-					adm_power = 35
-					dip_power = 35
-					mil_power = 35
-                }
-            
-			custom_tooltip = nerubian_prov_8
-
-			hidden_effect = {
-			4793 = {
-			remove_province_triggered_modifier = nerubian_tunnel_9
-			add_province_triggered_modifier = nerubian_tunnel_10}
-			add_adm_power = -35
-            add_dip_power = -35
-            add_mil_power = -35
-                country_event = { id = wwu_azjol.2 }
-			change_variable = {
-            which = nerubian_province_8
-            value = 1
-        }
-            }
-        }
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 9
-                    }
-					OR = {
-					NOT = { adm_power = 35 }
-					NOT = { dip_power = 35 }
-					NOT = { mil_power = 35 }
-				NOT = { 4793 = {
-				owned_by = ROOT
-				} }
-				NOT = { 4793 = {
-				development = 50
-				} }
-					}
-                }
-			custom_tooltip = nerubian_prov_8
-        }
-
-
-		if = {
-            limit = {
-                    is_variable_equal = {
-                        which = nerubian_province_8
-                        value = 10
-                    }
-					}
-		custom_tooltip = nerubian_prov_1b
-		}
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
     }
-	#back
+    
+    #------------------------------
+    # Seat of the Spider
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.seat_of_the_spider
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4788 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 3
+            PROVINCE_ID = 4788
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.seat_of_the_spider.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4788 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.seat_of_the_spider.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4788 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.seat_of_the_spider.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4788 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
+    #------------------------------
+    # Brood Pits
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.brood_pits
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4789 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 4
+            PROVINCE_ID = 4789
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.brood_pits.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4789 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.brood_pits.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4789 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.brood_pits.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4789 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
+    #------------------------------
+    # Chambers of Corruption
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.chambers_of_corruption
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4790 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 5
+            PROVINCE_ID = 4790
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.chambers_of_corruption.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4790 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.chambers_of_corruption.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4790 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.chambers_of_corruption.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4790 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
+    #------------------------------
+    # Ancient Tunnels
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.ancient_tunnels
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4791 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 6
+            PROVINCE_ID = 4791
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.ancient_tunnels.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4791 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.ancient_tunnels.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4791 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.ancient_tunnels.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4791 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
+    #------------------------------
+    # Temple of Ahn'kahet
+    #------------------------------
+    option = {
+		name = wwu_azjol.1.dig.temple_of_ahnkahet
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4792 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 7
+            PROVINCE_ID = 4792
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.temple_of_ahnkahet.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4792 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.temple_of_ahnkahet.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4792 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.temple_of_ahnkahet.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4792 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
+    #------------------------------
+    # Shadow Web Caverns
+    #------------------------------
+    # 4793
+    option = {
+		name = wwu_azjol.1.dig.shadow_web_caverns
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4793 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        improve_nerubian_tunnel_province = {
+            NUMBER = 8
+            PROVINCE_ID = 4793
+        }
+    }
+    option = {
+		name = wwu_azjol.1.dig.shadow_web_caverns.invalid
+
+        trigger = { 
+            has_country_modifier = dig_tunnel_cooldown
+            4793 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_COOLDOWN_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.shadow_web_caverns.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4793 = {
+                owned_by = ROOT
+                NOT = { development = 10 }
+            }
+            
+            # Cost
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_DEV_TT
+    }
+    option = {
+		name = wwu_azjol.1.dig.shadow_web_caverns.invalid
+
+        trigger = { 
+            NOT = { has_country_modifier = dig_tunnel_cooldown }
+            4793 = {
+                owned_by = ROOT
+                development = 10
+            }
+            
+            # Cost
+            OR = {
+                NOT = { adm_power = 50 }
+                NOT = { dip_power = 50 } 
+                NOT = { mil_power = 50 }
+            }
+        }
+        
+        custom_tooltip = NERUBIAN_DIG_PROVINCE_LACK_COST_TT
+    }
+    
 	option = {
-		name = "wwu_azjol.1.op9"
-		}
- }
+		name = wwu_azjol.1.exit
+        
+        hidden_effect = {
+            set_country_flag = skip_loop
+        }
+    }
+    
+    after = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    has_country_flag = skip_loop
+                }
+                clr_country_flag = skip_loop
+            }
+            else = {
+                country_event = { id = wwu_azjol.2 }
+            }
+        }
+    }
+}
  
+# Menu Loop
 country_event = {
 	id = wwu_azjol.2
 	title = wwu_azjol.2.title
 	desc = wwu_azjol.2.desc
 	picture = ANIM_NER3_eventPicture
+    
     hidden = yes
 	is_triggered_only = yes
+    
 	option = {
 		name = "wwu_azjol.2.op1"
-		            country_event = { id = wwu_azjol.1 }
-					}
-					}
-					
-country_event = {
-	id = wwu_azjol.3
-	title = wwu_azjol.3.title
-	desc = wwu_azjol.3.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            region = region_icecrown
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_one_four
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.3.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					region = region_icecrown
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
-country_event = {
-	id = wwu_azjol.4
-	title = wwu_azjol.4.title
-	desc = wwu_azjol.4.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            region = region_wintergrasp
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_two_four
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.4.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					region = region_wintergrasp
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
-country_event = {
-	id = wwu_azjol.5
-	title = wwu_azjol.5.title
-	desc = wwu_azjol.5.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            region = region_borean_tundra
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_three_four
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.5.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					region = region_borean_tundra
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
-country_event = {
-	id = wwu_azjol.6
-	title = wwu_azjol.6.title
-	desc = wwu_azjol.6.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            region = region_sholazar_basin
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_one_four_extra
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.6.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					region = region_sholazar_basin
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
-country_event = {
-	id = wwu_azjol.7
-	title = wwu_azjol.7.title
-	desc = wwu_azjol.7.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            region = region_dragonblight
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_two_five
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.7.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					region = region_dragonblight
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
-country_event = {
-	id = wwu_azjol.8
-	title = wwu_azjol.8.title
-	desc = wwu_azjol.8.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-            superregion = northrend_superregion
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-			NOT = {has_province_modifier = nerubian_tunnel_1}
-			NOT = {has_province_modifier = nerubian_tunnel_2}
-			NOT = {has_province_modifier = nerubian_tunnel_3}
-			NOT = {has_province_modifier = nerubian_tunnel_4}
-			NOT = {has_province_modifier = nerubian_tunnel_5}
-			NOT = {has_province_modifier = nerubian_tunnel_6}
-			NOT = {has_province_modifier = nerubian_tunnel_7}
-			NOT = {has_province_modifier = nerubian_tunnel_8}
-			NOT = {has_province_modifier = nerubian_tunnel_9}
-			NOT = {has_province_modifier = nerubian_tunnel_10}
-        }
-		has_country_flag = nerubian_tunnel_end
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.8.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					superregion = northrend_superregion
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-					NOT = {has_province_modifier = nerubian_tunnel_1}
-					NOT = {has_province_modifier = nerubian_tunnel_2}
-					NOT = {has_province_modifier = nerubian_tunnel_3}
-					NOT = {has_province_modifier = nerubian_tunnel_4}
-					NOT = {has_province_modifier = nerubian_tunnel_5}
-					NOT = {has_province_modifier = nerubian_tunnel_6}
-					NOT = {has_province_modifier = nerubian_tunnel_7}
-					NOT = {has_province_modifier = nerubian_tunnel_8}
-					NOT = {has_province_modifier = nerubian_tunnel_9}
-					NOT = {has_province_modifier = nerubian_tunnel_10}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}
-	
+        
+        country_event = { id = wwu_azjol.1 }
+    }
+}
+
+# Great Throne of Azjol'Nerub
 country_event = {
 	id = wwu_azjol.9
 	title = wwu_azjol.9.title
 	desc = wwu_azjol.9.desc
 	picture = ANIM_NER9_eventPicture
+    
 	is_triggered_only = yes
+    
 	option = {
-	name = "wwu_azjol.9.op1"
-			4788 = {
+        name = "wwu_azjol.9.op1"
+        
+        4788 = {
 			add_base_tax = 3
 			add_base_production = 3
 			add_base_manpower = 3
             add_province_triggered_modifier = nerubian_throne_a
-            }
+        }
 	}
 	option = {
-	name = "wwu_azjol.9.op2"
-			add_adm_power = -50
-			add_dip_power = -50
-			add_mil_power = -50
-			4788 = {
-			change_trade_goods = gold
+        name = "wwu_azjol.9.op2"
+    
+        add_adm_power = -50
+        add_dip_power = -50
+        add_mil_power = -50
+        4788 = {
+            change_trade_goods = gold
             add_province_triggered_modifier = nerubian_throne_b
-            }
+        }
 	}
-	}
+}
 	
+# Power of Nerubian Wisdom
 country_event = {
 	id = wwu_azjol.10
 	title = wwu_azjol.10.title
 	desc = wwu_azjol.10.desc
 	picture = ANIM_NER4_eventPicture
+    
 	is_triggered_only = yes
+    
 	option = {
-	name = "wwu_azjol.10.op1"
+        name = "wwu_azjol.10.op1"
+        
 		custom_tooltip = nerubian_tooltip_event_1_1
 		set_country_flag = nerubian_tooltip_10_a
-		hidden_effect = {
-		country_event = { id = wwu_azjol.11 }
-		}
 	}
+    
 	option = {
-	name = "wwu_azjol.10.op2"
+        name = "wwu_azjol.10.op2"
+        
 		custom_tooltip = nerubian_tooltip_event_1_2
 		set_country_flag = nerubian_tooltip_10_b
-		hidden_effect = {
-		country_event = { id = wwu_azjol.11 }
-		}
 	}
 	option = {
-	name = "wwu_azjol.10.op3"
+        name = "wwu_azjol.10.op3"
+        
 		custom_tooltip = nerubian_tooltip_event_1_3
 		set_country_flag = nerubian_tooltip_10_c
-		hidden_effect = {
-		country_event = { id = wwu_azjol.11 }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_azjol.11 }
 		}
-	}
-	}
+    }
+}
 	
+# Power of Nerubian Wisdom
 country_event = {
 	id = wwu_azjol.11
 	title = wwu_azjol.11.title
 	desc = wwu_azjol.11.desc
 	picture = ANIM_NER4_eventPicture
+    
 	is_triggered_only = yes
+    
 	option = {
-	name = "wwu_azjol.11.op1"
+        name = "wwu_azjol.11.op1"
+        
 		custom_tooltip = nerubian_tooltip_event_2_1
 		set_country_flag = nerubian_tooltip_11_a
-		hidden_effect = {
-		country_event = { id = wwu_azjol.12 }
-		}
 	}
+    
 	option = {
-	name = "wwu_azjol.10.op2"
+        name = "wwu_azjol.10.op2"
+        
 		custom_tooltip = nerubian_tooltip_event_2_2
 		set_country_flag = nerubian_tooltip_11_b
-		hidden_effect = {
-		country_event = { id = wwu_azjol.12 }
-		}
 	}
+    
 	option = {
-	name = "wwu_azjol.10.op3"
+        name = "wwu_azjol.10.op3"
+        
 		custom_tooltip = nerubian_tooltip_event_2_3
 		set_country_flag = nerubian_tooltip_11_c
-		hidden_effect = {
-		country_event = { id = wwu_azjol.12 }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_azjol.12 }
 		}
-	}
-	}
+    }
+}
 	
+# Power of Nerubian Wisdom
 country_event = {
 	id = wwu_azjol.12
 	title = wwu_azjol.12.title
 	desc = wwu_azjol.12.desc
 	picture = ANIM_NER4_eventPicture
+    
 	is_triggered_only = yes
+    
 	option = {
-	name = "wwu_azjol.12.op1"
+        name = "wwu_azjol.12.op1"
+        
 		custom_tooltip = nerubian_tooltip_event_3_1
 		set_country_flag = nerubian_tooltip_12_a
-		hidden_effect = {
-		country_event = { id = wwu_azjol.13 }
-		}
 	}
+    
 	option = {
-	name = "wwu_azjol.12.op2"
+        name = "wwu_azjol.12.op2"
+        
 		custom_tooltip = nerubian_tooltip_event_3_2
 		set_country_flag = nerubian_tooltip_12_b
-		hidden_effect = {
-		country_event = { id = wwu_azjol.13 }
-		}
 	}
+    
 	option = {
-	name = "wwu_azjol.12.op3"
+        name = "wwu_azjol.12.op3"
+        
 		custom_tooltip = nerubian_tooltip_event_3_3
 		set_country_flag = nerubian_tooltip_12_c
-		hidden_effect = {
-		country_event = { id = wwu_azjol.13 }
+	}
+    
+    after = {
+        hidden_effect = {
+            country_event = { id = wwu_azjol.13 }
 		}
-	}
-	}
+    }
+}
 	
 country_event = {
 	id = wwu_azjol.13
 	title = wwu_azjol.13.title
 	desc = wwu_azjol.13.desc
 	picture = ANIM_NER2_eventPicture
+    
 	is_triggered_only = yes
+    
 	option = {
-	name = "wwu_azjol.13.op1"
+        name = "wwu_azjol.13.op1"
+        
 		set_country_flag = nerubian_tooltip_13_events
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_1"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_2"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_3"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_4"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_5"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_6"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_7"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_8"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_a
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_9"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_10"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_11"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_12"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_13"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_14"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_15"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_16"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_17"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_b
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_18"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_19"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_20"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_a
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_21"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_22"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_23"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_b
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_24"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_a
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_25"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_b
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_26"
-                duration = -1  
-            }
-		}
-			if = {
-                limit = {
-                    has_country_flag = nerubian_tooltip_10_c
-					has_country_flag = nerubian_tooltip_11_c
-					has_country_flag = nerubian_tooltip_12_c
-                }
-				add_country_modifier = {
-                name = "nerubian_archives_power_27"
-                duration = -1  
-            }
-		}
-			add_adm_power = 150
-            add_dip_power = 150
-            add_mil_power = 150
-
+        
+        add_adm_power = 150
+        add_dip_power = 150
+        add_mil_power = 150
+        
+        select_combined_nerubian_knowledge_modifier = yes
 	}
-	}
+}
 	
-country_event = {
-	id = wwu_azjol.14
-	title = wwu_azjol.14.title
-	desc = wwu_azjol.14.desc
-	picture = ANIM_NER3_eventPicture
-	hidden = yes
-	trigger = {
-	        any_owned_province = {
-            development = 10
-			culture_group = culture_group_nerubian
-			NOT = {region = region_azjol_nerub}
-            superregion = northrend_superregion
-			NOT = {has_province_modifier = nerubian_tunnel_0}
-        }
-		has_country_flag = nerubian_two_six
-		}
-	mean_time_to_happen = {
-		months = 12
-	}
-	option = {
-	name = "wwu_azjol.7.op1"
-	            every_owned_province = {
-                limit = {
-					development = 10
-					culture_group = culture_group_nerubian
-					NOT = {region = region_azjol_nerub}
-					superregion = northrend_superregion
-					NOT = {has_province_modifier = nerubian_tunnel_0}
-                }
-                add_province_triggered_modifier = nerubian_tunnel_0
-            }
-	
-	}
-	}

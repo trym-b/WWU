@@ -7,10 +7,19 @@ country_event = {
     desc = wwu_setup_the_risen.1.desc
     picture = BALNAZZAR_eventPicture
 	
-    fire_only_once = yes
     major = yes
-    
     is_triggered_only = yes
+    
+    trigger = {
+        NOT = { exists = X01 }
+        NOT = { has_global_flag = balnazzar_reveal }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = balnazzar_reveal 
+        }
+    }
     
     option = {
         name = wwu_setup_the_risen.1.option.a

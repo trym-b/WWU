@@ -10,6 +10,8 @@ country_event = {
 	desc = wwu_player_switch.100.desc
 	picture = LICH_KING_CLOSEUP_eventPicture
 
+    is_triggered_only = yes
+
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = P11
@@ -50,6 +52,8 @@ country_event = {
 	desc = wwu_player_switch.101.desc
 	picture = LICH_KING_CLOSEUP_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = { 
         has_global_flag = enabled_player_switch_events
         exists = P52
@@ -90,6 +94,8 @@ country_event = {
 	desc = wwu_player_switch.102.desc
 	picture = SCHOLOMANCE_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = P12
@@ -130,6 +136,8 @@ country_event = {
 	desc = wwu_player_switch.103.desc
 	picture = MALGANIS_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = DDL
@@ -170,6 +178,8 @@ country_event = {
 	desc = wwu_player_switch.104.desc
 	picture = SYLVANAS_WINDRUNNER_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = P14
@@ -210,6 +220,8 @@ country_event = {
 	desc = wwu_player_switch.105.desc
 	picture = ICECROWN_CITADEL_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = P13
@@ -250,6 +262,8 @@ country_event = {
 	desc = wwu_player_switch.106.desc
 	picture = GNOMEREGAN_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = A33
@@ -290,6 +304,8 @@ country_event = {
 	desc = wwu_player_switch.107.desc
 	picture = ENTERING_ORGRIMMAR_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
         exists = A48
@@ -392,9 +408,11 @@ country_event = {
 	desc = wwu_player_switch.110.desc
 	picture = INNER_DEMON_eventPicture
 
+    is_triggered_only = yes
+    
     trigger = {
         has_global_flag = enabled_player_switch_events
-        exists = A48
+        exists = B87
         ai = no
         B87 = {
             ai = yes
@@ -421,6 +439,90 @@ country_event = {
 	}
     option = {
 		name = wwu_player_switch.110.option.b
+		
+	}
+}
+
+# Silver Hand
+country_event = {
+	id = wwu_player_switch.111
+	title = wwu_player_switch.111.title
+	desc = wwu_player_switch.111.desc
+	picture = SILVER_HAND_eventPicture
+
+    is_triggered_only = yes
+    
+    trigger = {
+        has_global_flag = enabled_player_switch_events
+        has_global_flag = silver_hand_offer
+        exists = SVH
+        ai = no
+        SVH = {
+            ai = yes
+        }
+        NOT = { has_global_flag = player_prompt_SVH }
+    }
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = player_prompt_SVH
+        }
+    }
+    
+	option = {
+		name = wwu_player_switch.111.option.a
+		
+        switch_tag = SVH
+        convert_nation_boost_to_player = yes
+	}
+    option = {
+		name = wwu_player_switch.111.option.b
+		
+	}
+}
+
+# Shadowfang
+country_event = {
+	id = wwu_player_switch.112
+	title = wwu_player_switch.112.title
+	desc = wwu_player_switch.112.desc
+	picture = SHADOWFANG_KEEP_eventPicture
+
+    is_triggered_only = yes
+    
+    trigger = {
+        has_global_flag = enabled_player_switch_events
+        has_global_flag = setup_shadowfang
+        exists = A13
+        ai = no
+        A13 = {
+            ai = yes
+        }
+        NOT = { has_global_flag = player_prompt_A13 }
+    }
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = player_prompt_A13
+        }
+    }
+    
+	option = {
+		name = wwu_player_switch.112.option.a
+		
+        switch_tag = A13
+        convert_nation_boost_to_player = yes
+	}
+    option = {
+		name = wwu_player_switch.112.option.b
 		
 	}
 }
