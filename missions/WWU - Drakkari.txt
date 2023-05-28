@@ -1,0 +1,693 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+wwu_drakkari_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A74
+	}
+    
+	has_country_shield = yes
+	
+    wwu_intrude_into_the_peaks = {
+		icon = mission_glaive_toss
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            area_dun_niffelem = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            area = area_dun_niffelem
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_drakkari_zeal
+                duration = 3650
+            }
+		}
+	}
+    
+	wwu_establish_mountain_garrison = {
+		icon = mission_hunter_arrow_2
+        position = 2
+        
+		required_missions = { 
+            wwu_intrude_into_the_peaks
+        }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 5
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_storm_peak
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_storm_peak
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_storm_peak = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_secure_the_southern_peaks = {
+		icon = mission_gryphon_1
+        position = 3
+        
+		required_missions = { 
+            wwu_establish_mountain_garrison
+        }
+        
+		trigger = {
+            area_k3 = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_bunnhildar_village = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_dun_niffelem = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_k3
+                area = area_bunnhildar_village
+                area = area_dun_niffelem
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_storm_peaks_adaptation
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_assault_ulduar = {
+		icon = mission_titan_spirits
+        position = 4
+        
+		required_missions = { 
+            wwu_secure_the_southern_peaks
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = B73
+                }
+                war_with = B73
+            }
+            else = {
+                area_ulduar = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                owned_by = B73
+                area = area_ulduar
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_troll_supremacy
+                duration = 3650
+            }
+		}
+	}
+    
+    wwu_acquire_titan_technology = {
+		icon = mission_goblet
+        position = 5
+        
+		required_missions = { 
+            wwu_assault_ulduar
+        }
+        
+		trigger = {
+            owns_core_province = 2495
+		}
+		provinces_to_highlight = {
+            province_id = 2495
+			NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_titan_insights
+                duration = -1
+            }
+		}
+	}
+}
+
+wwu_drakkari_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A74
+	}
+    
+	has_country_shield = yes
+	
+	wwu_secure_the_northern_peaks = {
+		icon = mission_griffin_attack
+        position = 3
+        
+		required_missions = { 
+            wwu_establish_mountain_garrison
+        }
+        
+		trigger = {
+            area_terrace_of_the_makers = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_thunderfall = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_terrace_of_the_makers
+                area = area_thunderfall
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_drakkari_resourcefulness
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_claim_the_peaks = {
+		icon = mission_frozen_throne
+        position = 4
+        
+		required_missions = { 
+            wwu_secure_the_northern_peaks
+        }
+        
+		trigger = {
+            area_valkyrion = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_frosthold = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_inventors_library = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_valkyrion
+                area = area_frosthold
+                area = area_inventors_library
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_storm_peak = {
+                limit = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                
+                add_base_tax = 1
+                add_base_production = 1
+                add_base_manpower = 1
+            }
+		}
+	}
+}
+
+wwu_drakkari_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A74
+	}
+    
+	has_country_shield = yes
+	
+	wwu_oust_the_interlopers = {
+		icon = mission_troll_hexxer
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            region_zuldrak = {
+                type = all
+                
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_zuldrak
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_zuldrak_domination
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_claim_the_crystalsong_forest = {
+		icon = mission_troll_hexxer
+        position = 2
+        
+		required_missions = { 
+            wwu_oust_the_interlopers
+        }
+        
+		trigger = {
+            region_crystalsong = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_crystalsong
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_crystalsong = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_establish_crystalline_garrison = {
+		icon = mission_mage_spirit
+        position = 3
+        
+		required_missions = { 
+            wwu_claim_the_crystalsong_forest
+        }
+        
+		trigger = {
+            area_unbound_thicket = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_sunreaver_and_windrunner_overlooks = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            
+            OR = {
+                area_unbound_thicket = {
+                    has_fort_building_trigger = yes
+                }
+                area_sunreaver_and_windrunner_overlooks = {
+                    has_fort_building_trigger = yes
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_unbound_thicket
+                area = area_sunreaver_and_windrunner_overlooks
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_dragonblight = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    wwu_acquire_crystal_seeds = {
+		icon = mission_force_shield
+        position = 4
+        
+		required_missions = { 
+            wwu_establish_crystalline_garrison
+        }
+        
+		trigger = {
+            region_crystalsong = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            
+            region_crystalsong = {
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            region = region_crystalsong
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_crystal_seeds
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_challenge_the_dragonflights = {
+		icon = mission_fireball_2
+        position = 5
+        
+		required_missions = { 
+            wwu_acquire_crystal_seeds
+        }
+        
+		trigger = {
+            any_country = {
+                culture_group = culture_group_dragonkin
+                capital_scope = {
+                    superregion = northrend_superregion
+                }
+                war_with = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            owner = {
+                culture_group = culture_group_dragonkin
+                capital_scope = {
+                    superregion = northrend_superregion
+                }
+            }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_fearless_warriors
+                duration = 10950
+            }
+		}
+	}
+}
+
+wwu_drakkari_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A74
+	}
+    
+	has_country_shield = yes
+	
+	wwu_intrude_into_the_hills = {
+		icon = mission_drogbar_totem
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            region_grizzly_hills = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            region = region_grizzly_hills
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_grizzly_hills = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    wwu_establish_grizzlemaw_garrison = {
+		icon = mission_druid_berserk
+        position = 2
+        
+		required_missions = { 
+            wwu_intrude_into_the_hills
+        }
+        
+		trigger = {
+            area_grizzlemaw = {
+                type = all
+                
+                OR = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    is_empty = yes
+                }
+            }
+		}
+		provinces_to_highlight = {
+            area = area_grizzlemaw
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			area_grizzlemaw = {
+                limit = {
+                    is_empty = yes
+                }
+                
+                cede_province = ROOT
+                add_core = ROOT
+            }
+            
+            add_country_modifier = {
+                name = mission_desecration_of_grizzlemaw
+                duration = -1
+            }
+		}
+	}
+    wwu_purge_the_iron_dwarves = {
+		icon = mission_dwarf_stone_avatar
+        position = 3
+        
+		required_missions = { 
+            wwu_establish_grizzlemaw_garrison
+        }
+        
+		trigger = {
+            NOT = { exists = B76 }
+            NOT = { exists = DAG }
+		}
+		provinces_to_highlight = {
+            OR = {
+                owned_by = B76
+                owned_by = DAG
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_subjugation_of_titan_constructions
+                duration = -1
+            }
+		}
+	}
+    wwu_claim_the_hills = {
+		icon = mission_dire_troll
+        position = 4
+        
+		required_missions = { 
+            wwu_purge_the_iron_dwarves
+        }
+        
+		trigger = {
+            area_thor_modan = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_redwood = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_heartwood = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_camp_oneqwah = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_dun_argol = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_grizzlemaw = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_thor_modan
+                area = area_redwood
+                area = area_heartwood
+                area = area_camp_oneqwah
+                area = area_dun_argol
+                area = area_grizzlemaw
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+            custom_tooltip = GRIZZLEMAW_SUBJUGATION_TT
+            hidden_effect = {
+                every_country = {
+                    limit = {
+                        ai = yes
+                        capital_scope = {
+                            region = region_grizzly_hills
+                        }
+                        OR = {
+                            technology_group = tech_wolvar
+                            technology_group = tech_furbolg
+                        }
+                    }
+                    
+                    ROOT = {
+                        create_subject = {
+                            subject_type = vassal
+                            subject = PREV
+                        }
+                    }
+                }
+            }
+		}
+	}
+}
+
+wwu_drakkari_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = A74
+	}
+    
+	has_country_shield = yes
+	
+	wwu_push_into_granite_springs = {
+		icon = mission_equipment
+        position = 3
+        
+		required_missions = { 
+            wwu_establish_grizzlemaw_garrison
+        }
+        
+		trigger = {
+            area_zeb_halak = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_granite_springs = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_zeb_halak
+                area = area_granite_springs
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_mil_power = 500
+		}
+	}
+    
+    wwu_establish_port_drakkar = {
+		icon = mission_ship_6
+        position = 4
+        
+		required_missions = { 
+            wwu_push_into_granite_springs
+        }
+        
+		trigger = {
+            owns_core_province = 1289
+            area_venture_bay = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_venture_bay
+                province_id = 1289
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			1289 = {
+                add_base_tax = 4
+                add_base_production = 4
+                add_base_manpower = 4
+                
+                add_permanent_province_modifier = {
+                    name = mission_port_drakkar
+                    duration = -1
+                }
+            }
+            
+            add_country_modifier = {
+                name = mission_port_drakkar_global
+                duration = -1
+            }
+		}
+	}
+}
