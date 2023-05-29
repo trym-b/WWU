@@ -1,18 +1,18 @@
 #--------------------------------------
 # Name
 #--------------------------------------
-A74_drakkari_column_1 = {
+A77_winterfang_column_1 = {
 	slot = 1
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = A74
+		tag = A77
 	}
     
 	has_country_shield = yes
 	
-    A74_mojo_of_the_slain_gods = {
+    A77_mojo_of_the_slain_gods = {
 		icon = mission_blood_corruption
         position = 1
         
@@ -40,12 +40,12 @@ A74_drakkari_column_1 = {
 		}
 	}
     
-    A74_secure_the_southern_peaks = {
+    A77_secure_the_southern_peaks = {
 		icon = mission_gryphon_1
         position = 3
         
 		required_missions = { 
-            A74_establish_mountain_garrison
+            A77_establish_mountain_garrison
         }
         
 		trigger = {
@@ -82,12 +82,12 @@ A74_drakkari_column_1 = {
 		}
 	}
     
-    A74_assault_ulduar = {
+    A77_assault_ulduar = {
 		icon = mission_titan_spirits
         position = 4
         
 		required_missions = { 
-            A74_secure_the_southern_peaks
+            A77_secure_the_southern_peaks
         }
         
 		trigger = {
@@ -119,12 +119,12 @@ A74_drakkari_column_1 = {
 		}
 	}
     
-    A74_acquire_titan_technology = {
+    A77_acquire_titan_technology = {
 		icon = mission_goblet
         position = 5
         
 		required_missions = { 
-            A74_assault_ulduar
+            A77_assault_ulduar
         }
         
 		trigger = {
@@ -143,12 +143,12 @@ A74_drakkari_column_1 = {
 		}
 	}
     
-    A74_bolster_the_steps = {
+    A77_bolster_the_steps = {
 		icon = mission_axe_and_sword
         position = 7
         
 		required_missions = { 
-            A74_restore_gundrak
+            A77_restore_gundrak
         }
         
 		trigger = {
@@ -178,25 +178,25 @@ A74_drakkari_column_1 = {
         
 		effect = {
             add_country_modifier = {
-                name = mission_drakkari_garrisons
+                name = mission_winterfang_garrisons
                 duration = -1
             }
 		}
 	}
 }
 
-A74_drakkari_column_2 = {
+A77_winterfang_column_2 = {
 	slot = 2
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = A74
+		tag = A77
 	}
     
 	has_country_shield = yes
 	
-    A74_intrude_into_the_peaks = {
+    A77_intrude_into_the_peaks = {
 		icon = mission_glaive_toss
         position = 1
         
@@ -214,18 +214,18 @@ A74_drakkari_column_2 = {
         
 		effect = {
 			add_country_modifier = {
-                name = mission_drakkari_zeal
+                name = mission_winterfang_zeal
                 duration = 3650
             }
 		}
 	}
     
-	A74_establish_mountain_garrison = {
+	A77_establish_mountain_garrison = {
 		icon = mission_hunter_arrow_2
         position = 2
         
 		required_missions = { 
-            A74_intrude_into_the_peaks
+            A77_intrude_into_the_peaks
         }
         
 		trigger = {
@@ -250,12 +250,12 @@ A74_drakkari_column_2 = {
 		}
 	}
     
-	A74_secure_the_northern_peaks = {
+	A77_secure_the_northern_peaks = {
 		icon = mission_griffin_attack
         position = 3
         
 		required_missions = { 
-            A74_establish_mountain_garrison
+            A77_establish_mountain_garrison
         }
         
 		trigger = {
@@ -280,18 +280,18 @@ A74_drakkari_column_2 = {
         
 		effect = {
 			add_country_modifier = {
-                name = mission_drakkari_resourcefulness
+                name = mission_winterfang_resourcefulness
                 duration = -1
             }
 		}
 	}
     
-    A74_claim_the_peaks = {
+    A77_claim_the_peaks = {
 		icon = mission_frozen_throne
         position = 4
         
 		required_missions = { 
-            A74_secure_the_northern_peaks
+            A77_secure_the_northern_peaks
         }
         
 		trigger = {
@@ -333,12 +333,12 @@ A74_drakkari_column_2 = {
 		}
 	}
     
-    A74_accumulate_treasure_horde = {
+    A77_accumulate_treasure_horde = {
 		icon = mission_crown_of_heavens
         position = 7
         
 		required_missions = { 
-            A74_restore_gundrak
+            A77_restore_gundrak
         }
         
 		trigger = {
@@ -353,183 +353,194 @@ A74_drakkari_column_2 = {
         
 		effect = {
             add_country_modifier = {
-                name = mission_drakkari_treasures
+                name = mission_winterfang_treasures
                 duration = -1
             }
 		}
 	}
 }
 
-A74_drakkari_column_3 = {
+A77_winterfang_column_3 = {
 	slot = 3
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = A74
+		tag = A77
 	}
     
 	has_country_shield = yes
 	
-	A74_oust_the_interlopers = {
-		icon = mission_troll_hexxer
+    A77_oust_the_wolvar = {
+		icon = mission_burning_castle
         position = 1
         
 		required_missions = { }
         
 		trigger = {
-            region_zuldrak = {
+            owns_core_province = 2425
+            owns_core_province = 2422
+            owns_core_province = 2421
+            owns_core_province = 633
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2425
+                province_id = 2422
+                province_id = 2421
+                province_id = 633
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_wolvar_slaves
+                duration = -1
+            }
+		}
+	}
+    
+    A77_infiltrate_gundrak = {
+		icon = mission_capture_flag
+        position = 2
+        
+		required_missions = {
+            A77_oust_the_wolvar
+        }
+        
+		trigger = {
+            has_spy_network_in = {
+                who = A74
+                value = 60
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = A74
+		}
+        
+		effect = {
+            A74 = {
+                capital_scope = {
+                    add_permanent_claim = ROOT
+                }
+            }
+		}
+	}
+    
+    A77_breach_the_outer_complex = {
+		icon = mission_strand_of_the_ancients
+        position = 3
+        
+		required_missions = { 
+            A77_infiltrate_gundrak
+        }
+        
+		trigger = {
+            area_kolramas = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_zim_abwa = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_drak_agal = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_kolramas
+                area = area_zim_abwa
+                area = area_drak_agal
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_winterfang_fervor
+                duration = 3650
+            }
+		}
+	}
+    
+    A77_breach_the_inner_complex = {
+		icon = mission_troll_hexxer
+        position = 4
+        
+		required_missions = { 
+            A77_breach_the_outer_complex
+        }
+        
+		trigger = {
+            area_rhunok = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_zim_torga = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                area = area_rhunok
+                area = area_zim_torga
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			custom_tooltip = CLAIM_ALL_DRAKKARI_LANDS_TT
+            hidden_effect = {
+                A74 = {
+                    every_owned_province = {
+                        limit = {
+                            superregion = northrend_superregion
+                        }
+                        
+                        add_permanent_claim = ROOT
+                    }
+                }
+            }
+		}
+	}
+    
+	A77_usurp_the_drakkari = {
+		icon = mission_brimstone
+        position = 5
+        
+		required_missions = { 
+            A77_breach_the_inner_complex
+        }
+        
+		trigger = {
+            area_gundrak = {
                 type = all
                 
                 country_or_non_sovereign_subject_holds = ROOT
             }
 		}
 		provinces_to_highlight = {
-            region = region_zuldrak
+            area = area_gundrak
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
 			add_country_modifier = {
-                name = mission_zuldrak_domination
+                name = mission_winterfang_primacy
                 duration = -1
             }
-		}
-	}
-    
-    A74_claim_the_crystalsong_forest = {
-		icon = mission_troll_hexxer
-        position = 2
-        
-		required_missions = { 
-            A74_oust_the_interlopers
-        }
-        
-		trigger = {
-            region_crystalsong = {
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-		}
-		provinces_to_highlight = {
-            region = region_crystalsong
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			region_crystalsong = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    
-    A74_establish_crystalline_garrison = {
-		icon = mission_mage_spirit
-        position = 3
-        
-		required_missions = { 
-            A74_claim_the_crystalsong_forest
-        }
-        
-		trigger = {
-            area_unbound_thicket = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-            area_sunreaver_and_windrunner_overlooks = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
             
-            OR = {
-                area_unbound_thicket = {
-                    has_fort_building_trigger = yes
+            if = {
+                limit = {
+                    exists = A74
                 }
-                area_sunreaver_and_windrunner_overlooks = {
-                    has_fort_building_trigger = yes
-                }
-            }
-		}
-		provinces_to_highlight = {
-            OR = {
-                area = area_unbound_thicket
-                area = area_sunreaver_and_windrunner_overlooks
-            }
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			region_dragonblight = {
-                add_permanent_claim = ROOT
+                
+                inherit = A74
             }
 		}
 	}
     
-    A74_acquire_crystal_seeds = {
-		icon = mission_force_shield
-        position = 4
-        
-		required_missions = { 
-            A74_establish_crystalline_garrison
-        }
-        
-		trigger = {
-            region_crystalsong = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-            
-            region_crystalsong = {
-                has_fort_building_trigger = yes
-            }
-		}
-		provinces_to_highlight = {
-            region = region_crystalsong
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_crystal_seeds
-                duration = -1
-            }
-		}
-	}
-    
-    A74_challenge_the_dragonflights = {
-		icon = mission_fireball_2
-        position = 5
-        
-		required_missions = { 
-            A74_acquire_crystal_seeds
-        }
-        
-		trigger = {
-            any_country = {
-                culture_group = culture_group_dragonkin
-                capital_scope = {
-                    superregion = northrend_superregion
-                }
-                war_with = ROOT
-            }
-		}
-		provinces_to_highlight = {
-            owner = {
-                culture_group = culture_group_dragonkin
-                capital_scope = {
-                    superregion = northrend_superregion
-                }
-            }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_fearless_warriors
-                duration = 10950
-            }
-		}
-	}
-    
-    A74_restore_gundrak = {
+    A77_restore_gundrak = {
 		icon = mission_bwonsomdi
         position = 6
         
@@ -564,12 +575,12 @@ A74_drakkari_column_3 = {
 		}
 	}
     
-    A74_establish_the_amphitheatre = {
+    A77_establish_the_amphitheatre = {
 		icon = mission_bones
         position = 7
         
 		required_missions = { 
-            A74_restore_gundrak
+            A77_restore_gundrak
         }
         
 		trigger = {
@@ -592,7 +603,7 @@ A74_drakkari_column_3 = {
             
             1285 = {
                 add_province_modifier = {
-                    name = mission_drakkari_construction_surge
+                    name = mission_winterfang_construction_surge
                     duration = 10950
                 }
             }
@@ -600,26 +611,30 @@ A74_drakkari_column_3 = {
 	}
 }
 
-A74_drakkari_column_4 = {
+A77_winterfang_column_4 = {
 	slot = 4
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = A74
+		tag = A77
 	}
     
 	has_country_shield = yes
 	
-    A74_intrude_into_the_hills = {
+    A77_intrude_into_the_hills = {
 		icon = mission_drogbar_totem
         position = 1
         
 		required_missions = { }
         
 		trigger = {
-            region_grizzly_hills = {
-                country_or_non_sovereign_subject_holds = ROOT
+            calc_true_if = {
+                amount = 10
+                
+                all_owned_province = {
+                    region = region_grizzly_hills
+                }
             }
 		}
 		provinces_to_highlight = {
@@ -634,12 +649,12 @@ A74_drakkari_column_4 = {
 		}
 	}
     
-    A74_establish_grizzlemaw_garrison = {
+    A77_establish_grizzlemaw_garrison = {
 		icon = mission_druid_berserk
         position = 2
         
 		required_missions = { 
-            A74_intrude_into_the_hills
+            A77_intrude_into_the_hills
         }
         
 		trigger = {
@@ -675,12 +690,12 @@ A74_drakkari_column_4 = {
 	}
     
     
-    A74_purge_the_iron_dwarves = {
+    A77_purge_the_iron_dwarves = {
 		icon = mission_dwarf_stone_avatar
         position = 3
         
 		required_missions = { 
-            A74_establish_grizzlemaw_garrison
+            A77_establish_grizzlemaw_garrison
         }
         
 		trigger = {
@@ -702,12 +717,12 @@ A74_drakkari_column_4 = {
             }
 		}
 	}
-    A74_claim_the_hills = {
+    A77_claim_the_hills = {
 		icon = mission_dire_troll
         position = 4
         
 		required_missions = { 
-            A74_purge_the_iron_dwarves
+            A77_purge_the_iron_dwarves
         }
         
 		trigger = {
@@ -774,12 +789,12 @@ A74_drakkari_column_4 = {
 		}
 	}
     
-    A74_secure_the_perimeter = {
+    A77_secure_the_perimeter = {
 		icon = mission_garrosh_corruption
         position = 7
         
 		required_missions = { 
-            A74_restore_gundrak
+            A77_restore_gundrak
         }
         
 		trigger = {
@@ -803,84 +818,31 @@ A74_drakkari_column_4 = {
         
 		effect = {
             add_country_modifier = {
-                name = mission_drakkari_peace_of_mind
+                name = mission_winterfang_peace_of_mind
                 duration = -1
             }
 		}
 	}
 }
 
-A74_drakkari_column_5 = {
+A77_winterfang_column_5 = {
 	slot = 5
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = A74
+		tag = A77
 	}
     
 	has_country_shield = yes
-	
-    A74_restoration_of_the_drakkari_empire = {
-		icon = mission_shaman_rage
-        position = 1
-        
-		required_missions = { 
-            
-        }
-        
-		trigger = {
-            OR = {
-                A75 = {
-                    is_subject_of = ROOT
-                    has_opinion = {
-                        who = ROOT
-                        value = 180
-                    }
-                }
-                NOT = { exists = A75 }
-            }
-            OR = {
-                A76 = {
-                    is_subject_of = ROOT
-                    has_opinion = {
-                        who = ROOT
-                        value = 180
-                    }
-                }
-                NOT = { exists = A76 }
-            }
-		}
-        
-		effect = {
-            change_tag = DRE
-            
-            add_country_modifier = {
-                name = mission_drakkari_empire_reborn
-                duration = -1
-            }
-            
-            custom_tooltip = CLAIM_ALL_TROLL_LANDS_TT
-            hidden_effect = {
-                every_province = {
-                    limit = {
-                        owner = {
-                            culture_group = culture_group_troll
-                        }
-                    }
-                    
-                    add_permanent_claim = ROOT
-                }
-            }
-		}
-	}
     
-	A74_push_into_granite_springs = {
+    
+	A77_push_into_granite_springs = {
 		icon = mission_equipment
         position = 3
         
 		required_missions = { 
-            A74_establish_grizzlemaw_garrison
+            A77_establish_grizzlemaw_garrison
         }
         
 		trigger = {
@@ -906,12 +868,12 @@ A74_drakkari_column_5 = {
 		}
 	}
     
-    A74_establish_port_drakkar = {
+    A77_establish_port_winterfang = {
 		icon = mission_ship_6
         position = 4
         
 		required_missions = { 
-            A74_push_into_granite_springs
+            A77_push_into_granite_springs
         }
         
 		trigger = {
@@ -936,24 +898,24 @@ A74_drakkari_column_5 = {
                 add_base_manpower = 4
                 
                 add_permanent_province_modifier = {
-                    name = mission_port_drakkar
+                    name = mission_port_winterfang
                     duration = -1
                 }
             }
             
             add_country_modifier = {
-                name = mission_port_drakkar_global
+                name = mission_port_winterfang_global
                 duration = -1
             }
 		}
 	}
     
-    A74_influence_of_port_drakkar = {
+    A77_influence_of_port_winterfang = {
 		icon = mission_trading_outpost
         position = 5
         
 		required_missions = { 
-            A74_establish_port_drakkar
+            A77_establish_port_winterfang
         }
         
 		trigger = {
@@ -969,18 +931,18 @@ A74_drakkari_column_5 = {
             add_mercantilism = 10
             
             add_country_modifier = {
-                name = mission_drakkari_trade_dominance
+                name = mission_winterfang_trade_dominance
                 duration = -1
             }
 		}
 	}
     
-    A74_expand_the_aquaducts = {
+    A77_expand_the_aquaducts = {
 		icon = mission_strand_of_the_ancients
         position = 7
         
 		required_missions = { 
-            A74_restore_gundrak
+            A77_restore_gundrak
         }
         
 		trigger = {
@@ -1003,7 +965,7 @@ A74_drakkari_column_5 = {
         
 		effect = {
             add_country_modifier = {
-                name = mission_drakkari_aquaduct_system
+                name = mission_winterfang_aquaduct_system
                 duration = -1
             }
 		}
