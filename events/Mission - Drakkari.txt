@@ -1,15 +1,73 @@
 namespace = wwu_drakkari
  
+# Arrival of the Scourge
 country_event = {
 	id = wwu_drakkari.1
 	title = wwu_drakkari.1.title
 	desc = wwu_drakkari.1.desc
-	picture = KUL_TIRAN_SHIP_eventPicture
+	picture = LICH_KING_CLOSE_eventPicture
 	
     is_triggered_only = yes
     
 	trigger = {
+        NOT = { has_global_flag = drakkari_arrival_of_the_scourge }
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        exists = P11
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = drakkari_arrival_of_the_scourge 
+        }
+    }
+	
+	option = {
+		name = wwu_drakkari.1.option.a
 		
+        custom_tooltip = DRAKKARI_SCOURGE_REBEL_TT
+        hidden_effect = {
+            add_country_modifier = {
+                name = event_drakkari_scourge_rebels_timer
+                duration = 18250
+                hidden = yes
+            }
+        }
+        
+        random_owned_province = {
+            spawn_rebels = {
+                type = scourge_rebels
+                size = 1
+            }
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            P11 = {
+                country_event = { id = wwu_drakkari.2 }
+            }
+        }
+    }
+}
+
+# Empire of the Drakkari
+country_event = {
+	id = wwu_drakkari.2
+	title = wwu_drakkari.2.title
+	desc = wwu_drakkari.2.desc
+	picture = LICH_KING_CLOSE_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		tag = P11
 	}
 	
 	mean_time_to_happen = {
@@ -17,7 +75,664 @@ country_event = {
 	}
 	
 	option = {
-		name = wwu_drakkari.1.option.a
+		name = wwu_drakkari.2.option.a
 		
+        every_province = {
+            limit = {
+                owned_by = FROM
+            }
+            
+            add_permanent_claim = ROOT
+        }
+	}
+}
+
+# Scourge Assault
+country_event = {
+	id = wwu_drakkari.3
+	title = wwu_drakkari.3.title
+	desc = wwu_drakkari.3.desc
+	picture = ABOMINATION_eventPicture
+	goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        has_country_modifier = event_drakkari_scourge_rebels_timer
+        any_owned_province = {
+            superregion = northrend_superregion
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    superregion = northrend_superregion
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.3.option.a
+		
+        event_target:target_province = {
+            spawn_rebels = {
+                type = scourge_rebels
+                size = 1
+            }
+        }
+	}
+}
+
+# Submission to the Lich King
+country_event = {
+	id = wwu_drakkari.4
+	title = wwu_drakkari.4.title
+	desc = wwu_drakkari.4.desc
+	picture = LICH_KING_CLOSEUP_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_global_flag = drakkari_submission_to_lich_king }
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        exists = P11
+        dominant_religion = cult_of_the_damned
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = drakkari_submission_to_lich_king
+        }
+    }
+    
+	option = {
+		name = wwu_drakkari.4.option.a
+		
+        P11 = {
+            create_subject = {
+                subject_type = scourge_vassal
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_drakkari.4.option.b
+		
+        add_stability = -3
+        
+        capital_scope = {
+            random_owned_province = {
+                spawn_rebels = {
+                    type = scourge_rebels
+                    size = 3
+                }
+            }
+            random_owned_province = {
+                spawn_rebels = {
+                    type = scourge_rebels
+                    size = 3
+                }
+            }
+            random_owned_province = {
+                spawn_rebels = {
+                    type = scourge_rebels
+                    size = 3
+                }
+            }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+#----------------------
+# Loa Flavour
+#----------------------
+# Reverance of the Loa
+country_event = {
+	id = wwu_drakkari.10
+	title = wwu_drakkari.10.title
+	desc = wwu_drakkari.10.desc
+	picture = PACT_WITH_THE_LOA_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        has_estate = estate_loa
+        has_any_loa = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_drakkari.10.option.a
+		
+        add_years_of_income = 1.0
+	}
+    option = {
+		name = wwu_drakkari.10.option.b
+		
+        add_estate_loyalty = {
+            estate = estate_loa
+            loyalty = 20
+        }
+	}
+}
+
+# Mojo-imbued Beserker
+country_event = {
+	id = wwu_drakkari.11
+	title = wwu_drakkari.11.title
+	desc = wwu_drakkari.11.desc
+	picture = DRAKKARI_EMBALMER_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        check_variable = {
+            which = loa_kill_count
+            value = 1
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = show_general_1
+            clr_country_flag = show_general_2
+            clr_country_flag = show_general_3
+            clr_country_flag = show_general_4
+            clr_country_flag = show_general_5
+            
+            random_list = {
+                10 = { set_country_flag = show_general_1 }
+                10 = { set_country_flag = show_general_2 }
+                10 = { set_country_flag = show_general_3 }
+                10 = { set_country_flag = show_general_4 }
+                10 = { set_country_flag = show_general_5 }
+            }
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.11.option.a
+		
+        if = {
+            limit = {
+                has_country_flag = show_general_1
+            }
+            define_general = {
+                shock = 3
+                fire = 2
+                manuever = 2
+                siege = 2
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_2
+            }
+            define_general = {
+                shock = 2
+                fire = 3
+                manuever = 2
+                siege = 2
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_3
+            }
+            define_general = {
+                shock = 2
+                fire = 2
+                manuever = 3
+                siege = 2
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_4
+            }
+            define_general = {
+                shock = 2
+                fire = 2
+                manuever = 2
+                siege = 3
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_5
+            }
+            define_general = {
+                shock = 3
+                fire = 3
+                manuever = 3
+                siege = 3
+            }
+        }
+	}
+}
+
+# Mojo-imbued Champion
+country_event = {
+	id = wwu_drakkari.12
+	title = wwu_drakkari.12.title
+	desc = wwu_drakkari.12.desc
+	picture = DRAKKARI_ENCHANTER_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        check_variable = {
+            which = loa_kill_count
+            value = 3
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = show_general_1
+            clr_country_flag = show_general_2
+            clr_country_flag = show_general_3
+            clr_country_flag = show_general_4
+            clr_country_flag = show_general_5
+            
+            random_list = {
+                10 = { set_country_flag = show_general_1 }
+                10 = { set_country_flag = show_general_2 }
+                10 = { set_country_flag = show_general_3 }
+                10 = { set_country_flag = show_general_4 }
+                10 = { set_country_flag = show_general_5 }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_drakkari.12.option.a
+		
+        if = {
+            limit = {
+                has_country_flag = show_general_1
+            }
+            define_general = {
+                shock = 6
+                fire = 5
+                manuever = 5
+                siege = 5
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_2
+            }
+            define_general = {
+                shock = 5
+                fire = 6
+                manuever = 5
+                siege = 5
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_3
+            }
+            define_general = {
+                shock = 5
+                fire = 5
+                manuever = 6
+                siege = 5
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_4
+            }
+            define_general = {
+                shock = 5
+                fire = 5
+                manuever = 5
+                siege = 6
+            }
+        }
+        if = {
+            limit = {
+                has_country_flag = show_general_5
+            }
+            define_general = {
+                shock = 6
+                fire = 6
+                manuever = 6
+                siege = 6
+            }
+        }
+	}
+}
+
+# Frostmane Envoy
+country_event = {
+	id = wwu_drakkari.13
+	title = wwu_drakkari.13.title
+	desc = wwu_drakkari.13.desc
+	picture = DRAKKARI_DEFENDER_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_flag = drakkari_frostmane_envoy }
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        knows_country = A75 
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = drakkari_frostmane_envoy 
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.13.option.a
+		
+        add_opinion = {
+            who = A75
+            modifier = drakkari_connection
+        }
+        reverse_add_opinion = {
+            who = A75
+            modifier = drakkari_connection
+        }
+	}
+    option = {
+		name = wwu_drakkari.13.option.b
+		
+        A75 = {
+            capital_scope = {
+                add_permanent_claim = ROOT
+            }
+        }
+	}
+}
+
+# Winterax Envoy
+country_event = {
+	id = wwu_drakkari.14
+	title = wwu_drakkari.14.title
+	desc = wwu_drakkari.14.desc
+	picture = DRAKKARI_DEFENDER_eventPicture
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_flag = drakkari_winterax_envoy }
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        knows_country = A76 
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = drakkari_winterax_envoy 
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.14.option.a
+		
+        add_opinion = {
+            who = A76
+            modifier = drakkari_connection
+        }
+        reverse_add_opinion = {
+            who = A76
+            modifier = drakkari_connection
+        }
+	}
+    option = {
+		name = wwu_drakkari.14.option.b
+		
+        A76 = {
+            capital_scope = {
+                add_permanent_claim = ROOT
+            }
+        }
+	}
+}
+
+# Temple Upkeep
+country_event = {
+	id = wwu_drakkari.15
+	title = wwu_drakkari.15.title
+	desc = wwu_drakkari.15.desc
+	picture = DRAKTHARON_KEEP_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        any_owned_province = {
+            superregion = northrend_superregion
+            NOT = { has_province_modifier = event_drakkari_abandoned_temple }
+            NOT = { has_province_modifier = event_drakkari_restored_temple }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    superregion = northrend_superregion
+                    NOT = { has_province_modifier = event_drakkari_abandoned_temple }
+                    NOT = { has_province_modifier = event_drakkari_restored_temple }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.15.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = event_drakkari_abandoned_temple
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_drakkari.15.option.b
+		
+        add_years_of_income = -0.25
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = event_drakkari_restored_temple
+                duration = 3650
+            }
+        }
+	}
+}
+
+# Elevated Farms
+country_event = {
+	id = wwu_drakkari.16
+	title = wwu_drakkari.16.title
+	desc = wwu_drakkari.16.desc
+	picture = ZULDRAK_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        any_owned_province = {
+            region = region_zuldrak
+            NOT = { has_tax_building_trigger = yes }
+            num_free_building_slots = 1
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    region = region_zuldrak
+                    NOT = { has_tax_building_trigger = yes }
+                    num_free_building_slots = 1
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.16.option.a
+		
+        event_target:target_province = {
+            add_or_improve_farm = yes
+        }
+	}
+    option = {
+		name = wwu_drakkari.16.option.b
+		
+        add_years_of_income = 0.2
+	}
+}
+
+# Aquaduct Upkeep
+country_event = {
+	id = wwu_drakkari.17
+	title = wwu_drakkari.17.title
+	desc = wwu_drakkari.17.desc
+	picture = ZULDRAK_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            tag = A74
+            was_tag = A74
+        }
+        any_owned_province = {
+            superregion = northrend_superregion
+            NOT = { has_province_modifier = event_drakkari_abandoned_aquaduct }
+            NOT = { has_province_modifier = event_drakkari_restored_aquaduct }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    superregion = northrend_superregion
+                    NOT = { has_province_modifier = event_drakkari_abandoned_aquaduct }
+                    NOT = { has_province_modifier = event_drakkari_restored_aquaduct }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_drakkari.17.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = event_drakkari_abandoned_aquaduct
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_drakkari.17.option.b
+		
+        add_years_of_income = -0.25
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = event_drakkari_restored_aquaduct
+                duration = 3650
+            }
+        }
 	}
 }

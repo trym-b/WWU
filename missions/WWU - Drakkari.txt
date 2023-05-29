@@ -12,56 +12,30 @@ wwu_drakkari_column_1 = {
     
 	has_country_shield = yes
 	
-    wwu_intrude_into_the_peaks = {
-		icon = mission_glaive_toss
+    wwu_mojo_of_the_slain_gods = {
+		icon = mission_blood_corruption
         position = 1
         
-		required_missions = { }
-        
-		trigger = {
-            area_dun_niffelem = {
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-		}
-		provinces_to_highlight = {
-            area = area_dun_niffelem
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_drakkari_zeal
-                duration = 3650
-            }
-		}
-	}
-    
-	wwu_establish_mountain_garrison = {
-		icon = mission_hunter_arrow_2
-        position = 2
-        
 		required_missions = { 
-            wwu_intrude_into_the_peaks
+            
         }
         
 		trigger = {
-            calc_true_if = {
-                amount = 5
-                
-                all_province = {
-                    country_or_non_sovereign_subject_holds = ROOT
-                    region = region_storm_peak
+            custom_trigger_tooltip = {
+                tooltip = SACRIFICE_LOA_MISSION_TT 
+                check_variable = {
+                    which = loa_kill_count
+                    value = 3
                 }
             }
 		}
-		provinces_to_highlight = {
-            region = region_storm_peak
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
         
 		effect = {
-			region_storm_peak = {
-                add_permanent_claim = ROOT
+			add_mil_power = 400
+            
+            add_country_modifier = {
+                name = mission_mojo_time
+                duration = -1
             }
 		}
 	}
@@ -168,6 +142,47 @@ wwu_drakkari_column_1 = {
             }
 		}
 	}
+    
+    wwu_bolster_the_steps = {
+		icon = mission_axe_and_sword
+        position = 7
+        
+		required_missions = { 
+            wwu_restore_gundrak
+        }
+        
+		trigger = {
+            2439 = {
+                owned_by = ROOT
+                base_manpower = 3
+                has_fort_building_trigger = yes
+            }
+            2435 = {
+                owned_by = ROOT
+                base_manpower = 3
+                has_fort_building_trigger = yes
+            }
+            2427 = {
+                owned_by = ROOT
+                base_manpower = 3
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2439
+                province_id = 2435
+                province_id = 2427
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_drakkari_garrisons
+                duration = -1
+            }
+		}
+	}
 }
 
 wwu_drakkari_column_2 = {
@@ -181,6 +196,60 @@ wwu_drakkari_column_2 = {
     
 	has_country_shield = yes
 	
+    wwu_intrude_into_the_peaks = {
+		icon = mission_glaive_toss
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            area_dun_niffelem = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            area = area_dun_niffelem
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_drakkari_zeal
+                duration = 3650
+            }
+		}
+	}
+    
+	wwu_establish_mountain_garrison = {
+		icon = mission_hunter_arrow_2
+        position = 2
+        
+		required_missions = { 
+            wwu_intrude_into_the_peaks
+        }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 5
+                
+                all_province = {
+                    country_or_non_sovereign_subject_holds = ROOT
+                    region = region_storm_peak
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_storm_peak
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_storm_peak = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
 	wwu_secure_the_northern_peaks = {
 		icon = mission_griffin_attack
         position = 3
@@ -260,6 +329,32 @@ wwu_drakkari_column_2 = {
                 add_base_tax = 1
                 add_base_production = 1
                 add_base_manpower = 1
+            }
+		}
+	}
+    
+    wwu_accumulate_treasure_horde = {
+		icon = mission_crown_of_heavens
+        position = 7
+        
+		required_missions = { 
+            wwu_restore_gundrak
+        }
+        
+		trigger = {
+            treasury = 5000
+            2441 = {
+                trade_node_value = 30.0
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2441
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_drakkari_treasures
+                duration = -1
             }
 		}
 	}
@@ -433,6 +528,72 @@ wwu_drakkari_column_3 = {
             }
 		}
 	}
+    
+    wwu_restore_gundrak = {
+		icon = mission_bwonsomdi
+        position = 6
+        
+		required_missions = { 
+            
+        }
+        
+		trigger = {
+            area_gundrak = {
+                base_tax = 4
+                base_production 4
+                base_manpower = 4
+            }
+		}
+		provinces_to_highlight = {
+            area = area_gundrak
+		}
+        
+		effect = {
+            add_splendor = 100
+            
+            capital_scope = {
+                add_permanent_province_modifier = {
+                    name = mission_splendor_of_gundrak
+                    duration = -1
+                }
+            }
+		}
+	}
+    
+    wwu_establish_the_amphitheatre = {
+		icon = mission_bones
+        position = 7
+        
+		required_missions = { 
+            wwu_restore_gundrak
+        }
+        
+		trigger = {
+            1285 = {
+                owned_by = ROOT
+                base_tax = 5
+                base_production = 5
+                base_manpower = 5
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1285
+		}
+        
+		effect = {
+            custom_tooltip = UNLOCK_AMPITHEATRE_OF_ANGUISH_TT
+            hidden_effect = {
+                set_country_flag = unlock_gp_amphitheatre_of_anguish
+            }
+            
+            1285 = {
+                add_province_modifier = {
+                    name = mission_drakkari_construction_surge
+                    duration = 10950
+                }
+            }
+		}
+	}
 }
 
 wwu_drakkari_column_4 = {
@@ -446,7 +607,7 @@ wwu_drakkari_column_4 = {
     
 	has_country_shield = yes
 	
-	wwu_intrude_into_the_hills = {
+    wwu_intrude_into_the_hills = {
 		icon = mission_drogbar_totem
         position = 1
         
@@ -468,6 +629,7 @@ wwu_drakkari_column_4 = {
             }
 		}
 	}
+    
     wwu_establish_grizzlemaw_garrison = {
 		icon = mission_druid_berserk
         position = 2
@@ -507,6 +669,8 @@ wwu_drakkari_column_4 = {
             }
 		}
 	}
+    
+    
     wwu_purge_the_iron_dwarves = {
 		icon = mission_dwarf_stone_avatar
         position = 3
@@ -605,6 +769,41 @@ wwu_drakkari_column_4 = {
             }
 		}
 	}
+    
+    wwu_secure_the_perimeter = {
+		icon = mission_garrosh_corruption
+        position = 7
+        
+		required_missions = { 
+            wwu_restore_gundrak
+        }
+        
+		trigger = {
+            2442 = {
+                owned_by = ROOT
+                base_manpower = 3
+                has_fort_building_trigger = yes
+            }
+            2434 = {
+                owned_by = ROOT
+                base_manpower = 3
+                has_fort_building_trigger = yes
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2442
+                province_id = 2434
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_drakkari_peace_of_mind
+                duration = -1
+            }
+		}
+	}
 }
 
 wwu_drakkari_column_5 = {
@@ -618,6 +817,60 @@ wwu_drakkari_column_5 = {
     
 	has_country_shield = yes
 	
+    wwu_restoration_of_the_drakkari_empire = {
+		icon = mission_shaman_rage
+        position = 1
+        
+		required_missions = { 
+            
+        }
+        
+		trigger = {
+            OR = {
+                A75 = {
+                    is_subject_of = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+                NOT = { exists = A75 }
+            }
+            OR = {
+                A76 = {
+                    is_subject_of = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+                NOT = { exists = A76 }
+            }
+		}
+        
+		effect = {
+            change_tag = DRE
+            
+            add_country_modifier = {
+                name = mission_drakkari_empire_reborn
+                duration = -1
+            }
+            
+            custom_tooltip = CLAIM_ALL_TROLL_LANDS_TT
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        owner = {
+                            culture_group = culture_group_troll
+                        }
+                    }
+                    
+                    add_permanent_claim = ROOT
+                }
+            }
+		}
+	}
+    
 	wwu_push_into_granite_springs = {
 		icon = mission_equipment
         position = 3
@@ -686,6 +939,67 @@ wwu_drakkari_column_5 = {
             
             add_country_modifier = {
                 name = mission_port_drakkar_global
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_influence_of_port_drakkar = {
+		icon = mission_trading_outpost
+        position = 5
+        
+		required_missions = { 
+            wwu_establish_port_drakkar
+        }
+        
+		trigger = {
+            833 = {
+                is_strongest_trade_power = ROOT
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 833
+		}
+        
+		effect = {
+            add_mercantilism = 10
+            
+            add_country_modifier = {
+                name = mission_drakkari_trade_dominance
+                duration = -1
+            }
+		}
+	}
+    
+    wwu_expand_the_aquaducts = {
+		icon = mission_strand_of_the_ancients
+        position = 7
+        
+		required_missions = { 
+            wwu_restore_gundrak
+        }
+        
+		trigger = {
+            calc_true_if = {
+                amount = 10
+                
+                region_zuldrak = {
+                    owned_by = ROOT
+                    OR = {
+                        has_trade_building_trigger = yes
+                        has_production_building_trigger = yes
+                        has_road_building_trigger = yes
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            region = region_zuldrak
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_drakkari_aquaduct_system
                 duration = -1
             }
 		}
