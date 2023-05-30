@@ -1,0 +1,65 @@
+#---------------------------------------
+# Purchase Land
+#---------------------------------------
+purchase_land = {
+	category = economy
+	
+	alert_index = 3
+	alert_tooltip = purchase_land_tooltip
+	require_acceptance = no
+    
+	is_visible = {  
+        NOT = { has_country_flag = in_land_purchase_process }
+        
+        NOT = { is_rival = FROM }
+        NOT = { is_enemy = FROM }
+        FROM = {
+            has_opinion = {
+                who = ROOT
+                value = 0
+            }
+            NOT = { is_rival = ROOT }
+            NOT = { is_enemy = ROOT }
+		}
+	}
+	is_allowed = {
+        #has_idea = wwu_expansion_ideas_7
+        NOT = { has_country_modifier = land_purchase_cooldown }
+        is_at_war = no
+		FROM = {
+            is_at_war = no
+            has_opinion = {
+                who = ROOT
+                value = 180
+            }
+        }
+	}
+	on_accept = {
+        hidden_effect = {
+            if = { 
+                limit = { has_global_flag = enable_diplomacy_logging }
+                log = "DEBUG - [Root.GetName], [From.GetName] - purchase_land - accepted"
+            }
+        }
+        
+        save_event_target_as = land_purchase_purchasing_nation
+        add_country_modifier = {
+            name = land_purchase_cooldown
+            duration = 365
+            hidden = yes
+        }
+		FROM = {
+            save_event_target_as = land_purchase_target_nation
+        }
+        
+        country_event = { id = wwu_land_purchase.1 }
+	}
+	on_decline = { }
+	
+	ai_acceptance = {
+        
+	}
+	ai_will_do = {
+        always = no
+	}
+}
