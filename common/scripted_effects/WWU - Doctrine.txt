@@ -18,6 +18,9 @@ clear_siege_doctrine_flags = {
     clr_country_flag = siege_type_2
     clr_country_flag = siege_type_3
     clr_country_flag = siege_type_4
+    clr_country_flag = siege_type_5
+    clr_country_flag = siege_type_6
+    clr_country_flag = siege_type_7
 }
 
 siege_doctrine_effect = {
@@ -202,6 +205,152 @@ siege_doctrine_effect = {
                     relentless_conquest_effect_coup_de_grace = yes
                 }
             }
+        }
+    }
+    # Siege Doctrine: Enslave the Remnants
+    if = {
+        limit = {
+            FROM = {
+                has_country_flag = siege_type_5
+            }
+            NOT = { owned_by = FROM } # Stop any issues where FROM re-sieges there own province, and applies devastation
+        }
+        
+        if = {
+            limit = {
+                FROM = {
+                    mil_power = 10
+                }
+            }
+            
+            FROM = {
+                add_mil_power = -10
+            }
+            
+            # Cascade, add manpower for each breakpoint
+            if = {
+                limit = {
+                    development = 3
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 6
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 9
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 12
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 15
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 18
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 21
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 24
+                }
+                
+                FROM = { add_manpower = 0.25 }
+            }
+            if = {
+                limit = {
+                    development = 27
+                }
+                
+                FROM = { add_manpower = 0.5 }
+            }
+            if = {
+                limit = {
+                    development = 30
+                }
+                
+                FROM = { add_manpower = 0.5 }
+            }
+        }
+    }
+    # Siege Doctrine: Purify and Cleanse
+    if = {
+        limit = {
+            FROM = {
+                has_country_flag = siege_type_6
+            }
+            NOT = { owned_by = FROM } # Stop any issues where FROM re-sieges there own province, and applies devastation
+        }
+        
+        if = {
+            limit = {
+                is_capital = no
+                NOT = { development = 10 }
+                FROM = {
+                    mil_power = 50
+                }
+            }
+            
+            FROM = {
+                add_mil_power = -50
+            }
+        
+            change_culture = FROM
+            change_religion = FROM
+            add_devastation = 25
+        }
+    }
+    # Siege Doctrine: Plague of Undeath
+    if = {
+        limit = {
+            FROM = {
+                has_country_flag = siege_type_7
+            }
+            NOT = { owned_by = FROM } # Stop any issues where FROM re-sieges there own province, and applies devastation
+        }
+        
+        if = {
+            limit = {
+                is_capital = no
+                FROM = {
+                    mil_power = 10
+                }
+            }
+            
+            FROM = {
+                add_mil_power = -10
+            }
+        
+            change_culture = FROM
+            change_religion = FROM
+            add_devastation = 25
         }
     }
 }
@@ -651,7 +800,7 @@ rebel_doctrine_effect = {
         if = {
             limit = {
                 FROM = {
-                    manpower = 1.0
+                    manpower = 1
                 }
                 # Cascading, scales the cost based on rebel stack size
                 if = {
@@ -659,7 +808,7 @@ rebel_doctrine_effect = {
                         units_in_province = 5
                     }
                     FROM = {
-                        manpower = 1.25
+                        manpower = 2
                     }
                 }
                 if = {
@@ -667,7 +816,7 @@ rebel_doctrine_effect = {
                         units_in_province = 10
                     }
                     FROM = {
-                        manpower = 1.5
+                        manpower = 3
                     }
                 }
                 if = {
@@ -675,7 +824,7 @@ rebel_doctrine_effect = {
                         units_in_province = 15
                     }
                     FROM = {
-                        manpower = 1.75
+                        manpower = 3
                     }
                 }
                 if = {
@@ -683,7 +832,7 @@ rebel_doctrine_effect = {
                         units_in_province = 20
                     }
                     FROM = {
-                        manpower = 2
+                        manpower = 4
                     }
                 }
                 if = {
@@ -691,7 +840,7 @@ rebel_doctrine_effect = {
                         units_in_province = 25
                     }
                     FROM = {
-                        manpower = 2.25
+                        manpower = 5
                     }
                 }
                 if = {
@@ -699,7 +848,7 @@ rebel_doctrine_effect = {
                         units_in_province = 30
                     }
                     FROM = {
-                        manpower = 2.5
+                        manpower = 6
                     }
                 }
                 if = {
@@ -707,7 +856,7 @@ rebel_doctrine_effect = {
                         units_in_province = 35
                     }
                     FROM = {
-                        manpower = 2.75
+                        manpower = 7
                     }
                 }
                 if = {
@@ -715,7 +864,7 @@ rebel_doctrine_effect = {
                         units_in_province = 40
                     }
                     FROM = {
-                        manpower = 3.0
+                        manpower = 8
                     }
                 }
             }
@@ -729,7 +878,7 @@ rebel_doctrine_effect = {
                     units_in_province = 5
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -737,7 +886,7 @@ rebel_doctrine_effect = {
                     units_in_province = 10
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -745,7 +894,7 @@ rebel_doctrine_effect = {
                     units_in_province = 15
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -753,7 +902,7 @@ rebel_doctrine_effect = {
                     units_in_province = 20
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -761,7 +910,7 @@ rebel_doctrine_effect = {
                     units_in_province = 25
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -769,7 +918,7 @@ rebel_doctrine_effect = {
                     units_in_province = 30
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -777,7 +926,7 @@ rebel_doctrine_effect = {
                     units_in_province = 35
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             if = {
@@ -785,7 +934,7 @@ rebel_doctrine_effect = {
                     units_in_province = 40
                 }
                 FROM = {
-                    add_manpower = -0.25
+                    add_manpower = -1
                 }
             }
             

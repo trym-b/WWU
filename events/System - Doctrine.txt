@@ -196,6 +196,7 @@ country_event = {
 		name = wwu_doctrine.2.option.sow_terror
     
         trigger = {
+            full_idea_group = wwu_professional_army_ideas
             NOT = { has_country_flag = siege_type_2 }
             mil_power = 100
         }
@@ -219,6 +220,7 @@ country_event = {
 		name = wwu_doctrine.2.option.sow_terror.selected
     
         trigger = {
+            full_idea_group = wwu_professional_army_ideas
             has_country_flag = siege_type_2
         }
         
@@ -235,11 +237,29 @@ country_event = {
 		name = wwu_doctrine.2.option.sow_terror.invalid
     
         trigger = {
+            full_idea_group = wwu_professional_army_ideas
             NOT = { has_country_flag = siege_type_2 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SOW_TERROR_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Sow Terror - INVALID
+	option = {
+		name = wwu_doctrine.2.option.sow_terror.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_professional_army_ideas }
+            NOT = { has_country_flag = siege_type_2 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_SOW_TERROR_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = SIEGE_DOCTRINE_SOW_TERROR_TT
         
@@ -253,6 +273,7 @@ country_event = {
 		name = wwu_doctrine.2.option.slash_and_burn
     
         trigger = {
+            full_idea_group = wwu_armaments_ideas
             NOT = { has_country_flag = siege_type_3 }
             mil_power = 100
         }
@@ -276,6 +297,7 @@ country_event = {
 		name = wwu_doctrine.2.option.slash_and_burn.selected
     
         trigger = {
+            full_idea_group = wwu_armaments_ideas
             has_country_flag = siege_type_3
         }
         
@@ -292,6 +314,7 @@ country_event = {
 		name = wwu_doctrine.2.option.slash_and_burn.invalid
     
         trigger = {
+            full_idea_group = wwu_armaments_ideas
             NOT = { has_country_flag = siege_type_3 }
             NOT = { mil_power = 100 }
         }
@@ -304,58 +327,293 @@ country_event = {
             factor = 0
         }
     }
-    
-    # Coup de Grace - NOT SELECTED
+    # Slash and Burn - INVALID
 	option = {
-		name = wwu_doctrine.2.option.coup_de_grace
+		name = wwu_doctrine.2.option.slash_and_burn.invalid
     
         trigger = {
-            NOT = { has_country_flag = siege_type_4 }
+            NOT = { full_idea_group = wwu_armaments_ideas }
+            NOT = { has_country_flag = siege_type_3 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_SLASH_AND_BURN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SLASH_AND_BURN_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    
+    # Coup de Grace - NOT SELECTED
+	# option = {
+		# name = wwu_doctrine.2.option.coup_de_grace
+    
+        # trigger = {
+            # NOT = { has_country_flag = siege_type_4 }
+            # mil_power = 100
+        # }
+        
+        # add_mil_power = -100
+        
+        # custom_tooltip = DOCTRINE_SPACER
+        # custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        
+        # hidden_effect = {
+            # clear_siege_doctrine_flags = yes
+            # set_country_flag = siege_type_4
+        # }
+        
+        # ai_chance = {
+            # factor = 20
+        # }
+    # }
+    # # Coup de Grace - SELECTED
+	# option = {
+		# name = wwu_doctrine.2.option.coup_de_grace.selected
+    
+        # trigger = {
+            # has_country_flag = siege_type_4
+        # }
+        
+        # custom_tooltip = ALREADY_CHOSEN_TT
+        # custom_tooltip = DOCTRINE_SPACER
+        # custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        
+        # ai_chance = {
+            # factor = 0
+        # }
+    # }
+    # # Coup de Grace - INVALID
+	# option = {
+		# name = wwu_doctrine.2.option.coup_de_grace.invalid
+    
+        # trigger = {
+            # NOT = { has_country_flag = siege_type_4 }
+            # NOT = { mil_power = 100 }
+        # }
+        
+        # custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        # custom_tooltip = DOCTRINE_SPACER
+        # custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        
+        # ai_chance = {
+            # factor = 0
+        # }
+    # }
+    
+    # Enslave the Remnants - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.enslave_the_remnants
+    
+        trigger = {
+            full_idea_group = wwu_tyranny_ideas
+            NOT = { has_country_flag = siege_type_5 }
             mil_power = 100
         }
         
         add_mil_power = -100
         
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        custom_tooltip = SIEGE_DOCTRINE_ENSLAVE_THE_REMNANTS_TT
         
         hidden_effect = {
             clear_siege_doctrine_flags = yes
-            set_country_flag = siege_type_4
+            set_country_flag = siege_type_5
         }
         
         ai_chance = {
             factor = 20
         }
     }
-    # Coup de Grace - SELECTED
+    # Enslave the Remnants - SELECTED
 	option = {
-		name = wwu_doctrine.2.option.coup_de_grace.selected
+		name = wwu_doctrine.2.option.enslave_the_remnants.selected
     
         trigger = {
-            has_country_flag = siege_type_4
+            full_idea_group = wwu_tyranny_ideas
+            has_country_flag = siege_type_5
         }
         
         custom_tooltip = ALREADY_CHOSEN_TT
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        custom_tooltip = SIEGE_DOCTRINE_ENSLAVE_THE_REMNANTS_TT
         
         ai_chance = {
             factor = 0
         }
     }
-    # Coup de Grace - INVALID
+    # Enslave the Remnants - INVALID
 	option = {
-		name = wwu_doctrine.2.option.coup_de_grace.invalid
+		name = wwu_doctrine.2.option.enslave_the_remnants.invalid
     
         trigger = {
-            NOT = { has_country_flag = siege_type_4 }
+            full_idea_group = wwu_tyranny_ideas
+            NOT = { has_country_flag = siege_type_5 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
         custom_tooltip = DOCTRINE_SPACER
-        custom_tooltip = SIEGE_DOCTRINE_COUP_DE_GRACE_TT
+        custom_tooltip = SIEGE_DOCTRINE_ENSLAVE_THE_REMNANTS_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Enslave the Remnants - INVALID
+	option = {
+		name = wwu_doctrine.2.option.enslave_the_remnants.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_tyranny_ideas }
+            NOT = { has_country_flag = siege_type_5 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_ENSLAVE_THE_REMNANTS_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_ENSLAVE_THE_REMNANTS_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    
+    # Purify and Cleanse - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.purify_and_cleanse
+    
+        trigger = {
+            full_idea_group = wwu_elitism_ideas
+            NOT = { religion = cult_of_the_damned }
+            NOT = { has_country_flag = siege_type_6 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_PURIFY_AND_CLEANSE_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_6
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+    }
+    # Purify and Cleanse - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.purify_and_cleanse.selected
+    
+        trigger = {
+            full_idea_group = wwu_elitism_ideas
+            NOT = { religion = cult_of_the_damned }
+            has_country_flag = siege_type_6
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_PURIFY_AND_CLEANSE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Purify and Cleanse - INVALID
+	option = {
+		name = wwu_doctrine.2.option.purify_and_cleanse.invalid
+    
+        trigger = {
+            full_idea_group = wwu_elitism_ideas
+            NOT = { religion = cult_of_the_damned }
+            NOT = { has_country_flag = siege_type_6 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_PURIFY_AND_CLEANSE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Purify and Cleanse - INVALID
+	option = {
+		name = wwu_doctrine.2.option.purify_and_cleanse.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_elitism_ideas }
+            NOT = { religion = cult_of_the_damned }
+            NOT = { has_country_flag = siege_type_6 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_ELITISM_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_PURIFY_AND_CLEANSE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    
+    # Spread the Plague of Undeath - NOT SELECTED
+	option = {
+		name = wwu_doctrine.2.option.spread_the_plague_of_undeath
+    
+        trigger = {
+            religion = cult_of_the_damned
+            NOT = { has_country_flag = siege_type_7 }
+            mil_power = 100
+        }
+        
+        add_mil_power = -100
+        
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SPREAD_THE_PLAGUE_OF_UNDEATH_TT
+        
+        hidden_effect = {
+            clear_siege_doctrine_flags = yes
+            set_country_flag = siege_type_7
+        }
+        
+        ai_chance = {
+            factor = 20
+        }
+    }
+    # Spread the Plague of Undeath - SELECTED
+	option = {
+		name = wwu_doctrine.2.option.spread_the_plague_of_undeath.selected
+    
+        trigger = {
+            religion = cult_of_the_damned
+            has_country_flag = siege_type_7
+        }
+        
+        custom_tooltip = ALREADY_CHOSEN_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SPREAD_THE_PLAGUE_OF_UNDEATH_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Spread the Plague of Undeath - INVALID
+	option = {
+		name = wwu_doctrine.2.option.spread_the_plague_of_undeath.invalid
+    
+        trigger = {
+            religion = cult_of_the_damned
+            NOT = { has_country_flag = siege_type_7 }
+            NOT = { mil_power = 100 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = SIEGE_DOCTRINE_SPREAD_THE_PLAGUE_OF_UNDEATH_TT
         
         ai_chance = {
             factor = 0
@@ -457,6 +715,7 @@ country_event = {
 		name = wwu_doctrine.3.option.martyrdom
     
         trigger = {
+            full_idea_group = wwu_propaganda_ideas
             NOT = { has_country_flag = homeland_type_2 }
             mil_power = 100
         }
@@ -480,6 +739,7 @@ country_event = {
 		name = wwu_doctrine.3.option.martyrdom.selected
     
         trigger = {
+            full_idea_group = wwu_propaganda_ideas
             has_country_flag = homeland_type_2
         }
         
@@ -496,11 +756,29 @@ country_event = {
 		name = wwu_doctrine.3.option.martyrdom.invalid
     
         trigger = {
+            full_idea_group = wwu_propaganda_ideas
             NOT = { has_country_flag = homeland_type_2 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Martyrdom - INVALID
+	option = {
+		name = wwu_doctrine.3.option.martyrdom.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_propaganda_ideas }
+            NOT = { has_country_flag = homeland_type_2 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_PROPAGANDA_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = HOMELAND_DOCTRINE_MARTYRDOM_TT
         
@@ -514,6 +792,7 @@ country_event = {
 		name = wwu_doctrine.3.option.sabotage
     
         trigger = {
+            full_idea_group = wwu_espionage_ideas
             NOT = { has_country_flag = homeland_type_3 }
             mil_power = 100
         }
@@ -537,6 +816,7 @@ country_event = {
 		name = wwu_doctrine.3.option.sabotage.selected
     
         trigger = {
+            full_idea_group = wwu_espionage_ideas
             has_country_flag = homeland_type_3
         }
         
@@ -553,11 +833,29 @@ country_event = {
 		name = wwu_doctrine.3.option.sabotage.invalid
     
         trigger = {
+            full_idea_group = wwu_espionage_ideas
             NOT = { has_country_flag = homeland_type_3 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Sabotage - INVALID
+	option = {
+		name = wwu_doctrine.3.option.sabotage.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_espionage_ideas }
+            NOT = { has_country_flag = homeland_type_3 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_ESPIONAGE_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = HOMELAND_DOCTRINE_SABOTAGE_TT
         
@@ -571,6 +869,7 @@ country_event = {
 		name = wwu_doctrine.3.option.slander
     
         trigger = {
+            full_idea_group = wwu_influence_ideas
             NOT = { has_country_flag = homeland_type_4 }
             mil_power = 100
         }
@@ -594,6 +893,7 @@ country_event = {
 		name = wwu_doctrine.3.option.slander.selected
     
         trigger = {
+            full_idea_group = wwu_influence_ideas
             has_country_flag = homeland_type_4
         }
         
@@ -610,11 +910,29 @@ country_event = {
 		name = wwu_doctrine.3.option.slander.invalid
     
         trigger = {
+            full_idea_group = wwu_influence_ideas
             NOT = { has_country_flag = homeland_type_4 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = HOMELAND_DOCTRINE_SLANDER_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Slander - INVALID
+	option = {
+		name = wwu_doctrine.3.option.slander.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_influence_ideas }
+            NOT = { has_country_flag = homeland_type_4 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_INFLUENCE_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = HOMELAND_DOCTRINE_SLANDER_TT
         
@@ -1186,6 +1504,7 @@ country_event = {
 		name = wwu_doctrine.5.option.bribery
     
         trigger = {
+            full_idea_group = wwu_economic_ideas
             NOT = { has_country_flag = rebel_doctrine_type_2 }
             mil_power = 100
         }
@@ -1209,6 +1528,7 @@ country_event = {
 		name = wwu_doctrine.5.option.bribery.selected
     
         trigger = {
+            full_idea_group = wwu_economic_ideas
             has_country_flag = rebel_doctrine_type_2
         }
         
@@ -1225,11 +1545,29 @@ country_event = {
 		name = wwu_doctrine.5.option.bribery.invalid
     
         trigger = {
+            full_idea_group = wwu_economic_ideas
             NOT = { has_country_flag = rebel_doctrine_type_2 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_BRIBERY_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Bribery - INVALID
+	option = {
+		name = wwu_doctrine.5.option.bribery.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_economic_ideas }
+            NOT = { has_country_flag = rebel_doctrine_type_2 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_ECONOMIC_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = REBEL_DOCTRINE_BRIBERY_TT
         
@@ -1243,6 +1581,7 @@ country_event = {
 		name = wwu_doctrine.5.option.corruption
     
         trigger = {
+            full_idea_group = wwu_law_ideas
             NOT = { has_country_flag = rebel_doctrine_type_3 }
             mil_power = 100
         }
@@ -1266,6 +1605,7 @@ country_event = {
 		name = wwu_doctrine.5.option.corruption.selected
     
         trigger = {
+            full_idea_group = wwu_law_ideas
             has_country_flag = rebel_doctrine_type_3
         }
         
@@ -1282,11 +1622,29 @@ country_event = {
 		name = wwu_doctrine.5.option.corruption.invalid
     
         trigger = {
+            full_idea_group = wwu_law_ideas
             NOT = { has_country_flag = rebel_doctrine_type_3 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_CORRUPTION_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Corruption - INVALID
+	option = {
+		name = wwu_doctrine.5.option.corruption.invalid
+    
+        trigger = {
+            NOT = { full_idea_group = wwu_law_ideas }
+            NOT = { has_country_flag = rebel_doctrine_type_3 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_LAW_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = REBEL_DOCTRINE_CORRUPTION_TT
         
@@ -1300,6 +1658,7 @@ country_event = {
 		name = wwu_doctrine.5.option.garrison
     
         trigger = {
+            full_idea_group = wwu_absolutism_ideas
             NOT = { has_country_flag = rebel_doctrine_type_4 }
             mil_power = 100
         }
@@ -1323,6 +1682,7 @@ country_event = {
 		name = wwu_doctrine.5.option.garrison.selected
     
         trigger = {
+            full_idea_group = wwu_absolutism_ideas
             has_country_flag = rebel_doctrine_type_4
         }
         
@@ -1339,11 +1699,29 @@ country_event = {
 		name = wwu_doctrine.5.option.garrison.invalid
     
         trigger = { 
+            full_idea_group = wwu_absolutism_ideas
             NOT = { has_country_flag = rebel_doctrine_type_4 }
             NOT = { mil_power = 100 }
         }
         
         custom_tooltip = DOCTRINE_LACK_MIL_COST_TT
+        custom_tooltip = DOCTRINE_SPACER
+        custom_tooltip = REBEL_DOCTRINE_GARRISON_TT
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    # Garrison - INVALID
+	option = {
+		name = wwu_doctrine.5.option.garrison.invalid
+    
+        trigger = { 
+            NOT = { full_idea_group = wwu_absolutism_ideas }
+            NOT = { has_country_flag = rebel_doctrine_type_4 }
+        }
+        
+        custom_tooltip = DOCTRINE_LACK_IDEAGROUP_ABSOLUTISM_TT
         custom_tooltip = DOCTRINE_SPACER
         custom_tooltip = REBEL_DOCTRINE_GARRISON_TT
         
@@ -1447,6 +1825,8 @@ country_event = {
 	desc = wwu_doctrine.60.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_sow_terror }
         is_at_war = yes
@@ -1488,6 +1868,8 @@ country_event = {
 	desc = wwu_doctrine.61.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_slash_and_burn }
         is_at_war = yes
@@ -1529,6 +1911,8 @@ country_event = {
 	desc = wwu_doctrine.62.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_coup_de_grace }
         is_at_war = yes
@@ -1570,6 +1954,8 @@ country_event = {
 	desc = wwu_doctrine.63.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_martyrdom }
         is_at_war = yes
@@ -1611,6 +1997,8 @@ country_event = {
 	desc = wwu_doctrine.64.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_sabotage }
         is_at_war = yes
@@ -1652,6 +2040,8 @@ country_event = {
 	desc = wwu_doctrine.65.desc
 	picture = ALARM_O_BOT_eventPicture
 	
+    is_triggered_only = yes
+    
     trigger = {
         NOT = { has_country_flag = doctrine_notify_slander }
         is_at_war = yes
@@ -1686,6 +2076,135 @@ country_event = {
     }
 }
 
+# Notification: Enslave the Remnants 
+country_event = {
+	id = wwu_doctrine.66
+	title = wwu_doctrine.66.title
+	desc = wwu_doctrine.66.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = doctrine_notify_enslave_the_remnants }
+        is_at_war = yes
+        any_country = {
+            war_with = ROOT
+            has_country_flag = siege_type_5
+        }
+    }
+
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    has_country_flag = siege_type_5
+                }
+                save_event_target_as = enemy_country
+            }
+            
+            set_country_flag = doctrine_notify_enslave_the_remnants
+        }
+    }
+    
+	option = {
+		name = wwu_doctrine.66.option.a
+    
+        custom_tooltip = SIEGE_DOCTRINE_ENSLAVE_THE_REMNANTS_ENEMY_TT
+    }
+}
+
+# Notification: Purify and Cleanse
+country_event = {
+	id = wwu_doctrine.67
+	title = wwu_doctrine.67.title
+	desc = wwu_doctrine.67.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = doctrine_notify_purify_and_cleanse }
+        is_at_war = yes
+        any_country = {
+            war_with = ROOT
+            has_country_flag = siege_type_6
+        }
+    }
+
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    has_country_flag = siege_type_6
+                }
+                save_event_target_as = enemy_country
+            }
+            
+            set_country_flag = doctrine_notify_purify_and_cleanse
+        }
+    }
+    
+	option = {
+		name = wwu_doctrine.67.option.a
+    
+        custom_tooltip = SIEGE_DOCTRINE_PURIFY_AND_CLEANSE_ENEMY_TT
+    }
+}
+
+# Notification: Spread the Plague of Undeath
+country_event = {
+	id = wwu_doctrine.68
+	title = wwu_doctrine.68.title
+	desc = wwu_doctrine.68.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = doctrine_notify_spread_the_plague_of_undeath }
+        is_at_war = yes
+        any_country = {
+            war_with = ROOT
+            has_country_flag = siege_type_7
+        }
+    }
+
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_country = {
+                limit = {
+                    war_with = ROOT
+                    has_country_flag = siege_type_7
+                }
+                save_event_target_as = enemy_country
+            }
+            
+            set_country_flag = doctrine_notify_spread_the_plague_of_undeath
+        }
+    }
+    
+	option = {
+		name = wwu_doctrine.68.option.a
+    
+        custom_tooltip = SIEGE_DOCTRINE_SPREAD_THE_PLAGUE_OF_UNDEATH_ENEMY_TT
+    }
+}
+
 # Reset Notification flags
 country_event = {
 	id = wwu_doctrine.99
@@ -1707,6 +2226,9 @@ country_event = {
         clr_country_flag = doctrine_notify_sow_terror
         clr_country_flag = doctrine_notify_slash_and_burn
         clr_country_flag = doctrine_notify_coup_de_grace
+        clr_country_flag = doctrine_notify_enslave_the_remnants
+        clr_country_flag = doctrine_notify_purify_and_cleanse
+        clr_country_flag = doctrine_notify_spread_the_plague_of_undeath
         clr_country_flag = doctrine_notify_martyrdom
         clr_country_flag = doctrine_notify_sabotage
         clr_country_flag = doctrine_notify_slander
@@ -1743,7 +2265,6 @@ country_event = {
         set_country_flag = homeland_type_1
         set_country_flag = army_doctrine_type_1
         set_country_flag = rebel_doctrine_type_1
-        set_country_flag = ai_doctrine_coo
         
         # AI remains on default for first 50 years
         if = {
