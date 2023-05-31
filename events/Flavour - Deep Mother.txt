@@ -1,0 +1,201 @@
+namespace = wwu_deep_mother
+
+#----------------------------------------
+# Flavour
+#----------------------------------------
+# Favour of the Deep Mother
+country_event = {
+	id = wwu_deep_mother.1
+	title = wwu_deep_mother.1.title
+	desc = wwu_deep_mother.1.desc
+	picture = MURLOC_WARLEADER_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = { 
+        NOT = { has_country_modifier = deep_mother_abyssal_blessing }
+        NOT = { has_country_modifier = deep_mother_oceanic_blessing }
+        NOT = { has_country_modifier = deep_mother_coastal_blessing }
+		religion = deep_mother
+        num_of_ports = 5
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_deep_mother.1.option.a
+		
+        add_country_modifier = {
+            name = deep_mother_abyssal_blessing
+            duration = -1
+        }
+	}
+    option = {
+		name = wwu_deep_mother.1.option.b
+		
+        add_country_modifier = {
+            name = deep_mother_oceanic_blessing
+            duration = -1
+        }
+	}
+    option = {
+		name = wwu_deep_mother.1.option.c
+		
+        add_country_modifier = {
+            name = deep_mother_coastal_blessing
+            duration = -1
+        }
+	}
+}
+
+# Collapse of Ritual Den
+country_event = {
+	id = wwu_deep_mother.2
+	title = wwu_deep_mother.2.title
+	desc = wwu_deep_mother.2.desc
+	picture = MURLOC_TIDECALLER_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        religion = deep_mother
+        
+        any_owned_province = {
+            has_port = yes
+            NOT = { has_province_modifier = abandoned_ritual_den }
+            NOT = { has_province_modifier = restored_ritual_den }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_port = yes
+                    NOT = { has_province_modifier = abandoned_ritual_den }
+                    NOT = { has_province_modifier = restored_ritual_den }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_deep_mother.2.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = abandoned_ritual_den
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_deep_mother.2.option.b
+		
+        add_years_of_income = -0.15
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = restored_ritual_den
+                duration = 3650
+            }
+        }
+	}
+}
+
+# Unbreaking Wave
+country_event = {
+	id = wwu_deep_mother.3
+	title = wwu_deep_mother.3.title
+	desc = wwu_deep_mother.3.desc
+	picture = MURLOC_TIDEHUNTER_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = deep_mother
+        NOT = { has_country_modifier = murloc_unbreakable_wave }
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_deep_mother.3.option.a
+		
+        add_country_modifier = {
+            name = murloc_unbreakable_wave
+            duration = -1
+        }
+	}
+}
+
+# Commune with the Sea
+country_event = {
+	id = wwu_deep_mother.4
+	title = wwu_deep_mother.4.title
+	desc = wwu_deep_mother.4.desc
+	picture = MURLOCS_ESCAPING_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = deep_mother
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_deep_mother.4.option.a
+		
+        add_yearly_manpower = 1.0
+	}
+    option = {
+		name = wwu_deep_mother.4.option.b
+		
+        add_yearly_sailors = 1.0
+	}
+}
+
+# Chosen of the Deep Mother
+country_event = {
+	id = wwu_deep_mother.5
+	title = wwu_deep_mother.5.title
+	desc = wwu_deep_mother.5.desc
+	picture = SILVER_HAND_MURLOC_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = deep_mother
+        stability = 3
+        NOT = { has_leader = "Chosen of the Deep Mother" }
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_deep_mother.5.option.a
+		
+        define_general = {
+            name = "Chosen of the Deep Mother"
+            shock = 5
+            fire = 5
+            siege = 5
+            manuever = 5
+        }
+	}
+}
