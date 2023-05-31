@@ -66,23 +66,29 @@ country_event = {
 	}
 }
 
-# The Emerald Nightmare
+# The Nightmare Spreads
 country_event = {
 	id = wwu_druidism.3
-	title = "wwu_druidism.3.title"
-	desc = "wwu_druidism.3.desc"
+	title = wwu_druidism.3.title
+	desc = wwu_druidism.3.desc
 	picture = EMERALD_NIGHTMARE_eventPicture	
-
+    goto = target_province
+    
+    is_triggered_only = yes
+    
 	trigger = {
 		religion = druidism
         NOT = { piety = 0 }
+        any_owned_province = {
+            NOT = { religion = nightmare }
+        }
 	}
 
 	mean_time_to_happen = {
 		days = 1
         
         modifier = {
-            factor = 2
+            factor = 5
             
             dominant_religion = nightmare
         }
@@ -97,24 +103,52 @@ country_event = {
             NOT = { piety = -0.5 }
         }
 	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = nightmare } 
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
 
 	option = {
-		name = "wwu_druidism.3.option.a"
+		name = wwu_druidism.3.option.a
 		
-        random_owned_province = {
-            limit = {
-                NOT = { religion = nightmare } 
-            }
-            
+        event_target:target_province = {
             change_religion = nightmare
         }
-        
-        if = {
-            limit = {
-                dominant_religion = nightmare
-            }
-            change_religion = nightmare
-        }
+	}
+}
+
+# The Emerald Nightmare
+country_event = {
+	id = wwu_druidism.4
+	title = wwu_druidism.4.title
+	desc = wwu_druidism.4.desc
+	picture = EMERALD_NIGHTMARE_eventPicture	
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+		religion = druidism
+        dominant_religion = nightmare
+        NOT = { piety = -0.8 }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.3.option.a
+		
+        change_religion = nightmare
 		
 		if = {
             limit = {
@@ -129,6 +163,65 @@ country_event = {
 				primary_culture = culture_night_elf
             }
             change_primary_culture = culture_satyr
+        }
+	}
+}
+
+# Shrine Upkeep
+country_event = {
+	id = wwu_druidism.5
+	title = wwu_druidism.5.title
+	desc = wwu_druidism.5.desc
+	picture = EMERALD_DREAM_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        religion = druidism
+        any_owned_province = {
+            NOT = { has_province_modifier = abandoned_druidic_shrine }
+            NOT = { has_province_modifier = restored_druidic_shrine }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    NOT = { has_province_modifier = abandoned_druidic_shrine }
+                    NOT = { has_province_modifier = restored_druidic_shrine }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_druidism.5.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = abandoned_druidic_shrine
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_druidism.5.option.b
+		
+        add_years_of_income = -0.5
+        add_piety = 0.05
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = restored_druidic_shrine
+                duration = 3650
+            }
         }
 	}
 }

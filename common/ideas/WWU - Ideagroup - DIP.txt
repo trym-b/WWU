@@ -280,14 +280,6 @@ wwu_exploration_ideas = {
                 tag = OGR # Gorian Empire
             }
         }
-        
-        modifier = {
-			factor = 0
-			OR = {
-				is_subject = yes
-				is_colonial_nation = yes
-			}
-		}
         modifier = {
             factor = 0
             NOT = { num_of_ports = 1 }
@@ -321,17 +313,33 @@ wwu_exploration_ideas = {
 			factor = 2
 			num_of_ports = 20
 		}
-        
         modifier = {
 			factor = 0
 			
             government = tribal
 		}
         
+        # VAWSER: non-colonial subjects won't pick this.
+        modifier = {
+			factor = 0
+            
+            NOT = { is_colonial_nation = yes }
+			is_subject = yes
+		}
+        # VAWSER: colonial nations should pick either Exploration or Expansion
+        modifier = {
+			factor = 4
+            
+			is_colonial_nation = yes
+            NOT = { has_idea_group = wwu_expansion_ideas }
+		}
         # VAWSER: stop the AI picking this once 6 nations have Exploration/Expansion/Imperialism
         modifier = {
 			factor = 0
 			
+            # Only apply to non-colonial nations
+            NOT = { is_colonial_nation = yes }
+            
             calc_true_if = {
                 amount = 6
                 
