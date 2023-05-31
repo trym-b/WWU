@@ -1,68 +1,64 @@
 namespace = wwu_druidism
 
-# Druidism Spreads
+#----------------------------------------
+# Flavour
+#----------------------------------------
+# Wisp Spirits
 country_event = {
 	id = wwu_druidism.1
-	title = "wwu_druidism.1.title"
-	desc = "wwu_druidism.1.desc"
-	picture = BITE_eventPicture	
+	title = wwu_druidism.1.title
+	desc = wwu_druidism.1.desc
+	picture = WISP_eventPicture
 
-	is_triggered_only = yes	
-	
+    is_triggered_only = yes
+    
 	trigger = {
-		religion = elune
-        any_owned_province = {
-            NOT = { religion = druidism }
-        }
-	}
-
-	mean_time_to_happen = {
-		days = 1		
-	}
-
-	option = {
-		name = "wwu_druidism.1.option.a"
-		
-        random_owned_province = {
-            limit = {
-                NOT = { religion = druidism }
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
             }
-            
-            change_religion = druidism
         }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.1.option.a
+		
+        add_stability_or_adm_power = yes
 	}
 }
 
-# Archdruid [Root.Monarch.GetName]?
+# One with Nature
 country_event = {
 	id = wwu_druidism.2
-	title = "wwu_druidism.2.title"
-	desc = "wwu_druidism.2.desc"
-	picture = WILDWALKER_eventPicture	
+	title = wwu_druidism.2.title
+	desc = wwu_druidism.2.desc
+	picture = MARK_OF_NATURE_eventPicture
 
-	is_triggered_only = yes	
-	
+    is_triggered_only = yes
+    
 	trigger = {
-		religion = elune
-        NOT = { ruler_religion = druidism }
+        NOT = { has_country_modifier = duty_of_the_druids }
 	}
-
+	
 	mean_time_to_happen = {
-		days = 1		
+		days = 1
 	}
-
+    
 	option = {
-		name = "wwu_druidism.2.option.a"
+		name = wwu_druidism.2.option.a
 		
-        set_ruler_religion = druidism
-        add_stability = -1
-        
-        custom_tooltip = DRUID_RULER_TT
-	}
-    option = {
-		name = "wwu_druidism.2.option.b"
-		
-        add_stability_or_adm_power = yes
+        add_country_modifier = {
+            name = duty_of_the_druids
+            duration = -1
+        }
 	}
 }
 
@@ -178,7 +174,16 @@ country_event = {
     is_triggered_only = yes
     
 	trigger = {
-        religion = druidism
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
         any_owned_province = {
             NOT = { has_province_modifier = abandoned_druidic_shrine }
             NOT = { has_province_modifier = restored_druidic_shrine }
@@ -226,3 +231,276 @@ country_event = {
 	}
 }
 
+# Versatility of the Druids
+country_event = {
+	id = wwu_druidism.6
+	title = wwu_druidism.6.title
+	desc = wwu_druidism.6.desc
+	picture = DRUID_OF_THE_CLAW_eventPicture
+
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_modifier = versatility_of_the_druids }
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
+        num_of_infantry = 20
+        num_of_cavalry = 10
+        num_of_artillery = 10
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.6.option.a
+		
+        add_country_modifier = {
+            name = versatility_of_the_druids
+            duration = 3650
+        }
+	}
+}
+
+# Preservation of Life
+country_event = {
+	id = wwu_druidism.7
+	title = wwu_druidism.7.title
+	desc = wwu_druidism.7.desc
+	picture = WAILING_CAVERNS_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
+        any_owned_province = {
+            OR = {
+                has_terrain = feltouched
+                has_terrain = arcanetouched
+                has_terrain = nethertouched
+                has_terrain = desolate_waste
+            }
+            NOT = { has_province_modifier = druidic_preservation }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    OR = {
+                        has_terrain = feltouched
+                        has_terrain = arcanetouched
+                        has_terrain = nethertouched
+                        has_terrain = desolate_waste
+                    }
+                    NOT = { has_province_modifier = druidic_preservation }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_druidism.7.option.a
+		
+        event_target:target_province = {
+            add_permanent_province_modifier = {
+                name = druidic_preservation
+                duration = 18250
+            }
+        }
+	}
+}
+
+# Celestial Judgment
+country_event = {
+	id = wwu_druidism.8
+	title = wwu_druidism.8.title
+	desc = wwu_druidism.8.desc
+	picture = TROGG_HATE_MINIONS_eventPicture
+
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_modifier = druidic_celestial_judgment }
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
+        is_at_war = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.8.option.a
+		
+        add_country_modifier = {
+            name = druidic_celestial_judgment
+            duration = 3650
+        }
+	}
+}
+
+# Natural Shapeshifters
+country_event = {
+	id = wwu_druidism.9
+	title = wwu_druidism.9.title
+	desc = wwu_druidism.9.desc
+	picture = SHAPESHIFT_eventPicture
+
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_modifier = druidic_shapeshift }
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
+        is_at_war = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.9.option.a
+		
+        add_country_modifier = {
+            name = druidic_shapeshift
+            duration = 3650
+        }
+	}
+}
+
+# Mass Shapeshift
+country_event = {
+	id = wwu_druidism.10
+	title = wwu_druidism.10.title
+	desc = wwu_druidism.10.desc
+	picture = DIRE_SHAPESHIFT_eventPicture
+
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_modifier = mass_shapeshift_bear }
+        NOT = { has_country_modifier = mass_shapeshift_cat }
+        NOT = { has_country_modifier = mass_shapeshift_storm_crow }
+        NOT = { has_country_modifier = mass_shapeshift_sea_lion }
+        OR = {
+            religion = druidism
+            AND = {
+                religion = elune
+                any_owned_province = {
+                    religion = druidism
+                }
+            }
+        }
+        
+        is_at_war = yes
+        NOT = { war_score = 0 } # Not winning war
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_druidism.10.option.a
+		
+        add_country_modifier = {
+            name = mass_shapeshift_bear
+            duration = 3650
+        }
+        
+        ai_chance = {
+            factor = 2
+        }
+	}
+    option = {
+		name = wwu_druidism.10.option.b
+		
+        add_country_modifier = {
+            name = mass_shapeshift_cat
+            duration = 3650
+        }
+        
+        ai_chance = {
+            factor = 2
+        }
+	}
+    option = {
+		name = wwu_druidism.10.option.c
+		
+        add_country_modifier = {
+            name = mass_shapeshift_storm_crow
+            duration = 3650
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_druidism.10.option.d
+		
+        add_country_modifier = {
+            name = mass_shapeshift_sea_lion
+            duration = 3650
+        }
+        
+        ai_chance = {
+            factor = 1
+            
+            # Block if nation has no ports
+            modifier = {
+                factor = 0
+                
+                NOT = { 
+                    any_owned_province = {
+                        has_port = yes
+                    }
+                }
+            }
+        }
+	}
+}

@@ -1,10 +1,480 @@
 namespace = wwu_elune
 
-# Cleanup the Night Warrior
+#----------------------------------------
+# Flavour
+#----------------------------------------
+# Druidism Spreads
+country_event = {
+	id = wwu_elune.1
+	title = wwu_elune.1.title
+	desc = wwu_elune.1.desc
+	picture = BITE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = elune
+        any_owned_province = {
+            NOT = { religion = druidism }
+        }
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_elune.1.option.a
+		
+        random_owned_province = {
+            limit = {
+                NOT = { religion = druidism }
+            }
+            
+            change_religion = druidism
+        }
+	}
+}
+
+# Archdruid [Root.Monarch.GetName]?
+country_event = {
+	id = wwu_elune.2
+	title = wwu_elune.2.title
+	desc = wwu_elune.2.desc
+	picture = WILDWALKER_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = elune
+        NOT = { ruler_religion = druidism }
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+
+	option = {
+		name = wwu_elune.2.option.a
+		
+        set_ruler_religion = druidism
+        add_stability = -1
+        
+        custom_tooltip = DRUID_RULER_TT
+	}
+    option = {
+		name = wwu_elune.2.option.b
+		
+        add_stability_or_adm_power = yes
+	}
+}
+
+# Restoration of the Shrines
+country_event = {
+	id = wwu_elune.3
+	title = wwu_elune.3.title
+	desc = wwu_elune.3.desc
+	picture = MIRROR_OF_ELUNE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_flag = restored_elune_shrines }
+		religion = elune
+        owns_core_province = 2298 # Sargeron
+        owns_core_province = 3668 # Sargeron Temple District
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = restored_elune_shrines
+        }
+    }
+
+	option = {
+		name = wwu_elune.4.option.a
+		
+        2298 = {
+            change_province_name = "Elune's Palace" 
+        }
+        3668 = {
+            change_province_name = "Elune's Cathedral" 
+        }
+        
+        custom_tooltip = ELUNE_SHRINE_EVENTS_TT
+	}
+}
+
+# Ancient Relic: Cup of Elune
+country_event = {
+	id = wwu_elune.4
+	title = wwu_elune.4.title
+	desc = wwu_elune.4.desc
+	picture = BOON_OF_ELUNE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_modifier = elune_spirits_of_the_ancients }
+        has_country_flag = restored_elune_shrines
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.4.option.a
+		
+        add_country_modifier = {
+            name = elune_spirits_of_the_ancients
+            duration = 3650
+        }
+	}
+}
+
+# Ancient Relic: Elune's Handmaiden
+country_event = {
+	id = wwu_elune.5
+	title = wwu_elune.5.title
+	desc = wwu_elune.5.desc
+	picture = ORACLE_OF_ELUNE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_modifier = elune_ritual_of_war }
+        has_country_flag = restored_elune_shrines
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.5.option.a
+		
+        add_country_modifier = {
+            name = elune_ritual_of_war
+            duration = 3650
+        }
+	}
+}
+
+# Ancient Relic: Elune's Brazier
+country_event = {
+	id = wwu_elune.6
+	title = wwu_elune.6.title
+	desc = wwu_elune.6.desc
+	picture = CHOSEN_WILDKIN_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_modifier = elune_sacrificial_offering }
+        has_country_flag = restored_elune_shrines
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.6.option.a
+		
+        add_country_modifier = {
+            name = elune_sacrificial_offering
+            duration = 3650
+        }
+	}
+}
+
+# Ancient Relic: Ancient Vortex Runestone
+country_event = {
+	id = wwu_elune.7
+	title = wwu_elune.7.title
+	desc = wwu_elune.7.desc
+	picture = ELUNES_GRACE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_modifier = elune_wrath_of_elune }
+        has_country_flag = restored_elune_shrines
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.7.option.a
+		
+        add_country_modifier = {
+            name = elune_wrath_of_elune
+            duration = 3650
+        }
+	}
+}
+
+# Moonwell Upkeep
+country_event = {
+	id = wwu_elune.8
+	title = wwu_elune.8.title
+	desc = wwu_elune.8.desc
+	picture = MIRROR_OF_ELUNE_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        religion = elune
+        
+        any_owned_province = {
+            NOT = { has_province_modifier = abandoned_moonwell }
+            NOT = { has_province_modifier = restored_moonwell }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    NOT = { has_province_modifier = abandoned_moonwell }
+                    NOT = { has_province_modifier = restored_moonwell }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_elune.8.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = abandoned_moonwell
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_elune.8.option.b
+		
+        add_years_of_income = -0.33
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = restored_moonwell
+                duration = 3650
+            }
+        }
+	}
+}
+
+# Devotion of the Priestesses
+country_event = {
+	id = wwu_elune.9
+	title = wwu_elune.9.title
+	desc = wwu_elune.9.desc
+	picture = ELUNE_PRIESTESS_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = elune
+        uses_devotion = yes
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.9.option.a
+		
+        add_devotion = 25
+	}
+}
+
+# Tranquillity Reigns
 country_event = {
 	id = wwu_elune.10
-	title = "wwu_elune.10.title"
-	desc = "wwu_elune.10.desc"
+	title = wwu_elune.10.title
+	desc = wwu_elune.10.desc
+	picture = ELUNES_GRACE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = elune
+        stability = 0
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.10.option.a
+		
+        add_stability_or_adm_power = yes
+	}
+}
+
+# Elune's Guidance
+country_event = {
+	id = wwu_elune.11
+	title = wwu_elune.11.title
+	desc = wwu_elune.11.desc
+	picture = WARRIOR_OF_ELUNE_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { has_country_modifier = elune_guidance }
+		religion = elune
+        is_at_war = yes
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.11.option.a
+		
+        add_country_modifier = {
+            name = elune_guidance
+            duration = 3650
+        }
+	}
+}
+
+# Blessing of Immortality
+country_event = {
+	id = wwu_elune.12
+	title = wwu_elune.12.title
+	desc = wwu_elune.12.desc
+	picture = ELUNE_CELEBRANT_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+		religion = elune
+        NOT = { is_immortal_lifespan = yes }
+        stability = 3
+        adm = 4
+        dip = 4
+        mil = 4
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.12.option.a
+		
+        custom_tooltip = ELUNE_IMMORTALITY_TT
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+        }
+	}
+}
+
+# Wildkin Gather
+country_event = {
+	id = wwu_elune.13
+	title = wwu_elune.13.title
+	desc = wwu_elune.13.desc
+	picture = CHOSEN_WILDKIN_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { manpower_percentage = 0.5 }
+        NOT = { has_country_modifier = elune_wildkin_protection }
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.13.option.a
+		
+        add_yearly_manpower = 2.0
+	}
+    option = {
+		name = wwu_elune.13.option.a
+		
+        add_devotion = 10
+        
+        add_country_modifier = {
+            name = elune_wildkin_protection
+            duration = 3650
+        }
+	}
+}
+
+# Elune's Warriors
+country_event = {
+	id = wwu_elune.14
+	title = wwu_elune.14.title
+	desc = wwu_elune.14.desc
+	picture = NIGHT_ELF_HUNTRESS_eventPicture	
+
+	is_triggered_only = yes	
+	
+	trigger = {
+        NOT = { army_size_percentage = 0.75 }
+		religion = elune
+	}
+
+	mean_time_to_happen = {
+		days = 1		
+	}
+    
+	option = {
+		name = wwu_elune.14.option.a
+		
+        capital_scope = {
+            infantry = ROOT
+            infantry = ROOT
+            infantry = ROOT
+            infantry = ROOT
+            infantry = ROOT
+        }
+	}
+    option = {
+		name = wwu_elune.14.option.a
+		
+        add_yearly_manpower = 1.0
+	}
+}
+
+#----------------------------------------
+# Utility
+#----------------------------------------
+# Cleanup the Night Warrior
+country_event = {
+	id = wwu_elune.100
+	title = wwu_elune.100.title
+	desc = wwu_elune.100.desc
 	picture = BESTIARY_eventPicture	
 
 	is_triggered_only = yes	
@@ -15,7 +485,7 @@ country_event = {
 	}
 
 	option = {
-		name = "wwu_elune.10.option.a"
+		name = wwu_elune.100.option.a
 		
         kill_leader = {
             type = "The Night Warrior"
