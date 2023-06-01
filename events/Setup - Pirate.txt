@@ -32,49 +32,7 @@ country_event = {
 	option = {
 		name = wwu_setup_pirate.1.option.a
         
-        area_plunder_bay = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_mount_hiji = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_limespoil = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_bootytown = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
         area_bloodsail_hold = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_northpoint = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_bloodbush = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
-        area_rustpoint = {
             cede_province = A15
             add_core = A15
             change_culture = culture_kul_tiran
@@ -82,71 +40,37 @@ country_event = {
         }
         
         ai_chance = {
-            factor = 100
+            factor = 90
         }
 	}
 	option = {
 		name = wwu_setup_pirate.1.option.b
         
         trigger = {
-            OR = {
-                area_plunder_bay = {
-                    owned_by = ROOT
-                }
-                area_mount_hiji = {
-                    owned_by = ROOT
-                }
-                area_limespoil = {
-                    owned_by = ROOT
-                }
-                area_bootytown = {
-                    owned_by = ROOT
-                }
-                area_bloodsail_hold = {
-                    owned_by = ROOT
-                }
-                area_northpoint = {
-                    owned_by = ROOT
-                }
-                area_bloodbush = {
-                    owned_by = ROOT
-                }
-                area_rustpoint = {
-                    owned_by = ROOT
-                }
+            area_bloodsail_hold = {
+                owned_by = ROOT
             }
         }
         
         area_bloodsail_hold = {
-            cede_province = A15
             add_core = A15
             change_culture = culture_kul_tiran
             change_religion = shadow
         }
-        area_plunder_bay = {
-            add_core = A15
-        }
-        area_mount_hiji = {
-            add_core = A15
-        }
-        area_limespoil = {
-            add_core = A15
-        }
-        area_bootytown = {
-            add_core = A15
-        }
-        area_northpoint = {
-            add_core = A15
-        }
-        area_bloodbush = {
-            add_core = A15
-        }
-        area_rustpoint = {
-            add_core = A15
-        }
         
         ai_chance = {
-            factor = 0
+            factor = 10
+            
+            # VAWSER: if ROOT is AI and a subject, then it is likely a colonial nation and as such shouldn't cede away land.
+            modifier = {
+                factor = 0
+                
+                area_bloodsail_hold = {
+                    owner = {
+                        is_subject = yes
+                    }
+                }
+            }
         }
 	}
     
