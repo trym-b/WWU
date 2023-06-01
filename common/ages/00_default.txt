@@ -117,10 +117,7 @@ age_orcish_horde = {
                     # Dark Portal Azeroth
                     1035 = {
                         owner = {
-                            OR = {
-                                tag = U03
-                                has_country_flag = orcish_horde_primary_nation
-                            }
+                            culture_group = culture_group_orc
                         }
                     }
                 }
@@ -401,13 +398,15 @@ age_burning_legion = {
 	can_start = {
 		custom_trigger_tooltip = {
 			tooltip = age_burning_legion_condition
+            
             OR = {
                 AND = {
                     current_age = age_scourge
-                    has_global_flag = scourge_of_lordaeron_flag
-                    OR = {
-                        NOT = { exists = P52 }
-                        has_global_flag = leader_of_legion_flag
+                    
+                    1268 = {
+                        owner = {
+                            NOT = { culture_group = culture_group_scourge }
+                        }
                     }
                 }
                 
