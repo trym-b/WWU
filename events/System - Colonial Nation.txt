@@ -1,0 +1,37 @@
+namespace = wwu_colonial_nation_boost
+
+country_event = {
+	id = wwu_colonial_nation_boost.1
+	title = wwu_colonial_nation_boost.1.title
+	desc = wwu_colonial_nation_boost.1.desc
+	picture = ALARM_O_BOT_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { has_country_flag = colonial_nation_boost }
+        OR = {
+            is_subject_of_type = colony
+            is_subject_of_type = crown_colony
+            is_subject_of_type = private_enterprise
+            is_subject_of_type = self_governing_colony
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = colonial_nation_boost
+        }
+    }
+    
+	option = {
+		name = wwu_colonial_nation_boost.1.option.a
+        
+        add_country_creation_boost = yes
+    }
+}
