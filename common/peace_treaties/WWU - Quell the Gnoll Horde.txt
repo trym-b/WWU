@@ -1,0 +1,116 @@
+#-------------------------------
+# Quell the Gnoll Horde
+#-------------------------------
+po_quell_the_gnoll_horde = {
+	category = 6
+	power_projection = humiliated_rival 
+	power_cost_base = 1.0
+	prestige_base = 1.0
+	ae_base = 1.0
+    
+	warscore_cost = {
+		all_provinces = 1.0
+		no_provinces = 0.0
+		owner_keeps = 0.0
+		conquered = 1.0
+		returned_core = 0.0
+		released_nation = 0.0
+		cancelled_subject = 0.0
+		concede_colonial_region = 0.0
+	}
+	warscore_cap = 25.0
+	requires_demand_independence = no
+	is_make_subject = no
+	requires_is_allowed = no
+	
+	is_visible = {
+        tag = STW
+        FROM = {
+            tag = GHR
+        }
+        NOT = { exists = WST }
+        NOT = { exists = DKS }
+        NOT = { exists = RRG }
+	}
+	is_allowed = {
+        tag = STW
+        FROM = {
+            tag = GHR
+        }
+	}
+	effect = {
+        region_redridge_mountains = {
+            limit = {
+                NOT = { area = area_redridge_canyons }
+                OR = {
+                    owned_by = GHR
+                    owned_by = STW
+                }
+            }
+            
+            cede_province = RRG
+            add_core = RRG
+        }
+        region_duskwood = {
+            limit = {
+                OR = {
+                    owned_by = GHR
+                    owned_by = STW
+                }
+            }
+            
+            cede_province = DKS
+            add_core = DKS
+        }
+        region_westfall = {
+            limit = {
+                OR = {
+                    owned_by = GHR
+                    owned_by = STW
+                }
+            }
+            
+            cede_province = WST
+            add_core = WST
+        }
+        region_elwynn_forest = {
+            limit = {
+                NOT = { province_id = 1639 }
+                NOT = { province_id = 1618 }
+            }
+            
+            cede_province = ROOT
+            add_core = ROOT
+        }
+        
+        create_subject = {
+            subject_type = tributary_vassal
+            subject = RRG
+        }
+        create_subject = {
+            subject_type = tributary_vassal
+            subject = DKS
+        }
+        create_subject = {
+            subject_type = tributary_vassal
+            subject = WST
+        }
+        
+        RRG = {
+            country_event = { id = wwu_discovery.2 days = 1 }
+        }
+        DKS = {
+            country_event = { id = wwu_discovery.2 days = 1 }
+        }
+        WST = {
+            country_event = { id = wwu_discovery.2 days = 1 }
+        }
+	}
+	ai_weight = {
+		export_to_variable = {
+			variable_name = ai_value
+			value = 1000
+		}
+	}
+}
+
