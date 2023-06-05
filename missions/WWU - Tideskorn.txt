@@ -1,0 +1,537 @@
+#--------------------------------------
+# Name
+#--------------------------------------
+TID_tideskorn_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TID
+	}
+    
+	has_country_shield = yes
+	
+	TID_reclaim_tideskorn_harbor = {
+		icon = mission_zangar_sea
+        position = 2
+        
+		required_missions = { 
+            TID_sway_the_bonespeakers
+        }
+        
+		trigger = {
+            4246 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = titan_worship
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 4246
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			add_country_modifier = {
+                name = mission_odyns_blessing
+                duration = -1
+            }
+		}
+	}
+}
+
+TID_tideskorn_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TID
+	}
+    
+	has_country_shield = yes
+	
+	TID_sway_the_bonespeakers = {
+		icon = mission_runestone
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = BON
+                }
+                
+                BON = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = BON
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = BON
+                }
+                create_subject = {
+                    subject_type = tributary_vassal
+                    subject = BON
+                }
+            }
+		}
+	}
+    
+    TID_develop_nastrondir = {
+		icon = mission_drake_blue
+        position = 4
+        
+		required_missions = { 
+            TID_seek_odyns_favour
+        }
+        
+		trigger = {
+            4247 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                development = 20
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 4247
+		}
+        
+		effect = {
+            add_prestige = 25
+            
+            4247 = {
+                add_permanent_province_modifier = {
+                    name = mission_storm_dragons_of_nastrondir
+                    duration = -1
+                }
+            }
+		}
+	}
+}
+
+TID_tideskorn_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TID
+	}
+    
+	has_country_shield = yes
+	
+	TID_sway_the_valkyra = {
+		icon = mission_lost_text
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = VLK
+                }
+                
+                VLK = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = VLK
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = VLK
+                }
+                create_subject = {
+                    subject_type = tributary_vassal
+                    subject = VLK
+                }
+            }
+		}
+	}
+    
+    TID_unite_the_tribes = {
+		icon = mission_paladin_blade_of_justice_1
+        position = 2
+        
+		required_missions = { 
+            TID_sway_the_valkyra
+            TID_sway_the_drekirjar
+            TID_sway_the_bonespeakers
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = VLK
+                }
+                
+                VLK = {
+                    is_subject_of = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = DRJ
+                }
+                
+                DRJ = {
+                    is_subject_of = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    exists = BON
+                }
+                
+                BON = {
+                    is_subject_of = ROOT
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            OR = {
+                is_capital_of = VLK
+                is_capital_of = DRJ
+                is_capital_of = BON
+            }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_united_vrykul_tribes
+                duration = -1
+            }
+		}
+	}
+    
+    TID_seek_odyns_favour = {
+		icon = mission_odyn
+        position = 3
+        
+		required_missions = { 
+            TID_unite_the_tribes
+        }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = VLJ
+                }
+                
+                VLJ = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = VLJ
+		}
+        
+		effect = {
+            create_alliance = VLJ
+            
+            add_country_modifier = {
+                name = mission_odyns_favour
+                duration = -1
+            }
+		}
+	}
+    
+    TID_develop_hrydashal = {
+		icon = mission_tools
+        position = 4
+        
+		required_missions = { 
+            TID_seek_odyns_favour
+        }
+        
+		trigger = {
+            2678 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                development = 20
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2678
+		}
+        
+		effect = {
+            add_prestige = 25
+            
+            2678 = {
+                add_permanent_province_modifier = {
+                    name = mission_dragon_tamers_of_hrydashal
+                    duration = -1
+                }
+            }
+		}
+	}
+    
+    TID_a_fel_proposition = {
+		icon = mission_fel_orc
+        position = 5
+        
+		required_missions = { 
+            
+        }
+        
+		trigger = {
+            num_of_cities = 20
+            exists = B92
+            any_known_country = {
+                religion = fel
+                has_opinion = {
+                    who = ROOT
+                    value = 50
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = B92
+		}
+        
+		effect = {
+            define_ruler = {
+                name = "Skovald"
+                dynasty = "Tideskorn"
+                adm = 3
+                dip = 2
+                mil = 6
+                religion = fel
+            }
+            
+            if = {
+                limit = {
+                    alliance_with = VLJ
+                }
+                
+                break_alliance = VLJ
+            }
+            
+            2689 = {
+                add_permanent_claim = ROOT
+            }
+            
+            add_ruler_modifier = {
+                name = mission_felskorn_power
+                duration = -1
+            }
+		}
+	}
+    
+    TID_the_felskorn = {
+		icon = mission_fel_boar
+        position = 6
+        
+		required_missions = { 
+            TID_a_fel_proposition
+        }
+        
+		trigger = {
+            war_with = VLJ
+		}
+		provinces_to_highlight = {
+            is_capital_of = VLJ
+		}
+        
+		effect = {
+            override_country_name = FELSKORN
+            change_religion = fel
+            every_owned_province = {
+                limit = {
+                    religion = titan_worship
+                }
+                
+                change_religion = fel
+            }
+		}
+	}
+    
+    TID_the_aegis_of_aggramar = {
+		icon = mission_ancient_tablet
+        position = 7
+        
+		required_missions = { 
+            TID_the_felskorn
+        }
+        
+		trigger = {
+            2689 = {
+                owned_by = ROOT
+                religion = fel
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2689
+            NOT = { owned_by = ROOT }
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = B92
+                }
+                
+                create_alliance = B92
+            }
+            
+            add_country_modifier = {
+                name = mission_corrupted_aegis
+                duration = -1
+            }
+		}
+	}
+}
+
+TID_tideskorn_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TID
+	}
+    
+	has_country_shield = yes
+	
+	TID_sway_the_drekirjar = {
+		icon = mission_black_dragonflight
+        position = 1
+        
+		required_missions = { }
+        
+		trigger = {
+            if = {
+                limit = {
+                    exists = DRJ
+                }
+                
+                DRJ = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+            }
+		}
+		provinces_to_highlight = {
+            is_capital_of = DRJ
+		}
+        
+		effect = {
+            if = {
+                limit = {
+                    exists = DRJ
+                }
+                create_subject = {
+                    subject_type = tributary_vassal
+                    subject = DRJ
+                }
+            }
+		}
+	}
+    
+    TID_develop_haustvald = {
+		icon = mission_dark_portal_blue
+        position = 4
+        
+		required_missions = { 
+            TID_seek_odyns_favour
+        }
+        
+		trigger = {
+            2687 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                development = 20
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2687
+		}
+        
+		effect = {
+            add_prestige = 25
+            
+            2687 = {
+                add_permanent_province_modifier = {
+                    name = mission_portal_to_helheim
+                    duration = -1
+                }
+            }
+		}
+	}
+}
+
+TID_tideskorn_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = TID
+	}
+    
+	has_country_shield = yes
+	
+	TID_cleanse_the_cove_of_nashal = {
+		icon = mission_burning_castle
+        position = 2
+        
+		required_missions = { 
+            TID_sway_the_drekirjar
+        }
+        
+		trigger = {
+            2685 = {
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = titan_worship
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 2685
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+            add_country_modifier = {
+                name = mission_trust_of_the_storm_dragons
+                duration = -1
+            }
+            
+            add_accepted_culture = culture_storm_dragonflight
+		}
+	}
+}
