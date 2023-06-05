@@ -335,36 +335,67 @@ P14_forsaken_column_3 = {
 		required_missions = { P14_eradicate_the_scourge_in_plaguelands } 
        
 		trigger = {
-		    A91 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+            if = {
+                limit = {
+                    exists = A91
+                }
+                A91 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
+                }
+                area_sunstrider_isle = {
+                    type = all
+                    owned_by = A91
+                }
+                area_silvermoon = {
+                    type = all
+                    owned_by = A91
+                }
+                area_duskwither_hills = {
+                    type = all
+                    owned_by = A91
+                }
+                area_west_sanctum = {
+                    type = all
+                    owned_by = A91
+                }
+                area_fairbreeze_village = {
+                    type = all
+                    owned_by = A91
+                }
+                area_east_sanctum = {
+                    type = all
+                    owned_by = A91
                 }
             }
-            area_sunstrider_isle = {
-				type = all
-				owned_by = A91
-			}
-			area_silvermoon = {
-				type = all
-				owned_by = A91
-			}
-			area_duskwither_hills = {
-				type = all
-				owned_by = A91
-			}
-			area_west_sanctum = {
-				type = all
-				owned_by = A91
-			}
-			area_fairbreeze_village = {
-				type = all
-				owned_by = A91
-			}
-			area_east_sanctum = {
-				type = all
-				owned_by = A91
-			}
+            else = {
+                area_sunstrider_isle = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_silvermoon = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_duskwither_hills = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_west_sanctum = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_fairbreeze_village = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_east_sanctum = {
+                    type = all
+                    owned_by = ROOT
+                }
+            }
 		}
 		effect = {
             add_dip_power = 300		
@@ -372,6 +403,37 @@ P14_forsaken_column_3 = {
 				name = mission_silvermoon_in_need
 				duration = -1
 			}
+            
+            if = {
+                limit = {
+                    NOT = { exists = A91 }
+                }
+                
+                area_sunstrider_isle = {
+                    cede_province = A91
+                    add_core = A91
+                }
+                area_silvermoon = {
+                    cede_province = A91
+                    add_core = A91
+                }
+                area_duskwither_hills = {
+                    cede_province = A91
+                    add_core = A91
+                }
+                area_west_sanctum = {
+                    cede_province = A91
+                    add_core = A91
+                }
+                area_fairbreeze_village = {
+                    cede_province = A91
+                    add_core = A91
+                }
+                area_east_sanctum = {
+                    cede_province = A91
+                    add_core = A91
+                }
+            }
 		}
 	}
 }

@@ -1,0 +1,296 @@
+namespace = mission_sunfury
+
+# Reject The Burning Legion!
+country_event = {
+	id = mission_sunfury.1
+	title = mission_sunfury.1.title
+	desc = mission_sunfury.1.desc
+	picture = CROWN_OF_KAELTHAS_eventPicture
+    
+	is_triggered_only = yes
+	
+	trigger = {
+		tag = A93 # Country is Sunfury
+		exists = A91 # Silvermoon exists
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = mission_sunfury.1.option.a
+		        
+        B92 = {
+            add_opinion = {
+                who = ROOT
+                modifier = loyal_to_the_legion
+            }
+        }
+        add_opinion = {
+            who = B92
+            modifier = loyal_to_the_legion
+        }
+        
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = mission_sunfury.1.option.b
+        
+		add_prestige = 100
+		add_stability = -2
+		change_religion = arcane
+        
+		every_owned_province = {
+            change_religion = arcane
+        }
+        
+		B92 = {
+			add_opinion = {
+                who = ROOT
+                modifier = betrayed_the_legion
+            }
+        }
+        add_opinion = {
+            who = B92
+            modifier = betrayed_the_legion
+        }
+        
+		ai_chance = { factor = 0 }
+	}
+}
+
+# Submission to Sunfury
+country_event = {
+	id = mission_sunfury.2
+	title = mission_sunfury.2.title
+	desc = mission_sunfury.2.desc
+	picture = CROWN_OF_KAELTHAS_eventPicture
+    
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = mission_sunfury.2.option.a
+		
+        hidden_effect = {
+            set_country_flag = submitted_to_sunfury
+        }
+        
+        A93 = {
+            create_subject = {
+                subject_type = vassal
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 90
+        }
+	}
+	
+	option = {
+		name = mission_sunfury.2.option.b
+        
+        hidden_effect = {
+            set_country_flag = rejected_sunfury
+        }
+        
+		every_owned_province = {
+            add_permanent_claim = A93
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+
+# Corruption of Karazhan
+province_event = {
+	id = mission_sunfury.3
+	title = mission_sunfury.3.title
+	desc = mission_sunfury.3.desc
+	picture = RETURN_TO_KARAZHAN_eventPicture
+    
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+    # Default option
+	option = {
+		name = mission_sunfury.3.option.a
+		
+        cede_province = B92
+        add_core = B92
+        
+        change_religion = fel
+        change_culture = culture_eredar
+        
+        add_base_tax = 2
+        add_base_production = 2
+        add_base_manpower = 2
+       
+        ai_chance = {
+            factor = 100
+        }
+	}
+	
+    # Player option
+	option = {
+		name = mission_sunfury.3.option.b
+        
+        change_religion = fel
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# The Shattered Sun
+province_event = {
+	id = mission_sunfury.4
+	title = mission_sunfury.4.title
+	desc = mission_sunfury.4.desc
+	picture = MAGISTERS_TERRACE_eventPicture
+    
+	is_triggered_only = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = mission_sunfury.4.option.a
+		
+        cede_province = G19
+        add_core = G19
+        change_religion = light_of_the_naaru
+	}
+    
+    after = {
+        G19 = {
+            add_stability = 3
+            add_treasury = 1000
+            set_capital = 2990
+            add_accepted_culture = culture_blood_elf
+            
+            capital_scope = {
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                infantry = G19
+                cavalry = G19
+                cavalry = G19
+                cavalry = G19
+                artillery = G19
+                artillery = G19
+            }
+        }
+    }
+}
+
+# Submission to the Legion
+country_event = {
+	id = mission_sunfury.5
+	title = mission_sunfury.5.title
+	desc = mission_sunfury.5.desc
+	picture = CROWN_OF_KAELTHAS_eventPicture
+    
+	is_triggered_only = yes
+	
+    trigger = {
+        NOT = { tag = B87 }
+        NOT = { tag = B92 }
+    }
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = mission_sunfury.5.option.a
+		
+        A93 = {
+            create_subject = {
+                subject_type = vassal
+                subject = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 90
+        }
+	}
+	
+	option = {
+		name = mission_sunfury.5.option.b
+        
+		every_owned_province = {
+            add_permanent_claim = A93
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+
+# Fel Corruption
+country_event = {
+	id = mission_sunfury.6
+	title = mission_sunfury.6.title
+	desc = mission_sunfury.6.desc
+	picture = VALDRIS_FELGORGE_eventPicture
+    
+	is_triggered_only = yes
+	
+    trigger = {
+        any_owned_province = {
+            has_province_modifier = mission_burning_legion_hegemony
+        }
+    }
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    has_province_modifier = mission_burning_legion_hegemony
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = mission_sunfury.6.option.a
+		
+        event_target:target_province = {
+            change_religion = fel
+            hidden_effect = {
+                remove_province_modifier = mission_burning_legion_hegemony
+            }
+        }
+	}
+}
+
+
+
