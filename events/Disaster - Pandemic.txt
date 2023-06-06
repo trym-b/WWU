@@ -16,6 +16,10 @@ country_event = {
     immediate = {
         hidden_effect = {
             set_country_flag = pandemic_outbreak_active
+            
+            random_owned_province = {
+                save_event_target_as = target_province
+            }
         }
     }
 	
@@ -23,6 +27,19 @@ country_event = {
 		name = wwu_pandemic.1.option.a
 		
 		add_stability = -3
+	}
+    option = {
+		name = wwu_pandemic.1.option.b
+		goto = target_province
+        
+		add_stability = -1
+        
+        event_target:target_province = {
+            spawn_rebels = {
+                type = plague_citizens_rebels
+                size = 3
+            }
+        }
 	}
 }
 
@@ -168,6 +185,21 @@ country_event = {
             }
         }
 	}
+    option = {
+		name = wwu_pandemic.10.option.e
+		
+		event_target:plague_province = {
+            spawn_rebels = {
+                type = plague_citizens_rebels
+                size = 1
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
 }
 
 # Major Outbreak in [Root.GetName]
@@ -273,6 +305,21 @@ country_event = {
         add_yearly_manpower = -0.6
         
 		event_target:plague_province = {
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
+    option = {
+		name = wwu_pandemic.11.option.e
+		
+		event_target:plague_province = {
+            spawn_rebels = {
+                type = plague_citizens_rebels
+                size = 2
+            }
+            
             add_province_modifier = {
                 name = plague_ridden_province
                 duration = 1800
@@ -391,6 +438,21 @@ country_event = {
             }
         }
 	}
+    option = {
+		name = wwu_pandemic.12.option.e
+		
+		event_target:plague_province = {
+            spawn_rebels = {
+                type = plague_citizens_rebels
+                size = 3
+            }
+            
+            add_province_modifier = {
+                name = plague_ridden_province
+                duration = 1800
+            }
+        }
+	}
 }
 
 # [Root.Monarch.GetName] has fallen ill
@@ -419,13 +481,19 @@ country_event = {
     option = {
 		name = wwu_pandemic.13.option.b
 		
-		add_adm_power = -100
+		add_adm_power = -50
         
         random = {
             chance = 25
             
             kill_ruler_or_debuff_immortal_ruler = yes
         }
+	}
+    option = {
+		name = wwu_pandemic.13.option.c
+		
+        add_treasury = -300
+		add_adm_power = -200
 	}
 }
 
@@ -454,7 +522,7 @@ country_event = {
 	option = {
 		name = wwu_pandemic.14.option.a
 		
-		add_adm_power = -100
+		add_adm_power = -50
         
         random_list = {
             33 = {
@@ -490,9 +558,9 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_pandemic.13.option.b
+		name = wwu_pandemic.14.option.b
 		
-		add_prestige = -25
+		add_prestige = -10
         
         kill_advisor_by_category_effect = {
             ADM = yes
@@ -503,5 +571,10 @@ country_event = {
         kill_advisor_by_category_effect = {
             MIL = yes
         }
+	}
+    option = {
+		name = wwu_pandemic.14.option.c
+		
+        add_treasury = -300
 	}
 }
