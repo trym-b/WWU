@@ -145,26 +145,77 @@ estate_warriors_guild_loyal_warriors = {
 	}
 }
 estate_warriors_guild_deathmarch = {
-	icon = privilege_combat_readiness
+	icon = privilege_sprint
 
     # Costs
     max_absolutism = 0
 	land_share = 0
-	loyalty = -0.1
+	loyalty = -0.05
 	influence = 0.1
     
 	penalties = {
         
 	}
 	benefits = {
-        movement_speed = 0.1
+        movement_speed = 0.2
 	}
 	ai_will_do = {
 		factor = 10
 	}
 }
-estate_warriors_guild_muster_warriors = {
-	icon = privilege_barracks
+estate_warriors_guild_military_requisitions = {
+	icon = privilege_combat_readiness
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.1
+	influence = 0.1
+    
+	penalties = {
+        global_tax_modifier = -0.1
+	}
+	benefits = {
+        land_maintenance_modifier = -0.1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_warriors_guild_forged_in_battle = {
+	icon = privilege_backstab
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+
+    can_select = {
+	}
+	on_granted = {  
+        if = {
+            limit = {
+                has_dlc = "Cradle of Civilization"
+            }
+            custom_tooltip = FORGED_IN_BATTLE_DLC_TT
+        }
+        else = {
+            custom_tooltip = FORGED_IN_BATTLE_TT
+        }
+	}
+	penalties = {
+        
+	}
+	benefits = {
+        
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_warriors_guild_scheduled_drills = {
+	icon = privilege_salvage_yard
 
     # Costs
     max_absolutism = 0
@@ -172,30 +223,92 @@ estate_warriors_guild_muster_warriors = {
 	loyalty = 0.05
 	influence = 0.05
     
-    can_select = {
-        prestige = 0
-	}
-    on_granted = {
-        add_prestige = -10
-        
-        custom_tooltip = estate_warriors_guild_muster_warriors_tooltip
-        hidden_effect = {
-            capital_scope = {
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-                infantry = ROOT
-            }
-        }
-	}
+    is_valid = {
+        has_dlc = "Cradle of Civilization"
+    }
 	penalties = {
         
 	}
 	benefits = {
-		
+        drill_gain_modifier = 0.33
 	}
 	ai_will_do = {
-		factor = 1
+		factor = 10
+	}
+}
+estate_warriors_guild_masters_of_shock_warfare = {
+	icon = privilege_secretive_man
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        leader_cost = 0.25
+	}
+	benefits = {
+        leader_land_shock = 2
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_warriors_guild_masters_of_ranged_warfare = {
+	icon = privilege_preparation
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        leader_cost = 0.25
+	}
+	benefits = {
+        leader_land_fire = 2
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_warriors_guild_masters_of_scout_warfare = {
+	icon = privilege_master_of_subtelty
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        leader_cost = 0.25
+	}
+	benefits = {
+        leader_land_manuever = 2
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_warriors_guild_masters_of_siege_warfare = {
+	icon = privilege_nuke
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        leader_cost = 0.25
+	}
+	benefits = {
+        leader_siege = 2
+	}
+	ai_will_do = {
+		factor = 10
 	}
 }

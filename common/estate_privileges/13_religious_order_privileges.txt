@@ -26,7 +26,7 @@ estate_religious_order_land_rights = {
 	icon = privilege_blueprint
     
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 10
 	loyalty = 0.05
 	influence = 0.05
@@ -95,7 +95,7 @@ estate_religious_order_guild_oversight = {
 	icon = privilege_ancient_history
 
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -112,7 +112,7 @@ estate_religious_order_enforce_unity = {
 	icon = privilege_clemency
 
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -130,7 +130,7 @@ estate_religious_order_proclaim_divinity = {
 	icon = privilege_crown_of_heaven
 
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -148,13 +148,13 @@ estate_religious_order_appease_the_masses = {
 	icon = privilege_clarity_of_purpose
 
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
     
 	penalties = {
-        global_autonomy = 0.05
+        global_autonomy = 0.02
 	}
 	benefits = {
         years_of_nationalism = -5
@@ -167,7 +167,7 @@ estate_religious_order_mass_conversion = {
 	icon = privilege_profession_scroll_2
 
     # Costs
-    max_absolutism = -2
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -177,6 +177,151 @@ estate_religious_order_mass_conversion = {
 	}
 	benefits = {
         missionaries = 1
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_religious_order_conversion_by_the_sword = {
+	icon = privilege_challenge
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+    can_select = {
+	}
+	on_granted = {
+        custom_tooltip = CONVERSION_BY_THE_SWORD_TT
+	}
+	penalties = {
+        
+	}
+	benefits = {
+        
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_religious_order_priority_of_self = {
+	icon = privilege_blessed_hands
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.1
+	influence = 0.1
+    
+	penalties = {
+        tolerance_heathen = -1
+        tolerance_heretic = -1
+	}
+	benefits = {
+        tolerance_own = 3
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+estate_religious_order_religious_zeal = {
+	icon = privilege_crown_of_glory
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	is_valid = {
+		OR = {
+            uses_church_aspects = yes
+            uses_fervor = yes
+            uses_piety = yes
+            uses_karma = yes
+            uses_patriarch_authority = yes
+        }
+	}
+	can_select = {
+		OR = {
+            uses_church_aspects = yes
+            uses_fervor = yes
+            uses_piety = yes
+            uses_karma = yes
+            uses_patriarch_authority = yes
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_church_aspects = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_church_power = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_fervor = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_fervor_increase = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_piety = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_piety = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_karma = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            monthly_karma = 3.0
+        }
+	}
+    loyalty_scaled_conditional_modifier = {
+		trigger = { 
+            uses_patriarch_authority = yes
+        }
+        
+        # Modifier at 100% Loyalty
+		modifier = { 
+            yearly_patriarch_authority = 3.0
+        }
+	}
+    
+	ai_will_do = {
+		factor = 1
+	}
+}
+estate_religious_order_conversion_by_decree = {
+	icon = privilege_note_2
+
+    # Costs
+    max_absolutism = 0
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	penalties = {
+        religious_unity = -0.2
+	}
+	benefits = {
+        prestige_per_development_from_conversion = 1.0
 	}
 	ai_will_do = {
 		factor = 10

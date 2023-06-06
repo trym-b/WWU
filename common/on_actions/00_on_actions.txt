@@ -247,6 +247,25 @@ on_battle_won_country = {
         add_mil_power = 5
     }
     
+    # Warrior's Guild
+    if = {
+        limit = {
+            has_estate_privilege = estate_warriors_guild_forged_in_battle
+        }
+        
+        if = {
+            limit = {
+                has_dlc = "Cradle of Civilization"
+            }
+            
+            add_army_professionalism = 0.01
+            add_army_tradition = 1
+        }
+        else = {
+            add_army_tradition = 2
+        }
+    }
+    
     government_on_battle_won_country_effect = yes
     faction_on_battle_won_country_effect = yes
     
@@ -447,6 +466,21 @@ on_siege_won_country = {
         }
         
         add_treasury = 10
+    }
+    
+    # Religious Order
+    if = {
+        limit = {
+            has_estate_privilege = estate_adventuring_guild_encourage_sacking
+            FROM = {
+                is_capital = no
+            }
+        }
+        
+        FROM = {
+            change_religion = ROOT
+            add_unrest = 5
+        }
     }
     
     random_events = {
