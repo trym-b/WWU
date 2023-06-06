@@ -492,3 +492,40 @@ recall_army = {
 		always = yes
 	}
 }
+
+#---------------------------------------
+# Claim Position of the Grand Warlock
+#---------------------------------------
+claim_grand_warlock = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = recall_army_tooltip
+	
+	require_acceptance = no # Whether the recipient gets an option to decline
+	
+	is_visible = {
+        religion = fel
+        FROM = {
+            religion = fel
+            is_papal_controller = yes
+        }
+	}
+	is_allowed = {
+        papal_influence = 100
+	}
+	on_accept = {
+        add_papal_influence = -100
+        set_papal_controller = ROOT
+	}
+	on_decline = { 
+	}
+	
+	ai_acceptance = { 
+	}
+
+	ai_will_do = {
+		always = no
+	}
+}
+
