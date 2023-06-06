@@ -403,6 +403,52 @@ on_siege_won_country = {
         }
     }
     
+    # Adventurer's Guild
+    if = {
+        limit = {
+            has_estate_privilege = estate_adventuring_guild_encourage_sacking
+        }
+        
+        # Cascade
+        if = {
+            limit = {
+                FROM = { development = 30 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 25 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 20 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 15 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 10 }
+            }
+            
+            add_treasury = 10
+        }
+        
+        add_treasury = 10
+    }
+    
     random_events = {
 		10 = army_professionalism_events.1 # City Sacked
 		100 = 0
@@ -1476,9 +1522,6 @@ on_monthly_pulse = {
         
         # Faction Support
         wwu_government_mechanics.10 # War Support
-        
-        # Fel Pope
-        wwu_fel_pope.1
         
         # Civilization
         wwu_civilization.100
@@ -3180,6 +3223,9 @@ on_five_year_pulse_2 = {
         100 = wwu_deep_mother.4
         10  = wwu_deep_mother.5
         
+        # Grand Warlock
+        100 = wwu_grand_warlock.1
+        
         1000 = 0
     }
 }
@@ -4083,6 +4129,19 @@ on_center_of_trade_upgrade = {
             value = 1
         } 
     }
+    
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_mercantile_guild_trade_hub_promotion
+            }
+        }
+        
+        area = {
+            add_base_tax = 1
+            add_base_production = 1
+        }
+    }
 }
 
 on_center_of_trade_downgrade = {
@@ -4859,6 +4918,24 @@ on_colony_finished = {
 		log = "DEBUG - [Root.GetName], [From.GetName]: on_colony_finished "
 	}
     
+    if = {
+        limit = {
+            FROM = {
+                has_estate_privilege = estate_mercantile_guild_trade_colonies
+            }
+        }
+        
+        add_base_production = 2
+        
+        # Only reduce if it is higher than 1
+        if = {
+            limit = {
+                base_manpower = 2
+            }
+            
+            add_base_manpower = -1
+        }
+    }
 }
 
 #ROOT - Country

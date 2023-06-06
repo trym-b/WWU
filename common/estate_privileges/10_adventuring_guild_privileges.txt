@@ -2,7 +2,7 @@ estate_adventuring_guild_exception = {
 	icon = privilege_three_flags
     
     # Costs
-    max_absolutism = -5
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.05
 	influence = 0.05
@@ -25,7 +25,7 @@ estate_adventuring_guild_exception = {
 estate_adventuring_guild_advancement_of_adventurers = {
 	icon = privilege_crown_of_heaven
     
-	max_absolutism = -5
+	max_absolutism = 0
 	loyalty = 0.05
 	land_share = 5
 	influence = 0.1
@@ -127,7 +127,7 @@ estate_adventuring_guild_guild_oversight = {
 	icon = privilege_ancient_history
 
     # Costs
-    max_absolutism = -5
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.1
 	influence = 0.1
@@ -144,7 +144,7 @@ estate_adventuring_guild_astute_recruitment = {
 	icon = privilege_challenge
     
     # Costs
-    max_absolutism = -5
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.05
 	influence = 0.05
@@ -157,7 +157,7 @@ estate_adventuring_guild_astute_recruitment = {
 	}
 	benefits = {
 		land_morale = 0.1
-        is_banner_modifier = yes
+        is_mercenary_modifier = yes
 	}
 	ai_will_do = {
 		factor = 10
@@ -167,7 +167,7 @@ estate_adventuring_guild_encourage_looting = {
 	icon = privilege_cash_flow
     
     # Costs
-    max_absolutism = -5
+    max_absolutism = 0
 	land_share = 0
 	loyalty = 0.05
 	influence = 0.05
@@ -181,7 +181,7 @@ estate_adventuring_guild_encourage_looting = {
 	}
 	benefits = {
 		loot_amount = 1.0
-        is_banner_modifier = yes
+        is_mercenary_modifier = yes
 	}
 	ai_will_do = {
 		factor = 10
@@ -190,42 +190,19 @@ estate_adventuring_guild_encourage_looting = {
 estate_adventuring_guild_adventurers_in_the_army = {
 	icon = privilege_crown
     
-	max_absolutism = -5
+	max_absolutism = 0
 	influence = 0.1
 	loyalty = 0.1
     
 	can_select = {
 		army_tradition = 30
 	}
-	on_granted = {
-        custom_tooltip = UNLOCK_ADVENTURER_UNIT_TT
-        
-		add_army_tradition = -30
-        
-        hidden_effect = {
-            every_owned_province = {
-                add_permanent_province_modifier = {
-                    name = adventurer_province
-                    duration = -1
-                }
-            }
-        }
-	}
-    on_revoked = {  
-        hidden_effect = {
-            every_owned_province = {
-                limit = {
-                    has_province_modifier = adventurer_province
-                }
-                remove_province_modifier = adventurer_province
-            }
-        }
-    }
 	penalties = {
 		army_tradition = -0.5
 	}
 	benefits = {
-		has_banners = yes
+		shock_damage = 0.25
+        is_mercenary_modifier = yes
 	}
     
 	ai_will_do = {
@@ -244,7 +221,7 @@ estate_adventuring_guild_adventurers_in_the_army = {
 estate_adventuring_guild_pioneer_initiatives = {
 	icon = privilege_safari_hat
     
-	max_absolutism = -5
+	max_absolutism = 0
 	loyalty = 0.05
 	influence = 0.05
     
@@ -268,12 +245,12 @@ estate_adventuring_guild_pioneer_initiatives = {
 estate_adventuring_guild_advisors = {
 	icon = privilege_salvage_yard
     
-	max_absolutism = -10
+	max_absolutism = 0
 	influence = 0.05
 	loyalty = 0.05
     
 	penalties = {
-		stability_cost_modifier = 0.15
+		stability_cost_modifier = 0.05
 	}
 	benefits = {
 		advisor_cost = -0.1
@@ -311,7 +288,7 @@ estate_adventuring_guild_advisors = {
 estate_adventuring_guild_generous_quest_rewards = {
 	icon = privilege_treasure_chest
     
-	max_absolutism = -5
+	max_absolutism = 0
 	loyalty = 0.1
 	influence = 0.1
 	land_share = 0
@@ -330,5 +307,109 @@ estate_adventuring_guild_generous_quest_rewards = {
 			factor = 0
 			NOT = { crown_land_share = 35 }
 		}
+	}
+}
+
+# Disciplined Adventurers
+estate_adventuring_guild_disciplined_adventurers = {
+	icon = privilege_backstab
+    
+	max_absolutism = 0
+	loyalty = 0.1
+	influence = 0.1
+	land_share = 0
+    
+	penalties = {
+        
+	}
+	benefits = {
+		discipline = 0.05
+        is_mercenary_modifier = yes
+	}
+    
+	ai_will_do = {
+		factor = 3
+	}
+}
+
+# Loyalty to the Coin
+estate_adventuring_guild_loyalty_to_the_coin = {
+	icon = privilege_trading_post
+    
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0.05
+	land_share = 0
+    
+	penalties = {
+        mercenary_cost = 0.1
+	}
+	benefits = {
+		morale_damage = 0.2
+        is_mercenary_modifier = yes
+	}
+    
+	ai_will_do = {
+		factor = 3
+	}
+}
+
+# Golden Garrisons
+estate_adventuring_guild_golden_garrisons = {
+	icon = privilege_trading_post
+    
+	max_absolutism = 0
+	loyalty = 0.05
+	influence = 0.05
+	land_share = 0
+    
+	penalties = {
+        
+	}
+	benefits = {
+		fort_maintenance_modifier = -0.2
+        garrison_size = 0.25
+	}
+    
+	ai_will_do = {
+		factor = 1
+        
+        modifier = {
+            factor = 2
+            
+            calc_true_if = {
+                amount = 5
+                
+                all_owned_province = {
+                    has_fort_building_trigger = yes
+                }
+            }
+        }
+	}
+}
+
+# Encourage Sacking
+estate_adventuring_guild_encourage_sacking = {
+	icon = privilege_gold
+    
+    # Costs
+    max_absolutism = 5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.05
+    
+	can_select = {
+	}
+	on_granted = {
+        custom_tooltip = ENCOURAGE_SACKING_TT
+	}
+	penalties = {
+        global_unrest = 2
+	}
+	benefits = {
+		
+	}
+	ai_will_do = {
+		factor = 0
 	}
 }
