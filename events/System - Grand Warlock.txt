@@ -50,3 +50,73 @@ country_event = {
         set_papal_controller = ROOT
 	}
 }
+
+# Pilfer the Treasury
+country_event = {
+	id = wwu_grand_warlock.2
+	title = wwu_grand_warlock.2.title
+	desc = wwu_grand_warlock.2.desc
+	picture = DEMONS_BITE_eventPicture
+	
+    is_triggered_only = yes
+    
+    trigger = {
+        has_dlc = "Emperor"
+        religion = fel
+        is_papal_controller = yes
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_grand_warlock.2.option.a
+        
+        add_curia_treasury = -250
+        add_treasury = 250
+	}
+    option = {
+		name = wwu_grand_warlock.2.option.b
+        
+        add_papal_influence = 30
+	}
+}
+
+# Demonic Crucible
+country_event = {
+	id = wwu_grand_warlock.3
+	title = wwu_grand_warlock.3.title
+	desc = wwu_grand_warlock.3.desc
+	picture = FEL_REAVER_eventPicture
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_modifier = grand_warlock_demonic_crucible }
+        religion = fel
+        is_papal_controller = yes
+        papal_influence = 50
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_grand_warlock.3.option.a
+        
+        add_papal_influence = -50
+        
+        add_country_modifier = {
+            name = grand_warlock_demonic_crucible
+            duration = 3650
+        }
+	}
+    option = {
+		name = wwu_grand_warlock.3.option.b
+        
+        add_papal_influence = 30
+	}
+}
+
