@@ -1,0 +1,195 @@
+namespace = wwu_candle_flavour
+
+# Protect the Candles
+country_event = {
+	id = wwu_candle_flavour.1
+	title = wwu_candle_flavour.1.title
+	desc = wwu_candle_flavour.1.desc
+	picture = KOBOLD_CANDLE_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        religion = candle
+        NOT = { has_country_modifier = event_candle_protection }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_candle_flavour.1.option.a
+		
+        add_mil_power = -50
+        
+        add_country_modifier = {
+            name = event_candle_protection
+            duration = 3650
+        }
+	}
+    option = {
+		name = wwu_candle_flavour.1.option.b
+		
+        add_mil_power = 50
+	}
+}
+
+# Darkness Approaches
+country_event = {
+	id = wwu_candle_flavour.2
+	title = wwu_candle_flavour.2.title
+	desc = wwu_candle_flavour.2.desc
+	picture = NO_TAKE_CANDLE_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        religion = candle
+    }
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_candle_flavour.2.option.a
+		
+        add_stability = 1
+	}
+    option = {
+		name = wwu_candle_flavour.2.option.b
+		
+        add_yearly_manpower = 1.0
+	}
+    option = {
+		name = wwu_candle_flavour.2.option.c
+		
+        add_corruption = -2
+	}
+}
+
+# Mineshaft Collapse
+country_event = {
+	id = wwu_candle_flavour.3
+	title = wwu_candle_flavour.3.title
+	desc = wwu_candle_flavour.3.desc
+	picture = MINE_SHAFT_eventPicture
+    goto = target_province
+    
+    is_triggered_only = yes
+    
+	trigger = {
+        religion = candle
+        
+        any_owned_province = {
+            NOT = { has_province_modifier = abandoned_mineshaft }
+            NOT = { has_province_modifier = reinforced_mineshaft }
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    NOT = { has_province_modifier = abandoned_mineshaft }
+                    NOT = { has_province_modifier = reinforced_mineshaft }
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+
+	option = {
+		name = wwu_candle_flavour.3.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = abandoned_mineshaft
+                duration = 3650
+            }
+        }
+	}
+    option = {
+		name = wwu_candle_flavour.3.option.b
+		
+        add_years_of_income = -0.1
+        
+        event_target:target_province = {
+            add_province_modifier = {
+                name = reinforced_mineshaft
+                duration = 3650
+            }
+        }
+	}
+}
+
+# Enduring Wax
+country_event = {
+	id = wwu_candle_flavour.4
+	title = wwu_candle_flavour.4.title
+	desc = wwu_candle_flavour.4.desc
+	picture = KOBOLD_CANDLE_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        religion = candle
+        NOT = { has_country_modifier = event_enduring_wax }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_candle_flavour.4.option.a
+		
+        add_country_modifier = {
+            name = event_enduring_wax
+            duration = 3650
+        }
+	}
+    option = {
+		name = wwu_candle_flavour.4.option.b
+		
+        add_treasury = 250
+	}
+}
+
+# The Candle Guides Us
+country_event = {
+	id = wwu_candle_flavour.5
+	title = wwu_candle_flavour.5.title
+	desc = wwu_candle_flavour.5.desc
+	picture = KOBOLD_GEOMANCER_eventPicture
+	
+	is_triggered_only = yes
+    
+    trigger = {
+        religion = candle
+        NOT = { has_country_modifier = event_candle_wisdom }
+    }
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_candle_flavour.5.option.a
+		
+        add_country_modifier = {
+            name = event_candle_wisdom
+            duration = 3650
+        }
+	}
+    option = {
+		name = wwu_candle_flavour.5.option.b
+		
+        add_adm_power = 250
+	}
+}
