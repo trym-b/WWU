@@ -1,0 +1,98 @@
+namespace = wwu_emerald_nightmare
+
+# Corruption of Shaladrassil
+country_event = {
+	id = wwu_emerald_nightmare.1
+	title = wwu_emerald_nightmare.1.title 
+	desc = wwu_emerald_nightmare.1.desc 
+	picture = EMERALD_NIGHTMARE_eventPicture
+	
+    is_triggered_only = yes
+    
+    trigger = {
+		NOT = { has_global_flag = corruption_of_shaladrassil }
+        
+        # Probably want to replace this for a better check in the future
+        calc_true_if = {
+            amount = 6
+            
+            broken_isles_superregion = {
+                religion = fel
+            }
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+
+    immediate = {
+        hidden_effect = {
+            hide_ambient_object = shaladrassil_pure
+            
+            set_global_flag = corruption_of_shaladrassil
+            
+            show_ambient_object = shaladrassil_corrupted
+        }
+    }
+    
+    option = {
+		name = wwu_emerald_nightmare.1.option.a
+		
+        2655 = { change_religion = nightmare }
+        
+		custom_tooltip = EMERALD_NIGHTMARE_SPREAD_TT
+    }   
+}
+
+# Corruption in [target_province.GetName]
+country_event = {
+	id = wwu_emerald_nightmare.2
+	title = wwu_emerald_nightmare.2.title 
+	desc = wwu_emerald_nightmare.2.desc 
+	picture = EMERALD_NIGHTMARE_TWILIGHT_eventPicture
+	goto = target_province
+    
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { religion = nightmare }
+        has_global_flag = corruption_of_shaladrassil
+        2655 = { religion = nightmare }
+        capital_scope = {
+            superregion = broken_isles_superregion
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = nightmare }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+    
+    option = {
+		name = wwu_emerald_nightmare.2.option.a
+		
+        event_target:target_province = {
+            change_religion = nightmare
+        }
+    }   
+    option = {
+		name = wwu_emerald_nightmare.2.option.b
+		
+        add_mil_power = -50
+        event_target:target_province = {
+            add_devastation = 50
+        }
+    }  
+}
