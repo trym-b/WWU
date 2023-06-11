@@ -199,9 +199,7 @@ class IOPDX_OT_material_create_popup(material_popup, Operator):
         apply.prop(self, "apply_mat")
         self.layout.separator()
 
-#---------------------------
 # Auto-Convert
-#---------------------------
 class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
     bl_idname = "io_pdx_mesh.material_autoconvert_popup"
     bl_description = bl_label = "Auto-convert material into PdxMeshStandard material"
@@ -210,22 +208,9 @@ class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
         return True
 
     def execute(self, context):
-        # Grab list of existing material slots
-        # Iterate over list
-        # -> Create PdxMeshStandard material for each item
-        # -> Save existing Base Color texture filename
-        # Assign PdxMeshStandard material to slot OR Make new PdxMeshStandard material slot and remove the old material 
-        # -> Add existing Base Color texture filename, change filetype to .dds
-        # -> Add nospec.dds to Specular/Roughness/Metallic
-        # -> Add nonormal.dds to Normal G/B
-
         IO_PDX_LOG.info("Auto-Convert")
-        image_color = bpy.data.images.new("no_color", 4, 4)
-        image_specular = bpy.data.images.new('no_spec.dds', 4, 4)
-        image_normal = bpy.data.images.new('no_normal.dds', 4, 4)
 
         mat_name = self.mat_name
-        inherit_spec_normal_name = self.inherit_spec_normal_name
 
         # Get list of meshes
         blender_meshes = [obj for obj in bpy.context.scene.objects if type(obj.data) == bpy.types.Mesh]
@@ -235,33 +220,17 @@ class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
             for slot in obj.material_slots:
                 mat = slot.material
 
-                # Make new PDX Material
                 mat_pdx = type("Material", (PDXData, object), {"shader": ["PdxMeshStandard"]})
                 shader = create_shader(mat_pdx, mat_name + " {0}".format(k), None, template_only=True)
 
-                # Edit shader
                 old_bsdf = mat.node_tree.nodes.get("Principled BSDF")
                 new_bsdf = shader.node_tree.nodes.get("Principled BSDF")
 
-                # Base Color
                 base_diff = old_bsdf.inputs["Base Color"].links[0].from_node.image
                 new_bsdf.inputs["Base Color"].links[0].from_node.image = base_diff
 
-                # Spec
-                #new_bsdf.inputs["Roughness"].links[0].from_node.image = image_specular
-
-                # Normal
-                #image_normal = bpy.data.images.new('no_normal.dds', 4, 4)
-                #new_bsdf.inputs["Normal"].links[0].from_node.image = image_normal
-
                 obj.material_slots[k].material = shader
                 k = k + 1
-
-                # Add to material slot list
-                #selected_objs = [obj for obj in context.selected_objects if isinstance(obj.data, bpy.types.Mesh)]
-                #for obj in selected_objs:
-                #    obj.data.materials.append(shader)
-                #    IO_PDX_LOG.info("Applied material: {0} to object: {1}".format(shader.name, obj.name))
 
         return {"FINISHED"}
 
@@ -273,12 +242,88 @@ class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
     def draw(self, context):
         box = self.layout.box()
         box.prop(self, "mat_name")
-        toggle = self.layout.box()
-        toggle.prop(self, "inherit_spec_normal_name")
 
-#---------------------------
+# Adjust Textures
+class IOPDX_OT_material_texture_adjust_popup(material_popup, Operator):
+    bl_idname = "io_pdx_mesh.material_texture_adjust_popup"
+    bl_description = bl_label = "Add no_spec.dds, no_normal.dds to PDX Materials, change .png to .dds"
+
+    def check(self, context):
+        return True
+
+    def execute(self, context):
+        normal_image = bpy.data.images.load(get_normal_filepath())
+        specular_image = bpy.data.images.load(get_specular_filepath())
+
+        for i, obj in enumerate(get_list_of_meshes()):
+            for slot in obj.material_slots:
+                mat = slot.material
+
+                change_diffuse_texture(mat)
+                add_specular_texture(mat, specular_image)
+                add_normal_texture(mat, normal_image)
+
+        return {"FINISHED"}
+
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self, width=350)
+
+    def draw(self, context):
+        box = self.layout.box()
+
+def get_specular_filepath():
+    return "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_spec.dds"
+
+def get_normal_filepath():
+    return "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_normal.dds";
+
+def get_list_of_meshes():
+    return [obj for obj in bpy.context.scene.objects if type(obj.data) == bpy.types.Mesh]
+
+def change_diffuse_texture(mat):
+    category = "Base Color"
+
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")
+
+    current_diffuse_filepath = bsdf.inputs[category].links[0].from_node.image.filepath
+    new_diffuse_filepath = current_diffuse_filepath.replace(".png", ".dds")
+
+    image_texture_node = mat.node_tree.nodes.new('ShaderNodeTexImage')
+    image_texture_node.image = bpy.data.images.load(new_diffuse_filepath)
+
+    link = mat.node_tree.links.new(image_texture_node.outputs["Color"], bsdf.inputs[category])
+    return
+
+def add_specular_texture(mat, image):
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")
+    bsdf.inputs["Roughness"].links[0].from_node.image = image
+    return
+
+def add_normal_texture(mat, image):
+    node_tree = mat.node_tree
+    surface_node = None
+    for node in node_tree.nodes:
+        if node.type == 'BSDF_PRINCIPLED':
+            surface_node = node
+            break
+
+    normal_input = surface_node.inputs['Normal']
+
+    if normal_input.is_linked:
+        # Disconnect the existing link
+        link = normal_input.links[0]
+        node_tree.links.remove(link)
+
+    normal_map_node = node_tree.nodes.new('ShaderNodeNormalMap')
+    image_texture_node = node_tree.nodes.new('ShaderNodeTexImage')
+
+    image_texture_node.image = image
+
+    link = node_tree.links.new(image_texture_node.outputs['Color'], normal_map_node.inputs['Color'])
+    link = node_tree.links.new(normal_map_node.outputs['Normal'], normal_input)
+    return
+
 # Edit Material
-#---------------------------
 class IOPDX_OT_material_edit_popup(material_popup, Operator):
     bl_idname = "io_pdx_mesh.material_edit_popup"
     bl_description = bl_label = "Edit a PDX material"
@@ -852,7 +897,16 @@ class IOPDX_PT_PDXblender_tools(PDXUI, Panel):
         row = col.row(align=True)
         row.operator("io_pdx_mesh.material_create_popup", icon="MATERIAL", text="Create")
         row.operator("io_pdx_mesh.material_edit_popup", icon="SHADING_TEXTURE", text="Edit")
+        col.separator()
+
+        col.label(text="Auto-Convert")
+        row = col.row(align=True)
         row.operator("io_pdx_mesh.material_autoconvert_popup", icon="MATERIAL", text="Auto-Convert")
+        col.separator()
+
+        col.label(text="Texture Adjust")
+        row = col.row(align=True)
+        row.operator("io_pdx_mesh.material_texture_adjust_popup", icon="MATERIAL", text="Texture Adjust")
         col.separator()
 
         col.label(text="PDX bones:")
