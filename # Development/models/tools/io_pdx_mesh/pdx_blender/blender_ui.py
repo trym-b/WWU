@@ -18,6 +18,8 @@ from .. import bl_info, IO_PDX_LOG, IO_PDX_SETTINGS, ENGINE_SETTINGS
 from ..pdx_data import PDXData
 from ..updater import github
 
+from wand import image as WandImage
+
 try:
     from . import blender_import_export
 
@@ -139,16 +141,20 @@ class material_popup(object):
         name="Apply material to selected?",
         default=False,
     )
-    inherit_spec_normal_name: BoolProperty(
-        name="Inherit Spec/Name Name:",
-        default=False,
+    specular_path: StringProperty(
+        name="Specular Filepath:",
+        default="",
+    )
+    normal_path: StringProperty(
+        name="Normal Filepath:",
+        default="",
     )
     # fmt:on
 
 
-#---------------------------
+# ---------------------------
 # Create Material
-#---------------------------
+# ---------------------------
 class IOPDX_OT_material_create_popup(material_popup, Operator):
     bl_idname = "io_pdx_mesh.material_create_popup"
     bl_description = bl_label = "Create a PDX material"
@@ -199,10 +205,12 @@ class IOPDX_OT_material_create_popup(material_popup, Operator):
         apply.prop(self, "apply_mat")
         self.layout.separator()
 
+# ---------------------------
 # Auto-Convert
+# ---------------------------
 class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
     bl_idname = "io_pdx_mesh.material_autoconvert_popup"
-    bl_description = bl_label = "Auto-convert material into PdxMeshStandard material"
+    bl_description = bl_label = "Convert existing materials into PdxMeshStandard"
 
     def check(self, context):
         return True
@@ -211,10 +219,15 @@ class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
         IO_PDX_LOG.info("Auto-Convert")
 
         mat_name = self.mat_name
+        specular_filepath = self.specular_path
+        normal_filepath = self.normal_path
 
-        # Get list of meshes
-        blender_meshes = [obj for obj in bpy.context.scene.objects if type(obj.data) == bpy.types.Mesh]
+        specular_image = bpy.data.images.load(specular_filepath)
+        normal_image = bpy.data.images.load(normal_filepath)
 
+        blender_meshes = get_list_of_meshes()
+
+        # Convert materials
         for i, obj in enumerate(blender_meshes):
             k = 0
             for slot in obj.material_slots:
@@ -232,30 +245,8 @@ class IOPDX_OT_material_autoconvert_popup(material_popup, Operator):
                 obj.material_slots[k].material = shader
                 k = k + 1
 
-        return {"FINISHED"}
-
-    def invoke(self, context, event):
-        self.mat_name = "PDX_Mat"
-        self.inherit_spec_normal_name = False
-        return context.window_manager.invoke_props_dialog(self, width=350)
-
-    def draw(self, context):
-        box = self.layout.box()
-        box.prop(self, "mat_name")
-
-# Adjust Textures
-class IOPDX_OT_material_texture_adjust_popup(material_popup, Operator):
-    bl_idname = "io_pdx_mesh.material_texture_adjust_popup"
-    bl_description = bl_label = "Add no_spec.dds, no_normal.dds to PDX Materials, change .png to .dds"
-
-    def check(self, context):
-        return True
-
-    def execute(self, context):
-        normal_image = bpy.data.images.load(get_normal_filepath())
-        specular_image = bpy.data.images.load(get_specular_filepath())
-
-        for i, obj in enumerate(get_list_of_meshes()):
+        # Add proper textures
+        for i, obj in enumerate(blender_meshes):
             for slot in obj.material_slots:
                 mat = slot.material
 
@@ -266,19 +257,65 @@ class IOPDX_OT_material_texture_adjust_popup(material_popup, Operator):
         return {"FINISHED"}
 
     def invoke(self, context, event):
+        self.mat_name = "PDX_Mat"
+        self.specular_path = "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_spec.dds"
+        self.normal_path = "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_normal.dds"
+        return context.window_manager.invoke_props_dialog(self, width=350)
+
+    def draw(self, context):
+        box = self.layout.box()
+        box.prop(self, "mat_name")
+        box2 = self.layout.box()
+        box2.prop(self, "specular_path")
+        box3 = self.layout.box()
+        box3.prop(self, "normal_path")
+
+# ---------------------------
+# Texture Convert
+# ---------------------------
+class IOPDX_OT_material_textureconvert_popup(material_popup, Operator):
+    bl_idname = "io_pdx_mesh.material_textureconvert_popup"
+    bl_description = bl_label = "Convert used PNG textures to DDS"
+
+    def check(self, context):
+        return True
+
+    def execute(self, context):
+        IO_PDX_LOG.info("Texture-Convert")
+
+        blender_meshes = get_list_of_meshes()
+
+        # Convert used material textures
+        for i, obj in enumerate(blender_meshes):
+            for slot in obj.material_slots:
+                mat = slot.material
+
+                convert_diffuse_texture(mat)
+
+        return {"FINISHED"}
+
+    def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self, width=350)
 
     def draw(self, context):
         box = self.layout.box()
 
-def get_specular_filepath():
-    return "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_spec.dds"
+# ---------------------------
+# Utility
+# ---------------------------
+def convert_diffuse_texture(mat):
+    category = "Base Color"
 
-def get_normal_filepath():
-    return "C:\\Users\\Xylozi\\AppData\\Roaming\\Blender Foundation\\Blender\\3.5\\scripts\\addons\\io_pdx_mesh\\resources\\no_normal.dds";
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")
 
-def get_list_of_meshes():
-    return [obj for obj in bpy.context.scene.objects if type(obj.data) == bpy.types.Mesh]
+    current_diffuse_filepath = bsdf.inputs[category].links[0].from_node.image.filepath
+    new_diffuse_filepath = current_diffuse_filepath.replace(".png", ".dds")
+
+    with WandImage.Image(filename=current_diffuse_filepath) as img:
+        img.compression = 'dxt5'
+        img.save(filename=new_diffuse_filepath)
+
+    return
 
 def change_diffuse_texture(mat):
     category = "Base Color"
@@ -323,7 +360,12 @@ def add_normal_texture(mat, image):
     link = node_tree.links.new(normal_map_node.outputs['Normal'], normal_input)
     return
 
+def get_list_of_meshes():
+    return [obj for obj in bpy.context.scene.objects if type(obj.data) == bpy.types.Mesh]
+
+# ---------------------------
 # Edit Material
+# ---------------------------
 class IOPDX_OT_material_edit_popup(material_popup, Operator):
     bl_idname = "io_pdx_mesh.material_edit_popup"
     bl_description = bl_label = "Edit a PDX material"
@@ -893,20 +935,20 @@ class IOPDX_PT_PDXblender_tools(PDXUI, Panel):
     def draw(self, context):
         col = self.layout.column(align=True)
 
+        col.label(text="Texture Convert:")
+        row = col.row(align=True)
+        row.operator("io_pdx_mesh.material_textureconvert_popup", icon="MATERIAL", text="Apply")
+        col.separator()
+
+        col.label(text="Material Convert:")
+        row = col.row(align=True)
+        row.operator("io_pdx_mesh.material_autoconvert_popup", icon="MATERIAL", text="Apply")
+        col.separator()
+
         col.label(text="PDX materials:")
         row = col.row(align=True)
         row.operator("io_pdx_mesh.material_create_popup", icon="MATERIAL", text="Create")
         row.operator("io_pdx_mesh.material_edit_popup", icon="SHADING_TEXTURE", text="Edit")
-        col.separator()
-
-        col.label(text="Auto-Convert")
-        row = col.row(align=True)
-        row.operator("io_pdx_mesh.material_autoconvert_popup", icon="MATERIAL", text="Auto-Convert")
-        col.separator()
-
-        col.label(text="Texture Adjust")
-        row = col.row(align=True)
-        row.operator("io_pdx_mesh.material_texture_adjust_popup", icon="MATERIAL", text="Texture Adjust")
         col.separator()
 
         col.label(text="PDX bones:")
