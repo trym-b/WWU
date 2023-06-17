@@ -205,6 +205,64 @@ country_decisions = {
             }
         }
     }
+
+    # Restore Nordrassil
+    restore_nordrassil = {
+        color = { 156 158 23}
+        
+        potential = {
+            NOT = {
+                OR = {
+                    has_country_flag = is_evil
+                    religion = fel
+                }
+            }
+
+            has_country_flag = burnt_nordrassil
+            OR = {
+                religion = druidism
+                religion = dragon_aspects
+                religion = elune
+                religion = shamanism
+            }
+
+            # Owns Nordrassil
+            1334 = {
+                owner = {
+                    has_country_flag = burnt_nordrassil
+                }
+            }
+            adm_power = 300
+        }
+
+        effect = {
+
+            remove_country_modifier = burnt_teldrassil
+
+            add_adm_power = -300
+
+            1334 = {
+                change_culture = culture_forest_nypmh
+                change_religion = druidism
+                add_core = A95
+                add_devastation = -100
+                set_base_tax = 6
+                set_base_production = 6
+                set_base_manpower = 6
+                center_of_trade = 1
+                add_permanent_province_modifier = {
+                    name = nordrassil_restored
+                    duration = -1
+                }
+            }
+
+            add_stability = 1
+            add_prestige = 50
+        }
+        ai_will_do = {
+            factor = 1
+        }
+    }
     
     #--------------------------------
     # Teldrassil
