@@ -208,40 +208,32 @@ country_decisions = {
 
     # Restore Nordrassil
     restore_nordrassil = {
-        color = { 156 158 23}
+        color = { 156 158 23 }
         
         potential = {
-            NOT = {
-                OR = {
-                    has_country_flag = is_evil
-                    religion = fel
-                }
-            }
-
+            has_global_flag = nordrassil_burned
+            NOT = { has_country_flag = is_evil }
+            NOT = { religion = fel }
+            owns = 1334 # Nordrassil
+        }
+        allow = {
             OR = {
                 religion = druidism
                 religion = dragon_aspects
                 religion = elune
                 religion = shamanism
             }
-
-            # Owns Nordrassil
-            owns = 1334 
             
-            1334 = {
-                owner = {
-                    has_country_flag = burnt_nordrassil
-                }
-            }
             adm_power = 300
         }
 
         effect = {
-
-            remove_country_modifier = burnt_teldrassil
-
             add_adm_power = -300
+            
+            add_stability = 1
+            add_prestige = 50
 
+            # Nordrassil
             1334 = {
                 change_culture = culture_forest_nymph
                 change_religion = druidism
@@ -257,8 +249,22 @@ country_decisions = {
                 }
             }
 
-            add_stability = 1
-            add_prestige = 50
+            # Remove the Destroyer's buff
+            every_country = {
+                limit = {
+                    has_country_modifier = destroyer_of_nordrassil
+                }
+                
+                remove_country_modifier = destroyer_of_nordrassil
+            }
+            
+            # Remove the Mt. Hyjal debuff
+            region_mount_hyjal = {
+                remove_province_modifier = world_tree_destruction
+            }
+            
+            # Show the tree again
+            show_ambient_object = nordrassil_01
         }
         ai_will_do = {
             factor = 1
