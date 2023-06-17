@@ -420,4 +420,66 @@ country_decisions = {
             }
         }
     }
+    
+    # Restore Teldrassil
+    restore_teldrassil = {
+        color = { 156 158 23 }
+        
+        potential = {
+            has_global_flag = teldrassil_burned
+            NOT = { has_country_flag = is_evil }
+            NOT = { religion = fel }
+            owns = 1073 # Teldrassil
+        }
+        allow = {
+            OR = {
+                religion = druidism
+                religion = dragon_aspects
+                religion = elune
+                religion = shamanism
+            }
+            
+            adm_power = 300
+        }
+
+        effect = {
+            add_adm_power = -300
+            
+            add_stability = 1
+            add_prestige = 50
+
+            # Teldrassil
+            1073 = {
+                change_culture = culture_forest_nymph
+                change_religion = druidism
+                add_core = A95
+                add_devastation = -100
+                set_base_tax = 6
+                set_base_production = 6
+                set_base_manpower = 6
+                center_of_trade = 1
+                add_permanent_province_modifier = {
+                    name = teldrassil_restored
+                    duration = -1
+                }
+            }
+
+            # Remove the Destroyer's buff
+            every_country = {
+                limit = {
+                    has_country_modifier = destroyer_of_teldrassil
+                }
+                
+                remove_country_modifier = destroyer_of_teldrassil
+            }
+            
+            # Remove the Teldrassil debuff
+            region_teldrassil = {
+                remove_province_modifier = world_tree_destruction
+            }
+        }
+        ai_will_do = {
+            factor = 1
+        }
+    }
 }
