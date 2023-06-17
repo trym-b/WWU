@@ -188,3 +188,63 @@ country_event = {
         }
 	}
 }
+
+# Illidari Pact
+country_event = {
+	id = wwu_mission_illidari.20
+	title = wwu_mission_illidari.20.title
+	desc = wwu_mission_illidari.20.desc
+	picture = ILLIDAN_STORMRAGE_eventPicture
+    
+	is_triggered_only = yes
+
+	mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    option = {
+		name = wwu_mission_illidari.20.option.a
+        
+        B87 = {
+            create_subject = {
+                subject_type = vassal
+                subject = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = mission_illidari_commitments
+            duration = 10950
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+    }
+    option = {
+		name = wwu_mission_illidari.20.option.b
+        
+        add_country_modifier = {
+            name = mission_illidari_commitments
+            duration = 3650
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+    option = {
+		name = wwu_mission_illidari.20.option.c
+        
+        break_alliance = B87
+        B87 = {
+            capital_scope = {
+                add_permanent_claim = ROOT
+            }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+    }
+}
