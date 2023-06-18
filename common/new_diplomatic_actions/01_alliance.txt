@@ -14,15 +14,15 @@ invite_to_alliance = {
         has_global_flag = enabled_faction_mechanics
 		has_country_modifier = head_of_alliance
         FROM = {
-            NOT = { has_country_modifier = member_of_alliance }
-			NOT = { cannot_join_alliance = yes }
+            is_not_member_of_faction = yes
+			is_allowed_alliance_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
 	is_allowed = {
 		has_country_modifier = head_of_alliance
 		FROM = {
-			NOT = { cannot_join_alliance = yes }
+			is_allowed_alliance_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
@@ -319,7 +319,7 @@ invite_to_alliance = {
 				FROM = {
 					OR = {
                         is_uncivilized = yes
-                        cannot_join_alliance = yes
+                        NOT = { is_allowed_alliance_member = yes }
                     }
 				}
 			}
@@ -373,15 +373,15 @@ invite_to_horde = {
         has_global_flag = enabled_faction_mechanics
 		has_country_modifier = head_of_horde
         FROM = {
-            NOT = { has_country_modifier = member_of_horde }
-			NOT = { cannot_join_horde = yes }
+            is_not_member_of_faction = yes
+			is_allowed_horde_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
 	is_allowed = {
 		has_country_modifier = head_of_horde
 		FROM = {
-			NOT = { cannot_join_horde = yes }
+			is_allowed_horde_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
@@ -653,7 +653,7 @@ invite_to_horde = {
 				FROM = {
 					OR = {
                         is_uncivilized = yes
-                        cannot_join_horde = yes
+                        NOT = { is_allowed_horde_member = yes }
                     }
 				}
 			}
@@ -707,15 +707,15 @@ invite_to_old_horde = {
         has_global_flag = enabled_faction_mechanics
 		has_country_modifier = head_of_old_horde
         FROM = {
-            NOT = { has_country_modifier = member_of_old_horde }
-			NOT = { cannot_join_old_horde = yes }
+            is_not_member_of_faction = yes
+			is_allowed_old_horde_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
 	is_allowed = {
 		has_country_modifier = head_of_old_horde
 		FROM = {
-			NOT = { cannot_join_old_horde = yes }
+			is_allowed_old_horde_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
             # Only allow Draenor nations before the Dark Portal is built
             if = {
@@ -1004,7 +1004,7 @@ invite_to_old_horde = {
 				FROM = {
 					OR = {
                         is_uncivilized = yes
-                        cannot_join_old_horde = yes
+                        NOT = { is_allowed_old_horde_member = yes }
                     }
 				}
 			}
@@ -1044,15 +1044,15 @@ invite_to_trade_coalition = {
         has_global_flag = enabled_faction_mechanics
 		has_country_modifier = head_of_trade_coalition
         FROM = {
-            NOT = { has_country_modifier = member_of_trade_coalition }
-			NOT = { cannot_join_trade_coalition = yes }
+            is_not_member_of_faction = yes
+			is_allowed_trade_coalition_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
 	is_allowed = {
 		has_country_modifier = head_of_trade_coalition
 		FROM = {
-			NOT = { cannot_join_trade_coalition = yes }
+			is_allowed_trade_coalition_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
@@ -1273,7 +1273,7 @@ invite_to_trade_coalition = {
 				FROM = {
 					OR = {
                         is_uncivilized = yes
-                        cannot_join_trade_coalition = yes
+                        NOT = { is_allowed_trade_coalition_member = yes }
                     }
 				}
 			}
@@ -1327,15 +1327,15 @@ invite_to_dragon_aspects = {
         has_global_flag = enabled_faction_mechanics
 		has_country_modifier = head_of_dragon_aspects
         FROM = {
-            NOT = { has_country_modifier = member_of_dragon_aspects }
-			NOT = { cannot_join_dragon_aspects = yes }
+            is_not_member_of_faction = yes
+			is_allowed_dragon_aspects_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
 	is_allowed = {
 		has_country_modifier = head_of_dragon_aspects
 		FROM = {
-			NOT = { cannot_join_dragon_aspects = yes }
+			is_allowed_dragon_aspects_member = yes
 			NOT = { has_country_modifier = recent_faction_interaction }
 		}
 	}
@@ -1564,7 +1564,7 @@ invite_to_dragon_aspects = {
 			name = INV_CANNOT_JOIN_DRAGON_ASPECTS
 			limit = {
 				FROM = {
-					cannot_join_dragon_aspects = yes
+					NOT = { is_allowed_dragon_aspects_member = yes }
 				}
 			}
 			export_to_variable = {
@@ -1615,15 +1615,15 @@ join_the_alliance = {
 	is_visible = {
         NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
-		NOT = { has_country_modifier = member_of_alliance }
-        NOT = { cannot_join_alliance = yes }
+		is_not_member_of_faction = yes
+        is_allowed_alliance_member = yes
         FROM = { 
             has_country_modifier = head_of_alliance
         }
 	}
 	is_allowed = {
 		NOT = { has_country_modifier = member_of_alliance }
-        NOT = { cannot_join_alliance = yes }
+        is_allowed_alliance_member = yes
         NOT = { has_country_modifier = recent_faction_interaction }
         FROM = { 
             has_country_modifier = head_of_alliance
@@ -1874,7 +1874,7 @@ join_the_alliance = {
 			limit = {
 				OR = {
                     is_uncivilized = yes
-                    cannot_join_alliance = yes
+                    NOT = { is_allowed_alliance_member = yes }
                 }
 			}
 			export_to_variable = {
@@ -1911,15 +1911,15 @@ join_the_horde = {
 	is_visible = {
         NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
-		NOT = { has_country_modifier = member_of_horde }
-        NOT = { cannot_join_horde = yes }
+		is_not_member_of_faction = yes
+        is_allowed_horde_member = yes
         FROM = { 
             has_country_modifier = head_of_horde
         }
 	}
 	is_allowed = {
 		NOT = { has_country_modifier = member_of_horde }
-        NOT = { cannot_join_horde = yes }
+        is_allowed_horde_member = yes
         NOT = { has_country_modifier = recent_faction_interaction }
         FROM = { 
             has_country_modifier = head_of_horde
@@ -2152,7 +2152,7 @@ join_the_horde = {
 			limit = {
 				OR = {
                     is_uncivilized = yes
-                    cannot_join_horde = yes
+                    NOT = { is_allowed_horde_member = yes }
                 }
 			}
 			export_to_variable = {
@@ -2189,20 +2189,21 @@ join_the_old_horde = {
 	is_visible = {
         NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
-		NOT = { has_country_modifier = member_of_old_horde }
-        NOT = { cannot_join_old_horde = yes }
+		is_not_member_of_faction = yes
+        is_allowed_old_horde_member = yes
         FROM = { 
             has_country_modifier = head_of_old_horde
         }
 	}
 	is_allowed = {
+        is_allowed_old_horde_member = yes
 		NOT = { has_country_modifier = member_of_old_horde }
-        NOT = { cannot_join_old_horde = yes }
         NOT = { has_country_modifier = recent_faction_interaction }
+        
         # Only allow Draenor nations before the Dark Portal is built
         if = {
             limit = {
-                has_global_flag = dark_portal_built
+                NOT  = { has_global_flag = dark_portal_built }
             }
             capital_scope = {
                 superregion = draenor_superregion
@@ -2447,7 +2448,7 @@ join_the_old_horde = {
 			limit = {
 				OR = {
                     is_uncivilized = yes
-                    cannot_join_old_horde = yes
+                    NOT = { is_allowed_old_horde_member = yes }
                 }
 			}
 			export_to_variable = {
@@ -2484,15 +2485,15 @@ join_the_trade_coalition = {
 	is_visible = {
         NOT = { has_global_flag = trade_coalition_dismantled }
         has_global_flag = enabled_faction_mechanics
-		NOT = { has_country_modifier = member_of_trade_coalition }
-        NOT = { cannot_join_trade_coalition = yes }
+		is_not_member_of_faction = yes
+        is_allowed_trade_coalition_member = yes
         FROM = { 
             has_country_modifier = head_of_trade_coalition
         }
 	}
 	is_allowed = {
 		NOT = { has_country_modifier = member_of_trade_coalition }
-        NOT = { cannot_join_trade_coalition = yes }
+        is_allowed_trade_coalition_member = yes
         NOT = { has_country_modifier = recent_faction_interaction }
         FROM = { 
             has_country_modifier = head_of_trade_coalition
@@ -2689,7 +2690,7 @@ join_the_trade_coalition = {
 			limit = {
 				OR = {
                     is_uncivilized = yes
-                    cannot_join_trade_coalition = yes
+                    NOT = { is_allowed_trade_coalition_member = yes }
                 }
 			}
 			export_to_variable = {
@@ -2726,15 +2727,15 @@ join_the_dragon_aspects = {
 	is_visible = {
         NOT = { has_global_flag = dragon_aspects_dismantled }
         has_global_flag = enabled_faction_mechanics
-		NOT = { has_country_modifier = member_of_dragon_aspects }
-        NOT = { cannot_join_dragon_aspects = yes }
+		is_not_member_of_faction = yes
+        is_allowed_dragon_aspects_member = yes
         FROM = { 
             has_country_modifier = head_of_dragon_aspects
         }
 	}
 	is_allowed = {
 		NOT = { has_country_modifier = member_of_dragon_aspects }
-        NOT = { cannot_join_dragon_aspects = yes }
+        is_allowed_dragon_aspects_member = yes
         NOT = { has_country_modifier = recent_faction_interaction }
         FROM = { 
             has_country_modifier = head_of_dragon_aspects
@@ -2939,7 +2940,7 @@ join_the_dragon_aspects = {
 		add_entry = {
 			name = INV_CANNOT_JOIN_DRAGON_ASPECTS
 			limit = {
-				cannot_join_dragon_aspects = yes
+				NOT = { is_allowed_dragon_aspects_member = yes }
 			}
 			export_to_variable = {
 				which = ai_value

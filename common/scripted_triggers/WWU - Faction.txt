@@ -7,59 +7,49 @@
 # trade_coalition
 # dragon_aspects
 
-# Alliance
-cannot_join_alliance = {
+is_not_member_of_faction = {
+    NOT = { has_country_modifier = member_of_alliance }
     NOT = { has_country_modifier = member_of_horde }
     NOT = { has_country_modifier = member_of_old_horde }
     NOT = { has_country_modifier = member_of_trade_coalition }
+    NOT = { has_country_modifier = member_of_dragon_aspects }
+}
 
-	OR = {
-		primary_culture = culture_sand_troll
-		primary_culture = culture_jungle_troll
-		primary_culture = culture_forest_troll
-		culture_group = culture_group_orc
-		culture_group = culture_group_mogu
-	}
+# Alliance
+is_allowed_alliance_member = {
+    # Culture Block
+    NOT = { primary_culture = culture_sand_troll }
+    NOT = { primary_culture = culture_jungle_troll }
+    NOT = { primary_culture = culture_forest_troll }
+    NOT = { culture_group = culture_group_orc }
+    NOT = { culture_group = culture_group_mogu }
 }
 
 # Horde
-cannot_join_horde = { 
-    NOT = { has_country_modifier = member_of_alliance }
-    NOT = { has_country_modifier = member_of_old_horde }
-    NOT = { has_country_modifier = member_of_trade_coalition }
-    
-	OR = {
-		culture_group = culture_group_human
-		culture_group = culture_group_draenei
-		culture_group = culture_group_darnassian
-	}
+is_allowed_horde_member = { 
+    # Culture Block
+    NOT = { culture_group = culture_group_human }
+    NOT = { culture_group = culture_group_draenei }
+    NOT = { culture_group = culture_group_darnassian }
 }
 
 # Old Horde
-cannot_join_old_horde = { 
-    NOT = { has_country_modifier = member_of_alliance }
-    NOT = { has_country_modifier = member_of_horde }
-    NOT = { has_country_modifier = member_of_trade_coalition }
-    
-	OR = {
-		culture_group = culture_group_human
-		culture_group = culture_group_draenei
-		culture_group = culture_group_darnassian
-	}
+is_allowed_old_horde_member = { 
+    # Culture Block
+    NOT = { culture_group = culture_group_human }
+    NOT = { culture_group = culture_group_draenei }
+    NOT = { culture_group = culture_group_darnassian }
 }
 
 # Trade Coalition
-cannot_join_trade_coalition = {
-    NOT = { has_country_modifier = member_of_alliance }
-    NOT = { has_country_modifier = member_of_horde }
-    NOT = { has_country_modifier = member_of_old_horde }
-    
-	NOT = { culture_group = culture_group_goblin }
+is_allowed_trade_coalition_member = {
+    # Culture Block
+    culture_group = culture_group_goblin
 }
 
 # Dragon Aspects
-cannot_join_dragon_aspects = {
-	NOT = { culture_group = culture_group_dragonkin }
+is_allowed_dragon_aspects_member = {
+    culture_group = culture_group_dragonkin
 }
 
 # Is suited to the Alliance
