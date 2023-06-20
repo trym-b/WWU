@@ -20,8 +20,6 @@ country_event = {
         # These types can't be changed to a different type.
         trigger = {
             event_target:current_subject = {
-                NOT = { is_subject_of_type = scourge_vassal }
-                NOT = { is_subject_of_type = demonic_vassal }
                 NOT = { is_subject_of_type = client_vassal }
                 NOT = { is_subject_of_type = client_march }
                 NOT = { is_subject_of_type = colony }
@@ -271,6 +269,114 @@ country_event = {
         
         trigger = {
             full_idea_group = wwu_subjugation_ideas
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            NOT = { adm_power = 250 }
+        }
+        
+        custom_tooltip = MAKE_VASSAL_COST_INVALID_TT
+	}
+    
+    # Establish Scourge Contract - VALID
+	option = {
+		name = wwu_subject_management.2.option.make_scourge_vassal
+        
+        trigger = {
+            tag = P11
+            religion = cult_of_the_damned
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            adm_power = 250
+        }
+        
+        add_adm_power = -250
+        
+        create_subject = {
+            subject_type = scourge_vassal
+            subject = event_target:current_subject
+        }
+        
+        event_target:current_subject = {
+            add_liberty_desire = 10
+        }
+        
+        hidden_effect = {
+            event_target:current_subject = {
+                set_country_flag = ignore_tributary_vassal_event
+            }
+        }
+	}
+    # Establish Scourge Contract - INVALID
+    option = {
+		name = wwu_subject_management.2.option.make_scourge_vassal.invalid
+        
+        trigger = {
+            tag = P11
+            religion = cult_of_the_damned
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            NOT = { adm_power = 250 }
+        }
+        
+        custom_tooltip = MAKE_VASSAL_COST_INVALID_TT
+	}
+    
+    # Establish Demonic Contract - VALID
+	option = {
+		name = wwu_subject_management.2.option.make_demonic_vassal
+        
+        trigger = {
+            tag = B92 # Burning Legion
+            religion = fel
+            event_target:current_subject = {
+                OR = {
+                    is_subject_of_type = vassal
+                    is_subject_of_type = march
+                    is_subject_of_type = tributary_vassal
+                }
+            }
+            adm_power = 250
+        }
+        
+        add_adm_power = -250
+        
+        create_subject = {
+            subject_type = demonic_vassal
+            subject = event_target:current_subject
+        }
+        
+        event_target:current_subject = {
+            add_liberty_desire = 10
+        }
+        
+        hidden_effect = {
+            event_target:current_subject = {
+                set_country_flag = ignore_tributary_vassal_event
+            }
+        }
+	}
+    # Establish Demonic Contract - INVALID
+    option = {
+		name = wwu_subject_management.2.option.make_demonic_vassal.invalid
+        
+        trigger = {
+            tag = B92 # Burning Legion
+            religion = fel
             event_target:current_subject = {
                 OR = {
                     is_subject_of_type = vassal
