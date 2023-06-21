@@ -1,0 +1,639 @@
+namespace = wwu_hold_system
+
+#--------------------------------------------------
+# System
+#--------------------------------------------------
+# Hold Setup - Game Start
+country_event = {
+	id = wwu_hold_system.100
+	title = wwu_hold_system.100.title
+	desc = wwu_hold_system.100.desc
+	picture = MINE_SHAFT_eventPicture
+	
+	is_triggered_only = yes
+	hidden = yes
+    
+	trigger = {
+		NOT = { has_global_flag = setup_hold_provinces }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_hold_provinces
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.100.option.a
+		
+        # General
+        every_country = {
+            limit = {
+                is_valid_hold_race = yes
+            }
+            
+            capital_scope = {
+                setup_hold_province = yes
+                setup_hold_depth_levels = yes
+            }
+            
+            every_owned_province = {
+                limit = {
+                    is_pre_existing_hold = yes
+                }
+                
+                setup_hold_province = yes
+                setup_hold_depth_levels = yes
+            }
+        }
+	}
+}
+
+# Hold Setup - Valid Hold nation missing Hold in capital
+country_event = {
+	id = wwu_hold_system.101
+	title = wwu_hold_system.101.title
+	desc = wwu_hold_system.101.desc
+	picture = MINE_SHAFT_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+        is_valid_hold_race = yes
+        
+		capital_scope = {
+            NOT = { is_hold_province = yes }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            capital_scope = {
+                save_event_target_as = capital_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.101.option.a
+		
+        capital_scope = {
+            setup_hold_province = yes
+        }
+	}
+}
+
+# Hold Setup - Random Hold in valid province
+country_event = {
+	id = wwu_hold_system.102
+	title = wwu_hold_system.102.title
+	desc = wwu_hold_system.102.desc
+	picture = MINE_SHAFT_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+        is_valid_hold_race = yes
+        any_owned_province = {
+            is_valid_hold_province = yes
+            NOT = { is_hold_province = yes }
+        }
+	}
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_valid_hold_province = yes
+                }
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.102.option.a
+		
+        event_target:target_province = {
+            setup_hold_province = yes
+        }
+	}
+}
+
+# Province Menu - Build Hold
+province_event = {
+	id = wwu_hold_system.103
+	title = wwu_hold_system.103.title
+	desc = wwu_hold_system.103.desc
+	picture = MINE_SHAFT_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_hold_system.103.option.a
+		
+        setup_hold_province = yes
+	}
+}
+
+
+# Hold Setup - Downgrade Hold Level if development drops
+country_event = {
+	id = wwu_hold_system.110
+	title = wwu_hold_system.110.title
+	desc = wwu_hold_system.110.desc
+	picture = MINE_SHAFT_eventPicture
+	
+	is_triggered_only = yes
+	hidden = yes
+    
+	trigger = {
+        is_valid_hold_race = yes
+    }
+	
+	option = {
+		name = wwu_hold_system.100.option.a
+		
+        every_owned_province = {
+            limit = {
+                is_hold_province = yes
+            }
+            
+            assess_hold_status = yes
+        }
+	}
+}
+
+#--------------------------------------------------
+# Flavour
+#--------------------------------------------------
+# --- Generic ---
+# Destruction in [target_province.GetName]
+country_event = {
+	id = wwu_hold_system.10
+	title = wwu_hold_system.10.title
+	desc = wwu_hold_system.10.desc
+	picture = DEBRIS_eventPicture
+	goto = target_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            devastation = 1
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.10.option.a
+		
+        add_years_of_income = -1.0
+        
+        event_target:target_province = {
+            add_devastation = -5
+        }
+	}
+    option = {
+		name = wwu_hold_system.10.option.a
+		
+        trigger = {
+            OR = {
+                base_tax = 2
+                base_production = 2
+                base_manpower = 2 
+            }
+        }
+        
+        add_years_of_income = -0.1
+        
+        event_target:target_province = {
+            add_devastation = -1
+            
+            random_list = {
+                33 = { 
+                    trigger = {
+                        base_tax = 2
+                    }
+                    add_base_tax = -1
+                }
+                33 = { 
+                    trigger = {
+                        base_production = 2
+                    }
+                    add_base_production = -1
+                }
+                33 = { 
+                    trigger = {
+                        base_manpower = 2
+                    }
+                    add_base_manpower = -1
+                }
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.10.option.b
+		
+        event_target:target_province = {
+            if = {
+                limit = {
+                    base_tax = 3
+                }
+                
+                add_base_tax = -2
+            }
+            else = {
+                set_base_tax = 1
+            }
+            
+            if = {
+                limit = {
+                    base_production = 3
+                }
+                
+                add_base_production = -2
+            }
+            else = {
+                set_base_production = 1
+            }
+            
+            if = {
+                limit = {
+                    base_manpower = 3
+                }
+                
+                add_base_manpower = -2
+            }
+            else = {
+                set_base_manpower = 1
+            }
+        }
+	}
+}
+
+# Explosive Exploration
+country_event = {
+	id = wwu_hold_system.11
+	title = wwu_hold_system.11.title
+	desc = wwu_hold_system.11.desc
+	picture = DYNAMITE_eventPicture
+	goto = target_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            NOT = { is_hold_level_10 = yes }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    NOT = { is_hold_level_10 = yes }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.11.option.a
+		
+        event_target:target_province = {
+            random_list = {
+                50 = {
+                    add_province_modifier = {
+                        name = hold_improvements
+                        duration = 3650
+                    }
+                }
+                50 = {
+                    downgrade_hold_status = yes
+                }
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.11.option.b
+		
+        event_target:target_province = {
+            add_base_production = 1
+        }
+	}
+}
+
+# Ancient Machinery
+country_event = {
+	id = wwu_hold_system.12
+	title = wwu_hold_system.12.title
+	desc = wwu_hold_system.12.desc
+	picture = GLOWING_POOL_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.12.option.a
+		
+        event_target:target_province = {
+            random_list = {
+                50 = {
+                    add_permanent_province_modifier = {
+                        name = hold_titan_machinery
+                        duration = 3650
+                    }
+                }
+                50 = {
+                    add_permanent_province_modifier = {
+                        name = hold_corrupt_titan_machinery
+                        duration = 3650
+                    }
+                }
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.12.option.b
+		
+        add_prestige = 10
+	}
+}
+
+# Citizens Flee [target_province.GetName]
+country_event = {
+	id = wwu_hold_system.13
+	title = wwu_hold_system.13.title
+	desc = wwu_hold_system.13.desc
+	picture = TEMPLE_ESCAPE_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            devastation = 20
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.13.option.a
+		
+        event_target:target_province = {
+            downgrade_hold_status = yes
+        }
+	}
+}
+
+# Vicious Punishment in [target_province.GetName]
+country_event = {
+	id = wwu_hold_system.14
+	title = wwu_hold_system.14.title
+	desc = wwu_hold_system.14.desc
+	picture = ROARING_TORCH_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            unrest = 3
+            NOT = { has_province_modifier = hold_vicious_enforcers }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    unrest = 3
+                    NOT = { has_province_modifier = hold_vicious_enforcers }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.14.option.a
+		
+        add_mil_power = -50
+        event_target:target_province = {
+            add_province_modifier = {
+                name = hold_vicious_enforcers
+                duration = 3650
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_hold_system.14.option.b
+		
+        event_target:target_province = {
+            add_devastation = 1
+        }
+	}
+}
+
+# We Dug Too Deep
+country_event = {
+	id = wwu_hold_system.15
+	title = wwu_hold_system.15.title
+	desc = wwu_hold_system.15.desc
+	picture = MINECART_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            OR = {
+                is_hold_level_8 = yes
+                is_hold_level_9 = yes
+                is_hold_level_10 = yes
+            }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    OR = {
+                        is_hold_level_8 = yes
+                        is_hold_level_9 = yes
+                    }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.15.option.a
+		
+        event_target:target_province = {
+            add_permanent_province_modifier = {
+                name = hold_we_must_dig
+                duration = -1
+            }
+        }
+	}
+	
+	option = {
+		name = wwu_hold_system.15.option.b
+		
+        custom_tooltip = HOLD_CANNOT_BE_IMPROVED_TT
+        
+        event_target:target_province = {
+            add_permanent_province_modifier = {
+                name = hold_is_finished
+                duration = -1
+            }
+        }
+	}
+}
+
+# The Beast Below
+country_event = {
+	id = wwu_hold_system.16
+	title = wwu_hold_system.16.title
+	desc = wwu_hold_system.16.desc
+	picture = TROGG_HATE_MINIONS_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            has_province_modifier = hold_we_must_dig
+            NOT = { has_province_modifier = hold_beast_below }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    has_province_modifier = hold_we_must_dig
+                    NOT = { has_province_modifier = hold_beast_below }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.16.option.a
+		
+        event_target:target_province = {
+            add_devastation = 100
+            
+            add_permanent_province_modifier = { 
+                name = hold_beast_below
+                duration = 7300
+            }
+        }
+	}
+}
+
+
+# --- Kobold ---
+# Kobold Khaos
+
+# Inexhaustible Gold
+
+# Friends from the Deep
+
+# --- Trogg ---
+# Troggs, Troggs, Troggs!
+
+# Beat the Meat
+
+# Crude Expansion 
+
+# --- Furbolg ---
+# One with Azeroth
+
+# Timber Growth
+
+# Night Elf Assistance
+
+# --- Quillboar ---
+# Razor Thickets
+
+# Ornery Boars
+
+# Opportunistic Hold
+
+# --- Titan / Earthen ---
+# Defenders of Azeroth
+
+# Buried Secrets
+
+# Forgotten Machinery
+
+# --- Dwarf ---
+# Rare Minerals
+
+# Deep Mineshafts
+
+# Mysteries of the Makers
+

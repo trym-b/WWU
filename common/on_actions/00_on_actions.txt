@@ -48,6 +48,7 @@ on_startup = {
         wwu_game_configuration.100 # Default Configuration
         wwu_doctrine.100    # Default
         wwu_terrain_affinity.100
+        wwu_hold_system.100
 	}
 }
 
@@ -1223,10 +1224,11 @@ on_adm_development = {
     owner = {
         if = { 
             limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [Prev.GetName]: on_adm_development "
+            log = "DEBUG - [ROOT.GetName], [owner.GetName]: on_adm_development "
         }
     }
     
+    update_hold_status = yes
 }
 
 # province
@@ -1234,11 +1236,11 @@ on_dip_development = {
     owner = {
         if = { 
             limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [Prev.GetName]: on_dip_development "
+            log = "DEBUG - [Root.GetName], [owner.GetName]: on_dip_development "
         }
     }
     
-    
+    update_hold_status = yes
 }
 
 # province
@@ -1246,11 +1248,11 @@ on_mil_development = {
     owner = {
         if = { 
             limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [Prev.GetName]: on_mil_development "
+            log = "DEBUG - [Root.GetName], [owner.GetName]: on_mil_development "
         }
     }
     
-    
+    update_hold_status = yes
 }
 
 on_overextension_pulse = {
@@ -1623,6 +1625,10 @@ on_monthly_pulse = {
         wwu_sunfury_f.3
         wwu_sunfury_f.4
         wwu_sunfury_f.5
+        
+        # Hold System
+        wwu_hold_system.101
+        wwu_hold_system.110
     }
 }
 
@@ -2011,6 +2017,36 @@ on_yearly_pulse = {
         
         # Sunfury
         100 = mission_sunfury.6
+        1000 = 0
+    }
+    
+    #-----------------------------
+    # Hold System
+    #-----------------------------
+    random_events = {
+        # System
+        100 = wwu_hold_system.102
+        
+        # Generic
+        100 = wwu_hold_system.10
+        100 = wwu_hold_system.11
+        100 = wwu_hold_system.12
+        100 = wwu_hold_system.13
+        100 = wwu_hold_system.14
+        100 = wwu_hold_system.15
+        100 = wwu_hold_system.16
+        
+        # Kobold
+        
+        # Trogg
+        
+        # Furbolg
+        
+        # Quillboar
+        
+        # Titan/Earthen
+        
+        # Dwarf
         
         1000 = 0
     }
