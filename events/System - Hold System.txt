@@ -597,8 +597,100 @@ country_event = {
 
 # --- Kobold ---
 # Kobold Khaos
+country_event = {
+	id = wwu_hold_system.20
+	title = wwu_hold_system.20.title
+	desc = wwu_hold_system.20.desc
+	picture = KOBOLD_DISASTER_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        culture_group = culture_group_kobold
+        
+        any_owned_province = {
+            is_hold_province = yes
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.20.option.a
+		
+        event_target:target_province = {
+            add_devastation = 25
+        }
+	}
+    option = {
+		name = wwu_hold_system.20.option.b
+		
+        add_yearly_manpower = -1.0
+	}
+}
 
 # Inexhaustible Gold
+country_event = {
+	id = wwu_hold_system.21
+	title = wwu_hold_system.21.title
+	desc = wwu_hold_system.21.desc
+	picture = GREEDY_KOBOLDR_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        culture_group = culture_group_kobold
+        
+        any_owned_province = {
+            is_hold_province = yes
+            NOT = { has_province_modifier = hold_inexhaustible_gold }
+            NOT = { trade_goods = gold }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    NOT = { has_province_modifier = hold_inexhaustible_gold }
+                    NOT = { trade_goods = gold }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.21.option.a
+		
+        event_target:target_province = {
+            change_trade_goods = gold
+            add_permanent_province_modifier = {
+                name = hold_inexhaustible_gold
+                duration = -1
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.21.option.b
+		
+        add_years_of_income = 1.0
+	}
+}
 
 # Friends from the Deep
 
