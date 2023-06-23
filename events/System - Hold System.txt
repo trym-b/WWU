@@ -693,6 +693,50 @@ country_event = {
 }
 
 # Friends from the Deep
+country_event = {
+	id = wwu_hold_system.22
+	title = wwu_hold_system.22.title
+	desc = wwu_hold_system.22.desc
+	picture = KOBOLD_CANDLE_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        culture_group = culture_group_kobold
+        
+        any_owned_province = {
+            is_hold_province = yes
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.22.option.a
+		
+        event_target:target_province = {
+            add_base_manpower = 1
+        }
+	}
+    option = {
+		name = wwu_hold_system.22.option.a
+		
+        event_target:target_province = {
+            add_base_production = 1
+        }
+	}
+}
 
 # --- Trogg ---
 # Troggs, Troggs, Troggs!
