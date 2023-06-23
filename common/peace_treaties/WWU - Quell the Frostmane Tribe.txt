@@ -1,13 +1,12 @@
 #-------------------------------
 # Quell the Frostmane Tribe
 #-------------------------------
- po_quell_the_frostmane = {
+po_quell_the_frostmane = {
     category = 6
     power_projection = humiliated_rival 
     power_cost_base = 1.0
   	prestige_base = 1.0
   	ae_base = 1.0
-}
 
     warscore_cost = {
 		all_provinces = 0.0
@@ -25,55 +24,61 @@
 	requires_is_allowed = no
 
     is_visible = {
-        tag = A75
+        NOT = { has_global_flag = frostmane_quelled }
+        tag = A29
+        
         FROM = {
             tag = A75
         }
     }
     is_allowed = {
-        tag = A75
+        tag = A29
         FROM = {
            tag = A75
         }
-     }
+    }
     effect = {
-       area_gnomeregan_exterior = {
-            limit = {
-                OR = {
-                    owned_by = A75
-                }
-            }
-
-            cede_province = A29
-            add_core = A29
-            change_culture = culture_ironforge
-            change_religion = holy_light
+        hidden_effect = {
+            set_global_flag = frostmane_quelled 
         }
-       area_kharanos = {
+        area_gnomeregan_exterior = {
             limit = {
-                OR = {
                 owned_by = A75
             }
-        }
 
-            cede_province = A29
-            add_core = A29
+            cede_province = ROOT
+            add_core = ROOT
             change_culture = culture_ironforge
             change_religion = holy_light
         }
-        817 = {
+        area_kharanos = {
             limit = {
-                OR = {
+                owned_by = A75
+            }
+
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = culture_ironforge
+            change_religion = holy_light
+        }
+        
+        if = {
+            limit = {
+                817 = {
                     owned_by = A75
                 }
             }
-
-            cede_province = A29
-            add_core = A29
-            change_culture = culture_ironforge
-            change_religion = holy_light
+            
+            817 = {
+                cede_province = ROOT
+                add_core = ROOT
+                change_culture = culture_ironforge
+                change_religion = holy_light
+            }
         }
-     ai_weight = {
+    }
+    
+    ai_weight = {
 		export_to_variable = {
 			variable_name = ai_value
     		value = 1000
