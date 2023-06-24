@@ -2364,24 +2364,15 @@ apply_loyalty_change_to_estate_target = {
 #----------------------------------------
 # Take loyalty and land from each estate
 seize_land_from_estate = {
-    if = {
-        limit = {
-            [[HAS_EXCEPTION]
-                NOT = { has_estate_privilege = estate_$ESTATE$_exception }
-            ]
-            has_estate = estate_$ESTATE$
-        }
-        
-        change_estate_land_share = {
-            estate = estate_$ESTATE$
-            share = $AMOUNT$
-        }
-        
-        add_estate_loyalty = {
-            estate = estate_$ESTATE$
-            loyalty = -20
-            short = yes
-        }
+    change_estate_land_share = {
+        estate = $ESTATE$
+        share = -5
+    }
+    
+    add_estate_loyalty = {
+        estate = $ESTATE$
+        loyalty = -10
+        short = yes
     }
 }
 
@@ -2458,5 +2449,101 @@ estate_rebel_effect = {
     add_country_modifier = {
         name = estate_$ESTATE$_supremacy
         duration = 3650
+    }
+}
+
+sell_titles_amount_small = {
+    if = {
+        limit = {
+            has_country_flag = sell_titles_to_$ESTATE$
+        }
+        change_estate_land_share = {
+            estate = $ESTATE$
+            share = 5
+        }
+        add_years_of_estate_land_income = 0.5
+    }
+}
+sell_titles_amount_medium = {
+    if = {
+        limit = {
+            has_country_flag = sell_titles_to_$ESTATE$
+        }
+        change_estate_land_share = {
+            estate = $ESTATE$
+            share = 10
+        }
+        add_years_of_estate_land_income = 0.75
+    }
+}
+sell_titles_amount_large = {
+    if = {
+        limit = {
+            has_country_flag = sell_titles_to_$ESTATE$
+        }
+        change_estate_land_share = {
+            estate = $ESTATE$
+            share = 15
+        }
+        add_years_of_estate_land_income = 1.0
+    }
+}
+sell_titles_amount_huge = {
+    if = {
+        limit = {
+            has_country_flag = sell_titles_to_$ESTATE$
+        }
+        change_estate_land_share = {
+            estate = $ESTATE$
+            share = 20
+        }
+        add_years_of_estate_land_income = 1.25
+    }
+}
+
+execute_estate_leader = {
+    add_stability = -1
+    add_estate_influence_modifier = {
+        estate = $ESTATE$
+        desc = EST_VAL_EXECUTED_LEADER
+        duration = 7300
+        influence = -25
+        short = yes
+    }
+    add_estate_loyalty = {
+        estate = $ESTATE$
+        loyalty = -25
+        short = yes
+    }
+    
+    random_owned_province = {
+        limit = {
+            is_in_capital_area = yes
+            NOT = { has_siege = yes } # i.e. rebels are not present
+        }
+        
+        if = {
+            limit = {
+                owner = {
+                    has_estate = $ESTATE$
+					NOT = {
+						estate_loyalty = {
+							estate = $ESTATE$
+							loyalty = 30
+						}
+					}
+                }
+            }
+            
+            add_named_unrest = { 
+                name = estate_land_seized 
+                value = 10 
+            }  
+            
+            spawn_rebels = {
+				type = $ESTATE$_rebels
+				size = 1
+			}
+        }
     }
 }

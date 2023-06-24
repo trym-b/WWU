@@ -374,13 +374,13 @@ country_event = {
         event_target:target_province = {
             random_list = {
                 50 = {
-                    add_permanent_province_modifier = {
+                    add_province_modifier = {
                         name = hold_titan_machinery
                         duration = 3650
                     }
                 }
                 50 = {
-                    add_permanent_province_modifier = {
+                    add_province_modifier = {
                         name = hold_corrupt_titan_machinery
                         duration = 3650
                     }
@@ -527,7 +527,7 @@ country_event = {
 		name = wwu_hold_system.15.option.a
 		
         event_target:target_province = {
-            add_permanent_province_modifier = {
+            add_province_modifier = {
                 name = hold_we_must_dig
                 duration = -1
             }
@@ -540,7 +540,7 @@ country_event = {
         custom_tooltip = HOLD_CANNOT_BE_IMPROVED_TT
         
         event_target:target_province = {
-            add_permanent_province_modifier = {
+            add_province_modifier = {
                 name = hold_is_finished
                 duration = -1
             }
@@ -586,7 +586,7 @@ country_event = {
         event_target:target_province = {
             add_devastation = 100
             
-            add_permanent_province_modifier = { 
+            add_province_modifier = { 
                 name = hold_beast_below
                 duration = 7300
             }
@@ -679,7 +679,7 @@ country_event = {
 		
         event_target:target_province = {
             change_trade_goods = gold
-            add_permanent_province_modifier = {
+            add_province_modifier = {
                 name = hold_inexhaustible_gold
                 duration = -1
             }
@@ -740,10 +740,150 @@ country_event = {
 
 # --- Trogg ---
 # Troggs, Troggs, Troggs!
+country_event = {
+	id = wwu_hold_system.30
+	title = wwu_hold_system.30.title
+	desc = wwu_hold_system.30.desc
+	picture = STONESPLINTER_TROGG_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        culture_group = culture_group_trogg
+        
+        any_owned_province = {
+            is_hold_province = yes
+            NOT = { has_province_modifier = hold_trogg_vault }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    NOT = { has_province_modifier = hold_trogg_vault }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.30.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = hold_trogg_vault
+                duration = -1
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.30.option.a
+		
+        add_yearly_manpower = 1.0
+	}
+}
 
-# Beat the Meat
+# Titanic Hoarders
+country_event = {
+	id = wwu_hold_system.31
+	title = wwu_hold_system.31.title
+	desc = wwu_hold_system.31.desc
+	picture = TUNNEL_TROGG_eventPicture
+	goto = target_province
+	
+	is_triggered_only = yes
+    
+	trigger = {
+        culture_group = culture_group_trogg
+        
+        any_owned_province = {
+            is_hold_province = yes
+            NOT = { has_province_modifier = hold_inexhaustible_gold }
+            NOT = { trade_goods = artifacts }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    NOT = { has_province_modifier = hold_inexhaustible_gold }
+                    NOT = { trade_goods = artifacts }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.31.option.a
+		
+        event_target:target_province = {
+            add_unrest = 2
+            
+            change_trade_goods = artifacts
+            
+            add_province_modifier = {
+                name = hold_titanic_aura
+                duration = -1
+            }
+        }
+	}
+    option = {
+		name = wwu_hold_system.31.option.b
+		
+        add_years_of_income = 1.0
+	}
+}
 
 # Crude Expansion 
+country_event = {
+	id = wwu_hold_system.32
+	title = wwu_hold_system.32.title
+	desc = wwu_hold_system.32.desc
+	picture = TROGGZOR_eventPicture
+	goto = target_province
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        any_owned_province = {
+            is_hold_province = yes
+            NOT = { is_hold_level_10 = yes }
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            random_owned_province = {
+                limit = {
+                    is_hold_province = yes
+                    NOT = { is_hold_level_10 = yes }
+                }
+                
+                save_event_target_as = target_province
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_hold_system.32.option.a
+		
+        event_target:target_province = {
+            add_province_modifier = {
+                name = hold_crude_expansion
+                duration = 3650
+            }
+        }
+	}
+}
 
 # --- Furbolg ---
 # One with Azeroth

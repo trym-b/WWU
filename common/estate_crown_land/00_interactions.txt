@@ -1,5 +1,60 @@
+#-------------------------------
+# Beckon the Council
+#-------------------------------
 interaction = {
-    key = sale_of_titles
+    key = estate_action_beckon_the_council
+    random_seed = random
+	cooldown_months = 60
+
+    trigger = {
+        has_agenda_estates = yes
+        NOT = { has_any_active_estate_agenda = yes }
+		NOT = { has_government_attribute = blocked_call_diet }
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - summon_the_council"
+        }
+        
+        custom_tooltip = ESTATES_SUMMON_THE_COUNCIL_DESC
+        hidden_effect = {
+	        country_event = { id = estate_system.2 }
+        }
+        custom_tooltip = SEPERATOR_TOOLTIP
+        
+		if = {
+			limit = {
+				has_country_flag = recent_estate_agenda
+			}
+			clr_country_flag = recent_estate_agenda
+		}
+		set_country_flag = recent_estate_agenda
+
+        add_estate_influence_modifier = {
+            estate = all
+            desc = EST_VAL_COUNCIL_SUMMONED
+            duration = 7300
+            influence = 5
+            short = yes
+        }
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 5
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0 # AI won't do agendas
+	}
+}
+
+#-------------------------------
+# Sale of Titles
+#-------------------------------
+interaction = {
+    key = estate_action_sale_of_titles
     random_seed = crown_land_share
 	cooldown_months = 60
 
@@ -15,15 +70,8 @@ interaction = {
             log = "DEBUG - [Root.GetName] - sale_of_titles"
         }
         
-		add_years_of_estate_land_income = 2.0
-
-		custom_tooltip = ESTATES_SALE_OF_TITLES_DESC
-		give_estate_land_share_gigantic = { estate = all }
-		add_estate_loyalty = {
-			estate = all
-			loyalty = 20
-			short = yes
-		}
+		country_event = { id = estate_system.10 }
+        
 		if = {
 			limit = {
 				has_country_flag = recent_land_distribution
@@ -134,57 +182,11 @@ interaction = {
 	}
 }
 
+#-------------------------------
+# Seize Land
+#-------------------------------
 interaction = {
-    key = summon_the_council
-    random_seed = random
-	cooldown_months = 60
-
-    trigger = {
-        has_agenda_estates = yes
-        NOT = { has_any_active_estate_agenda = yes }
-		NOT = { has_government_attribute = blocked_call_diet }
-    }
-
-    effect = {
-        if = { 
-            limit = { has_global_flag = enable_estate_interaction_logging }
-            log = "DEBUG - [Root.GetName] - summon_the_council"
-        }
-        
-        custom_tooltip = ESTATES_SUMMON_THE_COUNCIL_DESC
-        hidden_effect = {
-	        country_event = { id = estate_system.2 }
-        }
-        custom_tooltip = SEPERATOR_TOOLTIP
-        
-		if = {
-			limit = {
-				has_country_flag = recent_estate_agenda
-			}
-			clr_country_flag = recent_estate_agenda
-		}
-		set_country_flag = recent_estate_agenda
-
-        add_estate_influence_modifier = {
-            estate = all
-            desc = EST_VAL_COUNCIL_SUMMONED
-            duration = 7300
-            influence = 5
-            short = yes
-        }
-        add_estate_loyalty = {
-            estate = all
-            loyalty = 5
-            short = yes
-        }
-    }
-	ai_will_do = {
-		factor = 0 # AI won't do agendas
-	}
-}
-
-interaction = {
-    key = seize_land
+    key = estate_action_seize_land
     random_seed = random
 	cooldown_months = 60
 
@@ -238,39 +240,7 @@ interaction = {
             log = "DEBUG - [Root.GetName] - seize_land"
         }
         
-        custom_tooltip = ESTATES_SEIZE_LAND_DESC
-        
-        seize_land_from_estate = { ESTATE = clergy      AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = traders     AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = nobility    AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = peasants    AMOUNT = -5     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = tribals     AMOUNT = -5     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = slaves      AMOUNT = -5     HAS_EXCEPTION = yes }
-        
-        seize_land_from_estate = { ESTATE = adventuring_guild   AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = mercantile_guild    AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = warriors_guild      AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = religious_order     AMOUNT = -3     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = criminal_syndicate  AMOUNT = -3     HAS_EXCEPTION = yes }
-        
-        seize_land_from_estate = { ESTATE = reliquary           AMOUNT = -5     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = explorers_league    AMOUNT = -5     HAS_EXCEPTION = yes }
-        seize_land_from_estate = { ESTATE = invention           AMOUNT = -5     HAS_EXCEPTION = yes }
-        
-        seize_land_from_estate = { ESTATE = legion          AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = abyssal_maw     AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = firelands       AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = deepholm        AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = skywall         AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = loa             AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = dragonflight    AMOUNT = -5 }
-        seize_land_from_estate = { ESTATE = underling       AMOUNT = -5 }
-        
-		custom_tooltip = SEPERATOR_TOOLTIP
-		
-		custom_tooltip = seize_land_rebels_tt
-        
-		seize_land_effect = yes
+        country_event = { id = estate_system.20 }
         
         hidden_effect = {
             if = {
@@ -383,54 +353,289 @@ interaction = {
 	}
 }
 
+#-------------------------------
+# Guild Recruitment
+#-------------------------------
 interaction = {
-    key = building_management
+    key = estate_action_guild_recruitment
     random_seed = random
-    cooldown_months = 1
-
+    cooldown_months = 600
+    
     trigger = {
-        ai = no
+        NOT = {
+            has_country_flag = has_estate_adventuring_guild
+            has_country_flag = has_estate_mercantile_guild
+            has_country_flag = has_estate_warriors_guild
+            has_country_flag = has_estate_religious_order
+            has_country_flag = has_estate_criminal_syndicate
+        }
+        
+        years_of_income = 1.0
     }
 
     effect = {
         if = { 
             limit = { has_global_flag = enable_estate_interaction_logging }
-            log = "DEBUG - [Root.GetName] - building_management"
+            log = "DEBUG - [Root.GetName] - estate_action_guild_recruitment"
         }
-
-        country_event = { id = wwu_building_manager.1 }
+        
+        country_event = { id = wwu_guilds.10 }
     }
 	ai_will_do = {
 		factor = 0
 	}
 }
 
+#-------------------------------
+# Seek Advisor
+#-------------------------------
 interaction = {
-    key = seek_advisor
+    key = estate_action_seek_advisor
     random_seed = random
-    cooldown_months = 12
+    cooldown_months = 64
     
-    trigger = {
-        prestige = 0
-    }
-
     effect = {
         if = { 
             limit = { has_global_flag = enable_estate_interaction_logging }
             log = "DEBUG - [Root.GetName] - seek_advisor"
         }
         
-        add_prestige = -10
-        
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 3
+            short = yes
+        }
         add_estate_influence_modifier = {
             estate = all
             desc = EST_VAL_ESTATE_ADVISOR
             duration = 7300
-            influence = 5
+            influence = 3
             short = yes
         }
         
-		country_event = { id = estate_system.10 }
+		country_event = { id = wwu_advisor_select.10 }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Cede Legitimacy
+#-------------------------------
+interaction = {
+    key = estate_action_cede_legitimacy
+    random_seed = random
+    cooldown_months = 36
+    
+    trigger = {
+        OR = {
+            legitimacy = 10
+            republican_tradition = 10
+            horde_unity = 10
+            devotion = 10
+            meritocracy = 10
+        }
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_cede_legitimacy"
+        }
+        
+        add_legitimacy = -10
+        add_republican_tradition = -10
+        add_horde_unity = -10
+        add_devotion = -10
+        add_meritocracy = -10
+
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 5
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Cede Prestige
+#-------------------------------
+interaction = {
+    key = estate_action_cede_prestige
+    random_seed = random
+    cooldown_months = 36
+    
+    trigger = {
+        prestige = 15
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_cede_prestige"
+        }
+        
+        add_prestige = -15
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 5
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Postpone Reform
+#-------------------------------
+interaction = {
+    key = estate_action_postpone_reform
+    random_seed = random
+    cooldown_months = 36
+    
+    trigger = {
+        government_reform_progress = 250
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_postpone_reform"
+        }
+        
+        change_government_reform_progress = -250
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 10
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Overlook Corruption
+#-------------------------------
+interaction = {
+    key = estate_action_overlook_corruption
+    random_seed = random
+    cooldown_months = 36
+    
+    trigger = {
+        NOT = { corruption = 10 }
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_overlook_corruption"
+        }
+        
+        add_corruption = 2
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 10
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Rescind Taxation
+#-------------------------------
+interaction = {
+    key = estate_action_rescind_taxation
+    random_seed = random
+    cooldown_months = 36
+    
+    trigger = {
+        years_of_income = 1.0
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_rescind_taxation"
+        }
+        
+        add_years_of_estate_land_income = -1
+        add_estate_loyalty = {
+            estate = all
+            loyalty = 10
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Curtail Influence
+#-------------------------------
+interaction = {
+    key = estate_action_curtail_influence
+    random_seed = random
+    cooldown_months = 64
+    
+    trigger = {
+        stability = 0
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_curtail_influence"
+        }
+        
+        add_estate_influence_modifier = {
+            estate = all
+            desc = EST_VAL_CURTAIL_INFLUENCE
+            duration = 7300
+            influence = -15
+            short = yes
+        }
+        add_estate_loyalty = {
+            estate = all
+            loyalty = -15
+            short = yes
+        }
+    }
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+#-------------------------------
+# Execute Leader
+#-------------------------------
+interaction = {
+    key = estate_action_execute_leader
+    random_seed = random
+    cooldown_months = 64
+    
+    trigger = {
+        stability = 0
+    }
+
+    effect = {
+        if = { 
+            limit = { has_global_flag = enable_estate_interaction_logging }
+            log = "DEBUG - [Root.GetName] - estate_action_execute_leader"
+        }
+        
+        country_event = { id = estate_system.30 }
     }
 	ai_will_do = {
 		factor = 0

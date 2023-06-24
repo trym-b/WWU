@@ -293,469 +293,933 @@ country_event = {
 	}
 }
 
-# Founding of Guilds
-country_event = {
-	id = estate_system.4
-	title = estate_system.4.title
-	desc = estate_system.4.desc
-	picture = TREASURE_VAULT_eventPicture
-
-	is_triggered_only = yes
-
-	immediate = {
-		hidden_effect = {
-			add_country_modifier = { 
-				name = adventurers_allowed
-				duration = -1
-			}
-		}
-	}
-
-    
-	# option = {
-		# name = estate_system.4.option.a
-		# trigger = {
-			# NOT = { has_country_flag = has_estate_adventuring_guild }
-		# }
-		# hidden_effect = { 
-            # set_country_flag = has_estate_adventuring_guild 
-        # }
-		# custom_tooltip = estate_system.4.option.a.tooltip
-	# }
-	option = {
-		name = estate_system.4.option.b
-		trigger = {
-			NOT = { has_country_flag = has_estate_mercantile_guild }
-		}
-		hidden_effect = { 
-            set_country_flag = has_estate_mercantile_guild 
-        }
-		custom_tooltip = estate_system.4.option.b.tooltip
-		
-	}
-	option = {
-		name = estate_system.4.option.c
-		trigger = {
-			NOT = { has_country_flag = has_estate_warriors_guild }
-		}
-		hidden_effect = { 
-            set_country_flag = has_estate_warriors_guild 
-        }
-		custom_tooltip = estate_system.4.option.c.tooltip
-	}
-	option = {
-		name = estate_system.4.option.d
-		trigger = {
-            NOT = { religion_group = philosophy_group }
-			NOT = { has_country_flag = has_estate_religious_order }
-		}
-		hidden_effect = { 
-            set_country_flag = has_estate_religious_order 
-        }
-		custom_tooltip = estate_system.4.option.d.tooltip
-	}
-	option = {
-		name = estate_system.4.option.e
-		trigger = {
-			NOT = { has_country_flag = has_estate_criminal_syndicate }
-		}
-		hidden_effect = { 
-            set_country_flag = has_estate_criminal_syndicate 
-        }
-		custom_tooltip = estate_system.4.option.e.tooltip
-	}
-}
-
-#-----------------------------------
-# Seek Advisor
-#-----------------------------------
+# Sale of Titles - Menu
 country_event = {
 	id = estate_system.10
 	title = estate_system.10.title
 	desc = estate_system.10.desc
-	picture = ELISE_STARSEEKER_eventPicture
+	picture = QUEST_FOR_EPIC_LOOT_eventPicture
 
-	is_triggered_only = yes
+    is_triggered_only = yes
     
-    # Administrative
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = sell_titles_to_estate_clergy
+            clr_country_flag = sell_titles_to_estate_traders
+            clr_country_flag = sell_titles_to_estate_nobility
+            clr_country_flag = sell_titles_to_estate_peasants
+            clr_country_flag = sell_titles_to_estate_tribals
+            clr_country_flag = sell_titles_to_estate_slaves
+            clr_country_flag = sell_titles_to_estate_adventuring_guild
+            clr_country_flag = sell_titles_to_estate_mercantile_guild
+            clr_country_flag = sell_titles_to_estate_criminal_syndicate
+            clr_country_flag = sell_titles_to_estate_warriors_guild
+            clr_country_flag = sell_titles_to_estate_religious_order
+            clr_country_flag = sell_titles_to_estate_reliquary
+            clr_country_flag = sell_titles_to_estate_explorers_league
+            clr_country_flag = sell_titles_to_estate_invention
+            clr_country_flag = sell_titles_to_estate_legion
+            clr_country_flag = sell_titles_to_estate_abyssal_maw
+            clr_country_flag = sell_titles_to_estate_firelands
+            clr_country_flag = sell_titles_to_estate_deepholm
+            clr_country_flag = sell_titles_to_estate_skywall
+            clr_country_flag = sell_titles_to_estate_loa
+            clr_country_flag = sell_titles_to_estate_dragonflight
+            clr_country_flag = sell_titles_to_estate_underling
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
 	option = {
-		name = estate_system.10.option.a
-		
+		name = estate_system.10.option.estate_clergy
+        
+        trigger = {
+            has_estate = estate_clergy
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_clergy
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_clergy
+        }
         country_event = { id = estate_system.11 }
 	}
-    
-    # Diplomatic
-	option = {
-		name = estate_system.10.option.b
-		
-        country_event = { id = estate_system.12 }
-	}
-    
-    # Military
-	option = {
-		name = estate_system.10.option.c
-		
-        country_event = { id = estate_system.13 }
-	}
-    
-    # Exit
     option = {
-		name = estate_system.option.exit
+		name = estate_system.10.option.estate_traders
         
-    }
+        trigger = {
+            has_estate = estate_traders
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_traders
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_traders
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_nobility
+        
+        trigger = {
+            has_estate = estate_nobility
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_nobility
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_nobility
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_peasants
+        
+        trigger = {
+            has_estate = estate_peasants
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_peasants
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_peasants
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_tribals
+        
+        trigger = {
+            has_estate = estate_tribals
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_tribals
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_tribals
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_slaves
+        
+        trigger = {
+            has_estate = estate_slaves
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_slaves
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_slaves
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_adventuring_guild
+        
+        trigger = {
+            has_estate = estate_adventuring_guild
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_adventuring_guild
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_adventuring_guild
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_mercantile_guild
+        
+        trigger = {
+            has_estate = estate_mercantile_guild
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_mercantile_guild
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_mercantile_guild
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_criminal_syndicate
+        
+        trigger = {
+            has_estate = estate_criminal_syndicate
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_criminal_syndicate
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_criminal_syndicate
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_warriors_guild
+        
+        trigger = {
+            has_estate = estate_warriors_guild
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_warriors_guild
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_warriors_guild
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_religious_order
+        
+        trigger = {
+            has_estate = estate_religious_order
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_religious_order
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_religious_order
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_reliquary
+        
+        trigger = {
+            has_estate = estate_reliquary
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_reliquary
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_reliquary
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_explorers_league
+        
+        trigger = {
+            has_estate = estate_explorers_league
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_explorers_league
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_explorers_league
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_invention
+        
+        trigger = {
+            has_estate = estate_invention
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_invention
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_invention
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_legion
+        
+        trigger = {
+            has_estate = estate_legion
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_legion
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_legion
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_abyssal_maw
+        
+        trigger = {
+            has_estate = estate_abyssal_maw
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_abyssal_maw
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_abyssal_maw
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_firelands
+        
+        trigger = {
+            has_estate = estate_firelands
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_firelands
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_firelands
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_deepholm
+        
+        trigger = {
+            has_estate = estate_deepholm
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_deepholm
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_deepholm
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_skywall
+        
+        trigger = {
+            has_estate = estate_skywall
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_skywall
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_skywall
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_loa
+        
+        trigger = {
+            has_estate = estate_loa
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_loa
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_loa
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_dragonflight
+        
+        trigger = {
+            has_estate = estate_dragonflight
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_dragonflight
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_dragonflight
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.estate_underling
+        
+        trigger = {
+            has_estate = estate_underling
+        }
+        
+        custom_tooltip = SELL_TITLES_TO_estate_underling
+        hidden_effect = {
+            set_country_flag = sell_titles_to_estate_underling
+        }
+        country_event = { id = estate_system.11 }
+	}
+    option = {
+		name = estate_system.10.option.none
+        
+        custom_tooltip = SELL_TITLES_TO_NONE
+	}
 }
 
-# Administrative
+# Quantity of Titles
 country_event = {
 	id = estate_system.11
 	title = estate_system.11.title
 	desc = estate_system.11.desc
-	picture = CABAL_SHADOW_PRIEST_eventPicture
+	picture = TREASURE_VAULT_eventPicture
 
-	is_triggered_only = yes
-    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
 	option = {
 		name = estate_system.11.option.a
-		
-        define_advisor = {
-            type = philosopher
-            skill = 1
-        }
         
-        add_treasury = -100
+        sell_titles_amount_small = { ESTATE = estate_clergy }
+        sell_titles_amount_small = { ESTATE = estate_traders }
+        sell_titles_amount_small = { ESTATE = estate_nobility }
+        sell_titles_amount_small = { ESTATE = estate_peasants }
+        sell_titles_amount_small = { ESTATE = estate_tribals }
+        sell_titles_amount_small = { ESTATE = estate_slaves }
+        sell_titles_amount_small = { ESTATE = estate_adventuring_guild }
+        sell_titles_amount_small = { ESTATE = estate_mercantile_guild }
+        sell_titles_amount_small = { ESTATE = estate_criminal_syndicate }
+        sell_titles_amount_small = { ESTATE = estate_warriors_guild }
+        sell_titles_amount_small = { ESTATE = estate_religious_order }
+        sell_titles_amount_small = { ESTATE = estate_reliquary }
+        sell_titles_amount_small = { ESTATE = estate_explorers_league }
+        sell_titles_amount_small = { ESTATE = estate_invention }
+        sell_titles_amount_small = { ESTATE = estate_legion }
+        sell_titles_amount_small = { ESTATE = estate_abyssal_maw }
+        sell_titles_amount_small = { ESTATE = estate_firelands }
+        sell_titles_amount_small = { ESTATE = estate_deepholm }
+        sell_titles_amount_small = { ESTATE = estate_skywall }
+        sell_titles_amount_small = { ESTATE = estate_loa }
+        sell_titles_amount_small = { ESTATE = estate_dragonflight }
+        sell_titles_amount_small = { ESTATE = estate_underling }
 	}
     option = {
 		name = estate_system.11.option.b
-		
-        define_advisor = {
-            type = natural_scientist
-            skill = 1
-        }
         
-        add_treasury = -100
+        sell_titles_amount_medium = { ESTATE = estate_clergy }
+        sell_titles_amount_medium = { ESTATE = estate_traders }
+        sell_titles_amount_medium = { ESTATE = estate_nobility }
+        sell_titles_amount_medium = { ESTATE = estate_peasants }
+        sell_titles_amount_medium = { ESTATE = estate_tribals }
+        sell_titles_amount_medium = { ESTATE = estate_slaves }
+        sell_titles_amount_medium = { ESTATE = estate_adventuring_guild }
+        sell_titles_amount_medium = { ESTATE = estate_mercantile_guild }
+        sell_titles_amount_medium = { ESTATE = estate_criminal_syndicate }
+        sell_titles_amount_medium = { ESTATE = estate_warriors_guild }
+        sell_titles_amount_medium = { ESTATE = estate_religious_order }
+        sell_titles_amount_medium = { ESTATE = estate_reliquary }
+        sell_titles_amount_medium = { ESTATE = estate_explorers_league }
+        sell_titles_amount_medium = { ESTATE = estate_invention }
+        sell_titles_amount_medium = { ESTATE = estate_legion }
+        sell_titles_amount_medium = { ESTATE = estate_abyssal_maw }
+        sell_titles_amount_medium = { ESTATE = estate_firelands }
+        sell_titles_amount_medium = { ESTATE = estate_deepholm }
+        sell_titles_amount_medium = { ESTATE = estate_skywall }
+        sell_titles_amount_medium = { ESTATE = estate_loa }
+        sell_titles_amount_medium = { ESTATE = estate_dragonflight }
+        sell_titles_amount_medium = { ESTATE = estate_underling }
 	}
     option = {
 		name = estate_system.11.option.c
-		
-        define_advisor = {
-            type = artist
-            skill = 1
-        }
         
-        add_treasury = -100
+        sell_titles_amount_large = { ESTATE = estate_clergy }
+        sell_titles_amount_large = { ESTATE = estate_traders }
+        sell_titles_amount_large = { ESTATE = estate_nobility }
+        sell_titles_amount_large = { ESTATE = estate_peasants }
+        sell_titles_amount_large = { ESTATE = estate_tribals }
+        sell_titles_amount_large = { ESTATE = estate_slaves }
+        sell_titles_amount_large = { ESTATE = estate_adventuring_guild }
+        sell_titles_amount_large = { ESTATE = estate_mercantile_guild }
+        sell_titles_amount_large = { ESTATE = estate_criminal_syndicate }
+        sell_titles_amount_large = { ESTATE = estate_warriors_guild }
+        sell_titles_amount_large = { ESTATE = estate_religious_order }
+        sell_titles_amount_large = { ESTATE = estate_reliquary }
+        sell_titles_amount_large = { ESTATE = estate_explorers_league }
+        sell_titles_amount_large = { ESTATE = estate_invention }
+        sell_titles_amount_large = { ESTATE = estate_legion }
+        sell_titles_amount_large = { ESTATE = estate_abyssal_maw }
+        sell_titles_amount_large = { ESTATE = estate_firelands }
+        sell_titles_amount_large = { ESTATE = estate_deepholm }
+        sell_titles_amount_large = { ESTATE = estate_skywall }
+        sell_titles_amount_large = { ESTATE = estate_loa }
+        sell_titles_amount_large = { ESTATE = estate_dragonflight }
+        sell_titles_amount_large = { ESTATE = estate_underling }
 	}
     option = {
 		name = estate_system.11.option.d
-		
-        define_advisor = {
-            type = treasurer
-            skill = 1
-        }
         
-        add_treasury = -100
+        sell_titles_amount_huge = { ESTATE = estate_clergy }
+        sell_titles_amount_huge = { ESTATE = estate_traders }
+        sell_titles_amount_huge = { ESTATE = estate_nobility }
+        sell_titles_amount_huge = { ESTATE = estate_peasants }
+        sell_titles_amount_huge = { ESTATE = estate_tribals }
+        sell_titles_amount_huge = { ESTATE = estate_slaves }
+        sell_titles_amount_huge = { ESTATE = estate_adventuring_guild }
+        sell_titles_amount_huge = { ESTATE = estate_mercantile_guild }
+        sell_titles_amount_huge = { ESTATE = estate_criminal_syndicate }
+        sell_titles_amount_huge = { ESTATE = estate_warriors_guild }
+        sell_titles_amount_huge = { ESTATE = estate_religious_order }
+        sell_titles_amount_huge = { ESTATE = estate_reliquary }
+        sell_titles_amount_huge = { ESTATE = estate_explorers_league }
+        sell_titles_amount_huge = { ESTATE = estate_invention }
+        sell_titles_amount_huge = { ESTATE = estate_legion }
+        sell_titles_amount_huge = { ESTATE = estate_abyssal_maw }
+        sell_titles_amount_huge = { ESTATE = estate_firelands }
+        sell_titles_amount_huge = { ESTATE = estate_deepholm }
+        sell_titles_amount_huge = { ESTATE = estate_skywall }
+        sell_titles_amount_huge = { ESTATE = estate_loa }
+        sell_titles_amount_huge = { ESTATE = estate_dragonflight }
+        sell_titles_amount_huge = { ESTATE = estate_underling }
 	}
-    option = {
-		name = estate_system.11.option.e
-		
-        define_advisor = {
-            type = theologian
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.11.option.f
-		
-        define_advisor = {
-            type = master_of_mint
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.11.option.g
-		
-        define_advisor = {
-            type = inquisitor
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.11.option.h
-		
-        define_advisor = {
-            type = administrator
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.11.option.i
-		
-        define_advisor = {
-            type = supervisor
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.11.option.j
-		
-        define_advisor = {
-            type = reformer
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    
-    # Exit
-    option = {
-		name = estate_system.option.return
-        
-        country_event = { id = estate_system.10 }
-    }
 }
 
-# Diplomatic
-country_event = {
-	id = estate_system.12
-	title = estate_system.12.title
-	desc = estate_system.12.desc
-	picture = CABAL_SHADOW_PRIEST_eventPicture
 
-	is_triggered_only = yes
-    
+# Sieze Land - Menu
+country_event = {
+	id = estate_system.20
+	title = estate_system.20.title
+	desc = estate_system.20.desc
+	picture = ENTRENCHMENT_eventPicture
+
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
 	option = {
-		name = estate_system.12.option.a
-		
-        define_advisor = {
-            type = statesman
-            skill = 1
+		name = estate_system.20.option.estate_clergy
+        
+        trigger = {
+            has_estate = estate_clergy
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_clergy }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.b
-		
-        define_advisor = {
-            type = naval_reformer
-            skill = 1
+		name = estate_system.20.option.estate_traders
+        
+        trigger = {
+            has_estate = estate_traders
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_traders }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.c
-		
-        define_advisor = {
-            type = trader
-            skill = 1
+		name = estate_system.20.option.estate_nobility
+        
+        trigger = {
+            has_estate = estate_nobility
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_nobility }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.d
-		
-        define_advisor = {
-            type = spymaster
-            skill = 1
+		name = estate_system.20.option.estate_peasants
+        
+        trigger = {
+            has_estate = estate_peasants
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_peasants }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.e
-		
-        define_advisor = {
-            type = colonial_governor
-            skill = 1
+		name = estate_system.20.option.estate_tribals
+        
+        trigger = {
+            has_estate = estate_tribals
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_tribals }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.f
-		
-        define_advisor = {
-            type = diplomat
-            skill = 1
+		name = estate_system.20.option.estate_slaves
+        
+        trigger = {
+            has_estate = estate_slaves
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_slaves }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.g
-		
-        define_advisor = {
-            type = navigator
-            skill = 1
+		name = estate_system.20.option.estate_adventuring_guild
+        
+        trigger = {
+            has_estate = estate_adventuring_guild
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_adventuring_guild }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.h
-		
-        define_advisor = {
-            type = shipwright
-            skill = 1
+		name = estate_system.20.option.estate_mercantile_guild
+        
+        trigger = {
+            has_estate = estate_mercantile_guild
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_mercantile_guild }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.i
-		
-        define_advisor = {
-            type = ambassador
-            skill = 1
+		name = estate_system.20.option.estate_criminal_syndicate
+        
+        trigger = {
+            has_estate = estate_criminal_syndicate
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_criminal_syndicate }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
     option = {
-		name = estate_system.12.option.j
-		
-        define_advisor = {
-            type = negotiator
-            skill = 1
+		name = estate_system.20.option.estate_warriors_guild
+        
+        trigger = {
+            has_estate = estate_warriors_guild
         }
         
-        add_treasury = -100
+        seize_land_from_estate = { ESTATE = estate_warriors_guild }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
 	}
-    
-    # Exit
     option = {
-		name = estate_system.option.return
+		name = estate_system.20.option.estate_religious_order
         
-        country_event = { id = estate_system.10 }
-    }
+        trigger = {
+            has_estate = estate_religious_order
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_religious_order }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_reliquary
+        
+        trigger = {
+            has_estate = estate_reliquary
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_reliquary }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_explorers_league
+        
+        trigger = {
+            has_estate = estate_explorers_league
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_explorers_league }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_invention
+        
+        trigger = {
+            has_estate = estate_invention
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_invention }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_legion
+        
+        trigger = {
+            has_estate = estate_legion
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_legion }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_abyssal_maw
+        
+        trigger = {
+            has_estate = estate_abyssal_maw
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_abyssal_maw }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_firelands
+        
+        trigger = {
+            has_estate = estate_firelands
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_firelands }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_deepholm
+        
+        trigger = {
+            has_estate = estate_deepholm
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_deepholm }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_skywall
+        
+        trigger = {
+            has_estate = estate_skywall
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_skywall }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_loa
+        
+        trigger = {
+            has_estate = estate_loa
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_loa }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_dragonflight
+        
+        trigger = {
+            has_estate = estate_dragonflight
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_dragonflight }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.estate_underling
+        
+        trigger = {
+            has_estate = estate_underling
+        }
+        
+        seize_land_from_estate = { ESTATE = estate_underling }
+        custom_tooltip = seize_land_rebels_tt
+		seize_land_effect = yes
+	}
+    option = {
+		name = estate_system.20.option.none
+        
+	}
 }
 
-# Military
+# Execute Leader - Menu
 country_event = {
-	id = estate_system.13
-	title = estate_system.13.title
-	desc = estate_system.13.desc
-	picture = CABAL_SHADOW_PRIEST_eventPicture
+	id = estate_system.30
+	title = estate_system.30.title
+	desc = estate_system.30.desc
+	picture = PIT_OF_SPIKES_eventPicture
 
-	is_triggered_only = yes
-    
-    option = {
-		name = estate_system.13.option.a
-		
-        define_advisor = {
-            type = army_reformer
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.b
-		
-        define_advisor = {
-            type = army_organiser
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.c
-		
-        define_advisor = {
-            type = commandant
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.d
-		
-        define_advisor = {
-            type = quartermaster
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.e
-		
-        define_advisor = {
-            type = recruitmaster
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.f
-		
-        define_advisor = {
-            type = fortification_expert
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.g
-		
-        define_advisor = {
-            type = grand_captain
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.h
-		
-        define_advisor = {
-            type = sapper
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.i
-		
-        define_advisor = {
-            type = scout
-            skill = 1
-        }
-        
-        add_treasury = -100
-	}
-    option = {
-		name = estate_system.13.option.j
-		
-        define_advisor = {
-            type = orator
-            skill = 1
-        }
-        
-        add_treasury = -100
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
 	}
 
-    # Exit
-    option = {
-		name = estate_system.option.return
+	option = {
+		name = estate_system.30.option.estate_clergy
         
-        country_event = { id = estate_system.10 }
-    }
+        trigger = {
+            has_estate = estate_clergy
+        }
+        
+        execute_estate_leader = { ESTATE = estate_clergy }
+	}
+    option = {
+		name = estate_system.30.option.estate_traders
+        
+        trigger = {
+            has_estate = estate_traders
+        }
+        
+        execute_estate_leader = { ESTATE = estate_traders }
+	}
+    option = {
+		name = estate_system.30.option.estate_nobility
+        
+        trigger = {
+            has_estate = estate_nobility
+        }
+        
+        execute_estate_leader = { ESTATE = estate_nobility }
+	}
+    option = {
+		name = estate_system.30.option.estate_peasants
+        
+        trigger = {
+            has_estate = estate_peasants
+        }
+        
+        execute_estate_leader = { ESTATE = estate_peasants }
+	}
+    option = {
+		name = estate_system.30.option.estate_tribals
+        
+        trigger = {
+            has_estate = estate_tribals
+        }
+        
+        execute_estate_leader = { ESTATE = estate_tribals }
+	}
+    option = {
+		name = estate_system.30.option.estate_slaves
+        
+        trigger = {
+            has_estate = estate_slaves
+        }
+        
+        execute_estate_leader = { ESTATE = estate_slaves }
+	}
+    option = {
+		name = estate_system.30.option.estate_adventuring_guild
+        
+        trigger = {
+            has_estate = estate_adventuring_guild
+        }
+        
+        execute_estate_leader = { ESTATE = estate_adventuring_guild }
+	}
+    option = {
+		name = estate_system.30.option.estate_mercantile_guild
+        
+        trigger = {
+            has_estate = estate_mercantile_guild
+        }
+        
+        execute_estate_leader = { ESTATE = estate_mercantile_guild }
+	}
+    option = {
+		name = estate_system.30.option.estate_criminal_syndicate
+        
+        trigger = {
+            has_estate = estate_criminal_syndicate
+        }
+        
+        execute_estate_leader = { ESTATE = estate_criminal_syndicate }
+	}
+    option = {
+		name = estate_system.30.option.estate_warriors_guild
+        
+        trigger = {
+            has_estate = estate_warriors_guild
+        }
+        
+        execute_estate_leader = { ESTATE = estate_warriors_guild }
+	}
+    option = {
+		name = estate_system.30.option.estate_religious_order
+        
+        trigger = {
+            has_estate = estate_religious_order
+        }
+        
+        execute_estate_leader = { ESTATE = estate_religious_order }
+	}
+    option = {
+		name = estate_system.30.option.estate_reliquary
+        
+        trigger = {
+            has_estate = estate_reliquary
+        }
+        
+        execute_estate_leader = { ESTATE = estate_reliquary }
+	}
+    option = {
+		name = estate_system.30.option.estate_explorers_league
+        
+        trigger = {
+            has_estate = estate_explorers_league
+        }
+        
+        execute_estate_leader = { ESTATE = estate_explorers_league }
+	}
+    option = {
+		name = estate_system.30.option.estate_invention
+        
+        trigger = {
+            has_estate = estate_invention
+        }
+        
+        execute_estate_leader = { ESTATE = estate_invention }
+	}
+    option = {
+		name = estate_system.30.option.estate_legion
+        
+        trigger = {
+            has_estate = estate_legion
+        }
+        
+        execute_estate_leader = { ESTATE = estate_legion }
+	}
+    option = {
+		name = estate_system.30.option.estate_abyssal_maw
+        
+        trigger = {
+            has_estate = estate_abyssal_maw
+        }
+        
+        execute_estate_leader = { ESTATE = estate_abyssal_maw }
+	}
+    option = {
+		name = estate_system.30.option.estate_firelands
+        
+        trigger = {
+            has_estate = estate_firelands
+        }
+        
+        execute_estate_leader = { ESTATE = estate_firelands }
+	}
+    option = {
+		name = estate_system.30.option.estate_deepholm
+        
+        trigger = {
+            has_estate = estate_deepholm
+        }
+        
+        execute_estate_leader = { ESTATE = estate_deepholm }
+	}
+    option = {
+		name = estate_system.30.option.estate_skywall
+        
+        trigger = {
+            has_estate = estate_skywall
+        }
+        
+        execute_estate_leader = { ESTATE = estate_skywall }
+	}
+    option = {
+		name = estate_system.30.option.estate_loa
+        
+        trigger = {
+            has_estate = estate_loa
+        }
+        
+        execute_estate_leader = { ESTATE = estate_loa }
+	}
+    option = {
+		name = estate_system.30.option.estate_dragonflight
+        
+        trigger = {
+            has_estate = estate_dragonflight
+        }
+        
+        execute_estate_leader = { ESTATE = estate_dragonflight }
+	}
+    option = {
+		name = estate_system.30.option.estate_underling
+        
+        trigger = {
+            has_estate = estate_underling
+        }
+        
+        execute_estate_leader = { ESTATE = estate_underling }
+	}
+    option = {
+		name = estate_system.30.option.none
+        
+	}
 }
-
