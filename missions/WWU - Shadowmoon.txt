@@ -21,11 +21,13 @@ A34_shadowmoon_column_2 = {
         completed_by = 592.1.1
         
 		trigger = {
-			OR = {
-                AND = {
+            if = {
+                limit = {
                     ai = yes
-                    is_year = 560
                 }
+                is_year = 560
+            }
+            else = {
                 grown_by_development = 3
             }
 		}
@@ -42,9 +44,14 @@ A34_shadowmoon_column_2 = {
         completed_by = 592.1.1
         
 		trigger = {
-            OR = {
+            if = {
+                limit = {
+                    ai = yes
+                }
                 is_year = 565
-                grown_by_development = 12
+            }
+            else = {
+                grown_by_development = 5
             }
 		}
 		effect = {
@@ -68,12 +75,14 @@ A34_shadowmoon_column_2 = {
         completed_by = 592.1.1
         
 		trigger = {
-            OR = {
-                AND = {
+            if = {
+                limit = {
                     ai = yes
-                    is_year = 580
                 }
-                grown_by_development = 24
+                is_year = 580
+            }
+            else = {
+                grown_by_development = 8
             }
 		}
 		effect = {
@@ -144,12 +153,14 @@ A34_shadowmoon_column_3 = {
         completed_by = 592.1.1
         
 		trigger = {
-            OR = {
-                AND = {
+            if = {
+                limit = {
                     ai = yes
-                    is_year = 595
                 }
-                grown_by_development = 30
+                is_year = 595
+            }
+            else = {
+                grown_by_development = 20
             }
 		}
 		effect = {
@@ -227,28 +238,26 @@ A34_shadowmoon_column_4 = {
 		trigger = { 
             mission_completed = A34_the_first_warlocks
             
-            OR = {
-                AND = {
+            if = {
+                limit = {
                     ai = yes
-                    is_year = 590
+                }
+                is_year = 590
+            }
+            else = {
+                any_country = {
+                    has_country_modifier = mission_acceptance_of_warlocks
+                    owns = 3765
+                }
+                any_country = {
+                    has_country_modifier = mission_acceptance_of_warlocks
+                    owns = 3806
+                }
+                any_country = {
+                    has_country_modifier = mission_acceptance_of_warlocks
+                    owns = 3770
                 }
                 AND = {
-                    ai = no
-                    any_country = {
-                        has_country_modifier = mission_acceptance_of_warlocks
-                        owns = 3765
-                    }
-                    any_country = {
-                        has_country_modifier = mission_acceptance_of_warlocks
-                        owns = 3806
-                    }
-                    any_country = {
-                        has_country_modifier = mission_acceptance_of_warlocks
-                        owns = 3770
-                    }
-                }
-                AND = {
-                    ai = no
                     has_country_modifier = mission_acceptance_of_warlocks
                     owns = 3765
                     owns = 3806
@@ -347,7 +356,15 @@ A34_shadowmoon_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-			grown_by_development = 40
+            if = {
+                limit = {
+                    ai = yes
+                }
+                is_year = 592
+            }
+            else = {
+                grown_by_development = 25
+            }
 		}
 		effect = {
 			country_event = { id = rise_of_the_horde.6 days = 30 }
