@@ -1,3 +1,15 @@
+#---------------------------------------
+# Rise of the Horde
+#---------------------------------------
+# Covers:
+# Rise of the Horde
+# First War
+# Second War
+# Aftermath of the Second War
+# Beyond the Dark Portal
+
+# Ends:
+# If: the Orcish Horde no longer exists, or Orcish Horde is below 5 provinces, or non-Orc nations owns the Azeroth Dark Portal (only after the Orcish Horde has spawned)
 # Covers the Rise of the Horde
 age_rise_of_the_horde = {
 	start = 546
@@ -103,173 +115,25 @@ age_rise_of_the_horde = {
 	}
 }
 
-# Covers the First and Second War
-age_orcish_horde = {
-	start = 592
-	
-	can_start = {
-		custom_trigger_tooltip = {
-			tooltip = age_orcish_horde_condition
-            OR = {
-                AND = {
-                    current_age = age_rise_of_the_horde
-                    
-                    # Dark Portal Azeroth
-                    1035 = {
-                        owner = {
-                            culture_group = culture_group_orc
-                        }
-                    }
-                }
-                
-                # Fallback
-                is_year = 617
-            }
-		}
-	}
-	
-    papacy = 1.0
-	religious_conflicts = yes
-    absolutism = { 
-        harsh_treatment = 1
-		stability = 1
-		decrease_autonomy_command = 1
-		strengthen_government = 2
-		
-		increase_autonomy_command = -2
-		debase_currency = -1
-		execute_rebel_acceptance_command = -10
-		automatic_seat_in_parliament = -2
-		manual_seat_in_parliament = -2
-		war_exhaustion = -1
-    }
-    
-	objectives = {
-		toh_obj_prestigious_capital = {
-            capital_scope = {
-                development = 30
-                religion = ROOT
-                culture = ROOT
-                NOT = { devastation = 1 }
-            }
-        }
-		toh_obj_absolute_rule = {
-            absolutism = 80
-        }
-        toh_obj_kalimdor_settlements = {
-		    OR = {
-                # Kalimdor Capital -> Non-Kalimdor province
-				AND = {
-					capital_scope = {
-						superregion = kalimdor_superregion 
-					}
-					any_owned_province = {
-                        NOT = {
-                            superregion = kalimdor_superregion
-                        }
-					}
-				}
-                # Non-Kalimdor Capital -> Kalimdor province
-				AND = {
-					capital_scope = {
-						NOT = {
-                            superregion = kalimdor_superregion
-                        }
-					}
-					any_owned_province = {
-						superregion = kalimdor_superregion
-					}
-				}
-		    }
-        }
-        toh_obj_masterful_counsel = {
-			OR = {
-				philosopher = 3
-				natural_scientist = 3
-				artist = 3
-				treasurer = 3
-				theologian = 3
-				master_of_mint = 3
-				inquisitor = 3
-                administrator = 3
-                supervisor = 3
-                reformer = 3
-			}
-			OR = {
-				statesman = 3
-				naval_reformer = 3
-				trader = 3
-				spymaster = 3
-				colonial_governor = 3
-				diplomat = 3
-				navigator = 3
-                shipwright = 3
-                ambassador = 3
-                negotiator = 3
-			}
-			OR = {
-				army_reformer = 3
-				army_organiser = 3
-				commandant = 3
-				quartermaster = 3
-				recruitmaster = 3
-				fortification_expert = 3
-				grand_captain = 3
-                sapper = 3
-                scout = 3
-                orator = 3
-			}
-        }
-        toh_obj_colossal_army = {
-            land_forcelimit = 60
-            army_size_percentage = 0.8
-        }
-        toh_obj_colossal_navy = {
-            naval_forcelimit = 60
-            navy_size_percentage = 0.8
-        }
-        toh_obj_inspirational_leader = {
-            has_commanding_three_star = yes
-        }
-	}		
+#---------------------------------------
+# The Frozen Throne
+#---------------------------------------
+# Covers:
+# Rise of the Lich King
+# The Third War
+# The Assault on Hyjal
 
-	abilities = {
-        toh_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_2  = { allow = { has_age_ability = toh_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_3  = { allow = { has_age_ability = toh_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_4  = { allow = { has_age_ability = toh_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_5  = { allow = { has_age_ability = toh_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_6  = { allow = { has_age_ability = toh_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_7  = { allow = { has_age_ability = toh_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_8  = { allow = { has_age_ability = toh_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_9  = { allow = { has_age_ability = toh_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_10 = { allow = { has_age_ability = toh_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        toh_ability_11 = { allow = { has_age_ability = toh_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-	}
-}
+# Ends:
+# If: the Scourge no longer exists, or Scourge is below 5 provinces, or Scourge is limited to Icecrown (only after Scourge of Lordaeron has been created)
 
-# Covers the start of the Third War
-age_scourge = {
-	start = 617
+age_frozen_throne = {
+	start = 605
 	
 	can_start = {
 		custom_trigger_tooltip = {
 			tooltip = age_scourge_condition
-            OR = {
-                AND = {
-                    current_age = age_orcish_horde
-                    
-                    # Dark Portal Azeroth
-                    1035 = {
-                        owner = {
-                             has_country_modifier = member_of_alliance
-                        }
-                    }
-                }
-                
-                # Fallback
-                is_year = 617
-            }
+            
+            always = no
 		}
 	}
 	
@@ -290,7 +154,7 @@ age_scourge = {
     }
     
 	objectives = {
-		tsr_obj_prestigious_capital = {
+		frth_obj_prestigious_capital = {
             capital_scope = {
                 development = 30
                 religion = ROOT
@@ -298,14 +162,14 @@ age_scourge = {
                 NOT = { devastation = 1 }
             }
         }
-		tsr_obj_skillful_ruler = {
+		frth_obj_skillful_ruler = {
             OR = {
                 adm = 6
                 dip = 6
                 mil = 6
             }
         }
-        tsr_obj_northrend_settlements = {
+        frth_obj_northrend_settlements = {
 		    OR = {
 				AND = {
 					capital_scope = {
@@ -325,7 +189,7 @@ age_scourge = {
 				}
 		    }
         }
-        tsr_obj_masterful_counsel = {
+        frth_obj_masterful_counsel = {
 			OR = {
 				philosopher = 3
 				natural_scientist = 3
@@ -363,56 +227,58 @@ age_scourge = {
                 orator = 3
 			}
         }
-        tsr_obj_colossal_army = {
+        frth_obj_colossal_army = {
             land_forcelimit = 70
             army_size_percentage = 0.8
         }
-        tsr_obj_colossal_navy = {
+        frth_obj_colossal_navy = {
             naval_forcelimit = 70
             navy_size_percentage = 0.8
         }
-        tsr_obj_inspirational_leader = {
+        frth_obj_inspirational_leader = {
             has_commanding_three_star = yes
         }
 	}		
 
 	abilities = {
-        tsr_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_2  = { allow = { has_age_ability = tsr_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_3  = { allow = { has_age_ability = tsr_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_4  = { allow = { has_age_ability = tsr_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_5  = { allow = { has_age_ability = tsr_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_6  = { allow = { has_age_ability = tsr_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_7  = { allow = { has_age_ability = tsr_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_8  = { allow = { has_age_ability = tsr_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_9  = { allow = { has_age_ability = tsr_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_10 = { allow = { has_age_ability = tsr_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tsr_ability_11 = { allow = { has_age_ability = tsr_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_2  = { allow = { has_age_ability = frth_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_3  = { allow = { has_age_ability = frth_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_4  = { allow = { has_age_ability = frth_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_5  = { allow = { has_age_ability = frth_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_6  = { allow = { has_age_ability = frth_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_7  = { allow = { has_age_ability = frth_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_8  = { allow = { has_age_ability = frth_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_9  = { allow = { has_age_ability = frth_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_10 = { allow = { has_age_ability = frth_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        frth_ability_11 = { allow = { has_age_ability = frth_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
 	}
 }
 
-# Covers the tail-end of the Third War
-age_burning_legion = {
+#---------------------------------------
+# Trouble in Azeroth
+#---------------------------------------
+# Covers:
+# Onyxia Infiltration
+# Stonemason Uprising
+# Troubles in the Horde
+# Assault of Blackwing Lair
+# Rise of the Blood God
+# Gates of Ahn'Qiraj
+# Shadow of the Necropolis
+# Drums of War
+
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
+age_trouble_in_azeroth = {
 	start = 622
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_burning_legion_condition
+			tooltip = age_trouble_in_azeroth_condition
             
-            OR = {
-                AND = {
-                    current_age = age_scourge
-                    
-                    1268 = {
-                        owner = {
-                            NOT = { culture_group = culture_group_scourge }
-                        }
-                    }
-                }
-                
-                # Fallback
-                is_year = 700
-            }
+            always = no
 		}
 	}
 	
@@ -433,19 +299,25 @@ age_burning_legion = {
     }
     
 	objectives = {
-		tbl_obj_united_front = {
-            num_of_allies = 5
-        }
-		tbl_obj_defender_of_azeroth = {
-            is_rival = B92
-        }
-        tbl_obj_overwhelming_might = {
-		    army_strength = {
-                who = B92
-                value = 1.5
+		azer_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
             }
         }
-        tbl_obj_masterful_counsel = {
+		azer_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        azer_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        azer_obj_masterful_counsel = {
 			OR = {
 				philosopher = 3
 				natural_scientist = 3
@@ -483,30 +355,650 @@ age_burning_legion = {
                 orator = 3
 			}
         }
-        tbl_obj_colossal_army = {
-            land_forcelimit = 80
+        azer_obj_colossal_army = {
+            land_forcelimit = 70
             army_size_percentage = 0.8
         }
-        tbl_obj_colossal_navy = {
-            naval_forcelimit = 80
+        azer_obj_colossal_navy = {
+            naval_forcelimit = 70
             navy_size_percentage = 0.8
         }
-        tbl_obj_inspirational_leader = {
+        azer_obj_inspirational_leader = {
             has_commanding_three_star = yes
         }
 	}		
 
 	abilities = {
-        tbl_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_2  = { allow = { has_age_ability = tbl_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_3  = { allow = { has_age_ability = tbl_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_4  = { allow = { has_age_ability = tbl_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_5  = { allow = { has_age_ability = tbl_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_6  = { allow = { has_age_ability = tbl_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_7  = { allow = { has_age_ability = tbl_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_8  = { allow = { has_age_ability = tbl_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_9  = { allow = { has_age_ability = tbl_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_10 = { allow = { has_age_ability = tbl_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
-        tbl_ability_11 = { allow = { has_age_ability = tbl_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_2  = { allow = { has_age_ability = azer_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_3  = { allow = { has_age_ability = azer_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_4  = { allow = { has_age_ability = azer_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_5  = { allow = { has_age_ability = azer_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_6  = { allow = { has_age_ability = azer_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_7  = { allow = { has_age_ability = azer_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_8  = { allow = { has_age_ability = azer_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_9  = { allow = { has_age_ability = azer_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_10 = { allow = { has_age_ability = azer_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        azer_ability_11 = { allow = { has_age_ability = azer_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
 	}
 }
+
+#---------------------------------------
+# The Burning Crusade
+#---------------------------------------
+# Covers:
+# Before the Storm
+# The Burning Crusade
+# The Black Temple
+# The Gods of Zul'Aman
+# Fury of the Sunwell
+
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
+age_burning_crusade = {
+	start = 625
+	
+	can_start = {
+		custom_trigger_tooltip = {
+			tooltip = age_burning_crusade_condition
+            
+            always = no
+		}
+	}
+	
+    papacy = 1.0
+	religious_conflicts = yes
+    absolutism = { 
+        harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		automatic_seat_in_parliament = -2
+		manual_seat_in_parliament = -2
+		war_exhaustion = -1
+    }
+    
+	objectives = {
+		burn_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
+            }
+        }
+		burn_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        burn_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        burn_obj_masterful_counsel = {
+			OR = {
+				philosopher = 3
+				natural_scientist = 3
+				artist = 3
+				treasurer = 3
+				theologian = 3
+				master_of_mint = 3
+				inquisitor = 3
+                administrator = 3
+                supervisor = 3
+                reformer = 3
+			}
+			OR = {
+				statesman = 3
+				naval_reformer = 3
+				trader = 3
+				spymaster = 3
+				colonial_governor = 3
+				diplomat = 3
+				navigator = 3
+                shipwright = 3
+                ambassador = 3
+                negotiator = 3
+			}
+			OR = {
+				army_reformer = 3
+				army_organiser = 3
+				commandant = 3
+				quartermaster = 3
+				recruitmaster = 3
+				fortification_expert = 3
+				grand_captain = 3
+                sapper = 3
+                scout = 3
+                orator = 3
+			}
+        }
+        burn_obj_colossal_army = {
+            land_forcelimit = 70
+            army_size_percentage = 0.8
+        }
+        burn_obj_colossal_navy = {
+            naval_forcelimit = 70
+            navy_size_percentage = 0.8
+        }
+        burn_obj_inspirational_leader = {
+            has_commanding_three_star = yes
+        }
+	}		
+
+	abilities = {
+        burn_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_2  = { allow = { has_age_ability = burn_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_3  = { allow = { has_age_ability = burn_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_4  = { allow = { has_age_ability = burn_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_5  = { allow = { has_age_ability = burn_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_6  = { allow = { has_age_ability = burn_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_7  = { allow = { has_age_ability = burn_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_8  = { allow = { has_age_ability = burn_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_9  = { allow = { has_age_ability = burn_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_10 = { allow = { has_age_ability = burn_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        burn_ability_11 = { allow = { has_age_ability = burn_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+	}
+}
+
+#---------------------------------------
+# Wrath of the Lich King
+#---------------------------------------
+# Covers:
+# Echoes of Doom
+# Wrath of the Lich King
+# Secrets of Ulduar
+# Call of the Crusade
+# Fall of the Lich King
+
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
+age_wrath_of_the_lich_king = {
+	start = 626
+	
+	can_start = {
+		custom_trigger_tooltip = {
+			tooltip = age_wrath_of_the_lich_king_condition
+            
+            always = no
+		}
+	}
+	
+    papacy = 1.0
+	religious_conflicts = yes
+    absolutism = { 
+        harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		automatic_seat_in_parliament = -2
+		manual_seat_in_parliament = -2
+		war_exhaustion = -1
+    }
+    
+	objectives = {
+		wotlk_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
+            }
+        }
+		wotlk_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        wotlk_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        wotlk_obj_masterful_counsel = {
+			OR = {
+				philosopher = 3
+				natural_scientist = 3
+				artist = 3
+				treasurer = 3
+				theologian = 3
+				master_of_mint = 3
+				inquisitor = 3
+                administrator = 3
+                supervisor = 3
+                reformer = 3
+			}
+			OR = {
+				statesman = 3
+				naval_reformer = 3
+				trader = 3
+				spymaster = 3
+				colonial_governor = 3
+				diplomat = 3
+				navigator = 3
+                shipwright = 3
+                ambassador = 3
+                negotiator = 3
+			}
+			OR = {
+				army_reformer = 3
+				army_organiser = 3
+				commandant = 3
+				quartermaster = 3
+				recruitmaster = 3
+				fortification_expert = 3
+				grand_captain = 3
+                sapper = 3
+                scout = 3
+                orator = 3
+			}
+        }
+        wotlk_obj_colossal_army = {
+            land_forcelimit = 70
+            army_size_percentage = 0.8
+        }
+        wotlk_obj_colossal_navy = {
+            naval_forcelimit = 70
+            navy_size_percentage = 0.8
+        }
+        wotlk_obj_inspirational_leader = {
+            has_commanding_three_star = yes
+        }
+	}		
+
+	abilities = {
+        wotlk_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_2  = { allow = { has_age_ability = wotlk_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_3  = { allow = { has_age_ability = wotlk_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_4  = { allow = { has_age_ability = wotlk_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_5  = { allow = { has_age_ability = wotlk_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_6  = { allow = { has_age_ability = wotlk_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_7  = { allow = { has_age_ability = wotlk_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_8  = { allow = { has_age_ability = wotlk_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_9  = { allow = { has_age_ability = wotlk_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_10 = { allow = { has_age_ability = wotlk_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        wotlk_ability_11 = { allow = { has_age_ability = wotlk_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+	}
+}
+
+#---------------------------------------
+# Cataclysm
+#---------------------------------------
+# Covers:
+# The Shattering
+# Rise of the Zandalari
+# Rage of the Firelands
+# The Hour of Twilight
+
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
+age_cataclysm = {
+	start = 631
+	
+	can_start = {
+		custom_trigger_tooltip = {
+			tooltip = age_cataclysm_condition
+            
+            always = no
+		}
+	}
+	
+    papacy = 1.0
+	religious_conflicts = yes
+    absolutism = { 
+        harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		automatic_seat_in_parliament = -2
+		manual_seat_in_parliament = -2
+		war_exhaustion = -1
+    }
+    
+	objectives = {
+		cata_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
+            }
+        }
+		cata_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        cata_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        cata_obj_masterful_counsel = {
+			OR = {
+				philosopher = 3
+				natural_scientist = 3
+				artist = 3
+				treasurer = 3
+				theologian = 3
+				master_of_mint = 3
+				inquisitor = 3
+                administrator = 3
+                supervisor = 3
+                reformer = 3
+			}
+			OR = {
+				statesman = 3
+				naval_reformer = 3
+				trader = 3
+				spymaster = 3
+				colonial_governor = 3
+				diplomat = 3
+				navigator = 3
+                shipwright = 3
+                ambassador = 3
+                negotiator = 3
+			}
+			OR = {
+				army_reformer = 3
+				army_organiser = 3
+				commandant = 3
+				quartermaster = 3
+				recruitmaster = 3
+				fortification_expert = 3
+				grand_captain = 3
+                sapper = 3
+                scout = 3
+                orator = 3
+			}
+        }
+        cata_obj_colossal_army = {
+            land_forcelimit = 70
+            army_size_percentage = 0.8
+        }
+        cata_obj_colossal_navy = {
+            naval_forcelimit = 70
+            navy_size_percentage = 0.8
+        }
+        cata_obj_inspirational_leader = {
+            has_commanding_three_star = yes
+        }
+	}		
+
+	abilities = {
+        cata_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_2  = { allow = { has_age_ability = cata_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_3  = { allow = { has_age_ability = cata_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_4  = { allow = { has_age_ability = cata_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_5  = { allow = { has_age_ability = cata_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_6  = { allow = { has_age_ability = cata_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_7  = { allow = { has_age_ability = cata_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_8  = { allow = { has_age_ability = cata_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_9  = { allow = { has_age_ability = cata_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_10 = { allow = { has_age_ability = cata_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        cata_ability_11 = { allow = { has_age_ability = cata_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+	}
+}
+
+#---------------------------------------
+# Mists of Pandaria
+#---------------------------------------
+# Covers:
+# Mists of Pandaria
+# Landfall
+# The Thunder King
+# Escalation
+# Siege of Orgrimmar
+
+# Ends:
+# If: all of the story events have occured (this requires new content to be made).  The story events will occur in a linear order, but no specific result from them is required.
+
+age_mists_of_pandaria = {
+	start = 632
+	
+	can_start = {
+		custom_trigger_tooltip = {
+			tooltip = age_mists_of_pandaria_condition
+            
+            always = no
+		}
+	}
+	
+    papacy = 1.0
+	religious_conflicts = yes
+    absolutism = { 
+        harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		automatic_seat_in_parliament = -2
+		manual_seat_in_parliament = -2
+		war_exhaustion = -1
+    }
+    
+	objectives = {
+		mop_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
+            }
+        }
+		mop_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        mop_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        mop_obj_masterful_counsel = {
+			OR = {
+				philosopher = 3
+				natural_scientist = 3
+				artist = 3
+				treasurer = 3
+				theologian = 3
+				master_of_mint = 3
+				inquisitor = 3
+                administrator = 3
+                supervisor = 3
+                reformer = 3
+			}
+			OR = {
+				statesman = 3
+				naval_reformer = 3
+				trader = 3
+				spymaster = 3
+				colonial_governor = 3
+				diplomat = 3
+				navigator = 3
+                shipwright = 3
+                ambassador = 3
+                negotiator = 3
+			}
+			OR = {
+				army_reformer = 3
+				army_organiser = 3
+				commandant = 3
+				quartermaster = 3
+				recruitmaster = 3
+				fortification_expert = 3
+				grand_captain = 3
+                sapper = 3
+                scout = 3
+                orator = 3
+			}
+        }
+        mop_obj_colossal_army = {
+            land_forcelimit = 70
+            army_size_percentage = 0.8
+        }
+        mop_obj_colossal_navy = {
+            naval_forcelimit = 70
+            navy_size_percentage = 0.8
+        }
+        mop_obj_inspirational_leader = {
+            has_commanding_three_star = yes
+        }
+	}		
+
+	abilities = {
+        mop_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_2  = { allow = { has_age_ability = mop_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_3  = { allow = { has_age_ability = mop_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_4  = { allow = { has_age_ability = mop_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_5  = { allow = { has_age_ability = mop_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_6  = { allow = { has_age_ability = mop_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_7  = { allow = { has_age_ability = mop_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_8  = { allow = { has_age_ability = mop_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_9  = { allow = { has_age_ability = mop_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_10 = { allow = { has_age_ability = mop_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        mop_ability_11 = { allow = { has_age_ability = mop_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+	}
+}
+
+#---------------------------------------
+# The Eternal Conflict
+#---------------------------------------
+# Covers:
+# Generic
+
+# Does not end
+
+age_eternal_conflict = {
+	start = 635
+	
+	can_start = {
+		custom_trigger_tooltip = {
+			tooltip = age_eternal_conflict_condition
+            
+            always = no
+		}
+	}
+	
+    papacy = 1.0
+	religious_conflicts = yes
+    absolutism = { 
+        harsh_treatment = 1
+		stability = 1
+		decrease_autonomy_command = 1
+		strengthen_government = 2
+		
+		increase_autonomy_command = -2
+		debase_currency = -1
+		execute_rebel_acceptance_command = -10
+		automatic_seat_in_parliament = -2
+		manual_seat_in_parliament = -2
+		war_exhaustion = -1
+    }
+    
+	objectives = {
+		etcf_obj_prestigious_capital = {
+            capital_scope = {
+                development = 30
+                religion = ROOT
+                culture = ROOT
+                NOT = { devastation = 1 }
+            }
+        }
+		etcf_obj_skillful_ruler = {
+            OR = {
+                adm = 6
+                dip = 6
+                mil = 6
+            }
+        }
+        etcf_obj_bountiful_treasury = {
+		    treasury = 10000
+        }
+        etcf_obj_masterful_counsel = {
+			OR = {
+				philosopher = 3
+				natural_scientist = 3
+				artist = 3
+				treasurer = 3
+				theologian = 3
+				master_of_mint = 3
+				inquisitor = 3
+                administrator = 3
+                supervisor = 3
+                reformer = 3
+			}
+			OR = {
+				statesman = 3
+				naval_reformer = 3
+				trader = 3
+				spymaster = 3
+				colonial_governor = 3
+				diplomat = 3
+				navigator = 3
+                shipwright = 3
+                ambassador = 3
+                negotiator = 3
+			}
+			OR = {
+				army_reformer = 3
+				army_organiser = 3
+				commandant = 3
+				quartermaster = 3
+				recruitmaster = 3
+				fortification_expert = 3
+				grand_captain = 3
+                sapper = 3
+                scout = 3
+                orator = 3
+			}
+        }
+        etcf_obj_colossal_army = {
+            land_forcelimit = 70
+            army_size_percentage = 0.8
+        }
+        etcf_obj_colossal_navy = {
+            naval_forcelimit = 70
+            navy_size_percentage = 0.8
+        }
+        etcf_obj_inspirational_leader = {
+            has_commanding_three_star = yes
+        }
+	}		
+
+	abilities = {
+        etcf_ability_1  = { effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_2  = { allow = { has_age_ability = etcf_ability_1 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_3  = { allow = { has_age_ability = etcf_ability_2 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_4  = { allow = { has_age_ability = etcf_ability_3 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_5  = { allow = { has_age_ability = etcf_ability_4 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_6  = { allow = { has_age_ability = etcf_ability_5 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_7  = { allow = { has_age_ability = etcf_ability_6 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_8  = { allow = { has_age_ability = etcf_ability_7 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_9  = { allow = { has_age_ability = etcf_ability_8 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_10 = { allow = { has_age_ability = etcf_ability_9 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+        etcf_ability_11 = { allow = { has_age_ability = etcf_ability_10 } effect = { country_event = { id = wwu_age_bonus.101 } } ai_will_do = { factor = 1 } }
+	}
+}
+

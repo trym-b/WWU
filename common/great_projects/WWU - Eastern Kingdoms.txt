@@ -1771,7 +1771,9 @@ gp_uthers_tomb = {
     # Construction
 	build_trigger = {
         # Only built after the Third War
-        current_age = age_burning_legion
+        NOT = { current_age = age_rise_of_the_horde }
+        NOT = { current_age = age_frozen_throne }
+        
         OR = {
             has_monument_research_eastern_kingdoms = yes
             is_available_to_human = yes
@@ -2177,10 +2179,10 @@ gp_dalaran_ek = {
 
     # Construction
 	build_trigger = {
-        OR = {
-            current_age = age_rise_of_the_horde
-            current_age = age_orcish_horde
-        }
+        NOT = { current_age = age_wrath_of_the_lich_king }
+        NOT = { current_age = age_cataclysm }
+        NOT = { current_age = age_mists_of_pandaria }
+        NOT = { current_age = age_eternal_conflict }
         OR = {
             has_monument_research_eastern_kingdoms = yes
             is_available_to_human = yes
@@ -2197,10 +2199,6 @@ gp_dalaran_ek = {
     # Conditions
 	can_use_modifiers_trigger = {
 		is_state = yes
-        OR = {
-            current_age = age_rise_of_the_horde
-            current_age = age_orcish_horde
-        }
 		OR = {
             has_monument_research_eastern_kingdoms = yes
             is_available_to_human = yes
@@ -2214,7 +2212,12 @@ gp_dalaran_ek = {
             is_available_to_high_elf = yes
         }
 	}
-	keep_trigger = { always = yes }
+	keep_trigger = {    
+        NOT = { current_age = age_wrath_of_the_lich_king }
+        NOT = { current_age = age_cataclysm }
+        NOT = { current_age = age_mists_of_pandaria }
+        NOT = { current_age = age_eternal_conflict }
+    }
 
 	# Tiers
 	tier_0 = {
@@ -4178,7 +4181,11 @@ gp_dragonmaw_port = {
 
     # Construction
 	build_trigger = {
-        NOT = { current_age = age_rise_of_the_horde }
+        OR = {
+            current_age = age_cataclysm
+            current_age = age_mists_of_pandaria
+            current_age = age_eternal_conflict
+        }
         OR = {
             has_monument_research_eastern_kingdoms = yes
             is_available_to_orc = yes
@@ -4206,7 +4213,7 @@ gp_dragonmaw_port = {
         }
 	}
 	keep_trigger = {
-        NOT = { current_age = age_rise_of_the_horde }
+        
 	}
 
 	# Tiers
