@@ -7,10 +7,6 @@
 # Second War
 # Aftermath of the Second War
 # Beyond the Dark Portal
-
-# Ends:
-# If: the Orcish Horde no longer exists, or Orcish Horde is below 5 provinces, or non-Orc nations owns the Azeroth Dark Portal (only after the Orcish Horde has spawned)
-# Covers the Rise of the Horde
 age_rise_of_the_horde = {
 	start = 546
 	
@@ -51,48 +47,48 @@ age_rise_of_the_horde = {
         }
         roth_obj_masterful_counsel = {
 			OR = {
-				philosopher = 3
-				natural_scientist = 3
-				artist = 3
-				treasurer = 3
-				theologian = 3
-				master_of_mint = 3
-				inquisitor = 3
-                administrator = 3
-                supervisor = 3
-                reformer = 3
+				philosopher = 2
+				natural_scientist = 2
+				artist = 2
+				treasurer = 2
+				theologian = 2
+				master_of_mint = 2
+				inquisitor = 2
+                administrator = 2
+                supervisor = 2
+                reformer = 2
 			}
 			OR = {
-				statesman = 3
-				naval_reformer = 3
-				trader = 3
-				spymaster = 3
-				colonial_governor = 3
-				diplomat = 3
-				navigator = 3
-                shipwright = 3
-                ambassador = 3
-                negotiator = 3
+				statesman = 2
+				naval_reformer = 2
+				trader = 2
+				spymaster = 2
+				colonial_governor = 2
+				diplomat = 2
+				navigator = 2
+                shipwright = 2
+                ambassador = 2
+                negotiator = 2
 			}
 			OR = {
-				army_reformer = 3
-				army_organiser = 3
-				commandant = 3
-				quartermaster = 3
-				recruitmaster = 3
-				fortification_expert = 3
-				grand_captain = 3
-                sapper = 3
-                scout = 3
-                orator = 3
+				army_reformer = 2
+				army_organiser = 2
+				commandant = 2
+				quartermaster = 2
+				recruitmaster = 2
+				fortification_expert = 2
+				grand_captain = 2
+                sapper = 2
+                scout = 2
+                orator = 2
 			}
         }
         roth_obj_colossal_army = {
-            land_forcelimit = 50
+            land_forcelimit = 30
             army_size_percentage = 0.8
         }
         roth_obj_colossal_navy = {
-            naval_forcelimit = 50
+            naval_forcelimit = 30
             navy_size_percentage = 0.8
         }
         roth_obj_inspirational_leader = {
@@ -115,6 +111,9 @@ age_rise_of_the_horde = {
 	}
 }
 
+# Ends:
+# If: the Orcish Horde no longer exists, or Orcish Horde is below 5 provinces, or non-Orc nations owns the Azeroth Dark Portal (only after the Orcish Horde has spawned)
+
 #---------------------------------------
 # The Frozen Throne
 #---------------------------------------
@@ -122,18 +121,26 @@ age_rise_of_the_horde = {
 # Rise of the Lich King
 # The Third War
 # The Assault on Hyjal
-
-# Ends:
-# If: the Scourge no longer exists, or Scourge is below 5 provinces, or Scourge is limited to Icecrown (only after Scourge of Lordaeron has been created)
-
 age_frozen_throne = {
 	start = 605
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_scourge_condition
+			tooltip = age_rise_of_the_horde_condition
             
-            always = no
+            has_global_flag = orcish_horde_has_been_spawned
+            
+            # Orcish Horde is gone, or the Dark Portal in Azeroth has been lost from Orc control
+            OR = {
+                NOT = { exists = U03 }
+                1035 = {
+                    owner = {
+                        NOT = {
+                            culture_group = culture_group_orc
+                        }
+                    }
+                }
+            }
 		}
 	}
 	
@@ -164,9 +171,9 @@ age_frozen_throne = {
         }
 		frth_obj_skillful_ruler = {
             OR = {
-                adm = 6
-                dip = 6
-                mil = 6
+                adm = 5
+                dip = 5
+                mil = 5
             }
         }
         frth_obj_northrend_settlements = {
@@ -191,48 +198,48 @@ age_frozen_throne = {
         }
         frth_obj_masterful_counsel = {
 			OR = {
-				philosopher = 3
-				natural_scientist = 3
-				artist = 3
-				treasurer = 3
-				theologian = 3
-				master_of_mint = 3
-				inquisitor = 3
-                administrator = 3
-                supervisor = 3
-                reformer = 3
+				philosopher = 2
+				natural_scientist = 2
+				artist = 2
+				treasurer = 2
+				theologian = 2
+				master_of_mint = 2
+				inquisitor = 2
+                administrator = 2
+                supervisor = 2
+                reformer = 2
 			}
 			OR = {
-				statesman = 3
-				naval_reformer = 3
-				trader = 3
-				spymaster = 3
-				colonial_governor = 3
-				diplomat = 3
-				navigator = 3
-                shipwright = 3
-                ambassador = 3
-                negotiator = 3
+				statesman = 2
+				naval_reformer = 2
+				trader = 2
+				spymaster = 2
+				colonial_governor = 2
+				diplomat = 2
+				navigator = 2
+                shipwright = 2
+                ambassador = 2
+                negotiator = 2
 			}
 			OR = {
-				army_reformer = 3
-				army_organiser = 3
-				commandant = 3
-				quartermaster = 3
-				recruitmaster = 3
-				fortification_expert = 3
-				grand_captain = 3
-                sapper = 3
-                scout = 3
-                orator = 3
+				army_reformer = 2
+				army_organiser = 2
+				commandant = 2
+				quartermaster = 2
+				recruitmaster = 2
+				fortification_expert = 2
+				grand_captain = 2
+                sapper = 2
+                scout = 2
+                orator = 2
 			}
         }
         frth_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 40
             army_size_percentage = 0.8
         }
         frth_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 40
             navy_size_percentage = 0.8
         }
         frth_obj_inspirational_leader = {
@@ -255,6 +262,9 @@ age_frozen_throne = {
 	}
 }
 
+# Ends:
+# If: the Scourge no longer exists, or Scourge is below 5 provinces, or Scourge is limited to Icecrown (only after Scourge of Lordaeron has been created)
+
 #---------------------------------------
 # Trouble in Azeroth
 #---------------------------------------
@@ -262,23 +272,31 @@ age_frozen_throne = {
 # Onyxia Infiltration
 # Stonemason Uprising
 # Troubles in the Horde
-# Assault of Blackwing Lair
+# Assault on Blackwing Lair
 # Rise of the Blood God
 # Gates of Ahn'Qiraj
 # Shadow of the Necropolis
 # Drums of War
-
-# Ends:
-# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
-
 age_trouble_in_azeroth = {
 	start = 622
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_trouble_in_azeroth_condition
+			tooltip = age_frozen_throne_condition
             
-            always = no
+            has_global_flag = scourge_has_spawned
+            
+            OR = {
+                NOT = { exists = P11 }
+                AND = {
+                    has_global_flag = scourge_presence_in_lordaeron
+                    NOT = {
+                        any_country = {
+                            is_subject_of = P11
+                        }
+                    }
+                }
+            }
 		}
 	}
 	
@@ -315,7 +333,7 @@ age_trouble_in_azeroth = {
             }
         }
         azer_obj_bountiful_treasury = {
-		    treasury = 10000
+		    treasury = 5000
         }
         azer_obj_masterful_counsel = {
 			OR = {
@@ -356,11 +374,11 @@ age_trouble_in_azeroth = {
 			}
         }
         azer_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 50
             army_size_percentage = 0.8
         }
         azer_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 50
             navy_size_percentage = 0.8
         }
         azer_obj_inspirational_leader = {
@@ -383,6 +401,9 @@ age_trouble_in_azeroth = {
 	}
 }
 
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
 #---------------------------------------
 # The Burning Crusade
 #---------------------------------------
@@ -392,18 +413,21 @@ age_trouble_in_azeroth = {
 # The Black Temple
 # The Gods of Zul'Aman
 # Fury of the Sunwell
-
-# Ends:
-# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
-
 age_burning_crusade = {
 	start = 625
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_burning_crusade_condition
+			tooltip = age_trouble_in_azeroth_condition
             
-            always = no
+            has_global_flag = onyxia_infilitration
+            has_global_flag = stonemason_uprising
+            has_global_flag = troubles_in_the_horde
+            has_global_flag = assault_on_blackwing_lair
+            has_global_flag = rise_of_the_blood_god
+            has_global_flag = gates_of_ahnqiraj
+            has_global_flag = shadow_of_the_necropolis
+            has_global_flag = drums_of_war
 		}
 	}
 	
@@ -440,7 +464,7 @@ age_burning_crusade = {
             }
         }
         burn_obj_bountiful_treasury = {
-		    treasury = 10000
+		    treasury = 7500
         }
         burn_obj_masterful_counsel = {
 			OR = {
@@ -481,11 +505,11 @@ age_burning_crusade = {
 			}
         }
         burn_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 60
             army_size_percentage = 0.8
         }
         burn_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 60
             navy_size_percentage = 0.8
         }
         burn_obj_inspirational_leader = {
@@ -508,6 +532,9 @@ age_burning_crusade = {
 	}
 }
 
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
 #---------------------------------------
 # Wrath of the Lich King
 #---------------------------------------
@@ -517,18 +544,18 @@ age_burning_crusade = {
 # Secrets of Ulduar
 # Call of the Crusade
 # Fall of the Lich King
-
-# Ends:
-# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
-
 age_wrath_of_the_lich_king = {
 	start = 626
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_wrath_of_the_lich_king_condition
+			tooltip = age_burning_crusade_condition
             
-            always = no
+            has_global_flag = before_the_storm
+            has_global_flag = the_burning_crusade
+            has_global_flag = the_black_temple
+            has_global_flag = the_gods_of_zulaman
+            has_global_flag = fury_of_the_sunwell
 		}
 	}
 	
@@ -633,6 +660,9 @@ age_wrath_of_the_lich_king = {
 	}
 }
 
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
 #---------------------------------------
 # Cataclysm
 #---------------------------------------
@@ -641,18 +671,18 @@ age_wrath_of_the_lich_king = {
 # Rise of the Zandalari
 # Rage of the Firelands
 # The Hour of Twilight
-
-# Ends:
-# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
-
 age_cataclysm = {
 	start = 631
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_cataclysm_condition
+			tooltip = age_wrath_of_the_lich_king_condition
             
-            always = no
+            has_global_flag = echoes_of_doom
+            has_global_flag = wrath_of_the_lich_king
+            has_global_flag = secrets_of_ulduar
+            has_global_flag = call_of_the_crusade
+            has_global_flag = fall_of_the_lich_king
 		}
 	}
 	
@@ -689,7 +719,7 @@ age_cataclysm = {
             }
         }
         cata_obj_bountiful_treasury = {
-		    treasury = 10000
+		    treasury = 12500
         }
         cata_obj_masterful_counsel = {
 			OR = {
@@ -730,11 +760,11 @@ age_cataclysm = {
 			}
         }
         cata_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 80
             army_size_percentage = 0.8
         }
         cata_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 80
             navy_size_percentage = 0.8
         }
         cata_obj_inspirational_leader = {
@@ -757,6 +787,10 @@ age_cataclysm = {
 	}
 }
 
+# Ends:
+# If: all of the story events have occured (this requires new content to be made). The story events will occur in a linear order, but no specific result from them is required.
+
+
 #---------------------------------------
 # Mists of Pandaria
 #---------------------------------------
@@ -766,18 +800,17 @@ age_cataclysm = {
 # The Thunder King
 # Escalation
 # Siege of Orgrimmar
-
-# Ends:
-# If: all of the story events have occured (this requires new content to be made).  The story events will occur in a linear order, but no specific result from them is required.
-
 age_mists_of_pandaria = {
 	start = 632
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_mists_of_pandaria_condition
+			tooltip = age_cataclysm_condition
             
-            always = no
+            has_global_flag = the_shattering
+            has_global_flag = rise_of_the_zandalari
+            has_global_flag = rise_of_the_firelands
+            has_global_flag = the_hour_of_twilight
 		}
 	}
 	
@@ -814,7 +847,7 @@ age_mists_of_pandaria = {
             }
         }
         mop_obj_bountiful_treasury = {
-		    treasury = 10000
+		    treasury = 15000
         }
         mop_obj_masterful_counsel = {
 			OR = {
@@ -855,11 +888,11 @@ age_mists_of_pandaria = {
 			}
         }
         mop_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 90
             army_size_percentage = 0.8
         }
         mop_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 90
             navy_size_percentage = 0.8
         }
         mop_obj_inspirational_leader = {
@@ -882,22 +915,28 @@ age_mists_of_pandaria = {
 	}
 }
 
+# Ends:
+# If: all of the story events have occured (this requires new content to be made).  The story events will occur in a linear order, but no specific result from them is required.
+
+
 #---------------------------------------
 # The Eternal Conflict
 #---------------------------------------
 # Covers:
 # Generic
 
-# Does not end
-
 age_eternal_conflict = {
 	start = 635
 	
 	can_start = {
 		custom_trigger_tooltip = {
-			tooltip = age_eternal_conflict_condition
+			tooltip = age_mists_of_pandaria_condition
             
-            always = no
+            has_global_flag = mists_of_pandaria
+            has_global_flag = landfall
+            has_global_flag = the_thunder_king
+            has_global_flag = escalation
+            has_global_flag = siege_of_orgrimmar
 		}
 	}
 	
@@ -934,7 +973,7 @@ age_eternal_conflict = {
             }
         }
         etcf_obj_bountiful_treasury = {
-		    treasury = 10000
+		    treasury = 20000
         }
         etcf_obj_masterful_counsel = {
 			OR = {
@@ -975,11 +1014,11 @@ age_eternal_conflict = {
 			}
         }
         etcf_obj_colossal_army = {
-            land_forcelimit = 70
+            land_forcelimit = 100
             army_size_percentage = 0.8
         }
         etcf_obj_colossal_navy = {
-            naval_forcelimit = 70
+            naval_forcelimit = 100
             navy_size_percentage = 0.8
         }
         etcf_obj_inspirational_leader = {
