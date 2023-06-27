@@ -526,3 +526,45 @@ country_event = {
 		
 	}
 }
+
+# Sons of Lothar
+country_event = {
+	id = wwu_player_switch.113
+	title = wwu_player_switch.113.title
+	desc = wwu_player_switch.113.desc
+	picture = DARK_PORTAL_ASSAULT_eventPicture
+
+    is_triggered_only = yes
+    
+    trigger = {
+        has_global_flag = enabled_player_switch_events
+        has_global_flag = sons_of_lothar_setup
+        exists = SOL
+        ai = no
+        SOL = {
+            ai = yes
+        }
+        NOT = { has_global_flag = player_prompt_SOL }
+    }
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = player_prompt_SOL
+        }
+    }
+    
+	option = {
+		name = wwu_player_switch.113.option.a
+		
+        switch_tag = SOL
+        convert_nation_boost_to_player = yes
+	}
+    option = {
+		name = wwu_player_switch.113.option.b
+		
+	}
+}
