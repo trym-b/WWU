@@ -1,0 +1,655 @@
+namespace = wwu_the_missing_diplomat
+
+# The Missing Diplomat
+country_event = {
+	id = wwu_the_missing_diplomat.1
+	title = wwu_the_missing_diplomat.1.title
+	desc = wwu_the_missing_diplomat.1.desc
+	picture = DEFIAS_BANDIT_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		tag = STW
+		current_age = age_trouble_in_azeroth
+        NOT = { has_global_flag = the_missing_diplomat }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	immediate = {
+        hidden_effect = {
+            set_global_flag = the_missing_diplomat 
+            set_country_flag = missing_ruler_search
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.1.option.a
+		
+		exile_ruler_as = { 
+            name = missing_ruler 
+        }
+        
+        custom_tooltip = MISSING_DIPLOMAT_INVESTIGATION_TT
+        
+		hidden_effect = {
+			country_event = {
+                id = wwu_the_missing_diplomat.2 
+                days = 3
+            }
+			country_event = { 
+                id = wwu_the_missing_diplomat.11 
+                days = 1800
+            }
+		}
+	}
+}
+# Absence of the [Root.Monarch.GetTitle]
+country_event = {
+	id = wwu_the_missing_diplomat.2
+	title = wwu_the_missing_diplomat.2.title
+	desc = wwu_the_missing_diplomat.2.desc
+	picture = MENTAL_COLLAPSE_eventPicture
+	
+	is_triggered_only = yes
+		
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = questioned_the_traders
+			clr_country_flag = questioned_the_nobles
+			clr_country_flag = questioned_the_clergy
+			clr_country_flag = questioned_the_stonemasons
+		
+			if = {
+				limit = {
+					NOT = { has_country_flag = trader_conspiracy }
+					NOT = { has_country_flag = noble_conspiracy }
+					NOT = { has_country_flag = clergy_conspiracy }
+					NOT = { has_country_flag = stonemason_conspiracy }
+				}
+				random_list = {
+					25 = {
+						set_country_flag = trader_conspiracy
+					}
+					25 = {
+						set_country_flag = noble_conspiracy
+					}
+					25 = {
+						set_country_flag = clergy_conspiracy
+					}
+					25 = {
+						set_country_flag = stonemason_conspiracy
+					}
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.2.option.a
+		
+		trigger = {
+			NOT = { has_country_flag = investigated_the_traders }
+		}
+        
+		hidden_effect = {
+            set_country_flag = investigated_the_traders
+            set_country_flag = questioned_the_traders
+            
+			if = {
+				limit = {
+					has_country_flag = trader_conspiracy
+				}
+				country_event = { id = wwu_the_missing_diplomat.3 days = 365 } # Success
+			}
+			else = {
+				country_event = { id = wwu_the_missing_diplomat.4 days = 365 } # Fail
+			}
+		}
+		
+		custom_tooltip = QUESTION_THE_TRADERS_TT
+        
+		add_estate_loyalty = {
+			estate = estate_traders
+			loyalty = -10
+		}
+		add_dip_power = -25
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.2.option.b
+		
+		trigger = {
+			NOT = { has_country_flag = investigated_the_nobles }
+		}
+		
+		hidden_effect = {
+            set_country_flag = investigated_the_nobles
+            set_country_flag = questioned_the_nobles
+            
+			if = {
+				limit = {
+					has_country_flag = noble_conspiracy
+				}
+				country_event = { id = wwu_the_missing_diplomat.3 days = 365 } # Success
+			}
+			else = {
+				country_event = { id = wwu_the_missing_diplomat.4 days = 365 } # Fail
+			}
+		}
+        
+        custom_tooltip = QUESTION_THE_NOBLES_TT
+        
+		add_estate_loyalty = {
+			estate = estate_nobility
+			loyalty = -10
+		}
+		add_mil_power = -25
+		
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.2.option.c
+		
+		trigger = {
+			NOT = { has_country_flag = investigated_the_clergy }
+		}
+		
+		hidden_effect = {
+            set_country_flag = investigated_the_clergy
+            set_country_flag = questioned_the_clergy
+            
+			if = {
+				limit = {
+					has_country_flag = clergy_conspiracy
+				}
+				country_event = { id = wwu_the_missing_diplomat.3 days = 365 } # Success
+			}
+			else = {
+				country_event = { id = wwu_the_missing_diplomat.4 days = 365 } # Fail
+			}
+		}
+        
+		custom_tooltip = QUESTION_THE_CLERGY_TT
+        
+		add_estate_loyalty = {
+			estate = estate_clergy
+			loyalty = -10
+		}
+		add_adm_power = -25
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.2.option.d
+		
+		trigger = {
+			NOT = { has_country_flag = investigated_the_stonemasons }
+		}
+		
+		hidden_effect = {
+            set_country_flag = investigated_the_stonemasons
+            set_country_flag = questioned_the_stonemasons
+            
+			if = {
+				limit = {
+					has_country_flag = stonemason_conspiracy
+				}
+				country_event = { id = wwu_the_missing_diplomat.3 days = 365 } # Success
+			}
+			else = {
+				country_event = { id = wwu_the_missing_diplomat.4 days = 365 } # Fail
+			}
+		}
+        
+		custom_tooltip = QUESTION_THE_STONEMASONS_TT
+        
+		add_estate_loyalty = {
+			estate = estate_peasants
+			loyalty = -10
+		}
+        
+		add_years_of_income = -0.2
+	}
+}
+
+# Investigation Succeeds!
+country_event = {
+	id = wwu_the_missing_diplomat.3
+	title = wwu_the_missing_diplomat.3.title
+	desc = wwu_the_missing_diplomat.3.desc
+	picture = HOLY_WRATH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_the_missing_diplomat.3.option.a
+		
+		add_yearly_manpower = -1.0
+		add_mil_power = -200
+        
+		country_event = { 
+            id = wwu_the_missing_diplomat.5 
+            days = 30
+            random = 5 
+            tooltip = SAVE_ATTEMPT_QUICK_TT
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.3.option.b
+		
+		add_treasury = -200
+		add_dip_power = -50
+        
+		country_event = { 
+            id = wwu_the_missing_diplomat.5 
+            days = 90
+            random = 30 
+            tooltip = SAVE_ATTEMPT_AVERAGE_TT
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.3.option.c
+		
+		add_adm_power = -25
+        
+		country_event = { 
+            id = wwu_the_missing_diplomat.5 
+            days = 300
+            random = 60 
+            tooltip = SAVE_ATTEMPT_SLOW_TT 
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.3.option.d
+		
+		custom_tooltip = SAVE_ATTEMPT_NONE_TT
+        
+		add_prestige = -25
+	}
+}
+
+# Investigation Falters
+country_event = {
+	id = wwu_the_missing_diplomat.4
+	title = wwu_the_missing_diplomat.4.title
+    
+	desc = {
+		trigger = { 
+			has_country_flag = questioned_the_traders
+		}
+		desc = wwu_the_missing_diplomat.4.desc.traders
+	}
+	desc = {
+		trigger = { 
+			has_country_flag = questioned_the_nobles
+		}
+		desc = wwu_the_missing_diplomat.4.desc.nobles
+	}
+	desc = {
+		trigger = { 
+			has_country_flag = questioned_the_clergy
+		}
+		desc = wwu_the_missing_diplomat.4.desc.clergy
+	}
+	desc = {
+		trigger = { 
+			has_country_flag = questioned_the_stonemasons
+		}
+		desc = wwu_the_missing_diplomat.4.desc.stonemasons
+	}
+	picture = STORMWIND_DOCK_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_the_missing_diplomat.4.option.a
+		
+		if = {
+			limit = {
+				has_country_flag = questioned_the_traders
+			}
+			add_estate_loyalty = {
+				estate = estate_traders
+				loyalty = -10
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = questioned_the_nobles
+			}
+			add_estate_loyalty = {
+				estate = estate_nobility
+				loyalty = -10
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = questioned_the_clergy
+			}
+            
+			add_estate_loyalty = {
+				estate = estate_clergy
+				loyalty = -10
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = questioned_the_stonemasons
+			}
+            
+			add_estate_loyalty = {
+				estate = estate_peasants
+				loyalty = -10
+			}
+		}
+	}
+    
+    after = {
+        country_event = { id = wwu_the_missing_diplomat.2 }
+    }
+}
+
+# In Pursuit of the [Root.Monarch.GetTitle]
+country_event = {
+	id = wwu_the_missing_diplomat.5
+	title = wwu_the_missing_diplomat.5.title
+	desc = wwu_the_missing_diplomat.5.desc
+	picture = FREEHOLD_eventPicture
+	
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_the_missing_diplomat.5.option.a
+		
+		country_event = { 
+            id = wwu_the_missing_diplomat.6 
+            days = 30
+            random = 15
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.5.option.b
+		
+		country_event = { 
+            id = wwu_the_missing_diplomat.7 
+            days = 30 
+            random = 15
+        }
+	}
+}
+
+# A Captured Gladiator
+country_event = {
+	id = wwu_the_missing_diplomat.6
+	title = wwu_the_missing_diplomat.6.title
+	desc = wwu_the_missing_diplomat.6.desc
+	picture = DIREMAUL_eventPicture
+	
+	is_triggered_only = yes
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = missing_ruler_search
+        }
+    }
+    
+	option = {
+		name = wwu_the_missing_diplomat.6.option.a
+		
+		set_ruler = missing_ruler
+        
+		add_prestige = 25
+		
+        add_ruler_modifier = {
+            name = poor_memory
+            duration = 1800
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_the_missing_diplomat.8 days = 90 }
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.6.option.b
+        
+		add_prestige = -25
+	}
+}
+
+# A Captured Slave
+country_event = {
+	id = wwu_the_missing_diplomat.7
+	title = wwu_the_missing_diplomat.7.title
+	desc = wwu_the_missing_diplomat.7.desc
+	picture = COILFANG_RESERVOIR_eventPicture
+	
+	is_triggered_only = yes
+	
+	immediate = {
+        hidden_effect = {
+            clr_country_flag = missing_ruler_search
+        }
+    }
+	
+	option = {
+		name = wwu_the_missing_diplomat.7.option.a
+		
+		add_years_of_income = -1
+		add_prestige = 25
+		
+        add_ruler_modifier = {
+            name = poor_memory
+            duration = 1800
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_the_missing_diplomat.8 days = 90 }
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.7.option.b
+		
+		add_yearly_manpower = -1
+		add_prestige = 25
+        
+		add_ruler_modifier = {
+            name = poor_memory
+            duration = 1800
+        }
+        
+        hidden_effect = {
+            country_event = { id = wwu_the_missing_diplomat.8 days = 90 }
+        }
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.7.option.c
+		
+		kill_ruler_or_debuff_immortal_ruler = yes
+		add_prestige = -25
+	}
+}
+
+# Onyxia's Reveal
+country_event = {
+	id = wwu_the_missing_diplomat.8
+	title = wwu_the_missing_diplomat.8.title
+	desc = wwu_the_missing_diplomat.8.desc
+	picture = THRONE_APPROACH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_the_missing_diplomat.8.opt1
+		
+		custom_tooltip = ONYXIA_STORMWIND_WAR_TT
+        
+		capital_scope = {
+			spawn_rebels = {
+				type = pretender_rebels
+				size = 3
+			}
+		}
+		random_owned_province = {
+			limit = {
+				is_in_capital_area = yes
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = 3
+			}
+		}
+		random_owned_province = {
+			limit = {
+				is_in_capital_area = yes
+			}
+			spawn_rebels = {
+				type = pretender_rebels
+				size = 2
+			}
+		}
+		
+        hidden_effect = {
+            set_country_flag = onyxia_stormwind_war
+        }
+	}
+}
+
+# Victory over Onyxia
+country_event = {
+	id = wwu_the_missing_diplomat.10
+	title = wwu_the_missing_diplomat.10.title
+	desc = wwu_the_missing_diplomat.10.desc
+	picture = MIRROR_IMAGE_2_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+		has_country_flag = onyxia_stormwind_war
+		NOT = { num_of_revolts = 1 }
+		NOT = { has_spawned_rebels = pretender_rebels }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.10.option.a
+		
+		add_prestige = 10
+		add_stability_or_adm_power = yes
+	}
+}
+
+# Failure to find the Former [Root.Monarch.GetTitle]
+country_event = {
+	id = wwu_the_missing_diplomat.11
+	title = wwu_the_missing_diplomat.11.title
+	desc = wwu_the_missing_diplomat.11.desc
+	picture = LORD_VICTOR_NEFARIUS_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_country_flag = missing_ruler_search
+	}
+	
+	option = {
+		name = wwu_the_missing_diplomat.11.option.a
+		
+		add_prestige = -25
+        
+		remove_advisor = unique_katrana_prestor
+		remove_advisor = unique_bolvar_fordragon
+        
+		if = {
+			limit = { exists = A99 }
+            
+			A99 = {
+                # This prevents the normal succession event from occuring
+                hidden_effect = {
+                    set_country_flag = skip_next_succession_event
+                }
+                
+				define_ruler = {
+					name = "Katrana"
+					dynasty = "Prestor"
+					adm = 3
+					dip = 5
+					mil = 4
+					age = 50
+					claim = 35
+					culture = culture_black_dragonflight
+					religion = corrupt_dragon_aspect
+				}
+				create_union = STW
+			}
+		}
+		else_if = {
+			limit = {
+				any_country = {
+					total_development = STW
+					primary_culture = culture_black_dragonflight
+				}
+			}
+			random_country = {
+				limit = {
+					total_development = STW
+					primary_culture = culture_black_dragonflight
+				}
+                
+                # This prevents the normal succession event from occuring
+                hidden_effect = {
+                    set_country_flag = skip_next_succession_event
+                }
+                
+				define_ruler = {
+					name = "Katrana"
+					dynasty = "Prestor"
+					adm = 3
+					dip = 5
+					mil = 4
+					age = 50
+					claim = 35
+					culture = culture_black_dragonflight
+					religion = corrupt_dragon_aspect
+				}
+				create_union = STW
+			}
+		}
+		else = {
+            # This prevents the normal succession event from occuring
+            hidden_effect = {
+                set_country_flag = skip_next_succession_event
+            }
+            
+			define_ruler = {
+				name = "Katrana"
+				dynasty = "Prestor"
+				adm = 3
+				dip = 5
+				mil = 4
+				age = 50
+				claim = 35
+				culture = culture_black_dragonflight
+				religion = corrupt_dragon_aspect
+			}
+			create_union = STW
+		}
+        
+		capital_scope = {
+			change_culture = culture_black_dragonflight
+			change_religion = corrupt_dragon_aspect
+		}
+	}
+}

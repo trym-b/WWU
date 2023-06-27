@@ -1,0 +1,275 @@
+namespace = wwu_stonemason_uprising
+
+# Stonemasons' Guild
+country_event = {
+	id = wwu_stonemason_uprising.1
+	title = wwu_stonemason_uprising.1.title
+    desc = wwu_stonemason_uprising.1.desc
+	picture = SHADOWFANG_KEEP_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+        NOT = { has_global_flag = stonemason_uprising }
+        current_age = age_trouble_in_azeroth
+        
+		tag = STW
+		NOT = { exists = A07 }
+        
+		area_stormwind = {
+            type = all
+            owned_by = ROOT
+        }
+        area_lower_stormwind = {
+            type = all
+            owned_by = ROOT
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = stonemason_uprising 
+        }
+    }
+	
+	option = {
+		name = wwu_stonemason_uprising.1.option.a
+        
+		country_event = { 
+			id = wwu_stonemason_uprising.2
+			days = 150
+			random = 15
+		}
+        
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = wwu_stonemason_uprising.1.option.b
+        
+        add_stability = 1
+        
+		ai_chance = { factor = 0 }
+	}
+}
+
+# Construction of Stormwind
+country_event = {
+	id = wwu_stonemason_uprising.2
+	title = wwu_stonemason_uprising.2.title
+	desc = wwu_stonemason_uprising.2.desc
+	picture = GATHER_YOUR_PARTY_eventPicture
+	
+	is_triggered_only = yes
+    
+    immediate = {
+        area_stormwind = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+            
+            add_province_modifier = {
+                name = city_glory_of_stormwind
+                duration = 3650
+            }
+		}
+        area_lower_stormwind = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+            
+            add_province_modifier = {
+                name = city_glory_of_stormwind
+                duration = 3650
+            }
+		}
+    }
+	
+    option = {
+		name = wwu_stonemason_uprising.2.option.a
+        
+		add_years_of_income = -3
+        
+		ai_chance = { factor = 0 }
+	}
+    
+	option = {
+		name = wwu_stonemason_uprising.2.option.b
+        
+		country_event = { 
+			id = wwu_stonemason_uprising.3
+			days = 100
+			random = 15
+			tooltip = GUILD_PAYMENT_TT
+		}
+        
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = wwu_stonemason_uprising.2.option.c
+        
+		ai_chance = { factor = 0 }
+		
+		1022 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+        
+		country_event = { 
+			id = wwu_stonemason_uprising.5
+			days = 90
+			random = 15
+			tooltip = HOUSE_OF_NOBLES_TT
+		}
+	}
+}
+
+# Stonemasons' Anger
+country_event = {
+	id = wwu_stonemason_uprising.3
+	title = wwu_stonemason_uprising.3.title
+	desc = wwu_stonemason_uprising.3.desc
+	picture = DEFIAS_RINGLEADER_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_stonemason_uprising.3.option.a
+        
+		country_event = { 
+			id = wwu_stonemason_uprising.4
+			days = 30
+			random = 15
+		}
+        
+        area_lower_stormwind = {
+            remove_province_modifier = city_glory_of_stormwind
+            add_province_modifier = {
+                name = city_ransacked_by_stonemasons
+                duration = 3650
+            }
+        }
+        
+		ai_chance = { factor = 100 }
+	}
+	
+	option = {
+		name = wwu_stonemason_uprising.3.option.b
+        
+		country_event = { 
+			id = wwu_stonemason_uprising.5
+			days = 30
+			random = 15
+		}
+        
+		ai_chance = { factor = 100 }
+	}
+}
+
+# Stonemason Insurgency
+country_event = {
+	id = wwu_stonemason_uprising.4
+	title = wwu_stonemason_uprising.4.title
+	desc = wwu_stonemason_uprising.4.desc
+	picture = EDWIN_VANCLEEF_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_stonemason_uprising.4.option.a
+        
+        capital_scope = {
+            spawn_rebels = {
+                type = stonemason_rebels
+                size = 3
+            }
+        }
+        random_owned_province = {   
+            limit = {
+                OR = {
+                    area = area_stormwind
+                    area = area_lower_stormwind
+                }
+            }
+            spawn_rebels = {
+                type = stonemason_rebels
+                size = 3
+            }
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    area = area_stormwind
+                    area = area_lower_stormwind
+                }
+            }
+            spawn_rebels = {
+                type = stonemason_rebels
+                size = 3
+            }
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    area = area_stormwind
+                    area = area_lower_stormwind
+                }
+            }
+            spawn_rebels = {
+                type = stonemason_rebels
+                size = 3
+            }
+        }
+	}
+}
+
+# Noble Revolt
+country_event = {
+	id = wwu_stonemason_uprising.5
+	title = wwu_stonemason_uprising.5.title
+	desc = wwu_stonemason_uprising.5.desc
+	picture = DEFIAS_RINGLEADER_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_stonemason_uprising.5.option.a
+        
+        capital_scope = {
+            spawn_rebels = {
+                type = noble_rebels
+                size = 3
+            }
+        }
+        random_owned_province = {   
+            limit = {
+                OR = {
+                    area = area_stormwind
+                    area = area_lower_stormwind
+                }
+            }
+            spawn_rebels = {
+                type = noble_rebels
+                size = 3
+            }
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    area = area_stormwind
+                    area = area_lower_stormwind
+                }
+            }
+            spawn_rebels = {
+                type = noble_rebels
+                size = 3
+            }
+        }
+	}
+}
