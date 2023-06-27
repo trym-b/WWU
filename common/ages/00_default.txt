@@ -130,16 +130,10 @@ age_frozen_throne = {
             
             has_global_flag = orcish_horde_has_been_spawned
             
-            # Orcish Horde is gone, or the Dark Portal in Azeroth has been lost from Orc control
+            # Orcish Horde is gone, or Draenor has collapsed into Outland
             OR = {
                 NOT = { exists = U03 }
-                1035 = {
-                    owner = {
-                        NOT = {
-                            culture_group = culture_group_orc
-                        }
-                    }
-                }
+                has_global_flag = setup_outland
             }
 		}
 	}
@@ -287,13 +281,22 @@ age_trouble_in_azeroth = {
             has_global_flag = scourge_has_spawned
             
             OR = {
-                NOT = { exists = P11 }
+                # Scourge is wiped out
                 AND = {
-                    has_global_flag = scourge_presence_in_lordaeron
-                    NOT = {
-                        any_country = {
-                            is_subject_of = P11
-                        }
+                    NOT = { exists = P11 }
+                    NOT = { exists = P12 }
+                    NOT = { exists = P52 }
+                }
+                # Scourge is fragmented
+                AND = {
+                    exists = P12
+                    P12 = {
+                        NOT = { is_subject_of = P11 }
+                    }
+                    
+                    exists = P52
+                    P52 = {
+                        NOT = { is_subject_of = P52 }
                     }
                 }
             }

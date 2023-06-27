@@ -1,0 +1,173 @@
+namespace = wwu_sons_of_lothar
+
+# Sons of Lothar
+country_event = {
+	id = wwu_sons_of_lothar.1
+	title = wwu_sons_of_lothar.1.title
+	desc = wwu_sons_of_lothar.1.desc
+	picture = DARK_PORTAL_ASSAULT_eventPicture
+
+    major = yes
+    is_triggered_only = yes
+    
+	trigger = { 
+        NOT = { exists = SOL }
+        NOT = { has_global_flag = sons_of_lothar_setup }
+        
+        culture_group = culture_group_human
+        owns = 1035
+        
+        current_age = age_rise_of_the_horde
+        
+        3792 = {
+            has_great_project = {
+                type = dark_portal_draenor
+            }
+        }
+	}
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	immediate = {
+		hidden_effect = { set_global_flag = sons_of_lothar_setup }
+    }
+	
+	option = {
+		name = wwu_sons_of_lothar.1.option.a
+		
+        # Dark Portal: Draenor
+        3792 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            change_religion = holy_light
+            change_culture = culture_stormwindian
+            
+            add_building = wow_fort_3
+        }
+        # Kil'sorrow Village
+        3791 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            set_base_tax = 4
+            set_base_production = 4
+            set_base_manpower = 6
+            
+            change_religion = holy_light
+            change_culture = culture_dalaran
+        }
+        # Tanaan Thicket
+        3790 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            set_base_tax = 7
+            set_base_production = 7
+            set_base_manpower = 8
+            
+            add_building = wow_fort_3
+            
+            change_religion = holy_light
+            change_culture = culture_stormwindian
+        }
+        # Hellfire Citadel
+        3785 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            set_base_tax = 4
+            set_base_production = 4
+            set_base_manpower = 6
+            
+            change_religion = holy_light
+            change_culture = culture_wildhammer
+            
+            add_building = wow_fort_1
+        }
+        # Fangrila
+        3789 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            set_base_tax = 4
+            set_base_production = 4
+            set_base_manpower = 6
+            
+            change_religion = holy_light
+            change_culture = culture_high_elf
+        }
+        # Shattered Coast
+        3788 = {
+            cede_province = SOL
+            add_core = SOL
+            
+            set_base_tax = 4
+            set_base_production = 4
+            set_base_manpower = 6
+            
+            add_building = wow_fort_1
+            change_religion = holy_light
+            change_culture = culture_arathi
+        }
+        
+    }
+    
+    after = {
+        hidden_effect = {
+            SOL = {
+                country_event = { id = wwu_sons_of_lothar.2 }
+            }
+        }
+    }
+}
+
+# Sons of Lothar - Self
+country_event = {
+	id = wwu_sons_of_lothar.2
+	title = wwu_sons_of_lothar.2.title
+	desc = wwu_sons_of_lothar.2.desc
+	picture = UNSTABLE_PORTAL_eventPicture
+
+    is_triggered_only = yes
+    hidden = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_sons_of_lothar.2.option.a
+		
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+        define_ruler = {
+            name = "Khadgar" 
+            dynasty = "of Kul Tiras" 
+            adm = 6
+            dip = 6
+            mil = 6 
+            age = 30
+            claim = 100
+        }
+        set_ruler_flag = mage_personality
+        
+        SOL = {
+            set_member_of_faction = {
+                faction = alliance
+            }
+        }
+        
+        set_capital = 3790
+        
+        add_nation_boost_2 = yes
+        
+        discover_outland = yes
+        discover_draenor = yes
+	}
+}
