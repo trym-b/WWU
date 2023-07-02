@@ -1,0 +1,51 @@
+namespace = wwu_rise_of_the_blood_god
+
+# Hakkar the Soulflayer
+country_event = {
+	id = wwu_rise_of_the_blood_god.1
+	title = wwu_rise_of_the_blood_god.1.title
+    desc = wwu_rise_of_the_blood_god.1.desc
+	picture = SHADOWFANG_KEEP_eventPicture
+	
+	is_triggered_only = yes
+	
+	trigger = {
+        has_global_flag = nefarian_experiments
+        NOT = { has_global_flag = rise_of_the_blood_god }
+        current_age = age_trouble_in_azeroth
+        
+        tag = A66
+        any_owned_province = {
+            area = area_zul_gurub
+        }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = rise_of_the_blood_god 
+        }
+    }
+	
+	option = {
+		name = wwu_rise_of_the_blood_god.1.option.a
+        
+        define_advisor = {
+            type = orator
+            name = "Jin'do the Hexxer"
+            skill = 3
+            cost_multiplier = 0.1
+        }
+        
+        random_owned_province = {
+            limit = {
+                area = area_zul_gurub
+            }
+            change_religion = hakkari
+        }
+	}
+}
+
