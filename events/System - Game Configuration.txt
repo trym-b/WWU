@@ -329,6 +329,36 @@ country_event = {
         }
 	}
     
+    # Local Colonial Nation Naming
+    option = {
+		name = wwu_game_configuration.2.option.local_colonial_nation_names.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_local_colonial_naming }
+        }
+        
+        custom_tooltip = LOCAL_COLONIAL_NAMING_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_local_colonial_naming
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.2.option.local_colonial_nation_names.off
+		
+        trigger = {
+            has_global_flag = enabled_local_colonial_naming
+        }
+        
+        custom_tooltip = LOCAL_COLONIAL_NAMING__OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_local_colonial_naming
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    
     # Exit
     option = {
 		name = wwu_game_configuration.2.option.exit
@@ -1019,6 +1049,7 @@ country_event = {
         set_global_flag = enabled_player_switch_events
         set_global_flag = enabled_doctrine_mechanics
         #set_global_flag = enabled_lore_diplomacy_mechanics
+        set_global_flag = enabled_local_colonial_naming
         
         # Difficulty
         set_global_flag = enabled_relentless_conquest_system

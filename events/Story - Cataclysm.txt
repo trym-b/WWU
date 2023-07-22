@@ -311,7 +311,15 @@ country_event = {
 		name = cataclysm.5.opt1
 		
 		add_prestige = -5
-		add_yearly_manpower = 0.3
+		if = {
+            limit = {
+                NOT = { manpower_percentage = 1.0 }
+            }
+            add_yearly_manpower = 0.25
+        }
+        else = {
+            add_yearly_manpower = 0.05
+        }
         
 		random_owned_province = {
 			add_unrest = 2
@@ -349,7 +357,15 @@ country_event = {
             
 			add_devastation = 2
 			ROOT = {
-				add_yearly_manpower = 0.1
+				if = {
+                    limit = {
+                        NOT = { manpower_percentage = 1.0 }
+                    }
+                    add_yearly_manpower = 0.1
+                }
+                else = {
+                    add_yearly_manpower = 0.05
+                }
 				add_prestige = -1
 			}
 			owner = {

@@ -207,7 +207,17 @@ country_event = {
 			}
 		}
 		add_prestige = 10
-		add_yearly_manpower = 1
+		
+        if = {
+            limit = {
+                NOT = { manpower_percentage = 1.0 }
+            }
+            add_yearly_manpower = 1.0
+        }
+        else = {
+            add_yearly_manpower = 0.25
+        }
+        
 		declare_war_with_cb = {
 			who = FROM
 			casus_belli = cb_annex
