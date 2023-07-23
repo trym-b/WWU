@@ -427,3 +427,181 @@ country_event = {
 	}
 }
 
+##########################
+### Missions Anh'Qiraj ###
+##########################
+country_event = {
+    id = wwu_aqir.100
+    title = wwu_aqir.100.title
+    desc - wwu_aqir.100.desc
+    picture = SCARAB_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_aqir.100.option.a
+
+        A43 = {
+            define_ruler = {
+                name = "Cho'gall"
+                dynasty = "the Empowered"
+                age = 50
+                claim = 100
+                change_adm = 6
+                change_dip = 6
+                change_mil = 6
+                male = yes
+                culture = culture_twilight_cultist
+                religion = cthun
+                add_ruler_personality = personality_cruel
+                set_ruler_flag = is_immortal
+                set_ruler_flag = mage_personality
+                set_ruler_flag = ruler_portrait_chogall
+            }
+        }
+    }
+    option = {
+        name = wwu_aqir_100.option.b
+
+        define_advisor = {
+            type = commander
+            name = "Cho'gall of Highmaul"
+            skill = 3
+            discount = yes
+            culture = culture_twilight_cultist
+            religion = cthun
+        }
+
+        A43 = {
+            define_ruler = {
+                name = "Twilight"
+                dynasty = "Father"
+                claim = 100
+                change_adm = 5
+                change_dip = 5
+                change_mil = 5
+                male = yes
+                culture = culture_twilight_cultist
+                religion = twilight_cult
+            }
+        }
+    }
+}
+
+country_event = {
+    id = wwu_aqir.101
+    title = wwu_aqir.101.title
+    desc = wwu_aqir.101.desc
+    picture = SCARAB_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_aqir.101.option.a
+
+        add_stability = -5
+        add_prestige = -100
+
+        spawn_rebels = {
+            size = 3
+            leader = noble_zealot
+            type = corrupt_titan_worship
+        }
+    }
+    option = {
+        name = wwu_aqir.101.option.b
+
+        change_culture = culture_infinite_dragonflight
+        change_religion = corrupt_titan_worship
+        add_accepted_culture = culture_silithid
+
+        add_stability = 1
+        add_prestige = 20
+
+        A97 = {
+            white_peace = KOT
+            create_march = KOT
+            add_trust = {
+                who = KOT
+                value = 35
+                mutual = yes
+            }
+        }
+    }
+}
+
+country_event = {
+    id = wwu_aqir.102
+    title = wwu_aqir.102.title
+    desc = wwu_aqir.102.desc
+    picture = SCARAB_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = { days = 1 }
+
+    option = {
+        name = wwu_aqir.102.option.a
+
+        area_zulfarrak = {
+            add_devastation = 100
+            every_province = {
+                add_base_tax = -1
+                add_base_production = -1
+                add_base_manpower = -1
+            }
+        }
+        add_years_of_income = 5.0
+        1520 = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+        }
+    }
+
+    option = {
+        name = wwu_aqir.102.option.b
+
+        vassalize = A73
+        define_general = {
+            shock = 6
+            fire = 6
+            manuever = 2
+            siege = 4
+            name "Gazh'rilla the Hydra Demigod"
+        }
+
+        A73 = {
+            override_country_name = FARRAKI_SLAVES
+            change_religion = cthun
+        }
+    }
+
+    option = {
+        name = wwu_aqir.102.option.c
+
+        inherit = A73
+        area_zulfarrak = {
+            add_core = ROOT
+            remove_core = A73
+            add_devastation = 75
+            change_culture = culture_qiraji
+            change_religion = cthun
+        }
+        add_power_projection = {
+            type = mission_reward_power_projection
+            amount = 25
+        }
+        add_mil_power = -200
+        add_prestige = 10
+    }
+}
+

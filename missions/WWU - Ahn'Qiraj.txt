@@ -12,12 +12,443 @@ A97_ahn_qiraj_column_1 = {
     
 	has_country_shield = yes
 	
-	A97_titanic_corruption = {
-		icon = mission_titan_spirits
+	A97_spread_the_wings = {
+        icon = mission_scarab
+        position = 5
+
+        required_missions = { A97_breach_the_valley }
+
+        trigger = {
+            num_of_colonists = 1
+        }
+
+        provinces_to_highlight = {
+            OR = {
+            area = area_tel_abim
+            area = area_verdant_wilds
+            area = area_molten_cay
+            area = area_isle_of_dread
+            area = area_seething_shore
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+
+        effect = {
+            area_seething_shore = {
+                add_permanent_claim = ROOT
+            }
+            area_isle_of_dread = {
+                add_permanent_claim = ROOT
+            }
+            area_molten_cay = {
+                add_permanent_claim = ROOT
+            }
+            area_tel_abim = {
+                add_permanent_claim = ROOT
+            }
+            area_verdant_wilds = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    A97_swarm_south_seas = {
+        icon = mission_treasure_map
+        position = 6
+
+        required_missions = { A97_spread_the_wings }
+
+        trigger = {
+            area_tel_abim = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_verdant_wilds = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+                area = area_tel_abim
+                area = area_verdant_wilds
+            }
+
+        effect = {
+            region_paradise_isles = {
+                add_permanent_claim = ROOT
+            }
+            add_country_modifier = {
+                name = mission_tropical_migration
+                duration = 7300
+            }
+        }
+    }
+
+    A97_deal_with_twilight_hammer = {
+        icon = mission_shadow_twilight
+        position = 10
+
+        trigger = {
+            has_opinion = {
+                who = A43
+                value = 150
+            }
+        }
+
+        effect = {
+            if = {
+                limit = {
+                    exists = A43
+                }
+
+                create_alliance = A43
+                add_historical_friend = A43
+                add_accepted_culture = culture_twilight_cultist
+
+                # Twilight Hammer
+                A43 = {
+                    add_historical_friend = ROOT
+                    add_accepted_culture = culture_qiraji
+                    add_accepted_culture = culture_silithid
+                }
+                else = {
+                    add_dip_power = 200
+                }
+            }
+        }
+    }
+
+    A97_chogall_fate = {
+        icon = mission_blood_corruption
+        position = 11
+
+        required_missions = { A97_deal_with_twilight_hammer }
+
+        trigger = {
+            has_opinion = {
+                who = A43
+                value = 200
+            }
+        }
+
+        effect = {
+                country_event = { id = wwu_aqir.100 days = 1}
+        }
+    }
+}
+
+A97_ahn_qiraj_column_2 = {
+	slot = 2
+	generic = no
+	ai = no
+    
+	potential = {
+		tag = A97
+	}
+    
+	has_country_shield = yes
+
+    A97_stabilize_temple_of_anhqiraj = {
+        icon = mission_find_treasure
+        position = 1
+
+        trigger = {
+            stability = 2
+            legitimacy = 90
+            prestige = 25
+            num_of_revolts = 0
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_realm_of_anhqiraj
+                duration = 3650
+            }
+        }
+    }
+	
+	A97_quell_the_tolvir_threat = {
+		icon = mission_tolvir_arena
         position = 3
+        
+		required_missions = { A97_awaken_the_qiraji }
+        
+		trigger = {
+            1568 = { country_or_non_sovereign_subject_holds = ROOT }
+            1563 = { country_or_non_sovereign_subject_holds = ROOT }
+            1569 = { country_or_non_sovereign_subject_holds = ROOT }
+            1558 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 1568
+                province_id = 1563
+                province_id = 1569
+                province_id = 1558
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+
+			region_uldum = {
+                add_permanent_claim = ROOT
+                add_permanent_province_modifier = {
+                    name = mission_silithid_infestation
+                    duration = -1
+                }
+            }
+            add_country_modifier = {
+                name = mission_uldum_expansion
+                duration = -1
+            }
+		}
+	}
+    
+    A97_breach_the_valley = {
+		icon = mission_strand_of_the_ancients
+        position = 4
         
 		required_missions = { A97_quell_the_tolvir_threat }
         
+		trigger = {
+            2328 = { country_or_non_sovereign_subject_holds = ROOT }
+            1547 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		provinces_to_highlight = {
+            OR = {
+                province_id = 2328 # Sands of the Watchers
+                province_id = 1547 # Valley of the Watchers
+            }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+        
+		effect = {
+			region_tanaris = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    A97_corruption_of_the_caverns = {
+		icon = mission_blood_corruption
+        position = 5
+        
+		required_missions = { A97_breach_the_valley }
+        
+		trigger = {
+            KOT = {
+                exists = yes
+                is_at_war = yes
+                has_spy_network_from = {
+                    who = A97
+                    value = 50
+                }
+                1544 = {
+                    owned_by = KOT
+                    controlled_by = A97
+                }
+            }
+		}
+		provinces_to_highlight = {
+            province_id = 1544 # Caverns of Time
+		}
+        
+		effect = {
+			KOT = {
+                country_event = { id = wwu_aqir.101 days = 1 }
+            }
+		}
+	}
+
+    A97_war_of_sandfury = {
+        icon = mission_city_of_gold
+        position = 6
+
+        required_missions = { A97_corruption_of_the_caverns }
+
+        trigger = {
+            A97 = {
+                offensive_war_with = A73
+                num_of_generals = 2
+                army_size = 40
+            }
+            area_gadgetzan = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_sandsorrow = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_the_noxious_lair = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_steamwheedle_port = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_steamwheedle_port
+                area = area_the_noxious_lair
+                area = area_sandsorrow
+                area = area_gadgetzan
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_sandfury_war
+                duration = 1825
+            }
+        }
+    }
+
+    A97_decimation_of_sandfury = {
+        icon = mission_bones
+        position = 7
+
+        required_missions = { A97_war_of_sandfury }
+
+        trigger = {
+            area_zulfarrak = {
+                type = all
+                controlled_by = ROOT
+                owned_by = A73
+            }
+        }
+
+        provinces_to_highlight = {
+            area = area_zulfarrak
+        }
+
+        effect = {
+            country_event = { id = wwu_aqir.102 days = 1 }
+        }
+    }
+}
+
+
+A97_ahn_qiraj_column_3 = {
+	slot = 3
+	generic = no
+	ai = no
+    
+	potential = {
+		tag = A97
+	}
+    
+	has_country_shield = yes
+
+    A97_conquer_the_scarab_wall = {
+        icon = mission_lost_text
+        position = 1
+
+        trigger = {
+            2329 = {
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 2329
+        }
+
+            effect = {
+                2329 = {
+                    add_building = wow_fort_3 #Would be good to have Scarab Wall like Gilnean
+                    add_base_manpower = 5
+                }
+                add_prestige = 10
+        }
+    }
+	
+	A97_awaken_the_qiraji = {
+		icon = mission_void_walker
+        position = 2
+        
+		required_missions = { A97_conquer_the_scarab_wall }
+        required_missions = { A97_stabilize_temple_of_anhqiraj }
+        
+		trigger = {
+            custom_trigger_tooltip = {
+                tooltip = AWAKEN_CTHUN
+                
+                has_country_modifier = seat_of_cthun
+            }
+		}
+		effect = {
+			remove_country_modifier = slumber_of_the_qiraji
+            
+            add_stability = 1
+            add_yearly_manpower = 5.0
+		}
+	}
+    
+    A97_reclaim_silithus = {
+		icon = mission_demonhunter_darkness
+        position = 3
+        
+		required_missions = { A97_awaken_the_qiraji }
+        
+		trigger = {
+			OR = {
+                claim = H03
+                NOT = { exists = H03 }
+            }
+		}
+		effect = {
+			region_silithus = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+    
+    # The Below Mission effect does not show in game, need fix
+    A97_restoration_of_ahn_qiraj = {
+		icon = mission_shadow_twilight
+        position = 4
+        
+		required_missions = { A97_reclaim_silithus }
+        
+		trigger = {
+			owns_core_province = 1518 # Hive Regal
+            owns_core_province = 1516 # Hive Zora
+            owns_core_province = 1509 # Hive Ash
+            owns_core_province = 1513 # Cenarion Hold
+            owns_core_province = 1511 # Valor's Rest
+		}
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 1518 # Hive Regal
+                province_id = 1516 # Hive Zora
+                province_id = 1509 # Hive Ash
+                province_id = 1513 # Cenarion Hold
+                province_id = 1511 # Valor's Rest
+            }
+			NOT = { owned_by = ROOT }
+		}
+
+		effect = {
+			add_country_modifier = {
+                name = mission_might_of_anhqiraj
+                duration = 18250
+                }
+		    }
+        }
+
+    A97_titanic_corruption = {
+		icon = mission_titan_spirits
+        position = 5
+ 
+		required_missions = { A97_breach_the_valley }
+ 
 		trigger = {
             # Halls of Origination
 			1558 = {
@@ -45,6 +476,7 @@ A97_ahn_qiraj_column_1 = {
                 religion = cthun
             }
 		}
+
 		provinces_to_highlight = {
             OR = {
                 province_id = 1558
@@ -55,228 +487,64 @@ A97_ahn_qiraj_column_1 = {
             }
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-        
+ 
 		effect = {
 			add_country_modifier = {
                 name = mission_corrupt_titanic_equipment
                 duration = -1
             }
+            add_country_modifier = {
+                name = mission_pressure_of_cthun
+                duration = 3650
+            }
 		}
 	}
-}
 
-A97_ahn_qiraj_column_2 = {
-	slot = 2
-	generic = no
-	ai = no
-    
-	potential = {
-		tag = A97
-	}
-    
-	has_country_shield = yes
-	
-	A97_quell_the_tolvir_threat = {
-		icon = mission_tolvir_arena
-        position = 2
-        
-		required_missions = { A97_awaken_the_qiraji }
-        
-		trigger = {
-            1568 = { country_or_non_sovereign_subject_holds = ROOT }
-            1563 = { country_or_non_sovereign_subject_holds = ROOT }
-            1569 = { country_or_non_sovereign_subject_holds = ROOT }
-            1558 = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-		provinces_to_highlight = {
-            OR = {
-                province_id = 1568
-                province_id = 1563
-                province_id = 1569
-                province_id = 1558
-            }
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			region_uldum = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    
-    A97_breach_the_valley = {
-		icon = mission_strand_of_the_ancients
-        position = 3
-        
-		required_missions = { A97_quell_the_tolvir_threat }
-        
-		trigger = {
-            2328 = { country_or_non_sovereign_subject_holds = ROOT }
-            1547 = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-		provinces_to_highlight = {
-            OR = {
-                province_id = 2328 # Sands of the Watchers
-                province_id = 1547 # Valley of the Watchers
-            }
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			region_tanaris = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    
-    A97_corruption_of_the_caverns = {
-		icon = mission_blood_corruption
-        position = 4
-        
-		required_missions = { A97_breach_the_valley }
-        
-		trigger = {
-            # Caverns of Time
-			1544 = {
+    A97_raise_the_anubisans = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { A97_titanic_corruption }
+
+        trigger = {
+            region_uldum = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
                 religion = cthun
             }
-		}
-		provinces_to_highlight = {
-            province_id = 1544 # Caverns of Time
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_corruption_of_time
-                duration = -1
-            }
-            
-            kalimdor_superregion = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-}
-
-
-A97_ahn_qiraj_column_3 = {
-	slot = 3
-	generic = no
-	ai = no
-    
-	potential = {
-		tag = A97
-	}
-    
-	has_country_shield = yes
-	
-	A97_awaken_the_qiraji = {
-		icon = mission_void_walker
-        position = 1
-        
-		required_missions = { }
-        
-		trigger = {
-            custom_trigger_tooltip = {
-                tooltip = AWAKEN_CTHUN
-                
-                has_country_modifier = seat_of_cthun
-            }
-		}
-		effect = {
-			remove_country_modifier = slumber_of_the_qiraji
-            
-            add_stability = 1
-            add_yearly_manpower = 5.0
-		}
-	}
-    
-    A97_reclaim_silithus = {
-		icon = mission_demonhunter_darkness
-        position = 2
-        
-		required_missions = { A97_awaken_the_qiraji }
-        
-		trigger = {
-			OR = {
-                claim = H03
-                NOT = { exists = H03 }
-            }
-		}
-		effect = {
-			region_silithus = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    
-    A97_restoration_of_ahn_qiraj = {
-		icon = mission_shadow_twilight
-        position = 3
-        
-		required_missions = { A97_reclaim_silithus }
-        
-		trigger = {
-			owns_core_province = 1518 # Hive Regal
-            owns_core_province = 1516 # Hive Zora
-            owns_core_province = 1509 # Hive Ash
-            owns_core_province = 1513 # Cenarion Hold
-            owns_core_province = 1511 # Valor's Rest
-		}
-        provinces_to_highlight = {
-            OR = {
-                province_id = 1518 # Hive Regal
-                province_id = 1516 # Hive Zora
-                province_id = 1509 # Hive Ash
-                province_id = 1513 # Cenarion Hold
-                province_id = 1511 # Valor's Rest
-            }
-			NOT = { owned_by = ROOT }
-		}
-		effect = {
-			add_country_modifier = {
-                name = mission_qiraj_restoration
-                duration = -1
-            }
-		}
-	}
-    
-    A97_conquest_of_kalimdor = {
-		icon = mission_black_dragonflight
-        position = 5
-        
-		required_missions = { 
-            A97_corruption_of_the_caverns 
-            A97_restoration_of_ahn_qiraj
         }
-        
-		trigger = {
-            calc_true_if = {
-                all_owned_province = {
-                    superregion = kalimdor_superregion
+
+            effect = {
+                define_general = {
+                    shock = 6
+                    fire = 6
+                    manuever = 6
+                    siege = 6
+                    name = "Shoth the Darkened"
                 }
-                
-                amount = 300
+
+                area_inner_ahn_qiraj = {
+                    add_permanent_province_modifier = {
+                        name = mission_anubisan_guards
+                        duration = -1
+                    }
+                }
+                area_outer_ahn_qiraj = {
+                    add_permanent_province_modifier = {
+                        name = mission_anubisan_guards
+                        duration = -1
+                    }
+                }
+                area_inner_sanctum = {
+                    add_permanent_province_modifier = {
+                        name = mission_anubisan_guards
+                        duration = -1 
+                }
             }
-		}
-		provinces_to_highlight = {
-            superregion = kalimdor_superregion
-			NOT = { owned_by = ROOT }
-		}
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_domination_of_kalimdor
-                duration = -1
-            }
-            
-            custom_tooltip = MAY_FORM_THE_BLACK_EMPIRE
-		}
-	}
+        }
+    }
 }
+
 
 A97_ahn_qiraj_column_4 = {
 	slot = 4
@@ -291,7 +559,7 @@ A97_ahn_qiraj_column_4 = {
 	
     A97_bolster_the_silithid_hives = {
 		icon = mission_bones
-        position = 2
+        position = 3
         
 		required_missions = { A97_awaken_the_qiraji }
         
@@ -332,7 +600,7 @@ A97_ahn_qiraj_column_4 = {
     
 	A97_swarm_the_crater = {
 		icon = mission_scarab
-        position = 3
+        position = 4
         
 		required_missions = { A97_bolster_the_silithid_hives }
         
@@ -377,7 +645,7 @@ A97_ahn_qiraj_column_5 = {
 	
 	A97_plunder_night_elf_ruins = {
 		icon = mission_night_elf_female
-        position = 3
+        position = 4
         
 		required_missions = { A97_bolster_the_silithid_hives }
         

@@ -32,6 +32,8 @@ country_event = {
             culture_group = culture_group_fungarian
             culture_group = culture_group_vulpera
             culture_group = culture_group_pygmy
+            culture_group = cultrue_group_qiraji
+            culture_group = culture_group_silithid
         }
 	}
 	
@@ -228,6 +230,32 @@ country_event = {
                 
                 add_province_modifier = {
                     name = desert_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+
+        # Silithid Infestation Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = cultrue_group_qiraji
+                    culture_group = culture_group_silithid
+                }
+            }
+
+            every_owned_province = {
+                limit = {
+                    has_terrain = desert
+                    has_terrain = coastal_desert
+                    has_terrain = complex
+                    has_terrain = jungle
+                    has_terrain = drylands
+                    has_province_modifier = mission_silithid_infestation
+                }
+
+                add_province_modifier = {
+                    name = silithid_infestation_affinity
                     duration = -1
                 }
             }
