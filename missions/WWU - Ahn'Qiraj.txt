@@ -70,12 +70,12 @@ A97_ahn_qiraj_column_1 = {
         }
 
         provinces_to_highlight = {
-				OR = {
+            OR = {
                 area = area_tel_abim
                 area = area_verdant_wilds
-				}
-				NOT = { country_or_non_sovereign_subject_holds = ROOT }
-       }
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
 
         effect = {
             region_paradise_isles = {
@@ -133,7 +133,7 @@ A97_ahn_qiraj_column_1 = {
         }
 
         effect = {
-                country_event = { id = wwu_aqir.100 days = 1}
+            country_event = { id = wwu_aqir.100 days = 1}
         }
     }
 }
@@ -191,14 +191,14 @@ A97_ahn_qiraj_column_2 = {
 		}
         
 		effect = {
-
 			region_uldum = {
                 add_permanent_claim = ROOT
 
                 hidden_effect = {
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation  # Modifier does not exist
-                    duration = -1
+                    set_province_flag = silithid_infestation
+                    add_permanent_province_modifier = {
+                        name = silithid_infestation_affinity
+                        duration = -1
                     }
                 }
             }
@@ -342,17 +342,17 @@ A97_ahn_qiraj_column_2 = {
         required_missions = { A97_dominate_thousand_needles }
 
         trigger = {
-            region_dustfallew_marsh = {
+            region_dustwallow_marsh = {
                 owned_by = ROOT
             }
         }
 
         provinces_to_highlight = {
-            region = region_dustfallew_marsh
+            region = region_dustwallow_marsh
         }
 
         effect = {
-            region_dustfallew_marsh = {
+            region_dustwallow_marsh = {
                 add_permanent_claim = ROOT
             }
             add_casus_belli = {
@@ -419,12 +419,12 @@ A97_ahn_qiraj_column_3 = {
             province_id = 2329
         }
 
-            effect = {
-                2329 = {
-                    add_building = wow_fort_3 #Would be good to have Scarab Wall like Gilnean
-                    add_base_manpower = 5
-                }
-                add_prestige = 10
+        effect = {
+            2329 = {
+                add_building = wow_fort_3 #Would be good to have Scarab Wall like Gilnean
+                add_base_manpower = 5
+            }
+            add_prestige = 10
         }
     }
 	
@@ -432,9 +432,12 @@ A97_ahn_qiraj_column_3 = {
 		icon = mission_void_walker
         position = 2
         
-		required_missions = { A97_conquer_the_scarab_wall A97_stabilize_temple_of_anhqiraj A97_tame_the_silithid }
+		required_missions = { 
+            A97_conquer_the_scarab_wall 
+            A97_stabilize_temple_of_anhqiraj 
+            A97_tame_the_silithid 
+        }
 
-        
 		trigger = {
             custom_trigger_tooltip = {
                 tooltip = AWAKEN_CTHUN
@@ -498,9 +501,9 @@ A97_ahn_qiraj_column_3 = {
 			add_country_modifier = {
                 name = mission_might_of_anhqiraj
                 duration = 18250
-                }
-		    }
+            }
         }
+    }
 
     A97_titanic_corruption = {
 		icon = mission_titan_spirits
@@ -573,31 +576,31 @@ A97_ahn_qiraj_column_3 = {
             }
         }
 
-            effect = {
-                define_general = {
-                    shock = 6
-                    fire = 6
-                    manuever = 6
-                    siege = 6
-                    name = "Shoth the Darkened"
-                }
+        effect = {
+            define_general = {
+                shock = 6
+                fire = 6
+                manuever = 6
+                siege = 6
+                name = "Shoth the Darkened"
+            }
 
-                area_inner_ahn_qiraj = {
-                    add_permanent_province_modifier = {
-                        name = mission_anubisan_guards
-                        duration = -1
-                    }
+            area_inner_ahn_qiraj = {
+                add_permanent_province_modifier = {
+                    name = mission_anubisan_guards
+                    duration = -1
                 }
-                area_outer_ahn_qiraj = {
-                    add_permanent_province_modifier = {
-                        name = mission_anubisan_guards
-                        duration = -1
-                    }
+            }
+            area_outer_ahn_qiraj = {
+                add_permanent_province_modifier = {
+                    name = mission_anubisan_guards
+                    duration = -1
                 }
-                area_inner_sanctum = {
-                    add_permanent_province_modifier = {
-                        name = mission_anubisan_guards
-                        duration = -1 
+            }
+            area_inner_sanctum = {
+                add_permanent_province_modifier = {
+                    name = mission_anubisan_guards
+                    duration = -1 
                 }
             }
         }
@@ -612,17 +615,17 @@ A97_ahn_qiraj_column_3 = {
         trigger = {
             num_of_owned_provinces_with = {
                 value = 10
-                region_thousand_needless
+                region = region_thousand_needles
             }
             army_size_percentage = 90
         }
 
         provinces_to_highlight = {
-            region = region_thousand_needless
+            region = region_thousand_needles
         }
 
         effect = {
-            region_thousand_needless = {
+            region_thousand_needles = {
                 add_permanent_claim = ROOT
             }
             add_mil_power = 100
@@ -656,7 +659,11 @@ A97_ahn_qiraj_column_3 = {
         icon = mission_orbital_strike
         position = 9
 
-        required_missions = { A97_subjegation_of_onyxia A97_incursion_into_south_barrens A97_defilement_of_mulgore }
+        required_missions = { 
+            A97_subjegation_of_onyxia 
+            A97_incursion_into_south_barrens 
+            A97_defilement_of_mulgore 
+        }
 
         trigger = {
             stability = 3
@@ -665,9 +672,9 @@ A97_ahn_qiraj_column_3 = {
         }
 
         effect = {
-            country_event = { wwu_aqir.105 days = 1 }
+            country_event = { id = wwu_aqir.105 days = 1 }
 
-            superregion_kalimdor = {
+            kalimdor_superregion = {
                 add_permanent_claim = ROOT
             }
             add_adm_tech = 2
@@ -804,10 +811,11 @@ A97_ahn_qiraj_column_4 = {
                 cede_province = ROOT
                 add_core = ROOT
 
-            hidden_effect = {
-                add_permanent_province_modifier = { # Modifier does not exist
-                    name = mission_silithid_infestation
-                    duration = -1
+                hidden_effect = {   
+                    set_province_flag = silithid_infestation
+                    add_permanent_province_modifier = {
+                        name = silithid_infestation_affinity
+                        duration = -1
                     }
                 }
             }
@@ -852,11 +860,12 @@ A97_ahn_qiraj_column_4 = {
             add_prestige = 20
             add_mil_power = 100
 
-        hidden_effect = {
-            region_feralas = {
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation # Modifier does not exist
-                    duration = -1
+            hidden_effect = {
+                region_feralas = {  
+                    set_province_flag = silithid_infestation
+                    add_permanent_province_modifier = {
+                        name = silithid_infestation_affinity
+                        duration = -1
                     }
                 }
             }
@@ -909,9 +918,13 @@ A97_ahn_qiraj_column_4 = {
                     name = mission_bloody_fertilizer
                     duration = 36500
                 }
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation
-                    duration = -1
+                
+                hidden_effect = {
+                    set_province_flag = silithid_infestation
+                    add_permanent_province_modifier = {
+                        name = silithid_infestation_affinity
+                        duration = -1
+                    }
                 }
             }
         }
@@ -1010,10 +1023,10 @@ A97_ahn_qiraj_column_5 = {
 
             hidden_effect = {
                 H01 = {
-                    country_event = { wwu_aqir.104 days = 1 }
+                    country_event = { id = wwu_aqir.104 days = 1 }
                 }
                 A94 = {
-                    country_event = { wwu_aqir.104 days = 1 }
+                    country_event = { id = wwu_aqir.104 days = 1 }
                 }
             }
         }
