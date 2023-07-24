@@ -70,9 +70,12 @@ A97_ahn_qiraj_column_1 = {
         }
 
         provinces_to_highlight = {
+				OR = {
                 area = area_tel_abim
                 area = area_verdant_wilds
-            }
+				}
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
+       }
 
         effect = {
             region_paradise_isles = {
@@ -157,7 +160,7 @@ A97_ahn_qiraj_column_2 = {
             stability = 2
             legitimacy = 90
             prestige = 25
-            num_of_revolts = 0
+            NOT = { num_of_revolts = 1 }
         }
 
         effect = {
@@ -194,10 +197,10 @@ A97_ahn_qiraj_column_2 = {
 
 			region_uldum = {
                 add_permanent_claim = ROOT
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation
-                    duration = -1
-                }
+                #add_permanent_province_modifier = {
+                #    name = mission_silithid_infestation  # Modifier does not exist
+                #    duration = -1
+                #}
             }
             add_country_modifier = {
                 name = mission_uldum_expansion
@@ -372,9 +375,8 @@ A97_ahn_qiraj_column_3 = {
 		icon = mission_void_walker
         position = 2
         
-		required_missions = { A97_conquer_the_scarab_wall }
-        required_missions = { A97_stabilize_temple_of_anhqiraj }
-        required_missions = { A97_tame_the_silithid }
+		required_missions = { A97_conquer_the_scarab_wall A97_stabilize_temple_of_anhqiraj A97_tame_the_silithid }
+
         
 		trigger = {
             custom_trigger_tooltip = {
@@ -563,7 +565,7 @@ A97_ahn_qiraj_column_4 = {
         position = 1
 
         trigger = {
-            every_subject_country = {
+            all_subject_country = {
                 has_opinion = {
                     who = A97
                     value = 100
@@ -668,10 +670,10 @@ A97_ahn_qiraj_column_4 = {
                 cede_province = ROOT
                 add_core = ROOT
 
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation
-                    duration = -1
-                }
+                #add_permanent_province_modifier = { # Modifier does not exist
+                #    name = mission_silithid_infestation
+                #    duration = -1
+                #}
             }
 		}
 	}
@@ -683,10 +685,10 @@ A97_ahn_qiraj_column_4 = {
         required_missions = { A97_feralas_incursion }
 
         trigger = {
-            has_war_score_in = {
-                who = GD2
-                value = 90
-            }
+            #has_war_score_in = { Are you sure this command exists?
+            #    who = GD2
+            #    value = 90
+            #}
             GD2 = {
                 is_at_war = yes
             }
@@ -701,8 +703,7 @@ A97_ahn_qiraj_column_4 = {
         icon = mission_canibalism
         position = 6
 
-        required_missions = { A97_lethan_brood_corruption }
-        required_missions = { A97_inflirtrate_dire_maul }
+        required_missions = { A97_lethan_brood_corruption A97_inflirtrate_dire_maul }
 
         trigger = {
             region_feralas = {
@@ -716,10 +717,10 @@ A97_ahn_qiraj_column_4 = {
             add_mil_power = 100
 
             region_feralas = {
-                add_permanent_province_modifier = {
-                    name = mission_silithid_infestation
-                    duration = -1
-                }
+                #add_permanent_province_modifier = {
+                #    name = mission_silithid_infestation # Modifier does not exist
+                #    duration = -1
+                #}
             }
         }
     }
