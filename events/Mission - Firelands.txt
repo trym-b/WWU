@@ -1,0 +1,90 @@
+namespace = wwu_firelands
+
+# Dark Iron Fate
+country_event = {
+    id = wwu_firelands.1
+    title = wwu_firelands.1.title
+    desc = wwu_firelands.1.desc
+    picture = GARR_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_firelands.1.option.a
+
+        inherit = A30
+    }
+
+    option = {
+        name = wwu_firelands.1.option.b
+
+        create_subject = {
+            subject_type = subjugated_vassal
+            subject = A30
+        }
+
+        A30 = {
+            add_country_modifier = {
+                name = event_firelord_blessing
+                duration = -1
+            }
+        }
+    }
+}
+
+# Fall of Ironforge
+country_event = {
+    id = wwu_firelands.2
+    title = wwu_firelands.2.title
+    desc = wwu_firelands.2.desc
+    picture = GARR_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_firelands.2.option.a 
+
+        area_ironforge = {
+            cede_province = A30
+            add_core = A30
+            change_religion = fire
+            change_culture = culture_dark_iron
+        }
+
+        A30 = {
+            add_country_modifier = {
+                name = event_hold_of_ironforge
+                duration = 7305
+            }
+        }
+        P26 = {
+            add_country_modifier = {
+                name = event_ironforge_dark_iron
+                duration = -1
+            }
+        }
+    }
+
+    option = {
+        name = wwu_firelands.2.option.b
+
+        area_ironforge = {
+            cede_province = P26
+            add_core = P26
+            change_culture = culture_fire
+            change_religion = fire
+
+            add_province_modifier = {
+                name = event_flames_of_ironforge
+                duration = -1
+            }
+        }
+    }
+}

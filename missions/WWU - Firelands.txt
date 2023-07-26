@@ -64,4 +64,242 @@
     
 	 has_country_shield = yes
 
+    P26_dark_iron_pact = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            has_opinion = {
+                who = A30
+                value = 180
+            }
+            reverse_has_opinion = {
+                who = A30
+                value = 150
+            }
+
+            3155 = {
+                owned_by = A30
+            }
+        }
+
+        effect = {
+            3155 = {
+                cede_province = ROOT
+                add_core = ROOT
+                remove_core = A30
+
+                change_culture = culture_fire
+                change_religion = ROOT
+            }
+        }
+    }
+
+    P26_molten_core = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { P26_dark_iron_pact }
+
+        trigger = {
+            3155 = {  # The Molten Core
+                development = 30
+                has_great_project = {
+                    type = gp_blackrock_mountain
+                    tier = 3
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 3155
+        }
+
+        effect = {
+            3155 = {
+            add_province_modifier = {
+                name = mission_seat_of_ragnaros
+                duration = -1 
+                }
+            }
+        }
+    }
+
+    P26_contol_of_dark_iron_clan = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { P26_molten_core }
+
+        trigger = {
+            A30 = {
+                OR ={
+                    is_vassal = yes
+                    is_march = yes
+                }
+                NOT = { liberty_desire = 25 }
+                NOT = { total_development = 250 }
+            }
+        }
+
+        effect = {
+            country_event = { id =  wwu_firelands.1 days = 1 }
+
+            region_burning_steppes = {
+                add_permanent_claim = ROOT
+            }
+            region_searing_gorge = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    P26_subjegation_of_burning_steppes = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { P26_contol_of_dark_iron_clan }
+
+        trigger = {
+            region_burning_steppes = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_burning_steppes
+        }
+
+        effect = {
+            region_badlands = {
+                add_permanent_claim = ROOT
+            }
+
+            add_country_modifier = {
+                name = mission_conquest_of_burning_steppes
+                duration = 14600
+            }
+        }
+    }
+
+    P26_conquest_of_badlands = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { P26_subjegation_of_burning_steppes }
+
+        trigger = {
+            region_badlands = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = ROOT
+            }
+        }
+        provinces_to_highlight = {
+            region = region_badlands
+        }
+
+        effect = {
+            region_loch_modan = {
+                add_permanent_claim = ROOT
+            }
+            add_prestige = 15
+            add_years_of_income = 4.0
+        }
+    }
+
+    P26_invasion_of_loch_modan = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { P26_conquest_of_badlands }
+
+        trigger = {
+            region_loch_modan = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_loch_modan
+        }
+
+        effect = {
+            region = region_dun_morogh {
+                add_permanent_claim = ROOT
+            }
+
+            add_prestige = 15
+            add_yearly_manpower = 2
+            add_years_of_income = 4.0
+        }
+    }
+
+    P26_into_the_ironforge_heartlands = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { P26_invasion_of_loch_modan }
+
+        trigger = {
+            region_dun_morogh = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_dun_morogh
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_invasion_dun_morogh
+                duration = 3652
+            }
+            region_dun_morogh = {
+                add_claim = ROOT
+            }
+
+            define_general = {
+                shock = 4
+                fire = 6
+                manuever = 4
+                siege = 4
+                name = "General Gehennas"
+                trait = elite_inspirational_leader_general_personality 
+            }
+        }
+    }
+
+    P26_the_fall_of_ironforge = {
+        icon = mission_titan_spirits
+        position = 8
+
+        required_missions = { P26_into_the_ironforge_heartlands }
+
+        trigger = {
+            area_ironforge = {
+                type = all
+                controlled_by = ROOT
+            }
+            NOT = { exists = A29 # Khaz Modan }
+            NOT = { exists = A75 # Frostmane }
+
+            region_dun_morogh = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            area = area_ironforge
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.2 days = 1 }
+        }
+    }
 }
