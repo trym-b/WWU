@@ -50,19 +50,72 @@
 	 }
     
 	 has_country_shield = yes
+
+    P26_conquest_of_searing_gorge = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { P26_contol_of_dark_iron_clan }
+
+        trigger = {
+            region_searing_gorge = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_searing_gorge
+        }
+
+        effect = {
+            add_prestige = 15
+            add_stability = 1
+        }
+    }
+
+    P26_redridge_aggression = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { P26_conquest_of_searing_gorge P26_subjegation_of_burning_steppes }
+
+        trigger = {
+            region_redridge_mountains = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+                religion = fire
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_redridge_mountains
+        }
+
+        effect = {
+            region_elwynn_forest = {
+                add_permanent_claim = ROOT
+            }
+
+            add_country_modifier = {
+                name = mission_invasion_of_stormwind
+                duration = 7305
+            }
+        }
+    }
 	
  }
 
- P26_firelands_column = {
-	 slot = 5
-	 generic = no
-	 ai = yes
+P26_firelands_column = {
+	slot = 5
+	generic = no
+	ai = yes
     
-	 potential = {
-		 tag = P26
-	 }
+	potential = {
+		tag = P26
+	}
     
-	 has_country_shield = yes
+	has_country_shield = yes
 
     P26_dark_iron_pact = {
         icon = mission_titan_spirits
