@@ -2,17 +2,176 @@
  # Name
  #--------------------------------------
  P26_firelands_column_1 = {
-	 slot = 1
-	 generic = no
-	 ai = yes
+	slot = 1
+	generic = no
+	ai = yes
     
-	 potential = {
-		 tag = P26
-	 }
+	potential = {
+		tag = P26
+	}
     
-	 has_country_shield = yes
+	has_country_shield = yes
 
- }
+    P26_elemental_forces_of_flame = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            army_size_percentage = 1
+            num_of_generals = 2
+        }
+
+        effect = {
+            3157 = { # Temple of Earth
+                add_permanent_claim = ROOT
+            }
+            1561 = { # Throne of the Four Winds
+                add_permanent_claim = ROOT
+            }
+            2554 = { # Throne of Tides
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    P26_confront_the_windlord = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { P26_elemental_forces_of_flame }
+
+        trigger = {
+            offensive_war_with = P28
+            war_score_against = {
+                who = P28
+                value = 75
+            }
+            1561 = {
+                controlled_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 1561
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.4 days = 1 }
+        }
+    }
+
+    P26_confront_the_tidehunter = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { P26_confront_the_windlord }
+
+        trigger = {
+            offensive_war_with = P24
+            war_score_against = {
+                who = P24
+                value = 75
+            }
+            2554 = {
+                controlled_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 2554
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.5 days = 1}
+        }
+    }
+
+    P26_confront_the_stonemother = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { P26_confront_the_tidehunter }
+
+        trigger = {
+            offensive_war_with = P27
+            war_score_against = {
+                who = P27
+                value = 75
+            }
+        }
+        provinces_to_highlight = {
+                province_id = 3157
+            }
+        effect = {
+            country_event = { id = wwu_firelands.6 days = 1 }
+        }
+    }
+
+    P26_elemental_control = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { P26_confront_the_stonemother }
+
+        trigger = {
+            region_skywall = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_abyssal_maw = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_deepholm = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.7 days = 1 }
+        }
+    }
+
+    P26_ungoro_volcano = {
+        icon = mission_titan_spirits
+        position = 6
+
+        trigger = {
+            total_development = 400
+        }
+
+        provinces_to_highlight = {
+            area = area_fire_plume_ridge
+            province_id = 1539
+        }
+
+        effect = {
+            area_fire_plume_ridge = {
+                cede_province = ROOT
+                change_culture = culture_fire
+                change_religion = ROOT
+            }
+            1539 = {
+                cede_province = ROOT
+                change_culture = culture_fire
+                change_religion = ROOT
+            }
+            1533 = {
+                add_base_tax = 3
+                add_base_production = 3
+                add_base_manpower = 3
+            }
+
+            define_general = {
+                shock = 4
+                fire = 4
+                manuever = 2
+                siege = 2
+                name = "Blazerunner"
+                trait = inspirational_leader_general_personality 
+            }
+        }
+
+    }
+}
 
  P26_firelands_column_2 = {
 	 slot = 2
