@@ -115,12 +115,15 @@
 
         trigger = {
             region_skywall = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
             region_abyssal_maw = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
             region_deepholm = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
         }
@@ -169,7 +172,43 @@
                 trait = inspirational_leader_general_personality 
             }
         }
+    }
 
+    P26_confrontation_with_ordos = {
+        icon = mission_titan_spirits
+        position = 7
+
+        trigger = {
+            has_opinion = {
+                who = ORO
+                value = 175
+            }
+            ORO = {
+                has_opinion = {
+                    who = P26
+                    value = 100
+                }
+                NOT = { development = 150 }
+            }
+            OR = {
+                ai_attitude = {
+                    who = P26
+                    attitude = attitude_threatened
+                }
+                ai_attitude = {
+                    who = P26
+                    attitude = attitude_friendly
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            area = area_timeless_isle
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.8 days = 1 }
+        }
     }
 }
 
@@ -258,12 +297,65 @@
 
             add_country_modifier = {
                 name = mission_invasion_of_stormwind
-                duration = 7305
+                duration = 7300
             }
         }
     }
-	
- }
+
+    P26_elwynn_agression = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { P26_redridge_aggression }
+
+        trigger = {
+            region_elwynn_forest = {
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_elwynn_forest
+        }
+
+        effect = {
+            add_prestige = 10
+        }
+    }
+
+    P26_the_flames_of_stormwind = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { P26_elwynn_agression }
+
+        trigger = {
+            area_lower_stormwind = {
+                type = all
+                controlled_by = ROOT
+            }
+            area_stormwind_coast = {
+                type = all
+                controlled_by = ROOT
+            }
+            area_stormwind = {
+                type = all
+                controlled_by = ROOT
+            }
+        }
+
+        effect = {
+            country_event = { id = wwu_firelands.3 days = 1 }
+        }
+
+        region_westfall = {
+            add_claim = ROOT
+        }
+        region_duskwood = {
+            add_claim = ROOT
+        }
+    }
+}
 
 P26_firelands_column = {
 	slot = 5
@@ -390,7 +482,7 @@ P26_firelands_column = {
 
             add_country_modifier = {
                 name = mission_conquest_of_burning_steppes
-                duration = 14600
+                duration = 10950
             }
         }
     }
@@ -469,7 +561,7 @@ P26_firelands_column = {
         effect = {
             add_country_modifier = {
                 name = mission_invasion_dun_morogh
-                duration = 3652
+                duration = 3650
             }
             region_dun_morogh = {
                 add_claim = ROOT
@@ -497,9 +589,6 @@ P26_firelands_column = {
                 type = all
                 controlled_by = ROOT
             }
-            NOT = { exists = A29 } # Khaz Modan
-            NOT = { exists = A75 } # Frostmane
-
             region_dun_morogh = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
