@@ -434,7 +434,7 @@ country_event = {
     id = wwu_aqir.100
     title = wwu_aqir.100.title
     desc = wwu_aqir.100.desc
-    picture = SCARAB_eventPicture
+    picture = CHOGALL_eventPicture
 
     is_triggered_only = yes
 
@@ -451,14 +451,16 @@ country_event = {
                 dynasty = "the Empowered"
                 age = 50
                 claim = 100
-                change_adm = 6
-                change_dip = 6
-                change_mil = 6
+                change_adm = 7
+                change_dip = 7
+                change_mil = 7
                 male = yes
                 culture = culture_twilight_cultist
                 religion = cthun
             }
         }
+
+        ai_chance = { factor = 90 }
     }
     option = {
         name = wwu_aqir_100.option.b
@@ -485,6 +487,7 @@ country_event = {
                 religion = twilight_cult
             }
         }
+        ai_chance = { factor = 10 }
     }
 }
 
@@ -492,7 +495,7 @@ country_event = {
     id = wwu_aqir.101
     title = wwu_aqir.101.title
     desc = wwu_aqir.101.desc
-    picture = SCARAB_eventPicture
+    picture = SCALED_NIGHTMARE_eventPicture
 
     is_triggered_only = yes
 
@@ -503,34 +506,43 @@ country_event = {
     option = {
         name = wwu_aqir.101.option.a
 
+        A97 = {
+            add_prestige = -5
+        }
+
+        KOT = {
         add_stability = -5
         add_prestige = -100
 
         spawn_rebels = {
             size = 3
             leader = noble_zealot
-            type = corrupt_titan_worship
+            type = titan_corrupt_rebels
+            }
         }
+        ai_chance = { factor = 25 }
     }
     option = {
         name = wwu_aqir.101.option.b
 
-        change_culture = culture_infinite_dragonflight
-        change_religion = corrupt_titan_worship
-        add_accepted_culture = culture_silithid
+        create_march = KOT
 
-        add_stability = 1
-        add_prestige = 20
+        KOT = {
+            change_culture = culture_infinite_dragonflight
+            change_religion = corrupt_titan_worship
+            add_accepted_culture = culture_silithid
 
-        A97 = {
-            white_peace = KOT
-            create_march = KOT
+            add_stability = 1
+            add_prestige = 20
+
+            white_peace = A97
             add_trust = {
-                who = KOT
+                who = A97
                 value = 35
                 mutual = yes
             }
         }
+        ai_chance { factor = 75 }
     }
 }
 
@@ -538,7 +550,7 @@ country_event = {
     id = wwu_aqir.102
     title = wwu_aqir.102.title
     desc = wwu_aqir.102.desc
-    picture = SCARAB_eventPicture
+    picture = ZUL_FARRAK_eventPicture
 
     is_triggered_only = yes
 
@@ -549,18 +561,20 @@ country_event = {
 
         area_zulfarrak = {
             add_devastation = 100
-            every_province = {
-                add_base_tax = -1
-                add_base_production = -1
-                add_base_manpower = -1
-            }
         }
+        1541 = {
+            add_base_tax = -3
+            add_base_production = -3
+            add_base_manpower = -3
+        }
+
         add_years_of_income = 5.0
         1520 = {
             add_base_tax = 3
             add_base_production = 3
             add_base_manpower = 3
         }
+        ai_chance = { factor = 50 }
     }
 
     option = {
@@ -579,6 +593,7 @@ country_event = {
             override_country_name = FARRAKI_SLAVES
             change_religion = cthun
         }
+        ai_chance = { factor = 30 }
     }
 
     option = {
@@ -599,13 +614,14 @@ country_event = {
         add_mil_power = -200
         add_prestige = 10
     }
+    ai_chance = { factor = 20 }
 }
 
 country_event = {
     id = wwu_aqir.103
     title = wwu_aqir.103.title
     desc = wwu_aqir.103.desc
-    picture = SCARAB_eventPicture
+    picture = EMERALD_NIGHTMARE_eventPicture
 
     is_triggered_only = yes
 
@@ -616,13 +632,14 @@ country_event = {
     option = {
         name = wwu_aqir.103.option.a
 
-        change_culture = culture_nightmare_dragonflight
-        change_graphical_culture = nightmare_gfx
-        change_religion = nightmare
-
+        add_prestige = 10
         create_vassal = GD2
 
         GD2 = {
+            change_culture = culture_nightmare_dragonflight
+            change_graphical_culture = nightmare_gfx
+            change_religion = nightmare
+
             add_mil_power = 500
             add_stability = 2
             add_trust = {
@@ -633,12 +650,14 @@ country_event = {
         }
     }
 }
-
+#############################
+### Sentinel Hidden Event ###
+#############################
 country_event = {
     id = wwu_aqir.104
     title = wwu_aqir.104.title
     desc = wwu_aqir.104.desc
-    picture = SCARAB_eventPicture
+    picture = ASHENVALE_eventPicture
 
     is_triggered_only = yes
 
@@ -662,9 +681,11 @@ country_event = {
     id = wwu_aqir.105
     title = wwu_aqir.105.title
     desc = wwu_aqir.105.desc
-    picture = SCARAB_eventPicture
+    picture = CTHUN_CLOSEUP_eventPicture
 
     is_triggered_only = yes
+
+    major = yes
 
     mean_time_to_happen = {
         days = 1
