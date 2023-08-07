@@ -444,7 +444,7 @@ country_event = {
 
     option = {
         name = wwu_aqir.100.option.a
-
+        
         A43 = {
             define_ruler = {
                 name = "Cho'gall"
@@ -491,6 +491,7 @@ country_event = {
     }
 }
 
+# Called for KOT - Keepers of Time
 country_event = {
     id = wwu_aqir.101
     title = wwu_aqir.101.title
@@ -503,24 +504,40 @@ country_event = {
         days = 1
     }
 
+    immediate = {
+        set_saved_name = {
+            key = rebel_leader
+            type = advisor
+            scope = ROOT
+        }
+    }
+
     option = {
         name = wwu_aqir.101.option.a
 
-        A97 = {
-            add_prestige = -5
+        if = {
+            limit = {
+                exists = A97
+            }
+            A97 = {
+                add_prestige = -5
+            }
         }
 
         add_stability = -5
         add_prestige = -100
 
-        spawn_rebels = {
-            size = 3
-            leader = noble_zealot
-            type = titan_corrupt_rebels
+        capital_scope = {
+            spawn_rebels = {
+                size = 3
+                leader = rebel_leader
+                type = titan_corrupt_rebels
             }
         }
+        
         ai_chance = { factor = 25 }
     }
+    
     option = {
         name = wwu_aqir.101.option.b
 
@@ -533,24 +550,41 @@ country_event = {
         add_stability = 1
         add_prestige = 25
 
-        white_peace = A97
-        add_trust = {
-            who = A97
-            value = 35
-            mutual = yes
-        }
-
         every_owned_province = {
-            culture_bronze_dragonflight = {
-                change_culture = culture_infinite_dragonflight
+            limit = {
+                culture = culture_bronze_dragonflight
             }
+            
+            change_culture = culture_infinite_dragonflight
         }
-
-        A97 = {
-            create_march = KOT
+        
+        if = {
+            limit = {
+                exists = A97
+            }
+            
+            if = {
+                limit = {
+                    war_with = A97
+                }
+                white_peace = A97
+            }
+            
+            add_trust = {
+                who = A97
+                value = 35
+                mutual = yes
+            }
+            
+            create_march = ROOT
         }
-
+        
         ai_chance { factor = 75 }
+    }
+    
+    after = {
+        clear_saved_name = rebel_leader
+    }
 }
 
 country_event = {
@@ -566,28 +600,43 @@ country_event = {
     option = {
         name = wwu_aqir.102.option.a
 
+        add_years_of_income = 5.0
+        
         area_zulfarrak = {
             add_devastation = 100
         }
+        
         1541 = {
             add_base_tax = -3
             add_base_production = -3
             add_base_manpower = -3
         }
 
-        add_years_of_income = 5.0
         1520 = {
             add_base_tax = 3
             add_base_production = 3
             add_base_manpower = 3
         }
+        
         ai_chance = { factor = 50 }
     }
 
     option = {
         name = wwu_aqir.102.option.b
 
-        vassalize = A73
+        if = {
+            limit = {
+                exists = A73
+            }
+            
+            vassalize = A73
+
+            A73 = {
+                override_country_name = FARRAKI_SLAVES
+                change_religion = cthun
+            }
+        }
+        
         define_general = {
             shock = 6
             fire = 6
@@ -595,33 +644,45 @@ country_event = {
             siege = 4
             name = "Gazh'rilla the Hydra Demigod"
         }
-
-        A73 = {
-            override_country_name = FARRAKI_SLAVES
-            change_religion = cthun
-        }
+        
         ai_chance = { factor = 30 }
     }
 
     option = {
         name = wwu_aqir.102.option.c
 
-        inherit = A73
+        if = {
+            limit = {
+                exists = A73
+            }
+            
+            inherit = A73
+        }
+        
+        area_zulfarrak = {
+            limit = {
+                is_core = A73
+            }
+            remove_core = A73
+        }
+        
         area_zulfarrak = {
             add_core = ROOT
-            remove_core = A73
             add_devastation = 75
             change_culture = culture_qiraji
             change_religion = cthun
         }
+        
         add_power_projection = {
             type = mission_rewards_power_projection
             amount = 25
         }
+        
         add_mil_power = -200
         add_prestige = 10
+        
+        ai_chance = { factor = 20 }
     }
-    ai_chance = { factor = 20 }
 }
 
 country_event = {
@@ -639,27 +700,32 @@ country_event = {
     option = {
         name = wwu_aqir.103.option.a
 
-        create_subject = {
-            subject_type = vassal
-            subject = GD2
+        if = {
+            limit = {
+                exists = GD2
+            }
+            
+            create_subject = {
+                subject_type = vassal
+                subject = GD2
+            }
+
+            GD2 = {
+                change_religion = nightmare
+
+                add_mil_power = 500
+                add_stability = 2
+                
+                add_trust = {
+                    who = ROOT
+                    value = 50
+                    mutual = yes
+                }
+            }
         }
-
-        GD2 = {
-
-            #change_culture = culture_nightmare_dragonflight
-            #change_graphical_culture = nightmare_gfx
-            change_religion = nightmare
-
-            add_mil_power = 500
-            add_stability = 2
-            add_trust = {
-                who = A97
-                value = 50
-                mutual = yes
-            }
-            ai_chance = {
-                factor = 100
-            }
+                
+        ai_chance = {
+            factor = 100
         }
     }
 }
