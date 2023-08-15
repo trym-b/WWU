@@ -11,6 +11,7 @@ country_event = {
     is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = leader_assignment_in_progress }
         NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = alliance_exists
@@ -30,14 +31,14 @@ country_event = {
     }
     
     immediate = {
+        set_global_flag = leader_assignment_in_progress
         random_country = {
             limit = {
                 has_country_modifier = member_of_alliance
+                NOT = { has_country_modifier = recent_leader_assignment }
             }
             
-            set_head_of_faction = {
-                faction = alliance
-            }
+            country_event = { id = wwu_faction_system_leader_assignment.10 }
         }
     }
 	
@@ -50,17 +51,74 @@ country_event = {
 	}
 }
 
+# Choice Event
+country_event = {
+	id = wwu_faction_system_leader_assignment.10
+	title = wwu_faction_system_leader_assignment.10.title
+	desc = wwu_faction_system_leader_assignment.10.desc
+	picture = VARIAN_WRYNN_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = no
+                }
+                
+                add_country_modifier = {
+                    name = recent_leader_assignment
+                    duration = 1800
+                    hidden = yes
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_leader_assignment.10.option.a
+        
+        set_head_of_faction = {
+            faction = alliance
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_faction_system_leader_assignment.10.option.b
+        
+        add_dip_power = 25
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        clr_global_flag = leader_assignment_in_progress
+    }
+}
+
 # Hotde - Random Leader if existing one is removed
 country_event = {
 	id = wwu_faction_system_leader_assignment.2
 	title = wwu_faction_system_leader_assignment.2.title
 	desc = wwu_faction_system_leader_assignment.2.desc
-	picture = VARIAN_WRYNN_eventPicture
+	picture = WARCHIEF_THRALL_eventPicture
     
     hidden = yes
     is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = leader_assignment_in_progress }
         NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = horde_exists
@@ -81,14 +139,14 @@ country_event = {
     }
     
     immediate = {
+        set_global_flag = leader_assignment_in_progress
         random_country = {
             limit = {
                 has_country_modifier = member_of_horde
+                NOT = { has_country_modifier = recent_leader_assignment }
             }
             
-            set_head_of_faction = {
-                faction = horde
-            }
+            country_event = { id = wwu_faction_system_leader_assignment.11 }
         }
     }
 	
@@ -101,17 +159,74 @@ country_event = {
 	}
 }
 
+# Choice Event
+country_event = {
+	id = wwu_faction_system_leader_assignment.11
+	title = wwu_faction_system_leader_assignment.11.title
+	desc = wwu_faction_system_leader_assignment.11.desc
+	picture = WARCHIEF_THRALL_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = no
+                }
+                
+                add_country_modifier = {
+                    name = recent_leader_assignment
+                    duration = 1800
+                    hidden = yes
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_leader_assignment.11.option.a
+        
+        set_head_of_faction = {
+            faction = horde
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_faction_system_leader_assignment.11.option.b
+        
+        add_dip_power = 25
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        clr_global_flag = leader_assignment_in_progress
+    }
+}
+
 # Old Horde - Random Leader if existing one is removed
 country_event = {
 	id = wwu_faction_system_leader_assignment.3
 	title = wwu_faction_system_leader_assignment.3.title
 	desc = wwu_faction_system_leader_assignment.3.desc
-	picture = VARIAN_WRYNN_eventPicture
+	picture = HORDE_TRIAL_eventPicture
     
     hidden = yes
     is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = leader_assignment_in_progress }
         NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = old_horde_exists
@@ -132,14 +247,14 @@ country_event = {
     }
     
     immediate = {
+        set_global_flag = leader_assignment_in_progress
         random_country = {
             limit = {
                 has_country_modifier = member_of_old_horde
+                NOT = { has_country_modifier = recent_leader_assignment }
             }
             
-            set_head_of_faction = {
-                faction = old_horde
-            }
+            country_event = { id = wwu_faction_system_leader_assignment.12 }
         }
     }
 	
@@ -152,17 +267,74 @@ country_event = {
 	}
 }
 
+# Choice Event
+country_event = {
+	id = wwu_faction_system_leader_assignment.12
+	title = wwu_faction_system_leader_assignment.12.title
+	desc = wwu_faction_system_leader_assignment.12.desc
+	picture = HORDE_TRIAL_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = no
+                }
+                
+                add_country_modifier = {
+                    name = recent_leader_assignment
+                    duration = 1800
+                    hidden = yes
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_leader_assignment.12.option.a
+        
+        set_head_of_faction = {
+            faction = old_horde
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_faction_system_leader_assignment.12.option.b
+        
+        add_dip_power = 25
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        clr_global_flag = leader_assignment_in_progress
+    }
+}
+
 # Trade Coalition - Random Leader if existing one is removed
 country_event = {
 	id = wwu_faction_system_leader_assignment.4
 	title = wwu_faction_system_leader_assignment.4.title
 	desc = wwu_faction_system_leader_assignment.4.desc
-	picture = VARIAN_WRYNN_eventPicture
+	picture = AUCTIONMASTER_eventPicture
     
     hidden = yes
     is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = leader_assignment_in_progress }
         NOT = { has_global_flag = trade_coalition_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = trade_coalition_exists
@@ -183,14 +355,14 @@ country_event = {
     }
     
     immediate = {
+        set_global_flag = leader_assignment_in_progress
         random_country = {
             limit = {
                 has_country_modifier = member_of_trade_coalition
+                NOT = { has_country_modifier = recent_leader_assignment }
             }
             
-            set_head_of_faction = {
-                faction = trade_coalition
-            }
+            country_event = { id = wwu_faction_system_leader_assignment.13 }
         }
     }
 	
@@ -203,17 +375,74 @@ country_event = {
 	}
 }
 
+# Choice Event
+country_event = {
+	id = wwu_faction_system_leader_assignment.13
+	title = wwu_faction_system_leader_assignment.13.title
+	desc = wwu_faction_system_leader_assignment.13.desc
+	picture = AUCTIONMASTER_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = no
+                }
+                
+                add_country_modifier = {
+                    name = recent_leader_assignment
+                    duration = 1800
+                    hidden = yes
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_leader_assignment.13.option.a
+        
+        set_head_of_faction = {
+            faction = trade_coalition
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_faction_system_leader_assignment.13.option.b
+        
+        add_dip_power = 25
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        clr_global_flag = leader_assignment_in_progress
+    }
+}
+
 # Dragon Aspects - Random Leader if existing one is removed
 country_event = {
 	id = wwu_faction_system_leader_assignment.5
 	title = wwu_faction_system_leader_assignment.5.title
 	desc = wwu_faction_system_leader_assignment.5.desc
-	picture = VARIAN_WRYNN_eventPicture
+	picture = HUNGRY_DRAGON_eventPicture
     
     hidden = yes
     is_triggered_only = yes
     
     trigger = {
+        NOT = { has_global_flag = leader_assignment_in_progress }
         NOT = { has_global_flag = dragon_aspects_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_global_flag = dragon_aspects_exists
@@ -234,14 +463,14 @@ country_event = {
     }
     
     immediate = {
+        set_global_flag = leader_assignment_in_progress
         random_country = {
             limit = {
                 has_country_modifier = member_of_dragon_aspects
+                NOT = { has_country_modifier = recent_leader_assignment }
             }
             
-            set_head_of_faction = {
-                faction = dragon_aspects
-            }
+            country_event = { id = wwu_faction_system_leader_assignment.14 }
         }
     }
 	
@@ -254,3 +483,58 @@ country_event = {
 	}
 }
 
+# Choice Event
+country_event = {
+	id = wwu_faction_system_leader_assignment.14
+	title = wwu_faction_system_leader_assignment.14.title
+	desc = wwu_faction_system_leader_assignment.14.desc
+	picture = HUNGRY_DRAGON_eventPicture
+    
+    is_triggered_only = yes
+    major = yes
+
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            if = {
+                limit = {
+                    ai = no
+                }
+                
+                add_country_modifier = {
+                    name = recent_leader_assignment
+                    duration = 1800
+                    hidden = yes
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_faction_system_leader_assignment.14.option.a
+        
+        set_head_of_faction = {
+            faction = dragon_aspects
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    option = {
+		name = wwu_faction_system_leader_assignment.14.option.b
+        
+        add_dip_power = 25
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        clr_global_flag = leader_assignment_in_progress
+    }
+}
