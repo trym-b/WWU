@@ -128,21 +128,8 @@ feudal_theocracy_mechanic = {
 			icon = GFX_sanction_holy_war_button
 			trigger = {
 				mil_power_cost = 50
-				any_neighbor_province = {
-					owner = {
-						exists = yes
-						not = { defensive_pact_with = ROOT }
-						not = { religion = ROOT }
-					}
-					not = { is_claim = ROOT }
-					not = { is_core = ROOT }
-					has_discovered = ROOT
-				}
-			}
-			effect = { 
-				mil_power_cost = 50
-				every_neighbor_province = {
-					limit = {
+				any_owned_province = {
+					any_neighbor_province = {
 						owner = {
 							exists = yes
 							not = { defensive_pact_with = ROOT }
@@ -152,7 +139,36 @@ feudal_theocracy_mechanic = {
 						not = { is_core = ROOT }
 						has_discovered = ROOT
 					}
-					add_claim = ROOT
+				}
+			}
+			effect = { 
+				mil_power_cost = 50
+				random_owned_province = {
+					limit = {
+						any_neighbor_province = {
+							owner = {
+								exists = yes
+								not = { defensive_pact_with = ROOT }
+								not = { religion = ROOT }
+							}
+							not = { is_claim = ROOT }
+							not = { is_core = ROOT }
+							has_discovered = ROOT
+						}
+					}
+					every_neighbor_province = {
+						limit = {
+							owner = {
+								exists = yes
+								not = { defensive_pact_with = ROOT }
+								not = { religion = ROOT }
+							}
+							not = { is_claim = ROOT }
+							not = { is_core = ROOT }
+							has_discovered = ROOT
+						}
+						add_claim = ROOT
+					}
 				}
 			}
 			cooldown_years = 0
