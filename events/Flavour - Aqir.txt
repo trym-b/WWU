@@ -803,9 +803,15 @@ country_event = {
     trigger = {
         A97 = {
             ai = yes
-            has_spy_network_in = { 
-                who = PAQ
-                value = 25
+            OR = {
+                has_opinion = {
+                    who = PAQ
+                    value = 125
+                }
+                has_spy_network_in = {
+                    who = PAQ
+                    value = 20
+                }
             }
         }
     }
@@ -813,8 +819,40 @@ country_event = {
     option = {
         name = wwu_aqir.200.option.a
 
-        inherit = {
-            tag = PAQ
+        inherit = PAQ
+    }
+}
+
+country_event = {
+    id = wwu_aqir.201
+    title = wwu_aqir.201.title
+    desc = wwu_aqir.201.desc
+    picture = SCARAB_eventPicture
+
+    is_triggered_only = yes
+
+    fire_only_once = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    trigger = {
+        A97 = {
+            ai = yes
+            last_mission = A97_awaken_the_qiraji
+        }
+    }
+
+    option = {
+        name = wwu_aqir.201.option.a
+
+        A97 = {
+        add_casus_belli = {
+                target = H03
+                type = cb_vassalize_mission
+                months = 300
+            }
         }
     }
 }
