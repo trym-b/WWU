@@ -21,6 +21,8 @@ country_event = {
                 has_province_modifier = cof_twilight
                 has_province_modifier = cof_nightmare
                 has_province_modifier = cof_void
+                has_province_modifier = cof_damned
+                has_province_modifier = cof_decay
             }
         }
     }
@@ -267,6 +269,64 @@ country_event = {
                     NOT = { religion = void }
                 }
                 province_event = { id = wwu_centres_of_fanaticism.81 }
+            }
+        }
+	}
+    # Damned
+	option = {
+		name = wwu_centres_of_fanaticism.1.option.a
+		
+        trigger = {
+            has_country_flag = cof_spawn_rebels
+            any_owned_province = {
+                has_province_modifier = cof_damned
+            }
+        }
+        
+        random_owned_province = {
+            limit = {
+                has_province_modifier = cof_damned
+                any_neighbor_province = {
+                    owned_by = ROOT
+                    NOT = { religion = cult_of_the_damned }
+                }
+            }
+            
+            random_neighbor_province = {
+                limit = {
+                    owned_by = ROOT
+                    NOT = { religion = cult_of_the_damned }
+                }
+                province_event = { id = wwu_centres_of_fanaticism.91 }
+            }
+        }
+	}
+    # Decay
+	option = {
+		name = wwu_centres_of_fanaticism.1.option.a
+		
+        trigger = {
+            has_country_flag = cof_spawn_rebels
+            any_owned_province = {
+                has_province_modifier = cof_decay
+            }
+        }
+        
+        random_owned_province = {
+            limit = {
+                has_province_modifier = cof_decay
+                any_neighbor_province = {
+                    owned_by = ROOT
+                    NOT = { religion = decay }
+                }
+            }
+            
+            random_neighbor_province = {
+                limit = {
+                    owned_by = ROOT
+                    NOT = { religion = decay }
+                }
+                province_event = { id = wwu_centres_of_fanaticism.101 }
             }
         }
 	}
@@ -939,6 +999,79 @@ province_event = {
 		
         spawn_rebels = {
             type = cult_of_the_damned_rebels
+            size = 1
+        }
+	}
+}
+
+# Incitation of Decay Fanatics
+country_event = {
+	id = wwu_centres_of_fanaticism.100
+	title = wwu_centres_of_fanaticism.100.title
+	desc = wwu_centres_of_fanaticism.100.desc
+	picture = DEVOURING_OOZE_eventPicture
+    goto = target_province
+   
+    is_triggered_only = yes
+
+    trigger = {
+        has_country_flag = start_cof
+        religion = decay
+    }
+
+    immediate = {
+        clr_country_flag = start_cof
+        hidden_effect = {
+            random_neighbor_country = {
+                limit = {
+                    NOT = { religion = decay }
+                }
+                
+                save_event_target_as = target_neighbor
+                
+                random_owned_province = {
+                    limit = {
+                        is_capital = no
+                    }
+                    
+                    save_event_target_as = target_province
+                }
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_centres_of_fanaticism.100.option.a
+		
+        event_target:target_province = {
+            change_religion = decay
+            add_province_modifier = {
+                name = cof_decay
+                duration = 1800
+            }
+            spawn_rebels = {
+                type = decay_rebels
+                size = 1
+            }
+        }
+	}
+}
+
+# Spread of Decay Fanatics
+province_event = {
+	id = wwu_centres_of_fanaticism.101
+	title = wwu_centres_of_fanaticism.101.title
+	desc = wwu_centres_of_fanaticism.101.desc
+	picture = DEVOURING_OOZE_eventPicture
+    goto = ROOT
+   
+    is_triggered_only = yes
+    
+	option = {
+		name = wwu_centres_of_fanaticism.101.option.a
+		
+        spawn_rebels = {
+            type = decay_rebels
             size = 1
         }
 	}
