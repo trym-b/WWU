@@ -11,14 +11,15 @@ P74_nerubian_column_1 = {
     }
     has_country_shield = yes
  
-    P74_nerubian_one_four = {
+    # Encounter the Vrykuls
+    P74_encounter_the_vrykuls = {
         icon = mission_nerub_vrykul
         position = 4
-        required_missions = { P74_nerubian_two_three }
+        required_missions = { P74_fighting_on_the_surface }
  
         trigger = {
             calc_true_if = {
-                amount = 10
+                amount = 12
                 
                 all_owned_province = {
                     region = region_icecrown
@@ -30,38 +31,45 @@ P74_nerubian_column_1 = {
             NOT = { owned_by = ROOT }
         }
  		effect = {
-            custom_tooltip = nerubian_tooltip_one_four_a
-			custom_tooltip = nerubian_tooltip_one_four_b
+            custom_tooltip = P74_encounter_the_vrykuls_tunnel_network_TT
+            
+            region_icecrown = {
+                add_permanent_claim = ROOT
+            }
+            
+            custom_tooltip = P74_encounter_the_vrykuls_development_TT
 			
             hidden_effect = {
-                every_province = {
+                region_icecrown = {
                     limit = {
-                        country_or_non_sovereign_subject_holds = ROOT
-                        region = region_icecrown
+                        owned_by = ROOT
                     }
-                    add_province_modifier = { 
+                    
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
+                }
+                
+                set_country_flag = cultural_dominantion_icecrown
+            }
+            
+            custom_tooltip = P74_encounter_the_vrykuls_cultural_domination_TT
+			
+            hidden_effect = {
+                region_icecrown = {
+                    limit = {
+                        owned_by = ROOT
+                    }
+                    add_permanent_province_modifier = { 
                         name = nerubian_convert_culture
-                        duration = 7300
+                        duration = -1
                     }
                 }
-                if = {
-                    limit = {
-                        has_country_flag = nerubian_two_four
-                        has_country_flag = nerubian_three_four
-                    }
-                    area_wyrmrest_temple = {
-                        add_claim = ROOT
-                    }
-                    set_country_flag = nerubian_one_four_extra
-				}
-                set_country_flag = nerubian_one_four
             }
         }
  
         ai_weight   = { factor = 1 }
     }
- 
-
 }
  
 #--------------------------------------
@@ -77,7 +85,7 @@ P74_nerubian_column_2 = {
     }
     has_country_shield = yes
  
-    P74_nerubian_two_one = {
+    P74_breach_the_surface = {
         icon = mission_nerub_nerubian_2
         position = 1
         required_missions = {  }
@@ -95,9 +103,11 @@ P74_nerubian_column_2 = {
             area_balagarde = {
                 add_permanent_claim = ROOT
             }
+            # Cathedral of Darkness
             2367 = {
                 add_core = ROOT
             }
+            # Battlescar Spire
             2361 = {
                 add_core = ROOT
             }
@@ -106,14 +116,14 @@ P74_nerubian_column_2 = {
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_two_three = {
+    P74_fighting_on_the_surface = {
         icon = mission_nerub_nerubian_3
         position = 3
-        required_missions = { P74_nerubian_two_one }
+        required_missions = { P74_breach_the_surface }
  
         trigger = {
-            2367 = { country_or_non_sovereign_subject_holds = ROOT }
-            2361 = { country_or_non_sovereign_subject_holds = ROOT }
+            2367 = { country_or_non_sovereign_subject_holds = ROOT } # Cathedral of Darkness
+            2361 = { country_or_non_sovereign_subject_holds = ROOT } # Battlescar Spire
             grown_by_development = 20
         }
         provinces_to_highlight = {
@@ -125,57 +135,54 @@ P74_nerubian_column_2 = {
         }
  
         effect = {
-            custom_tooltip = nerubian_tooltip_two_three_a
-			
-            hidden_effect = {
-                area_naxxanar = {
-                    add_permanent_claim = ROOT
-                }
-                area_the_geyser_fields = {
-                    add_permanent_claim = ROOT
-                }
-                area_kaskala = {
-                    add_permanent_claim = ROOT
-                }
-                area_sapphire_hive = {
-                    add_permanent_claim = ROOT
-                }
-                area_the_lifeblood_pillar = {
-                    add_permanent_claim = ROOT
-                }
-                area_the_glimmering_pillar = {
-                    add_permanent_claim = ROOT
-                }
-                area_jotunheim = {
-                    add_permanent_claim = ROOT
-                }
-                area_the_conflagration = {
-                    add_permanent_claim = ROOT
-                }
-                area_wintergrasp = {
-                    add_permanent_claim = ROOT
-                }
-                area_vault_of_archavon = {
-                    add_permanent_claim = ROOT
-                }
-			}
             add_country_modifier = {
                 name = nerubian_war_on_surface
                 duration = 7300
+            }
+            
+            area_naxxanar = {
+                add_permanent_claim = ROOT
+            }
+            area_the_geyser_fields = {
+                add_permanent_claim = ROOT
+            }
+            area_kaskala = {
+                add_permanent_claim = ROOT
+            }
+            area_sapphire_hive = {
+                add_permanent_claim = ROOT
+            }
+            area_the_lifeblood_pillar = {
+                add_permanent_claim = ROOT
+            }
+            area_the_glimmering_pillar = {
+                add_permanent_claim = ROOT
+            }
+            area_jotunheim = {
+                add_permanent_claim = ROOT
+            }
+            area_the_conflagration = {
+                add_permanent_claim = ROOT
+            }
+            area_wintergrasp = {
+                add_permanent_claim = ROOT
+            }
+            area_vault_of_archavon = {
+                add_permanent_claim = ROOT
             }
         }
  
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_two_four = {
+    P74_encounter_the_dragons = {
         icon = mission_nerub_bluedragon
         position = 4
-        required_missions = { P74_nerubian_two_three }
+        required_missions = { P74_fighting_on_the_surface }
  
         trigger = {
             calc_true_if = {
-                amount = 10
+                amount = 8
                 
                 all_owned_province = {
                     region = region_wintergrasp
@@ -184,96 +191,131 @@ P74_nerubian_column_2 = {
         }
         provinces_to_highlight = {
             region = region_wintergrasp
-            NOT = { owned_by = ROOT}
+            NOT = { owned_by = ROOT }
         }
  		effect = {
-            custom_tooltip = nerubian_tooltip_two_four_a
-			custom_tooltip = nerubian_tooltip_two_four_b
+            custom_tooltip = P74_encounter_the_dragons_tunnel_network_TT
+            
+            region_wintergrasp = {
+                add_permanent_claim = ROOT
+            }
+            
+            custom_tooltip = P74_encounter_the_dragons_development_TT
 			
             hidden_effect = {
-                every_province = {
+                region_wintergrasp = {
                     limit = {
-                        country_or_non_sovereign_subject_holds = ROOT
-                        region = region_wintergrasp
+                        owned_by = ROOT
                     }
-                    add_province_modifier = { 
+                    
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
+                }
+                
+                set_country_flag = cultural_dominantion_wintergrasp
+            }
+            
+            custom_tooltip = P74_encounter_the_dragons_cultural_domination_TT
+			
+            hidden_effect = {
+                region_wintergrasp = {
+                    limit = {
+                        owned_by = ROOT
+                    }
+                    add_permanent_province_modifier = { 
                         name = nerubian_convert_culture
-                        duration = 7300
+                        duration = -1
                     }
                 }
-                if = {
-                    limit = {
-                        has_country_flag = nerubian_one_four
-                        has_country_flag = nerubian_three_four
-                    }
-                    area_wyrmrest_temple = {
-                        add_claim = ROOT
-                    }
-                    set_country_flag = nerubian_one_four_extra
-				}
-                set_country_flag = nerubian_two_four
             }
         }
  
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_two_five = {
+    P74_fall_of_wyrmrest_temple = {
         icon = mission_nerub_wyrmest
         position = 5
         required_missions = { 
-            P74_nerubian_one_four
-            P74_nerubian_two_four
-            P74_nerubian_three_four
+            P74_encounter_the_vrykuls
+            P74_encounter_the_dragons
+            P74_encounter_the_tuskarrs
         }
  
         trigger = {
+            calc_true_if = {
+                amount = 12
+                
+                all_owned_province = {
+                    region = region_dragonblight
+                }
+            }
+            
             area_wyrmrest_temple = {
                 country_or_non_sovereign_subject_holds = ROOT
             }
         }
         provinces_to_highlight = {
-            area = area_wyrmrest_temple
+            region = region_dragonblight
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         effect = {
-			custom_tooltip = nerubian_tooltip_two_five_a
-			custom_tooltip = nerubian_tooltip_two_five_b
-			
+            custom_tooltip = P74_fall_of_wyrmrest_temple_tunnel_network_TT
             
+            region_dragonblight = {
+                add_permanent_claim = ROOT
+            }
+        
+			custom_tooltip = P74_fall_of_wyrmrest_temple_development_TT
+			
             hidden_effect = {
-                every_province = {
+                region_dragonblight = {
                     limit = {
-                        country_or_non_sovereign_subject_holds = ROOT
-                        region = region_dragonblight
+                        owned_by = ROOT
                     }
-                    add_province_modifier = { 
+                    
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
+                }
+                
+                set_country_flag = cultural_dominantion_dragonblight
+            }
+            
+            custom_tooltip = P74_fall_of_wyrmrest_temple_cultural_domination_TT
+			
+            hidden_effect = {
+                region_dragonblight = {
+                    limit = {
+                        owned_by = ROOT
+                    }
+                    add_permanent_province_modifier = { 
                         name = nerubian_convert_culture
-                        duration = 7300
+                        duration = -1
                     }
                 }
-                set_country_flag = nerubian_two_five
             }
         }
  
         ai_weight   = { factor = 1 }
     }
 	
-    P74_nerubian_two_six = {
+    P74_the_nerubian_empire = {
         icon = mission_nerub_hadronox
         position = 6
         required_missions = { 
-            P74_nerubian_two_five
-            P74_nerubian_three_five
+            P74_fall_of_wyrmrest_temple
+            P74_throne_of_the_spider
         }
  
         trigger = {
-            grown_by_development = 1000
+            grown_by_development = 800
 			NOT = { great_power_rank = 3 }
             adm_tech = 15
             
             calc_true_if = {
-                amount = 200
+                amount = 120
                 
                 all_owned_province = {
                     superregion = northrend_superregion
@@ -288,38 +330,53 @@ P74_nerubian_column_2 = {
         effect = {
 			override_country_name = nerubian_empire
 			set_government_rank = 3
-			custom_tooltip = nerubian_tooltip_two_six_aa
-			custom_tooltip = nerubian_tooltip_two_six_a
-			custom_tooltip = nerubian_tooltip_two_six_b
-			custom_tooltip = nerubian_tooltip_two_six_c
+            
+            custom_tooltip = P74_the_nerubian_empire_tunnel_network_TT
+            
+            northrend_superregion = {
+                add_permanent_claim = ROOT 
+            }
+            
+			custom_tooltip = P74_the_nerubian_empire_mercenary_company_TT
             
             hidden_effect = {
                 set_country_flag = nerub_merc_1
-                every_province = {
+            }
+            
+            custom_tooltip = P74_the_nerubian_empire_development_TT
+			
+            hidden_effect = {
+                northrend_superregion = {
                     limit = {
-                         superregion = northrend_superregion
+                        owned_by = ROOT
                     }
-                    add_permanent_claim = ROOT 
+                    
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
                 }
-                every_province = {
+                
+                set_country_flag = cultural_dominantion_northrend
+            }
+            
+            custom_tooltip = P74_the_nerubian_empire_cultural_domination_TT
+			
+            hidden_effect = {
+                northrend_superregion = {
                     limit = {
-                        country_or_non_sovereign_subject_holds = ROOT
-                         superregion = northrend_superregion
+                        owned_by = ROOT
                     }
-                    add_province_modifier = { 
+                    add_permanent_province_modifier = { 
                         name = nerubian_convert_culture
-                        duration = 7300
+                        duration = -1
                     }
                 }
-                set_country_flag = nerubian_two_six
             }
         }
  
         ai_weight   = { factor = 1 }
-    }
-	
+    }	
 }
- 
  
 #--------------------------------------
 # Column 3
@@ -334,7 +391,7 @@ P74_nerubian_column_3 = {
     }
     has_country_shield = yes
  
-    P74_nerubian_three_one = {
+    P74_repairing_the_tunnel_network = {
         icon = mission_nerub_nerubian_1
         position = 1
         required_missions = {  }
@@ -353,10 +410,11 @@ P74_nerubian_column_3 = {
         }
  
         effect = {
-            custom_tooltip = nerubian_tooltip_three_one_a
-            set_country_flag = nerubian_open_upgrade_province
- 
+            custom_tooltip = IMPROVE_TUNNEL_DECISION_UNLOCKED_TT
+            
             hidden_effect = {
+                set_country_flag = nerubian_open_upgrade_province
+ 
                 change_variable = {
                     which = nerubian_tunnel_1_depth
                     value = 1
@@ -395,14 +453,14 @@ P74_nerubian_column_3 = {
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_three_three = {
+    P74_bolster_the_nests = {
         icon = mission_nerub_egg
         position = 3
-        required_missions = { P74_nerubian_four_two }
+        required_missions = { P74_the_endless_depths }
  
         trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_three_three_a
+                tooltip = P74_bolster_the_nests_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_4_depth
@@ -429,10 +487,10 @@ P74_nerubian_column_3 = {
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_three_four = {
+    P74_encounter_the_tuskarrs = {
         icon = mission_nerub_tuskarr
         position = 4
-        required_missions = { P74_nerubian_two_three }
+        required_missions = { P74_fighting_on_the_surface }
  
         trigger = {
             calc_true_if = {
@@ -448,45 +506,54 @@ P74_nerubian_column_3 = {
             NOT = { owned_by = ROOT }
         }
  		effect = {
-            custom_tooltip = nerubian_tooltip_three_four_a
-			custom_tooltip = nerubian_tooltip_three_four_b
+            custom_tooltip = P74_encounter_the_tuskarrs_tunnel_network_TT
             
+            region_borean_tundra = {
+                add_permanent_claim = ROOT
+            }
+        
+			custom_tooltip = P74_encounter_the_tuskarrs_development_TT
+			
             hidden_effect = {
-                every_province = {
+                region_borean_tundra = {
                     limit = {
-                        country_or_non_sovereign_subject_holds = ROOT
-                        region = region_borean_tundra
+                        owned_by = ROOT
                     }
-                    add_province_modifier = { 
+                    
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
+                }
+                
+                set_country_flag = cultural_dominantion_borean_tundra
+            }
+            
+            custom_tooltip = P74_encounter_the_tuskarrs_cultural_domination_TT
+			
+            hidden_effect = {
+                region_borean_tundra = {
+                    limit = {
+                        owned_by = ROOT
+                    }
+                    add_permanent_province_modifier = { 
                         name = nerubian_convert_culture
-                        duration = 7300
+                        duration = -1
                     }
                 }
-                if = {
-                    limit = {
-                        has_country_flag = nerubian_one_four
-                        has_country_flag = nerubian_two_four
-                    }
-                    set_country_flag = nerubian_one_four_extra
-                    area_wyrmrest_temple = {
-                        add_claim = ROOT
-                    }
-				}
-                set_country_flag = nerubian_three_four
             }
         }
  
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_three_five = {
+    P74_throne_of_the_spider = {
         icon = mission_nerub_anubarak
         position = 5
-        required_missions = { P74_nerubian_four_four }
+        required_missions = { P74_fortress_of_the_spider }
  
         trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_three_five_a
+                tooltip = P74_throne_of_the_spider_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_3_depth
@@ -526,14 +593,14 @@ P74_nerubian_column_4 = {
     }
     has_country_shield = yes
  
-    P74_nerubian_four_two = {
+    P74_the_endless_depths = {
         icon = mission_nerub_azjol_1
         position = 2
-        required_missions = { P74_nerubian_three_one }
+        required_missions = { P74_repairing_the_tunnel_network }
  
         trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_four_two_a
+                tooltip = P74_the_endless_depths_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_1_depth
@@ -588,14 +655,14 @@ P74_nerubian_column_4 = {
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_four_three = {
+    P74_temple_knowledge = {
         icon = mission_nerub_prophet_3
         position = 3
-        required_missions = { P74_nerubian_four_two }
+        required_missions = { P74_the_endless_depths }
  
         trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_four_three_a
+                tooltip = P74_temple_knowledge_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_7_depth
@@ -610,8 +677,10 @@ P74_nerubian_column_4 = {
         }
  
         effect = {
-            custom_tooltip = nerubian_tooltip_four_three_b
-            set_country_flag = nerub_merc_2a
+            custom_tooltip = P74_temple_knowledge_mercenary_company_TT
+            hidden_effect = {
+                set_country_flag = nerub_merc_2a
+            }
  
             if = {
                 limit = {
@@ -627,13 +696,13 @@ P74_nerubian_column_4 = {
                 }
                 # Ahn Kahet Temple
                 4792 = {
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
 					add_great_project_tier = {
 						type = gp_ahn_kahet_temple
 						tier = 1
 					}
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
                 }
             }
             else_if = {
@@ -658,18 +727,18 @@ P74_nerubian_column_4 = {
         ai_weight = { factor = 1 }
     }
  
-    P74_nerubian_four_four = {
+    P74_fortress_of_the_spider = {
         icon = mission_nerub_azjol_2
         position = 4
         required_missions = {
-            P74_nerubian_three_three
-            P74_nerubian_four_three
-            P74_nerubian_five_three
+            P74_bolster_the_nests
+            P74_temple_knowledge
+            P74_the_royal_archives
         }
  
         trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_four_four_a
+                tooltip = P74_fortress_of_the_spider_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_1_depth
@@ -741,14 +810,14 @@ P74_nerubian_column_5 = {
     }
     has_country_shield = yes
  
-    P74_nerubian_five_three = {
+    P74_the_royal_archives = {
         icon = mission_nerub_prophet_1
         position = 3
-        required_missions = { P74_nerubian_four_two }
+        required_missions = { P74_the_endless_depths }
  
 		trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_five_three_a
+                tooltip = P74_the_royal_archives_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_2_depth
@@ -763,8 +832,10 @@ P74_nerubian_column_5 = {
         }
  
         effect = {
-            custom_tooltip = nerubian_tooltip_five_three_b
-            set_country_flag = nerub_merc_2b
+            custom_tooltip = P74_the_royal_archives_mercenary_company_TT
+            hidden_effect = {
+                set_country_flag = nerub_merc_2b
+            }
  
             if = {
                 limit = {
@@ -780,13 +851,13 @@ P74_nerubian_column_5 = {
                 }
                 # Royal Archives
                 4787 = {
+                    add_base_tax = 1
+                    add_base_production = 1
+                    add_base_manpower = 1
 					add_great_project_tier = {
 						type = gp_azjol_nerub
 						tier = 1
 					}
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
                 }
             }
             else_if = {
@@ -811,14 +882,14 @@ P74_nerubian_column_5 = {
         ai_weight   = { factor = 1 }
     }
  
-    P74_nerubian_five_five = {
+    P74_power_of_nerubian_wisdom = {
         icon = mission_nerub_prophet_2
         position = 5
-        required_missions = { P74_nerubian_five_three }
+        required_missions = { P74_the_royal_archives }
  
 		trigger = {
             custom_trigger_tooltip = {
-                tooltip = nerubian_tooltip_five_five_a
+                tooltip = P74_power_of_nerubian_wisdom_province_TT
  
                 check_variable = {
                     which = nerubian_tunnel_2_depth
@@ -841,6 +912,4 @@ P74_nerubian_column_5 = {
  
         ai_weight   = { factor = 1 }
     }
- 
- 
 }
