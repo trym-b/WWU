@@ -209,7 +209,17 @@ A40_bleeding_hollow_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-			alliance_with = A41
+            OR = {
+                alliance_with = A41 
+                NOT = { exists = A41 }
+                AND = {
+                    is_rival = A41
+                    army_strength = {
+                        who = A41
+                        value = 1.5
+                    }
+                }
+            }
             3785 = {
                 country_or_non_sovereign_subject_holds = ROOT
                 has_fort_building_trigger = yes
@@ -224,7 +234,13 @@ A40_bleeding_hollow_column_5 = {
                 add_base_tax = 6
                 add_base_production = 6
                 add_base_manpower = 6
-                add_core = A41
+                
+                if = {
+                    limit = {
+                        exists = A41
+                    }
+                    add_core = A41
+                }
             }
 		}
 	}

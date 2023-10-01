@@ -218,7 +218,17 @@ A44_burning_blade_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-			alliance_with = A36
+            OR = {
+                alliance_with = A36 
+                NOT = { exists = A36 }
+                AND = {
+                    is_rival = A36
+                    army_strength = {
+                        who = A36
+                        value = 1.5
+                    }
+                }
+            }
 		}
 		effect = {
 			add_country_modifier = {

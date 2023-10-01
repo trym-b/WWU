@@ -176,11 +176,16 @@ A35_warsong_column_5 = {
         completed_by = 592.1.1
         
 		trigger = {
-            if = {
-                limit = {
-                    exists = A54
-                }
+            OR = {
                 alliance_with = A51 
+                NOT = { exists = A51 }
+                AND = {
+                    is_rival = A51
+                    army_strength = {
+                        who = A51
+                        value = 1.5
+                    }
+                }
             }
 		}
 		effect = {
