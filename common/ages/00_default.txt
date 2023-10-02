@@ -128,13 +128,51 @@ age_frozen_throne = {
 		custom_trigger_tooltip = {
 			tooltip = age_rise_of_the_horde_condition
             
-            has_global_flag = orcish_horde_has_been_spawned
+            OR = {
+                # Orcish Horde was spawned (U03 or own tag)
+                had_global_flag = {
+                    flag = orcish_horde_has_been_spawned
+                    days = 365
+                }
+                # OR: Non-Fel orc clan entered Azeroth via "Establish a Foothold in Azeroth"
+                had_global_flag = {
+                    flag = non_fel_orc_spawned_in_azeroth
+                    days = 365
+                }
+                # OR: there is a Draenor/Outland-unique culture in EK after 600
+                AND = { 
+                    is_year = 600
+                    eastern_kingdom_superregion = {
+                        owner = {
+                            OR = {
+                                culture_group = culture_group_orc
+                                culture_group = culture_group_ogre
+                                culture_group = culture_group_draenei
+                                culture_group = culture_group_broken
+                                culture_group = culture_group_arrakoa
+                                culture_group = culture_group_fallen_arrakoa
+                                culture_group = culture_group_ethereal
+                                culture_group = culture_group_zangar
+                                culture_group = culture_group_saberon
+                                culture_group = culture_group_rock_flayer
+                            }
+                        }
+                    }
+                }
+            }
             
             # Orcish Horde is gone, or Draenor has collapsed into Outland
             OR = {
-                NOT = { exists = U03 }
+                # No nation that spawned/became the Orcish Horde exists
+                NOT = { 
+                    any_country = {
+                        has_country_flag = spawned_orcish_horde
+                    }
+                }
+                # OR: Outland was formed
                 has_global_flag = setup_outland
                 
+                # OR: there is Fel in EK or Kalimdor after 600
                 AND = {
                     is_year = 600
                     eastern_kingdom_superregion = {
