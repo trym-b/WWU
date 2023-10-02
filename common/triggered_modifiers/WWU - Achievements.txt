@@ -1,6 +1,9 @@
 #-----------------------------------------
-# Example
+# Notes
 #-----------------------------------------
+# Year 800 is the 'end' date for achievements as other there is no incentive to rush.
+# After this year, all the achievements disappear if not already completed.
+
 # _g is for the in progress Achievement
 # _r is used for a failed timed Achievement
 
@@ -48,6 +51,7 @@ achievement_g_world_conqueror = {
         has_global_flag = enabled_achievements
 		ai = no
 		NOT = { has_country_modifier = achievement_world_conqueror }
+        NOT = { is_year = 800 }
 	}
 
 	trigger = {
@@ -109,6 +113,7 @@ achievement_world_conqueror = {
 		ai = no
         OR = {
             AND = {
+                NOT = { is_year = 800 }
                 eastern_kingdom_superregion = {
                     type = all
                     country_or_non_sovereign_subject_holds = ROOT
@@ -173,6 +178,7 @@ achievement_g_gold_gold_gold = {
         has_global_flag = enabled_achievements
 		ai = no
 		NOT = { has_country_modifier = achievement_gold_gold_gold }
+        NOT = { is_year = 800 }
 	}
 
 	trigger = {
@@ -186,7 +192,10 @@ achievement_gold_gold_gold = {
         has_global_flag = enabled_achievements
 		ai = no
         OR = {
-            treasury = 100000
+            AND = {
+                NOT = { is_year = 800 }
+                treasury = 100000
+            }
             has_country_modifier = achievement_gold_gold_gold
         }
 	}
@@ -201,6 +210,7 @@ achievement_g_uplifted = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
+        NOT = { is_year = 800 }
         NOT = { has_country_modifier = uncivilized_nation }
 		NOT = { has_country_modifier = achievement_uplifted }
 	}
@@ -226,11 +236,14 @@ achievement_uplifted = {
 		ai = no
         NOT = { has_country_modifier = uncivilized_nation }
         OR = {
-            calc_true_if = {
-                amount = 8
-                
-                any_subject_country = {
-                    has_country_flag = was_or_is_uncivilized_nation
+            AND = {
+                NOT = { is_year = 800 }
+                calc_true_if = {
+                    amount = 8
+                    
+                    any_subject_country = {
+                        has_country_flag = was_or_is_uncivilized_nation
+                    }
                 }
             }
             has_country_modifier = achievement_uplifted
@@ -247,6 +260,7 @@ achievement_g_disturbing_the_peace = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
+        NOT = { is_year = 800 }
 		NOT = { has_country_modifier = achievement_disturbing_the_peace }
 	}
 
@@ -269,11 +283,14 @@ achievement_disturbing_the_peace = {
 		ai = no
         
         OR = {
-            calc_true_if = {
-                amount = 10
-                
-                all_country = {
-                    war_with = ROOT
+            AND = {
+                NOT = { is_year = 800 }
+                calc_true_if = {
+                    amount = 10
+                    
+                    all_country = {
+                        war_with = ROOT
+                    }
                 }
             }
             has_country_modifier = achievement_disturbing_the_peace
@@ -290,96 +307,141 @@ achievement_g_world_drinking_tour = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
+        NOT = { is_year = 800 }
 		NOT = { has_country_modifier = achievement_world_drinking_tour }
 	}
 
 	trigger = {
         eastern_kingdom_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         kalimdor_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         northrend_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         pandaria_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         broken_isles_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         kul_tiras_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         zandalar_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         south_seas_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         paradise_isles_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         plunder_isle_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
         dragon_isles_superregion = {
             owned_by = ROOT
-            OR = {
-                has_building = wow_tavern_1
-                has_building = wow_tavern_2
-                has_building = wow_tavern_3
+            custom_trigger_tooltip = {
+                tooltip = WORLD_DRINKING_TOUR_TT
+                
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
             }
         }
 	}
@@ -393,6 +455,7 @@ achievement_world_drinking_tour = {
         
         OR = {
             AND = {
+                NOT = { is_year = 800 }
                 eastern_kingdom_superregion = {
                     owned_by = ROOT
                     OR = {
