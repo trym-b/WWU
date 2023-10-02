@@ -35,44 +35,124 @@
 #-----------------------------------------
 # Shared Achievements
 #-----------------------------------------
+# Order in menu matches the order in this file.
 # These are achievements all or most nations can complete.
 
 # Inactive
 achievement_g_world_conqueror = {
 	potential = {
 		ai = no
-        NOT = { has_country_modifier = uncivilized_nation }
-		NOT = { has_country_modifier = achievement_uplifted }
+		NOT = { has_country_modifier = achievement_world_conqueror }
 	}
 
 	trigger = {
-        custom_trigger_tooltip = {
-            tooltip = UNCIVILIZED_NATION_UPLIFT_TT
-            calc_true_if = {
-                amount = 8
-                
-                any_subject_country = {
-                    has_country_flag = was_or_is_uncivilized_nation
-                }
-            }
+        eastern_kingdom_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        kalimdor_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        northrend_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        pandaria_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        broken_isles_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        kul_tiras_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        zandalar_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        south_seas_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        paradise_isles_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        plunder_isle_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        underwater_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        dragon_isles_superregion = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
         }
 	}
 }
 
 # Active
-achievement_uplifted = {
+achievement_world_conqueror = {
 	potential = {
 		ai = no
-        NOT = { has_country_modifier = uncivilized_nation }
         OR = {
-            calc_true_if = {
-                amount = 8
-                
-                any_subject_country = {
-                    has_country_flag = was_or_is_uncivilized_nation
+            AND = {
+                eastern_kingdom_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                kalimdor_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                northrend_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                pandaria_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                broken_isles_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                kul_tiras_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                zandalar_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                south_seas_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                paradise_isles_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                plunder_isle_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                underwater_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                dragon_isles_superregion = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
                 }
             }
-            has_country_modifier = achievement_uplifted
+            has_country_modifier = achievement_world_conqueror
         }
 	}
 
@@ -156,3 +236,45 @@ achievement_uplifted = {
 # Unique Achievements
 #-----------------------------------------
 # These are achievements for single or small groups of nations.
+# Inactive
+achievement_g_argent_champion = {
+	potential = {
+		ai = no
+        religion_group = light_group
+		NOT = { has_country_modifier = achievement_argent_champion }
+	}
+
+	trigger = {
+        religion = argent_light
+        NOT = { exists = P11 }
+        area_icecrown_interior = {
+            type = all
+            owned_by = ROOT
+            religion = argent_light
+        }
+	}
+}
+
+# Active
+achievement_argent_champion = {
+	potential = {
+		ai = no
+        religion_group = light_group
+        OR = {
+            AND = {
+                religion = argent_light
+                NOT = { exists = P11 }
+                area_icecrown_interior = {
+                    type = all
+                    owned_by = ROOT
+                    religion = argent_light
+                }
+            }
+            has_country_modifier = achievement_argent_champion
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
