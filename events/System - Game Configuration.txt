@@ -440,6 +440,36 @@ country_event = {
         }
 	}
     
+    # Warmonger System
+    option = {
+		name = wwu_game_configuration.3.option.warmonger.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_warmonger_system }
+        }
+        
+        custom_tooltip = WARMONGER_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_warmonger_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.3.option.warmonger.off
+		
+        trigger = {
+            has_global_flag = enabled_warmonger_system
+        }
+        
+        custom_tooltip = WARMONGER_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_warmonger_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    
     # Relentless Conquest System
     option = {
 		name = wwu_game_configuration.3.option.relentless_conquest.on
@@ -1089,6 +1119,7 @@ country_event = {
         # Difficulty
         set_global_flag = enabled_relentless_conquest_system
         #set_global_flag = enabled_vanquisher_system
+        #set_global_flag = enabled_warmonger_system
         
         # Content
         set_global_flag = enable_content_eastern_kingdoms
