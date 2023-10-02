@@ -7,6 +7,58 @@ update_story_state = {
         
         set_global_flag = illidari_exist
     }
+    
+    # Add these fallback checks in-case the X_exists flag is missed.
+    if = {
+        limit = {
+            NOT = { has_global_flag = alliance_exists }
+            any_country = {
+                has_country_modifier = head_of_alliance
+            }
+        }
+        
+        set_global_flag = alliance_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = old_horde_exists }
+            any_country = {
+                has_country_modifier = head_of_old_horde
+            }
+        }
+        
+        set_global_flag = old_horde_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = horde_exists }
+            any_country = {
+                has_country_modifier = head_of_horde
+            }
+        }
+        
+        set_global_flag = horde_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = trade_coalition_exists }
+            any_country = {
+                has_country_modifier = head_of_trade_coalition
+            }
+        }
+        
+        set_global_flag = trade_coalition_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = dragon_aspects_exists }
+            any_country = {
+                has_country_modifier = head_of_dragon_aspects
+            }
+        }
+        
+        set_global_flag = dragon_aspects_exists
+    }
 }
 
 
