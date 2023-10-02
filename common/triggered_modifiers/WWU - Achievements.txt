@@ -1,0 +1,158 @@
+#-----------------------------------------
+# Example
+#-----------------------------------------
+# # Inactive
+# ach_test_achievement_g = {
+	# potential = {
+		# ai = no
+		# NOT = { has_country_modifier = ach_test_achievement }
+	# }
+
+	# trigger = {
+		# stability = 3
+        # custom_trigger_tooltip = {
+            # tooltip = TEST_TOOLTIP_ACH_TT
+            # always = yes
+        # }
+	# }
+# }
+
+# # Active
+# ach_test_achievement = {
+	# potential = {
+		# ai = no
+        # OR = {
+            # stability = 3
+            # has_country_modifier = ach_test_achievement
+        # }
+	# }
+
+	# trigger = {
+		# always = yes
+	# }
+# }
+
+#-----------------------------------------
+# Shared Achievements
+#-----------------------------------------
+# These are achievements all or most nations can complete.
+
+# Inactive
+achievement_g_world_conqueror = {
+	potential = {
+		ai = no
+        NOT = { has_country_modifier = uncivilized_nation }
+		NOT = { has_country_modifier = achievement_uplifted }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = UNCIVILIZED_NATION_UPLIFT_TT
+            calc_true_if = {
+                amount = 8
+                
+                any_subject_country = {
+                    has_country_flag = was_or_is_uncivilized_nation
+                }
+            }
+        }
+	}
+}
+
+# Active
+achievement_uplifted = {
+	potential = {
+		ai = no
+        NOT = { has_country_modifier = uncivilized_nation }
+        OR = {
+            calc_true_if = {
+                amount = 8
+                
+                any_subject_country = {
+                    has_country_flag = was_or_is_uncivilized_nation
+                }
+            }
+            has_country_modifier = achievement_uplifted
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_gold_gold_gold = {
+	potential = {
+		ai = no
+		NOT = { has_country_modifier = achievement_gold_gold_gold }
+	}
+
+	trigger = {
+		treasury = 100000
+	}
+}
+
+# Active
+achievement_gold_gold_gold = {
+	potential = {
+		ai = no
+        OR = {
+            treasury = 100000
+            has_country_modifier = achievement_gold_gold_gold
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_uplifted = {
+	potential = {
+		ai = no
+        NOT = { has_country_modifier = uncivilized_nation }
+		NOT = { has_country_modifier = achievement_uplifted }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = UNCIVILIZED_NATION_UPLIFT_TT
+            calc_true_if = {
+                amount = 8
+                
+                any_subject_country = {
+                    has_country_flag = was_or_is_uncivilized_nation
+                }
+            }
+        }
+	}
+}
+
+# Active
+achievement_uplifted = {
+	potential = {
+		ai = no
+        NOT = { has_country_modifier = uncivilized_nation }
+        OR = {
+            calc_true_if = {
+                amount = 8
+                
+                any_subject_country = {
+                    has_country_flag = was_or_is_uncivilized_nation
+                }
+            }
+            has_country_modifier = achievement_uplifted
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+#-----------------------------------------
+# Unique Achievements
+#-----------------------------------------
+# These are achievements for single or small groups of nations.
