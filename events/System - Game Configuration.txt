@@ -8,6 +8,10 @@ country_event = {
 	picture = BESTIARY_eventPicture
     
 	is_triggered_only = yes
+    
+    trigger = {
+        ai = no
+    }
 
     # Feature Configuration
     option = {
@@ -351,10 +355,40 @@ country_event = {
             has_global_flag = enabled_local_colonial_naming
         }
         
-        custom_tooltip = LOCAL_COLONIAL_NAMING__OFF_TT
+        custom_tooltip = LOCAL_COLONIAL_NAMING_OFF_TT
         
         hidden_effect = {
             clr_global_flag = enabled_local_colonial_naming
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    
+    # Achievements
+    option = {
+		name = wwu_game_configuration.2.option.achievements.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_achievements }
+        }
+        
+        custom_tooltip = ACHIEVEMENTS_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_achievements
+            country_event = { id = wwu_game_configuration.20 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.2.option.achievements.off
+		
+        trigger = {
+            has_global_flag = enabled_achievements
+        }
+        
+        custom_tooltip = ACHIEVEMENTS_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_achievements
             country_event = { id = wwu_game_configuration.20 }
         }
 	}
@@ -1050,6 +1084,7 @@ country_event = {
         set_global_flag = enabled_doctrine_mechanics
         #set_global_flag = enabled_lore_diplomacy_mechanics
         set_global_flag = enabled_local_colonial_naming
+        set_global_flag = enabled_achievements
         
         # Difficulty
         set_global_flag = enabled_relentless_conquest_system
