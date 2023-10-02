@@ -1,0 +1,665 @@
+update_story_state = {
+    # Illidari - Block the Illidan story chain if Illidari have ever existed.
+    if = {
+        limit = {
+            exists = B87
+        }
+        
+        set_global_flag = illidari_exist
+    }
+}
+
+
+update_monthly_modifiers = {
+    # Immortal Republic
+    if = {
+        limit = {
+            NOT = { has_ruler_modifier = immortal_republic }
+            is_immortal_lifespan = yes
+            government = republic
+        }
+        
+        add_ruler_modifier = {
+            name = immortal_republic
+            duration = -1
+        }
+    }
+    # Long-lived Republic
+    if = {
+        limit = {
+            NOT = { has_ruler_modifier = long_lived_republic }
+            is_increased_lifespan = yes
+            government = republic
+        }
+        
+        add_ruler_modifier = {
+            name = long_lived_republic
+            duration = -1
+        }
+    }
+    
+    # Lanquished Crusade
+    if = {
+        limit = {
+            tag = B92
+            NOT = { has_country_modifier = lanquished_crusade }
+            religion = fel
+            is_at_war = no
+        }
+        
+        remove_country_modifier = burning_crusade
+        add_country_modifier = {
+            name = lanquished_crusade
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.11 }
+    }
+    
+    # Burning Crusade
+    if = {
+        limit = {
+            tag = B92
+            NOT = { has_country_modifier = burning_crusade }
+            religion = fel
+            is_at_war = yes
+        }
+        
+        remove_country_modifier = lanquished_crusade
+        add_country_modifier = {
+            name = burning_crusade
+            duration = -1
+        }
+    }
+    
+    # Burning Legion - Cleanup if religion is swapped
+    if = {
+        limit = {
+            tag = B92
+            OR = {
+                has_country_modifier = burning_crusade
+                has_country_modifier = lanquished_crusade
+            }
+            NOT = { religion = fel }
+        }
+        
+        remove_country_modifier = burning_crusade
+        remove_country_modifier = lanquished_crusade
+    }
+    
+    # Elwynn Ownership - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = elwynn_ownership }
+            OR = {
+                tag = STW
+                tag = B15
+                tag = GHR
+                tag = FNN
+            }
+            region_elwynn_forest = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = elwynn_ownership
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.1 }
+    }
+    
+    # Elwynn Ownership - Remove
+    if = {
+        limit = {
+            has_country_modifier = elwynn_ownership
+            NOT = {
+                region_elwynn_forest = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+            }
+        }
+        
+        remove_country_modifier = elwynn_ownership
+    }
+    
+    # Terrifying Visage - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = terrifying_visage }
+            any_country = {
+                has_country_flag = kiljaeden_summoned
+                war_with = ROOT
+                religion = fel
+            }
+            NOT = { religion = fel }
+        }
+        
+        add_country_modifier = {
+            name = terrifying_visage
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.2 }
+    }
+    
+    # Terrifying Visage - Remove
+    if = {
+        limit = {
+            has_country_modifier = terrifying_visage
+        
+            OR = {
+                NOT = { is_at_war = yes }
+                religion = fel
+            }
+        }
+        
+        remove_country_modifier = terrifying_visage
+    }
+    
+    # Presence of C'Thun - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = presence_of_cthun }
+            has_global_flag = cthun_active
+            NOT = { religion = cthun }
+            capital_scope = {
+                superregion = kalimdor_superregion
+            }
+        }
+        
+        add_country_modifier = {
+            name = presence_of_cthun
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.3 }
+    }
+    
+    # Presence of C'Thun - Remove
+    if = {
+        limit = {
+            has_country_modifier = presence_of_cthun
+        
+            OR = {
+                NOT = { has_global_flag = cthun_active }
+                religion = cthun
+                NOT = { 
+                    capital_scope = {
+                        superregion = kalimdor_superregion
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = presence_of_cthun
+    }
+    
+    # Presence of Yogg'Saron - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = presence_of_yogg_saron }
+            has_global_flag = yogg_saron_active
+            NOT = { religion = yogg_saron }
+            capital_scope = {
+                superregion = northrend_superregion
+            }
+        }
+        
+        add_country_modifier = {
+            name = presence_of_yogg_saron
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.4 }
+    }
+    
+    # Presence of Yogg'Saron - Remove
+    if = {
+        limit = {
+            has_country_modifier = presence_of_yogg_saron
+        
+            OR = {
+                NOT = { has_global_flag = yogg_saron_active }
+                religion = yogg_saron
+                NOT = { 
+                    capital_scope = {
+                        superregion = northrend_superregion
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = presence_of_yogg_saron
+    }
+    
+    # Presence of N'Zoth - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = presence_of_nzoth }
+            has_global_flag = nzoth_active
+            NOT = { religion = nzoth }
+            capital_scope = {
+                OR = {
+                    superregion = eastern_kingdom_superregion
+                    superregion = kalimdor_superregion
+                    superregion = northrend_superregion
+                    superregion = broken_isles_superregion
+                    superregion = zandalar_superregion
+                    superregion = kul_tiras_superregion
+                    superregion = south_seas_superregion
+                    superregion = plunder_isle_superregion
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = presence_of_nzoth
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.5 }
+    }
+    
+    # Presence of N'Zoth - Remove
+    if = {
+        limit = {
+            has_country_modifier = presence_of_nzoth
+        
+            OR = {
+                NOT = { has_global_flag = nzoth_active }
+                religion = nzoth
+                NOT = { 
+                    capital_scope = {
+                        OR = {
+                            superregion = eastern_kingdom_superregion
+                            superregion = kalimdor_superregion
+                            superregion = northrend_superregion
+                            superregion = broken_isles_superregion
+                            superregion = zandalar_superregion
+                            superregion = kul_tiras_superregion
+                            superregion = south_seas_superregion
+                            superregion = plunder_isle_superregion
+                        }
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = presence_of_nzoth
+    }
+    
+    # Presence of Y'Shaarj - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = presence_of_yshaarj }
+            has_global_flag = yshaarj_active
+            NOT = { religion = yshaarj }
+            capital_scope = {
+                superregion = pandaria_superregion
+            }
+        }
+        
+        add_country_modifier = {
+            name = presence_of_yshaarj
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.6 }
+    }
+    
+    # Presence of Y'Shaarj - Remove
+    if = {
+        limit = {
+            has_country_modifier = presence_of_yshaarj
+        
+            OR = {
+                NOT = { has_global_flag = yshaarj_active }
+                religion = yshaarj
+                NOT = { 
+                    capital_scope = {
+                        superregion = pandaria_superregion
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = presence_of_yshaarj
+    }
+    
+    # Fighting against Power - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = fighting_against_power }
+            has_government_attribute = enables_hegemony_boost
+            any_country = { 
+                is_hegemon = yes 
+                war_with = ROOT
+            }
+        }
+        
+        add_country_modifier = {
+            name = fighting_against_power
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.7 }
+    }
+    
+    # Fighting against Power - Remove
+    if = {
+        limit = {
+            has_country_modifier = fighting_against_power
+        
+            OR = {
+                NOT = { has_government_attribute = enables_hegemony_boost }
+                NOT = { 
+                    any_country = { 
+                        is_hegemon = yes 
+                        war_with = ROOT
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = fighting_against_power
+    }
+    
+    # Champion of the People - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = champion_of_the_people }
+            has_government_attribute = enables_champion_of_the_people_triggered_modifier
+            is_monarch_leader = yes
+        }
+        
+        add_country_modifier = {
+            name = champion_of_the_people
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.8 }
+    }
+    
+    # Champion of the People - Remove
+    if = {
+        limit = {
+            has_country_modifier = champion_of_the_people
+        
+            OR = {
+                NOT = { has_government_attribute = enables_champion_of_the_people_triggered_modifier }
+                NOT = { is_monarch_leader = yes }
+            }
+        }
+        
+        remove_country_modifier = champion_of_the_people
+    }
+    
+    # War Footing - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = war_footing }
+            has_government_attribute = enables_war_footing_triggered_modifier
+            is_at_war = yes
+        }
+        
+        add_country_modifier = {
+            name = war_footing
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.9 }
+    }
+    
+    # War Footing - Remove
+    if = {
+        limit = {
+            has_country_modifier = war_footing
+            
+            OR = {
+                NOT = { has_government_attribute = enables_war_footing_triggered_modifier }
+                NOT = { is_at_war = yes }
+            }
+        }
+        
+        remove_country_modifier = war_footing
+    }
+    
+    # Unity of the Horde - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = unity_of_the_horde }
+            has_government_attribute = enables_horde_unity_bonus_during_war
+            is_at_war = yes
+        }
+        
+        add_country_modifier = {
+            name = unity_of_the_horde
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.10 }
+    }
+    
+    # Unity of the Horde - Remove
+    if = {
+        limit = {
+            has_country_modifier = unity_of_the_horde
+        
+            OR = {
+                NOT = { has_government_attribute = enables_horde_unity_bonus_during_war }
+                NOT = { is_at_war = yes }
+            }
+        }
+        
+        remove_country_modifier = unity_of_the_horde
+    }
+    
+    # Vast Hold Network - Add
+    if = {
+        limit = {
+            is_valid_hold_race = yes
+            calc_true_if = {
+                amount = 5
+                
+                all_owned_province = {
+                    has_province_modifier = hold_depth_level_0
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = vast_hold_network
+            duration = -1
+        }
+    }
+    
+    # Vast Hold Network  - Remove
+    if = {
+        limit = {
+            is_valid_hold_race = yes
+            NOT = {
+                calc_true_if = {
+                    amount = 5
+                    
+                    all_owned_province = {
+                        has_province_modifier = hold_depth_level_0
+                    }
+                }
+            }
+        }
+        
+        remove_country_modifier = vast_hold_network
+    }
+    
+    # Dwarven Civil War - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = dwarven_civil_war }
+            
+            OR = {
+                tag = A28
+                tag = A29
+                tag = A30
+            }
+            OR = {
+                exists = A28
+                exists = A29
+                exists = A30
+            }
+        }
+        
+        add_country_modifier = {
+            name = dwarven_civil_war
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.12 }
+    }
+    
+    # Dwarven Civil War - Remove
+    if = {
+        limit = {
+            has_country_modifier = dwarven_civil_war
+            OR = {
+                AND = {
+                    tag = A28
+                    NOT = { exists = A29 }
+                    NOT = { exists = A30 }
+                }
+                AND = {
+                    tag = A29
+                    NOT = { exists = A28 }
+                    NOT = { exists = A30 }
+                }
+                AND = {
+                    tag = A30
+                    NOT = { exists = A29 }
+                    NOT = { exists = A28 }
+                }
+            }
+        }
+        
+        remove_country_modifier = dwarven_civil_war
+    }
+    
+    # Glory to Ironforge - Add
+    if = {
+        limit = {
+            tag = A29
+            NOT = { exists = A28 }
+            NOT = { exists = A30 }
+        }
+        
+        add_country_modifier = {
+            name = glory_of_ironforge
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.13 }
+    }
+    
+    # Glory to the Wildhammer - Add
+    if = {
+        limit = {
+            tag = A28
+            NOT = { exists = A29 }
+            NOT = { exists = A30 }
+        }
+        
+        add_country_modifier = {
+            name = glory_of_wildhammer
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.14 }
+    }
+    
+    # Glory to the Dark Iron - Add
+    if = {
+        limit = {
+            tag = A30
+            NOT = { exists = A29 }
+            NOT = { exists = A28 }
+        }
+        
+        add_country_modifier = {
+            name = glory_of_dark_iron
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.15 }
+    }
+    
+    # Dwarfdom United - Add
+    if = {
+        limit = {
+            OR = {
+                tag = THC
+                tag = ANM
+            }
+        }
+        
+        add_country_modifier = {
+            name = dwarves_united
+            duration = -1
+        }
+        
+        country_event = { id = wwu_notification_event.16 }
+    }
+    
+    # Uncivilized Ruler - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = uncivilized_ruler_leads }
+            is_uncivilized = yes
+            is_monarch_leader = yes
+        }
+        
+        add_country_modifier = {
+            name = uncivilized_ruler_leads
+            duration = -1
+        }
+    }
+    # Uncivilized Ruler - Remove
+    if = {
+        limit = {
+            has_country_modifier = uncivilized_ruler_leads
+            OR = {
+                NOT = { is_uncivilized = yes }
+                NOT = { is_monarch_leader = yes }
+            }
+        }
+        
+        remove_country_modifier = uncivilized_ruler_leads
+    }
+    
+    # Society is Reforming - Add
+    if = {
+        limit = {
+            NOT = { has_country_modifier = society_is_reforming }
+            is_uncivilized = yes
+            has_country_flag = civilization_process_active
+        }
+        
+        add_country_modifier = {
+            name = society_is_reforming
+            duration = -1
+        }
+    }
+    # Society is Reforming - Remove
+    if = {
+        limit = {
+            has_country_modifier = society_is_reforming
+            OR = {
+                NOT = { is_uncivilized = yes }
+                NOT = { has_country_flag = civilization_process_active }
+            }
+        }
+        
+        remove_country_modifier = society_is_reforming
+    }
+}
