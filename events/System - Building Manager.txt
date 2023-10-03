@@ -47,9 +47,20 @@ country_event = {
     # Exit
 	option = {
 		name = wwu_building_manager.1.option.exit
-        
-        
 	}
+    
+    after = {
+        if = {
+            limit = {
+                has_country_flag = skip_status_report_return
+            }
+            
+            clr_country_flag = skip_status_report_return
+        }
+        else = {
+            country_event = { id = wwu_status_report.1 }
+        }
+    }
 }
 
 # Automatic Construction
