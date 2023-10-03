@@ -51,14 +51,14 @@ country_decisions = {
         color = { 156 158 33 }
         
         potential = {
-            controls = 1334
+            owns = 1334
             NOT = { has_country_modifier = burning_nordrassil }
             NOT = { has_country_flag = burning_nordrassil_timer }
             NOT = { has_country_modifier = destroyer_of_nordrassil }
         }
         
         allow = {
-            controls = 1334
+            owns = 1334
             
             if = { 
                 limit = {
@@ -110,6 +110,9 @@ country_decisions = {
             
             hidden_effect = {
                 set_country_flag = burning_nordrassil_timer
+                1334 = {
+                    set_province_flag = nordrassil_province_being_burnt
+                }
             }
             
             custom_tooltip = DESTROYING_WORLD_TREE_TT
@@ -140,24 +143,13 @@ country_decisions = {
         
         potential = {
             NOT = { has_country_flag = burnt_nordrassil }
-            
-            # Nordrassil is owned by the burner
+            owns = owns
             1334 = {
-                owner = {
-                    has_country_flag = burning_nordrassil_timer
-                }
+                has_province_flag = nordrassil_province_being_burnt
             }
         }
         
         allow = {
-            # Nordrassil is owned by the burner, and we are at war with them
-            1334 = {
-                owner = {
-                    has_country_flag = burning_nordrassil_timer
-                    war_with = ROOT
-                }
-            }
-            
             controls = 1334
             
             mil_power = 100
@@ -189,6 +181,12 @@ country_decisions = {
                 remove_country_modifier = burning_nordrassil
                 
                 add_stability = -3
+            }
+            
+            hidden_effect = {
+                1334 = {
+                    clr_province_flag = nordrassil_province_being_burnt
+                }
             }
         }
         
@@ -279,7 +277,7 @@ country_decisions = {
         color = { 156 158 33 }
         
         potential = {
-            controls = 1073
+            owns = 1073
             NOT = { has_country_modifier = burning_teldrassil }
             NOT = { has_country_flag = burning_teldrassil_timer }
             NOT = { has_country_modifier = destroyer_of_teldrassil }
@@ -287,7 +285,7 @@ country_decisions = {
         }
         
         allow = {
-            controls = 1073
+            owns = 1073
             
             if = { 
                 limit = {
@@ -339,6 +337,9 @@ country_decisions = {
             
             hidden_effect = {
                 set_country_flag = burning_teldrassil_timer
+                1073 = {
+                    set_province_flag = teldrassil_province_being_burnt
+                }
             }
             
             custom_tooltip = DESTROYING_WORLD_TREE_TT
@@ -369,24 +370,13 @@ country_decisions = {
         
         potential = {
             NOT = { has_country_flag = burnt_teldrassil }
-            
-            # Teldrassil is owned by the burner
+            owns = 1073
             1073 = {
-                owner = {
-                    has_country_flag = burning_teldrassil_timer
-                }
+                has_province_flag = teldrassil_province_being_burnt
             }
         }
         
         allow = {
-            # Teldrassil is owned by the burner,  and we are at war with them
-            1073 = {
-                owner = {
-                    has_country_flag = burning_teldrassil_timer
-                    war_with = ROOT
-                }
-            }
-            
             controls = 1073
             
             mil_power = 100
@@ -404,6 +394,12 @@ country_decisions = {
                 remove_country_modifier = burning_teldrassil
                 
                 add_stability = -3
+            }
+            
+            hidden_effect = {
+                1073 = {
+                    clr_province_flag = teldrassil_province_being_burnt
+                }
             }
         }
         

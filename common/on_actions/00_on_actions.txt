@@ -3718,6 +3718,37 @@ on_province_owner_change = {
     on_province_owner_change_effect = yes
     on_province_owner_change_estate_privileges_effect = yes
     on_province_owner_change_update_goods_production = yes
+    
+    # Nordrassil - Clear timer if the province is lost during the burning
+    if = {
+        limit = {
+            province_id = 1334
+            FROM = {
+                has_country_flag = burning_nordrassil_timer
+            }
+        }
+        
+        FROM = { 
+            clr_country_flag = burning_nordrassil_timer
+            remove_country_modifier = burning_nordrassil
+        }
+        clr_province_flag = nordrassil_province_being_burnt
+    }
+    # Teldrassil - Clear timer if the province is lost during the burning
+    if = {
+        limit = {
+            province_id = 1073
+            FROM = {
+                has_country_flag = burning_teldrassil_timer
+            }
+        }
+        
+        FROM = { 
+            clr_country_flag = burning_teldrassil_timer
+            remove_country_modifier = burning_teldrassil
+        }
+        clr_province_flag = teldrassil_province_being_burnt
+    }
 }
 
 # country
