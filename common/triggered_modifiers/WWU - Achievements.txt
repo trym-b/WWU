@@ -173,6 +173,133 @@ achievement_world_conqueror = {
 }
 
 # Inactive
+achievement_g_one_faith = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+		NOT = { has_country_modifier = achievement_one_faith }
+        NOT = { is_year = 800 }
+	}
+
+	trigger = {
+        eastern_kingdom_superregion = {
+            type = all
+            religion = ROOT
+        }
+        kalimdor_superregion = {
+            type = all
+            religion = ROOT
+        }
+        northrend_superregion = {
+            type = all
+            religion = ROOT
+        }
+        pandaria_superregion = {
+            type = all
+            religion = ROOT
+        }
+        broken_isles_superregion = {
+            type = all
+            religion = ROOT
+        }
+        kul_tiras_superregion = {
+            type = all
+            religion = ROOT
+        }
+        zandalar_superregion = {
+            type = all
+            religion = ROOT
+        }
+        south_seas_superregion = {
+            type = all
+            religion = ROOT
+        }
+        paradise_isles_superregion = {
+            type = all
+            religion = ROOT
+        }
+        plunder_isle_superregion = {
+            type = all
+            religion = ROOT
+        }
+        underwater_superregion = {
+            type = all
+            religion = ROOT
+        }
+        dragon_isles_superregion = {
+            type = all
+            religion = ROOT
+        }
+	}
+}
+
+# Active
+achievement_one_faith = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                NOT = { is_year = 800 }
+                eastern_kingdom_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                kalimdor_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                northrend_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                pandaria_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                broken_isles_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                kul_tiras_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                zandalar_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                south_seas_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                paradise_isles_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                plunder_isle_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                underwater_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+                dragon_isles_superregion = {
+                    type = all
+                    religion = ROOT
+                }
+            }
+            has_country_modifier = achievement_one_faith
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
 achievement_g_gold_gold_gold = {
 	potential = {
         has_global_flag = enabled_achievements
@@ -553,3 +680,68 @@ achievement_world_drinking_tour = {
 		always = yes
 	}
 }
+
+# Inactive
+achievement_g_one_with_the_trees = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_one_with_the_trees }
+        any_owned_province = {
+            OR = {
+				has_terrain = forest
+				has_terrain = woods
+			}
+        }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = ONE_WITH_THE_TREES_TT
+            all_owned_province = { 
+                OR = {
+                    has_terrain = forest
+                    has_terrain = woods
+                }
+            }
+            NOT = {
+                any_country = {
+                    NOT = { tag = ROOT }
+                    total_development = ROOT
+                }
+            }
+        }
+	}
+}
+
+# Active
+achievement_one_with_the_trees = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        
+        OR = {
+            AND = {
+                all_owned_province = { 
+                    OR = {
+                        has_terrain = forest
+                        has_terrain = woods
+                    }
+                }
+                NOT = {
+                    any_country = {
+                        NOT = { tag = ROOT }
+                        total_development = ROOT
+                    }
+                }
+            }
+            has_country_modifier = achievement_one_with_the_trees
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+

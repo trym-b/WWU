@@ -238,7 +238,10 @@ achievement_g_stormwind_united = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
-        tag = STW
+        OR = {
+            tag = STW
+            was_tag = STW
+        }
         NOT = { is_year = 600 }
 		NOT = { has_country_modifier = achievement_stormwind_united }
 	}
@@ -276,7 +279,10 @@ achievement_stormwind_united = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
-        tag = STW
+        OR = {
+            tag = STW
+            was_tag = STW
+        }
         OR = {
             AND = {
                 NOT = { is_year = 600 }
@@ -315,7 +321,10 @@ achievement_r_stormwind_united = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
-        tag = STW
+        OR = {
+            tag = STW
+            was_tag = STW
+        }
         OR = {
             is_year = 600
             has_country_modifier = achievement_r_stormwind_united
@@ -336,7 +345,10 @@ achievement_g_lords_of_stone = {
         has_global_flag = enabled_achievements
 		ai = no
         NOT = { is_year = 800 }
-        tag = P54
+        OR = {
+            tag = P54
+            was_tag = P54
+        }
 		NOT = { has_country_modifier = achievement_lords_of_stone }
 	}
 
@@ -352,6 +364,10 @@ achievement_lords_of_stone = {
 	potential = {
         has_global_flag = enabled_achievements
 		ai = no
+        OR = {
+            tag = P54
+            was_tag = P54
+        }
         NOT = { is_year = 800 }
         OR = {
             AND = {
@@ -367,3 +383,694 @@ achievement_lords_of_stone = {
 		always = yes
 	}
 }
+
+# Inactive
+achievement_g_the_four_bananas = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+        OR = {
+            tag = TAB
+            was_tag = TAB
+        }
+		NOT = { has_country_modifier = achievement_the_four_bananas }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = FOUR_BANANAS_TT
+            NOT = {
+                any_country = {
+                    NOT = {
+                        OR = {
+                            tag = TAB
+                            AND = {
+                                is_subject_of = TAB
+                                NOT = { is_subject_of_type = tributary_state }
+                            }
+                        }
+                    }
+                    exists = yes
+                }
+            }
+        }
+	}
+}
+
+# Active
+achievement_the_four_bananas = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = TAB
+            was_tag = TAB
+        }
+        NOT = { is_year = 800 }
+        OR = {
+            AND = {
+                NOT = {
+                    any_country = {
+                        NOT = {
+                            OR = {
+                                tag = ROOT
+                                AND = {
+                                    is_subject_of = ROOT
+                                    NOT = { is_subject_of_type = tributary_state }
+                                }
+                            }
+                        }
+                        exists = yes
+                    }
+                }
+            }
+            has_country_modifier = achievement_the_four_bananas
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_all_your_bananas_belong_to_us = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+        primary_culture = culture_gorilla
+		NOT = { has_country_modifier = achievement_all_your_bananas_belong_to_us }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = ALL_YOUR_BANANAS_BELONG_TO_US_TT
+            NOT = {
+                any_province = {
+                    trade_goods = banana_goods
+                    NOT = { country_or_non_sovereign_subject_holds = ROOT }
+                }
+            }
+        }
+	}
+}
+
+# Active
+achievement_all_your_bananas_belong_to_us = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        primary_culture = culture_gorilla
+        NOT = { is_year = 800 }
+        OR = {
+            AND = {
+                NOT = {
+                    any_province = {
+                        trade_goods = banana_goods
+                        NOT = { country_or_non_sovereign_subject_holds = ROOT }
+                    }
+                }
+            }
+            has_country_modifier = achievement_all_your_bananas_belong_to_us
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_true_heir_of_arathor = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = A12
+            tag = A14
+            tag = A17
+            tag = A16
+            tag = A08
+            tag = A18
+            was_tag = A12
+            was_tag = A14
+            was_tag = A17
+            was_tag = A16
+            was_tag = A08
+            was_tag = A18
+        }
+        NOT = { is_year = 650 }
+		NOT = { has_country_modifier = achievement_true_heir_of_arathor }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = WARNING_ACHIEVEMENT_TRUE_HEIR_OF_ARATHOR_TT
+            NOT = { is_year = 650 }
+        }
+        region_eastern_plaguelands = {
+            type = all
+            owned_by = ROOT
+        }
+        region_western_plaguelands = {
+            type = all
+            owned_by = ROOT
+        }
+        region_tirisfal_glades = {
+            type = all
+            owned_by = ROOT
+        }
+        region_silverpine_forest = {
+            type = all
+            owned_by = ROOT
+        }
+        region_gilneas = {
+            type = all
+            owned_by = ROOT
+        }
+        region_alterac_mountains = {
+            type = all
+            owned_by = ROOT
+        }
+        region_hillsbrad_foothills = {
+            type = all
+            owned_by = ROOT
+        }
+        region_arathi_highlands = {
+            type = all
+            owned_by = ROOT
+        }
+        region_the_hinterlands = {
+            type = all
+            owned_by = ROOT
+        }
+	}
+}
+
+# Active
+achievement_true_heir_of_arathor = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = A12
+            tag = A14
+            tag = A17
+            tag = A16
+            tag = A08
+            tag = A18
+            was_tag = A12
+            was_tag = A14
+            was_tag = A17
+            was_tag = A16
+            was_tag = A08
+            was_tag = A18
+        }
+        OR = {
+            AND = {
+                NOT = { is_year = 650 }
+                region_eastern_plaguelands = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_western_plaguelands = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_tirisfal_glades = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_silverpine_forest = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_gilneas = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_alterac_mountains = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_hillsbrad_foothills = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_arathi_highlands = {
+                    type = all
+                    owned_by = ROOT
+                }
+                region_the_hinterlands = {
+                    type = all
+                    owned_by = ROOT
+                }
+            }
+            has_country_modifier = achievement_true_heir_of_arathor
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Failed
+achievement_r_true_heir_of_arathor = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = A12
+            tag = A14
+            tag = A17
+            tag = A16
+            tag = A08
+            tag = A18
+            was_tag = A12
+            was_tag = A14
+            was_tag = A17
+            was_tag = A16
+            was_tag = A08
+            was_tag = A18
+        }
+        OR = {
+            is_year = 650
+            has_country_modifier = achievement_r_true_heir_of_arathor
+        }
+	}
+
+	trigger = {
+        custom_trigger_tooltip = {
+            tooltip = FAILED_ACHIEVEMENT_TRUE_HEIR_OF_ARATHOR_TT
+            always = yes
+        }
+	}
+}
+
+# Active
+achievement_g_the_candle_kingdom = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = G28
+            tag = G27
+            was_tag = G28
+            was_tag = G27
+        }
+		NOT = { has_country_modifier = achievement_the_candle_kingdom }
+	}
+
+	trigger = {
+		region_stonetalon_mountains = {
+            type = all
+            owned_by = ROOT
+            religion = ROOT
+            culture = ROOT
+        }
+        region_desolace = {
+            type = all
+            owned_by = ROOT
+            religion = ROOT
+            culture = ROOT
+        }
+	}
+}
+
+# Failed
+achievement_the_candle_kingdom = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = G28
+            tag = G27
+            was_tag = G28
+            was_tag = G27
+        }
+        OR = {
+            AND = {
+                region_stonetalon_mountains = {
+                    type = all
+                    owned_by = ROOT
+                    religion = ROOT
+                    culture = ROOT
+                }
+                region_desolace = {
+                    type = all
+                    owned_by = ROOT
+                    religion = ROOT
+                    culture = ROOT
+                }
+            }
+            has_country_modifier = achievement_the_candle_kingdom
+        }
+	}
+
+	trigger = {
+        always = yes
+	}
+}
+
+# Active
+achievement_g_port_forward = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = A14
+            was_tag = A14
+        }
+		NOT = { has_country_modifier = achievement_port_forward }
+	}
+
+	trigger = {
+		calc_true_if = {
+			all_owned_province = {
+				OR = {
+                    has_building = wow_shipyard_1
+                    has_building = wow_shipyard_2
+                    has_building = wow_shipyard_3
+                }
+			}
+			amount = 120
+		}
+        calc_true_if = {
+			all_owned_province = {
+				OR = {
+                    has_building = wow_dockyard_1
+                    has_building = wow_dockyard_2
+                    has_building = wow_dockyard_3
+                }
+			}
+			amount = 120
+		}
+	}
+}
+
+# Failed
+achievement_port_forward = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            tag = G28
+            tag = G27
+            was_tag = G28
+            was_tag = G27
+        }
+        OR = {
+            AND = {
+                calc_true_if = {
+                    all_owned_province = {
+                        OR = {
+                            has_building = wow_shipyard_1
+                            has_building = wow_shipyard_2
+                            has_building = wow_shipyard_3
+                        }
+                    }
+                    amount = 120
+                }
+                calc_true_if = {
+                    all_owned_province = {
+                        OR = {
+                            has_building = wow_dockyard_1
+                            has_building = wow_dockyard_2
+                            has_building = wow_dockyard_3
+                        }
+                    }
+                    amount = 120
+                }
+            }
+            has_country_modifier = achievement_port_forward
+        }
+	}
+
+	trigger = {
+        always = yes
+	}
+}
+
+# Inactive
+achievement_g_frozen_assets = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_frozen_assets }
+        capital_scope = {
+            superregion = northrend_superregion
+        }
+	}
+
+	trigger = {
+        2441 = {
+			trade_share = {
+				country = ROOT
+				share = 90
+			}
+			highest_value_trade_node = yes 
+		}
+	}
+}
+
+# Active
+achievement_frozen_assets = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                capital_scope = {
+                    superregion = northrend_superregion
+                }
+                2441 = {
+                    trade_share = {
+                        country = ROOT
+                        share = 90
+                    }
+                    highest_value_trade_node = yes 
+                }
+            }
+            has_country_modifier = achievement_frozen_assets
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_invasion_of_the_furbolgs = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_invasion_of_the_furbolgs }
+        culture_group = culture_group_furbolg
+        capital_scope = {
+            superregion = kalimdor_superregion
+        }
+	}
+
+	trigger = {
+        region_darkshore = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        region_winterspring = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        region_felwood = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        region_mount_hyjal = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+        region_ashenvale = {
+            type = all
+            country_or_non_sovereign_subject_holds = ROOT
+        }
+	}
+}
+
+# Active
+achievement_invasion_of_the_furbolgs = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                culture_group = culture_group_furbolg
+                capital_scope = {
+                    superregion = kalimdor_superregion
+                }
+                 region_darkshore = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                region_winterspring = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                region_felwood = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                region_mount_hyjal = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+                region_ashenvale = {
+                    type = all
+                    country_or_non_sovereign_subject_holds = ROOT
+                }
+            }
+            has_country_modifier = achievement_invasion_of_the_furbolgs
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_elunes_grace = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_elunes_grace }
+        religion = elune
+	}
+
+	trigger = {
+        religion = elune
+		num_of_owned_provinces_with = {
+			value = 500
+			religion = elune
+		}
+	}
+}
+
+# Active
+achievement_elunes_grace = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                religion = elune
+                num_of_owned_provinces_with = {
+                    value = 500
+                    religion = elune
+                }
+            }
+            has_country_modifier = achievement_elunes_grace
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_everybody_loves_fel = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_everybody_loves_fel }
+        religion = fel
+	}
+
+	trigger = {
+        religion = fel
+		calc_true_if = {
+            amount = 50
+            
+            all_country = {
+                religion = fel
+            }
+        }
+	}
+}
+
+# Active
+achievement_everybody_loves_fel = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                religion = fel
+                calc_true_if = {
+                    amount = 50
+                    
+                    all_country = {
+                        religion = fel
+                    }
+                }
+            }
+            has_country_modifier = achievement_everybody_loves_fel
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
+# Inactive
+achievement_g_the_light_will_forge_you_a_new_one = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        NOT = { is_year = 800 }
+		NOT = { has_country_modifier = achievement_the_light_will_forge_you_a_new_one }
+        tag = ARL
+	}
+
+	trigger = {
+        argus_superregion = {
+            type = all
+            owned_by = ROOT
+            religion = ROOT
+            culture = ROOT
+        }
+	}
+}
+
+# Active
+achievement_the_light_will_forge_you_a_new_one = {
+	potential = {
+        has_global_flag = enabled_achievements
+		ai = no
+        OR = {
+            AND = {
+                tag = ARL
+                argus_superregion = {
+                    type = all
+                    owned_by = ROOT
+                    religion = ROOT
+                    culture = ROOT
+                }
+            }
+            has_country_modifier = achievement_the_light_will_forge_you_a_new_one
+        }
+	}
+
+	trigger = {
+		always = yes
+	}
+}
+
