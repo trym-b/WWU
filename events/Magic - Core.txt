@@ -1999,3 +1999,46 @@ country_event = {
         }
     }
 }
+
+# Mana Fulfilment
+country_event = {
+	id = wwu_magic.70
+	title = wwu_magic.70.title
+	desc = wwu_magic.70.desc
+	picture = MAGIC_TOME_eventPicture
+    
+	is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_country_flag = block_mana_warning }
+        NOT = { has_country_modifier = mana_warning_cooldown }
+        check_variable = {
+            which = ruler_magic_mana
+            value = 10
+        }
+    }
+	
+    immediate = {
+        hidden_effect = {
+            add_country_modifier = {
+                name = mana_warning_cooldown
+                duration = 1800
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_magic.70.option.a
+		
+	}
+    
+	option = {
+		name = wwu_magic.70.option.b
+		
+        hidden_effect = {
+            set_country_flag = block_mana_warning
+        }
+        
+        custom_tooltip = MANA_WARNING_IGNORED_TT
+	}
+}
