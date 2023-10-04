@@ -24,8 +24,43 @@ country_event = {
         
         current_age = age_rise_of_the_horde
         
-        capital_scope = {
-            superregion = draenor_superregion
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        3756 = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        3762 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                    AND = {
+                        3762 = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        3756 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            owns = 3756
+            owns = 3762
         }
     }
     
@@ -42,18 +77,8 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.1.option.a
         
-        3756 = {
-            cede_province = A43
-            add_core = A43
-            change_culture = culture_twilight_cultist
-            change_religion = twilight_cult
-        }
-        3762 = {
-            cede_province = A43
-            add_core = A43
-            change_culture = culture_twilight_cultist
-            change_religion = twilight_cult
-        }
+        spawn_nation_by_province = { province = 3756 tag = A43 culture = culture_twilight_cultist religion = twilight_cult }
+        spawn_nation_by_province = { province = 3756 tag = A43 culture = culture_twilight_cultist religion = twilight_cult }
         
         ai_chance = {
             factor = 100
@@ -62,27 +87,24 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.1.option.b
         
-        trigger = {
-            OR = {
-                3756 = {
-                    owned_by = ROOT
-                }
-                3762 = {
-                    owned_by = ROOT
-                }
-            }
-        }
+        add_dip_power = -100
         
-        3756 = {
-            add_core = A43
-            change_culture = culture_twilight_cultist
-            change_religion = twilight_cult
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_province_conditional = { province = 3756 tag = A43 culture = culture_twilight_cultist religion = twilight_cult }
+        spawn_nation_by_province_conditional = { province = 3756 tag = A43 culture = culture_twilight_cultist religion = twilight_cult }
+        
+        ai_chance = {
+            factor = 0
         }
-        3762 = {
-            add_core = A43
-            change_culture = culture_twilight_cultist
-            change_religion = twilight_cult
-        }
+	}
+	option = {
+		name = wwu_setup_orc.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 3756 tag = A43 }
+        spawn_nation_by_province_core_only = { province = 3756 tag = A43 }
         
         ai_chance = {
             factor = 0
@@ -127,8 +149,47 @@ country_event = {
             days = 365
         }
         
-        capital_scope = {
-            superregion = kalimdor_superregion
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        area_orgrimmar = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_orgrimmar = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                    AND = {
+                        area_orgrimmar_exterior = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_orgrimmar_exterior = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            area_orgrimmar = {
+                owned_by = ROOT
+            }
+            area_orgrimmar_exterior = {
+                owned_by = ROOT
+            }
         }
     }
     
@@ -145,24 +206,8 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.10.option.a
         
-        area_orgrimmar = {
-            cede_province = A48
-            add_core = A48
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
-        area_orgrimmar_exterior = {
-            cede_province = A48
-            add_core = A48
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
-        
-        hidden_effect = {
-            A48 = {
-                country_event = { id = wwu_setup_orc.11 days = 1 }
-            }
-        }
+        spawn_nation_by_area = { area = area_orgrimmar tag = A48 culture = culture_orc religion = shamanism }
+        spawn_nation_by_area = { area = area_orgrimmar_exterior tag = A48 culture = culture_orc religion = shamanism }
         
         ai_chance = {
             factor = 100
@@ -171,35 +216,42 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.10.option.b
         
-        trigger = {
-            OR = {
-                area_orgrimmar = {
-                    owned_by = ROOT
-                }
-                area_orgrimmar_exterior = {
-                    owned_by = ROOT
-                }
-            }
-        }
+        add_dip_power = -100
         
-        area_orgrimmar = {
-            add_core = A48
-            change_culture = culture_orc
-            change_religion = shamanism
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_orgrimmar tag = A48 culture = culture_orc religion = shamanism }
+        spawn_nation_by_area_conditional = { area = area_orgrimmar_exterior tag = A48 culture = culture_orc religion = shamanism }
+        
+        ai_chance = {
+            factor = 0
         }
-        area_orgrimmar_exterior = {
-            cede_province = A48
-            add_core = A48
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
+	}
+	option = {
+		name = wwu_setup_orc.10.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_orgrimmar tag = A48 }
+        spawn_nation_by_area_core_only = { area = area_orgrimmar_exterior tag = A48 }
         
         ai_chance = {
             factor = 0
         }
 	}
     
-    after = {   
+    after = {
+        if = {
+            limit = {
+                exists = A48
+            }
+            hidden_effect = {
+                A48 = {
+                    country_event = { id = wwu_setup_orc.11 days = 1 }
+                }
+            }
+        }
+        
         random_country = {
             limit = {
                 OR = {
@@ -303,6 +355,28 @@ country_event = {
     
 	trigger = {
         NOT = { has_global_flag = setup_warsong }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_splintertree_post = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_splintertree_post = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_splintertree_post = {
+            owned_by = ROOT
+        }
     }
     
     immediate = {
@@ -318,18 +392,7 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.12.option.a
         
-        area_splintertree_post = {
-            cede_province = A35
-            add_core = A35
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
-        
-        hidden_effect = {
-            A35 = {
-                country_event = { id = wwu_setup_orc.13 days = 1 }
-            }
-        }
+        spawn_nation_by_area = { area = area_splintertree_post tag = A35 culture = culture_orc religion = shamanism }
         
         ai_chance = {
             factor = 100
@@ -338,22 +401,40 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.12.option.b
         
-        trigger = {
-            area_splintertree_post = {
-                owned_by = ROOT
-            }
-        }
+        add_dip_power = -100
         
-        area_splintertree_post = {
-            add_core = A35
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_splintertree_post tag = A35 culture = culture_orc religion = shamanism }
         
         ai_chance = {
             factor = 0
         }
 	}
+	option = {
+		name = wwu_setup_orc.12.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_splintertree_post tag = A35 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = A35
+            }
+            hidden_effect = {
+                A35 = {
+                    country_event = { id = wwu_setup_orc.13 days = 1 }
+                }
+            }
+        }
+    }
 }
 
 # Warsong - Setup Country
@@ -437,8 +518,62 @@ country_event = {
             days = 18250
         }
         
-        capital_scope = {
-            superregion = eastern_kingdom_superregion
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        area_blackrock_exterior = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_blackrock_exterior = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                    AND = {
+                        area_blackrock_valley = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_blackrock_valley = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                    AND = {
+                        area_blackrock_mountain = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_blackrock_mountain = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            area_blackrock_exterior = {
+                owned_by = ROOT
+            }
+            area_blackrock_valley = {
+                owned_by = ROOT
+            }
+            area_blackrock_mountain = {
+                owned_by = ROOT
+            }
         }
     }
     
@@ -455,33 +590,9 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.14.option.a
         
-        area_blackrock_exterior = {
-            cede_province = P98
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        area_blackrock_valley = {
-            cede_province = P98
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        area_blackrock_mountain = {
-            limit = { 
-                NOT = { province_id = 3155 }
-            }
-            cede_province = P98
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        
-        hidden_effect = {
-            P98 = {
-                country_event = { id = wwu_setup_orc.15 days = 1 }
-            }
-        }
+        spawn_nation_by_area = { area = area_blackrock_exterior tag = P98 culture = culture_orc religion = fel }
+        spawn_nation_by_area = { area = area_blackrock_valley tag = P98 culture = culture_orc religion = fel }
+        spawn_nation_by_area_conditional = { area = area_blackrock_mountain tag = P98 culture = culture_orc religion = fel }
         
         ai_chance = {
             factor = 100
@@ -490,35 +601,44 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.14.option.b
         
-        trigger = {
-            area_blackrock_mountain = {
-                owned_by = ROOT
-            }
-        }
+        add_dip_power = -100
         
-        area_blackrock_exterior = {
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        area_blackrock_valley = {
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        area_blackrock_mountain = {
-            limit = { 
-                NOT = { province_id = 3155 }
-            }
-            add_core = P98
-            change_culture = culture_orc
-            change_religion = fel
-        }
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_blackrock_exterior tag = P98 culture = culture_orc religion = fel }
+        spawn_nation_by_area_conditional = { area = area_blackrock_valley tag = P98 culture = culture_orc religion = fel }
+        spawn_nation_by_area_conditional = { area = area_blackrock_mountain tag = P98 culture = culture_orc religion = fel }
         
         ai_chance = {
             factor = 0
         }
 	}
+	option = {
+		name = wwu_setup_orc.14.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_blackrock_exterior tag = P98 }
+        spawn_nation_by_area_core_only = { area = area_blackrock_valley tag = P98 }
+        spawn_nation_by_area_core_only = { area = area_blackrock_mountain tag = P98 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = P98
+            }
+            hidden_effect = {
+                P98 = {
+                    country_event = { id = wwu_setup_orc.15 days = 1 }
+                }
+            }
+        }
+    }
 }
 
 # Black Tooth Grin - Setup
@@ -592,9 +712,7 @@ country_event = {
             days = 9125
         }
         
-        capital_scope = {
-            superregion = eastern_kingdom_superregion
-        }
+        owns = 1061
     }
     
     immediate = {
@@ -610,19 +728,7 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.16.option.a
         
-        # Grim Batol
-        1061 = {
-            cede_province = A45
-            add_core = A45
-            change_culture = culture_orc
-            change_religion = fel
-        }
-        
-        hidden_effect = {
-            A45 = {
-                country_event = { id = wwu_setup_orc.17 days = 1 }
-            }
-        }
+        spawn_nation_by_province = { province = 1061 tag = A45 culture = culture_orc religion = fel }
         
         ai_chance = {
             factor = 100
@@ -631,21 +737,40 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.16.option.b
         
-        trigger = {
-            owns = 1061
-        }
+        add_dip_power = -100
         
-        # Grim Batol
-        1061 = {
-            add_core = A45
-            change_culture = culture_orc
-            change_religion = fel
-        }
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_province_conditional = { province = 1061 tag = A45 culture = culture_orc religion = fel }
         
         ai_chance = {
             factor = 0
         }
 	}
+	option = {
+		name = wwu_setup_orc.16.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1061 tag = A45 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = A45
+            }
+            hidden_effect = {
+                A45 = {
+                    country_event = { id = wwu_setup_orc.17 days = 1 }
+                }
+            }
+        }
+    }
 }
 
 # Dragonmaw - Setup
@@ -762,8 +887,47 @@ country_event = {
             days = 3650
         }
         
-        capital_scope = {
-            superregion = eastern_kingdom_superregion
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        area_dun_baldar = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_dun_baldar = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                    AND = {
+                        area_frostwolf_keep = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        area_frostwolf_keep = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            area_dun_baldar = {
+                owned_by = ROOT
+            }
+            area_frostwolf_keep = {
+                owned_by = ROOT
+            }
         }
     }
     
@@ -780,24 +944,10 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.18.option.a
         
-        area_dun_baldar = {
-            cede_province = A46
-            add_core = A46
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
-        area_frostwolf_keep = {
-            cede_province = A46
-            add_core = A46
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
+        spawn_nation_by_area = { area = area_dun_baldar tag = A46 culture = culture_orc religion = shamanism }
+        spawn_nation_by_area = { area = area_frostwolf_keep tag = A46 culture = culture_orc religion = shamanism }
         
-        hidden_effect = {
-            A46 = {
-                country_event = { id = wwu_setup_orc.19 days = 1 }
-            }
-        }
+        
         
         ai_chance = {
             factor = 100
@@ -806,32 +956,42 @@ country_event = {
 	option = {
 		name = wwu_setup_orc.18.option.b
         
-        trigger = { 
-            OR = {
-                area_frostwolf_keep = {
-                    owned_by = ROOT
-                }
-                area_dun_baldar = {
-                    owned_by = ROOT
-                }
-            }
-        }
+        add_dip_power = -100
         
-        area_dun_baldar = {
-            add_core = A46
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
-        area_frostwolf_keep = {
-            add_core = A46
-            change_culture = culture_orc
-            change_religion = shamanism
-        }
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_dun_baldar tag = A46 culture = culture_orc religion = shamanism }
+        spawn_nation_by_area_conditional = { area = area_frostwolf_keep tag = A46 culture = culture_orc religion = shamanism }
         
         ai_chance = {
             factor = 0
         }
 	}
+	option = {
+		name = wwu_setup_orc.18.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_dun_baldar tag = A46 }
+        spawn_nation_by_area_core_only = { area = area_frostwolf_keep tag = A46 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = A46
+            }
+            hidden_effect = {
+                A46 = {
+                    country_event = { id = wwu_setup_orc.19 days = 1 }
+                }
+            }
+        }
+    }
 }
 
 # Frostwolf - Setup

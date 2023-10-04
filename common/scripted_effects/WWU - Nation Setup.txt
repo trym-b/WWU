@@ -1,0 +1,142 @@
+# Effects
+spawn_nation_by_province = {
+    $province$ = {
+        cede_province = $tag$
+        add_core = $tag$
+        change_culture = $culture$
+        change_religion = $religion$
+    }
+}
+
+spawn_nation_by_area = {
+    if = {
+        limit = {
+            $area$ = {
+                NOT = { owned_by = ROOT } # This is so nations other than ROOT don't suddenly lose land
+            }   
+        }
+        $area$ = {
+            limit = {
+                NOT = { owned_by = ROOT }
+            }
+            add_core = $tag$
+        }
+    }
+    if = {
+        limit = {
+            $area$ = {
+                owned_by = ROOT
+            }   
+        }
+        $area$ = {
+            limit = {
+                owned_by = ROOT
+            }
+            cede_province = $tag$
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+}
+
+spawn_nation_by_province_conditional = {
+    if = {
+        limit = {
+            $province$ = {
+                is_empty = yes
+            }
+        }
+        
+        $province$ = {
+            cede_province = $tag$
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+    else_if = {
+        limit = {
+            $province$ = {
+                culture = ROOT
+            }
+        }
+        
+        $province$ = {
+            add_core = $tag$
+        }
+    }
+    else = {
+        $province$ = {
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+}
+
+spawn_nation_by_area_conditional = {
+    if = {
+        limit = {
+            $area$ = {
+                is_empty = yes
+            }   
+        }
+        $area$ = {
+            limit = {
+                is_empty = yes
+            }
+            cede_province = $tag$
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+    if = {
+        limit = {
+            $area$ = {
+                OR = {
+                    culture = ROOT
+                    NOT = { owned_by = ROOT } # This is so nations other than ROOT don't suddenly lose land
+                }
+            }   
+        }
+        $area$ = {
+            limit = {
+                culture = ROOT
+            }
+            add_core = $tag$
+        }
+    }
+    if = {
+        limit = {
+            $area$ = {
+                NOT = { is_empty = yes }
+                NOT = { culture = ROOT }
+                owned_by = ROOT
+            }   
+        }
+        $area$ = {
+            limit = {
+                NOT = { is_empty = yes }
+                NOT = { culture = ROOT }
+                owned_by = ROOT
+            }
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+}
+
+spawn_nation_by_province_core_only = {
+    $province$ = {
+        add_core = $tag$
+    }
+}
+
+spawn_nation_by_area_core_only = {
+    $area$ = {
+        add_core = $tag$
+    }
+}

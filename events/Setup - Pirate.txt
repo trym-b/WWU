@@ -14,8 +14,27 @@ country_event = {
         NOT = { has_global_flag = setup_bloodsail }
         exists = P11 # Scourge exists
         exists = A14 # Kul Tiras exists
-        capital_scope = {
-            superregion = plunder_isle_superregion
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_bloodsail_hold = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_bloodsail_hold = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_bloodsail_hold = {
+            owned_by = ROOT
         }
     }
     
@@ -32,12 +51,7 @@ country_event = {
 	option = {
 		name = wwu_setup_pirate.1.option.a
         
-        area_bloodsail_hold = {
-            cede_province = A15
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
+        spawn_nation_by_area = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
         
         ai_chance = {
             factor = 90
@@ -46,17 +60,11 @@ country_event = {
 	option = {
 		name = wwu_setup_pirate.1.option.b
         
-        trigger = {
-            area_bloodsail_hold = {
-                owned_by = ROOT
-            }
-        }
+        add_dip_power = -100
         
-        area_bloodsail_hold = {
-            add_core = A15
-            change_culture = culture_kul_tiran
-            change_religion = shadow
-        }
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
         
         ai_chance = {
             factor = 10
@@ -71,6 +79,17 @@ country_event = {
                     }
                 }
             }
+        }
+	}
+    option = {
+		name = wwu_setup_pirate.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_bloodsail_hold tag = A15 }
+        
+        ai_chance = {
+            factor = 0
         }
 	}
     

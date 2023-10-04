@@ -11,10 +11,32 @@ country_event = {
     
 	trigger = {
         has_global_flag = enable_worgen
-        owns = 686 # Shadowfang Keep
+        
         NOT = { exists = P29 } # Wolfcult
         NOT = { exists = A13 } # Shadowfang
         NOT = { has_global_flag = setup_wolf_cult }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_shadowfang_keep = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_shadowfang_keep = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_shadowfang_keep = {
+            owned_by = ROOT
+        }
     }
     
     immediate = {
@@ -30,12 +52,23 @@ country_event = {
 	option = {
 		name = wwu_setup_worgen.1.option.a
         
-        area_shadowfang_keep = {
-            cede_province = P29
-            add_core = P29
-            change_culture = culture_wolfcult
-            change_religion = shadow
-        }
+        spawn_nation_by_area = { area = area_shadowfang_keep tag = P29 culture = culture_wolfcult religion = shadow }
+	}
+    option = {
+		name = wwu_setup_worgen.1.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_area_conditional = { area = area_shadowfang_keep tag = P29 culture = culture_wolfcult religion = shadow }
+	}
+    option = {
+		name = wwu_setup_worgen.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_shadowfang_keep tag = P29 }
 	}
     
     after = {
@@ -98,10 +131,82 @@ country_event = {
             flag = enable_worgen
             days = 18250
         }
-        owns = 1057 # Brightwood Grove
         
         NOT = { exists = P31 }
         NOT = { has_global_flag = setup_nightbane }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        1057 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        OR = {
+                            970 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                            586 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                        }
+                    }
+                    AND = {
+                        970 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        OR = {
+                            1057 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                            586 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                        }
+                    }
+                    AND = {
+                        586 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                        OR = {
+                            970 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                            1057 = {
+                                owner = {
+                                    ai = yes
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            owns = 1057
+            owns = 970
+            owns = 586
+        }
     }
     
     immediate = {
@@ -117,24 +222,29 @@ country_event = {
 	option = {
 		name = wwu_setup_worgen.3.option.a
         
-        1057 = {
-            cede_province = P31
-            add_core = P31
-            change_culture = culture_wolfcult
-            change_religion = shadow
-        }
-        970 = {
-            cede_province = P31
-            add_core = P31
-            change_culture = culture_wolfcult
-            change_religion = shadow
-        }
-        586 = {
-            cede_province = P31
-            add_core = P31
-            change_culture = culture_wolfcult
-            change_religion = shadow
-        }
+        spawn_nation_by_province = { province = 1057 tag = P31 culture = culture_wolfcult religion = shadow }
+        spawn_nation_by_province = { province = 970 tag = P31 culture = culture_wolfcult religion = shadow }
+        spawn_nation_by_province = { province = 586 tag = P31 culture = culture_wolfcult religion = shadow }
+	}
+    option = {
+		name = wwu_setup_worgen.3.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_province_conditional = { province = 1057 tag = P31 culture = culture_wolfcult religion = shadow }
+        spawn_nation_by_province_conditional = { province = 970 tag = P31 culture = culture_wolfcult religion = shadow }
+        spawn_nation_by_province_conditional = { province = 586 tag = P31 culture = culture_wolfcult religion = shadow }
+	}
+    option = {
+		name = wwu_setup_worgen.3.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1057 tag = P31 }
+        spawn_nation_by_province_core_only = { province = 970 tag = P31 }
+        spawn_nation_by_province_core_only = { province = 586 tag = P31 }
 	}
     
     after = {

@@ -1,0 +1,111 @@
+namespace = wwu_setup_gnome
+
+# Thermaplugg Exiles
+country_event = {
+	id = wwu_setup_gnome.1
+	title = wwu_setup_gnome.1.title
+	desc = wwu_setup_gnome.1.desc
+	picture = LEPER_GNOME_eventPicture
+
+    major = yes
+    is_triggered_only = yes # Fired from Fall of Gnomeregan event
+    
+	trigger = {
+        NOT = { exists = A33 }
+        NOT = { has_global_flag = setup_thermaplugg_exiles }
+        
+        area_gnomeregan = {
+            owned_by = ROOT
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_thermaplugg_exiles
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_gnome.1.option.a
+        
+        spawn_nation_by_area = { area = area_gnomeregan tag = A33 culture = culture_leper_gnome religion = avarice }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	# option = {
+		# name = wwu_setup_gnome.1.option.b
+        
+        # add_dip_power = -100
+        
+        # custom_tooltip = PARTIAL_SETUP_TT
+        
+        # spawn_nation_by_area_conditional = { area = area_gnomeregan tag = A33 culture = culture_leper_gnome religion = avarice }
+        
+        # ai_chance = {
+            # factor = 0
+        # }
+	# }
+	# option = {
+		# name = wwu_setup_gnome.1.option.c
+        
+        # add_mil_power = -250
+        
+        # spawn_nation_by_area_core_only = { province = 3756 tag = A43 }
+        # spawn_nation_by_area_core_only = { province = 3756 tag = A43 }
+        
+        # ai_chance = {
+            # factor = 0
+        # }
+	# }
+    
+    after = {
+        if = {
+            limit = {
+                exists = A33
+            }
+            A33 = {
+                country_event = { id = wwu_setup_gnome.2 }
+            }
+        }
+    }
+}
+
+# Thermaplugg Exiles
+country_event = {
+	id = wwu_setup_gnome.2
+	title = wwu_setup_gnome.2.title
+	desc = wwu_setup_gnome.2.desc
+	picture = LEPER_GNOME_eventPicture
+	
+	is_triggered_only = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_setup_gnome.2.option.a
+		
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+            name = "Sicco" 
+            dynasty = "Thermaplugg" 
+            adm = 3
+            dip = 2
+            mil = 3
+            age = 40
+        }
+        
+        add_nation_boost_1 = yes
+	}
+}
