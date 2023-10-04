@@ -1,0 +1,82 @@
+namespace = wwu_setup_human
+
+# Blackthorn
+country_event = {
+	id = wwu_setup_human.1
+	title = wwu_setup_human.1.title
+	desc = wwu_setup_human.1.desc
+	picture = DEFIAS_BANDIT_eventPicture
+
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = blackthorn_setup }
+        NOT = { exists = BTR }
+        exists = P11
+        
+        # Eye of Sargeras used
+        OR = {
+            has_global_flag = eye_of_sargeras_disrupted
+            has_global_flag = eye_of_sargeras_worked
+        }
+        
+        OR = {
+            owns = 1926
+            owns = 1927
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = blackthorn_setup 
+        }
+    }
+    
+	option = {
+		name = wwu_setup_human.1.option.a
+
+        spawn_nation_by_province = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
+        spawn_nation_by_province = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_human.1.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = PARTIAL_SETUP_TT
+        
+        spawn_nation_by_province_conditional = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
+        spawn_nation_by_province_conditional = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_human.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1926 tag = BTR }
+        spawn_nation_by_province_core_only = { province = 1927 tag = BTR }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        BTR = {
+            add_nation_boost_1 = yes
+            reveal_all_discovery = yes
+        }
+    }
+}
