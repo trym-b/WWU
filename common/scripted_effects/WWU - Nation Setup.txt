@@ -1,4 +1,4 @@
-# Effects
+# Spawn Freely
 spawn_nation_by_province = {
     $province$ = {
         cede_province = $tag$
@@ -40,6 +40,41 @@ spawn_nation_by_area = {
     }
 }
 
+spawn_nation_by_flag = {
+    if = {
+        limit = {
+            any_province = {
+                has_province_flag = $flag$
+                NOT = { owned_by = ROOT } # This is so nations other than ROOT don't suddenly lose land
+            }
+        }
+        every_province = {
+            limit = {
+                has_province_flag = $flag$
+                NOT = { owned_by = ROOT }
+            }
+            add_core = $tag$
+        }
+    }
+    if = {
+        limit = {
+            any_owned_province = {
+                has_province_flag = $flag$
+            }            
+        }
+        every_owned_province = {
+            limit = {
+                has_province_flag = $flag$
+            }
+            cede_province = $tag$
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+}
+
+# Spawn Conditionally
 spawn_nation_by_province_conditional = {
     if = {
         limit = {
@@ -129,6 +164,65 @@ spawn_nation_by_area_conditional = {
     }
 }
 
+spawn_nation_by_flag_conditional = {
+    if = {
+        limit = {
+            any_province = {
+                has_province_flag = $flag$
+                is_empty = yes
+            }   
+        }
+        every_province = {
+            limit = {
+                has_province_flag = $flag$
+                is_empty = yes
+            }
+            cede_province = $tag$
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+    if = {
+        limit = {
+            any_province = {
+                has_province_flag = $flag$
+                OR = {
+                    culture = ROOT
+                    NOT = { owned_by = ROOT } # This is so nations other than ROOT don't suddenly lose land
+                }
+            }   
+        }
+        every_province = {
+            limit = {
+                has_province_flag = $flag$
+                culture = ROOT
+            }
+            add_core = $tag$
+        }
+    }
+    if = {
+        limit = {
+            any_owned_province = {
+                has_province_flag = $flag$
+                NOT = { is_empty = yes }
+                NOT = { culture = ROOT }
+            }   
+        }
+        every_owned_province = {
+            limit = {
+                has_province_flag = $flag$
+                NOT = { is_empty = yes }
+                NOT = { culture = ROOT }
+            }
+            add_core = $tag$
+            change_culture = $culture$
+            change_religion = $religion$
+        }
+    }
+}
+
+# Spawn Cores Only
 spawn_nation_by_province_core_only = {
     $province$ = {
         add_core = $tag$
@@ -138,5 +232,26 @@ spawn_nation_by_province_core_only = {
 spawn_nation_by_area_core_only = {
     $area$ = {
         add_core = $tag$
+    }
+}
+
+spawn_nation_by_flag_core_only = {
+    every_province = {
+        limit = {
+            has_province_flag = $flag$
+        }
+        
+        add_core = $tag$
+    }
+}
+
+# Flags
+clear_province_flags = {
+    every_province = {
+        limit = {
+            has_province_flag = $flag$
+        }
+        
+        clr_province_flag = $flag$
     }
 }

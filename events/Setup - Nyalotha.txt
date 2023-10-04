@@ -1,0 +1,96 @@
+namespace = wwu_setup_nyalotha
+
+# Nyalotha Emerges!
+country_event = {
+	id = wwu_setup_nyalotha.1
+	title = wwu_setup_nyalotha.1.title
+	desc = wwu_setup_nyalotha.1.desc
+	picture = NZOTH_AWAKENED_eventPicture
+
+    major = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { exists = NYA }
+        NOT = { has_global_flag = setup_nyalotha }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_nyalotha
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_nyalotha.1.option.a
+        
+        spawn_nation_by_flag = { flag = nyalotha_spawn_province tag = NYA culture = culture_nazja religion = nzoth }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = NYA
+            }
+            NYA = {
+                country_event = { id = wwu_setup_nyalotha.2 }
+            }
+        }
+    }
+}
+
+# Nyalotha - Setup
+country_event = {
+	id = wwu_setup_nyalotha.2
+	title = wwu_setup_nyalotha.2.title
+	desc = wwu_setup_nyalotha.2.desc
+	picture = NZOTH_AWAKENED_eventPicture
+	
+	is_triggered_only = yes
+    hidden = yes
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_setup_nyalotha.2.option.a
+		
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+		define_ruler = {
+            name = "N'Zoth"
+            dynasty = "the Old God"
+			min_age = 250
+			adm = 7
+			dip = 7
+			mil = 7
+			claim = 100
+            religion = nzoth
+        }
+        
+        set_ruler_flag = is_immortal
+        
+        setup_spellcaster_history = {
+            APTITUDE = 5
+            FINESSE = 5
+            CONCENTRATION = 5
+            MANA = 5
+            corruption = yes
+        }
+        
+        add_nation_boost_1 = yes
+        reveal_all_discovery = yes
+	}
+}
