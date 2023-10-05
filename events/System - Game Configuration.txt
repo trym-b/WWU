@@ -530,6 +530,36 @@ country_event = {
         }
 	}
     
+    # Balance of Power System
+    option = {
+		name = wwu_game_configuration.3.option.balance_of_power.on
+		
+        trigger = {
+            NOT = { has_global_flag = enabled_balance_of_power_system }
+        }
+        
+        custom_tooltip = BALANCE_OF_POWER_ON_TT
+        
+        hidden_effect = {
+            set_global_flag = enabled_balance_of_power_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    option = {
+		name = wwu_game_configuration.3.option.balance_of_power.off
+		
+        trigger = {
+            has_global_flag = enabled_balance_of_power_system
+        }
+        
+        custom_tooltip = BALANCE_OF_POWER_OFF_TT
+        
+        hidden_effect = {
+            clr_global_flag = enabled_balance_of_power_system
+            country_event = { id = wwu_game_configuration.21 }
+        }
+	}
+    
     # Exit
     option = {
 		name = wwu_game_configuration.3.option.exit
@@ -1151,6 +1181,7 @@ country_event = {
         #set_global_flag = enabled_vanquisher_system
         #set_global_flag = enabled_warmonger_system
         set_global_flag = enabled_regional_aggressive_expansion
+        set_global_flag = enabled_balance_of_power_system
         
         # Content
         set_global_flag = enable_content_eastern_kingdoms
