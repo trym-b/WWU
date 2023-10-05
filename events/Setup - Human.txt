@@ -6,7 +6,8 @@ country_event = {
 	title = wwu_setup_human.1.title
 	desc = wwu_setup_human.1.desc
 	picture = DEFIAS_BANDIT_eventPicture
-
+    goto = 1926
+    
     is_triggered_only = yes
 
 	trigger = {
@@ -33,14 +34,21 @@ country_event = {
     immediate = {
         hidden_effect = {
             set_global_flag = blackthorn_setup 
+            BTR = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
 	option = {
 		name = wwu_setup_human.1.option.a
 
-        spawn_nation_by_province = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
-        spawn_nation_by_province = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        custom_tooltip = BTR_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
+            spawn_nation_by_province = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        }
         
         ai_chance = {
             factor = 100
@@ -51,10 +59,12 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = BTR_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1926 tag = BTR culture = culture_lordaeron religion = shadow }
+            spawn_nation_by_province_conditional = { province = 1927 tag = BTR culture = culture_lordaeron religion = shadow }
+        }
         
         ai_chance = {
             factor = 0

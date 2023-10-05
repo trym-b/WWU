@@ -6,7 +6,8 @@ country_event = {
 	title = wwu_setup_zangar.1.title
 	desc = wwu_setup_zangar.1.desc
 	picture = DARK_PORTAL_eventPicture
-
+    goto = 1613
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -62,6 +63,9 @@ country_event = {
     immediate = {
         hidden_effect = {
             set_global_flag = setup_sporeggar
+            F62 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -72,8 +76,12 @@ country_event = {
 	option = {
 		name = wwu_setup_zangar.1.option.a
         
-        spawn_nation_by_province = { province = 1613 tag = F62 culture = culture_sporeling religion = zangar }
-        spawn_nation_by_province = { province = 1614 tag = F62 culture = culture_sporeling religion = zangar }
+        custom_tooltip = F62_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1613 tag = F62 culture = culture_sporeling religion = zangar }
+            spawn_nation_by_province = { province = 1614 tag = F62 culture = culture_sporeling religion = zangar }
+        }
         
         ai_chance = {
             factor = 100
@@ -84,10 +92,12 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F62_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1613 tag = F62 culture = culture_sporeling religion = zangar }
-        spawn_nation_by_province_conditional = { province = 1614 tag = F62 culture = culture_sporeling religion = zangar }
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1613 tag = F62 culture = culture_sporeling religion = zangar }
+            spawn_nation_by_province_conditional = { province = 1614 tag = F62 culture = culture_sporeling religion = zangar }
+        }
         
         ai_chance = {
             factor = 0

@@ -2036,8 +2036,9 @@ on_yearly_pulse_2 = {
         20 = wwu_setup_draenei.7 # Murkblood
         20 = wwu_setup_draenei.8 # Windyreed
         20 = wwu_setup_human.1 # Blackthorn
+        20 = wwu_setup_ogre.1 # Crushridge
         
-        1000 = 0
+        500 = 0
     }
 }
 on_yearly_pulse_3 = {
@@ -4789,57 +4790,65 @@ on_colonist_boosting_colony = {
             log = "DEBUG - [Root.GetName]: on_colonist_boosting_colony "
         }
         
-		if = {
-			limit = {
-				OR = {
-					religion = noreligion
-					#test if colonists outnumber natives
-					variable_arithmetic_trigger = {
-						custom_tooltip = colonysize_is_larger_than_nativesize_tt
-						export_to_variable = {
-							which = vab_colonysize
-							value = trigger_value:colonysize
-						}
-						export_to_variable = {
-							which = vab_nativesize
-							value = trigger_value:native_size
-						}
-						check_variable = {
-							which = vab_colonysize
-							which = vab_nativesize
-						}
-					}
-					is_in_capital_area = yes
-				}
-			}
-			change_religion = FROM
-		}
-		if = {
-			limit = {
-				OR = {
-					culture = noculture
-					#test if colonists outnumber natives
-					variable_arithmetic_trigger = {
-						custom_tooltip = colonysize_is_larger_than_nativesize_tt
-						export_to_variable = {
-							which = vab_colonysize
-							value = trigger_value:colonysize
-						}
-						export_to_variable = {
-							which = vab_nativesize
-							value = trigger_value:native_size
-						}
-						check_variable = {
-							which = vab_colonysize
-							which = vab_nativesize
-						}
-					}
-					is_in_capital_area = yes
-				}
-			}
-			change_culture = FROM
-			change_original_culture = FROM
-		}
+        if = {
+            limit = {
+                FROM = {
+                    native_policy = native_policy_hostile
+                }
+            }
+            
+            if = {
+                limit = {
+                    OR = {
+                        religion = noreligion
+                        #test if colonists outnumber natives
+                        variable_arithmetic_trigger = {
+                            custom_tooltip = colonysize_is_larger_than_nativesize_tt
+                            export_to_variable = {
+                                which = vab_colonysize
+                                value = trigger_value:colonysize
+                            }
+                            export_to_variable = {
+                                which = vab_nativesize
+                                value = trigger_value:native_size
+                            }
+                            check_variable = {
+                                which = vab_colonysize
+                                which = vab_nativesize
+                            }
+                        }
+                        is_in_capital_area = yes
+                    }
+                }
+                change_religion = FROM
+            }
+            if = {
+                limit = {
+                    OR = {
+                        culture = noculture
+                        #test if colonists outnumber natives
+                        variable_arithmetic_trigger = {
+                            custom_tooltip = colonysize_is_larger_than_nativesize_tt
+                            export_to_variable = {
+                                which = vab_colonysize
+                                value = trigger_value:colonysize
+                            }
+                            export_to_variable = {
+                                which = vab_nativesize
+                                value = trigger_value:native_size
+                            }
+                            check_variable = {
+                                which = vab_colonysize
+                                which = vab_nativesize
+                            }
+                        }
+                        is_in_capital_area = yes
+                    }
+                }
+                change_culture = FROM
+                change_original_culture = FROM
+            }
+        }
 	}
 }
 

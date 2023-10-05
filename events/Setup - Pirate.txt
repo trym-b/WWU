@@ -6,7 +6,8 @@ country_event = {
 	title = wwu_setup_pirate.1.title
 	desc = wwu_setup_pirate.1.desc
 	picture = BLOODSAIL_RAIDER_eventPicture
-
+    goto = 4135
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -41,6 +42,9 @@ country_event = {
     immediate = {
         hidden_effect = {
             set_global_flag = setup_bloodsail
+            A15 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -51,7 +55,11 @@ country_event = {
 	option = {
 		name = wwu_setup_pirate.1.option.a
         
-        spawn_nation_by_area = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
+        custom_tooltip = A15_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
+        }
         
         ai_chance = {
             factor = 90
@@ -62,9 +70,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = A15_PARTIAL_SETUP_TT
         
-        spawn_nation_by_area_conditional = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_bloodsail_hold tag = A15 culture = culture_kul_tiran religion = shadow }
+        }
         
         ai_chance = {
             factor = 10

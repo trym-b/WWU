@@ -6,7 +6,8 @@ country_event = {
 	title = wwu_setup_ethereal.1.title
 	desc = wwu_setup_ethereal.1.desc
 	picture = ETHEREAL_PEDDLER_eventPicture
-
+    goto = 1705
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -19,31 +20,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_netherstorm
+                area_stormspire = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_stormspire = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 1711
-            owns = 1712
-            owns = 1713
-            owns = 1714
-            owns = 2060
-            owns = 2061
-            owns = 1705
+        area_stormspire = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_consortium
+            P18 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -54,13 +59,11 @@ country_event = {
 	option = {
 		name = wwu_setup_ethereal.1.option.a
         
-        spawn_nation_by_province = { province = 1711 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1712 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1713 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1714 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 2060 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 2061 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1705 tag = P18 culture = culture_ethereal religion = arcane }
+        custom_tooltip = P18_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_stormspire tag = P18 culture = culture_ethereal religion = arcane }
+        }
         
         ai_chance = {
             factor = 100
@@ -71,15 +74,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = P18_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1711 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1712 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1713 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1714 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 2060 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 2061 tag = P18 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1705 tag = P18 culture = culture_ethereal religion = arcane }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_stormspire tag = P18 culture = culture_ethereal religion = arcane }
+        }
         
         ai_chance = {
             factor = 0
@@ -90,13 +89,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1711 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 1712 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 1713 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 1714 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 2060 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 2061 tag = P18 }
-        spawn_nation_by_province_core_only = { province = 1705 tag = P18 }
+        spawn_nation_by_area_core_only = { area = area_stormspire tag = P18 }
         
         ai_chance = {
             factor = 0
@@ -117,7 +110,8 @@ country_event = {
 	title = wwu_setup_ethereal.2.title
 	desc = wwu_setup_ethereal.2.desc
 	picture = ETHEREAL_PEDDLER_eventPicture
-
+    goto = 2059
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -130,27 +124,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_netherstorm
+                area_celestial_ridge = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_celestial_ridge = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 2059
-            owns = 1715
-            owns = 1716
+        area_celestial_ridge = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_ethereum
+            F80 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -161,9 +163,11 @@ country_event = {
 	option = {
 		name = wwu_setup_ethereal.2.option.a
         
-        spawn_nation_by_province = { province = 2059 tag = F80 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1715 tag = F80 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province = { province = 1716 tag = F80 culture = culture_ethereal religion = arcane }
+        custom_tooltip = F80_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_celestial_ridge tag = F80 culture = culture_ethereal religion = arcane }
+        }
         
         ai_chance = {
             factor = 100
@@ -174,11 +178,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F80_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 2059 tag = F80 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1715 tag = F80 culture = culture_ethereal religion = arcane }
-        spawn_nation_by_province_conditional = { province = 1716 tag = F80 culture = culture_ethereal religion = arcane }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_celestial_ridge tag = F80 culture = culture_ethereal religion = arcane }
+        }
         
         ai_chance = {
             factor = 0
@@ -189,9 +193,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 2059 tag = F80 }
-        spawn_nation_by_province_core_only = { province = 1715 tag = F80 }
-        spawn_nation_by_province_core_only = { province = 1716 tag = F80 }
+        spawn_nation_by_area_core_only = { area = area_celestial_ridge tag = F80 }
         
         ai_chance = {
             factor = 0

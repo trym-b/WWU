@@ -6,7 +6,8 @@ country_event = {
 	title = wwu_setup_draenei.1.title
 	desc = wwu_setup_draenei.1.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1606
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -19,28 +20,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_zangarmarsh
+                area_umbrafen = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_umbrafen = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 1608
-            owns = 1606
-            owns = 1607
-            owns = 1610
+        area_umbrafen = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_umbrafen
+            F65 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -51,10 +59,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.1.option.a
         
-        spawn_nation_by_province = { province = 1608 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1606 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1607 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1610 tag = F65 culture = culture_lost_one religion = shadow }
+        custom_tooltip = F65_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_umbrafen tag = F65 culture = culture_lost_one religion = shadow }
+        }
         
         ai_chance = {
             factor = 100
@@ -65,12 +74,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F65_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1608 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1606 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1607 tag = F65 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1610 tag = F65 culture = culture_lost_one religion = shadow }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_umbrafen tag = F65 culture = culture_lost_one religion = shadow }
+        }
         
         ai_chance = {
             factor = 0
@@ -81,10 +89,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1608 tag = F65 }
-        spawn_nation_by_province_core_only = { province = 1606 tag = F65 }
-        spawn_nation_by_province_core_only = { province = 1607 tag = F65 }
-        spawn_nation_by_province_core_only = { province = 1610 tag = F65 }
+        spawn_nation_by_area_core_only = { area = area_umbrafen tag = F65 }
         
         ai_chance = {
             factor = 0
@@ -105,7 +110,8 @@ country_event = {
 	title = wwu_setup_draenei.2.title
 	desc = wwu_setup_draenei.2.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1612
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -118,27 +124,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_zangarmarsh
+                area_zabra_jin = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_zabra_jin = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 2062
-            owns = 2063
-            owns = 1612
+        area_zabra_jin = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_feralfen
+            F66 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -149,9 +163,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.2.option.a
         
-        spawn_nation_by_province = { province = 2062 tag = F66 culture = culture_lost_one religion = shamanism }
-        spawn_nation_by_province = { province = 2063 tag = F66 culture = culture_lost_one religion = shamanism }
-        spawn_nation_by_province = { province = 1612 tag = F66 culture = culture_lost_one religion = shamanism }
+        custom_tooltip = P50_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_zabra_jin tag = F66 culture = culture_lost_one religion = shamanism }
+        }
         
         ai_chance = {
             factor = 100
@@ -162,11 +178,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F66_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 2062 tag = F66 culture = culture_lost_one religion = shamanism }
-        spawn_nation_by_province_conditional = { province = 2063 tag = F66 culture = culture_lost_one religion = shamanism }
-        spawn_nation_by_province_conditional = { province = 1612 tag = F66 culture = culture_lost_one religion = shamanism }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_zabra_jin tag = F66 culture = culture_lost_one religion = shamanism }
+        }
         
         ai_chance = {
             factor = 0
@@ -177,9 +193,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 2062 tag = F66 }
-        spawn_nation_by_province_core_only = { province = 2063 tag = F66 }
-        spawn_nation_by_province_core_only = { province = 1612 tag = F66 }
+        spawn_nation_by_area_core_only = { area = area_zabra_jin tag = F66 }
         
         ai_chance = {
             factor = 0
@@ -200,6 +214,7 @@ country_event = {
 	title = wwu_setup_draenei.3.title
 	desc = wwu_setup_draenei.3.desc
 	picture = ZANGERMARSH_eventPicture
+    goto = 1615
     
 	is_triggered_only = yes
     
@@ -213,30 +228,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_zangarmarsh
+                area_marshlight = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_marshlight = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 1616
-            owns = 2065
-            owns = 1615
-            owns = 2064
-            owns = 1611
-            owns = 1617
+        area_marshlight = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_daggerfen
+            F67 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -247,12 +267,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.3.option.a
         
-        spawn_nation_by_province = { province = 1616 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 2065 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1615 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 2064 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1611 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province = { province = 1617 tag = F67 culture = culture_lost_one religion = shadow }
+        custom_tooltip = F67_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_marshlight tag = F67 culture = culture_lost_one religion = shadow }
+        }
         
         ai_chance = {
             factor = 100
@@ -263,14 +282,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F67_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1616 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 2065 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1615 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 2064 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1611 tag = F67 culture = culture_lost_one religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1617 tag = F67 culture = culture_lost_one religion = shadow }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_marshlight tag = F67 culture = culture_lost_one religion = shadow }
+        }
         
         ai_chance = {
             factor = 0
@@ -281,12 +297,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1616 tag = F67 }
-        spawn_nation_by_province_core_only = { province = 2065 tag = F67 }
-        spawn_nation_by_province_core_only = { province = 1615 tag = F67 }
-        spawn_nation_by_province_core_only = { province = 2064 tag = F67 }
-        spawn_nation_by_province_core_only = { province = 1611 tag = F67 }
-        spawn_nation_by_province_core_only = { province = 1617 tag = F67 }
+        spawn_nation_by_area_core_only = { area = area_marshlight tag = F67 }
         
         ai_chance = {
             factor = 0
@@ -307,7 +318,8 @@ country_event = {
 	title = wwu_setup_draenei.4.title
 	desc = wwu_setup_draenei.4.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1632
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -320,12 +332,35 @@ country_event = {
             days = 365
         }
         
-        owns = 1632
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_telaar = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_telaar = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_telaar = {
+            owned_by = ROOT
+        }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_kurenai
+            F68 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -335,9 +370,56 @@ country_event = {
 
 	option = {
 		name = wwu_setup_draenei.4.option.a
+
+        custom_tooltip = F68_FULL_SETUP_TT
         
-        spawn_nation_by_province_core_only = { province = 1632 tag = F68 }
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_telaar tag = F68 culture = culture_broken religion = shamanism }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
 	}
+	option = {
+		name = wwu_setup_draenei.4.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = F68_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_telaar tag = F68 culture = culture_broken religion = shamanism }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_draenei.4.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_telaar tag = F68 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = F68
+            }
+            
+            F68 = {
+                add_nation_boost_1 = yes
+                reveal_all_discovery = yes
+            }
+        }
+    }
 }
 
 # Dreghood
@@ -346,7 +428,8 @@ country_event = {
 	title = wwu_setup_draenei.5.title
 	desc = wwu_setup_draenei.5.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1597
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -359,26 +442,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_hellfire_peninsula
+                area_falcon_watch = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_falcon_watch = {
+                    owner = {
+                        ai = yes
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 1599
-            owns = 1596
+        area_falcon_watch = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_dreghood
+            F74 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -389,8 +481,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.5.option.a
         
-        spawn_nation_by_province = { province = 1599 tag = F74 culture = culture_broken religion = shamanism }
-        spawn_nation_by_province = { province = 1596 tag = F74 culture = culture_broken religion = shamanism }
+        custom_tooltip = F74_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area= { area = area_falcon_watch tag = F74 culture = culture_broken religion = shamanism }
+        }
         
         ai_chance = {
             factor = 100
@@ -401,10 +496,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F74_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1599 tag = F74 culture = culture_broken religion = shamanism }
-        spawn_nation_by_province_conditional = { province = 1596 tag = F74 culture = culture_broken religion = shamanism }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_falcon_watch tag = F74 culture = culture_broken religion = shamanism }
+        }
         
         ai_chance = {
             factor = 0
@@ -415,8 +511,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1599 tag = F74 }
-        spawn_nation_by_province_core_only = { province = 1596 tag = F74 }
+        spawn_nation_by_area_core_only = { area = area_falcon_watch tag = F74 }
         
         ai_chance = {
             factor = 0
@@ -437,7 +532,8 @@ country_event = {
 	title = wwu_setup_draenei.6.title
 	desc = wwu_setup_draenei.6.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1603
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -450,26 +546,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_zangarmarsh
+                area_telredor = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_telredor = {
+                    owner = {
+                        ai = no
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 1604
-            owns = 1605
+        area_telredor = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_wrekt
+            F75 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -480,8 +585,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.6.option.a
         
-        spawn_nation_by_province = { province = 1604 tag = F74 culture = culture_broken religion = shadow }
-        spawn_nation_by_province = { province = 1605 tag = F74 culture = culture_broken religion = shadow }
+        custom_tooltip = F75_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_telredor tag = F75 culture = culture_broken religion = shadow }
+        }
         
         ai_chance = {
             factor = 100
@@ -492,10 +600,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F75_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1604 tag = F74 culture = culture_broken religion = shadow }
-        spawn_nation_by_province_conditional = { province = 1605 tag = F74 culture = culture_broken religion = shadow }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_telredor tag = F75 culture = culture_broken religion = shadow }
+        }
         
         ai_chance = {
             factor = 0
@@ -506,8 +615,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1604 tag = F74 }
-        spawn_nation_by_province_core_only = { province = 1605 tag = F74 }
+        spawn_nation_by_area_core_only = { area = area_telredor tag = F75 }
         
         ai_chance = {
             factor = 0
@@ -515,7 +623,7 @@ country_event = {
 	}
     
     after = {
-        F74 = {
+        F75 = {
             add_nation_boost_1 = yes
             reveal_all_discovery = yes
         }
@@ -528,7 +636,8 @@ country_event = {
 	title = wwu_setup_draenei.7.title
 	desc = wwu_setup_draenei.7.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1610
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -541,12 +650,35 @@ country_event = {
             days = 365
         }
         
-        owns = 1609
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_coilfang = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_coilfang = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_coilfang = {
+            owned_by = ROOT
+        }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_murkblood
+            F84 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -557,7 +689,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.7.option.a
         
-        spawn_nation_by_province = { province = 1609 tag = F84 culture = culture_broken religion = shamanism }
+        custom_tooltip = F84_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_coilfang tag = F84 culture = culture_broken religion = shamanism }
+        }
         
         ai_chance = {
             factor = 100
@@ -568,9 +704,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F84_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 1609 tag = F84 culture = culture_broken religion = shamanism }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_coilfang tag = F84 culture = culture_broken religion = shamanism }
+        }
         
         ai_chance = {
             factor = 0
@@ -581,7 +719,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 1609 tag = F84 }
+        spawn_nation_by_area_core_only = { area = area_coilfang tag = F84 }
         
         ai_chance = {
             factor = 0
@@ -602,7 +740,8 @@ country_event = {
 	title = wwu_setup_draenei.8.title
 	desc = wwu_setup_draenei.8.desc
 	picture = ZANGERMARSH_eventPicture
-
+    goto = 1634
+    
 	is_triggered_only = yes
     
 	trigger = {
@@ -615,26 +754,35 @@ country_event = {
             days = 365
         }
         
+        # If the player and AI own part of the area, only allow the event to fire for the player.
         if = {
             limit = {
-                ai = no
-                capital_scope = {
-                    region = region_nagrand
+                area_burning_blade_ruins = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_burning_blade_ruins = {
+                    owner = {
+                        ai = no
+                    }
                 }
             }
             
             ai = no
         }
         
-        OR = {
-            owns = 2051
-            owns = 2052
+        area_burning_blade_ruins = {
+            owned_by = ROOT
         }
     }
     
     immediate = {
         hidden_effect = {
             set_global_flag = setup_windyreed
+            F86 = {
+                save_event_target_as = spawned_nation
+            }
         }
     }
     
@@ -645,8 +793,11 @@ country_event = {
 	option = {
 		name = wwu_setup_draenei.8.option.a
         
-        spawn_nation_by_province = { province = 2051 tag = F86 culture = culture_broken religion = shamanism }
-        spawn_nation_by_province = { province = 2052 tag = F86 culture = culture_broken religion = shamanism }
+        custom_tooltip = F86_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_burning_blade_ruins tag = F86 culture = culture_broken religion = shamanism }
+        }
         
         ai_chance = {
             factor = 100
@@ -657,10 +808,11 @@ country_event = {
         
         add_dip_power = -100
         
-        custom_tooltip = PARTIAL_SETUP_TT
+        custom_tooltip = F86_PARTIAL_SETUP_TT
         
-        spawn_nation_by_province_conditional = { province = 2051 tag = F86 culture = culture_broken religion = shamanism }
-        spawn_nation_by_province_conditional = { province = 2052 tag = F86 culture = culture_broken religion = shamanism }
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_burning_blade_ruins tag = F86 culture = culture_broken religion = shamanism }        
+        }
         
         ai_chance = {
             factor = 0
@@ -671,8 +823,7 @@ country_event = {
         
         add_mil_power = -250
         
-        spawn_nation_by_province_core_only = { province = 2051 tag = F86 }
-        spawn_nation_by_province_core_only = { province = 2052 tag = F86 }
+        spawn_nation_by_area_core_only = { area = area_burning_blade_ruins tag = F86 }
         
         ai_chance = {
             factor = 0
