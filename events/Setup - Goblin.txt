@@ -1,0 +1,217 @@
+namespace = wwu_setup_goblin
+
+# Ratchet Emerges!
+country_event = {
+	id = wwu_setup_goblin.1
+	title = wwu_setup_goblin.1.title
+	desc = wwu_setup_goblin.1.desc
+	picture = GOBLIN_SAPPER_eventPicture
+    goto = 1375
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = ratchet_setup }
+        NOT = { exists = RTC }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Orgrimmar exists
+        exists = A48
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_ratchet = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_ratchet = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_ratchet = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = ratchet_setup 
+            RTC = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_goblin.1.option.a
+
+        custom_tooltip = RTC_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_ratchet tag = RTC culture = culture_goblin religion = technomancy }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_goblin.1.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = RTC_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_ratchet tag = RTC culture = culture_goblin religion = technomancy }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_goblin.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_ratchet tag = RTC }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = RTC
+            }
+            
+            RTC = {
+                add_nation_boost_1 = yes
+                reveal_all_discovery = yes
+            }
+        }
+    }
+}
+
+# Gadgetzan Emerges!
+country_event = {
+	id = wwu_setup_goblin.2
+	title = wwu_setup_goblin.2.title
+	desc = wwu_setup_goblin.2.desc
+	picture = GOBLIN_AUTO_BARBER_eventPicture
+    goto = 1543
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = gadgetzan_setup }
+        NOT = { exists = GDG }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Approximately around Second War time
+        is_year = 580
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_gadgetzan = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_gadgetzan = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_gadgetzan = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = gadgetzan_setup 
+            GDG = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_goblin.2.option.a
+
+        custom_tooltip = GDG_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_gadgetzan tag = GDG culture = culture_goblin religion = technomancy }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_goblin.2.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = GDG_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_gadgetzan tag = GDG culture = culture_goblin religion = technomancy }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_goblin.2.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_gadgetzan tag = GDG }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        if = {
+            limit = {
+                exists = GDG
+            }
+            
+            GDG = {
+                add_nation_boost_1 = yes
+                reveal_all_discovery = yes
+            }
+        }
+    }
+}
