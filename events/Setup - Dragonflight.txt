@@ -1,0 +1,83 @@
+namespace = wwu_setup_dragonflight
+
+# Corruption of Occulus
+country_event = {
+	id = wwu_setup_dragonflight.1
+	title = wwu_setup_dragonflight.1.title
+	desc = wwu_setup_dragonflight.1.desc
+	picture = DRAGONKIN_SORCERER_eventPicture
+    goto = 1544
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = infinite_dragonflight_setup }
+        NOT = { exists = B07 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        current_age = age_cataclysm
+
+        1544 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = infinite_dragonflight_setup 
+            B07 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_dragonflight.1.option.a
+
+        custom_tooltip = B07_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1544 tag = B07 culture = culture_infinite_dragonflight religion = corrupt_dragon_aspect }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_dragonflight.1.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = B07_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1544 tag = B07 culture = culture_infinite_dragonflight religion = corrupt_dragon_aspect }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_dragonflight.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1544 tag = B07 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        B07 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}

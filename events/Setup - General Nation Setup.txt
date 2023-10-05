@@ -1,0 +1,376 @@
+namespace = wwu_general_nation_setup
+
+country_event = {
+	id = wwu_general_nation_setup.1
+	title = wwu_general_nation_setup.1.title
+	desc = wwu_general_nation_setup.1.desc
+	picture = SHATTRATH_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {
+		name = wwu_general_nation_setup.1.option.a
+		
+        reveal_all_discovery = yes
+        
+        if = {  
+            limit = {
+                num_of_cities = 3
+                NOT = { num_of_cities = 5 }
+            }
+            add_nation_boost_2 = yes
+        }
+        if = {  
+            limit = {
+                num_of_cities = 1
+                NOT = { num_of_cities = 2 }
+            }
+            add_nation_boost_3 = yes
+        }
+        else = {
+            add_nation_boost_1 = yes
+        }
+        
+        # This prevents the normal succession event from occuring
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+        
+        # Infinite Dragonflight
+        if = {
+            limit = {
+                tag = B07
+            }
+            define_ruler = {
+                name = "Occulus"
+                dynasty = "the Corrupted"
+                adm = 5
+                dip = 4
+                mil = 4
+                age = 230
+            }
+        }
+        # Wolf Cult
+        else_if = {
+            limit = {
+                tag = P29
+            }
+            define_ruler = {
+                name = "Alpha" 
+                dynasty = "Prime" 
+                adm = 3
+                dip = 2
+                mil = 6
+            }
+        }
+        # Nightbane
+        else_if = {
+            limit = {
+                tag = P31
+            }
+            define_ruler = {
+                name = "Gervase" 
+                dynasty = "the Nightbane" 
+                adm = 3
+                dip = 3
+                mil = 6
+            }
+        }
+        # Bloodsail
+        else_if = {
+            limit = {
+                tag = A15
+            }
+            define_ruler = {  
+                name = "Robert"  
+                dynasty = "Falrevere"  
+                adm = 3 
+                dip = 4
+                mil = 6
+                age = 40
+            } 
+        }
+        # Orgrimmar
+        else_if = {
+            limit = {
+                tag = A48
+            }
+            
+            set_country_flag = ignore_horde_vote
+
+            set_global_flag = setup_the_horde
+            set_global_flag = horde_exists
+        
+            set_head_of_faction = {
+                faction = horde
+            }
+            set_member_of_faction = {
+                faction = horde
+            }
+            
+            define_ruler = {
+                name = "Thrall"
+                dynasty = "Durotan"
+                adm = 4
+                dip = 6
+                mil = 5
+                min_age = 20
+                max_age = 30
+            }
+                
+            set_ruler_flag = is_immortal
+            set_ruler_flag = shaman_personality
+            set_ruler_flag = ruler_portrait_thrall
+            
+            setup_spellcaster_history = {
+                APTITUDE = 3
+                FINESSE = 3
+                CONCENTRATION = 3
+                MANA = 5
+                shaman = yes
+            }
+            
+            unlock_artifact = {
+                artifact = doomhammer
+            }
+        }
+        # Warsong
+        else_if = {
+            limit = {
+                tag = A35
+            }
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                # This prevents the normal succession event from occuring
+                hidden_effect = {
+                    set_country_flag = skip_next_succession_event
+                }
+                
+                define_ruler = { 
+                    name = "Grom" 
+                    dynasty = "Hellscream" 
+                    adm = 2
+                    dip = 2
+                    mil = 6
+                    min_age = 60
+                    max_age = 90
+                }
+                
+                set_ruler_flag = ruler_portrait_grommash
+            }
+            else = {
+                add_legitimacy = 25
+            }
+        }
+        # Black Tooth Grin
+        else_if = {
+            limit = {
+                tag = P98
+            }
+            
+            define_ruler = { 
+                name = "Rend" 
+                dynasty = "Blackhand" 
+                adm = 2
+                dip = 2
+                mil = 7
+                min_age = 50
+                max_age = 70
+            }
+        }
+        # Dragonaw
+        else_if = {
+            limit = {
+                tag = A45
+            }
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                define_ruler = {
+                    name = "Zuluhed" 
+                    dynasty = "the Whacked" 
+                    adm = 4
+                    dip = 3
+                    mil = 3
+                    min_age = 40
+                    max_age = 60
+                }
+                
+                if = {
+                    limit = {
+                        NOT = { religion = fel }
+                    }
+                    change_religion = fel
+                }
+                
+                set_capital = 1061
+            }
+            else = {
+                add_legitimacy = 25
+            }
+            
+            add_country_modifier = {
+                name = demon_soul_dragonmaw
+                duration = -1
+            }
+            
+            # Subjugate Vermillion Redoubt
+            if = {
+                limit = {
+                    exists = V01
+                }
+                
+                create_subject = {
+                    subject_type = vassal
+                    who = V01
+                }
+            }
+            
+            # Horde alliance
+            if = {
+                limit = {
+                    exists = U03
+                }
+                
+                create_alliance = U03
+            }
+        }
+        # Frostwolf
+        else_if = {
+            limit = {
+                tag = A46
+            }
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                define_ruler = {
+                    name = "Durotan" 
+                    dynasty = "Frostwolf" 
+                    adm = 6
+                    dip = 3
+                    mil = 4
+                    min_age = 50
+                    max_age = 80
+                }
+                
+                set_ruler_flag = ruler_portrait_durotan
+                
+                if = {
+                    limit = {
+                        religion = fel
+                    }
+                    change_religion = shamanism
+                }
+                
+                set_capital = 3061
+            }
+            
+            if = {
+                limit = {
+                    has_country_modifier = member_of_old_horde
+                }
+                
+                remove_country_modifier = member_of_old_horde
+            }
+        }
+        # Nyalotha
+        else_if = {
+            limit = {
+                tag = NYA
+            }
+            
+            define_ruler = {
+                name = "N'Zoth"
+                dynasty = "the Old God"
+                min_age = 250
+                adm = 7
+                dip = 7
+                mil = 7
+                claim = 100
+                religion = nzoth
+            }
+            
+            set_ruler_flag = is_immortal
+            
+            setup_spellcaster_history = {
+                APTITUDE = 5
+                FINESSE = 5
+                CONCENTRATION = 5
+                MANA = 5
+                corruption = yes
+            }
+        }
+        # Thermaplugg Exiles
+        else_if = {
+            limit = {
+                tag = A33
+            }
+            
+            define_ruler = {
+                name = "Sicco" 
+                dynasty = "Thermaplugg" 
+                adm = 3
+                dip = 2
+                mil = 3
+                age = 40
+            }
+        }
+        # Scryer
+        else_if = {
+            limit = {
+                tag = SCR
+            }
+            
+            add_stability_or_adm_power = yes
+            
+            define_ruler = {
+                name = "Vorenthal"
+                dynasty = "the Seer" 	
+                adm = 3
+                dip = 5	
+                mil = 4
+            }
+        }
+        # Aldor
+        else_if = {
+            limit = {
+                tag = ALD
+            }
+            
+            add_stability_or_adm_power = yes
+            
+            define_ruler = {
+                name = "Ishanah"
+                dynasty = "the High Priestess" 	
+                adm = 5
+                dip = 3	
+                mil = 4
+            }
+            
+            declare_war = SCR
+        }
+        else = {
+            define_ruler = { }
+        }
+    }
+    
+    after = {
+        clr_country_flag = ignore_horde_vote
+    }
+}
+
