@@ -1702,9 +1702,9 @@ NMilitary = {
 	MERCENARY_COMPANY_HIRING_COST_MONTHS = 72,		-- Initial hiring cost in months of maintenance
 	--- WWU: increase base hiring cost
 	MERCENARY_COMPANY_STARTING_MORALE = 0.5,		-- Starting morale
-	MERCENARY_COMPANY_MIN_REGIMENTS = 10,			-- Minimum regiments
+	MERCENARY_COMPANY_MIN_REGIMENTS = 5,			-- Minimum regiments
 	--- WWU: set to make merc stack sizes more consistent
-	MERCENARY_COMPANY_MAX_REGIMENTS = 30,			-- Maximum regiments
+	MERCENARY_COMPANY_MAX_REGIMENTS = 50,			-- Maximum regiments
 	--- WWU: set to make merc stack sizes more consistent
 	MERCENARY_COMPANY_MANPOWER_PER_REGIMENT = 2.0,	-- Manpower reserve factor (multiplied by 1000 per regiment)
 	MERCENARY_COMPANY_MANPOWER_RECOVERY = 120,				-- How many months to recover mercenary manpower fully

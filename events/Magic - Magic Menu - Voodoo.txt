@@ -7,7 +7,7 @@ country_event = {
 	id = wwu_magic_voodoo_menu.1
 	title = wwu_magic_voodoo_menu.1.title
 	desc = wwu_magic_voodoo_menu.1.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
@@ -89,7 +89,7 @@ country_event = {
 	id = wwu_magic_voodoo_menu.10
 	title = wwu_magic_voodoo_menu.10.title
 	desc = wwu_magic_voodoo_menu.10.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
@@ -98,30 +98,30 @@ country_event = {
     }
     
     #-------------------------
-    # Basic - Evocation
+    # Basic - Sacrifice Victims
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.10.option.evocation
+		name = wwu_magic_voodoo_menu.10.option.sacrifice_victims
         
         trigger = {
             has_poor_aptitude = yes
-            NOT = { corruption = 99 }
+            manpower_percentage = 0.05
             NOT = { has_country_modifier = evocation_cooldown }
         }
 		
-        evocation_effect = yes
-        add_mana_1 = yes
+        sacrifice_victims_effect = yes
+        add_mana_2 = yes
         
         ai_chance = {
             factor = 0
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.10.option.evocation.invalid
+		name = wwu_magic_voodoo_menu.10.option.sacrifice_victims.invalid
         
         trigger = {
             OR = {
-                corruption = 99
+                NOT = { manpower_percentage = 0.05 }
                 has_country_modifier = evocation_cooldown
                 NOT  = { has_poor_aptitude = yes }
             }
@@ -130,9 +130,9 @@ country_event = {
         # Invalid Message
         if = {
             limit = {
-                corruption = 99
+                NOT = { manpower_percentage = 0.05 }
             }
-            custom_tooltip = CORRUPTION_IS_TOO_HIGH
+            custom_tooltip = MANPOWER_TOO_LOW
         }
         else_if = {
             limit = {
@@ -153,8 +153,8 @@ country_event = {
         # Preview
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
-            evocation_effect = yes
-            add_mana_1 = yes
+            sacrifice_victims_effect = yes
+            add_mana_2 = yes
         }
         
         ai_chance = {
@@ -163,24 +163,89 @@ country_event = {
 	}
     
     #-------------------------
-    # Basic - Conjure Feast
+    # Basic - Cure Ailments
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.10.option.conjure_feast
+		name = wwu_magic_voodoo_menu.10.option.cure_ailments
         
         trigger = {
+            has_mana_2 = yes
+            war_exhaustion = 0.01
             has_poor_aptitude = yes
+        }
+		
+        lose_mana_2 = yes
+        remove_war_exhaustion_spell_effect = yes
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_voodoo_menu.10.option.cure_ailments.invalid
+        
+        trigger = {
+            OR = {
+                has_less_than_2_mana = yes
+                NOT = { war_exhaustion = 0.01 }
+                NOT = { has_poor_aptitude = yes }
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { war_exhaustion = 0.01 }
+            }
+            custom_tooltip = WAR_EXHAUSTION_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { has_poor_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_2 = yes
+            remove_war_exhaustion_spell_effect = yes
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Poor - Shadow Barrier
+    #-------------------------
+    option = {
+		name = wwu_magic_voodoo_menu.10.option.shadow_barrier
+        
+        trigger = {
+            has_common_aptitude = yes
             has_mana_1 = yes
-            NOT = { 
+            NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
+                    MODIFIER = shadow_barrier
                 }
             }
         }
 		
         lose_mana_1 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = conjure_feast
+            MODIFIER = shadow_barrier
         }
         
         ai_chance = {
@@ -189,20 +254,20 @@ country_event = {
             modifier = {
                 factor = 0
                 
-                num_of_free_diplomatic_relations = 3
+                NOT = { is_at_war = yes }
             }
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.10.option.conjure_feast.invalid
+		name = wwu_magic_voodoo_menu.10.option.shadow_barrier.invalid
         
         trigger = {
             OR = {
+                NOT = { has_common_aptitude = yes }
                 has_less_than_1_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
+                    MODIFIER = shadow_barrier
                 }
-                NOT = { has_poor_aptitude = yes }
             }
         }
 		
@@ -215,17 +280,17 @@ country_event = {
         }
         else_if = {
             limit = {
-                has_modifier_spell_effect = {
-                    MODIFIER = conjure_feast
-                }
+                NOT = { has_common_aptitude = yes }
             }
-            custom_tooltip = SPELL_IS_ON_COOLDOWN
+            custom_tooltip = APTITUDE_IS_TOO_LOW
         }
         else_if = {
             limit = {
-                NOT = { has_poor_aptitude = yes }
+                has_modifier_spell_effect = {
+                    MODIFIER = shadow_barrier
+                }
             }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
         }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
@@ -236,151 +301,8 @@ country_event = {
         tooltip = {
             lose_mana_1 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = conjure_feast
+                MODIFIER = shadow_barrier
             }
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    
-    #-------------------------
-    # Basic - Soothe Minds
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.soothe_minds
-        
-        trigger = {
-            has_mana_2 = yes
-            NOT = { stability = 3 }
-            has_poor_aptitude = yes
-        }
-		
-        lose_mana_2 = yes
-        stability_spell_effect = yes
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.soothe_minds.invalid
-        
-        trigger = {
-            OR = {
-                has_less_than_2_mana = yes
-                stability = 3
-                NOT = { has_poor_aptitude = yes }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_2_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                stability = 3
-            }
-            custom_tooltip = STABILITY_IS_AT_MAX
-        }
-        else_if = {
-            limit = {
-                NOT = { has_poor_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        tooltip = {
-            lose_mana_2 = yes
-            stability_spell_effect = yes
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    
-    #-------------------------
-    # Basic - Polymorph
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.polymorph
-        
-        trigger = {
-            has_mana_2 = yes
-            has_poor_aptitude = yes
-            any_owned_province = {
-                NOT = { culture = ROOT }
-            }
-        }
-		
-        lose_mana_2 = yes
-        polymorph_effect = yes
-        
-        country_event = { id = wwu_magic_effect.10 }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.polymorph.invalid
-        
-        trigger = {
-            OR = {
-                has_less_than_2_mana = yes  
-                NOT = { has_poor_aptitude = yes }
-                NOT = {
-                    any_owned_province = {
-                        NOT = { culture = ROOT }
-                    }
-                }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_2_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_owned_province = {
-                        NOT = { culture = ROOT }
-                    }
-                }
-            }
-            custom_tooltip = NO_WRONG_CULTURE_PROVINCES
-        }
-        else_if = {
-            limit = {
-                NOT = { has_poor_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        
-        tooltip = {
-            lose_mana_2 = yes
-            custom_tooltip = POLYMORPH_FAKE_EFFECT
         }
         
         ai_chance = {
@@ -408,54 +330,105 @@ country_event = {
 	id = wwu_magic_voodoo_menu.11
 	title = wwu_magic_voodoo_menu.11.title
 	desc = wwu_magic_voodoo_menu.11.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
     trigger = {
         has_ruler_modifier = spellcaster_capabilities
     }
-
+    
     #-------------------------
-    # Common - Apply Mass Invisibility
+    # Common - Raise the Dead
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.11.option.apply_mass_invisibility
+		name = wwu_magic_voodoo_menu.11.option.raise_the_dead
+        
+        trigger = {
+            has_common_aptitude = yes
+            has_mana_2 = yes
+        }
+		
+        lose_mana_2 = yes
+        yearly_manpower_spell_effect = yes
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_voodoo_menu.11.option.raise_the_dead.invalid
+        
+        trigger = {
+            OR = {
+                NOT = { has_common_aptitude = yes }
+                has_less_than_2_mana = yes
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { has_common_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_2 = yes
+            yearly_manpower_spell_effect = yes
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Common - Mind Vision
+    #-------------------------
+    option = {
+		name = wwu_magic_voodoo_menu.11.option.mind_vision
         
         trigger = {
             has_common_aptitude = yes
             has_mana_1 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = mind_vision
                 }
             }
         }
 		
         lose_mana_1 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = apply_mass_invisibility
+            MODIFIER = mind_vision
         }
         
         ai_chance = {
             factor = 1
-            
-            modifier = {
-                factor = 0
-                
-                NOT = { is_at_war = yes }
-            }
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.11.option.apply_mass_invisibility.invalid
+		name = wwu_magic_voodoo_menu.11.option.mind_vision.invalid
         
         trigger = {
             OR = {
                 NOT = { has_common_aptitude = yes }
                 has_less_than_1_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = mind_vision
                 }
             }
         }
@@ -476,7 +449,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = apply_mass_invisibility
+                    MODIFIER = mind_vision
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -490,7 +463,7 @@ country_event = {
         tooltip = {
             lose_mana_1 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = apply_mass_invisibility
+                MODIFIER = mind_vision
             }
         }
         
@@ -500,38 +473,47 @@ country_event = {
 	}
     
     #-------------------------
-    # Common - Focus Magic
+    # Common - Disguise
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.11.option.focus_magic
+		name = wwu_magic_voodoo_menu.11.option.disguise
         
         trigger = {
             has_common_aptitude = yes
-            has_mana_2 = yes
+            has_mana_1 = yes
+            NOT = {
+                has_modifier_spell_effect = {
+                    MODIFIER = disguise
+                }
+            }
         }
 		
-        lose_mana_2 = yes
-        army_tradition_spell_effect = yes
-        navy_tradition_spell_effect = yes
+        lose_mana_1 = yes
+        apply_modifier_spell_effect = {
+            MODIFIER = disguise
+        }
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.11.option.focus_magic.invalid
+		name = wwu_magic_voodoo_menu.11.option.disguise.invalid
         
         trigger = {
             OR = {
                 NOT = { has_common_aptitude = yes }
-                has_less_than_2_mana = yes
+                has_less_than_1_mana = yes
+                has_modifier_spell_effect = {
+                    MODIFIER = disguise
+                }
             }
         }
 		
         # Invalid Message
         if = {
             limit = {
-                has_less_than_2_mana = yes
+                has_less_than_1_mana = yes
             }
             custom_tooltip = MANA_IS_TOO_LOW
         }
@@ -541,6 +523,14 @@ country_event = {
             }
             custom_tooltip = APTITUDE_IS_TOO_LOW
         }
+        else_if = {
+            limit = {
+                has_modifier_spell_effect = {
+                    MODIFIER = disguise
+                }
+            }
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
+        }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
         }
@@ -548,87 +538,10 @@ country_event = {
         # Preview
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
-            lose_mana_2 = yes
-            army_tradition_spell_effect = yes
-            navy_tradition_spell_effect = yes
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    
-    #-------------------------
-    # Common - Mirror Image
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.mirror_image
-        
-        trigger = {
-            has_mana_2 = yes
-            has_common_aptitude = yes
-            any_owned_province = {
-                NOT = { culture = ROOT }
+            lose_mana_1 = yes
+            apply_modifier_spell_effect = {
+                MODIFIER = disguise
             }
-        }
-		
-        lose_mana_2 = yes
-        mirror_image_effect = yes
-        
-        country_event = { id = wwu_magic_effect.20 }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.10.option.mirror_image.invalid
-        
-        trigger = {
-            OR = {
-                has_less_than_2_mana = yes  
-                NOT = { has_common_aptitude = yes }
-                NOT = {
-                    any_owned_province = {
-                        NOT = { religion = ROOT }
-                    }
-                }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_2_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                NOT = {
-                    any_owned_province = {
-                        NOT = { religion = ROOT }
-                    }
-                }
-            }
-            custom_tooltip = NO_WRONG_RELIGION_PROVINCES
-        }
-        else_if = {
-            limit = {
-                NOT = { has_common_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        
-        tooltip = {
-            lose_mana_2 = yes
-            custom_tooltip = MIRROR_IMAGE_FAKE_EFFECT
         }
         
         ai_chance = {
@@ -657,117 +570,75 @@ country_event = {
 	id = wwu_magic_voodoo_menu.12
 	title = wwu_magic_voodoo_menu.12.title
 	desc = wwu_magic_voodoo_menu.12.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
     trigger = {
         has_ruler_modifier = spellcaster_capabilities
     }
-
-    #-------------------------
-    # Rare - Summon Portals
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.12.option.summon_portals
-        
-        trigger = {
-            has_rare_aptitude = yes
-            has_mana_1 = yes
-            NOT = {
-                has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
-                }
-            }
-        }
-		
-        lose_mana_1 = yes
-        apply_modifier_spell_effect = {
-            MODIFIER = summon_portals
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.12.option.summon_portals.invalid
-        
-        trigger = {
-            OR = {
-                NOT = { has_rare_aptitude = yes }
-                has_less_than_1_mana = yes
-                has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
-                }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_1_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                NOT = { has_rare_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                has_modifier_spell_effect = {
-                    MODIFIER = summon_portals
-                }
-            }
-            custom_tooltip = SPELL_IS_ON_COOLDOWN
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        tooltip = {
-            lose_mana_1 = yes
-            apply_modifier_spell_effect = {
-                MODIFIER = summon_portals
-            }
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
     
     #-------------------------
-    # Rare - Display Prowess
+    # Advanced - Curse of Weakness
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.12.option.display_prowess
+		name = wwu_magic_voodoo_menu.12.option.curse_of_weakness
         
         trigger = {
-            has_dlc = "Mandate of Heaven"
             has_rare_aptitude = yes
             has_mana_2 = yes
+            NOT = { has_country_modifier = curse_of_weakness_timer }
+            NOT = { 
+                has_modifier_spell_effect = {
+                    MODIFIER = curse_of_weakness
+                }
+            }
         }
 		
         lose_mana_2 = yes
-        splendor_spell_effect = yes
+        custom_tooltip = CURSE_OF_WEAKNESS_TT
+        tooltip = {
+            apply_modifier_spell_effect = {
+                MODIFIER = curse_of_weakness
+            }
+        }
+        
+        scaled_magic_timer_tooltip_effect = {
+            TOOLTIP_LEGENDARY = CURSE_OF_WEAKNESS_5_TT
+            TOOLTIP_EPIC = CURSE_OF_WEAKNESS_4_TT
+            TOOLTIP_RARE = CURSE_OF_WEAKNESS_3_TT
+            TOOLTIP_COMMON = CURSE_OF_WEAKNESS_2_TT
+            TOOLTIP_POOR = CURSE_OF_WEAKNESS_1_TT
+        }
+        hidden_effect = {
+            scaled_magic_modifier_timer_effect = {
+                MODIFIER = curse_of_weakness_timer
+                TIME_LEGENDARY = 3650
+                TIME_EPIC = 2920
+                TIME_RARE = 2190
+                TIME_COMMON = 1460
+                TIME_POOR = 730
+            }
+        }
         
         ai_chance = {
             factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                is_at_war = no
+            }
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.12.option.display_prowess.invalid
+		name = wwu_magic_voodoo_menu.12.option.curse_of_weakness.invalid
         
         trigger = {
             OR = {
-                NOT = { has_rare_aptitude = yes }
                 has_less_than_2_mana = yes
+                has_country_modifier = curse_of_weakness_timer
+                NOT = { has_rare_aptitude = yes }
             }
         }
 		
@@ -777,6 +648,12 @@ country_event = {
                 has_less_than_2_mana = yes
             }
             custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                has_country_modifier = curse_of_weakness_timer
+            }
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
         }
         else_if = {
             limit = {
@@ -792,7 +669,169 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_2 = yes
-            splendor_spell_effect = yes
+            custom_tooltip = CURSE_OF_WEAKNESS_TT
+            
+            tooltip = {
+                apply_modifier_spell_effect = {
+                    MODIFIER = curse_of_weakness
+                }
+            }
+            
+            scaled_magic_timer_tooltip_effect = {
+                TOOLTIP_LEGENDARY = CURSE_OF_WEAKNESS_5_TT
+                TOOLTIP_EPIC = CURSE_OF_WEAKNESS_4_TT
+                TOOLTIP_RARE = CURSE_OF_WEAKNESS_3_TT
+                TOOLTIP_COMMON = CURSE_OF_WEAKNESS_2_TT
+                TOOLTIP_POOR = CURSE_OF_WEAKNESS_1_TT
+            }
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Rare - Zombify
+    #-------------------------
+    option = {
+		name = wwu_magic_voodoo_menu.12.option.zombify
+        
+        trigger = {
+            has_rare_aptitude = yes
+            has_mana_2 = yes
+            NOT = {
+                has_modifier_spell_effect = {
+                    MODIFIER = zombify
+                }
+            }
+        }
+		
+        lose_mana_2 = yes
+        apply_modifier_spell_effect = {
+            MODIFIER = zombify
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_voodoo_menu.12.option.zombify.invalid
+        
+        trigger = {
+            OR = {
+                NOT = { has_rare_aptitude = yes }
+                has_less_than_2_mana = yes
+                has_modifier_spell_effect = {
+                    MODIFIER = zombify
+                }
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { has_rare_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                has_modifier_spell_effect = {
+                    MODIFIER = zombify
+                }
+            }
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_2 = yes
+            apply_modifier_spell_effect = {
+                MODIFIER = zombify
+            }
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Common - Mass Hex
+    #-------------------------
+    option = {
+		name = wwu_magic_voodoo_menu.12.option.mass_hex
+        
+        trigger = {
+            has_rare_aptitude = yes
+            has_mana_2 = yes
+            any_owned_province = {
+                NOT = { religion = ROOT }
+            }
+        }
+		
+        lose_mana_2 = yes
+        mass_hex_effect = yes
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    option = {
+		name = wwu_magic_voodoo_menu.12.option.mass_hex.invalid
+        
+        trigger = {
+            OR = {
+                NOT = { has_rare_aptitude = yes }
+                has_less_than_2_mana = yes
+                all_owned_province = {
+                    religion = ROOT
+                }
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_2_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { has_rare_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                all_owned_province = {
+                    religion = ROOT
+                }
+            }
+            custom_tooltip = NO_WRONG_RELIGION
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_2 = yes
+            mass_hex_effect = yes
         }
         
         ai_chance = {
@@ -821,7 +860,7 @@ country_event = {
 	id = wwu_magic_voodoo_menu.13
 	title = wwu_magic_voodoo_menu.13.title
 	desc = wwu_magic_voodoo_menu.13.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
@@ -830,10 +869,10 @@ country_event = {
     }
 
     #-------------------------
-    # Epic - Transmute Gold
+    # Epic - Resurrect Dire Troll
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.13.option.transmute_gold
+		name = wwu_magic_voodoo_menu.13.option.resurrect_dire_troll
         
         trigger = {
             has_epic_aptitude = yes
@@ -841,14 +880,14 @@ country_event = {
         }
 		
         lose_mana_3 = yes
-        years_of_income_spell_effect = yes
+        resurrect_dire_troll_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.13.option.transmute_gold.invalid
+		name = wwu_magic_voodoo_menu.13.option.resurrect_dire_troll.invalid
         
         trigger = {
             OR = {
@@ -878,7 +917,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_3 = yes
-            years_of_income_spell_effect = yes
+            resurrect_dire_troll_effect = yes
         }
         
         ai_chance = {
@@ -887,107 +926,24 @@ country_event = {
 	}
     
     #-------------------------
-    # Epic - Temporal Sight
+    # Epic - Enhance Weaponry
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.13.option.temporal_sight
+		name = wwu_magic_voodoo_menu.13.option.enhance_weaponry
         
         trigger = {
             has_epic_aptitude = yes
             has_mana_3 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
+                    MODIFIER = enhance_weaponry
                 }
             }
         }
 
         lose_mana_3 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = temporal_sight
-        }
-        
-        ai_chance = {
-            factor = 1
-            
-            modifier = {
-                factor = 0
-                
-                NOT = { corruption = 10 }
-            }
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.13.option.temporal_sight.invalid
-        
-        trigger = {
-            OR = {
-                NOT = { has_epic_aptitude = yes }
-                has_less_than_3_mana = yes
-                has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
-                }
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_3_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                NOT = { has_epic_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                has_modifier_spell_effect = {
-                    MODIFIER = temporal_sight
-                }
-            }
-            custom_tooltip = SPELL_IS_ON_COOLDOWN
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        tooltip = {
-            lose_mana_3 = yes
-            apply_modifier_spell_effect = {
-                MODIFIER = temporal_sight
-            }
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
-    
-    #-------------------------
-    # Epic - Touch of the Magi
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.13.option.touch_of_the_magi
-        
-        trigger = {
-            has_epic_aptitude = yes
-            has_mana_3 = yes
-            NOT = {
-                has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
-                }
-            }
-        }
-
-        lose_mana_3 = yes
-        apply_modifier_spell_effect = {
-            MODIFIER = touch_of_the_magi
+            MODIFIER = enhance_weaponry
         }
         
         ai_chance = {
@@ -1001,14 +957,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.13.option.touch_of_the_magi.invalid
+		name = wwu_magic_voodoo_menu.13.option.enhance_weaponry.invalid
         
         trigger = {
             OR = {
                 NOT = { has_epic_aptitude = yes }
                 has_less_than_3_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
+                    MODIFIER = enhance_weaponry
                 }
             }
         }
@@ -1029,7 +985,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = touch_of_the_magi
+                    MODIFIER = enhance_weaponry
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -1043,7 +999,90 @@ country_event = {
         tooltip = {
             lose_mana_3 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = touch_of_the_magi
+                MODIFIER = enhance_weaponry
+            }
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+    
+    #-------------------------
+    # Epic - Enhance Armor
+    #-------------------------
+    option = {
+		name = wwu_magic_voodoo_menu.13.option.enhance_armor
+        
+        trigger = {
+            has_epic_aptitude = yes
+            has_mana_3 = yes
+            NOT = {
+                has_modifier_spell_effect = {
+                    MODIFIER = enhance_armor
+                }
+            }
+        }
+
+        lose_mana_3 = yes
+        apply_modifier_spell_effect = {
+            MODIFIER = enhance_armor
+        }
+        
+        ai_chance = {
+            factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { is_at_war = yes }
+            }
+        }
+	}
+    option = {
+		name = wwu_magic_voodoo_menu.13.option.enhance_armor.invalid
+        
+        trigger = {
+            OR = {
+                NOT = { has_epic_aptitude = yes }
+                has_less_than_3_mana = yes
+                has_modifier_spell_effect = {
+                    MODIFIER = enhance_armor
+                }
+            }
+        }
+		
+        # Invalid Message
+        if = {
+            limit = {
+                has_less_than_3_mana = yes
+            }
+            custom_tooltip = MANA_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                NOT = { has_epic_aptitude = yes }
+            }
+            custom_tooltip = APTITUDE_IS_TOO_LOW
+        }
+        else_if = {
+            limit = {
+                has_modifier_spell_effect = {
+                    MODIFIER = enhance_armor
+                }
+            }
+            custom_tooltip = SPELL_IS_ON_COOLDOWN
+        }
+        else = {
+            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
+        }
+        
+        # Preview
+        custom_tooltip = PREVIEW_SPELL
+        tooltip = {
+            lose_mana_3 = yes
+            apply_modifier_spell_effect = {
+                MODIFIER = enhance_armor
             }
         }
         
@@ -1073,7 +1112,7 @@ country_event = {
 	id = wwu_magic_voodoo_menu.14
 	title = wwu_magic_voodoo_menu.14.title
 	desc = wwu_magic_voodoo_menu.14.desc
-	picture = MAGIC_TOME_eventPicture
+	picture = VOODOO_DOCTOR_eventPicture
     
 	is_triggered_only = yes
     
@@ -1082,24 +1121,24 @@ country_event = {
     }
 
     #-------------------------
-    # Legendary - Alter Time
+    # Legendary - Healing Wave
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.14.option.alter_time
+		name = wwu_magic_voodoo_menu.14.option.healing_wave
         
         trigger = {
             has_legendary_aptitude = yes
-            has_mana_4 = yes
+            has_mana_2 = yes
             NOT = {
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = healing_wave
                 }
             }
         }
 
-        lose_mana_4 = yes
+        lose_mana_2 = yes
         apply_modifier_spell_effect = {
-            MODIFIER = alter_time
+            MODIFIER = healing_wave
         }
         
         ai_chance = {
@@ -1107,14 +1146,14 @@ country_event = {
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.14.option.alter_time.invalid
+		name = wwu_magic_voodoo_menu.14.option.healing_wave.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
-                has_less_than_4_mana = yes
+                has_less_than_2_mana = yes
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = healing_wave
                 }
             }
         }
@@ -1122,7 +1161,7 @@ country_event = {
         # Invalid Message
         if = {
             limit = {
-                has_less_than_4_mana = yes
+                has_less_than_2_mana = yes
             }
             custom_tooltip = MANA_IS_TOO_LOW
         }
@@ -1135,7 +1174,7 @@ country_event = {
         else_if = {
             limit = {
                 has_modifier_spell_effect = {
-                    MODIFIER = alter_time
+                    MODIFIER = healing_wave
                 }
             }
             custom_tooltip = SPELL_IS_ON_COOLDOWN
@@ -1149,7 +1188,7 @@ country_event = {
         tooltip = {
             lose_mana_4 = yes
             apply_modifier_spell_effect = {
-                MODIFIER = alter_time
+                MODIFIER = healing_wave
             }
         }
         
@@ -1159,10 +1198,10 @@ country_event = {
 	}
     
     #-------------------------
-    # Legendary - Presence of Mind
+    # Legendary - Drain Power
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.14.option.presence_of_mind
+		name = wwu_magic_voodoo_menu.14.option.drain_power
         
         trigger = {
             has_legendary_aptitude = yes
@@ -1170,14 +1209,14 @@ country_event = {
         }
 		
         lose_mana_4 = yes
-        monarch_power_spell_effect = yes
+        drain_power_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.14.option.presence_of_mind.invalid
+		name = wwu_magic_voodoo_menu.14.option.drain_power.invalid
         
         trigger = {
             OR = {
@@ -1207,7 +1246,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_4 = yes
-            monarch_power_spell_effect = yes
+            drain_power_effect = yes
         }
         
         ai_chance = {
@@ -1216,38 +1255,35 @@ country_event = {
 	}
     
     #-------------------------
-    # Cataclysmic - Mind Surge
+    # Legendary - Big Bad Voodoo
     #-------------------------
     option = {
-		name = wwu_magic_voodoo_menu.14.option.mind_surge
+		name = wwu_magic_voodoo_menu.14.option.big_bad_voodoo
         
         trigger = {
             has_legendary_aptitude = yes
             has_mana_5 = yes
-            NOT = { adm_tech = 39 }
-            NOT = { dip_tech = 39 }
-            NOT = { mil_tech = 39 }
+            any_owned_province = {
+                NOT = { is_core = ROOT }
+            }
         }
 		
         lose_mana_5 = yes
-        cataclysmic_effect = yes
-        random_tech_spell_effect = yes
+        big_bad_voodoo_effect = yes
         
         ai_chance = {
             factor = 1
         }
 	}
     option = {
-		name = wwu_magic_voodoo_menu.14.option.mind_surge.invalid
+		name = wwu_magic_voodoo_menu.14.option.big_bad_voodoo.invalid
         
         trigger = {
             OR = {
                 NOT = { has_legendary_aptitude = yes }
                 has_less_than_5_mana = yes
-                AND = {
-                    adm_tech = 39
-                    dip_tech = 39
-                    mil_tech = 39
+                all_owned_province = {
+                    is_core = ROOT
                 }
             }
         }
@@ -1267,13 +1303,11 @@ country_event = {
         }
         else_if = {
             limit = {
-                AND = {
-                    adm_tech = 39
-                    dip_tech = 39
-                    mil_tech = 39
+                all_owned_province = {
+                    is_core = ROOT
                 }
             }
-            custom_tooltip = TECH_IS_AT_MAX
+            custom_tooltip = NO_UNCORED_PROVINCES
         }
         else = {
             custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
@@ -1283,8 +1317,7 @@ country_event = {
         custom_tooltip = PREVIEW_SPELL
         tooltip = {
             lose_mana_5 = yes
-            cataclysmic_effect = yes
-            random_tech_spell_effect = yes
+            big_bad_voodoo_effect = yes
         }
         
         ai_chance = {
@@ -1292,78 +1325,6 @@ country_event = {
         }
 	}
     
-    #-------------------------
-    # Cataclysmic - Ascendance
-    #-------------------------
-    option = {
-		name = wwu_magic_voodoo_menu.14.option.ascendance
-        
-        trigger = {
-            has_legendary_aptitude = yes
-            has_mana_5 = yes
-            NOT = { has_leader = "Ascended Commander" }
-        }
-		
-        lose_mana_5 = yes
-        cataclysmic_effect = yes
-        ascendance_effect = yes
-        
-        ai_chance = {
-            factor = 1
-            
-            modifier = {
-                factor = 0
-                
-                NOT = { is_at_war = yes }
-            }
-        }
-	}
-    option = {
-		name = wwu_magic_voodoo_menu.14.option.ascendance.invalid
-        
-        trigger = {
-            OR = {
-                NOT = { has_legendary_aptitude = yes }
-                has_less_than_5_mana = yes
-                has_leader = "Ascended Commander"
-            }
-        }
-		
-        # Invalid Message
-        if = {
-            limit = {
-                has_less_than_5_mana = yes
-            }
-            custom_tooltip = MANA_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                NOT = { has_legendary_aptitude = yes }
-            }
-            custom_tooltip = APTITUDE_IS_TOO_LOW
-        }
-        else_if = {
-            limit = {
-                has_leader = "Ascended Commander"
-            }
-            custom_tooltip = ASCENDED_COMMANDER_ALREADY_PRESENT
-        }
-        else = {
-            custom_tooltip = YOU_CANNOT_USE_THIS_SPELL_CURRENTLY
-        }
-        
-        # Preview
-        custom_tooltip = PREVIEW_SPELL
-        tooltip = {
-            lose_mana_5 = yes
-            cataclysmic_effect = yes
-            ascendance_effect = yes
-        }
-        
-        ai_chance = {
-            factor = 1
-        }
-	}
     
     # Exit
     option = {

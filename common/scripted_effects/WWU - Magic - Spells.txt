@@ -27,6 +27,199 @@
 # religious_power_spell_effect
 
 #------------------------
+# On Actions
+#------------------------
+magic_on_battle_won = {
+    # Curse of Weakness
+    if = {
+        limit = {
+            has_country_modifier = curse_of_weakness_timer
+        }
+        
+        save_event_target_as = caster
+        
+        FROM = {
+            save_event_target_as = victim
+            country_event = { id = wwu_magic_notification_event.10 }
+        }
+    }
+}
+
+#------------------------
+# Enemy-oriented Effect
+#------------------------
+# ROOT is enemy, FROM is caster
+apply_modifier_spell_enemy_effect = {    
+    scaled_magic_modifier_enemy_effect = {
+        MODIFIER_POOR       = $MODIFIER$_poor
+        MODIFIER_COMMON     = $MODIFIER$_common
+        MODIFIER_RARE       = $MODIFIER$_rare
+        MODIFIER_EPIC       = $MODIFIER$_epic
+        MODIFIER_LEGENDARY  = $MODIFIER$_legendary
+    }
+}
+
+# ROOT = caster, FROM = enemy
+scaled_magic_modifier_enemy_effect = {
+    # Legendary
+    if = {
+        limit = {
+            event_target:caster = { has_legendary_finesse = yes }
+            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_LEGENDARY$ } }
+        }
+        
+        event_target:victim = { 
+            add_country_modifier = {
+                name = $MODIFIER_LEGENDARY$
+                duration = -1
+            }
+        }
+    }
+    # Epic
+    else_if = {
+        limit = {
+            event_target:caster = { has_epic_finesse = yes }
+            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_EPIC$ } }
+        }
+        
+        event_target:victim = { 
+            add_country_modifier = {
+                name = $MODIFIER_EPIC$
+                duration = -1
+            }
+        }
+    }
+    # Rare
+    else_if = {
+        limit = {
+            event_target:caster = { has_rare_finesse = yes }
+            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_RARE$ } }
+        }
+        
+        event_target:victim = { 
+            add_country_modifier = {
+                name = $MODIFIER_RARE$
+                duration = -1
+            }
+        }
+    }
+    # Common
+    else_if = {
+        limit = {
+            event_target:caster = { has_common_finesse = yes }
+            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_COMMON$ } }
+        }
+        
+        event_target:victim = { 
+            add_country_modifier = {
+                name = $MODIFIER_COMMON$
+                duration = -1
+            }
+        }
+    }
+    # Poor
+    else_if = {
+        limit = {
+            event_target:caster = { has_poor_finesse = yes }
+            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_POOR$ } }
+        }
+        
+        event_target:victim = { 
+            add_country_modifier = {
+                name = $MODIFIER_POOR$
+                duration = -1
+            }
+        }
+    }
+}
+
+scaled_magic_timer_tooltip_effect = {
+    if = {
+        limit = {
+            has_legendary_concentration = yes
+        }
+        
+        custom_tooltip = $TOOLTIP_LEGENDARY$
+    }
+    else_if = {
+        limit = {
+            has_epic_concentration = yes
+        }
+        
+        custom_tooltip = $TOOLTIP_EPIC$
+    }
+    else_if = {
+        limit = {
+            has_rare_concentration = yes
+        }
+        
+        custom_tooltip = $TOOLTIP_RARE$
+    }
+    else_if = {
+        limit = {
+            has_common_concentration = yes
+        }
+        
+        custom_tooltip = $TOOLTIP_COMMON$
+    }
+    else_if = {
+        limit = {
+            has_poor_concentration = yes
+        }
+        
+        custom_tooltip = $TOOLTIP_POOR$
+    }
+}
+
+scaled_magic_modifier_timer_effect = {
+    if = {
+        limit = {
+            has_legendary_concentration = yes
+        }
+        add_ruler_modifier = {
+            name = $MODIFIER$
+            duration = $TIME_LEGENDARY$
+        }
+    }
+    else_if = {
+        limit = {
+            has_epic_concentration = yes
+        }
+        add_ruler_modifier = {
+            name = $MODIFIER$
+            duration = $TIME_EPIC$
+        }
+    }
+    else_if = {
+        limit = {
+            has_rare_concentration = yes
+        }
+        add_ruler_modifier = {
+            name = $MODIFIER$
+            duration = $TIME_RARE$
+        }
+    }
+    else_if = {
+        limit = {
+            has_common_concentration = yes
+        }
+        add_ruler_modifier = {
+            name = $MODIFIER$
+            duration = $TIME_COMMON$
+        }
+    }
+    else_if = {
+        limit = {
+            has_poor_concentration = yes
+        }
+        add_ruler_modifier = {
+            name = $MODIFIER$
+            duration = $TIME_POOR$
+        }
+    }
+}
+
+#------------------------
 # Utility
 #------------------------
 scaled_magic_modifier_effect = {
@@ -358,7 +551,6 @@ evocation_cooldown_effect = {
 #-----------------------------
 # Shared
 #-----------------------------
-
 # Adds modifier based on ruler Aptitude, with its duration determined by Concentration, and its potency by Finesse
 apply_modifier_spell_effect = {    
     scaled_magic_modifier_effect = {
@@ -2059,6 +2251,356 @@ touch_of_death_effect = {
 #-----------------------------
 # Voodoo
 #-----------------------------
+# Sacrifice Victims
+sacrifice_victims_effect = {
+    add_yearly_manpower = -0.5
+    
+    custom_tooltip = EVOCATION_TT
+    
+    hidden_effect = {
+        evocation_cooldown_effect = {
+            MODIFIER            = evocation_cooldown
+            DURATION_POOR       = 1825
+            DURATION_COMMON     = 1460
+            DURATION_RARE       = 1095
+            DURATION_EPIC       = 730
+            DURATION_LEGENDARY  = 365
+        }
+    }
+}
+
+curse_of_weakness_effect = {
+    # Legendary
+    if = {
+        limit = {
+            has_legendary_finesse = yes
+        }
+        
+        custom_tooltip = CURSE_OF_WEAKNESS_5_EFFECT_TT
+    }
+    # Epic
+    else_if = {
+        limit = {
+            has_epic_finesse = yes
+        }
+        
+        custom_tooltip = CURSE_OF_WEAKNESS_4_EFFECT_TT
+    }
+    # Rare
+    else_if = {
+        limit = {
+            has_rare_finesse = yes
+        }
+        
+        custom_tooltip = CURSE_OF_WEAKNESS_3_EFFECT_TT
+    }
+    # Common
+    else_if = {
+        limit = {
+            has_common_finesse = yes
+        }
+        
+        custom_tooltip = CURSE_OF_WEAKNESS_2_EFFECT_TT
+    }
+    # Poor
+    else_if = {
+        limit = {
+            has_poor_finesse = yes
+        }
+        
+        custom_tooltip = CURSE_OF_WEAKNESS_1_EFFECT_TT
+    }
+}
+
+drain_power_effect = {
+    custom_tooltip = KILL_ENEMY_UNITS_IN_COUNTRY_TT
+    
+    hidden_effect = {
+        every_owned_province = {
+            kill_units = {
+                who = enemy
+            }
+        }
+    }
+}
+
+mass_hex_effect = {
+    # Legendary
+    if = {
+        limit = {
+            has_legendary_finesse = yes
+        }
+        
+        custom_tooltip = MASS_HEX_EFFECT_5_TT
+    }
+    # Epic
+    else_if = {
+        limit = {
+            has_epic_finesse = yes
+        }
+        
+        custom_tooltip = MASS_HEX_EFFECT_4_TT
+    }
+    # Rare
+    else_if = {
+        limit = {
+            has_rare_finesse = yes
+        }
+        
+        custom_tooltip = MASS_HEX_EFFECT_3_TT
+    }
+    # Common
+    else_if = {
+        limit = {
+            has_common_finesse = yes
+        }
+        
+        custom_tooltip = MASS_HEX_EFFECT_2_TT
+    }
+    # Poor
+    else_if = {
+        limit = {
+            has_poor_finesse = yes
+        }
+        
+        custom_tooltip = MASS_HEX_EFFECT_1_TT
+    }
+
+    
+    hidden_effect = {
+        # Legendary
+        if = {
+            limit = {
+                has_legendary_finesse = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+        }
+        # Epic
+        else_if = {
+            limit = {
+                has_epic_finesse = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+        }
+        # Rare
+        else_if = {
+            limit = {
+                has_rare_finesse = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+        }
+        # Common
+        else_if = {
+            limit = {
+                has_common_finesse = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+        }
+        # Poor
+        else_if = {
+            limit = {
+                has_poor_finesse = yes
+            }
+            
+            random_owned_province = {
+                limit = {
+                    NOT = { religion = ROOT }
+                }
+                
+                change_religion = ROOT
+            }
+        }
+    }
+}
+
+resurrect_dire_troll_effect = {
+    custom_tooltip = RESURRECT_DIRE_TROLL_EFFECT_TT
+    
+    hidden_effect = {
+        # Legendary
+        if = {
+            limit = {
+                has_legendary_finesse = yes
+            }
+            
+            define_general = {
+                name = "Dire Troll"
+                fire = 6
+                shock = 6
+                manuever = 6
+                siege = 6
+            }
+        }
+        # Epic
+        else_if = {
+            limit = {
+                has_epic_finesse = yes
+            }
+            
+            define_general = {
+                name = "Dire Troll"
+                fire = 5
+                shock = 5
+                manuever = 5
+                siege = 5
+            }
+        }
+        # Rare
+        else_if = {
+            limit = {
+                has_rare_finesse = yes
+            }
+            
+            define_general = {
+                name = "Dire Troll"
+                fire = 4
+                shock = 4
+                manuever = 4
+                siege = 4
+            }
+        }
+        # Common
+        else_if = {
+            limit = {
+                has_common_finesse = yes
+            }
+            
+            define_general = {
+                name = "Dire Troll"
+                fire = 3
+                shock = 3
+                manuever = 3
+                siege = 4
+            }
+        }
+        # Poor
+        else_if = {
+            limit = {
+                has_poor_finesse = yes
+            }
+            
+            define_general = {
+                name = "Dire Troll"
+                fire = 2
+                shock = 2
+                manuever = 2
+                siege = 4
+            }
+        }
+    }
+}
+
+big_bad_voodoo_effect = {
+    custom_tooltip = BIG_BAD_VOODOO_EFFECT_TT
+    
+    hidden_effect = {
+        every_owned_province = {
+            limit = {
+                NOT = { is_core = ROOT }
+            }
+            
+            add_core = ROOT
+        }
+    }
+}
 
 #-----------------------------
 # Nature
@@ -2254,7 +2796,7 @@ harmony_spell_effect = {
 }
 
 #-----------------------------
-# Ancient
+# Corruption
 #-----------------------------
 
 #-----------------------------
@@ -2262,7 +2804,7 @@ harmony_spell_effect = {
 #-----------------------------
 
 #-----------------------------
-# Titan
+# Titanic
 #-----------------------------
 
 #-----------------------------
