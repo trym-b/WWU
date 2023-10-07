@@ -1343,7 +1343,26 @@ on_monthly_pulse = {
 		log = "DEBUG - [Root.GetName]: on_monthly_pulse "
 	}
     
-    # TODO: tidy these up
+    #----------------------------
+    # Effects: Global
+    #----------------------------
+    # Run only once (on the player).
+    if = {
+        limit = {
+            ai = no
+        }
+        
+        # Story Flag Assignment/Removal
+        update_story_state = yes
+        
+        # Faction Government Mechanics
+        update_faction_government_mechanics = yes
+    }
+    
+    #----------------------------
+    # Effects: Country
+    #----------------------------
+    # Run for each country.
     
     # Random Seed
     set_random_seed_flags = yes
@@ -1360,9 +1379,6 @@ on_monthly_pulse = {
     # Subject Integration
     subject_annexation_effect = yes
     
-    # Faction Government Mechanics
-    update_faction_government_mechanics = yes
-    
     # Artifact Modifier Assignment/Removal
     update_artifact_modifier_assignment = yes
     
@@ -1375,8 +1391,8 @@ on_monthly_pulse = {
     # Civilization Modifier Assignment/Removal
     update_civilization_assignment = yes
     
-    # Story Flag Assignment/Removal
-    update_story_state = yes
+    # Nerubian Tunnel Network
+    update_nerubian_tunnel_network = yes
     
     # Factions
     update_faction_state = yes
@@ -1384,27 +1400,10 @@ on_monthly_pulse = {
     # Misc Modifier Assignment/Removal
     update_monthly_modifiers = yes
     
-    # Nerubian Tunnel Network
-    update_nerubian_tunnel_network = yes
-    
+    #----------------------------
+    # Events
+    #----------------------------
     events = {
-        # Factions
-        wwu_faction_system_government.1 # Promotion - Alliance
-        wwu_faction_system_government.2 # Promotion - Horde
-        wwu_faction_system_government.3 # Promotion - Old Horde
-        wwu_faction_system_government.4 # Promotion - Old Horde (Gorian)
-        wwu_faction_system_government.5 # Promotion - Trade Coalition
-        wwu_faction_system_government.6 # Promotion - Dragon Aspects
-        
-        wwu_faction_system_government.10 # Demotion - Alliance
-        wwu_faction_system_government.11 # Demotion - Horde
-        wwu_faction_system_government.12 # Demotion - Old Horde
-        wwu_faction_system_government.13 # Demotion - Trade Coalition
-        wwu_faction_system_government.14 # Demotion - Dragon Aspects
-        
-        # Religion
-        wwu_religion.2
-        
         # Raid
         wwu_raid.4
         wwu_raid.5
@@ -1540,10 +1539,6 @@ on_monthly_pulse = {
         
         # Lordaeron Survivors
         wwu_lordaeron_survivors.1
-        
-        # Hold System
-        #wwu_hold_system.101
-        #wwu_hold_system.110
     }
 }
 
@@ -1553,8 +1548,12 @@ on_yearly_pulse = {
 		log = "DEBUG - [Root.GetName]: on_yearly_pulse "
 	}
     
+    #----------------------------
+    # Global
+    #----------------------------
+    # Run only once (on the player).
+    
     # Trade Good Price Swing
-    # Only do this for the player so it occurs once
     if = {
         limit = {
             ai = no
@@ -1563,14 +1562,11 @@ on_yearly_pulse = {
         randomise_goods_price = yes
     }
 	
-	# Do not want it to be checked on every month due to performance
-	if = {
-		limit = {
-			has_country_flag = unified_dwarf
-			is_at_war = yes
-		}
-		country_event = { id = wwu_dwarf.11 days = 31 random = 31 }
-	}
+    #----------------------------
+    # Country
+    #----------------------------
+    # world
+    update_world_state = yes
     
     # Balance of Power
     update_balance_of_power_modifiers = yes
@@ -1579,6 +1575,20 @@ on_yearly_pulse = {
     update_mercenary_availability = yes
     
     events = {
+        # Factions
+        wwu_faction_system_government.1 # Promotion - Alliance
+        wwu_faction_system_government.2 # Promotion - Horde
+        wwu_faction_system_government.3 # Promotion - Old Horde
+        wwu_faction_system_government.4 # Promotion - Old Horde (Gorian)
+        wwu_faction_system_government.5 # Promotion - Trade Coalition
+        wwu_faction_system_government.6 # Promotion - Dragon Aspects
+        
+        wwu_faction_system_government.10 # Demotion - Alliance
+        wwu_faction_system_government.11 # Demotion - Horde
+        wwu_faction_system_government.12 # Demotion - Old Horde
+        wwu_faction_system_government.13 # Demotion - Trade Coalition
+        wwu_faction_system_government.14 # Demotion - Dragon Aspects
+        
         # Religion Manager
         wwu_religion_manager.100
         

@@ -87,12 +87,31 @@ country_event = {
                 OR = {
                     is_subject_of_type = march
                     is_subject_of_type = tributary_vassal
+                    is_subject_of_type = subjugated_vassal
                 }
             }
-            adm_power = 250
+            if = {
+                limit = {
+                    is_subject_of_type = subjugated_vassal
+                }
+                
+                adm_power = 400
+            }
+            else = {
+                adm_power = 250
+            }
         }
         
-        add_adm_power = -250
+        if = {
+            limit = {
+                is_subject_of_type = subjugated_vassal
+            }
+            
+            add_adm_power = -400
+        }
+        else = {
+            add_adm_power = -250
+        }
         
         create_subject = {
             subject_type = vassal
@@ -127,9 +146,19 @@ country_event = {
                 OR = {
                     is_subject_of_type = march
                     is_subject_of_type = tributary_vassal
+                    is_subject_of_type = subjugated_vassal
                 }
             }
-            NOT = { adm_power = 250 }
+            if = {
+                limit = {
+                    is_subject_of_type = subjugated_vassal
+                }
+                
+                NOT = { adm_power = 400 }
+            }
+            else = {
+                NOT = { adm_power = 250 }
+            }
         }
         
         custom_tooltip = MAKE_VASSAL_COST_INVALID_TT
