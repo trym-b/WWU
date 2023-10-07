@@ -21,13 +21,22 @@ kul_tiran_house_feud = {
 	}
 	
 	can_end = {
-        custom_trigger_tooltip = {
-            tooltip = HOUSE_FEUD_OVER_TT
-            
-            had_country_flag = {
-                flag = house_feud_timer
-                days = 18250
+        OR = {
+            custom_trigger_tooltip = {
+                tooltip = HOUSE_FEUD_OVER_TT
+                
+                had_country_flag = {
+                    flag = house_feud_timer
+                    days = 18250
+                }
             }
+            AND = {
+                NOT = { has_faction = faction_house_proudmoore }
+                NOT = { has_faction = faction_house_stormsong }
+                NOT = { has_faction = faction_house_ashvane }
+                NOT = { has_faction = faction_house_waycrest }
+            }
+            NOT = { has_country_flag = house_feud_timer }
         }
 	}
 	
