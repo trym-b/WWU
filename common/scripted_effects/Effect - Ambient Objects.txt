@@ -1,62 +1,56 @@
 # Checked every month
 update_ambient_objects = {
+    # Scourge Mushrooms
     if = {
         limit = {
-            ai = no
+            NOT = { has_global_flag = ao_scourge_mushrooms }
+            
+            has_global_flag = scourge_of_lordaeron_flag
         }
         
-        # Scourge Mushrooms
-        if = {
-            limit = {
-                NOT = { has_global_flag = ao_scourge_mushrooms }
-                
-                has_global_flag = scourge_of_lordaeron_flag
-            }
-            
-            set_global_flag = ao_scourge_mushrooms
-            
-            # Show the Plaguewood ambient objects
-            show_ambient_object = big_orange_mushroom_1
-            show_ambient_object = big_orange_mushroom_2
-            show_ambient_object = big_orange_mushroom_3
-            show_ambient_object = big_orange_mushroom_4
-            show_ambient_object = big_orange_mushroom_5
-            show_ambient_object = big_orange_mushroom_6
-            
-            show_ambient_object = big_purple_mushroom_1
-            show_ambient_object = big_purple_mushroom_2
-            show_ambient_object = big_purple_mushroom_3
-            show_ambient_object = big_purple_mushroom_4
-            show_ambient_object = big_purple_mushroom_5
-            show_ambient_object = big_purple_mushroom_6
-        }
+        set_global_flag = ao_scourge_mushrooms
         
-        # Scourge in Quel'Thalas
-        if = {
-            limit = {
-                NOT = { has_global_flag = ao_scourge_quelthalas }
+        # Show the Plaguewood ambient objects
+        show_ambient_object = big_orange_mushroom_1
+        show_ambient_object = big_orange_mushroom_2
+        show_ambient_object = big_orange_mushroom_3
+        show_ambient_object = big_orange_mushroom_4
+        show_ambient_object = big_orange_mushroom_5
+        show_ambient_object = big_orange_mushroom_6
+        
+        show_ambient_object = big_purple_mushroom_1
+        show_ambient_object = big_purple_mushroom_2
+        show_ambient_object = big_purple_mushroom_3
+        show_ambient_object = big_purple_mushroom_4
+        show_ambient_object = big_purple_mushroom_5
+        show_ambient_object = big_purple_mushroom_6
+    }
+    
+    # Scourge in Quel'Thalas
+    if = {
+        limit = {
+            NOT = { has_global_flag = ao_scourge_quelthalas }
+            
+            OR = {
+                started_in = 618.1.1 # Frozen Throne
                 
-                OR = {
-                    started_in = 618.1.1 # Frozen Throne
-                    
-                    # Deatholme
-                    1039 = {
-                        culture_group = culture_group_scourge
-                    }
+                # Deatholme
+                1039 = {
+                    culture_group = culture_group_scourge
                 }
             }
-            
-            set_global_flag = ao_scourge_quelthalas
-            
-            # Show the Quel'Thalas ambient objects
-            show_ambient_object = scourge_wall_1
-            
-            show_ambient_object = blood_crystal_2_1
-            show_ambient_object = blood_crystal_2_2
-            show_ambient_object = blood_crystal_2_3
-            show_ambient_object = blood_crystal_2_4
-            
-            show_ambient_object = blood_crystal_1_1
         }
+        
+        set_global_flag = ao_scourge_quelthalas
+        
+        # Show the Quel'Thalas ambient objects
+        show_ambient_object = scourge_wall_1
+        
+        show_ambient_object = blood_crystal_2_1
+        show_ambient_object = blood_crystal_2_2
+        show_ambient_object = blood_crystal_2_3
+        show_ambient_object = blood_crystal_2_4
+        
+        show_ambient_object = blood_crystal_1_1
     }
 }
