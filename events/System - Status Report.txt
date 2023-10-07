@@ -1,6 +1,6 @@
 namespace = wwu_status_report
 
-# Realm Management
+# Ruler
 country_event = {
 	id = wwu_status_report.1
 	title = wwu_status_report.1.title
@@ -131,9 +131,38 @@ country_event = {
         }
 	}
     
+    option = {
+		name = wwu_status_report.1.option.exit
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+}
+
+# Realm
+country_event = {
+	id = wwu_status_report.2
+	title = wwu_status_report.2.title
+	desc = wwu_status_report.2.desc
+	picture = HALLS_OF_STONE_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Adjust National Color
+    option = {
+		name = wwu_status_report.2.option.adjust_national_color
+        
+        country_event = { id = wwu_color_picker.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
     # View Doctrines
     option = {
-		name = wwu_status_report.1.option.view_doctrines
+		name = wwu_status_report.2.option.view_doctrines
         
         trigger = {
             has_global_flag = enabled_doctrine_mechanics
@@ -148,7 +177,7 @@ country_event = {
     
     # View Artifacts
     option = {
-		name = wwu_status_report.1.option.view_artifacts
+		name = wwu_status_report.2.option.view_artifacts
         
         trigger = {
             has_global_flag = enabled_archaeology_mechanics
@@ -161,15 +190,15 @@ country_event = {
         }
 	}
     
-    # View Factions
+    # View Development Management
     option = {
-		name = wwu_status_report.1.option.view_factions
+		name = wwu_status_report.2.option.view_development_management
         
         trigger = {
-            has_global_flag = enabled_faction_mechanics
+            always = no # TODO
         }
         
-        country_event = { id = wwu_faction_report.1 }
+        country_event = { id = wwu_development_manager.1 }
         
         ai_chance = {
             factor = 0
@@ -178,7 +207,7 @@ country_event = {
     
     # View Building Management
     option = {
-		name = wwu_status_report.1.option.view_building_management
+		name = wwu_status_report.2.option.view_building_management
         
         country_event = { id = wwu_building_manager.1 }
         
@@ -187,24 +216,33 @@ country_event = {
         }
 	}
     
-    # Adjust National Color
+    # View Religious Management
     option = {
-		name = wwu_status_report.1.option.adjust_national_color
+		name = wwu_status_report.2.option.view_religious_management
         
-        country_event = { id = wwu_color_picker.1 }
+        country_event = { id = wwu_religion_manager.1 }
         
         ai_chance = {
             factor = 0
         }
 	}
     
+    # View Cultural Management
+    option = {
+		name = wwu_status_report.2.option.view_cultural_management
+        
+        country_event = { id = wwu_culture_manager.1 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
     
     option = {
-		name = wwu_status_report.1.option.exit
+		name = wwu_status_report.2.option.exit
         
         ai_chance = {
             factor = 1
         }
 	}
 }
-

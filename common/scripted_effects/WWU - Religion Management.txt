@@ -1,0 +1,224 @@
+init_religion_management_defaults = {
+    #set_country_flag = enabled_auto_religion_conversion
+}
+
+auto_missionary_assignment = {
+    clr_country_flag = religion_manager_sent_missionary
+        
+    random_owned_province = {
+        limit = {
+            NOT = { religion = ROOT }
+            NOT = { has_construction = any }
+            owner = {
+                adm_power = 10
+            }
+        }
+        
+        export_to_variable = {
+            variable_name = missionary_strength
+            value = modifier:global_missionary_strength
+            who = ROOT
+        }
+            
+        set_variable = {
+            which = local_missionary_resistance
+            value = 0.0
+        }
+        
+        # Setup resistance from development
+        export_to_variable = {
+            which = local_development
+            value = trigger_value:development
+        }
+        
+        multiply_variable = {
+            which = local_development
+            value = 0.001
+        }
+        
+        change_variable = {
+            which = local_missionary_resistance
+            which = local_development
+        }
+            
+        # +1% if Territorial Core
+        if = {
+            limit = {
+                is_territory = yes
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.01
+            }
+            # log = "AUTO-MISSIONARY - Added Territory penalty"
+        }
+        
+        # +2% if non-accepted culture
+        if = {
+            limit = {
+                NOT = { has_owner_culture = yes }
+                NOT = { has_owner_accepted_culture = yes }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.02
+            }
+            # log = "AUTO-MISSIONARY - Added Non-Accepted Culture penalty"
+        }
+        
+        # Religion Bonus -1.5%
+        if = {
+            limit = {
+                OR = {
+                    religion = rationalism
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = -0.015
+            }
+            # log = "AUTO-MISSIONARY - Added Religion 1.5% bonus"
+        }
+        
+        # Religion Bonus -1%
+        if = {
+            limit = {
+                OR = {
+                    religion = technomancy
+                    religion = avarice
+                    religion = mystery_of_the_makers
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = -0.01
+            }
+            # log = "AUTO-MISSIONARY - Added Religion 1% bonus"
+        }
+        
+        # Religion Penalty +1%
+        if = {
+            limit = {
+                OR = {
+                    religion = shadow
+                    religion = anima
+                    religion = dragon_aspects
+                    religion = holy_light
+                    religion = celestials
+                    religion = ordos
+                    religion = cult_of_the_damned
+                    religion = voodoo
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.01
+            }
+            # log = "AUTO-MISSIONARY - Added Religion -1% penalty"
+        }
+        
+        # Religion Penalty +2%
+        if = {
+            limit = {
+                OR = {
+                    religion = forgotten_shadow
+                    religion = corrupt_dragon_aspect
+                    religion = light_of_the_naaru
+                    religion = light_of_rukhmar
+                    religion = sha
+                    religion = sporemounds
+                    religion = zangar
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.02
+            }
+            # log = "AUTO-MISSIONARY - Added Religion -2% penalty"
+        }
+        
+        # Religion Penalty +3%
+        if = {
+            limit = {
+                OR = {
+                    religion = cthun
+                    religion = nzoth
+                    religion = yogg_saron
+                    religion = yshaarj
+                    religion = twilight_cult
+                    religion = void
+                    religion = nightmare
+                    religion = titan_worship
+                    religion = corrupt_titan_worship
+                    religion = flame
+                    religion = earth
+                    religion = wind
+                    religion = water
+                    religion = tidemother
+                    religion = hakkari
+                    religion = bloodmancy
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.03
+            }
+            # log = "AUTO-MISSIONARY - Added Religion -3% penalty"
+        }
+        
+        # Religion Penalty +5%
+        if = {
+            limit = {
+                OR = {
+                    religion = fel
+                }
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.05
+            }
+            # log = "AUTO-MISSIONARY - Added Religion -5% penalty"
+        }
+        
+        # Zeal
+        if = {
+            limit = {
+                has_province_modifier = religious_zeal_at_conv
+            }
+            change_variable = {
+                which = local_missionary_resistance
+                value = 0.1
+            }
+            # log = "AUTO-MISSIONARY - Added Zeal penalty"
+        }
+        
+        # log = "AUTO-MISSIONARY - [missionary_strength.GetName] [missionary_strength.GetValue]"
+        # log = "AUTO-MISSIONARY - [local_missionary_resistance.GetName] [local_missionary_resistance.GetValue]"
+        
+        # If resistance is lower than strength, send the missionary
+        if = {
+            limit = {
+                check_variable = {
+                    which = missionary_strength
+                    which = local_missionary_resistance
+                }
+            }
+            
+            # Note, if no missionaries are free, this does nothing
+            send_missionary = yes
+            owner = { set_country_flag = religion_manager_sent_missionary }
+            # log = "AUTO-MISSIONARY - Sent Missionary"
+        }
+        else = {
+            # log = "AUTO-MISSIONARY - No action"
+        }
+    }
+    
+    # Only take ADM if a missionary is sent
+    if = {
+        limit = {
+            has_country_flag = religion_manager_sent_missionary
+        }
+        add_adm_power = -10
+    }
+}

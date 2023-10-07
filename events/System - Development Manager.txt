@@ -1,0 +1,49 @@
+namespace = wwu_development_manager
+
+# Development Management
+country_event = {
+	id = wwu_development_manager.1
+	title = wwu_development_manager.1.title
+	desc = wwu_development_manager.1.desc
+	picture = COGMASTERS_WRENCH_eventPicture
+	
+	is_triggered_only = yes
+    
+    
+    # Exit
+	option = {
+		name = wwu_development_manager.1.option.exit
+	}
+    
+    after = {
+        if = {
+            limit = {
+                has_country_flag = skip_status_report_return
+            }
+            
+            clr_country_flag = skip_status_report_return
+        }
+        else = {
+            country_event = { id = wwu_status_report.2 }
+        }
+    }
+}
+
+# Development Management - Yearly Update
+country_event = {
+	id = wwu_development_manager.100
+	title = wwu_development_manager.100.title
+	desc = wwu_development_manager.100.desc
+	picture = TREASURE_VAULT_eventPicture
+	
+    hidden = yes
+    is_triggered_only = yes
+    
+	trigger = {
+        has_country_flag = enabled_auto_development
+	}
+    
+	option = {
+		name = wwu_development_manager.100.option.a
+	}
+}
