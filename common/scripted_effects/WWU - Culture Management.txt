@@ -1,7 +1,32 @@
 init_culture_management_defaults = {
     #set_country_flag = enabled_auto_culture_conversion
     set_variable = {
-        which = auto_culture_convert_count
+        which = auto_culture_convert_target_count
         value = 1
+    }
+}
+
+auto_culture_convert_assignment = {
+    clr_country_flag = culture_manager_started_culture_convert
+        
+    random_owned_province = {
+        limit = {
+            NOT = { culture = ROOT }
+            NOT = { has_construction = any }
+        }
+        
+        add_culture_construction = {
+            speed = 1.0
+            cost = 1.0
+        }
+        owner = { set_country_flag = culture_manager_started_culture_convert }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = culture_manager_started_culture_convert
+        }
+        
+        add_dip_power = -10
     }
 }
