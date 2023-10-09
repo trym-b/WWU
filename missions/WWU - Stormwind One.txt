@@ -1,0 +1,530 @@
+#--------------------------------------
+# Stormwind
+#--------------------------------------
+STW_1_stormwind_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = STW
+		NOT = { has_country_flag = stormwind_one_finished }
+	}
+
+    STW_1_stormwind_securing_friends = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            num_of_allies = 2
+            all_ally = {
+                trust = {
+                    who = ROOT
+                    value = 75
+                }
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_stw_one_securing_friends
+                duration = 7300
+            }
+        }
+    }
+
+    STW_1_stormwind_filling_treasury = {
+        icon = mission_titan_spirits
+        position = 2
+
+        trigger = {
+            treasury = 1500
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_stw_one_filling_treasury
+                duration = 3650
+            }
+        }
+    }
+
+    STW_1_stormwind_stabilizing_realm = {
+        icon = mission_titan_spirits
+        position = 3
+
+        trigger = {
+            stability = 2
+            prestige = 40
+            legitimacy = 90
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_stw_one_stabilizing_realm
+                duration = 3650
+            }
+        }
+    }
+}
+
+STW_1_stormwind_column_2 = {
+    slot = 2
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = STW
+		NOT = { has_country_flag = stormwind_one_finished }
+	}
+
+    STW_1_stormwind_call_upon_guardian = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            is_at_war = yes
+            NOT = { is_year = 550}
+            P59 = {
+                NOT = { is_at_war = yes }
+                has_opinion = {
+                    who = STW
+                    value = 125
+                }
+            }
+        }
+
+        effect = {
+            country_event = { id = wwu_mission_stw_one.1 }
+        }
+    }
+
+    STW_1_stormwind_gnoll_defeat_westfal = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { STW_1_stormwind_surivial_of_humanity }
+
+        trigger = {
+            region_westfall = {
+                type = all
+                NOT = { owned_by = GHR }  
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+            add_mil_power = 50
+
+            region_westfall = {
+                add_province_modifier = {
+                    name = mission_stw_one_gnoll_defeat_westfall
+                    duration = 7300
+                }
+            }
+        }
+    }
+
+    STW_1_stormwind_secure_westfall = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { STW_1_stormwind_gnoll_defeat_westfal }
+
+        trigger = {
+            region_westfall = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+            add_adm_power = 100
+
+            region_westfall = {
+                add_province_modifier = {
+                    name = mission_stw_one_secured_westfal
+                    duration = 7300
+                }
+            }
+        }
+    }
+}
+
+STW_1_stormwind_column_3 = {
+    slot = 3
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = STW
+		NOT = { has_country_flag = stormwind_one_finished }
+	}
+
+    STW_1_stormwind_surivial_of_humanity = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            NOT = { is_at_war = yes }
+            area_stormwind = {
+                type = all
+                owned_by = ROOT
+            }
+            area_stormwind_coast = {
+                type = all
+                owned_by = ROOT
+            }
+            area_lower_stormwind = {
+                type = all
+                owned_by = ROOT
+            }
+            area_ravenhill = {
+                type = all
+                owned_by = ROOT
+            }
+            area_sentinel_hill = {
+                type = all
+                owned_by = ROOT
+            }
+            area_darkshire = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_stormwind
+                area = area_lower_stormwind
+                area = area_stormwind_coast
+                area = area_ravenhill
+                area = area_sentinel_hill
+                area = area_darkshire
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_stw_one_survival_of_humanity
+                duration = 9125
+            }
+
+            region_elwynn_forest = {
+                add_permanent_claim = ROOT
+            }
+            region_westfall = {
+                add_permanent_claim = ROOT
+            }
+            region_duskwood = {
+                add_permanent_claim = ROOT
+            }
+            region_redridge_mountains = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    STW_1_stormwind_reconquest_of_elwynn = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { STW_1_stormwind_surivial_of_humanity }
+
+        trigger = {
+            region_elwynn_forest = {
+                type = all
+                NOT = { owned_by = GHR }
+            }
+
+            area_westvale = {
+                type = all
+                owned_by = ROOT
+            }
+            area_eastvale = {
+                type = all
+                owned_by = ROOT
+            }
+            area_northshire = {
+                type = all
+                owned_by = ROOT
+            }
+            area_goldshire = {
+                type = all
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_westvale
+                area = area_eastvale
+                area = area_northshire
+                area = area_goldshire
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+
+        effect = {
+            add_prestige = 15
+            add_splendor = 100
+
+            area_westvale = {
+                change_culture = ROOT
+                change_religion = ROOT
+                add_core = ROOT
+            }
+            area_eastvale = {
+                change_culture = ROOT
+                change_religion = ROOT
+                add_core = ROOT
+            }
+            area_northshire = {
+                change_culture = ROOT
+                change_religion = ROOT
+                add_core = ROOT
+            }
+            area_goldshire = {
+                change_culture = ROOT
+                change_religion = ROOT
+                add_core = ROOT
+            }
+        }
+    }
+
+    STW_1_stormwind_conquest_of_redridge = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = {
+            STW_1_stormwind_gnoll_defeat_westfal
+            STW_1_stormwind_reconquest_of_elwynn
+            STW_1_stormwind_gnoll_defeat_hamlet
+        }
+
+        trigger = {
+            area_lakeshire = {
+                type = all
+                owned_by = ROOT
+            }
+            area_lakeshire_highway = {
+                type = all
+                owned_by = ROOT
+            }
+            area_stonewatch = {
+                type = all
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_lakeshire
+                area = area_lakeshire_highway
+                area = area_stonewatch
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+
+        effect = {
+            add_prestige = 10
+            add_years_of_income = 5
+        }
+    }
+
+    STW_1_stormwind_new_dawn = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { STW_1_stormwind_conquest_of_redridge }
+
+        trigger = {
+            NOT = { is_at_war = yes }
+        }
+
+        effect = {
+            country_event = { id = wwu_mission_stw_one.3 }
+            country_event = { id = wwu_mission_stw_one.4 }
+            country_event = { id = wwu_mission_stw_one.5 }
+            country_event = { id = wwu_mission_stw_one.6 }
+        }
+    }
+}
+
+STW_1_stormwind_column_4 = {
+    slot = 4
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = STW
+		NOT = { has_country_flag = stormwind_one_finished }
+	}
+
+    STW_1_stormwind_emisarry_to_ironforge = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            is_at_war = yes
+            NOT = { is_year = 560}
+            A29 = {
+                NOT = { is_at_war = yes }
+                has_opinion = {
+                    who = STW
+                    value = 125
+                }
+            }
+        }
+
+        effect = {
+            country_event = { id = wwu_mission_stw_one.2 }
+        }
+    }
+
+    STW_1_stormwind_gnoll_defeat_hamlet = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { STW_1_stormwind_surivial_of_humanity }
+
+        trigger = {
+            region_duskwood = {
+                type = all
+                NOT = { owned_by = GHR }  
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+            add_mil_power = 50
+
+            region_duskwood = {
+                add_province_modifier = {
+                    name = mission_stw_one_gnoll_defeat_hamlet
+                    duration = 7300
+                }
+            }
+        }
+    }
+
+    STW_1_stormwind_secure_hamlet = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { STW_1_stormwind_gnoll_defeat_hamlet }
+
+        trigger = {
+            region_duskwood = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+            add_adm_power = 100
+
+            region_duskwood = {
+                add_province_modifier = {
+                    name = mission_stw_one_secured_hamlet
+                    duration = 7300
+                }
+            }
+        }
+    }
+}
+
+STW_1_stormwind_column_5 = {
+    slot = 5
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = STW
+		NOT = { has_country_flag = stormwind_one_finished }
+	}
+
+    STW_1_stormwind_rebuilding_army = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            army_size = 20
+            num_of_infantry = 10
+            num_of_generals = 2
+            army_tradition = 25
+        }
+
+        effect = {
+            add_mil_power = 200
+            add_country_modifier = {
+                name = mission_stw_one_army_reform
+                duration = 7300
+            }
+            define_advisor = {
+                type = commandant
+                name = "Caria the Knight"
+                skill = 2
+                discount = yes
+                female = yes
+            }
+        }
+    }
+
+    STW_1_stormwind_brotherhood_of_horse = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { STW_1_stormwind_rebuilding_army }
+
+        trigger = {
+            num_of_cavalry = 6
+            employed_advisor = {
+                type = commandant
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_stw_one_brotherhood_of_horse
+                duration = 3650
+            }
+        }
+    }
+
+    STW_1_stormwind_arsenal = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { STW_1_stormwind_brotherhood_of_horse }
+
+        trigger = {
+            num_of_artillery = 6
+            2206 = {
+                base_manpower = 8
+                has_building = wow_arsenal_1
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 2206 # Old Town
+        }
+
+        effect = {
+            2206 = {
+                add_building = wow_arsenal_3
+            }
+            add_country_modifier = {
+                name = mission_stw_one_stormwind_cannons
+                duration = 7300
+            }
+        }
+    }
+}
