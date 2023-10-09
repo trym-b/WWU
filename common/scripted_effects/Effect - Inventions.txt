@@ -1,3 +1,41 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_yearly_pulse__inventions = {
+    finish_research_project = yes
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+finish_research_project = {
+    if = {
+        limit = {
+            has_country_flag = research_project_focus
+            check_variable = {
+                which = research_progress
+                value = 5
+            }
+        }
+        
+        reward_invention = yes
+    }
+}
+
+cleanup_research_project = {
+    remove_estate_privilege = estate_invention_research_project
+    
+    clr_country_flag = research_project_focus
+    clr_country_flag = research_focus_hardware
+    clr_country_flag = research_focus_utility
+    clr_country_flag = research_focus_modification
+    
+    set_variable = {
+        which = research_progress
+        value = 0
+    }
+}
+
 increment_research = {
     custom_tooltip = INCREMENT_RESEARCH_TT
     

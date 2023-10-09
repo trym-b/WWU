@@ -1,0 +1,176 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_yearly_pulse__centre_of_fanaticism = {
+    if = {
+        limit = {
+            any_owned_province = {
+                OR = {
+                    has_province_modifier = cof_cthun
+                    has_province_modifier = cof_nzoth
+                    has_province_modifier = cof_yogg_saron
+                    has_province_modifier = cof_yshaarj
+                    has_province_modifier = cof_sha
+                    has_province_modifier = cof_twilight
+                    has_province_modifier = cof_nightmare
+                    has_province_modifier = cof_void
+                    has_province_modifier = cof_damned
+                    has_province_modifier = cof_decay
+                }
+            }
+        }
+        
+        clr_country_flag = cof_spawn_rebels
+        random_list = {
+            50 = { set_country_flag = cof_spawn_rebels }
+            50 = { }
+        }
+        
+        # C'Thun
+        update_cof_provinces = {
+            NAME = cthun
+            RELIGION = cthun
+            ID = 11
+        }
+        
+        # N'Zoth
+        update_cof_provinces = {
+            NAME = nzoth
+            RELIGION = nzoth
+            ID = 21
+        }
+        
+        # Yogg-Saron
+        update_cof_provinces = {
+            NAME = yogg_saron
+            RELIGION = yogg_saron
+            ID = 31
+        }
+        
+        # Y'Shaarj
+        update_cof_provinces = {
+            NAME = yshaarj
+            RELIGION = yshaarj
+            ID = 41
+        }
+        
+        # Sha
+        update_cof_provinces = {
+            NAME = sha
+            RELIGION = sha
+            ID = 51
+        }
+        
+        # Twilight Cult
+        update_cof_provinces = {
+            NAME = twilight
+            RELIGION = twilight_cult
+            ID = 61
+        }
+        
+        # Nightmare
+        update_cof_provinces = {
+            NAME = nightmare
+            RELIGION = nightmare
+            ID = 71
+        }
+        
+        # Void
+        update_cof_provinces = {
+            NAME = void
+            RELIGION = void
+            ID = 81
+        }
+        
+        # Damned
+        update_cof_provinces = {
+            NAME = damned
+            RELIGION = cult_of_the_damned
+            ID = 91
+        }
+        
+        # Decay
+        update_cof_provinces = {
+            NAME = decay
+            RELIGION = decay
+            ID = 101
+        }
+    }
+}
+
+on_province_religion_converted__centre_of_fanaticism = {
+    if = {
+        limit = {
+            has_province_modifier = cof_cthun
+        }
+        remove_province_modifier = cof_cthun
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_nzoth
+        }
+        remove_province_modifier = cof_nzoth
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_yogg_saron
+        }
+        remove_province_modifier = cof_yogg_saron
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_yshaarj
+        }
+        remove_province_modifier = cof_yshaarj
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_sha
+        }
+        remove_province_modifier = cof_sha
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_twilight
+        }
+        remove_province_modifier = cof_twilight
+    }
+    if = {
+        limit = {
+            has_province_modifier = cof_nightmare
+        }
+        remove_province_modifier = cof_nightmare
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+update_cof_provinces = {
+    if = {
+        limit = {
+            has_country_flag = cof_spawn_rebels
+            any_owned_province = {
+                has_province_modifier = cof_$NAME$
+            }
+        }
+        
+        random_owned_province = {
+            limit = {
+                has_province_modifier = cof_$NAME$
+                any_neighbor_province = {
+                    owned_by = ROOT
+                    NOT = { religion = $RELIGION$ }
+                }
+            }
+            
+            random_neighbor_province = {
+                limit = {
+                    owned_by = ROOT
+                    NOT = { religion = $RELIGION$ }
+                }
+                province_event = { id = wwu_centres_of_fanaticism.$ID$ }
+            }
+        }
+    }
+}

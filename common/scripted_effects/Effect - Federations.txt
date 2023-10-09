@@ -1,0 +1,13 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_federation_leader_change__federations = {
+    if = {
+		limit = { tag = FROM }
+		disband_federation = THIS
+	}
+	else = {
+		# New strongest member becomes the new federation leader
+		set_federation_leader = THIS
+	}
+}

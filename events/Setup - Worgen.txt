@@ -89,6 +89,102 @@ country_event = {
     }
 }
 
+# Shadowfang Keep
+country_event = {
+	id = wwu_setup_worgen.2
+	title = wwu_setup_worgen.2.title
+	desc = wwu_setup_worgen.2.desc
+	picture = RAGING_WORGEN_eventPicture
+    goto = 686
+    
+	is_triggered_only = yes
+    
+	trigger = {
+        has_global_flag = enable_worgen
+        
+        tag = P11 # Scourge
+        
+        # Eye of Sargeras used
+        OR = {
+            has_global_flag = eye_of_sargeras_disrupted
+            has_global_flag = eye_of_sargeras_worked
+        }
+        
+        NOT = { exists = A13 } # Shadowfang
+        NOT = { has_global_flag = setup_shadowfang }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_shadowfang_keep = {
+                    owner = {
+                        ai = no
+                    }
+                }
+                area_shadowfang_keep = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_shadowfang_keep = {
+            owned_by = ROOT
+        }
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = setup_shadowfang
+            A13 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+    mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = wwu_setup_worgen.2.option.a
+        
+        custom_tooltip = A13_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_shadowfang_keep tag = A13 culture = culture_gilnean_worgen religion = shadow }
+        }
+	}
+    option = {
+		name = wwu_setup_worgen.2.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = A13_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_shadowfang_keep tag = A13 culture = culture_gilnean_worgen religion = shadow }
+        }
+	}
+    option = {
+		name = wwu_setup_worgen.2.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_shadowfang_keep tag = A13 }
+	}
+    
+    after = {
+        P29 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
 # Nightbane
 country_event = {
 	id = wwu_setup_worgen.3

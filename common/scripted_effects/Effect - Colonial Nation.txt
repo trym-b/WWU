@@ -1,0 +1,87 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_monthly_pulse__colonial_nation = {
+    if = {
+        limit = {
+            NOT = { has_country_flag = colonial_nation_boost }
+            OR = {
+                is_subject_of_type = colony
+                is_subject_of_type = crown_colony
+                is_subject_of_type = private_enterprise
+                is_subject_of_type = self_governing_colony
+            }
+        }
+        
+        set_country_flag = colonial_nation_boost
+        
+        add_country_creation_boost = yes
+        set_random_country_color = yes
+    }
+}
+
+on_colonial_type_change__colonial_nation = {
+    clr_country_flag = encourage_cash_crops_flag
+}
+
+on_colonist_boosting_colony__colonial_nation = {
+    if = {
+        limit = {
+            FROM = {
+                native_policy = native_policy_hostile
+            }
+        }
+        
+        if = {
+            limit = {
+                OR = {
+                    religion = noreligion
+                    #test if colonists outnumber natives
+                    variable_arithmetic_trigger = {
+                        custom_tooltip = colonysize_is_larger_than_nativesize_tt
+                        export_to_variable = {
+                            which = vab_colonysize
+                            value = trigger_value:colonysize
+                        }
+                        export_to_variable = {
+                            which = vab_nativesize
+                            value = trigger_value:native_size
+                        }
+                        check_variable = {
+                            which = vab_colonysize
+                            which = vab_nativesize
+                        }
+                    }
+                    is_in_capital_area = yes
+                }
+            }
+            change_religion = FROM
+        }
+        if = {
+            limit = {
+                OR = {
+                    culture = noculture
+                    #test if colonists outnumber natives
+                    variable_arithmetic_trigger = {
+                        custom_tooltip = colonysize_is_larger_than_nativesize_tt
+                        export_to_variable = {
+                            which = vab_colonysize
+                            value = trigger_value:colonysize
+                        }
+                        export_to_variable = {
+                            which = vab_nativesize
+                            value = trigger_value:native_size
+                        }
+                        check_variable = {
+                            which = vab_colonysize
+                            which = vab_nativesize
+                        }
+                    }
+                    is_in_capital_area = yes
+                }
+            }
+            change_culture = FROM
+            change_original_culture = FROM
+        }
+    }
+}

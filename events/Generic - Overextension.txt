@@ -366,6 +366,23 @@ country_event = {
                 }
                 
                 save_event_target_as = target_province
+                
+                add_province_modifier = {
+                    name = "rebel_sentiment"
+                    duration = 1825
+                }
+                random_neighbor_province = {
+                    limit = {
+                        owned_by = ROOT
+                        NOT = { has_province_modifier = rebel_sentiment }
+                        is_colony = no
+                        likely_rebels = nationalist_rebels
+                    }
+                    add_province_modifier = {
+                        name = "rebel_sentiment"
+                        duration = 1825
+                    }
+                }
             }
         }
     }
@@ -377,21 +394,23 @@ country_event = {
 	option = {
 		name = wwu_overextension.11.option.a
 		
-        event_target:target_province = {
-            add_province_modifier = {
-                name = "rebel_sentiment"
-                duration = 1825
-            }
-            random_neighbor_province = {
-                limit = {
-                    owned_by = ROOT
-                    NOT = { has_province_modifier = rebel_sentiment }
-                    is_colony = no
-                    likely_rebels = nationalist_rebels
-                }
+        tooltip = {
+            event_target:target_province = {
                 add_province_modifier = {
                     name = "rebel_sentiment"
                     duration = 1825
+                }
+                random_neighbor_province = {
+                    limit = {
+                        owned_by = ROOT
+                        NOT = { has_province_modifier = rebel_sentiment }
+                        is_colony = no
+                        likely_rebels = nationalist_rebels
+                    }
+                    add_province_modifier = {
+                        name = "rebel_sentiment"
+                        duration = 1825
+                    }
                 }
             }
         }

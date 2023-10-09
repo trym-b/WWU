@@ -1,0 +1,29 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_yearly_pulse__raid = {
+    if = {
+        limit = {
+            ai = yes
+            has_global_flag = active_raid
+            NOT = {
+                any_country = {
+                    has_country_flag = raid_owner
+                }
+            }
+        }
+        
+        clr_global_flag = active_raid
+        
+        clr_country_flag = raid_owner
+        
+        every_country = {
+            limit = {
+                has_country_flag = raid_target
+            }
+            
+            clr_country_flag = raid_target
+            disband_rebels = adventurer_rebels
+        }
+    }
+}

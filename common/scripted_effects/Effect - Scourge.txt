@@ -1,3 +1,104 @@
+#-----------------------------------
+# On Action
+#-----------------------------------
+on_yearly_pulse__scourge = {
+    if = {
+        limit = {
+            NOT = { has_global_flag = scourge_of_lordaeron_subject_force }
+            tag = P11
+            exists = P52
+            P52 = {
+                NOT = { is_subject_of = P11 }
+            }
+        }
+        
+        set_global_flag = scourge_of_lordaeron_subject_force
+        
+        create_subject = {
+            subject_type = scourge_vassal
+            subject = P52
+        }
+        
+        P52 = {
+            add_government_reform = scourge_domain_reform
+            add_nation_boost_3 = yes
+        }
+    }
+    
+    # Province Conversion
+    if = {
+        limit = {
+            any_owned_province = {
+                has_province_flag = primed_for_scourge_conversion
+                NOT = { owned_by = P52 }
+                is_capital = no
+            }
+        }
+        
+        random_owned_province = {
+            limit = { 
+                has_province_flag = primed_for_scourge_conversion
+                NOT = { owned_by = P52 }
+                is_capital = no
+            }
+            
+            clr_province_flag = primed_for_scourge_conversion
+            add_core = P52
+            cede_province = P52
+        }
+    }
+}
+
+on_five_year_pulse_4__scourge = {
+    # AI Mission Assist: Give AI 100 spy network against Lordaeron/Stratholme
+    if = {
+        limit = {
+            tag = P11
+            ai = yes
+        }
+        
+        if = {
+            limit = {
+                exists = A08
+            }
+            add_spy_network_in = {
+                who = A08
+                value = 100
+            }
+        }
+        if = {
+            limit = {
+                exists = A10
+            }
+            add_spy_network_in = {
+                who = A10
+                value = 100
+            }
+        }
+    }
+}
+
+on_dependency_gained__scourge = {
+    if = {
+        limit = {
+            NOT = { has_global_flag = destroyed_helm_flag }
+            tag = P11
+            FROM = {
+                is_subject_of_type = scourge_vassal
+            }
+        }
+        FROM = {
+            change_religion = cult_of_the_damned
+            capital_scope = {
+                change_religion = cult_of_the_damned
+            }
+        }
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
 convert_province_to_scourge = { 
     custom_tooltip = PROVINCE_JOINS_THE_SCOURGE
     hidden_effect = {

@@ -1,5 +1,69 @@
-#All are Country Scope unless otherwise stated.
+#-----------------------------------
+# On Action
+#-----------------------------------
+on_five_year_pulse_4__advisor = {
+    if = {
+		limit = {
+			had_country_flag = {
+				flag = advisor_events_adm
+				days = 720
+			}
+		}
+		clr_country_flag = advisor_events_adm
+	}
+	if = {
+		limit = {
+			had_country_flag = {
+				flag = advisor_events_dip
+				days = 720
+			}
+		}
+		clr_country_flag = advisor_events_dip
+	}
+	if = {
+		limit = {
+			had_country_flag = {
+				flag = advisor_events_mil
+				days = 720
+			}
+		}
+		clr_country_flag = advisor_events_mil
+	}
+}
 
+on_pre_adm_advisor_fired__advisor = {
+    if = {
+		limit = {
+			has_country_flag = need_to_fire_adm_advisor
+		}
+		set_country_flag = just_fired_adm_advisor
+		remove_advisor_by_category_no_action = ADM
+	}
+}
+
+on_pre_dip_advisor_fired__advisor = {
+    if = {
+		limit = {
+			has_country_flag = need_to_fire_dip_advisor
+		}
+		set_country_flag = just_fired_dip_advisor
+		remove_advisor_by_category_no_action = DIP
+	}
+}
+
+on_pre_mil_advisor_fired__advisor = {
+    if = {
+		limit = {
+			has_country_flag = need_to_fire_mil_advisor
+		}
+		set_country_flag = just_fired_mil_advisor
+		remove_advisor_by_category_no_action = MIL
+	}
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
 internal_advisor_generation_effect = {
 	define_advisor = {
         type = $advisor_type$

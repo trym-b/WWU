@@ -1,3 +1,51 @@
+#-----------------------------------
+# On Action
+#-----------------------------------
+on_five_year_pulse_4__ai = {    
+    if = {
+        limit = {
+            ai = yes
+        }
+        random_list = {
+            33 = { set_country_flag = ai_can_use_ruler_view }
+            66 = { }
+        }
+    
+        # White Peace a extradimension war if it has lasted too long
+        if = {
+            limit = {
+                is_at_war = yes
+                
+                OR = {
+                    tag = B92
+                    tag = P24
+                    tag = P26
+                    tag = P27 
+                    tag = P28
+                    tag = ARL
+                    tag = SDG
+                }
+                
+                any_known_country = {
+                    ai = yes
+                    war_with = ROOT
+                    
+                    is_in_war = {
+                        participants = ROOT
+                        participants = THIS
+                        duration = 3650
+                    }
+                }
+            }
+            
+            white_peace = ROOT
+        }
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
 init_default_ai_cooldowns = {
     # Randomise the AI limiters so the AI don't use the decisions simultaneously 
     if = {

@@ -127,7 +127,7 @@ on_battle_won_country = {
     on_battle_won_country__statistics = yes
     on_battle_won_country__government_mechanics = yes
     on_battle_won_country__estate = yes
-    on_battle_won_country__misc = yes
+    on_battle_won_country__cultural = yes
     on_battle_won_country__faction = yes
     on_battle_won_country__magic = yes
     on_battle_won_country__doctrines = yes
@@ -571,17 +571,19 @@ on_mil_development = {
 on_overextension_pulse = {
 	# Random Events
 	random_events = {
-		100 = wwu_overextension.1
-		100 = wwu_overextension.2
-		100 = wwu_overextension.3
-		100 = wwu_overextension.4
-		100 = wwu_overextension.5
-		100 = wwu_overextension.6
-		100 = wwu_overextension.7
-		100 = wwu_overextension.8
-		100 = wwu_overextension.9
-		100 = wwu_overextension.10
-        100 = wwu_overextension.11
+		100 = wwu_overextension.1               # Troops Deserting
+		100 = wwu_overextension.2               # Widespread Opposition
+		100 = wwu_overextension.3               # Bad Reputation!
+		100 = wwu_overextension.4               # Inflation
+		100 = wwu_overextension.5               # Officers Deserting
+		100 = wwu_overextension.6               # Merchants Resented
+		100 = wwu_overextension.7               # Merchants Assassinated!
+		100 = wwu_overextension.8               # Legitimacy Questioned
+		100 = wwu_overextension.9               # Magistrates Resigns
+		100 = wwu_overextension.10              # Advisor Resigns
+        50 = wwu_overextension.11               # Rebel Sentiment
+        
+        # None
         400 = 0
 	}
 }
@@ -609,7 +611,7 @@ on_monthly_pulse = {
         on_monthly_pulse__ambient_objects = yes
     }
     
-    # effects
+    # Effects
     on_monthly_pulse__init_random_seed = yes
     on_monthly_pulse__magic = yes
     on_monthly_pulse__subject_annexation = yes
@@ -621,628 +623,572 @@ on_monthly_pulse = {
     on_monthly_pulse__faction = yes
     on_monthly_pulse__estate = yes
     on_monthly_pulse__triggered_modifiers = yes
+    on_monthly_pulse__nightfallen = yes
+    on_monthly_pulse__colonial_nation = yes
     
     # Events
     events = {
         # Magic
-        wwu_magic_effect.11 # Polymorph
-        wwu_magic_effect.21 # Mirror Image
+        wwu_magic_effect.11             # Polymorph
+        wwu_magic_effect.21             # Mirror Image
         
         # Invasion
-        wwu_invasion.1
-        wwu_invasion.2
-        wwu_invasion.3
-        wwu_invasion.110
-        
-        # Faction Support
-        wwu_government_mechanics.10 # War Support
+        wwu_invasion.1                  # Elemental Rift
+        wwu_invasion.2                  # Demonic Rift
+        wwu_invasion.3                  # Mawsworn Invasion
         
         # Kel Thuzad
-        wwu_kel_thuzad.2
+        wwu_kel_thuzad.2                # Capture of Naxxramas
         
         # Tribal Succession
-        tribal_succession.2
+        tribal_succession.2             # Succession Secured!
         
         # Subject Interactions
-        subject_interaction_events.45
-        subject_interaction_events.46
+        subject_interaction_events.45   # No longer subject - Smugglers removed
+        subject_interaction_events.46   # No longer embargoing - Smugglers removed
         
         # Quel'Thalas
-        wwu_quelthalas.1
+        wwu_quelthalas.1                # Lordaeron Border Agreement Broken!
         
         # Privateers
-        privateers.15
-        
-        # Nightfallen
-        wwu_nightfallen.10
+        privateers.15                   # Undeclared Trade War Now Declared
         
         # Cocktail
-        wwu_banana_flavour.100
-        
-        # Colonial Nation Boost
-        wwu_colonial_nation_boost.1
+        wwu_banana_flavour.100          # Volcano Cocktail - Pick event
         
         # Mana
-        wwu_magic.70
+        wwu_magic.70                    # Mana Fulfilment
     }
 }
 
 # ROOT = Country
 on_yearly_pulse = {
-    #----------------------------
-    # Global
-    #----------------------------
     # Run only once (on the player).
-    
-    # Trade Good Price Swing
     if = {
         limit = {
             ai = no
         }
         
-        randomise_goods_price = yes
+        on_yearly_pulse__trade_goods = yes
+        on_yearly_pulse__building_management = yes
     }
 	
-    #----------------------------
-    # Country
-    #----------------------------
-    # world
-    update_world_state = yes
-    
-    # Balance of Power
-    update_balance_of_power_modifiers = yes
+    # Effects
+    on_yearly_pulse__balance_of_power = yes
     on_yearly_pulse__mercenary_companies = yes
-        
     on_yearly_pulse__terrain_affinity = yes
     on_yearly_pulse__ruler = yes
-
+    on_yearly_pulse__invasion = yes
+    on_yearly_pulse__faction = yes
+    on_yearly_pulse__inventions = yes
+    on_yearly_pulse__raid = yes
+    on_yearly_pulse__religion_management = yes
+    on_yearly_pulse__culture_management = yes
+    on_yearly_pulse__province_event_manager = yes
+    on_yearly_pulse__zandalar = yes
+    on_yearly_pulse__scourge = yes
+    on_yearly_pulse__azjol_nerub = yes
+    on_yearly_pulse__centre_of_fanaticism = yes
+    
+    # Events
     events = {
-        # Civilization
-        wwu_civilization.100
+        # Dwarf
+        wwu_dwarf.11                                # Dwarves At War
         
-        # Faction Leader Assignment
-        wwu_faction_system_leader_assignment.1
-        wwu_faction_system_leader_assignment.2
-        wwu_faction_system_leader_assignment.3
-        wwu_faction_system_leader_assignment.4
-        wwu_faction_system_leader_assignment.5
+        # Civilization
+        wwu_civilization.100                        # Civilization of [Root.GetName]
         
         # Faction Collapse
-        wwu_faction_system_collapse.10
-        wwu_faction_system_collapse.11
-        wwu_faction_system_collapse.12
-        wwu_faction_system_collapse.13
-        wwu_faction_system_collapse.14
+        wwu_faction_system_collapse.10              # Alliance Collapse
+        wwu_faction_system_collapse.11              # Horde Collapse
+        wwu_faction_system_collapse.12              # Old Horde Collapse
+        wwu_faction_system_collapse.13              # Trade Coalition Collapse
+        wwu_faction_system_collapse.14              # Dragon Aspects Collapse
         
         # Inventions
-        wwu_inventions.1
-        wwu_inventions.10
+        wwu_inventions.1                            # Research Project: Initial Focus
         
         # Monument Research
-        wwu_monument_research.1
+        wwu_monument_research.1                     # Research Begins
+        wwu_monument_research.10                    # Research Complete! (Broken Isles)
+        wwu_monument_research.11                    # Research Complete! (Draenor)
+        wwu_monument_research.12                    # Research Complete! (Eastern Kingdoms)
+        wwu_monument_research.13                    # Research Complete! (Kalimdor)
+        wwu_monument_research.14                    # Research Complete! (Kul Tiras)
+        wwu_monument_research.15                    # Research Complete! (South Seas)
+        wwu_monument_research.16                    # Research Complete! (Northrend)
+        wwu_monument_research.17                    # Research Complete! (Outland)
+        wwu_monument_research.18                    # Research Complete! (Pandaria)
+        wwu_monument_research.19                    # Research Complete! (Zandalar)
+        wwu_monument_research.20                    # Research Complete! (Argus)
+        wwu_monument_research.21                    # Research Complete! (Naga Domain)
+        wwu_monument_research.22                    # Research Complete! (Paradise Isles)
+        wwu_monument_research.23                    # Research Complete! (Plunder Isle)
+        wwu_monument_research.24                    # Research Complete! (Elemental Planes)
+        wwu_monument_research.25                    # Research Complete! (Dragon Isles)
         
         # Player Switch
-        wwu_player_switch.100
-        wwu_player_switch.101
-        wwu_player_switch.102
-        wwu_player_switch.103
-        wwu_player_switch.104
-        wwu_player_switch.105
-        wwu_player_switch.106
-        wwu_player_switch.107
-        wwu_player_switch.110
+        wwu_player_switch.100                       # The Scourge
+        wwu_player_switch.101                       # Scourge of Lordaeron
+        wwu_player_switch.102                       # Cult of the Damned
+        wwu_player_switch.103                       # Dreadlords
+        wwu_player_switch.104                       # The Forsaken
+        wwu_player_switch.105                       # Knights of the Ebon Blade
+        wwu_player_switch.106                       # Thermaplugg Exiles
+        wwu_player_switch.107                       # Orgrimmar
+        wwu_player_switch.110                       # Illidari
         
         # Ruler Class Training
-        wwu_ruler_training.2
-        wwu_ruler_training.3
-        wwu_ruler_training.4
-        wwu_ruler_training.5
-        wwu_ruler_training.6
-        wwu_ruler_training.7
-        wwu_ruler_training.8
-        wwu_ruler_training.9
-        wwu_ruler_training.10
-        wwu_ruler_training.11
-        wwu_ruler_training.12
-        wwu_ruler_training.13
+        wwu_ruler_training.2                        # Warrior
+        wwu_ruler_training.3                        # Paladin
+        wwu_ruler_training.4                        # Priest
+        wwu_ruler_training.5                        # Rogue
+        wwu_ruler_training.6                        # Mage
+        wwu_ruler_training.7                        # Warlock
+        wwu_ruler_training.8                        # Druid
+        wwu_ruler_training.9                        # Shaman
+        wwu_ruler_training.10                       # Hunter
+        wwu_ruler_training.11                       # Death Knight
+        wwu_ruler_training.12                       # Monk
+        wwu_ruler_training.13                       # Demon Hunter
+        wwu_ruler_training.15                       # Failure to Learn
         
         # Raid
-        wwu_raid.4
-        wwu_raid.5
+        wwu_raid.4                                  # Raid Failure
         
         # Factions
-        wwu_faction_system_government.1 # Promotion - Alliance
-        wwu_faction_system_government.2 # Promotion - Horde
-        wwu_faction_system_government.3 # Promotion - Old Horde
-        wwu_faction_system_government.4 # Promotion - Old Horde (Gorian)
-        wwu_faction_system_government.5 # Promotion - Trade Coalition
-        wwu_faction_system_government.6 # Promotion - Dragon Aspects
-        
-        wwu_faction_system_government.10 # Demotion - Alliance
-        wwu_faction_system_government.11 # Demotion - Horde
-        wwu_faction_system_government.12 # Demotion - Old Horde
-        wwu_faction_system_government.13 # Demotion - Trade Coalition
-        wwu_faction_system_government.14 # Demotion - Dragon Aspects
-        
-        # Religion Manager
-        wwu_religion_manager.100
-        
-        # Culture Manager
-        wwu_culture_manager.100
-        
-        # Trade Companies
-        trade_company_events.100
-        
-        # Natives
-        wwu_natives.100
-        
-        # Missionaries 
-        wwu_missionaries.100
+        wwu_faction_system_government.1             # Promotion - Alliance
+        wwu_faction_system_government.2             # Promotion - Horde
+        wwu_faction_system_government.3             # Promotion - Old Horde
+        wwu_faction_system_government.4             # Promotion - Old Horde (Gorian)
+        wwu_faction_system_government.5             # Promotion - Trade Coalition
+        wwu_faction_system_government.6             # Promotion - Dragon Aspects
+        wwu_faction_system_government.10            # Demotion - Alliance
+        wwu_faction_system_government.11            # Demotion - Horde
+        wwu_faction_system_government.12            # Demotion - Old Horde
+        wwu_faction_system_government.13            # Demotion - Trade Coalition
+        wwu_faction_system_government.14            # Demotion - Dragon Aspects
         
         # Government
-        wwu_government_heir.10
+        wwu_government_heir.10                      # Champion of the Scourge
         
-        # Outland
-        wwu_setup_outland.1
+        # Story: Major Events
+        wwu_setup_outland.1                         # Collapse of Draenor
+        wwu_scourge.1                               # Ner'zhul's Arrival to Icecrown Citadel
+        wwu_scourge.36                              # Prince Arthas
         
-        # Shadowfang
-        wwu_shadowfang.1
-        
-        # Scourge
-        wwu_scourge.1
-        wwu_scourge.36
-        
-        # Darkshire
-        wwu_story_misc.1
+        # Story: Minor Events
+        wwu_story_misc.1                            # Darkness Falls
         
         # Illidari
-        wwu_illidan.1
-        wwu_illidan.2
-        wwu_illidan.3
-        wwu_illidan.4
-        wwu_illidan.5
-        wwu_illidan.6
-        wwu_illidan.7
-        wwu_illidan.10
-        wwu_illidan.12
-        wwu_illidan.20
+        wwu_illidan.1                               # Kil'jaeden's Bargain
+        wwu_illidan.2                               # Illidan's Naga
+        wwu_illidan.3                               # The Eye of Sargeras
+        wwu_illidan.4                               # Illidan and the Eye of Sargeras
+        wwu_illidan.5                               # Eye of Sargeras Unleashed
+        wwu_illidan.6                               # Frozen Throne Survives!
+        wwu_illidan.7                               # Frozen Throne Crumbles...
+        wwu_illidan.10                              # Escape to Outland
+        wwu_illidan.12                              # Akama and the Ashtongue Deathsworn
+        wwu_illidan.20                              # Magtheridon and the Fel Horde
         
         # Cataclysm
-        cataclysm.3
-        cataclysm.6
+        cataclysm.3                                 # Life purpose fullfilled!
+        cataclysm.6                                 # Migration of Gilneans
         
         # Broken Shore
-        broken_shore.1
-        
-        # Ruler Class Training
-        wwu_ruler_training.15
-        
-        # Monument Research
-        wwu_monument_research.10
-        wwu_monument_research.11
-        wwu_monument_research.12
-        wwu_monument_research.13
-        wwu_monument_research.14
-        wwu_monument_research.15
-        wwu_monument_research.16
-        wwu_monument_research.17
-        wwu_monument_research.18
-        wwu_monument_research.19
-        wwu_monument_research.20
-        wwu_monument_research.21
-        wwu_monument_research.22
-        wwu_monument_research.23
-        wwu_monument_research.24
-        wwu_monument_research.25
+        broken_shore.1                              # Broken Shore Rises
         
         # Monuments
-        wwu_great_projects.1
-        wwu_great_projects.2
-        wwu_great_projects.3
-        wwu_great_projects.4
-        wwu_great_projects.5
-        wwu_great_projects.6
-        wwu_great_projects.7
-        wwu_great_projects.8
-        wwu_great_projects.10
-        wwu_great_projects.11
-        
-        # Faction Support
-        wwu_government_mechanics.11 # Relations
+        wwu_great_projects.1                        # Bastion of Twilight
+        wwu_great_projects.2                        # Deathknell
+        wwu_great_projects.3                        # Statue of Anduin Lothar
+        wwu_great_projects.4                        # Acherus
+        wwu_great_projects.5                        # Scholomance
+        wwu_great_projects.6                        # Deatholme
+        wwu_great_projects.7                        # Dalaran (Northrend)
+        wwu_great_projects.8                        # Icecrown Citadel
+        wwu_great_projects.10                       # Shadow Vault
+        wwu_great_projects.11                       # Corp'Rethar
         
         # Discovery
-        wwu_discovery.1
-        wwu_discovery.3
-        wwu_discovery.6
-        wwu_discovery.7
-        wwu_discovery.8
-        wwu_discovery.9
-        wwu_discovery.10
-        wwu_discovery.11
-        wwu_discovery.12
-        wwu_discovery.13
-        wwu_discovery.14
+        wwu_discovery.1                             # Compendium of Azeroth
+        wwu_discovery.3                             # Scourge Discovery
+        wwu_discovery.6                             # Discovery of Azeroth
+        wwu_discovery.7                             # Discovery of Argus
+        wwu_discovery.8                             # Discovery of Skywall
+        wwu_discovery.9                             # Discovery of Abyssal Maw
+        wwu_discovery.10                            # Discovery of Firelands
+        wwu_discovery.11                            # Discovery of Deepholm
+        wwu_discovery.12                            # Discovery of Shadowlands
+        wwu_discovery.13                            # Discovery of Draenor 
+        wwu_discovery.14                            # Discovery of Outland 
         
         # Scarlet Crusade
-        wwu_mission_scarlet_crusade.8
+        wwu_mission_scarlet_crusade.8               # Opening the Package
         
         # Zem'lan Pirates
-        wwu_zemlan_pirates.1
-        wwu_zemlan_pirates.2
-        wwu_zemlan_pirates.3
-        wwu_zemlan_pirates.4
+        wwu_zemlan_pirates.1                        # Zem'lan Pirates - Reduce Ruler Stats
+        wwu_zemlan_pirates.2                        # Zem'lan Revenants - Reduce Ruler Stats - Improved Curse
+        wwu_zemlan_pirates.3                        # No access to the curse!
+        wwu_zemlan_pirates.4                        # The Undying Zem'lan Curse
         
         # Zandalar 
-        wwu_zandalar_rise_of_the_zandalari.1
-        wwu_zandalar_rise_of_the_zandalari.2
-        wwu_zandalar_rise_of_the_zandalari.3
+        wwu_zandalar_rise_of_the_zandalari.1        # The Prophet demands access to the Golden Fleet
+        wwu_zandalar_rise_of_the_zandalari.2        # Rise of the Zandalari
+        wwu_zandalar_rise_of_the_zandalari.3        # Meeting of the Trolls
         
-        wwu_zandalar_pirate_invasion.1
-        wwu_zandalar_pirate_invasion.2
-        wwu_zandalar_pirate_invasion.3
+        wwu_zandalar_pirate_invasion.1              # Port of Zem'lan
+        wwu_zandalar_pirate_invasion.2              # Port of Zem'lan has been cleared
+        wwu_zandalar_pirate_invasion.3              # Humiliated by the Pirate-king
         
-        wwu_zandalar_pandaria_invasion.20
-        wwu_zandalar_pandaria_invasion.30
+        wwu_zandalar_pandaria_invasion.20           # Partition of Pandaria
+        wwu_zandalar_pandaria_invasion.30           # Lei Shen's Body
         
-        wwu_zandalar_naga_invasion.10
-        wwu_zandalar_naga_invasion.11
-        wwu_zandalar_naga_invasion.12
+        wwu_zandalar_naga_invasion.10               # Nazeshi Invasion!
+        wwu_zandalar_naga_invasion.11               # Nazeshi Driven Out!
+        wwu_zandalar_naga_invasion.12               # Defeated by the Nazeshi
         
-        wwu_zandalar_naga_invasion.20
-        wwu_zandalar_naga_invasion.21
-        wwu_zandalar_naga_invasion.22
+        wwu_zandalar_naga_invasion.20               # Vilescale Naga invasion!
+        wwu_zandalar_naga_invasion.21               # Vilescale Driven Out!
+        wwu_zandalar_naga_invasion.22               # Defeated by the Vilescale
         
-        wwu_zandalar.7
-        wwu_zandalar.30
-        wwu_zandalar.31
-        wwu_zandalar.32
-        wwu_zandalar.33
-        wwu_zandalar.42
-        wwu_zandalar.101
+        wwu_zandalar.1                              # A Show of Strength
+        wwu_zandalar.7                              # Oondasta is ready for Armor
+        wwu_zandalar.30                             # Amani Destroyed
+        wwu_zandalar.31                             # Gurubashi Destroyed
+        wwu_zandalar.32                             # Drakkari Destroyed
+        wwu_zandalar.33                             # Farraki Destroyed
+        wwu_zandalar.42                             # Birth of Talanji
         
-        wwu_zandalar_great_civil_war.2
+        wwu_zandalar_great_civil_war.2              # Threat of Civil War Dissipates
         
-        wwu_zandalar_cataclysm.10
-        wwu_zandalar_cataclysm.11
-        wwu_zandalar_cataclysm.12
-        wwu_zandalar_cataclysm.13
-        wwu_zandalar_cataclysm.14
+        wwu_zandalar_cataclysm.10                   # Visions of The Cataclysm
+        wwu_zandalar_cataclysm.11                   # Visions about the Armored Dragon
+        wwu_zandalar_cataclysm.12                   # Visions of a legion of Water Serpents
+        wwu_zandalar_cataclysm.13                   # Visions of the Sinking of Zandalar
+        wwu_zandalar_cataclysm.14                   # Earthquake!
         
         # Reliquary
-        reliquary_guild.1
+        reliquary_guild.1                           # The Reliquary
         
         # Explorer's League
-        explorers_league.1
+        explorers_league.1                          # The Explorer's League
         
-        # The Missing Diplomat
-        wwu_the_missing_diplomat.1
-        wwu_the_missing_diplomat.10
+        # Onyxia
+        wwu_the_missing_diplomat.1                  # The Missing Diplomat
+        wwu_the_missing_diplomat.10                 # Victory over Onyxia
         
         # Sunwell
-        thalassian.1
+        thalassian.1                                # The Sunwell has been restored!
         
         # Sunfury
-        mission_sunfury.1
+        mission_sunfury.1                           # Reject The Burning Legion!
         
         # Silvermoon
-        wwu_silvermoon.1
-        wwu_silvermoon.2
-        wwu_silvermoon.3
+        wwu_silvermoon.1                            # Leadership of Silvermoon
+        wwu_silvermoon.2                            # Blood Knights Arise!
+        wwu_silvermoon.3                            # Sunwell Restored
         
         # Aldor/Scryer
-        wwu_setup_aldor_scryer.1
+        wwu_setup_aldor_scryer.1                    # Aldor Scryer Emergence in Shattrath
         
         # Shadow Council
-        wwu_shadow_council.1
-        wwu_shadow_council.2
+        wwu_shadow_council.1                        # The Shadow Council
+        wwu_shadow_council.2                        # Mantle of the Horde
         
         # Old Gods
-        wwu_old_gods.1
-        wwu_old_gods.2
-        wwu_old_gods.3
-        wwu_old_gods.4
-        wwu_old_gods.11
-        wwu_old_gods.12
+        wwu_old_gods.1                              # C'thun Rises!
+        wwu_old_gods.2                              # Yogg-Saron Rises!
+        wwu_old_gods.3                              # N'Zoth Rises!
+        wwu_old_gods.4                              # Y'Shaarj Rises!
+        wwu_old_gods.11                             # Whispers from the Deep
+        wwu_old_gods.12                             # Tidemother answers
         
         # Maw
-        wwu_flavour_maw.1
+        wwu_flavour_maw.1                           # Deal with Sire Denethius
         
         # Mantid
-        wwu_mantid.2
-        wwu_mantid.3
+        wwu_mantid.2                                # Failure to Adhere to the Cycle 
+        wwu_mantid.3                                # The Cycle Continues
         
         # Lei Shen
-        wwu_lei_shen.1
-        wwu_lei_shen.2
-        wwu_lei_shen.4
+        wwu_lei_shen.1                              # Zandalari Allies
+        wwu_lei_shen.2                              # Prophet Khar'zul
+        wwu_lei_shen.4                              # Submission to Lei Shen
         
         # Kul Tiras
-        wwu_kul_tiras.1
-        wwu_kul_tiras.112
-        wwu_kul_tiras.114
-        wwu_kul_tiras.116
+        wwu_kul_tiras.1                             # Appointment of Heir
+        wwu_kul_tiras.112                           # Balor - Kul Tiras
+        wwu_kul_tiras.114                           # Southshore - Kul Tiras
+        wwu_kul_tiras.116                           # Thandol Span - Kul Tiras
         
         # Ebon Blade
-        wwu_ebon_blade_flavour.1
-        wwu_ebon_blade_flavour.2
-        wwu_ebon_blade_flavour.3
-        wwu_ebon_blade_flavour.4
+        wwu_ebon_blade_flavour.1                    # Conquest of Tyr's Hand
+        wwu_ebon_blade_flavour.2                    # Deathcharger Access
+        wwu_ebon_blade_flavour.3                    # Undead Gryphon Access
+        wwu_ebon_blade_flavour.4                    # Battle for Light's Hope Chapel
         
         # Karazhan
-        karazhan.4
-        karazhan.6
-        karazhan.7
+        karazhan.4                                  # Send Khadgar to spy on Medivh
+        karazhan.6                                  # Medivh's plot is revealed by Khadgar
+        karazhan.7                                  # Medivh's plot is revealed by someone else
         
         # Hydraxian Waterlords
-        wwu_hydraxia_waterlords.1
-        wwu_hydraxia_waterlords.2
+        wwu_hydraxia_waterlords.1                   # Presence in Azshara
+        wwu_hydraxia_waterlords.2                   # Weakness of Neptulon
         
         # Gilneas
-        wwu_gilneas.1
+        wwu_gilneas.1                               # Build the Wall
         
         # Forsaken
-        wwu_forsaken.3
-        wwu_forsaken.4
-        wwu_forsaken.5
-        wwu_forsaken.6
-        wwu_forsaken.7
-        wwu_forsaken.8
-        
-        # Dwarf
-        wwu_dwarf.10
+        wwu_forsaken.3                              # Confront Nathanos Blightcaller
+        wwu_forsaken.4                              # Send Vengance Expedition to Northrend
+        wwu_forsaken.5                              # Hand of Vengance
+        wwu_forsaken.6                              # Koltira Deathweaver
+        wwu_forsaken.7                              # Establish Tranquillen
+        wwu_forsaken.8                              # Establish New Stromgarde
         
         # Stonemason Uprising
-        wwu_stonemason_uprising.1
+        wwu_stonemason_uprising.1                   # Stonemasons' Guild
         
         # Council of Zanchul
-        wwu_council_of_zanchul.10
-        wwu_council_of_zanchul.12
-        wwu_council_of_zanchul.100
+        wwu_council_of_zanchul.10                   # The Prophet Zul and the Council of Zanchul
+        wwu_council_of_zanchul.12                   # Threat of Civil War Dissipates
         
         # Council of Tirisfal
-        wwu_council_of_tirisfal.1
+        wwu_council_of_tirisfal.1                   # Council of Tirisfal
         
         # Army of the Light
-        wwu_army_of_the_light.1
+        wwu_army_of_the_light.1                     # Interdimensional Travel
         
         # Argussian Reach
-        wwu_argussian_reach.1
+        wwu_argussian_reach.1                       # Interdimensional Travel
         
         # Arathor
-        wwu_arathor_flavour.1
+        wwu_arathor_flavour.1                       # True Heirs of Arathor
         
         # Anvilmar
-        wwu_anvilmar.1
+        wwu_anvilmar.1                              # Leadership of Anvilmar
         
         # Drakkari
-        wwu_drakkari.1
-        wwu_drakkari.4
+        wwu_drakkari.1                              # Arrival of the Scourge
+        wwu_drakkari.4                              # Submission to the Lich King
         
         # Druidism
-        wwu_druidism.4
+        wwu_druidism.4                              # The Emerald Nightmare
         
         # Emerald Nightmare
-        wwu_emerald_nightmare.1
+        wwu_emerald_nightmare.1                     # Corruption of Shaladrassil
         
         # Sons of Lothar
-        wwu_sons_of_lothar.1
+        wwu_sons_of_lothar.1                        # Sons of Lothar
         
         # Blackwing Lair
-        wwu_blackwing_lair.1
+        wwu_blackwing_lair.1                        # Nefarian's Experiments
         
         # Rise of the Blood God
-        wwu_rise_of_the_blood_god.1
+        wwu_rise_of_the_blood_god.1                 # Hakkar the Soulflayer
         
         # Centres of Fanaticism
-        wwu_centres_of_fanaticism.1
-        wwu_centres_of_fanaticism.10
-        wwu_centres_of_fanaticism.20
-        wwu_centres_of_fanaticism.30
-        wwu_centres_of_fanaticism.40
-        wwu_centres_of_fanaticism.50
-        wwu_centres_of_fanaticism.60
-        wwu_centres_of_fanaticism.70
-        wwu_centres_of_fanaticism.80
-        wwu_centres_of_fanaticism.90
-        wwu_centres_of_fanaticism.100
-        
-        # Scourge
-        wwu_scourge.300
+        wwu_centres_of_fanaticism.10                # Incitation of C'Thun Fanatics
+        wwu_centres_of_fanaticism.20                # Incitation of N'Zoth Fanatics
+        wwu_centres_of_fanaticism.30                # Incitation of Yogg-Saron Fanatics
+        wwu_centres_of_fanaticism.40                # Incitation of Y'Shaarj Fanatics
+        wwu_centres_of_fanaticism.50                # Incitation of Sha Fanatics
+        wwu_centres_of_fanaticism.60                # Incitation of Twilight Fanatics
+        wwu_centres_of_fanaticism.70                # Incitation of Nightmare Fanatics
+        wwu_centres_of_fanaticism.80                # Incitation of Void Fanatics
+        wwu_centres_of_fanaticism.90                # Incitation of Damned Fanatics
+        wwu_centres_of_fanaticism.100               # Incitation of Decay Fanatics
         
         # Outland Exodus
-        wwu_outland_exodus.1
-        wwu_outland_exodus.2
-        wwu_outland_exodus.3
-        wwu_outland_exodus.10
+        wwu_outland_exodus.1                        # The Uneasy Alliance
+        wwu_outland_exodus.2                        # Garithos's Betrayal
+        wwu_outland_exodus.3                        # Exodus to Outland (Blood Elf)
+        wwu_outland_exodus.10                       # Exodus to Outland (Naga)
         
         # Knights of the Ebon Blade
-        wwu_knights_of_the_ebon_blade.1
+        wwu_knights_of_the_ebon_blade.1             # Knights of the Ebon Blade
         
         # Kel Thuzad
-        wwu_kel_thuzad.1
+        wwu_kel_thuzad.1                            # Arrival of Naxxramas
         
         # World Tree
-        world_tree.1
-        world_tree.2
+        world_tree.1                                # Burning of Nordrassil
+        world_tree.2                                # Burning of Teldrassil
         
         # Lordaeron Survivors
-        wwu_lordaeron_survivors.1
+        wwu_lordaeron_survivors.1                   # Survivors of the Scourge
         
         # Council of Zanchul
-        wwu_council_of_zanchul.11
+        wwu_council_of_zanchul.11                   # Estate Investment in [target_province.GetName]
         
         # Elune
-        wwu_elune.3
+        wwu_elune.3                                 # Restoration of the Shrines
         
         # Sunfury
-        wwu_sunfury_f.1
-        wwu_sunfury_f.2
-        wwu_sunfury_f.3
-        wwu_sunfury_f.4
-        wwu_sunfury_f.5
-        
-        # Azjol Nerub: Cultural Domination
-        wwu_mission_azjol_nerub.1
-        wwu_mission_azjol_nerub.2
-        wwu_mission_azjol_nerub.3
-        wwu_mission_azjol_nerub.4
-        wwu_mission_azjol_nerub.5
-        
+        wwu_sunfury_f.1                             # Expansion of Botanica
+        wwu_sunfury_f.2                             # Expansion of Mechanar
+        wwu_sunfury_f.3                             # Expansion of Alcatraz
+        wwu_sunfury_f.4                             # Expansion in Tempest Keep Lower
+        wwu_sunfury_f.5                             # Expansion of Tempest Keep Upper
     }
     
+    # Random Events
     random_events = {
         # Raid
-        100 = wwu_raid.3
+        100 = wwu_raid.3                            # Bolster Raid
         
         # Inventions
-        300 = wwu_inventions.2
-        300 = wwu_inventions.3
-        300 = wwu_inventions.4
-        300 = wwu_inventions.5
+        300 = wwu_inventions.2                      # Research Project in Jeopardy
+        300 = wwu_inventions.3                      # Breakthrough Attempt
+        300 = wwu_inventions.4                      # Eureka!
+        300 = wwu_inventions.5                      # Resource Management
         
         # Invasion
-        100 = wwu_invasion.10
-        100 = wwu_invasion.11
-        100 = wwu_invasion.12
-        100 = wwu_invasion.13
-        100 = wwu_invasion.100
-        100 = wwu_invasion.101
+        100 = wwu_invasion.10                       # Fury of Ragnaros
+        100 = wwu_invasion.11                       # Might of Therazane
+        100 = wwu_invasion.12                       # Tides of Neptulon
+        100 = wwu_invasion.13                       # Storm of Al'Akir
+        100 = wwu_invasion.100                      # AI - Invasion Helper - Elemental
+        100 = wwu_invasion.101                      # AI - Invasion Helper - Demonic
         
         # Government
-        500 = wwu_government_mechanics.3 # Criminal Acumen - Spying
+        500 = wwu_government_mechanics.3            # Criminal Acumen - Spying
         
         # Decisions
-        500 = wwu_decision_events.2 # Kaja'mite
-        500 = wwu_decision_events.1 # Mage Discovery
+        500 = wwu_decision_events.2                 # Kaja'mite
+        500 = wwu_decision_events.1                 # Mage Discovery
         
         # Archaeology
-        300 = wwu_archaeology_dig.1
-        300 = wwu_archaeology_dig.2
-        300 = wwu_archaeology_dig.3
-        300 = wwu_archaeology_dig.4
-        300 = wwu_archaeology_dig.5
-        300 = wwu_archaeology_dig.6
-        300 = wwu_archaeology_dig.7
-        300 = wwu_archaeology_dig.8
-        300 = wwu_archaeology_dig.9
+        300 = wwu_archaeology_dig.1                 # Opportunists
+        300 = wwu_archaeology_dig.2                 # Dig in Jeopardy
+        300 = wwu_archaeology_dig.3                 # Archaeologist Fumbles
+        300 = wwu_archaeology_dig.4                 # Local Complaints
+        300 = wwu_archaeology_dig.5                 # Dig Breakthrough
+        300 = wwu_archaeology_dig.6                 # Dig Success!
+        300 = wwu_archaeology_dig.7                 # Tomb Raiders
+        300 = wwu_archaeology_dig.8                 # Hostile Predators
+        300 = wwu_archaeology_dig.9                 # Corrupt Archaeologist
         
         # Gurubashi Conflict
-        500 = wwu_gurubashi_conflict.1
+        500 = wwu_gurubashi_conflict.1              # Border Friction between Azerothian farmers and Stranglethorn Trolls
         
         # Cataclysm
-        500 = cataclysm.1
-        500 = cataclysm.2
-        100 = cataclysm.5
+        500 = cataclysm.1                           # Discontent in the Horde
+        500 = cataclysm.2                           # Duel of Honour
+        100 = cataclysm.5                           # Power to Reanimate
         
         # Zandalar
-        200 = wwu_zandalar.1
-        500 = wwu_zandalar.4
-        500 = wwu_zandalar.5
-        500 = wwu_zandalar.6
-        500 = wwu_zandalar.7
+        500 = wwu_zandalar.4                        # Growth of Oondasta
+        500 = wwu_zandalar.5                        # A Sudden Breakthrough in Growth
+        500 = wwu_zandalar.6                        # Fighting on the Island of Giants
+        500 = wwu_zandalar.7                        # Oondasta is ready for Armor
         
         # Yaungol
-        500 = wwu_yaungol.3
+        500 = wwu_yaungol.3                         # Burning Oil
         
         # Titan Corruption
-        500 = wwu_titan_corruption.3
-        500 = wwu_titan_corruption.4
+        500 = wwu_titan_corruption.3                # Corruption of the Keeper
+        500 = wwu_titan_corruption.4                # Cleansing of the Keeper
         
         # Nightfallen
-        100 = wwu_nightfallen.1
-        100 = wwu_nightfallen.2
-        50  = wwu_nightfallen.3
-        50  = wwu_nightfallen.4
-        50  = wwu_nightfallen.5
-        100 = wwu_nightfallen.6
+        100 = wwu_nightfallen.1                     # Withering
+        100 = wwu_nightfallen.2                     # Arcwine Caravan
+        50  = wwu_nightfallen.3                     # Empower the Western Leylines
+        50  = wwu_nightfallen.4                     # Empower the Eastern Leylines
+        50  = wwu_nightfallen.5                     # Leyline Nourishment
+        100 = wwu_nightfallen.6                     # Nightwell Nourishment
         
         # Dwarf
-        500 = wwu_dwarf.10
+        500 = wwu_dwarf.10                          # Dwarven Treasurer
         
         # Consort
-        100 = wwu_consort.1
-        100 = wwu_consort.2
-        100 = wwu_consort.3
-        100 = wwu_consort.4
-        100 = wwu_consort.5
-        50  = wwu_consort.6
-        100 = wwu_consort.51
-        100 = wwu_consort.52
-        100 = wwu_consort.53
-        100 = wwu_consort.54
-        100 = wwu_consort.55
-        100 = wwu_consort.56
-        100 = wwu_consort.61
-        100 = wwu_consort.101
-        100 = wwu_consort.102
-        100 = wwu_consort.103
-        100 = wwu_consort.104
-        100 = wwu_consort.301
-        100 = wwu_consort.302
-        100 = wwu_consort.303
-        100 = wwu_consort.304
-        100 = wwu_consort.305
-        100 = wwu_consort.306
-        100 = wwu_consort.307
-        100 = wwu_consort.308
-        100 = wwu_consort.309
-        100 = wwu_consort.311
-        100 = wwu_consort.312
-        100 = wwu_consort.313
-        100 = wwu_consort.314
-        100 = wwu_consort.315
+        100 = wwu_consort.1                         # Marriage Proposal
+        100 = wwu_consort.2                         # Meet the in-laws
+        100 = wwu_consort.3                         # Spouses Family Wants your help
+        100 = wwu_consort.4                         # The Crown has the support of the spouses family
+        100 = wwu_consort.5                         # Family First?
+        50  = wwu_consort.6                         # Lowborn consort, marriage for love
+        100 = wwu_consort.51                        # A Visit from the Consort's Family
+        100 = wwu_consort.52                        # People don't like the infidel Consort
+        100 = wwu_consort.53                        # Advisor doesn't trust the foreign consort
+        100 = wwu_consort.54                        # Consort has great skills
+        100 = wwu_consort.55                        # Consort is unhappy in their new country
+        100 = wwu_consort.56                        # Country asks another country's consort of their dynasty for favors
+        100 = wwu_consort.61                        # The influence from the consort's home country is strong
+        100 = wwu_consort.101                       # Queen wants her own child to become heir 
+        100 = wwu_consort.102                       # Queen wants favourite child on throne
+        100 = wwu_consort.103                       # Infertile royal couple
+        100 = wwu_consort.104                       # Consort educates heir
+        100 = wwu_consort.301                       # Anniversary
+        100 = wwu_consort.302                       # Even longer anniversary!
+        100 = wwu_consort.303                       # Great diplomatic personality
+        100 = wwu_consort.304                       # Great administrative personality
+        100 = wwu_consort.305                       # Great militaristic personality
+        100 = wwu_consort.306                       # The royal couple bond over similar interests
+        100 = wwu_consort.307                       # The royal couple bond over similar BAD interests
+        100 = wwu_consort.308                       # The ruler mourns loss of consort
+        100 = wwu_consort.309                       # Perhaps the consort should be ruling our nation
+        100 = wwu_consort.311                       # Consort is popular among the commoners
+        100 = wwu_consort.312                       # Consort suggests advisor
+        100 = wwu_consort.313                       # Another child
+        100 = wwu_consort.314                       # Affair 
+        100 = wwu_consort.315                       # Questions concerning legitimacy 
         
         # Drakkari
-        100 = wwu_drakkari.3
+        100 = wwu_drakkari.3                        # Scourge Assault
         
         # Sunfury
-        100 = mission_sunfury.6
+        100 = mission_sunfury.6                     # Fel Corruption
+        
+        # None
         1000 = 0
     }
 }
 
 # ROOT = Country
 on_yearly_pulse_2 = {
-	
-    
-    # Nation Setup
+	# Random Events
     random_events = {
-        20 = wwu_setup_zangar.1 # Sporeggar
-        20 = wwu_setup_worgen.1 # Wolfcult
-        20 = wwu_setup_worgen.3 # Nightbane
-        20 = wwu_setup_pirate.1 # Bloodsail Buccaneers
-        20 = wwu_setup_orc.1 # Twilight's Hammer
-        20 = wwu_setup_orc.10 # Orgrimmar
-        20 = wwu_setup_orc.14 # Black Tooth Grin
-        20 = wwu_setup_orc.16 # Dragonmaw
-        20 = wwu_setup_orc.18 # Frostwolf
-        20 = wwu_setup_orc.20 # Thrallmar
-        20 = wwu_setup_ethereal.1 # The Consortium
-        20 = wwu_setup_ethereal.2 # Ethereum
-        20 = wwu_setup_draenei.1 # Umbrafen
-        20 = wwu_setup_draenei.2 # Feralfen
-        20 = wwu_setup_draenei.3 # Daggerfen
-        20 = wwu_setup_draenei.4 # Kurenai
-        20 = wwu_setup_draenei.5 # Dreghood
-        20 = wwu_setup_draenei.6 # Wrekt
-        20 = wwu_setup_draenei.7 # Murkblood
-        20 = wwu_setup_draenei.8 # Windyreed
-        20 = wwu_setup_human.1 # Blackthorn
-        20 = wwu_setup_ogre.1 # Crushridge
-        20 = wwu_setup_ogre.2 # Dreadmaul
-        20 = wwu_setup_ogre.3 # Splinterfist
-        20 = wwu_setup_ogre.4 # Firegut
-        20 = wwu_setup_ogre.5 # Mo'grosh
-        20 = wwu_setup_ogre.6 # Dustbelcher
-        20 = wwu_setup_ogre.7 # Deadwind
-        20 = wwu_setup_ogre.8 # Bloodeye
-        20 = wwu_setup_ogre.9 # Mosh'Ogg
-        20 = wwu_setup_ogre.10 # Dunemaul
-        20 = wwu_setup_ogre.11 # Warmaul
-        20 = wwu_setup_ogre.12 # Dire Maul
-        20 = wwu_setup_goblin.1 # Ratchet
-        20 = wwu_setup_goblin.2 # Gadgetzan
-        20 = wwu_setup_dragonflight.1 # Infinite Dragonflight
+        20 = wwu_setup_zangar.1             # Sporeggar
+        20 = wwu_setup_worgen.1             # Wolfcult
+        20 = wwu_setup_worgen.2             # Shadowfang
+        20 = wwu_setup_worgen.3             # Nightbane
+        20 = wwu_setup_pirate.1             # Bloodsail Buccaneers
+        20 = wwu_setup_orc.1                # Twilight's Hammer
+        20 = wwu_setup_orc.10               # Orgrimmar
+        20 = wwu_setup_orc.14               # Black Tooth Grin
+        20 = wwu_setup_orc.16               # Dragonmaw
+        20 = wwu_setup_orc.18               # Frostwolf
+        20 = wwu_setup_orc.20               # Thrallmar
+        20 = wwu_setup_ethereal.1           # The Consortium
+        20 = wwu_setup_ethereal.2           # Ethereum
+        20 = wwu_setup_draenei.1            # Umbrafen
+        20 = wwu_setup_draenei.2            # Feralfen
+        20 = wwu_setup_draenei.3            # Daggerfen
+        20 = wwu_setup_draenei.4            # Kurenai
+        20 = wwu_setup_draenei.5            # Dreghood
+        20 = wwu_setup_draenei.6            # Wrekt
+        20 = wwu_setup_draenei.7            # Murkblood
+        20 = wwu_setup_draenei.8            # Windyreed
+        20 = wwu_setup_human.1              # Blackthorn
+        20 = wwu_setup_ogre.1               # Crushridge
+        20 = wwu_setup_ogre.2               # Dreadmaul
+        20 = wwu_setup_ogre.3               # Splinterfist
+        20 = wwu_setup_ogre.4               # Firegut
+        20 = wwu_setup_ogre.5               # Mo'grosh
+        20 = wwu_setup_ogre.6               # Dustbelcher
+        20 = wwu_setup_ogre.7               # Deadwind
+        20 = wwu_setup_ogre.8               # Bloodeye
+        20 = wwu_setup_ogre.9               # Mosh'Ogg
+        20 = wwu_setup_ogre.10              # Dunemaul
+        20 = wwu_setup_ogre.11              # Warmaul
+        20 = wwu_setup_ogre.12              # Dire Maul
+        20 = wwu_setup_goblin.1             # Ratchet
+        20 = wwu_setup_goblin.2             # Gadgetzan
+        20 = wwu_setup_dragonflight.1       # Infinite Dragonflight
         
         500 = 0
     }
@@ -1250,24 +1196,15 @@ on_yearly_pulse_2 = {
 
 # ROOT = Country
 on_yearly_pulse_3 = {
-	
     
-    random_events = {
-        50 = wwu_game_configuration.200 # Vanquisher Assignment
-        100 = wwu_warmonger_system.1 # Warmonger System
-        
-        1000 = 0
-    }
 }
 
 # ROOT = Country
 on_yearly_pulse_4 = {
-	
-    
-    # Ruler/Heir Death
+	# Random Events
     random_events = {
-        1 = wwu_ruler.10 # Mortal Ruler - Death
-        1 = wwu_ruler.11 # Mortal Heir - Death
+        1 = wwu_ruler.10            # Mortal Ruler - Death
+        1 = wwu_ruler.11            # Mortal Heir - Death
         
         99 = 0
     }
@@ -1275,35 +1212,22 @@ on_yearly_pulse_4 = {
 
 # ROOT = Country
 on_yearly_pulse_5 = {
-	
-    
-    # Ruler Change
+	# Random Events
     random_events = {
-        1 = wwu_ruler.1 # Immortal Ruler - Growth
-        1 = wwu_ruler.2 # Immortal Ruler - Regression
+        1 = wwu_ruler.1                     # Immortal Ruler - Growth
+        1 = wwu_ruler.2                     # Immortal Ruler - Regression
         
         # Pirate Ruler Death
-        1 = wwu_pirate_ruler_death.1
-        1 = wwu_pirate_ruler_death.2
-        1 = wwu_pirate_ruler_death.3
+        1 = wwu_pirate_ruler_death.1        # Rum Deal
+        1 = wwu_pirate_ruler_death.2        # Clash of Swords
+        1 = wwu_pirate_ruler_death.3        # Crossed Hooks
         
         98 = 0
     }
 }
 
-# country random events
+# ROOT = Country
 on_bi_yearly_pulse = {
-	
-	
-    # Building Management is for players only
-    if = {
-        limit = {
-            ai = no
-        }
-        auto_build_effect = yes
-        auto_destroy_effect = yes
-    }
-    
     # Events
 	random_events = {
 		# Trade Specific
@@ -1423,9 +1347,9 @@ on_bi_yearly_pulse = {
 	}
 }
 
+# ROOT = Country
 on_bi_yearly_pulse_2 = {
-	
-    
+    # Random Events
 	random_events = {
 		100 = wwu_corruption.1
 		100 = wwu_corruption.2
@@ -1465,15 +1389,14 @@ on_bi_yearly_pulse_2 = {
 	}
 }
 
+# ROOT = Country
 on_bi_yearly_pulse_3 = {
-	
-	
-    #-----------------------
-    # Magic Events
-    #-----------------------
+	# Events
     events = {
         wwu_magic.11 # Accomplished Spellcaster
     }
+    
+    # Random Events
     random_events = {
         # Magic Training
         100 = wwu_magic.1
@@ -1489,9 +1412,9 @@ on_bi_yearly_pulse_3 = {
     }
 }
 
+# ROOT = Country
 on_bi_yearly_pulse_4 = {
-	
-    
+    # Random Events
     random_events = {
         # Espionage
 		100 = espionage_events.1
@@ -1544,9 +1467,9 @@ on_bi_yearly_pulse_4 = {
     }
 }
 
+# ROOT = Country
 on_bi_yearly_pulse_5 = {
-	
-    
+	# Random Events
     random_events = {
         # Ruler Class Training
         100 = wwu_ruler_training.20
@@ -1560,10 +1483,9 @@ on_bi_yearly_pulse_5 = {
     }
 }
 
-# country random events
+# ROOT = Country
 on_thri_yearly_pulse = {
-	
-    
+	# Random Events
 	random_events = {
 		# Republics
         100 = republics.1
@@ -1621,14 +1543,14 @@ on_thri_yearly_pulse = {
 	}
 }
 
+# ROOT = Country
 on_thri_yearly_pulse_2 = {
 	
-    
 }
 
+# ROOT = Country
 on_thri_yearly_pulse_3 = {
-	
-    
+	# Random Events
 	random_events = {
 		# Subject Interactions
 		50 = subject_interaction_events.1
@@ -1687,13 +1609,14 @@ on_thri_yearly_pulse_3 = {
 	}
 }
 
+# ROOT = Country
 on_thri_yearly_pulse_4 = {
 	
 }
 
+# ROOT = Country
 on_four_year_pulse = {
-	
-    
+	# Random Events
 	random_events = {
 		# Colonial Nations
 		100 = colonial_nation.1
@@ -1794,16 +1717,16 @@ on_four_year_pulse = {
 	}
 }
 
+# ROOT = Country
 on_four_year_pulse_2 = {
-	
-    
-    # Story
+	# Events
     events = {
-        wwu_worgen.1 # Archmage's Offer
-        wwu_thrall.1 # Discovery of Go'el
-        silver_hand.1 # Order of the Silver Hand
+        wwu_worgen.1                        # Archmage's Offer
+        wwu_thrall.1                        # Discovery of Go'el
+        silver_hand.1                       # Order of the Silver Hand
     }
     
+    # Random Events
     random_events = {
         # Twilight Infiltration
         100 = wwu_twilight_hammer.1
@@ -1826,32 +1749,31 @@ on_four_year_pulse_2 = {
     }
 }
 
+# ROOT = Country
 on_four_year_pulse_3 = {
-	
-    
+	# Random Events
     random_events = {
-		# Random Events
-		100 = wwu_local_country_flavour.1
-		100 = wwu_local_country_flavour.2
-		100 = wwu_local_country_flavour.3
-		100 = wwu_local_country_flavour.4
-		100 = wwu_local_country_flavour.5
-		100 = wwu_local_country_flavour.6
-		100 = wwu_local_country_flavour.7
-		100 = wwu_local_country_flavour.8
-		100 = wwu_local_country_flavour.9
-		100 = wwu_local_country_flavour.10
-		100 = wwu_local_country_flavour.11
-		100 = wwu_local_country_flavour.12
-		100 = wwu_local_country_flavour.13
-		100 = wwu_local_country_flavour.14
-		100 = wwu_local_country_flavour.15
-		100 = wwu_local_country_flavour.16
-		100 = wwu_local_country_flavour.17
-		100 = wwu_local_country_flavour.18
-		100 = wwu_local_country_flavour.19
-		100 = wwu_local_country_flavour.20
-		100 = wwu_local_country_flavour.21
+		100 = wwu_local_country_flavour.1               # Gift to the State
+		100 = wwu_local_country_flavour.2               # Temporary Insanity of Monarch
+		100 = wwu_local_country_flavour.3               # Excellent Advisor
+		100 = wwu_local_country_flavour.4               # Scandal at the Court
+		100 = wwu_local_country_flavour.5               # Exceptional Year
+		100 = wwu_local_country_flavour.6               # Exceptional Year
+		100 = wwu_local_country_flavour.7               # Exceptional Year
+		100 = wwu_local_country_flavour.8               # Rush of Colonists
+		100 = wwu_local_country_flavour.9               # Rush of Merchants
+		100 = wwu_local_country_flavour.10              # Diplomatic Move
+		100 = wwu_local_country_flavour.11              # Excellent Diplomacy
+		100 = wwu_local_country_flavour.12              # Reformation of the Army
+		100 = wwu_local_country_flavour.13              # Reformation of the Navy
+		100 = wwu_local_country_flavour.14              # Good Government Policies
+		100 = wwu_local_country_flavour.15              # Poor Government Policies
+		100 = wwu_local_country_flavour.16              # Unhappiness Among the [Root.GetClergyName]
+		100 = wwu_local_country_flavour.17              # Unhappiness Among the Artisans
+		100 = wwu_local_country_flavour.18              # Unhappiness Among the Peasantry
+		100 = wwu_local_country_flavour.19              # Unhappiness Among the Merchants
+		100 = wwu_local_country_flavour.20              # Political Crisis
+		100 = wwu_local_country_flavour.21              # Corruption
 		100 = wwu_local_country_flavour.22
 		100 = wwu_local_country_flavour.23
 		100 = wwu_local_country_flavour.24
@@ -1917,29 +1839,34 @@ on_four_year_pulse_3 = {
     }
 }
 
+# ROOT = Country
 on_four_year_pulse_4 = {
 	
 }
 
+# ROOT = Country
 on_five_year_pulse = {
-	
+	# Effects
+    on_five_year_pulse__game_configuration = yes
     
+    # Events
     events = {
         # Government
-        wwu_government.14 # Organisational Focus
-        wwu_government.16 # Warsong!
+        wwu_government.14               # Organisational Focus
+        wwu_government.16               # Warsong!
         
         # Estates
-        estate_system.3
+        estate_system.3                 # Estates bailing out the player
         
         # Arcane
-        wwu_arcane.1
+        wwu_arcane.1                    # Succumb to Chaos
         
         # Kel Thuzad
-        wwu_kel_thuzad.4
-        wwu_kel_thuzad.5
+        wwu_kel_thuzad.4                # Kel'Thuzad's Offer
+        wwu_kel_thuzad.5                # Fall of [Root.GetName]
     }
     
+    # Random Events
     random_events = {
 		# Aristocracy 		13  (8g 5b)
 		100 = ideagroups.100
@@ -2223,432 +2150,400 @@ on_five_year_pulse = {
 		100 = ideagroups.1910
         
         # Additional Ideagroups
-        100 = wwu_ideagroups.9
-        100 = wwu_ideagroups.10
-        300 = wwu_ideagroups.12
-        100 = wwu_ideagroups.13
+        100 = wwu_ideagroups.9              # Integration of Royalty
+        100 = wwu_ideagroups.10             # Integration of Vassal
+        300 = wwu_ideagroups.12             # Wartime Communities
+        100 = wwu_ideagroups.13             # Trusted Realm
         
         # Union
-        100 = 7001
-        100 = 7002
-        100 = 7003
-        100 = 7004
-        100 = 7005
+        100 = 7001                          # Local Nobles Protesting
+        100 = 7002                          # $MONARCH$ ignores $COUNTRY$
+        100 = 7003                          # $COUNTRY$ neglected economically
+        100 = 7004                          # Cultural Differences
+        100 = 7005                          # Our Union has a bad reputation
         
         # Uncivilized
-        100 = wwu_uncivilized.1
+        100 = wwu_uncivilized.1             # Hostile Adventurers
         
         # Privateers
-        100 = privateers.4
-        100 = privateers.5
-        100 = privateers.6
-        100 = privateers.7
-        100 = privateers.9
-        100 = privateers.11
-        100 = privateers.12
+        100 = privateers.4                  # A Reckless Privateer
+        100 = privateers.5                  # Privateer Captain Goes Rogue
+        100 = privateers.6                  # Oceans Beyond Privateering 
+        100 = privateers.7                  # Pirates Seeking Allegiance 
+        100 = privateers.9                  # Captured Slavers
+        100 = privateers.11                 # Plausible Deniability
+        100 = privateers.12                 # Merchants call for Trade Protection War
         
         # Personality
-        100 = mf_positive_personality.1
-        100 = mf_negative_personality.1
-        100 = mf_negative_personality.2
-        100 = mf_negative_personality.3
+        100 = mf_positive_personality.1     # Military Advisor Recruited
+        100 = mf_negative_personality.1     # Bastard Child
+        100 = mf_negative_personality.2     # An Inferior Castle
+        100 = mf_negative_personality.3     # A Lax Military
         
         # Monsoon
-        100 = monsoon_events.1
-        100 = monsoon_events.2
-        100 = monsoon_events.3
-        100 = monsoon_events.4
-        100 = monsoon_events.5
+        100 = monsoon_events.1              # Severe monsoon causes damage
+        100 = monsoon_events.2              # Monsoon fails. Drought.
+        100 = monsoon_events.3              # Monsoon rains bring fertility
+        100 = monsoon_events.4              # Famine caused by Trade Company policy
+        100 = monsoon_events.5              # Plum Rains
         
         # Military Reform
-        100 = wwu_military_reform.1
+        100 = wwu_military_reform.1         # Military Reform
         
         # Mercantilism
-        100 = mercantilism_events.1
-        100 = mercantilism_events.2
-        100 = mercantilism_events.3
-        100 = mercantilism_events.4
-        100 = mercantilism_events.5
-        100 = mercantilism_events.6
-        100 = mercantilism_events.7
-        100 = mercantilism_events.8
-        100 = mercantilism_events.9
-        100 = mercantilism_events.10
+        100 = mercantilism_events.1         # Importing Food to Combat Famine
+        100 = mercantilism_events.2         # Imports Compete with [Country] Quality Goods
+        100 = mercantilism_events.3         # Importing Iron
+        100 = mercantilism_events.4         # Importing Naval Supplies
+        100 = mercantilism_events.5         # [Trader], Controversial Protectionist
+        100 = mercantilism_events.6         # Radical Reforms
+        100 = mercantilism_events.7         # Intercolonial Trade
+        100 = mercantilism_events.8         # Chocolate Imports
+        100 = mercantilism_events.9         # Coffee Imports
+        100 = mercantilism_events.10        # Tea Imports
         
         # Great Men
-        100 = wwu_great_men.1
-        100 = wwu_great_men.2
-        100 = wwu_great_men.3
-        100 = wwu_great_men.4
-        100 = wwu_great_men.5
-        100 = wwu_great_men.6
-        100 = wwu_great_men.7
-        100 = wwu_great_men.8
-        100 = wwu_great_men.9
-        100 = wwu_great_men.10
-        100 = wwu_great_men.11
-        100 = wwu_great_men.12
-        100 = wwu_great_men.13
-        100 = wwu_great_men.14
-        100 = wwu_great_men.15
-        100 = wwu_great_men.16
-        100 = wwu_great_men.17
-        100 = wwu_great_men.18
-        100 = wwu_great_men.19
-        100 = wwu_great_men.20
-        100 = wwu_great_men.21
+        100 = wwu_great_men.1               # Philosopher
+        100 = wwu_great_men.2               # Natural Scientist
+        100 = wwu_great_men.3               # Army Reformer
+        100 = wwu_great_men.4               # Naval reformer
+        100 = wwu_great_men.5               # Artist
+        100 = wwu_great_men.6               # Treasurer
+        100 = wwu_great_men.7               # Theologian
+        100 = wwu_great_men.8               # Statesman
+        100 = wwu_great_men.9               # Colonial Governor
+        100 = wwu_great_men.10              # Spymaster
+        100 = wwu_great_men.11              # Diplomat
+        100 = wwu_great_men.12              # Trader
+        100 = wwu_great_men.13              # Master of Mint
+        100 = wwu_great_men.14              # Navigator
+        100 = wwu_great_men.15              # Grand Captain
+        100 = wwu_great_men.16              # Army Organiser
+        100 = wwu_great_men.17              # Commandant
+        100 = wwu_great_men.18              # Quartermaster
+        100 = wwu_great_men.19              # Recruitmaster
+        100 = wwu_great_men.20              # Fortification Expert
+        100 = wwu_great_men.21              # Inquisitor
+        100 = wwu_great_men.30              # Administrator
+        100 = wwu_great_men.31              # Supervisor
+        100 = wwu_great_men.32              # Reformer
+        100 = wwu_great_men.40              # Shipwright
+        100 = wwu_great_men.41              # Ambassador
+        100 = wwu_great_men.42              # Negotiator
+        100 = wwu_great_men.50              # Sapper
+        100 = wwu_great_men.51              # Scout
+        100 = wwu_great_men.52              # Orator
         
 		1000 = 0
 	}
 }
 
+# ROOT = Country
 on_five_year_pulse_2 = {
-    
-    
+    # Effects
+    on_five_year_pulse_2__artifacts = yes
+
+    # Random Events
     random_events = {
         # Estate
-        30 = wwu_estate_crownland.1 # Estate Demands Influence
-        30 = wwu_estate_crownland.2 # Estate Seizes Influence
+        30 = wwu_estate_crownland.1         # Estate Demands Influence
+        30 = wwu_estate_crownland.2         # Estate Seizes Influence
         
         # Government
-        100 = wwu_government.4
-        100 = wwu_government.6
+        100 = wwu_government.4              # Ruled by Despot
+        100 = wwu_government.6              # Call for Abdication
         
         # Artifacts
-        10 = wwu_artifact_unlocks.1
-        10 = wwu_artifact_unlocks.2
-        10 = wwu_artifact_unlocks.4
-        10 = wwu_artifact_unlocks.5
-        10 = wwu_artifact_unlocks.6
+        10 = wwu_artifact_unlocks.1         # Skull of Man'ari
+        10 = wwu_artifact_unlocks.2         # Maw of the Damned
+        10 = wwu_artifact_unlocks.4         # Aldrachi Warblades
+        10 = wwu_artifact_unlocks.5         # T'uure
+        10 = wwu_artifact_unlocks.6         # Fangs of the Devourer
         
         # Titan Corruption
-        100 = wwu_titan_corruption.1
-        100 = wwu_titan_corruption.2
+        100 = wwu_titan_corruption.1        # Corruption of the Keeper
+        100 = wwu_titan_corruption.2        # Cleansing of the Keeper
         
         # Scourge Rebellion
-        500 = wwu_scourge_flavour.1
+        500 = wwu_scourge_flavour.1         # Rebellion of the Living
         
         # Pandaren
-        500 = wwu_pandaren.1
-        500 = wwu_pandaren.2
-        500 = wwu_pandaren.3
-        500 = wwu_pandaren.4
+        500 = wwu_pandaren.1                # Demands from Yu'lon Disciples
+        500 = wwu_pandaren.2                # Demands from Chi'ji Disciples
+        500 = wwu_pandaren.3                # Demands from Niuzao Disciples
+        500 = wwu_pandaren.4                # Demands from Xu'en Disciples
         
         # Old Gods
-        300 = wwu_old_gods.10
-        
-        # Nazjatar
-        100 = wwu_nazjatar.2
+        300 = wwu_old_gods.10               # Whispers from Ulduar
         
         # Murloc
-        100 = wwu_murloc.1
-        100 = wwu_murloc.2
-        100 = wwu_murloc.3
+        100 = wwu_murloc.1                  # The Mating Call
+        100 = wwu_murloc.2                  # Better Nets For our Netters
+        100 = wwu_murloc.3                  # King Mrgl-Mrgl!
         
         # Mantid
-        100 = wwu_mantid.1
-        100 = wwu_mantid.5
-        100 = wwu_mantid.6
-        100 = wwu_mantid.8
-        100 = wwu_mantid.9
+        100 = wwu_mantid.1                  # The Cycle
+        100 = wwu_mantid.5                  # Excellent Amber Growth
+        100 = wwu_mantid.6                  # Poor Amber Growth
+        100 = wwu_mantid.8                  # Will of the Empress
+        100 = wwu_mantid.9                  # Kunchong Stampede
         
         # Loa
-        100 = wwu_loa.10
-        100 = wwu_loa.11
-        100 = wwu_loa.12
-        100 = wwu_loa.13
-        100 = wwu_loa.14
-        100 = wwu_loa.15
-        100 = wwu_loa.16
-        100 = wwu_loa.17
-        100 = wwu_loa.18
-        100 = wwu_loa.19
-        100 = wwu_loa.20
+        100 = wwu_loa.10                    # Altar of [Root.GetCurrentLoa]
+        100 = wwu_loa.11                    # Heretics in Court
+        100 = wwu_loa.12                    # Voice of Mysterious Loa
+        100 = wwu_loa.13                    # [Root.GetName]'s Prosperity
+        100 = wwu_loa.14                    # [Root.GetWarringLoa] vs. [Root.GetCurrentLoa]
+        100 = wwu_loa.15                    # Devastation of X
+        100 = wwu_loa.16                    # [Root.GetCurrentLoa]'s Acolyte
+        100 = wwu_loa.17                    # Worship Strays from [Root.GetCurrentLoa]
+        100 = wwu_loa.18                    # Forbidden Loa Worship
+        100 = wwu_loa.19                    # Omens of [Root.GetCurrentLoa]
+        100 = wwu_loa.20                    # [Root.GetCurrentLoa]'s Coup
         
         # Kul Tiras
-        100 = wwu_kul_tiras.10
-        100 = wwu_kul_tiras.11
-        100 = wwu_kul_tiras.12
-        100 = wwu_kul_tiras.13
+        100 = wwu_kul_tiras.10              # Proudmoore Arrogance
+        100 = wwu_kul_tiras.11              # Stormsong Presumption
+        100 = wwu_kul_tiras.12              # Ashvane Greed
+        100 = wwu_kul_tiras.13              # Waycrest Autonomy
         
         # Gnoll
-        100 = gnoll.1
-        100 = gnoll.2
-        100 = gnoll.3
+        100 = gnoll.1                       # Battle Tactics!
+        100 = gnoll.2                       # Kidnapping Incident
+        100 = gnoll.3                       # Rotten Food
         
         # Fallen Arakkoa
-        100 = wwu_fallen_arakkoa.1
-        100 = wwu_fallen_arakkoa.2
-        100 = wwu_fallen_arakkoa.3
-        100 = wwu_fallen_arakkoa.4
-        100 = wwu_fallen_arakkoa.5
-        100 = wwu_fallen_arakkoa.6
-        100 = wwu_fallen_arakkoa.7
-        100 = wwu_fallen_arakkoa.8
+        100 = wwu_fallen_arakkoa.1          # Aerial Assault
+        100 = wwu_fallen_arakkoa.2          # Shadows Gather
+        100 = wwu_fallen_arakkoa.3          # Outcast Illusions
+        100 = wwu_fallen_arakkoa.4          # Shadows Rise
+        100 = wwu_fallen_arakkoa.5          # Spawn of Sethe
+        100 = wwu_fallen_arakkoa.6          # Envoy of the Ravenspeakers
+        100 = wwu_fallen_arakkoa.7          # Murky Bargain
+        100 = wwu_fallen_arakkoa.8          # Emergence of the Void
         
         # Aqir
-        500 = wwu_aqir.1
-        500 = wwu_aqir.2
-        100 = wwu_aqir.3
-        100 = wwu_aqir.4
-        100 = wwu_aqir.5
-        100 = wwu_aqir.6
-        100 = wwu_aqir.7
-        500 = wwu_aqir.8
+        500 = wwu_aqir.1                    # Cycling of the Twin Emperor
+        500 = wwu_aqir.2                    # Cycling of the Twin Emperor
+        100 = wwu_aqir.3                    # Hatred of the Titans
+        100 = wwu_aqir.4                    # Qiraji Jewelery
+        100 = wwu_aqir.5                    # Qiraji Arsenal
+        100 = wwu_aqir.6                    # Shattered Crystalline Prism 
+        100 = wwu_aqir.7                    # Crazed Lieutenant
+        500 = wwu_aqir.8                    # Breeding Boom
         
         # Ancestral Shamanism
-        100 = wwu_shamanism.2
-        100 = wwu_shamanism.3
+        100 = wwu_shamanism.2               # Passing of Great Leader
+        100 = wwu_shamanism.3               # Help of Ancestors
         
         # Drakkari
-        100 = wwu_drakkari.10
-        100 = wwu_drakkari.11
-        100 = wwu_drakkari.12
-        100 = wwu_drakkari.13
-        100 = wwu_drakkari.14
-        100 = wwu_drakkari.15
-        100 = wwu_drakkari.16
-        100 = wwu_drakkari.17
+        100 = wwu_drakkari.10               # Reverance of the Loa
+        100 = wwu_drakkari.11               # Mojo-imbued Beserker
+        100 = wwu_drakkari.12               # Mojo-imbued Champion
+        100 = wwu_drakkari.13               # Frostmane Envoy
+        100 = wwu_drakkari.14               # Winterax Envoy
+        100 = wwu_drakkari.15               # Temple Upkeep
+        100 = wwu_drakkari.16               # Elevated Farms
+        100 = wwu_drakkari.17               # Aquaduct Upkeep
         
         # Elune
-        100 = wwu_elune.4
-        100 = wwu_elune.5
-        100 = wwu_elune.6
-        100 = wwu_elune.7
-        100 = wwu_elune.8
-        100 = wwu_elune.9
-        100 = wwu_elune.10
-        100 = wwu_elune.11
-        100 = wwu_elune.12
-        100 = wwu_elune.13
-        100 = wwu_elune.14
+        100 = wwu_elune.4                   # Restoration of the Shrines
+        100 = wwu_elune.5                   # Ancient Relic: Elune's Handmaiden
+        100 = wwu_elune.6                   # Ancient Relic: Elune's Brazier
+        100 = wwu_elune.7                   # Ancient Relic: Ancient Vortex Runestone
+        100 = wwu_elune.8                   # Moonwell Upkeep
+        100 = wwu_elune.9                   # Devotion of the Priestesses
+        100 = wwu_elune.10                  # Tranquillity Reigns
+        100 = wwu_elune.11                  # Elune's Guidance
+        100 = wwu_elune.12                  # Blessing of Immortality
+        100 = wwu_elune.13                  # Wildkin Gather
+        100 = wwu_elune.14                  # Elune's Warriors
         
         # Deep Mother
-        100 = wwu_deep_mother.1
-        100 = wwu_deep_mother.2
-        100 = wwu_deep_mother.3
-        100 = wwu_deep_mother.4
-        10  = wwu_deep_mother.5
+        100 = wwu_deep_mother.1             # Favour of the Deep Mother
+        100 = wwu_deep_mother.2             # Collapse of Ritual Den
+        100 = wwu_deep_mother.3             # Unbreaking Wave
+        100 = wwu_deep_mother.4             # Commune with the Sea
+        10  = wwu_deep_mother.5             # Chosen of the Deep Mother
         
         # Grand Warlock
-        100 = wwu_grand_warlock.1
-        100 = wwu_grand_warlock.2
-        100 = wwu_grand_warlock.3
+        100 = wwu_grand_warlock.1           # Assignment of the Grand Warlock
+        100 = wwu_grand_warlock.2           # Pilfer the Treasury
+        100 = wwu_grand_warlock.3           # Demonic Crucible
         
         # Candle
-        100 = wwu_candle_flavour.1
-        100 = wwu_candle_flavour.2
-        100 = wwu_candle_flavour.3
-        100 = wwu_candle_flavour.4
-        100 = wwu_candle_flavour.5
+        100 = wwu_candle_flavour.1          # Protect the Candles
+        100 = wwu_candle_flavour.2          # Darkness Approaches
+        100 = wwu_candle_flavour.3          # Mineshaft Collapse
+        100 = wwu_candle_flavour.4          # Enduring Wax
+        100 = wwu_candle_flavour.5          # The Candle Guides Us
         
         # Tuskarr Idolatry
-        100 = wwu_tuskarr_idolatry.1
-        100 = wwu_tuskarr_idolatry.2
-        100 = wwu_tuskarr_idolatry.3
-        100 = wwu_tuskarr_idolatry.4
-        100 = wwu_tuskarr_idolatry.5
-        100 = wwu_tuskarr_idolatry.6
-        100 = wwu_tuskarr_idolatry.7
+        100 = wwu_tuskarr_idolatry.1        # Deeds of Great Distinction
+        100 = wwu_tuskarr_idolatry.2        # Oilskin Clothes
+        100 = wwu_tuskarr_idolatry.3        # Whalebone Weaponry
+        100 = wwu_tuskarr_idolatry.4        # Fishing Frenzy
+        100 = wwu_tuskarr_idolatry.5        # Turtle Ships
+        100 = wwu_tuskarr_idolatry.6        # Patient to a Fault
+        100 = wwu_tuskarr_idolatry.7        # Corrupt Catch Master
         
         # Emerald Nightmare
-        100 = wwu_emerald_nightmare.2
+        100 = wwu_emerald_nightmare.2       # Corruption in [target_province.GetName]
         
         1000 = 0
     }
 }
 
+# ROOT = Country
 on_five_year_pulse_3 = {
-	
-    
+	# Random Events
 	random_events = {
         # Emerald Dream
-        100 = wwu_emerald_dream.1
-        100 = wwu_emerald_dream.2
-        100 = wwu_emerald_dream.3
-        100 = wwu_emerald_dream.4
-        100 = wwu_emerald_dream.5
-        100 = wwu_emerald_dream.6
-        100 = wwu_emerald_dream.7
-        100 = wwu_emerald_dream.8
+        100 = wwu_emerald_dream.1       # Spirit of your Ancestor
+        100 = wwu_emerald_dream.2       # Excess Magical Energy
+        100 = wwu_emerald_dream.3       # Tendrils of Nightmare
+        100 = wwu_emerald_dream.4       # A Traitor Inside
+        100 = wwu_emerald_dream.5       # Layers of Dream
+        100 = wwu_emerald_dream.6       # Friendly Spirits
+        100 = wwu_emerald_dream.7       # Burst of Corruption
+        100 = wwu_emerald_dream.8       # Corruption of Heir
         
-        100 = wwu_naga.1
-        100 = wwu_naga.2
-        100 = wwu_naga.3
+        100 = wwu_naga.1                # Harbingers of N'Zoth
+        100 = wwu_naga.2                # N'Zoth's Guile
+        100 = wwu_naga.3                # N'Zoth's Influence
         
         # Government
-        100 = wwu_government.9 # Decadence
-        100 = wwu_government.10 # Heir Apparent
+        100 = wwu_government.9          # Decadence
+        100 = wwu_government.10         # Heir Apparent
         
         # Monument Research
-        100 = wwu_monument_research.2
-        100 = wwu_monument_research.3
-        100 = wwu_monument_research.4
+        100 = wwu_monument_research.2   # Adventurers Attacked!
+        100 = wwu_monument_research.3   # Further Research Required
+        100 = wwu_monument_research.4   # Local Squabbles
         
         # Distant Claims
-        300 = wwu_distant_claims.1
-        300 = wwu_distant_claims.2
-        300 = wwu_distant_claims.3
-        300 = wwu_distant_claims.4
-        300 = wwu_distant_claims.5
+        300 = wwu_distant_claims.1      # Naga Aggression
+        300 = wwu_distant_claims.2      # Deepholm Intrusion
+        300 = wwu_distant_claims.3      # Kezani Ambitions
+        300 = wwu_distant_claims.4      # South Sea Scramble
+        300 = wwu_distant_claims.5      # Plunder Abound
         
         # Kel Thuzad
-        200 = wwu_kel_thuzad.3
+        200 = wwu_kel_thuzad.3          # Scourge Corruption
         
         # Guilds
-        10 = wwu_guilds.1
-        10 = wwu_guilds.2
-        10 = wwu_guilds.3
-        10 = wwu_guilds.4
-        10 = wwu_guilds.5
+        10 = wwu_guilds.1               # Mercantile Opportunity
+        10 = wwu_guilds.2               # Military Opportunity
+        10 = wwu_guilds.3               # Divine Opportunity
+        10 = wwu_guilds.4               # Criminal Opportunity
+        10 = wwu_guilds.5               # Adventuring Opportunity
         
 		1000 = 0
 	}
 }
 
+# ROOT = Country
 on_five_year_pulse_4 = {
+	# Effects
+    on_five_year_pulse_4__scourge = yes
+    on_five_year_pulse_4__advisor = yes
+    on_five_year_pulse_4__ai = yes
 	
-    
-    #fail-safe if for whatever reason these flags stay after being used in events
-	if = {
-		limit = {
-			had_country_flag = {
-				flag = advisor_events_adm
-				days = 720
-			}
-		}
-		clr_country_flag = advisor_events_adm
-	}
-	if = {
-		limit = {
-			had_country_flag = {
-				flag = advisor_events_dip
-				days = 720
-			}
-		}
-		clr_country_flag = advisor_events_dip
-	}
-	if = {
-		limit = {
-			had_country_flag = {
-				flag = advisor_events_mil
-				days = 720
-			}
-		}
-		clr_country_flag = advisor_events_mil
-	}
-    
-    events = {
-        # AI
-        wwu_ai.2
-        wwu_scourge.201
-    }
-    
+    # Random Events
     random_events = {
         # Magic
-        100 = wwu_magic.13
-        100 = wwu_magic.14
-        100 = wwu_magic.15
-        100 = wwu_magic.17
-        100 = wwu_magic.18
-        100 = wwu_magic.19
-        
-        # AI
-        200 = wwu_ai.1
+        20 = wwu_magic.13              # Degredation of Aptitude
+        20 = wwu_magic.14              # Degredation of Finesse
+        20 = wwu_magic.15              # Degredation of Concentration
+        20 = wwu_magic.17              # Advancement of Aptitude
+        20 = wwu_magic.18              # Advancement of Finesse
+        20 = wwu_magic.19              # Advancement of Concentration
         
         1000 = 0
     }
 }
 
-# El Dorado
+# ROOT = Province, FROM = Country
 on_explore_coast = {
-	
-    
+	# Random Events
     random_events = {
-		10 = wwu_exploration.1
-		10 = wwu_exploration.2
-		10 = wwu_exploration.4
-		10 = wwu_exploration.6
-		10 = wwu_exploration.7
-		10 = wwu_exploration.9
-		10 = wwu_exploration.10
-		10 = wwu_exploration.11
-		10 = wwu_exploration.12
-		10 = wwu_exploration.14
-		10 = wwu_exploration.15
-        100 = 0
+		10 = wwu_exploration.1          # Ordeal in $PROVINCENAME$
+		10 = wwu_exploration.2          # $PROVINCENAME$ Troopers
+		10 = wwu_exploration.4          # Glory Road
+		10 = wwu_exploration.6          # Unwelcomed Passenger
+		10 = wwu_exploration.7          # The Green Hills of $PROVINCENAME$
+		10 = wwu_exploration.9          # The Menace from $PROVINCENAME$
+		10 = wwu_exploration.10         # The $PROVINCENAME$ Beast
+		10 = wwu_exploration.11         # A Scattering of Poison
+		10 = wwu_exploration.12         # Drunk Explorer
+		10 = wwu_exploration.14         # Unexpected Explorer
+		10 = wwu_exploration.15         # Dead on Arrival
+        300 = 0
 	}
 }
 
+# ROOT = Province, FROM = Country
 on_conquistador_empty = {
 	
 }
 
+# ROOT = Province, FROM = Country
 on_conquistador_native = {
 	
 }
 
+# ROOT = Country
 on_buy_religious_reform = {
 	
 }
 
+# ROOT = Country
 on_circumnavigation = {
-	
-    
+	# Events
     events = {
-		wwu_exploration.100# Initial Circumnavigation
-        wwu_exploration.101 # Repeat Circumnavigation
+		wwu_exploration.100         # Initial Circumnavigation
+        wwu_exploration.101         # Repeat Circumnavigation
     }
 }
 
+# ROOT = Country
 on_become_free_city = {
 	
-    
-	events = {
-        
-	}
 }
 
+# ROOT = Country
 on_remove_free_city = {
 	
-    
-	events = {
-        
-	}
 }
 
+# ROOT = Province
 on_revoke_estate_land_ai = {
-	 #AI can't handle the rebels atm or perform a gradual revoke, sorry
-    
 	add_province_modifier = {
 		name = revoked_estate_modifier
-		duration = 5475 #15 years
+		duration = 5475
 	}
 }
 
+# ROOT = Province
 on_revoke_estate_land = {
-	
-    
 	add_province_modifier = {
 		name = revoked_estate_modifier
-		duration = 5475 #15 years
+		duration = 5475
 	}
 }
 
+# ROOT = Province
 on_revoke_estate_land_ai_post = {
-	
-    
-	add_local_autonomy = 25
-}
-on_revoke_estate_land_post = {
-	
-    
 	add_local_autonomy = 25
 }
 
+# ROOT = Province
+on_revoke_estate_land_post = {
+	add_local_autonomy = 25
+}
+
+# ROOT = Province
 on_grant_estate_land = {
-	
-    
 	if = {
 		limit = {
 			has_province_modifier = revoked_estate_modifier
@@ -2657,1309 +2552,827 @@ on_grant_estate_land = {
 	}
 }
 
+# ROOT = Country
 on_death_has_harem = {
 	
 }
 
+# ROOT = Country
 on_select_heir_from_harem = {
 	
 }
 
+# ROOT = Country
 on_fetishist_cult_change = {
 	
 }
 
-# country
+# ROOT = Country
 on_gain_great_power_status = {
-	
-    
-	if = {
-		limit = {
-			NOT = { has_country_flag = became_great_power_flag }
-		}
-		set_country_flag = became_great_power_flag
-	}
+	# Effects
+    on_gain_great_power_status__great_powers = yes
 }
 
-# country
+# ROOT = Country
 on_lose_great_power_status = {
 	
 }
 
-# province
+# ROOT = Province, FROM = Country
 on_province_religion_converted = {
-	owner = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [This.GetName]: on_province_religion_converted "
-        }
-    }
-    
-	owner = {
-		change_variable = {
-			which = religions_converted
-			value = 1
-		}
-	}
-    
-    # COF: Centres of Fanaticism
-    if = {
-        limit = {
-            has_province_modifier = cof_cthun
-        }
-        remove_province_modifier = cof_cthun
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_nzoth
-        }
-        remove_province_modifier = cof_nzoth
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_yogg_saron
-        }
-        remove_province_modifier = cof_yogg_saron
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_yshaarj
-        }
-        remove_province_modifier = cof_yshaarj
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_sha
-        }
-        remove_province_modifier = cof_sha
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_twilight
-        }
-        remove_province_modifier = cof_twilight
-    }
-    if = {
-        limit = {
-            has_province_modifier = cof_nightmare
-        }
-        remove_province_modifier = cof_nightmare
-    }
-    
-    # Remove the Sunfury world debuff in a province if it is converted to Fel
-    if = {
-        limit = {
-            has_province_modifier = mission_burning_legion_hegemony
-            religion = fel
-        }
-        remove_province_modifier = mission_burning_legion_hegemony
-    }
-    
-    on_province_religion_converted_effect = yes
-    on_province_religion_converted_estate_privileges_effect = yes
+	# Effects
+    on_province_religion_converted__statistics = yes
+    on_province_religion_converted__centre_of_fanaticism = yes
+    on_province_religion_converted__missions = yes
+    on_province_religion_converted__religion = yes
+    on_province_religion_converted__trade_goods = yes
+    on_province_religion_converted__estate = yes
 }
 
+# ROOT = Province, FROM = Country
 on_province_religion_changed = {
-    owner = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [This.GetName]: on_province_religion_changed "
-        }
-    }
-}
-
-# province
-on_province_culture_converted = {
-	owner = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [This.GetName]: on_province_culture_converted "
-        }
-    }
     
-	owner = {
-		change_variable = {
-			which = cultures_converted
-			value = 1
-		}
-	}
-	
-	on_province_culture_converted_effect = yes
 }
 
+# ROOT = Province, FROM = Country
+on_province_culture_converted = {
+	# Effects
+	on_province_culture_converted__statistics = yes
+	on_province_culture_converted__trade_goods = yes
+}
+
+# ROOT = Province, FROM = Country
 on_province_culture_changed = {
-    owner = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName], [This.GetName]: on_province_culture_changed "
-        }
-    }
+    
 }
 
-# THIS = Province, FROM = Country who Propogated
+# ROOT = Province, FROM = Country
 on_convert_by_trade_policy = {
 	
 }
 
-# province
-# FROM = old owner
+# ROOT = Province, FROM = Previous Owner, OWNER = Current Owner
 on_province_owner_change = {
-	
-    
-	owner = {
-		change_variable = {
-			which = provinces_gained
-			value = 1
-		}
-	}
-    
-    update_government_reforms_on_province_change = yes
+    # Effects
+	on_province_owner_change__statistics = yes
     on_province_owner_change__terrain_affinity = yes
-    on_province_owner_change_effect = yes
-    on_province_owner_change_estate_privileges_effect = yes
-    on_province_owner_change_update_goods_production = yes
-    
-    # Nordrassil - Clear timer if the province is lost during the burning
-    if = {
-        limit = {
-            province_id = 1334
-            FROM = {
-                has_country_flag = burning_nordrassil_timer
-            }
-        }
-        
-        FROM = { 
-            clr_country_flag = burning_nordrassil_timer
-            remove_country_modifier = burning_nordrassil
-        }
-        clr_province_flag = nordrassil_province_being_burnt
-    }
-    # Teldrassil - Clear timer if the province is lost during the burning
-    if = {
-        limit = {
-            province_id = 1073
-            FROM = {
-                has_country_flag = burning_teldrassil_timer
-            }
-        }
-        
-        FROM = { 
-            clr_country_flag = burning_teldrassil_timer
-            remove_country_modifier = burning_teldrassil
-        }
-        clr_province_flag = teldrassil_province_being_burnt
-    }
+    on_province_owner_change__missions = yes
+    on_province_owner_change__trade_goods = yes
+    on_province_owner_change__government = yes
+    on_province_owner_change__estate = yes
+    on_province_owner_change__goods_production = yes
+    on_province_owner_change__world_tree = yes
 }
 
-# country
+# ROOT = Country
 on_parliament_debate_reset = {
     
 }
 
-# country
+# ROOT = Country
 on_parliament_seat_given = {
     
 }
 
-# country
+# ROOT = Country
 on_parliament_seat_lost = {
     
 }
 
-# country
+# ROOT = Country
 on_parliament_debate_failed = {
 	
 }
 
-# country
+# ROOT = Country
 on_parliament_debate_succeeded = {
 	
 }
 
-# Harmony
+# ROOT = Country
 on_harmonized_light_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.1
     }
 }
+
+# ROOT = Country
 on_harmonized_disorder_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.2
     }
 }
+
+# ROOT = Country
 on_harmonized_life_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.4
     }
 }
+
+# ROOT = Country
 on_harmonized_death_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.7
     }
 }
+
+# ROOT = Country
 on_harmonized_shadow_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.5
     }
 }
+
+# ROOT = Country
 on_harmonized_elemental_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.3
     }
 }
+
+# ROOT = Country
 on_harmonized_philosophy_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.6
     }
 }
+
+# ROOT = Country
 on_harmonized_azerothian_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.8
     }
 }
+
+# ROOT = Country
 on_harmonized_draenorian_group = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.9
     }
 }
+
+# ROOT = Country
 on_harmonized_arcane = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.20
     }
 }
+
+# ROOT = Country
 on_harmonized_titan_worship = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.21
     }
 }
+
+# ROOT = Country
 on_harmonized_corrupt_titan_worship = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.22
     }
 }
+
+# ROOT = Country
 on_harmonized_mystery_of_the_makers = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.23
     }
 }
+
+# ROOT = Country
 on_harmonized_corrupt_dragon_aspect = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.24
     }
 }
+
+# ROOT = Country
 on_harmonized_crystal = {
-	
-    
+	# Events
     events = {
         wwu_harmonization.25
     }
 }
 
-# province
+# ROOT = Province, FROM = Country
 on_consecrate_patriarch = {
 	
 }
 
-# country. from = overlord
+# ROOT = Country, FROM = Overlord Country
 on_accept_tribute = {
 	
 }
 
-# country. from = overlord
+# ROOT = Country, FROM = Overlord Country
 on_refuse_tribute = {
 	
 }
 
-# country
+# ROOT = Country
 on_leader_recruited = {
 	
 }
 
-# country
+# ROOT = Country
 on_general_recruited = {
-	
-    
-	add_army_professionalism = 0.02
-    
-    if = {
-        limit = {
-            has_idea = wwu_innovation_ideas_7
-        }
-        
-        add_army_professionalism = 0.01
-    }
+	# Effects
+    on_general_recruited__military = yes
 }
 
-# country
+# ROOT = Country
 on_admiral_recruited = {
-	
-    
-    if = {
-		limit = { has_country_flag = admirals_give_army_professionalism }
-		add_army_professionalism = 0.002
-        
-        if = {
-            limit = {
-                has_idea = wwu_innovation_ideas_7
-            }
-            
-            add_army_professionalism = 0.01
-        }
-	}
+	# Effects
+    on_admiral_recruited__military = yes
 }
 
-# country
+# ROOT = Country
 on_conquistador_recruited = {
 	
 }
 
-# country
+# ROOT = Country
 on_explorer_recruited = {
 	
 }
 
-# THIS = Province, FROM = Country
+# ROOT = Province, FROM = Country
 on_regiment_recruited = {
 	
-
 }
 
-# THIS = Province, FROM = Country
+# ROOT = Province, FROM = Country
 on_mercenary_recruited = {
-	
-    
-	FROM = {
-        if = {
-            limit = {
-                has_idea = wwu_mercenary_army_ideas_1
-            }
-            add_army_professionalism = 0.01
-        }
-	}
+	on_mercenary_recruited__military = yes
 }
 
-# THIS = One province in the state
+# ROOT = Province
 on_add_pasha = {
 	
 }
 
-# THIS = One province in the state
+# ROOT = Province
 on_remove_pasha = {
-	hidden_effect = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName]: on_remove_pasha "
-        }
-        
-		owner = {
-			save_event_target_as = province_owner
-		}
-		remove_province_modifier = pasha_removed_modifier
-	}
-
-	area = {
-		limit = { owned_by = event_target:province_owner }
-		add_or_extend_province_modifier_effect = { MODIFIER = pasha_removed_modifier DURATION = 3650 }
-	}
+    # Effects
+    on_remove_pasha__cultural = yes
 }
 
-# THIS = Province
+# ROOT = Province
 on_janissaries_raised = {
 	
 }
 
-# THIS = Province
+# ROOT = Province
 on_cawa_raised = {
 	
-    
 }
 
+# ROOT = Province
 on_carolean_raised = {
 	
-    
 }
 
+# ROOT = Province
 on_hussars_raised = {
 	
-    
 }
 
+# ROOT = Province
 on_revolutionary_guard_raised = {
     
 }
 
+# ROOT = Province
 on_banner_raised = {
     
 }
 
+# ROOT = Province
 on_cossack_raised = {
     
 }
 
+# ROOT = Province
 on_marine_raised = {
     
 }
 
+# ROOT = Province
 on_rajput_raised = {
     
 }
 
+# ROOT = Province
 on_streltsy_raised = {
     
 }
 
+# ROOT = Province
 on_tercio_raised = {
     
 }
 
+# ROOT = Province
 on_musketeer_raised = {
     
 }
 
+# ROOT = Province
 on_samurai_raised = {
     
 }
 
+# ROOT = Province
 on_geobukseon_raised = {
     
 }
 
+# ROOT = Province
 on_man_of_war_raised = {
     
 }
 
+# ROOT = Province
 on_galleon_raised = {
     
 }
 
+# ROOT = Province
 on_galleass_raised = {
     
 }
 
+# ROOT = Province
 on_caravel_raised = {
     
 }
 
+# ROOT = Province
 on_voc_indiamen_raised = {
     
 }
 
+# ROOT = Country
 on_hre_reform_passed = {
     
 }
 
+# ROOT = Country
 on_mandate_reform_passed = {
     
 }
 
+# ROOT = Country
 on_reform_enacted = {
 	
 }
 
+# ROOT = Country
 on_reform_changed = {
 	
 }
 
+# ROOT = Province
 on_trade_company_investment = {
 	
 }
 
+# ROOT = Province
 on_center_of_trade_upgrade = {
-	
-    
-	owner = { 
-        change_variable = {
-            which = cot_upgraded
-            value = 1
-        } 
-    }
-    
-    if = {
-        limit = {
-            owner = {
-                has_estate_privilege = estate_mercantile_guild_trade_hub_promotion
-            }
-        }
-        
-        area = {
-            add_base_tax = 1
-            add_base_production = 1
-        }
-    }
+	# Effects
+    on_center_of_trade_upgrade__statistics = yes
+    on_center_of_trade_upgrade__estate = yes
 }
 
+# ROOT = Province
 on_center_of_trade_downgrade = {
 	
-
 }
 
+# ROOT = Country
 on_culture_promoted = {
-	
-    
-	change_variable = {
-		which = cultures_promoted
-		value = 1
-	}
+	# Effects
+    on_culture_promoted__statistics = yes
 }
 
+# ROOT = Country
 on_culture_demoted = {
 	
-    
 }
 
+# ROOT = Country
 on_primary_culture_changed = {
 	
-
 }
 
-# FROM = Previous Country, ROOT = Province
+# ROOT = Province, FROM = Former Country
 on_company_chartered = {
 	
 }
 
-# ROOT = Overlord, FROM = Minor
+# ROOT = Overlord Country, FROM = Subject Country
 on_dependency_gained = {
-	
-	
-    # Scourge Vassal - Convert Religion
-    if = {
-        limit = {
-            NOT = { has_global_flag = destroyed_helm_flag }
-            tag = P11
-            FROM = {
-                is_subject_of_type = scourge_vassal
-            }
-        }
-        FROM = {
-            change_religion = cult_of_the_damned
-            capital_scope = {
-                change_religion = cult_of_the_damned
-            }
-        }
-    }
+	# Effects
+    on_dependency_gained__scourge = yes
 }
 
-# ROOT = Overlord, FROM = Minor
+# ROOT = Overlord Country, FROM = Subject Country
 on_dependency_lost = {
 	
-
 }
 
-# ROOT = New vassal, FROM = Overlord
+# ROOT = Subject Country, FROM = Overlord Country
 on_create_vassal = {
 	
 }
 
-# ROOT = Country establishing it
-# First province in state is set
+# ROOT = Country
 on_holy_order_established = {
 	
-
 }
 
-# When a minority is expelled to a colony
-# THIS = Colony, ROOT = Colony, FROM = Home province
+# ROOT = Colony Country, FROM = Home Province
 on_minority_expelled = {
 	
-
 }
 
-# THIS = Raiding country, FROM = Sea province
+# ROOT = Raiding Country, FROM = Sea province
 on_raid_coast = {
-	
-    
-	if = {
-		limit = {
-			has_faction = pr_buccaneers
-		}
-		add_faction_influence = {
-			faction = pr_buccaneers
-			influence = 1
-		}
-        
-        change_variable = {
-            which = raid_coast_counter
-            value = 1
-        }
-	}
+	# Effects
+    on_raid_coast__government_factions = yes
 }
 
-# ROOT = Tag that captured the flagship, FROM = Tag that lost the flagship
+# ROOT = Winning Country, FROM = Losing Country
 on_flagship_captured = {
-	
-    
-    # Naval Acumen
-    if = {
-        limit = {
-            has_government_mechanic = naval_acumen_mechanic
-        }
-        
-        add_government_power = {
-            mechanic_type = naval_acumen_mechanic
-            power_type = naval_acumen
-            value = 25
-        }
-    }
-    if = {
-        limit = {
-            FROM = { has_government_mechanic = naval_acumen_mechanic }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = naval_acumen_mechanic
-                power_type = naval_acumen
-                value = -20
-            }
-        }
-    }
-    
-	FROM = {
-		set_country_flag = captured_flagship_country_flag
-	}
-	ROOT = {
-		country_event = { id = wwu_flagship_events.2 }
-		set_country_flag = trophy_hunter_flag
-	}
-	FROM = {
-		country_event = { id = wwu_flagship_events.1 }
-	}
+	# Effects
+    on_flagship_captured__government = yes
+    on_flagship_captured__military = yes
 }
 
-# ROOT = Tag that destroyed the flagship, FROM = Tag that lost the flagship
+# ROOT = Winning Country, FROM = Losing Country
 on_flagship_destroyed = {
-	
-    
-    # Naval Acumen
-    if = {
-        limit = {
-            has_government_mechanic = naval_acumen_mechanic
-        }
-        
-        add_government_power = {
-            mechanic_type = naval_acumen_mechanic
-            power_type = naval_acumen
-            value = 25
-        }
-    }
-    if = {
-        limit = {
-            FROM = { has_government_mechanic = naval_acumen_mechanic }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = naval_acumen_mechanic
-                power_type = naval_acumen
-                value = -20
-            }
-        }
-    }
-    
-	FROM = {
-		set_country_flag = sunk_flagship_country_flag
-	}
-	ROOT = {
-		country_event = { id = wwu_flagship_events.4 }
-	}
-	FROM = {
-		country_event = { id = wwu_flagship_events.3 }
-	}
+	# Effects
+    on_flagship_destroyed__government = yes
+    on_flagship_destroyed__military = yes
 }
 
-# this = Released country, FROM = Releasing country
+# ROOT = Released Country, FROM = Releasing Country
 on_country_released = {
-	
-    
-    government_on_country_released_effect = yes
+	# Effects
+    on_country_released__government = yes
 }
 
-# ROOT = province, FROM = country
+# ROOT = Province, FROM = Country
 on_trade_good_changed = {
-	
 
-	on_trade_good_changed_estate_privileges_effect = yes
 }
 
-# this = country
+# ROOT = Country
 on_loan_repaid = {
-	
-
-    on_loan_repaid_estate_privileges_effect = yes
+	# Effects
+    on_loan_repaid__estate = yes
 }
 
-# this = country
+# ROOT = Country
 on_rebels_break_country = {
-	
-    
-	add_country_modifier = {
-		name = just_lost_to_rebels
-		duration = 10
-		hidden = yes
-	}
+	# Effects
+    on_rebels_break_country__rebels = yes
 }
 
-# this = country
-## Fires when you fire or replace your ADM advisor, in the moment before they are actually removed from their post.
-## Note: Defining a new advisor here will result in the shortest appointment in history. Use on_post_adm_advisor_fired instead :)
+# ROOT = Country
 on_pre_adm_advisor_fired = {
-	
-	if = {
-		limit = {
-			has_country_flag = need_to_fire_adm_advisor
-		}
-		set_country_flag = just_fired_adm_advisor
-		remove_advisor_by_category_no_action = ADM
-	}
+	# Effects
+    on_pre_adm_advisor_fired__advisor = yes
 }
 
-# this = country
+# ROOT = Country
 on_pre_dip_advisor_fired = {
-	
-	if = {
-		limit = {
-			has_country_flag = need_to_fire_dip_advisor
-		}
-		set_country_flag = just_fired_dip_advisor
-		remove_advisor_by_category_no_action = DIP
-	}
+	# Effects
+    on_pre_dip_advisor_fired__advisor = yes
 }
 
-# this = country
+# ROOT = Country
 on_pre_mil_advisor_fired = {
-	
-	if = {
-		limit = {
-			has_country_flag = need_to_fire_mil_advisor
-		}
-		set_country_flag = just_fired_mil_advisor
-		remove_advisor_by_category_no_action = MIL
-	}
+	# Effects
+    on_pre_mil_advisor_fired__advisor = yes
 }
 
-# this = country
+# ROOT = Country
 on_post_adm_advisor_fired = {
 	
-
 }
 
-# this = country
+# ROOT = Country
 on_post_dip_advisor_fired = {
 	
-	
 }
 
-# this = country
+# ROOT = Country
 on_post_mil_advisor_fired = {
 	
-	
 }
 
-# this = new client state, from = parent country
+# ROOT = Country, FROM = Overlord Country
 on_create_client_state = {
 	
-	
 }
 
-# this = new target, from = previous target (both can be non-existent tag)
+# ROOT = Target Country, FROM = Former Target Country
 on_change_revolution_target = {
 	
 }
 
-# this = curia controller (enactor of the bull)
+# ROOT = Country
 on_golden_bull_enacted = {
-	
-    
-	set_country_flag = enacted_golden_bull
+	# Effects
+    on_golden_bull_enacted__religion = yes
 }
 
-
-# province:  spawned whenever a new owner takes over the province
-# FROM = The previous owner.
+# ROOT = Province, FROM = Previous Owner Country
 on_conquest = {
+    # Effects
     on_conquest__terrain_affinity = yes
-    
-	remove_named_unrest = estate_land_seized
-	clr_province_flag = has_estate_unrest_flag
-    
-    # Hubris
-    owner = {
-        if = {
-            limit = {
-                has_government_mechanic = hubris_mechanic
-            }
-            
-            add_government_power = {
-                mechanic_type = hubris_mechanic
-                power_type = hubris
-                value = 1
-            }
-        }
-    }
+    on_conquest__estate = yes
+	on_conquest__government = yes
 }
 
+# ROOT = Country
 on_country_creation = {
+	# Effects
 	on_country_creation__terrain_affinity = yes
 }
 
+# ROOT = Country
 on_federation_leader_change = {
-	
-    
-	if = {
-		limit = { tag = FROM }
-		disband_federation = THIS
-	}
-	else = {
-		# New strongest member becomes the new federation leader
-		set_federation_leader = THIS
-	}
+	# Effects
+    on_federation_leader_change__federations = yes
 }
 
-#FROM = country pillaged, ROOT = country doing the pillaging
+# ROOT = Winning Country, FROM = Losing COuntry
 on_pillaged_capital = {
 	
 }
 
-#FROM = country dev was transferred from, ROOT = country doing the transferring
+# ROOT = Winning Country, FROM = Losing COuntry
 on_transfer_development = {
 	
-    
 }
 
+# ROOT = Country
 on_colonial_type_change = {
-	
-    
-	clr_country_flag = encourage_cash_crops_flag
+	# Effects
+    on_colonial_type_change__colonial_nation = yes
 }
 
+# ROOT = Country
 on_estate_led_regency = {
 	
-    
 }
 
+# ROOT = Country
 on_estate_led_regency_surpassed = {
 	
-    
 }
 
+# ROOT = Country
 on_extended_regency = {
 	
-	
 }
 
+# ROOT = Country
 on_estate_removed = {
 	
 }
 
-##scope = colony province, FROM = owner country or province if there's a minority expulsion source, fires when the colony is created
+# ROOT = Province, FROM = Owner Country / Province if Minority Expulsion
 on_colony_established = {
     
 }
 
-#scope = new country, FROM = parent country
+# ROOT = Country, FROM = Overlord Country
 on_colonial_nation_established = {
     
 }
 
-##scope = colony province, FROM = owner country or province if there's a minority expulsion source
+# ROOT = Province, FROM = Owner Country / Province if Minority Expulsion
 on_colonist_boosting_colony = {
-	hidden_effect = {
-        if = { 
-            limit = { has_global_flag = enable_onaction_logging }
-            log = "DEBUG - [Root.GetName]: on_colonist_boosting_colony "
-        }
-        
-        if = {
-            limit = {
-                FROM = {
-                    native_policy = native_policy_hostile
-                }
-            }
-            
-            if = {
-                limit = {
-                    OR = {
-                        religion = noreligion
-                        #test if colonists outnumber natives
-                        variable_arithmetic_trigger = {
-                            custom_tooltip = colonysize_is_larger_than_nativesize_tt
-                            export_to_variable = {
-                                which = vab_colonysize
-                                value = trigger_value:colonysize
-                            }
-                            export_to_variable = {
-                                which = vab_nativesize
-                                value = trigger_value:native_size
-                            }
-                            check_variable = {
-                                which = vab_colonysize
-                                which = vab_nativesize
-                            }
-                        }
-                        is_in_capital_area = yes
-                    }
-                }
-                change_religion = FROM
-            }
-            if = {
-                limit = {
-                    OR = {
-                        culture = noculture
-                        #test if colonists outnumber natives
-                        variable_arithmetic_trigger = {
-                            custom_tooltip = colonysize_is_larger_than_nativesize_tt
-                            export_to_variable = {
-                                which = vab_colonysize
-                                value = trigger_value:colonysize
-                            }
-                            export_to_variable = {
-                                which = vab_nativesize
-                                value = trigger_value:native_size
-                            }
-                            check_variable = {
-                                which = vab_colonysize
-                                which = vab_nativesize
-                            }
-                        }
-                        is_in_capital_area = yes
-                    }
-                }
-                change_culture = FROM
-                change_original_culture = FROM
-            }
-        }
-	}
+	# Effects
+    on_colonist_boosting_colony__colonial_nation = yes
 }
 
-#ROOT = converted country, FROM = country which force converts ROOT, on_action gets called on Force religion peace and Enforce Religion subject interaction
+# ROOT = Losing Country, FROM = Winning Country
 on_force_conversion = {
 	
-    
 }
 
+# ROOT = Country,
 on_institution_embracement = {
 	
-
 }
 
+# ROOT = Country,
 on_national_focus_change = {
 	
-
 }
 
+# ROOT = Country,
 on_capital_moved = {
 	
-
 }
 
-#ROOT = province that was expanded in, FROM = country that did it
+# ROOT = Province, FROM = Country
 on_expanded_infrastructure = {
 	
-    
 }
 
-#ROOT = province that was centralized in
+# ROOT = Province
 on_centralized_state = {
-	
-    
-    if = {
-        limit = {
-            owner = {
-                has_idea = wwu_economic_ideas_5
-            }
-        }
-        area = {
-            add_base_tax = 1
-            add_base_production = 1
-            add_base_manpower = 1
-        }
-    }
+	# Effects
+    on_centralized_state__ideagroups = yes
 }
 
-# ROOT = country
+# ROOT = Country
 monarch_on_shipwreck = {
 	
 }
 
-# ROOT = country
+# ROOT = Country
 heir_on_shipwreck = {
 	
 }
 
-# ROOT = country
+# ROOT = Country
 consort_on_shipwreck = {
 	
 }
 
-# ROOT = country
+# ROOT = Country
 on_defender_of_faith_loss = {
-	
-    
-	clr_country_flag = claimed_defender_of_faith_flag
+	# Effects
+    on_defender_of_faith_loss__religion = yes
 }
 
 # ROOT = country
 on_defender_of_faith_claim = {
-	
-    
-	set_country_flag = claimed_defender_of_faith_flag
+	# Effects
+    on_defender_of_faith_claim__religion = yes
 }
 
-# ROOT = country
+# ROOT = Country
 on_hre_dismantled = {
 	
-    
 }
 
-# ROOT = country
+# ROOT = Country
 on_new_age = {
-	
-    
-    clr_country_flag = age_category_administrative
-    clr_country_flag = age_category_court
-    clr_country_flag = age_category_economic
-    clr_country_flag = age_category_technology
-    clr_country_flag = age_category_societal
-    clr_country_flag = age_category_diplomatic
-    clr_country_flag = age_category_espionage
-    clr_country_flag = age_category_colonial
-    clr_country_flag = age_category_army
-    clr_country_flag = age_category_navy
-    clr_country_flag = age_category_action
-    
-    # Temporary Age progression until events are done
-    if = {
-        limit = {
-            ai = no
-        }
-        
-        if = {
-            limit = {
-                current_age = age_trouble_in_azeroth
-            }
-            country_event = { id = wwu_age_progression.1 days = 10950 }
-        }
-        if = {
-            limit = {
-                current_age = age_burning_crusade
-            }
-            country_event = { id = wwu_age_progression.2 days = 10950 }
-        }
-        if = {
-            limit = {
-                current_age = age_wrath_of_the_lich_king
-            }
-            country_event = { id = wwu_age_progression.3 days = 10950 }
-        }
-        if = {
-            limit = {
-                current_age = age_cataclysm
-            }
-            country_event = { id = wwu_age_progression.4 days = 10950 }
-        }
-        if = {
-            limit = {
-                current_age = age_mists_of_pandaria
-            }
-            country_event = { id = wwu_age_progression.5 days = 10950 }
-        }
-    }
+	# Effects
+    on_new_age__ages = yes
 }
 
-# ROOT = province
+# ROOT = Province
 on_adm_exploited = {
 	
-    
 }
 
-# ROOT = province
+# ROOT = Province
 on_dip_exploited = {
     
-    
 }
 
-# ROOT = province
+# ROOT = Province
 on_mil_exploited = {
     
-    
 }
 
-# ROOT = province
+# ROOT = Province
 on_raze = {
     
-    
 }
 
-# ROOT = province
+# ROOT = Province
 on_concentrate_development = {
     
-    
 }
 
+# ROOT = Country
 on_slacken_start = {
-    
-    
-    if = {
-        limit = {
-            has_country_modifier = chaos_demon_hunter_fury
-        }
-        add_country_modifier = {
-            name = slackening_modifier_illidari
-            duration = -1
-        }
-    }
-    else = {
-        add_country_modifier = {
-            name = slackening_modifier
-            duration = -1
-        }
-    }
+    # Effects
+    on_slacken_start__military = yes
 }
+
+# ROOT = Country
 on_slacken_stop = {
-    
-    
-	remove_country_modifier = slackening_modifier
-	remove_country_modifier = slackening_modifier_illidari
+    # Effects
+    on_slacken_stop__military = yes
 }
 
-# ROOT - Province
+# ROOT = Province
 on_colony_finished = { 
-    
-    
-    if = {
-        limit = {
-            owner = {
-                has_estate_privilege = estate_mercantile_guild_trade_colonies
-            }
-        }
-        
-        add_base_production = 2
-        
-        # Only reduce if it is higher than 1
-        if = {
-            limit = {
-                base_manpower = 2
-            }
-            
-            add_base_manpower = -1
-        }
-    }
+    # Effects
+    on_colony_finished__estate = yes
 }
 
-#ROOT - Country
+# ROOT = Country
 on_advisor_hired = { 
     
 }
 
-#ROOT - Country, executed after on_advisor_hired!
+# ROOT = Country
 on_adm_advisor_hired = { 
     
 }
 
-#ROOT - Country, executed after on_advisor_hired!
+# ROOT = Country
 on_dip_advisor_hired = { 
     
 }
 
-#ROOT - Country, executed after on_advisor_hired!
+# ROOT = Country
 on_mil_advisor_hired = { 
     
 }
 
-#ROOT - Province, #FROM - Country that gets the core
+# ROOT = Province, FROM = Country
 on_core = { 
     
 }
 
-#ROOT - Country
+# ROOT = Country
 on_tech_taken = { 
     
 }
 
-#ROOT - Country, executed after on_tech_taken!
+# ROOT = Country
 on_adm_tech_taken = { 
     
 }
 
-#ROOT - Country, executed after on_tech_taken!
+# ROOT = Country
 on_dip_tech_taken = { 
     
 }
 
-#ROOT - Country, executed after on_tech_taken!
+# ROOT = Country
 on_mil_tech_taken = { 
     
 } 
 
-#ROOT - barraging country, FROM - barraged province 
+# ROOT = Country, FROM = Province
 on_barrage = { 
     
 }
 
-#ROOT - barraging country, FROM - barraged province 
+# ROOT = Country, FROM = Province
 on_naval_barrage = { 
     
 }
 
-#ROOT - scorching country, FROM - scorched province
+# ROOT = Country, FROM = Province
 on_scorch_earth  = { 
     
 }
 
-#ROOT - Winer FROM - Losing
+# ROOT = Winning Country, FROM = Losing Country
 on_war_ended = { 
 	
 }
 
-#ROOT - Original alliance creator, FROM - Alliance accepter
+# ROOT = Host Country, FROM = Allied Country
 on_alliance_broken = { 
-    
     
 }
 
-#ROOT - Original marriage creator, FROM - Marriage accepter
+# ROOT = Host Country, FROM = Married Country
 on_royal_marriage_broken = { 
     
 }
 
-#ROOT - Alliance sender, FROM - Alliance accepter
+# ROOT = Host Country, FROM = Allied Country
 on_alliance_created = { 
     
 }
 
-#ROOT - Marraige sender, FROM - marriage accepter
+# ROOT = Host Country, FROM = Married Country
 on_royal_marriage = { 
     
 }
 
+# ROOT = Country
 on_heir_disinherited = {
 	
 }

@@ -1,11 +1,3 @@
-# Unlock Interdimensional Invasion
-unlock_interdimensional_invasion = {
-    custom_tooltip = INTERDIMENSIONAL_INVASION_TT
-    hidden_effect = {
-        set_country_flag = unlocked_interdimensional_invasion
-    }
-}
-
 #-----------------------------------
 # On Actions
 #-----------------------------------
@@ -86,4 +78,97 @@ on_war_won__invasion = {
     # Reset Invasion flag
     clr_country_flag = invasion_spawn_done
     clr_country_flag = first_core_of_invasion
+}
+
+on_yearly_pulse__invasion = {
+    if = {
+        limit = {
+            ai = yes
+            NOT = { has_country_modifier = ai_teleport_cooldown }
+            
+            OR = {  
+                is_in_war = {
+                    casus_belli = cb_demonic_invasion
+                    attackers = ROOT
+                }
+                is_in_war = {
+                    casus_belli = cb_elemental_invasion
+                    attackers = ROOT
+                }
+            }
+            
+            any_owned_province = {
+                num_of_units_in_province = {
+                    who = ROOT
+                    amount = 1
+                }
+            }
+            
+            any_country = {
+                war_with = ROOT
+                OR = {  
+                    is_in_war = {
+                        casus_belli = cb_demonic_invasion
+                        defenders = THIS
+                    }
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                any_owned_province = {
+                    NOT = {
+                        num_of_units_in_province = {
+                            who = PREV
+                            amount = 1
+                        }
+                    }
+                }
+            }
+        }
+        
+        add_country_modifier = {
+            name = ai_teleport_cooldown
+            duration = 365
+        }
+        
+        random_country = {
+            limit = {
+                war_with = ROOT
+                OR = {  
+                    is_in_war = {
+                        casus_belli = cb_demonic_invasion
+                        defenders = THIS
+                    }
+                    is_in_war = {
+                        casus_belli = cb_elemental_invasion
+                        defenders = THIS
+                    }
+                }
+                any_owned_province = {
+                    NOT = {
+                        num_of_units_in_province = {
+                            who = PREV
+                            amount = 1
+                        }
+                    }
+                }
+            }
+            
+            save_event_target_as = hostile_country
+        }
+        
+        country_event = { id = wwu_teleport_system.10 }
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+# Unlock Interdimensional Invasion
+unlock_interdimensional_invasion = {
+    custom_tooltip = INTERDIMENSIONAL_INVASION_TT
+    hidden_effect = {
+        set_country_flag = unlocked_interdimensional_invasion
+    }
 }

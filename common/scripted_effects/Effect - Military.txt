@@ -1,0 +1,88 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_general_recruited__military = {
+    add_army_professionalism = 0.02
+    
+    if = {
+        limit = {
+            has_idea = wwu_innovation_ideas_7
+        }
+        
+        add_army_professionalism = 0.01
+    }
+}
+
+on_admiral_recruited__military = {
+    if = {
+		limit = { has_country_flag = admirals_give_army_professionalism }
+		add_army_professionalism = 0.002
+        
+        if = {
+            limit = {
+                has_idea = wwu_innovation_ideas_7
+            }
+            
+            add_army_professionalism = 0.01
+        }
+	}
+}
+
+on_mercenary_recruited__military = {
+    FROM = {
+        if = {
+            limit = {
+                has_idea = wwu_mercenary_army_ideas_1
+            }
+            add_army_professionalism = 0.01
+        }
+	}
+}
+
+on_flagship_captured__military = {
+    FROM = {
+		set_country_flag = captured_flagship_country_flag
+	}
+	ROOT = {
+		country_event = { id = wwu_flagship_events.2 }
+		set_country_flag = trophy_hunter_flag
+	}
+	FROM = {
+		country_event = { id = wwu_flagship_events.1 }
+	}
+}
+
+on_flagship_destroyed__military = {
+    FROM = {
+		set_country_flag = sunk_flagship_country_flag
+	}
+	ROOT = {
+		country_event = { id = wwu_flagship_events.4 }
+	}
+	FROM = {
+		country_event = { id = wwu_flagship_events.3 }
+	}
+}
+
+on_slacken_start__military = {
+    if = {
+        limit = {
+            has_country_modifier = chaos_demon_hunter_fury
+        }
+        add_country_modifier = {
+            name = slackening_modifier_illidari
+            duration = -1
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = slackening_modifier
+            duration = -1
+        }
+    }
+}
+
+on_slacken_stop__military = {
+    remove_country_modifier = slackening_modifier
+	remove_country_modifier = slackening_modifier_illidari
+}

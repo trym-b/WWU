@@ -1,4 +1,152 @@
 #-----------------------------------
+# On Action
+#-----------------------------------
+on_five_year_pulse__game_configuration = {
+    # Vanquisher System
+    if = {
+        limit = {
+            ai = yes
+            is_subject = no
+            NOT = { ruler_has_personality = vanquisher_personality }
+            
+            # Must be of a suitable size
+            num_of_cities = 3
+            
+            # Must not be bankrupt
+            NOT = { is_bankrupt = yes }
+            
+            has_dlc = "Rights of Man"
+            has_global_flag = enabled_vanquisher_system
+            
+            # Wait 10 years after start before assigning any Vanquishers
+            had_global_flag = {
+                flag = game_duration_timer
+                days = 3650
+            }
+                    
+            # Only 5 at one time
+            NOT = {
+                calc_true_if = {
+                    amount = 5
+                    
+                    all_country = {
+                        ruler_has_personality = vanquisher_personality
+                    }
+                }
+            }
+            
+            # Must not be next to the player within the first 50 years
+            if = {
+                limit = {
+                    had_global_flag = {
+                        flag = game_duration_timer
+                        days = 18250
+                    }
+                }
+                
+                any_neighbor_country = { 
+                    ai = no 
+                }
+            }
+        }
+        
+        add_ruler_personality = vanquisher_personality
+        add_ruler_modifier = {
+            name = vanquisher_bonus
+            duration = -1
+        }
+        
+        set_ai_personality = {
+            personality = ai_militarist
+            locked = yes
+        }
+        
+        add_stability = 3
+        add_prestige = 100
+        
+        change_adm = 2
+        change_dip = 2
+        change_mil = 4
+    }
+    
+    # Warmonger System
+    if = {
+        limit = {
+            ai = yes
+            has_global_flag = enabled_warmonger_system
+            is_at_war = no
+            
+            # These tags should declare wars anywhere
+            if = {
+                limit = {
+                    OR = {
+                        tag = B92
+                        tag = P24
+                        tag = P26
+                        tag = P27
+                        tag = P28
+                    }
+                }
+                
+                any_country = {
+                    NOT = { alliance_with = ROOT }
+                    NOT = { truce_with = ROOT }
+                }
+            }
+            # Otherwise only target neighbors
+            else = {
+                any_neighbor_country = {
+                    NOT = { alliance_with = ROOT }
+                    NOT = { truce_with = ROOT }
+                }
+            }
+        }
+        
+        # These tags should declare wars anywhere
+        if = {
+            limit = {
+                OR = {
+                    tag = B92
+                    tag = P24
+                    tag = P26
+                    tag = P27
+                    tag = P28
+                }
+            }
+            
+            random_country = {
+                limit = { 
+                    NOT = { alliance_with = ROOT }
+                    NOT = { truce_with = ROOT } 
+                }
+                save_event_target_as = victim
+            }
+        }
+        # Otherwise only target neighbors
+        else = {
+            random_neighbor_country = {
+                limit = {
+                    NOT = { alliance_with = ROOT }
+                    NOT = { truce_with = ROOT }
+                }
+                
+                save_event_target_as = victim
+            }
+        }
+        
+        if = {
+            limit = {
+                has_saved_event_target = event_target:victim
+            }
+            declare_war_with_cb = {
+                who = event_target:victim
+                casus_belli = cb_war_of_aggression
+            }
+        }
+    }
+}
+
+#-----------------------------------
 # Misc
 #-----------------------------------
 setup_default_game_configuration = {

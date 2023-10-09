@@ -52,3 +52,28 @@ on_war_won__missions = {
     }
 }
 
+on_province_religion_converted__missions = {
+    # Remove the Sunfury world debuff in a province if it is converted to Fel
+    if = {
+        limit = {
+            has_province_modifier = mission_burning_legion_hegemony
+            religion = fel
+        }
+        remove_province_modifier = mission_burning_legion_hegemony
+    }
+}
+
+on_province_owner_change__missions = {
+    if = {
+		limit = {
+			province_id = 1671
+		}
+		owner = {
+			add_country_modifier = {
+				name = lord_of_outland
+				duration = -1
+			}
+		}
+		FROM = { remove_country_modifier = lord_of_outland }
+	}
+}

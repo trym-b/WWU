@@ -1,3 +1,96 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_yearly_pulse__zandalar = {
+    if = {
+        limit = {
+            tag = A78 # Zandalar
+            is_year = 550 # Only start applying after 550
+            NOT = { has_country_flag = zandalar_show_strength_interval }
+        }
+        
+        set_country_flag = zandalar_show_strength_interval
+    }
+    
+    if = {
+        limit = {
+            tag = A78 # Zandalar
+            has_country_flag = has_council_of_zanchul
+        }
+        
+        update_council_of_zanchul = yes
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+update_council_of_zanchul = {
+    clr_country_flag = zanchul_random_event_good
+    clr_country_flag = zanchul_random_event_bad
+    
+    hidden_effect = {
+        random_list = {
+            50 = { set_country_flag = zanchul_random_event_good }
+            50 = { set_country_flag = zanchul_random_event_bad }
+        }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = zanchul_random_event_good
+        }
+        
+        random_list = {
+            8 = { set_country_flag = zul_good_event_a }
+            8 = { set_country_flag = zul_good_event_b }
+            8 = { set_country_flag = zul_good_event_c }
+            8 = { set_country_flag = zul_good_event_d }
+            8 = { set_country_flag = zul_good_event_e }
+            8 = { set_country_flag = zul_good_event_f }
+            8 = { set_country_flag = zul_good_event_g }
+            8 = { set_country_flag = zul_good_event_h }
+            8 = { set_country_flag = zul_good_event_i }
+            8 = { set_country_flag = zul_good_event_j }
+            5 = { set_country_flag = zul_good_event_k }
+            5 = { set_country_flag = zul_good_event_l }
+            5 = { set_country_flag = zul_good_event_m }
+            5 = { set_country_flag = zul_good_event_n }
+        }
+        
+        country_event = { id = wwu_council_of_zanchul.21 }
+    }
+    
+    if = {
+        limit = {
+            has_country_flag = zanchul_random_event_bad
+        }
+        
+        random_list = {
+            8 = { set_country_flag = zul_bad_event_a }
+            8 = { set_country_flag = zul_bad_event_b }
+            8 = { set_country_flag = zul_bad_event_c }
+            8 = { set_country_flag = zul_bad_event_d }
+            8 = { set_country_flag = zul_bad_event_e }
+            8 = { set_country_flag = zul_bad_event_f }
+            8 = { set_country_flag = zul_bad_event_g }
+            8 = { set_country_flag = zul_bad_event_h }
+            8 = { set_country_flag = zul_bad_event_i }
+            8 = { set_country_flag = zul_bad_event_j }
+            4 = { set_country_flag = zul_bad_event_k }
+            4 = { set_country_flag = zul_bad_event_l }
+            4 = { set_country_flag = zul_bad_event_m }
+            4 = { set_country_flag = zul_bad_event_n }
+            4 = { set_country_flag = zul_bad_event_o }
+        }
+        
+        country_event = { id = wwu_council_of_zanchul.20 }
+    }
+    
+    clr_country_flag = zanchul_random_event_good
+    clr_country_flag = zanchul_random_event_bad
+}
+
 # Council of Zanchul: Power
 increase_zul_power_by_5 = {
     custom_tooltip = var_zul_power_increase_5_tt

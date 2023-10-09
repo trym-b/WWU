@@ -1,0 +1,28 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_battle_won_country__cultural = {
+    if = {
+        limit = {
+            has_country_modifier = chaos_demonic_annihilation
+            FROM = {
+                culture_group = culture_group_demonic
+            }
+        }
+        
+        add_prestige = 5
+        add_mil_power = 5
+    }
+}
+
+on_remove_pasha__cultural = {
+    owner = {
+        save_event_target_as = province_owner
+    }
+    remove_province_modifier = pasha_removed_modifier
+    
+    area = {
+		limit = { owned_by = event_target:province_owner }
+		add_or_extend_province_modifier_effect = { MODIFIER = pasha_removed_modifier DURATION = 3650 }
+	}
+}
