@@ -1,3 +1,306 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Country
+on_startup__terrain_affinity = {
+    update_terrain_affinity = yes
+}
+
+on_yearly_pulse__terrain_affinity = {
+    update_terrain_affinity = yes
+}
+
+on_country_creation__terrain_affinity = {
+    update_terrain_affinity = yes
+}
+
+# ROOT = Province
+on_province_owner_change__terrain_affinity = {
+    remove_terrain_affinity = yes
+}
+
+on_conquest__terrain_affinity = {
+    remove_terrain_affinity = yes
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+update_terrain_affinity = {
+    if = {
+        limit = {
+            # Is a nation with a Terrain Affinity
+            OR = {
+                culture_group = culture_group_naga
+                culture_group = culture_group_murloc
+                culture_group = culture_group_lobstrok
+                culture_group = culture_group_water
+                culture_group = culture_group_sea_giant
+                culture_group = culture_group_demonic
+                culture_group = culture_group_earth
+                culture_group = culture_group_air
+                culture_group = culture_group_dwarven
+                culture_group = culture_group_earthen
+                culture_group = culture_group_tuskarr
+                culture_group = culture_group_ice_giant
+                culture_group = culture_group_earth_giant
+                culture_group = culture_group_drogbar
+                culture_group = culture_group_zangar
+                culture_group = culture_group_fungarian
+                culture_group = culture_group_vulpera
+                culture_group = culture_group_pygmy
+                culture_group = culture_group_aqir
+                culture_group = culture_group_fire
+                primary_culture = culture_silithid
+            }
+        }
+        
+        # Underwater Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_naga
+                    culture_group = culture_group_murloc
+                    culture_group = culture_group_lobstrok
+                    culture_group = culture_group_water
+                    culture_group = culture_group_sea_giant
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        has_terrain = underwater
+                        has_province_modifier = mission_drowned_province
+                    }
+                }
+                
+                add_province_modifier = {
+                    name = underwater_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Fel Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_demonic
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = feltouched
+                }
+                
+                add_province_modifier = {
+                    name = fel_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Underground Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_earth
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = underground
+                }
+                
+                add_province_modifier = {
+                    name = underground_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Suspended Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_air
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = suspended
+                }
+                
+                add_province_modifier = {
+                    name = suspended_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Complex Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_dwarven
+                    culture_group = culture_group_earthen
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = complex
+                }
+                
+                add_province_modifier = {
+                    name = complex_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Glacier Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_tuskarr
+                    culture_group = culture_group_ice_giant
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = glacier
+                }
+                
+                add_province_modifier = {
+                    name = glacier_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Mountain Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_earth_giant
+                    culture_group = culture_group_drogbar
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = mountain
+                }
+                
+                add_province_modifier = {
+                    name = mountain_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Swamp Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_zangar
+                    culture_group = culture_group_fungarian
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    has_terrain = marsh
+                }
+                
+                add_province_modifier = {
+                    name = marsh_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+        
+        # Desert Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_vulpera
+                    culture_group = culture_group_pygmy
+                }
+            }
+            
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        has_terrain = desert
+                        has_terrain = coastal_desert
+                    }
+                }
+                
+                add_province_modifier = {
+                    name = desert_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+
+        # Desolate Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_fire
+                    culture_group = culture_group_demonic
+                }
+            }
+
+            every_owned_province = {
+                limit = {
+                    has_terrain = desolate_waste
+                }
+
+                add_province_modifier = {
+                    name = desolate_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+
+        # Silithid Infestation Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_aqir
+                    primary_culture = culture_silithid
+                }
+            }
+
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        has_terrain = desert
+                        has_terrain = coastal_desert
+                        has_terrain = complex
+                        has_terrain = jungle
+                        has_terrain = drylands
+                        has_province_flag = silithid_infestation
+                    }
+                }
+
+                add_province_modifier = {
+                    name = silithid_infestation_affinity
+                    duration = -1
+                }
+            }
+        }
+    }
+}
+
 remove_terrain_affinity = {
     remove_province_modifier = underwater_terrain_affinity
     remove_province_modifier = fel_terrain_affinity
@@ -9,5 +312,4 @@ remove_terrain_affinity = {
     remove_province_modifier = marsh_terrain_affinity
     remove_province_modifier = desert_terrain_affinity
     remove_province_modifier = silithid_infestation_affinity
-    
 }

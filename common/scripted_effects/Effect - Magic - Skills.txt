@@ -884,7 +884,7 @@ cataclysmic_effect = {
 }
 
 # Triggered every month
-update_mana_regeneration = {
+on_monthly_pulse__magic = {
     if = {
         limit = {
             has_ruler_modifier = spellcaster_capabilities
@@ -924,6 +924,50 @@ update_mana_regeneration = {
                 5 = { add_mana_1 = yes }
             }
         }
+    }
+    
+    # Polymorph
+    if = {
+        limit = {
+            has_country_flag = polymorph_active
+            OR = {
+                NOT = {
+                    check_variable = {
+                        which = polymorph_count
+                        value = 1
+                    }
+                }
+                NOT = {
+                    any_owned_province = {
+                        NOT = { culture = ROOT }
+                    }
+                }
+            }
+        }
+        
+        clr_country_flag = polymorph_active
+    }
+    
+    # Mirror Image
+    if = {
+        limit = {
+            has_country_flag = mirror_image_active
+            OR = {
+                NOT = {
+                    check_variable = {
+                        which = mirror_image_count
+                        value = 1
+                    }
+                }
+                NOT = {
+                    any_owned_province = {
+                        NOT = { religion = ROOT }
+                    }
+                }
+            }
+        }
+        
+        clr_country_flag = mirror_image_active
     }
 }
 

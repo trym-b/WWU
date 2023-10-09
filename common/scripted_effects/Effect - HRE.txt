@@ -1,0 +1,62 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_successive_emperor__hre = {
+    emperor = {
+        add_imperial_influence = 5
+    }
+}
+
+on_emperor_elected__hre = {
+    every_elector = {
+		if = {
+			limit = {
+				preferred_emperor = root
+			}
+			change_variable = {
+				which = supported_successive_emperors
+				value = 1
+			}
+		}
+		else = {
+			set_variable = {
+				which = supported_successive_emperors
+				value = 0
+			}
+		}
+	}
+
+	emperor = {
+		save_global_event_target_as = Emperor
+	}
+}
+
+on_released_hre_member__hre = {
+    emperor = {
+        add_imperial_influence = 10
+    }
+}
+
+on_hre_wins_defensive_war__hre = {
+    emperor = {
+        add_imperial_influence = 10
+    }
+}
+
+on_hre_member_annexed__hre = {
+    emperor = {
+        add_imperial_influence = -10
+    }
+}
+
+on_hre_defense__hre = {
+    emperor = {
+        add_imperial_influence = 5
+    }
+}
+
+on_hre_non_defense__hre = {
+    emperor = {
+        add_imperial_influence = -10
+    }
+}

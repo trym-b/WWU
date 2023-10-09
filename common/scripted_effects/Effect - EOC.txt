@@ -1,0 +1,37 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_chinese_empire_dismantled__eoc = {
+    clear_global_event_target = celestial_emperor
+}
+
+on_mandate_of_heaven_gained__eoc = {
+    if = {
+		limit = {
+			is_emperor_of_china = yes
+		}
+		save_global_event_target_as = celestial_emperor
+	}
+    
+	set_mandate = 60
+	set_meritocracy = 60
+    add_country_modifier = {
+		name = new_leader_of_the_aspects
+		duration = 9125
+	}
+    if = {
+		limit = {
+			has_country_modifier = lost_mandate_of_heaven
+		}
+		remove_country_modifier = lost_mandate_of_heaven
+	}
+}
+
+on_mandate_of_heaven_lost__eoc = {
+    add_country_modifier = {
+		name = lost_mandate_of_heaven
+		duration = 7300
+	}
+    
+    add_stability = -2
+}

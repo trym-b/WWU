@@ -142,3 +142,21 @@ on_province_owner_change_effect = {
 		FROM = { remove_country_modifier = lord_of_outland }
 	}
 }
+
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Winner Country, FROM = Loser Country
+on_battle_won_country__misc = {
+    if = {
+        limit = {
+            has_country_modifier = chaos_demonic_annihilation
+            FROM = {
+                culture_group = culture_group_demonic
+            }
+        }
+        
+        add_prestige = 5
+        add_mil_power = 5
+    }
+}

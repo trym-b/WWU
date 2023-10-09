@@ -1,0 +1,282 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_startup__init = {
+    emperor = {
+		save_global_event_target_as = Emperor
+	}
+    
+    # Default "Old Horde Leader" event target to Shadowmoon
+    A34 = {
+        save_global_event_target_as = old_horde_leader
+    }
+    
+	if = {
+		limit = {
+			is_emperor_of_china = yes
+		}
+		save_global_event_target_as = celestial_emperor
+	}
+    
+    # Global
+    if = {
+        limit = {
+            NOT = { has_global_flag = completed_wwu_setup }
+        }
+        
+        set_global_flag = completed_wwu_setup
+        
+        # Set the first player nation as the Host Player, which will receive the single-fire player only events in multiplayer.
+        if = {
+            limit = {
+                ai = no
+                NOT = { has_global_flag = set_host_player }
+            }
+            
+            set_global_flag = set_host_player
+            set_country_flag = host_player
+        }
+        
+        # Set first player country as executor tag
+        save_global_event_target_as = executor
+        
+        # Invention Timer
+        set_global_flag = game_duration_timer
+        
+        # Custom Pulses
+        291 = {
+            add_province_triggered_modifier = generic_pulse_daily
+            add_province_triggered_modifier = generic_pulse_two_monthly
+            add_province_triggered_modifier = generic_pulse_yearly
+        }
+        
+        setup_default_game_configuration = yes
+        setup_tracking_variables = yes
+        setup_predefined_province_modifiers = yes
+        setup_predefined_canals = yes
+        setup_ambient_objects = yes
+        setup_story_progress = yes         
+        setup_native_adjustments = yes
+        setup_age_progression_timeline = yes
+    }
+    
+    # Country
+    if = {
+        limit = {
+            NOT = { has_country_flag = completed_country_wwu_setup }
+        }
+        
+        set_country_flag = completed_country_wwu_setup
+    
+        setup_world_discovery = yes                 # Discover world
+        setup_dragon_aspects_discovery = yes        # Discover world
+        add_starting_class_for_ruler = yes          # Add starting classes for rulers that are predefined
+        remove_starting_ideagroups = yes            # Remove starting ideagroups
+        
+        init_building_management_defaults = yes     # Add default Building Management flags
+        init_religion_management_defaults = yes     # Add default Religion Management flags
+        init_culture_management_defaults = yes      # Add default Culture Management flags
+        init_artifact_defaults = yes                # Add default Artifact flags
+        init_default_religion_state = yes           # Add initial religion power values (i.e. Piety, etc)
+        init_default_government_state = yes         # Add initial government state
+        init_default_estate_state = yes             # Add initial estate state
+        init_default_ai_cooldowns = yes             # Add AI cooldowns for menu stuff, scattered so the AI doesn't use it simultaneously
+        init_default_isolation_state = yes          # Add initial Isolation state (for those that use it)
+        init_history_adjustments = yes     
+        init_building_adjustments = yes
+        
+        setup_default_doctrine_assignment = yes
+        setup_default_estate_privileges = yes
+    }
+}
+
+#------------------------
+# Misc
+#------------------------
+# Story flags
+setup_story_progress = {
+    # Rise of the Horde
+    if = { 
+        limit = {
+            is_year = 546
+        }
+        set_global_flag = rise_of_the_horde
+        
+        set_global_flag = dragon_aspects_exists
+        set_global_flag = setup_the_dragon_aspects
+    }
+    
+    # The First War
+    if = {
+        limit = {
+            is_year = 592
+        }
+        set_global_flag = the_first_war
+        set_global_flag = dark_portal_opened_flag
+        set_global_flag = dark_portal_built
+        
+        set_global_flag = alliance_exists
+        set_global_flag = setup_the_alliance
+        
+        set_global_flag = old_horde_exists
+        set_global_flag = setup_the_old_horde
+        
+        # Disable Old Horde country setup events
+        set_global_flag = old_horde_country_setup
+        
+        # Add Draenor portal (ignore if past year 600)
+        if = {
+            limit = {
+                NOT = { is_year = 600 }
+            }
+            
+            3792 = {
+                add_great_project = {
+                    type = dark_portal_draenor
+                    instant = yes
+                }
+            }
+        }
+    }
+
+    # The Second War
+    if = { 
+        limit = {
+            is_year = 598
+        }
+        
+        set_global_flag = the_second_war
+    }
+    
+    # Beyond The Dark Portal
+    if = { 
+        limit = {
+            is_year = 600
+        }
+        
+        # Disable Outland country setup events
+        set_global_flag = setup_outland
+        set_global_flag = outland_country_setup
+        
+        set_global_flag = beyond_the_dark_portal
+        clr_global_flag = dark_portal_opened_flag
+        set_global_flag = dark_portal_closed_firsttime
+        set_global_flag = sonsoflothar
+        set_global_flag = khadgar
+        
+        # Add Outland portal
+        1586 = {
+            add_great_project = {
+                type = dark_portal_outland
+                instant = yes
+            }
+        }
+    }
+    
+    # Rise of the Lich King
+    if = { 
+        limit = {
+            is_year = 605
+        }
+        set_global_flag = setup_outland
+        set_global_flag = fel_horde_spawned 
+    }
+
+    # The Third War
+    if = { 
+        limit = {
+            is_year = 617
+        }
+        set_global_flag = the_third_war 
+        set_global_flag = scourge_of_lordaeron_flag
+        set_global_flag = scourge_invasion # Used for the secondary Scourge tree
+        
+        set_global_flag = setup_outland
+    }
+
+    # The Frozen Throne
+    if = { 
+        limit = {
+            is_year = 618
+        }
+        set_global_flag = the_third_war 
+        set_global_flag = scourge_of_lordaeron_flag
+        set_global_flag = the_frozen_throne
+        set_global_flag = archimonde_dead
+        set_global_flag = nerzhul_arrived
+    }
+
+    # The Rise of the Qiraji
+    if = { 
+        limit = {
+            is_year = 622
+        }
+        set_global_flag = rise_of_the_qiraji
+        set_global_flag = illidan_frozen_throne
+        
+        set_global_flag = horde_exists
+        set_global_flag = setup_the_horde
+        
+        clr_global_flag = old_horde_exists
+        clr_global_flag = setup_the_old_horde
+        
+        set_global_flag = northgate_rebellion_happened
+        
+        set_global_flag = setup_bloodsail
+        
+        # Story events that should not occur after this date
+        set_global_flag = kaelthas_uneasy_alliance
+        set_global_flag = kaelthas_garithos_betrayal
+        set_global_flag = lady_vashj_exodus_to_outland
+        set_global_flag = kaelthas_exodus_to_outland
+        set_global_flag = illidan_kiljaeden_bargain
+        set_global_flag = illidan_naga
+        set_global_flag = illidan_eye_of_sargeras_retrieved
+        set_global_flag = scourge_response_eye_of_sargeras
+        set_global_flag = illidan_used_eye_of_sargeras
+        set_global_flag = scourge_frozen_throne_safe
+        set_global_flag = scourge_frozen_throne_destroyed
+        set_global_flag = eye_of_sargeras_disrupted
+        set_global_flag = illidari_spawned
+        set_global_flag = ashtongue_deathsworn_spawned
+    }
+
+    # The Burning Crusade
+    if = { 
+        limit = {
+            is_year = 625
+        }
+        set_global_flag = the_burning_crusade
+    }
+
+    # Wrath of the Lich King
+    if = { 
+        limit = {
+            is_year = 626
+        }
+        set_global_flag = wrath_of_the_lich_king
+    }
+
+    # Cataclysm
+    if = { 
+        limit = {
+            is_year = 631
+        }
+        set_global_flag = cataclysm
+    }
+
+    # Mists of Pandaria
+    if = { 
+        limit = {
+            is_year = 632
+        }
+        set_global_flag = mists_of_pandaria
+    }
+    if = { 
+        limit = {
+            is_year = 700
+        }
+        set_global_flag = doomed_world
+    }
+}
+

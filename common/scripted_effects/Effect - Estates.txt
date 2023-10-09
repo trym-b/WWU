@@ -1,3 +1,174 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Winner Country, FROM = Loser Country
+on_battle_won_country__estate = {
+    # Warrior's Guild
+    if = {
+        limit = {
+            has_estate_privilege = estate_warriors_guild_forged_in_battle
+        }
+        
+        if = {
+            limit = {
+                has_dlc = "Cradle of Civilization"
+            }
+            
+            add_army_professionalism = 0.01
+            add_army_tradition = 1
+        }
+        else = {
+            add_army_tradition = 2
+        }
+    }
+    
+}
+
+on_religion_change__estate = {
+	if = {
+		limit = {
+			any_country = {
+				root = {
+					force_converted_by = prev
+					religion = prev
+				}
+			}
+		}
+		random_country = {
+			limit = {
+				root = {
+					force_converted_by = prev
+					religion = prev
+				}
+			}
+			add_country_modifier = {
+				name = recently_force_converted_protagonist_timer
+				duration = 5475
+				hidden = yes
+			}
+		}
+	}
+}
+
+on_siege_won_country__estate = {
+    # Adventurer's Guild
+    if = {
+        limit = {
+            has_estate_privilege = estate_adventuring_guild_encourage_sacking
+        }
+        
+        # Cascade
+        if = {
+            limit = {
+                FROM = { development = 30 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 25 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 20 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 15 }
+            }
+            
+            add_treasury = 10
+        }
+        if = {
+            limit = {
+                FROM = { development = 10 }
+            }
+            
+            add_treasury = 10
+        }
+        
+        add_treasury = 10
+    }
+    
+    # Religious Order
+    if = {
+        limit = {
+            has_estate_privilege = estate_adventuring_guild_encourage_sacking
+            FROM = {
+                is_capital = no
+            }
+        }
+        
+        FROM = {
+            change_religion = ROOT
+            add_unrest = 5
+        }
+    }
+}
+
+on_monthly_pulse__estate = {
+    # Loa
+    if = {
+        limit = {
+            has_estate_privilege = estate_loa_overwhelming_influence
+        }
+        remove_estate_privilege = estate_loa_high_influence
+        remove_estate_privilege = estate_loa_medium_influence
+        remove_estate_privilege = estate_loa_low_influence
+        remove_estate_privilege = estate_loa_minimal_influence
+    }
+    # Loa
+    if = {
+        limit = {
+            has_estate_privilege = estate_loa_high_influence
+        }
+        remove_estate_privilege = estate_loa_overwhelming_influence
+        remove_estate_privilege = estate_loa_medium_influence
+        remove_estate_privilege = estate_loa_low_influence
+        remove_estate_privilege = estate_loa_minimal_influence
+    }
+    # Loa
+    if = {
+        limit = {
+            has_estate_privilege = estate_loa_medium_influence
+        }
+        remove_estate_privilege = estate_loa_overwhelming_influence
+        remove_estate_privilege = estate_loa_high_influence
+        remove_estate_privilege = estate_loa_low_influence
+        remove_estate_privilege = estate_loa_minimal_influence
+    }
+    # Loa
+    if = {
+        limit = {
+            has_estate_privilege = estate_loa_low_influence
+        }
+        remove_estate_privilege = estate_loa_overwhelming_influence
+        remove_estate_privilege = estate_loa_high_influence
+        remove_estate_privilege = estate_loa_medium_influence
+        remove_estate_privilege = estate_loa_minimal_influence
+    }
+    # Loa
+    if = {
+        limit = {
+            has_estate_privilege = estate_loa_minimal_influence
+        }
+        remove_estate_privilege = estate_loa_overwhelming_influence
+        remove_estate_privilege = estate_loa_high_influence
+        remove_estate_privilege = estate_loa_medium_influence
+        remove_estate_privilege = estate_loa_low_influence
+    }
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
 init_default_estate_state = {
     if = {
         limit = {
@@ -107,6 +278,29 @@ init_default_estate_state = {
         change_estate_land_share = {
             estate = all
             share = -20
+        }
+    }
+}
+
+setup_default_estate_privileges = {
+    update_estate_loa_influence = yes
+}
+
+on_monarch_death__estate = {
+    update_estate_loa_influence = yes
+}
+
+update_estate_loa_influence = {
+    if = {
+        limit = {
+            has_estate = estate_loa
+        }
+        
+        random_list = {
+            33 = { set_estate_privilege = estate_loa_high_influence }
+            33 = { set_estate_privilege = estate_loa_medium_influence }
+            33 = { set_estate_privilege = estate_loa_low_influence }
+            33 = { set_estate_privilege = estate_loa_minimal_influence }
         }
     }
 }
@@ -359,34 +553,8 @@ each_estate_effect = {
 	}
 }
 
-#Estate Privilege on_action effects
-on_religion_change_estate_privileges_effect = {
-	if = {
-		limit = {
-			any_country = {
-				root = {
-					force_converted_by = prev
-					religion = prev
-				}
-			}
-		}
-		random_country = {
-			limit = {
-				root = {
-					force_converted_by = prev
-					religion = prev
-				}
-			}
-			add_country_modifier = {
-				name = recently_force_converted_protagonist_timer
-				duration = 5475
-				hidden = yes
-			}
-		}
-	}
-}
 
-on_annexed_estate_privileges_effect = {
+on_annexed__estate = {
 	if = {
 		limit = {
 			from = {
@@ -2547,3 +2715,4 @@ execute_estate_leader = {
         }
     }
 }
+

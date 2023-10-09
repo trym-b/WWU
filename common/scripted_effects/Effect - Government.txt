@@ -1,4 +1,459 @@
-update_faction_government_mechanics = {
+#-----------------------------------
+# On Actions
+#-----------------------------------
+# ROOT = Winner Country, FROM = Loser Country
+on_war_won__government = {  
+    # Nomadic
+    if = {
+        limit = {
+            is_nomad = yes
+        }
+        
+        add_horde_unity = 20
+    }
+    
+    if = {
+        limit = {
+            has_estate_privilege = estate_tribals_spoils_of_war
+        }
+        add_estate_loyalty = {
+            estate = estate_tribals
+            loyalty = 20
+        }
+    }
+    
+    # Alliance - Faction Authority
+    if = {
+        limit = {
+            has_government_mechanic = faction_authority_alliance_mechanic
+            has_country_flag = war_support_faction_leader
+        }
+        
+        add_government_power = {
+            mechanic_type = faction_authority_alliance_mechanic
+            power_type = faction_authority_alliance
+            value = 20
+        }
+        
+        clr_country_flag = war_support_faction_leader
+    }
+    
+    # Horde - Faction Authority
+    if = {
+        limit = {
+            has_government_mechanic = faction_authority_horde_mechanic
+            has_country_flag = war_support_faction_leader
+        }
+        
+        add_government_power = {
+            mechanic_type = faction_authority_horde_mechanic
+            power_type = faction_authority_horde
+            value = 20
+        }
+        
+        clr_country_flag = war_support_faction_leader
+    }
+    
+    # Old Horde - Faction Authority
+    if = {
+        limit = {
+            has_government_mechanic = faction_authority_old_horde_mechanic
+            has_country_flag = war_support_faction_leader
+        }
+        
+        add_government_power = {
+            mechanic_type = faction_authority_old_horde_mechanic
+            power_type = faction_authority_old_horde
+            value = 20
+        }
+        
+        clr_country_flag = war_support_faction_leader
+    }
+    
+    # Trade Coalition - Faction Authority
+    if = {
+        limit = {
+            has_government_mechanic = faction_authority_trade_coalition_mechanic
+            has_country_flag = war_support_faction_leader
+        }
+        
+        add_government_power = {
+            mechanic_type = faction_authority_trade_coalition_mechanic
+            power_type = faction_authority_trade_coalition
+            value = 20
+        }
+        
+        clr_country_flag = war_support_faction_leader
+    }
+    
+    # Dragon Aspects - Faction Authority
+    if = {
+        limit = {
+            has_government_mechanic = faction_authority_dragon_aspects_mechanic
+            has_country_flag = war_support_faction_leader
+        }
+        
+        add_government_power = {
+            mechanic_type = faction_authority_dragon_aspects_mechanic
+            power_type = faction_authority_dragon_aspects
+            value = 20
+        }
+        
+        clr_country_flag = war_support_faction_leader
+    }
+}
+
+# ROOT = Winning Country, FROM = Losing Country
+on_battle_won_country__government_mechanics = {
+    # Government: Nomad
+    if = {
+        limit = {
+            is_nomad = yes
+            FROM = {
+                NOT = { tag = REB }
+            }
+        }
+        
+        add_horde_unity = 5
+    }
+    
+    # Reform: War Propaganda
+    if = {
+        limit = {
+            has_estate_privilege = estate_peasants_war_propaganda
+        }
+        
+        add_prestige = 5
+    }
+
+    # Reform: Idealism
+    if = {
+        limit = {
+            has_reform = wwu_idealism_glory
+        }
+        add_power_projection = {
+            type = mission_rewards_power_projection
+            amount = 5
+        }
+    }
+    
+    # Scourge Government - Automatic "Raise the Dead"
+    if = {
+        limit = {
+            has_country_flag = automatic_raise_the_dead_option
+            OR = {
+                has_reform = scourge_reform
+                has_reform = scourge_domain_reform
+            }
+            has_estate_privilege = estate_clergy_necromantic_resurrection
+        }
+        
+        add_manpower = 2
+    }
+}
+
+# ROOT = Losing Country, FROM = Winning Country
+on_battle_lost_country__government = {
+    # Government Reform: War Propaganda
+    if = {
+        limit = {
+            has_estate_privilege = estate_peasants_war_propaganda
+        }
+        
+        add_prestige = -5
+    }
+}
+
+# ROOT = Province, FROM = Winning Country
+on_siege_lost_province__government = {
+    # Bloodlust
+    if = {
+        limit = {
+            FROM = {
+                has_country_modifier = tribal_bloodlust_scorch_the_earth
+            }
+        }
+            
+        add_devastation = 25
+    }
+}
+
+# ROOT = Winning Country, FROM = Province
+on_battle_lost_province__government = {
+    # Bloodlust - Add power on battle win
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = tribal_bloodlust_mechanic
+            }
+        }
+        
+        FROM = {
+            add_government_power = {
+                mechanic_type = tribal_bloodlust_mechanic
+                power_type = tribal_bloodlust
+                value = 5
+            }
+        }
+    }
+    
+    # Scourge Grasp
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = scourge_grasp_mechanic
+            }
+        }
+        
+        FROM = {
+            add_government_power = {
+                mechanic_type = scourge_grasp_mechanic
+                power_type = scourge_grasp
+                value = 5
+            }
+        }
+    }
+    
+    # Mojo - Gain
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = mojo_mechanic
+            }
+        }
+        
+        FROM = {
+            add_government_power = {
+                mechanic_type = mojo_mechanic
+                power_type = mojo
+                value = 5
+            }
+        }
+    }
+    
+    # Mojo - Loss
+    if = {
+        limit = {
+            has_government_mechanic = mojo_mechanic
+        }
+        
+        add_government_power = {
+            mechanic_type = mojo_mechanic
+            power_type = mojo
+            value = -2
+        }
+    }
+    
+    # Mojo - Cannibal
+    if = {
+        limit = {
+            FROM = {
+                has_government_mechanic = mojo_mechanic
+                has_country_modifier = mojo_cannibalise_enemies_mod
+            }
+        }
+        
+        FROM = {
+            add_yearly_manpower = 0.25
+        }
+    }
+}
+
+# ROOT = Winning Country, FROM = Province
+on_siege_won_country__government = {
+    # Criminal Acumen
+    if = {
+        limit = {
+            has_government_mechanic = criminal_acumen_mechanic
+        }
+        
+        country_event = { id = wwu_government_mechanics.1 }
+        
+        add_government_power = {
+            mechanic_type = criminal_acumen_mechanic
+            power_type = criminal_acumen
+            value = 1
+        }
+    }
+    
+    if = {
+        limit = {
+            has_government_attribute = enables_automatic_conversion
+        }
+        random = {
+            chance = 33
+            
+            FROM = { change_religion = ROOT }
+        }
+    }
+    
+    # Ransom Captives 
+    if = {
+        limit = {
+            has_government_attribute = enables_ransom_captives_event
+        }
+        random = {
+            chance = 10
+            
+            country_event = { id = wwu_tribal.1 }
+        }
+    }
+    
+    # Enslave Captives 
+    if = {
+        limit = {
+            has_government_attribute = enables_enslave_captives_event
+        }
+        random = {
+            chance = 10
+            
+            country_event = { id = wwu_tribal.2 }
+        }
+    }
+    
+    # Integrate Captives 
+    if = {
+        limit = {
+            has_government_attribute = enables_integrate_captives_event
+        }
+        random = {
+            chance = 10
+            
+            country_event = { id = wwu_tribal.3 }
+        }
+    }
+    
+    # Execute Captives 
+    if = {
+        limit = {
+            has_government_attribute = enables_execute_captives_event
+        }
+        random = {
+            chance = 10
+            
+            country_event = { id = wwu_tribal.4 }
+        }
+    }
+    
+    # Conscript Captives 
+    if = {
+        limit = {
+            has_government_attribute = enables_conscript_captives_event
+        }
+        random = {
+            chance = 10
+            
+            country_event = { id = wwu_tribal.5 }
+        }
+    }
+}
+
+# ROOT = Country
+on_monarch_death__government = {  
+    if = {
+        limit = {
+            has_reform = wwu_assembly_absolute_rule
+        }
+        
+        add_stability = -1
+    }
+    
+    # Succession
+    # The 'skip_next_succession_event' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
+    if = {
+        limit = {
+            NOT = { has_country_flag = skip_next_succession_event }
+        }
+        
+        country_event = { id = wwu_government.15 } # Tribal Vote
+        
+        # Succession
+        country_event = { id = wwu_government_succession.10 } # Zanchuli Council
+        country_event = { id = wwu_government_succession.11 } # G'huun's Chosen
+        country_event = { id = wwu_government_succession.12 } # Theocratic Selection
+        country_event = { id = wwu_government_succession.13 } # Naga Succession
+        country_event = { id = wwu_government_succession.14 } # Mantid Succession
+        country_event = { id = wwu_government_succession.15 } # Nerubian Succession
+        country_event = { id = wwu_government_succession.16 } # Aqir Leadership
+        country_event = { id = wwu_government_succession.17 } # Tol'vir Succession
+        country_event = { id = wwu_government_succession.18 } # Titanic Succession
+        country_event = { id = wwu_government_succession.19 } # Brood Selection
+        country_event = { id = wwu_government_succession.20 } # Hakkar's Chosen
+        country_event = { id = wwu_government_succession.21 } # High Priest Selection
+        country_event = { id = wwu_government_succession.22 } # Elemental Succession
+        country_event = { id = wwu_government_succession.23 } # Druidic Selection
+        country_event = { id = wwu_government_succession.24 } # Demonic Succession
+        country_event = { id = wwu_government_succession.25 } # New Rulership
+        country_event = { id = wwu_government_succession.26 } # Fall of the Lich King
+    }
+    else = {
+        clr_country_flag = skip_next_succession_event
+    }
+}
+
+# ROOT = Country
+on_death_election__government = {  
+    if = {
+		limit = {
+			has_reform = pirate_republic_reform
+		}
+		set_country_flag = pirate_death_election
+		country_event = { id = pirates.1 }
+	}
+}
+
+# ROOT = Released Country, FROM = Releasing Country
+government_on_country_released_effect = {
+    FROM = {
+        if = {
+            limit = {
+                has_reform = wwu_idealism_honor
+            }
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 100
+        }
+    }
+    
+    # Northshire
+    if = {
+        limit = {
+            tag = NHS
+            NOT = { government = theocracy }
+        }
+        
+        change_government = theocracy 
+    }
+}
+
+on_government_change__government = {
+    if = {
+		limit = {
+			NOT = { government = monarchy }
+			any_owned_province = {
+				has_province_modifier = domain_of_spouses_family
+			}
+		}
+		random_owned_province = {
+			limit = { has_province_modifier = domain_of_spouses_family }
+			remove_province_modifier = domain_of_spouses_family
+		}
+	}
+	if = {
+		limit = {
+			NOT = { government = monarchy }
+			any_owned_province = {
+				has_province_modifier = home_of_consort
+			}
+		}
+		random_owned_province = {
+			limit = { has_province_modifier = home_of_consort }
+			remove_province_modifier = home_of_consort
+		}
+	}
+}
+
+on_monthly_pulse__government = {
     #------------------------------
     # Alliance - Faction Authority
     #------------------------------
@@ -145,7 +600,9 @@ update_faction_government_mechanics = {
     }
 }
 
-
+#-----------------------------------
+# Misc
+#-----------------------------------
 init_default_government_state = {
     
 }
@@ -872,419 +1329,6 @@ show_faction_modifier_leader = {
     }
 }
 
-#-----------------------------------
-# On Actions
-#-----------------------------------
-# ROOT = Winning Country, FROM = Losing Country
-government_on_war_won_effect = {  
-    # Nomadic
-    if = {
-        limit = {
-            is_nomad = yes
-        }
-        
-        add_horde_unity = 20
-    }
-    
-    if = {
-        limit = {
-            has_estate_privilege = estate_tribals_spoils_of_war
-        }
-        add_estate_loyalty = {
-            estate = estate_tribals
-            loyalty = 20
-        }
-    }
-    
-    # Alliance - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_alliance_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_alliance_mechanic
-            power_type = faction_authority_alliance
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Horde - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_horde_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_horde_mechanic
-            power_type = faction_authority_horde
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Old Horde - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_old_horde_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_old_horde_mechanic
-            power_type = faction_authority_old_horde
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Trade Coalition - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_trade_coalition_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_trade_coalition_mechanic
-            power_type = faction_authority_trade_coalition
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-    
-    # Dragon Aspects - Faction Authority
-    if = {
-        limit = {
-            has_government_mechanic = faction_authority_dragon_aspects_mechanic
-            has_country_flag = war_support_faction_leader
-        }
-        
-        add_government_power = {
-            mechanic_type = faction_authority_dragon_aspects_mechanic
-            power_type = faction_authority_dragon_aspects
-            value = 20
-        }
-        
-        clr_country_flag = war_support_faction_leader
-    }
-}
-
-# ROOT = Winning Country, FROM = Losing Country
-government_on_battle_won_country_effect = {
-    # Government: Nomad
-    if = {
-        limit = {
-            is_nomad = yes
-            FROM = {
-                NOT = { tag = REB }
-            }
-        }
-        
-        add_horde_unity = 5
-    }
-    
-    # Reform: War Propaganda
-    if = {
-        limit = {
-            has_estate_privilege = estate_peasants_war_propaganda
-        }
-        
-        add_prestige = 5
-    }
-
-    # Reform: Idealism
-    if = {
-        limit = {
-            has_reform = wwu_idealism_glory
-        }
-        add_power_projection = {
-            type = mission_rewards_power_projection
-            amount = 5
-        }
-    }
-}
-
-# ROOT = Losing Country, FROM = Winning Country
-government_on_battle_lost_country_effect = {
-    # Government Reform: War Propaganda
-    if = {
-        limit = {
-            has_estate_privilege = estate_peasants_war_propaganda
-        }
-        
-        add_prestige = -5
-    }
-}
-
-# ROOT = Province, FROM = Winning Country
-government_on_siege_lost_province_effect = {
-    # Bloodlust
-    if = {
-        limit = {
-            FROM = {
-                has_country_modifier = tribal_bloodlust_scorch_the_earth
-            }
-        }
-            
-        add_devastation = 25
-    }
-}
-
-# ROOT = Winning Country, FROM = Province
-government_on_on_battle_lost_province_effect = {
-    # Bloodlust - Add power on battle win
-    if = {
-        limit = {
-            FROM = {
-                has_government_mechanic = tribal_bloodlust_mechanic
-            }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = tribal_bloodlust_mechanic
-                power_type = tribal_bloodlust
-                value = 5
-            }
-        }
-    }
-    
-    # Scourge Grasp
-    if = {
-        limit = {
-            FROM = {
-                has_government_mechanic = scourge_grasp_mechanic
-            }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = scourge_grasp_mechanic
-                power_type = scourge_grasp
-                value = 5
-            }
-        }
-    }
-    
-    # Mojo - Gain
-    if = {
-        limit = {
-            FROM = {
-                has_government_mechanic = mojo_mechanic
-            }
-        }
-        
-        FROM = {
-            add_government_power = {
-                mechanic_type = mojo_mechanic
-                power_type = mojo
-                value = 5
-            }
-        }
-    }
-    
-    # Mojo - Loss
-    if = {
-        limit = {
-            has_government_mechanic = mojo_mechanic
-        }
-        
-        add_government_power = {
-            mechanic_type = mojo_mechanic
-            power_type = mojo
-            value = -2
-        }
-    }
-    
-    # Mojo - Cannibal
-    if = {
-        limit = {
-            FROM = {
-                has_government_mechanic = mojo_mechanic
-                has_country_modifier = mojo_cannibalise_enemies_mod
-            }
-        }
-        
-        FROM = {
-            add_yearly_manpower = 0.25
-        }
-    }
-}
-
-# ROOT = Winning Country, FROM = Province
-government_on_siege_won_country_effect = {
-    # Criminal Acumen
-    if = {
-        limit = {
-            has_government_mechanic = criminal_acumen_mechanic
-        }
-        
-        country_event = { id = wwu_government_mechanics.1 }
-        
-        add_government_power = {
-            mechanic_type = criminal_acumen_mechanic
-            power_type = criminal_acumen
-            value = 1
-        }
-    }
-    
-    if = {
-        limit = {
-            has_government_attribute = enables_automatic_conversion
-        }
-        random = {
-            chance = 33
-            
-            FROM = { change_religion = ROOT }
-        }
-    }
-    
-    # Ransom Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_ransom_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.1 }
-        }
-    }
-    
-    # Enslave Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_enslave_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.2 }
-        }
-    }
-    
-    # Integrate Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_integrate_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.3 }
-        }
-    }
-    
-    # Execute Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_execute_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.4 }
-        }
-    }
-    
-    # Conscript Captives 
-    if = {
-        limit = {
-            has_government_attribute = enables_conscript_captives_event
-        }
-        random = {
-            chance = 10
-            
-            country_event = { id = wwu_tribal.5 }
-        }
-    }
-}
-
-# ROOT = Country
-government_on_monarch_death_effect = {  
-    if = {
-        limit = {
-            has_reform = wwu_assembly_absolute_rule
-        }
-        
-        add_stability = -1
-    }
-    
-    # Succession
-    # The 'skip_next_succession_event' flag is used so these events only fire on the initial triggering death, and not for the 'fake' death when the temp ruler is replaced.
-    if = {
-        limit = {
-            NOT = { has_country_flag = skip_next_succession_event }
-        }
-        
-        country_event = { id = wwu_government.15 } # Tribal Vote
-        
-        # Succession
-        country_event = { id = wwu_government_succession.10 } # Zanchuli Council
-        country_event = { id = wwu_government_succession.11 } # G'huun's Chosen
-        country_event = { id = wwu_government_succession.12 } # Theocratic Selection
-        country_event = { id = wwu_government_succession.13 } # Naga Succession
-        country_event = { id = wwu_government_succession.14 } # Mantid Succession
-        country_event = { id = wwu_government_succession.15 } # Nerubian Succession
-        country_event = { id = wwu_government_succession.16 } # Aqir Leadership
-        country_event = { id = wwu_government_succession.17 } # Tol'vir Succession
-        country_event = { id = wwu_government_succession.18 } # Titanic Succession
-        country_event = { id = wwu_government_succession.19 } # Brood Selection
-        country_event = { id = wwu_government_succession.20 } # Hakkar's Chosen
-        country_event = { id = wwu_government_succession.21 } # High Priest Selection
-        country_event = { id = wwu_government_succession.22 } # Elemental Succession
-        country_event = { id = wwu_government_succession.23 } # Druidic Selection
-        country_event = { id = wwu_government_succession.24 } # Demonic Succession
-        country_event = { id = wwu_government_succession.25 } # New Rulership
-        country_event = { id = wwu_government_succession.26 } # Fall of the Lich King
-    }
-    else = {
-        clr_country_flag = skip_next_succession_event
-    }
-}
-
-# ROOT = Country
-government_on_death_election_effect = {  
-    if = {
-		limit = {
-			has_reform = pirate_republic_reform
-		}
-		set_country_flag = pirate_death_election
-		country_event = { id = pirates.1 }
-	}
-}
-
-# ROOT = Released Country, FROM = Releasing Country
-government_on_country_released_effect = {
-    FROM = {
-        if = {
-            limit = {
-                has_reform = wwu_idealism_honor
-            }
-            add_adm_power = 100
-            add_dip_power = 100
-            add_mil_power = 100
-        }
-    }
-    
-    # Northshire
-    if = {
-        limit = {
-            tag = NHS
-            NOT = { government = theocracy }
-        }
-        
-        change_government = theocracy 
-    }
-}
 
 add_trade_singularity = {
     add_trade_modifier = {

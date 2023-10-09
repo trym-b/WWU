@@ -49,7 +49,7 @@ destroy_faction = {
 # On Actions
 #-----------------------------------
 # ROOT = Winning Country, FROM = Losing Country
-faction_on_battle_won_country_effect = {
+on_battle_won_country__faction = {
     # Faction: Alliance Fervor
     if = {
         limit = {
@@ -88,7 +88,7 @@ faction_on_battle_won_country_effect = {
 }
 
 # ROOT = Country
-faction_on_monarch_death_effect = {
+on_monarch_death__faction = {
     if = {
         limit = {
             has_country_modifier = head_of_old_horde
@@ -107,7 +107,7 @@ faction_on_monarch_death_effect = {
 }
 
 # ROOT = Country, FROM = Annexed Country
-faction_on_annexed_effect = {
+on_annexed__faction = {
     # If Head of faction is annexed, re-assign leadership
     if = {
         limit = {   
@@ -155,6 +155,149 @@ faction_on_annexed_effect = {
         country_event = { id = wwu_faction_system.34 }
     }
 }
+
+on_monthly_pulse__faction = {
+    # Add these fallback checks in-case the X_exists flag is missed.
+    if = {
+        limit = {
+            NOT = { has_global_flag = alliance_exists }
+            any_country = {
+                has_country_modifier = head_of_alliance
+            }
+        }
+        
+        set_global_flag = alliance_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = old_horde_exists }
+            any_country = {
+                has_country_modifier = head_of_old_horde
+            }
+        }
+        
+        set_global_flag = old_horde_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = horde_exists }
+            any_country = {
+                has_country_modifier = head_of_horde
+            }
+        }
+        
+        set_global_flag = horde_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = trade_coalition_exists }
+            any_country = {
+                has_country_modifier = head_of_trade_coalition
+            }
+        }
+        
+        set_global_flag = trade_coalition_exists
+    }
+    if = {
+        limit = {
+            NOT = { has_global_flag = dragon_aspects_exists }
+            any_country = {
+                has_country_modifier = head_of_dragon_aspects
+            }
+        }
+        
+        set_global_flag = dragon_aspects_exists
+    }
+    
+    # Clean up members if Faction is collapsed
+    # Alliance
+    if = {
+        limit = {
+            has_global_flag = alliance_dismantled
+            has_country_modifier = head_of_alliance
+        }
+        
+        remove_country_modifier = head_of_alliance
+    }
+    if = {
+        limit = {
+            has_global_flag = alliance_dismantled
+            has_country_modifier = member_of_alliance
+        }
+        
+        remove_country_modifier = member_of_alliance
+    }
+    # Old Horde
+    if = {
+        limit = {
+            has_global_flag = old_horde_dismantled
+            has_country_modifier = head_of_old_horde
+        }
+        
+        remove_country_modifier = head_of_old_horde
+    }
+    if = {
+        limit = {
+            has_global_flag = old_horde_dismantled
+            has_country_modifier = member_of_old_horde
+        }
+        
+        remove_country_modifier = member_of_old_horde
+    }
+    # Horde
+    if = {
+        limit = {
+            has_global_flag = horde_dismantled
+            has_country_modifier = head_of_horde
+        }
+        
+        remove_country_modifier = head_of_horde
+    }
+    if = {
+        limit = {
+            has_global_flag = horde_dismantled
+            has_country_modifier = member_of_horde
+        }
+        
+        remove_country_modifier = member_of_horde
+    }
+    # Trade Coalition
+    if = {
+        limit = {
+            has_global_flag = trade_coalition_dismantled
+            has_country_modifier = head_of_trade_coalition
+        }
+        
+        remove_country_modifier = head_of_trade_coalition
+    }
+    if = {
+        limit = {
+            has_global_flag = trade_coalition_dismantled
+            has_country_modifier = member_of_trade_coalition
+        }
+        
+        remove_country_modifier = member_of_trade_coalition
+    }
+    # Dragon Aspects
+    if = {
+        limit = {
+            has_global_flag = dragon_aspects_dismantled
+            has_country_modifier = head_of_dragon_aspects
+        }
+        
+        remove_country_modifier = head_of_dragon_aspects
+    }
+    if = {
+        limit = {
+            has_global_flag = dragon_aspects_dismantled
+            has_country_modifier = member_of_dragon_aspects
+        }
+        
+        remove_country_modifier = member_of_dragon_aspects
+    }
+}
+
+
 
 #--------------------------
 # Roster
