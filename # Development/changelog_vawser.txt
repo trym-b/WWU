@@ -119,3 +119,72 @@
 #--------------------------------------
 # TODO
 #--------------------------------------
+    
+	
+    
+    
+    
+	A30_marsh_advance = {
+	    icon = mission_man_running
+		position = 4
+		
+		required_missions = { A30_tighten_the_noose }
+        
+        trigger = {
+			area_dun_modr = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		provinces_to_highlight = {
+			area = area_dun_modr
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		effect = {
+			add_mil_power = 250
+			add_adm_power = 250
+			add_country_modifier = {
+                name = mission_control_wetlands
+                duration = -1
+            }
+			area_thundermar = {
+				add_permanent_claim = ROOT
+			}
+			area_grim_batol = {
+				add_permanent_claim = ROOT
+			}
+	    }
+	}
+	
+	A30_unified_dwarves_dk = {
+	    icon = mission_griffin_attack
+		required_missions = { }
+		position = 1
+		trigger = { 
+            custom_trigger_tooltip = {
+                tooltip = UNITED_THE_DWARF_KINGDOMS_TT
+                has_country_flag = unified_dwarf
+            }
+		}
+		effect = {
+			add_adm_power = 300
+			add_dip_power = 300
+			add_mil_power = 300
+			add_country_modifier = {
+                name = mission_dwarves_united_strong
+                duration = -1
+            }
+			capital_scope = {
+				add_base_manpower = 2
+				add_base_tax = 2
+				add_base_production = 2
+			}
+			region_dun_morogh = {
+				add_permanent_claim = ROOT
+			}
+			region_twilight_highlands = {
+				add_permanent_claim = ROOT
+			}
+	    }
+	}
+	
