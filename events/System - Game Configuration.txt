@@ -52,6 +52,8 @@ country_event = {
             remove_disabled_content = yes
 		
             country_event = { id = wwu_compendium.3 }
+            
+            set_country_flag = skip_return_event
         }
 	}
     
@@ -59,8 +61,17 @@ country_event = {
     option = {
 		name = wwu_game_configuration.1.option.exit
 		
-        country_event = { id = wwu_compendium.3 }
-	}
+        if = {
+            limit = {
+                has_country_flag = skip_return_event
+            }
+            
+            clr_country_flag = skip_return_event
+        }
+        else = {
+            country_event = { id = wwu_compendium.3 }
+        }
+    }
 }
 
 # Feature Configuration
