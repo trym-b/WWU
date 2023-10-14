@@ -32,9 +32,8 @@ on_new_monarch__magic = {
     if = {
         limit = {
             OR = {
-                has_reform = magocracy_reform
-                has_reform = kingdom_of_magic_reform
-                has_reform = wwu_tribal_magic_inherited_magic
+                has_government_attribute = enables_automatic_spellcasting_ruler
+                has_government_attribute = enables_automatic_spellcasting_ruler_strong
             }
         }
         add_ruler_spellcasting = yes
@@ -97,6 +96,25 @@ on_new_monarch__magic = {
                     which = ruler_magic_concentration
                     value = 3
                 }
+            }
+        }
+        
+        # Adjustment: for countries that would have more powerful spellcasters by default
+        if = {
+            limit = {
+                has_government_attribute = enables_automatic_spellcasting_ruler_strong
+            }
+            change_variable = {
+                which = ruler_magic_aptitude
+                value = 2
+            }
+            change_variable = {
+                which = ruler_magic_finesse
+                value = 2
+            }
+            change_variable = {
+                which = ruler_magic_concentration
+                value = 2
             }
         }
     }
