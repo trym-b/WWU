@@ -87,4 +87,1074 @@ on_province_owner_change__trade_goods = {
 		}
 		change_trade_goods = resource_arcane
 	}
+    
+    add_estate_trade_good_monopolies = yes
+}
+
+on_trade_good_changed__trade_goods = {
+    remove_estate_trade_good_monopolies = yes
+}
+
+#-----------------------------------
+# Misc
+#-----------------------------------
+apply_estate_monopoly_modifier = {
+	if = {
+		limit = { owner = { has_estate_privilege = $privilege$ } }
+		add_province_modifier = { 
+			name = $privilege$_mod 
+			duration = -1
+		}
+	}
+}
+
+remove_estate_monopoly_modifier = {
+	remove_province_modifier = $privilege$_mod
+}
+
+reapply_estate_privilege = {
+	if = {
+		limit = { 
+			can_revoke_estate_privilege = $privilege$
+		}
+		hidden_effect = {
+			remove_estate_privilege = $privilege$
+		}
+		set_estate_privilege = $privilege$
+	}
+}
+
+add_estate_trade_good_monopolies = {
+    # Wood
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_wood
+            }
+            trade_goods = resource_common_wood
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_wood_mod
+            duration = -1
+        }
+    }
+    # Rarified Wood
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_wood
+            }
+            trade_goods = resource_rare_wood
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_wood_mod
+            duration = -1
+        }
+    }
+    # Herbs
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_herbs
+            }
+            trade_goods = resource_common_herbs
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_herbs_mod
+            duration = -1
+        }
+    }
+    # Rarified Herbs
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_herbs
+            }
+            trade_goods = resource_rare_herbs
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_herbs_mod
+            duration = -1
+        }
+    }
+    # Ores
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_ores
+            }
+            trade_goods = resource_common_ores
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_ores_mod
+            duration = -1
+        }
+    }
+    # Rarified Ores
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_ores
+            }
+            trade_goods = resource_rare_ores
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_ores_mod
+            duration = -1
+        }
+    }
+    # Metals
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_metals
+            }
+            trade_goods = resource_common_metals
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_metals_mod
+            duration = -1
+        }
+    }
+    # Rarified Metals
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_metals
+            }
+            trade_goods = resource_rare_metals
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_metals_mod
+            duration = -1
+        }
+    }
+    # Skins
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_skins
+            }
+            trade_goods = resource_common_skins
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_skins_mod
+            duration = -1
+        }
+    }
+    # Rarified Skins
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_skins
+            }
+            trade_goods = resource_rare_skins
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_skins_mod
+            duration = -1
+        }
+    }
+    # Fish
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_fish
+            }
+            trade_goods = resource_common_fish
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_fish_mod
+            duration = -1
+        }
+    }
+    # Rarified Fish
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_fish
+            }
+            trade_goods = resource_rare_fish
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_fish_mod
+            duration = -1
+        }
+    }
+    # Cloth
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_common_cloth
+            }
+            trade_goods = resource_common_cloth
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_common_cloth_mod
+            duration = -1
+        }
+    }
+    # Rarified Cloth
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_rare_cloth
+            }
+            trade_goods = resource_rare_cloth
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_rare_cloth_mod
+            duration = -1
+        }
+    }
+    # Potions
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_potions
+            }
+            trade_goods = resource_potions
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_potions_mod
+            duration = -1
+        }
+    }
+    # Dyes
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_dyes
+            }
+            trade_goods = resource_dyes
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_dyes_mod
+            duration = -1
+        }
+    }
+    # Melee Weaponry
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_melee_weaponry
+            # }
+            # trade_goods = resource_melee_weaponry
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_melee_weaponry_mod
+            # duration = -1
+        # }
+    # }
+    # Plate Armor
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_plate_armor
+            # }
+            # trade_goods = resource_plate_armor
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_plate_armor_mod
+            # duration = -1
+        # }
+    # }
+    # Scrolls
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_scrolls
+            }
+            trade_goods = resource_scrolls
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_scrolls_mod
+            duration = -1
+        }
+    }
+    # Ranged Weaponry
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_ranged_weaponry
+            }
+            trade_goods = resource_ranged_weaponry
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_ranged_weaponry_mod
+            duration = -1
+        }
+    }
+    # Bombs
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_bombs
+            }
+            trade_goods = resource_bombs
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_bombs_mod
+            duration = -1
+        }
+    }
+    # Devices
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_devices
+            }
+            trade_goods = resource_devices
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_devices_mod
+            duration = -1
+        }
+    }
+    # Glyphs
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_glyphs
+            }
+            trade_goods = resource_glyphs
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_glyphs_mod
+            duration = -1
+        }
+    }
+    # Gems
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_gems
+            }
+            trade_goods = resource_gems
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_gems_mod
+            duration = -1
+        }
+    }
+    # Trinkets
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_trinkets
+            }
+            trade_goods = resource_trinkets
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_trinkets_mod
+            duration = -1
+        }
+    }
+    # Mail Armor
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_mail_armor
+            # }
+            # trade_goods = resource_mail_armor
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_mail_armor_mod
+            # duration = -1
+        # }
+    # }
+    # Leather Armor
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_leather_armor
+            # }
+            # trade_goods = resource_leather_armor
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_leather_armor_mod
+            # duration = -1
+        # }
+    # }
+    # Bags
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_bags
+            }
+            trade_goods = resource_bags
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_bags_mod
+            duration = -1
+        }
+    }
+    # Cloth Armor
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_cloth_armor
+            # }
+            # trade_goods = resource_cloth_armor
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_cloth_armor_mod
+            # duration = -1
+        # }
+    # }
+    # Magical Weaponry
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_magical_weaponry
+            # }
+            # trade_goods = resource_magical_weaponry
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_magical_weaponry_mod
+            # duration = -1
+        # }
+    # }
+    # Fossils
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_fossils
+            }
+            trade_goods = resource_fossils
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_fossils_mod
+            duration = -1
+        }
+    }
+    # Artifacts
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_artifacts
+            }
+            trade_goods = resource_artifacts
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_artifacts_mod
+            duration = -1
+        }
+    }
+    # Food
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_food
+            }
+            trade_goods = resource_food
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_food_mod
+            duration = -1
+        }
+    }
+    # Alcohol
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_alcohol
+            }
+            trade_goods = resource_alcohol
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_alcohol_mod
+            duration = -1
+        }
+    }
+    # Bananas
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_banana
+            }
+            trade_goods = resource_banana
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_banana_mod
+            duration = -1
+        }
+    }
+    # Arcwine
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_arcwine
+            # }
+            # trade_goods = resource_arcwine
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_arcwine_mod
+            # duration = -1
+        # }
+    # }
+    # Beasts of Burden
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_beasts_of_burden
+            }
+            trade_goods = resource_beasts_of_burden
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_beasts_of_burden_mod
+            duration = -1
+        }
+    }
+    # Ground Mounts
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_ground_mounts
+            }
+            trade_goods = resource_ground_mounts
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_ground_mounts_mod
+            duration = -1
+        }
+    }
+    # Flying Mounts
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_flying_mounts
+            }
+            trade_goods = resource_flying_mounts
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_flying_mounts_mod
+            duration = -1
+        }
+    }
+    # Mana
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_mana
+            # }
+            # trade_goods = resource_mana
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_mana_mod
+            # duration = -1
+        # }
+    # }
+    # Anima
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_anima
+            # }
+            # trade_goods = resource_anima
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_anima_mod
+            # duration = -1
+        # }
+    # }
+    # Fel
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_fel
+            }
+            trade_goods = resource_fel
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_fel_mod
+            duration = -1
+        }
+    }
+    # Arcane
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_arcane
+            # }
+            # trade_goods = resource_arcane
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_arcane_mod
+            # duration = -1
+        # }
+    # }
+    # Oil
+    if = {
+        limit = {
+            owner = {
+                has_estate_privilege = estate_monopoly_of_resource_oil
+            }
+            trade_goods = resource_oil
+        }
+        add_province_modifier = {
+            name = estate_monopoly_of_resource_oil_mod
+            duration = -1
+        }
+    }
+    # Apexis Crystals
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_apexis
+            # }
+            # trade_goods = resource_apexis
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_apexis_mod
+            # duration = -1
+        # }
+    # }
+    # Treasure
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_treasure
+            # }
+            # trade_goods = resource_treasure
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_treasure_mod
+            # duration = -1
+        # }
+    # }
+    # Slaves
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_slaves
+            # }
+            # trade_goods = resource_slaves
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_slaves_mod
+            # duration = -1
+        # }
+    # }
+    # Kypari Amber
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_kypari
+            # }
+            # trade_goods = resource_kypari
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_kypari_mod
+            # duration = -1
+        # }
+    # }
+    # Moonwell
+    # if = {
+        # limit = {
+            # owner = {
+                # has_estate_privilege = estate_monopoly_of_resource_moonwell
+            # }
+            # trade_goods = resource_moonwell
+        # }
+        # add_province_modifier = {
+            # name = estate_monopoly_of_resource_moonwell_mod
+            # duration = -1
+        # }
+    # }
+}
+
+remove_estate_trade_good_monopolies = {
+    # Wood
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_wood_mod
+            NOT = { trade_goods = resource_common_wood }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_wood_mod
+    }
+    # Rarified Wood
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_wood_mod
+            NOT = { trade_goods = resource_rare_wood }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_wood_mod
+    }
+    # Herbs
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_herbs_mod
+            NOT = { trade_goods = resource_common_herbs }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_herbs_mod
+    }
+    # Rarified Herbs
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_herbs_mod
+            NOT = { trade_goods = resource_rare_herbs }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_herbs_mod
+    }
+    # Ores
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_ores_mod
+            NOT = { trade_goods = resource_common_ores }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_ores_mod
+    }
+    # Rarified Ores
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_ores_mod
+            NOT = { trade_goods = resource_rare_ores }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_ores_mod
+    }
+    # Metals
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_metals_mod
+            NOT = { trade_goods = resource_common_metals }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_metals_mod
+    }
+    # Rarified Metals
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_metals_mod
+            NOT = { trade_goods = resource_rare_metals }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_metals_mod
+    }
+    # Skins
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_skins_mod
+            NOT = { trade_goods = resource_common_skins }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_skins_mod
+    }
+    # Rarified Skins
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_skins_mod
+            NOT = { trade_goods = resource_rare_skins }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_skins_mod
+    }
+    # Fish
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_fish_mod
+            NOT = { trade_goods = resource_common_fish }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_fish_mod
+    }
+    # Rarified Fish
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_fish_mod
+            NOT = { trade_goods = resource_rare_fish }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_fish_mod
+    }
+    # Cloth
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_common_cloth_mod
+            NOT = { trade_goods = resource_common_cloth }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_common_cloth_mod
+    }
+    # Rarified Cloth
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_rare_cloth_mod
+            NOT = { trade_goods = resource_rare_cloth }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_rare_cloth_mod
+    }
+    # Potions
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_potions_mod
+            NOT = { trade_goods = resource_potions }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_potions_mod
+    }
+    # Dyes
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_dyes_mod
+            NOT = { trade_goods = resource_dyes }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_dyes_mod
+    }
+    # Melee Weaponry
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_melee_weaponry_mod
+            # NOT = { trade_goods = resource_melee_weaponry }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_melee_weaponry_mod
+    # }
+    # Plate Armor
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_plate_armor_mod
+            # NOT = { trade_goods = resource_plate_armor }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_plate_armor_mod
+    # }
+    # Scrolls
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_scrolls_mod
+            NOT = { trade_goods = resource_scrolls }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_scrolls_mod
+    }
+    # Ranged Weaponry
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_ranged_weaponry_mod
+            NOT = { trade_goods = resource_ranged_weaponry }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_ranged_weaponry_mod
+    }
+    # Bombs
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_bombs_mod
+            NOT = { trade_goods = resource_bombs }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_bombs_mod
+    }
+    # Devices
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_devices_mod
+            NOT = { trade_goods = resource_devices }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_devices_mod
+    }
+    # Glyphs
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_glyphs_mod
+            NOT = { trade_goods = resource_glyphs }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_glyphs_mod
+    }
+    # Gems
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_gems_mod
+            NOT = { trade_goods = resource_gems }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_gems_mod
+    }
+    # Trinkets
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_trinkets_mod
+            NOT = { trade_goods = resource_trinkets }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_trinkets_mod
+    }
+    # Mail Armor
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_mail_armor_mod
+            # NOT = { trade_goods = resource_mail_armor }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_mail_armor_mod
+    # }
+    # Leather Armor
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_leather_armor_mod
+            # NOT = { trade_goods = resource_leather_armor }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_leather_armor_mod
+    # }
+    # Bags
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_bags_mod
+            NOT = { trade_goods = resource_bags }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_bags_mod
+    }
+    # Cloth Armor
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_cloth_armor_mod
+            # NOT = { trade_goods = resource_cloth_armor }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_cloth_armor_mod
+    # }
+    # Magical Weaponry
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_magical_weaponry_mod
+            # NOT = { trade_goods = resource_magical_weaponry }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_magical_weaponry_mod
+    # }
+    # Fossils
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_fossils_mod
+            NOT = { trade_goods = resource_fossils }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_fossils_mod
+    }
+    # Artifacts
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_artifacts_mod
+            NOT = { trade_goods = resource_artifacts }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_artifacts_mod
+    }
+    # Food
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_food_mod
+            NOT = { trade_goods = resource_food }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_food_mod
+    }
+    # Alcohol
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_alcohol_mod
+            NOT = { trade_goods = resource_alcohol }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_alcohol_mod
+    }
+    # Bananas
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_banana_mod
+            NOT = { trade_goods = resource_banana }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_banana_mod
+    }
+    # Arcwine
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_arcwine_mod
+            # NOT = { trade_goods = resource_arcwine }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_arcwine_mod
+    # }
+    # Beasts of Burden
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_beasts_of_burden_mod
+            NOT = { trade_goods = resource_beasts_of_burden }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_beasts_of_burden_mod
+    }
+    # Ground Mounts
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_ground_mounts_mod
+            NOT = { trade_goods = resource_ground_mounts }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_ground_mounts_mod
+    }
+    # Flying Mounts
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_flying_mounts_mod
+            NOT = { trade_goods = resource_flying_mounts }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_flying_mounts_mod
+    }
+    # Mana
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_mana_mod
+            # NOT = { trade_goods = resource_mana }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_mana_mod
+    # }
+    # Anima
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_anima_mod
+            # NOT = { trade_goods = resource_anima }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_anima_mod
+    # }
+    # Fel
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_fel_mod
+            NOT = { trade_goods = resource_fel }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_fel_mod
+    }
+    # Arcane
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_arcane_mod
+            # NOT = { trade_goods = resource_arcane }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_arcane_mod
+    # }
+    # Oil
+    if = {
+        limit = {
+            has_province_modifier = estate_monopoly_of_resource_oil_mod
+            NOT = { trade_goods = resource_oil }
+        }
+        remove_province_modifier = estate_monopoly_of_resource_oil_mod
+    }
+    # Apexis Crystals
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_apexis_mod
+            # NOT = { trade_goods = resource_apexis }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_apexis_mod
+    # }
+    # Treasure
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_treasure_mod
+            # NOT = { trade_goods = resource_treasure }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_treasure_mod
+    # }
+    # Slaves
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_slaves_mod
+            # NOT = { trade_goods = resource_slaves }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_slaves_mod
+    # }
+    # Kypari Amber
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_kypari_mod
+            # NOT = { trade_goods = resource_kypari }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_kypari_mod
+    # }
+    # Moonwell
+    # if = {
+        # limit = {
+            # has_province_modifier = estate_monopoly_of_resource_moonwell_mod
+            # NOT = { trade_goods = resource_moonwell }
+        # }
+        # remove_province_modifier = estate_monopoly_of_resource_moonwell_mod
+    # }
 }
