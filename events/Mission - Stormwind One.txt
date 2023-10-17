@@ -1,15 +1,423 @@
 namespace = wwu_mission_stw_one
 
 #Call of the Guardian
+country_event = {
+    id = wwu_mission_stw_one.1
+	title = wwu_mission_stw_one.1.title
+	desc = wwu_mission_stw_one.1.desc
+	picture = CROWN_OF_KAELTHAS_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        wwu_mission_stw_one.1.option.a
+
+            join_all_defensive_wars_of = STW
+            add_manpower = -5
+            add_treasury = -500
+            add_historical_friend = STW
+            STW = {
+                add_manpower = 5
+                add_treasury = 500
+                add_historical_friend = P59
+            }
+
+            ai_chance = { factor = 20 }
+    }
+
+    option = {
+        wwu_mission_stw_one.1.option.b
+
+            join_all_defensive_wars_of = STW
+            add_historical_friend = STW
+            STW = {
+                add_historical_friend = P59
+            }
+
+            ai_chance = { factor = 70 }
+        }
+
+
+    option = {
+        wwu_mission_stw_one.1.option.c
+
+            declare_war_with_cb = {
+                who = STW
+                casus_belli = cb_independence_war
+            }
+            area_darkshire = {
+                cede_province = P59
+            }
+            add_historical_rival = STW
+            STW = {
+                add_historical_rival = P59
+            }
+
+                ai_chance = { factor = 10 }
+        }
+}
 
 #Emissary to Ironforge
+country_event = {
+    id = wwu_mission_stw_one.2
+    title = wwu_mission_stw_one.2.title
+    desc = wwu_mission_stw_one.2.desc
+    picture = UTHER_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_one.2.option.a
+
+            join_all_defensive_wars_of = STW
+            create_alliance = STW
+            add_historical_friend = STW
+            STW = {
+                add_historical_friend = A29
+                join_all_defensive_wars_of = A29
+            }
+
+        ai_chance = { factor = 30 }
+    }
+
+    option = {
+        name = wwu_mission_stw_one.2.option.b
+
+            add_manpower = -3
+            add_historical_friend = STW
+            add_prestige = 5
+            STW = {
+                add_manpower = 3
+                add_historical_friend = A29
+            }
+
+        ai_chance = { factor = 60}
+    }
+
+    option = {
+        name = wwu_mission_stw_one.2.option.c
+
+        add_prestige = 5
+        STW = {
+            add_prestige = -5
+        }
+
+        ai_chance = { factor = 5 }
+    }
+}
 
 #Fate of Westfal
+country_event = {
+    id = wwu_mission_stw_one.3
+    title = wwu_mission_stw_one.3.title
+    desc = wwu_mission_stw_one.3.desc
+    picture = UTHER_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_one.3.option.a
+
+        if = {
+            limit = {
+                area_sentinel_hill = {
+                    previous_owner = STW
+                }
+            }
+            area_sentinel_hill = {
+                cede_province = WST
+                add_core = WST
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_the_deadmines = {
+                    previous_owner = STW
+                }
+            }
+            area_the_deadmines = {
+                cede_province = WST
+                add_core = WST
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_westfall_shore = {
+                    previous_owner = STW
+                }
+            }
+            area_westfall_shore = {
+                cede_province = WST
+                add_core = WST
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_westfall_farmland = {
+                    previous_owner = STW
+                }
+            }
+            area_westfall_farmland = {
+                cede_province = WST
+                add_core = WST
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_moonbrook = {
+                    previous_owner = STW
+                }
+            }
+            area_moonbrook = {
+                cede_province = WST
+                add_core = WST
+                remove_core = PREV
+            }
+        }
+
+        create_subject = {
+            subject_type = vassal
+            subject = WST
+        }
+        ai_chance = {
+            factor = 100
+        }
+    }
+
+    option = {
+        name = wwu_mission_stw_one.3.option.b
+
+        region_westfall = {
+            add_province_modifier = {
+                name = event_stw_one_crown_autonomy
+                duration = 18250
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
 
 #Fate of Grand Hamlet
+country_event = {
+    id = wwu_mission_stw_one.4
+    title = wwu_mission_stw_one.4.title
+    desc = wwu_mission_stw_one.4.desc
+    picture = UTHER_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_one.4.option.a
+
+        if = {
+            limit = {
+                area_darkshire = {
+                    previous_owner = STW
+                }
+            }
+            area_darkshire = {
+                cede_province = DKS
+                add_core = DKS
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_twilight_grove = {
+                    previous_owner = STW
+                }
+            }
+            area_twilight_grove = {
+                cede_province = DKS
+                add_core = DKS
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_ravenhill = {
+                    previous_owner = STW
+                }
+            }
+            area_ravenhill = {
+                cede_province = DKS
+                add_core = DKS
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_twisting_forest = {
+                    previous_owner = STW
+                }
+            }
+            area_twisting_forest = {
+                cede_province = DKS
+                add_core = DKS
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_the_darkened_banks = {
+                    previous_owner = STW
+                }
+            }
+            area_the_darkened_banks = {
+                cede_province = DKS
+                add_core = DKS
+                remove_core = PREV
+            }
+        }
+
+            create_subject = {
+                subject_type = vassal
+                subject = DKS
+        }
+        ai_chance = {
+            factor = 100
+        }
+    }
+
+    option = {
+        name = wwu_mission_stw_one.4.option.b
+
+        region_duskwood = {
+            add_province_modifier = {
+                name = event_stw_one_crown_autonomy
+                duration = 18250
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
 
 #Fate of Redridge
+country_event = {
+    id = wwu_mission_stw_one.5
+    title = wwu_mission_stw_one.5.title
+    desc = wwu_mission_stw_one.5.desc
+    picture = UTHER_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_one.5.option.a
+
+            if = {
+            limit = {
+                area_lakeshire = {
+                    previous_owner = STW
+                }
+            }
+            area_lakeshire = {
+                cede_province = RRG
+                add_core = RRG
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_lakeshire_highway = {
+                    previous_owner = STW
+                }
+            }
+            area_lakeshire_highway = {
+                cede_province = RRG
+                add_core = RRG
+                remove_core = PREV
+            }
+        }
+        if = {
+            limit = {
+                area_stonewatch = {
+                    previous_owner = STW
+                }
+            }
+            area_stonewatch = {
+                cede_province = RRG
+                add_core = RRG
+                remove_core = PREV
+            }
+        }
+
+            create_subject = {
+                subject_type = vassal
+                subject = RRG
+        }
+        ai_chance = {
+            factor = 100
+        }
+    }
+
+    option = {
+        name = wwu_mission_stw_one.4.option.b
+
+        region_redridge_mountains = {
+            add_province_modifier = {
+                name = event_stw_one_crown_autonomy
+                duration = 18250
+            }
+        }
+        ai_chance = {
+            factor = 10
+        }
+    }
+}
 
 #New Era of Peace
+country_event = {
+    id = wwu_mission_stw_one.6
+    title = wwu_mission_stw_one.6.title
+    desc = wwu_mission_stw_one.6.desc
+    picture = UTHER_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_one.6.option.a
+
+        add_country_modifier = {
+            name = event_stw_one_little_golden_era
+            duration = 3650
+        }
+
+        hidden_effect = {
+            add_country_flag = stormwind_one_finished
+        }
+
+        swap_non_generic_missions = yes
+    }
+}
 
 ## Destruction of Gnoll Hideout
+#TODO
+#description: add event that will fire if ruler is a general and sieges
+#down the capital of the gnoll horde, killing their ruler and fireing ticking disaster that will break
+#the gnoll horde and release the gnoll tags that appear later
