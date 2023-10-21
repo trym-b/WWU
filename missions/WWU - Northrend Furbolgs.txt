@@ -38,7 +38,7 @@ wwu_northrend_furbolg_column_1 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_rise_of_vordrassil_nf
-                duration = 9131
+                duration = 9125
             }
 			set_country_flag = growing_nightmares
 		}
@@ -49,13 +49,16 @@ wwu_northrend_furbolg_column_1 = {
 		required_missions = { wwu_vordrassil_nf }
 		
 		trigger = {
-			has_disaster = vordrassil_corruption			
+            custom_trigger_tooltip = {
+                tooltip = VORDRASSIL_DISASTER_PRESENT_TT
+                has_disaster = vordrassil_corruption	
+            }		
 		}
 		
 		effect = {
 			add_country_modifier = {
                 name = mission_corruption_looming_nf
-                duration = 9131
+                duration = 9125
             }
 			country_event = {
 				id = flavor_nf.4
@@ -85,7 +88,7 @@ wwu_northrend_furbolg_column_1 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_corruption_manifest_nf
-                duration = 9131
+                duration = 9125
             }
 			country_event = {
 				id = flavor_nf.5
@@ -100,7 +103,10 @@ wwu_northrend_furbolg_column_1 = {
 		required_missions = { wwu_madness_consumes_nf }
 		
 		trigger = {
-		    has_global_flag = seeds_of_teldrassil
+            custom_trigger_tooltip = {
+                tooltip = TELDRASSIL_GROWN_TT
+                has_global_flag = seeds_of_teldrassil
+            }
 			religious_unity = 0.9
 			area_heartwood = {
 				type = all
@@ -129,7 +135,10 @@ wwu_northrend_furbolg_column_1 = {
 		required_missions = { wwu_sons_of_ursoc_nf }
 		
 		trigger = {
-			has_country_flag = the_dream
+            custom_trigger_tooltip = {
+                tooltip = DREAMS_OR_NIGHTMARES_EVENT_DRUIDIC_TT
+                has_country_flag = the_dream
+            }
             religion = druidism
 			833 = {
 			    owned_by = ROOT
@@ -145,7 +154,7 @@ wwu_northrend_furbolg_column_1 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_druidic_roots_nf
-                duration = 9131
+                duration = 9125
             }
 		}
 	}
@@ -171,7 +180,7 @@ wwu_northrend_furbolg_column_1 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_druidic_practices_nf
-                duration = 9131
+                duration = 9125
             }
 			country_event = {
 				id = flavor_nf.11
@@ -233,7 +242,7 @@ wwu_northrend_furbolg_column_2 = {
 		required_missions = { }
 		
 		trigger = {
-			army_size_percentage = 1
+			army_size_percentage = 0.9
 			manpower_percentage = 0.6
 			num_of_generals = 1
 		}
@@ -241,7 +250,7 @@ wwu_northrend_furbolg_column_2 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_northrend_dangers_nf
-                duration = 9131
+                duration = 9125
             }
 			change_government_reform_progress = 100
 			add_army_tradition = 20
@@ -270,7 +279,7 @@ wwu_northrend_furbolg_column_2 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_furbolg_wars_nf
-                duration = 9131
+                duration = 9125
             }
 			area_grizzlemaw = {
                 add_permanent_claim = ROOT
@@ -323,7 +332,7 @@ wwu_northrend_furbolg_column_2 = {
             }
 			add_country_modifier = {
                 name = mission_eternal_rivals_nf
-                duration = 9131
+                duration = 9125
             }
 		}
 	}
@@ -353,13 +362,18 @@ wwu_northrend_furbolg_column_2 = {
             }
 		}
         provinces_to_highlight = {
-            NOT = { culture = culture_snow_furbolg }
             OR = {
                 area = area_grizzlemaw
                 area = area_heartwood
                 area = area_amberpine_lodge
             }
-            NOT = { owned_by = ROOT }
+            OR = {
+                NOT = { owned_by = ROOT }
+                AND = {
+                    owned_by = ROOT
+                    NOT = { culture = culture_snow_furbolg }
+                }
+            }
         }
 		
 		effect = {
@@ -421,7 +435,10 @@ wwu_northrend_furbolg_column_2 = {
 		required_missions = { wwu_nation_of_grizzlemaw_nf }
 		
 		trigger = {
-			has_country_flag = the_ancestors
+            custom_trigger_tooltip = {
+                tooltip = DREAMS_OR_NIGHTMARES_EVENT_ANCESTORS_TT
+                has_country_flag = the_ancestors
+            }
 			833 = {
 			    owned_by = ROOT
 			    religion = shamanism
@@ -446,8 +463,11 @@ wwu_northrend_furbolg_column_2 = {
 		position = 8
 		required_missions = { wwu_sons_of_ursoc_nf }
 		
-		trigger = {
-			has_country_flag = the_nightmare
+		trigger = { 
+            custom_trigger_tooltip = {
+                tooltip = DREAMS_OR_NIGHTMARES_EVENT_NIGHTMARE_TT
+                has_country_flag = the_nightmare
+            }
             religion = nightmare
 			833 = {
 			    owned_by = ROOT
@@ -464,7 +484,7 @@ wwu_northrend_furbolg_column_2 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_loyal_to_yogg_nf
-                duration = 9131
+                duration = 9125
             }
 		}
 	}
@@ -503,7 +523,7 @@ wwu_northrend_furbolg_column_2 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_spreading_madness_nf
-                duration = 9131
+                duration = 9125
             }
 			if = {
                 limit = {
@@ -588,11 +608,19 @@ wwu_northrend_furbolg_column_3 = {
 		
 		trigger = {
 		    OR = {
-			    is_rival = B76
-				is_rival = A77
-				is_rival = A74
+			    AND = {
+                    is_rival = B76
+                    trade_embargoing = B76
+				}
+                AND = {
+                    is_rival = A77
+                    trade_embargoing = A77
+				}
+                AND = {
+                    is_rival = A74
+                    trade_embargoing = A74
+				}
 			}
-			has_embargo_rivals = yes
 		}
         provinces_to_highlight = {
             OR = {
@@ -609,7 +637,7 @@ wwu_northrend_furbolg_column_3 = {
             }
 			add_country_modifier = {
                 name = mission_enemies_at_bay_nf
-                duration = 9131
+                duration = 9125
             }
 			area_venture_bay = {
                 add_permanent_claim = ROOT
@@ -635,7 +663,7 @@ wwu_northrend_furbolg_column_3 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_troll_invaders_nf
-                duration = 9131
+                duration = 9125
             }
 			area_zeb_halak = {
                 add_permanent_claim = ROOT
@@ -674,7 +702,7 @@ wwu_northrend_furbolg_column_3 = {
 		effect = {
 			add_country_modifier = {
                 name = mission_drive_trolls_beyond_our_lands_nf
-                duration = 9131
+                duration = 9125
             }
             
             2484 = { add_or_improve_fort = yes }
@@ -711,7 +739,7 @@ wwu_northrend_furbolg_column_3 = {
 			add_mil_power = 100
 			add_country_modifier = {
                 name = mission_drak_tharon_keep_nf
-                duration = 9131
+                duration = 9125
             }
 			region_zuldrak = {
                 add_permanent_claim = ROOT
@@ -753,7 +781,7 @@ wwu_northrend_furbolg_column_3 = {
             
 			add_country_modifier = {
                 name = mission_fall_of_an_empire_nf
-                duration = 9131
+                duration = 9125
             }
 		}
 	}
@@ -865,7 +893,7 @@ wwu_northrend_furbolg_column_4 = {
             }
 			add_country_modifier = {
                 name = mission_armies_of_iron_nf
-                duration = 9131
+                duration = 9125
             }
 		}
 	}
@@ -939,7 +967,7 @@ wwu_northrend_furbolg_column_4 = {
 			add_mil_power = 100
 			add_country_modifier = {
                 name = mission_vrykuls_of_howling_fjords_nf
-                duration = 9131
+                duration = 9125
             }
 			area_utgarde_keep = {
                 add_permanent_claim = ROOT
@@ -1183,7 +1211,7 @@ wwu_northrend_furbolg_column_5 = {
 			add_splendor = 50
 			add_country_modifier = {
                 name = mission_druidic_blessing_nf
-                duration = 14609
+                duration = 14600
             }
 		}
 	}
@@ -1211,7 +1239,7 @@ wwu_northrend_furbolg_column_5 = {
 			add_splendor = 50
 			add_country_modifier = {
                 name = mission_blessing_of_old_gods_nf
-                duration = 14609
+                duration = 14600
             }
 		}
 	}	
