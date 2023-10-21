@@ -34,6 +34,10 @@ on_conquest__estate = {
 on_center_of_trade_upgrade__estate = {
     if = {
         limit = {
+            # Only apply twice per CoT province, to prevent downgrade/upgrade abuse
+            ROOT = {
+                NOT = { check_variable = { which = province__center_of_trade_estate_mercantile_guild_trade_hub_promotion_counter value = 2 } }
+            }
             owner = {
                 has_estate_privilege = estate_mercantile_guild_trade_hub_promotion
             }
@@ -42,6 +46,12 @@ on_center_of_trade_upgrade__estate = {
         area = {
             add_base_tax = 1
             add_base_production = 1
+        }
+        
+        # Only apply twice per CoT province, to prevent downgrade/upgrade abuse
+        change_variable = {
+            which = province__center_of_trade_estate_mercantile_guild_trade_hub_promotion_counter
+            value = 1
         }
     }
 }
