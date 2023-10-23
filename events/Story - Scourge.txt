@@ -100,7 +100,7 @@ country_event = {
                     NOT = {
                         any_country = { 
                             ai = no
-                            capital_scope = {
+                            any_owned_province = {
                                 superregion = northrend_superregion
                             }
                         }
@@ -525,6 +525,26 @@ country_event = {
             add_core = P12 # Cult of the Damned
             change_religion = cult_of_the_damned
             change_culture = culture_cultist
+        }
+        
+        # AI Boost: only apply if player is not in north EK
+        if = {
+            limit = {
+                NOT = {
+                    any_country = { 
+                        ai = no
+                        any_owned_province = {
+                            is_north_eastern_kingdoms = yes
+                        }
+                    }
+                }
+            }
+            
+            region_western_plaguelands = {
+                cede_province = P12
+                add_core = P12
+                change_religion = P12
+            }
         }
 	}
     
