@@ -42,6 +42,11 @@ invite_to_alliance = {
                 name = recent_faction_interaction
                 duration = 365
             }
+            add_country_modifier = {
+                name = recently_joined_faction
+                duration = 3650
+                hidden = yes
+            }  
         }
 	}
 	on_decline = { 
@@ -401,6 +406,11 @@ invite_to_horde = {
                 name = recent_faction_interaction
                 duration = 365
             }
+            add_country_modifier = {
+                name = recently_joined_faction
+                duration = 3650
+                hidden = yes
+            }
         }
 	}
 	on_decline = {
@@ -744,6 +754,11 @@ invite_to_old_horde = {
                 name = recent_faction_interaction
                 duration = 365
             }
+            add_country_modifier = {
+                name = recently_joined_faction
+                duration = 3650
+                hidden = yes
+            }
         }
 	}
 	on_decline = { 
@@ -1072,6 +1087,11 @@ invite_to_trade_coalition = {
                 name = recent_faction_interaction
                 duration = 365
             }
+            add_country_modifier = {
+                name = recently_joined_faction
+                duration = 3650
+                hidden = yes
+            }
         }
 	}
 	on_decline = { 
@@ -1354,6 +1374,11 @@ invite_to_dragon_aspects = {
             add_country_modifier = {
                 name = recent_faction_interaction
                 duration = 365
+            }
+            add_country_modifier = {
+                name = recently_joined_faction
+                duration = 3650
+                hidden = yes
             }
         }
 	}
@@ -1643,6 +1668,11 @@ join_the_alliance = {
         add_country_modifier = {
             name = recent_faction_interaction
             duration = 365
+        }
+        add_country_modifier = {
+            name = recently_joined_faction
+            duration = 3650
+            hidden = yes
         }
 	}
 	on_decline = { 
@@ -1940,6 +1970,11 @@ join_the_horde = {
             name = recent_faction_interaction
             duration = 365
         }
+        add_country_modifier = {
+            name = recently_joined_faction
+            duration = 3650
+            hidden = yes
+        }
 	}
 	on_decline = { 
         hidden_effect = {
@@ -2228,6 +2263,11 @@ join_the_old_horde = {
             name = recent_faction_interaction
             duration = 365
         }
+        add_country_modifier = {
+            name = recently_joined_faction
+            duration = 3650
+            hidden = yes
+        }
 	}
 	on_decline = { 
         hidden_effect = {
@@ -2514,6 +2554,11 @@ join_the_trade_coalition = {
             name = recent_faction_interaction
             duration = 365
         }
+        add_country_modifier = {
+            name = recently_joined_faction
+            duration = 3650
+            hidden = yes
+        }
 	}
 	on_decline = { 
         hidden_effect = {
@@ -2756,6 +2801,11 @@ join_the_dragon_aspects = {
             name = recent_faction_interaction
             duration = 365
         }
+        add_country_modifier = {
+            name = recently_joined_faction
+            duration = 3650
+            hidden = yes
+        }
 	}
 	on_decline = { 
         hidden_effect = {
@@ -2979,7 +3029,7 @@ kick_from_alliance = {
 		has_country_modifier = head_of_alliance
         FROM = {
 			has_country_modifier = member_of_alliance
-            NOT = { has_country_modifier = recent_faction_interaction } # To discourage the AI from instantly kicking a new member
+            NOT = { has_country_modifier = recently_joined_faction } # To discourage the AI from instantly kicking a new member
 		}
 	}
 	is_allowed = {
@@ -3056,7 +3106,7 @@ kick_from_horde = {
 		has_country_modifier = head_of_horde
         FROM = {
 			has_country_modifier = member_of_horde
-            NOT = { has_country_modifier = recent_faction_interaction } # To discourage the AI from instantly kicking a new member
+            NOT = { has_country_modifier = recently_joined_faction } # To discourage the AI from instantly kicking a new member
 		}
 	}
 	is_allowed = {
@@ -3136,7 +3186,7 @@ kick_from_old_horde = {
 		has_country_modifier = head_of_old_horde
         FROM = {
 			has_country_modifier = member_of_old_horde
-            NOT = { has_country_modifier = recent_faction_interaction } # To discourage the AI from instantly kicking a new member
+            NOT = { has_country_modifier = recently_joined_faction } # To discourage the AI from instantly kicking a new member
 		}
 	}
 	is_allowed = {
@@ -3216,7 +3266,7 @@ kick_from_trade_coalition = {
 		has_country_modifier = head_of_trade_coalition
         FROM = {
 			has_country_modifier = member_of_trade_coalition
-            NOT = { has_country_modifier = recent_faction_interaction } # To discourage the AI from instantly kicking a new member
+            NOT = { has_country_modifier = recently_joined_faction } # To discourage the AI from instantly kicking a new member
 		}
 	}
 	is_allowed = {
@@ -3296,7 +3346,7 @@ kick_from_dragon_aspects = {
 		has_country_modifier = head_of_dragon_aspects
         FROM = {
 			has_country_modifier = member_of_dragon_aspects
-            NOT = { has_country_modifier = recent_faction_interaction } # To discourage the AI from instantly kicking a new member
+            NOT = { has_country_modifier = recently_joined_faction } # To discourage the AI from instantly kicking a new member
 		}
 	}
 	is_allowed = {
@@ -3374,6 +3424,15 @@ leave_the_alliance = {
         NOT = { has_global_flag = alliance_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_alliance
+        
+        # AI won't consider leaving for 10 years minimum after joining
+        if = {
+            limit = {
+                ai = yes
+            }
+            NOT = { has_country_modifier = recently_joined_faction }
+        }
+        
         FROM = { 
             has_country_modifier = head_of_alliance
         }
@@ -3449,6 +3508,15 @@ leave_the_horde = {
         NOT = { has_global_flag = horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_horde
+        
+        # AI won't consider leaving for 10 years minimum after joining
+        if = {
+            limit = {
+                ai = yes
+            }
+            NOT = { has_country_modifier = recently_joined_faction }
+        }
+        
         FROM = { 
             has_country_modifier = head_of_horde
         }
@@ -3528,6 +3596,15 @@ leave_the_old_horde = {
         NOT = { has_global_flag = old_horde_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_old_horde
+        
+        # AI won't consider leaving for 10 years minimum after joining
+        if = {
+            limit = {
+                ai = yes
+            }
+            NOT = { has_country_modifier = recently_joined_faction }
+        }
+        
         FROM = { 
             has_country_modifier = head_of_old_horde
         }
@@ -3607,6 +3684,15 @@ leave_the_trade_coalition = {
         NOT = { has_global_flag = trade_coalition_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_trade_coalition
+        
+        # AI won't consider leaving for 10 years minimum after joining
+        if = {
+            limit = {
+                ai = yes
+            }
+            NOT = { has_country_modifier = recently_joined_faction }
+        }
+        
         FROM = { 
             has_country_modifier = head_of_trade_coalition
         }
@@ -3686,6 +3772,15 @@ leave_the_dragon_aspects = {
         NOT = { has_global_flag = dragon_aspects_dismantled }
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_dragon_aspects
+        
+        # AI won't consider leaving for 10 years minimum after joining
+        if = {
+            limit = {
+                ai = yes
+            }
+            NOT = { has_country_modifier = recently_joined_faction }
+        }
+        
         FROM = { 
             has_country_modifier = head_of_dragon_aspects
         }
