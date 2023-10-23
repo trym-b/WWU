@@ -29,6 +29,8 @@ wow_portal = {
 			log = "DEBUG - [Root.GetName] - wow_portal "
 		}
         
+        on_building_constructed = yes
+        
         add_development_from_building = {
 			building = wow_portal
 			type = manpower
@@ -40,6 +42,8 @@ wow_portal = {
 			limit = { has_global_flag = enable_building_logging }
 			log = "DEBUG - [Root.GetName] - wow_portal destroyed"
 		}
+        
+        on_building_destroyed = yes
         
         remove_development_from_building = {
 			building = wow_portal
@@ -58,9 +62,15 @@ wow_portal = {
             }
         }
 	}
-    on_obsolete = { }
-    on_construction_started = { }
-    on_construction_canceled = { } 
+	on_obsolete = { 
+        on_building_obsoleted = yes
+    }
+    on_construction_started = { 
+        on_building_construction_started = yes
+    }
+    on_construction_canceled = { 
+        on_building_construction_canceled = yes
+    }  
     
 	ai_will_do = {
 		factor = 1
