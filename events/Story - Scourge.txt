@@ -873,3 +873,157 @@ country_event = {
 	}
 }
 
+# AI Helper: spawn Scourge of Lordaeron for the AI if north EK is not touched by the player
+country_event = {
+	id = wwu_scourge.201
+	title = wwu_scourge.201.title
+	desc = wwu_scourge.201.desc
+	picture = LICH_KING_CLOSEUP_eventPicture
+
+    hidden = yes
+    is_triggered_only = yes
+    
+    trigger = {
+        NOT = { has_global_flag = ai_helper_spawn_scourge_of_lordaeron }
+        ai = yes
+        tag = P11
+        has_country_flag = scourge_invasion # Only do this if Scourge has entered the EK invasion stage
+        NOT = {
+            any_country = { 
+                ai = no
+                any_owned_province = {
+                    is_north_eastern_kingdoms = yes
+                }
+            }
+        }
+    }
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = ai_helper_spawn_scourge_of_lordaeron
+        }
+    }
+    
+	option = {
+		name = wwu_scourge.201.option.a
+		
+        complete_mission = P11_kiljaedens_invasion_plan
+        complete_mission = P11_recruit_kelthuzad
+        complete_mission = P11_create_cult_of_the_damned
+        complete_mission = P11_poison_brill_granary
+        complete_mission = P11_poison_andorhal_granary
+        complete_mission = P11_poison_stratholme_granary
+        complete_mission = P11_compendium_of_the_fallen
+        complete_mission = P11_scourge_of_lordaeron
+        
+        set_global_flag = scourge_of_lordaeron_flag
+        clr_global_flag = undead_plague_active
+        
+        # Scourge of Lordaeron
+        642 = {
+            cede_province = P52
+            add_core = P52
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            
+            province_event = { id = wwu_scourge.38 }
+        }
+        region_eastern_plaguelands = {
+            cede_province = P52
+            add_core = P52
+            change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+        }
+        
+        # Cult of the Damned
+        790 = {
+            cede_province = P12 # Cult of the Damned
+            add_core = P12 # Cult of the Damned
+
+            add_or_improve_temple = yes
+            add_or_improve_arsenal = yes
+            add_or_improve_barracks = yes
+            add_or_improve_farm = yes
+            add_or_improve_fort = yes
+        
+            change_trade_goods = resource_fel
+            add_base_tax = 4
+            add_base_production = 4
+            add_base_manpower = 6
+            center_of_trade = 2
+        }
+        area_scholomance = {
+            cede_province = P12 # Cult of the Damned
+            add_core = P12 # Cult of the Damned
+            change_religion = cult_of_the_damned
+            change_culture = culture_cultist
+        }
+        
+        # AI Boost: only apply if player is not in north EK
+        if = {
+            limit = {
+                NOT = {
+                    any_country = { 
+                        ai = no
+                        any_owned_province = {
+                            is_north_eastern_kingdoms = yes
+                        }
+                    }
+                }
+            }
+            
+            region_western_plaguelands = {
+                cede_province = P12
+                add_core = P12
+                change_religion = P12
+            }
+        }
+	}
+    
+    after = {
+        hidden_effect = {
+            P52 = {
+                country_event = { id = wwu_scourge.300 }
+            }   
+            P12 = {
+                country_event = { id = wwu_scourge.33 }
+                country_event = { id = wwu_scourge.300 }
+            }
+            P11 = {
+                create_subject = {
+                    subject_type = scourge_vassal
+                    subject = P52
+                }
+            }
+        }
+    }
+}
+
+# AI Discovery
+country_event = {
+	id = wwu_scourge.300
+	title = wwu_scourge.300.title
+	desc = wwu_scourge.300.desc
+	picture = LICH_KING_CLOSEUP_eventPicture
+
+    hidden = yes
+    is_triggered_only = yes
+    
+    trigger = {
+        ai = yes
+    }
+    
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = wwu_scourge.200.option.a
+		
+        reveal_all_discovery = yes
+	}
+}
