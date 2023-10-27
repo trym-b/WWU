@@ -49,22 +49,35 @@ country_decisions = {
     open_dimensional_portals = {
 		potential = {   
             NOT = { has_global_flag = opened_dimensional_portals }
-
-		    culture_group = culture_group_orc
-            religion = fel
-			capital_scope = {
-				superregion = draenor_superregion
-			}
             
             # Not in the Rise of the Horde age
             NOT = { current_age = age_rise_of_the_horde }
+
+		    owns_core_province = 3792
 		}
 		allow =  {
-            # Allow if the owner is not Orc and not Fel
-            3792 = {
-                controller = {
+            # Only allow Shadowmoon to use this pre-600
+            if = {
+                limit = {
+                    NOT = { is_year = 600 }
+                }
+                tag = A34
+            }
+        
+            # Non-Orc, non-Fel nations can use it post-650
+            if = {
+                limit = {
                     NOT = { culture_group = culture_group_orc }
                     NOT = { religion = fel }
+                }
+                is_year = 650
+            }
+            # Fel Orc nations can use it at post-600
+            else = {
+                culture_group = culture_group_orc
+                religion = fel
+                3792 = {
+                    religion = fel
                 }
             }
             
@@ -81,13 +94,6 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
-            
-            # Only Shadowmoon should use this
-            modifier = {
-                factor = 0
-                
-                NOT = { tag = A34 }
-            }
 		}
 	}
 }
