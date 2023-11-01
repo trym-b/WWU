@@ -1141,6 +1141,107 @@ set_great_project_tier_3 = {
 	}
 }
 
+#Country effect
+create_colony_mission_reward = {
+	if = {
+		limit = {
+			$province$ = {
+				is_empty = yes
+			}
+		}
+		$province$ = {
+			add_siberian_construction = 400
+		}
+		if = {
+			limit = {
+				has_age_ability = ab_colony_boost_development
+			}
+			$province$ = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			owns = $province$
+		}
+		$province$ = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { is_permanent_claim = $province$ }
+		}
+		add_permanent_claim = $province$
+	}
+}
+
+#Country effect
+seize_empty_province_effect = {
+	if = {
+		limit = {
+			$province$ = {
+				is_empty = yes
+			}
+		}
+		$province$ = {
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+	else_if = {
+		limit = { NOT = { owns_or_non_sovereign_subject_of = $province$ } }
+		add_core = $province$
+	}
+	else = {
+		$province$ = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+#Provine effect
+create_colony_mission_reward_province = {
+	if = {
+		limit = {
+			is_empty = yes
+		}
+		add_siberian_construction = 400
+		if = {
+			limit = {
+				$country$ = {
+					has_age_ability = ab_colony_boost_development
+				}
+			}
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	else_if = {
+		limit = {
+			owned_by = $country$
+		}
+		add_base_tax = 1
+		add_base_production = 1
+		add_base_manpower = 1
+	}
+	else_if = {
+		limit = {
+			NOT = { is_permanent_claim = $country$ }
+		}
+		add_permanent_claim = $country$
+	}
+}
+
+
 #Province effect
 remove_random_development = {
 	if = {
@@ -1679,5 +1780,57 @@ enable_admirals_army_professionalism = {
 	}
 	hidden_effect = {
 		set_country_flag = admirals_give_army_professionalism
+	}
+}
+
+#Country effect
+add_inflation_scaled_to_trade = {
+	[[custom_tooltip] 
+		custom_tooltip = $custom_tooltip$
+	]
+	#custom_tooltip = add_inflation_scaled_to_trade_tt	#Make sure to define an own custom tooltip for telling how much inflation per trade percantage should be given
+	hidden_effect = {
+		export_to_variable = {
+			which = trade_income_variable
+			value = trigger_value:trade_income_percentage
+		}
+		multiply_variable = {
+			which = trade_income_variable
+			value = 100
+		}
+		multiply_variable = {
+			which = trade_income_variable
+			value = $inflation$
+		}
+		while = {
+			limit = {
+				check_variable = {
+					which = trade_income_variable
+					value = 1
+				}
+			}
+			add_inflation = 1
+			subtract_variable = {
+				which = trade_income_variable
+				value = 1
+			}
+		}
+		multiply_variable = {
+			which = trade_income_variable
+			value = 100
+		}
+		while = {
+			limit = {
+				check_variable = {
+					which = trade_income_variable
+					value = 1
+				}
+			}
+			add_inflation = 0.01
+			subtract_variable = {
+				which = trade_income_variable
+				value = 1
+			}
+		}
 	}
 }
