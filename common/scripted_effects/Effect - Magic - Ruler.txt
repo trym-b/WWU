@@ -38,8 +38,8 @@ on_new_monarch__magic = {
         }
         
         add_ruler_spellcasting = yes
-        set_country_flag = allow_magic_specialization_decision
-        country_event = { id = wwu_magic.16 }
+        
+        country_event = { id = wwu_magic.80 }
     
         random_list = {
             33 = {
@@ -129,5 +129,21 @@ on_monarch_death__magic = {
     set_variable = {
         which = ruler_magic_training
         value = 0
+    }
+}
+
+existing_school_cost = {
+    # Cost if school has already been set
+    if = {
+        limit = {
+            NOT = {
+                is_variable_equal = { 
+                    which = magic_school
+                    value = 0
+                }
+            }
+        }
+        
+        add_years_of_income = -3
     }
 }
