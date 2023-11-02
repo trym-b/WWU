@@ -1,0 +1,120 @@
+#----------------------------------------------
+# Each nation is placed in a suitable place within Outland based on what they are.
+# Ownership in Draenor is not mirrored, instead additional development is added to
+# Outland provinces based on final Draenor total development.
+#
+# Nations not included here will simply lose their Draenor provinces and gain no Outland provinces.
+#----------------------------------------------
+add_outland_development_bonus = {
+    add_country_modifier = {
+        name = outland_finding_our_footing
+        duration = 18250
+    }
+    
+    if = {
+        limit = {
+            total_development = 250
+        }
+        
+        add_country_modifier = {
+            name = outland_development_fervor
+            duration = 3650
+        }
+        
+        every_owned_province = {
+            limit = {
+                continent = continent_outland
+            }
+            
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+        }
+    }
+    if = {
+        limit = {
+            total_development = 500
+        }
+        
+        add_country_modifier = {
+            name = outland_development_fervor
+            duration = 10950
+        }
+        
+        every_owned_province = {
+            limit = {
+                continent = continent_outland
+            }
+            
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+        }
+    }
+    if = {
+        limit = {
+            total_development = 1000
+        }
+        
+        add_country_modifier = {
+            name = outland_development_fervor
+            duration = 21900
+        }
+        
+        every_owned_province = {
+            limit = {
+                continent = continent_outland
+            }
+            
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+            random_list = {
+                33 = { add_base_tax = 1 }
+                33 = { add_base_production = 1 }
+                33 = { add_base_manpower = 1 }
+            }
+        }
+    }
+}
+
+remove_ownership = {
+	remove_core = owner
+    kill_units = { 
+        who = owner
+    }
+    #cede_province = ---
+    #change_controller = ---
+    decolonize = yes
+    set_base_tax = 1
+    set_base_production = 1
+    set_base_manpower = 1
+}
+
+add_ownership = {
+    cede_province = PREV
+    add_core = PREV
+    change_culture = PREV
+    change_religion = PREV
+    
+    # Done so the nations have an army in Outland automatically.
+    infantry = PREV
+}
+
+
