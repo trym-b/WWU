@@ -1,0 +1,163 @@
+# select_current_missions = {
+	# hidden_effect = {
+		# clr_country_flag = can_choose_$key$_branching_missions
+		# change_variable = {
+			# which = can_preview_missions_var
+			# value = -1
+		# }
+	# }
+	# select_current_missions_$key$ = yes
+# }
+# select_current_branch = {
+	# custom_tooltip = BYZ_end_preview
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU } }
+		# select_current_missions = { key = TEU }
+	# }
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU_PRU } }
+		# select_current_missions = { key = TEU_PRU }
+	# }
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = LIV } }
+		# select_current_missions = { key = LIV }
+	# }
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = BYZ } }
+		# select_current_missions = { key = BYZ }
+	# }
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = PER } }
+		# select_current_missions = { key = PER }
+	# }
+# }
+
+# clear_all_branching_flags = {
+	# #TEU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU } }
+		# clr_country_flag = teu_prussian_path
+		# clr_country_flag = teu_crusader_path
+	# }
+	# #TEU-PRU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU_PRU } }
+		# clr_country_flag = teu_conquest_hre_path
+		# clr_country_flag = teu_diplomacy_hre_path
+		# clr_country_flag = teu_kingdom_prussia_path
+	# }
+	# #LIV
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = LIV } }
+		# clr_country_flag = liv_livonian_path
+		# clr_country_flag = liv_crusader_path
+	# }
+	# #BYZ
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = BYZ } }
+		# clr_country_flag = BYZ_centralized
+		# clr_country_flag = BYZ_decentralized
+	# }
+	# #PER
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = PER } }
+		# clr_country_flag = per_shia_missions
+		# clr_country_flag = per_sunni_missions
+		# clr_country_flag = per_zoroastrian_missions
+	# }
+# }
+
+# preview_mission_branch_1 = {
+	# #TEU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU } }
+		# set_country_flag = teu_prussian_path
+		# custom_tooltip = TEU_preview_prussian
+	# }
+	# #TEU_PRU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU_PRU } }
+		# set_country_flag = teu_conquest_hre_path
+		# custom_tooltip = TEU_PRU_preview_hre_conquest
+	# }
+	# #LIV
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = LIV } }
+		# set_country_flag = liv_livonian_path
+		# custom_tooltip = LIV_preview_livonian
+	# }
+	# #BYZ
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = BYZ } }
+		# set_country_flag = BYZ_centralized
+		# custom_tooltip = BYZ_preview_centralized
+	# }
+	# #PER
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = PER } }
+		# set_country_flag = per_shia_missions
+		# custom_tooltip = per_preview_shia_missions
+	# }
+# }
+# preview_mission_branch_2 = {
+	# #TEU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU } }
+		# set_country_flag = teu_crusader_path
+		# custom_tooltip = TEU_preview_crusader
+	# }
+	# #TEU_PRU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU_PRU } }
+		# if = {
+			# limit = { hre_size = 1 }
+			# set_country_flag = teu_diplomacy_hre_path
+			# custom_tooltip = TEU_PRU_preview_hre_diplomacy
+		# }
+		# else = {
+			# set_country_flag = teu_kingdom_prussia_path
+			# custom_tooltip = TEU_PRU_preview_prussian_kingdom
+		# }
+	# }
+	# #LIV
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = LIV } }
+		# set_country_flag = liv_crusader_path
+		# custom_tooltip = LIV_preview_crusader
+	# }
+	# #BYZ
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = BYZ } }
+		# set_country_flag = BYZ_decentralized
+		# custom_tooltip = BYZ_preview_decentralized
+	# }
+	# #PER
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = PER } }
+		# set_country_flag = per_sunni_missions
+		# custom_tooltip = per_preview_sunni_missions
+	# }
+# }
+# preview_mission_branch_3 = {
+	# #TEU_PRU
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = TEU_PRU } }
+		# set_country_flag = teu_kingdom_prussia_path
+		# custom_tooltip = TEU_PRU_preview_prussian_kingdom
+	# }
+	# #PER
+	# if = {
+		# limit = { can_preview_mission_of_key = { key = PER } }
+		# set_country_flag = per_zoroastrian_missions
+		# custom_tooltip = per_preview_zoroastrian_missions
+	# }
+# }
+# preview_mission_branch_4 = {
+# }
+# preview_mission_branch_5 = {
+# }
+# preview_mission_branch = {
+	# clear_all_branching_flags = yes
+	# preview_mission_branch_$branch$ = yes
+	# hidden_effect = { swap_non_generic_missions = yes }
+# }
