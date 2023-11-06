@@ -105,7 +105,7 @@ default = {
 	can_concentrate_development = yes
 	can_have_great_projects_moved_by_overlord = yes
 	extend_trading_range = no
-	can_gain_favors = yes
+	can_gain_favors = no
 
 	max_government_rank = 0								# 0 means no limit
 	cities_required_for_bonuses = 0						# How many cities the subject needs before giving bonuses to overlord
@@ -180,6 +180,8 @@ default = {
 	seize_court_resources = no
 	request_extra_levies = no
 	grant_administrative_autonomy = no
+
+	# disable_inheritance = yes # Use this for Personal Union types of subjects to disallow the inheriting mechanic
 
 	# (special)
 	sword_hunt = no
@@ -452,15 +454,15 @@ colony = {
 	dynamically_created_during_history = yes
 	overlord_enforce_peace_attacking = yes
 	can_transfer_in_peace = no
-	#press_sailors = yes
+	press_sailors = yes
 	transfer_trade_power = yes
 	can_concentrate_development = no
 	extend_trading_range = yes
 
 	liberty_desire_development_ratio = 0.1
-
+	opinion_on_subject_integration = 0
 	max_government_rank = 1
-	cities_required_for_bonuses = 8
+	cities_required_for_bonuses = 10
 
 	relative_power_class = 0
 	should_quit_wars_on_activation = yes
@@ -491,6 +493,7 @@ colony = {
 	start_colonial_war = yes
 	increase_tariffs = yes
 	decrease_tariffs = yes
+	enforce_culture = yes
 
 	# Modifiers:
 	modifier_overlord = {
@@ -506,6 +509,9 @@ colony = {
 
 crown_colony = {
 	copy_from = colony
+    sprite = GFX_icon_crown_colony
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_crown_colony
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_crown_colony
 
 	change_colonial_type = yes
 	#upgrade_subject_type = yes
@@ -527,6 +533,7 @@ crown_colony = {
 	takeondebt = yes
 	block_settlement_growth = yes
 	allow_settlement_growth = yes
+	enforce_culture = yes
 	
 	# Modifiers:
 	modifier_overlord = clear
@@ -541,6 +548,9 @@ crown_colony = {
 
 private_enterprise = {
 	copy_from = colony
+    sprite = GFX_icon_private_enterprise
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_private_enterprise
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_private_enterprise
 
 	change_colonial_type = yes
 	#upgrade_subject_type = yes
@@ -556,6 +566,7 @@ private_enterprise = {
 	replace_governor = no
 	block_settlement_growth = no
 	allow_settlement_growth = no
+	enforce_culture = yes
 	
 	# Modifiers:	
 	modifier_overlord = clear
@@ -570,6 +581,9 @@ private_enterprise = {
 
 self_governing_colony = {
 	copy_from = colony
+    sprite = GFX_icon_self_governing_colony
+	diplomacy_overlord_sprite = GFX_icon_diplomacy_lead_self_governing_colony
+	diplomacy_subject_sprite = GFX_icon_diplomacy_am_self_governing_colony
 
 	change_colonial_type = yes
 	#upgrade_subject_type = yes
@@ -585,7 +599,8 @@ self_governing_colony = {
 	replace_governor = no
 	block_settlement_growth = no
 	allow_settlement_growth = no
-	#press_sailors = no
+	press_sailors = no
+	enforce_culture = yes
 	
 	# Modifiers:	
 	modifier_overlord = clear
