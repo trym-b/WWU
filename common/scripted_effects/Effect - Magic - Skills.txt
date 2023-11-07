@@ -1,14 +1,134 @@
 #------------------------
 # Skills
 #------------------------
+start_magical_study = {
+    add_ruler_modifier = {
+        name = magical_training
+        duration = -1
+    }
+    
+    hidden_effect = {
+        set_variable = {
+            which = magical_study_progress
+            value = 0.0
+        }
+        set_country_flag = magical_study_progress_var_exists
+    }
+}
+
 complete_magical_study = {
     remove_country_modifier = magical_training
     clr_country_flag = gui_flag__magic_study_gui_open
 }
 
+cancel_magical_study = {
+    remove_country_modifier = magical_training
+    custom_tooltip = MAGIC_STUDY_RESUME_TT
+}
+
 reset_magical_study = {
     set_variable = { which = magical_study_progress value = 0 }
     set_variable = { which = study_difficulty value = 0 }
+}
+
+boost_magical_study_action = {
+    custom_tooltip = BOOST_MAGIC_STUDY_BY_5_TT
+        
+    if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 1 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 2 } }
+        add_years_of_income = -2.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 2 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 3 } }
+        add_years_of_income = -3.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 3 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 4 } }
+        add_years_of_income = -4.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 4 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 5 } }
+        add_years_of_income = -5.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 5 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 6 } }
+        add_years_of_income = -6.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 6 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 7 } }
+        add_years_of_income = -7.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 7 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 8 } }
+        add_years_of_income = -8.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 8 }
+        }
+        
+        hidden_effect = { set_variable = { which = study_difficulty value = 9 } }
+        add_years_of_income = -9.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = study_difficulty value = 9 }
+        }
+        
+        add_years_of_income = -10.0
+    }
+    else = {
+        hidden_effect = { set_variable = { which = study_difficulty value = 1 } }
+        add_years_of_income = -1.0
+    }
+        
+    hidden_effect = {
+        change_variable = { which = magical_study_progress value = 5 }
+        set_country_flag = magical_study_progress_var_exists
+        
+        # Cap at 100
+        if = {
+            limit = {
+                check_variable = {
+                    which = magical_study_progress
+                    value = 100.0
+                }
+            }
+            
+            set_variable = {
+                which = magical_study_progress
+                value = 100.0
+            }
+        } 
+    }
 }
 
 add_ruler_spellcasting = {
@@ -1150,4 +1270,52 @@ set_magic_school = {
             set_country_flag = ruler_learnt_magic_school_soul
         }
     ]
+    
+    hidden_effect = {
+        add_ruler_modifier = {
+            name = recently_changed_magic_specalization
+            duration = 10950
+            hidden = yes
+        }
+    }
+}
+
+take_magic_school_change_cost = {
+    add_years_of_income = -1.0
+    hidden_effect = {
+        clr_country_flag = gui_flag__magic_school_selection_open
+    }
+}
+
+take_aptitude_boost_cost = {
+    add_adm_power = -250
+}
+take_finesse_boost_cost = {
+    add_mil_power = -250
+}
+take_concentration_boost_cost = {
+    add_dip_power = -250
+}
+
+take_magical_study_cost = {
+    if = {
+        limit = {
+            OR = {
+                has_ruler_flag = mage_personality
+                has_ruler_flag = priest_personality
+                has_ruler_flag = warlock_personality
+                has_ruler_flag = druid_personality
+                has_reform = wwu_magic_free_magic
+            }
+        }
+        
+        add_adm_power = -20
+        add_dip_power = -20
+        add_mil_power = -20
+    }
+    else = {
+        add_adm_power = -100
+        add_dip_power = -100
+        add_mil_power = -100
+    }
 }

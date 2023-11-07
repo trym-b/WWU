@@ -1,13 +1,21 @@
 #-----------------------------------
 # On Actions
 #-----------------------------------
+# ROOT = Countr
 on_startup__magic = {
     reset_magical_study = yes
 }
 
+# ROOT = Countr
 on_country_creation__magic = { 
     reset_magical_study = yes
 }
+
+# ROOT = Country
+on_monarch_death__magic = {
+    reset_magical_study = yes
+}
+
 
 # ROOT = Country
 on_monthly_pulse__magic = {
@@ -124,7 +132,10 @@ on_monthly_pulse__magic = {
                 }
                 NOT = {
                     any_owned_province = {
-                        NOT = { culture = ROOT }
+                        OR = {
+                            NOT = { culture = ROOT }
+                            NOT = { religion = ROOT }
+                        }
                     }
                 }
             }
@@ -132,32 +143,11 @@ on_monthly_pulse__magic = {
         
         clr_country_flag = polymorph_active
     }
-    
-    # Mirror Image
-    if = {
-        limit = {
-            has_country_flag = mirror_image_active
-            OR = {
-                NOT = {
-                    check_variable = {
-                        which = mirror_image_count
-                        value = 1
-                    }
-                }
-                NOT = {
-                    any_owned_province = {
-                        NOT = { religion = ROOT }
-                    }
-                }
-            }
-        }
-        
-        clr_country_flag = mirror_image_active
-    }
 }
 
 # ROOT = Country
 on_yearly_pulse__magic = {
+    # 
 }
 
 # ROOT = Country
@@ -175,15 +165,15 @@ on_new_monarch__magic = {
         add_ruler_spellcasting = yes
         set_variable = {
             which = ruler_magic_aptitude
-            value = 2
+            value = 1
         }
         set_variable = {
             which = ruler_magic_finesse
-            value = 2
+            value = 1
         }
         set_variable = {
             which = ruler_magic_concentration
-            value = 2
+            value = 1
         }
     }
     
@@ -197,68 +187,17 @@ on_new_monarch__magic = {
         }
         
         add_ruler_spellcasting = yes
-        
-        country_event = { id = wwu_magic.80 }
-    
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_aptitude
-                    value = 3
-                }
-            }
+        set_variable = {
+            which = ruler_magic_aptitude
+            value = 1
         }
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_finesse
-                    value = 3
-                }
-            }
+        set_variable = {
+            which = ruler_magic_finesse
+            value = 1
         }
-        random_list = {
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 1
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 2
-                }
-            }
-            33 = {
-                set_variable = {
-                    which = ruler_magic_concentration
-                    value = 3
-                }
-            }
+        set_variable = {
+            which = ruler_magic_concentration
+            value = 1
         }
         
         # Adjustment: for countries that would have more powerful spellcasters by default
@@ -266,15 +205,15 @@ on_new_monarch__magic = {
             limit = {
                 has_government_attribute = enables_automatic_spellcasting_ruler_strong
             }
-            change_variable = {
+            set_variable = {
                 which = ruler_magic_aptitude
                 value = 2
             }
-            change_variable = {
+            set_variable = {
                 which = ruler_magic_finesse
                 value = 2
             }
-            change_variable = {
+            set_variable = {
                 which = ruler_magic_concentration
                 value = 2
             }
@@ -282,23 +221,3 @@ on_new_monarch__magic = {
     }
 }
 
-# ROOT = Country
-on_monarch_death__magic = {
-    reset_magical_study = yes
-}
-
-existing_school_cost = {
-    # Cost if school has already been set
-    if = {
-        limit = {
-            NOT = {
-                is_variable_equal = { 
-                    which = magic_school
-                    value = 0
-                }
-            }
-        }
-        
-        add_years_of_income = -3
-    }
-}

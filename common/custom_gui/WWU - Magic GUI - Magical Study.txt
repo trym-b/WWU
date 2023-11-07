@@ -1,0 +1,78 @@
+#--------------
+# Magic Study
+#--------------
+custom_text_box = {
+   name = magic_gui_study_title
+   potential = { 
+        has_magical_study_window_open = yes
+   }
+}
+
+# Start Study
+custom_button = {
+    name = magic_gui_start_magic_study
+   tooltip = MAGIC_STUDY_START_HOVER_TT
+    
+    potential = {
+        has_magical_study_window_open = yes
+        NOT = { has_ruler_modifier = magical_training }
+    }
+    
+    trigger = { 
+        has_magical_study_cost = yes
+    }
+    
+    effect = { 
+        take_magical_study_cost = yes
+        start_magical_study = yes
+    }
+}
+
+# Cancel Study
+custom_button = {
+    name = magic_gui_cancel_magic_study
+   tooltip = MAGIC_STUDY_CANCEL_HOVER_TT
+    
+    potential = {
+        has_magical_study_window_open = yes
+        has_ruler_modifier = magical_training
+    }
+    
+    trigger = { 
+        
+    }
+    
+    effect = { 
+        cancel_magical_study = yes
+    }
+}
+
+# Boost Study
+custom_button = {
+    name = magic_gui_boost_magic_study
+   tooltip = MAGIC_STUDY_BOOST_HOVER_TT
+    
+    potential = {
+        has_magical_study_window_open = yes
+        has_ruler_modifier = magical_training
+    }
+    
+    trigger = {     
+        has_not_completed_magical_study = yes
+        has_magical_study_gold_cost = yes
+    }
+    
+    effect = { 
+        boost_magical_study_action = yes
+    }
+}
+
+custom_text_box = {
+   name = magic_gui_study_progress_text
+   tooltip = STUDY_PROGRESS_HOVER_TT
+   
+   potential = { 
+        has_magical_study_window_open = yes
+   }
+}
+

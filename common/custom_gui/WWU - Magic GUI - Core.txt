@@ -1,0 +1,105 @@
+#----------------------------------------
+# Magic GUI
+#----------------------------------------
+#--------------
+# Court View
+#--------------
+# For rulers that can learn to be spellcasters
+custom_button = {
+    name = ruler_magic_study_button
+    tooltip = SPELLBOOK_MAGICAL_STUDY_HOVER_TT
+    
+    potential = {
+        NOT = { has_ruler_modifier = spellcaster_capabilities }
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = MAGIC_GUI_STUDY_NOT_OPEN_TT
+            NOT = { has_magical_study_window_open = yes }
+        }
+    }
+    
+    effect = { 
+        hidden_effect = {
+            set_country_flag = gui_flag__magic_study_gui_open
+            log = "[Root.GetName] -  ruler_magic_study_button"
+        }
+    }
+}
+
+# For rulers that are spellcasters
+custom_button = {
+    name = ruler_magic_usage_button
+    tooltip = SPELLBOOK_HOVER_TT
+    
+    potential = {
+        has_ruler_modifier = spellcaster_capabilities
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = MAGIC_GUI_USAGE_NOT_OPEN_TT
+            NOT = { has_spellbook_window_open = yes }
+        }
+    }
+    
+    effect = { 
+        hidden_effect = {
+            set_country_flag = gui_flag__magic_usage_gui_open
+            log = "[Root.GetName] -  ruler_magic_usage_button"
+        }
+    }
+}
+
+#--------------
+# Magic GUI Shared
+#--------------
+# Background
+custom_icon = {
+   name = magic_usage_view_background
+   potential = { 
+        has_spellbook_window_open = yes
+   }
+}
+
+# Background
+custom_icon = {
+   name = magic_study_view_background
+   potential = { 
+        has_magical_study_window_open = yes
+   }
+}
+
+# Background
+custom_icon = {
+   name = magic_school_selection_background
+   potential = { 
+        has_country_flag = gui_flag__magic_school_selection_open
+   }
+}
+
+# Back Button
+custom_button = {
+    name = magic_gui_back_button
+    
+    potential = {
+        OR = {
+            has_magical_study_window_open = yes
+            has_spellbook_window_open = yes
+        }
+    }
+    
+    trigger = { 
+        
+    }
+    
+    effect = { 
+        hidden_effect = {
+            clr_country_flag = gui_flag__magic_study_gui_open
+            clr_country_flag = gui_flag__magic_usage_gui_open
+            clr_country_flag = gui_flag__magic_school_selection_open
+        }
+    }
+}
+

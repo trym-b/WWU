@@ -73,7 +73,10 @@ country_event = {
             value = 1
         }
         any_owned_province = {
-            NOT = { culture = ROOT }
+            OR = {
+                NOT = { culture = ROOT }
+                NOT = { religion = ROOT }
+            }
             NOT = { has_province_modifier = polymorph_modifier }
         }
     }
@@ -82,7 +85,10 @@ country_event = {
         hidden_effect = {
             random_owned_province = {
                 limit = {
-                    NOT = { culture = ROOT }
+                    OR = {
+                        NOT = { culture = ROOT }
+                        NOT = { religion = ROOT }
+                    }
                 }
                 save_event_target_as = target_province
             }
@@ -103,78 +109,6 @@ country_event = {
         event_target:target_province = {
             add_province_modifier = {
                 name = polymorph_modifier
-                duration = 3650
-            }
-        }
-	}
-}
-
-# Mirror Image Begins
-country_event = {
-	id = wwu_magic_effect.20
-	title = wwu_magic_effect.20.title
-	desc = wwu_magic_effect.20.desc
-	picture = MIRROR_IMAGE_eventPicture
-    
-	is_triggered_only = yes
-
-    mean_time_to_happen = {
-		days = 1
-    }
-	
-	option = {
-		name = wwu_magic_effect.20.option.a
-		
-        custom_tooltip = MIRROR_IMAGE_BEGINS_TT
-	}
-}
-
-# Mirror Image in X
-country_event = {
-	id = wwu_magic_effect.21
-	title = wwu_magic_effect.21.title
-	desc = wwu_magic_effect.21.desc
-	picture = MIRROR_IMAGE_eventPicture
-    
-    is_triggered_only = yes
-    
-	trigger = {
-        has_country_flag = mirror_image_active
-        check_variable = {
-            which = mirror_image_count
-            value = 1
-        }
-        any_owned_province = {
-            NOT = { religion = ROOT }
-            NOT = { has_province_modifier = mirror_image_modifier }
-        }
-    }
-    
-    immediate = {
-        hidden_effect = {
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                save_event_target_as = target_province
-            }
-            subtract_variable = {
-                which = mirror_image_count
-                value = 1
-            }
-        }
-    }
-    
-    mean_time_to_happen = {
-		days = 1
-    }
-	
-	option = {
-		name = wwu_magic_effect.21.option.a
-		
-        event_target:target_province = {
-            add_province_modifier = {
-                name = mirror_image_modifier
                 duration = 3650
             }
         }
