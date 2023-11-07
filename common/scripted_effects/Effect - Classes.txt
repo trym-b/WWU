@@ -1,11 +1,389 @@
-increment_training = {
-    custom_tooltip = INCREMENT_TRAINING_TT
+#------------------------
+# On Actions
+#------------------------
+# ROOT = Countr
+on_startup__class = {
+    reset_class_study = yes
+}
+
+# ROOT = Countr
+on_country_creation__class = { 
+    reset_class_study = yes
+}
+
+# ROOT = Country
+on_monarch_death__class = {
+    reset_class_study = yes
+}
+
+# ROOT = Country
+on_monthly_pulse__class = {
+    # Make ruler the class they chosen if they have reached 100% study progress
+    if = {
+        limit = {
+            has_ruler_modifier = class_training
+            check_variable = {
+                which = class_study_progress
+                value = 100.0
+            }
+        }
+        
+        complete_class_study = yes
+        reset_class_study = yes
+        set_ruler_class = yes
+    }
+    
+    # Increment ruler study progress
+    if = {
+        limit = {
+            has_ruler_modifier = class_training
+            NOT = {
+                check_variable = {
+                    which = class_study_progress
+                    value = 100.0
+                }
+            }
+        }
+        
+        random_list = {
+            30 = { change_variable = { which = class_study_progress value = 0.1 } }
+            30 = { change_variable = { which = class_study_progress value = 0.2 } }
+            30 = { change_variable = { which = class_study_progress value = 0.3 } }
+            20 = { change_variable = { which = class_study_progress value = 0.4 } }
+            20 = { change_variable = { which = class_study_progress value = 0.5 } }
+            20 = { change_variable = { which = class_study_progress value = 0.6 } }
+            10 = { change_variable = { which = class_study_progress value = 0.7 } }
+            10 = { change_variable = { which = class_study_progress value = 0.8 } }
+            5 = { change_variable = { which = class_study_progress value = 0.9 } }
+            5 = { change_variable = { which = class_study_progress value = 1.0 } }
+        }
+        
+        set_country_flag = class_study_progress_var_exists
+        
+        # Cap at 100
+        if = {
+            limit = {
+                check_variable = {
+                    which = class_study_progress
+                    value = 100.0
+                }
+            }
+            
+            set_variable = {
+                which = class_study_progress
+                value = 100.0
+            }
+        }
+    }
+    
+    # Energy Regeneration
+    if = {
+        limit = {
+            OR = {
+                has_ruler_modifier = wisdom_of_the_warrior
+                has_ruler_modifier = wisdom_of_the_paladin
+                has_ruler_modifier = wisdom_of_the_priest
+                has_ruler_modifier = wisdom_of_the_rogue
+                has_ruler_modifier = wisdom_of_the_mage
+                has_ruler_modifier = wisdom_of_the_warlock
+                has_ruler_modifier = wisdom_of_the_druid
+                has_ruler_modifier = wisdom_of_the_hunter
+                has_ruler_modifier = wisdom_of_the_shaman
+                has_ruler_modifier = wisdom_of_the_death_knight
+                has_ruler_modifier = wisdom_of_the_monk
+                has_ruler_modifier = wisdom_of_the_demon_hunter
+            }
+        }
+        
+        random_list = {
+            95 = { }
+            5 = {
+                add_energy_1 = yes
+            }
+        }
+    }
+}
+
+# ROOT = Country
+on_new_monarch__class = {
+    
+}
+
+#------------------------
+# Skills
+#------------------------
+start_class_study = {
+    add_ruler_modifier = {
+        name = class_training
+        duration = -1
+    }
+    
+    hidden_effect = {
+        set_variable = {
+            which = class_study_progress
+            value = 0.0
+        }
+        set_country_flag = class_study_progress_var_exists
+    }
+}
+
+complete_class_study = {
+    remove_country_modifier = class_training
+    clr_country_flag = gui_flag__class_study_gui_open
+}
+
+cancel_class_study = {
+    remove_country_modifier = class_training
+    custom_tooltip = CLASS_STUDY_RESUME_TT
+    
+    hidden_effect = {
+        set_variable = { which = class_study_progress value = 0 }
+        set_variable = { which = class_study_difficulty value = 0 }
+        
+        clr_ruler_flag = training_as_warrior
+        clr_ruler_flag = training_as_paladin
+        clr_ruler_flag = training_as_priest
+        clr_ruler_flag = training_as_rogue
+        clr_ruler_flag = training_as_mage
+        clr_ruler_flag = training_as_warlock
+        clr_ruler_flag = training_as_druid
+        clr_ruler_flag = training_as_hunter
+        clr_ruler_flag = training_as_shaman
+        clr_ruler_flag = training_as_death_knight
+        clr_ruler_flag = training_as_monk
+        clr_ruler_flag = training_as_demon_hunter
+    }
+}
+
+reset_class_study = {
+    set_variable = { which = class_study_progress value = 0 }
+    set_variable = { which = class_study_difficulty value = 0 }
+}
+
+boost_class_study_action = {
+    custom_tooltip = BOOST_CLASS_STUDY_BY_5_TT
+        
+    if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 1 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 2 } }
+        add_years_of_income = -2.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 2 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 3 } }
+        add_years_of_income = -3.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 3 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 4 } }
+        add_years_of_income = -4.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 4 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 5 } }
+        add_years_of_income = -5.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 5 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 6 } }
+        add_years_of_income = -6.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 6 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 7 } }
+        add_years_of_income = -7.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 7 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 8 } }
+        add_years_of_income = -8.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 8 }
+        }
+        
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 9 } }
+        add_years_of_income = -9.0
+    }
+    else_if = {
+        limit = {
+            is_variable_equal = { which = class_study_difficulty value = 9 }
+        }
+        
+        add_years_of_income = -10.0
+    }
+    else = {
+        hidden_effect = { set_variable = { which = class_study_difficulty value = 1 } }
+        add_years_of_income = -1.0
+    }
+        
+    hidden_effect = {
+        change_variable = { which = class_study_progress value = 5 }
+        set_country_flag = class_study_progress_var_exists
+        
+        # Cap at 100
+        if = {
+            limit = {
+                check_variable = {
+                    which = class_study_progress
+                    value = 100.0
+                }
+            }
+            
+            set_variable = {
+                which = class_study_progress
+                value = 100.0
+            }
+        } 
+    }
+}
+
+take_class_study_cost = {
+    if = {
+        limit = {
+            has_idea = wwu_administrative_ideas_7
+        }
+        # None
+    }
+    else = {
+        add_adm_power = -100
+        add_dip_power = -100
+        add_mil_power = -100
+    }
+}
+
+boost_class_study = {
+    custom_tooltip = BOOST_CLASS_STUDY_BY_5_TT
     
     hidden_effect = {
         change_variable = {
-            which = ruler_training_progress
-            value = 1
+            which = class_study_progress
+            value = 5
         }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = class_study_progress
+                    value = 100.0
+                }
+            }
+            
+            set_variable = {
+                which = class_study_progress
+                value = 100.0
+            }
+        }
+    }
+}
+
+set_ruler_class = {
+    # assign ruler class based on initial selection
+    if = {
+        limit = {
+            has_ruler_flag = training_as_warrior
+        }
+        
+        trained_as_warrior = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_paladin
+        }
+        
+        trained_as_paladin = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_priest 
+        }
+        
+        trained_as_priest = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_rogue
+        }
+        
+        trained_as_rogue = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_mage 
+        }
+        
+        trained_as_mage = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_warlock
+        }
+        
+        trained_as_warlock = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_druid 
+        }
+        
+        trained_as_druid = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_hunter 
+        }
+        
+        trained_as_hunter = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_shaman
+        }
+        
+        trained_as_shaman = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_death_knight
+        }
+        
+        trained_as_death_knight = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_monk 
+        }
+        
+        trained_as_monk = yes
+    }
+    if = {
+        limit = {
+            has_ruler_flag = training_as_demon_hunter
+        }
+        
+        trained_as_demon_hunter = yes
     }
 }
 
@@ -353,5 +731,26 @@ trained_as_demon_hunter = {
     hidden_effect = { 
         set_ruler_flag = demon_hunter_personality 
         set_country_flag = demon_hunter_personality_education
+    }
+}
+
+add_energy_1 = {
+    custom_tooltip = ENERGY_GAIN_1
+    
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = {
+                    check_variable = {
+                         which = ruler_energy
+                         value = 5
+                    }
+                }
+            }
+            change_variable = {
+                which = ruler_energy
+                value = 1
+            }   
+        }
     }
 }
