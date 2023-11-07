@@ -1,0 +1,50 @@
+#----------------------------------------
+# Custom GUI - For non-specific elements
+#----------------------------------------
+#--------------
+# Court View
+#--------------
+# Ruler Info Toggle
+custom_button = {
+    name = ruler_information_panel_button
+    tooltip = RULER_INFO_TOGGLE_HOVER_TT
+    
+    potential = {
+        always = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        hidden_effect = {
+            if = {
+                limit = {
+                    NOT = { has_country_flag = gui_flag__court_view_ruler_information_panel_open }
+                }
+                set_country_flag = gui_flag__court_view_ruler_information_panel_open
+            }
+            else = {
+                clr_country_flag = gui_flag__court_view_ruler_information_panel_open
+            }
+        }
+    }
+}
+
+# Background
+custom_icon = {
+   name = ruler_information_panel_background
+   potential = { 
+        has_country_flag = gui_flag__court_view_ruler_information_panel_open
+   }
+}
+# Background
+custom_text_box = {
+   name = ruler_portrait
+   tooltip = RULER_PORTRAIT_HOVER_TT
+   potential = { 
+        has_country_flag = gui_flag__court_view_ruler_information_panel_open
+   }
+}
+
