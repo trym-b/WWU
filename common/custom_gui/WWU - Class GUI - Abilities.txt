@@ -287,12 +287,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_warrior_unrelenting_assault }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_warrior_unrelenting_assault
             duration = 3650
@@ -333,12 +333,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_warrior_battle_shout }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_warrior_battle_shout
             duration = 3650
@@ -380,12 +380,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_paladin_long_arm_of_the_law }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_paladin_long_arm_of_the_law
             duration = 3650
@@ -427,15 +427,28 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_priest_binding_prayers }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_priest_binding_prayers
             duration = 3650
+        }
+        
+        custom_tooltip = BINDING_PRAYERS_TT
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    religion = ROOT
+                }
+                add_province_modifier = {
+                    name = class_ability_priest_binding_prayers_prov
+                    duration = 3650
+                }
+            }
         }
     }
 }
@@ -450,12 +463,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_priest_evangelism }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_priest_evangelism
             duration = 3650
@@ -497,12 +510,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_rogue_combat_expertise }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_rogue_combat_expertise
             duration = 3650
@@ -520,15 +533,28 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_rogue_preparation }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_rogue_preparation
             duration = 3650
+        }
+        
+        custom_tooltip = PREPARATION_ABILITY_TT
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = ROOT
+                }
+                add_province_modifier = {
+                    name = class_ability_rogue_preparation_prov
+                    duration = 3650
+                }
+            }
         }
     }
 }
@@ -543,12 +569,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_rogue_master_of_subtlety }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_rogue_master_of_subtlety
             duration = 3650
@@ -637,12 +663,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_warlock_fire_and_brimstone }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_warlock_fire_and_brimstone
             duration = 3650
@@ -660,15 +686,36 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_warlock_jinx }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_warlock_jinx
             duration = 3650
+        }
+        
+        if = {
+            limit = {
+                is_at_war = yes
+            }
+            custom_tooltip = JINX_EFFECT_TT
+        
+            hidden_effect = {
+                every_war_enemy_country = {
+                    every_owned_province = {
+                        add_province_modifier = {
+                            name = class_ability_warlock_jinx_prov
+                            duration = 3650
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            custom_tooltip = JINX_EFFECT_PEACE_TT
         }
     }
 }
@@ -707,12 +754,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_druid_flourish }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_druid_flourish
             duration = 3650
@@ -730,12 +777,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_druid_natural_perfection }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_druid_natural_perfection
             duration = 3650
@@ -753,12 +800,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_druid_eclipse }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_druid_eclipse
             duration = 3650
@@ -777,12 +824,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_hunter_efficiency }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_hunter_efficiency
             duration = 3650
@@ -800,12 +847,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_hunter_master_tactitian }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_hunter_master_tactitian
             duration = 3650
@@ -847,12 +894,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_shaman_elemental_oath }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_shaman_elemental_oath
             duration = 3650
@@ -870,12 +917,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_shaman_echo_of_the_elements }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_shaman_echo_of_the_elements
             duration = 3650
@@ -893,12 +940,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_shaman_astral_shift }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_shaman_astral_shift
             duration = 3650
@@ -917,12 +964,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_death_knight_necrotic_aura }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_death_knight_necrotic_aura
             duration = 3650
@@ -950,6 +997,22 @@ custom_button = {
             name = class_ability_death_knight_death_siphon
             duration = 3650
         }
+        
+        if = {
+            limit = {
+                is_at_war = yes
+            }
+            
+            every_war_enemy_country = {
+                add_ruler_modifier = {
+                    name = class_ability_death_knight_death_siphon_enemy
+                    duration = 3650
+                }
+            }
+        }
+        else = {
+            custom_tooltip = DEATH_SIPHON_PEACE_TT
+        }
     }
 }
 # Death Knight - Icy Grip
@@ -973,6 +1036,19 @@ custom_button = {
             name = class_ability_death_knight_icy_grip
             duration = 3650
         }
+        
+        custom_tooltip = ICY_GRIP_TT
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = ROOT
+                }
+                add_province_modifier = {
+                    name = class_ability_death_knight_icy_grip_prov
+                    duration = 3650
+                }
+            }
+        }
     }
 }
 
@@ -987,12 +1063,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_monk_guard }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_monk_guard
             duration = 3650
@@ -1033,12 +1109,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_monk_ironskin_brew }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_monk_ironskin_brew
             duration = 3650
@@ -1057,15 +1133,28 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_4 = yes
         NOT = { has_ruler_modifier = class_ability_demon_hunter_demon_spikes }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_4 = yes
         add_ruler_modifier = {
             name = class_ability_demon_hunter_demon_spikes
             duration = 3650
+        }
+        
+        custom_tooltip = DEMON_SPIKES_TT
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = ROOT
+                }
+                add_province_modifier = {
+                    name = class_ability_demon_hunter_demon_spikes_prov
+                    duration = 3650
+                }
+            }
         }
     }
 }
@@ -1103,12 +1192,12 @@ custom_button = {
     }
     
     trigger = { 
-        has_energy_5 = yes
+        has_energy_3 = yes
         NOT = { has_ruler_modifier = class_ability_demon_hunter_spectral_sight }
     }
     
     effect = { 
-        lose_energy_5 = yes
+        lose_energy_3 = yes
         add_ruler_modifier = {
             name = class_ability_demon_hunter_spectral_sight
             duration = 3650
