@@ -3,17 +3,91 @@
 #-----------------------------------
 # ROOT = Country
 on_yearly_pulse__ai = {
-    # Magical Study
-    # TODO
-    
-    # Spellbook
-    # TODO
-    
-    # Class Study
-    # TODO
-    
-    # Class Abilities
-    # TODO
+    if = {
+        limit = {
+            ai = yes
+        }
+        
+        # Magical Study
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__magical_study_timer }
+            }
+            
+            country_event = { id = wwu_ai_handler.1 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__magical_study_timer }
+        }
+        
+        # Spellbook - Status
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__spellbook_status_timer }
+            }
+            
+            country_event = { id = wwu_ai_handler.2 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__spellbook_status_timer }
+        }
+        
+        # Spellbook - Spells
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__spellbook_spell_timer }
+            }
+            
+            country_event = { id = wwu_ai_handler.3 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__spellbook_spell_timer }
+        }
+        
+        # Class Study
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__class_study_timer }
+            }
+            
+            country_event = { id = wwu_ai_handler.10 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__class_study_timer }
+        }
+        
+        # Class Abilities
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__class_abilities_timer }
+            }
+            
+            country_event = { id = wwu_ai_handler.11 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__class_abilities_timer }
+        }
+        
+        # Doctrines
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__doctrines_timer }
+            }
+            
+            # country_event = { id = wwu_ai_handler.20 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__doctrines_timer }
+        }
+        
+        # Artifacts
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__artifacts_timer }
+            }
+            
+            # country_event = { id = wwu_ai_handler.30 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__artifacts_timer }
+        }
+        
+        # Faction Menu
+        if = {
+            limit = {
+                NOT = { has_country_modifier = ai_handler__faction_menu_timer }
+            }
+            
+            # country_event = { id = wwu_ai_handler.40 }
+            set_random_ai_handler_timer = { MODIFIER = ai_handler__faction_menu_timer }
+        }
+    }
 }
 
 # ROOT = Country
@@ -22,11 +96,7 @@ on_five_year_pulse_4__ai = {
         limit = {
             ai = yes
         }
-        random_list = {
-            33 = { set_country_flag = ai_can_use_ruler_view }
-            66 = { }
-        }
-    
+        
         # White Peace a extradimension war if it has lasted too long
         if = {
             limit = {
@@ -69,95 +139,27 @@ init_default_ai_cooldowns = {
             ai = yes
         }
         
-        random_list = {
-            25 = {
-                add_country_modifier = {
-                    name = ai_ruler_compendium_cooldown
-                    duration = 3650
-                }
-                add_country_modifier = {
-                    name = ai_realm_compendium_cooldown
-                    duration = 3650
-                }
-                add_country_modifier = {
-                    name = ai_faction_compendium_cooldown
-                    duration = 3650
-                }
-                add_country_modifier = {
-                    name = recent_repository_view
-                    duration = 3650
-                }
-                add_country_modifier = {
-                    name = doctrine_ai_cooldown
-                    duration = 3650
-                }
-            }
-            25 = {
-                add_country_modifier = {
-                    name = ai_ruler_compendium_cooldown
-                    duration = 7300
-                }
-                add_country_modifier = {
-                    name = ai_realm_compendium_cooldown
-                    duration = 7300
-                }
-                add_country_modifier = {
-                    name = ai_faction_compendium_cooldown
-                    duration = 7300
-                }
-                add_country_modifier = {
-                    name = recent_repository_view
-                    duration = 7300
-                }
-                add_country_modifier = {
-                    name = doctrine_ai_cooldown
-                    duration = 7300
-                }
-            }
-            25 = {
-                add_country_modifier = {
-                    name = ai_ruler_compendium_cooldown
-                    duration = 10950
-                }
-                add_country_modifier = {
-                    name = ai_realm_compendium_cooldown
-                    duration = 10950
-                }
-                add_country_modifier = {
-                    name = ai_faction_compendium_cooldown
-                    duration = 10950
-                }
-                add_country_modifier = {
-                    name = recent_repository_view
-                    duration = 10950
-                }
-                add_country_modifier = {
-                    name = doctrine_ai_cooldown
-                    duration = 10950
-                }
-            }
-            25 = {
-                add_country_modifier = {
-                    name = ai_ruler_compendium_cooldown
-                    duration = 1825
-                }
-                add_country_modifier = {
-                    name = ai_realm_compendium_cooldown
-                    duration = 1825
-                }
-                add_country_modifier = {
-                    name = ai_faction_compendium_cooldown
-                    duration = 1825
-                }
-                add_country_modifier = {
-                    name = recent_repository_view
-                    duration = 1825
-                }
-                add_country_modifier = {
-                    name = doctrine_ai_cooldown
-                    duration = 1825
-                }
-            }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__magical_study_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__spellbook_status_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__spellbook_spell_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__class_study_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__class_abilities_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__doctrines_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__artifacts_timer }
+        set_random_ai_handler_timer = { MODIFIER = ai_handler__faction_menu_timer }
+    }
+}
+
+set_random_ai_handler_timer = {
+    random_list = {
+            25 = { add_country_modifier = { name = $MODIFIER$ duration =  365 } # 1 year
+            25 = { add_country_modifier = { name = $MODIFIER$ duration =  730 } # 2 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1095 } # 3 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1460 } # 4 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1825 } # 5 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2190 } # 6 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2555 } # 7 years
+            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2920 } # 8 years
         }
     }
 }

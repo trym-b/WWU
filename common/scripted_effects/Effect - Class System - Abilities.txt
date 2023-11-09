@@ -1,0 +1,569 @@
+#------------------------
+# General
+#------------------------
+lose_scaled_energy_cost = {
+    lose_energy_$BASE$ = yes
+}
+
+add_ability_modifier = {
+    add_ruler_modifier = {
+        name = class_ability_$CLASS$_$MODIFIER$
+        duration = 3650
+    }
+}
+
+#------------------------
+# Warrior
+#------------------------
+# Unrelenting Assault
+ability_effect__warrior_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = warrior
+        MODIFIER = unrelenting_assault
+    }
+}
+
+# Second Wind
+ability_effect__warrior_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = warrior
+        MODIFIER = second_wind
+    }
+}
+
+# Battle Shout
+ability_effect__warrior_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = warrior
+        MODIFIER = battle_shout
+    }
+}
+
+#------------------------
+# Paladin
+#------------------------
+# Blade of Justice
+ability_effect__paladin_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = paladin
+        MODIFIER = blade_of_justice
+    }
+}
+
+# Long Arm of the Law
+ability_effect__paladin_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = paladin
+        MODIFIER = long_arm_of_the_law
+    }
+}
+
+# Sanctified Wrath
+ability_effect__paladin_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = paladin
+        MODIFIER = sanctified_wrath
+    }
+}
+
+#------------------------
+# Priest
+#------------------------
+# Binding Prayers
+ability_effect__priest_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = priest
+        MODIFIER = binding_prayers
+    }
+    custom_tooltip = BINDING_PRAYERS_TT
+    hidden_effect = {
+        every_owned_province = {
+            limit = {
+                religion = ROOT
+            }
+            add_province_modifier = {
+                name = class_ability_priest_binding_prayers_prov
+                duration = 3650
+            }
+        }
+    }
+}
+
+# Evangelism
+ability_effect__priest_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = priest
+        MODIFIER = evangelism
+    }
+}
+
+# Heavenly Voice
+ability_effect__priest_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = priest
+        MODIFIER = heavenly_voice
+    }
+}
+
+#------------------------
+# Rogue
+#------------------------
+# Combat Expertise
+ability_effect__rogue_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = rogue
+        MODIFIER = combat_expertise
+    }
+}
+
+# Preparation
+ability_effect__rogue_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = rogue
+        MODIFIER = preparation
+    }
+    
+    custom_tooltip = PREPARATION_ABILITY_TT
+    hidden_effect = {
+        every_owned_province = {
+            limit = {
+                culture = ROOT
+            }
+            add_province_modifier = {
+                name = class_ability_rogue_preparation_prov
+                duration = 3650
+            }
+        }
+    }
+}
+
+# Master of Subtlety
+ability_effect__rogue_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = rogue
+        MODIFIER = master_of_subtlety
+    }
+}
+
+#------------------------
+# Mage
+#------------------------
+# Time Warp
+ability_effect__mage_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = mage
+        MODIFIER = time_warp
+    }
+}
+
+# Focusing Crystal
+ability_effect__mage_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = mage
+        MODIFIER = focusing_crystal
+    }
+}
+
+# Rune of Power
+ability_effect__mage_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = mage
+        MODIFIER = rune_of_power
+    }
+}
+
+#------------------------
+# Warlock
+#------------------------
+# Fire and Brimstone
+ability_effect__warlock_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = warlock
+        MODIFIER = fire_and_brimstone
+    }
+}
+
+# Jinx
+ability_effect__warlock_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = warlock
+        MODIFIER = jinx
+    }
+    
+    if = {
+        limit = {
+            is_at_war = yes
+        }
+        custom_tooltip = JINX_EFFECT_TT
+    
+        hidden_effect = {
+            every_war_enemy_country = {
+                every_owned_province = {
+                    add_province_modifier = {
+                        name = class_ability_warlock_jinx_prov
+                        duration = 3650
+                    }
+                }
+            }
+        }
+    }
+    else = {
+        custom_tooltip = JINX_EFFECT_PEACE_TT
+    }
+}
+
+# Grimoire of Command
+ability_effect__warlock_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = warlock
+        MODIFIER = grimoire_of_command
+    }
+}
+
+#------------------------
+# Druid
+#------------------------
+# Flourish
+ability_effect__druid_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = druid
+        MODIFIER = flourish
+    }
+}
+
+# Natural Perfection
+ability_effect__druid_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = druid
+        MODIFIER = natural_perfection
+    }
+}
+
+# Eclipse
+ability_effect__druid_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = druid
+        MODIFIER = eclipse
+    }
+}
+
+#------------------------
+# Hunter
+#------------------------
+# Efficiency
+ability_effect__hunter_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = hunter
+        MODIFIER = efficiency
+    }
+}
+
+# Master Tactitian
+ability_effect__hunter_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = hunter
+        MODIFIER = master_tactitian
+    }
+}
+
+# Camouflage
+ability_effect__hunter_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = hunter
+        MODIFIER = camouflage
+    }
+}
+
+#------------------------
+# Shaman
+#------------------------
+# Elemental Oath
+ability_effect__shaman_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = shaman
+        MODIFIER = elemental_oath
+    }
+}
+
+# Echo of the Elements
+ability_effect__shaman_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = shaman
+        MODIFIER = echo_of_the_elements
+    }
+}
+
+# Astral Shift
+ability_effect__shaman_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = shaman
+        MODIFIER = astral_shift
+    }
+}
+
+#------------------------
+# Death Knight
+#------------------------
+# Necrotic Aura
+ability_effect__death_knight_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = death_knight
+        MODIFIER = necrotic_aura
+    }
+}
+
+# Death Siphon
+ability_effect__death_knight_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = death_knight
+        MODIFIER = death_siphon
+    }
+    
+    if = {
+        limit = {
+            is_at_war = yes
+        }
+        
+        every_war_enemy_country = {
+            add_ruler_modifier = {
+                name = class_ability_death_knight_death_siphon_enemy
+                duration = 3650
+            }
+        }
+    }
+    else = {
+        custom_tooltip = DEATH_SIPHON_PEACE_TT
+    }
+}
+
+# Icy Grip
+ability_effect__death_knight_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = death_knight
+        MODIFIER = icy_grip
+    }
+    
+    custom_tooltip = ICY_GRIP_TT
+    hidden_effect = {
+        every_owned_province = {
+            limit = {
+                culture = ROOT
+            }
+            add_province_modifier = {
+                name = class_ability_death_knight_icy_grip_prov
+                duration = 3650
+            }
+        }
+    }
+}
+
+#------------------------
+# Monk
+#------------------------
+# Guard
+ability_effect__monk_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = monk
+        MODIFIER = guard
+    }
+}
+
+# Power Strikes
+ability_effect__monk_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = monk
+        MODIFIER = power_strikes
+    }
+}
+
+# Ironskin Brew
+ability_effect__monk_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = monk
+        MODIFIER = ironskin_brew
+    }
+}
+
+#------------------------
+# Demon Hunter
+#------------------------
+# Demon Spikes
+ability_effect__demon_hunter_1 = {
+    lose_scaled_energy_cost = { 
+        BASE = 4
+    }
+    
+    add_ability_modifier = {
+        CLASS = demon_hunter
+        MODIFIER = demon_spikes
+    }
+    
+    custom_tooltip = DEMON_SPIKES_TT
+    hidden_effect = {
+        every_owned_province = {
+            limit = {
+                culture = ROOT
+            }
+            add_province_modifier = {
+                name = class_ability_demon_hunter_demon_spikes_prov
+                duration = 3650
+            }
+        }
+    }
+}
+
+# Soul Cleave
+ability_effect__demon_hunter_2 = {
+    lose_scaled_energy_cost = { 
+        BASE = 5
+    }
+    
+    add_ability_modifier = {
+        CLASS = demon_hunter
+        MODIFIER = soul_cleave
+    }
+}
+
+# Spectral Sight
+ability_effect__demon_hunter_3 = {
+    lose_scaled_energy_cost = { 
+        BASE = 3
+    }
+    
+    add_ability_modifier = {
+        CLASS = demon_hunter
+        MODIFIER = spectral_sight
+    }
+}

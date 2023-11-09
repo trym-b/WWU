@@ -1,0 +1,1087 @@
+#------------------------
+# Spell Triggers
+#------------------------
+has_scaled_spell_modifier = {
+    OR = {
+        has_country_modifier = $MODIFIER$_poor
+        has_country_modifier = $MODIFIER$_common
+        has_country_modifier = $MODIFIER$_rare
+        has_country_modifier = $MODIFIER$_epic
+        has_country_modifier = $MODIFIER$_legendary
+    }
+}
+
+has_scaled_mana_cost = {
+    if = {
+        limit = {
+            has_legendary_aptitude = yes
+        }
+        
+        has_mana_$LEGENDARY$ = yes
+    }
+    else_if = {
+        limit = {
+            has_epic_aptitude = yes
+        }
+        has_mana_$EPIC$ = yes
+    }
+    else_if = {
+        limit = {
+            has_rare_aptitude = yes
+        }
+        has_mana_$RARE$ = yes
+    }
+    else_if = {
+        limit = {
+            has_common_aptitude = yes
+        }
+        has_mana_$COMMON$ = yes
+    }
+    else = {
+        has_mana_$BASE$ = yes
+    }
+}
+
+#------------------------
+# Generic Spells
+#------------------------
+# All spell triggers are to be defined here with "spell_trigger__<name>" as the key.
+# This is to prevent code duplication since both the Magic GUI and the AI Handler event need to be in sync.
+
+# Conjure Gold
+spell_trigger__conjure_gold = {
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Inspire Glory
+spell_trigger__inspire_glory = {
+    NOT = { prestige = 100 }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 1
+        EPIC = 2
+        RARE = 2
+        COMMON = 3
+        BASE = 3
+    }
+}
+
+# Purge Opponents
+spell_trigger__purge_opponents = {
+    NOT = { corruption = 100 }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 3
+        EPIC = 4
+        RARE = 4
+        COMMON = 5
+        BASE = 5
+    }
+}
+
+# Emit Splendiferous Show
+spell_trigger__emit_splendiferous_show = {
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Arouse Support
+spell_trigger__arouse_support = {
+    if = {
+        limit = {
+            government = monarchy
+        }
+        
+        NOT = { legitimacy = 100 }
+    }
+    if = {
+        limit = {
+            government = republic
+        }
+        
+        NOT = { republican_tradition = 100 }
+    }
+    if = {
+        limit = {
+            uses_devotion = yes
+        }
+        
+        NOT = { devotion = 100 }
+    }
+    if = {
+        limit = {
+            uses_horde_unity = yes
+        }
+        
+        NOT = { horde_unity = 100 }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Soothe Population
+spell_trigger__soothe_population = {
+    NOT = { stability = 3 }
+    has_scaled_mana_cost = { 
+        LEGENDARY = 3
+        EPIC = 4
+        RARE = 4
+        COMMON = 5
+        BASE = 5
+    }
+}
+
+# Quell Fear
+spell_trigger__quell_fear = {
+    war_exhaustion = 0.01
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Rally Soldiers
+spell_trigger__rally_soldiers = {
+    NOT = { manpower_percentage = 1.0 }
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Rally Sailors
+spell_trigger__rally_sailors = {
+    NOT = { sailors_percentage = 1.0 }
+    has_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
+    }
+}
+
+# Galvinize Creativity
+spell_trigger__galvinize_creativity = {
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Arcane Spells
+#------------------------
+# Polymorph
+spell_trigger__polymorph = {
+    any_owned_province = {
+        OR = {
+            NOT = { culture = ROOT }
+            NOT = { religion = ROOT }
+        }
+    }
+        
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Presence of Mind
+spell_trigger__presence_of_mind = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+# Touch of the Magi
+spell_trigger__touch_of_the_magi = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = touch_of_the_magi
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Alter Time
+spell_trigger__alter_time = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = alter_time
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Holy Spells
+#------------------------
+# Judgment
+spell_trigger__judgment = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+# Divine Tempest
+spell_trigger__divine_tempest = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = divine_tempest
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Fortifying Aura
+spell_trigger__fortifying_aura = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = fortifying_aura
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Avatar of the Light
+spell_trigger__avatar_of_the_light = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+#------------------------
+# Chi Spells
+#------------------------
+# Ring of Peace
+spell_trigger__ring_of_peace = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+# Renewing Mists
+spell_trigger__renewing_mist = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = renewing_mist
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Secret Infusion
+spell_trigger__secret_infusion = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = secret_infusion
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Mists of Wisdom
+spell_trigger__mists_of_wisdom = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 8
+        EPIC = 9
+        RARE = 9
+        COMMON = 10
+        BASE = 10
+    }
+}
+
+#------------------------
+# Voodoo Spells
+#------------------------
+# Mass Hex
+spell_trigger__mass_hex = {
+    any_owned_province = {
+        NOT = { religion = ROOT }
+    }
+        
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+# Zombify
+spell_trigger__zombify = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = zombify
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+# Healing Wave
+spell_trigger__healing_wave = {   
+    NOT = {
+        has_scaled_spell_modifier = {
+            MODIFIER = healing_wave
+        }
+    }
+    
+    has_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+}
+
+# Big Bad Voodoo
+spell_trigger__big_bad_voodoo = {
+    any_owned_province = {
+        NOT = { is_core = ROOT }
+    }
+        
+    has_scaled_mana_cost = { 
+        LEGENDARY = 8
+        EPIC = 9
+        RARE = 9
+        COMMON = 10
+        BASE = 10
+    }
+}
+
+#------------------------
+# Nature Spells
+#------------------------
+spell_trigger__nature_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nature_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nature_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nature_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Necromancy Spells
+#------------------------
+spell_trigger__necromancy_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__necromancy_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__necromancy_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__necromancy_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Shamanism Spells
+#------------------------
+spell_trigger__shamanism_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shamanism_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shamanism_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shamanism_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Fel Spells
+#------------------------
+spell_trigger__fel_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fel_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fel_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fel_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Draconic Spells
+#------------------------
+spell_trigger__draconic_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__draconic_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__draconic_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__draconic_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Corruption Spells
+#------------------------
+spell_trigger__corruption_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__corruption_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__corruption_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__corruption_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Shadow Spells
+#------------------------
+spell_trigger__shadow_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shadow_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shadow_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__shadow_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Titanic Spells
+#------------------------
+spell_trigger__titanic_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__titanic_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__titanic_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__titanic_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Runic Spells
+#------------------------
+spell_trigger__runic_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__runic_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__runic_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__runic_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Nightmare Spells
+#------------------------
+spell_trigger__nightmare_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nightmare_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nightmare_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__nightmare_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Earth Spells
+#------------------------
+spell_trigger__earth_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__earth_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__earth_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__earth_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Fire Spells
+#------------------------
+spell_trigger__fire_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fire_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fire_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__fire_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Water Spells
+#------------------------
+spell_trigger__water_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__water_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__water_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__water_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Wind Spells
+#------------------------
+spell_trigger__wind_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__wind_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__wind_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__wind_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Domination Spells
+#------------------------
+spell_trigger__domination_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__domination_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__domination_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__domination_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+
+#------------------------
+# Soul Spells
+#------------------------
+spell_trigger__soul_spell_1 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__soul_spell_2 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__soul_spell_3 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}
+spell_trigger__soul_spell_4 = {   
+    has_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
+}

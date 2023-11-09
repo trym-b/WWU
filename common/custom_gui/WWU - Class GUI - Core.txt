@@ -10,32 +10,19 @@ custom_button = {
     tooltip = RULER_CLASS_HOVER_TT
     
     potential = {
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
-        NOT = { has_ruler_modifier = wisdom_of_the_warrior }
-        NOT = { has_ruler_modifier = wisdom_of_the_paladin }
-        NOT = { has_ruler_modifier = wisdom_of_the_priest }
-        NOT = { has_ruler_modifier = wisdom_of_the_rogue }
-        NOT = { has_ruler_modifier = wisdom_of_the_mage }
-        NOT = { has_ruler_modifier = wisdom_of_the_warlock }
-        NOT = { has_ruler_modifier = wisdom_of_the_druid }
-        NOT = { has_ruler_modifier = wisdom_of_the_hunter }
-        NOT = { has_ruler_modifier = wisdom_of_the_shaman }
-        NOT = { has_ruler_modifier = wisdom_of_the_death_knight }
-        NOT = { has_ruler_modifier = wisdom_of_the_monk }
-        NOT = { has_ruler_modifier = wisdom_of_the_demon_hunter }
+        is_ruler_information_panel_open = yes
+        ruler_has_no_class_modifier = yes
     }
     
     trigger = { 
         custom_trigger_tooltip = {
             tooltip = CLASS_GUI_NOT_OPEN_TT
-            NOT = { has_class_study_window_open = yes }
+            NOT = { is_class_study_gui_open = yes }
         }
     }
     
     effect = { 
-        hidden_effect = {
-            set_country_flag = gui_flag__class_study_gui_open
-        }
+        open_class_study_gui = yes
     }
 }
 # For rulers that have a class
@@ -44,34 +31,19 @@ custom_button = {
     tooltip = RULER_CLASS_ABILITIES_HOVER_TT
     
     potential = {
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
-        OR = {
-            has_ruler_modifier = wisdom_of_the_warrior
-            has_ruler_modifier = wisdom_of_the_paladin
-            has_ruler_modifier = wisdom_of_the_priest
-            has_ruler_modifier = wisdom_of_the_rogue
-            has_ruler_modifier = wisdom_of_the_mage
-            has_ruler_modifier = wisdom_of_the_warlock
-            has_ruler_modifier = wisdom_of_the_druid
-            has_ruler_modifier = wisdom_of_the_hunter
-            has_ruler_modifier = wisdom_of_the_shaman
-            has_ruler_modifier = wisdom_of_the_death_knight
-            has_ruler_modifier = wisdom_of_the_monk
-            has_ruler_modifier = wisdom_of_the_demon_hunter
-        }
+        is_ruler_information_panel_open = yes
+        ruler_has_any_class_modifier = yes
     }
     
     trigger = { 
         custom_trigger_tooltip = {
             tooltip = CLASS_ABILITIES_NOT_OPEN_TT
-            NOT = { has_class_abilities_window_open = yes }
+            NOT = { is_class_abilities_gui_open = yes }
         }
     }
     
     effect = { 
-        hidden_effect = {
-            set_country_flag = gui_flag__class_abilities_gui_open
-        }
+        open_class_abilities_gui = yes
     }
 }
 
@@ -84,8 +56,8 @@ custom_button = {
     
     potential = {
         OR = {
-            has_country_flag = gui_flag__class_study_gui_open
-            has_country_flag = gui_flag__class_abilities_gui_open
+            is_class_study_gui_open = yes
+            is_class_abilities_gui_open = yes
         }
     }
     
@@ -94,10 +66,8 @@ custom_button = {
     }
     
     effect = { 
-        hidden_effect = {
-            clr_country_flag = gui_flag__class_study_gui_open
-            clr_country_flag = gui_flag__class_abilities_gui_open
-        }
+        close_class_study_gui = yes
+        close_class_abilities_gui = yes
     }
 }
 
@@ -107,8 +77,8 @@ custom_button = {
     
     potential = {
         OR = {
-            has_country_flag = gui_flag__class_study_gui_open
-            has_country_flag = gui_flag__class_abilities_gui_open
+            is_class_study_gui_open = yes
+            is_class_abilities_gui_open = yes
         }
     }
     
@@ -117,11 +87,9 @@ custom_button = {
     }
     
     effect = { 
-        hidden_effect = {
-            clr_country_flag = gui_flag__class_study_gui_open
-            clr_country_flag = gui_flag__class_abilities_gui_open
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        close_class_study_gui = yes
+        close_class_abilities_gui = yes
+        close_class_selection_panel = yes
     }
 }
 

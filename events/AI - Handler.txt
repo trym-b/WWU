@@ -1,0 +1,2915 @@
+namespace = wwu_ai_handler
+
+#----------------------------
+# Summary
+#----------------------------
+# These events mirror the Custom GUI features in terms of explicit actions.
+# Presentation relevant elements are not included since this is purely for the AI.
+# These events can occur every 1/2/3/4 years, depending on the random ai_handler_<feature>_timer duration set.
+
+#----------------------------
+# Magical Study
+#----------------------------
+# This emulates the Magical Study GUI feature for the AI.
+country_event = {
+	id = wwu_ai_handler.1
+	title = wwu_ai_handler.1.title
+	desc = wwu_ai_handler.1.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        is_not_spellcaster = yes
+        
+        # Civilized nations only
+        is_civilized = yes
+        
+        # AI requirements
+        stability = 1
+        adm_power = 600
+        dip_power = 600
+        mil_power = 600
+        
+        # Add some randomness so the AI doesn't instantly take it 100% of them time it meets the requirements
+        OR = {
+            has_country_flag = random_flag_0
+            has_country_flag = random_flag_1
+            has_country_flag = random_flag_2
+            has_country_flag = random_flag_3
+            has_country_flag = random_flag_4
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Start Study
+	option = {
+		name = wwu_ai_handler.1.option.a
+		
+        trigger = {
+            is_not_in_magical_study = yes
+            has_magical_study_cost = yes
+        }
+        
+        take_magical_study_cost = yes
+        start_magical_study = yes
+        
+        log = "[Root.GetName] - Magical Study: Start Study"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Cancel Study
+	option = {
+		name = wwu_ai_handler.1.option.a
+		
+        trigger = {
+            is_in_magical_study = yes
+        }
+        
+        cancel_magical_study = yes
+        
+        log = "[Root.GetName] - Magical Study: Cancel Study"
+        
+        ai_chance = {
+            factor = 0 # AI should not use this
+        }
+	}
+    
+    # Boost Study
+	option = {
+		name = wwu_ai_handler.1.option.e
+		
+        trigger = {
+            is_in_magical_study = yes
+            has_not_completed_magical_study = yes
+            has_magical_study_gold_cost = yes
+        }
+        
+        boost_magical_study_action = yes
+        
+        log = "[Root.GetName] - Magical Study: Boost Study"
+        
+        ai_chance = {
+            factor = 0 # AI should not use this
+        }
+	}
+    
+    # No Action
+	option = {
+		name = wwu_ai_handler.1.option.x
+		
+        trigger = {
+        
+        }
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+
+#----------------------------
+# Spellbook - Status
+#----------------------------
+# This emulates the Spellbook GUI utility features for the AI.
+country_event = {
+	id = wwu_ai_handler.2
+	title = wwu_ai_handler.2.title
+	desc = wwu_ai_handler.2.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+       is_spellcaster = yes
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Boost Aptitude
+	option = {
+		name = wwu_ai_handler.2.option.a
+		
+        trigger = {
+            NOT = { has_legendary_aptitude = yes }
+            has_aptitude_boost_cost = yes
+        }
+        
+        take_aptitude_boost_cost = yes
+        add_aptitude_point = yes
+        
+        log = "[Root.GetName] - Spellbook: Boost Aptitude"
+        
+        ai_chance = {
+            factor = 100
+            
+            # Only allow AI to use this if they have a healthy power reserve
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 800 }
+            }
+        }
+	}
+    # Boost Finesse
+	option = {
+		name = wwu_ai_handler.2.option.a
+		
+        trigger = {
+            NOT = { has_legendary_finesse = yes }
+            has_finesse_boost_cost = yes
+        }
+        
+        take_finesse_boost_cost = yes
+        add_finesse_point = yes
+        
+        log = "[Root.GetName] - Spellbook: Boost Finesse"
+        
+        ai_chance = {
+            factor = 100
+            
+            # Only allow AI to use this if they have a healthy power reserve
+            modifier = {
+                factor = 0
+                
+                NOT = { mil_power = 800 }
+            }
+        }
+	}
+    # Boost Concentration
+	option = {
+		name = wwu_ai_handler.2.option.a
+		
+        trigger = {
+            NOT = { has_legendary_concentration = yes }
+            has_concentration_boost_cost = yes
+        }
+        
+        take_concentration_boost_cost = yes
+        add_concentration_point = yes
+        
+        log = "[Root.GetName] - Spellbook: Boost Concentration"
+        
+        ai_chance = {
+            factor = 100
+            
+            # Only allow AI to use this if they have a healthy power reserve
+            modifier = {
+                factor = 0
+                
+                NOT = { adm_power = 800 }
+            }
+        }
+	}
+    
+    # Change School
+	option = {
+		name = wwu_ai_handler.2.option.a
+		
+        trigger = {
+            has_no_magic_school = yes # Only do this if they don't have one set already
+            NOT = { has_ruler_flag = ai_handler__set_magic_school }
+        }
+        
+        set_ruler_flag = ai_handler__set_magic_school
+        
+        # TODO:
+        # Add some logic so AI of X type will select school of X type over others
+        
+        # This will cascade to the last viable school.
+        if = {
+            limit = {
+                can_select_school__arcane = yes
+            }
+            set_magic_school = {
+                arcane = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Arcane"
+        }
+        if = {
+            limit = {
+                can_select_school__holy = yes
+            }
+            set_magic_school = {
+                holy = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Holy"
+        }
+        if = {
+            limit = {
+                can_select_school__chi = yes
+            }
+            set_magic_school = {
+                chi = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Chi"
+        }
+        if = {
+            limit = {
+                can_select_school__voodoo = yes
+            }
+            set_magic_school = {
+                voodoo = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Voodoo"
+        }
+        if = {
+            limit = {
+                can_select_school__nature = yes
+            }
+            set_magic_school = {
+                nature = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Nature"
+        }
+        if = {
+            limit = {
+                can_select_school__necromancy = yes
+            }
+            set_magic_school = {
+                necromancy = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Necromancy"
+        }
+        if = {
+            limit = {
+                can_select_school__shamanism = yes
+            }
+            set_magic_school = {
+                shamanism = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Shamanism"
+        }
+        if = {
+            limit = {
+                can_select_school__fel = yes
+            }
+            set_magic_school = {
+                fel = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Fel"
+        }
+        if = {
+            limit = {
+                can_select_school__draconic = yes
+            }
+            set_magic_school = {
+                draconic = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Draconic"
+        }
+        if = {
+            limit = {
+                can_select_school__corruption = yes
+            }
+            set_magic_school = {
+                corruption = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Corruption"
+        }
+        if = {
+            limit = {
+                can_select_school__shadow = yes
+            }
+            set_magic_school = {
+                shadow = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Shadow"
+        }
+        if = {
+            limit = {
+                can_select_school__titanic = yes
+            }
+            set_magic_school = {
+                titanic = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Titanic"
+        }
+        if = {
+            limit = {
+                can_select_school__runic = yes
+            }
+            set_magic_school = {
+                runic = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Runic"
+        }
+        if = {
+            limit = {
+                can_select_school__nightmare = yes
+            }
+            set_magic_school = {
+                nightmare = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Nightmare"
+        }
+        if = {
+            limit = {
+                can_select_school__earth = yes
+            }
+            set_magic_school = {
+                elemental_earth = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Earth"
+        }
+        if = {
+            limit = {
+                can_select_school__fire = yes
+            }
+            set_magic_school = {
+                elemental_fire = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Fire"
+        }
+        if = {
+            limit = {
+                can_select_school__water = yes
+            }
+            set_magic_school = {
+                elemental_water = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Water"
+        }
+        if = {
+            limit = {
+                can_select_school__wind = yes
+            }
+            set_magic_school = {
+                elemental_wind = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Wind"
+        }
+        if = {
+            limit = {
+                can_select_school__domination = yes
+            }
+            set_magic_school = {
+                domination = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Domination"
+        }
+        if = {
+            limit = {
+                can_select_school__soul = yes
+            }
+            set_magic_school = {
+                soul = yes
+            }
+            log = "[Root.GetName] - Spellbook: Set School to Soul"
+        }
+        
+        ai_chance = {
+            factor = 1000 # Priority as this is a one-time action
+        }
+	}
+    
+    # No Action
+	option = {
+		name = wwu_ai_handler.1.option.x
+		
+        log = "[Root.GetName] - Spellbook: Status No Action"
+        
+        ai_chance = {
+            factor = 20
+        }
+	}
+}
+
+#----------------------------
+# Spellbook - Spells
+#----------------------------
+# This emulates the Spellbook GUI spell features for the AI.
+country_event = {
+	id = wwu_ai_handler.3
+	title = wwu_ai_handler.3.title
+	desc = wwu_ai_handler.3.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+       is_spellcaster = yes
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	# Generic: Conjure Gold
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__conjure_gold = yes
+        }
+        
+        spell_effect__conjure_gold = yes
+        
+        log = "[Root.GetName] - Spellbook: Conjure Gold"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Inspire Glory
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__inspire_glory = yes
+        }
+        
+        spell_effect__inspire_glory = yes
+        
+        log = "[Root.GetName] - Spellbook: Inspire Glory"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Purge Opponents
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__purge_opponents = yes
+        }
+        
+        spell_effect__purge_opponents = yes
+        
+        log = "[Root.GetName] - Spellbook: Purge Opponents"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Emit Splendiferous Show
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__emit_splendiferous_show = yes
+        }
+        
+        spell_effect__emit_splendiferous_show = yes
+        
+        log = "[Root.GetName] - Spellbook: Emit Splendiferous Show"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Arouse Support
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__arouse_support = yes
+        }
+        
+        spell_effect__arouse_support = yes
+        
+        log = "[Root.GetName] - Spellbook: Arouse Support"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Soothe Population
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__soothe_population = yes
+        }
+        
+        spell_effect__soothe_population = yes
+        
+        log = "[Root.GetName] - Spellbook: Soothe Population"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Quell Fear
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__quell_fear = yes
+        }
+        
+        spell_effect__quell_fear = yes
+        
+        log = "[Root.GetName] - Spellbook: Quell Fear"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Rally Soldiers
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__rally_soldiers = yes
+        }
+        
+        spell_effect__rally_soldiers = yes
+        
+        log = "[Root.GetName] - Spellbook: Rally Soldiers"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Rally Sailors
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__rally_sailors = yes
+        }
+        
+        spell_effect__rally_sailors = yes
+        
+        log = "[Root.GetName] - Spellbook: Rally Sailors"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Generic: Galvinize Creativity
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            spell_trigger__galvinize_creativity = yes
+        }
+        
+        spell_effect__galvinize_creativity = yes
+        
+        log = "[Root.GetName] - Spellbook: Galvanize Creativity"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Arcane: Polymorph
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__arcane = yes
+            spell_trigger__polymorph = yes
+        }
+        
+        spell_effect__polymorph = yes
+        
+        log = "[Root.GetName] - Spellbook: Polymorph"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Arcane: Presence of Mind
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__arcane = yes
+            spell_trigger__presence_of_mind = yes
+        }
+        
+        spell_effect__presence_of_mind = yes
+        
+        log = "[Root.GetName] - Spellbook: Presence of Mind"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Arcane: Touch of the Magi
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__arcane = yes
+            spell_trigger__touch_of_the_magi = yes
+        }
+        
+        spell_effect__touch_of_the_magi = yes
+        
+        log = "[Root.GetName] - Spellbook: Touch of the Magi"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Arcane: Alter Time
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__arcane = yes
+            spell_trigger__alter_time = yes
+        }
+        
+        spell_effect__alter_time = yes
+        
+        log = "[Root.GetName] - Spellbook: Alter Time"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Holy: Judgment
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__holy = yes
+            spell_trigger__judgment = yes
+        }
+        
+        spell_effect__judgment = yes
+        
+        log = "[Root.GetName] - Spellbook: Judgment"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Holy: Divine Tempest
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__holy = yes
+            spell_trigger__divine_tempest = yes
+        }
+        
+        spell_effect__divine_tempest = yes
+        
+        log = "[Root.GetName] - Spellbook: Divine Tempest"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Holy: Fortifying Aura
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__holy = yes
+            spell_trigger__fortifying_aura = yes
+        }
+        
+        spell_effect__fortifying_aura = yes
+        
+        log = "[Root.GetName] - Spellbook: Fortifying Aura"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Holy: Avatar of the Light
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__holy = yes
+            spell_trigger__avatar_of_the_light = yes
+        }
+        
+        spell_effect__avatar_of_the_light = yes
+        
+        log = "[Root.GetName] - Spellbook: Avatar of the Light"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Chi: Ring of Peace
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__chi = yes
+            spell_trigger__ring_of_peace = yes
+        }
+        
+        spell_effect__ring_of_peace = yes
+        
+        log = "[Root.GetName] - Spellbook: Ring of Peace"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Chi: Renewing Mists
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__chi = yes
+            spell_trigger__renewing_mist = yes
+        }
+        
+        spell_effect__renewing_mist = yes
+        
+        log = "[Root.GetName] - Spellbook: Renewing Mists"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Chi: Secret Infusion
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__chi = yes
+            spell_trigger__renewing_mist = yes
+        }
+        
+        spell_effect__secret_infusion = yes
+        
+        log = "[Root.GetName] - Spellbook: Secret Infusion"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Chi: Mists of Wisdom
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__chi = yes
+            spell_trigger__mists_of_wisdom = yes
+        }
+        
+        spell_effect__mists_of_wisdom = yes
+        
+        log = "[Root.GetName] - Spellbook: Mists of Wisdom"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Voodoo: Mass Hex
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__voodoo = yes
+            spell_trigger__mass_hex = yes
+        }
+        
+        spell_effect__mass_hex = yes
+        
+        log = "[Root.GetName] - Spellbook: Mass Hex"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Voodoo: Zombify
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__voodoo = yes
+            spell_trigger__zombify = yes
+        }
+        
+        spell_effect__zombify = yes
+        
+        log = "[Root.GetName] - Spellbook: Zombify"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Voodoo: Healing Wave
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__voodoo = yes
+            spell_trigger__healing_wave = yes
+        }
+        
+        spell_effect__healing_wave = yes
+        
+        log = "[Root.GetName] - Spellbook: Healing Wave"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Voodoo: Big Bad Voodoo
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__voodoo = yes
+            spell_trigger__big_bad_voodoo = yes
+        }
+        
+        spell_effect__big_bad_voodoo = yes
+        
+        log = "[Root.GetName] - Spellbook: Big Bad Voodoo"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # nature: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nature = yes
+            spell_trigger__nature_spell_1 = yes
+        }
+        
+        spell_effect__nature_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nature 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nature: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nature = yes
+            spell_trigger__nature_spell_2 = yes
+        }
+        
+        spell_effect__nature_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nature 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nature: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nature = yes
+            spell_trigger__nature_spell_3 = yes
+        }
+        
+        spell_effect__nature_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nature 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nature: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nature = yes
+            spell_trigger__nature_spell_4 = yes
+        }
+        
+        spell_effect__nature_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nature 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # necromancy: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__necromancy = yes
+            spell_trigger__necromancy_spell_1 = yes
+        }
+        
+        spell_effect__necromancy_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Necromancy 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # necromancy: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__necromancy = yes
+            spell_trigger__necromancy_spell_2 = yes
+        }
+        
+        spell_effect__necromancy_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Necromancy 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # necromancy: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__necromancy = yes
+            spell_trigger__necromancy_spell_3 = yes
+        }
+        
+        spell_effect__necromancy_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Necromancy 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # necromancy: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__necromancy = yes
+            spell_trigger__necromancy_spell_4 = yes
+        }
+        
+        spell_effect__necromancy_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Necromancy 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # shamanism: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shamanism = yes
+            spell_trigger__shamanism_spell_1 = yes
+        }
+        
+        spell_effect__shamanism_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shamanism 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shamanism: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shamanism = yes
+            spell_trigger__shamanism_spell_2 = yes
+        }
+        
+        spell_effect__shamanism_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shamanism 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shamanism: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shamanism = yes
+            spell_trigger__shamanism_spell_3 = yes
+        }
+        
+        spell_effect__shamanism_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shamanism 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shamanism: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shamanism = yes
+            spell_trigger__shamanism_spell_4 = yes
+        }
+        
+        spell_effect__shamanism_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shamanism 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # fel: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fel = yes
+            spell_trigger__fel_spell_1 = yes
+        }
+        
+        spell_effect__fel_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fel 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fel: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fel = yes
+            spell_trigger__fel_spell_2 = yes
+        }
+        
+        spell_effect__fel_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fel 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fel: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fel = yes
+            spell_trigger__fel_spell_3 = yes
+        }
+        
+        spell_effect__fel_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fel 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fel: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fel = yes
+            spell_trigger__fel_spell_4 = yes
+        }
+        
+        spell_effect__fel_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fel 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # draconic: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__draconic = yes
+            spell_trigger__draconic_spell_1 = yes
+        }
+        
+        spell_effect__draconic_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Draconic 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # draconic: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__draconic = yes
+            spell_trigger__draconic_spell_2 = yes
+        }
+        
+        spell_effect__draconic_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Draconic 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # draconic: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__draconic = yes
+            spell_trigger__draconic_spell_3 = yes
+        }
+        
+        spell_effect__draconic_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Draconic 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # draconic: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__draconic = yes
+            spell_trigger__draconic_spell_4 = yes
+        }
+        
+        spell_effect__draconic_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Draconic 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # corruption: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__corruption = yes
+            spell_trigger__corruption_spell_1 = yes
+        }
+        
+        spell_effect__corruption_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Corruption 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # corruption: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__corruption = yes
+            spell_trigger__corruption_spell_2 = yes
+        }
+        
+        spell_effect__corruption_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Corruption 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # corruption: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__corruption = yes
+            spell_trigger__corruption_spell_3 = yes
+        }
+        
+        spell_effect__corruption_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Corruption 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # corruption: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__corruption = yes
+            spell_trigger__corruption_spell_4 = yes
+        }
+        
+        spell_effect__corruption_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Corruption 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # shadow: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shadow = yes
+            spell_trigger__shadow_spell_1 = yes
+        }
+        
+        spell_effect__shadow_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shadow 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shadow: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shadow = yes
+            spell_trigger__shadow_spell_2 = yes
+        }
+        
+        spell_effect__shadow_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shadow 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shadow: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shadow = yes
+            spell_trigger__shadow_spell_3 = yes
+        }
+        
+        spell_effect__shadow_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shadow 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # shadow: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__shadow = yes
+            spell_trigger__shadow_spell_4 = yes
+        }
+        
+        spell_effect__shadow_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Shadow 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # titanic: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__titanic = yes
+            spell_trigger__titanic_spell_1 = yes
+        }
+        
+        spell_effect__titanic_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Titanic 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # titanic: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__titanic = yes
+            spell_trigger__titanic_spell_2 = yes
+        }
+        
+        spell_effect__titanic_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Titanic 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # titanic: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__titanic = yes
+            spell_trigger__titanic_spell_3 = yes
+        }
+        
+        spell_effect__titanic_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Titanic 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # titanic: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__titanic = yes
+            spell_trigger__titanic_spell_4 = yes
+        }
+        
+        spell_effect__titanic_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Titanic 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # runic: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__runic = yes
+            spell_trigger__runic_spell_1 = yes
+        }
+        
+        spell_effect__runic_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Runic 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # runic: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__runic = yes
+            spell_trigger__runic_spell_2 = yes
+        }
+        
+        spell_effect__runic_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Runic 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # runic: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__runic = yes
+            spell_trigger__runic_spell_3 = yes
+        }
+        
+        spell_effect__runic_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Runic 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # runic: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__runic = yes
+            spell_trigger__runic_spell_4 = yes
+        }
+        
+        spell_effect__runic_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Runic 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # nightmare: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nightmare = yes
+            spell_trigger__nightmare_spell_1 = yes
+        }
+        
+        spell_effect__nightmare_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nightmare 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nightmare: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nightmare = yes
+            spell_trigger__nightmare_spell_2 = yes
+        }
+        
+        spell_effect__nightmare_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nightmare 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nightmare: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nightmare = yes
+            spell_trigger__nightmare_spell_3 = yes
+        }
+        
+        spell_effect__nightmare_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nightmare 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # nightmare: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__nightmare = yes
+            spell_trigger__nightmare_spell_4 = yes
+        }
+        
+        spell_effect__nightmare_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Nightmare 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # earth: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__earth = yes
+            spell_trigger__earth_spell_1 = yes
+        }
+        
+        spell_effect__earth_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Earth 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # earth: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__earth = yes
+            spell_trigger__earth_spell_2 = yes
+        }
+        
+        spell_effect__earth_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Earth 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # earth: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__earth = yes
+            spell_trigger__earth_spell_3 = yes
+        }
+        
+        spell_effect__earth_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Earth 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # earth: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__earth = yes
+            spell_trigger__earth_spell_4 = yes
+        }
+        
+        spell_effect__earth_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Earth 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # fire: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fire = yes
+            spell_trigger__fire_spell_1 = yes
+        }
+        
+        spell_effect__fire_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fire 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fire: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fire = yes
+            spell_trigger__fire_spell_2 = yes
+        }
+        
+        spell_effect__fire_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fire 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fire: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fire = yes
+            spell_trigger__fire_spell_3 = yes
+        }
+        
+        spell_effect__fire_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fire 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # fire: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__fire = yes
+            spell_trigger__fire_spell_4 = yes
+        }
+        
+        spell_effect__fire_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Fire 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # water: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__water = yes
+            spell_trigger__water_spell_1 = yes
+        }
+        
+        spell_effect__water_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Water 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # water: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__water = yes
+            spell_trigger__water_spell_2 = yes
+        }
+        
+        spell_effect__water_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Water 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # water: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__water = yes
+            spell_trigger__water_spell_3 = yes
+        }
+        
+        spell_effect__water_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Water 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # water: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__water = yes
+            spell_trigger__water_spell_4 = yes
+        }
+        
+        spell_effect__water_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Water 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # wind: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__wind = yes
+            spell_trigger__wind_spell_1 = yes
+        }
+        
+        spell_effect__wind_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Wind 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # wind: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__wind = yes
+            spell_trigger__wind_spell_2 = yes
+        }
+        
+        spell_effect__wind_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Wind 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # wind: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__wind = yes
+            spell_trigger__wind_spell_3 = yes
+        }
+        
+        spell_effect__wind_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Wind 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # wind: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__wind = yes
+            spell_trigger__wind_spell_4 = yes
+        }
+        
+        spell_effect__wind_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Wind 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # domination: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__domination = yes
+            spell_trigger__domination_spell_1 = yes
+        }
+        
+        spell_effect__domination_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Domination 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # domination: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__domination = yes
+            spell_trigger__domination_spell_2 = yes
+        }
+        
+        spell_effect__domination_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Domination 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # domination: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__domination = yes
+            spell_trigger__domination_spell_3 = yes
+        }
+        
+        spell_effect__domination_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Domination 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # domination: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__domination = yes
+            spell_trigger__domination_spell_4 = yes
+        }
+        
+        spell_effect__domination_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Domination 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # soul: 1
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__soul = yes
+            spell_trigger__soul_spell_1 = yes
+        }
+        
+        spell_effect__soul_spell_1 = yes
+        
+        log = "[Root.GetName] - Spellbook: Soul 1"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # soul: 2
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__soul = yes
+            spell_trigger__soul_spell_2 = yes
+        }
+        
+        spell_effect__soul_spell_2 = yes
+        
+        log = "[Root.GetName] - Spellbook: Soul 2"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # soul: 3
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__soul = yes
+            spell_trigger__soul_spell_3 = yes
+        }
+        
+        spell_effect__soul_spell_3 = yes
+        
+        log = "[Root.GetName] - Spellbook: Soul 3"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # soul: 4
+	option = {
+		name = wwu_ai_handler.3.option.a
+		
+        trigger = {
+            is_school__soul = yes
+            spell_trigger__soul_spell_4 = yes
+        }
+        
+        spell_effect__soul_spell_4 = yes
+        
+        log = "[Root.GetName] - Spellbook: Soul 4"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # No Action
+	option = {
+		name = wwu_ai_handler.3.option.x
+		
+        trigger = {
+        
+        }
+        
+        ai_chance = {
+            factor = 1
+        }
+	}
+}
+
+#----------------------------
+# Class Study
+#----------------------------
+# This emulates the Class Study GUI features for the AI.
+country_event = {
+	id = wwu_ai_handler.10
+	title = wwu_ai_handler.10.title
+	desc = wwu_ai_handler.10.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        ruler_has_no_class = yes
+        is_not_in_class_training = yes
+        has_class_study_cost = yes
+        
+        # AI requirements
+        stability = 1
+        adm_power = 600
+        dip_power = 600
+        mil_power = 600
+        
+        # Add some randomness so the AI doesn't instantly take it 100% of them time it meets the requirements
+        OR = {
+            has_country_flag = random_flag_0
+            has_country_flag = random_flag_1
+            has_country_flag = random_flag_2
+            has_country_flag = random_flag_3
+            has_country_flag = random_flag_4
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Selection: Warrior
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_warrior = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = warrior }
+        
+        log = "[Root.GetName] - Class Study: Warrior"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Paladin
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_paladin = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = paladin }
+        
+        log = "[Root.GetName] - Class Study: Paladin"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Priest
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_priest = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = priest }
+        
+        log = "[Root.GetName] - Class Study: Priest"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Rogue
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_rogue = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = rogue }
+        
+        log = "[Root.GetName] - Class Study: Rogue"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Mage
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_mage = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = mage }
+        
+        log = "[Root.GetName] - Class Study: Mage"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Warlock
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_warlock = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = warlock }
+        
+        log = "[Root.GetName] - Class Study: Warlock"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Druid
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_druid = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = druid }
+        
+        log = "[Root.GetName] - Class Study: Druid"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Hunter
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_hunter = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = hunter }
+        
+        log = "[Root.GetName] - Class Study: Hunter"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Shaman
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_shaman = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = shaman }
+        
+        log = "[Root.GetName] - Class Study: Shaman"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Death Knight
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_death_knight = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = death_knight }
+        
+        log = "[Root.GetName] - Class Study: Death Knight"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Monk
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_monk = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = monk }
+        
+        log = "[Root.GetName] - Class Study: Monk"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Selection: Demon Hunter
+	option = {
+		name = wwu_ai_handler.10.option.a
+		
+        trigger = {
+            can_be_demon_hunter = yes
+        }
+        
+        take_class_study_cost = yes
+        start_class_study = { CLASS = demon_hunter }
+        
+        log = "[Root.GetName] - Class Study: Demon Hunter"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+}
+
+#----------------------------
+# Class Abilities
+#----------------------------
+# This emulates the Class Abilities GUI features for the AI.
+country_event = {
+	id = wwu_ai_handler.11
+	title = wwu_ai_handler.11.title
+	desc = wwu_ai_handler.11.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+       ruler_has_any_class = yes
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Warrior - Unrelenting Assault
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warrior = yes
+            ability_trigger__warrior_1 = yes
+        }
+        
+        ability_effect__warrior_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warrior - Unrelenting Assault"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Warrior - Second Wind
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warrior = yes
+            ability_trigger__warrior_2 = yes
+        }
+        
+        ability_effect__warrior_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warrior - Second Wind"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Warrior - Battle Shout
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warrior = yes
+            ability_trigger__warrior_3 = yes
+        }
+        
+        ability_effect__warrior_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warrior - Battle Shout"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Paladin - Blade of Justice
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_paladin = yes
+            ability_trigger__paladin_1 = yes
+        }
+        
+        ability_effect__paladin_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: paladin - Blade of Justice"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Paladin - Long Arm of the Law
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_paladin = yes
+            ability_trigger__paladin_2 = yes
+        }
+        
+        ability_effect__paladin_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Paladin - Long Arm of the Law"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Paladin - Sanctified Wrath
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_paladin = yes
+            ability_trigger__paladin_3 = yes
+        }
+        
+        ability_effect__paladin_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Paladin - Sanctified Wrath"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Priest - Binding Prayers
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_priest = yes
+            ability_trigger__priest_1 = yes
+        }
+        
+        ability_effect__priest_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Priest - Binding Prayers"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Priest - Evangelism
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_priest = yes
+            ability_trigger__priest_2 = yes
+        }
+        
+        ability_effect__priest_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Priest - Evangelism"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Priest - Heavenly Voice
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_priest = yes
+            ability_trigger__priest_3 = yes
+        }
+        
+        ability_effect__priest_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Priest - Heavenly Voice"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Rogue - Combat Expertise
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_rogue = yes
+            ability_trigger__rogue_1 = yes
+        }
+        
+        ability_effect__rogue_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Rogue - Combat Expertise"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Rogue - Preparation
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_rogue = yes
+            ability_trigger__rogue_2 = yes
+        }
+        
+        ability_effect__rogue_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Rogue - Preparation"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Rogue - Master of Subtlety
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_rogue = yes
+            ability_trigger__rogue_3 = yes
+        }
+        
+        ability_effect__rogue_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Rogue - Master of Subtlety"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Mage - Time Warp
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_mage = yes
+            ability_trigger__mage_1 = yes
+        }
+        
+        ability_effect__mage_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Mage - Time Warp"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Mage - Focusing Crystal
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_mage = yes
+            ability_trigger__mage_2 = yes
+        }
+        
+        ability_effect__mage_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Mage - Focusing Crystal"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Mage - Rune of Power
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_mage = yes
+            ability_trigger__mage_3 = yes
+        }
+        
+        ability_effect__mage_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Mage - Rune of Power"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Warlock - Fire and Brimstone
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warlock = yes
+            ability_trigger__warlock_1 = yes
+        }
+        
+        ability_effect__warlock_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warlock - Fire and Brimstone"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Warlock - Jinx
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warlock = yes
+            ability_trigger__warlock_2 = yes
+        }
+        
+        ability_effect__warlock_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warlock - Jinx"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Warlock - Grimoire of Command
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_warlock = yes
+            ability_trigger__warlock_3 = yes
+        }
+        
+        ability_effect__warlock_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Warlock - Grimoire of Command"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Druid - Flourish
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_druid = yes
+            ability_trigger__druid_1 = yes
+        }
+        
+        ability_effect__druid_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Druid - Flourish"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Druid - Natural Perfection
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_druid = yes
+            ability_trigger__druid_2 = yes
+        }
+        
+        ability_effect__druid_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Druid - Natural Perfection"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Druid - Eclipse
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_druid = yes
+            ability_trigger__druid_3 = yes
+        }
+        
+        ability_effect__druid_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Druid - Eclipse"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Hunter - Efficiency
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_hunter = yes
+            ability_trigger__hunter_1 = yes
+        }
+        
+        ability_effect__hunter_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Hunter - Efficiency"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Hunter - Master Tactitian
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_hunter = yes
+            ability_trigger__hunter_2 = yes
+        }
+        
+        ability_effect__hunter_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Hunter - Master Tactitian"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Hunter - Camouflage
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_hunter = yes
+            ability_trigger__hunter_3 = yes
+        }
+        
+        ability_effect__hunter_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Hunter - Camouflage"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Shaman - Elemental Oath
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_shaman = yes
+            ability_trigger__shaman_1 = yes
+        }
+        
+        ability_effect__shaman_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Shaman - Elemental Oath"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Shaman - Echo of the Elements
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_shaman = yes
+            ability_trigger__shaman_2 = yes
+        }
+        
+        ability_effect__shaman_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Shaman - Echo of the Elements"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Shaman - Astral Shift
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_shaman = yes
+            ability_trigger__shaman_3 = yes
+        }
+        
+        ability_effect__shaman_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: shaman - Camouflage"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Death Knight - Necrotic Aura
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_death_knight = yes
+            ability_trigger__death_knight_1 = yes
+        }
+        
+        ability_effect__death_knight_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Death Knight - Necrotic Aura"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Death Knight - Death Siphon
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_death_knight = yes
+            ability_trigger__death_knight_2 = yes
+        }
+        
+        ability_effect__death_knight_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Death Knight - Death Siphon"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Death Knight - Icy Grip
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_death_knight = yes
+            ability_trigger__death_knight_3 = yes
+        }
+        
+        ability_effect__death_knight_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Death Knight - Icy Grip"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Monk - Guard
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_monk = yes
+            ability_trigger__monk_1 = yes
+        }
+        
+        ability_effect__monk_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Monk - Guard"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Monk - Power Strikes
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_monk = yes
+            ability_trigger__monk_2 = yes
+        }
+        
+        ability_effect__monk_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Monk - Power Strikes"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Monk - Ironskin Brew
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_monk = yes
+            ability_trigger__monk_3 = yes
+        }
+        
+        ability_effect__monk_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Monk - Ironskin Brew"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # Demon Hunter - Demon Spikes
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_demon_hunter = yes
+            ability_trigger__demon_hunter_1 = yes
+        }
+        
+        ability_effect__demon_hunter_1 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Demon Hunter - Demon Spikes"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Demon Hunter - Soul Cleave
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_demon_hunter = yes
+            ability_trigger__demon_hunter_2 = yes
+        }
+        
+        ability_effect__demon_hunter_2 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Demon Hunter - Soul Cleave"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Demon Hunter - Spectral Sight
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        trigger = {
+            ruler_is_demon_hunter = yes
+            ability_trigger__demon_hunter_3 = yes
+        }
+        
+        ability_effect__demon_hunter_3 = yes
+        
+        log = "[Root.GetName] - Class Abilities: Demon Hunter - Spectral Sight"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    
+    # None
+	option = {
+		name = wwu_ai_handler.11.option.a
+        
+        log = "[Root.GetName] - Class Abilities: None"
+        
+        ai_chance = {
+            factor = 10
+        }
+	}
+}
+

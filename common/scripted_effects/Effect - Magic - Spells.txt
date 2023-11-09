@@ -1,2744 +1,1109 @@
-# List:
-# treasury_spell_effect
-# years_of_income_spell_effect
-# remove_inflation_spell_effect
-# mercantilism_spell_effect
-# adm_power_spell_effect
-# dip_power_spell_effect
-# mil_power_spell_effect
-# monarch_power_spell_effect
-# remove_corruption_spell_effect
-# prestige_spell_effect
-# random_tech_spell_effect
-# splendor_spell_effect
-# stability_spell_effect
-# remove_war_exhaustion_spell_effect
-# army_tradition_spell_effect
-# navy_tradition_spell_effect
-# army_professionalism_spell_effect
-# manpower_spell_effect
-# yearly_manpower_spell_effect
-# sailors_spell_effect
-# yearly_sailors_spell_effect
-# absolutism_spell_effect
-# legitimacy_spell_effect
-# meritocracy_spell_effect
-# reform_progress_spell_effect
-# religious_power_spell_effect
-
 #------------------------
-# On Actions
+# General
 #------------------------
-on_battle_won_country__magic = {
-    
-}
-
-#------------------------
-# Enemy-oriented Effect
-#------------------------
-# ROOT is enemy, FROM is caster
-apply_modifier_spell_enemy_effect = {    
-    scaled_magic_modifier_enemy_effect = {
-        MODIFIER_POOR       = $MODIFIER$_poor
-        MODIFIER_COMMON     = $MODIFIER$_common
-        MODIFIER_RARE       = $MODIFIER$_rare
-        MODIFIER_EPIC       = $MODIFIER$_epic
-        MODIFIER_LEGENDARY  = $MODIFIER$_legendary
-    }
-}
-
-# ROOT = caster, FROM = enemy
-scaled_magic_modifier_enemy_effect = {
-    # Legendary
+lose_scaled_mana_cost = {
     if = {
         limit = {
-            event_target:caster = { has_legendary_finesse = yes }
-            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_LEGENDARY$ } }
+            has_legendary_aptitude = yes
         }
         
-        event_target:victim = { 
-            add_country_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = -1
-            }
-        }
-    }
-    # Epic
-    else_if = {
-        limit = {
-            event_target:caster = { has_epic_finesse = yes }
-            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_EPIC$ } }
-        }
-        
-        event_target:victim = { 
-            add_country_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = -1
-            }
-        }
-    }
-    # Rare
-    else_if = {
-        limit = {
-            event_target:caster = { has_rare_finesse = yes }
-            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_RARE$ } }
-        }
-        
-        event_target:victim = { 
-            add_country_modifier = {
-                name = $MODIFIER_RARE$
-                duration = -1
-            }
-        }
-    }
-    # Common
-    else_if = {
-        limit = {
-            event_target:caster = { has_common_finesse = yes }
-            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_COMMON$ } }
-        }
-        
-        event_target:victim = { 
-            add_country_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = -1
-            }
-        }
-    }
-    # Poor
-    else_if = {
-        limit = {
-            event_target:caster = { has_poor_finesse = yes }
-            event_target:victim = { NOT = { has_country_modifier = $MODIFIER_POOR$ } }
-        }
-        
-        event_target:victim = { 
-            add_country_modifier = {
-                name = $MODIFIER_POOR$
-                duration = -1
-            }
-        }
-    }
-}
-
-scaled_magic_timer_tooltip_effect = {
-    if = {
-        limit = {
-            has_legendary_concentration = yes
-        }
-        
-        custom_tooltip = $TOOLTIP_LEGENDARY$
+        lose_mana_$LEGENDARY$ = yes
     }
     else_if = {
         limit = {
-            has_epic_concentration = yes
+            has_epic_aptitude = yes
         }
-        
-        custom_tooltip = $TOOLTIP_EPIC$
+        lose_mana_$EPIC$ = yes
     }
     else_if = {
         limit = {
-            has_rare_concentration = yes
+            has_rare_aptitude = yes
         }
-        
-        custom_tooltip = $TOOLTIP_RARE$
+        lose_mana_$RARE$ = yes
     }
     else_if = {
         limit = {
-            has_common_concentration = yes
+            has_common_aptitude = yes
         }
-        
-        custom_tooltip = $TOOLTIP_COMMON$
+        lose_mana_$COMMON$ = yes
     }
-    else_if = {
-        limit = {
-            has_poor_concentration = yes
-        }
-        
-        custom_tooltip = $TOOLTIP_POOR$
-    }
-}
-
-scaled_magic_modifier_timer_effect = {
-    if = {
-        limit = {
-            has_legendary_concentration = yes
-        }
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $TIME_LEGENDARY$
-        }
-    }
-    else_if = {
-        limit = {
-            has_epic_concentration = yes
-        }
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $TIME_EPIC$
-        }
-    }
-    else_if = {
-        limit = {
-            has_rare_concentration = yes
-        }
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $TIME_RARE$
-        }
-    }
-    else_if = {
-        limit = {
-            has_common_concentration = yes
-        }
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $TIME_COMMON$
-        }
-    }
-    else_if = {
-        limit = {
-            has_poor_concentration = yes
-        }
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $TIME_POOR$
-        }
+    else = {
+        lose_mana_$BASE$ = yes
     }
 }
 
 #------------------------
-# Utility
+# Generic Spells
 #------------------------
-scaled_magic_modifier_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                has_legendary_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = 3650
-            }
-        }
-        else_if = {
-            limit = {
-                has_epic_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = 2920
-            }
-        }
-        else_if = {
-            limit = {
-                has_rare_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = 2190
-            }
-        }
-        else_if = {
-            limit = {
-                has_common_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = 1460
-            }
-        }
-        else_if = {
-            limit = {
-                has_poor_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_LEGENDARY$
-                duration = 730
-            }
-        }
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                has_legendary_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = 3650
-            }
-        }
-        else_if = {
-            limit = {
-                has_epic_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = 2920
-            }
-        }
-        else_if = {
-            limit = {
-                has_rare_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = 2190
-            }
-        }
-        else_if = {
-            limit = {
-                has_common_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = 1460
-            }
-        }
-        else_if = {
-            limit = {
-                has_poor_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_EPIC$
-                duration = 730
-            }
-        }
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                has_legendary_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_RARE$
-                duration = 3650
-            }
-        }
-        else_if = {
-            limit = {
-                has_epic_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_RARE$
-                duration = 2920
-            }
-        }
-        else_if = {
-            limit = {
-                has_rare_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_RARE$
-                duration = 2190
-            }
-        }
-        else_if = {
-            limit = {
-                has_common_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_RARE$
-                duration = 1460
-            }
-        }
-        else_if = {
-            limit = {
-                has_poor_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_RARE$
-                duration = 730
-            }
-        }
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                has_legendary_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = 3650
-            }
-        }
-        else_if = {
-            limit = {
-                has_epic_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = 2920
-            }
-        }
-        else_if = {
-            limit = {
-                has_rare_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = 2190
-            }
-        }
-        else_if = {
-            limit = {
-                has_common_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = 1460
-            }
-        }
-        else_if = {
-            limit = {
-                has_poor_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_COMMON$
-                duration = 730
-            }
-        }
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                has_legendary_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_POOR$
-                duration = 3650
-            }
-        }
-        else_if = {
-            limit = {
-                has_epic_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_POOR$
-                duration = 2920
-            }
-        }
-        else_if = {
-            limit = {
-                has_rare_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_POOR$
-                duration = 2190
-            }
-        }
-        else_if = {
-            limit = {
-                has_common_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_POOR$
-                duration = 1460
-            }
-        }
-        else_if = {
-            limit = {
-                has_poor_concentration = yes
-            }
-            add_ruler_modifier = {
-                name = $MODIFIER_POOR$
-                duration = 730
-            }
-        }
-    }
-}
+# All spell effects are to be defined here with "spell_effect__<name>" as the key.
+# This is to prevent code duplication since both the Magic GUI and the AI Handler event need to be in sync.
 
-evocation_cooldown_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_concentration = yes
-        }
-        
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $DURATION_LEGENDARY$
-            hidden = yes
-        }
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_concentration = yes
-        }
-        
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $DURATION_EPIC$
-            hidden = yes
-        }
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_concentration = yes
-        }
-        
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $DURATION_RARE$
-            hidden = yes
-        }
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_concentration = yes
-        }
-        
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $DURATION_COMMON$
-            hidden = yes
-        }
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_concentration = yes
-        }
-        
-        add_ruler_modifier = {
-            name = $MODIFIER$
-            duration = $DURATION_POOR$
-            hidden = yes
-        }
-    }
-}
-
-#-----------------------------
-# Shared
-#-----------------------------
-# Adds modifier based on ruler Aptitude, with its duration determined by Concentration, and its potency by Finesse
-apply_modifier_spell_effect = {    
-    scaled_magic_modifier_effect = {
-        MODIFIER_POOR       = $MODIFIER$_poor
-        MODIFIER_COMMON     = $MODIFIER$_common
-        MODIFIER_RARE       = $MODIFIER$_rare
-        MODIFIER_EPIC       = $MODIFIER$_epic
-        MODIFIER_LEGENDARY  = $MODIFIER$_legendary
-    }
-}
-
-# Adds treasury based on ruler Finesse
-treasury_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_treasury = 500
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_treasury = 400
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_treasury = 300
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_treasury = 200
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_treasury = 100
-    }
-}
-
-# Adds years of income based on ruler Finesse
-years_of_income_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_years_of_income = 2.5
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_years_of_income = 2.1
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_years_of_income = 1.7
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_years_of_income = 1.3
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_years_of_income = 1
-    }
-}
-
-# Remove inflation based on ruler Finesse
-remove_inflation_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_inflation = -5
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_inflation = -4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_inflation = -3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_inflation = -2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_inflation = -1
-    }
-}
-
-# Add mercantilism based on ruler Finesse
-mercantilism_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_mercantilism = 5
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_mercantilism = 4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_mercantilism = 3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_mercantilism = 2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_mercantilism = 1
-    }
-}
-
-# Adds ADM power based on ruler Finesse
-adm_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_adm_power = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_adm_power = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_adm_power = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_adm_power = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_adm_power = 20
-    }
-}
-
-# Adds DIP power based on ruler Finesse
-dip_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_dip_power = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_dip_power = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_dip_power = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_dip_power = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_dip_power = 20
-    }
-}
-
-# Adds MIL power based on ruler Finesse
-mil_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_mil_power = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_mil_power = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_mil_power = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_mil_power = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_mil_power = 20
-    }
-}
-
-# Adds ADM/DIP/MIL power based on ruler Finesse
-monarch_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_adm_power = 100
-        add_dip_power = 100
-        add_mil_power = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_adm_power = 80
-        add_dip_power = 80
-        add_mil_power = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_adm_power = 60
-        add_dip_power = 60
-        add_mil_power = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_adm_power = 40
-        add_dip_power = 40
-        add_mil_power = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_adm_power = 20
-        add_dip_power = 20
-        add_mil_power = 20
-    }
-}
-
-# Adds ADM/DIP/MIL power based on ruler Finesse (weak)
-weak_monarch_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_adm_power = 50
-        add_dip_power = 50
-        add_mil_power = 50
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_adm_power = 40
-        add_dip_power = 40
-        add_mil_power = 40
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_adm_power = 30
-        add_dip_power = 30
-        add_mil_power = 30
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_adm_power = 20
-        add_dip_power = 20
-        add_mil_power = 20
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_adm_power = 10
-        add_dip_power = 10
-        add_mil_power = 10
-    }
-}
-
-# Remove corruption based on ruler Finesse
-remove_corruption_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_corruption = -5
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_corruption = -4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_corruption = -3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_corruption = -2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_corruption = -1
-    }
-}
-
-# Add prestige based on ruler Finesse
-prestige_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_prestige = 25
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_prestige = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_prestige = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_prestige = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_prestige = 5
-    }
-}
-
-# Adds 1 random technology
-random_tech_spell_effect = {
-    # Display the normal random list effect
-    tooltip = {
-        random_list = {
-            33 = {
-                add_adm_tech = 1
-            }
-            33 = {
-                add_dip_tech = 1
-            }
-            33 = {
-                add_mil_tech = 1
-            }
-        }
+# Conjure Gold
+spell_effect__conjure_gold = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
     
-    # Actually use the random flags to determine the result
-    hidden_effect = {
-        if = {
-            limit = {
-                OR = {
-                    has_country_flag = random_flag_0
-                    has_country_flag = random_flag_1
-                    has_country_flag = random_flag_2
-                }
-            }
-            
-            add_adm_tech = 1
-        }
-        else_if = {
-            limit = {
-                OR = {
-                    has_country_flag = random_flag_3
-                    has_country_flag = random_flag_4
-                    has_country_flag = random_flag_5
-                }
-            }
-            
-            add_dip_tech = 1
-        }
-        else_if = {
-            limit = {
-                OR = {
-                    has_country_flag = random_flag_6
-                    has_country_flag = random_flag_7
-                    has_country_flag = random_flag_8
-                    has_country_flag = random_flag_9
-                }
-            }
-            
-            add_mil_tech = 1
-        }
-    }
+    scaled_spell_effect__add_treasury = yes
 }
 
-# Adds Splendor based on ruler Finesse
-splendor_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_splendor = 100
+# Inspire Glory
+spell_effect__inspire_glory = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 1
+        EPIC = 2
+        RARE = 2
+        COMMON = 3
+        BASE = 3
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_splendor = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_splendor = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_splendor = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_splendor = 20
-    }
+    
+    scaled_spell_effect__add_prestige = yes
 }
 
-# Adds Stability based on ruler Finesse
-stability_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                NOT = { stability = 0 }
-            }
-            add_stability = 2
-        }
-        else = {
-            add_stability = 1
-        }
+# Purge Opponents
+spell_effect__purge_opponents = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 3
+        EPIC = 4
+        RARE = 4
+        COMMON = 5
+        BASE = 5
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                NOT = { stability = -1 }
-            }
-            add_stability = 2
-        }
-        else = {
-            add_stability = 1
-        }
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        if = {
-            limit = {
-                NOT = { stability = -2 }
-            }
-            add_stability = 2
-        }
-        else = {
-            add_stability = 1
-        }
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_stability = 1
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_stability = 1
-    }
+    
+    scaled_spell_effect__subtract_corruption = yes
 }
 
-# Remove war exhaustion based on ruler Finesse
-remove_war_exhaustion_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_war_exhaustion = -5
+# Emit Splendiferous Show
+spell_effect__emit_splendiferous_show = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_war_exhaustion = -4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_war_exhaustion = -3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_war_exhaustion = -2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_war_exhaustion = -1
-    }
+    
+    scaled_spell_effect__add_splendor = yes
 }
 
-# Adds Army Tradition based on ruler Finesse
-army_tradition_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_army_tradition = 25
+# Arouse Support
+spell_effect__arouse_support = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_army_tradition = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_army_tradition = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_army_tradition = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_army_tradition = 5
-    }
+    
+    scaled_spell_effect__add_legitimacy = yes
 }
 
-# Adds Navy Tradition based on ruler Finesse
-navy_tradition_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_navy_tradition = 25
+# Soothe Population
+spell_effect__soothe_population = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 3
+        EPIC = 4
+        RARE = 4
+        COMMON = 5
+        BASE = 5
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_navy_tradition = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_navy_tradition = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_navy_tradition = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_navy_tradition = 5
-    }
+    
+    scaled_spell_effect__add_stability = yes
 }
 
-# Adds Army Professionalism based on ruler Finesse
-army_professionalism_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_army_professionalism = 0.1
+# Quell Fear
+spell_effect__quell_fear = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_army_professionalism = 0.08
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_army_professionalism = 0.06
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_army_professionalism = 0.04
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_army_professionalism = 0.02
-    }
+    
+    scaled_spell_effect__subtract_war_exhaustion = yes
 }
 
-# Adds Manpower based on ruler Finesse
-manpower_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_manpower = 10
+# Rally Soldiers
+spell_effect__rally_soldiers = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_manpower = 8
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_manpower = 6
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_manpower = 4
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_manpower = 2
-    }
+    
+    scaled_spell_effect__add_yearly_manpower = yes
 }
 
-# Adds yearly Manpower based on ruler Finesse
-yearly_manpower_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_yearly_manpower = 5
+# Rally Sailors
+spell_effect__rally_sailors = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 2
+        EPIC = 3
+        RARE = 3
+        COMMON = 4
+        BASE = 4
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_yearly_manpower = 4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_yearly_manpower = 3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_yearly_manpower = 2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_yearly_manpower = 1
-    }
+    
+    scaled_spell_effect__add_yearly_sailors = yes
 }
 
-# Adds Sailors based on ruler Finesse
-sailors_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_sailors = 10
+# Galvinize Creativity
+spell_effect__galvinize_creativity = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_sailors = 8
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_sailors = 6
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_sailors = 4
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_sailors = 2
-    }
+    
+    scaled_spell_effect__add_reform_progress = yes
 }
 
-# Adds yearly Sailors based on ruler Finesse
-yearly_sailors_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_yearly_sailors = 5
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_yearly_sailors = 4
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_yearly_sailors = 3
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_yearly_sailors = 2
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_yearly_sailors = 1
-    }
-}
-
-# Adds Absolutism based on ruler Finesse
-absolutism_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_absolutism = 25
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_absolutism = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_absolutism = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_absolutism = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_absolutism = 5
-    }
-}
-
-# Adds Legitimacy based on ruler Finesse
-legitimacy_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_legitimacy = 25
-        add_republican_tradition = 25
-        add_devotion = 25
-        add_horde_unity = 25
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_legitimacy = 20
-        add_republican_tradition = 20
-        add_devotion = 20
-        add_horde_unity = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_legitimacy = 15
-        add_republican_tradition = 15
-        add_devotion = 15
-        add_horde_unity = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_legitimacy = 10
-        add_republican_tradition = 10
-        add_devotion = 10
-        add_horde_unity = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_legitimacy = 5
-        add_republican_tradition = 5
-        add_devotion = 5
-        add_horde_unity = 5
-    }
-}
-
-# Adds Meritocracy based on ruler Finesse
-meritocracy_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_meritocracy = 25
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_meritocracy = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_meritocracy = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_meritocracy = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_meritocracy = 5
-    }
-}
-
-# Adds Reform Progress based on ruler Finesse
-reform_progress_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        change_government_reform_progress = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        change_government_reform_progress = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        change_government_reform_progress = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        change_government_reform_progress = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        change_government_reform_progress = 20
-    }
-}
-
-# Adds Religious Power based on ruler Finesse
-#   Undead
-#   Shadow
-#   Old God
-religious_power_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_church_power = 100
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_church_power = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_church_power = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_church_power = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_church_power = 20
-    }
-}
-
-#-----------------------------
-# Arcane
-#-----------------------------
+#------------------------
+# Arcane Spells
+#------------------------
 # Polymorph
-polymorph_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        hidden_effect = {
-            set_variable = {
-                which = polymorph_count
-                value = 5
-            }
-            set_country_flag = polymorph_active
-        }
-        
-        custom_tooltip = POLYMORPH_EFFECT
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        hidden_effect = {
-            set_variable = {
-                which = polymorph_count
-                value = 4
-            }
-            set_country_flag = polymorph_active
-        }
-        
-        custom_tooltip = POLYMORPH_EFFECT
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        hidden_effect = {
-            set_variable = {
-                which = polymorph_count
-                value = 3
-            }
-            set_country_flag = polymorph_active
-        }
-        
-        custom_tooltip = POLYMORPH_EFFECT
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        hidden_effect = {
-            set_variable = {
-                which = polymorph_count
-                value = 2
-            }
-            set_country_flag = polymorph_active
-        }
-        
-        custom_tooltip = POLYMORPH_EFFECT
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        hidden_effect = {
-            set_variable = {
-                which = polymorph_count
-                value = 1
-            }
-            set_country_flag = polymorph_active
-        }
-        
-        custom_tooltip = POLYMORPH_EFFECT
-    }
-}
-
-# Ascendance
-ascendance_effect = {
-    define_general = {
-        name = "Ascended Commander"
-        fire = 10
-        shock = 10
-        manuever = 10
-        siege = 10
+spell_effect__polymorph = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
     }
     
-    country_event = { id = wwu_magic_effect.1 days = 3650 }
+    scaled_spell_effect__polymorph = yes
 }
 
-# Evocation
-evocation_effect = {
-    add_corruption = 2
-    
-    custom_tooltip = EVOCATION_TT
-    
-    hidden_effect = {
-        evocation_cooldown_effect = {
-            MODIFIER            = evocation_cooldown
-            DURATION_POOR       = 1825
-            DURATION_COMMON     = 1460
-            DURATION_RARE       = 1095
-            DURATION_EPIC       = 730
-            DURATION_LEGENDARY  = 365
-        }
-    }
-}
-
-#-----------------------------
-# Holy
-#-----------------------------
-allied_favors_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        every_ally = {
-            ROOT = {
-                add_favors = {
-                    who = PREV
-                    amount = 50
-                }
-            }
-        }
-    }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        every_ally = {
-            ROOT = {
-                add_favors = {
-                    who = PREV
-                    amount = 40
-                }
-            }
-        }
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        every_ally = {
-            ROOT = {
-                add_favors = {
-                    who = PREV
-                    amount = 30
-                }
-            }
-        }
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        every_ally = {
-            ROOT = {
-                add_favors = {
-                    who = PREV
-                    amount = 20
-                }
-            }
-        }
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        every_ally = {
-            ROOT = {
-                add_favors = {
-                    who = PREV
-                    amount = 10
-                }
-            }
-        }
-    }
-}
-
-judgment_effect = {
-    custom_tooltip = KILL_ENEMY_UNITS_IN_COUNTRY_TT
-    
-    hidden_effect = {
-        every_owned_province = {
-            kill_units = {
-                who = enemy
-            }
-        }
-    }
-}
-
-avatar_of_the_light_effect = {
-    define_general = {
-        name = "Avatar of the Light"
-        fire = 6
-        shock = 6
-        manuever = 6
-        siege = 6
+# Presence of Mind
+spell_effect__presence_of_mind = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
     
-    country_event = { id = wwu_magic_effect.2 days = 9125 } # 25 years
+    scaled_spell_effect__add_monarch_power = yes
 }
 
-#-----------------------------
-# Chi
-#-----------------------------
-expel_harm_effect = {
-    random_owned_province = {
-        spawn_rebels = {
-            type = pretender_rebels
-            size = 1
-        }
+# Touch of the Magic
+spell_effect__touch_of_the_magi = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
     }
     
-    custom_tooltip = EVOCATION_TT # This can be used for all types of evocation
+    add_scaled_spell_modifier = {
+        MODIFIER = touch_of_the_magi
+    }
+}
+
+# Alter Time
+spell_effect__alter_time = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
     
-    hidden_effect = {
-        evocation_cooldown_effect = {
-            MODIFIER            = expel_harm_cooldown
-            DURATION_POOR       = 1825
-            DURATION_COMMON     = 1460
-            DURATION_RARE       = 1095
-            DURATION_EPIC       = 730
-            DURATION_LEGENDARY  = 365
-        }
+    add_scaled_spell_modifier = {
+        MODIFIER = alter_time
     }
 }
 
-ring_of_peace_effect = {
-    if = {
-        limit = {
-            has_legendary_concentration = yes
-        }
-        
-        custom_tooltip = PREVENT_WAR_TT_10
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = chi_prevent_war
-                duration = 3650
-                hidden = yes
-            }
-        }
+#------------------------
+# Holy Spells
+#------------------------
+# Judgment
+spell_effect__judgment = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    else_if = {
-        limit = {
-            has_epic_concentration = yes
-        }
-        
-        custom_tooltip = PREVENT_WAR_TT_8
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = chi_prevent_war
-                duration = 2920
-                hidden = yes
-            }
-        }
-    }
-    else_if = {
-        limit = {
-            has_rare_concentration = yes
-        }
-        
-        custom_tooltip = PREVENT_WAR_TT_6
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = chi_prevent_war
-                duration = 2190
-                hidden = yes
-            }
-        }
-    }
-    else_if = {
-        limit = {
-            has_common_concentration = yes
-        }
-        
-        custom_tooltip = PREVENT_WAR_TT_4
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = chi_prevent_war
-                duration = 1460
-                hidden = yes
-            }
-        }
-    }
-    else_if = {
-        limit = {
-            has_poor_concentration = yes
-        }
-        
-        custom_tooltip = PREVENT_WAR_TT_2
-        hidden_effect = {
-            add_ruler_modifier = {
-                name = chi_prevent_war
-                duration = 730
-                hidden = yes
-            }
-        }
-    }
-}
-
-chi_burst_effect = {
-    every_owned_province = {
-        limit = {
-            has_siege = yes
-        }
-        kill_units = {
-            who = enemy
-        }
-    }
-}
-
-touch_of_death_effect = {
-    custom_tooltip = TOUCH_OF_DEATH_TT
     
-    hidden_effect = {
-        set_country_flag = touch_of_death
-    }
+    scaled_spell_effect__judgment = yes
 }
 
-#-----------------------------
-# Voodoo
-#-----------------------------
-# Sacrifice Victims
-sacrifice_victims_effect = {
-    add_yearly_manpower = -0.5
+# Divine Tempest
+spell_effect__divine_tempest = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
     
-    custom_tooltip = EVOCATION_TT
+    add_scaled_spell_modifier = {
+        MODIFIER = divine_tempest
+    }
+}
+
+# Fortifying Aura
+spell_effect__fortifying_aura = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
     
-    hidden_effect = {
-        evocation_cooldown_effect = {
-            MODIFIER            = evocation_cooldown
-            DURATION_POOR       = 1825
-            DURATION_COMMON     = 1460
-            DURATION_RARE       = 1095
-            DURATION_EPIC       = 730
-            DURATION_LEGENDARY  = 365
-        }
+    add_scaled_spell_modifier = {
+        MODIFIER = fortifying_aura
     }
 }
 
-curse_of_weakness_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        custom_tooltip = CURSE_OF_WEAKNESS_5_EFFECT_TT
+# Avatar of the Light
+spell_effect__avatar_of_the_light = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        custom_tooltip = CURSE_OF_WEAKNESS_4_EFFECT_TT
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        custom_tooltip = CURSE_OF_WEAKNESS_3_EFFECT_TT
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        custom_tooltip = CURSE_OF_WEAKNESS_2_EFFECT_TT
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        custom_tooltip = CURSE_OF_WEAKNESS_1_EFFECT_TT
-    }
-}
-
-drain_power_effect = {
-    custom_tooltip = KILL_ENEMY_UNITS_IN_COUNTRY_TT
     
-    hidden_effect = {
-        every_owned_province = {
-            kill_units = {
-                who = enemy
-            }
-        }
-    }
+    scaled_spell_effect__avatar_of_the_light = yes
 }
 
-mass_hex_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        custom_tooltip = MASS_HEX_EFFECT_5_TT
+#------------------------
+# Chi Spells
+#------------------------
+# Ring of Peace
+spell_effect__ring_of_peace = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        custom_tooltip = MASS_HEX_EFFECT_4_TT
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        custom_tooltip = MASS_HEX_EFFECT_3_TT
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        custom_tooltip = MASS_HEX_EFFECT_2_TT
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        custom_tooltip = MASS_HEX_EFFECT_1_TT
-    }
-
     
-    hidden_effect = {
-        # Legendary
-        if = {
-            limit = {
-                has_legendary_finesse = yes
-            }
-            
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-        }
-        # Epic
-        else_if = {
-            limit = {
-                has_epic_finesse = yes
-            }
-            
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-        }
-        # Rare
-        else_if = {
-            limit = {
-                has_rare_finesse = yes
-            }
-            
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-        }
-        # Common
-        else_if = {
-            limit = {
-                has_common_finesse = yes
-            }
-            
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-        }
-        # Poor
-        else_if = {
-            limit = {
-                has_poor_finesse = yes
-            }
-            
-            random_owned_province = {
-                limit = {
-                    NOT = { religion = ROOT }
-                }
-                
-                change_religion = ROOT
-            }
-        }
-    }
+    scaled_spell_effect__ring_of_peace = yes
 }
 
-resurrect_dire_troll_effect = {
-    custom_tooltip = RESURRECT_DIRE_TROLL_EFFECT_TT
+# Renewing Mists
+spell_effect__renewing_mist = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
     
-    hidden_effect = {
-        # Legendary
-        if = {
-            limit = {
-                has_legendary_finesse = yes
-            }
-            
-            define_general = {
-                name = "Dire Troll"
-                fire = 6
-                shock = 6
-                manuever = 6
-                siege = 6
-            }
-        }
-        # Epic
-        else_if = {
-            limit = {
-                has_epic_finesse = yes
-            }
-            
-            define_general = {
-                name = "Dire Troll"
-                fire = 5
-                shock = 5
-                manuever = 5
-                siege = 5
-            }
-        }
-        # Rare
-        else_if = {
-            limit = {
-                has_rare_finesse = yes
-            }
-            
-            define_general = {
-                name = "Dire Troll"
-                fire = 4
-                shock = 4
-                manuever = 4
-                siege = 4
-            }
-        }
-        # Common
-        else_if = {
-            limit = {
-                has_common_finesse = yes
-            }
-            
-            define_general = {
-                name = "Dire Troll"
-                fire = 3
-                shock = 3
-                manuever = 3
-                siege = 4
-            }
-        }
-        # Poor
-        else_if = {
-            limit = {
-                has_poor_finesse = yes
-            }
-            
-            define_general = {
-                name = "Dire Troll"
-                fire = 2
-                shock = 2
-                manuever = 2
-                siege = 4
-            }
-        }
+    add_scaled_spell_modifier = {
+        MODIFIER = renewing_mist
     }
 }
 
-big_bad_voodoo_effect = {
-    custom_tooltip = BIG_BAD_VOODOO_EFFECT_TT
+# Secret Infusion
+spell_effect__secret_infusion = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
+    }
     
-    hidden_effect = {
-        every_owned_province = {
-            limit = {
-                NOT = { is_core = ROOT }
-            }
-            
-            add_core = ROOT
-        }
+    add_scaled_spell_modifier = {
+        MODIFIER = secret_infusion
     }
 }
 
-#-----------------------------
-# Nature
-#-----------------------------
+# Mists of Wisdom
+spell_effect__mists_of_wisdom = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 8
+        EPIC = 9
+        RARE = 9
+        COMMON = 10
+        BASE = 10
+    }
+    
+    scaled_spell_effect__add_random_tech = yes
+}
 
-#-----------------------------
-# Undead
-#-----------------------------
+#------------------------
+# Voodoo Spells
+#------------------------
+# Mass Hex
+spell_effect__mass_hex = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+    scaled_spell_effect__mass_hex = yes
+}
 
-#-----------------------------
-# Shaman
-#-----------------------------
-# Adds Elemental Attunement based on ruler Finesse
-elemental_attunement_gain_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_karma = 25
+# Zombify
+spell_effect__zombify = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 4
+        EPIC = 5
+        RARE = 5
+        COMMON = 6
+        BASE = 6
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_karma = 20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_karma = 15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_karma = 10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_karma = 5
+    
+    add_scaled_spell_modifier = {
+        MODIFIER = zombify
     }
 }
 
-# Removes Elemental Attunement based on ruler Finesse
-elemental_attunement_loss_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_karma = -25
+# Healing Wave
+spell_effect__healing_wave = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_karma = -20
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_karma = -15
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_karma = -10
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_karma = -5
+    
+    add_scaled_spell_modifier = {
+        MODIFIER = healing_wave
     }
 }
 
-#-----------------------------
-# Fel
-#-----------------------------
-# Adds Unholy Influence based on ruler Finesse
-unholy_influence_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_papal_influence = 100
+# Big Bad Voodoo
+spell_effect__big_bad_voodoo = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 8
+        EPIC = 9
+        RARE = 9
+        COMMON = 10
+        BASE = 10
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_papal_influence = 80
-    }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_papal_influence = 60
-    }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_papal_influence = 40
-    }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_papal_influence = 20
-    }
+    
+    scaled_spell_effect__big_bad_voodoo = yes
 }
 
-#-----------------------------
-# Draconic
-#-----------------------------
-# Adds Harmony based on ruler Finesse
-harmony_spell_effect = {
-    # Legendary
-    if = {
-        limit = {
-            has_legendary_finesse = yes
-        }
-        
-        add_harmony = 100
+#------------------------
+# Nature Spells
+#------------------------
+spell_effect__nature_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Epic
-    else_if = {
-        limit = {
-            has_epic_finesse = yes
-        }
-        
-        add_harmony = 80
+    
+}
+spell_effect__nature_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Rare
-    else_if = {
-        limit = {
-            has_rare_finesse = yes
-        }
-        
-        add_harmony = 60
+    
+}
+spell_effect__nature_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Common
-    else_if = {
-        limit = {
-            has_common_finesse = yes
-        }
-        
-        add_harmony = 40
+    
+}
+spell_effect__nature_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
     }
-    # Poor
-    else_if = {
-        limit = {
-            has_poor_finesse = yes
-        }
-        
-        add_harmony = 20
-    }
+    
 }
 
-#-----------------------------
-# Corruption
-#-----------------------------
+#------------------------
+# Necromancy Spells
+#------------------------
+spell_effect__necromancy_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__necromancy_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__necromancy_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__necromancy_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Shadow
-#-----------------------------
+#------------------------
+# Shamanism Spells
+#------------------------
+spell_effect__shamanism_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shamanism_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shamanism_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shamanism_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Titanic
-#-----------------------------
+#------------------------
+# Fel Spells
+#------------------------
+spell_effect__fel_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fel_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fel_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fel_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Runic
-#-----------------------------
+#------------------------
+# Draconic Spells
+#------------------------
+spell_effect__draconic_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__draconic_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__draconic_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__draconic_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Nightmare
-#-----------------------------
+#------------------------
+# Corruption Spells
+#------------------------
+spell_effect__corruption_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__corruption_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__corruption_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__corruption_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Earth
-#-----------------------------
+#------------------------
+# Shadow Spells
+#------------------------
+spell_effect__shadow_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shadow_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shadow_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__shadow_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Fire
-#-----------------------------
+#------------------------
+# Titanic Spells
+#------------------------
+spell_effect__titanic_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__titanic_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__titanic_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__titanic_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Water
-#-----------------------------
+#------------------------
+# Runic Spells
+#------------------------
+spell_effect__runic_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__runic_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__runic_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__runic_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Wind
-#-----------------------------
+#------------------------
+# Nightmare Spells
+#------------------------
+spell_effect__nightmare_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__nightmare_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__nightmare_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__nightmare_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Domination
-#-----------------------------
+#------------------------
+# Earth Spells
+#------------------------
+spell_effect__earth_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__earth_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__earth_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__earth_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
 
-#-----------------------------
-# Soul
-#-----------------------------
+#------------------------
+# Fire Spells
+#------------------------
+spell_effect__fire_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fire_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fire_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__fire_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+
+#------------------------
+# Water Spells
+#------------------------
+spell_effect__water_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__water_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__water_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__water_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+
+#------------------------
+# Wind Spells
+#------------------------
+spell_effect__wind_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__wind_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__wind_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__wind_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+
+#------------------------
+# Domination Spells
+#------------------------
+spell_effect__domination_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__domination_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__domination_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__domination_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+
+#------------------------
+# Soul Spells
+#------------------------
+spell_effect__soul_spell_1 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__soul_spell_2 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__soul_spell_3 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}
+spell_effect__soul_spell_4 = {
+    lose_scaled_mana_cost = { 
+        LEGENDARY = 6
+        EPIC = 7
+        RARE = 7
+        COMMON = 8
+        BASE = 8
+    }
+    
+}

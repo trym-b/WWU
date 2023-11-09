@@ -10,22 +10,19 @@ custom_button = {
     tooltip = SPELLBOOK_MAGICAL_STUDY_HOVER_TT
     
     potential = {
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
-        NOT = { has_ruler_modifier = spellcaster_capabilities }
+        is_ruler_information_panel_open = yes
+        is_not_spellcaster = yes
     }
     
     trigger = { 
         custom_trigger_tooltip = {
             tooltip = MAGIC_GUI_STUDY_NOT_OPEN_TT
-            NOT = { has_magical_study_window_open = yes }
+            NOT = { is_magical_study_gui_open = yes }
         }
     }
     
     effect = { 
-        hidden_effect = {
-            set_country_flag = gui_flag__magic_study_gui_open
-            log = "[Root.GetName] -  ruler_magic_study_button"
-        }
+        open_magical_study_gui = yes
     }
 }
 
@@ -35,22 +32,19 @@ custom_button = {
     tooltip = SPELLBOOK_HOVER_TT
     
     potential = {
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
-        has_ruler_modifier = spellcaster_capabilities
+        is_ruler_information_panel_open = yes
+        is_spellcaster = yes
     }
     
     trigger = { 
         custom_trigger_tooltip = {
             tooltip = MAGIC_GUI_USAGE_NOT_OPEN_TT
-            NOT = { has_spellbook_window_open = yes }
+            NOT = { is_spellbook_gui_open = yes }
         }
     }
     
     effect = { 
-        hidden_effect = {
-            set_country_flag = gui_flag__magic_usage_gui_open
-            log = "[Root.GetName] -  ruler_magic_usage_button"
-        }
+        open_spellbook_gui = yes
     }
 }
 
@@ -61,7 +55,7 @@ custom_button = {
 custom_icon = {
    name = magic_usage_view_background
    potential = { 
-        has_spellbook_window_open = yes
+        is_spellbook_gui_open = yes
    }
 }
 
@@ -69,7 +63,7 @@ custom_icon = {
 custom_icon = {
    name = magic_study_view_background
    potential = { 
-        has_magical_study_window_open = yes
+        is_magical_study_gui_open = yes
    }
 }
 
@@ -77,7 +71,7 @@ custom_icon = {
 custom_icon = {
    name = magic_school_selection_background
    potential = { 
-        has_country_flag = gui_flag__magic_school_selection_open
+        is_magic_school_selection_panel_open = yes
    }
 }
 
@@ -87,8 +81,8 @@ custom_button = {
     
     potential = {
         OR = {
-            has_magical_study_window_open = yes
-            has_spellbook_window_open = yes
+            is_magical_study_gui_open = yes
+            is_spellbook_gui_open = yes
         }
     }
     
@@ -97,11 +91,9 @@ custom_button = {
     }
     
     effect = { 
-        hidden_effect = {
-            clr_country_flag = gui_flag__magic_study_gui_open
-            clr_country_flag = gui_flag__magic_usage_gui_open
-            clr_country_flag = gui_flag__magic_school_selection_open
-        }
+        close_magical_study_gui = yes
+        close_spellbook_gui = yes
+        close_magic_school_selection_panel = yes
     }
 }
 
@@ -111,8 +103,8 @@ custom_button = {
     
     potential = {
         OR = {
-            has_magical_study_window_open = yes
-            has_spellbook_window_open = yes
+            is_magical_study_gui_open = yes
+            is_spellbook_gui_open = yes
         }
     }
     
@@ -121,11 +113,9 @@ custom_button = {
     }
     
     effect = { 
-        hidden_effect = {
-            clr_country_flag = gui_flag__magic_study_gui_open
-            clr_country_flag = gui_flag__magic_usage_gui_open
-            clr_country_flag = gui_flag__magic_school_selection_open
-        }
+        close_magical_study_gui = yes
+        close_spellbook_gui = yes
+        close_magic_school_selection_panel = yes
     }
 }
 

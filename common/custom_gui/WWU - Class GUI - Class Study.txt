@@ -5,7 +5,7 @@
 custom_icon = {
    name = class_gui_view_background
    potential = { 
-        has_country_flag = gui_flag__class_study_gui_open
+        is_class_study_gui_open = yes
    }
 }
 
@@ -15,21 +15,21 @@ custom_icon = {
 custom_text_box = {
    name = class_gui_study_title
    potential = { 
-        has_country_flag = gui_flag__class_study_gui_open
+        is_class_study_gui_open = yes
    }
 }
 
 custom_text_box = {
    name = class_gui_study_selection
    potential = { 
-        has_country_flag = gui_flag__class_study_gui_open
+        is_class_study_gui_open = yes
    }
 }
 
 custom_text_box = {
    name = class_gui_abilities_title
    potential = { 
-        has_country_flag = gui_flag__class_abilities_gui_open
+        is_class_abilities_gui_open = yes
    }
 }
 
@@ -39,8 +39,8 @@ custom_button = {
    tooltip = CLASS_STUDY_START_HOVER_TT
     
     potential = {
-        has_class_study_window_open = yes
-        NOT = { has_ruler_modifier = class_training }
+        is_class_study_gui_open = yes
+        is_not_in_class_training = yes
     }
     
     trigger = { 
@@ -49,17 +49,16 @@ custom_button = {
     
     effect = { 
         custom_tooltip = TOGGLE_CLASS_SELECTION_TT
-        hidden_effect = {
-            if = {
-                limit = {
-                    has_country_flag = gui_flag__class_selection_gui_open
-                }
-                
-                clr_country_flag = gui_flag__class_selection_gui_open
+        
+        if = {
+            limit = {
+                is_class_selection_panel_open = yes
             }
-            else = {
-                set_country_flag = gui_flag__class_selection_gui_open
-            }
+            
+            open_class_selection_panel = yes
+        }
+        else = {
+            close_class_selection_panel = yes
         }
     }
 }
@@ -70,8 +69,8 @@ custom_button = {
     tooltip = CLASS_STUDY_CANCEL_HOVER_TT
     
     potential = {
-        has_class_study_window_open = yes
-        has_ruler_modifier = class_training
+        is_class_study_gui_open = yes
+        is_in_class_training = yes
     }
     
     trigger = { 
@@ -89,8 +88,8 @@ custom_button = {
    tooltip = CLASS_STUDY_BOOST_HOVER_TT
     
     potential = {
-        has_class_study_window_open = yes
-        has_ruler_modifier = class_training
+        is_class_study_gui_open = yes
+        is_in_class_training = yes
     }
     
     trigger = {     
@@ -108,7 +107,7 @@ custom_text_box = {
    tooltip = CLASS_STUDY_PROGRESS_HOVER_TT
    
    potential = { 
-        has_class_study_window_open = yes
+        is_class_study_gui_open = yes
    }
 }
 
@@ -119,7 +118,7 @@ custom_text_box = {
 custom_icon = {
    name = class_selection_background
    potential = { 
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
    }
 }
 
@@ -128,7 +127,7 @@ custom_text_box = {
    name = class_gui_class_section_title
    
    potential = { 
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
    }
 }
 
@@ -138,7 +137,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_WARRIOR_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -148,13 +147,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_warrior
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = warrior }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Paladin
@@ -163,7 +157,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_PALADIN_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -173,13 +167,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_paladin
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = paladin }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Priest
@@ -188,7 +177,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_PRIEST_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -198,13 +187,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_priest
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = priest }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Rogue
@@ -213,7 +197,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_ROGUE_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -223,13 +207,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_rogue
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = rogue }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Mage
@@ -238,7 +217,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_MAGE_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -248,13 +227,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_mage
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = mage }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Warlock
@@ -263,7 +237,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_WARLOCK_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -273,13 +247,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_warlock
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = warlock }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Druid
@@ -288,7 +257,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_DRUID_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -298,13 +267,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_druid
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = druid }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Hunter
@@ -313,7 +277,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_HUNTER_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -323,13 +287,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_hunter
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = hunter }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Shaman
@@ -338,7 +297,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_SHAMAN_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -348,13 +307,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_shaman
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = shaman }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Death Knight
@@ -363,7 +317,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_DEATH_KNIGHT_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -373,13 +327,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_death_knight
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = death_knight }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Monk
@@ -388,7 +337,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_MONK_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -398,13 +347,8 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_monk
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = monk }
+        close_class_selection_panel = yes
     }
 }
 # Selection: Demon Hunter
@@ -413,7 +357,7 @@ custom_button = {
     tooltip = RULER_CLASS_SPECIALIZATION_HOVER_DEMON_HUNTER_TT
     
     potential = {
-        has_country_flag = gui_flag__class_selection_gui_open
+        is_class_selection_panel_open = yes
     }
     
     trigger = { 
@@ -423,12 +367,7 @@ custom_button = {
     
     effect = { 
         take_class_study_cost = yes
-        start_class_study = yes
-        
-        hidden_effect = {
-            set_ruler_flag = training_as_demon_hunter
-            reset_class_study = yes
-            clr_country_flag = gui_flag__class_selection_gui_open
-        }
+        start_class_study = { CLASS = demon_hunter }
+        close_class_selection_panel = yes
     }
 }

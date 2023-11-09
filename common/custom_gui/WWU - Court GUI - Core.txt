@@ -18,16 +18,14 @@ custom_button = {
     }
     
     effect = { 
-        hidden_effect = {
-            if = {
-                limit = {
-                    NOT = { has_country_flag = gui_flag__court_view_ruler_information_panel_open }
-                }
-                set_country_flag = gui_flag__court_view_ruler_information_panel_open
+        if = {
+            limit = {
+                NOT = { is_ruler_information_panel_open = yes }
             }
-            else = {
-                clr_country_flag = gui_flag__court_view_ruler_information_panel_open
-            }
+            open_ruler_information_panel = yes
+        }
+        else = {
+            close_ruler_information_panel = yes
         }
     }
 }
@@ -36,7 +34,7 @@ custom_button = {
 custom_icon = {
    name = ruler_information_panel_background
    potential = { 
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
+        is_ruler_information_panel_open = yes
    }
 }
 # Background
@@ -44,7 +42,7 @@ custom_text_box = {
    name = ruler_portrait
    tooltip = RULER_PORTRAIT_HOVER_TT
    potential = { 
-        has_country_flag = gui_flag__court_view_ruler_information_panel_open
+        is_ruler_information_panel_open = yes
    }
 }
 

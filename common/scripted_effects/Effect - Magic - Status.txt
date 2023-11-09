@@ -363,7 +363,7 @@ setup_spellcaster_history = {
         } 
         set_country_flag = ruler_learnt_magic_school_necromancy
     ]
-    [[shaman]
+    [[shamanism]
         set_variable = {
             which = magic_school
             value = 7
@@ -377,7 +377,7 @@ setup_spellcaster_history = {
         } 
         set_country_flag = ruler_learnt_magic_school_fel
     ]
-    [[dragon]
+    [[draconic]
         set_variable = {
             which = magic_school
             value = 9
@@ -398,7 +398,7 @@ setup_spellcaster_history = {
         } 
         set_country_flag = ruler_learnt_magic_school_shadow
     ]
-    [[titan]
+    [[titanic]
         set_variable = {
             which = magic_school
             value = 12
@@ -440,7 +440,7 @@ setup_spellcaster_history = {
         } 
         set_country_flag = ruler_learnt_magic_school_water
     ]
-    [[elemental_air]
+    [[elemental_wind]
         set_variable = {
             which = magic_school
             value = 18
@@ -1130,7 +1130,7 @@ set_magic_school = {
             set_country_flag = ruler_learnt_magic_school_necromancy
         }
     ]
-    [[shaman]
+    [[shamanism]
         custom_tooltip = SET_MAGIC_SCHOOL_SHAMANISM
         hidden_effect = {
             set_variable = {
@@ -1150,7 +1150,7 @@ set_magic_school = {
             set_country_flag = ruler_learnt_magic_school_fel
         }
     ]
-    [[dragon]
+    [[draconic]
         custom_tooltip = SET_MAGIC_SCHOOL_DRACONIC
         hidden_effect = {
             set_variable = {
@@ -1180,7 +1180,7 @@ set_magic_school = {
             set_country_flag = ruler_learnt_magic_school_shadow
         }
     ]
-    [[titan]
+    [[titanic]
         custom_tooltip = SET_MAGIC_SCHOOL_TITAN
         hidden_effect = {
             set_variable = {
@@ -1240,7 +1240,7 @@ set_magic_school = {
             set_country_flag = ruler_learnt_magic_school_water
         }
     ]
-    [[elemental_air]
+    [[elemental_wind]
         custom_tooltip = SET_MAGIC_SCHOOL_WIND
         hidden_effect = {
             set_variable = {
@@ -1288,13 +1288,94 @@ take_magic_school_change_cost = {
 }
 
 take_aptitude_boost_cost = {
-    add_adm_power = -250
+    if = {
+        limit = {
+            has_legendary_aptitude = yes
+        }
+        
+        add_adm_power = -600
+    }
+    else_if = {
+        limit = {
+            has_epic_aptitude = yes
+        }
+        add_adm_power = -500
+    }
+    else_if = {
+        limit = {
+            has_rare_aptitude = yes
+        }
+        add_adm_power = -400
+    }
+    else_if = {
+        limit = {
+            has_common_aptitude = yes
+        }
+        add_adm_power = -300
+    }
+    else = {
+        add_adm_power = -200
+    }
 }
 take_finesse_boost_cost = {
-    add_mil_power = -250
+    if = {
+        limit = {
+            has_legendary_finesse = yes
+        }
+        
+        add_mil_power = -600
+    }
+    else_if = {
+        limit = {
+            has_epic_finesse = yes
+        }
+        add_mil_power = -500
+    }
+    else_if = {
+        limit = {
+            has_rare_finesse = yes
+        }
+        add_mil_power = -400
+    }
+    else_if = {
+        limit = {
+            has_common_finesse = yes
+        }
+        add_mil_power = -300
+    }
+    else = {
+        add_mil_power = -200
+    }
 }
 take_concentration_boost_cost = {
-    add_dip_power = -250
+    if = {
+        limit = {
+            has_legendary_concentration = yes
+        }
+        
+        add_dip_power = -600
+    }
+    else_if = {
+        limit = {
+            has_epic_concentration = yes
+        }
+        add_dip_power = -500
+    }
+    else_if = {
+        limit = {
+            has_rare_concentration = yes
+        }
+        add_dip_power = -400
+    }
+    else_if = {
+        limit = {
+            has_common_concentration = yes
+        }
+        add_dip_power = -300
+    }
+    else = {
+        add_dip_power = -200
+    }
 }
 
 take_magical_study_cost = {
