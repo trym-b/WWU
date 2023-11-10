@@ -58,14 +58,14 @@ on_yearly_pulse__ai = {
             set_random_ai_handler_timer = { MODIFIER = ai_handler__class_abilities_timer }
         }
         
-        # Doctrines
+        # Stratagems
         if = {
             limit = {
                 NOT = { has_country_modifier = ai_handler__stratagems_timer }
             }
             
-            # country_event = { id = wwu_ai_handler.20 }
-            set_random_ai_handler_timer = { MODIFIER = ai_handler__stratagems_timer }
+            country_event = { id = wwu_ai_handler.20 }
+            set_random_ai_handler_long_timer = { MODIFIER = ai_handler__stratagems_timer }
         }
         
         # Artifacts
@@ -133,7 +133,6 @@ on_five_year_pulse_4__ai = {
 # Misc
 #-----------------------------------
 init_default_ai_cooldowns = {
-    # Randomise the AI limiters so the AI don't use the decisions simultaneously 
     if = {
         limit = {
             ai = yes
@@ -144,22 +143,34 @@ init_default_ai_cooldowns = {
         set_random_ai_handler_timer = { MODIFIER = ai_handler__spellbook_spell_timer }
         set_random_ai_handler_timer = { MODIFIER = ai_handler__class_study_timer }
         set_random_ai_handler_timer = { MODIFIER = ai_handler__class_abilities_timer }
-        set_random_ai_handler_timer = { MODIFIER = ai_handler__stratagems_timer }
+        set_random_ai_handler_long_timer = { MODIFIER = ai_handler__stratagems_timer }
         set_random_ai_handler_timer = { MODIFIER = ai_handler__artifacts_timer }
         set_random_ai_handler_timer = { MODIFIER = ai_handler__faction_menu_timer }
     }
 }
 
+# Used for frequent features such as Magic
 set_random_ai_handler_timer = {
     random_list = {
-            25 = { add_country_modifier = { name = $MODIFIER$ duration =  365 } } # 1 year
-            25 = { add_country_modifier = { name = $MODIFIER$ duration =  730 } } # 2 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1095 } } # 3 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1460 } } # 4 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 1825 } } # 5 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2190 } } # 6 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2555 } } # 7 years
-            25 = { add_country_modifier = { name = $MODIFIER$ duration = 2920 } } # 8 years
-        }
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  365 } } # 1 year
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  730 } } # 2 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 1095 } } # 3 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 1460 } } # 4 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 1825 } } # 5 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 2190 } } # 6 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 2555 } } # 7 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 2920 } } # 8 years
+    }
+}
+
+# Used for infrequent features such as Stratagems
+set_random_ai_handler_long_timer = {
+    random_list = {
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  1825 } } # 5 year
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  3650 } } # 10 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  5475 } } # 15 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  7300 } } # 20 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration =  9125 } } # 25 years
+        25 = { add_country_modifier = { name = $MODIFIER$ duration = 10950 } } # 30 years
     }
 }
