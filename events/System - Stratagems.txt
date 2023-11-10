@@ -1,0 +1,258 @@
+namespace = wwu_stratagems
+
+#-------------------------
+# Helper Events
+#-------------------------
+# These are to delay the kill_units effect so it doesn't occur in the same frame as the province controller change, which causes a CTD
+
+# Rebel Kill
+province_event = {
+	id = wwu_stratagems.50
+	title = wwu_stratagems.50.title
+	desc = wwu_stratagems.50.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_stratagems.50.option.a
+    
+        kill_units = { 
+            who = REB
+        }
+    }
+}
+# Rebel Occupation Revert
+province_event = {
+	id = wwu_stratagems.51
+	title = wwu_stratagems.51.title
+	desc = wwu_stratagems.51.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		name = wwu_stratagems.51.option.a
+    
+        change_controller = owner
+    }
+}
+
+#-------------------------
+# Notification Events
+#-------------------------
+# These notify the opposing party if at war with a nation with the following doctrines active.
+# This is so a player can see why the doctrine differences are occuring and allow for counter-play
+
+# Notification: Sow Terror
+country_event = {
+	id = wwu_stratagems.60
+	title = wwu_stratagems.60.title
+	desc = wwu_stratagems.60.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = stratagem_notification__sow_terror
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.60.option.a
+    
+        custom_tooltip = OFFENSIVE_STRATAGEM_sow_terror_ENEMY_TT
+    }
+}
+
+# Notification: Slash and Burn
+country_event = {
+	id = wwu_stratagems.61
+	title = wwu_stratagems.61.title
+	desc = wwu_stratagems.61.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = stratagem_notification__slash_and_burn
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.61.option.a
+    
+        custom_tooltip = OFFENSIVE_STRATAGEM_slash_and_burn_ENEMY_TT
+    }
+}
+
+# Notification: Martyrdom
+country_event = {
+	id = wwu_stratagems.63
+	title = wwu_stratagems.63.title
+	desc = wwu_stratagems.63.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = stratagem_notification__martyrdom
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.63.option.a
+    
+        custom_tooltip = DEFENSIVE_STRATAGEM_martyrdom_ENEMY_TT
+    }
+}
+
+# Notification: Sabotage
+country_event = {
+	id = wwu_stratagems.64
+	title = wwu_stratagems.64.title
+	desc = wwu_stratagems.64.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = stratagem_notification__sabotage
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.64.option.a
+    
+        custom_tooltip = DEFENSIVE_STRATAGEM_SABOTAGE_ENEMY_TT
+    }
+}
+
+# Notification: Slander
+country_event = {
+	id = wwu_stratagems.65
+	title = wwu_stratagems.65.title
+	desc = wwu_stratagems.65.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = stratagem_notification__slander
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.64.option.a
+    
+        custom_tooltip = DEFENSIVE_STRATAGEM_slander_ENEMY_TT
+    }
+}
+
+# Notification: Enslave the Remnants 
+country_event = {
+	id = wwu_stratagems.66
+	title = wwu_stratagems.66.title
+	desc = wwu_stratagems.66.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = doctrine_notify_enslavement
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.66.option.a
+    
+        custom_tooltip = OFFENSIVE_STRATAGEM_enslavement_ENEMY_TT
+    }
+}
+
+# Notification: Purify and Cleanse
+country_event = {
+	id = wwu_stratagems.67
+	title = wwu_stratagems.67.title
+	desc = wwu_stratagems.67.desc
+	picture = ALARM_O_BOT_eventPicture
+	
+    is_triggered_only = yes
+    
+    mean_time_to_happen = { 
+        days = 1 
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = doctrine_notify_purification
+        }
+    }
+    
+	option = {
+		name = wwu_stratagems.67.option.a
+    
+        custom_tooltip = OFFENSIVE_STRATAGEM_purification_ENEMY_TT
+    }
+}
+
+# Reset Notification flags
+country_event = {
+	id = wwu_stratagems.99
+	title = wwu_stratagems.99.title
+	desc = wwu_stratagems.99.desc
+	picture = EQUALITY_eventPicture
+	
+    hidden = yes
+	is_triggered_only = yes
+
+    trigger = {
+        # Only remove the flags if ROOT is no longer at war, as this can be called whilst ROOT remains at war.
+        is_at_war = no
+    }
+
+	option = {
+		name = wwu_stratagems.99.option.a
+    
+        clr_country_flag = stratagem_notification__sow_terror
+        clr_country_flag = stratagem_notification__slash_and_burn
+        clr_country_flag = stratagem_notification__enslavement
+        clr_country_flag = stratagem_notification__purification
+        clr_country_flag = stratagem_notification__martyrdom
+        clr_country_flag = stratagem_notification__sabotage
+        clr_country_flag = stratagem_notification__slander
+    }
+}
+
