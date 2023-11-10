@@ -3307,3 +3307,54 @@ country_event = {
         }
 	}
 }
+
+#----------------------------
+# Mission Switch
+#----------------------------
+# This emulates the Mission Tab GUI features for the AI.
+country_event = {
+	id = wwu_ai_handler.100
+	title = wwu_ai_handler.100.title
+	desc = wwu_ai_handler.100.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        has_unique_mission_tab = yes
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Rise of the Horde
+	option = {
+		name = wwu_ai_handler.100.option.a
+        
+        trigger = {
+            has_mission_tab__rise_of_the_horde = yes
+        }
+        
+        switch_missions_to_rise_of_the_horde_missions = yes
+        
+        log = "[Root.GetName] - Mission Switch: Rise of the Horde"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+    # Personal
+	option = {
+		name = wwu_ai_handler.100.option.a
+        
+        switch_missions_to_personal = yes
+        
+        log = "[Root.GetName] - Mission Switch: Personal"
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+}

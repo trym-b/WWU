@@ -4,6 +4,21 @@
 #--------------
 # Mission View
 #--------------
+# Titles
+custom_text_box = {
+   name = window_title
+   potential = { 
+        NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+   }
+}
+custom_text_box = {
+   name = rise_of_the_horde_window_title
+   potential = { 
+        is_in_mission_tab__rise_of_the_horde = yes
+   }
+}
+
+
 # Close
 custom_button = {
     name = stratagem_close_button
@@ -110,5 +125,51 @@ custom_button = {
     effect = { 
         open_stratagem_gui = yes
         close_archaeology_gui = yes
+    }
+}
+
+#--------------
+# Tabs
+#--------------
+custom_button = {
+    name = personal_missions_tab
+    tooltip = SHOW_PERSONAL_MISSIONS_TT
+    
+    potential = {
+        # There share the core window type, hide the tab if within them
+        NOT = { is_archaeology_gui_open = yes }
+        NOT = { is_stratagem_gui_open = yes } 
+        
+        # Only show if they actually have an option
+        has_mission_tab__rise_of_the_horde = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        switch_missions_to_personal = yes
+    }
+}
+custom_button = {
+    name = story_missions_tab
+    tooltip = SHOW_RISE_OF_THE_HORDE_TT
+    
+    potential = {
+        # There share the core window type, hide the tab if within them
+        NOT = { is_archaeology_gui_open = yes }
+        NOT = { is_stratagem_gui_open = yes } 
+        
+        # Only show if they actually have an option
+        has_mission_tab__rise_of_the_horde = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        switch_missions_to_rise_of_the_horde_missions = yes
     }
 }
