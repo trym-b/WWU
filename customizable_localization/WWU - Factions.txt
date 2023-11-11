@@ -4,43 +4,92 @@
 # Please add one example sentence for each key.
 
 defined_text = {
-    name = GetAllianceActiveInactive
+    name = GetAllianceStatus
 
     text = {
-        localisation_key = alliance_active
+        localisation_key = FACTION_STATUS_ALLIANCE_HEAD
+        
         trigger = {
-			event_target:alliance_head_target = {
-				exists = yes
-			}
+			has_country_modifier = head_of_alliance
         }
     }
     text = {
-        localisation_key = alliance_inactive
+        localisation_key = FACTION_STATUS_ALLIANCE_MEMBER
+        
         trigger = {
-			event_target:alliance_head_target = {
-				exists = no
-			}
+			NOT = { has_country_modifier = head_of_alliance }
         }
     }
 }
-
 defined_text = {
-    name = GetHordeActiveInactive
+    name = GetOldHordeStatus
 
     text = {
-        localisation_key = horde_active
+        localisation_key = FACTION_STATUS_OLD_HORDE_HEAD
+        
         trigger = {
-			event_target:horde_head_target = {
-				exists = yes
-			}
+			has_country_modifier = head_of_old_horde
         }
     }
     text = {
-        localisation_key = horde_inactive
+        localisation_key = FACTION_STATUS_OLD_HORDE_MEMBER
+        
         trigger = {
-			event_target:horde_head_target = {
-				exists = no
-			}
+			NOT = { has_country_modifier = head_of_old_horde }
+        }
+    }
+}
+defined_text = {
+    name = GetHordeStatus
+
+    text = {
+        localisation_key = FACTION_STATUS_HORDE_HEAD
+        
+        trigger = {
+			has_country_modifier = head_of_horde
+        }
+    }
+    text = {
+        localisation_key = FACTION_STATUS_HORDE_MEMBER
+        
+        trigger = {
+			NOT = { has_country_modifier = head_of_horde }
+        }
+    }
+}
+defined_text = {
+    name = GetTradeCoalitionStatus
+
+    text = {
+        localisation_key = FACTION_STATUS_TRADE_COALITION_HEAD
+        
+        trigger = {
+			has_country_modifier = head_of_trade_coalition
+        }
+    }
+    text = {
+        localisation_key = FACTION_STATUS_TRADE_COALITION_MEMBER
+        
+        trigger = {
+			NOT = { has_country_modifier = head_of_trade_coalition }
+        }
+    }
+}
+defined_text = {
+    name = GetDragonAspectsStatus
+
+    text = {
+        localisation_key = FACTION_STATUS_DRAGON_ASPECTS_HEAD
+        
+        trigger = {
+			has_country_modifier = head_of_dragon_aspects
+        }
+    }
+    text = {
+        localisation_key = FACTION_STATUS_DRAGON_ASPECTS_MEMBER
+        
+        trigger = {
+			NOT = { has_country_modifier = head_of_dragon_aspects }
         }
     }
 }
