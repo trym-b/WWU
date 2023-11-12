@@ -352,6 +352,59 @@ on_monthly_pulse__faction = {
 
 on_yearly_pulse__faction = {
     #------------
+    # Faction Renown
+    #------------
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        
+        random_list = {
+            10 = { change_variable = { which = faction_renown value = 1 } }
+            10 = { change_variable = { which = faction_renown value = 2 } }
+            10 = { change_variable = { which = faction_renown value = 3 } }
+        }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = faction_renown
+                    value = 100
+                }
+            }
+            set_variable = {
+                which = faction_renown
+                value = 100
+            }
+        }
+    }
+    if = {
+        limit = {
+            is_any_faction_member = yes
+        }
+        
+        random_list = {
+            10 = { }
+            10 = { change_variable = { which = faction_renown value = 1 } }
+            10 = { change_variable = { which = faction_renown value = 2 } }
+            10 = { change_variable = { which = faction_renown value = 3 } }
+        }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = faction_renown
+                    value = 100
+                }
+            }
+            set_variable = {
+                which = faction_renown
+                value = 100
+            }
+        }
+    }
+
+    #------------
     # Decisions
     #------------
     # The heavy checks are done here (once per year) to reduce load, as checking directly in the
@@ -996,3 +1049,472 @@ clear_faction_view_flags = {
     clr_country_flag = gui_flag__open_dragon_aspects_view
     
 }
+
+boost_faction_renown = {
+    hidden_effect = {
+        change_variable = {
+            which = faction_renown
+            value = 5
+        }
+        
+        if = {
+            limit = {
+                check_variable = {
+                    which = faction_renown
+                    value = 100
+                }
+            }
+            
+            set_variable = {
+                which = faction_renown
+                value = 100
+            }
+        }
+    }
+}
+
+reset_faction_renown = {
+    hidden_effect = {
+        set_variable = {
+            which = faction_renown
+            value = 0
+        }
+    }
+}
+
+setup_default_faction_variables = {
+    hidden_effect = {
+        set_variable = {
+            which = faction_renown
+            value = 0
+        }
+    }
+}
+
+#-------------------
+# Faction Decisions
+#-------------------
+# Alliance
+alliance_decision_effect_1 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_yearly_manpower = 5.0
+    }
+    else = {
+        add_yearly_manpower = 3.0
+    }
+}
+alliance_decision_effect_2 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_prestige = 33
+    }
+    else = {
+        add_prestige = 25
+    }
+}
+alliance_decision_effect_3 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        if = {
+            limit = {
+                has_dlc = "The Cossacks"
+            }
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_alliance
+                }
+                ROOT = {
+                    add_favors = {
+                        who = PREV
+                        amount = 50
+                    }
+                }
+            }
+        }
+        else = {
+            add_dip_power = 300
+        }
+    }
+    else = {
+        if = {
+            limit = {
+                has_dlc = "The Cossacks"
+            }
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_alliance
+                }
+                ROOT = {
+                    add_favors = {
+                        who = PREV
+                        amount = 30
+                    }
+                }
+            }
+        }
+        else = {
+            add_dip_power = 150
+        }
+    }
+}
+alliance_decision_effect_4 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_inspired_fervor
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_inspired_fervor
+            duration = 1825
+        }
+    }
+}
+alliance_decision_effect_5 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_idea_disemmination
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_idea_disemmination
+            duration = 3650
+        }
+    }
+}
+    
+# Old Horde
+old_horde_decision_effect_1 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_yearly_manpower = 5.0
+    }
+    else = {
+        add_yearly_manpower = 3.0
+    }
+}
+old_horde_decision_effect_2 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_resilience
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_resilience
+            duration = 1825
+        }
+    }
+}
+old_horde_decision_effect_3 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_corruption = -5
+    }
+    else = {
+        add_corruption = -3
+    }
+}
+old_horde_decision_effect_4 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = factiona_relentless_inspiration
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = factiona_relentless_inspiration
+            duration = 1825
+        }
+    }
+}
+old_horde_decision_effect_5 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_mil_power = 300
+    }
+    else = {
+        add_mil_power = 200
+    }
+}
+    
+    
+# Horde
+horde_decision_effect_1 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_call_to_unify
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_call_to_unify
+            duration = 1825
+        }
+    }
+}
+horde_decision_effect_2 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        create_general = {
+            tradition = 100
+        }
+    }
+    else = {
+        create_general = {
+            tradition = 80
+        }
+    }
+}
+horde_decision_effect_3 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_manufacturing_prowess
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_manufacturing_prowess
+            duration = 1825
+        }
+    }
+}
+horde_decision_effect_4 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_tolerance_of_all
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_tolerance_of_all
+            duration = 1825
+        }
+    }
+}
+horde_decision_effect_5 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        capital_scope = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+        }
+    }
+    else = {
+        capital_scope = {
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 2
+        }
+    }
+}
+    
+# Trade Coalition
+trade_coalition_decision_effect_1 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_loan = {
+            fixed_interest = 0.0
+            duration = 120
+        }
+    }
+    else = {
+        add_loan = {
+            fixed_interest = 0.0
+            duration = 64
+        }
+    }
+}
+trade_coalition_decision_effect_2 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_mercantilism = 4
+    }
+    else = {
+        add_mercantilism = 2
+    }
+}
+trade_coalition_decision_effect_3 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_local_developments
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_local_developments
+            duration = 1825
+        }
+    }
+}
+trade_coalition_decision_effect_4 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_distant_headquarters
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_distant_headquarters
+            duration = 1825
+        }
+    }
+}
+trade_coalition_decision_effect_5 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_major_trade_influence
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_major_trade_influence
+            duration = 3650
+        }
+    }
+}
+    
+    
+# Dragon Aspects
+dragon_aspects_decision_effect_1 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_favour_of_the_green_dragonflight
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_favour_of_the_green_dragonflight
+            duration = 3650
+        }
+    }
+}
+dragon_aspects_decision_effect_2 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_favour_of_the_black_dragonflight
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_favour_of_the_black_dragonflight
+            duration = 3650
+        }
+    }
+}
+dragon_aspects_decision_effect_3 = {
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_corruption = -5
+    }
+    else = {
+        add_corruption = -3
+    }
+}
+dragon_aspects_decision_effect_4 = {
+    random_list = {
+        10 = { add_adm_tech = 1 }
+        10 = { add_dip_tech = 1 }
+        10 = { add_mil_tech = 1 }
+    }
+}
+dragon_aspects_decision_effect_5 = {
+    if = {
+        limit = { has_dlc = "Golden Century" }
+        
+        if = {
+            limit = {
+                is_any_faction_head = yes
+            }
+            reset_golden_age = yes
+        }
+        else = {
+            reset_golden_age = yes
+        }
+    }
+    else = {
+        if = {
+            limit = {
+                is_any_faction_head = yes
+            }
+            add_prestige = 50
+        }
+        else = {
+            add_prestige = 25
+        }
+    }
+}
+    
