@@ -1073,25 +1073,85 @@ boost_faction_renown = {
     }
 }
 
-boost_faction_renown_called_to_war = {
+reduce_faction_renown_20 = {
+    custom_tooltip = REDUCE_FACTION_RENOWN_20_TT
+    
     hidden_effect = {
-        change_variable = {
+        subtract_variable = {
             which = faction_renown
-            value = 10
+            value = 20
         }
         
-        if = {
-            limit = {
+        floor_faction_renown = yes
+    }
+}
+
+reduce_faction_renown_40 = {
+    custom_tooltip = REDUCE_FACTION_RENOWN_40_TT
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = faction_renown
+            value = 40
+        }
+        
+        floor_faction_renown = yes
+    }
+}
+
+reduce_faction_renown_60 = {
+    custom_tooltip = REDUCE_FACTION_RENOWN_60_TT
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = faction_renown
+            value = 60
+        }
+        
+        floor_faction_renown = yes
+    }
+}
+
+reduce_faction_renown_80 = {
+    custom_tooltip = REDUCE_FACTION_RENOWN_80_TT
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = faction_renown
+            value = 80
+        }
+        
+        floor_faction_renown = yes
+    }
+}
+
+reduce_faction_renown_100 = {
+    custom_tooltip = REDUCE_FACTION_RENOWN_100_TT
+    
+    hidden_effect = {
+        subtract_variable = {
+            which = faction_renown
+            value = 100
+        }
+        
+        floor_faction_renown = yes
+    }
+}
+
+floor_faction_renown = {
+    if = {
+        limit = {
+            NOT = {
                 check_variable = {
                     which = faction_renown
-                    value = 100
+                    value = 0
                 }
             }
-            
-            set_variable = {
-                which = faction_renown
-                value = 100
-            }
+        }
+        
+        set_variable = {
+            which = faction_renown
+            value = 0
         }
     }
 }
@@ -1114,127 +1174,163 @@ setup_default_faction_variables = {
     }
 }
 
-#-------------------
-# Faction Decisions
-#-------------------
-# Alliance
+#--------------------------------------
+# Faction Decisions: Alliance
+#--------------------------------------
+# Call upon Compatriots
 alliance_decision_effect_1 = {
+    reduce_faction_renown_20 = yes
+
     if = {
         limit = {
             is_any_faction_head = yes
         }
-        add_yearly_manpower = 5.0
-    }
-    else = {
         add_yearly_manpower = 3.0
     }
+    else = {
+        add_yearly_manpower = 2.0
+    }
 }
+# Bolster Standing
 alliance_decision_effect_2 = {
-    if = {
-        limit = {
-            is_any_faction_head = yes
-        }
-        add_prestige = 33
-    }
-    else = {
-        add_prestige = 25
-    }
-}
-alliance_decision_effect_3 = {
-    if = {
-        limit = {
-            is_any_faction_head = yes
-        }
-        if = {
-            limit = {
-                has_dlc = "The Cossacks"
-            }
-            every_country = {
-                limit = {
-                    has_country_modifier = member_of_alliance
-                }
-                ROOT = {
-                    add_favors = {
-                        who = PREV
-                        amount = 50
-                    }
-                }
-            }
-        }
-        else = {
-            add_dip_power = 300
-        }
-    }
-    else = {
-        if = {
-            limit = {
-                has_dlc = "The Cossacks"
-            }
-            every_country = {
-                limit = {
-                    has_country_modifier = member_of_alliance
-                }
-                ROOT = {
-                    add_favors = {
-                        who = PREV
-                        amount = 30
-                    }
-                }
-            }
-        }
-        else = {
-            add_dip_power = 150
-        }
-    }
-}
-alliance_decision_effect_4 = {
+    reduce_faction_renown_40 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_inspired_fervor
+            name = faction_glory_to_us
             duration = 3650
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_inspired_fervor
+            name = faction_glory_to_us
             duration = 1825
         }
     }
 }
-alliance_decision_effect_5 = {
+# Quid Pro Quo
+alliance_decision_effect_3 = {
+    reduce_faction_renown_60 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        if = {
+            limit = {
+                has_dlc = "The Cossacks"
+            }
+            
+            custom_tooltip = ALLIANCE_FAVORS_50_TT
+            hidden_effect = {
+                every_country = {
+                    limit = {
+                        has_country_modifier = member_of_alliance
+                    }
+                    ROOT = {
+                        add_favors = {
+                            who = PREV
+                            amount = 50
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            add_country_modifier = {
+                name = faction_quid_pro_quo
+                duration = 3650
+            }
+        }
+    }
+    else = {
+        if = {
+            limit = {
+                has_dlc = "The Cossacks"
+            }
+            
+            custom_tooltip = ALLIANCE_FAVORS_30_TT
+            hidden_effect = {
+                every_country = {
+                    limit = {
+                        has_country_modifier = member_of_alliance
+                    }
+                    ROOT = {
+                        add_favors = {
+                            who = PREV
+                            amount = 30
+                        }
+                    }
+                }
+            }
+        }
+        else = {
+            add_country_modifier = {
+                name = faction_quid_pro_quo
+                duration = 1825
+            }
+        }
+    }
+}
+# Inspire Fervor
+alliance_decision_effect_4 = {
+    reduce_faction_renown_80 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_idea_disemmination
+            name = faction_ferverous_loyalty
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_ferverous_loyalty
+            duration = 1825
+        }
+    }
+}
+# Disseminate Ideas
+alliance_decision_effect_5 = {
+    reduce_faction_renown_100 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_exchange_of_ideas
             duration = 7300
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_idea_disemmination
+            name = faction_exchange_of_ideas
             duration = 3650
         }
     }
 }
     
-# Old Horde
+#--------------------------------------
+# Faction Decisions: Old Horde
+#--------------------------------------
+# Call to War
 old_horde_decision_effect_1 = {
+    reduce_faction_renown_20 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
-        add_yearly_manpower = 5.0
-    }
-    else = {
         add_yearly_manpower = 3.0
     }
+    else = {
+        add_yearly_manpower = 2.0
+    }
 }
+# Instill Resilience
 old_horde_decision_effect_2 = {
+    reduce_faction_renown_40 = yes
     if = {
         limit = {
             is_any_faction_head = yes
@@ -1251,66 +1347,102 @@ old_horde_decision_effect_2 = {
         }
     }
 }
+# Enforce Obedience
 old_horde_decision_effect_3 = {
+    reduce_faction_renown_60 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
+        add_corruption = -10
+    }
+    else = {
         add_corruption = -5
     }
-    else = {
-        add_corruption = -3
-    }
 }
+# Bolster Industry
 old_horde_decision_effect_4 = {
+    reduce_faction_renown_80 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = factiona_relentless_inspiration
+            name = faction_wartime_industry
             duration = 3650
         }
     }
     else = {
         add_country_modifier = {
-            name = factiona_relentless_inspiration
+            name = faction_wartime_industry
             duration = 1825
         }
     }
 }
+# Provoke Ferocity
 old_horde_decision_effect_5 = {
-    if = {
-        limit = {
-            is_any_faction_head = yes
-        }
-        add_mil_power = 300
-    }
-    else = {
-        add_mil_power = 200
-    }
-}
-    
-    
-# Horde
-horde_decision_effect_1 = {
+    reduce_faction_renown_100 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_call_to_unify
+            name = faction_war_songs
             duration = 3650
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_call_to_unify
+            name = faction_war_songs
             duration = 1825
         }
     }
 }
+    
+#--------------------------------------
+# Faction Decisions: Horde
+#--------------------------------------
+# Enforce Tolerance
+horde_decision_effect_1 = {
+    reduce_faction_renown_20 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_tolerance_of_all
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_tolerance_of_all
+            duration = 1825
+        }
+    }
+}
+# Bolster Commerce
 horde_decision_effect_2 = {
+    reduce_faction_renown_40 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_trading_hubs
+            duration = 3650
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_trading_hubs
+            duration = 1825
+        }
+    }
+}
+# Seek Excellence
+horde_decision_effect_3 = {
+    reduce_faction_renown_60 = yes
     if = {
         limit = {
             is_any_faction_head = yes
@@ -1325,62 +1457,51 @@ horde_decision_effect_2 = {
         }
     }
 }
-horde_decision_effect_3 = {
-    if = {
-        limit = {
-            is_any_faction_head = yes
-        }
-        add_country_modifier = {
-            name = faction_manufacturing_prowess
-            duration = 3650
-        }
-    }
-    else = {
-        add_country_modifier = {
-            name = faction_manufacturing_prowess
-            duration = 1825
-        }
-    }
-}
+# Pacify Outsiders
 horde_decision_effect_4 = {
+    reduce_faction_renown_80 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_tolerance_of_all
+            name = faction_pacification
             duration = 3650
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_tolerance_of_all
+            name = faction_pacification
             duration = 1825
         }
     }
 }
+# Inspire Loyalty
 horde_decision_effect_5 = {
+    reduce_faction_renown_100 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
-        capital_scope = {
-            add_base_tax = 3
-            add_base_production = 3
-            add_base_manpower = 3
+        add_country_modifier = {
+            name = faction_factional_loyalty
+            duration = 3650
         }
     }
     else = {
-        capital_scope = {
-            add_base_tax = 2
-            add_base_production = 2
-            add_base_manpower = 2
+        add_country_modifier = {
+            name = faction_factional_loyalty
+            duration = 1825
         }
     }
 }
     
-# Trade Coalition
+#--------------------------------------
+# Faction Decisions: Trade Coalition
+#--------------------------------------
+# Sign Favourable Loan
 trade_coalition_decision_effect_1 = {
+    reduce_faction_renown_20 = yes
     if = {
         limit = {
             is_any_faction_head = yes
@@ -1397,18 +1518,22 @@ trade_coalition_decision_effect_1 = {
         }
     }
 }
+# Encourage Mercantilism
 trade_coalition_decision_effect_2 = {
+    reduce_faction_renown_40 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
-        add_mercantilism = 4
+        add_mercantilism = 5
     }
     else = {
-        add_mercantilism = 2
+        add_mercantilism = 3
     }
 }
+# Support Local Development
 trade_coalition_decision_effect_3 = {
+    reduce_faction_renown_60 = yes
     if = {
         limit = {
             is_any_faction_head = yes
@@ -1425,61 +1550,108 @@ trade_coalition_decision_effect_3 = {
         }
     }
 }
+# Bolster Exchange
 trade_coalition_decision_effect_4 = {
+    reduce_faction_renown_80 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_distant_headquarters
+            name = faction_trade_exchanges
             duration = 3650
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_distant_headquarters
+            name = faction_trade_exchanges
             duration = 1825
         }
     }
 }
+# Establish Cartel Influence
 trade_coalition_decision_effect_5 = {
+    reduce_faction_renown_100 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_major_trade_influence
+            name = faction_cartel_influence
             duration = 7300
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_major_trade_influence
+            name = faction_cartel_influence
             duration = 3650
         }
     }
 }
     
-    
-# Dragon Aspects
+#--------------------------------------
+# Faction Decisions: Dragon Aspects
+#--------------------------------------
+# Enforce Loyalty
 dragon_aspects_decision_effect_1 = {
+    reduce_faction_renown_20 = yes
     if = {
         limit = {
             is_any_faction_head = yes
         }
         add_country_modifier = {
-            name = faction_favour_of_the_green_dragonflight
+            name = faction_favour_of_the_red_dragonflight
             duration = 7300
         }
     }
     else = {
         add_country_modifier = {
-            name = faction_favour_of_the_green_dragonflight
+            name = faction_favour_of_the_red_dragonflight
             duration = 3650
         }
     }
 }
+# Heal the Wounded
 dragon_aspects_decision_effect_2 = {
+    reduce_faction_renown_40 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_favour_of_the_green_dragonflight
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_favour_of_the_green_dragonflight
+            duration = 3650
+        }
+    }
+}
+# Seek Wisdom
+dragon_aspects_decision_effect_3 = {
+    reduce_faction_renown_60 = yes
+    if = {
+        limit = {
+            is_any_faction_head = yes
+        }
+        add_country_modifier = {
+            name = faction_favour_of_the_blue_dragonflight
+            duration = 7300
+        }
+    }
+    else = {
+        add_country_modifier = {
+            name = faction_favour_of_the_blue_dragonflight
+            duration = 3650
+        }
+    }
+}
+# Crush Insolence
+dragon_aspects_decision_effect_4 = {
+    reduce_faction_renown_80 = yes
     if = {
         limit = {
             is_any_faction_head = yes
@@ -1496,25 +1668,9 @@ dragon_aspects_decision_effect_2 = {
         }
     }
 }
-dragon_aspects_decision_effect_3 = {
-    if = {
-        limit = {
-            is_any_faction_head = yes
-        }
-        add_corruption = -5
-    }
-    else = {
-        add_corruption = -3
-    }
-}
-dragon_aspects_decision_effect_4 = {
-    random_list = {
-        10 = { add_adm_tech = 1 }
-        10 = { add_dip_tech = 1 }
-        10 = { add_mil_tech = 1 }
-    }
-}
+# Establish Order
 dragon_aspects_decision_effect_5 = {
+    reduce_faction_renown_100 = yes
     if = {
         limit = { has_dlc = "Golden Century" }
         
@@ -1533,10 +1689,10 @@ dragon_aspects_decision_effect_5 = {
             limit = {
                 is_any_faction_head = yes
             }
-            add_prestige = 50
+            add_stability = 3
         }
         else = {
-            add_prestige = 25
+            add_stability = 2
         }
     }
 }
