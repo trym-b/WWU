@@ -1,5 +1,5 @@
 #-----------------------------------
-# On Action
+# On Actions
 #-----------------------------------
 on_yearly_pulse__building_management = {
     auto_build_effect = yes
@@ -7,11 +7,125 @@ on_yearly_pulse__building_management = {
 }
 
 #-----------------------------------
+# Custom GUI
+#-----------------------------------
+# gold_buffer_limit_100
+# gold_buffer_limit_250
+# gold_buffer_limit_500
+# gold_buffer_limit_750
+# gold_buffer_limit_1000
+# gold_buffer_limit_2000
+# gold_buffer_limit_5000
+# gold_buffer_limit_10000
+set_gold_buffer_limit = {
+    custom_tooltip = SET_GOLD_BUFFER_LIMIT_{TYPE}
+    
+    hidden_effect = {
+        set_country_flag = gold_buffer_limit_{TYPE}
+    }
+}
+
+# auto_build_target_all
+# auto_build_target_state_only
+# auto_build_target_territory_only
+set_auto_build_target = {
+    custom_tooltip = SET_AUTO_BUILD_TARGET_{TYPE}
+    
+    hidden_effect = {
+        set_country_flag = auto_build_target_{TYPE}
+    }
+}
+
+# auto_destroy_target_all
+# auto_destroy_target_state_only
+# auto_destroy_target_territory_only
+set_auto_destroy_target = {
+    custom_tooltip = SET_AUTO_DESTROY_TARGET_{TYPE}
+    
+    hidden_effect = {
+        set_country_flag = auto_destroy_target_{TYPE}
+    }
+}
+
+# barracks
+# arsenal
+# shipyard
+# dockyard
+# tower
+# training_ground
+# road
+
+# temple
+# marketplace
+# mine
+# farm
+# interment_camp
+# tavern
+# town_hall
+
+# manufactory
+set_auto_build_building = {
+    if = {
+        limit = {
+            has_country_flag = auto_build_{BUILDING}
+        }
+        
+        custom_tooltip = STOP_AUTO_BUILD_{BUILDING}
+        hidden_effect = { clr_country_flag = auto_build_{BUILDING} }
+    }
+    else_if = {
+        limit = {
+            NOT = { has_country_flag = auto_build_{BUILDING} }
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_{BUILDING}
+        hidden_effect = { srt_country_flag = auto_build_{BUILDING} }
+    }
+}
+
+# barracks
+# arsenal
+# shipyard
+# dockyard
+# tower
+# training_ground
+# road
+
+# temple
+# marketplace
+# mine
+# farm
+# interment_camp
+# tavern
+# town_hall
+
+# manufactory
+set_auto_destroy_building = {
+    if = {
+        limit = {
+            has_country_flag = auto_destroy_{BUILDING}
+        }
+        
+        custom_tooltip = STOP_AUTO_DESTROY_{BUILDING}
+        hidden_effect = { clr_country_flag = auto_destroy_{BUILDING} }
+    }
+    else_if = {
+        limit = {
+            NOT = { has_country_flag = auto_destroy_{BUILDING} }
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_{BUILDING}
+        hidden_effect = { set_country_flag = auto_destroy_{BUILDING} }
+    }
+}
+
+
+#-----------------------------------
 # Misc
 #-----------------------------------
 init_building_management_defaults = {
     # Building Management Settings
-    set_country_flag = gold_buffer_limit_low
+    set_country_flag = gold_buffer_limit_100
     set_country_flag = auto_build_target_all
     set_country_flag = auto_destroy_target_all
 }
@@ -27,7 +141,7 @@ auto_build_effect = {
         }
         if = {
             limit = {
-                has_country_flag = gold_buffer_limit_low
+                has_country_flag = gold_buffer_limit_100
             }
             
             while = {
@@ -41,7 +155,21 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_med
+                has_country_flag = gold_buffer_limit_250
+            }
+            
+            while = {
+                limit = {
+                    treasury = 250
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_500
             }
             
             while = {
@@ -55,12 +183,68 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_high
+                has_country_flag = gold_buffer_limit_750
+            }
+            
+            while = {
+                limit = {
+                    treasury = 750
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_1000
             }
             
             while = {
                 limit = {
                     treasury = 1000
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_2000
+            }
+            
+            while = {
+                limit = {
+                    treasury = 2000
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_5000
+            }
+            
+            while = {
+                limit = {
+                    treasury = 5000
+                    has_country_flag = auto_build_process
+                }
+                
+                auto_building_construction = yes
+            }
+        }
+        else_if = {
+            limit = {
+                has_country_flag = gold_buffer_limit_10000
+            }
+            
+            while = {
+                limit = {
+                    treasury = 10000
                     has_country_flag = auto_build_process
                 }
                 
@@ -128,7 +312,7 @@ auto_building_construction = {
         clr_country_flag = auto_build_process
     }
 
-    # Famr
+    # Farm
     if = {
         limit = {
             has_country_flag = auto_build_farm
@@ -1391,7 +1575,7 @@ auto_building_construction = {
     # Training Ground
     if = {
         limit = {
-            has_country_flag = auto_build_training_ring
+            has_country_flag = auto_build_training_ground
         }
         
         if = {
@@ -1496,49 +1680,6 @@ auto_building_construction = {
                 
                 add_building_construction = {
                     building = wow_training_ground_3
-                    speed = 1.0
-                    cost = 1.0
-                }
-            }
-        }
-    }
-    # Manufactory
-    if = {
-        limit = {
-            has_country_flag = auto_build_manufactory
-        }
-        
-        if = {
-            limit = {
-                dip_tech = 15
-                treasury = 600
-            }
-            random_owned_province = {
-                limit = {
-                    NOT = { has_building = wow_manufactory }
-                    can_build = wow_manufactory
-                    num_free_building_slots = 1
-                    
-                    if = {
-                        limit = {
-                            owner = {
-                                has_country_flag = auto_build_target_state_only
-                            }
-                        }
-                        is_state = yes
-                    }
-                    else_if = {
-                        limit = {
-                            owner = {
-                                has_country_flag = auto_build_target_territory_only
-                            }
-                        }
-                        is_territory = yes
-                    }
-                }
-                
-                add_building_construction = {
-                    building = wow_manufactory
                     speed = 1.0
                     cost = 1.0
                 }
@@ -1768,6 +1909,50 @@ auto_building_construction = {
                 
                 add_building_construction = {
                     building = wow_town_hall_3
+                    speed = 1.0
+                    cost = 1.0
+                }
+            }
+        }
+    }
+    
+    # Manufactory
+    if = {
+        limit = {
+            has_country_flag = auto_build_manufactory
+        }
+        
+        if = {
+            limit = {
+                dip_tech = 15
+                treasury = 600
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_building = wow_manufactory }
+                    can_build = wow_manufactory
+                    num_free_building_slots = 1
+                    
+                    if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_state_only
+                            }
+                        }
+                        is_state = yes
+                    }
+                    else_if = {
+                        limit = {
+                            owner = {
+                                has_country_flag = auto_build_target_territory_only
+                            }
+                        }
+                        is_territory = yes
+                    }
+                }
+                
+                add_building_construction = {
+                    building = wow_manufactory
                     speed = 1.0
                     cost = 1.0
                 }
@@ -2679,10 +2864,10 @@ auto_destroy_effect = {
         }
     }
     
-    # Training Ring
+    # Training Ground
     if = {
         limit = {
-            has_country_flag = auto_destroy_training_ring
+            has_country_flag = auto_destroy_training_ground
         }
         
         every_owned_province = {
