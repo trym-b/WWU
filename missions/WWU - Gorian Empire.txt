@@ -51,11 +51,15 @@ OGR_gorian_empire_column_1 = {
 				name = mission_warlust_OGR
 				duration = -1
 			}
-			area_mokgol_outpost = {
-                add_permanent_claim = ROOT
-            }
-			3756 = { add_permanent_claim = ROOT }
-			3753 = { add_permanent_claim = ROOT }			
+			area_warsong_stronghold = {
+				add_permanent_claim = ROOT
+			}
+			area_oshugun = {
+				add_permanent_claim = ROOT
+			}
+			area_pale_caverns = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	OGR_Destroy_the_Warsong_threat_OGR = {
@@ -65,33 +69,42 @@ OGR_gorian_empire_column_1 = {
 		required_missions = { OGR_Bolster_our_forces_OGR }
         
 		trigger = {
-            area_mokgol_outpost = { 
+            area_warsong_stronghold = { 
                 type = all	
                 country_or_non_sovereign_subject_holds = ROOT 
             }
-			3756 = {
-                country_or_non_sovereign_subject_holds = ROOT
+			area_oshugun = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			3753 = {
-                country_or_non_sovereign_subject_holds = ROOT
+			area_pale_caverns = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
+			NOT = { exists = A35 }
 		}
 		provinces_to_highlight = {          
 			OR = {
-                area = area_mokgol_outpost
-                province_id = 3756
-                province_id = 3753
+                area = area_warsong_stronghold
+                area = area_oshugun
+                area = area_pale_caverns
             }
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
-			area_broken_precipice = {
+			area_bloodwood = {
                 add_permanent_claim = ROOT
             }
-			3761 = { add_permanent_claim = ROOT }
-			3762 = { add_permanent_claim = ROOT }
-			3763 = { add_permanent_claim = ROOT }
+			area_gloomspore = {
+				add_permanent_claim = ROOT
+			}
+			area_throne_of_elements = {
+				add_permanent_claim = ROOT
+			}
+			area_mokgol_outpost = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	OGR_Subjugate_the_Sabreon_OGR = {
@@ -101,26 +114,32 @@ OGR_gorian_empire_column_1 = {
 		required_missions = { OGR_Destroy_the_Warsong_threat_OGR }
         
 		trigger = {
-            area_broken_precipice = {
+            area_bloodwood = {
                 type = all	
                 country_or_non_sovereign_subject_holds = ROOT 
             }
-			3761 = {
-                country_or_non_sovereign_subject_holds = ROOT
+			area_throne_of_elements = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			3762 = {
-                country_or_non_sovereign_subject_holds = ROOT
+			area_gloomspore = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			3763 = {
-                country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				NOT = { exists = SBM}
+				is_subject_of = ROOT
+			}
+			OR = {
+				NOT = { exists = SRP }
+				is_subject_of = ROOT
 			}
 		}
 		provinces_to_highlight = {
             OR = {
-                area = area_broken_precipice
-                province_id = 3761
-                province_id = 3762
-                province_id = 3763
+                area = area_bloodwood
+                area = area_throne_of_elements
+				area = area_gloomspore
             }
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
@@ -152,6 +171,15 @@ OGR_gorian_empire_column_1 = {
 			area_shattrath_draenor = {
                 add_permanent_claim = ROOT
             }
+			area_shattrath_outskirts = {
+				add_permanent_claim = ROOT
+			}
+			area_court_of_souls = {
+				add_permanent_claim = ROOT
+			}
+			area_gulrok = {
+				add_permanent_claim = ROOT
+			}
 			area_skettis_draenor = {
                 add_permanent_claim = ROOT
             }
@@ -166,11 +194,16 @@ OGR_gorian_empire_column_1 = {
 		trigger = {
             area_shattrath_draenor = {
                 type = all
-                country_or_non_sovereign_subject_holds = ROOT
+                owned_by = ROOT
+			}
+			area_shattrath_outskirts = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		provinces_to_highlight = {
             area = area_shattrath_draenor
+			area = area_shattrath_outskirts
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
@@ -199,16 +232,9 @@ OGR_gorian_empire_column_1 = {
 			OGR = {
 				country_event = { id = wwu_gorian_empire.1 }
 			}
-			area_orunai = {
-                add_permanent_claim = ROOT
+			region_talador = {
+				add_permanent_claim = ROOT
 			}
-			3772 = { add_permanent_claim = ROOT }
-			3773 = { add_permanent_claim = ROOT }
-			3770 = { add_permanent_claim = ROOT }
-			3774 = { add_permanent_claim = ROOT }
-			3776 = { add_permanent_claim = ROOT }
-			3775 = { add_permanent_claim = ROOT }
-	    }
 	}
 	OGR_Kick_the_Draenei_out_OGR = {
 		icon = mission_bloodlust
@@ -217,40 +243,14 @@ OGR_gorian_empire_column_1 = {
 		required_missions = { OGR_Restore_Goria }
         
 		trigger = {
-            area_orunai = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3772 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3773 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3770 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3774 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3776 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3775 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
+            NOT = { exists = A54 }
+			NOT = { exists = F49 }
+			NOT = { exists = TUU }
+			NOT = { exists = ORU }
         }
         
 		provinces_to_highlight = {
-            OR = {
-                area = area_orunai
-                province_id = 3772
-                province_id = 3773
-                province_id = 3770
-                province_id = 3774
-                province_id = 3776
-                province_id = 3775
-            }
+            region = talador
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
@@ -258,18 +258,13 @@ OGR_gorian_empire_column_1 = {
 			area_gromgar = {
                 add_permanent_claim = ROOT
 			}
-			3854 = { add_permanent_claim = ROOT }
-			3855 = { add_permanent_claim = ROOT }
-			3859 = { add_permanent_claim = ROOT }
-			area_bastion_rise = {
-                add_permanent_claim = ROOT
+			area_frostboar_point = {
+				add_permanent_claim = ROOT
 			}
-			area_tangleheart = {
-                add_permanent_claim = ROOT
+			area_frostwall = {
+				add_permanent_claim = ROOT
 			}
-			area_deadgrin = {
-                add_permanent_claim = ROOT
-			}
+			add_prestige = 20
 		}
 	}
 	OGR_Strike_at_the_northern_clans = {
@@ -281,26 +276,23 @@ OGR_gorian_empire_column_1 = {
 		trigger = {
 		    area_gromgar = {
                 type = all
+                owned_by = ROOT
+			}
+			area_frostwall = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
 			}
-			3859 = {
+			area_frostboar_point = {
+                type = all
                 country_or_non_sovereign_subject_holds = ROOT
 			}
-			3855 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3854 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-            
 		}
 		provinces_to_highlight = {
-            OR = {
-                area = area_gromgar
-                province_id = 3859
-                province_id = 3855
-                province_id = 3854
-            }
+			OR = {
+				area = area_gromgar
+				area = area_frostwall
+				area = area_frostboar_point
+			}
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
@@ -328,12 +320,10 @@ OGR_gorian_empire_column_1 = {
 		}
         
 		effect = {
-			area_temple_of_shanaar = {
-                add_permanent_claim = ROOT
-			}
-			area_fangrila = {
-                add_permanent_claim = ROOT
-			}
+			add_prestige = 20
+			add_adm_power = 200
+			add_dip_power = 200
+			add_mil_power = 200
 		}
 	}
 }
@@ -362,7 +352,7 @@ OGR_gorian_empire_column_2 = {
                 A51 = {
                     has_opinion = {
                         who = ROOT
-                        value = 150
+                        value = 125
                     }
                 }
 			}
@@ -452,6 +442,12 @@ OGR_gorian_empire_column_2 = {
 			area_bladefist_hold = {
                 add_permanent_claim = ROOT
 			}
+			area_writhing_mire = {
+				add_permanent_claim = ROOT
+			}
+			area_shadow_wood = {
+				add_permanent_claim = ROOT
+			}
             add_country_modifier = {
 			    name = mission_arakkoa_knowledge_OGR
 			    duration = -1
@@ -473,11 +469,21 @@ OGR_gorian_empire_column_2 = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
 			}
+			area_shadow_wood = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_writhing_mire = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		provinces_to_highlight = {
             OR = {
                 area = area_skyreach
                 area = area_bladefist_hold
+				area = area_writhing_mire
+				area = area_shadow_wood
             }
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
@@ -514,7 +520,11 @@ OGR_gorian_empire_column_2 = {
 			}
 			area_shazgul = {
                 add_permanent_claim = ROOT
-			}			
+			}
+			add_prestige = 20
+			add_adm_power = 200
+			add_dip_power = 200
+			add_mil_power = 200			
 		}
 	}
 	OGR_Push_into_Gorgrond_OGR = {
@@ -570,12 +580,13 @@ OGR_gorian_empire_column_2 = {
 		}
         
 		effect = {
-			area_zethgol = {
-                add_permanent_claim = ROOT
+			region_farahlon = {
+				add_permanent_claim = ROOT
 			}
-			area_hellfire_citadel_draenor = {
-                add_permanent_claim = ROOT
-			}			
+			add_prestige = 20
+			add_adm_power = 200
+			add_dip_power = 200
+			add_mil_power = 200
 		}
 	}
 	OGR_Into_the_jungle_OGR = {
@@ -589,40 +600,36 @@ OGR_gorian_empire_column_2 = {
 		}
         
 		trigger = {
-            area_zethgol = {
+            area_shattered_front = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
 		    }
-			area_temple_of_shanaar = {
+			area_zethgol = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
 		    }
-			area_hellfire_citadel_draenor = {
+			area_temple_of_shanaar= {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
 		    }
-			area_fangrila = {
+			area_zorammarsh = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
 		    }
-			area_tuurem_draenor = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
+			
 		}
 		provinces_to_highlight = {
             OR = {
                 area = area_zethgol
                 area = area_temple_of_shanaar
-                area = area_hellfire_citadel_draenor
-                area = area_fangrila
-                area = area_tuurem_draenor
+                area = area_shattered_front
+                area = area_zorammarsh
             }
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
         
 		effect = {
-			area_dark_portal_draenor = {
+			region_tanaan_jungle = {
                 add_permanent_claim = ROOT
 			}			
 		}
@@ -676,7 +683,6 @@ OGR_gorian_empire_column_2 = {
 				name = mission_aggresive_expansion_OGR
 				duration = -1	
 			}
-
 		}
 	}
 }
@@ -699,6 +705,8 @@ OGR_gorian_empire_column_3 = {
         
 		trigger = {
             num_of_allies = 2
+			army_size_percentage = 0.9
+			navy_size_percentige = 0.9
 		}
         
 		effect = {
@@ -708,7 +716,7 @@ OGR_gorian_empire_column_3 = {
 			}
 			 add_country_modifier = {
                 name = mission_an_olive_branch_OGR
-                duration = 15
+                duration = 7300
 			}
 		}
 	}
@@ -727,7 +735,7 @@ OGR_gorian_empire_column_3 = {
                 A49 = {
                     has_opinion = {
                         who = ROOT
-                        value = 150
+                        value = 170
                     }
                 }
 			}
@@ -767,7 +775,7 @@ OGR_gorian_empire_column_3 = {
                 A53 = {
                     has_opinion = {
                         who = ROOT
-                        value = 150
+                        value = 190
                     }
                 }
 			}
@@ -954,9 +962,24 @@ OGR_gorian_empire_column_3 = {
 		}
         
 		effect = {
-			area_throne_of_kiljaeden  = {
-                add_permanent_claim = ROOT
+			region_ashran = {
+				limit = {
+					is_empty = yes
+				}
+				cede_province = ROOT
+				add_core = ROOT
+				change_culture = ROOT
+				change_religion = ROOT
 			}
+			else = {
+				region_ashran = {
+					add_permanent_claim = ROOT
+				}
+			}
+			add_prestige = 20
+			add_adm_power = 200
+			add_dip_power = 200
+			add_mil_power = 200
 		}
 	}
 }
@@ -984,7 +1007,7 @@ OGR_gorian_empire_column_4 = {
                 F57 = {
                     has_opinion = {
                         who = ROOT
-                        value = 150
+                        value = 165
                     }
                 }
 			}
@@ -1024,7 +1047,7 @@ OGR_gorian_empire_column_4 = {
                 A52 = {
                     has_opinion = {
                         who = ROOT
-                        value = 150
+                        value = 165
                     }
                 }
             }
