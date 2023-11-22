@@ -118,5 +118,5 @@ tags={
 }
 picture="world_of_warcraft_universalis_logo.jpg"
 version="1.8.0"
-supported_version="1.36.0"
+supported_version="1.36.*"
 remote_file_id="1796527319"
