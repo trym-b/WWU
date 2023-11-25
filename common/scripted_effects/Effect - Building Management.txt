@@ -9,113 +9,954 @@ on_yearly_pulse__building_management = {
 #-----------------------------------
 # Custom GUI
 #-----------------------------------
-# gold_buffer_limit_100
-# gold_buffer_limit_250
-# gold_buffer_limit_500
-# gold_buffer_limit_750
-# gold_buffer_limit_1000
-# gold_buffer_limit_2000
-# gold_buffer_limit_5000
-# gold_buffer_limit_10000
-set_gold_buffer_limit = {
-    custom_tooltip = SET_GOLD_BUFFER_LIMIT_{TYPE}
+# Gold Buffer Limit
+reset_construction_limit = {
+    clr_country_flag = construction_limit_1
+    clr_country_flag = construction_limit_2
+    clr_country_flag = construction_limit_3
+    clr_country_flag = construction_limit_4
+    clr_country_flag = construction_limit_5
+    clr_country_flag = construction_limit_10
+    clr_country_flag = construction_limit_15
+    clr_country_flag = construction_limit_max
+}
+set_construction_limit_1 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_1
     
     hidden_effect = {
-        set_country_flag = gold_buffer_limit_{TYPE}
+        set_country_flag = construction_limit_1
+    }
+}
+set_construction_limit_2 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_2
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_2
+    }
+}
+set_construction_limit_3 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_3
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_3
+    }
+}
+set_construction_limit_4 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_4
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_4
+    }
+}
+set_construction_limit_5 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_5
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_5
+    }
+}
+set_construction_limit_10 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_10
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_10
+    }
+}
+set_construction_limit_15 = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_15
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_15
+    }
+}
+set_construction_limit_max = {
+    custom_tooltip = SET_CONSTRUCTION_LIMIT_MAX
+    
+    hidden_effect = {
+        set_country_flag = construction_limit_max
     }
 }
 
-# auto_build_target_all
-# auto_build_target_state_only
-# auto_build_target_territory_only
-set_auto_build_target = {
-    custom_tooltip = SET_AUTO_BUILD_TARGET_{TYPE}
+# Automatic Construction Targets
+reset_auto_build_targets = {
+    clr_country_flag = auto_build_target_all
+    clr_country_flag = auto_build_target_state_only
+    clr_country_flag = auto_build_target_territory_only
+}
+set_auto_build_target_all = {
+    custom_tooltip = SET_AUTO_BUILD_TARGET_all
     
     hidden_effect = {
-        set_country_flag = auto_build_target_{TYPE}
+        set_country_flag = auto_build_target_all
+    }
+}
+set_auto_build_target_state_only = {
+    custom_tooltip = SET_AUTO_BUILD_TARGET_state_only
+    
+    hidden_effect = {
+        set_country_flag = auto_build_target_state_only
+    }
+}
+set_auto_build_target_territory_only = {
+    custom_tooltip = SET_AUTO_BUILD_TARGET_territory_only
+    
+    hidden_effect = {
+        set_country_flag = auto_build_target_territory_only
     }
 }
 
-# auto_destroy_target_all
-# auto_destroy_target_state_only
-# auto_destroy_target_territory_only
-set_auto_destroy_target = {
-    custom_tooltip = SET_AUTO_DESTROY_TARGET_{TYPE}
+# Automatic Destruction Targets
+reset_auto_destroy_targets = {
+    clr_country_flag = auto_destroy_target_all
+    clr_country_flag = auto_destroy_target_state_only
+    clr_country_flag = auto_destroy_target_territory_only
+}
+set_auto_destroy_target_all = {
+    custom_tooltip = SET_AUTO_DESTROY_TARGET_all
     
     hidden_effect = {
-        set_country_flag = auto_destroy_target_{TYPE}
+        set_country_flag = auto_destroy_target_all
+    }
+}
+set_auto_destroy_target_state_only = {
+    custom_tooltip = SET_AUTO_DESTROY_TARGET_state_only
+    
+    hidden_effect = {
+        set_country_flag = auto_destroy_target_state_only
+    }
+}
+set_auto_destroy_target_territory_only = {
+    custom_tooltip = SET_AUTO_DESTROY_TARGET_territory_only
+    
+    hidden_effect = {
+        set_country_flag = auto_destroy_target_territory_only
     }
 }
 
-# barracks
-# arsenal
-# shipyard
-# dockyard
-# tower
-# training_ground
-# road
-
-# temple
-# marketplace
-# mine
-# farm
-# interment_camp
-# tavern
-# town_hall
-
-# manufactory
-set_auto_build_building = {
+# Building Status
+toggle_barracks_status = {
+    # Idle -> Build
     if = {
         limit = {
-            has_country_flag = auto_build_{BUILDING}
+            NOT = { has_country_flag = barracks_building_status_1 }
+            NOT = { has_country_flag = barracks_building_status_2 }
         }
         
-        custom_tooltip = STOP_AUTO_BUILD_{BUILDING}
-        hidden_effect = { clr_country_flag = auto_build_{BUILDING} }
+        hidden_effect = { 
+            set_country_flag = barracks_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_barracks
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_barracks 
+            set_country_flag = auto_build_barracks 
+        }
     }
+    
+    # Build -> Destroy
     else_if = {
         limit = {
-            NOT = { has_country_flag = auto_build_{BUILDING} }
+            has_country_flag = barracks_building_status_1
         }
         
-        custom_tooltip = START_AUTO_BUILD_{BUILDING}
-        hidden_effect = { srt_country_flag = auto_build_{BUILDING} }
+        hidden_effect = { 
+            clr_country_flag = barracks_building_status_1
+            set_country_flag = barracks_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_barracks
+        hidden_effect = { 
+            clr_country_flag = auto_build_barracks
+            set_country_flag = auto_destroy_barracks 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = barracks_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = barracks_building_status_1
+            clr_country_flag = barracks_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_barracks
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_barracks 
+            clr_country_flag = auto_build_barracks 
+        }
     }
 }
-
-# barracks
-# arsenal
-# shipyard
-# dockyard
-# tower
-# training_ground
-# road
-
-# temple
-# marketplace
-# mine
-# farm
-# interment_camp
-# tavern
-# town_hall
-
-# manufactory
-set_auto_destroy_building = {
+toggle_arsenal_status = {
+    # Idle -> Build
     if = {
         limit = {
-            has_country_flag = auto_destroy_{BUILDING}
+            NOT = { has_country_flag = arsenal_building_status_1 }
+            NOT = { has_country_flag = arsenal_building_status_2 }
         }
         
-        custom_tooltip = STOP_AUTO_DESTROY_{BUILDING}
-        hidden_effect = { clr_country_flag = auto_destroy_{BUILDING} }
+        hidden_effect = { 
+            set_country_flag = arsenal_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_arsenal
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_arsenal 
+            set_country_flag = auto_build_arsenal 
+        }
     }
+    
+    # Build -> Destroy
     else_if = {
         limit = {
-            NOT = { has_country_flag = auto_destroy_{BUILDING} }
+            has_country_flag = arsenal_building_status_1
         }
         
-        custom_tooltip = START_AUTO_DESTROY_{BUILDING}
-        hidden_effect = { set_country_flag = auto_destroy_{BUILDING} }
+        hidden_effect = { 
+            clr_country_flag = arsenal_building_status_1
+            set_country_flag = arsenal_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_arsenal
+        hidden_effect = { 
+            clr_country_flag = auto_build_arsenal
+            set_country_flag = auto_destroy_arsenal 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = arsenal_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = arsenal_building_status_1
+            clr_country_flag = arsenal_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_arsenal
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_arsenal 
+            clr_country_flag = auto_build_arsenal 
+        }
+    }
+}
+toggle_shipyard_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = shipyard_building_status_1 }
+            NOT = { has_country_flag = shipyard_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = shipyard_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_shipyard
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_shipyard 
+            set_country_flag = auto_build_shipyard 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = shipyard_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = shipyard_building_status_1
+            set_country_flag = shipyard_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_shipyard
+        hidden_effect = { 
+            clr_country_flag = auto_build_shipyard
+            set_country_flag = auto_destroy_shipyard 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = shipyard_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = shipyard_building_status_1
+            clr_country_flag = shipyard_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_shipyard
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_shipyard 
+            clr_country_flag = auto_build_shipyard 
+        }
+    }
+}
+toggle_dockyard_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = dockyard_building_status_1 }
+            NOT = { has_country_flag = dockyard_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = dockyard_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_dockyard
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_dockyard 
+            set_country_flag = auto_build_dockyard 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = dockyard_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = dockyard_building_status_1
+            set_country_flag = dockyard_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_dockyard
+        hidden_effect = { 
+            clr_country_flag = auto_build_dockyard
+            set_country_flag = auto_destroy_dockyard 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = dockyard_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = dockyard_building_status_1
+            clr_country_flag = dockyard_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_dockyard
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_dockyard 
+            clr_country_flag = auto_build_dockyard 
+        }
+    }
+}
+toggle_tower_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = tower_building_status_1 }
+            NOT = { has_country_flag = tower_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = tower_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_tower
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_tower 
+            set_country_flag = auto_build_tower 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = tower_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = tower_building_status_1
+            set_country_flag = tower_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_tower
+        hidden_effect = { 
+            clr_country_flag = auto_build_tower
+            set_country_flag = auto_destroy_tower 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = tower_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = tower_building_status_1
+            clr_country_flag = tower_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_tower
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_tower 
+            clr_country_flag = auto_build_tower 
+        }
+    }
+}
+toggle_training_ground_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = training_ground_building_status_1 }
+            NOT = { has_country_flag = training_ground_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = training_ground_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_training_ground
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_training_ground 
+            set_country_flag = auto_build_training_ground 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = training_ground_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = training_ground_building_status_1
+            set_country_flag = training_ground_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_training_ground
+        hidden_effect = { 
+            clr_country_flag = auto_build_training_ground
+            set_country_flag = auto_destroy_training_ground 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = training_ground_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = training_ground_building_status_1
+            clr_country_flag = training_ground_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_training_ground
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_training_ground 
+            clr_country_flag = auto_build_training_ground 
+        }
+    }
+}
+toggle_road_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = road_building_status_1 }
+            NOT = { has_country_flag = road_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = road_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_road
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_road 
+            set_country_flag = auto_build_road 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = road_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = road_building_status_1
+            set_country_flag = road_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_road
+        hidden_effect = { 
+            clr_country_flag = auto_build_road
+            set_country_flag = auto_destroy_road 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = road_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = road_building_status_1
+            clr_country_flag = road_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_road
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_road 
+            clr_country_flag = auto_build_road 
+        }
+    }
+}
+toggle_temple_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = temple_building_status_1 }
+            NOT = { has_country_flag = temple_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = temple_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_temple
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_temple 
+            set_country_flag = auto_build_temple 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = temple_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = temple_building_status_1
+            set_country_flag = temple_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_temple
+        hidden_effect = { 
+            clr_country_flag = auto_build_temple
+            set_country_flag = auto_destroy_temple 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = temple_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = temple_building_status_1
+            clr_country_flag = temple_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_temple
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_temple 
+            clr_country_flag = auto_build_temple 
+        }
+    }
+}
+toggle_marketplace_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = marketplace_building_status_1 }
+            NOT = { has_country_flag = marketplace_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = marketplace_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_marketplace
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_marketplace 
+            set_country_flag = auto_build_marketplace 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = marketplace_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = marketplace_building_status_1
+            set_country_flag = marketplace_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_marketplace
+        hidden_effect = { 
+            clr_country_flag = auto_build_marketplace
+            set_country_flag = auto_destroy_marketplace 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = marketplace_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = marketplace_building_status_1
+            clr_country_flag = marketplace_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_marketplace
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_marketplace 
+            clr_country_flag = auto_build_marketplace 
+        }
+    }
+}
+toggle_mine_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = mine_building_status_1 }
+            NOT = { has_country_flag = mine_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = mine_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_mine
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_mine 
+            set_country_flag = auto_build_mine 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = mine_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = mine_building_status_1
+            set_country_flag = mine_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_mine
+        hidden_effect = { 
+            clr_country_flag = auto_build_mine
+            set_country_flag = auto_destroy_mine 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = mine_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = mine_building_status_1
+            clr_country_flag = mine_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_mine
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_mine 
+            clr_country_flag = auto_build_mine 
+        }
+    }
+}
+toggle_farm_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = farm_building_status_1 }
+            NOT = { has_country_flag = farm_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = farm_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_farm
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_farm 
+            set_country_flag = auto_build_farm 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = farm_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = farm_building_status_1
+            set_country_flag = farm_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_farm
+        hidden_effect = { 
+            clr_country_flag = auto_build_farm
+            set_country_flag = auto_destroy_farm 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = farm_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = farm_building_status_1
+            clr_country_flag = farm_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_farm
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_farm 
+            clr_country_flag = auto_build_farm 
+        }
+    }
+}
+toggle_internment_camp_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = internment_camp_building_status_1 }
+            NOT = { has_country_flag = internment_camp_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = internment_camp_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_internment_camp
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_internment_camp 
+            set_country_flag = auto_build_internment_camp 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = internment_camp_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = internment_camp_building_status_1
+            set_country_flag = internment_camp_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_internment_camp
+        hidden_effect = { 
+            clr_country_flag = auto_build_internment_camp
+            set_country_flag = auto_destroy_internment_camp 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = internment_camp_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = internment_camp_building_status_1
+            clr_country_flag = internment_camp_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_internment_camp
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_internment_camp 
+            clr_country_flag = auto_build_internment_camp 
+        }
+    }
+}
+toggle_tavern_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = tavern_building_status_1 }
+            NOT = { has_country_flag = tavern_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = tavern_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_tavern
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_tavern 
+            set_country_flag = auto_build_tavern 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = tavern_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = tavern_building_status_1
+            set_country_flag = tavern_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_tavern
+        hidden_effect = { 
+            clr_country_flag = auto_build_tavern
+            set_country_flag = auto_destroy_tavern 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = tavern_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = tavern_building_status_1
+            clr_country_flag = tavern_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_tavern
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_tavern 
+            clr_country_flag = auto_build_tavern 
+        }
+    }
+}
+toggle_town_hall_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = town_hall_building_status_1 }
+            NOT = { has_country_flag = town_hall_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = town_hall_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_town_hall
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_town_hall 
+            set_country_flag = auto_build_town_hall 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = town_hall_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = town_hall_building_status_1
+            set_country_flag = town_hall_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_town_hall
+        hidden_effect = { 
+            clr_country_flag = auto_build_town_hall
+            set_country_flag = auto_destroy_town_hall 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = town_hall_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = town_hall_building_status_1
+            clr_country_flag = town_hall_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_town_hall
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_town_hall 
+            clr_country_flag = auto_build_town_hall 
+        }
+    }
+}
+toggle_manufactory_status = {
+    # Idle -> Build
+    if = {
+        limit = {
+            NOT = { has_country_flag = manufactory_building_status_1 }
+            NOT = { has_country_flag = manufactory_building_status_2 }
+        }
+        
+        hidden_effect = { 
+            set_country_flag = manufactory_building_status_1 
+        }
+        
+        custom_tooltip = START_AUTO_BUILD_manufactory
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_manufactory 
+            set_country_flag = auto_build_manufactory 
+        }
+    }
+    
+    # Build -> Destroy
+    else_if = {
+        limit = {
+            has_country_flag = manufactory_building_status_1
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = manufactory_building_status_1
+            set_country_flag = manufactory_building_status_2 
+        }
+        
+        custom_tooltip = START_AUTO_DESTROY_manufactory
+        hidden_effect = { 
+            clr_country_flag = auto_build_manufactory
+            set_country_flag = auto_destroy_manufactory 
+        }
+    }
+    
+    # Destroy -> Idle
+    else_if = {
+        limit = {
+            has_country_flag = manufactory_building_status_2
+        }
+        
+        hidden_effect = { 
+            clr_country_flag = manufactory_building_status_1
+            clr_country_flag = manufactory_building_status_2 
+        }
+        
+        custom_tooltip = START_IDLE_manufactory
+        hidden_effect = { 
+            clr_country_flag = auto_destroy_manufactory 
+            clr_country_flag = auto_build_manufactory 
+        }
     }
 }
 
@@ -125,7 +966,7 @@ set_auto_destroy_building = {
 #-----------------------------------
 init_building_management_defaults = {
     # Building Management Settings
-    set_country_flag = gold_buffer_limit_100
+    set_country_flag = construction_limit_1
     set_country_flag = auto_build_target_all
     set_country_flag = auto_destroy_target_all
 }
@@ -135,18 +976,30 @@ auto_build_effect = {
     
     set_country_flag = auto_build_process
     
+    set_variable = {
+        which = automatic_construction_counter
+        value = 0
+    }
+    
     if = {
         limit = {
-            has_country_flag = auto_build_active
+            any_automatic_construction_selected = yes
         }
+        
         if = {
             limit = {
-                has_country_flag = gold_buffer_limit_100
+                has_country_flag = construction_limit_1
             }
             
             while = {
                 limit = {
-                    treasury = 100 
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 1
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -155,12 +1008,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_250
+                has_country_flag = construction_limit_2
             }
             
             while = {
                 limit = {
-                    treasury = 250
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 2
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -169,12 +1028,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_500
+                has_country_flag = construction_limit_3
             }
             
             while = {
                 limit = {
-                    treasury = 500
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 3
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -183,12 +1048,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_750
+                has_country_flag = construction_limit_4
             }
             
             while = {
                 limit = {
-                    treasury = 750
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 4
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -197,12 +1068,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_1000
+                has_country_flag = construction_limit_5
             }
             
             while = {
                 limit = {
-                    treasury = 1000
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 5
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -211,12 +1088,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_2000
+                has_country_flag = construction_limit_10
             }
             
             while = {
                 limit = {
-                    treasury = 2000
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 10
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -225,12 +1108,18 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_5000
+                has_country_flag = construction_limit_15
             }
             
             while = {
                 limit = {
-                    treasury = 5000
+                    treasury = 0
+                    NOT = {
+                        check_variable = {
+                            which = automatic_construction_counter
+                            value = 15
+                        }
+                    }
                     has_country_flag = auto_build_process
                 }
                 
@@ -239,12 +1128,12 @@ auto_build_effect = {
         }
         else_if = {
             limit = {
-                has_country_flag = gold_buffer_limit_10000
+                has_country_flag = construction_limit_max
             }
             
             while = {
                 limit = {
-                    treasury = 10000
+                    treasury = 0
                     has_country_flag = auto_build_process
                 }
                 
@@ -312,6 +1201,11 @@ auto_building_construction = {
         clr_country_flag = auto_build_process
     }
 
+    change_variable = {
+        which = automatic_construction_counter
+        value = 1
+    }
+    
     # Farm
     if = {
         limit = {
@@ -321,7 +1215,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { adm_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -357,7 +1251,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { adm_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -383,6 +1277,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_farm_1
+                    }
+                    
+                    remove_building = wow_farm_1
+                }
+                
                 add_building_construction = {
                     building = wow_farm_2
                     speed = 1.0
@@ -392,7 +1294,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -418,6 +1320,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_farm_1
+                    }
+                    
+                    remove_building = wow_farm_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_farm_2
+                    }
+                    
+                    remove_building = wow_farm_2
+                }
+                
                 add_building_construction = {
                     building = wow_farm_3
                     speed = 1.0
@@ -435,7 +1352,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { dip_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -471,7 +1388,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { dip_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -497,6 +1414,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_internment_camp_1
+                    }
+                    
+                    remove_building = wow_internment_camp_1
+                }
+                
                 add_building_construction = {
                     building = wow_internment_camp_2
                     speed = 1.0
@@ -506,7 +1431,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -532,6 +1457,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_internment_camp_1
+                    }
+                    
+                    remove_building = wow_internment_camp_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_internment_camp_2
+                    }
+                    
+                    remove_building = wow_internment_camp_2
+                }
+                
                 add_building_construction = {
                     building = wow_internment_camp_3
                     speed = 1.0
@@ -549,7 +1489,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { adm_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -575,6 +1515,7 @@ auto_building_construction = {
                     }
                 }
                 
+                
                 add_building_construction = {
                     building = wow_temple_1
                     speed = 1.0
@@ -585,7 +1526,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { adm_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -611,6 +1552,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_temple_1
+                    }
+                    
+                    remove_building = wow_temple_1
+                }
+                
                 add_building_construction = {
                     building = wow_temple_2
                     speed = 1.0
@@ -620,7 +1569,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -646,6 +1595,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_temple_1
+                    }
+                    
+                    remove_building = wow_temple_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_temple_2
+                    }
+                    
+                    remove_building = wow_temple_2
+                }
+                
                 add_building_construction = {
                     building = wow_temple_3
                     speed = 1.0
@@ -663,7 +1627,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { adm_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -699,7 +1663,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { adm_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -725,6 +1689,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_mine_1
+                    }
+                    
+                    remove_building = wow_mine_1
+                }
+                
                 add_building_construction = {
                     building = wow_mine_2
                     speed = 1.0
@@ -734,7 +1706,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -760,6 +1732,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_mine_1
+                    }
+                    
+                    remove_building = wow_mine_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_mine_2
+                    }
+                    
+                    remove_building = wow_mine_2
+                }
+                
                 add_building_construction = {
                     building = wow_mine_3
                     speed = 1.0
@@ -777,7 +1764,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { dip_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -813,7 +1800,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { dip_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -839,6 +1826,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_market_1
+                    }
+                    
+                    remove_building = wow_market_1
+                }
+                
                 add_building_construction = {
                     building = wow_market_2
                     speed = 1.0
@@ -848,7 +1843,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -874,6 +1869,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_market_1
+                    }
+                    
+                    remove_building = wow_market_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_market_2
+                    }
+                    
+                    remove_building = wow_market_2
+                }
+                
                 add_building_construction = {
                     building = wow_market_3
                     speed = 1.0
@@ -891,7 +1901,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { adm_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -927,7 +1937,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { adm_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -953,6 +1963,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_tavern_1
+                    }
+                    
+                    remove_building = wow_tavern_1
+                }
+                
                 add_building_construction = {
                     building = wow_tavern_2
                     speed = 1.0
@@ -962,7 +1980,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -988,6 +2006,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_tavern_1
+                    }
+                    
+                    remove_building = wow_tavern_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_tavern_2
+                    }
+                    
+                    remove_building = wow_tavern_2
+                }
+                
                 add_building_construction = {
                     building = wow_tavern_3
                     speed = 1.0
@@ -1005,7 +2038,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { mil_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1041,7 +2074,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { mil_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1067,6 +2100,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_barracks_1
+                    }
+                    
+                    remove_building = wow_barracks_1
+                }
+                
                 add_building_construction = {
                     building = wow_barracks_2
                     speed = 1.0
@@ -1076,7 +2117,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1102,6 +2143,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_barracks_1
+                    }
+                    
+                    remove_building = wow_barracks_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_barracks_2
+                    }
+                    
+                    remove_building = wow_barracks_2
+                }
+                
                 add_building_construction = {
                     building = wow_barracks_3
                     speed = 1.0
@@ -1119,7 +2175,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { mil_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1155,7 +2211,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { mil_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1181,6 +2237,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_arsenal_1
+                    }
+                    
+                    remove_building = wow_arsenal_1
+                }
+                
                 add_building_construction = {
                     building = wow_arsenal_2
                     speed = 1.0
@@ -1190,7 +2254,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1216,6 +2280,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_arsenal_1
+                    }
+                    
+                    remove_building = wow_arsenal_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_arsenal_2
+                    }
+                    
+                    remove_building = wow_arsenal_2
+                }
+                
                 add_building_construction = {
                     building = wow_arsenal_3
                     speed = 1.0
@@ -1233,7 +2312,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { dip_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1270,7 +2349,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { dip_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1297,6 +2376,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_shipyard_1
+                    }
+                    
+                    remove_building = wow_shipyard_1
+                }
+                
                 add_building_construction = {
                     building = wow_shipyard_2
                     speed = 1.0
@@ -1306,7 +2393,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1333,6 +2420,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_shipyard_1
+                    }
+                    
+                    remove_building = wow_shipyard_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_shipyard_2
+                    }
+                    
+                    remove_building = wow_shipyard_2
+                }
+                
                 add_building_construction = {
                     building = wow_shipyard_3
                     speed = 1.0
@@ -1350,7 +2452,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { dip_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1387,7 +2489,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { dip_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1414,6 +2516,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_dockyard_1
+                    }
+                    
+                    remove_building = wow_dockyard_1
+                }
+                
                 add_building_construction = {
                     building = wow_dockyard_2
                     speed = 1.0
@@ -1423,7 +2533,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1449,6 +2559,21 @@ auto_building_construction = {
                         is_territory = yes
                     }
                 }
+
+                if = {
+                    limit = {
+                        has_building = wow_dockyard_1
+                    }
+                    
+                    remove_building = wow_dockyard_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_dockyard_2
+                    }
+                    
+                    remove_building = wow_dockyard_2
+                }
                 
                 add_building_construction = {
                     building = wow_dockyard_3
@@ -1467,7 +2592,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { mil_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1503,7 +2628,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { mil_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1529,6 +2654,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_tower_1
+                    }
+                    
+                    remove_building = wow_tower_1
+                }
+                
                 add_building_construction = {
                     building = wow_tower_2
                     speed = 1.0
@@ -1538,7 +2671,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1564,6 +2697,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_tower_1
+                    }
+                    
+                    remove_building = wow_tower_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_tower_2
+                    }
+                    
+                    remove_building = wow_tower_2
+                }
+                
                 add_building_construction = {
                     building = wow_tower_3
                     speed = 1.0
@@ -1581,7 +2729,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { mil_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1617,7 +2765,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { mil_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1643,6 +2791,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_training_ground_1
+                    }
+                    
+                    remove_building = wow_training_ground_1
+                }
+                
                 add_building_construction = {
                     building = wow_training_ground_2
                     speed = 1.0
@@ -1652,7 +2808,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 800
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1677,6 +2833,21 @@ auto_building_construction = {
                         is_territory = yes
                     }
                 }
+
+                if = {
+                    limit = {
+                        has_building = wow_training_ground_1
+                    }
+                    
+                    remove_building = wow_training_ground_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_training_ground_2
+                    }
+                    
+                    remove_building = wow_training_ground_2
+                }
                 
                 add_building_construction = {
                     building = wow_training_ground_3
@@ -1695,7 +2866,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { dip_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1731,7 +2902,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { dip_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1757,6 +2928,14 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_road_1
+                    }
+                    
+                    remove_building = wow_road_1
+                }
+                
                 add_building_construction = {
                     building = wow_road_2
                     speed = 1.0
@@ -1766,7 +2945,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 600
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1792,6 +2971,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_road_1
+                    }
+                    
+                    remove_building = wow_road_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_road_2
+                    }
+                    
+                    remove_building = wow_road_2
+                }
+                
                 add_building_construction = {
                     building = wow_road_3
                     speed = 1.0
@@ -1810,7 +3004,7 @@ auto_building_construction = {
         if = {
             limit = {
                 NOT = { adm_tech = 7 }
-                treasury = 200
+                treasury = 100
             }
             random_owned_province = {
                 limit = {
@@ -1846,7 +3040,7 @@ auto_building_construction = {
         else_if = {
             limit = {
                 NOT = { adm_tech = 15 }
-                treasury = 400
+                treasury = 300
             }
             random_owned_province = {
                 limit = {
@@ -1872,6 +3066,15 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_town_hall_1
+                    }
+                    
+                    remove_building = wow_town_hall_1
+                }
+                
+                
                 add_building_construction = {
                     building = wow_town_hall_2
                     speed = 1.0
@@ -1881,7 +3084,7 @@ auto_building_construction = {
         }
         else_if = {
             limit = {
-                treasury = 600
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
@@ -1907,6 +3110,21 @@ auto_building_construction = {
                     }
                 }
                 
+                if = {
+                    limit = {
+                        has_building = wow_town_hall_1
+                    }
+                    
+                    remove_building = wow_town_hall_1
+                }
+                if = {
+                    limit = {
+                        has_building = wow_town_hall_2
+                    }
+                    
+                    remove_building = wow_town_hall_2
+                }
+                
                 add_building_construction = {
                     building = wow_town_hall_3
                     speed = 1.0
@@ -1925,7 +3143,7 @@ auto_building_construction = {
         if = {
             limit = {
                 dip_tech = 15
-                treasury = 600
+                treasury = 500
             }
             random_owned_province = {
                 limit = {
