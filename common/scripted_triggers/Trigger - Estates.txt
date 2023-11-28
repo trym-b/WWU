@@ -406,3 +406,32 @@ is_criminal_nation = {
         tag = F40 # Bloodhill Bandits
     }
 }
+
+has_enabled_estate_action = {
+	has_country_flag = enable_estate_action_$estate_action$
+}
+has_enabled_estate_action_with_tooltip = {
+	custom_trigger_tooltip = {
+		tooltip = has_enabled_estate_action_$estate_action$_tt
+		has_country_flag = enable_estate_action_$estate_action$
+	}
+}
+
+estate_action_off_shared_cooldown = {
+	custom_trigger_tooltip = {
+		tooltip = CAN_USE_SHARED_ESTATE_ACTION_EVERY_$days$
+		OR = {
+			NOT = { has_country_flag = $estate_action$_flag }
+			had_country_flag = {
+				flag = $estate_action$_flag
+				days = $days$
+			}
+		}
+	}
+}
+has_not_any_estate_disaster_active = {
+	custom_trigger_tooltip = {
+		tooltip = has_not_any_estate_disaster_active_tt
+		NOT = { has_country_flag = has_estate_disaster_flag }
+	}
+}
