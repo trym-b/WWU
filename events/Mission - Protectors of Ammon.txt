@@ -1,6 +1,6 @@
 namespace = wwu_flavour_protectors_of_ammon
 
-#Dark Ritual
+# Dark Ritual
 country_event = {
 	id = wwu_flavour_protectors_of_ammon.1
 	title = wwu_flavour_protectors_of_ammon.1.title
@@ -25,6 +25,7 @@ country_event = {
              }
              change_culture = culture_ghost 
         }   
+        
 		add_manpower = 5000
 		
 		ai_chance = {
@@ -36,28 +37,35 @@ country_event = {
 		
 		if = {
 		    limit = {
-                every_owned_province = { 
+                any_owned_province = {
+                    area = area_ruins_of_ammon
+                    culture = culture_ghost
+                }
+			}
+            
+            every_owned_province = { 
+                limit = {
+                    area = area_ruins_of_ammon
+                    culture = culture_ghost
+                }
+                
+                if = {
                     limit = {
-                        area = area_ruins_of_ammon
-			            culture = culture_ghost
+                        owner = { primary_culture = culture_tolvir }
                         NOT = { culture = culture_tolvir }
                     }
                     change_culture = culture_tolvir 
-                } 
-			}
-		}
-		if = {
-		    limit = {
-                every_owned_province = { 
+                }
+                if = {
                     limit = {
-                        area = area_ruins_of_ammon
-			            culture = culture_ghost
+                        owner = { primary_culture = culture_stone_tolvir }
                         NOT = { culture = culture_stone_tolvir }
                     }
                     change_culture = culture_stone_tolvir 
-                } 
-			}
+                }
+            } 
 		}
+        
 		add_prestige = 20
 		add_dip_power = 100
 		
