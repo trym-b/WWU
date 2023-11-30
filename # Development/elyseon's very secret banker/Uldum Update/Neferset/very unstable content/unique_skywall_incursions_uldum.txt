@@ -1,0 +1,75 @@
+skywall_incursions_uldum = {
+	potential = {
+		primary_culture = culture_tolvir
+		has_country_modifier = mission_building_grand_capital
+	}
+
+	can_start = {
+        has_any_disaster = no
+        primary_culture = culture_tolvir
+        has_country_modifier = mission_building_grand_capital
+		
+        NOT = { stability = 0 }
+	}
+	
+	progress = {	    
+		modifier = {
+			factor = 1
+			num_of_loans = 10
+		}
+        modifier = {
+			factor = 1
+			is_at_war = yes
+		}
+		modifier = {
+			factor = 1
+			NOT = { religious_unity = 0.9 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { unrest = 0 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { prestige = 60 }
+		}
+		modifier = {
+			factor = 3
+			NOT = { current_age = age_cataclysm }
+		}
+		modifier = {
+			factor = 5
+			current_age = age_cataclysm 
+		}
+	}
+	
+	can_stop = {
+        always = no
+	}
+	
+	can_end = {
+        OR = {
+		    has_country_flag = a_dark_deal
+			has_country_flag = honor_our_ancestors_duty
+		}
+	}
+	
+	modifier = {
+        stability_cost_modifier = 1.0
+		global_unrest = 5
+		yearly_corruption = 0.1
+	}
+
+	on_start = wwu_flavour_neferset.4
+	on_end = wwu_flavour_neferset.5
+	
+	on_monthly = {
+        random_events = {
+            1000 = 0
+            100 = wwu_flavour_neferset.6  # Al'akir's attacks
+        }
+	}
+}
+
+
+

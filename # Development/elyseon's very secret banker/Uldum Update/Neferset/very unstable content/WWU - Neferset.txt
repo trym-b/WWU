@@ -1,0 +1,1252 @@
+#--------------------------------------
+# Neferset
+#--------------------------------------
+B72_neferset_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_tolvir_armies = {
+		icon = mission_warrior_class
+		required_missions = { }		
+		
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.6
+			num_of_generals = 1
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_strong_military_b72
+                duration = -1
+            }
+		}
+	}
+	B72_bug_extermination = {
+		icon = mission_curse
+		required_missions = { B72_tolvir_armies B72_protectors_of_ammon }
+		position = 4
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4632
+				province_id = 4633
+				province_id = 1014
+				province_id = 3219
+				province_id = 1236
+				province_id = 1235
+				province_id = 1234
+			}
+		}
+		trigger = {
+			4632 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4633 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1014 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			3219 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1236 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1235 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1234 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_back_push_ahn_qiraz_b72
+                duration = -1
+            }
+			area_hive_ash = {
+                add_permanent_claim = ROOT
+            }
+			area_hive_zora = {
+                add_permanent_claim = ROOT
+            }
+			area_hive_regal = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+	B72_titanic_duty = {
+		icon = mission_titan_spirits
+		required_missions = { B72_bug_extermination }
+		position = 5
+		
+		provinces_to_highlight = {
+			area = area_hive_ash
+			area = area_hive_zora
+            area = area_hive_regal
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+
+		}
+		trigger = {
+			area_hive_ash = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_hive_zora = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_hive_regal = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			NOT = { exists = AIH }
+			NOT = { exists = ZOH }
+			NOT = { exists = SPH }
+			NOT = { exists = RGH }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_silithid_extermination_b72
+                duration = -1
+            }
+			area_outer_ahn_qiraj = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+	B72_siege_of_ahn_qiraz = {
+		icon = mission_burning_castle
+		required_missions = { B72_titanic_duty }
+		position = 6
+		
+		provinces_to_highlight = {
+			area = area_outer_ahn_qiraj
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			area_outer_ahn_qiraj = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_scarab_walls_b72
+                duration = -1
+            }
+			area_inner_sanctum = {
+                add_permanent_claim = ROOT
+            }
+			area_inner_ahn_qiraj = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+	B72_the_end_of_an_ancient_duty = {
+		icon = mission_feast
+		required_missions = { B72_siege_of_ahn_qiraz }
+		position = 7
+		
+		provinces_to_highlight = {
+		    OR = {
+			    area = area_inner_ahn_qiraj
+			    area = area_inner_sanctum
+			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			area_inner_ahn_qiraj = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_inner_sanctum = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			has_global_flag = killed_cthun
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_death_of_an_old_god_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_increase_morale = {
+		icon = mission_ancient_sword
+		required_missions = { }
+		
+		trigger = {
+			is_at_war = no
+			if = {
+				limit = {
+					has_estate = estate_nobility
+				}
+				estate_influence = {
+					estate = estate_nobility
+					influence = 50
+				}
+				estate_loyalty = {
+					estate = estate_nobility
+					loyalty = 60
+				}
+			}
+			is_advisor_employed = army_reformer
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tolvir_morale_b72
+                duration = -1
+            }
+		}
+	}
+	B72_consolidate_the_coastline = {
+		icon = mission_beach
+		required_missions = { B72_increase_morale }
+		position = 2
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4621
+				province_id = 4622
+				province_id = 1565
+			}
+		}
+		trigger = {
+			4621 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			4622 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			1565 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_neferset_desert_expansion_b72
+                duration = -1
+            }
+			seize_empty_province_effect = { province = 4621 }
+			seize_empty_province_effect = { province = 4622 }
+			seize_empty_province_effect = { province = 1565 }
+		}
+	}
+	B72_protectors_of_ammon = {
+		icon = mission_tolvir_arena
+		required_missions = { B72_consolidate_the_coastline }
+		position = 3
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1564
+				province_id = 4623
+				province_id = 4624
+				province_id = 4625
+				province_id = 1566
+				province_id = 1567
+			}
+		}
+		trigger = {
+			OR = {
+			     POA = {
+			    	has_opinion = {
+                        who = ROOT
+                        value = 100
+			    	}
+                }
+				NOT = { exists = POA }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_fate_of_ammon_b72
+                duration = -1
+            }
+			if = {
+                limit = {
+				    POA = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 100
+					    }
+					}
+                }
+                create_vassal = POA
+            }
+			if = {
+			   limit = {
+			      NOT = { exists = POA }
+			   }
+			   area_ruins_of_ammon = {
+                add_permanent_claim = ROOT
+               }
+			   area_obelisk_of_the_sun = {
+                add_permanent_claim = ROOT
+               }
+			}		
+			country_event = {
+				id = wwu_flavour_neferset.1
+            }
+		}
+	}
+	B72_the_jewel_of_uldum = {
+		icon = mission_tolvir_arena
+		required_missions = { B72_protectors_of_ammon }
+		position = 4
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			1563 = {
+				owned_by = ROOT
+			    development = 20
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_building_grand_capital_b72
+                duration = -1
+            }
+		}
+	}
+	B72_skywall_threat = {
+		icon = mission_alakir_the_windlord
+		required_missions = { B72_the_jewel_of_uldum }
+		position = 5
+	
+		trigger = {
+			has_disaster = skywall_incursions_uldum
+		}
+		effect = {			
+			add_country_modifier = {
+                name = deal_with_siamat_b72
+                duration = -1
+            }
+            country_event = {
+				id = wwu_flavour_neferset.2
+            }			
+		}
+	}	
+	B72_a_dark_deal = {
+		icon = mission_deathknight_blood_plague
+		required_missions = { B72_skywall_threat }
+		position = 6
+		
+		trigger = {
+			OR = {
+		        has_country_flag = honor_our_ancestors_duty
+		        has_country_flag = a_dark_deal
+		    }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_choice_was_made_b72
+                duration = -1
+            }
+			declare_war = P28
+		}
+	}
+	B72_the_city_of_orsis = {
+		icon = mission_town_houses
+		required_missions = { B72_a_dark_deal }
+		position = 7
+		
+		trigger = {
+		    OR = {
+			     has_country_flag = siamats_imrpisonment
+			     has_country_flag = siamats_release
+			}
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_orsis_refugees_b72
+                duration = -1
+            }
+			country_event = {
+				id = wwu_flavour_neferset.7
+            }
+		}
+	}
+	B72_question_of_loyalty = {
+		icon = mission_branch
+		required_missions = { B72_the_city_of_orsis }
+		position = 8
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1559
+				province_id = 4598
+				province_id = 4599
+				province_id = 4600
+				province_id = 4601
+			}
+		}
+		trigger = {
+			1559 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			4598 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			4599 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			4600 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+			4601 = {
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 2
+				}
+				NOT = { native_size = 1 }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_old_city_of_tolvir_b72
+                duration = -1
+            }
+			country_event = {
+				id = wwu_flavour_neferset.8
+            }
+		}
+	}
+	B72_consolidate_the_tolvir = {
+		icon = mission_unity
+		required_missions = { B72_question_of_loyalty }
+		position = 9
+		
+		trigger = {
+			NOT = { exists = G10 }
+			
+		effect = {			
+			add_country_modifier = {
+                name = mission_nation_of_all_tolvir_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tolvir_civilization = {
+		icon = mission_ancestors
+		required_missions = { B72_consolidate_the_tolvir }
+		position = 10
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1559
+				province_id = 4598
+				province_id = 4599
+				province_id = 4600
+				province_id = 4601
+			}
+		}
+		trigger = {
+			1559 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+				has_building = wow_temple_2
+				has_building = wow_shipyard_2
+			}
+			4598 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+				has_building = wow_temple_2
+				has_building = wow_shipyard_2
+			}
+			4599 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+				has_building = wow_temple_2
+				has_building = wow_shipyard_2
+			}
+			4600 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+				has_building = wow_temple_2
+				has_building = wow_shipyard_2
+			}
+			4601 = {
+				owned_by = ROOT
+				development = 20
+				has_building = wow_market_2
+				has_building = wow_town_hall_2
+                has_building = wow_barracks_2
+				has_building = wow_temple_2
+				has_building = wow_shipyard_2
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_restore_city_of_tolvir_b72
+                duration = -1
+            }
+			add_prestige = 30
+			add_stability = 1
+			set_capital = #543
+		}
+	}
+	B72_tolvir_nationalism = {
+		icon = mission_titan_spirits
+		required_missions = { B72_tolvir_civilization }
+		position = 11
+		provinces_to_highlight = {
+			region = region_uldum
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		    OR = {
+			    region_uldum = {
+                    type = all
+					is_city = yes
+				    culture = culture_stone_tolvir
+				    country_or_non_sovereign_subject_holds = ROOT
+                }
+				region_uldum = {
+                    type = all
+					is_city = yesis_city = yes
+				    culture = culture_tolvir
+				    country_or_non_sovereign_subject_holds = ROOT
+                }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_future_or_past_b72
+                duration = -1
+            }
+		}
+	}
+	B72_lords_of_uldum = {
+		icon = mission_lordaeron_crown
+		required_missions = { B72_tolvir_supremacy }
+		position = 12
+		
+		provinces_to_highlight = {
+			region = region_uldum
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			region_uldum = {
+                type = all
+				is_city = yes
+				country_or_non_sovereign_subject_holds = ROOT
+            }
+			1569 = {
+				owned_by = ROOT
+			    development = 25
+			}
+			1563 = {
+				owned_by = ROOT
+			    development = 25
+			}
+			1568 = {
+				owned_by = ROOT
+			    development = 25
+			}
+			NOT = { exists = G14 }
+            NOT = { has_global_flag = formed_uldum }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_forming_uldum_b72
+                duration = -1
+            }
+			country_event = {
+				id = wwu_flavour_neferset.10
+            }
+		}
+	}
+}
+
+B72_neferset_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_waves_of_uldum = {
+		icon = mission_ship_2
+		required_missions = { }
+		
+		trigger = {
+			is_at_war = no
+			if = {
+				limit = {
+					has_estate = estate_traders
+				}
+				estate_influence = {
+					estate = estate_traders
+					influence = 50
+				}
+				estate_loyalty = {
+					estate = estate_traders
+					loyalty = 60
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_trading_routes_b72
+                duration = -1
+            }
+		}
+	}
+	B72_neferset_merchant_fleet = {
+		icon = mission_ship_1
+		required_missions = { B72_waves_of_uldum }
+		position = 2
+		
+		provinces_to_highlight = {
+			province_id = 473
+		}
+		trigger = {
+			473 = {
+                light_ships_in_province = 15
+            }
+			home_trade_node = {
+				trade_share = {
+					country = ROOT
+					share = 40
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_trade_fleets_b72
+                duration = -1
+            }
+			1563 = {
+			   add_center_of_trade_level = 1
+			}
+		}
+	}
+	B72_foreign_markets = {
+		icon = mission_trading_outpost
+		required_missions = { B72_neferset_merchant_fleet }
+		position = 3
+		
+		trigger = {
+			calc_true_if = {
+               amount = 2
+    
+                all_owned_province = {
+                    NOT = { is_in_capital_area = yes }
+                    province_has_center_of_trade_of_level = 1
+				}
+            }
+        }
+		effect = {			
+			add_country_modifier = {
+                name = mission_foreign_markets_b72
+                duration = -1
+            }
+			area_gadgetzan = {
+                add_permanent_claim = ROOT
+            }
+			area_lands_end = {
+                add_permanent_claim = ROOT
+            }
+			area_southbank_shore = {
+                add_permanent_claim = ROOT
+            }
+		}
+	}
+	B72_tanaris_opportunities = {
+		icon = mission_trading_outpost
+		required_missions = { B72_foreign_markets }
+		position = 4
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1239
+				province_id = 4566
+				province_id = 1549
+				province_id = 1243
+				province_id = 4568
+				province_id = 4567
+				province_id = 4062
+				province_id = 4063
+			}
+		}
+		#trigger = {
+		    if = {
+               limit = {
+                   1239  = { 
+                      is_empty = yes
+                   }
+               }    
+               1239 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               1239 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		     if = {
+                limit = {
+                   4566  = { 
+                      is_empty = yes
+                   }
+               }    
+               4566 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               4566 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		     if = {
+                limit = {
+                   1549  = { 
+                      is_empty = yes
+                   }
+               }    
+               1549 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               1549 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		     if = {
+                limit = {
+                   1243  = { 
+                      is_empty = yes
+                   }
+               }    
+               1243 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               1243 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		     if = {
+                limit = {
+                   4568  = { 
+                      is_empty = yes
+                   }
+               }    
+               4568 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               4568 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		     if = {
+                limit = {
+                   4567  = { 
+                      is_empty = yes
+                   }
+                }    
+                4567 = { 
+                   num_of_units_in_province = {
+                      who = ROOT
+                      amount = 2
+                   }
+                   NOT = { native_size = 1 }
+                }
+	        }
+            else = {
+               4567 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		   if = {
+               limit = {
+                  4062  = { 
+                     is_empty = yes
+                  }
+               }
+               4062 = { 
+                  num_of_units_in_province = {
+                     who = ROOT
+                     amount = 2
+                  }
+                  NOT = { native_size = 1 }
+               }
+	        }
+            else = {
+               4062 = { 
+                  <triggers if already colonised/owned>
+               }
+			}
+         }
+		 #trigger = {
+		   if = {
+              limit = {
+                 4063  = { 
+                    is_empty = yes
+                 }
+             }
+             4063 = { 
+                 num_of_units_in_province = {
+                    who = ROOT
+                    amount = 2
+                 }
+                 NOT = { native_size = 1 }
+              }
+	       }
+           else = {
+              4063 = { 
+                 <triggers if already colonised/owned>
+              }
+           }
+		}
+		effect = {			
+	        add_country_modifier = {
+                name = mission_gates_of_tanaris_b72
+                duration = -1
+            }
+			seize_empty_province_effect = { province = 1239 }
+			seize_empty_province_effect = { province = 4566 }
+			seize_empty_province_effect = { province = 1549 }
+			seize_empty_province_effect = { province = 1243 }
+			seize_empty_province_effect = { province = 4568 }
+			seize_empty_province_effect = { province = 4062 }
+			seize_empty_province_effect = { province = 4567 }
+			seize_empty_province_effect = { province = 4063 }
+		}
+	}
+	B72_dominate_home_region = {
+		icon = mission_hearthstone_vanilla
+		required_missions = { B72_tanaris_opportunities }
+		position = 5
+		
+		trigger = {
+			home_trade_node = {
+				trade_share = {
+					country = ROOT
+					share = 80
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_the_winds_of_trade_b72
+                duration = -1
+            }
+		}
+	}
+	B72_masters_of_the_desert_a = {
+		icon = mission_map
+		required_missions = { B72_dominate_home_region }
+		position = 6
+		
+		provinces_to_highlight = {
+			region = region_uldum
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			region_uldum = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_consolidate_uldum_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tolvir_polarization = {
+		icon = mission_tolvir_arena
+		required_missions = { B72_question_of_loyalty }
+		position = 9
+		
+		trigger = {
+			OR = {
+			    NOT = { exists = G09 }
+				G09 = { 
+				    is_vassal = yes 
+					owned_by = ROOT
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_fall_of_ramkahen_b72
+                duration = -1
+            }
+		}
+	}
+	B72_control_halls_of_origination = {
+		icon = mission_tolvir_arena
+		required_missions = { B72_tolvir_polarization }
+		position = 10
+		
+		trigger = {
+			OR = {
+			    NOT = { exists = ULW }
+				ULW = { 
+				    is_vassal = yes 
+					owned_by = ROOT
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_controlling_halls_of_origination_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_neferset_renovations_a = {
+		icon = mission_headquarters
+		required_missions = { }
+		
+		provinces_to_highlight = {
+			province_id = 4577
+		}
+		trigger = {
+			4577 = {
+				owned_by = ROOT
+			    development = 15
+				has_great_project = {
+                    type = gp_halls_of_origination
+                    tier = 2
+                }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_the_halls_of_origination_b72
+                duration = -1
+            }
+		}
+	}
+	B72_neferset_renovations_b = {
+		icon = mission_headquarters
+		required_missions = { }
+		position = 2
+		
+		provinces_to_highlight = {
+			province_id = 476
+		}
+		trigger = {
+			476 = {
+				owned_by = ROOT
+			    development = 15
+				has_great_project = {
+                    type = gp_virnaal_dam
+                    tier = 2
+                }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_the_virnaal_dam_b72
+                duration = -1
+            }
+		}
+	}
+	B72_neferset_renovations_c = {
+		icon = mission_headquarters
+		required_missions = { }
+		position = 3
+		
+		provinces_to_highlight = {
+			province_id = 4577
+			province_id = 476
+		}
+		trigger = {
+			4577 = {
+				owned_by = ROOT
+			    development = 20
+				has_great_project = {
+                    type = gp_halls_of_origination
+                    tier = 3
+                }
+			}
+			476 = {
+				owned_by = ROOT
+			    development = 20
+				has_great_project = {
+                    type = gp_virnaal_dam
+                    tier = 3
+                }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_monumental_architecture_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tolvir_commonwealth = {
+		icon = mission_tolvir_arena
+		required_missions = { }
+		position = 4
+		
+		trigger = {
+			G09 = {
+			    is_vassal = yes 
+		        owned_by = ROOT
+			}
+			G10 = {
+			    is_vassal = yes 
+				owned_by = ROOT
+			}
+			NHO = {
+			    is_vassal = yes 
+				owned_by = ROOT
+			}
+			ULW = {
+			    is_vassal = yes 
+				owned_by = ROOT
+			}
+			# G09 - G10 - NHO - ULW capitals at 20 dev each
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tolvir_swarm_b72
+                duration = -1
+            }
+		}
+	}
+	B72_masters_of_the_desert_b = {
+		icon = mission_map
+		required_missions = { }
+		position = 6
+		
+		provinces_to_highlight = {
+			region = region_tanaris
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			region_tanaris = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_consolidate_tanaris_b72
+                duration = -1
+            }
+		}
+	}
+	B72_exotic_ungoro = {
+		icon = mission_map
+		required_missions = { B72_masters_of_the_desert_a B72_masters_of_the_desert_b }
+		position = 7
+		
+		provinces_to_highlight = {
+			region = region_ungoro_crater
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			region_ungoro_crater = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_exploring_ungoro_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_question_of_faith = {
+		icon = mission_white_essence
+		required_missions = { }
+		
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_religion_dillema_b72
+                duration = -1
+            }
+		}
+	}
+	B72_patrons_blessing = {
+		icon = mission_gold_pile
+		required_missions = { }
+		position = 2
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_blessing_from_above_b72
+                duration = -1
+            }
+		}
+	}
+	B72_religious_dominance = {
+		icon = mission_white_essence
+		required_missions = { }
+		position = 3
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_one_faith_b72
+                duration = -1
+            }
+		}
+	}
+	B72_religious_artifacts_of_our_fathers = {
+		icon = mission_archaeology_skill
+		required_missions = { }
+		position = 5
+		
+		trigger = {
+			calc_true_if = {                     
+                has_country_flag = dig_in_kalimdor
+				value = 3
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_rise_of_amathet_b72
+                duration = -1
+            }
+		}
+	}
+}

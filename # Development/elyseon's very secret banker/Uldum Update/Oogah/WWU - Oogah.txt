@@ -1,0 +1,752 @@
+#--------------------------------------
+# Oogah
+#--------------------------------------
+G15_oogah_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = G15
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	G15_city_of_ramkahen = {
+		icon = mission_tolvir_arena
+		position = 2
+		required_missions = { G15_desert_warbands }
+		
+		provinces_to_highlight = {
+			area = area_ramkahen
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+		    1569 = { is_looted = yes }
+			area_ramkahen = {
+                type = all
+				NOT = { is_city = yes }
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_invade_the_oasis_g15
+                duration = -1
+            }
+			add_mil_power = 150
+		}
+	}
+	G15_desert_expansion_a = {
+		icon = mission_ship_2
+		position = 3	
+		required_missions = { G15_city_of_ramkahen }
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4593
+				province_id = 4594
+				province_id = 1556
+			}
+		}
+		
+		trigger = {
+		    if = {
+                limit = {
+                    4593  = { 
+                        is_empty = yes
+                    }
+                }
+                4593 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4594  = { 
+                        is_empty = yes
+                    }
+                }
+                4594 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1556  = { 
+                        is_empty = yes
+                    }
+                }
+                1556 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_homeland_g15
+                duration = -1
+            }
+			seize_empty_province_effect = { province = 4593 }
+			seize_empty_province_effect = { province = 4594 }
+			seize_empty_province_effect = { province = 1556 }
+		}
+	}
+	G15_city_of_orsis = {
+		icon = mission_tolvir_arena
+		position = 4	
+		required_missions = { G15_desert_expansion_a }
+
+		provinces_to_highlight = {
+			area = area_obelisk_of_the_moon
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+		    1568 = { is_looted = yes }
+			area_obelisk_of_the_moon = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_raiding_the_temples_of_orsis_g15
+                duration = -1
+            }
+			add_mil_power = 150
+		}
+	}
+	G15_desert_expansion_c = {
+		icon = mission_ship_2
+		position = 5	
+		required_missions = { G15_city_of_orsis }
+        
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4608
+				province_id = 4609
+				province_id = 4610
+				province_id = 480
+				province_id = 1577
+			}
+		}
+		
+		trigger = {
+		    if = {
+                limit = {
+                    4608 = { 
+                        is_empty = yes
+                    }
+                }
+                4608 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4609 = { 
+                        is_empty = yes
+                    }
+                }
+                4609 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4610 = { 
+                        is_empty = yes
+                    }
+                }
+                4610 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1577 = { 
+                        is_empty = yes
+                    }
+                }
+                1577 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    480 = { 
+                        is_empty = yes
+                    }
+                }
+                480 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_calling_of_the_desert_g15
+                duration = -1
+            }
+			seize_empty_province_effect = { province = 4608 }
+			seize_empty_province_effect = { province = 4609 }
+			seize_empty_province_effect = { province = 4610 }
+			seize_empty_province_effect = { province = 480 }
+			seize_empty_province_effect = { province = 1577 }
+		}
+	}
+}
+
+G15_oogah_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = G15
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	G15_desert_warbands = {
+		icon = mission_gnoll_head
+		required_missions = { }
+		
+		trigger = {
+		    is_at_war = no
+			has_estate = estate_tribals
+			estate_influence = {
+				estate = estate_tribals
+				influence = 50
+			}
+			estate_loyalty = {
+				estate = estate_tribals
+				loyalty = 60
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_pygmy_raiding_teams_g15
+                duration = -1
+            }
+			add_mil_power = 100
+			change_government_reform_progress = 100
+		}
+	}
+	G15_priesthood_of_nahom = {
+		icon = mission_tolvir_arena
+		position = 2	
+		required_missions = { G15_desert_warbands }
+
+        provinces_to_highlight = {
+			area = area_obelisk_of_the_stars
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			1576 = { is_looted = yes }
+			area_obelisk_of_the_stars = {
+                type = all
+				NOT = { is_city = yes }
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_raiding_the_obelisks_g15
+                duration = -1
+            }
+			add_mil_power = 150
+		}
+	}
+	G15_neferset_trade_deals = {
+		icon = mission_trading_outpost
+		position = 3	
+		required_missions = { G15_priesthood_of_nahom }
+
+		trigger = {
+			OR = {
+			    B72 = {
+			    	has_opinion = {
+                        who = ROOT
+                        value = 100
+			    	}					
+                }
+				B72 = {
+			    	NOT = {
+                        has_opinion = {
+                            who = ROOT
+                            value = -100
+					    }
+					}
+                }
+				NOT = { exists = B72 }
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_trading_routes_g15
+                duration = -1
+            }
+			if = {
+                limit = {
+				    B72 = {
+                        NOT = {
+					        has_opinion = {
+                                who = ROOT
+                                value = 100
+						    }
+					    }
+					}
+                }
+                create_alliance = B72
+				add_historical_friend = B72
+				1563 = {
+			       add_center_of_trade_level = 1
+			    }
+            }
+			else_if = {
+                limit = {
+				    B72 = {
+					    NOT = {
+					        has_opinion = {
+                                who = ROOT
+                                value = -100
+						    }
+						}
+					}
+				}
+				area_neferset = {
+                    add_permanent_claim = ROOT
+			    }
+				area_lost_city_of_the_tolvir = {
+                    add_permanent_claim = ROOT
+			    }
+				add_historical_rival = B72
+				add_casus_belli = {
+                    target = B72
+                    type = cb_vassalize_mission
+                    months = 300
+                }
+            }
+			add_dip_power = 200
+		}
+	}
+	G15_a_new_deal = {
+		icon = mission_treasure_map
+		position = 4	
+		required_missions = { G15_neferset_trade_deals }
+
+		trigger = {			
+			B72 = {
+			    OR = {
+			        alliance_with = ROOT
+				    is_subject_of = ROOT
+					NOT = { exists = yes }
+				}
+				religious_unity = 0.9
+		    }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_trade_benefits_g15
+                duration = -1
+            }
+			add_dip_power = 100
+			add_adm_power = 100
+			country_event = {
+				id = wwu_flavour_oogah.1			
+            }
+		}
+	}
+	G15_east_uldum = {
+		icon = mission_strand_of_the_ancients
+		position = 5
+		required_missions = { G15_a_new_deal }
+		
+        provinces_to_highlight = {
+		    OR = {
+			    area = area_cursed_landing
+			    area = area_halls_of_origination
+			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			area_cursed_landing = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_halls_of_origination = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_halls_of_origination_g15
+                duration = -1
+            }
+			add_mil_power = 150
+			add_dip_power = 150
+			country_event = {
+				id = wwu_flavour_oogah.2
+            }
+		}
+	}
+	G15_state_of_uldum = {
+		icon = mission_map
+		position = 6
+		required_missions = { G15_desert_expansion_c G15_east_uldum G15_tanaris_invasion }
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4577
+				province_id = 1576
+				province_id = 1569
+				province_id = 1568
+				province_id = 1563
+				province_id = 4601
+			}
+		}
+		
+		trigger = {
+			4577 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1576 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1569 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1568 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			1563 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4601 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {			
+			add_country_modifier = {
+                name = mission_uldum_g15
+                duration = -1
+            }
+			change_tag = G14
+			add_formable_bonus = yes
+			add_prestige = 25
+			add_mil_power = 200
+			add_adm_power = 200
+			add_dip_power = 200
+			change_government_reform_progress = 200
+		    country_event = {
+				id = wwu_flavour_oogah.3
+			}
+        }
+	}
+	G15_foreign_politics = {
+		icon = mission_shot_helmet
+		position = 7	
+		required_missions = { G15_state_of_uldum }
+
+		trigger = {
+		    ROOT = {
+			    OR = {
+			        government = monarchy
+					government = republic
+					government = tribal
+				}
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_diplomatic_options_g15
+                duration = -1
+            }
+			if = {
+			    limit = {
+				    government = monarchy
+				}
+				area_tel_abim = {
+                    add_permanent_claim = ROOT
+                }
+				region_lost_isles = {
+                    add_permanent_claim = ROOT
+                }
+				region_kezan = {
+                    add_permanent_claim = ROOT
+                }
+			}
+			if = {
+				limit = {
+				    government = republic
+				}
+				area_gadgetzan = {
+                    add_permanent_claim = ROOT
+                }
+				area_steamwheedle_port = {
+                    add_permanent_claim = ROOT
+                }
+				area_ratchet = {
+                    add_permanent_claim = ROOT
+                }
+				area_southsea_holdfast = {
+                    add_permanent_claim = ROOT
+                }
+				region_plunder_isle = {
+                    add_permanent_claim = ROOT
+                }
+				area_freehold = {
+                    add_permanent_claim = ROOT
+                }
+				area_booty_bay = {
+                    add_permanent_claim = ROOT
+                }
+			}
+			if = {
+				limit = {
+				    government = tribal
+				}
+				region_silithus = {
+                    add_permanent_claim = ROOT
+                }
+				region_tanaris = {
+                    add_permanent_claim = ROOT
+                }
+			}
+		}
+	}
+}
+
+G15_oogah_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = G15
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	G15_halls_of_origination = {
+		icon = mission_strand_of_the_ancients
+		position = 2
+		required_missions = { G15_desert_warbands }
+		
+		provinces_to_highlight = {
+			area = area_halls_of_origination
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+		    4577 = { is_looted = yes }
+			area_halls_of_origination = {
+                type = all
+				NOT = { is_city = yes }
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_loot_the_titan_facilities_g15
+                duration = -1
+            }
+			add_mil_power = 150
+		}
+	}
+	G15_desert_expansion_b = {
+		icon = mission_ship_2
+		position = 3	
+		required_missions = { G15_halls_of_origination }
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1557
+				province_id = 4570
+                province_id = 1239
+				province_id = 4566
+				province_id = 1549
+				province_id = 1234
+			}
+		}
+		
+		trigger = {
+		    if = {
+                limit = {
+                    1557 = { 
+                        is_empty = yes
+                    }
+                }
+                1557 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4570 = { 
+                        is_empty = yes
+                    }
+                }
+                4570 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1239 = { 
+                        is_empty = yes
+                    }
+                }
+                1239 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4566 = { 
+                        is_empty = yes
+                    }
+                }
+                4566 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1549 = { 
+                        is_empty = yes
+                    }
+                }
+                1549 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1234 = { 
+                        is_empty = yes
+                    }
+                }
+                1234 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_sand_oh_lovely_sand_g15
+                duration = -1
+            }
+			area_the_noxious_lair = {
+                add_permanent_claim = ROOT
+            }
+			area_valley_of_the_watchers = {
+                add_permanent_claim = ROOT
+            }
+			area_the_gaping_chasm = {
+                add_permanent_claim = ROOT
+            }
+			seize_empty_province_effect = { province = 1557 }
+			seize_empty_province_effect = { province = 4570 }
+            seize_empty_province_effect = { province = 1239 }
+			seize_empty_province_effect = { province = 1234 }
+			seize_empty_province_effect = { province = 4566 }
+			seize_empty_province_effect = { province = 1549 }			
+		}
+	}
+	G15_tanaris_invasion = {
+		icon = mission_ship_2
+		position = 5	
+		required_missions = { G15_desert_expansion_b }
+
+		provinces_to_highlight = {
+		    OR = {
+			    area = area_the_noxious_lair
+			    area = area_the_gaping_chasm
+			    area = area_valley_of_the_watchers
+			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			area_the_noxious_lair = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_the_gaping_chasm = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+			area_valley_of_the_watchers = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tanaris_expansion_g15
+                duration = -1
+            }
+		}
+	}
+}

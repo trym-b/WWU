@@ -1,0 +1,66 @@
+country_decisions = {
+    form_uldum = {
+		major = yes
+        ai_importance = 0
+        
+		potential = { 
+            NOT = { has_country_flag = enacted_final_tag_formation }
+            
+            # Exclusions
+			NOT = { exists = G14 }
+            
+            # Requisites
+			OR = {
+			    tag = G10
+				tag = B72
+				tag = G09
+				tag = G15
+			}
+            
+            any_owned_province = {
+                region = region_uldum
+            }
+		}
+        
+        provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			OR = {
+                province_id = 1569
+                province_id = 1563
+				province_id = 1568				
+            }
+		}
+        
+		allow = {
+            # Ownership
+			owns_core_province = 1569   # Ramkahen
+			owns_core_province = 1563   # Neferset
+			owns_core_province = 1568   # Orsis
+			
+			# General
+			is_at_war = no	
+			stability = 1
+			total_development = 200
+            
+		}
+		effect = {
+            
+            # Switch
+			change_tag = G14
+            country_event = {
+				id = wwu_flavour_name_change_uldum.1
+			}
+			
+            # Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            
+            set_final_tag_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

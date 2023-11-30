@@ -1,0 +1,45 @@
+country_decisions = {
+    activate_coffer_of_promise = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {        
+			tag = NHO
+			has_country_flag = allow_activation_of_coffer_of_promise
+		}
+		
+		allow = {
+            has_country_flag = allow_activation_of_coffer_of_promise
+    
+            treasury = 300
+    
+            any_owned_province = {
+                has_province_flag = coffer_of_promise_target
+                NOT = { has_province_modifier = activated_coffer_of_promise_nho }
+            }
+        }
+
+		
+		effect = {
+            # Cost
+			add_treasury = -300
+            every_owned_province = {
+                limit = {
+                    has_province_flag = coffer_of_promise_target
+                }
+                add_province_modifier = {
+                    name = activated_coffer_of_promise_nho
+                    duration = -1
+                }
+            }
+			add_country_modifier = {
+                name = activated_coffer_of_promise_recently_nho
+                duration = 1825
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

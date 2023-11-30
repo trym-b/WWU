@@ -1,0 +1,247 @@
+namespace = wwu_dungeon_halls_of_origination
+
+# Enter Halls of Origination
+country_event = {
+	id = wwu_dungeon_halls_of_origination.1
+	title = wwu_dungeon_halls_of_origination.1.title
+	desc = wwu_dungeon_halls_of_origination.1.desc
+	picture = DRAENOR_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {		
+		name = wwu_dungeon_halls_of_origination.1.a
+		
+		trigger = {
+		    NOT = { culture = culture_tolvir }
+			NOT = { culture = culture_stone_tolvir }
+			NOT = { tag = POA }
+		}
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.2
+            }
+		}		
+	}
+	option = {		
+		name = wwu_dungeon_halls_of_origination.1.b
+		
+		trigger = {
+		    OR = {
+		        culture_group = culture_group_tol_vir
+				tag = POA
+			}
+		}
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.2
+            }
+		}
+	}  
+}    
+
+# Maker's Overlook
+country_event = {
+	id = wwu_dungeon_halls_of_origination.2
+	title = wwu_dungeon_halls_of_origination.2.title
+	desc = wwu_dungeon_halls_of_origination.2.desc
+	picture = BECKONER_OF_EVIL_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.2.option.a	       
+        add_manpower = -0.5	
+
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.3
+            }
+		}
+		
+	}
+}
+
+# Chamber of Prophesy
+country_event = {
+	id = wwu_dungeon_halls_of_origination.3
+	title = wwu_dungeon_halls_of_origination.3.title
+	desc = wwu_dungeon_halls_of_origination.3.desc
+	picture = BECKONER_OF_EVIL_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.3.option.a
+		
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.4
+            }
+		}
+		
+    }
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.3.option.b	
+
+        hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.4
+            }
+		}
+		
+	}
+}
+
+# Temple Guardian Anhuur
+country_event = {
+	id = wwu_dungeon_halls_of_origination.4
+	title = wwu_dungeon_halls_of_origination.4.title
+	desc = wwu_dungeon_halls_of_origination.4.desc
+	picture = BECKONER_OF_EVIL_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+    option = {
+	    name = wwu_dungeon_halls_of_origination.4.option.a	
+        
+		trigger = {
+            if = {
+ 		        limit = {
+			        OR = {
+				        culture = culture_tolvir
+					    culture = culture_stone_tolvir
+				    }
+			        dip = 4
+			    }
+                change_dip = 1
+                add_country_modifier = {
+                    name = event_dungeon_hoo_guardian_ahuurs_trust
+                    duration = -1
+                }					
+		    }
+			if = {
+			    limit = {
+				    NOT = {
+					    OR = {
+						    culture_group = culture_group_tol_vir
+							tag = POA
+						}
+					}
+					dip = 5
+				}
+				add_country_modifier = {
+                    name = event_dungeon_hoo_guardian_ahuurs_trust
+                    duration = -1
+                }
+			}
+			NOT = { event = wwu_dungeon_halls_of_origination.3.b }
+		}
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.5
+            }
+		}
+	} 
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.4.option.b	
+        
+        add_manpower = -1
+        add_country_modifier = {
+            name = event_dungeon_hoo_defeating_guardian_ahuur
+            duration = -1
+        }
+		ULW = {
+		    add_opinion = {
+			    who = ROOT
+				modifier = -20
+			}
+		}
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.5
+            }
+		}
+	}
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.4.option.c	
+        
+		trigger = {
+		    OR = {
+		        personality = calm_personality
+				personality = careful_personality
+				personality = silver_tongue_personality
+			}
+		}
+		
+		ULW = {
+		    add_opinion = {
+			    who = ROOT
+				modifier = 40
+			}
+		}
+        add_country_modifier = {
+            name = event_dungeon_hoo_reasoned_guardian_ahuur
+            duration = -1
+        }
+		
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.5
+            }
+		}
+	}
+}
+
+# Chamber of Prophesy
+country_event = {
+	id = wwu_dungeon_halls_of_origination.5
+	title = wwu_dungeon_halls_of_origination.5.title
+	desc = wwu_dungeon_halls_of_origination.5.desc
+	picture = BECKONER_OF_EVIL_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.5.option.a
+		
+		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.6 #Tomb of the Earthrager
+            }
+		}
+    }
+	
+	option = {
+		name = wwu_dungeon_halls_of_origination.5.option.b	
+		
+  		hidden_effect = {
+		    country_event = {
+			    id = wwu_dungeon_halls_of_origination.7 #The Maker's Rise
+            }
+		}
+	}
+}
