@@ -1,6 +1,92 @@
 #--------------
 # Archaeology
 #--------------
+# --- Page 1
+# apocalypse
+# twinblades_of_the_deceiver
+# thasdorah
+# aluneth
+# sheilun
+# ashbringer
+# xalatath
+# doomhammer
+# dreadblades
+# skull_of_manari
+
+# warswords_of_valarjar
+# scythe_of_elune
+# maw_of_the_damned
+# blades_of_the_fallen_prince
+# aldrachi_warblades
+# fangs_of_ashamane
+# claws_of_ursoc
+# ghanir
+# titanstrike
+# talonclaw
+
+# felomelorn
+# ebonchill
+# fu_zan
+# fists_of_the_heavens
+# silver_hand
+# truthguard
+# lights_wrath
+# tuure
+# kingslayers
+# fangs_of_the_devourer
+
+# fist_of_raden
+# sharasdal
+# ulthalesh
+# scepter_of_sargeras
+# stromkar
+# scale_of_the_earthwarder
+# underlight_angler
+# glaive_of_the_aspects
+# scimitar_of_sirocco
+# staff_of_ammunae
+
+# --- Page 2
+# dustbringer
+# valanyr
+# puzzle_box_of_yogg_saron
+# twirling_longbow
+# spear_of_xuen
+# umbrella_of_chiji
+# amulet_of_rukhmar
+# dream_of_argus
+# grimoire_of_the_nameless_void
+# gronnsbane
+
+# gutreks_cleaver
+# headdress_of_the_first_shaman
+# warmaul_of_the_warmaul_chieftain
+# beakbreaker_of_terokk
+# zinrokh
+# fetish_of_hireek
+# bwonsamdi_voodoo_mask
+# rezan_idol
+# jagged_blade_of_the_drust
+# soul_coffer
+
+# fetish_of_the_tormented_mind
+# ritual_fetish
+# blade_of_northern_kings
+# brinebeards_shanker
+# crimson_captains_hat
+# elemental_lairat
+# onyx_annulet
+# spark_of_ingenuity
+# awakmani
+# kharnalex
+
+# pashmars_finial
+# anu_azshara
+# scepter_of_the_azshari
+# arcane_phial
+# vision_of_demise
+# pearl_of_pandaria
+
 # Titles
 custom_text_box = {
    name = primary_artifact_title
@@ -14,18 +100,6 @@ custom_text_box = {
 # Elements
 custom_icon = {
    name = archaeology_gui_progress_value_bg
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-custom_icon = {
-   name = archaeology_gui_major_discoveries_bg
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-custom_icon = {
-   name = archaeology_gui_minor_discoveries_bg
    potential = { 
         is_archaeology_gui_open = yes
    }
@@ -53,11 +127,11 @@ custom_button = {
     }
     
     trigger = { 
-        
+        is_artifact_view_page_2 = yes
     }
     
     effect = { 
-        
+        set_artifact_view_page_1 = yes
     }
 }
 
@@ -70,11 +144,11 @@ custom_button = {
     }
     
     trigger = { 
-        
+        is_artifact_view_page_1 = yes
     }
     
     effect = { 
-        
+        set_artifact_view_page_2 = yes
     }
 }
 
@@ -96,42 +170,6 @@ custom_text_box = {
    }
 }
 
-custom_text_box = {
-   name = archaeology_gui_major_discoveries_title
-   tooltip = ARCHAEOLOGY_MAJOR_DISCOVERIES_TT
-   
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-
-custom_text_box = {
-   name = archaeology_gui_major_discoveries_value_text
-   tooltip = ARCHAEOLOGY_MAJOR_DISCOVERIES_TT
-   
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-
-custom_text_box = {
-   name = archaeology_gui_minor_discoveries_title
-   tooltip = ARCHAEOLOGY_MINOR_DISCOVERIES_TT
-   
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-
-custom_text_box = {
-   name = archaeology_gui_minor_discoveries_value_text
-   tooltip = ARCHAEOLOGY_MINOR_DISCOVERIES_TT
-   
-   potential = { 
-        is_archaeology_gui_open = yes
-   }
-}
-
 # Actions
 custom_button = {
     name = archaeology_gui_start_dig_button
@@ -139,14 +177,55 @@ custom_button = {
     
     potential = {
         is_archaeology_gui_open = yes
+        
     }
     
     trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_NOT_STARTED_DIG_TT
+            
+            NOT = { has_country_flag = excavation_decision_used }
+        }
         
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_NOT_USED_DIG_RECENTLY_TT
+            
+            NOT = { has_country_modifier = archaeology_dig_decision_cooldown }
+        }
+        
+        is_allowed_to_dig = yes
+        
+        custom_trigger_tooltip = {
+            tooltip = HAS_NOT_STARTED_ARCHAEOLOGICAL_DIG
+            NOT = { has_country_flag = excavation_decision_used }
+        }
+        
+        adm_power = 50
+        dip_power = 50
+        mil_power = 50
     }
     
     effect = { 
+        add_adm_power = -50
+        add_dip_power = -50
+        add_mil_power = -50
+            
+        hidden_effect = {
+            set_country_flag = excavation_decision_used
+            
+            add_country_modifier = {
+                name = archaeology_dig_decision_cooldown
+                duration = 1800
+                hidden = yes
+            }
+            
+            set_variable = {
+                which = excavation_progress
+                value = 0
+            }
+        }
         
+        country_event = { id = wwu_archaeology.300 }
     }
 }
 custom_button = {
@@ -154,43 +233,3261 @@ custom_button = {
     tooltip = ARCHAEOLOGY_BOOST_DIG_TT
     
     potential = {
+        has_country_flag = dig_begins
         is_archaeology_gui_open = yes
     }
     
-    trigger = { 
-        
+    trigger = {
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_NOT_USED_DIG_BOOST_RECENTLY_TT
+            
+            NOT = { has_country_modifier = archaeology_dig_status_action_cooldown }
+        }
+        years_of_income = 1.0
     }
     
-    effect = { 
+    effect = {
+        add_years_of_income = -1.0
+        advance_dig_action = yes
         
+        custom_tooltip = ARCHAEOLOGICAL_EXPEDITION_ACTION_COOLDOWN_TT
+        hidden_effect = {
+            add_country_modifier = {
+                name = archaeology_dig_status_action_cooldown
+                duration = 365
+            }
+        }
     }
 }
 
+#--------------------------------------
 # Primary Artifact View
-custom_icon = {
-   name = primary_artifact__unknown
-   tooltip = ARCHAEOLOGY_PRIMARY_ARTIFACT_unknown
-   
-   potential = { 
-        is_archaeology_gui_open = yes
-        # filter
-   }
-}
-
-# Artifact Selection
+#--------------------------------------
 custom_button = {
-    name = select_artifact__apocalypse
-    tooltip = ARCHAEOLOGY_SELECT_ARTIFACT_apocalypse
+    name = primary_artifact__unknown
+    tooltip = ARTIFACT_INFO_unknown
     
     potential = {
         is_archaeology_gui_open = yes
+        has_no_primary_artifact = yes
     }
     
     trigger = { 
-        
     }
     
     effect = { 
         
+    }
+}
+
+custom_button = {
+    name = primary_artifact__apocalypse
+    tooltip = ARTIFACT_INFO_apocalypse
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_apocalypse
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__twinblades_of_the_deceiver
+    tooltip = ARTIFACT_INFO_twinblades_of_the_deceiver
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_twinblades_of_the_deceiver
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__thasdorah
+    tooltip = ARTIFACT_INFO_thasdorah
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_thasdorah
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__aluneth
+    tooltip = ARTIFACT_INFO_aluneth
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_aluneth
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__sheilun
+    tooltip = ARTIFACT_INFO_sheilun
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_sheilun
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__ashbringer
+    tooltip = ARTIFACT_INFO_ashbringer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_ashbringer
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__xalatath
+    tooltip = ARTIFACT_INFO_xalatath
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_xalatath
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__doomhammer
+    tooltip = ARTIFACT_INFO_doomhammer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_doomhammer
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__dreadblades
+    tooltip = ARTIFACT_INFO_dreadblades
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_dreadblades
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__skull_of_manari
+    tooltip = ARTIFACT_INFO_skull_of_manari
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_skull_of_manari
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__warswords_of_valarjar
+    tooltip = ARTIFACT_INFO_warswords_of_valarjar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_warswords_of_valarjar
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__scythe_of_elune
+    tooltip = ARTIFACT_INFO_scythe_of_elune
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_scythe_of_elune
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__maw_of_the_damned
+    tooltip = ARTIFACT_INFO_maw_of_the_damned
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_maw_of_the_damned
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__blades_of_the_fallen_prince
+    tooltip = ARTIFACT_INFO_blades_of_the_fallen_prince
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_blades_of_the_fallen_prince
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__aldrachi_warblades
+    tooltip = ARTIFACT_INFO_aldrachi_warblades
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_aldrachi_warblades
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fangs_of_ashamane
+    tooltip = ARTIFACT_INFO_fangs_of_ashamane
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fangs_of_ashamane
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__claws_of_ursoc
+    tooltip = ARTIFACT_INFO_claws_of_ursoc
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_claws_of_ursoc
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__ghanir
+    tooltip = ARTIFACT_INFO_ghanir
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_ghanir
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__titanstrike
+    tooltip = ARTIFACT_INFO_titanstrike
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_titanstrike
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__talonclaw
+    tooltip = ARTIFACT_INFO_talonclaw
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_talonclaw
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__felomelorn
+    tooltip = ARTIFACT_INFO_felomelorn
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_felomelorn
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__ebonchill
+    tooltip = ARTIFACT_INFO_ebonchill
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_ebonchill
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fu_zan
+    tooltip = ARTIFACT_INFO_fu_zan
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fu_zan
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fists_of_the_heavens
+    tooltip = ARTIFACT_INFO_fists_of_the_heavens
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fists_of_the_heavens
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__silver_hand
+    tooltip = ARTIFACT_INFO_silver_hand
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_silver_hand
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__truthguard
+    tooltip = ARTIFACT_INFO_truthguard
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_truthguard
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__lights_wrath
+    tooltip = ARTIFACT_INFO_lights_wrath
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_lights_wrath
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__tuure
+    tooltip = ARTIFACT_INFO_tuure
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_tuure
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__kingslayers
+    tooltip = ARTIFACT_INFO_kingslayers
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_kingslayers
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fangs_of_the_devourer
+    tooltip = ARTIFACT_INFO_fangs_of_the_devourer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fangs_of_the_devourer
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fist_of_raden
+    tooltip = ARTIFACT_INFO_fist_of_raden
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fist_of_raden
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__sharasdal
+    tooltip = ARTIFACT_INFO_sharasdal
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_sharasdal
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__ulthalesh
+    tooltip = ARTIFACT_INFO_ulthalesh
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_ulthalesh
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__scepter_of_sargeras
+    tooltip = ARTIFACT_INFO_scepter_of_sargeras
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_scepter_of_sargeras
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__stromkar
+    tooltip = ARTIFACT_INFO_stromkar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_stromkar
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__scale_of_the_earthwarder
+    tooltip = ARTIFACT_INFO_scale_of_the_earthwarder
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_scale_of_the_earthwarder
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__underlight_angler
+    tooltip = ARTIFACT_INFO_underlight_angler
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_underlight_angler
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__glaive_of_the_aspects
+    tooltip = ARTIFACT_INFO_glaive_of_the_aspects
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_glaive_of_the_aspects
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__scimitar_of_sirocco
+    tooltip = ARTIFACT_INFO_scimitar_of_sirocco
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_scimitar_of_sirocco
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__staff_of_ammunae
+    tooltip = ARTIFACT_INFO_staff_of_ammunae
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_staff_of_ammunae
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__dustbringer
+    tooltip = ARTIFACT_INFO_dustbringer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_dustbringer
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__valanyr
+    tooltip = ARTIFACT_INFO_valanyr
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_valanyr
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__puzzle_box_of_yogg_saron
+    tooltip = ARTIFACT_INFO_puzzle_box_of_yogg_saron
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_puzzle_box_of_yogg_saron
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__twirling_longbow
+    tooltip = ARTIFACT_INFO_twirling_longbow
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_twirling_longbow
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__spear_of_xuen
+    tooltip = ARTIFACT_INFO_spear_of_xuen
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_spear_of_xuen
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__umbrella_of_chiji
+    tooltip = ARTIFACT_INFO_umbrella_of_chiji
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_umbrella_of_chiji
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__amulet_of_rukhmar
+    tooltip = ARTIFACT_INFO_amulet_of_rukhmar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_amulet_of_rukhmar
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__dream_of_argus
+    tooltip = ARTIFACT_INFO_dream_of_argus
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_dream_of_argus
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__grimoire_of_the_nameless_void
+    tooltip = ARTIFACT_INFO_grimoire_of_the_nameless_void
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_grimoire_of_the_nameless_void
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__gronnsbane
+    tooltip = ARTIFACT_INFO_gronnsbane
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_gronnsbane
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__gutreks_cleaver
+    tooltip = ARTIFACT_INFO_gutreks_cleaver
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_gutreks_cleaver
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__headdress_of_the_first_shaman
+    tooltip = ARTIFACT_INFO_headdress_of_the_first_shaman
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_headdress_of_the_first_shaman
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__warmaul_of_the_warmaul_chieftain
+    tooltip = ARTIFACT_INFO_warmaul_of_the_warmaul_chieftain
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_warmaul_of_the_warmaul_chieftain
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__beakbreaker_of_terokk
+    tooltip = ARTIFACT_INFO_beakbreaker_of_terokk
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_beakbreaker_of_terokk
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__zinrokh
+    tooltip = ARTIFACT_INFO_zinrokh
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_zinrokh
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fetish_of_hireek
+    tooltip = ARTIFACT_INFO_fetish_of_hireek
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fetish_of_hireek
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__bwonsamdi_voodoo_mask
+    tooltip = ARTIFACT_INFO_bwonsamdi_voodoo_mask
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_bwonsamdi_voodoo_mask
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__rezan_idol
+    tooltip = ARTIFACT_INFO_rezan_idol
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_rezan_idol
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__jagged_blade_of_the_drust
+    tooltip = ARTIFACT_INFO_jagged_blade_of_the_drust
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_jagged_blade_of_the_drust
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__soul_coffer
+    tooltip = ARTIFACT_INFO_soul_coffer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_soul_coffer
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__fetish_of_the_tormented_mind
+    tooltip = ARTIFACT_INFO_fetish_of_the_tormented_mind
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_fetish_of_the_tormented_mind
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__ritual_fetish
+    tooltip = ARTIFACT_INFO_ritual_fetish
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_ritual_fetish
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__blade_of_northern_kings
+    tooltip = ARTIFACT_INFO_blade_of_northern_kings
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_blade_of_northern_kings
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__brinebeards_shanker
+    tooltip = ARTIFACT_INFO_brinebeards_shanker
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_brinebeards_shanker
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__crimson_captains_hat
+    tooltip = ARTIFACT_INFO_crimson_captains_hat
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_crimson_captains_hat
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__elemental_lairat
+    tooltip = ARTIFACT_INFO_elemental_lairat
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_elemental_lairat
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__onyx_annulet
+    tooltip = ARTIFACT_INFO_onyx_annulet
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_onyx_annulet
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__spark_of_ingenuity
+    tooltip = ARTIFACT_INFO_spark_of_ingenuity
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_spark_of_ingenuity
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__awakmani
+    tooltip = ARTIFACT_INFO_awakmani
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_awakmani
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__kharnalex
+    tooltip = ARTIFACT_INFO_kharnalex
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_kharnalex
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__pashmars_finial
+    tooltip = ARTIFACT_INFO_pashmars_finial
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_pashmars_finial
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__anu_azshara
+    tooltip = ARTIFACT_INFO_anu_azshara
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_anu_azshara
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__scepter_of_the_azshari
+    tooltip = ARTIFACT_INFO_scepter_of_the_azshari
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_scepter_of_the_azshari
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__arcane_phial
+    tooltip = ARTIFACT_INFO_arcane_phial
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_arcane_phial
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__vision_of_demise
+    tooltip = ARTIFACT_INFO_vision_of_demise
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_vision_of_demise
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+custom_button = {
+    name = primary_artifact__pearl_of_pandaria
+    tooltip = ARTIFACT_INFO_pearl_of_pandaria
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        has_country_flag = primary_artifact_pearl_of_pandaria
+    }
+    
+    trigger = { 
+    }
+    
+    effect = { 
+        
+    }
+}
+
+#--------------------------------------
+# Artifact Selection
+#--------------------------------------
+# Page 1 - Row 1
+custom_button = {
+    name = select_artifact__apocalypse
+    tooltip = ARTIFACT_INFO_apocalypse
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_apocalypse
+            has_country_flag = artifact_apocalypse
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_apocalypse
+            }
+            
+            make_primary_artifact = { artifact = apocalypse }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__twinblades_of_the_deceiver
+    tooltip = ARTIFACT_INFO_twinblades_of_the_deceiver
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_twinblades_of_the_deceiver
+            has_country_flag = artifact_twinblades_of_the_deceiver
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_twinblades_of_the_deceiver
+            }
+            
+            make_primary_artifact = { artifact = twinblades_of_the_deceiver }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__thasdorah
+    tooltip = ARTIFACT_INFO_thasdorah
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_thasdorah
+            has_country_flag = artifact_thasdorah
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_thasdorah
+            }
+            
+            make_primary_artifact = { artifact = thasdorah }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__aluneth
+    tooltip = ARTIFACT_INFO_aluneth
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_aluneth
+            has_country_flag = artifact_aluneth
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_aluneth
+            }
+            
+            make_primary_artifact = { artifact = aluneth }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__sheilun
+    tooltip = ARTIFACT_INFO_sheilun
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_sheilun
+            has_country_flag = artifact_sheilun
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_sheilun
+            }
+            
+            make_primary_artifact = { artifact = sheilun }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__ashbringer
+    tooltip = ARTIFACT_INFO_ashbringer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_ashbringer
+            has_country_flag = artifact_ashbringer
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_ashbringer
+            }
+            
+            make_primary_artifact = { artifact = ashbringer }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__xalatath
+    tooltip = ARTIFACT_INFO_xalatath
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_xalatath
+            has_country_flag = artifact_xalatath
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_xalatath
+            }
+            
+            make_primary_artifact = { artifact = xalatath }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__doomhammer
+    tooltip = ARTIFACT_INFO_doomhammer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_doomhammer
+            has_country_flag = artifact_doomhammer
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_doomhammer
+            }
+            
+            make_primary_artifact = { artifact = doomhammer }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__dreadblades
+    tooltip = ARTIFACT_INFO_dreadblades
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_dreadblades
+            has_country_flag = artifact_dreadblades
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_dreadblades
+            }
+            
+            make_primary_artifact = { artifact = dreadblades }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__skull_of_manari
+    tooltip = ARTIFACT_INFO_skull_of_manari
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_skull_of_manari
+            has_country_flag = artifact_skull_of_manari
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_skull_of_manari
+            }
+            
+            make_primary_artifact = { artifact = skull_of_manari }
+        }
+    }
+}
+
+# Page 1 - Row 2
+custom_button = {
+    name = select_artifact__warswords_of_valarjar
+    tooltip = ARTIFACT_INFO_warswords_of_valarjar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_warswords_of_valarjar
+            has_country_flag = artifact_warswords_of_valarjar
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_warswords_of_valarjar
+            }
+            
+            make_primary_artifact = { artifact = warswords_of_valarjar }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__scythe_of_elune
+    tooltip = ARTIFACT_INFO_scythe_of_elune
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_scythe_of_elune
+            has_country_flag = artifact_scythe_of_elune
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_scythe_of_elune
+            }
+            
+            make_primary_artifact = { artifact = scythe_of_elune }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__maw_of_the_damned
+    tooltip = ARTIFACT_INFO_maw_of_the_damned
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_maw_of_the_damned
+            has_country_flag = artifact_maw_of_the_damned
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_maw_of_the_damned
+            }
+            
+            make_primary_artifact = { artifact = maw_of_the_damned }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__blades_of_the_fallen_prince
+    tooltip = ARTIFACT_INFO_blades_of_the_fallen_prince
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_blades_of_the_fallen_prince
+            has_country_flag = artifact_blades_of_the_fallen_prince
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_blades_of_the_fallen_prince
+            }
+            
+            make_primary_artifact = { artifact = blades_of_the_fallen_prince }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__aldrachi_warblades
+    tooltip = ARTIFACT_INFO_aldrachi_warblades
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_aldrachi_warblades
+            has_country_flag = artifact_aldrachi_warblades
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_aldrachi_warblades
+            }
+            
+            make_primary_artifact = { artifact = aldrachi_warblades }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__fangs_of_ashamane
+    tooltip = ARTIFACT_INFO_fangs_of_ashamane
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fangs_of_ashamane
+            has_country_flag = artifact_fangs_of_ashamane
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fangs_of_ashamane
+            }
+            
+            make_primary_artifact = { artifact = fangs_of_ashamane }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__claws_of_ursoc
+    tooltip = ARTIFACT_INFO_claws_of_ursoc
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_claws_of_ursoc
+            has_country_flag = artifact_claws_of_ursoc
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_claws_of_ursoc
+            }
+            
+            make_primary_artifact = { artifact = claws_of_ursoc }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__ghanir
+    tooltip = ARTIFACT_INFO_ghanir
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_ghanir
+            has_country_flag = artifact_ghanir
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_ghanir
+            }
+            
+            make_primary_artifact = { artifact = ghanir }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__titanstrike
+    tooltip = ARTIFACT_INFO_titanstrike
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_titanstrike
+            has_country_flag = artifact_titanstrike
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_titanstrike
+            }
+            
+            make_primary_artifact = { artifact = titanstrike }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__talonclaw
+    tooltip = ARTIFACT_INFO_talonclaw
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_talonclaw
+            has_country_flag = artifact_talonclaw
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_talonclaw
+            }
+            
+            make_primary_artifact = { artifact = talonclaw }
+        }
+    }
+}
+
+# Page 1 - Row 3
+custom_button = {
+    name = select_artifact__felomelorn
+    tooltip = ARTIFACT_INFO_felomelorn
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_felomelorn
+            has_country_flag = artifact_felomelorn
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_felomelorn
+            }
+            
+            make_primary_artifact = { artifact = felomelorn }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__ebonchill
+    tooltip = ARTIFACT_INFO_ebonchill
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_ebonchill
+            has_country_flag = artifact_ebonchill
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_ebonchill
+            }
+            
+            make_primary_artifact = { artifact = ebonchill }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__fu_zan
+    tooltip = ARTIFACT_INFO_fu_zan
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fu_zan
+            has_country_flag = artifact_fu_zan
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fu_zan
+            }
+            
+            make_primary_artifact = { artifact = fu_zan }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__fists_of_the_heavens
+    tooltip = ARTIFACT_INFO_fists_of_the_heavens
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fists_of_the_heavens
+            has_country_flag = artifact_fists_of_the_heavens
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fists_of_the_heavens
+            }
+            
+            make_primary_artifact = { artifact = fists_of_the_heavens }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__silver_hand
+    tooltip = ARTIFACT_INFO_silver_hand
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_silver_hand
+            has_country_flag = artifact_silver_hand
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_silver_hand
+            }
+            
+            make_primary_artifact = { artifact = silver_hand }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__truthguard
+    tooltip = ARTIFACT_INFO_truthguard
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_truthguard
+            has_country_flag = artifact_truthguard
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_truthguard
+            }
+            
+            make_primary_artifact = { artifact = truthguard }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__lights_wrath
+    tooltip = ARTIFACT_INFO_lights_wrath
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_lights_wrath
+            has_country_flag = artifact_lights_wrath
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_lights_wrath
+            }
+            
+            make_primary_artifact = { artifact = lights_wrath }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__tuure
+    tooltip = ARTIFACT_INFO_tuure
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_tuure
+            has_country_flag = artifact_tuure
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_tuure
+            }
+            
+            make_primary_artifact = { artifact = tuure }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__kingslayers
+    tooltip = ARTIFACT_INFO_kingslayers
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_kingslayers
+            has_country_flag = artifact_kingslayers
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_kingslayers
+            }
+            
+            make_primary_artifact = { artifact = kingslayers }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__fangs_of_the_devourer
+    tooltip = ARTIFACT_INFO_fangs_of_the_devourer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fangs_of_the_devourer
+            has_country_flag = artifact_fangs_of_the_devourer
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fangs_of_the_devourer
+            }
+            
+            make_primary_artifact = { artifact = fangs_of_the_devourer }
+        }
+    }
+}
+
+# Page 1 - Row 4
+custom_button = {
+    name = select_artifact__fist_of_raden
+    tooltip = ARTIFACT_INFO_fist_of_raden
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fist_of_raden
+            has_country_flag = artifact_fist_of_raden
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fist_of_raden
+            }
+            
+            make_primary_artifact = { artifact = fist_of_raden }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__sharasdal
+    tooltip = ARTIFACT_INFO_sharasdal
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_sharasdal
+            has_country_flag = artifact_sharasdal
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_sharasdal
+            }
+            
+            make_primary_artifact = { artifact = sharasdal }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__ulthalesh
+    tooltip = ARTIFACT_INFO_ulthalesh
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_ulthalesh
+            has_country_flag = artifact_ulthalesh
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_ulthalesh
+            }
+            
+            make_primary_artifact = { artifact = ulthalesh }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__scepter_of_sargeras
+    tooltip = ARTIFACT_INFO_scepter_of_sargeras
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_scepter_of_sargeras
+            has_country_flag = artifact_scepter_of_sargeras
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_scepter_of_sargeras
+            }
+            
+            make_primary_artifact = { artifact = scepter_of_sargeras }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__stromkar
+    tooltip = ARTIFACT_INFO_stromkar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_stromkar
+            has_country_flag = artifact_stromkar
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_stromkar
+            }
+            
+            make_primary_artifact = { artifact = stromkar }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__scale_of_the_earthwarder
+    tooltip = ARTIFACT_INFO_scale_of_the_earthwarder
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_scale_of_the_earthwarder
+            has_country_flag = artifact_scale_of_the_earthwarder
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_scale_of_the_earthwarder
+            }
+            
+            make_primary_artifact = { artifact = scale_of_the_earthwarder }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__underlight_angler
+    tooltip = ARTIFACT_INFO_underlight_angler
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_underlight_angler
+            has_country_flag = artifact_underlight_angler
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_underlight_angler
+            }
+            
+            make_primary_artifact = { artifact = underlight_angler }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__glaive_of_the_aspects
+    tooltip = ARTIFACT_INFO_glaive_of_the_aspects
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_glaive_of_the_aspects
+            has_country_flag = artifact_glaive_of_the_aspects
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_glaive_of_the_aspects
+            }
+            
+            make_primary_artifact = { artifact = glaive_of_the_aspects }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__scimitar_of_sirocco
+    tooltip = ARTIFACT_INFO_scimitar_of_sirocco
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_scimitar_of_sirocco
+            has_country_flag = artifact_scimitar_of_sirocco
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_scimitar_of_sirocco
+            }
+            
+            make_primary_artifact = { artifact = scimitar_of_sirocco }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__staff_of_ammunae
+    tooltip = ARTIFACT_INFO_staff_of_ammunae
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_1 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_staff_of_ammunae
+            has_country_flag = artifact_staff_of_ammunae
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_staff_of_ammunae
+            }
+            
+            make_primary_artifact = { artifact = staff_of_ammunae }
+        }
+    }
+}
+
+# Page 2 - Row 1
+custom_button = {
+    name = select_artifact__dustbringer
+    tooltip = ARTIFACT_INFO_dustbringer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_dustbringer
+            has_country_flag = artifact_dustbringer
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_dustbringer
+            }
+            
+            make_primary_artifact = { artifact = dustbringer }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__valanyr
+    tooltip = ARTIFACT_INFO_valanyr
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_valanyr
+            has_country_flag = artifact_valanyr
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_valanyr
+            }
+            
+            make_primary_artifact = { artifact = valanyr }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__puzzle_box_of_yogg_saron
+    tooltip = ARTIFACT_INFO_puzzle_box_of_yogg_saron
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_puzzle_box_of_yogg_saron
+            has_country_flag = artifact_puzzle_box_of_yogg_saron
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_puzzle_box_of_yogg_saron
+            }
+            
+            make_primary_artifact = { artifact = puzzle_box_of_yogg_saron }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__twirling_longbow
+    tooltip = ARTIFACT_INFO_twirling_longbow
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_twirling_longbow
+            has_country_flag = artifact_twirling_longbow
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_twirling_longbow
+            }
+            
+            make_primary_artifact = { artifact = twirling_longbow }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__spear_of_xuen
+    tooltip = ARTIFACT_INFO_spear_of_xuen
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_spear_of_xuen
+            has_country_flag = artifact_spear_of_xuen
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_spear_of_xuen
+            }
+            
+            make_primary_artifact = { artifact = spear_of_xuen }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__umbrella_of_chiji
+    tooltip = ARTIFACT_INFO_umbrella_of_chiji
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_umbrella_of_chiji
+            has_country_flag = artifact_umbrella_of_chiji
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_umbrella_of_chiji
+            }
+            
+            make_primary_artifact = { artifact = umbrella_of_chiji }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__amulet_of_rukhmar
+    tooltip = ARTIFACT_INFO_amulet_of_rukhmar
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_amulet_of_rukhmar
+            has_country_flag = artifact_amulet_of_rukhmar
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_amulet_of_rukhmar
+            }
+            
+            make_primary_artifact = { artifact = amulet_of_rukhmar }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__dream_of_argus
+    tooltip = ARTIFACT_INFO_dream_of_argus
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_dream_of_argus
+            has_country_flag = artifact_dream_of_argus
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_dream_of_argus
+            }
+            
+            make_primary_artifact = { artifact = dream_of_argus }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__grimoire_of_the_nameless_void
+    tooltip = ARTIFACT_INFO_grimoire_of_the_nameless_void
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_grimoire_of_the_nameless_void
+            has_country_flag = artifact_grimoire_of_the_nameless_void
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_grimoire_of_the_nameless_void
+            }
+            
+            make_primary_artifact = { artifact = grimoire_of_the_nameless_void }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__gronnsbane
+    tooltip = ARTIFACT_INFO_gronnsbane
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_gronnsbane
+            has_country_flag = artifact_gronnsbane
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_gronnsbane
+            }
+            
+            make_primary_artifact = { artifact = gronnsbane }
+        }
+    }
+}
+
+# Page 2 - Row 2
+custom_button = {
+    name = select_artifact__gutreks_cleaver
+    tooltip = ARTIFACT_INFO_gutreks_cleaver
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_gutreks_cleaver
+            has_country_flag = artifact_gutreks_cleaver
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_gutreks_cleaver
+            }
+            
+            make_primary_artifact = { artifact = gutreks_cleaver }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__headdress_of_the_first_shaman
+    tooltip = ARTIFACT_INFO_headdress_of_the_first_shaman
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_headdress_of_the_first_shaman
+            has_country_flag = artifact_headdress_of_the_first_shaman
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_headdress_of_the_first_shaman
+            }
+            
+            make_primary_artifact = { artifact = headdress_of_the_first_shaman }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__warmaul_of_the_warmaul_chieftain
+    tooltip = ARTIFACT_INFO_warmaul_of_the_warmaul_chieftain
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = {     
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_warmaul_of_the_warmaul_chieftain
+            has_country_flag = artifact_warmaul_of_the_warmaul_chieftain
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_warmaul_of_the_warmaul_chieftain
+            }
+            
+            make_primary_artifact = { artifact = warmaul_of_the_warmaul_chieftain }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__beakbreaker_of_terokk
+    tooltip = ARTIFACT_INFO_beakbreaker_of_terokk
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_beakbreaker_of_terokk
+            has_country_flag = artifact_beakbreaker_of_terokk
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_beakbreaker_of_terokk
+            }
+            
+            make_primary_artifact = { artifact = beakbreaker_of_terokk }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__zinrokh
+    tooltip = ARTIFACT_INFO_zinrokh
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = {     
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_zinrokh
+            has_country_flag = artifact_zinrokh
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_zinrokh
+            }
+            
+            make_primary_artifact = { artifact = zinrokh }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__fetish_of_hireek
+    tooltip = ARTIFACT_INFO_fetish_of_hireek
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fetish_of_hireek
+            has_country_flag = artifact_fetish_of_hireek
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fetish_of_hireek
+            }
+            
+            make_primary_artifact = { artifact = fetish_of_hireek }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__bwonsamdi_voodoo_mask
+    tooltip = ARTIFACT_INFO_bwonsamdi_voodoo_mask
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_bwonsamdi_voodoo_mask
+            has_country_flag = artifact_bwonsamdi_voodoo_mask
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_bwonsamdi_voodoo_mask
+            }
+            
+            make_primary_artifact = { artifact = bwonsamdi_voodoo_mask }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__rezan_idol
+    tooltip = ARTIFACT_INFO_rezan_idol
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_rezan_idol
+            has_country_flag = artifact_rezan_idol
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_rezan_idol
+            }
+            
+            make_primary_artifact = { artifact = rezan_idol }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__jagged_blade_of_the_drust
+    tooltip = ARTIFACT_INFO_jagged_blade_of_the_drust
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_jagged_blade_of_the_drust
+            has_country_flag = artifact_jagged_blade_of_the_drust
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_jagged_blade_of_the_drust
+            }
+            
+            make_primary_artifact = { artifact = jagged_blade_of_the_drust }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__soul_coffer
+    tooltip = ARTIFACT_INFO_soul_coffer
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_soul_coffer
+            has_country_flag = artifact_soul_coffer
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_soul_coffer
+            }
+            
+            make_primary_artifact = { artifact = soul_coffer }
+        }
+    }
+}
+
+# Page 2 - Row 3
+custom_button = {
+    name = select_artifact__fetish_of_the_tormented_mind
+    tooltip = ARTIFACT_INFO_fetish_of_the_tormented_mind
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_fetish_of_the_tormented_mind
+            has_country_flag = artifact_fetish_of_the_tormented_mind
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_fetish_of_the_tormented_mind
+            }
+            
+            make_primary_artifact = { artifact = fetish_of_the_tormented_mind }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__ritual_fetish
+    tooltip = ARTIFACT_INFO_ritual_fetish
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_ritual_fetish
+            has_country_flag = artifact_ritual_fetish
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_ritual_fetish
+            }
+            
+            make_primary_artifact = { artifact = ritual_fetish }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__blade_of_northern_kings
+    tooltip = ARTIFACT_INFO_blade_of_northern_kings
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_blade_of_northern_kings
+            has_country_flag = artifact_blade_of_northern_kings
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_blade_of_northern_kings
+            }
+            
+            make_primary_artifact = { artifact = blade_of_northern_kings }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__brinebeards_shanker
+    tooltip = ARTIFACT_INFO_brinebeards_shanker
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_brinebeards_shanker
+            has_country_flag = artifact_brinebeards_shanker
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_brinebeards_shanker
+            }
+            
+            make_primary_artifact = { artifact = brinebeards_shanker }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__crimson_captains_hat
+    tooltip = ARTIFACT_INFO_crimson_captains_hat
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_crimson_captains_hat
+            has_country_flag = artifact_crimson_captains_hat
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_crimson_captains_hat
+            }
+            
+            make_primary_artifact = { artifact = crimson_captains_hat }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__elemental_lairat
+    tooltip = ARTIFACT_INFO_elemental_lairat
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_elemental_lairat
+            has_country_flag = artifact_elemental_lairat
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_elemental_lairat
+            }
+            
+            make_primary_artifact = { artifact = elemental_lairat }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__onyx_annulet
+    tooltip = ARTIFACT_INFO_onyx_annulet
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_onyx_annulet
+            has_country_flag = artifact_onyx_annulet
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_onyx_annulet
+            }
+            
+            make_primary_artifact = { artifact = onyx_annulet }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__spark_of_ingenuity
+    tooltip = ARTIFACT_INFO_spark_of_ingenuity
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_spark_of_ingenuity
+            has_country_flag = artifact_spark_of_ingenuity
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_spark_of_ingenuity
+            }
+            
+            make_primary_artifact = { artifact = spark_of_ingenuity }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__awakmani
+    tooltip = ARTIFACT_INFO_awakmani
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_awakmani
+            has_country_flag = artifact_awakmani
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_awakmani
+            }
+            
+            make_primary_artifact = { artifact = awakmani }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__kharnalex
+    tooltip = ARTIFACT_INFO_kharnalex
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_kharnalex
+            has_country_flag = artifact_kharnalex
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_kharnalex
+            }
+            
+            make_primary_artifact = { artifact = kharnalex }
+        }
+    }
+}
+
+# Page 2 - Row 4
+custom_button = {
+    name = select_artifact__pashmars_finial
+    tooltip = ARTIFACT_INFO_pashmars_finial
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = {
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_pashmars_finial
+            has_country_flag = artifact_pashmars_finial
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_pashmars_finial
+            }
+            
+            make_primary_artifact = { artifact = pashmars_finial }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__anu_azshara
+    tooltip = ARTIFACT_INFO_anu_azshara
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_anu_azshara
+            has_country_flag = artifact_anu_azshara
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_anu_azshara
+            }
+            
+            make_primary_artifact = { artifact = anu_azshara }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__scepter_of_the_azshari
+    tooltip = ARTIFACT_INFO_scepter_of_the_azshari
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_scepter_of_the_azshari
+            has_country_flag = artifact_scepter_of_the_azshari
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_scepter_of_the_azshari
+            }
+            
+            make_primary_artifact = { artifact = scepter_of_the_azshari }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__arcane_phial
+    tooltip = ARTIFACT_INFO_arcane_phial
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_arcane_phial
+            has_country_flag = artifact_arcane_phial
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_arcane_phial
+            }
+            
+            make_primary_artifact = { artifact = arcane_phial }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__vision_of_demise
+    tooltip = ARTIFACT_INFO_vision_of_demise
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_vision_of_demise
+            has_country_flag = artifact_vision_of_demise
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_vision_of_demise
+            }
+            
+            make_primary_artifact = { artifact = vision_of_demise }
+        }
+    }
+}
+custom_button = {
+    name = select_artifact__pearl_of_pandaria
+    tooltip = ARTIFACT_INFO_pearl_of_pandaria
+    
+    potential = {
+        is_archaeology_gui_open = yes
+        is_artifact_view_page_2 = yes
+    }
+    
+    trigger = { 
+        custom_trigger_tooltip = {
+            tooltip = ARCHAEOLOGY_HAS_ARTIFACT_pearl_of_pandaria
+            has_country_flag = artifact_pearl_of_pandaria
+        }
+    }
+    
+    effect = { 
+        if = {
+            limit = {
+                has_country_flag = artifact_pearl_of_pandaria
+            }
+            
+            make_primary_artifact = { artifact = pearl_of_pandaria }
+        }
     }
 }
