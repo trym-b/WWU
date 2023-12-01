@@ -541,21 +541,74 @@ spell_effect__shamanism_spell_4 = {
 #------------------------
 spell_effect__fel_spell_1 = {
     lose_scaled_mana_cost = { 
-        LEGENDARY = 6
-        EPIC = 7
-        RARE = 7
-        COMMON = 8
-        BASE = 8
+        LEGENDARY = 1
+        EPIC = 2
+        RARE = 2
+        COMMON = 3
+        BASE = 3
     }
     
+    custom_tooltip = GAIN_HELLFIRE_TOKEN_TT
+    hidden_effect = {
+        change_variable = {
+            which = spell_hellfire_token
+            value = 1
+        }
+    }
 }
 spell_effect__fel_spell_2 = {
     lose_scaled_mana_cost = { 
-        LEGENDARY = 6
-        EPIC = 7
-        RARE = 7
-        COMMON = 8
-        BASE = 8
+        LEGENDARY = 5
+        EPIC = 6
+        RARE = 6
+        COMMON = 7
+        BASE = 7
+    }
+    
+    every_war_enemy_country = {
+        if = {
+            limit = {
+                ROOT = { has_legendary_finesse = yes }
+            }
+            
+            add_country_modifier = {
+                name = howl_of_terror_legendary
+                duration = 1800
+            }
+        }
+        else_if = {
+            limit = {
+                ROOT = { has_epic_finesse = yes }
+            }
+            add_country_modifier = {
+                name = howl_of_terror_epic
+                duration = 1800
+            }
+        }
+        else_if = {
+            limit = {
+                ROOT = { has_rare_finesse = yes }
+            }
+            add_country_modifier = {
+                name = howl_of_terror_rare
+                duration = 1800
+            }
+        }
+        else_if = {
+            limit = {
+                ROOT = { has_common_finesse = yes }
+            }
+            add_country_modifier = {
+                name = howl_of_terror_common
+                duration = 1800
+            }
+        }
+        else = {
+            add_country_modifier = {
+                name = howl_of_terror_poor
+                duration = 1800
+            }
+        }
     }
     
 }

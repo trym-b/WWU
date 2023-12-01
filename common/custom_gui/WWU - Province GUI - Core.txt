@@ -1,0 +1,45 @@
+#----------------------------------------
+# Custom GUI - For non-specific elements
+#----------------------------------------
+custom_button = {
+    name = spell_hellfire_button
+    tooltip = HELLFIRE_SPELL_TT
+    
+    potential = {
+        NOT = { has_province_modifier = hellfire_prov }
+        owned_by = FROM # Only allow for owned provinces
+        FROM = {
+            is_school__fel = yes
+        }
+    }
+    
+    trigger = { 
+        FROM = {
+            custom_trigger_tooltip = {
+                tooltip = HELLFIRE_COST_TT
+                check_variable = {
+                    which = spell_hellfire_token
+                    value = 1
+                }
+            }
+        }
+    }
+    
+    effect = { 
+        add_devastation = 25
+    
+        add_province_modifier = {
+            name = hellfire_prov
+            duration = 1800
+        }
+    
+        hidden_effect = {
+            FROM = {
+                subtract_variable = {
+                    which = spell_hellfire_token
+                    value = 1
+                }   
+            }
+        }
+    }
+}
