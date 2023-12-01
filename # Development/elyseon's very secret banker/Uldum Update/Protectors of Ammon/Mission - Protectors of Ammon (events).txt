@@ -26,7 +26,7 @@ country_event = {
              change_culture = culture_ghost 
         }   
         
-		add_manpower = 5000
+		add_manpower = 5
 		
 		ai_chance = {
 			factor = 3
@@ -36,34 +36,26 @@ country_event = {
 	    name = wwu_flavour_protectors_of_ammon.1.b
 		
 		if = {
-		    limit = {
-                any_owned_province = {
-                    area = area_ruins_of_ammon
-                    culture = culture_ghost
-                }
-			}
-            
             every_owned_province = { 
                 limit = {
+				    B72 = { primary_culture = culture_tolvir }
                     area = area_ruins_of_ammon
-                    culture = culture_ghost
+			        culture = culture_ghost
+                    NOT = { culture = culture_tolvir }
                 }
-                
-                if = {
-                    limit = {
-                        owner = { primary_culture = culture_tolvir }
-                        NOT = { culture = culture_tolvir }
-                    }
-                    change_culture = culture_tolvir 
+                change_culture = culture_tolvir 
+            }
+		}
+		if = {
+            every_owned_province = { 
+                limit = {
+				    B72 = { primary_culture = culture_stone_tolvir }
+                    area = area_ruins_of_ammon
+			        culture = culture_ghost
+                    NOT = { culture = culture_stone_tolvir }
                 }
-                if = {
-                    limit = {
-                        owner = { primary_culture = culture_stone_tolvir }
-                        NOT = { culture = culture_stone_tolvir }
-                    }
-                    change_culture = culture_stone_tolvir 
-                }
-            } 
+                change_culture = culture_stone_tolvir 
+			}
 		}
         
 		add_prestige = 20
@@ -92,7 +84,7 @@ country_event = {
 		name = wwu_flavour_protectors_of_ammon.2.a
 		
 		#Become Neferset Yourself
-		switch_tag = B72
+		change_tag = B72
 		trigger_ni_switch = yes
 		1563 = {
 			add_base_manpower = 1
@@ -146,6 +138,9 @@ country_event = {
 	    name = wwu_flavour_protectors_of_ammon.3.a
         
 		#defend and get declared/ Defensive bonuses
+		
+		B72 = { declare_war = POA }
+		
 		add_country_modifier = {
             name = event_defenders_of_ammon_poa
             duration = -1
@@ -160,6 +155,12 @@ country_event = {
        
 		#pick arms and get an invasion cb on neferset/ Attack Bonuses
 		
+		add_casus_belli = {
+            target = B72
+            type = cb_annex
+            months = 300
+        }
+				
 		add_country_modifier = {
             name = event_avengers_of_ammon_poa
             duration = -1
@@ -220,6 +221,14 @@ country_event = {
 		#Accept the gift of Cthun and change religion
 		
 		change_religion = cthun
+		every_owned_province = { 
+            limit = {
+                area = area_ruins_of_ammon
+			    religion = titan_worship
+                NOT = { culture = cthun }
+            }
+            change_religion = cthun 
+		}
 		add_country_modifier = {
             name = event_embrace_whispers_poa
             duration = -1
@@ -246,6 +255,14 @@ country_event = {
 			}
 		}
 		change_religion = void
+		every_owned_province = { 
+            limit = {
+                area = area_ruins_of_ammon
+			    religion = titan_worship
+                NOT = { culture = void }
+            }
+            change_religion = void 
+		}
 		add_country_modifier = {
             name = event_emptyness_of_void_poa
             duration = -1
