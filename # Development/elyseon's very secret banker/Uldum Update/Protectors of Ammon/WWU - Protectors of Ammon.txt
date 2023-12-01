@@ -23,8 +23,7 @@ POA_protectors_of_ammon_column_3 = {
 		
 		trigger = {
 		    area_neferset = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 		}
@@ -201,7 +200,6 @@ POA_protectors_of_ammon_column_3 = {
 			}
 			region_uldum = {
                 type = all
-				NOT = { is_city = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			NOT = { mission_completed = POA_light_of_uldum }
@@ -250,7 +248,9 @@ POA_protectors_of_ammon_column_4 = {
 		required_missions = { POA_a_cursed_duty }
 		
 		trigger = {
-			has_opinion_modifier = { who = B72 modifier = scornfully_insulted }
+		    B72 = {
+			    has_opinion_modifier = { who = ROOT modifier = scornfully_insulted }
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -318,9 +318,10 @@ POA_protectors_of_ammon_column_4 = {
 		trigger = {
 			OR = {
 			    religion = cthun 
+				religion = void
 				religion = titan_worship
 			}
-			has_global_flag = cthun_active
+			religious_unity = 0.5
 		}
 		effect = {			
 			add_country_modifier = {
@@ -387,28 +388,23 @@ POA_protectors_of_ammon_column_4 = {
 		
 		trigger = {
 			area_neferset = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			area_ruins_of_ammon = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			area_skittering_dunes = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			area_obelisk_of_the_sun = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			area_lost_city_of_the_tolvir = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 		}
@@ -435,8 +431,9 @@ POA_protectors_of_ammon_column_4 = {
 					}
 				}
 				override_country_name = AMMON
-				change_government = theocracy
-				add_government_reform = ancient_theocracy_reform
+				#change_government = theocracy
+				#add_government_reform = ancient_theocracy_reform
+				#give an event to choose gov type 
 			}
         }
 	}
@@ -453,7 +450,6 @@ POA_protectors_of_ammon_column_4 = {
 		trigger = {
 			area_halls_of_origination = {
                 type = all
-				NOT = { is_city = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 			4577 = {
@@ -486,8 +482,7 @@ POA_protectors_of_ammon_column_4 = {
 		
 		trigger = {
 			region_silithus = {
-                type = all
-				NOT = { is_city = yes }
+				NOT = { is_empty  = yes }
                 country_or_non_sovereign_subject_holds = ROOT
             }
 		}
@@ -786,7 +781,10 @@ POA_protectors_of_ammon_column_5 = {
 				value = 40
 			}
 			religious_unity = 0.9
-			missionary_strength = 0.1
+			has_global_modifier_value = {
+                which = global_missionary_strength
+                value = 0.1
+            }
 			employed_advisor = {
                 type = theologian
             }
