@@ -1,0 +1,151 @@
+namespace = wwu_spell_necromancy
+
+# Pestilence Manager
+country_event = {
+	id = wwu_spell_necromancy.1
+	title = wwu_spell_necromancy.1.title
+	desc = wwu_spell_necromancy.1.desc
+	picture = PLAGUE_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        any_owned_province = {
+            OR = {
+                has_province_modifier = pestilence_prov_poor
+                has_province_modifier = pestilence_prov_common
+                has_province_modifier = pestilence_prov_rare
+                has_province_modifier = pestilence_prov_epic
+                has_province_modifier = pestilence_prov_legendary
+            }
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    has_province_flag = pox_origin
+                }
+                
+                clr_province_flag = pox_origin
+            }
+            random_owned_province = {
+                limit = {
+                    OR = {
+                        has_province_modifier = pestilence_prov_poor
+                        has_province_modifier = pestilence_prov_common
+                        has_province_modifier = pestilence_prov_rare
+                        has_province_modifier = pestilence_prov_epic
+                        has_province_modifier = pestilence_prov_legendary
+                    }
+                }
+                
+                save_event_target_as = pox_target
+                set_province_flag = pox_origin
+            }
+            random_owned_province = {
+                limit = {
+                    NOT = { has_province_flag = pox_origin }
+                }
+                
+                save_event_target_as = pox_spread_target
+            }
+        }
+    }
+	
+	option = {
+		name = wwu_spell_necromancy.1.option.a
+		
+        event_target:pox_target = {
+            province_event = { id = wwu_spell_necromancy.10 }
+        }
+	}
+}
+
+# Pestilence
+province_event = {
+	id = wwu_spell_necromancy.10
+	title = wwu_spell_necromancy.10.title
+	desc = wwu_spell_necromancy.10.desc
+	picture = PLAGUE_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Spread option
+	option = {
+		name = wwu_spell_necromancy.10.option.a
+		
+        trigger = {
+            has_saved_event_target = pox_spread_target
+        }
+        
+        add_devastation = 80
+        
+        event_target:pox_spread_target = {
+            province_event = { id = wwu_spell_necromancy.11 days = 7 random = 90 }
+        }
+	}
+    # Contain option
+    option = {
+		name = wwu_spell_necromancy.10.option.b
+		
+        trigger = {
+            mil_power = 100
+        }
+        
+        owner = {
+            add_mil_power = -100
+        }
+	}
+}
+
+# Pestilence
+province_event = {
+	id = wwu_spell_necromancy.11
+	title = wwu_spell_necromancy.11.title
+	desc = wwu_spell_necromancy.11.desc
+	picture = PLAGUE_eventPicture
+    
+    is_triggered_only = yes
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    # Spread option
+	option = {
+		name = wwu_spell_necromancy.11.option.a
+		
+        trigger = {
+            has_saved_event_target = pox_spread_target
+        }
+        
+        add_devastation = 80
+        
+        event_target:pox_spread_target = {
+            province_event = { id = wwu_spell_necromancy.10 days = 7 random = 90 }
+        }
+	}
+    # Contain option
+    option = {
+		name = wwu_spell_necromancy.11.option.b
+		
+        trigger = {
+            mil_power = 100
+        }
+        
+        owner = {
+            add_mil_power = -100
+        }
+	}
+}
