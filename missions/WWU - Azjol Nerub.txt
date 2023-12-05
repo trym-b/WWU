@@ -414,39 +414,6 @@ P74_nerubian_column_3 = {
             
             hidden_effect = {
                 set_country_flag = nerubian_open_upgrade_province
- 
-                change_variable = {
-                    which = nerubian_tunnel_1_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_2_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_3_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_4_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_5_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_6_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_7_depth
-                    value = 1
-                }
-                change_variable = {
-                    which = nerubian_tunnel_8_depth
-                    value = 1
-                }
             }
         }
  
@@ -459,15 +426,18 @@ P74_nerubian_column_3 = {
         required_missions = { P74_the_endless_depths }
  
         trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_bolster_the_nests_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_4_depth
-                    value = 4
+            4789 = { 
+                country_or_non_sovereign_subject_holds = ROOT 
+                OR = {
+                    has_province_modifier = nerubian_tunnel_4
+                    has_province_modifier = nerubian_tunnel_5
+                    has_province_modifier = nerubian_tunnel_6
+                    has_province_modifier = nerubian_tunnel_7
+                    has_province_modifier = nerubian_tunnel_8
+                    has_province_modifier = nerubian_tunnel_9
+                    has_province_modifier = nerubian_tunnel_10
                 }
             }
-            4789 = { country_or_non_sovereign_subject_holds = ROOT }
         }
         provinces_to_highlight = {
             province_id = 4789
@@ -476,7 +446,10 @@ P74_nerubian_column_3 = {
  
         effect = {
             4789 = {
-                add_province_triggered_modifier = nerubian_eggs
+                add_permanent_province_modifier = {
+                    name = nerubian_eggs
+                    duration = -1
+                }
  
                 add_base_tax = 1
                 add_base_production = 1
@@ -552,16 +525,10 @@ P74_nerubian_column_3 = {
         required_missions = { P74_fortress_of_the_spider }
  
         trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_throne_of_the_spider_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_3_depth
-                    value = 10
-                }
+            4788 = { 
+                country_or_non_sovereign_subject_holds = ROOT 
+                has_province_modifier = nerubian_tunnel_10
             }
-            
-            4788 = { country_or_non_sovereign_subject_holds = ROOT }
         }
         provinces_to_highlight = {
             province_id = 4788
@@ -599,41 +566,8 @@ P74_nerubian_column_4 = {
         required_missions = { P74_repairing_the_tunnel_network }
  
         trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_the_endless_depths_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_1_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_2_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_3_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_4_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_5_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_6_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_7_depth
-                    value = 3
-                }
-                check_variable = {
-                    which = nerubian_tunnel_8_depth
-                    value = 3
-                }
+            any_owned_province = {
+                has_province_modifier = nerubian_tunnel_3
             }
  
             region_azjol_nerub = {
@@ -648,7 +582,10 @@ P74_nerubian_column_4 = {
  
         effect = {
             region_azjol_nerub = {
-                add_province_triggered_modifier = nerubian_digging_a
+                add_permanent_province_modifier = {
+                    name = nerubian_digging_a
+                    duration = -1
+                }
             }
         }
  
@@ -661,12 +598,11 @@ P74_nerubian_column_4 = {
         required_missions = { P74_the_endless_depths }
  
         trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_temple_knowledge_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_7_depth
-                    value = 5
+            calc_true_if = {
+                amount = 5
+                
+                all_owned_province = {
+                    has_province_modifier = nerubian_tunnel_5
                 }
             }
             4792 = { owned_by = ROOT }
@@ -737,40 +673,11 @@ P74_nerubian_column_4 = {
         }
  
         trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_fortress_of_the_spider_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_1_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_2_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_3_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_4_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_5_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_6_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_7_depth
-                    value = 7
-                }
-                check_variable = {
-                    which = nerubian_tunnel_8_depth
-                    value = 7
+            calc_true_if = {
+                amount = 8
+                
+                all_owned_province = {
+                    has_province_modifier = nerubian_tunnel_6
                 }
             }
  
@@ -786,15 +693,15 @@ P74_nerubian_column_4 = {
  
         effect = {
             region_azjol_nerub = {
-                add_province_triggered_modifier = nerubian_digging_b
+                add_permanent_province_modifier = {
+                    name = nerubian_digging_b
+                    duration = -1
+                }
             }
         }
  
         ai_weight   = { factor = 1 }
     }
- 
- 
- 
 }
  
 #--------------------------------------
@@ -816,15 +723,10 @@ P74_nerubian_column_5 = {
         required_missions = { P74_the_endless_depths }
  
 		trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_the_royal_archives_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_2_depth
-                    value = 6
-                }
+            4787 = { 
+                owned_by = ROOT 
+                has_province_modifier = nerubian_tunnel_6
             }
-            4787 = { owned_by = ROOT }
         }
         provinces_to_highlight = {
             province_id = 4787
@@ -888,19 +790,14 @@ P74_nerubian_column_5 = {
         required_missions = { P74_the_royal_archives }
  
 		trigger = {
-            custom_trigger_tooltip = {
-                tooltip = P74_power_of_nerubian_wisdom_province_TT
- 
-                check_variable = {
-                    which = nerubian_tunnel_2_depth
-                    value = 10
-                }
-            }
             adm_tech = 15
             dip_tech = 15
             mil_tech = 15
             
-            4787 = { country_or_non_sovereign_subject_holds = ROOT }
+            4787 = { 
+                country_or_non_sovereign_subject_holds = ROOT 
+                has_province_modifier = nerubian_tunnel_10
+            }
         }
         provinces_to_highlight = {
             province_id = 4787

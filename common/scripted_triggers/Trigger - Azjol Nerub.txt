@@ -1,135 +1,177 @@
-has_required_cost_for_tunnel_improvement = {
-    adm_power = 50
-    dip_power = 50
-    mil_power = 50
-}
-
-is_max_tunnel_depth = {
-    check_variable = {
-        which = nerubian_tunnel_$NUMBER$_depth
-        value = 10
+nerubian_tunnel_potential = {
+    owner = {
+        OR = {
+            tag = P74
+            was_tag = P74
+        }
+    }
+    owner = { has_country_flag = nerubian_open_upgrade_province } # Can upgrade tunnel depth
+    
+    NOT = { has_province_modifier = nerubian_tunnel_10 } # Hide once at max tunnel depth
+    
+    # Restrictions by region, default Azjol Nerbu
+    OR = {
+        region = region_azjol_nerub
+        if = {
+            limit = {
+                owner = { mission_completed = P74_encounter_the_dragons }
+            }
+            region = region_wintergrasp
+        }
+        if = {
+            limit = {
+                owner = { mission_completed = P74_fall_of_wyrmrest_temple }
+            }
+            region = region_dragonblight
+        }
+        if = {
+            limit = {
+                owner = { mission_completed = P74_encounter_the_tuskarrs }
+            }
+            region = region_borean_tundra
+        }
+        if = {
+            limit = {
+                owner = { mission_completed = P74_encounter_the_vrykuls }
+            }
+            region = region_icecrown
+        }
+        if = {
+            limit = {
+                owner = { mission_completed = P74_the_nerubian_empire }
+            }
+            superregion = northrend_superregion
+        }
     }
 }
 
-has_required_development_for_tunnel_improvement = {
+nerubian_tunnel_trigger = {
+    # standard upgrade path
     if = {
         limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 0
-            }
+            NOT = { has_province_modifier = nerubian_tunnel_1 }
+            NOT = { has_province_modifier = nerubian_tunnel_2 }
+            NOT = { has_province_modifier = nerubian_tunnel_3 }
+            NOT = { has_province_modifier = nerubian_tunnel_4 }
+            NOT = { has_province_modifier = nerubian_tunnel_5 }
+            NOT = { has_province_modifier = nerubian_tunnel_6 }
+            NOT = { has_province_modifier = nerubian_tunnel_7 }
+            NOT = { has_province_modifier = nerubian_tunnel_8 }
+            NOT = { has_province_modifier = nerubian_tunnel_9 }
+            NOT = { has_province_modifier = nerubian_tunnel_10 }
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 10
-        }
-    }
-    else_if = {
-        limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 1
-            }
-        }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 12
+        
+        FROM = {
+            adm_power = 25
+            dip_power = 25
+            mil_power = 25
         }
     }
     else_if = {
         limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 2
-            }
+            has_province_modifier = nerubian_tunnel_1
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 15
-        }
-    }
-    else_if = {
-        limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 3
-            }
-        }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 20
+        
+        FROM = {
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
         }
     }
     else_if = {
         limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 4
-            }
+            has_province_modifier = nerubian_tunnel_2
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 25
-        }
-    }
-    else_if = {
-        limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 5
-            }
-        }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 30
+        
+        FROM = {
+            adm_power = 75
+            dip_power = 75
+            mil_power = 75
         }
     }
     else_if = {
         limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 6
-            }
+            has_province_modifier = nerubian_tunnel_3
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 35
-        }
-    }
-    else_if = {
-        limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 7
-            }
-        }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 40
+        
+        FROM = {
+            adm_power = 100
+            dip_power = 100
+            mil_power = 100
         }
     }
     else_if = {
         limit = {
-            is_variable_equal = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 8
-            }
+            has_province_modifier = nerubian_tunnel_4
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 45
+        
+        FROM = {
+            adm_power = 125
+            dip_power = 125
+            mil_power = 125
         }
     }
     else_if = {
         limit = {
-            check_variable = {
-                which = nerubian_tunnel_$NUMBER$_depth
-                value = 9
-            }
+            has_province_modifier = nerubian_tunnel_5
         }
-        $PROVINCE_ID$ = {
-            owned_by = ROOT
-            development = 50
+        
+        FROM = {
+            adm_power = 150
+            dip_power = 150
+            mil_power = 150
         }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = nerubian_tunnel_6
+        }
+        
+        FROM = {
+            adm_power = 175
+            dip_power = 175
+            mil_power = 175
+        }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = nerubian_tunnel_7
+        }
+        
+        FROM = {
+            adm_power = 200
+            dip_power = 200
+            mil_power = 200
+        }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = nerubian_tunnel_8
+        }
+        
+        FROM = {
+            adm_power = 225
+            dip_power = 225
+            mil_power = 225
+        }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = nerubian_tunnel_9
+        }
+        
+        FROM = {
+            adm_power = 250
+            dip_power = 250
+            mil_power = 250
+        }
+    }
+    else_if = {
+        limit = {
+            has_province_modifier = nerubian_tunnel_10
+        }
+        
+        always = no
     }
 }
+
