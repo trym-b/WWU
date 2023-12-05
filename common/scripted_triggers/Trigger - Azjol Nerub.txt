@@ -3,49 +3,20 @@ nerubian_tunnel_potential = {
         OR = {
             tag = P74
             was_tag = P74
+            is_subject_of = P74
         }
     }
     owner = { has_country_flag = nerubian_open_upgrade_province } # Can upgrade tunnel depth
-    
-    NOT = { has_province_modifier = nerubian_tunnel_10 } # Hide once at max tunnel depth
-    
-    # Restrictions by region, default Azjol Nerbu
-    OR = {
-        region = region_azjol_nerub
-        if = {
-            limit = {
-                owner = { mission_completed = P74_encounter_the_dragons }
-            }
-            region = region_wintergrasp
-        }
-        if = {
-            limit = {
-                owner = { mission_completed = P74_fall_of_wyrmrest_temple }
-            }
-            region = region_dragonblight
-        }
-        if = {
-            limit = {
-                owner = { mission_completed = P74_encounter_the_tuskarrs }
-            }
-            region = region_borean_tundra
-        }
-        if = {
-            limit = {
-                owner = { mission_completed = P74_encounter_the_vrykuls }
-            }
-            region = region_icecrown
-        }
-        if = {
-            limit = {
-                owner = { mission_completed = P74_the_nerubian_empire }
-            }
-            superregion = northrend_superregion
-        }
-    }
 }
 
 nerubian_tunnel_trigger = {
+    culture = culture_nerubian
+    development = 10
+    
+    NOT = { has_province_modifier = nerubian_tunnel_10 } # Hide once at max tunnel depth
+    
+    superregion = northrend_superregion
+    
     # standard upgrade path
     if = {
         limit = {
