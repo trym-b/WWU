@@ -32,6 +32,12 @@ custom_icon = {
         is_clique_gui_open = yes
    }
 }
+custom_icon = {
+   name = achievements_window_bg
+   potential = { 
+        is_achievements_gui_open = yes
+   }
+}
 
 # Titles
 custom_text_box = {
@@ -62,6 +68,12 @@ custom_text_box = {
    name = clique_title
    potential = { 
         is_clique_gui_open = yes
+   }
+}
+custom_text_box = {
+   name = achievements_title
+   potential = { 
+        is_achievements_gui_open = yes
    }
 }
 
@@ -113,7 +125,8 @@ custom_button = {
     }
     
     trigger = { 
-        hidden_trigger = { 
+        hidden_trigger = {
+            has_global_flag = enabled_stratagem_mechanics 
             NOT = { is_stratagem_gui_open = yes } 
         }
     }
@@ -133,6 +146,7 @@ custom_button = {
     
     trigger = { 
         hidden_trigger = { 
+            has_global_flag = enabled_archaeology_mechanics
             NOT = { is_archaeology_gui_open = yes } 
         }
     }
@@ -160,6 +174,26 @@ custom_button = {
     effect = { 
         close_all_faction_windows = yes
         open_clique_gui = yes
+    }
+}
+custom_button = {
+    name = faction_tab_achievements
+    tooltip = ACHIEVEMENTS_TAB_TT
+    
+    potential = {
+        always = yes # This mechanic is always available.
+    }
+    
+    trigger = {     
+        hidden_trigger = { 
+            has_global_flag = enabled_achievements
+            NOT = { is_achievements_gui_open = yes } 
+        }
+    }
+    
+    effect = { 
+        close_all_faction_windows = yes
+        open_achievements_gui = yes
     }
 }
 
