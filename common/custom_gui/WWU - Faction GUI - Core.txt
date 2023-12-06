@@ -9,6 +9,25 @@ custom_icon = {
    }
 }
 custom_icon = {
+   name = achievements_window_bg
+   potential = { 
+        is_achievements_gui_open = yes
+   }
+}
+custom_icon = {
+   name = game_configuration_window_bg
+   potential = { 
+        is_game_configuration_gui_open = yes
+   }
+}
+
+custom_icon = {
+   name = national_mechanics_window_bg
+   potential = { 
+        is_national_mechanics_gui_open = yes
+   }
+}
+custom_icon = {
    name = building_management_window_bg
    potential = { 
         is_building_management_gui_open = yes
@@ -32,12 +51,6 @@ custom_icon = {
         is_clique_gui_open = yes
    }
 }
-custom_icon = {
-   name = achievements_window_bg
-   potential = { 
-        is_achievements_gui_open = yes
-   }
-}
 
 # Titles
 custom_text_box = {
@@ -46,6 +59,19 @@ custom_text_box = {
         is_national_identity_gui_open = yes
    }
 }
+custom_text_box = {
+   name = achievements_title
+   potential = { 
+        is_achievements_gui_open = yes
+   }
+}
+custom_text_box = {
+   name = game_configuration_title
+   potential = { 
+        is_game_configuration_gui_open = yes
+   }
+}
+
 custom_text_box = {
    name = building_management_title
    potential = { 
@@ -71,13 +97,13 @@ custom_text_box = {
    }
 }
 custom_text_box = {
-   name = achievements_title
+   name = national_mechanics_title
    potential = { 
-        is_achievements_gui_open = yes
+        is_national_mechanics_gui_open = yes
    }
 }
 
-# Tabs
+# Tabs - Left
 custom_button = {
     name = faction_tab_national_identity
     tooltip = NATIONAL_IDENTITY_TAB_TT
@@ -95,6 +121,68 @@ custom_button = {
     effect = { 
         close_all_faction_windows = yes
         open_national_identity_gui = yes
+    }
+}
+custom_button = {
+    name = faction_tab_achievements
+    tooltip = ACHIEVEMENTS_TAB_TT
+    
+    potential = {
+        always = yes # This mechanic is always available.
+    }
+    
+    trigger = {     
+        hidden_trigger = { 
+            has_global_flag = enabled_achievements
+            NOT = { is_achievements_gui_open = yes } 
+        }
+    }
+    
+    effect = { 
+        close_all_faction_windows = yes
+        open_achievements_gui = yes
+    }
+}
+custom_button = {
+    name = faction_tab_game_configuration
+    tooltip = GAME_CONFIGURATION_TAB_TT
+    
+    potential = {
+        always = yes # This mechanic is always available.
+    }
+    
+    trigger = {     
+        hidden_trigger = { 
+            NOT = { is_game_configuration_gui_open = yes } 
+        }
+    }
+    
+    effect = { 
+        close_all_faction_windows = yes
+        open_game_configuration_gui = yes
+    }
+}
+
+
+# Tabs - Right
+custom_button = {
+    name = faction_tab_national_mechanics
+    tooltip = NATIONAL_MECHANICS_TAB_TT
+    
+    potential = {
+        always = yes # This mechanic is always available.
+    }
+    
+    trigger = { 
+        hidden_trigger = { 
+            has_national_mechanics = yes
+            NOT = { is_national_mechanics_gui_open = yes } 
+        }
+    }
+    
+    effect = { 
+        close_all_faction_windows = yes
+        open_national_mechanics_gui = yes
     }
 }
 custom_button = {
@@ -176,24 +264,3 @@ custom_button = {
         open_clique_gui = yes
     }
 }
-custom_button = {
-    name = faction_tab_achievements
-    tooltip = ACHIEVEMENTS_TAB_TT
-    
-    potential = {
-        always = yes # This mechanic is always available.
-    }
-    
-    trigger = {     
-        hidden_trigger = { 
-            has_global_flag = enabled_achievements
-            NOT = { is_achievements_gui_open = yes } 
-        }
-    }
-    
-    effect = { 
-        close_all_faction_windows = yes
-        open_achievements_gui = yes
-    }
-}
-
