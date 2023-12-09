@@ -2,7 +2,7 @@
 # Stormwind
 #--------------------------------------
 STW_stormwind_column_1 = {
-	slot = 1
+	slot = 6
 	generic = no
 	ai = yes
     has_country_shield = yes
@@ -12,9 +12,67 @@ STW_stormwind_column_1 = {
 		has_country_flag = stormwind_one_finished
 	}
 
+	STW_stormwind_reclaim_stonecairn = { 
+		icon = mission_runestone
+        position = 2
+        completed_by = 592.1.1 # First War
+        
+		required_missions = { STW_stormwind_calm_subjects } 
+        
+		trigger = {
+            area_stonecairn = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+            area_eastvale = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+        provinces_to_highlight = {
+            OR = {
+				area = area_stonecairn
+				area = area_eastvale
+			}
+        }
+		effect = { 
+			every_province = {
+			    limit = {
+				    OR = {
+					    area = area_stonecairn
+						area = area_eastvale
+					}
+				}
+				change_culture = ROOT
+			}
+		}
+	}
+
+	STW_stormwind_secure_westfall_shore = { 
+		icon = mission_storehouse
+        position = 4
+		required_missions = { STW_stormwind_unite_azerothian_lands } 
+        
+		trigger = {
+            area_westfall_shore = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+        provinces_to_highlight = {
+            area = area_westfall_shore
+        }
+		effect = { 
+			add_country_modifier = {
+				name = "mission_secured_westfall_shore"
+				duration = -1
+			}
+		}
+	}
+
 	STW_stormwind_army_reform = {
 		icon = mission_titan_spirits
-		position = 1
+		position = 6
 
 		trigger = {
 			army_size = 50
@@ -29,7 +87,7 @@ STW_stormwind_column_1 = {
 
 	STW_stormwind_order_of_knights = {
 		icon = mission_titan_spirits
-		position = 2
+		position = 7
 
 		required_missions = { STW_stormwind_army_reform}
 
@@ -59,7 +117,7 @@ STW_stormwind_column_1 = {
 
     STW_stormwind_faith_and_magic = {
         icon = mission_titan_spirits
-        position = 3
+        position = 8
 
         required_missions = { STW_stormwind_order_of_knights }
 
@@ -93,64 +151,6 @@ STW_stormwind_column_1 = {
             country_event = { id = wwu_mission_stw_main.2 }
         }
     }
-    
-    STW_stormwind_reclaim_stonecairn = { 
-		icon = mission_runestone
-        position = 12
-        completed_by = 592.1.1 # First War
-        
-		required_missions = { STW_stormwind_calm_subjects } 
-        
-		trigger = {
-            area_stonecairn = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-            area_eastvale = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-        provinces_to_highlight = {
-            OR = {
-				area = area_stonecairn
-				area = area_eastvale
-			}
-        }
-		effect = { 
-			every_province = {
-			    limit = {
-				    OR = {
-					    area = area_stonecairn
-						area = area_eastvale
-					}
-				}
-				change_culture = ROOT
-			}
-		}
-	}
-    
-    STW_stormwind_secure_westfall_shore = { 
-		icon = mission_storehouse
-        position = 14
-		required_missions = { STW_stormwind_unite_azerothian_lands } 
-        
-		trigger = {
-            area_westfall_shore = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-        provinces_to_highlight = {
-            area = area_westfall_shore
-        }
-		effect = { 
-			add_country_modifier = {
-				name = "mission_secured_westfall_shore"
-				duration = -1
-			}
-		}
-	}
 }
 
 STW_stormwind_column_2 = {
@@ -166,7 +166,7 @@ STW_stormwind_column_2 = {
     
     STW_stormwind_calm_subjects = { 
 		icon = mission_paladin_empowered_seals_righteous
-        position = 11
+        position = 1
 		required_missions = {  } 
         
 		trigger = {
@@ -249,7 +249,7 @@ STW_stormwind_column_2 = {
     
     STW_stormwind_centralize_elwynn = { 
 		icon = mission_lumbermill
-        position = 12
+        position = 2
         completed_by = 592.1.1 # First War
         
 		required_missions = { STW_stormwind_calm_subjects } 
@@ -274,7 +274,7 @@ STW_stormwind_column_2 = {
     
     STW_stormwind_unite_azerothian_lands = { 
 		icon = mission_scroll
-        position = 13
+        position = 3
 		required_missions = { STW_stormwind_centralize_elwynn } 
         
 		trigger = {
@@ -317,7 +317,7 @@ STW_stormwind_column_2 = {
     
     STW_stormwind_crush_the_gnoll_threat = { 
 		icon = mission_sparring_equipment
-        position = 14
+        position = 4
 		required_missions = { STW_stormwind_unite_azerothian_lands } 
         
 		trigger = {
@@ -368,7 +368,7 @@ STW_stormwind_column_3 = {
     
     STW_stormwind_secure_duskwood_banks = { 
 		icon = mission_secretive_plot
-        position = 12
+        position = 2
         completed_by = 592.1.1 # First War
         
 		required_missions = { STW_stormwind_calm_subjects } 
@@ -393,7 +393,7 @@ STW_stormwind_column_3 = {
     
     STW_stormwind_root_out_kobolds = { 
 		icon = mission_mining
-        position = 14
+        position = 4
 		required_missions = { STW_stormwind_unite_azerothian_lands } 
         
 		trigger = {
@@ -446,7 +446,7 @@ STW_stormwind_column_4 = {
     
     STW_stormwind_prepare_for_invasion = { 
 		icon = mission_tools
-        position = 11
+        position = 1
         completed_by = 592.1.1 # First War
         
 		required_missions = {  } 
@@ -470,7 +470,7 @@ STW_stormwind_column_4 = {
     
     STW_stormwind_establish_forward_outpost = { 
 		icon = mission_headquarters
-        position = 12
+        position = 2
         completed_by = 592.1.1 # First War
         
 		required_missions = { STW_stormwind_prepare_for_invasion } 
@@ -492,7 +492,7 @@ STW_stormwind_column_4 = {
     
      STW_stormwind_push_back_the_orcish_horde = { 
 		icon = mission_paladin_empowered_seals_truth
-        position = 13
+        position = 3
         completed_by = 592.1.1 # First War
         
 		required_missions = { 
@@ -539,7 +539,7 @@ STW_stormwind_column_5 = {
     
     STW_stormwind_cut_down_the_gurubashi = { 
 		icon = mission_troll_male
-        position = 12
+        position = 2
         completed_by = 592.1.1 # First War
         
 		required_missions = { STW_stormwind_prepare_for_invasion } 
@@ -565,7 +565,7 @@ STW_stormwind_column_5 = {
     
     STW_stormwind_secure_the_swamp = { 
 		icon = mission_camp_flag
-        position = 13
+        position = 3
         completed_by = 592.1.1 # First War
         
 		required_missions = { STW_stormwind_establish_forward_outpost } 
