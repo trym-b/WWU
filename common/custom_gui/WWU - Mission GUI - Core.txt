@@ -9,6 +9,7 @@ custom_text_box = {
    name = window_title
    potential = { 
         NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+        NOT = { is_in_mission_tab__frozen_throne = yes }
    }
 }
 custom_text_box = {
@@ -17,21 +18,27 @@ custom_text_box = {
         is_in_mission_tab__rise_of_the_horde = yes
    }
 }
+custom_text_box = {
+   name = frozen_throne_window_title
+   potential = { 
+        is_in_mission_tab__frozen_throne = yes
+   }
+}
+
 
 #--------------
 # Tabs
 #--------------
 custom_button = {
-    name = personal_missions_tab
+    name = story_mission_tab__personal
     tooltip = SHOW_PERSONAL_MISSIONS_TT
     
     potential = {
-        # There share the core window type, hide the tab if within them
-        NOT = { is_archaeology_gui_open = yes }
-        NOT = { is_stratagem_gui_open = yes } 
-        
         # Only show if they actually have an option
-        has_mission_tab__rise_of_the_horde = yes
+        OR = {
+            has_mission_tab__rise_of_the_horde = yes
+            has_mission_tab__frozen_throne = yes
+        }
     }
     
     trigger = { 
@@ -39,18 +46,14 @@ custom_button = {
     }
     
     effect = { 
-        switch_missions_to_personal = yes
+        switch_mission_set__personal = yes
     }
 }
 custom_button = {
-    name = story_missions_tab
+    name = story_mission_tab__rise_of_the_horde
     tooltip = SHOW_RISE_OF_THE_HORDE_TT
     
     potential = {
-        # There share the core window type, hide the tab if within them
-        NOT = { is_archaeology_gui_open = yes }
-        NOT = { is_stratagem_gui_open = yes } 
-        
         # Only show if they actually have an option
         has_mission_tab__rise_of_the_horde = yes
     }
@@ -60,6 +63,23 @@ custom_button = {
     }
     
     effect = { 
-        switch_missions_to_rise_of_the_horde_missions = yes
+        switch_mission_set__rise_of_the_horde = yes
+    }
+}
+custom_button = {
+    name = story_mission_tab__frozen_throne
+    tooltip = SHOW_FROZEN_THRONE_TT
+    
+    potential = {
+        # Only show if they actually have an option
+        has_mission_tab__frozen_throne = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        switch_mission_set__frozen_throne = yes
     }
 }

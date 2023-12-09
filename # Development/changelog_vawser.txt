@@ -1,110 +1,124 @@
 #--------------------------------------
 # Changelog
 #--------------------------------------
+#-----------
 # Interface
-- Added a 'Mechanics' window, which is accessed via a button at the bottom of the screen, or F3.
- - The Mechanics window hosts:
+#-----------
+# Faction Interface
+- Overhauled the implementation of several mechanics to make use of Custom GUI.
+- Added a "Mechanics" window, accessible via the old "Faction" menubar button (F3).
+ - This window hosts several different mechanics, accessible via side tab buttons when the window is open.
+ - These mechanics are:
   - National Identity
+  - Achievements
   - Building Management
   - Stratagems
   - Archaeology
-  - Cliques  
-
-- Added a 'Ruler Information Panel' to the court view.
- - Can be toggled via a button next to the Abdication button.
- - When enabled it will show a portrait of the ruler and the Magical Study/Spellbook and Class Study/Abilities buttons.
- - Hovering over the portrait will tell you the life type of the ruler: Mortal, Long-lived or Immortal.
-   
-- Added ruler class and spellcaster status to the Diplomacy view.
-- Added faction buttons to the Diplomacy view if a nation belongs to a Warcraft faction.
-
-# Magic
-- Overhauled the magic system.
- - There are now two windows within the Court view:
-  - Magical Study
-  - Spellbook
- - Both are accessed via the Spellbook button next to the Abdicate Ruler button.
+  - Cliques
  
- - Magical Study:
-  - Available when the ruler is not a spellcaster.
+- Implemented the color picker within the National Identity tab.
+- Implemented the Stratagem selection system within the Statagem tab.
+- Implemented the Cliques system within the Cliques tab.
+- Implemented the Builidng Management system within the Building Management tab.
+- Implemented the Achievements system within the Achievements tab.
+- Implemented the Archaeology system within the Archaeology tab.
+ 
+# Court Interface
+- Added new interface elements to the Court View.
+ - Added a "Ruler Information" button: this toggles the ruler information panel.
+ - Added a "Ruler Information" panel: this contains the buttons for training/using Magic and Classes/Class Abilities, 
+   as well as the ruler portrait. The ruler portrait tooltip will show the life type of the ruler (Mortal, Long-lived or Immortal)
+
+# Diplomacy Interface
+- Added new interface elements to the Diplomacy View.
+ - Added icons for Ruler class and magic status.
+ - Added buttons for the Warcraft Factions, that opens up a side panel
+ - The Faction panel allows you to:
+  - See the leader and members of a faction.
+  - Allows the usage of Faction Decisions, which cost Faction Renown.
+   - Faction Renown is gained over time and by assisting fellow faction members in war.
+   
+- Added new interface elements to display the current Offensive, Defensive and Insurrection stratagems a country has selected.
+
+# Province Interface
+- Added new interface elements to the Province View:
+ - Added spell cast buttons for spells that make use of targeted casts.
+ - Added Nerubian Dig button to allow for the new method of Tunnel Digging.
+ 
+# Mission Interface
+- Added new interface elements to the Mission View:
+ - Added tabs for countries that have multiple sets of mission tress, allowing for them to be previewed/swapped to:
+  - Rise of the Horde (the story missions for the Orcs).
+  - Frozen Throne (the Lordaeron invasion missions for the Scourge).
+  
+#-----------
+# Mechanics
+#-----------
+# Ruler Magic
+- Changed how the Magic system works, and implemented a Custom GUI for it.
+ - Aptitude now reduces the mana cost of spells (instead of unlocking the ability to use a spell).
+
+- All rulers now have the following options within the Court View:
+ - Magical Study (if untrained): this view will allow a ruler to start the process to become a spellcaster.
   - Costs 100 ADM, DIP and MIL to start (20 for spellcaster classes or Free Magic reform)
   - Each month between 0.1 and 1.0 Study Progress is added.
   - Once at 100% Study Progress, the ruler will become a spellcaster.
-  - You can spend gold to boost Study Progress by 5. However the cost will double each time (up to x10). This resets between each ruler.
-
- - Spellbook:
-  - Available when the ruler is a spellcaster.
-  - Displays the ruler's Aptitude, Finesse and Concentration
-   - Aptitude reduces the mana cost of spells.
-   - Finesse increases the potency of spells.
-   - Concentration increases the duration of spells (that utilise modifiers).
-   - Attributes can be increased by clicking the icon (if sufficient monarch power is possessed).
+  - You can spend gold to boost Study Progress by 5. However the cost will double each time (up to x10). 
+    This resets between each ruler.
+ - Spellbook (if trained): this view will allow a ruler to cast their spells.
+  - There are now a set of 10 general spells shared by all magic schools.
+  - All magic schools now grant the spellcaster an additional 4 spells, unique to each school.
    
-# Classes
-- Overhauled the class sytem. 
- - There is now a window within the Court view:
-  - It is accesed via the Class Study button next to the Spellbook/Magical Study button.
-  
- - Class Study:
-  - Available when the ruler does not belong to a class.
+# Ruler Classes
+- Changed how the Ruler Class system works, and implemented a Custom GUI for it.
+
+- Each class now bestows 3 unique class abilities that can be used.
+ - Each ability costs Energy, which functions similar to Mana from the Magic system.
+ - There is a max of 5 stored Energy.
+
+- All rulers now have the following options within the Court View:
+ - Class Study (if untrained): this view will allow a ruler to start the process to become a specific class.
   - Costs 100 ADM, DIP and MIL to start (0 if you have wwu_administrative_ideas_7)
   - Each month between 0.1 and 1.0 Study Progress is added.
   - Once at 100% Study Progress, the ruler will become their chosen class.
-  - You can spend gold to boost Study Progress by 5. However the cost will double each time (up to x10). This resets between each ruler.
-   
- - Abilities
-  - Available when the ruler belongs to a class.
-  - Each class provides three abilities: they cost Energy to use.
-  - Your ruler can have a max of 5 Energy. It regenerates over time similar to mana.
+  - You can spend gold to boost Study Progress by 5. However the cost will double each time (up to x10). 
+    This resets between each ruler.
+ - Abilities (if trained): this view will allow a ruler to use their class abilities.
+  - There are now a set of 3 unique spells for each class.
 
 # Stratagems
-- Doctrines have been renamed to Stratagems.
-- Removed the Army Doctrine options.
-- Added a 'Stratagem' window to the mechanics window.
-- Added the ability to change the potency of specific Stratagems, increase the potency of the effect, but also the cost.
-- The currently selected Offensive, Defensive and Insurrection Stratagem a country has are displayed within the Diplomacy menu.
- - This allows a player to see if the AI has a non-Standard stratagem and plan accordingly.
-
-# Warcraft Factions
-- Added faction window, accessed via the Faction Icon within the diplomacy window.
- - Allows you to see the leader and members of a faction
- - Allows you to make use of "Factional Decisions", which consume "Faction Renown" to use.
- - Faction Renown is gained overtime and by assisting fellow faction members in war.
+- Renamed the Doctrine system to Stratagems.
+- Renamed Siege doctrines to Offensive doctrines.
+- Renamed Homeland doctrines to Defensive doctrines.
 
 # Cliques
-- Renamed EU4 Factions to Cliques to make them more distinct from Warcraft Factions.
-- The interface for Cliques has been redesigned.
-- You no longer instantly boost clique influence, instead you can spend monarch power to add a +1% growth per year.
-
-# National Identity
-- Converted the old National Color Picker into a dedicated tab within the Mechanics window.
+- Re-made the Faction mechanic within Custom GUI, and renamed it to Cliques.
+- Increasing Clique Influence is no longer instant, instead the Boost Influence button will add a yearly growth for a set period.
 
 # Builidng Management
-- Converted the Building Management event menu into a custom GUI, found within the Mechanics window.
- - Changed the Gold Buffer Limit to instead be a Construction Limit. 
-  - Can be set to 1, 2, 3, 4, 5 or Unlimited.
-  - This value means the Automatic Construction pulse each year will queue X number of buildings, X being the Construction Limit value selected. Unlimited means it will spend all ducats until it reaches 0 or there is no valid province to queue a building in.
+- Changed the Building Management event into a Custom GUI.
+- Changed the Gold Buffer Limit to instead be a Construction Limit. 
+ - Can be set to 1, 2, 3, 4, 5 or Unlimited.
+ - This value means the Automatic Construction pulse each year will queue X number of buildings, 
+   X being the Construction Limit value selected. Unlimited means it will spend all ducats until it 
+   reaches 0 or there is no valid province to queue a building in.
 
 # Archaeology
-- Converted the Artifact event menu into a custom GUI, found within the Mechanics window.
- - Digs are now started within this window.
- - You can browse through all the availabel artifacts.
-  - If owned, you can click them to make them your primary artifact.
+- Changed the Archaeology decision and Artifact Repository event into a Custom GUI.
+- All artifact information can now be viewed quickly by hovering over each of the artifact icons within the view.
 
-# Achievements
-- Added a Achievements tab within the Mechanics window.
- - Replaces the triggered modifier version.
- 
-# Triggered Modifiers
-- All the triggered modifiers are now visible once more within the Triggered Modifier window.
-
-# Trade Goods
-- Added trade good bonuses for market share.
-
+#-----------
+# General
+#-----------
 # Azjol Nerub
-- Changed the Tunnel Digging mechanic:
- - Increasing Tunnel Depth is now done via button with the province view.
- - Issues with the previous implementation should now be fixed.
+- Adjusted the Tunnel Digging mechanic:
+ - You now increase Tunnel Depth via a button within the Province View.
+ - Increasing the Tunnel Depth no longer requires increased development per depth level, instead the cost increases.
+
+# Scourge
+- Added mission tree tab for the Frozen Throne mission tree. 
+ - Allows the player to switch between the initial mission set and the Frozen Throne missions.
+ - Frozen Throne missions require the Scourge Invasion mission in the initial mission tree to be complete before they can be completed however.
 
 # Sound
 - The Old Gods will now whisper to unsuspecting players.
@@ -112,13 +126,26 @@
 # Balance
 - Reduced the newly formed nation boost modifier duration to 10 years (was 25).
 
-# Removals
+#-----------
+# Reversions
+#-----------
+- Restored triggered modifiers and the Triggered modifier window.
 - Removed Ruler Investment (exchanging monarch power to increase monarch stats).
-- Removed Automatic Culture conversion toggle (was not functioning as intended).
+- Removed Automatic Culture conversion toggle as it did not function correctly.
 
-# Bugfix
+#-----------
+# Bugfixes
+#-----------
 - Fixed missing province history for some newly added Draenor provinces.
 - Fixed bad positions in Netherwing Ledge.
+- Fixed localization issues in Kul Tiras ideas
+- Fixed invalid country flag check in Zandalar - Visions of the Cataclysm mission
+- Fixed Zandalar event pictures
+- Fixed wwu_council_of_zanchul.10 from firing repeatedly
+- Clarified the Diplomacy Superiority tooltip
+- Changed the modifier used by mission_home_sweet_home event modifier
+- Fixed SVH_close_dark_portal_svh mission. It now destroyed both Dark Portals and prevents them from being built again.
+- Fixed several issues with the Nerbian Tunnel Digging mechanic.
 
 #--------------------------------------
 # TODO
@@ -129,8 +156,3 @@ Add Mak'gora duel system: rock, paper, scissors
  
 Add personal mission trees for all the Orc draenor nations
   
-- Add Subject Management tab
-- Convert current subject management into custom GUI
-- Add side section in window that displays ~30 possible small shields for selecting which subject to manage.
-
-- Adjust Zandalar mission tree stuff
