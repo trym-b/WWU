@@ -117,6 +117,6 @@ tags={
 	"National Ideas"
 }
 picture="world_of_warcraft_universalis_logo.jpg"
-version="1.8.0"
+version="1.8.1"
 supported_version="1.36.*"
 remote_file_id="1796527319"
