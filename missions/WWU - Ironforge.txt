@@ -118,6 +118,12 @@ A29_ironforge_column_2 = {
 			area_anvilmar = {
                 add_permanent_claim = ROOT
             }
+			area_gnomeregan_exterior = {
+				add_permanent_claim = ROOT
+			}
+			area_frostmane_hills = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	A29_dealing_with_the_frost_troll_threat_a29 = {
@@ -134,12 +140,18 @@ A29_ironforge_column_2 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+			area_frostmane_hills = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = { exists = A75 }
 		}
 		provinces_to_highlight = {
 			AND = {
 				OR = {
 					area = area_kharanos
 					area = area_anvilmar
+					area = area_frostmane_hills
 				}
 			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
@@ -151,12 +163,6 @@ A29_ironforge_column_2 = {
                 name = mission_troll_war_a29
                 duration = -1
             }
-			area_gnomeregan_exterior = {
-				add_permanent_claim = ROOT
-			}	
-			area_frostmane_hills = {
-				add_permanent_claim = ROOT
-			}
 		}
 	}
 	A29_securing_the_borders_a29 = {
@@ -165,47 +171,53 @@ A29_ironforge_column_2 = {
 		required_missions = { A29_dealing_with_the_frost_troll_threat_a29 }
 		
 		trigger = {
-			3053 = {
+			515 = {
                 country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
+				base_manpower = 3
             }
-            1747 = {
+            1746 = {
                 country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
+				base_manpower = 3
             }
-            3052 = {
+            1945 = {
                 country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
+				base_manpower = 3
             }
-			NOT = { exists = A75 }
 		}
 		provinces_to_highlight = {
 			OR = {
-				province_id = 3053
-				province_id = 1747
-				province_id = 941
-                owned_by = A75
+				province_id = 515
+				province_id = 1746
+				province_id = 1945
 			}
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {
 			add_country_modifier = {
 				name = mission_expand_fortifications_a29
 				duration = -1
 			}
+
+			area_valley_of_kings = {
+				add_permanent_claim = ROOT
+			}
+
 			hidden_effect = {
-				3053 = {
+				515 = {
 					add_or_improve_fort = yes
 				}
-                1747 = {
+                1746 = {
                     add_or_improve_fort = yes
                 }
-                3052 = {
+                1945 = {
                     add_or_improve_fort = yes
                 }
 			}
 		}
 	}
+	
 	A29_meeting_the_gnomes_a29 = {
         icon = mission_gnome_male
 		required_missions = { A29_securing_the_borders_a29 }
