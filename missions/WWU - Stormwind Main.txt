@@ -303,7 +303,247 @@ STW_stormwind_column_4 = {
 	potential = {
 		tag = STW
 		has_country_flag = stormwind_one_finished
-	} 
+	}
+
+	STW_stormwind_m_secure_stranghlethorn = {
+		icon = mission_titan_spirits
+		position = 2
+
+		required_missions = { STW_stormwind_m_reestablish_order }
+
+		trigger = {
+			owns_core_province = 1996
+
+			1996 = {
+				has_fort_building_trigger = yes
+				base_manpower = 4
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 1996
+		}
+
+		effect = {
+			1996 = {
+				add_province_modifier = {
+					name = mission_stranglethorn_pass
+					duration = -1
+				}
+			}
+		}
+
+		country_event = { id = wwu_mission_stw_main.3 }
+	}
+
+	STW_stormwind_m_kurzen_expedition = {
+		icon = mission_titan_spirits
+		position = 3
+
+		required_missions = { STW_stormwind_m_secure_stranghlethorn }
+
+		trigger = {
+			area_kurzen_encampment = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_kurzen_encampment
+		}
+
+		effect = {
+			area_fort_livingston = {
+				add_permanent_claim = ROOT
+				add_permanent_claim = F28
+			}
+			area_gurubashi_arena = {
+				add_permanent_claim = ROOT
+				add_permanent_claim = F28
+			}
+		}
+	}
+
+	STW_stormwind_m_fort_livingstone = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { STW_stormwind_m_kurzen_expedition }
+
+		trigger = {
+			548 = {
+				base_tax = 3
+				base_production = 3
+				base_manpower = 6
+				has_fort_building_trigger = yes
+				has_building = wow_tower = 1
+				has_building = wow_arsenal = 1
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 548
+		}
+
+		effect = {
+			area_kalai = {
+				add_permanent_claim = ROOT
+			}
+			area_upper_troll_ruins = {
+				add_permanent_claim = ROOT
+			}
+			area_lower_troll_ruins = {
+				add_permanent_claim = ROOT
+			}
+			area_zulakman = {
+				add_permanent_claim = ROOT
+			}
+
+			area_fort_livingston = {
+				change_culture = culture_stormwindian
+			}
+
+			define_advisor = {
+				type = fortification_expert
+				name = "Livingstone Marshal"
+				skill = 2
+				localtion = 548
+				discount = yes
+				culture = culture_stormwindian
+				religion = holy_light
+			}
+
+			custom_tooltip = SPECIALIST_LIVINGSTONE_TT
+			set_country_flag = stormwind_avalable_livingstone
+
+		}
+	}
+
+	STW_stormwind_m_into_the_jungle = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { STW_stormwind_m_fort_livingstone }
+
+		trigger = {
+			area_kalai = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_upper_troll_ruins = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_kalai
+				area = area_upper_troll_ruins
+			}
+		}
+
+		effect = {
+			add_prestige = 10
+			add_years_of_income = 1
+
+			area_kalai = {
+				change_culture = culture_stormwindian
+				change_religion = ROOT
+			}
+		}
+	}
+
+	STW_stormwind_m_securing_southern_stranglethorn = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { STW_stormwind_m_into_the_jungle }
+
+		trigger = {
+			area_lower_troll_ruins = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_lower_troll_ruins
+		}
+
+		effect = {
+			add_adm_power = 75
+			add_mil_power = 75
+			add_treasury = 250
+
+			if = {
+				limit = {
+					exists = A83
+				}
+				add_casus_belli = {
+					target = A83
+					type = cb_vassalize_mission
+					months = 60
+				}
+			}
+		}
+	}
+
+	STW_stormwind_m_control_booty_bay = {
+		icon = mission_titan_spirits
+		position = 7
+
+		required_missions = { STW_stormwind_m_securing_southern_stranglethorn }
+
+		trigger = {
+			area_booty_bay = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_jaguero_isle = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			A83 = {
+				OR = {
+					NOT = { exists = A83}
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_booty_bay
+				area = area_jaguero_isle
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					A83 = {
+						is_subject_of = ROOT
+					}
+				}
+				add_country_modifier = {
+					name = mission_booty_bay_protection
+					duration = -1
+				}
+			}
+
+				every_province = {
+					limit = {
+						region = region_stranglethorn_vale = {
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+					}
+					add_province_modifier = {
+						name = mission_stranglethorn_trade
+						duration = -1
+				}
+			}
+		}
+	}
+
+
     
     
 }
