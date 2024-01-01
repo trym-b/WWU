@@ -701,5 +701,57 @@ STW_stormwind_column_5 = {
 		effect = {
 			country_event = { id = wwu_mission_stw_main.5 }
 		}
-	} 
+	}
+
+	STW_stormwind_m_moving_against_zulgurub = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { STW_stormwind_m_into_the_jungle }
+
+		trigger = {
+			area_zulakman = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_zulakman
+		}
+
+		effect = {
+			area_zul_gurub = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	STW_stormwind_m_siege_of_zulgurub = {
+		icon = mission_titan_spirits
+		position = 7
+
+		required_missions = { STW_stormwind_m_moving_against_zulgurub }
+
+		trigger = {
+			OR = {
+				NOT = { exists = A66 }
+				A66 = {
+					defensive_war_with = STW
+				}
+			}
+			area_zul_gurub = {
+				type = all
+				controlled_by = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_zul_gurub
+		}
+
+		effect = {
+			country_event = { id = wwu_mission_stw_main.6 }
+		}
+	}
 }
