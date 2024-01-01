@@ -322,14 +322,14 @@ STW_stormwind_column_4 = {
 
 		effect = {
 			1996 = {
+				change_culture = ROOT
 				add_province_modifier = {
 					name = mission_stranglethorn_pass
 					duration = -1
 				}
 			}
+			country_event = { id = wwu_mission_stw_main.3 }
 		}
-
-		country_event = { id = wwu_mission_stw_main.3 }
 	}
 
 	STW_stormwind_m_kurzen_expedition = {
@@ -663,6 +663,43 @@ STW_stormwind_column_5 = {
 			add_country_flag = stormwind_grand_armada_unlock
 		}
 	}
-    
-    
+
+	STW_stormwind_m_balor_naval_command = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { STW_stormwind_m_stormwind_armada }
+
+		trigger = {
+			4111 = {
+				base_manpower = 8
+				base_production = 8
+				OR = {
+					has_building = wow_dockyard_1
+					has_building = wow_dockyard_2
+					has_building = wow_dockyard_3
+				}
+				OR = {
+					has_building = wow_shipyard_1
+					has_building = wow_shipyard_2
+					has_building = wow_shipyard_3
+				}
+				OR = {
+					has_building = wow_tower_1
+					has_building = wow_tower_2
+					has_building = wow_tower_3
+				}
+				has_fort_building_trigger = yes
+				unrest = 0
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 4111
+		}
+
+		effect = {
+			country_event = { id = wwu_mission_stw_main.5 }
+		}
+	} 
 }

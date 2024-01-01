@@ -120,14 +120,27 @@ country_event = {
     option = {
         name = wwu_mission_stw_main.3.option.a
 
-        area_kurzen_encampment = {
+        601 = {
+            cede_province = F28
+            add_core = F28
+            change_culture = culture_stormwindian
+            add_base_manpower = 4
+        }
+
+        585= {
             cede_province = F28
             add_core = F28
             change_culture = culture_stormwindian
         }
 
-        STw = {
-            country_event = { wwu_mission_stw_main.4 days = 30}
+        1997 = {
+            cede_province = F28
+            add_core = F28
+            change_culture = culture_stormwindian
+        }
+
+        STW = {
+            country_event = { id =  wwu_mission_stw_main.4 days = 30 }
         }
     }
 }
@@ -160,6 +173,8 @@ country_event = {
             add_mil_power = 100
             add_prestige = 20
             add_stability = 1
+            change_religion = faithless
+            set_captial = 601
 
             define_ruler = {
                 name = "Conrad"
@@ -171,7 +186,7 @@ country_event = {
                 change_mil = 4
                 male = yes
                 culture = culture_stormwindian
-                religion = holy_light
+                religion = faithless
             }
         }
     }
@@ -179,6 +194,60 @@ country_event = {
     option = {
         name = wwu_mission_stw_main.4.option.b
 
-        add_prestige = 5
+        inherit = F28
+    }
+}
+
+country_event = {
+    id = wwu_mission_stw_main.5
+    title = wwu_mission_stw_main.5.title
+    desc = wwu_mission_stw_main.5.desc
+    picture = SILVERPINE_FOREST_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_stw_main.5.option.a
+
+        release = BLR
+        create_march = BLR
+
+        BLR = {
+            change_religion = holy_light
+            add_idea_group = wwu_naval_ideas
+            add_idea_group = wwu_expansion_ideas
+            add_idea_group = wwu_quality_ideas
+            add_country_modifier = {
+                name = mission_stw_balor_naval_command_combat
+                duration = -1
+            }
+            add_country_modifier = {
+                name = mission_stw_balor_naval_command_economy
+                duration = -1
+            }
+        }
+
+        4111 = {
+            add_province_modifier = {
+                name = mission_balor_command
+                duration = -1
+            }
+        }
+    }
+
+    option = {
+        name = wwu_mission_stw_main.5.option.b
+
+        4111 = {
+            add_province_modifier = {
+                name = mission_stormwind_balor_command
+                duration = -1
+            }
+        }
+
+        add_navy_tradtion = 50
     }
 }
