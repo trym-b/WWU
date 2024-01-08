@@ -93,6 +93,94 @@ STW_stormwind_column_1 = {
             country_event = { id = wwu_mission_stw_main.2 }
         }
     }
+
+	STW_stormwind_m_securing_northern_redridge = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { STW_stormwind_m_securing_stonewatch_keep }
+
+		trigger = {
+			region_redridge_mountains = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_redridge_mountains
+		}
+
+		effect = {
+			area_valley_of_ashes = {
+				add_permanent_claim = ROOT
+			}
+			add_prestige = 5
+			add_adm_power = 50
+		}
+	}
+
+	STW_stormwind_m_morgan_camp = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { STW_stormwind_m_securing_northern_redridge }
+
+		trigger = {
+			area_valley_of_ashes = {
+				owned_by = ROOT
+			}
+			1989 = {
+				base_tax = 3
+				base_production = 4
+				base_manpower = 5
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_valley_of_ashes
+		}
+
+		effect = {
+			country_event = { id = wwu_mission_stw_main.8 }
+		}
+	}
+
+	STW_stormwidn_m_secure_eastern_steppes = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { STW_stormwind_m_morgan_camp }
+
+		trigger = {
+			area_ashen_shore = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_chiselgrip = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_dreadmaul_rock = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_dreadmaul_rock
+				area = area_chiselgrip
+				area = area_ashen_shore
+			}
+		}
+
+		effect = {
+			region_burning_steppes = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 STW_stormwind_column_2 = {
@@ -105,9 +193,179 @@ STW_stormwind_column_2 = {
 		tag = STW
 		has_country_flag = stormwind_one_finished
 	}
-    
 
+	STW_stormwind_m_elwynn_fortification = {
+		icon = mission_titan_spirits
+		position = 2
 
+		required_missions = { STW_stormwind_m_reestablish_order }
+
+		trigger = {
+			661 = {
+				OR = {
+					has_building = wow_tower_1
+					has_building = wow_tower_2
+					has_building = wow_tower_3
+				}
+				has_fort_building_trigger = yes
+				base_manpower = 5
+			}
+			1618 = {
+				OR = {
+					has_building = wow_tower_1
+					has_building = wow_tower_2
+					has_building = wow_tower_3
+				}
+				has_fort_building_trigger = yes
+				base_manpower = 5
+			}
+			1058 = {
+				OR = {
+					has_building = wow_arsenal_1
+					has_building = wow_arsenal_2
+					has_building = wow_arsenal_3
+				}
+				base_manpower = 6
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 661
+				province_id = 1618
+				province_id = 1058
+			}
+		}
+
+		effect = {
+			add_mil_power = 100
+
+			661 = {
+				add_province_modifier = {
+					name = mission_elwynn_fortification
+					duration = -1
+				}
+			}
+
+			1618 = {
+				add_province_modifier = {
+					name = mission_elwynn_fortification
+					duration = -1
+				}
+			}
+
+			1058 = {
+				add_base_manpower = 2
+				add_base_tax = 1
+				add_base_production = 1
+				add_province_modifier = {
+					name = mission_elwynn_fortification
+					duration = -1
+				}
+			}
+		}
+	}
+
+	STW_stormwind_m_securing_stonewatch_keep = {
+		icon = mission_titan_spirits
+		position = 3
+
+		required_missions = { STW_stormwind_m_elwynn_fortification }
+
+		trigger = {
+			800 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				base_manpower = 8
+				has_fort_building_trigger = yes
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 800
+		}
+
+		effect = {
+			region_redridge_mountains = {
+				add_permanent_claim = ROOT
+				add_permanent_claim = RRG
+			}
+
+				add_mil_power = 100
+
+				800 = {
+					add_province_modifier = {
+						name = mission_redridge_fortification
+						duration = -1
+					}
+				}
+
+				custom_tooltip = SPECIALIST_STONEWATCH_TT
+				set_country_flag = stormwind_avalable_stonewatch
+		}
+	}
+
+	STW_stormwind_m_invasion_of_black_moras = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { STW_stormwind_m_securing_stonewatch_keep }
+
+		trigger = {
+			area_splinterspear_bog = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+			provinces_to_highlight = {
+				area = area_splinterspear_bog
+			}
+
+			effect = {
+				region_swamp_of_sorrows = {
+					add_permanent_claim = ROOT
+				}
+				region_blasted_lands = {
+					add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	STW_stormwind_m_culling_the_hakkari = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { STW_stormwind_m_invasion_of_black_moras }
+
+		trigger = {
+			region_swamp_of_sorrows = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				region = ROOT
+				culture = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_swamp_of_sorrows
+		}
+
+		effect = {
+			region_swamp_of_sorrows = {
+				add_province_modifier = {
+					name = mission_swamp_of_sorrows
+					duration = -1
+				}
+			}
+
+			add_country_modifier = {
+				name = mission_hakkari_culling
+				duration = -1
+			}
+
+			add_prestige = 20
+		}
+	}
 }
 
 STW_stormwind_column_3 = {
