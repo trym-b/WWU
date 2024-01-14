@@ -119,16 +119,28 @@ F69_ango_rosh_column_4 = {
                     value = 90 
                 }
             }
-            F50 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 190 
+            OR = {
+                A51 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 190 
+                    }
+                    trust = { 
+                        who = ROOT
+                        value = 90 
+                    }
                 }
-                trust = { 
-                    who = ROOT
-                    value = 90 
+                F50 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 190 
+                    }
+                    trust = { 
+                        who = ROOT
+                        value = 90 
+                    }
                 }
-			}
+            }
 		}
         
 		effect = {
@@ -144,6 +156,12 @@ F69_ango_rosh_column_4 = {
                     exists = F50
                 }
                 vassalize = F50
+            }
+            if = {
+                limit = {
+                    exists = A51
+                }
+                vassalize = A51
             }
             add_country_modifier = {
                 name = mission_competent_diplomats
@@ -278,20 +296,20 @@ F69_ango_rosh_column_5 = {
             num_of_cities = 12
             army_size_percentage = 0.8
             OR = {
-            F50 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+                F50 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
-			}
-            A51 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 100
+                A51 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 100
+                    }
                 }
             }
-		}
-    } #For Future - check what version of Boulderfist spawns in Outland
+        }
         
 		effect = {
             add_prestige = 5
@@ -301,11 +319,26 @@ F69_ango_rosh_column_5 = {
                 name = mission_blademasters_blade
                 duration = -1
             }
-            add_trust = {
-                who = F50
-                value = 25
-                mutual = yes
-			}	
+            if = {
+                limit = {
+                    exists = F50
+                }  
+                add_trust = {
+                    who = F50
+                    value = 25
+                    mutual = yes
+                }	 
+            }
+            if = {
+                limit = {
+                    exists = A51
+                }  
+                add_trust = {
+                    who = A51
+                    value = 25
+                    mutual = yes
+                }	 
+            }
         }
     }
 		

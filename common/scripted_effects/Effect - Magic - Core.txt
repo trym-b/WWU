@@ -3,7 +3,16 @@
 #-----------------------------------
 # ROOT = Countr
 on_startup__magic = {
-    reset_magical_study = yes
+    # Apply only once
+    if = {
+        limit = {
+            NOT = { has_country_flag = setup_magic_system }
+        }
+        
+        set_country_flag = setup_magic_system
+        
+        reset_magical_study = yes
+    }
 }
 
 # ROOT = Countr

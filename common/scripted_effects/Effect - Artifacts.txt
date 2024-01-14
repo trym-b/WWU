@@ -81,6 +81,20 @@
 #-----------------------------------
 # On Actions
 #-----------------------------------
+on_yearly_pulse__artifacts = {
+    # Clean up Artifact Heist if the normal cleanup event does not occur.
+    if = {
+        limit = {
+            had_country_flag = {
+                flag = artifact_heist_active
+                days = 1800
+            }
+        }
+        
+        clr_country_flag = artifact_heist_active
+    }
+}
+
 on_five_year_pulse_2__artifacts = {
     # Pearl of Pandaria
     if = {
