@@ -1,0 +1,481 @@
+namespace = wwu_gorian_empire
+
+# Restoration of Goria
+country_event = {
+	id = wwu_gorian_empire.1
+	title = wwu_gorian_empire.1.title
+	desc = wwu_gorian_empire.1.desc
+	picture = OGRE_MAGI_eventPicture
+
+    is_triggered_only = yes
+    
+	option = {
+		name =  wwu_gorian_empire.1.option.a
+		
+        change_religion = arcane
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.1.option.b
+		
+        
+        change_religion = fel
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.1.option.c
+	
+        
+        change_religion = light_of_the_naaru
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.1.option.d
+		
+        
+        change_religion = cult_of_the_damned
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name = wwu_gorian_empire.1.option.e
+		
+		random_list = {
+			95 = { 
+                OGR = {
+                    country_event = { id = wwu_gorian_empire.9 }
+                } 
+            }
+			5 = { 
+                OGR = {
+                    country_event = { id = wwu_gorian_empire.10 }
+                }
+			}
+		}
+	}
+}
+# Subjugate the Ogres with good stats for cost
+country_event = {
+	id = wwu_gorian_empire.2
+	title = wwu_gorian_empire.2.title
+	desc = wwu_gorian_empire.2.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.2.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+        OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = A51
+            }
+        }
+        
+		ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.2.option.b
+        
+        add_stability = 1
+        add_legitimacy = 30
+        
+        add_casus_belli = {
+            type = cb_vassalize_mission
+            target = A51
+            months = 300
+        }
+        
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Subjugate Ango'rosh
+country_event = {
+	id = wwu_gorian_empire.3
+	title = wwu_gorian_empire.3.title
+	desc = wwu_gorian_empire.3.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.3.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+		OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = F69
+            }
+		}
+        
+		add_casus_belli = {
+            type = cb_vassalize_mission
+            target = F69
+            months = 300
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.3.option.b
+	
+        add_stability = 1
+        add_legitimacy = 30
+	
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+#A new world
+country_event = {
+	id = wwu_gorian_empire.4
+	title = wwu_gorian_empire.4.title
+	desc = wwu_gorian_empire.4.desc
+	picture = DARK_PORTAL_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.4.option.a
+		
+		add_stability = 1
+        add_adm_power = 150
+        add_dip_power = 150
+        add_mil_power = 150
+
+		eastern_kingdom_superregion = {
+            add_permanent_claim = ROOT
+        }
+
+        1035 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = ROOT
+            change_religion = ROOT
+        }
+
+        3792 = {
+            cede_province = ROOT
+            add_core = ROOT
+            change_culture = ROOT
+            change_religion = ROOT
+        }
+	}
+}
+#Subjugate Bladespire
+
+country_event = {
+	id = wwu_gorian_empire.5
+	title = wwu_gorian_empire.5.title
+	desc = wwu_gorian_empire.5.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = wwu_gorian_empire.5.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+		OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = A49
+            }
+		}
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.5.option.b
+        
+        add_casus_belli = {
+            type = cb_vassalize_mission
+            target = A49
+            months = 300
+        }
+        
+        add_stability = 1
+        add_legitimacy = 30
+	
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+#Subjugate Bloodmaul
+country_event = {
+	id = wwu_gorian_empire.6
+	title = wwu_gorian_empire.6.title
+	desc = wwu_gorian_empire.6.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.6.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+		OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = A53
+            }
+		}
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.6.option.b
+        
+        add_casus_belli = {
+            type = cb_vassalize_mission
+            target = A53
+            months = 300
+        }
+        
+        add_stability = 1
+        add_legitimacy = 30
+	
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Subjugate Stonemaul
+country_event = {
+	id = wwu_gorian_empire.7
+	title = wwu_gorian_empire.7.title
+	desc = wwu_gorian_empire.7.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.7.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+		OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = F57
+            }
+		}
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.7.option.b
+        
+        add_casus_belli = {
+            type = cb_vassalize_mission
+            target = F57
+            months = 300
+        }
+        
+        add_stability = 1
+        add_legitimacy = 30
+        
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+#Subjugate Gordunni
+country_event = {
+	id = wwu_gorian_empire.8
+	title = wwu_gorian_empire.8.title
+	desc = wwu_gorian_empire.8.desc
+	picture = BOULDERFIST_OGRE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = wwu_gorian_empire.8.option.a
+		
+		trigger = {
+            NOT = { is_vassal = yes }
+		}
+        
+		OGR = {
+            create_subject = {
+                subject_type = vassal
+                subject = A52
+            }
+		}
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+        name = wwu_gorian_empire.8.option.b
+        
+        add_casus_belli = {
+            type = cb_vassalize_mission
+            target = A52
+            months = 300
+        }
+        
+        add_stability = 1
+        add_legitimacy = 30
+	
+		ai_chance = {
+            factor = 0
+        }
+	}
+}
+
+# Restoration of Goria void
+country_event = {
+	id = wwu_gorian_empire.9
+	title = wwu_gorian_empire.9.title
+	desc = wwu_gorian_empire.9.desc
+	picture = ANCIENT_ONE_eventPicture
+
+    is_triggered_only = yes
+    
+	option = {
+		name =  wwu_gorian_empire.9.option.a
+        
+        change_religion = cthun
+        capital_scope = {
+            change_religion = cthun
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.9.option.b
+
+        change_religion = nzoth
+        capital_scope = {
+            change_religion = nzoth
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.9.option.c
+        
+        change_religion = yogg_saron
+        capital_scope = {
+            change_religion = yogg_saron
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.9.option.d
+
+        change_religion = yshaarj
+        capital_scope = {
+            change_religion = yshaarj
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+	option = {
+		name =  wwu_gorian_empire.9.option.e
+
+        change_religion = twilight_cult
+        capital_scope = {
+            change_religion = twilight_cult
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+	}
+}
+# Restoration of Goria void
+country_event = {
+	id = wwu_gorian_empire.10
+	title = wwu_gorian_empire.10.title
+	desc = wwu_gorian_empire.10.desc
+	picture = CRAZY_MONKEY_eventPicture
+
+    is_triggered_only = yes
+
+	option = {
+		name =  wwu_gorian_empire.10.option.a
+
+        change_religion = banana
+        capital_scope = {
+            change_religion = banana
+        }
+        
+		add_stability = 2
+        add_adm_power = 200
+        add_dip_power = 200
+        add_mil_power = 200
+		
+		3748 = {
+            change_trade_goods = resource_banana
+		}
+	}
+}
