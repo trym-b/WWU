@@ -3,10 +3,19 @@
 #------------------------
 # ROOT = Countr
 on_startup__class = {
-    reset_class_study = yes
-    set_variable = {
-        which = ruler_energy
-        value = 5.0
+    # Apply only once
+    if = {
+        limit = {
+            NOT = { has_country_flag = setup_class_system }
+        }
+        
+        set_country_flag = setup_class_system
+        
+        reset_class_study = yes
+        set_variable = {
+            which = ruler_energy
+            value = 5.0
+        }
     }
 }
 

@@ -23,15 +23,23 @@ on_yearly_pulse__zandalar = {
 }
 
 on_startup__zandalar = {
-    # Initial variables
+    # Apply only once
     if = {
         limit = {
-            tag = A78
+            NOT = { has_country_flag = setup_zandalar_variables }
         }
         
-        set_variable = {
-            which = zandalar_diplomatic_superiority
-            value = 0
+        set_country_flag = setup_zandalar_variables
+        
+        if = {
+            limit = {
+                tag = A78
+            }
+            
+            set_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 0
+            }
         }
     }
 }
