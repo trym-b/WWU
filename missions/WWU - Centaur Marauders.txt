@@ -1,0 +1,961 @@
+#----------------------------------------------
+# Centaur Marauders
+#----------------------------------------------
+H04_cen_mar_column_1 = {
+    slot = 1
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = H04
+        has_country_flag = not_sharing_centaur_mission_tree
+    }
+
+    H04_chosen_khan = {
+        icon = mission_titan_spirits
+        position = 1
+
+
+        trigger = {
+            MIL = 6
+            OR = {
+                ruler_has_personality = conqueror_personality
+                ruler_has_personality = inspiring_leader_personality
+                ruler_has_personality = bold_fighter_personality
+                ruler_has_personality = cruel_personality
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+
+            add_ruler_modifier = {
+                name = mission_chosen_khan
+                duration = -1
+            }
+        }
+    }
+
+    H04_speaker_of_spirits = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { H04_chosen_khan }
+
+        trigger = {
+            OR = {
+                has_ruler_flag = priest_personality
+                has_ruler_flag = shaman_personality
+                has_ruler_flag = druid_personality
+                has_ruler_flag = monk_personality
+            }
+        }
+
+        effect = {
+            add_prestige = 10
+
+            add_ruler_modifier = {
+                name = mission_spirit_speaker
+                duration = -1
+            }
+        }
+    }
+
+    H04_weaver_of_magic = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { H04_speaker_of_spirits }
+
+        trigger = {
+            is_spellcaster = yes
+        }
+
+        effect = {
+            add_mil_power = 75
+            add_adm_power = 75
+            add_dip_power = 75
+
+            add_ruler_personality = scholar_personality
+        }
+    }
+
+    H04_ritual_of_champions = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { H04_weaver_of_magic }
+
+        trigger = {
+            adm_power = 350
+            dip_power = 350
+            mil_power = 350
+            prestige = 90
+        }
+
+        effect = {
+            add_adm_power = -350
+            add_dip_power = -350
+            add_mil_power = -350
+
+            add_ruler_personality = immortal_personality
+            add_ruler_modifier = {
+                name = mission_immoral_champion
+                duration = -1
+            }
+        }
+    }
+
+    H04_show_of_might = {
+        icon = mission_titan_spirits
+        position = 6
+
+        trigger = {
+            power_projection = 75
+            prestige = 50
+        }
+
+        effect = {
+            add_casus_belli = {
+                target = B20
+                type = cb_vassalize_mission
+                duration = -1
+            }
+        }
+    }
+
+    H04_khans_of_galak = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { H04_show_of_might }
+
+        trigger = {
+            B20 = {
+                is_subject = yes
+                is_subject_of = ROOT
+                libery_desire = 10
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_khans_of_galak
+                duration = 7300
+            }
+        }
+    }
+
+    H04_union_of_khans = {
+        icon = mission_titan_spirits
+        position = 8
+
+        required_missions = { H04_khans_of_galak }
+
+        trigger = {
+            B20 = {
+                libery_desire = 0
+                has_opinion = {
+                    who = ROOT
+                    value = 175
+                }
+            }
+        }
+
+        effect = {
+            inherit = B20
+
+            add_dip_power = 100
+            add_prestige = 10
+            define_general = {
+                shock = 4
+                fire = 4
+                manuever = 6
+                siege = 2
+                name = "Skycaller Vrakthris"
+                trait = enforcer_personality
+            }
+        }
+    }
+}
+
+H04_cen_mar_column_2 = {
+    slot = 2
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = H04
+        has_country_flag = not_sharing_centaur_mission_tree
+    }
+
+    H04_trial_by_blood = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { H04_speaker_of_spirits }
+
+        trigger = {
+            num_of_times_used_pillage_capital = 5
+            num_of_war_reparation = 5
+            OR = {
+                power_projection = 50
+                prestige = 50
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_trial_by_blood
+                duration = 10950
+            }
+        }
+    }
+
+    H04_the_relentless_horde = {
+        icon = mission_titan_spirits
+        position = 4
+
+        trigger = {
+            army_size_percentage = 0.9
+            army_size = 20
+            cavalry_fraction = 0.25
+        }
+
+        effect = {
+            add_mil_power = 50
+            add_country_modifier = {
+                name = mission_relentless_horde
+                duration = 7300
+            }
+        }
+    }
+
+    H04_the_thundering_hooves = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { H04_the_relentless_horde }
+
+        trigger = {
+            has_global_modifier_value = {
+                which = cavalry_power
+                value = 0.35
+            }
+        }
+
+        effect = {
+            add_mil_power = 100
+            add_country_modifier = {
+                name = mission_thundering_hooves
+                duration = 3650
+            }
+        }
+    }
+
+    H04_the_horsemen_of_apocalypse = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { H04_the_thundering_hooves }
+
+        trigger = {
+            has_country_flag = primary_artifact_apocalypse
+            army_size = 40
+            cavalry_fraction = 0.5
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_apocalypse
+                duration = -1
+            }
+        }
+    }
+}
+
+H04_cen_mar_column_3 = {
+    slot = 3
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = H04
+        has_country_flag = not_sharing_centaur_mission_tree
+    }
+
+    H04_quillboar_agression = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { H04_organize_raiding_parties }
+
+        trigger = {
+            has_casus_belli_against = B69
+            is_rival = B69
+            has_spy_network_in = {
+                who = B69
+                value = 50
+            }
+        }
+
+        provinces_to_highlight = {
+            is_capital_of = B69
+        }
+
+        effect = {
+            declare_war_with_cb = {
+                who = B69
+                casus_belly = cb_crusade
+            }
+
+            add_country_modifier = {
+                name = mission_quillboar_war
+                duration = 1825
+            }
+        }
+    }
+
+    H04_dealing_with_razormane = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { H04_quillboar_agression }
+
+        trigger = {
+            war_with = B69
+            war_score_against = {
+                who = B69
+                value = 75
+            }
+            area_the_sludge_fen = {
+                type = all
+                controlled_by = ROOT
+            }
+            area_thunder_ridge = {
+                type = all
+                controlled_by = ROOT
+            }
+            area_southfury_river = {
+                type = all
+                controlled_by = ROOT
+            }
+        }
+
+        effect = {
+            add_prestige = 20
+            area_the_sludge_fen = {
+                add_core = ROOT
+                cede_province = ROOT
+            }
+            area_thunder_ridge = {
+                add_core = ROOT
+                cede_province = ROOT
+            }
+            area_southfury_river = {
+                add_core = ROOT
+                cede_province = ROOT
+            }
+        }
+    }
+
+    H04_control_of_durotar = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { H04_dealing_with_razormane }
+
+        trigger = {
+            region_durotar = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_durotar
+        }
+
+        effect = {
+            add_prestige = 20
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 100
+
+            add_country_modifier = {
+                name = mission_durotar_conquest
+                duration = -1
+            }
+        }
+    }
+
+    H04_invasion_of_mulgore = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { H04_southern_invasion }
+
+        trigger = {
+            OR = {
+                1445 = {
+                    owned_by = ROOT
+                }
+                1377 = {
+                    owned_by = ROOT
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 1445
+                province_id = 1377
+            }
+        }
+
+        effect = {
+            region_mulgore = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    H04_culling_of_mulgore = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { H04_invasion_of_mulgore }
+
+        trigger = {
+            region_mulgore = {
+                type = all
+                NOT = { culture = culture_tauren }
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_mulgore
+        }
+
+        effect = {
+            add_mil_power = 200
+            add_prestige = 10
+            add_splendor = 800
+        }
+    }
+
+    H04_rule_mulgore = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { H04_culling_of_mulgore }
+
+        trigger = {
+            region_mulgore = {
+                type = all
+                unrest = 0
+                nationalism = 0
+                culture = culture_centaur
+                religion = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_mulgore
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_rule_mulgore
+                duration = -1
+            }
+        }
+    }
+}
+
+H04_cen_mar_column_4 = {
+    slot = 4
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = H04
+        has_country_flag = not_sharing_centaur_mission_tree
+    }
+
+    H04_organize_raiding_parties = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            army_size_percentage = 0.9
+            estate_influence = {
+                estate = estate_tribals
+                influence = 50
+            }
+            estate_loyalty = {
+                estate = estate_tribals
+                loyalty = 60
+                higher_than_influence = yes
+            }
+        }
+
+        effect = {
+            add_army_tradition = 25
+            add_mil_power = 100
+        }
+    }
+
+    H04_war_against_the_tauren = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { H04_organize_raiding_parties }
+
+        trigger = {
+            any_country = {
+                defensive_war_with = ROOT
+                primary_culture = culture_tauren
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                region = region_north_barrens
+                region = region_south_barrens
+                region = region_stonetalon_mountains
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_war_on_tauren
+                duration = 7300
+            }
+
+            region_north_barrens = {
+                add_permanent_claim = ROOT
+            }
+
+            custom_tooltip = CENTAUR_CB_TT
+            hidden_effect = {
+                set_country_flag = centaur_tauren_cb_unlocked
+            }
+        }
+    }
+
+    H04_cull_northren_barrens = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { H04_war_against_the_tauren }
+
+        trigger = {
+            region_north_barrens = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_north_barrens
+        }
+
+        effect = {
+            add_prestige = 20
+            add_adm_power = 50
+            add_mil_power = 50
+            
+            1421 = {
+                add_base_manpower = 2
+                add_base_production = 2
+                add_base_tax = 2
+            }
+        }
+    }
+
+    H04_southern_invasion = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { H04_cull_northren_barrens }
+
+        trigger = {
+            region_south_barrens = {
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_south_barrens
+        }
+
+        effect = {
+            region_south_barrens = {
+                add_permanent_claim = ROOT
+            }
+
+            add_horde_unity = 10
+            add_years_of_income = 0.5
+        }
+    }
+
+    H04_bull_blood_of_barrens = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { H04_southern_invasion }
+
+        trigger = {
+            region_south_barrens = {
+                type = all
+                NOT = { culture = culture_tauren }
+            }
+            region_north_barrens = {
+                type = all
+                NOT = { culture = culture_tauren }
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_south_barrens
+        }
+
+        effect = {
+            add_prestige = 25
+
+            region_south_barrens = {
+                add_province_modifier = {
+                    name = mission_blood_of_barrens
+                    duration = -1
+                }
+            }
+            region_north_barrens = {
+                add_province_modifier = {
+                    name = mission_blood_of_barrens
+                    duration = -1
+                }
+            }
+        }
+    }
+
+    H04_fortify_the_barrens_borders = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { H04_bull_blood_of_barrens }
+
+        trigger = {
+            1459 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            1465 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            1444 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            1369 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            3475 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            1439 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+            2282 = {
+                has_fort_building_trigger = yes
+                base_manpower = 3
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 1459
+                province_id = 1465
+                province_id = 1444
+                province_id = 1369
+                province_id = 3475
+                province_id = 1439
+                province_id = 2282
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_centaur_forts
+                duration = -1
+            }
+        }
+    }
+
+    H04_heirs_of_centaur_race = {
+        icon = mission_titan_spirits
+        position = 8
+
+        required_missions = { H04_fortify_stonetalon H04_fortify_the_barrens_borders H04_rule_mulgore }
+
+        trigger = {
+            prestige = 90
+            horde_unity = 100
+        }
+
+        effect = {
+            country_event = { id = wwu_centaur_marauders.1 }
+        }
+    }
+}
+
+H04_cen_mar_column_5 = {
+    slot = 5
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = H04
+        has_country_flag = not_sharing_centaur_mission_tree
+    }
+
+    H04_subjegate_krenka = {
+        icon = mission_titan_spirits
+        position = 2
+
+        required_missions = { H04_organize_raiding_parties }
+
+        trigger = {
+            KRK = {
+                is_subject_of = ROOT
+                liberty_desire = 20
+            }
+        }
+
+        provinces_to_highlight = {
+            is_capital_of = KRK
+        }
+
+        effect = {
+            KRK = {
+                add_liberty_desire = -40
+                add_stability = 1
+            }
+
+            add_prestige = 10
+            add_horde_unity = 10
+        }
+    }       
+    
+    
+    H04_cull_witchwing = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { H04_subjegate_krenka }
+
+        trigger = {
+            NOT = { exists = F92 }
+            1409 = {
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 1409
+        }
+
+        effect = {
+            1409 = {
+                add_core = ROOT
+                add_base_manpower = -2
+                add_base_tax = -2
+                add_base_production = -2
+            }
+
+            1421 = {
+                add_base_manpower = 2
+                add_base_production = 2
+                add_base_tax = 2
+            }
+
+            add_country_modifier = {
+                name = mission_cull_witchwing
+                duration = 3650
+            }
+        }
+    }
+
+    H04_into_stonetalon = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { H04_cull_witchwing }
+
+        trigger = {
+            area_malaka_jin = {
+                country_or_non_sovereign_subject_holds = ROOT
+                army_size = 25
+            }
+        }
+
+        provinces_to_highlight = {
+            area = area_malaka_jin
+        }
+
+        effect = {
+            region_stonetalon_mountains = {
+                add_permanent_claim = ROOT
+            }
+
+            if = {
+                limit = {
+                    exists = SET
+                }
+
+                add_casus_belli = {
+                    target = SET
+                    type = cb_vassalize_mission
+                    duration = -1
+                }
+            }
+        }
+    }
+
+    H04_subjegation_of_stonetalon = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { H04_into_stonetalon }
+
+        trigger = {
+            OR = {
+                NOT = { exists = SET }
+                SET = {
+                    is_subject_of = ROOT
+                }
+            }
+            area_webwinder_path = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_webwinder_path
+                is_capital_of = SET
+            }
+        }
+
+        effect = {
+            area_windshear_crag = {
+                add_core = ROOT
+            }
+            area_mirkfallon_lake = {
+                add_core = ROOT
+            }
+
+            add_manpower = 10
+        }
+    }
+
+    H04_rule_stonetalon = {
+        icon = mission_titan_spirits
+        position = 6
+
+        required_missions = { H04_subjegation_of_stonetalon }
+
+        trigger = {
+            region_stonetalon_mountains = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_stonetalon_mountains
+        }
+
+        effect = {
+            add_prestige = 25
+
+            add_country_modifier = {
+                name = mission_rule_stonetalon
+                duration = 10950
+            }
+
+            add_country_modifier = {
+                name = master_of_stonetalon
+                duration = -1
+            }
+        }
+    }
+
+    H04_fortify_stonetalon = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { H04_rule_stonetalon }
+
+        trigger = {
+            2277 = {
+                has_fort_building_trigger = yes
+                base_manpower = 5
+            }
+            3635 = {
+                has_fort_building_trigger = yes
+                base_manpower = 5
+            }
+            3644 = {
+                has_fort_building_trigger = yes
+                base_manpower = 5
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2277
+                province_id = 3635
+                province_id = 3644
+            }
+        }
+
+        effect = {
+            2277 = {
+                add_province_modifier = {
+                    name = fortification_stonetalon
+                    duration = -1
+                }
+            }
+            3635 = {
+                add_province_modifier = {
+                    name = fortification_stonetalon
+                    duration = -1
+                }
+            }
+            3644 = {
+                add_province_modifier = {
+                    name = fortification_stonetalon
+                    duration = -1
+                }
+            }
+
+            region_stonetalon_mountains = {
+                add_province_modifier = {
+                    name = mission_stonetalon_fortifications
+                    duration = -1
+                }
+            }
+        }
+    }
+}
