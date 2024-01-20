@@ -99,7 +99,8 @@ H04_cen_mar_column_1 = {
             add_dip_power = -350
             add_mil_power = -350
 
-            add_ruler_personality = immortal_personality
+            custom_tooltip = IMMORTAL_RULER_TT
+            set_ruler_flag = is_immortal
             add_ruler_modifier = {
                 name = mission_immoral_champion
                 duration = -1
@@ -114,12 +115,14 @@ H04_cen_mar_column_1 = {
         trigger = {
             power_projection = 75
             prestige = 50
+            NOT = { is_subject = yes }
         }
 
         effect = {
             add_casus_belli = {
                 target = B20
                 type = cb_vassalize_mission
+                months = 120
             }
         }
     }
@@ -219,7 +222,7 @@ H04_cen_mar_column_2 = {
 
         trigger = {
             army_size_percentage = 0.9
-            army_size = 20
+            army_size = 40
             cavalry_fraction = 0.25
         }
 
@@ -241,7 +244,7 @@ H04_cen_mar_column_2 = {
         trigger = {
             has_global_modifier_value = {
                 which = cavalry_power
-                value = 0.35
+                value = 0.45
             }
         }
 
@@ -308,12 +311,30 @@ H04_cen_mar_column_3 = {
         effect = {
             declare_war_with_cb = {
                 who = B69
-                casus_belli = cb_crusade
+                casus_belli = cb_merciless_war
+            }
+
+            area_southfury_river = {
+                add_claim = ROOT
+            }
+
+            area_southfury_river = {
+                add_claim = ROOT
+            }
+
+            area_thunder_ridge = {
+                add_claim = ROOT
             }
 
             add_country_modifier = {
                 name = mission_quillboar_war
                 duration = 1825
+            }
+
+            hidden_effect = {
+                B69 = {
+                    country_event = { id = wwu_centaur_marauders.2 days = 3 }
+                }
             }
         }
     }
@@ -334,13 +355,28 @@ H04_cen_mar_column_3 = {
                 type = all
                 controlled_by = ROOT
             }
-            area_thunder_ridge = {
-                type = all
-                controlled_by = ROOT
-            }
             area_southfury_river = {
                 type = all
                 controlled_by = ROOT
+            }
+            2288 = {
+                controlled_by = ROOT
+            }
+            3469 = {
+                controlled_by = ROOT
+            }
+            1379 = {
+                controlled_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_the_sludge_fen
+                area = area_southfury_river
+                province_id = 2288
+                province_id = 3469
+                province_id = 1379
             }
         }
 
@@ -350,11 +386,19 @@ H04_cen_mar_column_3 = {
                 add_core = ROOT
                 cede_province = ROOT
             }
-            area_thunder_ridge = {
+            area_southfury_river = {
                 add_core = ROOT
                 cede_province = ROOT
             }
-            area_southfury_river = {
+            2288 = {
+                add_core = ROOT
+                cede_province = ROOT
+            }
+            3469 = {
+                add_core = ROOT
+                cede_province = ROOT
+            }
+            1379 = {
                 add_core = ROOT
                 cede_province = ROOT
             }
@@ -473,6 +517,30 @@ H04_cen_mar_column_3 = {
             }
         }
     }
+
+    H04_great_tauren_hunt = {
+        icon = mission_titan_spirits
+        position = 9
+
+        required_missions = { H04_heirs_of_centaur_race }
+
+        trigger = {
+            kalimdor_superregion = {
+                type = all
+                NOT = { culture = culture_tauren }
+            }
+        }
+
+        effect = {
+            add_prestige = 50
+            add_adm_power = 200
+
+            add_country_modifier = {
+                name = mission_great_tauren_hunt
+                duration = -1
+            }
+        }
+    }
 }
 
 H04_cen_mar_column_4 = {
@@ -506,6 +574,16 @@ H04_cen_mar_column_4 = {
         effect = {
             add_army_tradition = 25
             add_mil_power = 100
+
+            add_country_modifier = {
+                name = mission_raiding_parties
+                duration = -1
+            }
+
+            add_country_modifier = {
+                name = allow_siberian_frontier_20Y
+                duration = 7300
+            }
         }
     }
 
@@ -712,6 +790,193 @@ H04_cen_mar_column_4 = {
 
         effect = {
             country_event = { id = wwu_centaur_marauders.1 }
+        }
+    }
+
+    H04_reclaim_desolace = {
+        icon = mission_titan_spirits
+        position = 9
+
+        required_missions = { H04_heirs_of_centaur_race }
+
+        trigger = {
+            region_desolace = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_inner_maraudon = {
+                type = all
+                owned_by = ROOT
+            }
+            area_outer_maraudon = {
+                type = all
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_desolace
+        }
+
+        effect = {
+            add_adm_power = 100
+            add_dip_power = 100
+            add_horde_unity = 10
+
+            country_event = { id = wwu_centaur_marauders.3 days = 30 }
+        }
+    }
+
+    H04_unite_the_khanates = {
+        icon = mission_titan_spirits
+        position = 10
+
+        required_missions = { H04_reclaim_desolace }
+
+        trigger = {
+            KRK = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = KRK }
+                }
+            }
+            SET = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = SET }
+                }
+            }
+            B20 = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = B20 }
+                }
+            }
+            B24 = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = B24 }
+                }
+            }
+            B22 = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = B22 }
+                }
+            }
+            B21 = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = B21 }
+                }
+            }
+            B23 = {
+                OR = {
+                    is_subject_of = ROOT
+                    NOT = { exists = B23 }
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = B23
+                is_capital_of = B21
+                is_capital_of = B22
+                is_capital_of = B24
+                is_capital_of = B20
+                is_capital_of = SET
+                is_capital_of = KRK
+            }
+        }
+
+        effect = {
+            inherit = B23
+            inherit = B21
+            inherit = B22
+            inherit = B24
+            inherit = B20
+            inherit = SET
+            inherit = KRK
+
+            region_thousand_needles = {
+                add_permanent_claim = ROOT
+            }
+
+            region_feralas = {
+                add_permanent_claim = ROOT
+            }
+
+            country_event = { id = wwu_centaur_marauders.4 days = 3 }
+        }
+    }
+
+    H04_mysteries_of_maruadon = {
+        icon = mission_titan_spirits
+        position = 11
+
+        required_missions = { H04_unite_the_khanates }
+
+        trigger = {
+            3667 = {
+                development = 45
+                OR = {
+                    has_building = wow_temple_1
+                    has_building = wow_temple_2
+                    has_building = wow_temple_3
+                }
+                has_great_project = {
+                    type = gp_maraudon
+                    tier = 3
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 3667
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_mysteries_maraudon
+                duration = -1
+            }
+
+            discover_deepholm = yes
+
+            country_event = { id = wwu_centaur_marauders.5 }
+        }
+    }
+
+    H04_awakening_the_earth_mother = {
+        icon = mission_titan_spirits
+        position = 12
+
+        required_missions = { H04_mysteries_of_maruadon }
+
+        trigger = {
+            P27 = {
+                reverse_has_opinion = {
+                who = H04
+                value = 180
+            }
+        }
+
+            army_size_percentage = 0.9
+            prestige = 100
+            stability = 3
+        }
+
+        provinces_to_highlight = {
+            is_capital_of = P27
+        }
+
+        effect = {
+
+            custom_tooltip = AWAKENING_EARTH_MOTHER_MISSIONS_TT
+            P27 = {
+                country_event = { id = wwu_centaur_marauders.7 days = 3 }
+            }
         }
     }
 }
@@ -954,6 +1219,90 @@ H04_cen_mar_column_5 = {
                     duration = -1
                 }
             }
+        }
+    }
+
+    H04_domination_of_central_kalimdor = {
+        icon = mission_titan_spirits
+        position = 11
+
+        required_missions = { H04_unite_the_khanates }
+
+        trigger = {
+            region_thousand_needles = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_feralas = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_desolace = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_mulgore = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_north_barrens = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_south_barrens = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_stonetalon_mountains = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            region_durotar = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                region = region_durotar
+                region = region_north_barrens
+                region = region_south_barrens
+                region = region_stonetalon_mountains
+                region = region_mulgore
+                region = region_feralas
+                region = region_desolace
+                region = region_thousand_needles
+            }
+        }
+
+        effect = {
+            add_adm_power = 250
+            add_dip_power = 250
+            add_mil_power = 250
+
+            kalimdor_superregion = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    H04_scourge_on_horseback = {
+        icon = mission_titan_spirits
+        position = 12
+
+        required_missions = { H04_domination_of_central_kalimdor }
+
+        trigger = {
+            army_size = 150
+            army_size_percentage = 0.9
+
+            is_great_power = yes
+
+        }
+
+        effect = {
+            country_event = { id = wwu_centaur_marauders.8 days = 3 }
         }
     }
 }
