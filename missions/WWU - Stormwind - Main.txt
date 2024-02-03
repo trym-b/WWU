@@ -177,8 +177,102 @@ STW_stormwind_column_1 = {
 
 		effect = {
 			region_burning_steppes = {
-				add_permanent_claim = ROOT
+				add_claim = ROOT
 			}
+		}
+	}
+
+	STW_stormwind_m_invasion_of_blackrock = {
+		icon = mission_titan_spirits
+		position = 7
+
+		required_missions = { STW_stormwidn_m_secure_eastern_steppes }
+
+		trigger = {
+			area_blackrock_exterior = {
+				controlled_by = ROOT
+			}
+			area_blackrock_mountain = {
+				controlled_by = ROOT
+			}
+			area_blackrock_valley = {
+				controlled_by = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_blackrock_exterior
+				area = area_blackrock_mountain
+				area = area_blackrock_valley
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					NOT = { exists = A30 }
+				}
+				country_event = { id = wwu_mission_stw_main.9 days = 60}
+			}
+			else = {
+				country_event = { id = wwu_mission_stw_main.10 }
+			}
+		}
+	}
+
+	STW_stormwind_m_dousing_molten_core = {
+		icon = mission_titan_spirits
+		position = 8
+
+		required_missions = { STW_stormwind_m_invasion_of_blackrock }
+
+		trigger = {
+			P26 = {
+				war_with = ROOT
+			}
+			3155 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 3155
+		}
+
+		effect = {
+			2576 = {
+				add_core = ROOT
+				cede_province = ROOT
+			}
+
+			white_peace = P26
+		}
+	}
+
+	STW_stormwind_m_fall_of_the_firelord = {
+		icon = mission_titan_spirits
+		position = 9
+
+		required_missions = { STW_stormwind_m_dousing_molten_core }
+
+		trigger = {
+            offensive_war_with = P26
+            war_score_against = {
+                who = P26
+                value = 80
+            }
+            2601 = {
+                controlled_by = ROOT
+            }
+        }
+
+		provinces_to_highlight = {
+			province_id = 2601
+		}
+
+		effect = {
+			country_event = { id = wwu_mission_stw_main.11 }
 		}
 	}
 }
