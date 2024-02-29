@@ -870,22 +870,29 @@ A97_ahn_qiraj_column_4 = {
 		}
 	}
 
-    A97_lethan_brood_corruption = {
+    A97_lethon_brood_corruption = {
         icon = mission_red_essence
         position = 5
 
         required_missions = { A97_feralas_incursion }
 
         trigger = {
-            stability = 1
-            army_size_percentage = 0.75
+            OR = {
+                NOT = { exists = GD2 }
+                GD2 = {
+                    exists = yes
+                    war_with = A97
+                    has_spy_network_from = {
+                        who = A97
+                        value = 50
+                    }
 
-            has_spy_network_in = { 
-                who = GD2
-                value = 50
-            }
-            GD2 = {
-                war_with = A97
+                    GD2 = {
+                        capital_scope = {
+                            controlled_by = A97
+                        }
+                    }
+                }
             }
         }
 
@@ -898,7 +905,7 @@ A97_ahn_qiraj_column_4 = {
         icon = mission_cannibalize
         position = 6
 
-        required_missions = { A97_lethan_brood_corruption A97_inflirtrate_dire_maul }
+        required_missions = { A97_lethon_brood_corruption A97_inflirtrate_dire_maul }
 
         trigger = {
             region_feralas = {
