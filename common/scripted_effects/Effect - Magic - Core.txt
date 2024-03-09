@@ -13,6 +13,28 @@ on_startup__magic = {
         
         reset_magical_study = yes
     }
+    
+    # Add Spellcaster stuff for those with the Spellcaster personality (Custom Nation only)
+    if = {
+        limit = {
+            ruler_has_personality = spellcaster_personality
+            NOT = { has_country_flag = set_spellcaster_status }
+        }
+        set_country_flag = set_spellcaster_status
+        add_ruler_spellcasting = yes
+        set_variable = {
+            which = ruler_magic_aptitude
+            value = 1
+        }
+        set_variable = {
+            which = ruler_magic_finesse
+            value = 1
+        }
+        set_variable = {
+            which = ruler_magic_concentration
+            value = 1
+        }
+    }
 }
 
 # ROOT = Countr
