@@ -25,11 +25,12 @@ dark_portal_outland = {
         }
         FROM = {
 			owns_or_vassal_of = 1586
-        
+
             # Fel Orcs
             if = {
                 limit = {
                     NOT = { is_year = 580 }
+                    ai = yes
                 }
                 
                 culture_group = culture_group_orc
@@ -40,12 +41,17 @@ dark_portal_outland = {
                 limit = {
                     is_year = 580
                     NOT = { is_year = 600 }
+                    ai = yes
                 }
             
                 culture_group = culture_group_orc
             }
             # OR: Any Draenor/Outland culture after 600
-            else = {
+            else_if = {
+                limit = {
+                    is_year = 600
+                    ai = yes
+                }
                 OR = {
                     culture_group = culture_group_orc
                     culture_group = culture_group_ogre
@@ -58,6 +64,9 @@ dark_portal_outland = {
                     culture_group = culture_group_saberon
                     culture_group = culture_group_rock_flayer
                 }
+            }
+            else = {
+                ai = no # Humans should always be able to build it
             }
         }
 	}
@@ -237,6 +246,7 @@ dark_portal_draenor = {
             if = {
                 limit = {
                     NOT = { is_year = 580 }
+                    ai = yes
                 }
                 
                 culture_group = culture_group_orc
@@ -247,12 +257,18 @@ dark_portal_draenor = {
                 limit = {
                     is_year = 580
                     NOT = { is_year = 600 }
+                    ai = yes
                 }
             
                 culture_group = culture_group_orc
             }
             # OR: Any Draenor/Outland culture after 600
-            else = {
+            else_if = { 
+                limit = {
+                    is_year = 600
+                    ai = yes
+                }
+                
                 OR = {
                     culture_group = culture_group_orc
                     culture_group = culture_group_ogre
@@ -265,6 +281,9 @@ dark_portal_draenor = {
                     culture_group = culture_group_saberon
                     culture_group = culture_group_rock_flayer
                 }
+            }
+            else = {
+                ai = no # Humans should always be able to build it
             }
         }
 	}
