@@ -1209,3 +1209,150 @@ country_event = {
     }
 }
 
+# Loa blessing on new ruler election
+country_event = {
+	id = wwu_zandalar.50
+	title = wwu_zandalar.50.title
+	desc = wwu_zandalar.50.desc
+	picture = ZANDALAR_1_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Blessing to live up to 250 years
+	option = {
+		name = wwu_zandalar.50.op1
+		
+        custom_tooltip = powerful_zandalar_loa_blessing_tool
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+			set_ruler_flag = powerful_zandalar_loa_blessing
+        }
+		
+		add_years_of_income = -3 
+
+		add_adm_power = -100
+		add_dip_power = -100
+		add_mil_power = -100
+
+		add_ruler_modifier = {
+		name = powerful_zandalar_loa_blessing
+		duration = -1
+	}
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Blessing to live up to 200 years
+	option = {
+		name = wwu_zandalar.50.op2
+		
+        custom_tooltip = great_zandalar_loa_blessing_tool
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+			set_ruler_flag = great_zandalar_loa_blessing
+        }
+		
+		add_years_of_income = -2 
+
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+
+		add_ruler_modifier = {
+		name = great_zandalar_loa_blessing
+		duration = -1
+	}
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Blessing to live up to 150 years
+	option = {
+		name = wwu_zandalar.50.op3
+		
+        custom_tooltip = zandalar_loa_blessing_tool
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+			set_ruler_flag = zandalar_loa_blessing
+        }
+		
+		add_years_of_income = -1 
+
+		add_adm_power = -25
+		add_dip_power = -25
+		add_mil_power = -25
+
+		add_ruler_modifier = {
+		name = zandalar_loa_blessing
+		duration = -1
+	}
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # No blessing
+	option = {
+		name = wwu_zandalar.50.op4
+
+		add_prestige = -10
+		add_legitimacy = -10
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+}
+
+# Death after got blessing
+country_event = {
+	id = wwu_zandalar.51
+	title = wwu_zandalar.51.title
+	desc = wwu_zandalar.51.desc
+	picture = ZANDALAR_1_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Death after got blessing
+	option = {
+		name = wwu_zandalar.51.op1
+		
+		kill_ruler = yes
+		
+        if = {
+            limit = {
+                has_ruler_flag = powerful_zandalar_loa_blessing
+            }
+            
+		    clr_ruler_flag = powerful_zandalar_loa_blessing
+		remove_country_modifier = powerful_zandalar_loa_blessing
+		}
+        if = {
+            limit = {
+                has_ruler_flag = great_zandalar_loa_blessing
+            }
+            
+		    clr_ruler_flag = great_zandalar_loa_blessing
+		remove_country_modifier = great_zandalar_loa_blessing
+		}
+        if = {
+            limit = {
+                has_ruler_flag = zandalar_loa_blessing
+            }
+            
+		    clr_ruler_flag = zandalar_loa_blessing
+		remove_country_modifier = zandalar_loa_blessing
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+}
+
