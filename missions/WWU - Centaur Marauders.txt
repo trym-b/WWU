@@ -433,6 +433,19 @@ H04_cen_mar_column_3 = {
                 name = mission_durotar_conquest
                 duration = -1
             }
+
+            area_felfire_hill = {
+                add_claim = ROOT
+            }
+            area_forlorn_ridge = {
+                add_claim = ROOT
+            }
+            area_southern_azshara_forests = {
+                add_claim = ROOT
+            }
+            area_the_ruined_reaches = {
+                add_claim = ROOT
+            }
         }
     }
 
@@ -476,6 +489,7 @@ H04_cen_mar_column_3 = {
         trigger = {
             region_mulgore = {
                 type = all
+                religion = ROOT
                 NOT = { culture = culture_tauren }
             }
         }
@@ -500,8 +514,6 @@ H04_cen_mar_column_3 = {
         trigger = {
             region_mulgore = {
                 type = all
-                unrest = 0
-                nationalism = 0
                 culture = culture_centaur
                 religion = ROOT
             }
@@ -533,7 +545,7 @@ H04_cen_mar_column_3 = {
         }
 
         effect = {
-            add_prestige = 50
+            add_prestige_or_monarch_power = 50
             add_adm_power = 200
 
             add_country_modifier = {
@@ -704,7 +716,7 @@ H04_cen_mar_column_4 = {
         }
 
         effect = {
-            add_prestige = 25
+            add_prestige_or_monarch_power = 25
 
             region_south_barrens = {
                 add_province_modifier = {
@@ -958,7 +970,7 @@ H04_cen_mar_column_4 = {
         trigger = {
             P27 = {
                 reverse_has_opinion = {
-                who = H04
+                who = ROOT
                 value = 180
             }
         }
@@ -1002,7 +1014,11 @@ H04_cen_mar_column_5 = {
         trigger = {
             KRK = {
                 is_subject_of = ROOT
-                liberty_desire = 20
+                has_opinion = {
+                    who = ROOT
+                    value = 180
+                }
+                NOT = { liberty_desire = 50 }
             }
         }
 
@@ -1017,7 +1033,8 @@ H04_cen_mar_column_5 = {
             }
 
             add_prestige = 10
-            add_horde_unity = 10
+            add_dip_power = 50
+            add_horde_unity = 15
         }
     }       
     
@@ -1162,6 +1179,13 @@ H04_cen_mar_column_5 = {
             add_country_modifier = {
                 name = master_of_stonetalon
                 duration = -1
+            }
+
+            area_stardust = {
+                add_claim = ROOT
+            }
+            area_aessina = {
+                add_claim = ROOT
             }
         }
     }

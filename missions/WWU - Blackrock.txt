@@ -1,78 +1,44 @@
 #--------------------------------------
 # Blackrock
 #--------------------------------------
-A41_blackrock_column_5 = {
-	slot = 5
-	generic = no
-	ai = yes
+A41_blackrock_column_1 = {
+    slot = 1
+    generic = yes
+    ai = yes
     has_country_shield = yes
-    
-	potential = {
-		tag = A41
+
+    potential = {
+        tag = A41
         NOT = { is_in_mission_tab__rise_of_the_horde = yes }
-	}
-	
-    A41_blackrock_secure_the_foundry = {
-		icon = mission_blacksmithing
-        position = 1
-		required_missions = { }
-        
-        completed_by = 592.1.1
-        
-		trigger = {
-			area_blackrock_foundry = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-            area_gronn_canyon = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-            stability = 1
-		}
-        provinces_to_highlight = {
-            OR = {
-                area = area_blackrock_foundry
-                area = area_gronn_canyon
-            }
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-		effect = {
-			add_country_modifier = {
-                name = mission_blackrock_munitions
-                duration = -1
-            }
-		}
-	}
-    
-    A41_blackrock_expand_foundry_output = {
-		icon = mission_axe_and_sword
-        position = 2
-		required_missions = { A41_blackrock_secure_the_foundry }
-        
-        completed_by = 592.1.1
-        
-		trigger = {
-			3836 = {
-                base_production = 20
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-		}
-        provinces_to_highlight = {
-            province_id = 3836
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-		effect = {
-            add_country_modifier = {
-                name = mission_efficient_foundry
-                duration = -1
-            }
-		}
-	}
-    
+    }
+}
+
+A41_blackrock_column_2 = {
+    slot = 2
+    generic = yes
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = A41
+        NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+    }
+}
+
+A41_blackrock_column_3 = {
+    slot = 3
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = A41
+        NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+    }
+
     A41_blackrock_claim_mantle_of_warchief = {
 		icon = mission_icon_horde
-        position = 3
+        position = 1
 		required_missions = { }
         
         completed_by = 592.1.1
@@ -92,4 +58,204 @@ A41_blackrock_column_5 = {
             country_event = { id = rise_of_the_horde.7 }
 		}
 	}
+}
+
+A41_blackrock_column_4 = {
+    slot = 4
+    generic = no
+    ai = yes
+    has_country_shield = yes
+
+    potential = {
+        tag = A41
+        NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+    }
+}
+
+A41_blackrock_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+    has_country_shield = yes
+    
+	potential = {
+		tag = A41
+        NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+	}
+	
+    A41_blackrock_set_foundry_fires = {
+		icon = mission_blacksmithing
+        position = 1
+        
+		trigger = {
+			3836 = {
+                base_production = 12
+                development = 30
+                OR = {
+                    has_building = wow_mine_1
+                    has_building = wow_mine_2
+                    has_building = wow_mine_3
+                }
+                OR = {
+                    has_building = wow_arsenal_1
+                    has_building = wow_arsenal_2
+                    has_building = wow_arsenal_3
+                }
+            }
+		}
+        
+        provinces_to_highlight = {
+            province_id = 3836
+        }
+
+
+		effect = {
+			add_country_modifier = {
+                name = mission_blackrock_flames
+                duration = 7300
+            }
+		}
+	}
+    
+    A41_blackrock_flames_of_the_foundry = {
+		icon = mission_axe_and_sword
+        position = 2
+		required_missions = { A41_blackrock_set_foundry_fires }
+        
+		trigger = {
+            has_great_project = {
+                type = gp_blackrock_foundry
+                tier = 2
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 3836
+        }
+
+        effect = {
+            add_years_of_owned_provinces_production_income = {
+                years = 10
+            }
+
+            add_mercantilism = 5
+        }
+	}
+
+    A41_expand_the_blackrock_forges = {
+        icon = mission_titan_spirits
+        position = 3
+        required_missions = { A41_blackrock_flames_of_the_foundry }
+
+        trigger = {
+            area_blackrock_foundry = {
+                type = all
+                OR = {
+                    has_building = wow_mine_1
+                    has_building = wow_mine_2
+                    has_building = wow_mine_3
+                }
+                OR = {
+                    has_building = wow_arsenal_1
+                    has_building = wow_arsenal_2
+                    has_building = wow_arsenal_3
+                }
+
+                3836 = {
+                    has_fort_building_trigger = yes
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            area = area_blackrock_foundry
+        }
+
+        effect = {
+            area_blackrock_foundry = {
+                add_base_production = 3
+                add_province_modifier = {
+                    name = mission_foundry_fortified
+                    duration = -1
+                }
+            }
+
+            add_mil_power = 50
+        }
+    }
+
+    A41_perfect_the_foundry = {
+        icon = mission_titan_spirits
+        position = 4
+        required_missions = { A41_expand_the_blackrock_forges }
+
+        trigger = {
+            3836 = {
+                OR = {
+                    has_building = wow_market_1
+                    has_building = wow_market_2
+                    has_building = wow_market_3
+                }
+                OR = {
+                    has_building = wow_tavern_1
+                    has_building = wow_tavern_2
+                    has_building = wow_tavern_3
+                }
+                OR = {
+                    has_building = wow_town_hall_1
+                    has_building = wow_town_hall_2
+                    has_building = wow_town_hall_3
+                }
+                development = 45
+            }
+
+            has_great_project = {
+                type = gp_blackrock_foundry
+                tier = 3
+            }
+
+            employed_advisor = {
+                type = natural_scientist
+            }
+        }
+
+        effect = {
+            3836 = {
+                add_province_modifier = {
+                    name = mission_blackrock_foundry_power
+                    duration = -1
+                }
+
+                change_trade_goods = resource_plate_armor
+            }
+
+            area_blackrock_foundry = {
+                add_province_modifier = {
+                    name = mission_blackrock_influence
+                }
+            }
+        }
+    }
+
+    A41_unleash_flames_of_industry = {
+        icon = mission_titan_spirits
+        position = 5
+        required_missions = { A41_perfect_the_foundry }
+
+        trigger = {
+            monthly_income = 35.0
+            production_income_percentage = 0.5
+            is_bankcrupt = no
+            number_of_loans = 0
+
+            production_efficiency = 0.35
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_flames_of_industry
+                duration = -1
+            }
+        }
+    }
 }
