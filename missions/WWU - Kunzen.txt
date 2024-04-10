@@ -1,10 +1,321 @@
 #--------------------------------------
 # Kunzen
 #--------------------------------------
+KUN_kunzen_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+
+	potential = {
+		tag = KUN
+	}
+
+	KUN_sultfur_alliance = {
+		icon = mission_titan_spirits
+		position = 1
+
+		required_missions = { }
+
+		trigger = {
+			OR = {
+				alliance_with = HZS
+				is_rival = HZS
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = HZS
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_sultfur_alliance
+				duration = 7300
+			}
+
+			area_kunza_kunza = {
+				add_claim = ROOT
+			}
+		}
+	}
+
+	KUN_hozen_subject = {
+		icon = mission_titan_spirits
+		position = 2
+
+		required_missions = { KUN_sultfur_alliance }
+
+		trigger = {
+			has_opinion = {
+				who = HZS
+				value = 200
+			}
+			reverse_has_opinion = {
+				who = KUN
+				value = 180
+			}
+		}
+
+		effect = {
+			create_march = HZS
+			add_trust = {
+				who = HZS
+				value = 25
+				mutual = yes
+			}
+		}
+	}
+
+	KUN_lapidis_domination = {
+		icon = mission_titan_spirits
+		position = 6
+
+		trigger = {
+			region_lapidis = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_lapidis
+		}
+
+		effect = {
+			add_years_of_income = 3.0
+			add_dip_power = 100
+		}
+	}
+
+	KUN_goblin_ties = {
+		icon = mission_titan_spirits
+		position = 7
+
+		trigger = {
+			OR = {
+				is_rival = A83
+				any_country = {
+					primary_culture = culture_goblin
+					alliance_with = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_goblin_ties
+				duration = -1
+			}
+
+			area_booty_bay = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	KUN_hozen_bay = {
+		icon = mission_titan_spirits
+		position = 8
+
+		required_missions = { KUN_goblin_ties }
+
+		trigger = {
+			area_booty_bay = {
+				type = all
+				owned_by = ROOT
+			}
+			area_jaguero_isle = {
+				type = all
+				owned_by = ROOT
+			}
+			A83 = {
+				OR = {
+					NOT = { exists = A83 }
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_booty_bay
+				area = area_jaguero_isle
+			}
+		}
+
+		effect = {
+			region_stranglethorn_vale = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	KUN_jungle_for_hozen = {
+		icon = mission_titan_spirits
+		position = 9
+
+		required_missions = { KUN_hozen_bay }
+
+		trigger = {
+			region_stranglethorn_vale = {
+				type = all
+				owned_by = ROOT
+			}
+
+			NOT = { exists = A66 }
+		}
+
+		provinces_to_highlight = {
+			region = region_stranglethorn_vale
+		}
+
+		effect = {
+			area_kunza_kunza = {
+				add_base_production = 5
+				add_base_manpower = 5
+			}
+
+			region_stranglethorn_vale = {
+				add_province_modifier = {
+					name = mission_hozen_jungle_vale
+					duration = -1
+				}
+			}
+		}
+	}
+
+	KUN_the_great_gorilla = {
+		icon = mission_titan_spirits
+		position = 10
+
+		required_missions = { KUN_jungle_for_hozen }
+
+		trigger = {
+			997 = {
+				development = 30
+				OR = {
+					has_building = wow_temple_1
+					has_building = wow_temple_2
+					has_building = wow_temple_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 997
+		}
+
+		effect = {
+			prestige = 10
+		}
+	}
+}
+
+KUN_kunzen_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+
+	potential = {
+		tag = KUN
+	}
+
+	KUN_death_to_pygmy = {
+		icon = mission_titan_spirits
+		position = 1
+
+		trigger = {
+			NOT = { exists = OOG }
+			4132 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = OOG
+		}
+
+		effect = {
+			add_dip_power = 50
+			add_country_modifier = {
+				name = mission_death_pygmy
+				duration = 7300
+			}
+		}
+	}
+
+	KUN_kunza_isle_unification = {
+		icon = mission_titan_spirits
+		position = 3
+
+		required_missions = { KUN_death_to_pygmy KUN_hozen_subject }
+
+		trigger = {
+			area_kunza_kunza = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_kunza_kunza
+		}
+
+		effect = {
+			if = {
+				limit = {
+					exists = HZS
+				}
+				inherit = HZS
+			}
+
+			add_country_modifier = {
+				name = mission_kunza_unified
+				duration = -1
+			}
+		}
+	}
+
+	KUN_settling_island_chain = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { KUN_kunza_isle_unification }
+
+		trigger = {
+			OR = {
+				area_the_golden_chain = {
+					type = all
+					owned_by = ROOT
+				}
+				area_consuming_island = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_the_golden_chain
+				area = area_consuming_island
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_settling_islands
+				duration = 18250
+			}
+		}
+	}
+}
+
 KUN_kunzen_column_4 = {
 	slot = 4
 	generic = yes 
-	ai = no 
+	ai = yes 
     has_country_shield = yes
 	
 	potential = {
@@ -92,7 +403,7 @@ KUN_kunzen_column_4 = {
 KUN_kunzen_column_5 = {
 	slot = 5
 	generic = yes 
-	ai = no 
+	ai = yes 
     has_country_shield = yes
 	
 	potential = {
