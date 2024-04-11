@@ -11,7 +11,7 @@ KUN_kunzen_column_1 = {
 		tag = KUN
 	}
 
-	KUN_sultfur_alliance = {
+	KUN_saltfur_alliance = {
 		icon = mission_titan_spirits
 		position = 1
 
@@ -21,6 +21,7 @@ KUN_kunzen_column_1 = {
 			OR = {
 				alliance_with = HZS
 				is_rival = HZS
+				NOT = { exists = HZS }
 			}
 		}
 
@@ -30,7 +31,7 @@ KUN_kunzen_column_1 = {
 
 		effect = {
 			add_country_modifier = {
-				name = mission_sultfur_alliance
+				name = mission_saltfur_alliance
 				duration = 7300
 			}
 
@@ -44,25 +45,40 @@ KUN_kunzen_column_1 = {
 		icon = mission_titan_spirits
 		position = 2
 
-		required_missions = { KUN_sultfur_alliance }
+		required_missions = { KUN_saltfur_alliance }
 
 		trigger = {
-			has_opinion = {
-				who = HZS
-				value = 200
-			}
-			reverse_has_opinion = {
-				who = KUN
-				value = 180
+			OR = {
+			NOT = { exists = HZS }
+			AND = {
+				reverse_has_opinion = {
+					who = KUN
+					value = 180
+				}
+				has_opinion = {
+					who = HZS
+					value = 200
+					}
+				}
 			}
 		}
 
 		effect = {
-			create_march = HZS
-			add_trust = {
-				who = HZS
-				value = 25
-				mutual = yes
+			if = {
+				limit = {
+					exists = HZS
+				}
+				create_march = HZS
+				add_trust = {
+					who = HZS
+					value = 25
+					mutual = yes
+				}
+			}
+			else = {
+				4779 = {
+					add_core = ROOT
+				}
 			}
 		}
 	}
@@ -70,6 +86,8 @@ KUN_kunzen_column_1 = {
 	KUN_lapidis_domination = {
 		icon = mission_titan_spirits
 		position = 6
+
+		required_missions = { KUN_hozen_colonial_expansion }
 
 		trigger = {
 			region_lapidis = {
@@ -96,6 +114,7 @@ KUN_kunzen_column_1 = {
 			OR = {
 				is_rival = A83
 				any_country = {
+					NOT = { tag = A83 }
 					primary_culture = culture_goblin
 					alliance_with = ROOT
 				}
@@ -118,7 +137,7 @@ KUN_kunzen_column_1 = {
 		icon = mission_titan_spirits
 		position = 8
 
-		required_missions = { KUN_goblin_ties }
+		required_missions = { KUN_goblin_ties KUN_great_hozen_admirality }
 
 		trigger = {
 			area_booty_bay = {
@@ -307,6 +326,106 @@ KUN_kunzen_column_2 = {
 			add_country_modifier = {
 				name = mission_settling_islands
 				duration = 18250
+			}
+		}
+	}
+
+	KUN_hozen_colonial_expansion = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { KUN_settling_island_chain }
+
+		trigger = {
+			calc_true_if = {
+				amount = 20
+
+				all_owned_province = {
+					region = region_plunder_isle
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_plunder_isle
+			NOT = { owned_by = ROOT }
+		}
+
+		effect = {
+			region_plunder_isle = {
+				add_permanent_claim = ROOT
+			}
+			region_lapidis = {
+				add_permanent_claim = ROOT
+			}
+			region_gillijim = {
+				add_permanent_claim = ROOT
+			}
+
+			add_country_modifier = {
+				name = mission_colonial_rush
+				duration = 7300
+			}
+		}
+	}
+
+	KUN_plunder_isle_domination = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { KUN_hozen_colonial_expansion }
+
+		trigger = {
+			region_plunder_isle = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		provinces_to_highlight {
+			region = region_plunder_isle
+		}
+
+		effect = {
+			add_years_of_income = 3.0
+			add_dip_power = 250
+		}
+	}
+
+	KUN_great_hozen_admirality = {
+		icon = mission_titan_spirits
+		position = 7
+
+		required_missions = { KUN_plunder_isle_domination KUN_lapidis_domination }
+
+		trigger = {
+			NOT = { is_at_war = YES }
+			stability = 3
+		}
+
+		effect = {
+			set_government_rank = 3
+			change_government = republic
+			add_government_reform = mercantile_republic_reform
+
+			add_prestige_or_monarch_power = {
+                amount = 100
+            }
+
+			add_country_modifier = {
+				name = mission_hozen_admirality
+				duration = -1
+			}
+
+			area_tel_abim = {
+				add_permanent_claim = ROOT
+			}
+
+			custom_tooltip = KUNZEN_UNLOCK_KUNZEN_FLAGSHIP_TT
+
+			hidden_effect = {
+				discover_country = south_seas_superregion
+				set_country_flag = kunzen_ship_boarding_unlock
 			}
 		}
 	}
