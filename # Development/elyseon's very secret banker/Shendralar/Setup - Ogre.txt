@@ -1,0 +1,1167 @@
+namespace = wwu_setup_ogre
+
+# Crushridge Emerges!
+country_event = {
+	id = wwu_setup_ogre.1
+	title = wwu_setup_ogre.1.title
+	desc = wwu_setup_ogre.1.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 2965
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = crushridge_setup }
+        NOT = { exists = P50 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_alterac_heartland = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_alterac_heartland = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_alterac_heartland = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = crushridge_setup 
+            P50 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.1.option.a
+
+        custom_tooltip = P50_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_alterac_heartland tag = P50 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.1.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = P50_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_alterac_heartland tag = P50 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.1.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_alterac_heartland tag = P50 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        P50 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# Dreadmaul Emerges!
+country_event = {
+	id = wwu_setup_ogre.2
+	title = wwu_setup_ogre.2.title
+	desc = wwu_setup_ogre.2.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1050
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = dreadmaul_setup }
+        NOT = { exists = P96 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        1050 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = dreadmaul_setup 
+            P96 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.2.option.a
+
+        custom_tooltip = P96_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1050 tag = P96 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.2.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = P96_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1050 tag = P96 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.2.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1050 tag = P96 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        P96 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# splinterfist Emerges!
+country_event = {
+	id = wwu_setup_ogre.3
+	title = wwu_setup_ogre.3.title
+	desc = wwu_setup_ogre.3.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 602
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = splinterfist_setup }
+        NOT = { exists = P97 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        602 = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        618 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                    AND = {
+                        618 = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        602 = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            owns = 602
+            owns = 618
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = splinterfist_setup 
+            P97 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.3.option.a
+
+        custom_tooltip = P97_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 602 tag = P97 culture = culture_ogre religion = ogre_idolatry }
+            spawn_nation_by_province = { province = 618 tag = P97 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.3.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = P97_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 602 tag = P97 culture = culture_ogre religion = ogre_idolatry }
+            spawn_nation_by_province_conditional = { province = 618 tag = P97 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.3.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 602 tag = P97 }
+        spawn_nation_by_province_core_only = { province = 618 tag = P97 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        P97 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# firegut Emerges!
+country_event = {
+	id = wwu_setup_ogre.4
+	title = wwu_setup_ogre.4.title
+	desc = wwu_setup_ogre.4.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1987
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = firegut_setup }
+        NOT = { exists = P99 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_dreadmaul_rock = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_dreadmaul_rock = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_dreadmaul_rock = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = firegut_setup 
+            P99 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.4.option.a
+
+        custom_tooltip = P99_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_dreadmaul_rock tag = P99 culture = culture_ogre religion = flame }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.4.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = P99_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_dreadmaul_rock tag = P99 culture = culture_ogre religion = flame }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.4.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_dreadmaul_rock tag = P99 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        P99 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# mogrosh Emerges!
+country_event = {
+	id = wwu_setup_ogre.5
+	title = wwu_setup_ogre.5.title
+	desc = wwu_setup_ogre.5.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1941
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = mogrosh_setup }
+        NOT = { exists = MGR }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        1941 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = mogrosh_setup 
+            MGR = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.5.option.a
+
+        custom_tooltip = MGR_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1941 tag = MGR culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.5.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = MGR_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1941 tag = MGR culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.5.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1941 tag = MGR }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        MGR = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# dustbelcher Emerges!
+country_event = {
+	id = wwu_setup_ogre.6
+	title = wwu_setup_ogre.6.title
+	desc = wwu_setup_ogre.6.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1979
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = dustbelcher_setup }
+        NOT = { exists = DUB }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        1979 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = dustbelcher_setup 
+            DUB = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.6.option.a
+
+        custom_tooltip = DUB_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1979 tag = DUB culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.6.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = DUB_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1979 tag = DUB culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.6.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1979 tag = DUB }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        DUB = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# deadwind Emerges!
+country_event = {
+	id = wwu_setup_ogre.7
+	title = wwu_setup_ogre.7.title
+	desc = wwu_setup_ogre.7.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 921
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = deadwind_setup }
+        NOT = { exists = DDW }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        921 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = deadwind_setup 
+            DDW = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.7.option.a
+
+        custom_tooltip = DDW_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 921 tag = DDW culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.7.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = DDW_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 921 tag = DDW culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.7.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 921 tag = DDW }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        DDW = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# bloodeye Emerges!
+country_event = {
+	id = wwu_setup_ogre.8
+	title = wwu_setup_ogre.8.title
+	desc = wwu_setup_ogre.8.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 744
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = bloodeye_setup }
+        NOT = { exists = BOE }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        744 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = bloodeye_setup 
+            BOE = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.8.option.a
+
+        custom_tooltip = BOE_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 744 tag = BOE culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.8.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = BOE_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 744 tag = BOE culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.8.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 744 tag = BOE }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        BOE = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# moshogg Emerges!
+country_event = {
+	id = wwu_setup_ogre.9
+	title = wwu_setup_ogre.9.title
+	desc = wwu_setup_ogre.9.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1056
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = moshogg_setup }
+        NOT = { exists = F31 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        1056 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = moshogg_setup 
+            F31 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.9.option.a
+
+        custom_tooltip = F31_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1056 tag = F31 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.9.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = F31_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1056 tag = F31 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.9.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1056 tag = F31 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        F31 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# dunemaul Emerges!
+country_event = {
+	id = wwu_setup_ogre.10
+	title = wwu_setup_ogre.10.title
+	desc = wwu_setup_ogre.10.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1241
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = dunemaul_setup }
+        NOT = { exists = H05 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                OR = {
+                    AND = {
+                        area_dunemaul_grounds = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        area_dunemaul_grounds = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                    AND = {
+                        area_dunemaul_grounds_two = {
+                            owner = {
+                                ai = yes
+                            }
+                        }
+                        area_dunemaul_grounds_two = {
+                            owner = {
+                                ai = no
+                            }
+                        }
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        OR = {
+            area_dunemaul_grounds = {
+                owned_by = ROOT
+            }
+            area_dunemaul_grounds_two = {
+                owned_by = ROOT
+            }
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = dunemaul_setup 
+            H05 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.10.option.a
+
+        custom_tooltip = H05_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_dunemaul_grounds tag = H05 culture = culture_ogre religion = ogre_idolatry }
+            spawn_nation_by_area = { area = area_dunemaul_grounds_two tag = H05 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.10.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = H05_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_dunemaul_grounds tag = H05 culture = culture_ogre religion = ogre_idolatry }
+            spawn_nation_by_area_conditional = { area = area_dunemaul_grounds_two tag = H05 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.10.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_dunemaul_grounds tag = H05 }
+        spawn_nation_by_area_core_only = { area = area_dunemaul_grounds_two tag = H05 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        H05 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# warmaul Emerges!
+country_event = {
+	id = wwu_setup_ogre.11
+	title = wwu_setup_ogre.11.title
+	desc = wwu_setup_ogre.11.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 1629
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = warmaul_setup }
+        NOT = { exists = F83 }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        1629 = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = warmaul_setup 
+            F83 = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.11.option.a
+
+        custom_tooltip = F83_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province = { province = 1629 tag = F83 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.11.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = F83_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_province_conditional = { province = 1629 tag = F83 culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.11.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_province_core_only = { province = 1629 tag = F83 }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        F83 = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}
+
+# dire_maul Emerges!
+country_event = {
+	id = wwu_setup_ogre.12
+	title = wwu_setup_ogre.12.title
+	desc = wwu_setup_ogre.12.desc
+	picture = OGRE_BRUTE_eventPicture
+    goto = 4458
+    
+    is_triggered_only = yes
+
+	trigger = {
+        NOT = { has_global_flag = dire_maul_setup }
+        NOT = { exists = DRM }
+        is_at_war = no # Prevent the event if it might mess up a ongoing war
+        
+        # Appear if Outland occurs
+        had_global_flag = {
+            flag = setup_outland
+            days = 10950
+        }
+        
+        # If the player and AI own part of the area, only allow the event to fire for the player.
+        if = {
+            limit = {
+                area_diremaul_interior = {
+                    owner = {
+                        ai = yes
+                    }
+                }
+                area_diremaul_interior = {
+                    owner = {
+                        ai = no
+                    }
+                }
+            }
+            
+            ai = no
+        }
+        
+        area_diremaul_interior = {
+            owned_by = ROOT
+        }
+    }
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+    immediate = {
+        hidden_effect = {
+            set_global_flag = dire_maul_setup 
+            DRM = {
+                save_event_target_as = spawned_nation
+            }
+        }
+    }
+    
+	option = {
+		name = wwu_setup_ogre.12.option.a
+
+        custom_tooltip = DRM_FULL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area = { area = area_diremaul_interior tag = DRM culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 100
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.12.option.b
+        
+        add_dip_power = -100
+        
+        custom_tooltip = DRM_PARTIAL_SETUP_TT
+        
+        hidden_effect = {
+            spawn_nation_by_area_conditional = { area = area_diremaul_interior tag = DRM culture = culture_ogre religion = ogre_idolatry }
+        }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+	option = {
+		name = wwu_setup_ogre.12.option.c
+        
+        add_mil_power = -250
+        
+        spawn_nation_by_area_core_only = { area = area_diremaul_interior tag = DRM }
+        
+        ai_chance = {
+            factor = 0
+        }
+	}
+    
+    after = {
+        DRM = {
+            country_event = { id = wwu_general_nation_setup.1 days = 7 }
+        }
+    }
+}

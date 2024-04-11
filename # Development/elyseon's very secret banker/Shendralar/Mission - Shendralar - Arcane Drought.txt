@@ -1,0 +1,844 @@
+#Shendralar Mission Tree and Decision Events
+
+#For Mana Addiction there will be a negative modifier that will be covered depending the following events
+
+
+#Arcane Drought - Warning Window about the Weight of Options Later
+namespace = flavor_warning_g43
+
+country_event = {
+	id = flavor_warning_g43.1
+	title = flavor_warning_g43.1.title
+	desc = flavor_warning_g43.1.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_warning_g43.1.a
+		# - OK
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+# Arcane Sources Decision Events
+namespace = flavor_asd_g43
+
+#Immolthar Summoning Ritual
+country_event = {
+	id = flavor_asd_g43.1
+	title = flavor_asd_g43.1.title
+	desc = flavor_asd_g43.1.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.1.a
+		set_country_flag = summoning_immolthar_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.1.b
+		
+		set_country_flag = avoid_demon_summoning_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Ritual Success
+country_event = {
+	id = flavor_asd_g43.2
+	title = flavor_asd_g43.2.title
+	desc = flavor_asd_g43.2.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = summoning_immolthar_g43
+	}
+	
+	option = {
+		name = flavor_asd_g43.2.a
+		
+		set_country_flag = summoned_immothar_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.2.b
+		#uncommon success based on X reason
+		#OR
+		#other reward based on ruler skill
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.2.c
+		#rare success based on X2 reason
+		#OR
+		#other reward based on ruler skill
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Immolthar's Fate
+country_event = {
+	id = flavor_asd_g43.3
+	title = flavor_asd_g43.3.title
+	desc = flavor_asd_g43.3.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.3.a
+		#choose to follow him / Make him consort
+		#maybe X diplo skill is needed
+		set_country_flag = immolthar_supreme_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.3.b
+		#imprison him and exploit him
+		#maybe X admin skill is needed
+		set_country_flag = immolthar_imprisoned_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.3.c
+		#kill him to study him
+		#maybe X military skill is needed
+		set_country_flag = studious_highborne_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Immolthar the Usurper
+country_event = {
+	id = flavor_asd_g43.4
+	title = flavor_asd_g43.4.title
+	desc = flavor_asd_g43.4.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = immolthar_supreme_g43
+	}
+    
+	option = {
+		name = flavor_asd_g43.4.a
+		#Immolthar kills the Prince and summon the Legion / change of culture and religion in provinces
+		#Rule of Prince mission must be completed
+		#You go Along
+		set_country_flag = glorious_immolthar_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.4.b
+		#Immolthar kills the Prince and summon the Legion / change of culture and religion in provinces
+		#Rule of Prince mission must be completed
+		#You revolt / Immolthar spawn as a rebel general with a big stack (and a running disaster?)
+		set_country_flag = hideous_immolthar_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Immolthar's Exploitation
+country_event = {
+	id = flavor_asd_g43.5
+	title = flavor_asd_g43.5.title
+	desc = flavor_asd_g43.5.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = immolthar_imprisoned_g43
+	}
+    
+	option = {
+		name = flavor_asd_g43.5.a
+		#choose to follow fel
+		set_country_flag = fel_is_the_new_black_g43
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.5.b
+		#continue focusing on arcane essenses instead
+		set_country_flag = good_old_arcane_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Immolthar Study Experiments
+country_event = {
+	id = flavor_asd_g43.6
+	title = flavor_asd_g43.6.title
+	desc = flavor_asd_g43.6.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = studious_highborne_g43       
+	}
+    
+	option = {
+		name = flavor_asd_g43.6.a
+		#disaster for X reason
+		# dip = 2
+		set_country_flag = failed_studies_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.6.b
+		#learned to summon more demons safely (giving X decision to summon demons to consume)
+		#mana addiction debuff will be off for the period of summoned demon modifier
+		set_country_flag = demon_manipulation_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.6.c
+		#learn to properly use fel alongside arcane (maybe give syncronised religion)
+		#remove mana addiction modifier
+		set_country_flag = contradicting_coestistance_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#New Habbits - If the events of Prince Torth have been played out and switched to chaos religion then all arcane-fel options will adress chaos while new solutions will be cut off as options
+country_event = {
+	id = flavor_asd_g43.7
+	title = flavor_asd_g43.7.title
+	desc = flavor_asd_g43.7.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.7.a
+		# IF FELL OR FEL SYNCHRO: something about your new mastery over fel and switch religion to all provinces
+		# Remove Mana Addiction Modif as you are no longer arcane
+		# NOT AN OPTION IF CHAOS
+		set_country_flag = fel_mastery_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.7.b
+		# IF FELL SYNCHRO: remain arcane
+		# replace Mana Addiciton Modif with a semi good one with good and bad modifs
+		# NOT AN OPTION IF CHAOS
+		set_country_flag = consistent_arcane_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.7.c
+		# IF PURE ARCANE (OR CHAOS): struggle with arcane (OR CHAOS)
+		set_country_flag = stubborn_persistence_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.7.d
+		# IF PURE ARCANE: Look for new mana sources
+		# NOT AN OPTION IF CHAOS
+		set_country_flag = new_energy_sources_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Solutions - Arcane
+country_event = {
+	id = flavor_asd_g43.8
+	title = flavor_asd_g43.8.title
+	desc = flavor_asd_g43.8.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag =  consistent_arcane_g43      
+	}
+    
+	option = {
+		name = flavor_asd_g43.8.a
+		# Monastic Habbits: People learn to medidate and fight their addictions
+		# Remove Mana Addiction Modifier but trade it with a semi good modifier with few minus and positives modifs
+		# Maybe a change of goverment????????
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Solutions - New Sources - Option Window
+country_event = {
+	id = flavor_asd_g43.9
+	title = flavor_asd_g43.9.title
+	desc = flavor_asd_g43.9.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag =  new_energy_sources_g43      
+	}
+    
+	option = {
+		name = flavor_asd_g43.9.a
+		# Druidic/Elune
+		set_country_flag =  ancient_traditions_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = flavor_asd_g43.9.a
+		# Light
+		set_country_flag =  a_new_alternative_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Solutions - New Sources - Druidic / Elune
+country_event = {
+	id = flavor_asd_g43.10
+	title = flavor_asd_g43.10.title
+	desc = flavor_asd_g43.10.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = ancient_traditions_g43     
+	}
+    
+	option = {
+		name = flavor_asd_g43.10.a
+		# Night Elven emisseries teach us the ways of nature
+		# Remove Mana Addiction Modifier
+		# Get a PU CB over Cenarion Hold in Silithus if they are alive
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.10.b
+		# Night Elven emisseries teach us the ways of elune
+		# Remove Mana Addiction Modifier
+		# Bonus Relations and Trust with Darnassus or something?
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Solutions - New Sources - Fire - Cata Option for previous druidic. Fandral Staghelm's offering
+country_event = {
+	id = flavor_asd_g43.11
+	title = flavor_asd_g43.11.title
+	desc = flavor_asd_g43.11.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		age =        
+	}
+    
+	option = {
+		name = flavor_asd_g43.11.a
+		# age of cataclysm
+		# be druidic
+		# accept the gift
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.11.b
+		# age of cataclysm
+		# be druidic
+		# refuce the gift
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Solutions - New Sources - Church of Holy Light / Light of Sunwell - Approached High Elves of Quelthalas
+#Before Theramore is formed
+country_event = {
+	id = flavor_asd_g43.12
+	title = flavor_asd_g43.12.title
+	desc = flavor_asd_g43.12.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = a_new_alternative_g43       
+	}
+    
+	option = {
+		name = flavor_asd_g43.12.a
+		# High Elven emisseries teach us the ways of light
+		# Connect somehow with Quelthalas/Silvermoon
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.12.b
+		# High Elven emisseries teach us the ways of sunwell
+		# Connect somehow with Quelthalas/Silvermoon
+		# Light of Sunwell must exist
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Solutions - New Sources - Church of Holy Light - Approached High Elves of Theramore
+#After Theramore is formed
+country_event = {
+	id = flavor_asd_g43.13
+	title = flavor_asd_g43.13.title
+	desc = flavor_asd_g43.13.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		#has_country_flag =        
+	}
+    
+	option = {
+		name = flavor_asd_g43.13.a
+		# High Elven emisseries teach us the ways of light
+		# Alliance with Theramore
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+# Prince Tolthedrin - If you didnt imprison Immolthar options will differ
+country_event = {
+	id = flavor_asd_g43.14
+	title = flavor_asd_g43.14.title
+	desc = flavor_asd_g43.14.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.14.a
+		# IF IMMOLTHAR IS CONSORT: Good govermance
+		# Remove Mana Addiction Modif as you are no longer arcane (if it isnt removed already)
+		set_country_flag = good_govermance_g43
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.14.b
+		# IF Arcane and Immolthar imprisoned: energy shortage and dillema for immolthar essence draining
+		# Flavor option that lead to proper event
+		set_country_flag = energy_shortage_a_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.14.c
+		# IF Arcane and Immolthar killed: energy shortage and dillema for essence draining
+		# Flavor option that lead to proper event
+		set_country_flag = energy_shortage_b_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.14.d
+		# IF NEW SOURCE and Immolthar killed: civil war for state religion
+		# Flavor option that lead to proper event
+		set_country_flag = state_religion_in_turmoil_g43
+		
+		ai_chance = {
+			factor = 0
+		
+}
+
+# Prince Tolthedrin - Result of option b
+country_event = {
+	id = flavor_asd_g43.15
+	title = flavor_asd_g43.15.title
+	desc = flavor_asd_g43.15.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = energy_shortage_a_g43      
+	}
+    
+	option = {
+		name = flavor_asd_g43.15.a
+		# Essence of Immolthar is getting close to finishing. Drastic measures. Drive population into exile.
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.15.b
+		# Essence of Immolthar is getting close to finishing. Drastic measures. Slaughter majority of the population.
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+# Prince Tolthedrin - Result of option c
+country_event = {
+	id = flavor_asd_g43.16
+	title = flavor_asd_g43.16.title
+	desc = flavor_asd_g43.16.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = energy_shortage_b_g43      
+	}
+    
+	option = {
+		name = flavor_asd_g43.16.a
+		#Remane Arcane but slaughter population falling into madness.
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.16.b
+		#Switch to Chaos learning some essence manipulatiom by Immolthars biology but sacrificing people in the process.
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+# Prince Tolthedrin - Result of option d
+country_event = {
+	id = flavor_asd_g43.17
+	title = flavor_asd_g43.17.title
+	desc = flavor_asd_g43.17.desc
+	picture = #_eventPicture
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	trigger = {
+		has_country_flag = state_religion_in_turmoil_g43      
+	}
+    
+	option = {
+		name = flavor_asd_g43.17.a
+		# Choose side in the civil war: A (state religion loyalist "Arcane")
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.17.b
+		# Choose side in the civil war: B (new religion supporter "Elune/Druidic/CotHL etc")
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+# New Direction
+country_event = {
+	id = flavor_asd_g43.18
+	title = flavor_asd_g43.18.title
+	desc = flavor_asd_g43.18.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.18.a
+		# If Prince went for slaughter: choose permanent exile
+		set_country_flag = preferred_exile_g43
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.18.b
+		# If Prince went for slaughter: choose to stay as him and lead as it is
+		set_country_flag = loyalty_to_the_prince_g43
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.18.c
+		# If Immolthar is in control: Make Shendralar a proper demonic nation and whatever else
+		set_country_flag = a_demonic_new_face_g43
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.18.d
+		# If chosen a secondery religion: Make Shendralar a proper nation and whatever else
+		set_country_flag = end_of_arcane_addiction_for_shendralar_g43
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+}
+
+# New Direction: Exile
+country_event = {
+	id = flavor_asd_g43.19
+	title = flavor_asd_g43.19.title
+	desc = flavor_asd_g43.19.desc
+	picture = #_eventPicture
+	
+	is_triggered_only = yes
+	
+	mean_time_to_happen = { 
+        days = 1
+    }
+    
+	option = {
+		name = flavor_asd_g43.19.a
+		# To Desolace
+		# Opends flavor for traveling to said region
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.19.b
+		# To Stonetalone Mountains
+		# Opends flavor for traveling to said region
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.19.c
+		# To Bloodmyst Isle
+		# Opends flavor for traveling to said region
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.19.d
+		# To Ashenvale
+		# Opends flavor for traveling to said region
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	
+	option = {
+		name = flavor_asd_g43.19.e
+		# To Felwood
+		# Opends flavor for traveling to said region
+
+		ai_chance = {
+			factor = 1
+		}
+	}
+}

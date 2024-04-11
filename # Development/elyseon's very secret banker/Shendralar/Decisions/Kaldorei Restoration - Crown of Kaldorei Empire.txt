@@ -1,0 +1,81 @@
+#Claim Crown of KE
+country_decisions = {
+    decision_claim_crown_kald_empire = {
+		major = yes
+        ai_importance = 1
+        
+		potential = {
+			has_country_flag = claimant_of_the_crown
+			NOT = 
+		}
+		
+		allow = {
+            OR = {
+				AND = {
+					OR = {
+			            alliance_with = H01
+					    alliance_with = A94
+					}
+					OR = {
+					    trust = {
+                            who = H01
+                            value = 100
+                        }
+						trust = {
+                            who = A94
+                            value = 100
+                        }
+					}
+				}
+				AND = {
+					OR = {
+					    is_rival = H01
+						is_rival = A94
+					}
+					OR = {
+						army_strength = {
+                            who = H01
+                            value = 1.5
+                        }
+						army_strength = {
+                            who = A94
+                            value = 1.5
+						}
+					}
+				}
+            }
+			prestige = 100
+		}
+		
+		effect = {		
+		    set_country_flag = activated_kaldorei_restoration
+			
+			if = {
+			    limit = {
+                    NOT = {
+     				    OR = {
+					        H01 = { alliance_with = ROOT }
+						    A94 = { alliance_with = ROOT }
+					    }
+				    }
+				    add_country_modifier = {
+                        name = decision_crown_of_kaldorei_a
+                        duration = -1
+                    }
+					#remove modifier upon forming Kaldorei Empire
+			    }
+				else = {
+				    add_country_modifier = {
+                        name = decision_crown_of_kaldorei_b
+                        duration = -1
+                    }
+					#remove modifier upon forming Kaldorei Empire
+				}
+			}      
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
