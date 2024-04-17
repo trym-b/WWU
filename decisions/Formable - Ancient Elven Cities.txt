@@ -1,0 +1,829 @@
+#Ancient Elven Cities Menu
+#Open/Close
+country_decisions = {
+    decision_aec_menu_open = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {
+			OR = {
+			    culture_group = culture_group_darnassian
+			    culture_group = culture_group_shalassian
+			    culture_group = culture_group_satyr
+			    culture_group = culture_group_naga
+			}
+			NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			NOT = { tag = A94 }
+			NOT = { tag = MSF }
+			NOT = { tag = U04 }
+			NOT = { tag = FDE }
+		}
+		
+		allow = {
+            always = yes			
+		}
+		
+		effect = {		    
+		    if = {
+		        limit = {
+			        NOT = { has_country_flag = anc_elven_city_menu_open }
+			    }
+			    set_country_flag = anc_elven_city_menu_open  
+		    }
+			else_if = {
+		        limit = {
+			        has_country_flag = anc_elven_city_menu_open
+			    }
+			    clr_country_flag = anc_elven_city_menu_open  
+		    }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Eldarath
+country_decisions = {
+    rebuild_eldarath = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = ELD }
+			NOT = { tag = A94 }
+            NOT = { tag = NJZ }
+						
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_azshara
+		}
+		
+		allow = {
+            # Ownership
+			region_azshara = {
+				type = all
+				owned_by = ROOT
+			}
+			1431 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            # Switch
+			change_tag = ELD
+			change_government = theocracy
+			set_capital = 1431
+			
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes     #Sets AEC flag
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Eldrethalas
+country_decisions = {
+    restore_eldrethalas = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+			NOT = { has_country_flag = rebuild_ancient_elven_cities }
+            
+		    # Exclusions
+			NOT = { exists = ELR }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_feralas
+		}
+		
+		allow = {
+            # Ownership
+			region_feralas = {
+				type = all
+				owned_by = ROOT
+			}
+			2504 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {            
+            # Switch
+			change_tag = ELR
+			change_government = theocracy
+			set_capital = 2504
+			
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes     #Sets AEC flag
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Eldrethar
+country_decisions = {
+    rebuild_eldrethar = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = ELE }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }			
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_stonetalon_mountains
+		}
+		
+		allow = {
+            # Ownership
+			region_stonetalon_mountains = {
+				type = all
+				owned_by = ROOT
+			}
+			3645 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            # Switch
+			change_tag = ELE
+			change_government = theocracy
+			set_capital = 3645
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes     #Sets AEC flag
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Rebuild Isildien
+country_decisions = {
+    rebuild_isildien = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = ISI }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_feralas
+		}
+		
+		allow = {
+            # Ownership
+			region_feralas = {
+				type = all
+				owned_by = ROOT
+			}
+			1492 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            # Switch
+			change_tag = ISI
+			change_government = theocracy
+			set_capital = 1492
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes    #Sets AEC flag
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Rebuild Keltheril
+country_decisions = {
+    rebuild_keltheril= {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = KEL }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_winterspring
+		}
+		
+		allow = {
+            # Ownership
+			region_winterspring = {
+				type = all
+				owned_by = ROOT
+			}
+			1331 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {            
+            # Switch
+			change_tag = KEL
+			change_government = theocracy
+			set_capital = 1331
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Rebuild Latharlazal
+country_decisions = {
+    rebuild_latharlazal = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = LAT }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_ashenvale
+		}
+		
+		allow = {
+            # Ownership
+			region_ashenvale = {
+				type = all
+				owned_by = ROOT
+			}
+			1304 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            
+            # Switch
+			change_tag = LAT
+			change_government = theocracy
+			set_capital = 1304
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Loretharan
+country_decisions = {
+    rebuild_loretharan = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = LOR }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_bloodmyst_isle
+		}
+		
+		allow = {
+            # Ownership
+			region_bloodmyst_isle = {
+				type = all
+				owned_by = ROOT
+			}
+			2268 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		
+		effect = {          
+            # Switch
+			change_tag = LOR
+			change_government = theocracy
+			set_capital = 2268
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Rebuild Mathystra
+country_decisions = {
+    rebuild_mathystra = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = MAT }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_darkshore
+		}
+		
+		allow = {
+            # Ownership
+			region_darkshore = {
+				type = all
+				owned_by = ROOT
+			}
+			1297 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            
+            # Switch
+			change_tag = MAT
+			change_government = theocracy
+			set_capital = 1297
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Morlosaran
+country_decisions = {
+    rebuild_morlosaran = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = MOR }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+			
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_felwood
+		}
+		
+		allow = {
+            # Ownership
+			region_felwood = {
+				type = all
+				owned_by = ROOT
+			}
+			2226 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		effect = {
+            
+            # Switch
+			change_tag = MOR
+			change_government = theocracy
+			set_capital = 2226
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Rebuild Narthalas
+country_decisions = {
+    rebuild_narthalas = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = NAL }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_azsuna
+		}
+		
+		allow = {
+            # Ownership
+			region_azsuna = {
+				type = all
+				owned_by = ROOT
+			}
+			3178 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+            
+		}
+		effect = {
+            
+            # Switch
+			change_tag = NAL
+			change_government = theocracy
+			set_capital = 3178
+            if = {
+			    limit = {
+			        primary_culture = culture_ghost
+				}
+			    change_primary_culture = culture_highbourne
+			}
+			every_owned_province = { 
+                limit = {
+                    superregion = broken_isles_superregion
+                    culture = culture_ghost
+                    NOT = { culture = culture_highbourne }
+                }
+                change_culture = culture_highbourne 
+            }
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Shandaral
+country_decisions = {
+    rebuild_shandaral = {
+		major = yes
+        ai_importance = 0
+        
+		potential = {  
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = SHN }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_crystalsong
+		}
+		
+		allow = {
+            # Ownership
+			region_crystalsong = {
+				type = all
+				owned_by = ROOT
+			}
+			3282 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		effect = {            
+            # Switch
+			change_tag = SHN
+			change_government = theocracy
+			set_capital = 3282
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Restore Suramar
+country_decisions = {
+    restore_suramar = {
+		major = yes
+        ai_importance = 0
+        
+		potential = { 
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = SUR }
+			NOT = { tag = A94 }
+			NOT = { tag = NJZ }	
+			
+            # Requisites
+			OR = {
+                tag = WIT
+                tag = NTF
+			}
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_suramar
+		}
+		
+		allow = {
+            # Ownership
+			region_suramar = {
+				type = all
+				owned_by = ROOT
+			}
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		effect = {
+            
+            # Switch
+			change_tag = SUR
+			change_government = monarchy
+			add_accepted_culture = culture_nightborne
+			add_accepted_culture = culture_nightfallen
+			add_accepted_culture = culture_withered
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes		
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+}
+
+#Restore Vashjir
+country_decisions = {
+    restore_vashjir = {
+		major = yes
+        ai_importance = 0
+        
+		potential = { 
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = VHJ }
+			NOT = { tag = NJZ }
+			
+			culture_group = culture_group_naga
+            
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_vashjir
+		}
+		
+		allow = {
+            # Ownership
+			region_vashjir = {
+				type = all
+				owned_by = ROOT
+			}
+			3174 = { development = 20 }
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		effect = {
+            # Switch
+			change_tag = VHJ
+			change_government = theocracy
+			set_capital = 3174
+			
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+
+#Rebuild Zinazshari
+country_decisions = {
+    rebuild_zinazshari = {
+		major = yes
+        ai_importance = 0
+        
+		potential = { 
+            has_country_flag = anc_elven_city_menu_open
+            NOT = { has_country_flag = rebuild_ancient_elven_cities }
+			
+		    # Exclusions
+			NOT = { exists = VHJ }
+			
+			culture_group = culture_group_naga
+            
+		}
+        
+		provinces_to_highlight = {
+            NOT = { owned_by = ROOT }
+			region = region_nazjatar
+		}
+		
+		allow = {
+            # Ownership
+			region_nazjatar = {
+				type = all
+				owned_by = ROOT
+			}
+			
+            # General
+			is_at_war = no	
+			stability = 1
+            total_development = 200
+		}
+		effect = {
+            # Switch
+			change_tag = AZH
+			change_government = theocracy
+
+			# Bonus
+            add_formable_bonus = yes
+            trigger_ni_switch = yes
+            #trigger_mission_switch = yes
+            set_elven_city_status = yes
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
