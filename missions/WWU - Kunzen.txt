@@ -102,7 +102,7 @@ KUN_kunzen_column_1 = {
 
 		effect = {
 			add_years_of_income = 3.0
-			add_dip_power = 100
+			add_adm_power = 100
 		}
 	}
 
@@ -226,7 +226,15 @@ KUN_kunzen_column_1 = {
 		}
 
 		effect = {
-			prestige = 10
+			#country_event = { id = wwu_aqir.101 }
+
+			define_general = {
+				shock = 6
+				fire = 6
+				manuever = 8
+				siege = 8
+				name = "King Mulka"
+			}
 		}
 	}
 }
@@ -269,10 +277,11 @@ KUN_kunzen_column_2 = {
 		icon = mission_titan_spirits
 		position = 3
 
-		required_missions = { KUN_death_to_pygmy KUN_hozen_subject }
+		required_missions = { KUN_death_to_pygmy KUN_hozen_subject KUN_hozen_council }
 
 		trigger = {
 			area_kunza_kunza = {
+				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
@@ -396,7 +405,7 @@ KUN_kunzen_column_2 = {
 		icon = mission_titan_spirits
 		position = 7
 
-		required_missions = { KUN_plunder_isle_domination KUN_lapidis_domination }
+		required_missions = { KUN_plunder_isle_domination KUN_lapidis_domination KUN_gillijim_domination }
 
 		trigger = {
 			NOT = { is_at_war = YES }
@@ -429,6 +438,391 @@ KUN_kunzen_column_2 = {
 			}
 		}
 	}
+
+	KUN_challenge_zandalari = {
+		icon = mission_titan_spirits
+		position = 8
+
+		required_missions = { KUN_great_hozen_admirality }
+
+		trigger = {
+			if = {
+				limit = {
+					NOT = { exists = A78}
+				}
+				navy_size = 60
+				heavy_ship_fraction = 0.25
+			}
+			else = {
+				navy_size = A78
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = A78
+		}
+
+		effect = {
+			1112 = {
+				add_permanent_claim = ROOT
+			}
+			1111 = {
+				add_permanent_claim = ROOT
+			}
+			2611 = {
+				add_permanent_claim = ROOT
+			}
+			area_tusk_isle = {
+				add_permanent_claim = ROOT
+			}
+
+			create_admiral = {
+				tradition = 80
+			}
+		}
+	}
+
+	KUN_zandalar_landfall = {
+		icon = mission_titan_spirits
+		position = 9
+		
+		required_missions = { KUN_challenge_zandalari }
+
+		trigger = {
+			calc_true_if = {
+				amount = 6
+
+				all_owned_province = {
+					region = region_zuldazar
+				}
+			}
+
+			if = {
+				limit = {
+					exists = A78
+				}
+				OR = {
+					A78 = {
+						has_opinion_modifier = {
+							modifier = insulted
+							who = ROOT
+						}
+					}
+					A78 = {
+						has_opinion_modifier = {
+							modifier = scornfully_insulted
+							who = ROOT
+						}
+					}
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+				region = region_zuldazar
+				NOT = { owned_by = ROOT }
+		}
+
+		effect = {
+			region_zuldazar = {
+				add_permanent_claim = ROOT
+			}
+
+			custom_tooltip = MONKEY_MISSION_WARNING_TT
+
+			if = {
+				limit = {
+					exists = DAK
+					DAK = {
+						has_opinion = {
+							who = KUN
+							value = 100
+						}
+					}
+				}
+				DAK = {
+					country_event = { id = wwu_aqir.101 }
+				}
+			}
+
+			if = {
+				limit = {
+					exists = THP
+					THP = {
+						has_opinion = {
+							who = KUN
+							value = 100
+						}
+					}
+				}
+				THP = {
+					country_event = { id = wwu_aqir.101 }
+				}
+			}
+		} 
+	}
+
+	KUN_fall_of_zandalari = {
+		icon = mission_titan_spirits
+		position = 10
+
+		required_missions = { KUN_zandalar_landfall }
+
+		trigger = {
+			NOT = { exists = A78 }
+			region_zuldazar = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_zuldazar
+		}
+
+		effect = {
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			add_prestige = 25
+
+			region_nazmir = {
+				add_permanent_claim = ROOT
+			}
+			region_voldun = {
+				add_permanent_claim = ROOT
+			}
+
+			add_country_modifier = {
+				name = mission_monkey_rule_zandalar
+				duration = -1
+			}
+		}
+	}
+}
+
+KUN_kunzen_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+
+	potential = {
+		tag = KUN
+	}
+
+	KUN_development_of_kunza = {
+		icon = mission_titan_spirits
+		position = 1
+
+		trigger = {
+			4133 = {
+				development = 15
+			}
+			treasury = 100
+		}
+
+		provinces_to_highlight = {
+			province_id = 4133
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_kunza_development
+				duration = 7300
+			}
+
+			custom_tooltip = KUNZA_DEV_MISSION_WARNING_TT
+
+			hidden_effect = {
+				if = {
+					limit = {
+						treasury = 100
+					}
+					#country_event = { id = wwu_aqir.101 days = 90 }
+					4780 = {
+						cede_province = ROOT
+					}
+					add_treasury = -100
+				}
+			}
+		}
+	}
+
+	KUN_hozen_council = {
+		icon = mission_titan_spirits
+		position = 2
+
+		required_missions = { KUN_development_of_kunza }
+
+		trigger = {
+			stability = 1
+			employed_advisor = {
+				category = ADM
+			}
+			employed_advisor = {
+				category = DIP
+			}
+			employed_advisor = {
+				category = MIL
+			}
+		}
+
+		effect = {
+			add_ruler_modifier = {
+				name = mission_hozen_council
+				duration = -1
+			}
+
+			add_ruler_personality = expansionist_personality
+		}
+	}
+
+	KUN_hozen_the_wise = {
+		icon = mission_titan_spirits
+		position = 3
+
+		required_missions = { KUN_hozen_council }
+
+		trigger = {
+			is_spellcaster = yes
+		}
+
+		effect = {
+			add_ruler_modifier = {
+				name = mission_hozen_wise
+				duration = -1
+			}
+		}
+	}
+
+	KUN_appease_celestials = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { KUN_control_valley_of_four_winds }
+
+		trigger = {
+			P63 = {
+				OR = {
+					NOT = { exists = P63 }
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+
+			P65 = {
+				OR = {
+					NOT = { exists = P65 }
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+
+			P66 = {
+				OR = {
+					NOT = { exists = P66 }
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+
+			P64 = {
+				OR = {
+					NOT = { exists = P64 }
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = P63
+			is_capital_of = P64
+			is_capital_of = P65
+			is_capital_of = P66
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 100
+			}
+		}
+	}
+
+	KUN_gillijim_domination = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { KUN_hozen_colonial_expansion }
+
+		trigger = {
+			region_gillijim = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			region = region_gillijim
+		}
+
+		effect = {
+			add_years_of_income = 3.0
+			add_mil_power = 100
+		}
+	}
+
+	KUN_tel_abil_ownership = {
+		icon = mission_titan_spirits
+		position = 8
+
+		required_missions = { KUN_great_hozen_admirality }
+
+		trigger = {
+			area_tel_abim = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+
+			TAB = {
+				OR = {
+					NOT = { exists = TAB }
+					is_subject_of = ROOT 
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			owned_by = TAB
+			area = area_tel_abim
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+			add_power_projection = {
+				amount = 20
+			}
+			4071 = {
+				add_permanent_claim = ROOT
+			}
+			4064 = {
+				add_permanent_claim = ROOT
+			}
+			area_isle_of_skulls = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 KUN_kunzen_column_4 = {
@@ -441,80 +835,206 @@ KUN_kunzen_column_4 = {
 	    tag = KUN
 	} 
 	
-	KUN_bolster_kunza_kunza = {
-		icon = mission_strand_of_the_ancients
-        
-		required_missions = { }
-		
+	KUN_doing_de_magic = {
+		icon = mission_titan_spirits
+		position = 1
+
 		trigger = {
-			4133 = {
-                country_or_non_sovereign_subject_holds = ROOT
-                development = 15
-            }
+			OR = {
+				4778 = {
+					has_building = wow_portal
+				}
+				4133 = {
+					has_building = wow_portal
+				}
+			}
+			1795 = {
+				has_building = wow_portal
+			}
 		}
-        
-        provinces_to_highlight = {
+
+		provinces_to_highlight = {
+			province_id = 4778
 			province_id = 4133
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			province_id = 1795
 		}
-        
+
 		effect = {
-			region_plunder_isle = {
-                add_permanent_claim = ROOT
-            }
+			add_stability = 1
 		}
 	}
-    
-	KUN_control_northpoint = {
-		icon = mission_tools
+
+	KUN_the_heartland = {
+		icon = mission_titan_spirits
 		position = 2
-        
-		required_missions = { KUN_bolster_kunza_kunza }
-		
+
+		required_missions = { KUN_development_of_kunza KUN_doing_de_magic }
+
 		trigger = {
-			controls = 4136
+			1795 = {
+				religion = ROOT
+				base_tax = 5
+				base_production = 8
+				base_manpower = 5
+				OR = {
+					has_owner_culture = yes
+					has_owner_accepted_culture = yes
+				}
+				has_fort_building_trigger = yes
+			}
 		}
-        
-        provinces_to_highlight = {
-			province_id = 4136
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+
+		provinces_to_highlight = {
+			province_id = 1795
 		}
-        
+
 		effect = {
-			add_country_modifier = {
-                name = mission_hozen_fury
-                duration = 3650
-            }
+			discover_country = pandaria_superregion
+
+			region_valley_of_the_four_winds = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
-    
-	KUN_establish_hozen_isle = {
-		icon = mission_hunter_vs_wild
+
+	KUN_defeat_the_union = {
+		icon = mission_titan_spirits
 		position = 3
-		required_missions = { KUN_control_northpoint }
-		
+
+		required_missions = { KUN_the_heartland }
+
 		trigger = {
-			region_plunder_isle = {
-                type = all
-                
-                OR = {
-                    country_or_non_sovereign_subject_holds = ROOT
-                    is_empty = yes
-                }
+			P84 = {
+				NOT = { exists = P84 }
+				is_subject_of = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = P84
+		}
+
+		effect = {
+			add_accepted_culture = culture_pandaren
+
+			add_years_of_owned_provinces_production_income = {
+                years = 5
             }
+			add_power_projection = {
+				amount = 10
+			}
 		}
-        
-        provinces_to_highlight = {
-			region = region_plunder_isle
-            is_empty = no
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+	}
+
+	KUN_control_valley_of_four_winds = {
+		icon = mission_titan_spirits
+		position = 4
+
+		required_missions = { KUN_defeat_the_union }
+
+		trigger = {
+			region_valley_of_the_four_winds = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
-        
+
+		provinces_to_highlight = {
+			region = region_valley_of_the_four_winds
+		}
+
 		effect = {
 			add_country_modifier = {
-                name = mission_apes_together_strong
-                duration = -1
-            }
+				name = mission_hozen_valley
+				duration = -1
+			}
+		}
+	}
+
+	KUN_reestablish_hozen_ties = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { KUN_control_valley_of_four_winds }
+
+		trigger = {
+			any_country = {
+				NOT = { tag = HZS }
+				primary_culture = culture_forest_hozen
+				alliance_with = ROOT
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			owner = {
+				primary_culture = culture_forest_hozen
+			}
+		}
+
+		effect = {
+			add_dip_power = 100
+		}
+	}
+
+	KUN_hozen_empire = {
+		icon = mission_titan_spirits
+		position = 6
+
+		required_missions = { KUN_reestablish_hozen_ties }
+
+		trigger = {
+			tag = PAN
+		}
+
+		effect = {
+			pandaria_superregion = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	KUN_eradication_of_pandaria_threats = {
+		icon = mission_titan_spirits
+		position = 7
+
+		required_missions = { KUN_hozen_empire }
+
+		trigger = {
+			NOT = { exists = P34 }
+			NOT = { exists = P92 }
+			NOT = { exists = MOE }
+			NOT = { exists = MNE }
+
+			region_isle_of_thunder = {
+				type = all
+				owned_by = ROOT
+			}
+			region_townlong_steppes = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region_dread_wastes = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				region = region_isle_of_thunder
+				region = region_dread_wastes
+				region = region_townlong_steppes
+			}
+		}
+
+		effect = {
+			add_adm_power = 500
+			add_dip_power = 500
+			add_mil_power = 500
 		}
 	}
 }
@@ -528,44 +1048,4 @@ KUN_kunzen_column_5 = {
 	potential = {
 	    tag = KUN
 	} 
-	
-	KUN_create_hozen_strikeforce = {
-		icon = mission_monk_jab
-        
-		required_missions = { }
-		
-		trigger = {
-            num_of_infantry = 15
-			num_of_galley = 15
-		}
-        
-		effect = {
-			area_moonbrook = {
-                add_permanent_claim = ROOT
-            }
-            area_the_deadmines = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    
-    KUN_establish_goblin_alliance = {
-		icon = mission_rocket
-        
-		required_missions = { }
-		
-		trigger = {
-			alliance_with = A83
-		}
-        provinces_to_highlight = {
-            is_capital_of = A83
-        }
-        
-		effect = {
-			add_country_modifier = {
-                name = mission_goblin_equipment
-                duration = -1
-            }
-		}
-	}
 }
