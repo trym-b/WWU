@@ -519,6 +519,52 @@ celestial_order_reform = {
     ai = { factor = 0 }
 }
 
+# Used by Nazmir tribes
+blood_tribe_matriarchy_reform = {
+	icon                        = "blood_frenzy"
+    legacy_equivalent           = blood_tribe_matriarchy_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    different_religion_acceptance       = -25
+	different_religion_group_acceptance = -100
+    
+	modifiers = {
+		can_not_declare_war = yes
+        global_manpower_modifier = 0.05
+		manpower_recovery_speed = 0.05
+        global_regiment_recruit_speed = -0.1
+        
+        land_forcelimit = 2
+        
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        succession_ghuuns_chosen = yes
+        enables_automatic_spellcasting_ruler = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = blood_tribe_matriarchy_reform
+            AND = {
+                religion = bloodmancy
+                primary_culture = culture_blood_troll
+				NOT = {
+					have_had_reform = blood_matriarchy_reform
+				}
+            }
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
 # Used by Nazmir
 blood_matriarchy_reform = {
 	icon                        = "blood_frenzy"
@@ -539,7 +585,6 @@ blood_matriarchy_reform = {
         global_regiment_recruit_speed = -0.15
         
         land_forcelimit_modifier = 0.1
-        land_forcelimit = 3
         
         max_absolutism = 20
 	}
@@ -556,6 +601,9 @@ blood_matriarchy_reform = {
             AND = {
                 religion = bloodmancy
                 primary_culture = culture_blood_troll
+				NOT = {
+					have_had_reform = blood_tribe_matriarchy_reform
+				}
             }
         }
     }

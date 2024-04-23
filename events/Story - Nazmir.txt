@@ -1,0 +1,338 @@
+namespace = wwu_nazmir
+
+# An start event that appears to the player choosing one of the 3 countries
+country_event = {
+	id = wwu_nazmir.1
+	title = wwu_nazmir.1.title
+	desc = wwu_nazmir.1.desc
+	picture = NAZMIR_1_eventPicture
+    
+    is_triggered_only = yes
+	
+	trigger = {
+	any_country = {
+	NOT = { has_country_flag = nazmir_start_opened }
+	NOT = { has_country_flag = first_blood_matron }
+	}
+		OR = {
+		AND = {
+            tag = NZM # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+        
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = no
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = no
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NTV # Natha'vor
+            ai = no
+			NZM = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = AMK # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			NZM = {
+			ai = yes
+			}
+			}
+        }
+		}
+    
+    immediate = {
+		hidden_effect = {
+		NZM = {
+		set_country_flag = nazmir_start_opened
+            set_variable = {
+                which = nazmir_blood
+                value = 0
+            }
+			}
+		NTV = {
+		set_country_flag = nazmir_start_opened
+            set_variable = {
+                which = nazmir_blood
+                value = 0
+            }
+			}
+		AMK = {
+		set_country_flag = nazmir_start_opened
+            set_variable = {
+                which = nazmir_blood
+                value = 0
+            }
+			}
+		NZM = {
+            set_variable = {
+                which = nazmir_small
+                value = 0
+            }
+			}
+		NTV = {
+            set_variable = {
+                which = nazmir_small
+                value = 0
+            }
+			}
+		AMK = {
+            set_variable = {
+                which = nazmir_small
+                value = 0
+            }
+			}
+		NZM = {
+            set_variable = {
+                which = nazmir_medium
+                value = 0
+            }
+			}
+		NTV = {
+            set_variable = {
+                which = nazmir_medium
+                value = 0
+            }
+			}
+		AMK = {
+            set_variable = {
+                which = nazmir_medium
+                value = 0
+            }
+			}
+		NZM = {
+            set_variable = {
+                which = nazmir_big
+                value = 0
+            }
+			}
+		NTV = {
+            set_variable = {
+                which = nazmir_big
+                value = 0
+            }
+			}
+		AMK = {
+            set_variable = {
+                which = nazmir_big
+                value = 0
+            }
+			}
+		NZM = {
+            set_variable = {
+                which = nazmir_curse
+                value = 1
+            }
+			}
+		NTV = {
+            set_variable = {
+                which = nazmir_curse
+                value = 1
+            }
+			}
+		AMK = {
+            set_variable = {
+                which = nazmir_curse
+                value = 1
+            }
+			}
+    if = {
+        limit = {
+		OR = {
+		AND = {
+            tag = NZM # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = no
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = yes
+			NTV = {
+			ai = no
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+		AND = {
+            tag = NZM # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+			
+        }
+		}
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = NTV          # Who the current scope makes subject
+}
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = AMK          # Who the current scope makes subject
+}
+    }
+    
+    if = {
+        limit = {
+		AND = {
+            tag = NTV # Natha'vor
+            ai = no
+			NZM = {
+			ai = yes
+			}
+			AMK = {
+			ai = yes
+			}
+			}
+        }
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = NZM          # Who the current scope makes subject
+}
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = AMK          # Who the current scope makes subject
+}
+    }
+	
+    if = {
+        limit = {
+		AND = {
+            tag = AMK # Nazmani
+            ai = no
+			NTV = {
+			ai = yes
+			}
+			NZM = {
+			ai = yes
+			}
+			}
+        }
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = NTV           # Who the current scope makes subject
+}
+create_subject = {              # Used to create subjects not covered by other effects
+    subject_type = lesser_bloodmother       # Found in common/subject_types/00_subject_types.txt
+	subject = NZM           # Who the current scope makes subject
+}
+    }
+
+	}
+    }
+    
+	option = {
+		name = wwu_nazmir.1.op1
+        custom_tooltip = event_1_tooltip
+        hidden_effect = {
+            set_country_flag = first_blood_matron
+        }
+	}
+}
+
+# An start event that appears after built totem
+country_event = {
+	id = wwu_nazmir.2
+	title = wwu_nazmir.2.title
+	desc = wwu_nazmir.2.desc
+	picture = NAZMIR_2_eventPicture
+    
+    is_triggered_only = yes
+
+    immediate = {
+		capital_scope = {
+    remove_province_triggered_modifier = blood_totem_building_province
+            }
+	}
+	option = {
+		name = wwu_nazmir.2.op1
+        custom_tooltip = event_2_tooltip
+		capital_scope = {
+		                add_province_triggered_modifier = blood_totem_province
+            }
+			hidden_effect = {
+					random_easy_sacrificial = yes
+					random_medium_sacrificial = yes
+					random_hard_sacrificial = yes
+					}
+	}
+}
+

@@ -59,12 +59,104 @@ country_event = {
 		}
         
 		zandalar_diplomatic_superiority_effect = yes
+		
+	# Making ai able to complete the disaster
+		hidden_effect = {
+		if = {
+		limit = {
+		ai = yes
+		}
+		change_estate_land_share = {
+			estate = estate_clergy
+			share = -2.25
+		}
+		change_estate_land_share = {
+			estate = estate_traders
+			share = -2.25
+		}
+		change_estate_land_share = {
+			estate = estate_nobility
+			share = -2.25
+		}
+		if = {
+		limit = {
+		2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
+				}
+            check_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 1
+            }
+			NOT = {
+            check_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 2
+            }
+			}
+				}
+				2469 = {
+				add_building = wow_farm_1
+				}
+
+		}
+		if = {
+		limit = {
+		2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
+				}
+            check_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 2
+            }
+			NOT = {
+            check_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 3
+            }
+			}
+				}
+			2469 = {
+				add_building = wow_market_1
+				}
+		}
+		if = {
+		limit = {
+		2469 = {
+                country_or_non_sovereign_subject_holds = ROOT
+				}
+            check_variable = {
+                which = zandalar_diplomatic_superiority
+                value = 3
+            }
+				}
+			2469 = {
+				add_building = wow_temple_1
+			add_great_project_tier = {
+				type = gp_dazaralor
+				tier = 1
+			}
+			}
+create_general = {
+    tradition = 40
+}
+create_general = {
+    tradition = 40
+}
+		}
+		}
+		}
+		ai_chance = {
+			factor = 100
+		}
 	}
     
 	option = {
 		name = wwu_zandalar.1.op2
         
         add_prestige = -5
+		ai_chance = {
+			factor = 0
+		}
 	}
 }
 
@@ -1209,6 +1301,426 @@ country_event = {
     }
 }
 
+    # Zandalar choosing to pay tribute
+country_event = {
+	id = wwu_zandalar.43
+    title = "wwu_zandalar.43.title"
+	desc = "wwu_zandalar.43.desc"
+	picture = NAZMIR_1_eventPicture
+    
+    is_triggered_only = yes
+	
+	major = yes
+	major_trigger = { 
+	OR = {
+	tag = NZM
+	tag = NTV
+	tag = AMK
+	tag = NAZ
+	}
+	}
+    
+    option = {
+        name = "wwu_zandalar.43.op1"
+        custom_tooltip = zandalar_pay_tribute
+		
+		hidden_effect = {
+		if = {
+		limit = {
+		NZM = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NZM = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NZM
+			}
+			white_peace = NZM
+			}
+			}
+		if = {
+		limit = {
+		NTV = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NTV = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NTV
+			}
+			white_peace = NTV
+			}
+			}
+		if = {
+		limit = {
+		AMK = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		AMK = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = AMK
+			}
+			white_peace = AMK
+			}
+			}
+		if = {
+		limit = {
+		NAZ = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NAZ = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NAZ
+			}
+			white_peace = NAZ
+			}
+			}
+				country_event = { 
+			id = wwu_zandalar.44
+				days = 100
+			}
+			}
+		ai_chance = { 
+			factor = 10 
+		}
+
+    }
+    
+    option = {
+        name = "wwu_zandalar.43.op2"
+		if = {
+		limit = {
+		has_disaster = rusty_empire
+		}
+        custom_tooltip = zandalar_cant_stop_tribute
+		hidden_effect = {
+		if = {
+		limit = {
+		NZM = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NZM = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NZM
+			}
+			white_peace = NZM
+			}
+			}
+		if = {
+		limit = {
+		NTV = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NTV = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NTV
+			}
+			white_peace = NTV
+			}
+			}
+		if = {
+		limit = {
+		AMK = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		AMK = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = AMK
+			}
+			white_peace = AMK
+			}
+			}
+		if = {
+		limit = {
+		NAZ = {
+		exists = yes
+		NOT = {has_country_flag = zandalari_tribute_reject}
+		}
+		}
+		NAZ = {
+						country_event = { 
+			id = wwu_zandalar.45
+			}
+			}
+			if = {
+			limit = {
+			war_with = NAZ
+			}
+			white_peace = NAZ
+			}
+			}
+				country_event = { 
+			id = wwu_zandalar.44
+				days = 100
+			}
+			}
+		}
+		if = {
+		limit = {
+		NOT = {
+		has_disaster = rusty_empire}
+		}
+        custom_tooltip = zandalar_stop_tribute
+
+		}
+		
+		ai_chance = { 
+			factor = 75 
+			modifier = {
+				factor = 0
+				has_disaster = rusty_empire
+			}
+		}
+        
+
+    }
+}
+
+    # Check if tribes took tribute
+country_event = {
+	id = wwu_zandalar.44
+	title = wwu_zandalar.44.title
+	desc = wwu_zandalar.44.desc
+	picture = ZANDALAR_1_eventPicture
+	hidden = yes
+	
+	is_triggered_only = yes
+	
+	trigger = {
+	tag = A78
+	OR = {
+	truce_with = NZM
+	truce_with = NTV
+	truce_with = AMK
+	truce_with = NAZ
+	}
+	}
+    
+
+	option = {
+		name = wwu_zandalar.44.op1
+				country_event = { 
+			id = wwu_zandalar.43
+				days = 1725
+			}
+	}
+    
+}
+
+    # Tribes choose to claim tribute
+country_event = {
+	id = wwu_zandalar.45
+	title = wwu_zandalar.45.title
+	desc = wwu_zandalar.45.desc
+	picture = ZANDALAR_1_eventPicture
+	
+	is_triggered_only = yes
+	
+	major = yes
+	major_trigger = { 
+	tag = A78
+	}
+    
+    # Death after got blessing
+	option = {
+		name = wwu_zandalar.45.op1
+		custom_tooltip = zandalar_accept_tribute
+		
+		if = {
+		limit = {
+		tag = NZM
+		}
+		add_truce_with = A78
+		A78 = {
+		add_country_modifier = {
+			name = zandalar_tribute_to_nazmani
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		add_country_modifier = {
+			name = zandalar_tribute_tribes
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		if = {
+		limit = {
+		tag = NTV
+		}
+		add_truce_with = A78
+		A78 = {
+		add_country_modifier = {
+			name = zandalar_tribute_to_nathavor
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		add_country_modifier = {
+			name = zandalar_tribute_tribes
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		if = {
+		limit = {
+		tag = AMK
+		}
+		add_truce_with = A78
+		A78 = {
+		add_country_modifier = {
+			name = zandalar_tribute_to_amaki
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		add_country_modifier = {
+			name = zandalar_tribute_tribes
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		if = {
+		limit = {
+		tag = NAZ
+		}
+		add_truce_with = A78
+		A78 = {
+		add_country_modifier = {
+			name = zandalar_tribute_to_nazmir
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		add_country_modifier = {
+			name = zandalar_tribute_nazmir
+			duration = 1825                       # -1 for unlimited duration
+		}
+		}
+		ai_chance = { 
+			factor = 95
+		}
+	}
+	option = {
+		name = wwu_zandalar.45.op2
+		custom_tooltip = zandalar_reject_tribute
+		hidden_effect = {
+		set_country_flag = zandalari_tribute_reject
+		}
+		ai_chance = { 
+			factor = 5 
+		}
+	}
+}
+
+
+# Giving additional bonus on gold mines
+country_event = {
+	id = wwu_zandalar.46
+	title = wwu_zandalar.46.title
+	desc = wwu_zandalar.46.desc
+	picture = ZANDALAR_1_eventPicture
+	hidden = yes
+	trigger = {
+	has_country_flag = zandalari_gold_mines_upgrade
+	}
+	is_triggered_only = yes
+    
+    # Give bonus to specific expanded infrastructure
+	option = {
+		name = wwu_zandalar.46.op1
+		if = {
+		limit = {
+		event_target:expanded_infrastructure_target = {
+		NOT = { num_of_times_expanded_infrastructure = 2 }
+		num_of_times_expanded_infrastructure = 1
+		trade_goods = resource_treasure
+		NOT = { has_active_triggered_province_modifier = zandalar_mine_1 }
+		}
+		}
+		event_target:expanded_infrastructure_target = {
+		add_province_triggered_modifier = zandalar_mine_1
+		}
+		}
+		if = {
+		limit = {
+		event_target:expanded_infrastructure_target = {
+		NOT = { num_of_times_expanded_infrastructure = 3 }
+		num_of_times_expanded_infrastructure = 2
+		trade_goods = resource_treasure
+		OR = {
+		NOT = { has_active_triggered_province_modifier = zandalar_mine_2 }
+		has_active_triggered_province_modifier = zandalar_mine_1
+		}
+		}
+		}
+		event_target:expanded_infrastructure_target = {
+		remove_province_triggered_modifier = zandalar_mine_1
+		add_province_triggered_modifier = zandalar_mine_2
+		}
+		}
+		if = {
+		limit = {
+		event_target:expanded_infrastructure_target = {
+		num_of_times_expanded_infrastructure = 3
+		trade_goods = resource_treasure
+		OR = {
+		NOT = { has_active_triggered_province_modifier = zandalar_mine_3 }
+		has_active_triggered_province_modifier = zandalar_mine_2
+		}
+		}
+		}
+		event_target:expanded_infrastructure_target = {
+		remove_province_triggered_modifier = zandalar_mine_2
+		add_province_triggered_modifier = zandalar_mine_3
+		}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+}
 # Loa blessing on new ruler election
 country_event = {
 	id = wwu_zandalar.50

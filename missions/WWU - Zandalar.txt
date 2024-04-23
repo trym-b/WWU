@@ -1336,26 +1336,77 @@ A78_zandalar_column_5 = {
 		}
 		
 		trigger = {
-            # Atal'gral
-            1112 = {
-                country_or_non_sovereign_subject_holds = ROOT
-                development = 15
+			num_of_owned_provinces_with = {
+				value = 2
+				num_of_times_expanded_infrastructure = 2
+				trade_goods = resource_treasure
                 OR = {
-                    has_building = wow_mine_2
-                    has_building = wow_mine_3
+                    has_building = wow_farm_2
+                    has_building = wow_farm_3
                 }
-            }
+			}
 		}
         provinces_to_highlight = {
-            province_id = 1112
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		OR = {
+		AND = {
+			province_id = 1112
+			country_or_non_sovereign_subject_holds = ROOT
+			}
+		AND = {
+			NOT = { num_of_times_expanded_infrastructure = 2 }
+			trade_goods = resource_treasure
+            country_or_non_sovereign_subject_holds = ROOT
+			}
+			}
         }
+		
+
+		
 		effect = {
+            custom_tooltip = zandalar_gold_mines_upgrade
+            set_country_flag = zandalari_gold_mines_upgrade
+		hidden_effect = {
             # Atal'gral
+			if = {
+			limit = {
+			1112 = {
+			owned_by = ROOT
+			num_of_times_expanded_infrastructure = 2
+                OR = {
+                    has_building = wow_farm_2
+                    has_building = wow_farm_3
+                }
+				}
+				}
             1112 = {
                 change_trade_goods = resource_treasure
             }
         }
+		every_owned_province = {
+		limit = {
+		NOT = { num_of_times_expanded_infrastructure = 2 }
+		num_of_times_expanded_infrastructure = 1
+		trade_goods = resource_treasure
+		}
+		add_province_triggered_modifier = zandalar_mine_1
+		}
+		every_owned_province = {
+		limit = {
+		NOT = { num_of_times_expanded_infrastructure = 3 }
+		num_of_times_expanded_infrastructure = 2
+		trade_goods = resource_treasure
+		}
+		add_province_triggered_modifier = zandalar_mine_2
+		}
+		every_owned_province = {
+		limit = {
+		num_of_times_expanded_infrastructure = 3
+		trade_goods = resource_treasure
+		}
+		add_province_triggered_modifier = zandalar_mine_3
+		}
+		}
+		}
         
         ai_weight   = { factor = 1 }
     }
@@ -1400,7 +1451,7 @@ A78_zandalar_column_5 = {
                 }
             }
             
-            gold_income = 20
+            gold_income = 100
             
             calc_true_if = {
                 amount = 3

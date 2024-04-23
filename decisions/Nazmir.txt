@@ -1,0 +1,151 @@
+country_decisions = {
+    # Start building totem to unlock first mission
+	nazmir_build_first_totem = {
+        color = { 144 34 42 }
+        
+        potential = {
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+			}
+			NOT = { has_country_flag = nazmir_first_totem_building }
+        }
+        
+		allow = {
+			adm_power = 150                   
+			dip_power = 150                     
+			mil_power = 150
+			
+			manpower = 5
+			
+			capital_scope = {
+			num_of_units_in_province = {
+				who = ROOT
+				type = infantry
+				amount = 5
+			}
+			}
+			
+		}
+        
+		effect = {
+		add_adm_power = -150
+		add_dip_power = -150
+		add_mil_power = -150
+		
+		add_manpower = -5
+		
+		capital_scope = {
+		kill_units = {
+			who = ROOT
+			type = infantry
+			amount = 5
+		}
+		}
+		
+		capital_scope = {
+		                add_province_triggered_modifier = blood_totem_building_province
+            }
+            
+					country_event = { 
+			id = wwu_nazmir.2
+			days = 365
+		}
+
+            hidden_effect = {
+                set_country_flag = nazmir_first_totem_building
+            }
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+    
+	
+	
+    # Open blood totem menu
+	nazmir_blood_totem_decision = {
+        color = { 144 34 42 }
+        
+        potential = {
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
+			any_owned_province = {
+			has_active_triggered_province_modifier = blood_totem_province
+			}
+        }
+        
+		allow = {
+			any_owned_province = {
+			has_active_triggered_province_modifier = blood_totem_province
+			}
+		}
+        
+		effect = {
+		
+			custom_tooltip = decision_2_nazmir_tooltip
+			
+			hidden_effect = {
+            
+            country_event = { id = wwu_blood_totem.1 }
+			}
+			
+		}
+        
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+	
+    # Reload blood totem menu
+	nazmir_blood_totem_reload_decision = {
+        color = { 144 34 42 }
+        
+        potential = {
+		NOT = { has_country_flag = blood_totem_menu_open }
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
+			any_owned_province = {
+			has_active_triggered_province_modifier = blood_totem_province
+			}
+        }
+        
+		allow = {
+			stability = 1
+			any_owned_province = {
+			has_active_triggered_province_modifier = blood_totem_province
+			}
+		}
+        
+		effect = {
+			add_stability = -1
+			custom_tooltip = decision_3_nazmir_tooltip
+            hidden_effect = {
+            random_easy_sacrificial = yes
+			random_medium_sacrificial = yes
+			random_hard_sacrificial = yes
+			remove_country_modifier = easy_sacrificial_cd
+			remove_country_modifier = medium_sacrificial_cd
+			remove_country_modifier = hard_sacrificial_cd
+			remove_country_modifier = blood_totem_curse_cd
+			}
+			
+		}
+        
+		ai_will_do = {
+			factor = 0
+		}
+	}
+    
+	}
