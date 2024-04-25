@@ -50,15 +50,9 @@ KUN_kunzen_column_1 = {
 		trigger = {
 			OR = {
 			NOT = { exists = HZS }
-			AND = {
-				reverse_has_opinion = {
-					who = KUN
-					value = 180
-				}
-				has_opinion = {
-					who = HZS
-					value = 200
-					}
+			reverse_has_opinion = {
+				who = KUN
+				value = 190
 				}
 			}
 		}
@@ -103,6 +97,10 @@ KUN_kunzen_column_1 = {
 		effect = {
 			add_years_of_income = 3.0
 			add_adm_power = 100
+
+			area_westfall_shore = {
+				add_claim = ROOT
+			}
 		}
 	}
 
@@ -112,6 +110,9 @@ KUN_kunzen_column_1 = {
 
 		trigger = {
 			OR = {
+				A83 = {
+					is_subject_of = ROOT
+				}
 				is_rival = A83
 				any_country = {
 					NOT = { tag = A83 }
@@ -129,6 +130,18 @@ KUN_kunzen_column_1 = {
 
 			area_booty_bay = {
 				add_permanent_claim = ROOT
+			}
+			area_jaguero_isle = {
+				add_permanent_claim = ROOT
+			}
+
+			if = {
+				limit = {
+					A83 = {
+						is_subject_of = ROOT
+					}
+					inherit = A83
+				}
 			}
 		}
 	}
@@ -226,15 +239,7 @@ KUN_kunzen_column_1 = {
 		}
 
 		effect = {
-			#country_event = { id = wwu_aqir.101 }
-
-			define_general = {
-				shock = 6
-				fire = 6
-				manuever = 8
-				siege = 8
-				name = "King Mulka"
-			}
+			country_event = { id = wwu_mission_kunzen.5 }
 		}
 	}
 }
@@ -431,9 +436,14 @@ KUN_kunzen_column_2 = {
 			}
 
 			custom_tooltip = KUNZEN_UNLOCK_KUNZEN_FLAGSHIP_TT
+			custom_tooltip = KUNZEN_DISCOVER_SOUTH_SEAS_TT
+			custom_tooltip = KUNZEN_UNLOCK_PLUNDER_ISLE_MONUMENTS_TT
 
 			hidden_effect = {
-				discover_country = south_seas_superregion
+				south_seas_superregion = {
+					discover_country = ROOT
+				}
+				set_country_flag = monument_research_plunder_isle
 				set_country_flag = kunzen_ship_boarding_unlock
 			}
 		}
@@ -528,7 +538,7 @@ KUN_kunzen_column_2 = {
 				add_permanent_claim = ROOT
 			}
 
-			custom_tooltip = MONKEY_MISSION_WARNING_TT
+			custom_tooltip = KUNZEN_MONKEY_MISSION_WARNING_TT
 
 			if = {
 				limit = {
@@ -536,12 +546,12 @@ KUN_kunzen_column_2 = {
 					DAK = {
 						has_opinion = {
 							who = KUN
-							value = 100
+							value = 125
 						}
 					}
 				}
 				DAK = {
-					country_event = { id = wwu_aqir.101 }
+					country_event = { id = wwu_mission_kunzen.1 }
 				}
 			}
 
@@ -551,14 +561,16 @@ KUN_kunzen_column_2 = {
 					THP = {
 						has_opinion = {
 							who = KUN
-							value = 100
+							value = 125
 						}
 					}
 				}
 				THP = {
-					country_event = { id = wwu_aqir.101 }
+					country_event = { id = wwu_mission_kunzen.2 }
 				}
 			}
+
+			custom_tooltip = RISE_OF_KUNZEN_EVENT_PREVIEW_TT
 		} 
 	}
 
@@ -571,6 +583,7 @@ KUN_kunzen_column_2 = {
 		trigger = {
 			NOT = { exists = A78 }
 			region_zuldazar = {
+				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
@@ -618,7 +631,6 @@ KUN_kunzen_column_3 = {
 			4133 = {
 				development = 15
 			}
-			treasury = 100
 		}
 
 		provinces_to_highlight = {
@@ -631,16 +643,16 @@ KUN_kunzen_column_3 = {
 				duration = 7300
 			}
 
-			custom_tooltip = KUNZA_DEV_MISSION_WARNING_TT
+			custom_tooltip = KUNZEN_KUNZA_DEV_MISSION_WARNING_TT
 
 			hidden_effect = {
 				if = {
 					limit = {
 						treasury = 100
 					}
-					#country_event = { id = wwu_aqir.101 days = 90 }
 					4780 = {
 						cede_province = ROOT
+						add_core = ROOT
 					}
 					add_treasury = -100
 				}
@@ -777,6 +789,17 @@ KUN_kunzen_column_3 = {
 		effect = {
 			add_years_of_income = 3.0
 			add_mil_power = 100
+
+			if = {
+				limit = {
+					exists = A83
+				}
+				add_casus_belli = {
+                	target = A83
+                	type = cb_vassalize_mission
+                	months = 240
+            	}
+			}
 		}
 	}
 
@@ -840,6 +863,16 @@ KUN_kunzen_column_4 = {
 		position = 1
 
 		trigger = {
+			4778 = {
+				owned_by = ROOT
+			}
+			4133 = {
+				owned_by = ROOT
+			}
+			1795 = {
+				owned_by = ROOT
+			}
+
 			OR = {
 				4778 = {
 					has_building = wow_portal
@@ -861,6 +894,17 @@ KUN_kunzen_column_4 = {
 
 		effect = {
 			add_stability = 1
+
+			hidden_effect = {
+				area_halfhill = {
+					discover_country = ROOT
+				}
+				area_stormstout_fields = {
+					discover_country = ROOT
+				}
+			}
+
+			custom_tooltip = KUNZEN_DISCOVER_STORMSTOUT_AND_HALFHILL_TT
 		}
 	}
 
@@ -889,7 +933,13 @@ KUN_kunzen_column_4 = {
 		}
 
 		effect = {
-			discover_country = pandaria_superregion
+			hidden_effect = {
+				region_valley_of_the_four_winds = {
+					discover_country = ROOT
+				}
+			}
+
+			custom_tooltip = KUNZEN_DISCOVER_VALLEY_OF_FOUR_WINDS_TT
 
 			region_valley_of_the_four_winds = {
 				add_permanent_claim = ROOT
@@ -948,6 +998,14 @@ KUN_kunzen_column_4 = {
 				name = mission_hozen_valley
 				duration = -1
 			}
+
+			hidden_effect = {
+				pandaria_superregion = {
+					discover_country = ROOT
+				}
+			}
+
+			custom_tooltip = KUNZEN_DISCOVER_PANDARIA_TT
 		}
 	}
 
