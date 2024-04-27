@@ -245,7 +245,7 @@ H04_cen_mar_column_2 = {
         trigger = {
             has_global_modifier_value = {
                 which = cavalry_power
-                value = 0.45
+                value = 0.75
             }
         }
 
@@ -297,12 +297,16 @@ H04_cen_mar_column_3 = {
         required_missions = { H04_organize_raiding_parties }
 
         trigger = {
-            has_casus_belli_against = B69
-            is_rival = B69
             has_spy_network_in = {
                 who = B69
-                value = 50
+                value = 33
             }
+            OR = {
+                has_casus_belli_against = B69
+                is_rival = B69
+            }
+            NOT = { has_truce = yes }
+            NOT = { is_at_war = yes }
         }
 
         provinces_to_highlight = {
@@ -348,10 +352,6 @@ H04_cen_mar_column_3 = {
 
         trigger = {
             war_with = B69
-            war_score_against = {
-                who = B69
-                value = 75
-            }
             area_the_sludge_fen = {
                 type = all
                 controlled_by = ROOT
@@ -402,6 +402,10 @@ H04_cen_mar_column_3 = {
             1379 = {
                 add_core = ROOT
                 cede_province = ROOT
+            }
+
+            region_durotar = {
+                add_claim = ROOT
             }
         }
     }
