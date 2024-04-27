@@ -16,6 +16,7 @@ NGame = {
 	--- WWU: changed.
 
 	AGE_USHER_IN_TIME = 300,				-- how many months progress for a new age needs.
+	--- WWU: Base value is 360, reduced for incentive to obtain more cards via splendor spending, reduced waiting time between age progression.
 
 	MAX_COLONIAL_NATIONS = 75,				-- Max is 100
 	MAX_CLIENT_STATES = 100,				-- Max is 100 -- TODO: Lower this to 75 after 1.18 (used to start at K75 for some reason)
@@ -167,8 +168,10 @@ NDiplomacy = {
 	REQUEST_HEIR_TRUCE = 5,
 	REQUEST_HEIR_AE = 20,
 	WARNING_YEARS = 10,								-- Years before warning expire
+	--- WWU: Reduced time for warnings to reduce blocking expansion by more powerful AI
 	ANNUL_TREATIES_YEARS = 10,						-- Years before annul treaties expire
 	COALITION_YEARS = 10,							-- Years before coalition expire
+	--- WWU: reduced time that coalition remains active to not block expansion for players
 	REVANCHISM_MONTHLY_DECAY = 0.833,			-- about 20 years to decay all of it.
 	MONARCH_GOV_CHANGE_LEGITIMACY_PENALTY = 0.0,	-- Penalty(%) on the legitimacy when changing gov type to the monarchy
 	EXTEND_REGENCY_LEGITIMACY_PENALTY = 10,  		-- Penalty for extending a regency
@@ -443,6 +446,7 @@ NDiplomacy = {
 	BREAK_ALLIANCE_PENALTY_SCALER = -0.85,			-- Break Alliance resentment is scaled by this value but is capped at -100.
 	BREAK_ALLIANCE_DIPLOREP_FACTOR = 3,				-- AI acceptance factor per diplomatic reputation
 	AE_COALITION_THRESHOLD = -75,					-- Coalitions can form below this amount of AE opinion
+	--- WWU: BASE -50, Increased on player demand
 	
 	ABANDON_UNION_PRESTIGE = -25,					-- The change in prestige for the overlord when abandoning a personal union.
 
