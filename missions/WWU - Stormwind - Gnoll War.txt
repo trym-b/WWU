@@ -144,23 +144,45 @@ STW_1_stormwind_column_2 = {
         required_missions = { STW_1_stormwind_gnoll_defeat_westfal }
 
         trigger = {
-            region_westfall = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
+                area_moonbrook = {
+                    type = all
+                    owned_by = ROOT
+                }
+                area_westfall_farmland = {
+                    type = all
+                    owned_by = ROOT
             }
         }
 
         provinces_to_highlight = {
-            region = region_westfall
+            OR = {
+                area = area_moonbrook
+                area = area_westfall_farmland
+            }
         }
 
         effect = {
             add_adm_power = 125
 
-            region_westfall = {
-                add_province_modifier = {
-                    name = mission_stw_one_secured_westfal
-                    duration = 7300
+            custom_tooltip = SECURE_WESTFALL_TT
+
+            if = {
+                limit = {
+                    region_westfall = {
+                        type = all
+                        owned_by = ROOT
+                    }
+                }
+                region_westfall = {
+                        add_province_modifier = {
+                            name = mission_stw_one_secured_westfal
+                            duration = 7300
+                    }
+                }
+            }
+            else = {
+                    region_westfall = {
+                        add_permanent_claim = ROOT
                 }
             }
         }
@@ -231,13 +253,13 @@ STW_1_stormwind_column_3 = {
                 add_permanent_claim = ROOT
             }
             region_westfall = {
-                add_permanent_claim = ROOT
+                add_claim = ROOT
             }
             region_duskwood = {
-                add_permanent_claim = ROOT
+                add_claim = ROOT
             }
             region_redridge_mountains = {
-                add_permanent_claim = ROOT
+                add_claim = ROOT
             }
         }
     }
@@ -345,7 +367,7 @@ STW_1_stormwind_column_3 = {
 
         effect = {
             add_prestige = 10
-            add_years_of_income = 5
+            add_years_of_income = 3
         }
     }
 
@@ -365,6 +387,8 @@ STW_1_stormwind_column_3 = {
 
         effect = {
             custom_tooltip = STORMWIND_ONE_EVENT_INSIGHT_LAST_TT
+
+            remove_country_modifier = stormwind_crippled
 
             country_event = { id = wwu_mission_stw_one.3 }
             country_event = { id = wwu_mission_stw_one.4 }
@@ -462,10 +486,25 @@ STW_1_stormwind_column_4 = {
         effect = {
             add_adm_power = 125
 
+            custom_tooltip = SECURE_DUSKWOOD_TT
+
             region_duskwood = {
                 add_province_modifier = {
                     name = mission_stw_one_secured_hamlet
                     duration = 7300
+                }
+            }
+
+            if = {
+                limit = {
+                    GD3 = {
+                        is_subject_of = ROOT
+                    }
+                }
+                698 = {
+                    add_base_manpower = 3
+                    add_building = wow_temple_3
+                    add_core = ROOT
                 }
             }
         }
@@ -528,7 +567,6 @@ STW_1_stormwind_column_5 = {
                 name = mission_stw_one_brotherhood_of_horse
                 duration = 3650
             }
-            set_country_flag = stormwind_avalable_horsebrothers
         }
     }
 
@@ -536,12 +574,10 @@ STW_1_stormwind_column_5 = {
         icon = mission_gunspire
         position = 3
 
-        required_missions = { STW_1_stormwind_brotherhood_of_horse }
-
         trigger = {
-            num_of_artillery = 6
+            num_of_artillery = 4
             2206 = {
-                base_manpower = 8
+                base_manpower = 5
                 has_building = wow_arsenal_1
             }
         }
@@ -553,6 +589,7 @@ STW_1_stormwind_column_5 = {
         effect = {
             2206 = {
                 add_building = wow_arsenal_3
+                add_base_production = 2
             }
             add_country_modifier = {
                 name = mission_stw_one_stormwind_cannons
