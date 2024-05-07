@@ -1,0 +1,185 @@
+namespace = wwu_mission_lordaeron
+
+# Fate of Tyr's Hand
+country_event = {
+    id = wwu_mission_lordaeron.1
+    title = wwu_mission_lordaeron.1
+    desc = wwu_mission_lordaeron.1
+    picture = STORMWIND_KNIGHT_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_lordaeron.1.option.a
+
+        area_new_avalon = {
+            cede_province = P62
+            add_core = P62
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+        area_noxious_glade = {
+            cede_province = P62
+            add_core = P62
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+
+        1028 = {
+            add_base_tax = 2
+            add_base_production = 2
+            add_base_manpower = 2
+        }
+
+        A08 = {
+            country_event = { id = wwu_mission_lordaeron.2 days = 1 }
+        }
+
+        ai_chance = {
+            factor = 10
+        }
+    }
+
+    option = {
+        name = wwu_mission_lordaeron.1.option.b
+
+        area_new_avalon = {
+            change_culture = culture_lordaeron
+            change_religion = holy_light
+        }
+
+        3073 = {
+            cede_province = LDH
+            add_core = LDH
+        }
+        922 = {
+            cede_province = LDH
+            add_core = LDH
+        }
+        915 = {
+            cede_province = LDH
+            add_core = LDH
+        }
+        1011 = {
+            cede_province = LDH
+            add_core = LDH
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+        }
+
+        519 = {
+            cede_province = LDA
+            add_core = LDA
+        }
+        1028 = {
+            cede_province = LDA
+            add_core = LDA
+            add_base_tax = 1
+            add_base_production = 1
+            add_base_manpower = 1
+        }
+        539 = {
+            cede_province = LDA
+            add_core = LDA
+        }
+
+        A08 = {
+            country_event = { id = wwu_mission_lordaeron.2 days = 1 }
+        }
+
+        A08 = {
+            add_country_modifier = {
+                name = A08_event_tyrs_autonomy
+                duration = 14600
+            }
+        }
+
+        ai_chance = {
+            factor = 2
+        }
+    }
+
+    option = {
+        name = wwu_mission_lordaeron.1.option.c
+
+        area_new_avalon = {
+            add_core = ROOT
+            change_culture = ROOT
+            change_religion = ROOT
+        }
+
+        1028 = {
+            add_base_tax = 3
+            add_base_production = 3
+            add_base_manpower = 3
+        }
+
+        add_dip_power = -200
+        add_treasury = -250
+        add_manpower = -5
+
+        ai_chance = {
+            factor = 1
+        }
+    }
+}
+
+# Control Event
+country_event = {
+    id = wwu_mission_lordaeron.2
+    title = wwu_mission_lordaeron.2
+    desc = wwu_mission_lordaeron.2
+    picture = STORMWIND_KNIGHT_eventPicture
+
+    is_triggered_only = yes
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_mission_lordaeron.2.option.a
+
+        if = {
+            limit = {
+                exists = P62
+            }
+            create_subject = {
+                subject_type = march
+                subject = P62
+            }
+            P62 = {
+                set_capital = 1028
+            }
+        }
+
+        if = {
+            limit = {
+                exists = LDH
+            }
+            create_subject = {
+                subject_type = tributary_vassal
+                subject = LDH
+            }
+            LDH = {
+                set_capital = 1011
+            }
+        }
+
+        if = {
+            limit = {
+                exists = LDA
+            }
+            create_subject = {
+                subject_type = tributary_vassal
+                subject = LDA
+            }
+            LDA = {
+                set_capital = 1028
+            }
+        }
+    }
+}

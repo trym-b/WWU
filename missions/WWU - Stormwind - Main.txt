@@ -276,6 +276,268 @@ STW_stormwind_column_1 = {
 			country_event = { id = wwu_mission_stw_main.11 }
 		}
 	}
+
+	STW_stormwind_m_preparation_of_restoration = {
+		icon = mission_titan_spirits
+		position = 11
+
+		trigger = {
+			stability = 1
+			OR = {
+				employed_advisor = {
+					type = supervisor
+				}
+				full_idea_group = wwu_development_ideas
+			}
+
+			area_stormwind = {
+				type = all
+				OR = {
+					has_state_edict = edict_encourage_construction
+					has_state_edict = edict_encourage_development
+				}
+			}
+
+			area_stormwind_coast = {
+				type = all
+				OR = {
+					has_state_edict = edict_encourage_construction
+					has_state_edict = edict_encourage_development
+				}
+			}
+
+			area_lower_stormwind = {
+				type = all
+				OR = {
+					has_state_edict = edict_encourage_construction
+					has_state_edict = edict_encourage_development
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_lower_stormwind
+				area = area_stormwind
+				area = area_stormwind_coast
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = mission_stormwind_development
+					duration = 9125
+				}
+			}
+		}
+
+	STW_stormwind_m_expansion_of_trade_district = {
+		icon = mission_titan_spirits
+		position = 12
+
+		required_missions = { STW_stormwind_m_preparation_of_restoration }
+
+		trigger = {
+			2202 = {
+				development = 12
+				base_production = 6
+				OR = {
+					has_building = wow_market_1
+					has_building = wow_market_2
+					has_building = wow_market_3
+				}
+				OR = {
+					province_has_center_of_trade_of_level = 2
+					province_has_center_of_trade_of_level = 3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2202
+		}
+
+		effect = {
+			2202 = {
+				add_base_tax = 2
+				add_base_production = 2
+			}
+			
+			if = {
+				limit = {
+					2202 = {
+						NOT = { province_has_center_of_trade_of_level = 3 }
+					}
+				}
+				2202 = {
+					add_center_of_trade_level = 1
+				}
+			}
+
+			define_advisor = {
+				type = trader
+				skill = 3
+				localtion = 2202
+				discount = yes
+				culture = culture_stormwindian
+				religion = holy_light
+			}
+		}
+	}
+
+	STW_stormwind_m_development_of_old_town = {
+		icon = mission_titan_spirits
+		position = 13
+
+		required_missions = { STW_stormwind_m_expansion_of_trade_district }
+
+		trigger = {
+			2206 = {
+				development = 15
+				OR = {
+					base_manpower = 10
+					holy_order = warrior_order
+				}
+				OR = {
+					has_building = wow_arsenal_1
+					has_building = wow_arsenal_2
+					has_building = wow_arsenal_3
+				}
+				OR = {
+					has_building = wow_tavern_1
+					has_building = wow_tavern_2
+					has_building = wow_tavern_3
+				}
+				OR = {
+					has_building = wow_barracks_1
+					has_building = wow_barracks_2
+					has_building = wow_barracks_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2206
+		}
+
+		effect = {
+			2206 = {
+				add_province_modifier = {
+					name = mission_elwynn_fortification
+					duration = -1
+				}
+				add_base_manpower = 2
+				add_base_tax = 2
+			}
+			add_army_professionalism = 0.05
+
+			custom_tooltip = ENABLE_PRIVILIGE_GUILD_OF_HEROES_TT
+
+			hidden_effect = {
+				set_country_flag = stormwind_enable_privilige_guild_of_heroes
+			}
+		}
+	}
+
+	STW_stormwind_m_industial_district = {
+		icon = mission_titan_spirits
+		position = 14
+
+		required_missions = { STW_stormwind_m_development_of_old_town }
+
+		trigger = {
+			2203 = {
+				development = 20
+				base_production = 10
+				OR = {
+					has_building = wow_mine_1
+					has_building = wow_mine_2
+					has_building = wow_mine_3
+				}
+			}
+			2505 = {
+				development = 15
+				base_production = 8
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2203
+				province_id = 2505
+			}
+		}
+
+		effect = {
+			2203 = {
+				change_trade_goods = resource_plate_armor
+				add_base_production = 3
+				add_province_modifier = {
+					name = mission_dwarven_district
+					duration = -1
+				}
+			}
+			2505 = {
+				change_trade_goods = resource_devices
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			
+			define_advisor = {
+				type = natural_scientist
+				name = "Grimand Elmore"
+				skill = 3
+				location = 2203
+				discount = yes
+				culture = culture_ironforge
+				religion = holy_light
+			}
+
+			add_prestige_or_monarch_power = {
+				amount = 10
+			}
+		}
+	}
+
+	STW_stormwind_m_the_park_district = {
+		icon = mission_titan_spirits
+		position = 15
+
+		required_missions = { STW_stormwind_m_industial_district }
+
+		trigger = {
+			2207 = {
+				development = 12
+				OR = {
+					has_building = wow_tavern_1
+					has_building = wow_tavern_2
+					has_building = wow_tavern_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2207
+		}
+
+		effect = {
+			add_stability = 1
+			2207 = {
+				change_trade_goods = resource_potions
+				add_base_tax = 3
+			}
+			add_country_modifier = {
+				name = mission_park_district
+				duration = -1
+			}
+		}
+	}
 }
 
 STW_stormwind_column_2 = {
@@ -458,6 +720,280 @@ STW_stormwind_column_2 = {
 			}
 
 			add_prestige = 20
+		}
+	}
+
+	STW_stormwind_m_the_mage_district = {
+		icon = mission_titan_spirits
+		position = 12
+
+		required_missions = { STW_stormwind_m_preparation_of_restoration }
+
+		trigger = {
+			2205 = {
+				development = 15
+				OR = {
+					has_building = wow_tower_1
+					has_building = wow_tower_2
+					has_building = wow_tower_3
+				}
+				has_building = wow_portal
+			}
+			OR = {
+				has_great_project = {
+    				type = gp_stormwind_mage_tower
+    				tier = 0
+				}
+				has_great_project = {
+    				type = gp_stormwind_mage_tower
+    				tier = 1
+				}
+				has_great_project = {
+    				type = gp_stormwind_mage_tower
+    				tier = 2
+				}
+				has_great_project = {
+    				type = gp_stormwind_mage_tower
+    				tier = 3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2205
+		}
+
+		effect = {
+			2205 = {
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+			add_great_project_tier = {
+    			type = gp_stormwind_mage_tower
+    			tier = 1
+			}
+
+			add_adm_power = 100
+			add_prestige_or_monarch_power = {
+				amount = 10
+			}
+		}
+	}
+
+	STW_stormwind_m_the_catedral_district = {
+		icon = mission_titan_spirits
+		position = 13
+
+		required_missions = { STW_stormwind_m_the_mage_district }
+
+		trigger = {
+			2204 = {
+				development = 15
+				base_tax = 5
+				OR = {
+					has_building = wow_temple_1
+					has_building = wow_temple_2
+					has_building = wow_temple_3
+				}
+			}
+			OR = {
+				has_great_project = {
+    				type = gp_cathedral_of_light
+    				tier = 0
+				}
+				has_great_project = {
+    				type = gp_cathedral_of_light
+    				tier = 1
+				}
+				has_great_project = {
+    				type = gp_cathedral_of_light
+    				tier = 2
+				}
+				has_great_project = {
+    				type = gp_cathedral_of_light
+    				tier = 3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2204
+		}
+
+		effect = {
+			2204 = {
+				add_base_manpower = 2
+			}
+			add_great_project_tier = {
+    			type = gp_cathedral_of_light
+    			tier = 1
+			}
+
+			define_advisor = {
+				type = inquisitor
+				skill = 2
+				location = 2204
+				discount = yes
+				culture = culture_stormwindian
+				religion = holy_light
+			}
+		}
+	}
+
+	STW_stormwind_m_gates_of_stormwind = {
+		icon = mission_titan_spirits
+		position = 14
+
+		required_missions = { STW_stormwind_m_the_catedral_district }
+
+		trigger = {
+			2149 = {
+				base_manpower = 12
+				OR = {
+					has_building = wow_arsenal_1
+					has_building = wow_arsenal_2
+					has_building = wow_arsenal_3
+				}
+				OR = {
+					has_building = wow_barracks_1
+					has_building = wow_barracks_2
+					has_building = wow_barracks_3
+				}
+				OR = {
+					has_building = wow_tower_1
+					has_building = wow_tower_2
+					has_building = wow_tower_3
+				}
+				OR = {
+					has_building = wow_training_ground_1
+					has_building = wow_training_ground_2
+					has_building = wow_training_ground_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 2149
+		}
+
+		effect = {
+			2149 = {
+				add_province_modifier = {
+					name = mission_stormwind_gates
+					duration = -1
+				}
+			}
+			#Add some decision about forts
+
+			add_manpower = 10
+			add_power_projection = {
+				amount = 10
+			}
+
+			custom_tooltip = SPECIALIST_FOOTMENT_TT
+			set_country_flag = stormwind_avalable_footmen
+		}
+	}
+
+	STW_stormwind_m_stormwind_harbor = {
+		icon = mission_titan_spirits
+		position = 15
+
+		required_missions = { STW_stormwind_m_gates_of_stormwind }
+
+		trigger = {
+			2141 = {
+				development = 20
+				base_production = 10
+			}
+			4111 = {
+				development = 10
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2141
+				province_id = 4111
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_stormwind_harbor
+				duration = -1
+			}
+
+			2141 = {
+				add_province_modifier = {
+					name = mission_harbor
+					duration = -1
+				}
+				center_of_trade = 1
+			}
+
+			#add decision frostsabre
+			custom_tooltip = ENABLE_PRIVILIGE_STORMWIND_PURCHASE_TRANSPORT_TT
+			set_country_flag = stormwind_enable_traders_purchase_transportships_privilege
+		}
+	}
+
+	STW_stormwind_m_stormwind_keep = {
+		icon = mission_titan_spirits
+		position = 16
+
+		required_missions = { STW_stormwind_m_stormwind_harbor STW_stormwind_m_the_park_district }
+
+		trigger = {
+			1022 = {
+				development = 30
+				has_fort_building_trigger = yes
+				prosperity = 100
+			}
+		}
+
+		provinces_to_highlight = {
+			province_id = 1022
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+
+			add_country_modifier = {
+				name = mission_stormwind_keep
+				duration = -1
+			}
+
+			area_stormwind = {
+				add_province_modifier = {
+					name = mission_stw_keep_local
+					duration = -1
+				}
+			}
+			area_lower_stormwind = {
+				add_province_modifier = {
+					name = mission_stw_keep_local
+					duration = -1
+				}
+			}
+			area_stormwind_coast = {
+				add_province_modifier = {
+					name = mission_stw_keep_local
+					duration = -1
+				}
+			}
+
+			if = {
+				limit = {
+					STW = {
+						has_country_modifier = stormwind_crippled
+					}
+				}
+				remove_country_modifier = stormwind_crippled
+			}
 		}
 	}
 }
@@ -729,7 +1265,292 @@ STW_stormwind_column_3 = {
 				}
 			}
 		}
-	}  
+	}
+
+	STW_stormwind_m_goldshire_expansion = {
+		icon = mission_titan_spirits
+		position = 15
+
+		required_missions = { STW_stormwind_m_gates_of_stormwind }
+
+		trigger = {
+			area_goldshire = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+				culture = ROOT
+			}
+			603 = {
+				development = 15
+				OR = {
+					has_building = wow_tavern_1
+					has_building = wow_tavern_2
+					has_building = wow_tavern_3
+				}
+				OR = {
+					has_building = wow_farm_1
+					has_building = wow_farm_2
+					has_building = wow_farm_3
+				}
+				OR = {
+					has_building = wow_market_1
+					has_building = wow_market_2
+					has_building = wow_market_3
+				}
+			}
+			2139 = {
+				development = 8
+				OR = {
+					has_building = wow_farm_1
+					has_building = wow_farm_2
+					has_building = wow_farm_3
+				}
+			}
+			2138 = {
+				development = 8
+				OR = {
+					has_building = wow_farm_1
+					has_building = wow_farm_2
+					has_building = wow_farm_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_goldshire
+		}
+
+		effect = {
+			add_years_of_income = 1
+
+			area_goldshire = {
+				add_province_modifier = {
+					name = mission_elwynn_prosperity
+					duration = -1
+				}
+			}
+			603 = {
+				add_base_tax = 3
+				add_base_manpower = 1
+				add_center_of_trade_level = 1
+			}
+		}
+	}
+
+	STW_stormwind_m_westvale_and_eastvale = {
+		icon = mission_titan_spirits
+		position = 16
+
+		required_missions = { STW_stormwind_m_goldshire_expansion }
+
+		trigger = {
+			area_westvale = {
+				type = all
+				development = 10
+				base_tax = 3
+			}
+			area_eastvale = {
+				type = all
+				development = 10
+				base_tax = 3
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				area = area_westvale
+				area = area_eastvale
+			}
+		}
+
+		effect = {
+			area_westvale = {
+				add_province_modifier = {
+					name = mission_elwynn_prosperity
+					duration = -1
+				}
+			}
+			area_eastvale = {
+				add_province_modifier = {
+					name = mission_elwynn_prosperity
+					duration = -1
+				}
+			}
+
+			add_years_of_income = 0.6
+
+			986 = {
+				add_base_production = 3
+				add_building = wow_portal
+			}
+			954 = {
+				add_base_production = 3
+				add_center_of_trade_level = 1
+			}
+		}
+	}
+
+	STW_stormwind_m_kings_road = {
+		icon = mission_titan_spirits
+		position = 17
+
+		required_missions = { STW_stormwind_m_westvale_and_eastvale }
+
+		trigger = {
+			603 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2138 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2139 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2146 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2147 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2148 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			661 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			717 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2194 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			903 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2178 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			2177 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			1058 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			922 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+			751 = {
+				OR = {
+					has_building = wow_road_1
+					has_building = wow_road_2
+					has_building = wow_road_3
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				province_id = 751
+				province_id = 922
+				province_id = 1058
+				province_id = 2177
+				province_id = 603
+				province_id = 903
+				province_id = 2194
+				province_id = 717
+				province_id = 661
+				province_id = 2148
+				province_id = 2147
+				province_id = 2146
+				province_id = 2139
+				province_id = 2138
+				province_id = 2178
+			}
+		}
+
+		effect = {
+			region_elwynn_forest = {
+				add_country_modifier = {
+					name = mission_kings_road
+					duration = -1
+				}
+			}
+			region_westfall = {
+				add_country_modifier = {
+					name = mission_kings_road
+					duration = -1
+				}
+			}
+			region_duskwood = {
+				add_country_modifier = {
+					name = mission_kings_road
+					duration = -1
+				}
+			}
+			region_redridge_mountains = {
+				add_country_modifier = {
+					name = mission_kings_road
+					duration = -1
+				}
+			}
+		}
+	} 
 }
 
 STW_stormwind_column_4 = { 
@@ -1039,8 +1860,6 @@ STW_stormwind_column_4 = {
 
 		effect = {
 			add_adm_power = 200
-
-			remove_country_modifier = stormwind_isolationism
 		}
 	}
 
@@ -1160,6 +1979,45 @@ STW_stormwind_column_4 = {
 				name = mission_new_age_prosperity
 				duration = 7300
 			}
+
+			remove_country_modifier = stormwind_isolationism
+		}
+	}
+
+	stw_stormwind_m_northshire_vineyards = {
+		icon = mission_titan_spirits
+		position = 16
+
+		required_missions = { STW_stormwind_m_goldshire_expansion }
+
+		trigger = {
+			area_northshire = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+				culture = ROOT
+				development = 10
+			}
+		}
+
+		provinces_to_highlight = {
+			area = area_northshire
+		}
+
+		effect = {
+			add_stability = 1
+
+			area_northshire = {
+				add_province_modifier = {
+					name = mission_elwynn_prosperity
+					duration = -1
+				}
+			}
+
+			add_country_modifier = {
+				name = mission_wine
+				duration = 9125
+			}
 		}
 	}
 }
@@ -1180,7 +2038,7 @@ STW_stormwind_column_5 = {
 		position = 1
 
 		trigger = {
-			navy_size = 40
+			navy_size = 25
 			num_of_admirals = 1
 			sailors_percentage = 0.9
 		}
@@ -1205,7 +2063,7 @@ STW_stormwind_column_5 = {
 		required_missions = { STW_stormwind_m_building_the_fleet }
 
 		trigger = {
-			num_of_light_ship = 30
+			num_of_light_ship = 20
 
 			2202 = {
 				is_strongest_trade_power = ROOT
@@ -1255,7 +2113,7 @@ STW_stormwind_column_5 = {
 		required_missions = { STW_stormwind_m_mercantile_connections }
 
 		trigger = {
-			num_of_heavy_ship = 50
+			num_of_heavy_ship = 30
 			navy_size_percentage = 0.9
 			num_of_admirals = 3
 		}

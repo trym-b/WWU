@@ -731,3 +731,42 @@ estate_traders_regional_trade_hubs = {
 		factor = 1
 	}
 }
+
+estate_traders_purchase_transport_ships_stormwind = {
+	icon = privilege_sailor
+
+	# Costs
+	max_absolutism = -5
+	land_share = 0
+	loyalty = 0.05
+	influence = 0.15
+
+	is_valid = {
+		tag = STW
+		has_country_flag = stormwind_enable_traders_purchase_transportships_privilege
+	}
+	can_select = {
+		if = {
+			limit = { has_estate = estate_traders }
+			NOT = { has_estate_privilege = estate_traders_purchase_transport_ships_stormwind }
+		}
+	}
+	penalties = {
+		trade_efficiency = -0.15
+	}
+	loyalty_scaled_conditional_modifier = {
+		trigger = {
+			always = yes
+		}
+
+		# Modifier at 100% Loyality
+		modifier = {
+			transport_cost = -0.5
+			global_ship_recruit_speed = -0.1
+		}
+	}
+
+	ai_will_do = {
+		factor = 0
+	}
+}

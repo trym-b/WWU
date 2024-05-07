@@ -9,11 +9,223 @@ A08_lordaeron_column_1 = {
     
 	potential = {
 		tag = A08
+	}
+
+	A08_ingratiate_stratholme_region = { 
+		icon = mission_goblet
+		position = 1
+        
+		trigger = {
+            A10 = {
+				OR = {
+					NOT = { exists = A10 }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
+			}
+
+			LDN = {
+				OR = {
+					NOT = { exists = LDN }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
+			}
+
+			LDD = {
+				OR = {
+					NOT = { exists = LDD }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
+			}
+
+			area_eastwall_tower = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_northdale = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_corins_crossing = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_the_marris_stead = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_darrowshire = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_kings_wood = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_lights_hope = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_stratholme = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_royal_approach = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+        provinces_to_highlight = {
+            OR = {
+				area = area_royal_approach
+				area = area_stratholme
+				area = area_lights_hope
+				area = area_kings_wood
+				area = area_darrowshire
+				area = area_the_marris_stead
+				area = area_corins_crossing
+				area = area_northdale
+				area = area_eastwall_tower
+			}
+        }
+
+		effect = { 
+			add_country_modifier = {
+                name = mission_stratholme_domination
+                duration = -1
+            }
+
+			add_power_projection = {
+				amount = 10
+			}
+
+			add_dip_power = 100
+			add_adm_power = 100
+
+            area_zul_mashar = {
+				add_permanent_claim = ROOT
+			}
+			area_noxious_glade = {
+				add_permanent_claim = ROOT
+			}
+			area_new_avalon = {
+				add_permanent_claim = ROOT
+			}
+			area_quellithien_lodge = {
+				add_permanent_claim = ROOT
+			}
+
+			remove_country_modifier = A08_eastweald_administrative_attrition
+		}
+	}
+
+    A08_secure_the_eastern_outposts = { 
+		icon = mission_troll_male
+		position = 2
+        
+		required_missions = { A08_ingratiate_stratholme_region } 
+        
+		trigger = {
+            area_quellithien_lodge = {
+				type = all
+				owned_by = ROOT
+			}
+			area_zul_mashar = {
+				owned_by = ROOT
+			}
+			area_noxious_glade = {
+				owned_by = ROOT
+			}
+			area_new_avalon = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+
+        provinces_to_highlight = {
+            OR = {
+				area = area_quellithien_lodge
+				area = area_zul_mashar
+				area = area_noxious_glade
+				area = area_new_avalon
+			}
+        }
+
+		effect = { 
+			add_country_modifier = {
+				name = "mission_eastern_security"
+				duration = -1
+			}
+
+			add_years_of_income = 0.5
+			add_prestige = 10
+
+			country_event = { id = wwu_mission_lordaeron.1 days = 7 }
+
+			region_the_hinterlands = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+    A08_eliminate_the_trolls = { 
+		icon = mission_troll_hexxer
+		position = 3
+        
+		required_missions = { A08_secure_the_eastern_outposts } 
+        
+		trigger = {
+            NOT = { exists = A60 }
+            NOT = { exists = A61 }
+            NOT = { exists = A62 }
+            NOT = { exists = A64 }
+			NOT = { exists = A65 }
+		}
+        provinces_to_highlight = {
+            OR = {
+                region = region_zulaman
+                owned_by = A60
+                owned_by = A61
+                owned_by = A62
+                owned_by = A64
+				owned_by = A65
+            }
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+		effect = { 
+			add_country_modifier = {
+				name = "mission_troll_conqueror"
+				duration = -1
+			}
+
+			add_prestige = 10
+		}
 	} 
     
     A08_ready_the_soldiers = { 
 		icon = mission_ancient_sword
-        position = 2
+        position = 12
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -51,7 +263,7 @@ A08_lordaeron_column_2 = {
     
     A08_uthers_investigations = { 
 		icon = mission_crown_of_heavens
-        position = 1
+        position = 11
 		completed_by = 616.12.31
         
 		required_missions = {  } 
@@ -75,7 +287,7 @@ A08_lordaeron_column_2 = {
     
     A08_arthas_crusade = { 
 		icon = mission_brimstone
-        position = 3
+        position = 13
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -96,7 +308,7 @@ A08_lordaeron_column_2 = {
     
     A08_the_culling = { 
 		icon = mission_cannibalize
-		position = 4
+		position = 14
 		completed_by = 618.12.31
         
 		required_missions = { A08_arthas_crusade } 
@@ -132,7 +344,7 @@ A08_lordaeron_column_2 = {
     
     A08_expedition_to_northrend = { 
 		icon = mission_frostmourne
-		position = 5
+		position = 15
 		completed_by = 618.12.31
         
 		required_missions = { A08_the_culling } 
@@ -172,7 +384,7 @@ A08_lordaeron_column_3 = {
     
     A08_purge_the_infected = { 
 		icon = mission_fireball_1
-        position = 2
+        position = 12
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -198,46 +410,87 @@ A08_lordaeron_column_4 = {
 		tag = A08
 	} 
     
-	A08_ingratiate_vandermar = { 
+	A08_consolidate_vandelmar = { 
 		icon = mission_ancient_tome
         
 		required_missions = {  } 
         
 		trigger = {
-            G50 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 200
-                }
-            }
+            OR = {
+				G50 = {
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
+
+				AND = {
+					area_vandermar = {
+						owned_by = ROOT
+					}
+					area_scarlet_coast = {
+						owned_by = ROOT
+					}
+					NOT = { exists = G50 }
+				}
+			}
 		}
+
         provinces_to_highlight = {
             is_capital_of = G50
+			OR = {
+				area = area_scarlet_coast
+				area = area_vandermar
+			}
         }
+
 		effect = { 
 			add_country_modifier = {
                 name = mission_vadermar_elites
                 duration = -1
             }
-            region_tirisfal_glades = {
-                add_permanent_claim = ROOT
-            }
+            area_webbed_coast = {
+				add_permanent_claim = ROOT
+			}
+			area_fenris_isle = {
+				add_permanent_claim = ROOT
+			}
+			area_silverpine_fields = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
-    A08_secure_tirisfal_glades = { 
+    A08_eliminating_the_border_threats = { 
 		icon = mission_faction_fight_2
         
-		required_missions = { A08_ingratiate_vandermar } 
+		required_missions = { A08_consolidate_vandelmar } 
         
 		trigger = {
-            region_tirisfal_glades = {
+            NOT = { exists = P55 }
+			NOT = { exists = B25 }
+			area_fenris_isle = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
+			}
+			area_webbed_coast = {
+				type = all
+				owned_by = ROOT
+			}
+			area_silverpine_fields = {
+				type = all
+				owned_by = ROOT
 			}
 		}
         provinces_to_highlight = {
-            region = region_tirisfal_glades
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+            OR = {
+				area = area_fenris_isle
+				area = area_webbed_coast
+				area = area_silverpine_fields
+			}
         }
 		effect = { 
 			add_country_modifier = {
@@ -250,15 +503,13 @@ A08_lordaeron_column_4 = {
             region_alterac_mountains = {
                 add_permanent_claim = ROOT
             }
-			region_alterac_mountains = {
-                add_permanent_claim = A16     #Stromgarde also competes for region
-            }
+			region_western_plaguelands = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
     A08_passage_to_southshore = { 
 		icon = mission_storehouse
-        
-		required_missions = { A08_secure_tirisfal_glades } 
         
 		trigger = {
             991 = {
@@ -268,7 +519,6 @@ A08_lordaeron_column_4 = {
 		}
         provinces_to_highlight = {
             province_id = 991
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
 			add_country_modifier = {
@@ -278,10 +528,9 @@ A08_lordaeron_column_4 = {
             add_stability = 1
 		}
 	}
+
     A08_protect_stormwind = { 
 		icon = mission_unity
-        
-		required_missions = { A08_passage_to_southshore } 
         
 		trigger = {
             alliance_with = STW
@@ -307,90 +556,5 @@ A08_lordaeron_column_5 = {
     
 	potential = {
 		tag = A08
-	} 
-    
-	A08_ingratiate_stratholme = { 
-		icon = mission_goblet
-        
-		required_missions = {  } 
-        
-		trigger = {
-            A10 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 200
-                }
-            }
-		}
-        provinces_to_highlight = {
-            is_capital_of = A10
-        }
-		effect = { 
-			add_country_modifier = {
-                name = mission_stratholme_elites
-                duration = -1
-            }
-            region_eastern_plaguelands = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    A08_secure_the_eastern_outposts = { 
-		icon = mission_troll_male
-        
-		required_missions = { A08_ingratiate_stratholme } 
-        
-		trigger = {
-            region_eastern_plaguelands = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-        provinces_to_highlight = {
-            region = region_eastern_plaguelands
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-		effect = { 
-			add_country_modifier = {
-				name = "mission_eastern_security"
-				duration = -1
-			}
-            region_zulaman = {
-                add_permanent_claim = ROOT
-            }
-		}
-	}
-    A08_eliminate_the_trolls = { 
-		icon = mission_troll_hexxer
-        
-		required_missions = { A08_secure_the_eastern_outposts } 
-        
-		trigger = {
-            NOT = { exists = A58 }
-            NOT = { exists = A59 }
-            NOT = { exists = A62 }
-            NOT = { exists = P55 }
-            NOT = { exists = A62 }
-            region_zulaman = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-        provinces_to_highlight = {
-            OR = {
-                region = region_zulaman
-                owned_by = A58
-                owned_by = A59
-                owned_by = A62
-                owned_by = P55
-            }
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
-		effect = { 
-			add_country_modifier = {
-				name = "mission_troll_conqueror"
-				duration = -1
-			}
-		}
 	}
 }
