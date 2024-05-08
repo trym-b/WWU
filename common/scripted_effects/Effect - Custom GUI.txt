@@ -2,13 +2,10 @@
 # On Actions
 #-----------------------------------
 on_startup__custom_gui = {
-    set_country_flag = gui_flag__national_identity_gui_open
-    
     if = {
         limit = {
             ai = no
         }
-        update_faction_gui_state = yes
         setup_clique_view = yes
         setup_archaeology_view = yes
         setup_achievements_view = yes
@@ -17,13 +14,10 @@ on_startup__custom_gui = {
 }
 
 on_country_released__custom_gui = {
-    set_country_flag = gui_flag__national_identity_gui_open
-    
     if = {
         limit = {
             ai = no
         }
-        update_faction_gui_state = yes
         setup_clique_view = yes
         setup_archaeology_view = yes
         setup_achievements_view = yes
@@ -32,13 +26,10 @@ on_country_released__custom_gui = {
 }
 
 on_country_creation__custom_gui = {
-    set_country_flag = gui_flag__national_identity_gui_open
-    
     if = {
         limit = {
             ai = no
         }
-        update_faction_gui_state = yes
         setup_clique_view = yes
         setup_archaeology_view = yes
         setup_achievements_view = yes
@@ -52,7 +43,6 @@ on_monthly_pulse__custom_gui = {
             ai = no
         }
         
-        update_faction_gui_state = yes
         setup_clique_view = yes
         fill_clique_influence_variables = yes
         
@@ -76,21 +66,6 @@ on_monthly_pulse__custom_gui = {
             set_country_flag = gui_flag__display_achievements_view_page_1
         }
     }
-}
-
-# Faction GUI
-update_faction_gui_state = {
-    # Add Custom GUI faction if not present
-    if = {
-        limit = {
-            NOT = { has_faction = faction_custom_gui }
-        }
-        
-        add_faction = faction_custom_gui
-    }
-    
-    # Restore default factions if not present
-    restore_default_factions_if_missing = yes
 }
 
 restore_default_factions_if_missing = {
@@ -360,16 +335,12 @@ restore_default_factions_if_missing = {
 # Faction GUI
 close_all_faction_windows = {
     close_national_identity_gui = yes
-    close_game_configuration_gui = yes
     close_achievements_gui = yes
     
-    close_national_mechanics_gui = yes
     close_building_management_gui = yes
     close_stratagem_gui = yes
     close_archaeology_gui = yes
-    close_clique_gui = yes
 }
-
 
 # Ruler Information Panel
 open_ruler_information_panel = {
