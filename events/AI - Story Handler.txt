@@ -1,0 +1,241 @@
+namespace = wwu_ai_story_handler
+
+#----------------------------
+# Rise of the Horde
+#----------------------------
+# Handle the story events if Shadowmoon is wiped out
+
+# Beckon Kil'jaeden
+country_event = {
+	id = wwu_ai_story_handler.1
+	title = wwu_ai_story_handler.1.title
+	desc = wwu_ai_story_handler.1.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { exists = A34 }
+        
+        ai = yes
+        is_year = 560
+        OR = {
+            AND = {
+                capital_scope = { superregion = draenor_superregion }
+                culture_group = culture_group_orc
+            }
+            has_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+	
+	option = {
+		name = wwu_ai_story_handler.1.option.a
+		
+        country_event = { id = rise_of_the_horde.1 days = 30 }
+	}
+}
+
+# Doubts of Nerzhul
+country_event = {
+	id = wwu_ai_story_handler.2
+	title = wwu_ai_story_handler.2.title
+	desc = wwu_ai_story_handler.2.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { exists = A34 }
+        is_year = 565
+        ai = yes
+        OR = {
+            AND = {
+                capital_scope = { superregion = draenor_superregion }
+                culture_group = culture_group_orc
+            }
+            has_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = chosen_ai_shadowmoon_substitute
+            set_global_flag = allow_messenger_from_nerzhul
+        }
+    }
+	
+	option = {
+		name = wwu_ai_story_handler.2.option.a
+		
+        country_event = { id = rise_of_the_horde.3 days = 30 }
+	}
+}
+
+# The First Warlocks
+country_event = {
+	id = wwu_ai_story_handler.3
+	title = wwu_ai_story_handler.3.title
+	desc = wwu_ai_story_handler.3.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { exists = A34 }
+        is_year = 580
+        ai = yes
+        OR = {
+            AND = {
+                capital_scope = { superregion = draenor_superregion }
+                culture_group = culture_group_orc
+            }
+            has_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = chosen_ai_shadowmoon_substitute
+            set_global_flag = allow_acceptance_of_warlocks
+        }
+    }
+	
+	option = {
+		name = wwu_ai_story_handler.3.option.a
+		
+        add_country_modifier = {
+            name = mission_acceptance_of_warlocks
+            duration = -1
+        }
+        
+        country_event = { id = rise_of_the_horde.10 days = 7 }
+        
+        every_country = {
+            limit = {
+                capital_scope = { 
+                    superregion = draenor_superregion
+                }
+                culture_group = culture_group_draenei
+            }
+            capital_scope = {
+                add_permanent_claim = ROOT
+            }
+        }
+	}
+}
+
+# Establish the Horde
+country_event = {
+	id = wwu_ai_story_handler.4
+	title = wwu_ai_story_handler.4.title
+	desc = wwu_ai_story_handler.4.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { exists = A34 }
+        is_year = 600
+        NOT = { has_global_flag = horde_exists }
+        ai = yes
+        OR = {
+            AND = {
+                OR = {
+                    has_country_modifier = mission_acceptance_of_warlocks
+                    any_country = {
+                        has_country_modifier = mission_acceptance_of_warlocks
+                    }
+                }
+            }
+            has_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+	
+	option = {
+		name = wwu_ai_story_handler.4.option.a
+        
+		country_event = { id = wwu_faction_system.10 }
+         
+        # Add Shadow Council cores so they exist in the world if Shadowmoon falls/player releases them
+        every_owned_province = {
+            add_core = B88
+        }
+         
+        add_country_modifier = {
+            name = the_shadow_council
+            duration = -1
+        }
+	}
+}
+
+# Contact with Medivh
+country_event = {
+	id = wwu_ai_story_handler.5
+	title = wwu_ai_story_handler.5.title
+	desc = wwu_ai_story_handler.5.desc
+	picture = RAFAAM_eventPicture
+    
+    is_triggered_only = yes
+    hidden = yes
+    
+    trigger = {
+        NOT = { exists = A34 }
+        is_year = 592
+        ai = yes
+        OR = {
+            AND = {
+                capital_scope = { superregion = draenor_superregion }
+                culture_group = culture_group_orc
+            }
+            has_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+
+	mean_time_to_happen = {
+		days = 1
+	}
+    
+    immediate = {
+        hidden_effect = {
+            set_country_flag = chosen_ai_shadowmoon_substitute
+        }
+    }
+	
+	option = {
+		name = wwu_ai_story_handler.5.option.a
+		
+        country_event = { id = rise_of_the_horde.6 days = 30 }
+	}
+}
