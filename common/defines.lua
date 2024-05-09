@@ -707,7 +707,7 @@ NCountry = {
 
 
 	EXPLORE_COAST_EVENT_CHANCE = 2,			-- Chance (in %) of getting an event when exploring coasts
-	MIN_TECH_FOR_CIRCUMNAVIGATE = 9,			-- Must have this level of dip tech to circumnavigate the globe
+	MIN_TECH_FOR_CIRCUMNAVIGATE = 99,			-- Must have this level of dip tech to circumnavigate the globe
 	CIRCUMNAVIGATION_PROVINCE_1 = 254,			-- Provinces for circumnavigation (coast of gambia)
 	-- WWU: Sea of Menethil
 	CIRCUMNAVIGATION_PROVINCE_2 = 3990,			-- Provinces for circumnavigation (magellan strait)
