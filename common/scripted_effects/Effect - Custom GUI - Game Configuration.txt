@@ -1,8 +1,86 @@
 #-----------------------------------
-# On Actions
+# Configuration
 #-----------------------------------
+open_configuration_gui = {
+    set_country_flag = gui_flag__open_configuration_view
+}
 
+close_configuration_gui = {
+    clr_country_flag = gui_flag__open_configuration_view
+}
 
-#-----------------------------------
-# Mechanics
-#-----------------------------------
+# toggle_feature = { FLAG = racial_modifiers }
+# toggle_feature = { FLAG = magic_mechanics }
+# toggle_feature = { FLAG = archaeology_mechanics }
+# toggle_feature = { FLAG = isolation_mechanics }
+# toggle_feature = { FLAG = stratagem_mechanics }
+# toggle_feature = { FLAG = lore_diplomacy_mechanics }
+# toggle_feature = { FLAG = faction_mechanics }
+# toggle_feature = { FLAG = local_colonial_naming }
+# toggle_feature = { FLAG = player_switch_events }
+
+# toggle_feature = { FLAG = vanquisher_system }
+# toggle_feature = { FLAG = warmonger_system }
+# toggle_feature = { FLAG = relentless_conquest_system }
+# toggle_feature = { FLAG = regional_aggressive_expansion }
+# toggle_feature = { FLAG = balance_of_power_system }
+
+# toggle_content = { FLAG = eastern_kingdoms }
+# toggle_content = { FLAG = kalimdor }
+# toggle_content = { FLAG = northrend }
+# toggle_content = { FLAG = pandaria }
+# toggle_content = { FLAG = outland }
+# toggle_content = { FLAG = draenor }
+# toggle_content = { FLAG = broken_isles }
+# toggle_content = { FLAG = zandalar }
+# toggle_content = { FLAG = kul_tiras }
+# toggle_content = { FLAG = naga_domain }
+# toggle_content = { FLAG = paradise_isles }
+# toggle_content = { FLAG = south_seas }
+# toggle_content = { FLAG = plunder_isle }
+# toggle_content = { FLAG = dragon_isles }
+# toggle_content = { FLAG = elemental_realms }
+# toggle_content = { FLAG = argus }
+# toggle_content = { FLAG = shadowlands }
+
+toggle_feature = {
+    if = {
+        limit = {
+            NOT = { has_global_flag = enabled_$FLAG$ }
+        }
+        
+        hidden_effect = {
+            set_global_flag = enabled_$FLAG$
+        }
+    }
+    else_if = {
+        limit = {
+            has_global_flag = enabled_$FLAG$
+        }
+        
+        hidden_effect = {
+            clr_global_flag = enabled_$FLAG$
+        }
+    }
+}
+
+toggle_content = {
+    if = {
+        limit = {
+            NOT = { has_global_flag = enable_content_$FLAG$ }
+        }
+        
+        hidden_effect = {
+            set_global_flag = enable_content_$FLAG$
+        }
+    }
+    else_if = {
+        limit = {
+            has_global_flag = enable_content_$FLAG$
+        }
+        
+        hidden_effect = {
+            clr_global_flag = enable_content_$FLAG$
+        }
+    }
+}
