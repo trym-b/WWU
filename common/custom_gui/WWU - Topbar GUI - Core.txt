@@ -37,6 +37,13 @@ custom_window = {
    }
 }
 
+custom_window = {
+   name = wwu_window_shared_faction_view
+   potential = { 
+        is_shared_faction_gui_open = yes
+   }
+}
+
 # Buttons
 custom_button = {
     name = wwu_menu_button_national_identity
@@ -57,11 +64,11 @@ custom_button = {
             limit = {
                 NOT = { is_national_identity_gui_open = yes }
             }
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
             open_national_identity_gui = yes
         }
         else = {
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
         }
        
     }
@@ -85,11 +92,11 @@ custom_button = {
             limit = {
                 NOT = { is_achievements_gui_open = yes }
             }
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
             open_achievements_gui = yes
         }
         else = {
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
         }
     }
 }
@@ -113,11 +120,11 @@ custom_button = {
             limit = {
                 NOT = { is_building_management_gui_open = yes }
             }
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
             open_building_management_gui = yes
         }
         else = {
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
         }
     }
 }
@@ -140,11 +147,11 @@ custom_button = {
             limit = {
                 NOT = { is_stratagem_gui_open = yes }
             }
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
             open_stratagem_gui = yes
         }
         else = {
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
         }
     }
 }
@@ -167,19 +174,19 @@ custom_button = {
             limit = {
                 NOT = { is_archaeology_gui_open = yes }
             }
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
             open_archaeology_gui = yes
         }
         else = {
-            close_all_faction_windows = yes
+            close_all_topbar_windows = yes
         }
     }
 }
 
-# UNUSED
+# Factions
 custom_button = {
-    name = wwu_button_4
-    tooltip = UNUSED_WINDOW_TT
+    name = wwu_menu_button_alliance_faction
+    tooltip = ALLIANCE_FACTION_TT
     
     potential = {
        always = yes # This mechanic is always available.
@@ -187,16 +194,28 @@ custom_button = {
     
     trigger = { 
         hidden_trigger = { 
-            always = no
+            any_country = {
+                is_alliance_member = yes
+            }
         }
     }
     
     effect = { 
+        if = {
+            limit = {
+                NOT = { is_alliance_gui_open = yes }
+            }
+            close_all_topbar_windows = yes
+            open_alliance_gui = yes
+        }
+        else = {
+            close_all_topbar_windows = yes
+        }
     }
 }
 custom_button = {
-    name = wwu_button_5
-    tooltip = UNUSED_WINDOW_TT
+    name = wwu_menu_button_horde_faction
+    tooltip = HORDE_FACTION_TT
     
     potential = {
        always = yes # This mechanic is always available.
@@ -204,16 +223,28 @@ custom_button = {
     
     trigger = { 
         hidden_trigger = { 
-            always = no
+            any_country = {
+                is_horde_member = yes
+            }
         }
     }
     
     effect = { 
+        if = {
+            limit = {
+                NOT = { is_horde_gui_open = yes }
+            }
+            close_all_topbar_windows = yes
+            open_horde_gui = yes
+        }
+        else = {
+            close_all_topbar_windows = yes
+        }
     }
 }
 custom_button = {
-    name = wwu_button_9
-    tooltip = UNUSED_WINDOW_TT
+    name = wwu_menu_button_trade_coalition_faction
+    tooltip = TRADE_COALITION_FACTION_TT
     
     potential = {
        always = yes # This mechanic is always available.
@@ -221,16 +252,28 @@ custom_button = {
     
     trigger = { 
         hidden_trigger = { 
-            always = no
+            any_country = {
+                is_trade_coalition_member = yes
+            }
         }
     }
     
     effect = { 
+        if = {
+            limit = {
+                NOT = { is_trade_coalition_gui_open = yes }
+            }
+            close_all_topbar_windows = yes
+            open_trade_coalition_gui = yes
+        }
+        else = {
+            close_all_topbar_windows = yes
+        }
     }
 }
 custom_button = {
-    name = wwu_button_10
-    tooltip = UNUSED_WINDOW_TT
+    name = wwu_menu_button_dragon_aspects
+    tooltip = DRAGON_ASPECTS_FACTION_TT
     
     potential = {
        always = yes # This mechanic is always available.
@@ -238,10 +281,99 @@ custom_button = {
     
     trigger = { 
         hidden_trigger = { 
-            always = no
+            any_country = {
+                is_dragon_aspects_member = yes
+            }
         }
     }
     
     effect = { 
+        if = {
+            limit = {
+                NOT = { is_dragon_aspects_gui_open = yes }
+            }
+            close_all_topbar_windows = yes
+            open_dragon_aspects_gui = yes
+        }
+        else = {
+            close_all_topbar_windows = yes
+        }
+    }
+}
+
+# Close Buttons
+custom_button = {
+    name = national_identity_close_button
+    
+    potential = {
+        is_national_identity_gui_open = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        close_all_topbar_windows = yes
+    }
+}
+custom_button = {
+    name = achievement_close_button
+    
+    potential = {
+        is_achievements_gui_open = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        close_all_topbar_windows = yes
+    }
+}
+custom_button = {
+    name = building_management_close_button
+    
+    potential = {
+        is_building_management_gui_open = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        close_all_topbar_windows = yes
+    }
+}
+custom_button = {
+    name = stratagem_close_button
+    
+    potential = {
+        is_stratagem_gui_open = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        close_all_topbar_windows = yes
+    }
+}
+custom_button = {
+    name = archaeology_close_button
+    
+    potential = {
+        is_archaeology_gui_open = yes
+    }
+    
+    trigger = { 
+        always = yes
+    }
+    
+    effect = { 
+        close_all_topbar_windows = yes
     }
 }

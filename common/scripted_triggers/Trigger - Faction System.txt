@@ -3,14 +3,12 @@
 #--------------------------
 # alliance
 # horde
-# old_horde
 # trade_coalition
 # dragon_aspects
 
 is_any_faction_head = {
     OR = {
         has_country_modifier = head_of_alliance
-        has_country_modifier = head_of_old_horde
         has_country_modifier = head_of_horde
         has_country_modifier = head_of_trade_coalition
         has_country_modifier = head_of_dragon_aspects
@@ -21,7 +19,6 @@ is_any_faction_head = {
 is_any_faction_member = {
     OR = {
         has_country_modifier = member_of_alliance
-        has_country_modifier = member_of_old_horde
         has_country_modifier = member_of_horde
         has_country_modifier = member_of_trade_coalition
         has_country_modifier = member_of_dragon_aspects
@@ -30,10 +27,6 @@ is_any_faction_member = {
 
 is_alliance_member = {
     has_country_modifier = member_of_alliance
-}
-
-is_old_horde_member = {
-    has_country_modifier = member_of_old_horde
 }
 
 is_horde_member = {
@@ -52,10 +45,6 @@ is_alliance_head = {
     has_country_modifier = head_of_alliance
 }
 
-is_old_horde_head = {
-    has_country_modifier = head_of_old_horde
-}
-
 is_horde_head = {
     has_country_modifier = head_of_horde
 }
@@ -71,7 +60,6 @@ is_dragon_aspects_head = {
 is_not_member_of_faction = {
     NOT = { has_country_modifier = member_of_alliance }
     NOT = { has_country_modifier = member_of_horde }
-    NOT = { has_country_modifier = member_of_old_horde }
     NOT = { has_country_modifier = member_of_trade_coalition }
     NOT = { has_country_modifier = member_of_dragon_aspects }
 }
@@ -88,14 +76,6 @@ is_allowed_alliance_member = {
 
 # Horde
 is_allowed_horde_member = { 
-    # Culture Block
-    NOT = { culture_group = culture_group_human }
-    NOT = { culture_group = culture_group_draenei }
-    NOT = { culture_group = culture_group_darnassian }
-}
-
-# Old Horde
-is_allowed_old_horde_member = { 
     # Culture Block
     NOT = { culture_group = culture_group_human }
     NOT = { culture_group = culture_group_draenei }
@@ -142,15 +122,6 @@ is_horde_culture = {
         culture_group = culture_group_shalassian
         culture_group = culture_group_vulpera
         primary_culture = culture_blood_elf
-    }
-}
-
-# Is suited to the Old Horde
-is_old_horde_culture = {
-    OR = {
-        culture_group = culture_group_orc
-        culture_group = culture_group_ogre
-        culture_group = culture_group_troll
         culture_group = culture_group_twilight
     }
 }
@@ -267,34 +238,39 @@ is_historical_alliance_member = {
 }
 
 is_historical_horde_member = {
-    OR = {
-        tag = A48 # Orgrimmar
-        tag = A50 # Thrallmar
-        tag = A70 # Darkspear
-        tag = A91 # Silvermoon
-        tag = THB # Thunder Bluff
-        tag = P14 # The Forsaken
-        tag = P36 # Tushui Order
+    if = {
+        limit = {
+            has_global_flag = horde_reformation
+        }
+        OR = {
+            tag = A48 # Orgrimmar
+            tag = A50 # Thrallmar
+            tag = A70 # Darkspear
+            tag = A91 # Silvermoon
+            tag = THB # Thunder Bluff
+            tag = P14 # The Forsaken
+            tag = P36 # Tushui Order
+        }
     }
-}
-
-is_historical_old_horde_member = {
-    OR = {
-        tag = B88 # Shadow Council
-        tag = A34 # Shadowmoon
-        tag = A35 # Warsong
-        tag = A36 # Shattered Hand
-        tag = A37 # Thunderlord
-        tag = A38 # Laughing Skull
-        tag = A39 # Bonechewer
-        tag = A40 # Bleeding Hollow
-        tag = A41 # Blackrock
-        tag = A42 # Stormreaver
-        tag = A43 # Twilight's Hammer
-        tag = A44 # Burning Blade
-        tag = A45 # Dragonmaw
-        tag = A46 # Frostwolf
-        tag = A58 # Amani
+    else
+    {
+        OR = {
+            tag = B88 # Shadow Council
+            tag = A34 # Shadowmoon
+            tag = A35 # Warsong
+            tag = A36 # Shattered Hand
+            tag = A37 # Thunderlord
+            tag = A38 # Laughing Skull
+            tag = A39 # Bonechewer
+            tag = A40 # Bleeding Hollow
+            tag = A41 # Blackrock
+            tag = A42 # Stormreaver
+            tag = A43 # Twilight's Hammer
+            tag = A44 # Burning Blade
+            tag = A45 # Dragonmaw
+            tag = A46 # Frostwolf
+            tag = A58 # Amani
+        }
     }
 }
 
@@ -321,81 +297,9 @@ is_historical_dragon_aspects_member = {
     }
 }
 
-has_faction_view_open = {
-    OR = {
-        has_country_flag = gui_flag__open_alliance_view
-        has_country_flag = gui_flag__open_old_horde_view
-        has_country_flag = gui_flag__open_horde_view
-        has_country_flag = gui_flag__open_trade_coalition_view
-        has_country_flag = gui_flag__open_dragon_aspects_view
-    }
-}
-
-has_alliance_view_open = {
-    has_country_flag = gui_flag__open_alliance_view
-}
-
-has_old_horde_view_open = {
-    has_country_flag = gui_flag__open_old_horde_view
-}
-
-has_horde_view_open = {
-    has_country_flag = gui_flag__open_horde_view
-}
-
-has_trade_coalition_view_open = {
-    has_country_flag = gui_flag__open_trade_coalition_view
-}
-
-has_dragon_aspects_view_open = {
-    has_country_flag = gui_flag__open_dragon_aspects_view
-}
-
-matches_opened_faction_view = {
-    if = {
-        limit = {
-            FROM = { has_alliance_view_open = yes }
-        }
-        is_alliance_member = yes
-    }
-    if = {
-        limit = {
-            FROM = { has_old_horde_view_open = yes }
-        }
-        is_old_horde_member = yes
-    }
-    if = {
-        limit = {
-            FROM = { has_horde_view_open = yes }
-        }
-        is_horde_member = yes
-    }
-    if = {
-        limit = {
-            FROM = { has_trade_coalition_view_open = yes }
-        }
-        is_trade_coalition_member = yes
-    }
-    if = {
-        limit = {
-            FROM = { has_dragon_aspects_view_open = yes }
-        }
-        is_dragon_aspects_member = yes
-    }
-}
-
 #-------------------
 # Faction Decisions
 #-------------------
-faction_decision_trigger = {
-    # Viewing own diplomacy view
-    custom_trigger_tooltip = {
-        tooltip = VIEWING_OWN_COUNTRY_TT
-        tag = ROOT
-        tag = FROM
-    }
-}
-
 has_faction_renown_20 = {
     custom_trigger_tooltip = {
         tooltip = FACTION_RENOWN_COST_20
@@ -477,39 +381,14 @@ alliance_decision_trigger_5 = {
     has_faction_renown_100 = yes
 }
 
-# Old Horde
-old_horde_decision_trigger_1 = {
+# Horde
+horde_decision_trigger_1 = {
     NOT = { manpower_percentage = 1.0 }
     has_faction_renown_20 = yes
 }
 
-old_horde_decision_trigger_2 = {
-    NOT = { has_country_modifier = faction_resilience }
-    has_faction_renown_40 = yes
-}
-
-old_horde_decision_trigger_3 = {
-    has_faction_renown_60 = yes
-}
-
-old_horde_decision_trigger_4 = {
-    NOT = { has_country_modifier = faction_wartime_industry }
-    has_faction_renown_80 = yes
-}
-
-old_horde_decision_trigger_5 = {
-    NOT = { has_country_modifier = faction_war_songs }
-    has_faction_renown_100 = yes
-}
-
-# Horde
-horde_decision_trigger_1 = {
-    NOT = { has_country_modifier = faction_tolerance_of_all }
-    has_faction_renown_20 = yes
-}
-
 horde_decision_trigger_2 = {
-    NOT = { has_country_modifier = faction_trading_hubs }
+    NOT = { has_country_modifier = faction_resilience }
     has_faction_renown_40 = yes
 }
 
@@ -518,12 +397,12 @@ horde_decision_trigger_3 = {
 }
 
 horde_decision_trigger_4 = {
-    NOT = { has_country_modifier = faction_pacification }
+    NOT = { has_country_modifier = faction_wartime_industry }
     has_faction_renown_80 = yes
 }
 
 horde_decision_trigger_5 = {
-    NOT = { has_country_modifier = faction_factional_loyalty }
+    NOT = { has_country_modifier = faction_war_songs }
     has_faction_renown_100 = yes
 }
 

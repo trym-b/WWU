@@ -58,3 +58,55 @@ is_achievements_gui_open = {
 }
 
 
+# Alliance
+is_alliance_gui_open = {
+    has_country_flag = gui_flag__alliance_gui_open
+}
+
+# Horde
+is_horde_gui_open = {
+    has_country_flag = gui_flag__horde_gui_open
+}
+
+# Trade Coalition
+is_trade_coalition_gui_open = {
+    has_country_flag = gui_flag__trade_coalition_gui_open
+}
+
+# Dragon Aspects
+is_dragon_aspects_gui_open = {
+    has_country_flag = gui_flag__dragon_aspects_gui_open
+}
+
+is_shared_faction_gui_open = {
+    OR = {
+        has_country_flag = gui_flag__alliance_gui_open
+        has_country_flag = gui_flag__horde_gui_open
+        has_country_flag = gui_flag__trade_coalition_gui_open
+        has_country_flag = gui_flag__dragon_aspects_gui_open
+    }
+}   
+
+is_viewing_own_faction = {  
+    custom_trigger_tooltip = {
+        tooltip = IS_MEMBER_OF_THIS_FACTION_TT
+        OR = {
+            AND = {
+                is_alliance_gui_open = yes
+                is_alliance_member = yes
+            }
+            AND = {
+                is_horde_gui_open = yes
+                is_horde_member = yes
+            }
+            AND = {
+                is_trade_coalition_gui_open = yes
+                is_trade_coalition_member = yes
+            }
+            AND = {
+                is_dragon_aspects_gui_open = yes
+                is_dragon_aspects_member = yes
+            }
+        }
+    }
+}

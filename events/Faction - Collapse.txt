@@ -54,6 +54,7 @@ country_event = {
 	
     trigger = {
         has_global_flag = enabled_faction_mechanics
+        has_global_flag = horde_reformation
     }
     
     immediate = {
@@ -95,12 +96,13 @@ country_event = {
 	
     trigger = {
         has_global_flag = enabled_faction_mechanics
+        NOT = { has_global_flag = horde_reformation }
     }
     
     immediate = {
         hidden_effect = {
-            set_global_flag = collapse_the_old_horde
-            set_global_flag = old_horde_dismantled
+            set_global_flag = collapse_the_horde
+            set_global_flag = horde_dismantled
         }
     }
     
@@ -109,16 +111,16 @@ country_event = {
 		
         every_country = {
             limit = {
-                has_country_modifier = head_of_old_horde
+                has_country_modifier = head_of_horde
             }
-            remove_country_modifier = head_of_old_horde
+            remove_country_modifier = head_of_horde
         }
         
         every_country = {
             limit = {
-                has_country_modifier = member_of_old_horde
+                has_country_modifier = member_of_horde
             }
-            remove_country_modifier = member_of_old_horde
+            remove_country_modifier = member_of_horde
         }
 	}
 }
@@ -270,6 +272,7 @@ country_event = {
     trigger = {
         has_global_flag = enabled_faction_mechanics
         has_country_modifier = member_of_horde
+        has_global_flag = horde_reformation
         
         # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
         had_global_flag = {
@@ -317,11 +320,12 @@ country_event = {
     
     trigger = {
         has_global_flag = enabled_faction_mechanics
-        has_country_modifier = member_of_old_horde
+        has_country_modifier = member_of_horde
+        NOT = { has_global_flag = horde_reformation }
         
         # Only remove after 1 year of existence, i.e. give the AI a chance to expand the faction
         had_global_flag = {
-            flag = old_horde_exists
+            flag = horde_exists
             days = 365
         }
         
@@ -329,7 +333,7 @@ country_event = {
             calc_true_if = {
                 amount = 2
                 all_country = {
-                    has_country_modifier = member_of_old_horde
+                    has_country_modifier = member_of_horde
                 }
             }
         }
@@ -338,9 +342,9 @@ country_event = {
     immediate = {
         hidden_effect = {
             destroy_faction = {
-                FACTION = old_horde
+                FACTION = horde
             }
-            set_global_flag = old_horde_dismantled
+            set_global_flag = horde_dismantled
         }
     }
 	

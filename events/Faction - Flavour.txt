@@ -67,7 +67,7 @@ country_event = {
     
     trigger = {
         has_global_flag = enabled_faction_mechanics
-        NOT = { has_global_flag = old_horde_exists }
+        NOT = { has_global_flag = horde_exists }
     }
     
     mean_time_to_happen = {
@@ -75,18 +75,18 @@ country_event = {
 	}
     
     immediate = {
-        set_global_flag = old_horde_exists
-        set_global_flag = setup_the_old_horde 
+        set_global_flag = horde_exists
+        set_global_flag = setup_the_horde 
     }
     
 	option = {
 		name = wwu_faction_system.10.option.a
 		
         set_head_of_faction = {
-            faction = old_horde
+            faction = horde
         }
         set_member_of_faction = {
-            faction = old_horde
+            faction = horde
         }
         
         every_country = {
@@ -95,80 +95,7 @@ country_event = {
             }
             
             set_member_of_faction = {
-                faction = old_horde
-            }
-        }
-	}
-}
-
-# Old Horde - Warchief Vote
-country_event = {
-	id = wwu_faction_system.20
-	title = wwu_faction_system.20.title
-	desc = wwu_faction_system.20.desc
-	picture = HORDE_TRIAL_eventPicture
-    
-    is_triggered_only = yes
-    
-    major = yes
-    
-    trigger = {
-        has_global_flag = enabled_faction_mechanics
-        NOT = { has_global_flag = old_horde_dismantled }
-        has_country_modifier = head_of_old_horde
-        NOT = { has_country_flag = ignore_horde_vote }
-    }
-    
-    immediate = {
-        remove_country_modifier = head_of_old_horde
-    }
-	
-    # Maintain current member as Warchief
-	option = {
-		name = wwu_faction_system.20.option.a
-        
-        add_prestige = -10
-        
-        every_country = {
-            limit = {
-                has_country_modifier = member_of_old_horde
-                NOT = { has_country_modifier = head_of_old_horde }
-            }
-            add_opinion = {
-                who = ROOT
-                modifier = omod_power_hungry
-            }
-        }
-        
-        ai_chance = {
-            factor = 90
-        }
-	}
-    
-    # Permit tribal vote
-    option = {
-		name = wwu_faction_system.20.option.b
-        
-        custom_tooltip = tribal_vote_tt
-        
-        hidden_effect = {
-            random_country = {
-                limit = {
-                    has_country_modifier = member_of_old_horde
-                }
-                set_head_of_faction = {
-                    faction = old_horde
-                }
-            }
-        }
-        
-        ai_chance = {
-            factor = 10
-            
-            modifier = {
-                factor = 0
-                
-                tag = U03
+                faction = horde
             }
         }
 	}
@@ -270,41 +197,6 @@ country_event = {
 	}
 }
 
-# Old Horde
-# Pass Leadership
-country_event = {
-	id = wwu_faction_system.31
-	title = wwu_faction_system.31.title
-	desc = wwu_faction_system.31.desc
-	picture = HORDE_TRIAL_eventPicture
-    
-    major = yes
-    is_triggered_only = yes
-
-    trigger = {
-        has_global_flag = enabled_faction_mechanics
-    }
-
-    mean_time_to_happen = {
-		days = 1
-	}
-    
-	option = {
-		name = wwu_faction_system.31.option.a
-		
-        hidden_effect = {
-            set_global_flag = leader_assignment_in_progress
-        }
-        
-        random_country = {
-            limit = {
-                has_country_modifier = member_of_old_horde
-            }
-            country_event = { id = wwu_faction_system_leader_assignment.11 }
-        }
-	}
-}
-
 # Horde
 # Pass Leadership
 country_event = {
@@ -335,7 +227,7 @@ country_event = {
             limit = {
                 has_country_modifier = member_of_horde
             }
-            country_event = { id = wwu_faction_system_leader_assignment.12 }
+            country_event = { id = wwu_faction_system_leader_assignment.11 }
         }
 	}
 }

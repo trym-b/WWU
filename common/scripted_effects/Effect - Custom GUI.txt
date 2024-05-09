@@ -333,13 +333,18 @@ restore_default_factions_if_missing = {
 # Windows
 #-----------------------------------
 # Faction GUI
-close_all_faction_windows = {
+close_all_topbar_windows = {
     close_national_identity_gui = yes
     close_achievements_gui = yes
     
     close_building_management_gui = yes
     close_stratagem_gui = yes
     close_archaeology_gui = yes
+    
+    close_alliance_gui = yes
+    close_horde_gui = yes
+    close_trade_coalition_gui = yes
+    close_dragon_aspects_gui = yes
 }
 
 # Ruler Information Panel
@@ -459,24 +464,200 @@ close_achievements_gui = {
     hidden_effect = { clr_country_flag = gui_flag__achievements_gui_open }
 }
 
-# National Mechanics
-open_national_mechanics_gui = {
-    hidden_effect = { set_country_flag = gui_flag__national_mechanics_gui_open }
+
+# Alliance
+open_alliance_gui = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = { has_country_flag = gui_flag__alliance_gui_open }
+            }
+            
+            reset_faction_slot_flags = { FACTION = alliance }
+            fill_faction_leader_slot = { FACTION = alliance }
+            fill_faction_member_slot = { FACTION = alliance NUM = 1 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 2 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 3 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 4 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 5 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 6 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 7 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 8 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 9 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 10 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 11 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 12 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 13 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 14 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 15 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 16 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 17 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 18 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 19 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 20 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 21 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 22 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 23 }
+            fill_faction_member_slot = { FACTION = alliance NUM = 24 }
+            
+            clear_shared_faction_view_flags = yes
+            set_country_flag = gui_flag__alliance_gui_open
+        }
+        else = {
+            clear_shared_faction_view_flags = yes
+        }
+    }
+}
+close_alliance_gui = {
+    hidden_effect = { clr_country_flag = gui_flag__alliance_gui_open }
 }
 
-close_national_mechanics_gui = {
-    hidden_effect = { clr_country_flag = gui_flag__national_mechanics_gui_open }
+# Horde
+open_horde_gui = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = { has_country_flag = gui_flag__horde_gui_open }
+            }
+            reset_faction_slot_flags = { FACTION = horde }
+            fill_faction_leader_slot = { FACTION = horde }
+            fill_faction_member_slot = { FACTION = horde NUM = 1 }
+            fill_faction_member_slot = { FACTION = horde NUM = 2 }
+            fill_faction_member_slot = { FACTION = horde NUM = 3 }
+            fill_faction_member_slot = { FACTION = horde NUM = 4 }
+            fill_faction_member_slot = { FACTION = horde NUM = 5 }
+            fill_faction_member_slot = { FACTION = horde NUM = 6 }
+            fill_faction_member_slot = { FACTION = horde NUM = 7 }
+            fill_faction_member_slot = { FACTION = horde NUM = 8 }
+            fill_faction_member_slot = { FACTION = horde NUM = 9 }
+            fill_faction_member_slot = { FACTION = horde NUM = 10 }
+            fill_faction_member_slot = { FACTION = horde NUM = 11 }
+            fill_faction_member_slot = { FACTION = horde NUM = 12 }
+            fill_faction_member_slot = { FACTION = horde NUM = 13 }
+            fill_faction_member_slot = { FACTION = horde NUM = 14 }
+            fill_faction_member_slot = { FACTION = horde NUM = 15 }
+            fill_faction_member_slot = { FACTION = horde NUM = 16 }
+            fill_faction_member_slot = { FACTION = horde NUM = 17 }
+            fill_faction_member_slot = { FACTION = horde NUM = 18 }
+            fill_faction_member_slot = { FACTION = horde NUM = 19 }
+            fill_faction_member_slot = { FACTION = horde NUM = 20 }
+            fill_faction_member_slot = { FACTION = horde NUM = 21 }
+            fill_faction_member_slot = { FACTION = horde NUM = 22 }
+            fill_faction_member_slot = { FACTION = horde NUM = 23 }
+            fill_faction_member_slot = { FACTION = horde NUM = 24 }
+            
+            clear_shared_faction_view_flags = yes
+            set_country_flag = gui_flag__horde_gui_open
+        }
+        else = {
+            clear_shared_faction_view_flags = yes
+        }
+    }
+}
+close_horde_gui = {
+    hidden_effect = { clr_country_flag = gui_flag__horde_gui_open }
 }
 
-# Game Configuration
-open_game_configuration_gui = {
-    hidden_effect = { set_country_flag = gui_flag__game_configuration_gui_open }
+# Trade Coalition
+open_trade_coalition_gui = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = { has_country_flag = gui_flag__trade_coalition_gui_open }
+            }
+            reset_faction_slot_flags = { FACTION = trade_coalition }
+            fill_faction_leader_slot = { FACTION = trade_coalition }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 1 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 2 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 3 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 4 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 5 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 6 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 7 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 8 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 9 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 10 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 11 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 12 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 13 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 14 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 15 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 16 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 17 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 18 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 19 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 20 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 21 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 22 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 23 }
+            fill_faction_member_slot = { FACTION = trade_coalition NUM = 24 }
+            
+            clear_shared_faction_view_flags = yes
+            set_country_flag = gui_flag__trade_coalition_gui_open
+        }
+        else = {
+            clear_shared_faction_view_flags = yes
+        }
+    }
+}
+close_trade_coalition_gui = {
+    hidden_effect = {
+        clr_country_flag = gui_flag__trade_coalition_gui_open
+    }
 }
 
-close_game_configuration_gui = {
-    hidden_effect = { clr_country_flag = gui_flag__game_configuration_gui_open }
+# Dragon Aspects
+open_dragon_aspects_gui = {
+    hidden_effect = {
+        if = {
+            limit = {
+                NOT = { has_country_flag = gui_flag__dragon_aspects_gui_open }
+            }
+            reset_faction_slot_flags = { FACTION = dragon_aspects }
+            fill_faction_leader_slot = { FACTION = dragon_aspects }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 1 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 2 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 3 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 4 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 5 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 6 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 7 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 8 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 9 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 10 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 11 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 12 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 13 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 14 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 15 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 16 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 17 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 18 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 19 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 20 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 21 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 22 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 23 }
+            fill_faction_member_slot = { FACTION = dragon_aspects NUM = 24 }
+            
+            clear_shared_faction_view_flags = yes
+            set_country_flag = gui_flag__dragon_aspects_gui_open
+        }
+        else = {
+            clear_shared_faction_view_flags = yes
+        }
+    }
+}
+close_dragon_aspects_gui = {
+    hidden_effect = {
+        clr_country_flag = gui_flag__dragon_aspects_gui_open
+    }
 }
 
-#-----------------------------------
-# Clique Views
-#-----------------------------------
+clear_shared_faction_view_flags = {
+    clr_country_flag = gui_flag__open_alliance_gui
+    clr_country_flag = gui_flag__open_horde_gui
+    clr_country_flag = gui_flag__trade_coalition_gui_open
+    clr_country_flag = gui_flag__dragon_aspects_gui_open
+    
+}
