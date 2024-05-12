@@ -205,7 +205,6 @@ A08_lordaeron_column_1 = {
 		}
         provinces_to_highlight = {
             OR = {
-                region = region_zulaman
                 owned_by = A60
                 owned_by = A61
                 owned_by = A62
@@ -226,7 +225,7 @@ A08_lordaeron_column_1 = {
     
     A08_ready_the_soldiers = { 
 		icon = mission_ancient_sword
-        position = 12
+        position = 9
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -264,7 +263,7 @@ A08_lordaeron_column_2 = {
     
     A08_uthers_investigations = { 
 		icon = mission_crown_of_heavens
-        position = 11
+        position = 8
 		completed_by = 616.12.31
         
 		required_missions = {  } 
@@ -288,7 +287,7 @@ A08_lordaeron_column_2 = {
     
     A08_arthas_crusade = { 
 		icon = mission_brimstone
-        position = 13
+        position = 10
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -309,7 +308,7 @@ A08_lordaeron_column_2 = {
     
     A08_the_culling = { 
 		icon = mission_cannibalize
-		position = 14
+		position = 11
 		completed_by = 618.12.31
         
 		required_missions = { A08_arthas_crusade } 
@@ -345,7 +344,7 @@ A08_lordaeron_column_2 = {
     
     A08_expedition_to_northrend = { 
 		icon = mission_frostmourne
-		position = 15
+		position = 12
 		completed_by = 618.12.31
         
 		required_missions = { A08_the_culling } 
@@ -385,7 +384,7 @@ A08_lordaeron_column_3 = {
     
     A08_purge_the_infected = { 
 		icon = mission_fireball_1
-        position = 12
+        position = 9
 		completed_by = 618.12.31
         
 		required_missions = { A08_uthers_investigations } 
@@ -413,6 +412,7 @@ A08_lordaeron_column_4 = {
     
 	A08_consolidate_vandelmar = { 
 		icon = mission_ancient_tome
+		position = 1
         
 		required_missions = {  } 
         
@@ -431,9 +431,11 @@ A08_lordaeron_column_4 = {
 
 				AND = {
 					area_vandermar = {
+						type = all
 						owned_by = ROOT
 					}
 					area_scarlet_coast = {
+						type = all
 						owned_by = ROOT
 					}
 					NOT = { exists = G50 }
@@ -467,6 +469,7 @@ A08_lordaeron_column_4 = {
 	}
     A08_eliminating_the_border_threats = { 
 		icon = mission_faction_fight_2
+		position = 2
         
 		required_missions = { A08_consolidate_vandelmar } 
         
@@ -511,6 +514,7 @@ A08_lordaeron_column_4 = {
 	}
     A08_passage_to_southshore = { 
 		icon = mission_storehouse
+		position = 3
         
 		trigger = {
             991 = {
@@ -532,6 +536,7 @@ A08_lordaeron_column_4 = {
 
     A08_protect_stormwind = { 
 		icon = mission_unity
+		position = 4
         
 		trigger = {
             alliance_with = STW
@@ -557,5 +562,97 @@ A08_lordaeron_column_5 = {
     
 	potential = {
 		tag = A08
+	}
+
+	A08_rally_the_army = {
+		icon = mission_haymaker
+		position = 1
+
+		trigger = {
+			army_size_percentage = 0.9
+			num_of_generals = 1
+			employed_advisor = {
+				category = MIL
+			}
+		}
+
+		effect = {
+			add_mil_power = 100
+			add_prestige = 10
+		}
+	}
+
+	A08_dalaran_diplomacy = {
+		icon = mission_magi
+		position = 3
+
+		required_missions = { A08_rally_the_army A08_eliminating_the_border_threats }
+
+		trigger = {
+			OR = {
+				AND = {
+					OR = {
+						reverse_has_opinion = {
+    					who = A18
+    					value = 165
+					}
+					OR = {
+						ai_attitude = {
+							who = A08
+							attitude = attitude_friendly
+						}
+						ai_attitude = {
+							who = A08
+							attitude = attitude_threatened
+							}
+						}
+					}
+				}
+				AND = {
+					OR = {
+						is_rival = yes
+						ai_attitude = {
+							who = A08
+							attitude = attitude_hostile
+						}
+					}
+					OR = {
+						area_dalaran = {
+							is_claim = A08
+						}
+						offensive_war_with = A18
+					}
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = A18
+		}
+
+		effect = {
+			if = {
+				limit = {
+					A08 = {
+						OR = {
+							NOT = { at_war_with = A18 }
+							ai_attitude = {
+								who = A08
+								attitude = attitude_hostile
+							}
+						}
+					}
+				}
+				add_casus_belli = {
+                    target = A18
+                    type = cb_vassalize_mission
+                    months = 120
+                }
+			}
+			else = {
+				create_alliance = A18
+
+			}
+		}
 	}
 }
