@@ -1,7 +1,7 @@
 #Demonic Invasion Force Fromations Menu
 #Open/Close
 country_decisions = {
-    decision_diff_menu_open = {
+    demonic_invasion_force_formation_menu = {
 		major = yes
         ai_importance = 0
         
@@ -14,7 +14,7 @@ country_decisions = {
 		}
 		
 		allow = {
-            always = yes			
+            NOT = { has_country_modifier = ai_handler__demonic_invasion_force_formation_menu }	
 		}
 		
 		effect = {		    
@@ -30,10 +30,29 @@ country_decisions = {
 			    }
 			    clr_country_flag = dem_inv_force_menu_open  
 		    }
+            
+            if = {
+                limit = {
+                    ai = yes
+                }
+                
+                add_country_modifier = {
+                    name = ai_handler__demonic_invasion_force_formation_menu
+                    duration = 3600
+                }
+            }
 		}
 		
 		ai_will_do = {
 			factor = 1
+            
+            modifier = {
+                factor = 0
+                
+                NOT = { 
+                    has_country_modifier = ai_handler__demonic_invasion_force_formation_menu
+                }
+            }
 		}
 	}
 
