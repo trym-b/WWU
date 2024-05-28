@@ -1,21 +1,98 @@
 #--------------------------------------
 # Nazmir
 #--------------------------------------
-NAZ_nazmir_column_4 = {
-	slot = 4
+NAZ_nazmir_column_1 = {
+	slot = 1
 	generic = no
 	ai = yes
     
 	potential = {
-		tag = NAZ
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
 	}
 	has_country_shield = yes
 	
     # Claim the Blood Gate
-    NAZ_claim_the_blood_gate = {
+    NAZ_one_two = {
 		icon = mission_blood_rage
+        position = 2
+		required_missions = { NAZ_three_one }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
         
-		required_missions = {  }
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    NAZ_one_three = {
+		icon = mission_blood_rage
+        position = 3
+		required_missions = { NAZ_one_two }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    NAZ_one_four = {
+		icon = mission_blood_rage
+        position = 4
+		required_missions = { NAZ_one_three }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    NAZ_one_five = {
+		icon = mission_blood_rage
+        position = 5
+		required_missions = { 
+			NAZ_one_four
+			NAZ_two_four
+		}
 		
 		trigger = {
             1136 = { country_or_non_sovereign_subject_holds = ROOT }
@@ -35,67 +112,345 @@ NAZ_nazmir_column_4 = {
         ai_weight   = { factor = 1 }
 	}
     
-    # Crush the Zandalari
-    NAZ_crush_the_zandalari = {
-		icon = mission_troll_hexxer
-        
-		required_missions = { NAZ_claim_the_blood_gate }
+}
+
+NAZ_nazmir_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+    
+	potential = {
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
+	}
+	has_country_shield = yes
+	
+    # Claim the Blood Gate
+    NAZ_two_three = {
+		icon = mission_blood_rage
+        position = 3
+		required_missions = { NAZ_three_two }
 		
 		trigger = {
-            NOT = { exists = A78 }
-            2469 = { country_or_non_sovereign_subject_holds = ROOT}
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-        
+            
         provinces_to_highlight = {
-            OR = {
-                owned_by = A78
-                province_id = 2469
-            }
+            province_id = 1136
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
-            add_mil_power = 300
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_two_four = {
+		icon = mission_blood_rage
+        position = 4
+		required_missions = { NAZ_one_three }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
             
-			add_country_modifier = {
-                name = dazaralor_riches
-                duration = -1
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_two_five = {
+		icon = mission_blood_rage
+        position = 5
+		required_missions = { NAZ_two_four }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+
+    
+}
+
+NAZ_nazmir_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
+	}
+	has_country_shield = yes
+	
+    # Claim the Blood Gate
+    NAZ_three_one = {
+		icon = mission_blood_rage
+        position = 1
+		required_missions = {  }
+		
+		trigger = {
+            	custom_trigger_tooltip = {
+					tooltip = nazmir_blood_1_check_any
+					OR = {
+		            check_variable = {
+                		which = nazmir_small
+               		    value = 1
+            }
+		            check_variable = {
+                		which = nazmir_medium
+               		    value = 1
+            }
+		            check_variable = {
+                		which = nazmir_big
+               		    value = 1
+            }
+					}
+			}
+		}
+            
+        
+		effect = {
+			custom_tooltip = nazmir_unlock_colonization_1_tooltip
+			hidden_effect = {
+				set_country_flag = nazmir_unlock_colonization_1
+			}
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_three_two = {
+		icon = mission_blood_rage
+        position = 2
+		required_missions = { NAZ_three_one }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_three_three = {
+		icon = mission_blood_rage
+        position = 3
+		required_missions = { NAZ_three_two }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_three_four = {
+		icon = mission_blood_rage
+        position = 4
+		required_missions = { 
+			NAZ_three_three
+			NAZ_two_three
+			NAZ_four_three
+		}
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_three_six = {
+		icon = mission_blood_rage
+        position = 6
+		required_missions = {
+		NAZ_three_four 
+		NAZ_one_five
+		NAZ_five_five
+		}
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
             }
 		}
         
         ai_weight   = { factor = 1 }
 	}
     
-    # Spread the Blood of G'huun
-    NAZ_spread_the_blood_of_ghuun = {
-		icon = mission_blood_troll
-        
-		required_missions = { NAZ_crush_the_zandalari }
+}
+
+NAZ_nazmir_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+    
+	potential = {
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
+	}
+	has_country_shield = yes
+	
+    # Claim the Blood Gate
+    NAZ_four_three = {
+		icon = mission_blood_rage
+        position = 3
+		required_missions = { NAZ_three_two }
 		
 		trigger = {
-            any_province = {
-                country_or_non_sovereign_subject_holds = ROOT
-                NOT = { superregion = zandalar_superregion }
-            }
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-        
+            
         provinces_to_highlight = {
-            NOT = { superregion = zandalar_superregion }
-            is_sea = no
+            province_id = 1136
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
-            add_prestige = 25
-            
-			add_country_modifier = {
-                name = blood_of_ghuun
-                duration = -1
+			region_zuldazar = {
+                add_permanent_claim = ROOT
             }
 		}
         
         ai_weight   = { factor = 1 }
 	}
+	
+    # Claim the Blood Gate
+    NAZ_four_four = {
+		icon = mission_blood_rage
+        position = 4
+		required_missions = {  }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    # Claim the Blood Gate
+    NAZ_four_five = {
+		icon = mission_blood_rage
+        position = 5
+		required_missions = { NAZ_four_four }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+
+    
 }
 
 NAZ_nazmir_column_5 = {
@@ -104,133 +459,187 @@ NAZ_nazmir_column_5 = {
 	ai = yes
     
 	potential = {
-		tag = NAZ
+		OR = {
+            tag = NZM
+            tag = AMK
+            tag = NTV
+            tag = NAZ
+			}
 	}
 	has_country_shield = yes
-	
-    # Restore the Necropolis
-    NAZ_restore_the_necropolis = {
-		icon = mission_blood_corruption
-        
+
+    # Prevent the Cataclysm
+    NAZ_five_one = {
+		icon = mission_burning_castle
+        position = 1
 		required_missions = {  }
 		
 		trigger = {
-            1127 = {
-                country_or_non_sovereign_subject_holds = ROOT
-                base_tax = 8
-                base_production = 8
-                base_manpower = 8
-            }
+            A78 = {
+			OR = {
+			has_disaster = zandalar_cataclysm
+			      custom_trigger_tooltip = {
+            tooltip = nazmir_mission_zandalari_cataclysm_a
+			OR = {
+            has_country_flag = zandalari_cataclysm_handling_bad
+			has_country_flag = zandalari_cataclysm_handling_good
+			}
+                }
+			NOT = { exists = yes }
 		}
-        
-        provinces_to_highlight = {
-            province_id = 1127
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
-        }
+		}
+						custom_trigger_tooltip = {
+					tooltip = nazmir_blood_20_check
+		            check_variable = {
+                which = nazmir_blood
+                value = 20
+            }
+			}
+			capital_scope = {
+			infantry_in_province = 20
+			}
+		}
         
 		effect = {
-            if = {
-                limit = {
-                    1128 = { is_empty = yes }
-                }
-                1128 = {
-                    cede_province = ROOT
-                    add_core = ROOT
-                }
-            }
-            if = {
-                limit = {
-                    1129 = { is_empty = yes }
-                }
-                1129 = {
-                    cede_province = ROOT
-                    add_core = ROOT
-                }
-            }
-            if = {
-                limit = {
-                    1130 = { is_empty = yes }
-                }
-                1130 = {
-                    cede_province = ROOT
-                    add_core = ROOT
-                }
-            }
-            add_country_modifier = {
-                name = necropolis_restored
-                duration = -1
-            }
+		capital = {
+		kill_units = {
+			who = ROOT	   
+			type = infantry  
+			amount = 20  
 		}
-        
+		}
+		custom_tooltip = nazmir_mission_zandalari_cataclysm_b
+		hidden_effect = {
+			if = {
+			limit = {
+			A78 = {
+			has_disaster = zandalar_cataclysm
+			}
+			}
+            zandalar_superregion = {
+			limit = {
+			owned_by = ROOT
+			}
+                add_devastation = -50
+                remove_province_modifier = zandalari_province_affected_by_cataclysm
+            }
+			}
+			if = {
+			limit = {
+            A78 = {
+			OR = {
+			OR = {
+            has_country_flag = zandalari_cataclysm_handling_bad
+			has_country_flag = zandalari_cataclysm_handling_good
+			}
+			NOT = { exists = yes }
+		}
+		}
+			}
+				adm_power = 100
+				dip_power = 100
+				mil_power = 100
+                blood_add_3 = yes
+			}
+		}
+        }
         ai_weight   = { factor = 1 }
 	}
-    
-    # Oust the Tortollan
-    NAZ_oust_the_tortollan = {
-		icon = mission_hearthstone_vanilla
-        
-		required_missions = { NAZ_restore_the_necropolis }
+	
+	
+    # Claim the Blood Gate
+    NAZ_five_two = {
+		icon = mission_blood_rage
+        position = 2
+		required_missions = { NAZ_three_one }
 		
 		trigger = {
-            1120 = { country_or_non_sovereign_subject_holds = ROOT }
-            NOT = { exists = TOR }
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-        
+            
         provinces_to_highlight = {
-            OR = {
-                owned_by = TOR
-                province_id = 1120
-            }
+            province_id = 1136
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
-            add_prestige = 10
-            
-			region_voldun = {
+			region_zuldazar = {
                 add_permanent_claim = ROOT
             }
 		}
         
         ai_weight   = { factor = 1 }
 	}
-    
-    # Dominate Vol'dun
-    NAZ_dominate_voldun = {
-		icon = mission_cannibalize
-        
-		required_missions = { NAZ_oust_the_tortollan }
+	
+    NAZ_five_three = {
+		icon = mission_blood_rage
+        position = 3
+		required_missions = { NAZ_five_two }
 		
 		trigger = {
-            NOT = { exists = TOR }
-            NOT = { exists = SEK }
-            NOT = { exists = VLC }
-            1115 = { country_or_non_sovereign_subject_holds = ROOT }
-            1118 = { country_or_non_sovereign_subject_holds = ROOT }
-            1120 = { country_or_non_sovereign_subject_holds = ROOT }
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-        
+            
         provinces_to_highlight = {
-            OR = {
-                owned_by = TOR
-                owned_by = SEK
-                owned_by = VLC
-                province_id = 1115
-                province_id = 1118
-                province_id = 1120
-            }
+            province_id = 1136
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
         
 		effect = {
-            add_prestige = 50
-            
-			add_country_modifier = {
-                name = subjugation_of_sethraliss
-                duration = -1
+			region_zuldazar = {
+                add_permanent_claim = ROOT
             }
 		}
         
         ai_weight   = { factor = 1 }
 	}
+	
+    NAZ_five_four = {
+		icon = mission_blood_rage
+        position = 4
+		required_missions = { NAZ_five_three }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+    NAZ_five_five = {
+		icon = mission_blood_rage
+        position = 5
+		required_missions = { NAZ_five_four }
+		
+		trigger = {
+            1136 = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+            
+        provinces_to_highlight = {
+            province_id = 1136
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+        
+		effect = {
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+		}
+        
+        ai_weight   = { factor = 1 }
+	}
+	
+
+    
 }
