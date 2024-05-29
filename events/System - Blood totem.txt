@@ -128,53 +128,39 @@ country_event = {
 }
 
 	# 3 option of easy sacrifice
-		if = {
+	if = {
 		limit = {
-            check_variable = {
-                which = wwu_blood_totem.1_a
-                value = 3
-            }
-		NOT = { check_variable = {
-                which = wwu_blood_totem.1_a
-                value = 4
-            }
+            check_variable = { which = wwu_blood_totem.1_a value = 3 }
+			NOT = { check_variable = { which = wwu_blood_totem.1_a value = 4 } }
+		}
+		if = {
+			limit = {
+				manpower_percentage = 0.25
+				adm_power = 25
 			}
+			custom_tooltip = wwu_blood_totem_1_a_3a
+			hidden_effect = {
+				add_yearly_manpower = -1
+				add_adm_power = -25
+				add_country_modifier = {
+					name = "easy_sacrificial_cd"
+					duration = 730 
+					hidden = yes
+				}
+				clr_country_flag = blood_totem_menu_open
+				random_easy_sacrificial = yes
+				blood_add_1 = yes
+				blood_small_add = yes
 			}
-		if = {
-		limit = {
-		manpower_percentage = 0.25
-		adm_power = 25
-		}
-		custom_tooltip = wwu_blood_totem_1_a_3a
-		hidden_effect = {
-		add_yearly_manpower = -1
-		add_adm_power = -25
-        add_country_modifier = {
-            name = "easy_sacrificial_cd"
-            duration = 730 
-            hidden = yes
-        }
-		clr_country_flag = blood_totem_menu_open
-		random_easy_sacrificial = yes
-		blood_add_1 = yes
-		blood_small_add = yes
-		}
 		
+		}
+		else = {
+			custom_tooltip = wwu_blood_totem_1_a_3b
+			hidden_effect = {
+				country_event = { id = wwu_blood_totem.2 }
+			}
+		}
 	}
-		if = {
-		limit = {
-		NOT = {
-		manpower_percentage = 0.25
-		adm_power = 25
-		}
-		}
-		custom_tooltip = wwu_blood_totem_1_a_3b
-		hidden_effect = {
-		country_event = { id = wwu_blood_totem.2 }
-		}
-		
-	}
-}
 
 	# 4 option of easy sacrifice
 		if = {
