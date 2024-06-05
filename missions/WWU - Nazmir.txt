@@ -621,25 +621,7 @@ add_devotion = 10
             
         
 		effect = {
-			change_tag = NAZ
-			set_government_rank = 2
-			remove_government_reform = blood_tribe_matriarchy_reform
-			add_government_reform = blood_matriarchy_reform
-			custom_tooltip = nazmir_unlock_event_7_c
 			hidden_effect = {
-				add_government_reform = blood_matriarchy_reform
-						            change_variable = {
-                		which = nazmir_blood_cycle
-               		    value = 1
-            }
-			}
-			region_zuldazar = {
-                add_permanent_claim = ROOT
-            }
-add_power_projection = { 
-	type = 25_permanent_power_projection
-	amount = 25 
-}
         if = {
 			limit = {
 				tag = NZM
@@ -661,6 +643,42 @@ add_power_projection = {
 			inherit = NTV
 			inherit = NZM
 		}
+		random_owned_province = {
+			limit = {
+				has_province_modifier = defend_capital_against_fungarians
+				}
+				remove_province_modifier = defend_capital_against_fungarians
+			}
+		
+		1122 = {
+				add_province_modifier = {
+                name = defend_capital_against_fungarians
+                duration = -1
+				}
+		}
+			}
+			change_tag = NAZ
+			set_government_rank = 2
+			set_capital = 1122
+			remove_government_reform = blood_tribe_matriarchy_reform
+			add_government_reform = blood_matriarchy_reform
+			custom_tooltip = nazmir_unlock_event_7_c
+			hidden_effect = {
+				add_government_reform = blood_matriarchy_reform
+						            change_variable = {
+                		which = nazmir_blood_cycle
+               		    value = 1
+            }
+			}
+			
+			region_zuldazar = {
+                add_permanent_claim = ROOT
+            }
+add_power_projection = { 
+	type = 25_permanent_power_projection
+	amount = 25 
+}
+
 			
 		}
         
