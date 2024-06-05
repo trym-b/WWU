@@ -10,6 +10,12 @@ country_event = {
     is_triggered_only = yes
     
 	trigger = {
+        NOT = { 
+		            check_variable = {
+                		which = nazmir_expedition
+               		    value = 1
+            }
+        }
         NOT = { has_global_flag = fungarian_invasion_1 }
         OR = {
         tag = AMK # Nazmani
@@ -85,6 +91,7 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
                 value = 1
@@ -106,6 +113,7 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
                 value = 2
@@ -127,9 +135,10 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
-                value = 1
+                value = 3
             } 
                 }
                 FN1 = {
@@ -169,6 +178,7 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
                 value = 5
@@ -190,6 +200,7 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
                 value = 6
@@ -213,6 +224,7 @@ country_event = {
 
             if = {
                 limit = {
+                    NOT = { ai = yes }
             check_variable = {
                 which = wwu_blood_fungarian_bonus
                 value = 7
@@ -363,28 +375,34 @@ country_event = {
         }
         if = {
             limit = {
-                2723 = {
-                   NOT = { has_province_modifier = zandalar_trap_5 } 
-                }
+                            check_variable = {
+                which = wwu_blood_fungarian_bonus
+                value = 8
+            } 
             }
             2723 = {
                 cede_province = ROOT
                 add_core = ROOT
                 change_culture = ROOT
                 change_religion = ROOT
-            add_province_modifier = {
-                name = zandalar_fungarian_bad
-                duration = 9125                      
+add_province_modifier = {
+                name = zandalar_trap_5
+                duration = -1                    
                 desc = zandalar_fungarian_bad_desc                         
             }
             }
         }
         
         
-        add_treasury = 50
+        add_treasury = 75
         add_prestige = 5
         add_legitimacy = 5
-        
+        if = {
+            limit = {
+            has_country_flag = nazmir_fungarian_army_tradition
+            }
+            add_army_tradition = 5
+        }
     }
 }
 
