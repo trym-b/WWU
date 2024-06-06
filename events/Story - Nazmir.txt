@@ -315,6 +315,15 @@ country_event = {
     custom_tooltip = event_1_tooltip
     hidden_effect = {
       set_country_flag = first_blood_matron
+	  if = {
+		limit = {
+			ai = yes
+		}
+		country_event = { 
+    		id = wwu_nazmir.8          
+    		days = 365      
+		}
+	  }
     }
   }
 }
@@ -707,10 +716,13 @@ country_event = {
       which = nazmir_expedition
       value = 1
     }
-    any_province = {
-      colonysize = 50
-      region = region_nazmir
-    }
+        region_nazmir = {
+          OR = {
+            colonysize = 50
+            owned_by = ROOT
+          }
+          has_province_modifier = zandalar_trap_3
+        }
     NOT = {
       has_country_flag = event_nazmir_5_open
     }
@@ -1051,3 +1063,93 @@ country_event = {
 
   }
 }
+
+#ai helper event
+country_event = {
+	id = wwu_nazmir.8
+	title = wwu_nazmir.1.title
+	desc = wwu_nazmir.1.desc
+	picture = ZANDALAR_1_eventPicture
+    
+    is_triggered_only = yes
+
+  immediate = {
+		    change_variable = {
+                which = nazmir_ai_help
+                value = 1
+            }
+  }
+
+  option = {
+    name = wwu_nazmir.8.op1
+
+if = {
+	limit = {
+		NOT = {
+		    check_variable = {
+                which = nazmir_ai_help
+                value = 6
+            }
+		}
+	}
+	country_event = { 
+   		id = wwu_nazmir.8          
+    	days = 1460       
+	}
+}
+
+if = {
+	limit = {
+		NOT = {
+		    check_variable = {
+                which = nazmir_ai_help
+                value = 4
+            }
+		}
+		    check_variable = {
+                which = nazmir_ai_help
+                value = 3
+            }
+	}
+complete_mission = NAZ_five_four
+}
+
+if = {
+	limit = {
+		NOT = {
+		    check_variable = {
+                which = nazmir_ai_help
+                value = 2
+            }
+		}
+		    check_variable = {
+                which = nazmir_ai_help
+                value = 1
+            }
+	}
+complete_mission = NAZ_one_two
+complete_mission = NAZ_one_three
+complete_mission = NAZ_one_four
+complete_mission = NAZ_one_five
+}
+
+        change_variable = {
+          which = nazmir_small
+          value = 1
+        }
+        change_variable = {
+          which = nazmir_medium
+          value = 1
+        }
+        change_variable = {
+          which = nazmir_big
+          value = 1
+        }
+blood_add_3 = yes
+blood_add_2 = yes
+add_manpower = 5
+add_treasury = 100
+  }
+
+}
+	
