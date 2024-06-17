@@ -920,6 +920,59 @@ lesser_bloodmother = {
 	}
 }
 
+silithid_hive = {
+	copy_from = tributary_state
+
+	# Graphics
+	sprite = GFX_court_union
+	diplomacy_overlord_sprite = GFX_diplomacy_leadunions
+	diplomacy_subject_sprite = GFX_diplomacy_inunion
+
+	# Properties:
+	base_liberty_desire = 20.0
+	can_be_annexed = yes
+	takes_diplo_slot = yes
+
+	can_fight = {
+		independent_nations = no
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = no
+		other_overlord = all
+	}
+	can_ally = {
+		independent_nations = no
+		other_overlord = all
+	}
+	can_marry = {
+		independent_nations = no
+		other_overlord = all 
+	}
+
+	# Subject Interactions:
+	conscript_general = yes
+	place_relative_on_throne = no
+	fortify_march = yes
+
+	# Modifiers:
+	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+	modifier_subject = clear #Ditto
+    
+	modifier_subject = {
+		modifier = subject_nation
+	}
+    
+	modifier_overlord = {
+		modifier = tributary_vassal_subject
+	}
+    
+	modifier_subject = {
+		modifier = tributary_vassal_overlord
+	}
+
+}
+
 eyalet = {
 	copy_from = default
 	

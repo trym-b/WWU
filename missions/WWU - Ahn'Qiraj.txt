@@ -240,6 +240,18 @@ A97_ahn_qiraj_column_2 = {
                         name = mission_ai_colonist_unlock
                         duration = -1
                     }
+                    inherit = CPH
+                    inherit = ZZH
+                }
+            }
+
+            hidden_effect = {
+                if = {
+                    limit = {
+                        exists = KOT
+                        NOT = { is_subject = yes }
+                    }
+                    country_event = { id = wwu_aqir.200 days = 180 }
                 }
             }
 		}
@@ -495,6 +507,9 @@ A97_ahn_qiraj_column_3 = {
                 add_permanent_claim = ROOT
             }
 
+            inherit = ZRH
+            inherit = VKH
+
             hidden_effect = {
                 if = {
                     limit = {
@@ -549,27 +564,6 @@ A97_ahn_qiraj_column_3 = {
                 type = mission_rewards_power_projection
                 amount = 25
             }
-
-            if = {
-                limit = {
-                    H03 = {
-                        exists = yes
-                        1513 = {
-                            controlled_by = A97
-                        }
-                    }
-                }
-                inherit = H03
-                add_treasury = 250
-            }
-
-            hidden_effect = {
-                H02 = {
-                    area_cenarion_hold = {
-                        add_permanent_claim = ROOT
-                    }
-                }
-            }
 		}
 	}
     
@@ -580,7 +574,19 @@ A97_ahn_qiraj_column_3 = {
 		required_missions = { A97_reclaim_silithus A97_bolster_the_silithid_hives }
         
 		trigger = {
-			region_silithus = {
+			area_hive_zora = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_cenarion_hold = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_hive_ash = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            area_hive_regal = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
@@ -595,6 +601,22 @@ A97_ahn_qiraj_column_3 = {
 			add_country_modifier = {
                 name = mission_might_of_anhqiraj
                 duration = 18250
+            }
+
+            hidden_effect = {
+                if = {
+                    limit = {
+                        A97 = {
+                            ai = yes
+                        }
+                    }
+                    inherit = AIH
+                    inherit = ZOH
+                    inherit = SPH
+                    inherit = RGH
+
+                    add_treasury = 5000
+                }
             }
         }
     }
@@ -806,7 +828,7 @@ A97_ahn_qiraj_column_4 = {
             all_subject_country = {
                 has_opinion = {
                     who = A97
-                    value = 100
+                    value = 125
                 }
             }
         }
@@ -831,9 +853,6 @@ A97_ahn_qiraj_column_4 = {
                     inherit = PAQ
                 }
             }
-
-            inherit = ZRH
-            inherit = VKH
         }
     }
 	
@@ -939,6 +958,15 @@ A97_ahn_qiraj_column_4 = {
                         duration = -1
                     }
                 }
+            }
+
+            if = {
+                limit = {
+                    GRH = {
+                        is_subject_of = ROOT
+                    }
+                }
+                integrate = GRH
             }
 		}
 	}
@@ -1120,6 +1148,16 @@ A97_ahn_qiraj_column_5 = {
         effect = {
             region_feralas = {
                 add_permanent_claim = ROOT
+            }
+        }
+
+        hidden_effect = {
+            if = {
+                limit = {
+                    exists = GD2
+                    NOT = { is_subject = yes }
+                }
+                country_event = { id = wwu_aqir.201 days = 180 }
             }
         }
     }
