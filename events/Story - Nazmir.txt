@@ -307,6 +307,11 @@ country_event = {
         }
       }
 
+      add_country_modifier = {
+        name = blood_matron_gift_cd
+        duration = 1825
+        hidden = yes
+      }
     }
   }
 
@@ -1062,6 +1067,121 @@ country_event = {
 
 
   }
+}
+
+country_event = {
+  id = wwu_nazmir.9
+  title = wwu_nazmir.9.title
+  desc = wwu_nazmir.9.desc
+  picture = NAZMIR_3_eventPicture
+
+  is_triggered_only = yes
+
+  trigger = {
+    has_country_flag = first_blood_matron
+    NOT = {
+      has_country_modifier = blood_matron_gift_cd
+    }
+    NOT = {
+      has_country_flag = blood_matron_gift_received
+    }
+  }
+
+  immediate = {
+    set_country_flag = blood_matron_gift_received
+  }
+
+  option = {
+    name = wwu_nazmir.9.op1
+    trigger = {
+      NOT = {
+        tag = NZM
+      }
+      NZM = {
+        is_subject_of = ROOT
+      }
+    }
+      add_adm_power = 100
+      add_country_modifier = {
+        name = blood_matron_gift_nzm
+        duration = 5475
+      }
+  }
+
+  option = {
+    name = wwu_nazmir.9.op2
+    trigger = {
+      NOT = {
+        tag = NTV
+      }
+      NTV = {
+        is_subject_of = ROOT
+      }
+    }
+      add_dip_power = 100
+  random_list = {
+  	30 = {
+define_advisor = {
+    type = treasurer
+    name = "Butcher treasurer"  
+    skill = 1
+    female = yes
+    cost_multiplier = 0.5
+}
+  	}
+  	30 = {
+define_advisor = {
+    type = spymaster
+    name = "Butcher spymaster"  
+    skill = 1
+    female = yes
+    cost_multiplier = 0.5
+}
+  	}
+  	30 = {
+define_advisor = {
+    type = commandant
+    name = "Butcher commandant"  
+    skill = 1
+    female = yes
+    cost_multiplier = 0.5
+}
+  	}
+  	10 = {
+define_advisor = {
+    type = army_reformer
+    name = "Butcher from Diablo"  
+    skill = 3
+    female = yes
+    cost_multiplier = 0.05
+}
+  	}
+  }
+  }
+
+  option = {
+    name = wwu_nazmir.9.op3
+    trigger = {
+      NOT = {
+        tag = AMK
+      }
+      AMK = {
+        is_subject_of = ROOT
+      }
+    }
+      add_mil_power = 100
+  define_general = {
+    shock = 6           
+    fire = 2    
+    manuever = 0    
+    siege = 3
+    name = "Warmother Champion"
+    female = yes
+    trait = master_of_arms_personality
+}
+  }
+
+
 }
 
 #ai helper event
