@@ -1,0 +1,103 @@
+####################
+### Dragonflayer ###
+####################
+B08_dragonflayer_column_4 = {
+    slot = 4
+	generic = no
+	ai = yes
+
+    potential = {
+        tag = B08
+    }
+
+    has_country_shield = yes
+
+    B08_gather_the_hunters = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            army_size_percentage = 0.9
+            num_of_generals = 1
+        }
+
+        effect = {
+            add_mil_power = 100
+
+            area_halvarde = {
+                add_permanent_claim = ROOT
+            }
+            area_new_agamand = {
+                add_permanent_claim = ROOT
+            }
+            area_skorn = {
+                add_permanent_claim = ROOT
+            }
+            area_gjalerbron = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    B08_reclaim_gjalerborn = {
+        icon = mission_titan_spirits
+        position = 2 
+
+        required_missions = { B08_gather_the_hunters }
+
+        trigger = {
+            NOT = { exists = B62 }
+            680 = {
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 680
+                is_capital_of = B62
+            }
+        }
+
+        effect = {
+            add_prestige = 15
+            add_legitimacy = 15
+
+            region_howling_fjord = {
+                add_permanent_claim = ROOT
+            }
+
+            #unlock decision - restore gjalerborn
+            #unlock decision - colonize vengance landing
+        }
+    }
+
+    B08_unite_the_howling_fjord = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { B08_reclaim_gjalerborn }
+
+        trigger = {
+            region_howling_fjord = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_howling_fjord
+        }
+
+        effect = {
+            region_grizzly_hills = {
+                add_permanent_claim = ROOT
+            }
+
+            add_mil_power = 250
+            add_prestige_or_monarch_power = {
+                amount = 25
+            }
+        }
+    }
+}
