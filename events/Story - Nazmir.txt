@@ -990,6 +990,7 @@ country_event = {
   }
 }
 
+# Blood Cycle
 country_event = {
   id = wwu_nazmir.7
   title = wwu_nazmir.7.title
@@ -1007,10 +1008,40 @@ country_event = {
 
   immediate = {
     hidden_effect = {
+    if = {
+      limit = {
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_discount
+            value = 1
+          }
+        }
+      }
       add_country_modifier = {
         name = nazmir_blood_cycle_cd
         duration = 7300
       }
+    }
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_discount
+          value = 1
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_discount
+            value = 2
+          }
+        }
+      }
+      add_country_modifier = {
+        name = nazmir_blood_cycle_cd
+        duration = 5475
+      }
+    }
+
+
     }
   }
 
@@ -1019,14 +1050,10 @@ country_event = {
 
     if = {
       limit = {
-        check_variable = {
-          which = nazmir_blood_cycle
-          value = 1
-        }
         NOT = {
           check_variable = {
-            which = nazmir_blood_cycle
-            value = 2
+            which = nazmir_blood_mini
+            value = 3
           }
         }
       }
@@ -1036,13 +1063,13 @@ country_event = {
     if = {
       limit = {
         check_variable = {
-          which = nazmir_blood_cycle
-          value = 2
+          which = nazmir_blood_mini
+          value = 3
         }
         NOT = {
           check_variable = {
-            which = nazmir_blood_cycle
-            value = 3
+            which = nazmir_blood_mini
+            value = 6
           }
         }
       }
@@ -1052,20 +1079,124 @@ country_event = {
     if = {
       limit = {
         check_variable = {
-          which = nazmir_blood_cycle
-          value = 3
+          which = nazmir_blood_mini
+          value = 6
         }
         NOT = {
           check_variable = {
-            which = nazmir_blood_cycle
-            value = 4
+            which = nazmir_blood_mini
+            value = 9
           }
         }
       }
       blood_add_3 = yes
     }
 
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 9
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 12
+          }
+        }
+      }
+      blood_add_4 = yes
+    }
 
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 12
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 15
+          }
+        }
+      }
+      blood_add_5 = yes
+    }
+
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 15
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 18
+          }
+        }
+      }
+      blood_add_6 = yes
+    }
+
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 18
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 21
+          }
+        }
+      }
+      blood_add_7 = yes
+    }
+
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 21
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 24
+          }
+        }
+      }
+      blood_add_8 = yes
+    }
+
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 24
+        }
+        NOT = {
+          check_variable = {
+            which = nazmir_blood_mini
+            value = 27
+          }
+        }
+      }
+      blood_add_9 = yes
+    }
+
+    if = {
+      limit = {
+        check_variable = {
+          which = nazmir_blood_mini
+          value = 27
+        }
+      }
+      blood_add_10 = yes
+    }
   }
 }
 
@@ -1271,5 +1402,138 @@ add_manpower = 5
 add_treasury = 100
   }
 
+}
+
+# Blood god immortal gift
+country_event = {
+	id = wwu_nazmir.10
+	title = wwu_nazmir.10.title
+	desc = wwu_nazmir.10.desc
+	picture = NAZMIR_4_eventPicture
+	
+  trigger = {
+    has_country_flag = three_four_nazmir
+      NOT = {
+        has_ruler_flag = nazmir_gift_event
+      }
+  }
+	is_triggered_only = yes
+
+  immediate = {
+    set_ruler_flag = nazmir_gift_event
+  }
+    
+    # Take gift
+	option = {
+		name = wwu_nazmir.10.op1
+		
+        custom_tooltip = nazmir_took_gift
+        hidden_effect = {
+            set_ruler_flag = is_immortal
+			set_ruler_flag = nazmir_took_gift
+      add_country_modifier = {
+        name = nazmir_took_gift
+        duration = 360
+        hidden = yes
+      }
+        }
+		
+		ai_chance = {
+			factor = 75
+		}
+	}
+
+    # No
+	option = {
+		name = wwu_nazmir.10.op4
+
+    custom_tooltip = nazmir_reject_gift
+		add_prestige = -20
+		add_devotion = -20
+        
+		ai_chance = {
+			factor = 25
+		}
+	}
+}
+
+# Death after got blessing
+country_event = {
+	id = wwu_nazmir.11
+	title = wwu_nazmir.11.title
+	desc = wwu_nazmir.11.desc
+	picture = NAZMIR_4_eventPicture
+	
+	is_triggered_only = yes
+    
+    # Death after got blessing
+	option = {
+		name = wwu_nazmir.11.op1
+		
+		kill_ruler = yes
+    blood_add_5 = yes
+		
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
+}
+
+# Check if you have 1 blood
+country_event = {
+	id = wwu_nazmir.12
+	title = wwu_nazmir.12.title
+	desc = wwu_nazmir.12.desc
+	picture = NAZMIR_4_eventPicture
+
+  trigger = {
+  has_ruler_flag = nazmir_took_gift
+  NOT = {
+      has_country_modifier = nazmir_took_gift
+      }
+  }
+
+  hidden = yes
+	
+	is_triggered_only = yes
+    
+    # Check if you have 1 blood
+	option = {
+		name = wwu_nazmir.12.op1
+		
+    if = {
+      limit = {
+            check_variable = {
+              which = nazmir_blood
+              value = 1
+            }
+      }
+            change_variable = {
+              which = nazmir_blood
+              value = -1
+            }
+      add_country_modifier = {
+        name = nazmir_took_gift
+        duration = 360
+        hidden = yes
+      }
+    }
+        else = {
+          hidden_effect = {
+            country_event = {
+              id = wwu_nazmir.11
+            }
+          }
+
+        }
+		
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    
 }
 	
