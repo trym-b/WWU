@@ -84,7 +84,6 @@ F69_D_ango_rosh_column_1 = {
         trigger = {
             5397 = {
                 development = 30
-                add_base_manpower = 10
 
                 OR = {
                     has_building = wow_mine_1
@@ -354,10 +353,10 @@ F69_D_ango_rosh_column_2 = {
                     5396 = {
                         owned_by = ROOT
                     }
-                    5396 = {
-                        add_base_manpower = 3
-                    }
                 }
+				5396 = {
+					add_base_manpower = 3
+				}
             }
         }
     }
@@ -482,19 +481,14 @@ F69_D_ango_rosh_column_2 = {
                 type = all
                 country_or_non_sovereign_subject_holds = ROOT
             }
-
-            calc_true_if = {
-                region_ashran = {
-                    any_core_province = {
-                        OR = {
-                            has_building = wow_shipyard_1
-                            has_building = wow_shipyard_2
-                            has_building = wow_shipyard_3
-                        }
-                    }
-                }
-                amount = 1
-            }
+			any_owned_province = {
+				region = region_ashran
+				OR = {
+					has_building = wow_shipyard_1
+					has_building = wow_shipyard_2
+					has_building = wow_shipyard_3
+				}
+			}
         }
 
         provinces_to_highlight = {
@@ -506,9 +500,9 @@ F69_D_ango_rosh_column_2 = {
                 add_permanent_claim = ROOT
             }
 
-            add_power_projection = {
-                amount = 10
-            }
+            #add_power_projection = { # Commented out because type = is missing
+            #    amount = 10
+            #}
             
             custom_tooltip = UNLOCK_PRIMAL_HARVEST_CB_TT
             hidden_effect = {
@@ -593,12 +587,12 @@ F69_D_ango_rosh_column_3 = {
             }
             area_shattrath_draenor = {
                 type = all
-                NOT = { primary_culture = culture_draenei }
+                NOT = { culture = culture_draenei }
                 owned_by = ROOT
             }
             area_shattrath_outskirts = {
                 type = all
-                NOT = { primary_culture = culture_draenei }
+                NOT = { culture = culture_draenei }
                 owned_by = ROOT
             }
             3765 = {
@@ -637,9 +631,9 @@ F69_D_ango_rosh_column_3 = {
             add_dip_power = 100
             add_mil_power = 100
 
-            add_power_projection = {
-                amount = 10
-            }
+            #add_power_projection = { # Commented out because type = is missing
+            #    amount = 10
+            #}
         }
     }
 
