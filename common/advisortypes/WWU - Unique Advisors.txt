@@ -337,9 +337,10 @@ unique_butcher = {
 
 # Aranas
 unique_aranas = {
-	monarch_power = MIL # Change this to your desired type
+	monarch_power = DIP
 	
 	# ADD BONUS HERE
+	technology_cost = -0.1
     
     
 	skill_scaled_modifier = { 
@@ -357,10 +358,13 @@ unique_aranas = {
 	chance = {
 		factor = 100
         
+        # The country should be Gilneas
         modifier = {
             factor = 0
             
-            # Add exclusive trigger here so it only appears for intended tag, or leave as 0 so it is only given via effect
+			owner = { 
+				NOT = { tag = A12 }
+			}
         }
 	}
 	
@@ -371,10 +375,10 @@ unique_aranas = {
 
 # Arugal
 unique_arugal = {
-	monarch_power = MIL # Change this to your desired type
+	monarch_power = ADM
 	
-	# ADD BONUS HERE
-    
+	# Bonus
+    global_institution_spread = 0.12
     
 	skill_scaled_modifier = { 
         trigger = {
@@ -391,23 +395,27 @@ unique_arugal = {
 	chance = {
 		factor = 100
         
+        # The country should be Gilneas
         modifier = {
             factor = 0
             
-            # Add exclusive trigger here so it only appears for intended tag, or leave as 0 so it is only given via effect
+			owner = { 
+				NOT = { tag = A12 }
+			}
         }
 	}
 	
 	ai_will_do = {
-		factor = 10
+		factor = 80
 	}
 }
 
 # Shade of Arugal
 unique_shade_of_arugal = {
-	monarch_power = MIL # Change this to your desired type
+	monarch_power = ADM
 	
-	# ADD BONUS HERE
+	# BONUS 
+	years_of_nationalism = -5
     
     
 	skill_scaled_modifier = { 
@@ -425,14 +433,29 @@ unique_shade_of_arugal = {
 	chance = {
 		factor = 100
         
+        # The country should be The Scourge
         modifier = {
             factor = 0
             
-            # Add exclusive trigger here so it only appears for intended tag, or leave as 0 so it is only given via effect
+			owner = { 
+				NOT = { tag = P11 }
+			}
+        }
+		
+		# The country should be The Scourge of Lordaeron and not controlled by AI
+        modifier = {
+            factor = 0
+            
+			owner = { 
+				NOT = { 
+					tag = P11
+					ai = yes
+				}
+			}
         }
 	}
 	
 	ai_will_do = {
-		factor = 10
+		factor = 80
 	}
 }
