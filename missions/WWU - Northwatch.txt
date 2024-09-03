@@ -179,7 +179,7 @@ G06_northwatch_column_2 = {
 				name = mission_freedom_of_moves_g06
 				duration = 7300
 			}		
-			 A23 = {			
+			A23 = {			
 			    create_subject = {
                     subject_type = tributary_vassal
                     subject = G06
@@ -293,7 +293,10 @@ G06_northwatch_column_2 = {
 				duration = -1
 			}
 			add_prestige = 20
-		    #event for choosing goverment
+			
+		    country_event = {
+				id = wwu_mission_northwatch.1
+            }
 		}
 	}
 	G06_theramore_depedance = {
@@ -340,38 +343,9 @@ G06_northwatch_column_2 = {
 				name = mission_fate_of_theramore_g06
 				duration = -1
 			}
-			if = {
-			    limit = {
-				    A23 = {
-                        has_opinion = {
-                            who = ROOT
-                            value = 200
-				        }
-                    }
-				}
-				create_union = A23
-			}
-			else_if = {
-			    limit = {
-				    NOT = { exists = A23 }
-					OR = {
-					    area_dreadmurk_coast = {				            
-				            country_or_non_sovereign_subject_holds = ROOT
-						}
-						area_theramore_isle = {
-				            country_or_non_sovereign_subject_holds = ROOT
-						}
-					}
-			    }
-				release = A23
-                create_subject = {
-                    subject_type = personal_union
-                    subject = A23
-                }
-			}
-			region_dustwallow_marsh = {
-                add_core = A23
-			}
+			country_event = {
+				id = wwu_mission_northwatch.2
+            }
 		}
 	}
 	G06_south_barren_trade_routes = {
@@ -506,39 +480,22 @@ G06_northwatch_column_3 = {
 				name = mission_hunter_hill_g06
 				duration = 7300
 			}
-            if = {
-                limit = {
-                    1443 = {
-                        NOT = { owned_by = ROOT }
-                    }
-                }
-                1443 = { cede_province = ROOT }
-            }
-            if = {
-                limit = {
-                    3452 = {
-                        NOT = { owned_by = ROOT }
-                    }
-                }
-                3452 = { cede_province = ROOT }
-            }
-            if = {
-                limit = {
-                    1369 = {
-                        NOT = { owned_by = ROOT }
-                    }
-                }
-                1369 = { cede_province = ROOT }
-            }
-            if = {
-                limit = {
-                    3451 = {
-                        NOT = { owned_by = ROOT }
-                    }
-                }
-                3451 = { cede_province = ROOT }
-            }
-            
+			1443 = {
+			    NOT = { owned_by = ROOT }
+			    cede_province = ROOT
+			}
+			3452 = {
+			    NOT = { owned_by = ROOT }
+			    cede_province = ROOT
+			}
+			1369 = {
+			    NOT = { owned_by = ROOT }
+			    cede_province = ROOT
+			}
+			3451 = {
+			    NOT = { owned_by = ROOT }
+			    cede_province = ROOT
+			}
 			add_mil_power = 200
 			area_malaka_jin = {
                 add_permanent_claim = ROOT
@@ -746,7 +703,7 @@ G06_northwatch_column_4 = {
 					    controlled_by = ROOT
 					}
 				}
-				3403 = { cede_province = ROOT }
+				cede_province = 3403
 			}
 			if = {
 			    limit = {
@@ -839,28 +796,10 @@ G06_northwatch_column_4 = {
 				name = mission_the_root_of_all_evil_g06
 				duration = 7300
 			}
-			add_mil_power = 300
-			3395 = {
-			    add_devastation = 60
-			}
-			3164 = {
-			    add_devastation = 60
-			}
-			3165 = {
-			    add_devastation = 60
-			}
-			3399 = {
-			    add_devastation = 60
-			}
-			3167 = {
-			    add_devastation = 60
-			}
-			3166 = {
-			    add_devastation = 60
-			}
-			3398 = {
-			    add_devastation = 60
-			}
+			
+			country_event = {
+				id = wwu_mission_northwatch.3
+            }
 		}
 	}
 	G06_fate_of_the_horde = {
@@ -921,52 +860,9 @@ G06_northwatch_column_4 = {
 				name = mission_new_strom_g06
 				duration = 7300
 			}
-			if = {
-                limit = {    
-                    1373 = {
-                        owned_by = ROOT
-                    }
-                }
-		        1373 = {
-                    cede_province = NW1
-				    add_core = NW1
-                    change_culture = culture_arathi
-                    change_religion = holy_light
-			    }
+			country_event = {
+				id = wwu_mission_northwatch.4
             }
-			if = {
-                limit = {    
-                    3464 = {
-                        owned_by = ROOT
-                    }
-                }
-		        3464 = {
-                    cede_province = NW1
-				    add_core = NW1
-                    change_culture = culture_arathi
-                    change_religion = holy_light
-			    }
-            }
-			if = {
-                limit = {    
-                    3465 = {
-                        owned_by = ROOT
-                    }
-                }
-		        3465 = {
-                    cede_province = NW1
-				    add_core = NW1
-                    change_culture = culture_arathi
-                    change_religion = holy_light
-			    }
-            }
-			create_subject = {
-                subject_type = personal_union
-                subject = NW1
-            }
-			region_north_barrens = {
-			    add_core = NW1
-			}
 		}
 	}
 	G06_establish_tiragarde = {
@@ -996,39 +892,9 @@ G06_northwatch_column_4 = {
 				name = mission_tiragarde_g06
 				duration = 7300
 			}
-			if = {
-                limit = {    
-                    1382 = {
-                        owned_by = ROOT
-                    }
-                }
-		        1382 = {
-                    cede_province = TIR
-				    add_core = TIR
-                    change_culture = culture_kul_tiran
-                    change_religion = holy_light
-			    }
+			country_event = {
+				id = wwu_mission_northwatch.5
             }
-			if = {
-                limit = {    
-                    3406 = {
-                        owned_by = ROOT
-                    }
-                }
-		        3406 = {
-                    cede_province = TIR
-				    add_core = TIR
-                    change_culture = culture_kul_tiran
-                    change_religion = holy_light
-			    }
-            }
-			create_subject = {
-                subject_type = personal_union
-                subject = TIR
-            }
-			region_durotar = {
-			    add_core = TIR
-			}
 		}
 	}
 	G06_form_new_arathor = {
@@ -1076,9 +942,9 @@ G06_northwatch_column_4 = {
 				name = mission_new_land_new_empire_g06
 				duration = 7300
 			}
-            # do it with event			
-			change_tag = FNN
-			add_formable_bonus = yes
+			country_event = {
+				id = wwu_faction_system_collapse.8
+            }			
 		}
 	}
 }
@@ -1278,39 +1144,9 @@ G06_northwatch_column_5 = {
 				name = mission_new_home_for_the_dwarves_g06
 				duration = 7300
 			}
-			if = {
-                limit = {    
-                    1474 = {
-                        owned_by = ROOT
-                    }
-                }
-		        1474 = {
-                    cede_province = F59
-				    add_core = F59
-                    change_culture = culture_ironforge
-                    change_religion = holy_light
-			    }
+			country_event = {
+				id = wwu_mission_northwatch.6
             }
-			if = {
-                limit = {    
-                    3422 = {
-                        owned_by = ROOT
-                    }
-                }
-		        3422 = {
-                    cede_province = F59
-				    add_core = F59
-                    change_culture = culture_ironforge
-                    change_religion = holy_light
-			    }
-            }
-			create_subject = {
-                subject_type = personal_union
-                subject = F59
-            }
-			region_mulgore = {
-			    add_core = F59
-			}
 		}
 	}
 	G06_establish_windshear_hold = {
@@ -1340,40 +1176,9 @@ G06_northwatch_column_5 = {
 				name = mission_windshear_hold_g06
 				duration = 7300
 			}
-			
-			if = {
-                limit = {    
-                    1363 = {
-                        owned_by = ROOT
-                    }
-                }
-		        1363 = {
-                    cede_province = NW2
-				    add_core = NW2
-                    change_culture = culture_alterac
-                    change_religion = holy_light
-			    }
+			country_event = {
+				id = wwu_mission_northwatch.7
             }
-			if = {
-                limit = {    
-                    3640 = {
-                        owned_by = ROOT
-                    }
-                }
-		        3640 = {
-                    cede_province = NW2
-				    add_core = NW2
-                    change_culture = culture_alterac
-                    change_religion = holy_light
-			    }
-            }
-			create_subject = {
-                subject_type = personal_union
-                subject = NW2
-            }
-			region_stonetalon_mountains = {
-			    add_core = NW2
-			}
 		}
 	}
 }
