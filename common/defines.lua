@@ -982,7 +982,7 @@ NCountry = {
 	MONTHS_TO_CORE_MAXIMUM = 240,					-- Maximum amount of months it will take to core a province after all modifiers.
 	MONTHS_TO_CORE_MINIMUM = 6,						-- Minimum amount of months it will take to core a province after all modifiers.
 	MONTHS_TO_CORE = 36,							-- How many months it will take to core a province.
-	MONTHS_TO_CHANGE_CULTURE = 1,					-- How many months it will take to change culture in a province, per development.
+	MONTHS_TO_CHANGE_CULTURE = 6,					-- How many months it will take to change culture in a province, per development.
 	--- WWU: make changing culture much quicker.
 	RELEASED_NATION_ARMY_SIZE = 0.5,				-- Newly released nations get an army of this size
 	STARTING_ARMY_SIZE = 0.75,						-- Percentage of force limit
