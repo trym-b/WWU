@@ -13,6 +13,15 @@ A12_unlock_decision_reborn_lordaeron = {
 	set_country_flag = A12_unlock_decision_reborn_lordaeron_cf
 }
 
+A12_unlock_decision_give_andoorhal_to_x04 = {
+
+	set_country_flag = A12_unlock_decision_reborn_lordaeron_for_andorhal_cf
+}
+
+A12_unlock_decision_give_stratholme_to_x04 = {
+	set_country_flag = A12_unlock_decision_reborn_lordaeron_for_stratholme_cf
+}	
+
 
 
 
@@ -37,9 +46,12 @@ A12_liberate_lordaeron_making_them_vassal = {
         if = {
             limit = { 543 = { controlled_by = ROOT } } # Lordaeron Capital
             543 = {
+				rename_capital = "New Lordaeron City"
+				change_province_name = "New Lordaeron City"
                 cede_province = X04
                 set_capital = X04
                 add_core = X04
+				change_religion = ROOT
             }
         }
         if = {
@@ -62,7 +74,11 @@ A12_liberate_lordaeron_making_them_vassal = {
                 cede_province = X04
                 add_core = X04
 				
-				add_building = wow_fort_1
+				add_building_construction = {
+					building = wow_fort_1
+					speed = 0.5
+					cost = 0
+				}
             }
         }
         if = {
@@ -201,14 +217,14 @@ A12_liberate_lordaeron_making_them_vassal = {
                 culture = culture_gilnean
             }
             custom_tooltip = " "
-            define_leader_to_ruler = {
+            define_ruler_to_general = {
                 name = "Darius Crowley"
                 type = general
                 fixed = yes
                 trait = elite_master_of_arms_personality
                 shock = 4
                 fire = 5
-                maneuver = 4
+                manuever = 4
                 siege = 3
             }
             hidden_effect = {
@@ -219,8 +235,8 @@ A12_liberate_lordaeron_making_them_vassal = {
         }
         else = {
             define_ruler = {
-                name = "Raven"
-                dynasty = "Hallow"
+                name = "Lord Thomas"
+                dynasty = "Hewell"
                 adm = 4
                 dip = 2
                 mil = 3
@@ -252,8 +268,15 @@ A12_liberate_lordaeron_making_them_vassal = {
 		}
         X04 = {
             add_government_reform = lordaeron_kingdom_reform
-            add_yearly_manpower = 2.5
-            country_event = { id = wwu_discovery.6 days = 2 }
+            
+            country_event = { id = wwu_discovery.2 days = 2 }
+			
+			add_army_tradition = 20
+			add_navy_tradition = 20
+			add_yearly_manpower = 2.5
+			add_yearly_sailors = 0.5
+			add_years_of_income = 1.5
+			add_mercantilism = 10
 			
 			if = {
 				limit = {
@@ -277,11 +300,144 @@ A12_liberate_lordaeron_making_them_vassal = {
         region_western_plaguelands = {
             add_permanent_claim = X04
         }
-        region_eastern_plaguelands = {
-            add_permanent_claim = X04
-        }
+		
+		A12 = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = A12_darius_crowley_killed }
+				}
+				kill_leader = {
+					type = "Darius Crowley"
+				}
+				kill_leader = {
+					type = "Lorna Crowley"
+				}
+			}
+		}
     }
     
     custom_tooltip = X04_gain_permanant_claim_in_tg_wg_eg
     set_global_flag = is_X04_name_changing_flag
+	set_country_flag = A12_X04_spawned
+}
+
+A12_give_andorhal_to_new_lordaeron = {
+	if = {
+		limit = {
+            area_andorhal = {
+                OR = {
+                    controlled_by = ROOT
+                    owned_by = ROOT
+                }
+            }
+			
+            has_country_flag = A12_unlock_decision_reborn_lordaeron_for_andorhal_cf
+        }
+		if = {
+            limit = { 1923 = { controlled_by = ROOT } }
+            1923 = {
+                cede_province = X04
+                add_core = X04
+            }
+        }
+        if = {
+            limit = { 703 = { controlled_by = ROOT } }
+            703 = {
+                cede_province = X04
+                add_core = X04
+            }
+        }
+		if = {
+            limit = { 688 = { controlled_by = ROOT } }
+            688 = { #Andorhal
+                cede_province = X04
+                add_core = X04
+				rename_capital = "New Andorhal"
+				change_province_name = "New Andorhal"
+				
+				add_base_tax = 2
+				add_base_manpower = 3
+				
+				if = {
+					limit = {
+						A12 = {
+							primary_culture = culture_gilnean_worgen
+						}
+					}
+					random_list = {
+						50 = { change_culture = culture_gilnean_worgen }
+						50 = { change_culture = culture_gilnean }
+					}
+				}
+				else = {
+					change_culture = culture_gilnean
+				}
+            }
+        }
+	}
+}
+
+A12_give_stratholme_to_new_lordaeron = {
+	if = {
+		limit = {
+            area_stratholme = {
+                OR = {
+                    controlled_by = ROOT
+                    owned_by = ROOT
+                }
+            }
+			
+            has_country_flag = A12_unlock_decision_reborn_lordaeron_for_stratholme_cf
+			has_country_flag = A12_X04_spawned
+        }
+		if = {
+            limit = { 642 = { controlled_by = ROOT } }
+            642 = {
+                cede_province = X04
+                add_core = X04
+            }
+        }
+        if = {
+            limit = { 4748 = { controlled_by = ROOT } }
+            4748 = {
+                cede_province = X04
+                add_core = X04
+            }
+        }
+		if = {
+            limit = { 4749 = { controlled_by = ROOT } }
+            4749 = {
+                cede_province = X04
+                add_core = X04
+            }
+		}
+		if = {
+			limit = { 4750 = { controlled_by = ROOT } }
+			4750 = {
+				cede_province = X04
+                add_core = X04
+			}
+		}
+		if = {
+			limit = { 4751 = { controlled_by = ROOT } }
+			4751 = {
+				cede_province = X04
+                add_core = X04
+			}
+		}
+		if = {
+			limit = { 4752 = { controlled_by = ROOT } }
+			4752 = {
+				cede_province = X04
+                add_core = X04
+			}
+		}
+		if = {
+			limit = { 4753 = { controlled_by = ROOT } }
+			4753 = {
+				cede_province = X04
+                add_core = X04
+			}
+        }
+	}
 }
