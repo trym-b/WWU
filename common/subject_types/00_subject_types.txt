@@ -1532,3 +1532,58 @@ cultural_sphere_of_influence_subject = {
 		modifier = culturally_influenced_country
 	}
 }
+
+gilnean_colony = {
+	copy_from = vassal
+	
+	# the icons
+	sprite = GFX_icon_subject_type
+	diplomacy_overlord_sprite = GFX_diplomacy_lead_subject_type
+	diplomacy_subject_sprite = GFX_diplomacy_am_subject_type
+
+	# properties
+	can_be_annexed = no
+	can_be_integrated = no
+	can_fight_independence_war = yes
+	joins_overlords_wars = yes
+	takes_diplo_slot = no
+	overlord_protects_external = no	
+	can_use_claims = yes
+	allows_taking_land_without_independence = no
+	overlord_can_fabricate_for = yes
+	trust_on_start = 100
+
+	max_government_rank = 2
+	
+	base_liberty_desire = 0.25
+	liberty_desire_development_ratio = 0.1
+	liberty_desire_same_dynasty = -25.0
+	pays_overlord = 2.0
+	forcelimit_bonus = 0
+	forcelimit_to_overlord = 0
+
+	relative_power_class = 1
+	
+	restoration_cb = cb_disloyal_vassal
+
+	# Subject Interactions:
+	scutage = yes
+	embargo_rivals = yes
+	send_officers = yes
+	contribute_to_capital = yes
+	conscript_general = yes
+	divert_trade = yes
+	seize_territory = no
+
+	# allows event modifiers
+        # the vanilla modifiers aren't defined as event modifiers though
+	modifier_subject = {
+		modifier = subject_type_nation
+	}
+	modifier_overlord = {
+		modifier = subject_type_subject
+	}
+        #looks in 00_opinion_modifers
+	overlord_opinion_modifier = is_gilnean_colony
+	subject_opinion_modifier = is_gilnean_colony
+}
