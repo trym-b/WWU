@@ -144,14 +144,6 @@ A12_liberate_lordaeron_making_them_vassal = {
         }
     }
     
-    # Create subject
-    A12 = {
-        create_subject = {
-            subject_type = gilnean_colony
-            subject = X04
-        }
-    }
-
     # Define X04 characteristics
     X04 = {
         add_country_modifier = {
@@ -258,19 +250,26 @@ A12_liberate_lordaeron_making_them_vassal = {
                 change_culture = culture_gilnean
             }
 		}
-		
-		if = {
-			limit = {
-				NOT = { technology_group = tech_worgen }
-				primary_culture = culture_gilnean_worgen
-			}	
-			change_technology_group = tech_worgen
-		}
-            
         X04 = {
             add_government_reform = lordaeron_kingdom_reform
             add_yearly_manpower = 2.5
             country_event = { id = wwu_discovery.6 days = 2 }
+			
+			if = {
+				limit = {
+					A12 = {
+						primary_culture = culture_gilnean_worgen
+					}
+				}
+				change_primary_culture = culture_gilnean_worgen
+			}
+			if = {
+				limit = {
+					NOT = { technology_group = tech_worgen }
+					primary_culture = culture_gilnean_worgen
+				}				
+				change_technology_group = tech_worgen
+			}
         }
         region_tirisfal_glades = {
             add_permanent_claim = X04
