@@ -881,6 +881,50 @@ scourge_vassal = {
 	}
 }
 
+prime_scourge_vassal = { #For Gilneas
+	copy_from = vassal
+	
+	# Graphics:
+	sprite = GFX_icon_vassal
+	diplomacy_overlord_sprite = GFX_diplomacy_leadvassal
+	diplomacy_subject_sprite = GFX_diplomacy_amvassal
+
+	# Properties:
+	base_liberty_desire = -20.0
+	can_be_annexed = no
+    takes_diplo_slot = no
+	allows_taking_land_without_independence = yes
+	overlord_can_attack = yes
+	can_have_subjects_of_other_types = yes
+	
+	can_fight = {
+		independent_nations = yes
+		same_overlord = tributary_state
+		other_overlord = all
+	}
+	can_rival = {
+		independent_nations = yes
+		same_overlord = tributary_state
+		other_overlord = all
+	}
+    
+	# Modifiers:
+	modifier_overlord = clear #We don't want to duplicate the ones inherited from vassal
+	modifier_subject = clear #Ditto
+    
+	modifier_subject = {
+		modifier = subject_nation
+	}
+    
+	modifier_overlord = {
+		modifier = scourge_vassal_subject
+	}
+    
+	modifier_subject = {
+		modifier = scourge_vassal_bonus
+	}
+}
+
 lesser_bloodmother = {
 	copy_from = tributary_state
 	
