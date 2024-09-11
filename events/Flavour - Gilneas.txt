@@ -421,6 +421,7 @@ country_event = {
 		OR = {
 			tag = A12
 			culture = culture_gilnean
+			culture = culture_lordaeron
 		}
 		
 		OR = {
@@ -452,6 +453,7 @@ country_event = {
 				limit = {
 					any_neighbor_province = {
 						culture_group = culture_group_worgen
+						NOT = { has_province_modifier = A12_the_worgens_already_attacked_this_prov }	
 					}
 					NOT = {
 						province_id = 890
@@ -469,39 +471,74 @@ country_event = {
 	
 	option = {
 		name = wwu_gilneas.5.option.a
-		
-		random_list = {
-			70 = {
-				event_target:A12_propagation_of_the_curse_event_target = {
-					change_culture = culture_gilnean_worgen						
+		if = {
+			limit = { culture = culture_gilnean }
+			random_list = {
+				70 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_gilnean_worgen						
+					}
 				}
+				30 = { }
 			}
-			30 = { }
+			
+			custom_tooltip = " "
+			
+			add_prestige = -10
 		}
-		
-		custom_tooltip = " "
-		
-		add_prestige = -10
+		else = {
+			random_list = {
+				70 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_lordaeron_worgen						
+					}
+				}
+				30 = { }
+			}
+			
+			custom_tooltip = " "
+			
+			add_prestige = -10
+		}
 	}
 	
 	option = {
 		name = wwu_gilneas.5.option.b
-		
-		random_list = {
-			40 = {
-				event_target:A12_propagation_of_the_curse_event_target = {
-					change_culture = culture_gilnean_worgen						
+		if = {
+			limit = { culture = culture_gilnean }
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_gilnean_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
 				}
 			}
-			60 = { 
-				add_prestige = 5 
-				add_yearly_manpower = -0.05
-			}
+			
+			custom_tooltip = " "
+			
+			add_mil_power = -50
 		}
-		
-		custom_tooltip = " "
-		
-		add_mil_power = -50
+		else = {
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_gilnean_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
 	}
 }
 
