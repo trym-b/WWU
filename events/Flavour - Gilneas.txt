@@ -2078,3 +2078,177 @@ country_event = {
 	}
 }
 
+#The Siege of Gilneas
+country_event = {
+	id = wwu_gilneas.36
+	title = wwu_gilneas.36.title
+	desc = wwu_gilneas.36.desc
+	picture = DEADLY_POISON_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		927 = {
+			has_siege = yes
+		}
+		is_in_war = {
+			participants = P14 #Forsaken
+		}
+		
+		tag = A12 
+	}
+	
+	option = {
+		name = wwu_gilneas.36.option.a
+		
+		
+		ai_chance = { factor = 100 }
+	}
+}
+
+#Fall of the Capital
+country_event = {
+	id = wwu_gilneas.37
+	title = wwu_gilneas.37.title
+	desc = wwu_gilneas.37.desc
+	picture = GILNEAS_CITY_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		927 = {
+			controller = {
+				tag = P14 #Forsaken
+			}
+		}
+		
+		tag = A12
+	}
+	
+	option = {
+		name = wwu_gilneas.37.option.a
+		if = {
+			limit = {
+				3020 = { #Hailwood
+					OR = {
+						controlled_by = A12
+						owned_by = A12
+					}
+				}
+			}
+			3020 = { #Hailwood
+				add_province_modifier = {
+					name = A12_war_with_forsaken
+					duration = 7300
+				}
+				
+				infantry = A12
+			}
+		}
+		if = {
+			limit = {
+				789 = { #Greymane Manor
+					OR = {
+						controlled_by = A12
+						owned_by = A12
+					}
+				}
+			}
+			789 = { #Greymane Manor
+				add_province_modifier = {
+					name = A12_war_with_forsaken
+					duration = 7300
+				}
+				
+				infantry = A12
+			}
+		}
+		if = {
+			limit = {
+				890 = { #Tempest's Reach
+					OR = {
+						controlled_by = A12
+						owned_by = A12
+					}
+				}
+			}
+			890 = { #Tempest's Reach
+				add_province_modifier = {
+					name = A12_war_with_forsaken
+					duration = 7300
+				}
+				
+				infantry = A12
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					AND = {
+						3020 = { #Hailwood
+							OR = {
+								controlled_by = A12
+								owned_by = A12
+							}
+						}
+					}
+					AND = {
+						789 = { #Greymane Manor
+							OR = {
+								controlled_by = A12
+								owned_by = A12
+							}
+						}
+					}
+					AND = {
+						890 = { #Tempest's Reach
+							OR = {
+								controlled_by = A12
+								owned_by = A12
+							}
+						}
+					}
+				}
+			}
+			random_owned_province = {
+				add_province_modifier = {
+					name = A12_war_with_forsaken
+					duration = 7300
+				}
+				
+				infantry = A12
+			}
+		}
+		ai_chance = { factor = 100 }
+	}
+}
+
+#A New Dawn for Gilneas
+country_event = {
+	id = wwu_gilneas.38
+	title = wwu_gilneas.38.title
+	desc = wwu_gilneas.38.desc
+	picture = THRONE_APPROACH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = A12
+		
+		mission_completed = A12_the_gilneas_liberation_front
+		mission_completed = A12_adopt_the_worgen_culture
+		mission_completed = A12_the_third_war
+		
+		NOT = { is_at_war = yes }
+	}
+	
+	option = {
+		name = wwu_gilneas.38.option.a
+		add_country_modifier = {
+			name = 
+			duration =
+		}
+		
+		ai_chance = { factor = 100 }
+	}
+}

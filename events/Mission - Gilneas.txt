@@ -805,3 +805,139 @@ country_event = {
 		ai_chance = { factor = 100 }
 	}
 }
+
+# Decision about the Alliance
+country_event = {
+	id = wwu_mission_gilneas.20
+	title = wwu_mission_gilneas.20.title
+	desc = wwu_mission_gilneas.20.desc
+	picture = STORMSONG_eventPicture
+    
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Leave the Alliance
+		name = wwu_mission_gilneas.20.option.a
+		add_legitimacy = 5
+		
+		custom_tooltip = " "
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		
+		custom_tooltip = " "
+		remove_country_modifier = member_of_alliance
+		
+		ai_chance = { factor = 80 }
+	}
+	
+	option = { #Stay in it
+		name = wwu_mission_gilneas.20.option.b
+		add_legitimacy = -5
+		
+		custom_tooltip = " "
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+		
+		ai_chance = { factor = 20 }
+	}
+}
+
+#Koroth Hillbreaker defend his territoires
+country_event = {
+	id = wwu_mission_gilneas.21
+	title = wwu_mission_gilneas.21.title
+	desc = wwu_mission_gilneas.21.desc
+	picture = CLIFF_AND_AGITATED_SEA_eventPicture
+    
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	major = yes
+	
+	option = { #Bones men mad ! Bones men must be dead !
+		name = wwu_mission_gilneas.21.option.a
+		hidden_effect = {
+			random_list = {
+				60 = { 
+					A12 = { #Gilneas
+						country_event = { id = wwu_mission_gilneas.22 } #Join war against Forsaken with Gilneas
+						
+						create_alliance = F60
+						join_all_defensive_wars_of = A12
+					}
+					F60 = { #Stagecoach (Koroth Hillbreaker)
+						join_all_defensive_wars_of = A12
+					}
+				} 
+				40 = {
+					A12 = { #Gilneas
+						create_subject = {
+							subject_type = march
+							subject = F60 #Stagecoach (Koroth Hillbreaker)
+						}
+						
+						country_event = { id = wwu_mission_gilneas.23 } #Join war against Forsaken with Gilneas and become a march for Gilneas
+					}
+				}
+			}
+		}
+		ai_chance = { factor = 95 }
+	}
+	
+	option = { #Bones men mad ! Bones men and wolf men must be dead !
+		name = wwu_mission_gilneas.21.option.b
+		F60 = { #Stagecoach (Koroth Hillbreaker)
+			declare_war = A12 #Gilneas
+			declare_war = P14 #Forsaken
+		}
+		
+		ai_chance = { factor = 5 }
+	}
+}
+
+#Koroth Hillbreaker defend his territoires - Notify Gilneas
+country_event = {
+	id = wwu_mission_gilneas.22
+	title = wwu_mission_gilneas.22.title
+	desc = wwu_mission_gilneas.22.desc
+	picture = CLIFF_AND_AGITATED_SEA_eventPicture
+    
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = wwu_mission_gilneas.22.option.a
+		tooltip = {
+			create_alliance = F60
+			
+			F60 = { join_all_defensive_wars_of = A12 }
+		}
+		ai_chance = { factor = 100 }
+	}
+}
+
+#Koroth Hillbreaker defend his territoires - Notify Gilneas for becoming a march too
+country_event = {
+	id = wwu_mission_gilneas.23
+	title = wwu_mission_gilneas.23.title
+	desc = wwu_mission_gilneas.23.desc
+	picture = CLIFF_AND_AGITATED_SEA_eventPicture
+    
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = wwu_mission_gilneas.23.option.a
+		tooltip = {
+			A12 = { #Gilneas
+				create_subject = {
+					subject_type = march
+					subject = F60 #Stagecoach (Koroth Hillbreaker)
+				}
+			}
+		}
+		ai_chance = { factor = 100 }
+	}
+}

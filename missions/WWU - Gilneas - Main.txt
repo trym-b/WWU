@@ -18,7 +18,7 @@ A12_1_gilneas_column1 = {
 		required_missions = { A12_neutrality_or_alliance }
 		trigger = { 
 			927 = {
-				num_of_times_improved = 5
+				num_of_times_improved = 4
 				num_of_times_expanded_infrastructure = 1
 			}
 		}
@@ -65,7 +65,7 @@ A12_1_gilneas_column1 = {
 					}
 				}
 				927 = {
-					add_random_development = 10
+					add_random_development = 5
 				}
 			}
 		}
@@ -98,7 +98,7 @@ A12_1_gilneas_column1 = {
 						name = A12_develop_silverpine_arg_keep_modifier
 						duration = 5478
 					}
-					add_random_development = 5
+					add_random_development = 2
 					
 					custom_tooltip = " "
 					
@@ -487,216 +487,212 @@ A12_1_gilneas_column2 = {
 			}
 		}
 	}
-A12_evacuate_the_silverpine = {
-	icon = mission_salvage
-	position = 5
-	required_missions = { A12_build_argelaine_dungeon A12_prevent_the_fall }
-	trigger = {
-			OR = {
-				AND = {
-					OR = {
-						is_in_war = { participants = P52 }
-						is_in_war = { participants = P11 }
-					}
-					OR = {
-						STW = { owes_favors = { who = A12 value = 15 } }
-						A29 = { owes_favors = { who = A12 value = 15 } }
-						A14 = { owes_favors = { who = A12 value = 15 } }
-						A94 = { owes_favors = { who = A12 value = 15 } }
-					}
-					adm_power = 50
-					dip_power = 50
-					mil_power = 50
-				}
-				NOT = { region_silverpine_forest = { OR = { owned_by = ROOT } controlled_by = ROOT } }
-			}
-		}
-		effect = {
-			if = {
-				limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } } }
-				custom_tooltip = A12_evacuate_the_silverpine_failed
-				custom_tooltip = " "
-			}
-			
-			if = { #Stormwind
-				limit = { STW = { owes_favors = { who = A12 value = 15 } } }
-				2141 = {
-					set_province_flag = A12_have_gilnean_refugees
-					add_base_tax = 1
-				}
-				custom_tooltip = " "
-				
-				add_country_modifier = {
-					name = A12_refugee_to_stormwind
-					duration = 3650
-				}
-				
-				add_opinion = {
-					who = STW
-					modifier = A12_has_accepted_our_refugees
-				}
-				STW = {
-					add_opinion = {
-						who = A12
-						modifier = A12_has_accepted_our_refugees_b
-					}
-				}
-				custom_tooltip = " "
-			}
-			else_if = { #Stormwind preview
-				limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } STW = { owes_favors = { who = A12 value = 15 } } } }
-				tooltip = {
-					add_country_modifier = {
-						name = A12_refugee_to_stormwind
-						duration = 3650
-					}
-				}
-				tooltip = {
-					add_opinion = {
-						who = STW
-						modifier = A12_has_accepted_our_refugees
-					}
-				}
-				tooltip = {
-					STW = {
-						add_opinion = {
-							who = A12
-							modifier = A12_has_accepted_our_refugees_b
-						}
-					}
-				}
-				custom_tooltip = " "
-			}
-			if = { #Khaz Modan
-				limit = { A29 = { owes_favors = { who = A12 value = 15 } } }
-				add_country_modifier = {
-					name = A12_refugee_to_khaz_modan
-					duration = 3650
-				}
-				
-				add_opinion = {
-					who = A29
-					modifier = A12_has_accepted_our_refugees
-				}
-				A29 = {
-					add_opinion = {
-						who = A12
-						modifier = A12_has_accepted_our_refugees_b
-					}
-				}
-				custom_tooltip = " "
-			}
-			else_if = { #Khaz Modan preview
-				limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } A29 = { owes_favors = { who = A12 value = 15 } } } }
-				tooltip = {
-					add_country_modifier = {
-						name = A12_refugee_to_khaz_modan
-						duration = 3650
-					}
-				}
-				tooltip = {
-					add_opinion = {
-						who = A29
-						modifier = A12_has_accepted_our_refugees
-					}
-				}
-				tooltip = {
-					A29 = {
-						add_opinion = {
-							who = A12
-							modifier = A12_has_accepted_our_refugees_b
-						}
-					}
-				}
-				custom_tooltip = " "
-			}
-			if = { #Kul Tiras
-				limit = { A14 = { owes_favors = { who = A12 value = 15 } } }
-				add_country_modifier = {
-					name = A12_refugee_to_kultiras
-					duration = 3650
-				}
-				
-				add_opinion = {
-					who = A14
-					modifier = A12_has_accepted_our_refugees
-				}
-				A14 = {
-					add_opinion = {
-						who = A12
-						modifier = A12_has_accepted_our_refugees_b
-					}
-				}
-				custom_tooltip = " "
-			}
-			else_if = { #Kul Tiras preview
-				limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } A14 = { owes_favors = { who = A12 value = 15 } } } }
-				tooltip = {
-					add_country_modifier = {
-						name = A12_refugee_to_kultiras
-						duration = 3650
-					}
-				}
-				tooltip = {
-					add_opinion = {
-						who = A14
-						modifier = A12_has_accepted_our_refugees
-					}
-				}
-				tooltip = {
-					A14 = {
-						add_opinion = {
-							who = A12
-							modifier = A12_has_accepted_our_refugees_b
-						}
-					}
-				}
-				custom_tooltip = " "
-			}
-
-			if = { #Darnassus
-				limit = { A94 { owes_favors = { who = A12 value = 15 } } }
-				add_country_modifier = {
-					name = A12_refugee_to_darnassus
-					duration = 3650
-				}
-				add_opinion = {
-					who = A94
-					modifier = A12_has_accepted_our_refugees
-				}
-				A94 = {
-					add_opinion = {
-						who = A12
-						modifier = A12_has_accepted_our_refugees_b
-					}
-				}
-				custom_tooltip = " "
-			}
-			else_if = { #Darnassus preview
-				limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } A94 = { owes_favors = { who = A12 value = 15 } } } }
-				tooltip = {
-					add_country_modifier = {
-						name = A12_refugee_to_darnassus
-						duration = 3650
-					}
-				}
-				tooltip = {
-					add_opinion = {
-						who = A94
-						modifier = A12_has_accepted_our_refugees
-					}
-				}
-				tooltip = {
-					A94 = {
-						add_opinion = {
-							who = A12
-							modifier = A12_has_accepted_our_refugees_b
-						}
-					}
-				}
-			}
-		}
-	}
+#A12_evacuate_the_silverpine = {
+#	icon = mission_salvage
+#	position = 5
+#	required_missions = { A12_build_argelaine_dungeon A12_prevent_the_fall }
+#	trigger = {
+#		OR = {
+#			AND = {
+#				OR = {
+#					is_in_war = { participants = P52 }
+#					is_in_war = { participants = P11 }
+#				}
+#				OR = {
+#					STW = { owes_favors = { who = A12 value = 15 } }
+#					A29 = { owes_favors = { who = A12 value = 15 } }
+#					A14 = { owes_favors = { who = A12 value = 15 } }
+#					A94 = { owes_favors = { who = A12 value = 15 } }
+#				}
+#			}
+#			NOT = { region_silverpine_forest = { OR = { owned_by = ROOT } controlled_by = ROOT } }
+#		}
+#	}
+#	effect = {
+#		if = {
+#			limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } } }
+#			custom_tooltip = A12_evacuate_the_silverpine_failed
+#			custom_tooltip = " "
+#		}
+#		
+#		if = { #Stormwind
+#			limit = { STW = { owes_favors = { who = A12 value = 15 } } }
+#			2141 = {
+#				set_province_flag = A12_have_gilnean_refugees
+#				add_base_tax = 1
+#			}
+#			custom_tooltip = " "
+#			
+#			add_country_modifier = {
+#				name = A12_refugee_to_stormwind
+#				duration = 3650
+#			}
+#			
+#			add_opinion = {
+#				who = STW
+#				modifier = A12_has_accepted_our_refugees
+#			}
+#			STW = {
+#				add_opinion = {
+#					who = A12
+#					modifier = A12_has_accepted_our_refugees_b
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		else_if = { #Stormwind preview
+#			limit = { NOT = { STW = { owes_favors = { who = A12 value = 15 } } } }
+#			tooltip = {
+#				add_country_modifier = {
+#					name = A12_refugee_to_stormwind
+#					duration = 3650
+#				}
+#			}
+#			tooltip = {
+#				add_opinion = {
+#					who = STW
+#					modifier = A12_has_accepted_our_refugees
+#				}
+#			}
+#			tooltip = {
+#				STW = {
+#					add_opinion = {
+#						who = A12
+#						modifier = A12_has_accepted_our_refugees_b
+#					}
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		if = { #Khaz Modan
+#			limit = { A29 = { owes_favors = { who = A12 value = 15 } } }
+#			add_country_modifier = {
+#				name = A12_refugee_to_khaz_modan
+#				duration = 3650
+#			}
+#			
+#			add_opinion = {
+#				who = A29
+#				modifier = A12_has_accepted_our_refugees
+#			}
+#			A29 = {
+#				add_opinion = {
+#					who = A12
+#					modifier = A12_has_accepted_our_refugees_b
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		else_if = { #Khaz Modan preview
+#			limit = { NOT = { A29 = { owes_favors = { who = A12 value = 15 } } } }
+#			tooltip = {
+#				add_country_modifier = {
+#					name = A12_refugee_to_khaz_modan
+#					duration = 3650
+#				}
+#			}
+#			tooltip = {
+#				add_opinion = {
+#					who = A29
+#					modifier = A12_has_accepted_our_refugees
+#				}
+#			}
+#			tooltip = {
+#				A29 = {
+#					add_opinion = {
+#						who = A12
+#						modifier = A12_has_accepted_our_refugees_b
+#					}
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		if = { #Kul Tiras
+#			limit = { A14 = { owes_favors = { who = A12 value = 15 } } }
+#			add_country_modifier = {
+#				name = A12_refugee_to_kultiras
+#				duration = 3650
+#			}
+#			
+#			add_opinion = {
+#				who = A14
+#				modifier = A12_has_accepted_our_refugees
+#			}
+#			A14 = {
+#				add_opinion = {
+#					who = A12
+#					modifier = A12_has_accepted_our_refugees_b
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		else_if = { #Kul Tiras preview
+#			limit = { NOT = { A14 = { owes_favors = { who = A12 value = 15 } } } }
+#			tooltip = {
+#				add_country_modifier = {
+#					name = A12_refugee_to_kultiras
+#					duration = 3650
+#				}
+#			}
+#			tooltip = {
+#				add_opinion = {
+#					who = A14
+#					modifier = A12_has_accepted_our_refugees
+#				}
+#			}
+#			tooltip = {
+#				A14 = {
+#					add_opinion = {
+#						who = A12
+#						modifier = A12_has_accepted_our_refugees_b
+#					}
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#
+#		if = { #Darnassus
+#			limit = { A94 { owes_favors = { who = A12 value = 15 } } }
+#			add_country_modifier = {
+#				name = A12_refugee_to_darnassus
+#				duration = 3650
+#			}
+#			add_opinion = {
+#				who = A94
+#				modifier = A12_has_accepted_our_refugees
+#			}
+#			A94 = {
+#				add_opinion = {
+#					who = A12
+#					modifier = A12_has_accepted_our_refugees_b
+#				}
+#			}
+#			custom_tooltip = " "
+#		}
+#		else_if = { #Darnassus preview
+#			limit = { NOT = { A94 = { owes_favors = { who = A12 value = 15 } } } }
+#			tooltip = {
+#				add_country_modifier = {
+#					name = A12_refugee_to_darnassus
+#					duration = 3650
+#				}
+#			}
+#			tooltip = {
+#				add_opinion = {
+#					who = A94
+#					modifier = A12_has_accepted_our_refugees
+#				}
+#			}
+#			tooltip = {
+#				A94 = {
+#					add_opinion = {
+#						who = A12
+#						modifier = A12_has_accepted_our_refugees_b
+#					}
+#				}
+#			}
+#		}
+#	}
 	A12_reconciliation_with_bloodfang = {
 		icon = mission_hunter_beast_taming
 		position = 8
@@ -865,9 +861,26 @@ A12_1_gilneas_column3 = {
 		required_missions = { A12_neutrality_or_alliance }
 		trigger = {
 			OR = {
-				alliance_with = A08
-				has_country_modifier = member_of_alliance
+				AND = {
+					alliance_with = A08
+					exists = A08
+				}
+				AND = {
+					alliance_with = A25
+					exists = A25
+				}
+				AND = {
+					alliance_with = F55
+					exists = F55
+				}
+				AND = {
+					alliance_with = STW
+					exists = STW
+					
+					NOT = { exists = A08 }
+				}
 			}
+			has_country_modifier = member_of_alliance
 		}
 		effect = {
 			add_country_modifier = {
@@ -881,14 +894,18 @@ A12_1_gilneas_column3 = {
 		position = 3
 		required_missions = { A12_alliance_of_lordaeron }
 		trigger = {
-			NOT = {
-				is_at_war = yes
-			}
+			NOT = { is_at_war = yes }
 			stability = 3
+			
 		}
 		effect = {
 			927 = {
 				add_random_development = 4
+			}
+			
+			if = {
+				limit = { has_country_modifier = member_of_alliance }
+				country_event = { id = wwu_mission_gilneas.20 }
 			}
 		}
 	}
@@ -1067,6 +1084,31 @@ A12_1_gilneas_column3 = {
 			add_mil_power = 200
 		}
 	}
+	A12_uses_stagecoach = {
+		icon = mission_ogre_king
+		position = 15
+		required_missions = { A12_forsaken_war }
+		trigger = {
+			is_in_war = {
+				attacker_leader = P14
+				defender_leader = A12
+			}
+			AND = {
+				F60 = {
+					has_opinion = {
+						who = A12
+						value = 60
+					}
+				}
+				exists = F60
+			}
+		}
+		effect = {
+			F60 = {
+				country_event = { id = wwu_mission_gilneas.21 days = 1 }
+			}
+		}
+	}
 	A12_end_the_blocus = {
 		icon = mission_admiral
 		position = 16
@@ -1176,11 +1218,28 @@ A12_1_gilneas_column4 = {
 
 		NOT = { has_country_flag = A12_neutrality_path }
 	}
+	
+	A12_start_the_isolation = {
+		icon = mission_force_shield
+		position = 5
+		required_missions = { A12_prevent_the_fall }
+		trigger = {
+			adm_power = 300
+			dip_power = 300
+			mil_power = 300
+		}
+		effect = {
+			add_country_modifier = {
+				name = A12_start_the_isolation_modifier
+				duration = -1
+			}
+		}
+	}
 
 	A12_greyman_wall = {
 		icon = mission_greymane_wall
-		position = 5
-		required_missions = { A12_prevent_the_fall }
+		position = 6
+		required_missions = { A12_start_the_isolation }
 		trigger = {
 			914 = {
 				fort_level = 2
@@ -1378,6 +1437,44 @@ A12_1_gilneas_column4 = {
 					rename_capital = "Greymane Wall"
 					change_province_name = "Greymane Wall"
 				}
+			}
+		}
+	}
+	A12_end_the_isolation = {
+		icon = mission_ancestors
+		position = 7
+		required_missions = { A12_greyman_wall }
+		trigger = {
+			num_of_allies = 2
+			calc_true_if = {
+				amount = 2
+				all_country = {
+					has_opinion = {
+						who = A12
+						value = 100
+					}
+				}
+			}
+			dip_power = 500
+			diplomatic_reputation = 3
+		}
+		effect = {
+			add_country_modifier = {
+				name = A12_end_the_isolation_modifier
+				duration = -1
+			}
+			remove_country_modifier = A12_start_the_isolation_modifier
+			
+			if = {
+				limit = { has_had_golden_age = yes } 
+				reset_golden_age = yes 
+			}
+			else_if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 360
+			}
+			else = { 
+				add_prestige_or_monarch_power = { amount = 100 }
 			}
 		}
 	}
@@ -1630,7 +1727,7 @@ A12_1_gilneas_column5 = {
 			A18 = {
 				has_opinion = {
 					who = ROOT
-					value = 120
+					value = 90
 				}
 			}
 		}
@@ -1648,7 +1745,7 @@ A12_1_gilneas_column5 = {
 		trigger = {
 			has_spy_network_in = {
 				who = A18
-				value = 30
+				value = 15
 			}
 		}
 		effect = {
