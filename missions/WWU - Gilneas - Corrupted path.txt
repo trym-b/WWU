@@ -479,9 +479,11 @@ A12_3_gilneas_column2 = {
 		position = 5
 		required_missions = { A12_prevent_the_fall_c }
 		trigger = {
-			NOT = {
-				region = region_silverpine_forest
-				owned_by = ROOT
+			region_silverpine_forest = {
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
 			}
 			custom_trigger_tooltip = {
 				tooltip = A12_sacrifies_the_silverpine_citizens_tt
@@ -494,8 +496,14 @@ A12_3_gilneas_column2 = {
 					limit = {
 						exists = P52 #The Scourge of Lordaeron
 						
-						exists = F52 #Pyrewood
-						exists = H09 #Ambermill
+						OR = {
+							exists = F52 #Pyrewood
+							exists = H09 #Ambermill
+							
+							regio_silverpine_forest = {
+								owned_by = ROOT
+							}
+						}
 					}
 					672 = { #The King's Highway
 						cede_province = P52
