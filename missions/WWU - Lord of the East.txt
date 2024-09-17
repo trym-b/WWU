@@ -5,7 +5,7 @@ X02_lote_column1 = {
 	potential = {
 		tag = X02
 	}
-
+	
 }
 
 X02_lote_column2 = {
@@ -52,19 +52,21 @@ X02_lote_column3 = {
 		position = 1
 		required_missions = {  }
 		trigger = {
-			A12 = {
-				OR = {
-					has_opinion_modifier = {
-						modifier = insulted
-						who = X02
-					}
-					has_opinion_modifier = {
-						modifier = scornfully_insulted
-						who = X02
+			OR = {
+				A12 = {
+					OR = {
+						has_opinion_modifier = {
+							modifier = insulted
+							who = X02
+						}
+						has_opinion_modifier = {
+							modifier = scornfully_insulted
+							who = X02
+						}
 					}
 				}
+				army_size_percentage = 1
 			}
-			army_size_percentage = 1
 		}
 		effect = {
 			custom_tooltip = X02_disable_decision_assassinate
@@ -164,10 +166,12 @@ X02_lote_column5 = {
 		position = 3
 		required_missions = { X02_support_of_south_peasants }
 		trigger = {
-			962 = {
-				has_spy_network_in = {
-					who = owner
-					value = 10
+			962 = { #Purgation Isle
+				FROM = {
+					has_spy_network_in = {
+						who = PREV
+						value = 10
+					}
 				}
 			}
 		}
@@ -176,7 +180,7 @@ X02_lote_column5 = {
 			
 			hidden_effect = {
 				add_spy_network_in = {
-					who = PREV
+					who = FROM
 					value = -10
 				}
 			}

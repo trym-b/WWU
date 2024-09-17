@@ -511,13 +511,14 @@ country_event = {
 	
 	immediate = {
 		change_technology_group = tech_scourge
+		add_corruption = -4
 	}
 	
 	option = { #Become scourge domain
 		name = wwu_mission_gilneas.12.option.a
 		P11 = {
 			create_subject = {
-				subject_type = scourge_vassal
+				subject_type = prime_scourge_vassal
 				subject = A12
 			}
 		}
@@ -537,9 +538,11 @@ country_event = {
 				add_government_reform = scourge_domain_reform
 			}
 			
-			hidden_effect = {
-				A12_the_scourge_in_gilneas = yes
-			}	
+				
+		}
+		
+		hidden_effect = {
+			A12_the_scourge_in_gilneas = yes
 		}
 		
 		ai_chance = { factor = 95 }
@@ -749,44 +752,30 @@ country_event = {
 	}
 	
 	trigger = {
-		NOT = {
-			A12 = {
-				is_subject_of = P11
-			}
-		}
+		NOT = { A12 = { is_subject_of = P11 } }
 		has_country_flag = A12_freedom_keep_from_lich_king
 	}
 	
 	immediate = {
 		hidden_effect = {
-			A12 = {
-				if = {
-					limit = { NOT = { government = monarchy } }
-					change_government = monarchy
-					add_government_reform = scourge_domain_reform
-				}
-				else = {
-					add_government_reform = scourge_domain_reform
-				}
-					
-				kill_ruler = yes
-					
-				if = {
-					limit = { has_heir = yes }
-					kill_heir = yes
-				}
-				if = {
-					limit = { has_consort = yes }
-					kill_consort = yes
-				}
-						
-				add_accepted_culture = culture_scourge
-				add_accepted_culture = culture_undead_human
-				change_religion = cult_of_the_damned
-				change_technology_group = tech_scourge
-					
-				A12_the_scourge_in_gilneas = yes
+			if = {
+				limit = { NOT = { government = monarchy } }
+				change_government = monarchy
+				add_government_reform = scourge_domain_reform
 			}
+			else = {
+				add_government_reform = scourge_domain_reform
+			}
+					
+			kill_ruler = yes
+					
+						
+			add_accepted_culture = culture_scourge
+			add_accepted_culture = culture_undead_human
+			change_religion = cult_of_the_damned
+			change_technology_group = tech_scourge
+					
+			A12_the_scourge_in_gilneas = yes
 		}	
 	}
 	
@@ -803,44 +792,6 @@ country_event = {
 			}
 		}
 		ai_chance = { factor = 100 }
-	}
-}
-
-# Decision about the Alliance
-country_event = {
-	id = wwu_mission_gilneas.20
-	title = wwu_mission_gilneas.20.title
-	desc = wwu_mission_gilneas.20.desc
-	picture = STORMSONG_eventPicture
-    
-	is_triggered_only = yes
-	fire_only_once = yes
-	
-	option = { #Leave the Alliance
-		name = wwu_mission_gilneas.20.option.a
-		add_legitimacy = 5
-		
-		custom_tooltip = " "
-		add_adm_power = 50
-		add_dip_power = 50
-		add_mil_power = 50
-		
-		custom_tooltip = " "
-		remove_country_modifier = member_of_alliance
-		
-		ai_chance = { factor = 80 }
-	}
-	
-	option = { #Stay in it
-		name = wwu_mission_gilneas.20.option.b
-		add_legitimacy = -5
-		
-		custom_tooltip = " "
-		add_adm_power = -50
-		add_dip_power = -50
-		add_mil_power = -50
-		
-		ai_chance = { factor = 20 }
 	}
 }
 
@@ -939,5 +890,43 @@ country_event = {
 			}
 		}
 		ai_chance = { factor = 100 }
+	}
+}
+
+# Decision about the Alliance
+country_event = {
+	id = wwu_mission_gilneas.24
+	title = wwu_mission_gilneas.24.title
+	desc = wwu_mission_gilneas.24.desc
+	picture = STORMSONG_eventPicture
+    
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Leave the Alliance
+		name = wwu_mission_gilneas.24.option.a
+		add_legitimacy = 5
+		
+		custom_tooltip = " "
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		
+		custom_tooltip = " "
+		remove_country_modifier = member_of_alliance
+		
+		ai_chance = { factor = 80 }
+	}
+	
+	option = { #Stay in it
+		name = wwu_mission_gilneas.24.option.b
+		add_legitimacy = -5
+		
+		custom_tooltip = " "
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+		
+		ai_chance = { factor = 20 }
 	}
 }

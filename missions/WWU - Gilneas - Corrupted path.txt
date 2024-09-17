@@ -745,7 +745,7 @@ A12_3_gilneas_column3 = {
 		required_missions = { A12_prevent_the_fall_c }
 		trigger = { 
 			num_of_generals = 2
-			monthly_mil = 13
+			monthly_mil = 11
 			manpower_percentage = 0.95
 		}
 		effect = {
@@ -765,13 +765,10 @@ A12_3_gilneas_column3 = {
 		required_missions = { A12_rally_the_army_c }
 		trigger = {
 			OR = {
-				AND = {
-					alliance_with = P11
-					P11 = {
-						has_opinion = {
-							who = A12
-							value = 60
-						}
+				A12 = {
+					OR = {
+						is_subject_of = P11
+						alliance_with = P11
 					}
 				}
 				OR = {
@@ -782,17 +779,13 @@ A12_3_gilneas_column3 = {
 						}
 					}
 					A12 = {
-						is_threat = P11
-					}
-					A12 = {
-						guaranteed_by = P11
+						OR = {
+							is_threat = P11
+							guaranteed_by = P11
+						}
 					}
 				}
-			}
-			OR = {
-				A12 = {
-					is_subject_of = P11
-				}
+				corruption = 3
 			}
 		}
 		effect = {
@@ -821,16 +814,21 @@ A12_3_gilneas_column3 = {
 					P11 = {
 						has_opinion = {
 							who = A12
-							value = 120
+							value = 100
 						}
 					}
 				}
-			}
-			OR = {
-				A12 = {
-					is_subject_of = P11
+				P11 = {
+					has_opinion = {
+						who = A12
+						value = 120
+					}
 				}
+				A12 = { is_subject_of = P11 }
 			}
+			
+			ruler_has_any_class = yes
+			
 			any_province = {
 				superregion = eastern_kingdom_superregion
 				religion = cult_of_the_damned
@@ -838,6 +836,7 @@ A12_3_gilneas_column3 = {
 		}
 		effect = {
 			set_ruler_religion = cult_of_the_damned
+			set_country_flag = can_corrupt_ruler
 			
 			custom_tooltip = " "
 			
@@ -858,10 +857,14 @@ A12_3_gilneas_column3 = {
 		required_missions = { A12_corrupt_ruler_c }
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 10
+				value = 5
 				religion = cult_of_the_damned
 			}
 			religion = cult_of_the_damned
+			
+			region_gilneas = {
+				NOT = { has_rebel_faction = REB }
+			}
 		}
 		effect = {
 			country_event = { id = wwu_mission_gilneas.12 }
@@ -1681,11 +1684,7 @@ A12_3_gilneas_column6 = { #Get independance of The Scourge
 		position = 15
 		required_missions = { A12_we_cant_more_c_2 }
 		trigger = {
-			NOT = {
-				is_subject_of = P11
-			}
-			
-			liberty_desire = 30
+			NOT = { is_subject_of = P11 }
 			
 			is_in_war = {
 				attacker_leader = ROOT

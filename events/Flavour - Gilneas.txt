@@ -105,9 +105,14 @@ country_event = {
 		tag = A12 # Gilneas
 			
 		NOT = {
-			ruler_culture = culture_gilnean_worgen
-			has_country_flag = A12_genn_became_worgen
-			has_ruler_flag = is_immunize_to_the_worgen_curse
+			OR = {
+				ruler_culture = culture_gilnean_worgen
+				ruler_culture = culture_scourge
+				ruler_culture = culture_forsaken
+				ruler_culture = culture_undead_human
+				has_country_flag = A12_genn_became_worgen
+				has_ruler_flag = is_immunize_to_the_worgen_curse
+			}
 		}
 	}
 	
@@ -439,6 +444,9 @@ country_event = {
 				has_global_flag = curse_of_the_worgen_cured
 				primary_culture = culture_gilnean_worgen
 				technology_group = tech_worgen
+				culture = culture_forsaken
+				culture = culture_scourge
+				culture = culture_undead_human
 			}
 			
 			any_owned_province = {
@@ -1678,14 +1686,13 @@ country_event = {
 
 	option = {
 		name = wwu_gilneas.26.option.a
-		
 		set_country_flag = changed_to_worgen_tech_group
 		
 		change_technology_group = tech_worgen
 		
 		swap_free_idea_group = yes
 		
-		ai_chance = { factor = 100 }
+		ai_chance = { factor = 90 }
 	}
 	
 	option = {
@@ -1694,7 +1701,7 @@ country_event = {
 		
 		set_country_flag = changed_to_worgen_tech_group
 		
-		ai_chance = { factor = 100 }
+		ai_chance = { factor = 10 }
 	}
 }
 
@@ -2026,10 +2033,10 @@ country_event = {
 	id = wwu_gilneas.35
 	title = wwu_gilneas.35.title
 	desc = wwu_gilneas.35.desc
-	picture = DEADLY_POISON_eventPicture
+	picture = UNDEAD_ASSAULT_eventPicture
 		
 	mean_time_to_happen = {
-		months = 48
+		months = 6
 	}
 	
 	trigger = {
@@ -2052,6 +2059,9 @@ country_event = {
 			}
 			
 			change_religion = forgotten_shadow
+			remove_accepted_culture = culture_scourge
+			remove_accepted_culture = culture_undead_human
+			add_accepted_culture = culture_forsaken
 			
 			A12_the_scourge_in_gilneas_c = yes
 			
@@ -2083,7 +2093,7 @@ country_event = {
 	id = wwu_gilneas.36
 	title = wwu_gilneas.36.title
 	desc = wwu_gilneas.36.desc
-	picture = DEADLY_POISON_eventPicture
+	picture = GILNEAS_CITY_eventPicture
 	
 	fire_only_once = yes
 	
@@ -2231,6 +2241,10 @@ country_event = {
 	picture = THRONE_APPROACH_eventPicture
 	
 	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		months = 28
+	}
 	
 	trigger = {
 		tag = A12
