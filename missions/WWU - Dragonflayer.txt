@@ -100,4 +100,100 @@ B08_dragonflayer_column_4 = {
             }
         }
     }
+
+    B08_subjegate_grizzly_hills = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { B08_unite_the_howling_fjord }
+
+        trigger = {
+            region_grizzly_hills = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_grizzly_hills
+        }
+
+        effect = {
+            area_strand_of_the_ancients = {
+                add_permanent_claim = ROOT
+            }
+            area_naxxramas = {
+                add_permanent_claim = ROOT
+            }
+            area_jintha_kalar = {
+                add_permanent_claim = ROOT
+            }
+            area_dawns_reach = {
+                add_permanent_claim = ROOT
+            }
+            area_draktharon_keep = {
+                add_permanent_claim = ROOT
+            }
+            area_kolramas = {
+                add_permanent_claim = ROOT
+            }
+            area_zim_torga = {
+                add_permanent_claim = ROOT
+            }
+            area_heb_drakkar = {
+                add_permanent_claim = ROOT
+            }
+
+            add_prestige_or_monarch_power = {
+                amount = 25
+            }
+        }
+    }
+
+    B08_crush_drakkari_spirt = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { B08_subjegate_grizzly_hills }
+
+        trigger = {
+            NOT = { exists = A74 }
+            NOT = { exists = A77 }
+            NOT = { exists = DRE }
+            area_gundrak_raid = {
+                type = all
+                owned_by = ROOT
+            }
+            area_gundrak = {
+                type = all
+                owned_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = A74
+                is_capital_of = A77
+                is_capital_of = DRE
+            }
+            OR = {
+                area = area_gundrak
+                area = area_gundrak_raid
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_B08_drakkari_vanquisher
+                duration = -1
+            }
+
+            #unlock_decision = vrykul_blood_frenzy
+            #country_event = pillage_of_gundrak
+
+            add_prestige_or_monarch_power = {
+                amount = 20
+            }
+        }
+    }
 }
