@@ -1,6 +1,315 @@
 ####################
 ### Dragonflayer ###
 ####################
+B08_dragonflayer_column_1 = {
+    slot = 1
+    generic = no
+    ai = yes
+
+    potential = {
+        tag = B08
+    }
+
+    has_country_shield = yes
+
+    B08_reinforce_utgarde_keep = {
+        icon = mission_titan_spirits
+        position = 1
+
+        trigger = {
+            734 = {
+                has_fort_building_trigger = yes
+                has_manpower_building_trigger = yes
+                has_forcelimit_building_trigger = yes
+                base_manpower = 10
+                has_great_project = {
+                    type = gp_utgarde_keep
+                    tier = 1
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 734
+        }
+
+        effect = {
+            define_general = {
+                shock = 4
+                fire = 3
+                manuever = 3
+                siege = 1
+                name = "Oluf the Violent"
+                trait = elite_hardy_warrior_personality
+            }
+
+            add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 10
+            }
+
+            734 = {
+                change_trade_good = resource_ground_mounts
+            }
+
+            2467 = {
+                add_base_manpower = 1
+            }
+            2464 = {
+                add_base_manpower = 1
+            }
+        }
+    }
+
+    B08_dragonflayer_pens = {
+        icon = mission_titan_spirits
+        position = 3
+
+        required_missions = { B08_reinforce_utgarde_keep }
+
+        trigger = {
+            734 = {
+                development = 30
+                has_building = wow_stables
+                has_great_project = {
+                    type = gp_utgarde_keep
+                    tier = 2
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 734
+        }
+
+        effect = {
+            734 = {
+                add_base_production = 3
+                add_base_manpower = 1
+                add_base_tax = 1
+
+                add_province_modifier = {
+                    name = mission_B08_dragonflayer_pens
+                    duration = -1
+                }
+            }
+        }
+    }
+
+    B08_furnace_of_hate = {
+        icon = mission_titan_spirits
+        position = 4
+
+        required_missions = { B08_dragonflayer_pens }
+
+        trigger = {
+            734 = {
+                development = 40
+                has_production_building_trigger = yes
+                has_great_project = {
+                    type = gp_utgarde_keep
+                    tier = 3
+                }
+                has_center_of_trade_of_level = 3
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 734
+        }
+
+        effect = {
+            734 = {
+                add_base_production = 5
+                add_province_modifier = {
+                    name = mission_B08_hate_furnace
+                    duration = -1
+                }
+            }
+
+            add_country_modifier = {
+                name = mission_B08_power_of_furnace
+                duration = -1
+            }
+        }
+    }
+
+    B08_cliffside_harbors = {
+        icon = mission_titan_spirits
+        position = 6
+
+        trigger = {
+            calc_true_if = {
+                amount = 6
+
+                all_owned_province = {
+                    region = region_howling_fjord
+                    OR = {
+                        has_shipyard_building_trigger = yes
+                        has_dock_building_trigger = yes
+                    }
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_howling_fjord
+            has_port = yes
+            owned_by = ROOT
+        }
+
+        effect = {
+            add_power_projection = {
+                type = mission_rewards_power_projection
+                amount = 5
+            }
+            add_navy_tradition = 20
+
+            hidden_effect = {
+                set_country_flag = unlock_harpoon_research_1
+            }
+        }
+    }
+
+    B08_mighty_fleet = {
+        icon = mission_titan_spirits
+        position = 7
+
+        required_missions = { B08_cliffside_harbors }
+
+        trigger = {
+            OR = {
+                navy_size = 25
+                navy_size_percentage = 0.9
+            }
+            has_flagship = yes
+            num_of_admirals = 1
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_B08_ship_power
+                duration = -1
+            }
+
+            create_admiral = {
+                tradition = 90
+            }
+        }
+    }
+
+    B08_bloodwake_subjegation = {
+        icon = mission_titan_spirits
+        position = 8
+
+        required_missions = { B08_mighty_fleet }
+
+        trigger = {
+            OR = {
+                has_opinion = {
+                    who = BLW
+                    value = 175
+                }
+                AND = {
+                    NOT = { exists = BLW }
+                    4104 = {
+                        owned_by = ROOT
+                    }
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = BLW
+                province_id = 4104
+            }
+        }
+
+        effect = {
+            if = {
+                limit = {
+                    exists = BLW
+                }
+                BLW = {
+                    country_event = { id = wwu_dragonflayer.3 days = 3 }
+                }
+            }
+            else = {
+                add_prestige = 10
+            }
+        }
+    }
+
+    B08_dread_chain_expedition = {
+        icon = mission_titan_spirits
+        position = 9
+
+        required_missions = { B08_bloodwake_subjegation }
+
+        trigger = {
+            area_strand_of_the_ancients = {
+                type = all
+                owned_by = ROOT
+            }
+            treasury = 1000
+            num_of_explorers = 1
+            OR = {
+                4093 = {
+                    owned_by = ROOT
+                }
+                calc_true_if = {
+                    amount = 3
+
+                    all_owned_province = {
+                        region = region_borean_tundra
+                        OR = {
+                            has_shipyard_building_trigger = yes
+                            has_dock_building_trigger = yes
+                        }
+                    }
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_strand_of_the_ancients
+                province_id = 4093
+                AND = {
+                    region = region_borean_tundra
+                    has_port = yes
+                    NOT = { owned_by = ROOT }
+                }
+            }
+        }
+
+        effect = {
+            add_treasury = -1000
+            area_south_dread_chain = {
+                limit = {
+                    is_empty = yes
+                }
+                cede_province = ROOT
+                add_core = ROOT
+                15 = {
+                    add_base_manpower = 5
+                }
+            }
+            else = {
+                region_dread_chain = {
+                    add_permanent_claim = ROOT
+                }
+            }
+
+            add_country_modifier = {
+                name = mission_B08_colonial_missions
+                duration = -1
+            }
+        }
+    }
+}
+
 B08_dragonflayer_column_4 = {
     slot = 4
 	generic = no
@@ -13,7 +322,7 @@ B08_dragonflayer_column_4 = {
     has_country_shield = yes
 
     B08_gather_the_hunters = {
-        icon = mission_titan_spirits
+        icon = mission_shaman
         position = 1
 
         trigger = {
@@ -22,25 +331,12 @@ B08_dragonflayer_column_4 = {
         }
 
         effect = {
-            add_mil_power = 100
-
-            area_halvarde = {
-                add_permanent_claim = ROOT
-            }
-            area_new_agamand = {
-                add_permanent_claim = ROOT
-            }
-            area_skorn = {
-                add_permanent_claim = ROOT
-            }
-            area_gjalerbron = {
-                add_permanent_claim = ROOT
-            }
+            add_mil_power = 150
         }
     }
 
     B08_reclaim_gjalerborn = {
-        icon = mission_titan_spirits
+        icon = mission_nerub_vrykul
         position = 2 
 
         required_missions = { B08_gather_the_hunters }
@@ -67,13 +363,15 @@ B08_dragonflayer_column_4 = {
                 add_permanent_claim = ROOT
             }
 
-            #unlock decision - restore gjalerborn
-            #unlock decision - colonize vengance landing
+            hidden_effect = {
+                set_country_flag = unlock_colonize_vengance
+                set_country_flag = unlock_restore_gjalerborn
+            }
         }
     }
 
     B08_unite_the_howling_fjord = {
-        icon = mission_titan_spirits
+        icon = mission_wolf
         position = 3
 
         required_missions = { B08_reclaim_gjalerborn }
@@ -81,12 +379,16 @@ B08_dragonflayer_column_4 = {
         trigger = {
             region_howling_fjord = {
                 type = all
-                country_or_non_sovereign_subject_holds = ROOT
+                owned_by = ROOT
             }
+
+            army_size_percentage = 0.9
+            manpower_percentage = 0.75
         }
 
         provinces_to_highlight = {
             region = region_howling_fjord
+            NOT = { is_empty = yes }
         }
 
         effect = {
@@ -102,7 +404,7 @@ B08_dragonflayer_column_4 = {
     }
 
     B08_subjegate_grizzly_hills = {
-        icon = mission_titan_spirits
+        icon = mission_dwarf_stone_avatar
         position = 4
 
         required_missions = { B08_unite_the_howling_fjord }
@@ -151,7 +453,7 @@ B08_dragonflayer_column_4 = {
     }
 
     B08_crush_drakkari_spirt = {
-        icon = mission_titan_spirits
+        icon = mission_troll_hexxer
         position = 5
 
         required_missions = { B08_subjegate_grizzly_hills }
@@ -189,11 +491,277 @@ B08_dragonflayer_column_4 = {
             }
 
             #unlock_decision = vrykul_blood_frenzy
-            #country_event = pillage_of_gundrak
+            country_event = { id = wwu_dragonflayer.1 days = 5 }
 
             add_prestige_or_monarch_power = {
                 amount = 20
             }
+        }
+    }
+
+    B08_subjegate_valkyrion = {
+        icon = mission_frozen_pirate
+        position = 8
+
+        required_missions = { B08_alliance_with_thorim }
+
+        trigger = {
+            OR = {
+                AND = {
+                    area_valkyrion = {
+                        type = all
+                        owned_by = ROOT
+                    }
+                    NOT = { exists = VLR }
+                }
+                VLR = {
+                    is_subject_of = ROOT
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = VLR
+                area = area_valkyrion
+            }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_B08_valkyrion
+                duration = -1
+            }
+
+            if = {
+                limit = {
+                    VLR = {
+                        is_subject_of = ROOT
+                        religion = cult_of_the_damned
+                    }
+                }
+                VLR = {
+                    change_religion = titan_worship
+                }
+            }
+        }
+    }
+}
+B08_dragonflayer_column_5 = {
+    slot = 5
+	generic = no
+	ai = yes
+
+    potential = {
+        tag = B08
+    }
+
+    has_country_shield = yes
+
+    B08_fortifying_borders = {
+        icon = mission_headquarters
+        position = 3
+
+        required_missions = { B08_reclaim_gjalerborn }
+
+        trigger = {
+            851 = {
+                owned_by = ROOT
+                OR = {
+                    has_fort_building_trigger = yes
+                    has_state_edict = edict_reinforce_garrison
+                }
+            }
+            3239 = {
+                owned_by = ROOT
+                OR = {
+                    has_fort_building_trigger = yes
+                    has_state_edict = edict_reinforce_garrison
+                }
+            }
+            680 = {
+                owned_by = ROOT
+                OR = {
+                    has_fort_building_trigger = yes
+                    has_state_edict = edict_reinforce_garrison
+                }
+            }
+            635 = {
+                owned_by = ROOT
+                OR = {
+                    has_fort_building_trigger = yes
+                    has_state_edict = edict_reinforce_garrison
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                province_id = 851
+                province_id = 3239
+                province_id = 680
+                province_id = 635
+            }
+        }
+
+        effect = {
+            add_stability = 1
+
+            define_advisor = {
+                type = army_reformer
+                skill = 2
+                discount = yes
+                culture = culture_vrykul
+                religion = titan_worship
+            }
+        }
+    }
+
+    B08_conclude_the_jalgar_war = {
+        icon = mission_titan_spirits
+        position = 5
+
+        required_missions = { B08_subjegate_grizzly_hills }
+
+        trigger = {
+            region_grizzly_hills = {
+                type = all
+                NOT = { culture = culture_snow_furbolg }
+            }
+        }
+
+        provinces_to_highlight = {
+            culture_group = culture_snow_furbolg
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_B08_jalgar_war_victory
+                duration = -1
+            }
+        }
+    }
+
+    B08_explore_titan_facilities = {
+        icon = mission_thunderstrike
+        position = 6
+
+        trigger = {
+            religion = titan_worship
+            OR = {
+                area_dun_argol = {
+                    type = all
+                    owned_by = ROOT
+                    religion = titan_worship
+                }
+                area_thor_modan = {
+                    type = all
+                    owned_by = ROOT
+                    religion = titan_worship
+                }
+            }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                area = area_thor_modan
+                area = area_dun_argol
+            }
+            NOT = { owned_by = ROOT }
+        }
+
+        effect = {
+            add_country_modifier = {
+                name = mission_B08_titan_schematics
+                duration = 9125
+            }
+            add_accepted_culture = culture_iron_dwarf
+
+            add_adm_power = 50
+            add_dip_power = 50
+            add_mil_power = 50
+        }
+    }
+
+    B08_alliance_with_thorim = {
+        icon = mission_thorim
+        position = 7
+
+        required_missions = { B08_explore_titan_facilities }
+
+        trigger = {
+            OR = {
+                AND = {
+                    NOT = { exists = P16 }
+                    area_bunnhildar_village = {
+                        owned_by = ROOT
+                    }
+                }
+
+                P16 = {
+                    is_subject_of = ROOT
+                }
+
+                AND = {
+                    alliance_with = P16
+                    has_opinion = {
+                        who = P16
+                        value = 165
+                    }
+                }
+            }
+
+            NOT = { exists = F42 }
+        }
+
+        provinces_to_highlight = {
+            OR = {
+                is_capital_of = F42
+                is_capital_of = P16
+                area = area_bunnhildar_village
+            }
+        }
+
+        effect = {
+            area_ulduar = {
+                add_permanent_claim = ROOT
+            }
+            area_temple_of_storms = {
+                add_claim = ROOT
+            }
+
+            add_accepted_culture = culture_frost_vrykul
+
+            hidden_effect = {
+                set_country_flag = question_of_engine_of_creation
+                set_country_flag = recruit_thorim
+            }
+        }
+    }
+
+    B08_secrets_of_ulduar = {
+        icon = mission_tentacle
+        position = 9
+
+        required_missions = { B08_alliance_with_thorim }
+
+        trigger = {
+            offensive_war_with = B73
+            war_score_against = {
+                who = B73
+                value = 50
+            }
+            2495 = {
+                controlled_by = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            province_id = 2495
+        }
+
+        effect = {
+            country_event = { id = wwu_dragonflayer.2 }
         }
     }
 }
