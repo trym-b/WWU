@@ -49,7 +49,7 @@ B08_dragonflayer_column_3 = {
             }
 
             734 = {
-                change_trade_good = resource_ground_mounts
+                change_trade_goods = resource_ground_mounts
             }
 
             2467 = {
@@ -57,6 +57,11 @@ B08_dragonflayer_column_3 = {
             }
             2464 = {
                 add_base_manpower = 1
+            }
+
+            custom_tooltip = unlock_utgarde_defensive_strategy_TT
+            hidden_effect = {
+                set_country_flag = unlock_utgarde_defensive_strategy
             }
         }
     }
@@ -92,6 +97,11 @@ B08_dragonflayer_column_3 = {
                     name = mission_B08_dragonflayer_pens
                     duration = -1
                 }
+            }
+
+            custom_tooltip = unlock_dragonflayer_riders_reform_TT
+            hidden_effect = {
+                set_country_flag = unlock_dragonflayer_dragon_riders
             }
         }
     }
@@ -188,9 +198,12 @@ B08_dragonflayer_column_4 = {
                 add_permanent_claim = ROOT
             }
 
+            custom_tooltip = B08_restore_vrykul_cities_TT
+            custom_tooltip = B08_restore_gjalerborn_TT
+
             hidden_effect = {
-                set_country_flag = unlock_colonize_vengance
                 set_country_flag = unlock_restore_gjalerborn
+                set_country_flag = unlock_restore_vrykul_cities
             }
         }
     }
@@ -414,8 +427,12 @@ B08_dragonflayer_column_5 = {
             }
             add_navy_tradition = 20
 
+            custom_tooltip = B08_harpoon_reaserch_TT
+            custom_tooltip = B08_colonize_vengance_TT
+
             hidden_effect = {
                 set_country_flag = unlock_harpoon_research_1
+                set_country_flag = unlock_colonize_vengance
             }
         }
     }
@@ -443,6 +460,23 @@ B08_dragonflayer_column_5 = {
 
             create_admiral = {
                 tradition = 90
+            }
+
+            if = {
+                limit = {
+                    area_strand_of_the_ancients = {
+                        NOT = { is_empty = yes}
+                    }
+                }
+                area_strand_of_the_ancients = {
+                    add_permanent_claim = ROOT
+                }
+                else = {
+                    custom_tooltip = B08_colonize_sota_TT
+                    hidden_effect = {
+                        set_country_flag = unlock_colonize_sota
+                    }
+                }
             }
         }
     }
