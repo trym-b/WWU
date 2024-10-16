@@ -120,7 +120,7 @@ B08_dragonflayer_column_3 = {
                     type = gp_utgarde_keep
                     tier = 3
                 }
-                has_center_of_trade_of_level = 3
+                province_has_center_of_trade_of_level = 3
             }
         }
 
@@ -578,14 +578,22 @@ B08_dragonflayer_column_5 = {
 
         effect = {
             add_treasury = -1000
-            area_south_dread_chain = {
+            
+            if = {
                 limit = {
-                    is_empty = yes
+                    area_south_dread_chain = {
+                        is_empty = yes
+                    }
                 }
-                cede_province = ROOT
-                add_core = ROOT
-                15 = {
-                    add_base_manpower = 5
+                area_south_dread_chain = {
+                    limit = {
+                        is_empty = yes
+                    }
+                    cede_province = ROOT
+                    add_core = ROOT
+                    15 = {
+                        add_base_manpower = 5
+                    }
                 }
             }
             else = {
