@@ -425,16 +425,15 @@ country_event = {
 	trigger = {
 		OR = {
 			tag = A12
-			culture = culture_gilnean
-			culture = culture_lordaeron
+			primary_culture = culture_gilnean
+			primary_culture = culture_lordaeron
 		}
 		
 		OR = {
-			any_neighbor_province = {
+			any_neighbor_country = {
 				culture_group = culture_group_worgen
 			}
-		 	any_province = {
-				owned_by = ROOT
+		 	any_owned_province = {
 				culture_group = culture_group_worgen
 			}
 		}
@@ -444,9 +443,9 @@ country_event = {
 				has_global_flag = curse_of_the_worgen_cured
 				primary_culture = culture_gilnean_worgen
 				technology_group = tech_worgen
-				culture = culture_forsaken
-				culture = culture_scourge
-				culture = culture_undead_human
+				primary_culture = culture_forsaken
+				primary_culture = culture_scourge
+				primary_culture = culture_undead_human
 			}
 			
 			any_owned_province = {
@@ -480,7 +479,7 @@ country_event = {
 	option = {
 		name = wwu_gilneas.5.option.a
 		if = {
-			limit = { culture = culture_gilnean }
+			limit = { primary_culture = culture_gilnean }
 			random_list = {
 				70 = {
 					event_target:A12_propagation_of_the_curse_event_target = {
@@ -490,7 +489,7 @@ country_event = {
 				30 = { }
 			}
 			
-			custom_tooltip = " "
+			#custom_tooltip = " "
 			
 			add_prestige = -10
 		}
@@ -504,7 +503,7 @@ country_event = {
 				30 = { }
 			}
 			
-			custom_tooltip = " "
+			#custom_tooltip = " "
 			
 			add_prestige = -10
 		}
@@ -513,7 +512,7 @@ country_event = {
 	option = {
 		name = wwu_gilneas.5.option.b
 		if = {
-			limit = { culture = culture_gilnean }
+			limit = { primary_culture = culture_gilnean }
 			random_list = {
 				40 = {
 					event_target:A12_propagation_of_the_curse_event_target = {
@@ -526,7 +525,7 @@ country_event = {
 				}
 			}
 			
-			custom_tooltip = " "
+			#custom_tooltip = " "
 			
 			add_mil_power = -50
 		}
@@ -543,7 +542,7 @@ country_event = {
 				}
 			}
 			
-			custom_tooltip = " "
+			#custom_tooltip = " "
 			
 			add_mil_power = -50
 		}
@@ -918,21 +917,21 @@ country_event = {
 				cede_province = A12
 				remove_core = X02
 				remove_claim = X02
-				set_local_autonomy = -100
+				set_local_autonomy = 0
 			}
 			
 			908 = {
 				cede_province = A12
 				remove_core = X02
 				remove_claim = X02
-				set_local_autonomy = -100
+				set_local_autonomy = 0
 			}
 			
 			858 = {
 				cede_province = A12
 				remove_core = X02
 				remove_claim = X02
-				set_local_autonomy = -100
+				set_local_autonomy = 0
 			}
 			if = {
 				limit = { 3017 = { owned_by = X02 } }
@@ -940,7 +939,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -949,7 +948,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -958,7 +957,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -967,7 +966,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -976,7 +975,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -985,7 +984,7 @@ country_event = {
 					cede_province = A12
 					remove_core = X02
 					remove_claim = X02
-					set_local_autonomy = -100
+					set_local_autonomy = 0
 				}
 			}
 			if = {
@@ -997,11 +996,11 @@ country_event = {
 			}
 		}
 		else = {
-			A12 = {
-				kill_units = {
-					who = REB
-				}
-			}
+			#A12 = {
+			#	kill_units = {
+			#		who = REB
+			#	}
+			#}
 				
 			every_owned_province = {
 				limit = { controlled_by = noble_rebels }
@@ -1111,7 +1110,7 @@ country_event = {
 	trigger = {
 		OR = {
 			tag = A13
-			culture = culture_gilnean
+			primary_culture = culture_gilnean
 		}
 		
 		has_global_flag = enable_worgen
@@ -1225,6 +1224,10 @@ country_event = {
 		has_global_flag = A12_death_of_ashbury_walden
 		tag = A12
 	}
+	
+	mean_time_to_happen = {
+		months = 60
+	}
 		
 	fire_only_once = yes
 	
@@ -1278,6 +1281,10 @@ country_event = {
 		
 	fire_only_once = yes
 	major = yes
+	
+	mean_time_to_happen = {
+		months = 60
+	}
 	
 	immediate = {
 		hidden_effect = {
@@ -1413,7 +1420,11 @@ country_event = {
 
 	fire_only_once = yes
 	major = yes
-
+	
+	mean_time_to_happen = {
+		months = 60
+	}
+	
 	option = { # Accept
 		name = wwu_gilneas.20.option.a
 
@@ -1578,7 +1589,7 @@ country_event = {
 		X04 = {
 			override_country_name = KINGDOM_OF_TIRISFAL
 			
-		custom_tooltip = " "
+		##custom_tooltip = " "
 		
 		custom_tooltip = X04_the_question_about_name_b
 		}
@@ -1606,6 +1617,9 @@ country_event = {
 		tag = A12
 		has_global_flag = is_X04_name_changing_flag
 	}
+	mean_time_to_happen = {
+		months = 60
+	}
 	immediate = {
 		hidden_effect = {
 			A12 = {
@@ -1626,7 +1640,7 @@ country_event = {
 		switch_tag = X04
 		swap_free_idea_group = yes
 		
-		custom_tooltip = " "
+		##custom_tooltip = " "
 		
 		# Diplomacy 
 		X04 = {
@@ -1638,7 +1652,7 @@ country_event = {
 			create_guarantee = X04
 		}
 		
-		custom_tooltip = " "
+		##custom_tooltip = " "
 		
 		custom_tooltip = wwu_gilneas_25_warning
 		
@@ -1673,11 +1687,14 @@ country_event = {
 	desc = wwu_gilneas.26.desc
 	picture = ALARM_O_BOT
 
-	
 	trigger = {
 		culture_group = culture_group_worgen
 		NOT = { technology_group = tech_worgen }
 		NOT = { has_global_flag = changed_to_worgen_tech_group }
+	}
+	
+	mean_time_to_happen = {
+		months = 60
 	}
 
 	option = {
@@ -1714,6 +1731,10 @@ country_event = {
 		tag = X04
 		
 		NOT = { ai = yes }
+	}
+	
+	mean_time_to_happen = {
+		months = 60
 	}
 	
 	option = { # Accept
@@ -1896,6 +1917,10 @@ country_event = {
 
 	fire_only_once = yes
 	
+	mean_time_to_happen = {
+		months = 60
+	}
+	
 	option = {
 		name = wwu_gilneas.31.option.a
 		define_heir = {
@@ -1934,6 +1959,10 @@ country_event = {
 		NOT = { has_ruler_flag = ruler_portrait_genn_graymane }
 	}
 	
+	mean_time_to_happen = {
+		months = 60
+	}
+	
 	fire_only_once = yes
 	
 	option = {
@@ -1952,7 +1981,6 @@ country_event = {
 	desc = wwu_gilneas.33.desc
 	picture = GILNEAS_CITY_eventPicture
 	
-	
 	trigger = {
 		tag = A12
 		has_ruler = "Genn Greymane"
@@ -1960,6 +1988,10 @@ country_event = {
 	}
 
 	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		months = 60
+	}
 	
 	option = {
 		name = wwu_gilneas.33.option.a
@@ -2106,6 +2138,10 @@ country_event = {
 		tag = A12 
 	}
 	
+	mean_time_to_happen = {
+		months = 60
+	}
+	
 	option = {
 		name = wwu_gilneas.36.option.a
 		
@@ -2131,6 +2167,10 @@ country_event = {
 		}
 		
 		tag = A12
+	}
+	
+	mean_time_to_happen = {
+		months = 60
 	}
 	
 	option = {
