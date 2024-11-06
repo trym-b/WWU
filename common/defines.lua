@@ -163,13 +163,13 @@ NDiplomacy = {
 	EMPEROR_REVOKE_AUTHORITY_COST = 50.0,			-- Cost for the emperor to revoke a reform
 	EMPEROR_REVOKE_MODIFIER_DAYS = 1800,			-- How long the temporary modifier applied after revoking will last
 	TRUCE_YEARS = 5, 								-- _DDEF_TRUCE_YEARS_; Years of Truce
-	SCALED_TRUCE_YEARS = 3,						-- Additional years of truce based on % of warscore taken in war (100% warscore = full scaled truce years)
+	SCALED_TRUCE_YEARS = 5,						-- Additional years of truce based on % of warscore taken in war (100% warscore = full scaled truce years)
 	--- WWU: reduced scaled truce length to allow for quicker conquest.
 	REQUEST_HEIR_TRUCE = 5,
 	REQUEST_HEIR_AE = 20,
 	WARNING_YEARS = 10,								-- Years before warning expire
 	--- WWU: Reduced time for warnings to reduce blocking expansion by more powerful AI
-	ANNUL_TREATIES_YEARS = 10,						-- Years before annul treaties expire
+	ANNUL_TREATIES_YEARS = 15,						-- Years before annul treaties expire
 	COALITION_YEARS = 10,							-- Years before coalition expire
 	--- WWU: reduced time that coalition remains active to not block expansion for players
 	REVANCHISM_MONTHLY_DECAY = 0.833,			-- about 20 years to decay all of it.
@@ -762,9 +762,9 @@ NCountry = {
 	--- WWU: adjusted to fit around 1 year reduction per click
 	GREAT_PROJECT_MOVE_COST_PER_DAY = 3, --how much to move a great project for one day
 	COUNTRIES_GETTING_SCORE = 10,
-	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 10,			-- extra expense for being above forcelimit
+	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 5,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive troops
-	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 10,			-- extra expense for being above forcelimit
+	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 5,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive ships
 	REPUBLICAN_TRADITION_YEARLY_INCREASE = 1,		-- how much it increases each year.
 	PIETY_PERCENTAGE_AT_NEW_RULER = 0.25,			-- percentage of piety kept at new ruler.
