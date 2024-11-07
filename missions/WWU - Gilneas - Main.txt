@@ -26,25 +26,33 @@ A12_1_gilneas_column1 = {
 			if = {
 				limit = {
 					927 = {
-						has_great_project = {
-							type = gp_gilneas_city
-							tier = 0
+						NOT = {
+							has_great_project = {
+								type = gp_gilneas_city
+								tier = 1
+							}
 						}
 					}
 				}
 				927 = {
 					add_great_project_tier = {
 						type = gp_gilneas_city
-						tier = 1
+						tier = 3
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					927 = {
 						has_great_project = {
 							type = gp_gilneas_city
 							tier = 1
+						}
+						NOT = {
+							has_great_project = {
+								type = gp_gilneas_city
+								tier = 2
+							}
 						}
 					}
 				}
@@ -55,15 +63,29 @@ A12_1_gilneas_column1 = {
 					}
 				}
 			}
-			if = {
+			else_if = {
 				limit = {
 					927 = {
 						has_great_project = {
 							type = gp_gilneas_city
-							tier = 3
+							tier = 2
+						}
+						NOT = {
+							has_great_project = {
+								type = gp_gilneas_city
+								tier = 3
+							}
 						}
 					}
 				}
+				927 = {
+					add_great_project_tier = {
+						type = gp_gilneas_city
+						tier = 1
+					}
+				}
+			}
+			else = {
 				927 = {
 					add_random_development = 5
 				}
@@ -100,7 +122,7 @@ A12_1_gilneas_column1 = {
 					}
 					add_random_development = 2
 					
-					custom_tooltip = " "
+					custom_tooltip = no_tooltip
 					
 					add_building_construction = {
 						building = wow_fort_3
@@ -253,11 +275,11 @@ A12_1_gilneas_column1 = {
 					NOT = { has_country_flag = A12_darius_crowley_killed }
 					is_in_war = {
 						attackers = P14
-						duration = 0
+						duration = 60
 					}
 				}
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				
 				914 = {
 					infantry = A12
@@ -266,7 +288,7 @@ A12_1_gilneas_column1 = {
 					infantry = A12
 				}
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip_1
 				
 				define_general = {
 					name = "Lorna Crowley"
@@ -316,7 +338,7 @@ A12_1_gilneas_column1 = {
 				}
 				custom_tooltip = A12_the_gilneas_liberation_front_a
 					
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 					
 				custom_tooltip = A12_the_gilneas_liberation_front_b 
 				tooltip = {
@@ -331,7 +353,7 @@ A12_1_gilneas_column1 = {
 					}
 				}
 						
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip_1
 						
 				custom_tooltip = A12_the_gilneas_liberation_front_c
 				tooltip = {
@@ -401,19 +423,19 @@ A12_1_gilneas_column1 = {
 					id = wwu_mission_gilneas.6
 				}
 			}
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			A11 = {
 				country_event = { 
 					id = wwu_mission_gilneas.6
 				}
 			}
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip_1
 			TLB = {
 				country_event = { 
 					id = wwu_mission_gilneas.6
 				}
 			}
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip_2
 			add_country_modifier = {
 				name = A12_strength_in_unity_modifier
 				duration = 7300
@@ -481,7 +503,7 @@ A12_1_gilneas_column2 = {
 				change_province_name = "Argelaine Keep"
 				rename_capital = "Argelaine Keep"
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				
 				add_random_development = 5
 			}
@@ -512,7 +534,7 @@ A12_1_gilneas_column2 = {
 #		if = {
 #			limit = { NOT = { region_silverpine_forest = { owned_by = ROOT } } }
 #			custom_tooltip = A12_evacuate_the_silverpine_failed
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		
 #		if = { #Stormwind
@@ -521,7 +543,7 @@ A12_1_gilneas_column2 = {
 #				set_province_flag = A12_have_gilnean_refugees
 #				add_base_tax = 1
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #			
 #			add_country_modifier = {
 #				name = A12_refugee_to_stormwind
@@ -538,7 +560,7 @@ A12_1_gilneas_column2 = {
 #					modifier = A12_has_accepted_our_refugees_b
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		else_if = { #Stormwind preview
 #			limit = { NOT = { STW = { owes_favors = { who = A12 value = 15 } } } }
@@ -562,7 +584,7 @@ A12_1_gilneas_column2 = {
 #					}
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		if = { #Khaz Modan
 #			limit = { A29 = { owes_favors = { who = A12 value = 15 } } }
@@ -581,7 +603,7 @@ A12_1_gilneas_column2 = {
 #					modifier = A12_has_accepted_our_refugees_b
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		else_if = { #Khaz Modan preview
 #			limit = { NOT = { A29 = { owes_favors = { who = A12 value = 15 } } } }
@@ -605,7 +627,7 @@ A12_1_gilneas_column2 = {
 #					}
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		if = { #Kul Tiras
 #			limit = { A14 = { owes_favors = { who = A12 value = 15 } } }
@@ -624,7 +646,7 @@ A12_1_gilneas_column2 = {
 #					modifier = A12_has_accepted_our_refugees_b
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		else_if = { #Kul Tiras preview
 #			limit = { NOT = { A14 = { owes_favors = { who = A12 value = 15 } } } }
@@ -648,7 +670,7 @@ A12_1_gilneas_column2 = {
 #					}
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #
 #		if = { #Darnassus
@@ -667,7 +689,7 @@ A12_1_gilneas_column2 = {
 #					modifier = A12_has_accepted_our_refugees_b
 #				}
 #			}
-#			custom_tooltip = " "
+#			custom_tooltip = no_tooltip
 #		}
 #		else_if = { #Darnassus preview
 #			limit = { NOT = { A94 = { owes_favors = { who = A12 value = 15 } } } }
@@ -761,7 +783,7 @@ A12_1_gilneas_column2 = {
 			custom_tooltip = A12_unlock_decision_reborn_lordaeron_for_andorhal_tt
 			A12_unlock_decision_give_andoorhal_to_x04 = yes #Unlock Scripted Effect for cede Andorhal region to X04
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_prestige = 20
 			add_splendor = 200
@@ -785,7 +807,7 @@ A12_1_gilneas_column2 = {
 				add_dip_power = 300
 				add_mil_power = 300
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				
 				add_country_modifier = {
 					name = A12_victory_on_the_tragedy_a
@@ -903,10 +925,11 @@ A12_1_gilneas_column3 = {
 				add_random_development = 4
 			}
 			
-			if = {
-				limit = { has_country_modifier = member_of_alliance }
-				country_event = { id = wwu_mission_gilneas.20 }
-			}
+			# This mission does not exist!
+			#if = {
+			#	limit = { has_country_modifier = member_of_alliance }
+			#	country_event = { id = wwu_mission_gilneas.20 }
+			#}
 		}
 	}
 	A12_prevent_the_fall = {
@@ -925,7 +948,7 @@ A12_1_gilneas_column3 = {
 		effect = {
 			create_general = { tradition = 80 }
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_country_modifier = {
 				name = A12_prevent_the_fall_modifier
@@ -945,7 +968,7 @@ A12_1_gilneas_column3 = {
 		effect = {
 			add_manpower = 5
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_country_modifier = {
 				name = A12_rally_the_army_modifier
@@ -988,7 +1011,7 @@ A12_1_gilneas_column3 = {
 		effect = {
 			add_war_exhaustion = -2
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_legitimacy = 10
 			add_prestige = 10
@@ -1011,7 +1034,7 @@ A12_1_gilneas_column3 = {
 		effect = {
 			add_war_exhaustion = -2
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			custom_tooltip = A12_unlock_decision_reborn_lordaeron_tt
 			tooltip = {
@@ -1042,18 +1065,18 @@ A12_1_gilneas_column3 = {
 		effect = {
 			add_war_exhaustion = -2
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			capital_scope = {
 				add_random_development = 3
 			}
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip_1
 			
 			custom_tooltip = A12_unlock_decision_reborn_lordaeron_for_stratholme_tt
 			
 			A12_unlock_decision_give_stratholme_to_x04 = yes #Unlock Scripted Effect for cede Stratholme region to X04
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip_2
 			
 			add_prestige = 20
 			add_splendor = 200
@@ -1072,7 +1095,7 @@ A12_1_gilneas_column3 = {
 		effect = {
 			add_stability = 1
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_country_modifier = {
 				name = A12_forsaken_war_modifier
@@ -1264,7 +1287,7 @@ A12_1_gilneas_column4 = {
 				custom_tooltip = A12_can_build_greymane_wall_by_mission_tt
 				set_country_flag = A12_can_build_greymane_wall_by_mission
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				custom_tooltip = A12_can_build_greymane_wall_by_mission_modifier_a_tt
 				tooltip = {
 					914 = {
@@ -1274,7 +1297,7 @@ A12_1_gilneas_column4 = {
 						}
 					}
 				}
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip_1
 				custom_tooltip = A12_can_build_greymane_wall_by_mission_modifier_b_tt
 				tooltip = {
 					914 = {
@@ -1287,28 +1310,10 @@ A12_1_gilneas_column4 = {
 			if = {
 				limit = {
 					914 = {
-						has_great_project = {
-							type = gp_greymane_wall
-							tier = 0
-						}
-						OR = {
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 2
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 3
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 1
-								}
+						NOT = {
+							has_great_project = {
+								type = gp_greymane_wall
+								tier = 1
 							}
 						}
 					}
@@ -1327,24 +1332,10 @@ A12_1_gilneas_column4 = {
 							type = gp_greymane_wall
 							tier = 1
 						}
-						OR = {
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 2
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 3
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 0
-								}
+						NOT = {
+							has_great_project = {
+								type = gp_greymane_wall
+								tier = 2
 							}
 						}
 					}
@@ -1363,24 +1354,10 @@ A12_1_gilneas_column4 = {
 							type = gp_greymane_wall
 							tier = 2
 						}
-						OR = {
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 1
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 3
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 0
-								}
+						NOT = {
+							has_great_project = {
+								type = gp_greymane_wall
+								tier = 3
 							}
 						}
 					}
@@ -1398,26 +1375,6 @@ A12_1_gilneas_column4 = {
 						has_great_project = {
 							type = gp_greymane_wall
 							tier = 3
-						}
-						OR = {
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 1
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 0
-								}
-							}
-							NOT = {
-								has_great_project = {
-									type = gp_greymane_wall
-									tier = 2
-								}
-							}
 						}
 					}
 				}
@@ -1492,7 +1449,7 @@ A12_1_gilneas_column4 = {
 		effect = {
 			add_dip_power = 100
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_country_modifier = {
 				name = A12_adopt_the_worgen_culture_modifier_a
@@ -1558,7 +1515,7 @@ A12_1_gilneas_column4 = {
 			add_dip_power = 100
 			add_mil_power = 100
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			if = { #B
 				limit = {
@@ -1604,8 +1561,8 @@ A12_1_gilneas_column4 = {
 					limit = {
 						eastern_kingdom_superregion = {
 							OR = {
-								controlled_by = culture_group_scourge
-								owned_by = culture_group_scourge
+								controller = { culture_group = culture_group_scourge }
+								owner = { culture_group = culture_group_scourge }
 							}
 						}
 					}
@@ -1751,7 +1708,7 @@ A12_1_gilneas_column5 = {
 		effect = {
 			add_splendor = 30
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			add_country_modifier = {
 				name = A12_ur_research
@@ -1892,7 +1849,7 @@ A12_1_gilneas_column5 = {
 				add_historical_friend = ROOT
 			}
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			end_disaster = curse_of_the_worgen
 			
 			set_global_flag = curse_of_the_worgen_cured
@@ -1946,7 +1903,7 @@ A12_1_gilneas_column5 = {
 					add_permanent_claim = ROOT
 				}
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				
 				custom_tooltip = A12_claim_tol_barad_tt_a
 				
@@ -1963,7 +1920,7 @@ A12_1_gilneas_column5 = {
 				add_mercantilism = 14
 			}
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			if = {
 				limit = {
@@ -1977,7 +1934,7 @@ A12_1_gilneas_column5 = {
 					months = 60
 				}
 				
-				custom_tooltip = " "
+				custom_tooltip = no_tooltip
 				
 				custom_tooltip = A12_claim_tol_barad_tt_b
 				
@@ -2007,7 +1964,7 @@ A12_1_gilneas_column5 = {
 				
 				H12 = {
 					is_subject_of = A12
-					NOT = { culture = culture_undead_human }
+					NOT = { primary_culture = culture_undead_human }
 				}
 			}	
 		}
@@ -2015,7 +1972,7 @@ A12_1_gilneas_column5 = {
 			add_splendor = 120
 			add_mercantilism = 12
 			
-			custom_tooltip = " "
+			custom_tooltip = no_tooltip
 			
 			change_adm = 1
 			add_adm_power = 100
