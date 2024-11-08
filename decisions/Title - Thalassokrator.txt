@@ -1,0 +1,126 @@
+country_decisions = {
+    proclaim_title_of_thalassokrator = {
+		major = yes
+        ai_importance = 0
+        
+		potential = { 
+            NOT = { 
+				has_country_modifier = thalassokrator
+			}
+			OR = {
+				# Northern Europe
+				45 = {	# L�beck
+					is_strongest_trade_power = ROOT
+				}
+				1926 = { #Baltic Sea
+					is_strongest_trade_power = ROOT
+				}
+				1269 = { #Antwerpen
+					is_strongest_trade_power = ROOT
+				}
+				1975 = { #North Sea
+					is_strongest_trade_power = ROOT
+				}
+				33 = { #Novgorod
+					is_strongest_trade_power = ROOT
+				}
+			}
+		}
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 45
+				province_id = 1926
+				province_id = 1269
+				province_id = 1975
+			}
+			NOT = { is_strongest_trade_power = ROOT }
+		}
+		
+		allow = {		
+			#has_mission = NHO_atulhet_weapon
+			OR = {
+				full_idea_group = maritime_ideas
+				full_idea_group = naval_ideas
+				full_idea_group = trade_ideas
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = confirm_thalassocracy_a_tt
+					AND = {
+						45 = {	# Kezan
+							is_strongest_trade_power = ROOT
+						}
+						1926 = { #Lost Isles
+							is_strongest_trade_power = ROOT
+						}
+						1269 = { #South Sea
+							is_strongest_trade_power = ROOT
+						}
+						1975 = { #Paradise Isles
+							is_strongest_trade_power = ROOT
+						}
+						1293 = { #Broken Isles
+							is_strongest_trade_power = ROOT
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = confirm_thalassocracy_b_tt
+					AND = {
+						1293 = { #Broken Isles
+							is_strongest_trade_power = ROOT
+						}
+						1295 = { #Zandalar
+							is_strongest_trade_power = ROOT
+						}
+						1298 = { #Kultiras
+							is_strongest_trade_power = ROOT
+						}
+						1975 = { #Paradise Isles
+							is_strongest_trade_power = ROOT
+						}
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = confirm_thalassocracy_c_tt
+					AND = {
+						1308 = { # Plunder Isles
+							is_strongest_trade_power = ROOT
+						}
+						137 = { #Lapidis
+							is_strongest_trade_power = ROOT
+						}
+						358 = { #Gillijim
+							is_strongest_trade_power = ROOT
+						}
+						1320 = { #Zandalar
+							is_strongest_trade_power = ROOT
+						}
+						377 = { #Kultiras
+							is_strongest_trade_power = ROOT
+						}
+					}
+				}
+			}
+		}
+		
+		effect = {
+            # Cost
+            add_country_modifier = {
+				name = "thalassokrators"
+				duration = -1
+			}
+			change_government_reform_progress = 100          
+			add_country_modifier = thalassokrator
+			unlock_government_reform = {
+				government_reform = thalassocracy_reform
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
