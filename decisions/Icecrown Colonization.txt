@@ -50,3 +50,54 @@ country_decisions = {
         }
     }
 }
+
+country_decisions = {
+    estabilsh_surfice_colonies = {
+        potential = {
+            tag = P74
+            NOT = { has_country_modifier = establish_settlement_icecrown }
+            NOT = { has_country_modifier = recently_send_icecrown }
+            any_province = {
+                region = region_icecrown
+                is_empty = yes
+            }
+            completed_mission = P74_breach_the_surface
+        }
+        allow = {
+            adm_power = 100
+            dip_power = 100
+            mil_power = 100
+            NOT = { is_at_war = yes }
+            completed_mission = P74_breach_the_surface
+        }
+        effect = {
+            add_adm_power = -100
+            add_dip_power = -100
+            add_mil_power = -100
+            add_country_modifier = {
+                name = establish_settlement_icecrown
+                duration = 365
+            }
+            add_country_modifier = {
+                name = recently_send_icecrown
+                duration = 1825
+            }
+        }
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+                NOT = { adm_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { dip_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { mil_power = 300 }
+            }
+        }
+    }
+}
