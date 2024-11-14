@@ -2337,13 +2337,18 @@ A23_theramore_column_4 = {
 	A23_horde_relations = { 
 		icon = mission_horde_banner
         position = 2
-		required_missions = {  } 
+		required_missions = { A23_alliance_network } 
         
 		trigger = {
-		    A48 = {
-				alliance_with = ROOT
-		    }
-			negotiator = 2
+		    OR = {
+			    AND = {
+		            A48 = {
+				        alliance_with = ROOT
+		            }
+			        negotiator = 2
+				}
+				is_rival = A48
+			}
 		}
 		
 		effect = { 
@@ -2708,6 +2713,7 @@ A23_theramore_column_4 = {
                 
 			    region_south_barrens = {
 			        has_building = wow_market_2
+					type = all
 					owned_by = ROOT
 				}
 			}
@@ -2731,6 +2737,7 @@ A23_theramore_column_4 = {
                 
 			    region_north_barrens = {
 			        has_building = wow_market_2
+					type = all
 					owned_by = ROOT
 				}
 			}
@@ -3129,12 +3136,15 @@ A23_theramore_column_5 = {
 			    	}
                 }
 		    }
-			A48 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 180
-			    }
-            }
+			OR = {
+			    A48 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+					}
+                }
+				is_rival = A48
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -3396,6 +3406,7 @@ A23_theramore_column_5 = {
                 
 			    region_dustwallow_marsh = {
 			        has_building = wow_farm_2
+					type = all
 					owned_by = ROOT
 				}
 			}
@@ -3502,10 +3513,12 @@ A23_theramore_column_5 = {
                 
 			    region_south_barrens = {
 			        has_building = wow_farm_2
+					type = all
 					owned_by = ROOT
 				}
 				region_north_barrens = {
 			        has_building = wow_farm_2
+					type = all
 					owned_by = ROOT
 				}
 			}
