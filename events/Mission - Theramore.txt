@@ -46,70 +46,57 @@ country_event = {
         days = 1
     }
     
-    option = {
-        name = wwu_mission_theramore.2.option.a
-            
-		trigger = {
-			1452 = {
-			    is_empty = yes
-			}
-			1450 = {
-			    is_empty = yes
-			}
-			3508 = {
-			    is_empty = yes
-			}
-		}
-			
-		1452 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-		1450 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-		3508 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-
-		
-        ai_chance = {
-            factor = 1
-        }
-    }
 	option = {
-        name = wwu_mission_theramore.2.option.b
+        name = wwu_mission_theramore.2.option.a
         
-        trigger = {
+	    if = {
+		    limit = {
+			    OR = {
+				    1450 = { NOT = { is_empty = yes } }
+					1452 = { NOT = { is_empty = yes } }
+					3508 = { NOT = { is_empty = yes } }
+					2950 = { NOT = { is_empty = yes } }
+				}
+			}
+			1450 = { add_core = ROOT }
+			1452 = { add_core = ROOT }
+			3508 = { add_core = ROOT }
+			2950 = { add_core = ROOT }
+		}
+		else_if = {
+		    limit = {
+			    OR = {
+				    1450 = { is_empty = yes }
+					1452 = { is_empty = yes }
+					3508 = { is_empty = yes }
+					2950 = { is_empty = yes }
+				}
+			}
 			1452 = {
-			    NOT = { is_empty = yes }
-			}
-			1450 = {
-			    NOT = { is_empty = yes }
-			}
-			3508 = {
-			    NOT = { is_empty = yes }
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
+		    1450 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
+		    3508 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
+			2950 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
 		    }
 		}
-	
-		1450 = {
-		    add_core = ROOT
-		}
-		1452 = {
-		    add_core = ROOT
-		}
-		3508 = {
-		    add_core = ROOT
-		}
-		
         ai_chance = {
             factor = 1
         }
@@ -1914,7 +1901,10 @@ country_event = {
 		every_owned_province = { 
             limit = {
                 region = region_tirisfal_glades
-				culture = culture_scourge # ADD UNDEAD
+				OR = {
+				    culture = culture_scourge
+                    culture = culture_forsaken
+				}
                 NOT = { culture = culture_lordaeron }
             }
             change_culture = culture_lordaeron 
