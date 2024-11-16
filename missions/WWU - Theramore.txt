@@ -92,7 +92,10 @@ A23_theramore_column_1 = {
 				    cede_province = G06
                     add_core = G06
 				}
-				create_vassal = G06
+				create_subject = {
+                    subject_type = vassal
+                    subject = G06
+				}
 			}
 			else_if = {
 			    limit = {
@@ -505,14 +508,14 @@ A23_theramore_column_1 = {
 		trigger = {
             1124 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			1132 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 		}
@@ -535,9 +538,7 @@ A23_theramore_column_1 = {
 				superregion = kul_tiras_superregion
 				superregion	= kalimdor_superregion
 			}
-			any_province = { 
-				culture_group = culture_group_human
-			}
+			culture_group = culture_group_human
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		trigger = {          
@@ -756,7 +757,7 @@ A23_theramore_column_2 = {
 		
 		trigger = {
 			region_dustwallow_marsh = {
-				NOT = { is_empty = yes }
+			    type = all
 				country_or_non_sovereign_subject_holds = ROOT 
 			}
 			num_accepted_cultures = 4
@@ -1174,7 +1175,7 @@ A23_theramore_column_2 = {
 				controlled_by = ROOT 
 			}
 			A78 = {
-			    navy_size = 10
+			    NOT = { navy_size = 10 }
 			}
 		}
 		
@@ -1231,44 +1232,44 @@ A23_theramore_column_2 = {
 		trigger = {
             2611 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			2613 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			1135 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			2470 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			2749 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			1110 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 			1111 = {
 			    has_local_modifier_value = {
-	                which = local_production_efficiency
-	                value = 0.2
+	                which = trade_goods_size
+	                value = 0.6
                 }
 			}
 		}
@@ -2276,7 +2277,7 @@ A23_theramore_column_3 = {
 			}
 		}
 	}
-	A23_fate_of_lordaeron= { 
+	A23_fate_of_lordaeron = { 
 		icon = mission_lordaeron_crown
 		position = 34
 		required_missions = { A23_returning_home_reclaim_lordaeron }
@@ -2336,13 +2337,18 @@ A23_theramore_column_4 = {
 	A23_horde_relations = { 
 		icon = mission_horde_banner
         position = 2
-		required_missions = {  } 
+		required_missions = { A23_alliance_network } 
         
 		trigger = {
-		    A48 = {
-				alliance_with = ROOT
-		    }
-			negotiator = 2
+		    OR = {
+			    AND = {
+		            A48 = {
+				        alliance_with = ROOT
+		            }
+			        negotiator = 2
+				}
+				is_rival = A48
+			}
 		}
 		
 		effect = { 
@@ -2466,15 +2472,24 @@ A23_theramore_column_4 = {
 		
 		trigger = {
 		    1440 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			3443 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			3444 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			OR = {
@@ -2507,7 +2522,10 @@ A23_theramore_column_4 = {
 		
 		trigger = {
 		    3439 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			3435 = {
@@ -2515,11 +2533,17 @@ A23_theramore_column_4 = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			3436 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 			3438 = {
-			    units_in_province = 5
+			    num_of_units_in_province = {
+                    who = ROOT
+                    amount = 5
+                }
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
@@ -2707,6 +2731,8 @@ A23_theramore_column_4 = {
                 
 			    region_south_barrens = {
 			        has_building = wow_market_2
+					type = all
+					owned_by = ROOT
 				}
 			}
 		}
@@ -2729,6 +2755,8 @@ A23_theramore_column_4 = {
                 
 			    region_north_barrens = {
 			        has_building = wow_market_2
+					type = all
+					owned_by = ROOT
 				}
 			}
 		}
@@ -2770,6 +2798,9 @@ A23_theramore_column_4 = {
                 name = mission_broken_isles_a23
                 duration = -1
             }
+			region_azsuna = {
+                add_permanent_claim = ROOT
+			}
 			region_valsharah = {
                 add_permanent_claim = ROOT
 			}
@@ -2940,7 +2971,10 @@ A23_theramore_column_4 = {
 				        }
 				    }
 				}
-			    create_vassal = A22
+				create_subject = {
+                    subject_type = vassal
+                    subject = A22
+				}
 			}
 			if = {
                 limit = {
@@ -2959,7 +2993,10 @@ A23_theramore_column_4 = {
 				        }
 				    }
 				}
-			    create_vassal = A24
+			    create_subject = {
+                    subject_type = vassal
+                    subject = A24
+				}
 			}
 			if = {
                 limit = {
@@ -2978,7 +3015,10 @@ A23_theramore_column_4 = {
 				        }
 				    }
 				}
-			    create_vassal = SVH
+			    create_subject = {
+                    subject_type = vassal
+                    subject = SVH
+				}
 			}
 		}
 	}
@@ -3000,37 +3040,43 @@ A23_theramore_column_5 = {
 		
 		trigger = {
 		    OR = {
-		    	A94 = {
+			    A94 = {
                     has_opinion = {
                         who = ROOT
                         value = 100
-			    	}
-					has_spy_network_from = {
-                    	who = ROOT
-                    	value = 30
-                    }
-                }
+			        }
+				}
 				H01 = {
-                    has_opinion = {
+			        has_opinion = {
                         who = ROOT
                         value = 100
-			    	}
-					has_spy_network_from = {
+			        }
+				}
+			}
+			OR = {
+			    A94 = {
+				    has_spy_network_from = {
                     	who = ROOT
                     	value = 30
                     }
-                }
+				}
+				H01 = {
+				    has_spy_network_from = {
+                        who = ROOT
+                        value = 30
+                    }
+				}
 		    }
 			A48 = {
-                has_opinion = {
+			    has_opinion = {
                     who = ROOT
                     value = 100
 			    }
-				has_spy_network_from = {
+			    has_spy_network_from = {
                     who = ROOT
                     value = 30
                 }
-            }
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -3108,12 +3154,15 @@ A23_theramore_column_5 = {
 			    	}
                 }
 		    }
-			A48 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 180
-			    }
-            }
+			OR = {
+			    A48 = {
+                    has_opinion = {
+                        who = ROOT
+                        value = 180
+					}
+                }
+				is_rival = A48
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -3211,7 +3260,7 @@ A23_theramore_column_5 = {
 		position = 11
 		required_missions = { A23_blue_dragonflight_assistance }
 		
-		trigger = {
+		trigger = { 
 		    OR = {
         		A48 = {               
     	 			has_spy_network_from = {
@@ -3375,6 +3424,8 @@ A23_theramore_column_5 = {
                 
 			    region_dustwallow_marsh = {
 			        has_building = wow_farm_2
+					type = all
+					owned_by = ROOT
 				}
 			}
 		}
@@ -3480,9 +3531,13 @@ A23_theramore_column_5 = {
                 
 			    region_south_barrens = {
 			        has_building = wow_farm_2
+					type = all
+					owned_by = ROOT
 				}
 				region_north_barrens = {
 			        has_building = wow_farm_2
+					type = all
+					owned_by = ROOT
 				}
 			}
 		}
@@ -3503,7 +3558,7 @@ A23_theramore_column_5 = {
 				province_id = 1448
 				province_id = 1444
 			    province_id = 1369
-				province_id = 3476
+				province_id = 3475
 				province_id = 1372
 			}
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
@@ -3522,7 +3577,7 @@ A23_theramore_column_5 = {
                 country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
             }
-			3476 = {
+			3475 = {
                 country_or_non_sovereign_subject_holds = ROOT
 				has_fort_building_trigger = yes
             }

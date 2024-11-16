@@ -46,68 +46,92 @@ country_event = {
         days = 1
     }
     
-    option = {
-        name = wwu_mission_theramore.2.option.a
-            
-		trigger = {
-			1452 = {
-			    is_empty = yes
-			}
-			1450 = {
-			    is_empty = yes
-			}
-			3508 = {
-			    is_empty = yes
-			}
-		}
-			
-		1452 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-		1450 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-		3508 = {
-			cede_province = GMT
-            add_core = GMT
-			change_culture = culture_tauren
-			change_religion = tauren_shamanism
-		}
-
-		
-        ai_chance = {
-            factor = 1
-        }
-    }
 	option = {
-        name = wwu_mission_theramore.2.option.b
+        name = wwu_mission_theramore.2.option.a
         
-        trigger = {
-			1452 = {
-			    NOT = { is_empty = yes }
+	    if = {
+		    limit = {
+			    OR = {
+				    1450 = { NOT = { is_empty = yes } }
+				}
 			}
-			1450 = {
-			    NOT = { is_empty = yes }
+			1450 = { add_core = ROOT }			
+		}
+		else_if = {
+		    limit = {
+			    OR = {
+				    1450 = { is_empty = yes }
+				}
 			}
-			3508 = {
-			    NOT = { is_empty = yes }
+		    1450 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
 		    }
 		}
-	
-		1450 = {
-		    add_core = ROOT
+		if = {
+		    limit = {
+			    OR = {
+					1452 = { NOT = { is_empty = yes } }
+				}
+			}
+			1452 = { add_core = ROOT }
 		}
-		1452 = {
-		    add_core = ROOT
+		else_if = {
+		    limit = {
+			    OR = {
+				    1452 = { is_empty = yes }
+				}
+			}
+		    1452 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
 		}
-		3508 = {
-		    add_core = ROOT
+		if = {
+		    limit = {
+			    OR = {
+					3508 = { NOT = { is_empty = yes } }
+				}
+			}
+			3508 = { add_core = ROOT }
+		}
+		else_if = {
+		    limit = {
+			    OR = {
+				    3508 = { is_empty = yes }
+				}
+			}
+		    3508 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
+		}
+		if = {
+		    limit = {
+			    OR = {
+					2950 = { NOT = { is_empty = yes } }
+				}
+			}
+			2950 = { add_core = ROOT }
+		}
+		else_if = {
+		    limit = {
+			    OR = {
+				    2950 = { is_empty = yes }
+				}
+			}
+		    2950 = {
+			    cede_province = GMT
+                add_core = GMT
+			    change_culture = culture_tauren
+			    change_religion = tauren_shamanism
+		    }
 		}
 		
         ai_chance = {
@@ -539,7 +563,13 @@ country_event = {
     
     option = {
         name = wwu_mission_theramore.13.option.a
-
+        
+		trigger = {
+		    1463 = { owned_by = ROOT }
+			3513 = { owned_by = ROOT }
+			3503 = { owned_by = ROOT }
+		}
+		
 		1463 = {
 			cede_province = F58
             add_core = F58
@@ -556,13 +586,52 @@ country_event = {
 		    spawn_infantry = { AMOUNT = 10 TAG = F58 }
             spawn_cavalry = { AMOUNT = 1 TAG = F58 }
             spawn_artillery = { AMOUNT = 4 TAG = F58 }
-		}
+		}		
 		F58 = {
 		    declare_war_with_cb = {
                 who = ROOT
                 casus_belli = cb_triggered_independence_war
             }
 		}
+		
+        ai_chance = {
+            factor = 1
+        }
+    }
+	option = {
+        name = wwu_mission_theramore.13.option.b
+        
+		trigger = {
+		    1463 = { NOT = { owned_by = ROOT }}
+			3513 = { NOT = { owned_by = ROOT }}
+			3503 = { NOT = { owned_by = ROOT }}
+		}
+		
+        if = {
+		    limit = {
+			    exists = F58
+			}
+			3503 = {
+		        spawn_infantry = { AMOUNT = 10 TAG = F58 }
+                spawn_cavalry = { AMOUNT = 1 TAG = F58 }
+                spawn_artillery = { AMOUNT = 4 TAG = F58 }
+		    }		
+		    F58 = {
+		        declare_war_with_cb = {
+                    who = ROOT
+                    casus_belli = cb_triggered_independence_war
+                }
+		    }
+		}
+		else_if = {
+		    limit = {
+			    NOT = { exists = F58 }
+			}	
+		    add_prestige = -20
+			add_dip_power = -50
+			add_mil_power = -50
+		}
+		
         ai_chance = {
             factor = 1
         }
@@ -1201,7 +1270,7 @@ country_event = {
 		add_prestige = 20
 		add_power_projection = {
             type = mission_rewards_power_projection
-            amount = 20
+            amount = 40
         }
 		
         ai_chance = {
@@ -1230,7 +1299,11 @@ country_event = {
             amount = 20
         }
 		add_mil_power = 150
-		
+		remove_historical_rival = A14
+		A14 = {
+		    remove_historical_rival = ROOT
+        }
+			
         ai_chance = {
             factor = 1
         }
@@ -1245,15 +1318,15 @@ country_event = {
 			}
 		}
 		
-		spawn_waycrest = yes
-		spawn_stormsong = yes
-		spawn_ashvane = yes
-		integrate_proudmoore = yes
+		A14 = {
+		    release = WYC
+		    release = SNG
+			release = ASH
+		}
 		create_union = WYC		
 		create_union = SNG
 		create_union = ASH
-		add_dip_power = 100
-		add_adm_power = 100
+		inherit = A14		
 		
         ai_chance = {
             factor = 1
@@ -1914,7 +1987,10 @@ country_event = {
 		every_owned_province = { 
             limit = {
                 region = region_tirisfal_glades
-				culture = culture_scourge # ADD UNDEAD
+				OR = {
+				    culture = culture_scourge
+                    culture = culture_forsaken
+				}
                 NOT = { culture = culture_lordaeron }
             }
             change_culture = culture_lordaeron 
