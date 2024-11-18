@@ -446,7 +446,18 @@ country_event = {
         name = wwu_mission_theramore.11.option.a
 
 		#return/seed core to Stonespire
-		1474 = {
+		if = {
+		    limit = {
+		        NOT = { exists = SES }
+			}
+			release = SES
+		}
+		3434 = {
+			cede_province = SES
+            add_core = SES
+			remove_core = ROOT
+		}
+		1464 = {
 			cede_province = SES
             add_core = SES
 			remove_core = ROOT
@@ -480,11 +491,21 @@ country_event = {
         name = wwu_mission_theramore.11.option.b
 
 		#refuce to return core
-		SES = {
-		    add_opinion = {
-                who = ROOT
-                modifier = A23_barren_digsites_e			
+		if = {
+		    limit = {
+			    exists = SES
 			}
+		    SES = {
+		        add_opinion = {
+                    who = ROOT
+                    modifier = A23_barren_digsites_e			
+			    }
+		    }
+			add_historical_rival = SES
+			SES = {
+		        add_historical_rival = ROOT
+			    add_manpower = -5
+		    }
 		}
 		THB = {
 		    add_opinion = {
@@ -492,15 +513,10 @@ country_event = {
                 modifier = A23_barren_digsites_f				
 			}
 		}		
-		add_historical_rival = THB 
-		add_historical_rival = SES
+		add_historical_rival = THB 		
 		THB = {
 		    add_historical_rival = ROOT
-		}
-		SES = {
-		    add_historical_rival = ROOT
-			add_manpower = -5
-		}
+		}		
 		
         ai_chance = {
             factor = 1
