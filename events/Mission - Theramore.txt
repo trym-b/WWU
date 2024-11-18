@@ -1964,7 +1964,9 @@ country_event = {
         name = wwu_mission_theramore.38.option.a
 
 		#Release Lordaeron as PU
+		
 		spawn_lordaeron = yes
+		
 		create_union = A08
 		
         ai_chance = {
@@ -1972,22 +1974,40 @@ country_event = {
         }
     }
 	option = {
-        name = wwu_mission_theramore.38.option.b
-        
-		trigger = {
-		    exists = A22
-		}
+        name = wwu_mission_theramore.38.option.b      
 		
 		#Feed it to a Crusader vassal if said vassal exists
 		#no immigrants back
-		spawn_scarlet_lordaeron = yes
-		A22 = {
-		    override_country_name = SCARLET_LORDAERON
-			hidden_effect = {
-                set_country_flag = is_scarlet_lordaeron_flag
+		if = {
+		    limit = {
+			    exists = A22
+			}
+			spawn_scarlet_lordaeron = yes
+		    A22 = {
+		        override_country_name = SCARLET_LORDAERON
+			    hidden_effect = {
+                    set_country_flag = is_scarlet_lordaeron_flag
+                }
+		    }
+		}
+		else_if = {
+		    limit = {
+			    NOT = { exists = A22 } 
+			}
+			release = A22
+			spawn_scarlet_lordaeron = yes
+		    A22 = {
+		        override_country_name = SCARLET_LORDAERON
+			    hidden_effect = {
+                    set_country_flag = is_scarlet_lordaeron_flag
+                }
+		    }
+			create_subject = {
+                subject_type = vassal
+                subject = A22
             }
 		}
-				
+		
         ai_chance = {
             factor = 1
         }
