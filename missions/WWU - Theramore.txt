@@ -3038,41 +3038,43 @@ A23_theramore_column_5 = {
 		trigger = {
 		    OR = {
 			    A94 = {
-                    has_opinion = {
-                        who = ROOT
-                        value = 100
-			        }
+				    OR = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 100
+			            }
+				        has_spy_network_from = {
+                    	    who = ROOT
+                    	    value = 30
+                        }
+					}
 				}
 				H01 = {
+			        OR = {
+                        has_opinion = {
+                            who = ROOT
+                            value = 100
+			            }
+				        has_spy_network_from = {
+                    	    who = ROOT
+                    	    value = 30
+                        }
+					}
+				}
+			}
+			OR = {
+			    A48 = {
 			        has_opinion = {
                         who = ROOT
                         value = 100
 			        }
 				}
-			}
-			OR = {
-			    A94 = {
-				    has_spy_network_from = {
-                    	who = ROOT
-                    	value = 30
-                    }
-				}
-				H01 = {
-				    has_spy_network_from = {
+				A48 = {
+			        has_spy_network_from = {
                         who = ROOT
                         value = 30
                     }
 				}
-		    }
-			A48 = {
-			    has_opinion = {
-                    who = ROOT
-                    value = 100
-			    }
-			    has_spy_network_from = {
-                    who = ROOT
-                    value = 30
-                }
 			}
 		}
 		effect = {			
@@ -3082,17 +3084,70 @@ A23_theramore_column_5 = {
 			}
 			if = {
 			    limit = {
-				    NOT = { exists = A94 }
+					H01 = {
+			            has_opinion = {
+                            who = ROOT
+                            value = 100
+			            }
+				    }
 				}
 				add_historical_friend = H01
 			}
 			else_if = {
 			    limit = {
-				    exists = A94
+					H01 = {
+			            has_spy_network_from = {
+                            who = ROOT
+                            value = 30
+                        }
+				    }
+				}
+				add_historical_rival = A94
+			}
+			if = {
+			    limit = {
+					A94 = {
+			            has_opinion = {
+                            who = ROOT
+                            value = 100
+			            }
+				    }
 				}
 				add_historical_friend = A94
 			}
-			add_historical_friend = A48
+			else_if = {
+			    limit = {
+					A94 = {
+			            has_spy_network_from = {
+                            who = ROOT
+                            value = 30
+                        }
+				    }
+				}
+				add_historical_rival = A94
+			}
+			if = {
+			    limit = {
+			        A48 = {
+			            has_spy_network_from = {
+                            who = ROOT
+                            value = 30
+                        }
+				    }
+				}
+				add_historical_rival = A48
+			}
+			else_if = {
+			    limit = {
+			        A48 = {
+			            has_opinion = {
+                            who = ROOT
+                            value = 100
+			            }
+				    }
+				}
+				add_historical_friend = A48
+			}
 		}
 	}
 	A23_darnassus_relations = {
