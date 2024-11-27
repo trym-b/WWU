@@ -456,7 +456,7 @@ NDiplomacy = {
 	LEAVING_GREAT_POWER_YEARS = 5,					-- The number of years a Great Power can remain after being removed from the top (8).
 	GREAT_POWER_SUBJECT_CONTRIBUTION = 0.5,			-- Share of subjects' development that will count towards overlord's Great Power score.
 
-	FORCE_BREAK_ALLIANCE_TRUCE_YEARS = 8,			-- Length of truce imposed by Break Alliance.
+	FORCE_BREAK_ALLIANCE_TRUCE_YEARS = 10,			-- Length of truce imposed by Break Alliance.
 	--- WWU: reduced to match new max truce length.
 	FORCE_END_RIVALRY_YEARS = 15,					-- Years until you can re-add a Rival after being forced to remove them by peace treaty.
 	DECLINE_FAVOR_ACTION_STAB_HIT = 0,				-- stability lost for refusing a favor action																	
@@ -762,9 +762,9 @@ NCountry = {
 	--- WWU: adjusted to fit around 1 year reduction per click
 	GREAT_PROJECT_MOVE_COST_PER_DAY = 3, --how much to move a great project for one day
 	COUNTRIES_GETTING_SCORE = 10,
-	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 5,			-- extra expense for being above forcelimit
+	LAND_FORCELIMIT_EXTRA_COST_FACTOR = 4,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive troops
-	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 5,			-- extra expense for being above forcelimit
+	NAVAL_FORCELIMIT_EXTRA_COST_FACTOR = 4,			-- extra expense for being above forcelimit
 	--- WWU: increase cost of excessive ships
 	REPUBLICAN_TRADITION_YEARLY_INCREASE = 1,		-- how much it increases each year.
 	PIETY_PERCENTAGE_AT_NEW_RULER = 0.25,			-- percentage of piety kept at new ruler.
