@@ -447,10 +447,24 @@ country_event = {
 				primary_culture = culture_scourge
 				primary_culture = culture_undead_human
 			}
-			
+		}
+		NOT = {
 			any_owned_province = {
 				has_province_modifier = A12_the_worgens_already_attacked_this_prov
 			}
+		}
+		any_owned_province = {
+			any_neighbor_province = {
+				culture_group = culture_group_worgen
+				NOT = { has_province_modifier = A12_the_worgens_already_attacked_this_prov }	
+			}
+			NOT = {
+				OR = {
+					province_id = 890
+					province_id = 908
+				}
+			}
+			NOT = { culture_group = culture_group_worgen }
 		}
 	}
 	
@@ -463,9 +477,12 @@ country_event = {
 						NOT = { has_province_modifier = A12_the_worgens_already_attacked_this_prov }	
 					}
 					NOT = {
-						province_id = 890
-						province_id = 908
+						OR = {
+							province_id = 890
+							province_id = 908
+						}
 					}
+					NOT = { culture_group = culture_group_worgen }
 				}
 				save_event_target_as = A12_propagation_of_the_curse_event_target
 				add_province_modifier = {
