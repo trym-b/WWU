@@ -443,6 +443,7 @@ country_event = {
 				has_global_flag = curse_of_the_worgen_cured
 				primary_culture = culture_gilnean_worgen
 				technology_group = tech_worgen
+				religion = scarlet_light
 				primary_culture = culture_forsaken
 				primary_culture = culture_scourge
 				primary_culture = culture_undead_human
@@ -1169,19 +1170,21 @@ country_event = {
 	option = {
 		name = wwu_gilneas.14.option.a
 		
-		random_list = {
-			85 = {
-				X02 = {
-					country_event = {
-						id = wwu_gilneas.9
+		hidden_effect = {
+			random_list = {
+				85 = {
+					X02 = {
+						country_event = {
+							id = wwu_gilneas.9
+						}
 					}
 				}
-			}
-			
-			15 = {
-				A12 = {
-					country_event = {
-						id = wwu_gilneas.10
+				
+				15 = {
+					A12 = {
+						country_event = {
+							id = wwu_gilneas.10
+						}
 					}
 				}
 			}
@@ -1992,7 +1995,10 @@ country_event = {
 	trigger = {
 		tag = A12
 		has_ruler = "Genn Greymane"
-		NOT = { has_heir = yes }
+		NOT = {
+			has_heir = yes 
+			has_country_flag = A12_liam_already_died
+		}
 	}
 
 	fire_only_once = yes
