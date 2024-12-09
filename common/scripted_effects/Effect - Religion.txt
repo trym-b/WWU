@@ -575,6 +575,55 @@ set_up_of_estate_privileges = {
 				religion = cult_of_the_damned
 			}
 			has_estate = estate_clergy
+			NOT = { #Scourge AI
+				AND = {
+					tag = P11
+					ai = yes
+					OR = {
+						AND = {
+							tag = A12
+							ai = no
+						}
+						AND = {
+							religion = fel
+							ai = no
+						}
+						AND = {
+							religion = forgotten_shadow
+							ai = no
+						}
+					}
+				}
+			}
+			NOT = { #Scarlet Crusade AI
+				AND = {
+					tag = A22
+					ai = yes
+					OR = {
+						AND = {
+							religion = holy_light
+							ai = no 
+							OR = {
+								NOT = { 
+									OR = {
+										technology_group = tech_worgen 
+										technology_group = tech_high_elf
+										technology_group = tech_dwarf
+									}
+								}
+							}
+						}
+						AND = {
+							religion = argent_light
+							ai = no
+						}
+						AND = {
+							religion = forgotten_shadow
+							ai = no
+						}
+					}
+				}
+			}
 		}
 		set_estate_privilege = estate_clergy_eternal_damnation
 	}
