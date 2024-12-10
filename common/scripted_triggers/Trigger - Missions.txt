@@ -16,7 +16,17 @@ is_primal_culture = {
 has_unique_mission_tab = {
     OR = {
         has_mission_tab__rise_of_the_horde = yes
+        has_mission_tab__alliance = yes
+        has_mission_tab__horde = yes
     }
+}
+
+# VAWSER: this is used in mission column potentials so the personal trees are fully hidden if a different tab is active.
+has_personal_tab_active = {
+    NOT = { is_in_mission_tab__rise_of_the_horde = yes }
+    NOT = { is_in_mission_tab__frozen_throne = yes }
+    NOT = { is_in_mission_tab__alliance = yes }
+    NOT = { is_in_mission_tab__horde = yes }
 }
 
 # Rise of the Horde
@@ -40,7 +50,6 @@ has_mission_tab__rise_of_the_horde = {
     }
 }
 
-
 is_in_mission_tab__rise_of_the_horde = {
     has_country_flag = display_missions_rise_of_the_horde
 }
@@ -60,3 +69,28 @@ may_use_frozen_throne_missions = {
         mission_completed = P11_the_scourge_invasion
     }
 }   
+
+# Alliance
+has_mission_tab__alliance = {
+    OR = {
+        has_country_modifier = head_of_alliance
+        has_country_modifier = member_of_alliance
+    }
+}
+
+is_in_mission_tab__alliance = {
+    has_country_flag = display_missions_alliance
+}
+
+# Horde
+has_mission_tab__horde = {
+    OR = {
+        has_country_modifier = head_of_horde
+        has_country_modifier = member_of_horde
+    }
+}
+
+is_in_mission_tab__horde = {
+    has_country_flag = display_missions_horde
+}
+
