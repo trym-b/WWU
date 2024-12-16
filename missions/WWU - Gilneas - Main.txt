@@ -1,5 +1,5 @@
 #--------------------------------------
-# Gilneas
+#  Gilneas
 #--------------------------------------
 A12_1_gilneas_column1 = {
 	slot = 1
@@ -356,13 +356,14 @@ A12_1_gilneas_column1 = {
 			}
 		}
 	}
-	A12_strength_in_unity = { #will vassalize Bloodfang and Hillsbrade
+	A12_strength_in_unity = { #will vassalize Bloodfang, Hillsbrade and Talonbranch
 		icon = mission_worgen_foot
 		position = 10
 		required_missions = { A12_the_gilneas_liberation_front }
 		trigger = {
 			F53 = { #Bloodfang
 				exists = yes
+				culture_group = culture_group_worgen
 				OR = {
 					alliance_with = ROOT
 					is_subject_of = ROOT
@@ -371,31 +372,32 @@ A12_1_gilneas_column1 = {
 						value = 130
 					}
 				}
-				culture_group = culture_group_worgen
 			}
 			A11 = { #Hillsbrade
+				exists = yes
+				culture_group = culture_group_worgen
 				OR = {
-					AND = {
+					OR = {
 						alliance_with = ROOT
 						is_subject_of = ROOT
 						has_opinion = {
 							who = ROOT
-							value = 145
+							value = 130
 						}
 					}
-					AND = {
+					OR = {
 						alliance_with = F53
 						is_subject_of = F53
 						has_opinion = {
-							who = ROOT
-							value = 100
+							who = F53
+							value = 80
 						}
 					}
 				}
-				culture_group = culture_group_worgen
 			}
 			TLB = { #Talonbranch
 				exists = yes
+				culture_group = culture_group_worgen
 				OR = {
 					alliance_with = ROOT
 					is_subject_of = ROOT
@@ -404,9 +406,9 @@ A12_1_gilneas_column1 = {
 						value = 130
 					}
 				}
-				culture_group = culture_group_worgen
 			}
 			primary_culture = culture_gilnean_worgen
+			technology_group = tech_worgen
 		}
 		effect = {
 			F53 = {
@@ -1270,7 +1272,7 @@ A12_1_gilneas_column4 = {
 				fort_level = 2
 				base_tax = 5
 				base_production = 5
-				base_manpower = 6
+				base_manpower = 5
 			}
 			army_tradition = 35
 			owns = 914
@@ -1303,9 +1305,7 @@ A12_1_gilneas_column4 = {
 				custom_tooltip = A12_can_build_greymane_wall_by_mission_modifier_b_tt
 				tooltip = {
 					914 = {
-						add_base_production = 4
-						add_base_tax = 4
-						add_base_manpower = 7
+						add_random_development = 5
 					}
 				}
 			}
@@ -1381,9 +1381,7 @@ A12_1_gilneas_column4 = {
 					}
 				}
 				914 = {
-					add_base_production = 4
-					add_base_tax = 4
-					add_base_manpower = 7
+					add_random_development = 5
 				}
 				
 				add_adm_power = 100
