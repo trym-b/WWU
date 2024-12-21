@@ -98,4 +98,168 @@ country_decisions = {
             }
         }
     }
+
+    advance_the_glacier = {
+        potential = {
+            tag = P11
+            any_province = {
+                region = region_icecrown
+                is_empty = yes
+            }
+            NOT = { has_country_modifier = advance_glacier_icecrown }
+            NOT = { has_country_modifier = recently_send_icecrown }
+        }
+        allow = {
+            adm_power = 75
+            dip_power = 75
+            mil_power = 75
+            NOT = { is_at_war = yes }
+        }
+        effect = {
+            add_adm_power = -75
+            add_dip_power = -75
+            add_mil_power = -75
+            add_country_modifier = {
+                name = advance_glacier_icecrown
+                duration = 365
+            }
+            add_country_modifier = {
+                name = recently_send_icecrown
+                duration = 1825
+            }
+        }
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+                NOT = { adm_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { dip_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { mil_power = 300 }
+            }
+        }
+    }
+
+    settle_icecrown_isles = {
+        potential = {
+            capital_scope = {
+                OR = {
+                    region = region_icecrown
+                    region = region_azjol_nerub
+                    region = region_sholazar_basin 
+                    region = region_borean_tundra
+                }
+				is_core = ROOT					
+			}
+            area_isle_of_conquest = {
+                is_empty = yes
+            }
+            area_onslaught_harbor  = {
+                is_empty = yes
+            }
+        }
+        allow = {
+            treasury = 1000
+            dip_power = 100
+            adm_power = 100
+            mil_power = 100
+        }
+        effect = {
+            add_treasury = -1000
+            add_adm_power = -100
+            add_dip_power = -100
+            add_mil_power = -100
+
+            area_isle_of_conquest = {
+                add_siberian_construction = 100
+                change_culture = ROOT
+            }
+            area_onslaught_harbor = {
+                add_siberian_construction = 100
+                change_culture = ROOT
+            }
+        }
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+                NOT = { adm_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { dip_power = 300 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { mil_power = 300 }
+            }
+        }
+    }
+
+    establish_glaciar_settlements_no_dlc = {
+        potential = {
+            NOT = { has_dlc = "Third Rome" }
+            capital_scope = {
+                OR = {
+                    region = region_icecrown
+                }
+            }
+            NOT = { has_country_modifier = recently_send_icecrown_nodlc }
+            any_province = {
+                region = region_icecrown
+                is_empty = yes
+            }
+        }
+        allow = {
+            adm_power = 50
+            dip_power = 50
+            mil_power = 50
+            NOT = { is_at_war = yes }
+        }
+        effect = {
+            add_adm_power = -50
+            add_dip_power = -50
+            add_mil_power = -50
+
+            random_empty_neighbor_province  = {
+                limit = {
+                    region = region_icecrown
+                }
+                cede_province = ROOT
+                add_core = ROOT
+                add_province_modifier = {
+                    name = nodlc_colonial_penalty_province
+                    duration = 365
+                }
+            }
+
+            add_country_modifier = {
+                name = recently_send_icecrown_nodlc
+                duration = 1825
+            }
+        }
+        ai_will_do = {
+            factor = 1
+
+            modifier = {
+                factor = 0
+                NOT = { adm_power = 200 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { dip_power = 200 }
+            }
+            modifier = {
+                factor = 0
+                NOT = { mil_power = 200 }
+            }
+        }
+    }
 }
