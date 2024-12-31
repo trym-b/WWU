@@ -236,7 +236,8 @@ P14_forsaken_column_3 = {
 	
     P14_breaking_the_chains = { 
 		icon = mission_cannibalize
-        
+        position = 1
+		
 		required_missions = {  } 
         
 		trigger = {
@@ -268,6 +269,68 @@ P14_forsaken_column_3 = {
             area_vandermar = {
                 add_permanent_claim = ROOT
             }			
+		}
+	}
+	
+	P14_build_a_military_state = { 
+		icon = mission_dark_ranger
+		position = 2
+        
+		required_missions = { P14_breaking_the_chains } 
+        
+		trigger = {
+			is_subject = no
+			army_professionalism = 0.90
+			army_tradition = 75
+		}
+		effect = { 
+		   custom_tooltip = P14_build_a_military_state_tt
+		   
+		   custom_tooltip = no_tooltip
+		   
+		   define_general = {
+				shock = 4
+				fire = 3
+				manuever = 4
+				siege = 2
+				name = "Dark Ranger Velonara"
+				culture = culture_darkfallen
+				female = yes
+				trait = master_of_arms_personality
+		   }
+		}
+	}
+	
+	P14_build_a_military_state_2 = { 
+		icon = mission_warrior_bloodfrenzy
+		position = 3
+        
+		required_missions = { P14_build_a_military_state } 
+        
+		trigger = {
+			OR = {
+				has_reform = the_military_state_forsaken_reform
+				army_tradition = 100
+				num_of_carolean = 20
+			}
+		}
+		effect = { 
+		   custom_tooltip = the_military_state_forsaken_privilege_tt
+		   hidden_effect = {
+				set_country_flag = the_military_state_forsaken_privilege
+		   }
+		   
+		   custom_tooltip = no_tooltip
+		   
+		   define_general = {
+				shock = 4
+				fire = 3
+				manuever = 3
+				siege = 2
+				name = "Nathanos Blightcaller"
+				culture = culture_forsaken
+				trait = elite_inspirational_leader_general_personality
+		   }
 		}
 	}
     

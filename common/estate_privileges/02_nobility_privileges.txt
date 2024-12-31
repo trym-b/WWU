@@ -805,3 +805,40 @@ estate_nobility_greymane_greyguard = {
 		}
 	}
 }
+
+estate_nobility_dark_ranger_elitism = {
+	icon = privilege_dark_ranger
+	max_absolutism = 0
+	land_share = 10
+	loyalty = 0.05
+	influence = 0.05
+	is_valid = {
+		has_country_flag = the_military_state_forsaken_privilege
+	}
+	on_granted = {
+		add_country_modifier = {
+			name = estate_nobility_dark_ranger_elitism_modifier
+			duration = -1
+		}
+	}
+	on_revoked = {
+		remove_country_modifier = estate_nobility_dark_ranger_elitism_modifier
+	}
+	on_invalid = {
+		remove_country_modifier = estate_nobility_dark_ranger_elitism_modifier
+	}
+	penalties = {
+		amount_of_carolean = -0.1
+	}
+	benefits = {
+		nobles_privilege_slots = 1
+	}
+	cooldown_years = 5
+	ai_will_do = {
+		factor = 4
+		modifier = {
+			factor = 0
+			NOT = { num_of_carolean = 10 }
+		}
+	}
+}
