@@ -2038,3 +2038,87 @@ silithid_lair_reform = {
     }
 
 }
+
+# Used by Forsaken by completing mission "P14_build_a_military_state"
+the_military_state_forsaken_reform = {
+    icon                        = "dark_ranger"
+    legacy_equivalent           = autocracy_legacy
+    valid_for_new_country       = no
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+
+    heir    = no
+    queen   = no
+	royal_marriage = yes
+	maintain_dynasty = yes
+	different_religion_acceptance = -20
+	rulers_can_be_generals = yes
+	
+	allow_carolean = yes
+
+    modifiers = {
+		morale_damage_received = -0.010
+		army_tradition = 0.5
+		years_of_nationalism = -5
+		special_unit_forcelimit = 0.10
+		shock_damage = 0.05
+		leader_land_shock = 1 
+		general_cost = -0.15
+		military_tactics = 0.05
+    }
+
+    custom_attributes = {
+		locked_government_type = yes
+		block_pretenders = yes
+		succession_new_rulership = yes
+	}
+
+    potential = {
+		tag = P14
+    }
+	
+	trigger = {
+		mission_completed = P14_build_a_military_state
+	}
+}
+
+# Used by Forsaken
+the_forsaken_reform = {
+    icon                        = "the_forsaken"
+    legacy_equivalent           = autocracy_legacy
+    valid_for_new_country       = no
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+	different_religion_acceptance = -20
+
+    heir    = no
+    queen   = no
+	royal_marriage = yes
+	
+	fixed_rank = 2
+
+    modifiers = {
+        culture_conversion_cost = -0.10
+		core_creation = -0.10
+		morale_damage_received = -0.005
+		army_tradition = 0.25
+		years_of_nationalism = -3
+    }
+
+    custom_attributes = {
+		locked_government_type = yes
+		block_pretenders = yes
+		succession_new_rulership = yes
+	}
+
+    potential = {
+        OR = {
+            have_had_reform = the_forsaken_reform
+			have_had_reform = the_military_state_forsaken_reform
+        }
+    }
+}
