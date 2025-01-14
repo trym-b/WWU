@@ -426,10 +426,24 @@ country_event = {
 		OR = {
 			tag = A12
 			primary_culture = culture_gilnean
-			primary_culture = culture_lordaeron
+			AND = {
+				primary_culture = culture_lordaeron
+				OR = {
+					region = region_silverpine_forest
+					region = region_hillsbrad_foothills
+				}
+			}
+			AND = {
+				primary_culture = culture_kul_tiran
+				region = region_tol_barad
+			}
 		}
 		
-		continent = continent_eastern_kingdoms
+		OR = {
+			continent = continent_eastern_kingdoms
+			region = region_valsharah
+			region = region_duskwood
+		}
 		
 		OR = {
 			any_neighbor_country = {
@@ -501,31 +515,110 @@ country_event = {
 		if = {
 			limit = { primary_culture = culture_gilnean }
 			random_list = {
-				70 = {
+				60 = {
 					event_target:A12_propagation_of_the_curse_event_target = {
 						change_culture = culture_gilnean_worgen						
 					}
 				}
-				30 = { }
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
 			}
 			
 			#custom_tooltip = " "
 			
-			add_prestige = -10
+			add_mil_power = -50
 		}
-		else = {
+		else_if = {
+			limit = { primary_culture = culture_lordaeron }
 			random_list = {
-				70 = {
+				60 = {
 					event_target:A12_propagation_of_the_curse_event_target = {
 						change_culture = culture_lordaeron_worgen						
 					}
 				}
-				30 = { }
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
 			}
 			
 			#custom_tooltip = " "
 			
-			add_prestige = -10
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_dalaran }
+			random_list = {
+				60 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_dalaran_worgen						
+					}
+				}
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_stormwindian }
+			random_list = {
+				60 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_stormwindian_worgen						
+					}
+				}
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_kul_tiran }
+			random_list = {
+				60 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_kul_tiran_worgen						
+					}
+				}
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_alterac }
+			random_list = {
+				60 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_alterac_worgen						
+					}
+				}
+				40 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
 		}
 	}
 	
@@ -549,11 +642,84 @@ country_event = {
 			
 			add_mil_power = -50
 		}
-		else = {
+		else_if = {
+			limit = { primary_culture = culture_lordaeron }
 			random_list = {
 				40 = {
 					event_target:A12_propagation_of_the_curse_event_target = {
 						change_culture = culture_lordaeron_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_dalaran }
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_dalaran_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_stormwindian }
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_stormwindian_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_kul_tiran }
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_kul_tiran_worgen						
+					}
+				}
+				60 = { 
+					add_prestige = 5 
+					add_yearly_manpower = -0.05
+				}
+			}
+			
+			#custom_tooltip = " "
+			
+			add_mil_power = -50
+		}
+		else_if = {
+			limit = { primary_culture = culture_alterac }
+			random_list = {
+				40 = {
+					event_target:A12_propagation_of_the_curse_event_target = {
+						change_culture = culture_alterac_worgen						
 					}
 				}
 				60 = { 
