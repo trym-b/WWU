@@ -647,7 +647,8 @@ NCountry = {
 	ESTATE_PRIVILEGES_MAX_CONCURRENT = 6,		-- Max. number of privileges active at the same time
 
 	ESTATE_AGENDA_DEFAULT_MAX_ACTIVE_DAYS = 7300, -- Default max amount of days an agenda can stay active
-	ESTATE_AGENDA_ABOUT_TO_EXPIRE_WARNING = 1095, -- How many days it should start warning for agenda about to expire
+	ESTATE_AGENDA_ABOUT_TO_EXPIRE_WARNING = 1825, -- How many days it should start warning for agenda about to expire
+	--- WWU: set to 5 years
 
 	ESTATE_LOYALTY_INFLUENCE_ON_LIBERTY_DESIRE = -0.3, -- Estate loyalty influence on libarty desire of vassals (if it has vassal_liberty_affected_by_loyalty)
 
@@ -687,7 +688,7 @@ NCountry = {
 	PARLIAMENT_EFFECT_DURATION = 10,				-- in years
 	PARLIAMENT_DEBATE_DURATION = 5,				-- in years
 	NUM_PARLIAMENT_ISSUES = 5,
-	PARLIAMENT_PRESTIGE_HIT = -20,				-- penalty if failed debate.
+	PARLIAMENT_PRESTIGE_HIT = -10,				-- penalty if failed debate.
 	PARLIAMENT_CHANCE_OF_DECISION = 10,			-- % Chance debate is ended after PARLIAMENT_DEBATE_DURATION
 	PARLIAMENT_RESET_COOLDOWN = 20,				-- how long before you can use reset again for parliament decisions
 
@@ -869,8 +870,8 @@ NCountry = {
 	PS_REDUCE_WAREXHAUSTION = 100,
     --- WWU: increased.
 	PS_FACTION_BOOST = 10,
-	PS_RAISE_TARIFFS = 50,
-	PS_LOWER_TARIFFS = 25,
+	PS_RAISE_TARIFFS = 35,
+	PS_LOWER_TARIFFS = 15,
 	PS_RAISE_WAR_TAXES = 2,	-- Monthly Cost
 	PS_WAR_TAXES_LIMIT_MIN = 0,	-- Minimum value for the cost of war taxes
 	PS_CREATE_TRADE_POST = 50,
@@ -879,9 +880,9 @@ NCountry = {
 	PS_IMPROVE_PROVINCE_MUL = 0,
 	PS_IMPROVE_PROVINCE_CAPITAL_DISCOUNT = 0.0,
 	--- WWU: removed dev cost reduction in capital
-	PS_SET_PRIMARY_CULTURE = 300,
+	PS_SET_PRIMARY_CULTURE = 250,
     --- WWU: increased.
-	PS_ADD_ACCEPTED_CULTURE = 250,
+	PS_ADD_ACCEPTED_CULTURE = 200,
     --- WWU: increased.
 	PS_REMOVE_ACCEPTED_CULTURE = 10,
 	PS_REMOVE_ACCEPTED_CULTURE_UNREST_DURATION = 5,
@@ -992,10 +993,10 @@ NCountry = {
 	GALLEY_INLAND_SEA_COAST_RATIO = 0.75, 			-- % of ports that need to be inland seas for galleys to be considered important
 	REBEL_BREAK_STABILITY_SET = 0,					-- Stability will be set to this value when rebels break country.
 	REBEL_BREAK_EXHAUSTION_SET = 0, 				-- Exhaustion will be set to this value when rebels break country.
-	REVOLT_SIZE_DEVELOPMENT_MULTIPLIER = 0.03,		-- Multiplied with the province's development
-	--- WWU: reduce revolt size based on development
-	REVOLT_SIZE_BASE = 3,
-	--- WWU: reduce base revolt size
+	REVOLT_SIZE_DEVELOPMENT_MULTIPLIER = 0.05,		-- Multiplied with the province's development
+	--- WWU: increased revolt size based on development
+	REVOLT_SIZE_BASE = 5,
+	--- WWU: increased base revolt size
 	REVOLT_TECH_IMPACT = 0.03, 			-- % each tech increases size of rebels by this percent.
 	REVOLT_TECH_MORALE = 0.01,			-- 1% per tech level
 
@@ -1109,7 +1110,7 @@ NCountry = {
 	HORDE_UNITY_PER_LOOT = 0.25,					-- Horde unity gained per ducat looted.
 	HORDE_UNITY_PER_RAZE = 0.5,						-- Horde unity gained per development level razed.
 	DEVOTION_PER_RAZE = 0.33,						-- Devotion gained per development level razed.
-	PILLAGE_CAPITAL_MAX_DEV_PILLAGED = 2,
+	PILLAGE_CAPITAL_MAX_DEV_PILLAGED = 3,
 	NATIVE_UPRISING_COOLDOWN_MONTHS = 12,
 	NATIVE_UPRISING_CHANCE_PER_AGGRESSIVENESS = 1.0,
 	MIN_POPULATION_FOR_TRADEGOOD_ASSIGNMENT = 400,
