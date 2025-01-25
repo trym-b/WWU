@@ -24,6 +24,7 @@ A60_vilebranch_column_4 = {
 		required_missions = {  } 
         
 		trigger = {
+			stability = 1
             all_subject_country = {
 				NOT = { liberty_desire = 40 }
 			}
@@ -33,6 +34,8 @@ A60_vilebranch_column_4 = {
             add_adm_power = 100
             add_dip_power = 100
             add_mil_power = 100
+
+			add_stability = 1
             
             region_the_hinterlands = {
                 add_permanent_claim = ROOT
@@ -58,7 +61,7 @@ A60_vilebranch_column_4 = {
             add_mil_power = 100
 			
 			add_country_modifier = {
-				name = "mission_amani_expansionism"
+				name = mission_vilebranch_expansion
 				duration = -1
 			}
 		}
@@ -71,24 +74,20 @@ A60_vilebranch_column_4 = {
 		trigger = {
             area_stromgarde = {
                 type = all
-                controlled_by = ROOT
+                owned_by = ROOT
             }
 		}
         provinces_to_highlight = {
             area = area_stromgarde
-            NOT = { controlled_by = ROOT }
         }
 		effect = { 
 			add_country_modifier = {
-				name = "mission_bane_of_trollbane"
+				name = mission_bane_of_trollbane
 				duration = -1
 			}
             region_arathi_highlands = {
                 add_permanent_claim = ROOT
             }
-			area_stromgarde = {
-				change_culture = culture_forest_troll
-			}
 		}
 	}
     A60_retake_troll_homelands = { 
@@ -107,12 +106,16 @@ A60_vilebranch_column_4 = {
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+
             region_hillsbrad_foothills = {
                 add_permanent_claim = ROOT
             }
 		
 			add_country_modifier = {
-				name = "mission_vilebranch_victory"
+				name = mission_vilebranch_victory
 				duration = -1
 			}
 		}
@@ -133,7 +136,27 @@ A60_vilebranch_column_4 = {
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		effect = { 
-			add_prestige = 20
+			change_mil = 1
+			change_adm = 1
+			change_dip = 1
+
+			region_gilneas = {
+				add_permanent_claim = ROOT
+			}
+			region_alterac_mountains = {
+				add_permanent_claim = ROOT
+			}
+			region_silverpine_forest = {
+				add_permanent_claim = ROOT
+			}
+
+			if = {
+				limit = {
+					exists = P55
+				}
+				create_guarantee = P55
+
+			}
 		}
 	}
 }
@@ -157,12 +180,31 @@ A60_vilebranch_column_5 = {
 		required_missions = { } 
         
 		trigger = {
-            num_of_colonists = 1
+            OR = {
+				num_of_colonists = 1
+				area_zebjiri = {
+					type = all
+					owned_by = ROOT
+				}
+			}
 		}
 		effect = {
 			add_country_modifier = {
-				name = "mission_vilebranch_colonialism"
+				name = mission_vilebranch_colonialism
 				duration = 1825
+			}
+
+			area_new_avalon = {
+				add_claim = ROOT
+			}
+			area_kings_harbor = {
+				add_claim = ROOT
+			}
+			area_tuskhold = {
+				add_claim = ROOT
+			}
+			area_lights_point = {
+				add_claim = ROOT
 			}
 		}
 	}
@@ -174,20 +216,23 @@ A60_vilebranch_column_5 = {
 		required_missions = { A60_vilebranch_colonist } 
         
 		trigger = {
-            1831 = { country_or_non_sovereign_subject_holds = ROOT }
-            539 = { country_or_non_sovereign_subject_holds = ROOT }
+            area_kings_harbor = {
+				type = all
+				owned_by = ROOT
+			}
 		}
         provinces_to_highlight = {
-            OR = {
-				province_id = 539
-				province_id = 1831
-			}
+            area = area_kings_harbor
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		
 		effect = {
-			add_dip_power = 100
-			add_prestige = 10
+			add_power_projection = {
+                type = mission_rewards_power_projection
+				amount = 20
+			}
+
+			add_dip_power = 50
 		}
 	}
     
@@ -202,16 +247,34 @@ A60_vilebranch_column_5 = {
 				type = all
                 country_or_non_sovereign_subject_holds = ROOT
 			}
+			area_kings_harbor = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_tuskhold = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_lights_point = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
+
         provinces_to_highlight = {
-            area = area_new_avalon
+            OR = {
+				area = area_kings_harbor
+				area = area_new_avalon
+				area = area_tuskhold
+				area = area_lights_point
+			}
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		
 		effect = {
 			add_dip_power = 100
 			add_country_modifier = {
-				name = "mission_vilebranch_connected_north"
+				name = mission_vilebranch_connected_north
 				duration = -1
 			}
 		}
