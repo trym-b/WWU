@@ -428,21 +428,25 @@ country_event = {
 			primary_culture = culture_gilnean
 			AND = {
 				primary_culture = culture_lordaeron
-				OR = {
-					region = region_silverpine_forest
-					region = region_hillsbrad_foothills
+				any_owned_province = {
+					OR = {
+						region = region_silverpine_forest
+						region = region_hillsbrad_foothills
+					}
 				}
 			}
 			AND = {
 				primary_culture = culture_kul_tiran
-				region = region_tol_barad
+				any_owned_province = { region = region_tol_barad }
 			}
 		}
 		
-		OR = {
-			continent = continent_eastern_kingdoms
-			region = region_valsharah
-			region = region_duskwood
+		any_owned_province =  {
+			OR = {
+				continent = continent_eastern_kingdoms
+				region = region_valsharah
+				region = region_duskwood
+			}
 		}
 		
 		OR = {
@@ -2499,6 +2503,10 @@ country_event = {
 		play_sound = worgen_attack_gilneas
 	}
 	
+	mean_time_to_happen = {
+		months = 12
+	}
+	
 	trigger = {
 		NOT = { ai = yes }
 		
@@ -2529,6 +2537,10 @@ country_event = {
 		area_icecrown_interior = {
 			discover_country = ROOT
 		}
+	}
+	
+	mean_time_to_happen = {
+		months = 12
 	}
 	
 	trigger = {
