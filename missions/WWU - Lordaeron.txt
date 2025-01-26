@@ -59,59 +59,110 @@ A08_lordaeron_column_1 = {
 				}
 			}
 
-			area_eastwall_tower = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			GRE = {
+				OR = {
+					NOT = { exists = GRE }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
 			}
-			area_northdale = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+
+			BLC = {
+				OR = {
+					NOT = { exists = BLC }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
 			}
-			area_corins_crossing = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+
+			CRC = {
+				OR = {
+					NOT = { exists = CRC }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
 			}
-			area_the_marris_stead = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+
+			LDC = {
+				OR = {
+					NOT = { exists = LDC }
+					AND = {
+						has_opinion = {
+							who = A08
+							value = 150
+						}
+						NOT = { liberty_desire = 10 }
+						is_subject_of = A08
+					}
+				}
 			}
-			area_darrowshire = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_kings_wood = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_lights_hope = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_stratholme = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_royal_approach = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+
+			NOT = { exists = EAS }
+			NOT = { exists = LDB }
+			NOT = { exists = LDR }
 		}
 
         provinces_to_highlight = {
             OR = {
-				area = area_royal_approach
-				area = area_stratholme
-				area = area_lights_hope
-				area = area_kings_wood
-				area = area_darrowshire
-				area = area_the_marris_stead
-				area = area_corins_crossing
-				area = area_northdale
-				area = area_eastwall_tower
+				is_capital_of = LDC
+				is_capital_of = CRC
+				is_capital_of = BLC
+				is_capital_of = GRE
+				is_capital_of = LDD
+				is_capital_of = LDN
+				is_capital_of = A10
 			}
         }
 
 		effect = { 
+			if = {
+				limit = {
+					LDC = {
+						is_subject_of = ROOT
+					}
+					CRC = {
+						is_subject_of = ROOT
+					}
+					BLC = {
+						is_subject_of = ROOT
+					}
+					GRE = {
+						is_subject_of = ROOT
+					}
+					LDD = {
+						is_subject_of = ROOT
+					}
+					LDN = {
+						is_subject_of = ROOT
+					}
+					A10 = {
+						is_subject_of = ROOT
+					}
+				}
+				add_country_modifier = {
+					name = mission_A08_stratholme_domination_subjects
+					duration = -1
+				}
+			}
+
 			add_country_modifier = {
                 name = mission_stratholme_domination
                 duration = -1
@@ -137,6 +188,15 @@ A08_lordaeron_column_1 = {
 			area_quellithien_lodge = {
 				add_permanent_claim = ROOT
 			}
+			area_kings_harbor = {
+				add_permanent_claim = ROOT
+			}
+			area_lights_point = {
+				add_permanent_claim = ROOT
+			}
+			area_tuskhold = {
+				add_permanent_claim = ROOT
+			}
 
 			remove_country_modifier = A08_eastweald_administrative_attrition
 		}
@@ -151,17 +211,31 @@ A08_lordaeron_column_1 = {
 		trigger = {
             area_quellithien_lodge = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			area_zul_mashar = {
-				owned_by = ROOT
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			area_noxious_glade = {
-				owned_by = ROOT
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			area_new_avalon = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_tuskhold = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_lights_point = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area_kings_harbor = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -172,6 +246,9 @@ A08_lordaeron_column_1 = {
 				area = area_zul_mashar
 				area = area_noxious_glade
 				area = area_new_avalon
+				area = area_kings_harbor
+				area = area_lights_point
+				area = area_tuskhold
 			}
         }
 
@@ -184,7 +261,12 @@ A08_lordaeron_column_1 = {
 			add_years_of_income = 0.5
 			add_prestige = 10
 
-			country_event = { id = wwu_mission_lordaeron.1 days = 7 }
+			if = {
+				limit = {
+					NOT = { exists = P62 }
+				}
+				country_event = { id = wwu_mission_lordaeron.1 days = 7 }
+			}
 
 			region_the_hinterlands = {
 				add_permanent_claim = ROOT
