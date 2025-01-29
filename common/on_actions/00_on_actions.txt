@@ -14,6 +14,35 @@ on_startup = {
 	on_startup__nazmir = yes
 	on_startup__gilneas = yes
 	##set_up_of_estate_privileges = yes
+	
+	if = {
+		limit = {
+			OR = {
+				has_country_modifier = member_of_alliance
+				has_country_modifier = head_of_alliance
+			}
+			any_owned_province = {
+				NOT = { has_province_flag = owned_by_alliance_member }
+			}
+		}
+		every_owned_province = {
+			set_province_flag = owned_by_alliance_member 
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				has_country_modifier = member_of_horde
+				has_country_modifier = head_of_horde
+			}
+			any_owned_province = {
+				NOT = { has_province_flag = owned_by_horde_member }
+			}
+		}
+		every_owned_province = {
+			set_province_flag = owned_by_horde_member 
+		}
+	}
 }
 
 # ROOT = Country
@@ -615,6 +644,34 @@ on_monthly_pulse = {
         on_monthly_pulse__story = yes
         on_monthly_pulse__ambient_objects = yes
     }
+	if = {
+		limit = {
+			OR = {
+				has_country_modifier = member_of_alliance
+				has_country_modifier = head_of_alliance
+			}
+			any_owned_province = {
+				NOT = { has_province_flag = owned_by_alliance_member }
+			}
+		}
+		every_owned_province = {
+			set_province_flag = owned_by_alliance_member 
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				has_country_modifier = member_of_horde
+				has_country_modifier = head_of_horde
+			}
+			any_owned_province = {
+				NOT = { has_province_flag = owned_by_horde_member }
+			}
+		}
+		every_owned_province = {
+			set_province_flag = owned_by_horde_member 
+		}
+	}
     
     # Effects
     on_monthly_pulse__init_random_seed = yes
