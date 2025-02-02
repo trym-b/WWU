@@ -1,6 +1,11 @@
 country_decisions = {
     establish_glaciar_settlements = {
         potential = {
+			OR = {
+				has_dlc = "Third Rome"
+				has_dlc = "Domination"
+			}
+			
             capital_scope = {
                 OR = {
                     region = region_icecrown
@@ -23,10 +28,21 @@ country_decisions = {
             add_adm_power = -50
             add_dip_power = -50
             add_mil_power = -50
-            add_country_modifier = {
-                name = establish_settlement_icecrown
-                duration = 365
-            }
+			
+			if = {
+				limit = {
+					has_dlc = "Third Rome"
+					has_dlc = "Domination"
+				}
+				add_country_modifier = {
+					name = establish_settlement_icecrown
+					duration = 365
+				}
+			}
+			else = {
+				set_country_flag = may_explore_icecrown_citadel
+				custom_tooltip = may_explore_icecrown_citadel_TT
+			}
             add_country_modifier = {
                 name = recently_send_icecrown
                 duration = 1825
@@ -52,6 +68,11 @@ country_decisions = {
 
     estabilsh_surfice_colonies = {
         potential = {
+			OR = {
+				has_dlc = "Third Rome"
+				has_dlc = "Domination"
+			}
+			
             tag = P74
             NOT = { has_country_modifier = establish_settlement_icecrown }
             NOT = { has_country_modifier = recently_send_icecrown }
@@ -101,6 +122,11 @@ country_decisions = {
 
     advance_the_glacier = {
         potential = {
+			OR = {
+				has_dlc = "Third Rome"
+				has_dlc = "Domination"
+			}
+			
             tag = P11
             any_province = {
                 region = region_icecrown
@@ -119,10 +145,20 @@ country_decisions = {
             add_adm_power = -75
             add_dip_power = -75
             add_mil_power = -75
-            add_country_modifier = {
-                name = advance_glacier_icecrown
-                duration = 365
-            }
+            if = {
+				limit = {
+					has_dlc = "Third Rome"
+					has_dlc = "Domination"
+				}
+				add_country_modifier = {
+					name = establish_settlement_icecrown
+					duration = 365
+				}
+			}
+			else = {
+				set_country_flag = may_explore_icecrown_citadel
+				custom_tooltip = may_explore_icecrown_citadel_TT
+			}
             add_country_modifier = {
                 name = recently_send_icecrown
                 duration = 1825
@@ -205,7 +241,10 @@ country_decisions = {
 
     establish_glaciar_settlements_no_dlc = {
         potential = {
-            NOT = { has_dlc = "Third Rome" }
+			OR = {
+				NOT = { has_dlc = "Third Rome" }
+				NOT = { has_dlc = "Domination" }
+			}
             capital_scope = {
                 OR = {
                     region = region_icecrown

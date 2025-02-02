@@ -180,6 +180,7 @@ country_decisions = {
 			add_dip_power = -200
 			add_mil_power = -300
 			add_treasury = -150
+			set_country_flag = naxxramas_built_country_flag
             
             # Naxxramas
 			599 = {
@@ -508,6 +509,253 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
+		}
+	}
+	
+	#--------------------------------------
+    # Move Naxxramas
+    #--------------------------------------
+	move_naxxramas_to = {
+		potential = {
+			tag = P11
+			has_global_flag = arrival_of_naxxramas
+			any_owned_province = {
+				has_great_project = {
+					type = gp_naxxramas
+				}
+			}
+			NOT = { has_country_modifier = move_naxxramas_to_for_ai_cooldown }
+		}
+		allow = {
+			adm_power = 50
+			dip_power = 50
+			mil_power = 50
+			
+			NOT = { has_global_flag = wwu_alliance_raid_naxxramas_mission_completed }
+		}
+		effect = {
+			if = { #Move to Stratholme
+				limit = {
+					OR = {
+						599 = {
+							has_great_project = {
+								type = gp_naxxramas
+							}
+						}
+						AND = {
+							capital_scope = {
+								has_great_project = {
+									type = gp_naxxramas
+								}
+							}
+							
+							has_country_flag = naxxramas_is_in_dragonblight
+						}
+					}
+				}
+				hidden_effect = {
+					599 = { # The Carrion Fields
+						add_base_tax = -5
+						add_base_production = -5
+						add_base_manpower = -5
+						
+						change_trade_goods = resource_potions
+						
+						change_province_name = "The Carrion Fields"
+						rename_capital = "Naxxramas"
+					}
+					
+					3075 = { # Fields of Stratholme
+						add_base_tax = 5
+						add_base_production = 5
+						add_base_manpower = 5
+						
+						change_trade_goods = resource_melee_weaponry
+						
+						change_province_name = "Naxxramas"
+						rename_capital = "Naxxramas"
+					}
+				}
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+						
+					move_great_project = {
+						type = gp_naxxramas
+						province = 3075
+					}
+					
+					set_country_flag = naxxramas_is_in_stratholme
+					clr_country_flag = naxxramas_is_in_dragonblight
+				}
+			}
+			if = { # Move to Dragonblight
+				limit = {
+					OR = {
+						3075 = {
+							has_great_project = {
+								type = gp_naxxramas
+							}
+						}
+						AND = {
+							capital_scope = {
+								has_great_project = {
+									type = gp_naxxramas
+								}
+							}
+							
+							has_country_flag = naxxramas_is_in_stratholme
+						}
+					}
+				}
+				hidden_effect = {
+					599 = { # The Carrion Fields
+						add_base_tax = 5
+						add_base_production = 5
+						add_base_manpower = 5
+						
+						change_trade_goods = resource_melee_weaponry
+						
+						change_province_name = "Naxxramas"
+						rename_capital = "Naxxramas"
+					}
+					
+					3075 = { # Fields of Stratholme
+						add_base_tax = -5
+						add_base_production = -5
+						add_base_manpower = -5
+						
+						change_trade_goods = resource_food
+						
+						change_province_name = "Fields of Stratholme"
+						rename_capital = "Fields of Stratholme"
+					}
+					
+					if = {
+						limit = { ai = yes }
+						add_country_modifier = {
+							name = move_naxxramas_to_for_ai_cooldown
+							duration = 1825
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+						
+					move_great_project = {
+						type = gp_naxxramas
+						province = 599
+					}
+					
+					set_country_flag = naxxramas_is_in_dragonblight
+					clr_country_flag = naxxramas_is_in_stratholme
+				}
+			}
+			
+			add_adm_power = -50
+			add_dip_power = -50
+			add_mil_power = -50
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	move_naxxramas_to_for_ai = {
+		potential = {
+			tag = P11
+			3075 = {
+				has_great_project = {
+					type = gp_naxxramas
+				}
+			}
+			ai = yes
+			is_year = 626
+			NOT = { has_country_modifier = move_naxxramas_to_for_ai_cooldown }
+		}
+		allow = {
+			# AI must pay more tax !
+			adm_power = 100
+			dip_power = 100
+			mil_power = 100
+			
+			NOT = { has_global_flag = wwu_alliance_raid_naxxramas_mission_completed }
+		}
+		effect = {
+			if = { # Move to Dragonblight
+				limit = {
+					OR = {
+						3075 = {
+							has_great_project = {
+								type = gp_naxxramas
+							}
+						}
+						AND = {
+							capital_scope = {
+								has_great_project = {
+									type = gp_naxxramas
+								}
+							}
+							
+							has_country_flag = naxxramas_is_in_stratholme
+						}
+					}
+				}
+				hidden_effect = {
+					599 = { # The Carrion Fields
+						add_base_tax = 5
+						add_base_production = 5
+						add_base_manpower = 5
+						
+						change_trade_goods = resource_melee_weaponry
+						
+						change_province_name = "Naxxramas"
+						rename_capital = "Naxxramas"
+					}
+					
+					3075 = { # Fields of Stratholme
+						add_base_tax = -5
+						add_base_production = -5
+						add_base_manpower = -5
+						
+						change_trade_goods = resource_food
+						
+						change_province_name = "Fields of Stratholme"
+						rename_capital = "Fields of Stratholme"
+					}
+				}
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+						
+					move_great_project = {
+						type = gp_naxxramas
+						province = 599
+					}
+					
+					set_country_flag = naxxramas_is_in_dragonblight
+					clr_country_flag = naxxramas_is_in_stratholme
+				}
+			}
+			
+			add_adm_power = -100
+			add_dip_power = -100
+			add_mil_power = -100
+			
+			add_country_modifier = {
+				name = move_naxxramas_to_for_ai_cooldown
+				duration = 1825
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 200
+				current_age = age_wrath_of_the_lich_king
+			}
 		}
 	}
 }

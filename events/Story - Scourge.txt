@@ -818,6 +818,69 @@ country_event = {
 	}
 }
 
+# On Actions - Naxxramas on Stratholme
+country_event = {
+	id = wwu_scourge.40
+	title = wwu_scourge.40.title
+	desc = wwu_scourge.40.desc
+	picture = DEMONIC_PRESENCE_eventPicture
+
+	hidden = yes
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	trigger = {
+		any_owned_province = {
+			has_great_project = {
+				type = gp_naxxramas
+			}
+		}
+		OR = {
+			start_date = 618.1.1
+			start_date = 622.1.1
+			start_date = 625.1.1
+		}
+		
+		NOT = { has_global_flag = naxxramas_moved_above_stratholme }
+	}
+	
+	immediate = {
+		599 = { # The Carrion Fields
+			move_great_project = {
+				type = gp_naxxramas
+				province = 3075 # Fields of Stratholme
+				instant = yes
+			}
+		}
+		3075 = { # Fields of Stratholme
+			add_base_tax = 5
+			add_base_production = 5
+			add_base_manpower = 5
+            
+			change_trade_goods = resource_melee_weaponry
+            
+			change_culture = culture_scourge
+            change_religion = cult_of_the_damned
+            
+			change_province_name = "Naxxramas"
+			rename_capital = "Naxxramas"
+		}
+		set_country_flag = naxxramas_is_in_stratholme
+		clr_country_flag = naxxramas_is_in_dragonblight
+		
+		set_global_flag = naxxramas_moved_above_stratholme
+		play_sound = pick_up_cloth
+	}
+    
+	option = {
+		name = wwu_scourge.40.option.a
+        
+	}
+}
+
 #-------------------------------------------
 # AI Helpers
 #-------------------------------------------

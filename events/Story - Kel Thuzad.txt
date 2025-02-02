@@ -14,6 +14,7 @@ country_event = {
         
         culture_group = culture_group_scourge
         controls = 3075 # Fields of Stratholme
+		has_country_flag = naxxramas_built_country_flag
 	}
 	
 	mean_time_to_happen = {
@@ -42,15 +43,30 @@ country_event = {
             
 			change_province_name = "Naxxramas"
 			rename_capital = "Naxxramas"
+		}
+		
+		# The Carrions Fields
+		599 = {
+			add_base_tax = -5
+			add_base_production = -5
+			add_base_manpower = -5
             
-            if = {
+			change_trade_goods = resource_potions
+            
+			change_province_name = "The Carrions Fields"
+			rename_capital = "Naxxramas"
+			
+			if = {
                 limit = {
                     has_dlc = "Leviathan"
                 }
                 
-                add_great_project = {
+                move_great_project = {
                     type = gp_naxxramas
+					province = 3075
                 }
+				set_country_flag = naxxramas_is_in_stratholme
+				clr_country_flag = naxxramas_is_in_dragonblight
             }
 		}
 	}
