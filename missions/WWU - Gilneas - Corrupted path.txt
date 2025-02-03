@@ -1264,11 +1264,14 @@ A12_3_gilneas_column5 = {
 		position = 3
 		required_missions = { A12_hire_arugal_c }
 		trigger = {
-			A18 = {
-				has_opinion = {
-					who = ROOT
-					value = 60
+			OR = {
+				A18 = {
+					has_opinion = {
+						who = ROOT
+						value = 60
+					}
 				}
+				NOT = { exists = A18 }
 			}
 		}
 		effect = {
@@ -1283,9 +1286,12 @@ A12_3_gilneas_column5 = {
 		position = 4
 		required_missions = { A12_archmage_arugal_c }
 		trigger = {
-			has_spy_network_in = {
-				who = A18
-				value = 25
+			OR = {
+				has_spy_network_in = {
+					who = A18
+					value = 25
+				}
+				NOT = { exists = A18 }
 			}
 		}
 		effect = {
