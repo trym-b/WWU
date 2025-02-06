@@ -1474,3 +1474,55 @@ country_event = {
 		}
     }
 }
+
+# Son of Arugal
+country_event = {
+	id = wwu_government_succession.27
+	title = wwu_government_succession.27.title
+	desc = wwu_government_succession.27.desc
+	picture = BATTLE_AXE_eventPicture
+	
+	is_triggered_only = yes
+	
+	hidden = yes
+	
+	immediate = {
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+    }
+	
+	trigger = {
+		has_government_attribute = succession_worgen
+		OR = {
+			AND = {
+				tag = X05  
+				is_subject_of = A13
+			}
+			AND = {
+				tag = BOO  
+				is_subject_of = A13
+			}
+			AND = {
+				tag = F53  
+				is_subject_of = A13
+			}
+			AND = {
+				tag = X06  
+				is_subject_of = A13
+			}
+		}
+	}
+	option = {
+		name = wwu_government_succession.27.option.a
+		
+		define_ruler = {
+			name = "Son of Arugal"
+			adm = -1
+			mil = -1
+			male = yes
+		}
+		set_ruler_flag = ruler_portrait_son_of_arugal
+		set_ruler_flag = is_long_lived
+	}
+}
