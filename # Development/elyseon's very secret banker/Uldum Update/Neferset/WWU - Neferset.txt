@@ -1,0 +1,730 @@
+#--------------------------------------
+# Neferset
+#--------------------------------------
+B72_neferset_column_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_the_grand_caravan_lines = {
+		icon = mission_warrior_class
+		required_missions = { B72_city_of_neferset }		
+		position = 3
+		
+		provinces_to_highlight = {
+            #province_id = 2469
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+		
+		trigger = {
+			#2469 = {
+				is_strongest_trade_power = ROOT
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_trade_b72
+                duration = -1
+            }
+		}
+	}
+	B72_the_fertile_lands_of_virnaar_river = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_grand_caravan_lines }		
+		position = 4
+		
+		trigger = {
+			OR = {
+			    #coasts of rhamkahen
+				#upgrade twice X and X provinces
+			}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_virnaar_river_b72
+                duration = -1
+            }
+		}
+	}
+	B72_desert_expansion_b = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_fertile_lands_of_virnaar_river }		
+		position = 5
+		
+		trigger = {
+			#if = {
+                #limit = {
+                    4621  = { 
+                        is_empty = yes
+                    }
+                #}
+                #4621 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                #}
+            #}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_colonization_b_b72
+                duration = -1
+            }
+			#seize_empty_province_effect = { province = 4621 }
+			#seize_empty_province_effect = { province = 4622 }
+			#seize_empty_province_effect = { province = 1565 }
+			#seize_empty_province_effect = { province = 482 }
+		}
+	}
+	B72_expand_sea_trade_tanaris = {
+		icon = mission_warrior_class
+		required_missions = { B72_desert_expansion_b }		
+		position = 6
+		
+		trigger = {
+			#have merchant in tanaris
+			#have X advisor employed
+			# certain % of trade power in Tanaris
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tanaris_trade_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tanaris_dominance = {
+		icon = mission_warrior_class
+		required_missions = { B72_expand_sea_trade_tanaris }		
+		position = 7
+		
+		provinces_to_highlight = {
+		    #area = area_neferset
+            #NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
+		trigger = {
+			#area_northwatch_hold = {
+			    type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			#}
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_coastline_dominance_b72
+                duration = -1
+            }
+		}
+	}
+	B72_farraki_subjucation = {
+		icon = mission_warrior_class
+		required_missions = { B72_tanaris_dominance }		
+		position = 8
+		
+		trigger = {
+			# sandfury is vassal or fully annexed
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_trolls_b72
+                duration = -1
+            }
+		}
+	}
+	B72_breaking_the_mists_of_uldum = {
+		icon = mission_warrior_class
+		required_missions = { B72_deathwings_offer }		
+		position = 10
+		
+		trigger = {
+			# own 3 monument pillars in 3X provinces
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_open_to_the_world_b72
+                duration = -1
+            }
+		}
+	}
+	B72_a_familiar_force = {
+		icon = mission_warrior_class
+		required_missions = { B72_breaking_the_mists_of_uldum }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_the_qirazi_b72
+                duration = -1
+            }
+		}
+	}
+	B72_old_god_relations = {
+		icon = mission_warrior_class
+		required_missions = { B72_a_familiar_force B72_primal_winds }		
+		position = 13
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_cthuns_influence_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_the_status_quo = {
+		icon = mission_ancient_sword
+		required_missions = { }
+		
+		trigger = {
+		
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tolvir_unity_b72
+                duration = -1
+            }
+		}
+	}
+	B72_city_of_neferset = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_status_quo }		
+		position = 2
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_prestigious_city_b72
+                duration = -1
+            }
+		}
+	}
+	B72_desert_expansion_a = {
+		icon = mission_warrior_class
+		required_missions = { B72_city_of_neferset }		
+		position = 3
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_colonization_a_b72
+                duration = -1
+            }
+		}
+	}
+	B72_the_case_of_orsis = {
+		icon = mission_warrior_class
+		required_missions = { B72_desert_expansion_a B72_desert_expansion_b B72_desert_expansion_c}		
+		position = 6
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_city_of_orsis_b72
+                duration = -1
+            }
+		}
+	}
+	B72_gadgetzan_subjucation = {
+		icon = mission_warrior_class
+		required_missions = { B72_tanaris_dominance }
+		position = 8
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_goblin_trade_hub_b72
+                duration = -1
+            }
+		}
+	}
+	B72_question_of_faith = {
+		icon = mission_warrior_class
+		required_missions = { B72_deathwings_offer }		
+		position = 10
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_questioning_the_ancestral_faith_b72
+                duration = -1
+            }
+		}
+	}
+	B72_alakirs_blessing = {
+		icon = mission_warrior_class
+		required_missions = { B72_question_of_faith }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_influnce_of_primal_wind_b72
+                duration = -1
+            }
+		}
+	}
+	B72_primal_winds = {
+		icon = mission_warrior_class
+		required_missions = { B72_alakirs_blessing }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_united_in_cause_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_the_ghosts_that_haunt_us = {
+		icon = mission_warrior_class
+		required_missions = { B72_city_of_neferset }		
+		position = 3
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_protectors_of_ammon_b72
+                duration = -1
+            }
+		}
+	}
+	B72_temple_of_ammon = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_ghosts_that_haunt_us }		
+		position = 4
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_restore_the_lost_temples_b72
+                duration = -1
+            }
+		}
+	}
+	B72_desert_expansion_c = {
+		icon = mission_warrior_class
+		required_missions = { B72_temple_of_ammon }		
+		position = 5
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_colonization_c_b72
+                duration = -1
+            }
+		}
+	}
+	B72_the_case_of_ramkahen = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_case_of_orsis B72_priesthood_of_nahom }		
+		position = 7
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_ramkahen_realm_b72
+                duration = -1
+            }
+		}
+	}
+	B72_state_of_uldum = {
+		icon = mission_warrior_class
+		required_missions = { B72_the_case_of_ramkahen }		
+		position = 8
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_uldum_dominance_b72
+                duration = -1
+            }
+		}
+	}
+	B72_deathwings_offer = {
+		icon = mission_warrior_class
+		required_missions = { }		
+		position = 9
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_shady_deals_b72
+                duration = -1
+            }
+		}
+	}
+	B72_lost_city_of_tolvir = {
+		icon = mission_warrior_class
+		required_missions = { B72_deathwings_offer }		
+		position = 10
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_reclaim_ancient_city_b72
+                duration = -1
+            }
+		}
+	}
+	B72_halls_of_origination = {
+		icon = mission_warrior_class
+		required_missions = { B72_lost_city_of_tolvir }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_facilities_of_the_gods_beyond_b72
+                duration = -1
+            }
+		}
+	}
+	B72_awakening_of_the_amathet_tribe = {
+		icon = mission_warrior_class
+		required_missions = { B72_halls_of_origination B72_orsis_ramkahen_and_stone_skin }		
+		position = 13
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_hidden_crypts_b72
+                duration = -1
+            }
+		}
+	}
+	B72_fate_of_the_amathet = {
+		icon = mission_warrior_class
+		required_missions = { B72_awakening_of_the_amathet_tribe }		
+		position = 14
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_the_amathet_crusade_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_cult_of_the_sun = {
+		icon = mission_headquarters
+		required_missions = { }
+		
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_sun_worship_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tolvir_weapon_mastery = {
+		icon = mission_warrior_class
+		required_missions = { B72_cult_of_the_sun }		
+		position = 2
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tolviri_archers_b72
+                duration = -1
+            }
+		}
+	}
+	B72_atulhets_weapon = {
+		icon = mission_warrior_class
+		required_missions = { B72_tolvir_weapon_mastery }		
+		position = 3
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_symbol_of_a_legend_b72
+                duration = -1
+            }
+		}
+	}
+	B72_tomb_of_precursors = {
+		icon = mission_warrior_class
+		required_missions = { B72_atulhets_weapon }		
+		position = 4
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_legends_resting_place_b72
+                duration = -1
+            }
+		}
+	}
+	B72_power_of_the_sun = {
+		icon = mission_warrior_class
+		required_missions = { B72_tomb_of_precursors }		
+		position = 5
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_unrelenting_fire_b72
+                duration = -1
+            }
+		}
+	}
+	B72_priesthood_of_nahom = {
+		icon = mission_warrior_class
+		required_missions = { B72_power_of_the_sun }		
+		position = 6
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_tolviri_priesthood_b72
+                duration = -1
+            }
+		}
+	}
+	B72_skin_of_stone = {
+		icon = mission_warrior_class
+		required_missions = { B72_deathwings_offer }		
+		position = 10
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_reverse_the_curse_b72
+                duration = -1
+            }
+		}
+	}
+	B72_reconsidering_deathwings_offer = {
+		icon = mission_warrior_class
+		required_missions = { B72_skin_of_stone }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_allegiances_b72
+                duration = -1
+            }
+		}
+	}
+	B72_orsis_ramkahen_and_stone_skin = {
+		icon = mission_warrior_class
+		required_missions = { B72_reconsidering_deathwings_offer }		
+		position = 12
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_proposals_b72
+                duration = -1
+            }
+		}
+	}
+}
+
+B72_neferset_column_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = B72
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	B72_oogah_raiders = {
+		icon = mission_warrior_class
+		required_missions = { B72_atulhets_weapon }		
+		position = 4
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_pygmy_nuisance_b72
+                duration = -1
+            }
+		}
+	}
+	B72_desert_expansion_d = {
+		icon = mission_warrior_class
+		required_missions = { B72_oogah_raiders }		
+		position = 5
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_desert_colonization_d_b72
+                duration = -1
+            }
+		}
+	}
+	B72_protectors_of_the_halls = {
+		icon = mission_warrior_class
+		required_missions = { B72_power_of_the_sun }		
+		position = 6
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_halls_of_origination_b72
+                duration = -1
+            }
+		}
+	}
+	B72_ungoro_colonial_effort = {
+		icon = mission_warrior_class
+		required_missions = { B72_deathwings_offer }		
+		position = 10
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_jurassic_park_b72
+                duration = -1
+            }
+		}
+	}
+	B72_secrets_of_the_shapers = {
+		icon = mission_warrior_class
+		required_missions = { B72_ungoro_colonial_effort }		
+		position = 11
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_craters_purpose_b72
+                duration = -1
+            }
+		}
+	}
+	B72_divine_duty = {
+		icon = mission_warrior_class
+		required_missions = { B72_secrets_of_the_shapers }		
+		position = 12
+		
+		trigger = {
+			
+		}
+		effect = {			
+			add_country_modifier = {
+                name = mission_fate_of_the_shapers_b72
+                duration = -1
+            }
+		}
+	}
+}
