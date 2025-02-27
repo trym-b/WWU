@@ -8,189 +8,119 @@ G28_windshear_column_1 = {
     
 	potential = {
 		tag = G28
+        has_personal_tab_active = yes
 	}
     
 	has_country_shield = yes
-	
-	G28_rivalries_in_our_nation_G28 = {
-		icon = mission_pvp_3
-        position = 3
-        
-		required_missions = { G28_protect_the_caverns_G28 }
-        
+
+	G28_rally_the_rats = {
+		icon = mission_titan_spirits
+		position = 1
+
 		trigger = {
-            has_country_flag = togwaggle_rising
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			country_event = { id = wwu_windshear.2 }
-		}
-	}
-	G28_no_going_back_G28 = {
-		icon = mission_pvp_3
-        position = 4
-        
-		required_missions = { G28_rivalries_in_our_nation_G28 }
-        
-		trigger = {
-            has_country_flag = breaking_point
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_country_modifier = {
-			    name = mission_fanatic_military_G28
-			    duration = -1
+			army_size_percentage = 0.9
+			OR = {
+				national_focus = MIL
+				has_estate_privilege = estate_nobility_levies
 			}
 		}
-	}
-	G28_prepare_for_the_fight_G28 = {
-		icon = mission_garrison
-        position = 5
-        
-		required_missions = { G28_no_going_back_G28 }
-        
-		trigger = {
-            army_size_percentage = 0.9
-		}
-		provinces_to_highlight = {
-            
-		}
-        
+
 		effect = {
-			country_event = { id = wwu_windshear.4 }
+			add_yearly_manpower = 3
+			add_army_tradition = 10
 		}
 	}
-	G28_stay_with_the_old_G28 = {
-		icon = mission_ancient_tablet
-        position = 6
-        
-		required_missions = { G28_prepare_for_the_fight_G28 }
-        
+
+	G28_professional_swarmers = {
+		icon = mission_titan_spirits
+		position = 2
+
+		required_missions = { G28_rally_the_rats G28_the_big_ass_rat }
+
 		trigger = {
-            has_country_flag = old_order_stands_strong
+			army_size = 30
+			army_tradition = 65
+			army_professionalism = 0.35
 		}
-		provinces_to_highlight = {
-            
-		}
-        
+
 		effect = {
-			country_event = { id = wwu_windshear.8 }
-			
-			add_country_modifier = {
-			    name = mission_encourage_trade_G28
-			    duration = -1
-			}
+			add_prestige = 10
+			country_event = { id =  wwu_mission_windshear.1 }
 		}
 	}
-	G28_root_out_resistance_G28 = {
-		icon = mission_barracks
-        position = 7
-        
-		required_missions = { G28_stay_with_the_old_G28 }
-        
+
+	G28_the_spinning_rat = {
+		icon = mission_titan_spirits
+		position = 3
+
+		required_missions = { G28_professional_swarmers }
+
 		trigger = {
-            crown_land_share = 40
-			monthly_income = 20
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			country_event = { id = wwu_windshear.9 }
-			
-		}
-	}
-	G28_prosperity_through_trade_G28 = {
-		icon = mission_gold_pile
-        position = 8
-        
-		required_missions = { G28_root_out_resistance_G28 }
-        
-		trigger = {
-		
-            home_trade_node = {
-				trade_share = {
-					country = ROOT
-					share = 80
+			custom_trigger_tooltip = {
+				tooltip = G28_SPINNING_RAT_TT
+
+                OR = {
+					has_ruler_flag = rogue_personality
+                	has_ruler_flag = warrior_personality
+                	has_ruler_flag = monk_personality
+					has_ruler_flag = hunter_personality
 				}
 			}
 		}
-		provinces_to_highlight = {
-            
-		}
-        
+
 		effect = {
-			
-			add_country_modifier = {
-			    name = mission_prosperous_trade_G28
-			    duration = -1
-			}
-			
+			add_stability = 1
 		}
 	}
-	G28_expanding_our_reach_G28 = {
-		icon = mission_scroll
-        position = 9
-        
-		required_missions = { G28_prosperity_through_trade_G28 }
-        
+
+	G28_rats_on_ships = {
+		icon = mission_titan_spirits
+		position = 4
+
 		trigger = {
-		
-            1310 = { is_strongest_trade_power = ROOT }
-			1373 = { is_strongest_trade_power = ROOT }
-				}
-			
-		
-		provinces_to_highlight = {
-            
+			navy_size = 20
+			num_of_heavy_ship = 5
 		}
-        
+
 		effect = {
-			
-			add_country_modifier = {
-			    name = mission_cave_routes_G28
-			    duration = -1
-			}
-			
+			add_navy_tradition = 20
 		}
 	}
-	G28_economic_empire_G28 = {
-		icon = mission_cache
-        position = 10
-        
-		required_missions = { G28_prosperity_through_trade_G28 }
-        
+
+	G28_windshear_stormcallers = {
+		icon = mission_titan_spirits
+		position = 5
+
+		required_missions = { G28_rats_on_ships G28_coastal_menace }
+
 		trigger = {
-		
-           treasury = 5000
-		   
-				}
-			
-		
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_country_modifier = {
-			    name = mission_cave_routes_G28
-			    duration = -1
+			OR = {
+				alliance_with = P28
+				overlord_of = P28
+				is_subject_of = P28
+				NOT = { exists = P28 }
 			}
-			
-			country_event = { id = wwu_windshear.10 }
-			
+			OR= {
+				is_spellcaster = yes
+				religion = wind
+				OR = {
+					has_reform = wwu_warriors_magical_affinity
+					has_reform = wwu_tribal_magic_inherited_magic
+					NOT = { government = tribal }
+				}
+			}
+		}
+
+		provinces_to_highlight = {
+			is_capital_of = P28
+		}
+
+		effect = {
+			add_stability = 1
 		}
 	}
 }
 
-########### Column 2
 G28_windshear_column_2 = {
 	slot = 2
 	generic = no
@@ -198,1073 +128,110 @@ G28_windshear_column_2 = {
     
 	potential = {
 		tag = G28
+        has_personal_tab_active = yes
+	}
+    
+	has_country_shield = yes
+
+	G28_the_big_ass_rat = {
+		icon = mission_titan_spirits
+		position = 1
+
+		trigger = {
+			has_commanding_three_star = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mission_B28_big_ass_rat_attack
+				duration = 5475
+			}
+		}
+	}
+
+	G28_coastal_menace = {
+		icon = mission_titan_spirits
+		position = 4
+
+		trigger = {
+			OR = {
+				full_idea_group = wwu_piracy_ideas
+				has_global_modifier_value = {
+					which = privateer_efficiency
+					value = 0.25
+				}
+			}
+			calc_true_if = {
+				amount = 10
+
+				all_owned_province = {
+					superregion = kalimdor_superregion
+					has_port = yes
+				} 
+			}
+		}
+
+		provinces_to_highlight = {
+			AND = {
+				superregion = kalimdor_superregion
+				has_port
+				NOT = { owned_by = ROOT }
+			}
+		}
+
+		effect = {
+			define_admiral = {
+				shock = 4
+				fire = 4
+				manuever = 6
+				siege = 2
+			}
+
+			add_mercantilism = 3
+		}
+	}
+}
+
+G28_windshear_column_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+    
+	potential = {
+		tag = G28
+		has_personal_tab_active = yes
 	}
     
 	has_country_shield = yes
 	
-	G28_develop_the_caverns_G28 = {
-		icon = mission_blueprint
-        position = 1
-        
-		required_missions = { }
-        
-		trigger = {
-            grown_by_development = 10
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_years_of_income = 1.0
-		}
-	}
-	G28_protect_the_caverns_G28 = {
-		icon = mission_axe_and_sword
-        position = 2
-        
-		required_missions = { G28_develop_the_caverns_G28 }
-        
-		trigger = {
-            army_size_percentage = 0.85
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			3640 = { add_permanent_claim = ROOT }
-			3642 = { add_permanent_claim = ROOT }
-			2278 = { add_permanent_claim = ROOT }
-			1407 = { add_permanent_claim = ROOT }
-			3644 = { add_permanent_claim = ROOT }
-			
-			hidden_effect = {
-                country_event = { id = wwu_windshear.1 days = 30 }
-            }
-		}
-	}
-	G28_encourage_trade_G28 = {
-		icon = mission_find_treasure
-        position = 3
-        
-		required_missions = { G28_protect_the_caverns_G28 }
-        
-		trigger = {
-           OR = {
-                wow_market_1  = 5
-                wow_market_2  = 5
-                wow_market_3  = 5
-            }
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_country_modifier = {
-			    name = mission_encourage_trade_G28
-			    duration = -1
-			}
-		}
-	}
-	G28_growing_our_treasury_G28 = {
-		icon = mission_gold_pile
-        position = 4
-        
-		required_missions = { G28_encourage_trade_G28 }
-        
-		trigger = {
-            treasury = 1500
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_country_modifier = {
-			    name = mission_kobold_hoard_G28
-			    duration = -1
-			}
-		}
-	}
-	G28_develop_the_underground_G28 = {
-		icon = mission_mining
-        position = 5
-        
-		required_missions = { G28_growing_our_treasury_G28 }
-        
-		trigger = {
-            grown_by_development = 500
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			add_country_modifier = {
-			    name = mission_richess_of_the_cavern_G28
-			    duration = -1
-			}
-		}
-	}
-	G28_the_king_of_windshear_G28 = {
-		icon = mission_gladiator_medallion
-        position = 6
-        
-		required_missions = { G28_prepare_for_the_fight_G28 }
-        
-		trigger = {
-            has_country_flag = togwaggle_reigns_supreme
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			country_event = { id = wwu_windshear.11 }
-			
-			add_country_modifier = {
-			    name = mission_the_new_king_G28
-			    duration = -1
-			}
-		}
-	}
-	G28_treasure_king_G28 = {
-		icon = mission_gold_pile
-        position = 7
-        
-		required_missions = { G28_the_king_of_windshear_G28 }
-        
-		trigger = {
-             share_of_starting_income = 1.5 
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			
-			add_country_modifier = {
-			    name = mission_togwaggles_treasure_hoard_G28
-			    duration = -1
-			}
-		}
-	}
-	G28_production_quotas_G28 = {
-		icon = mission_lumbermill
-        position = 8
-        
-		required_missions = { G28_treasure_king_G28 }
-        
-		trigger = {
-		
-            1364 = {
-				has_production_building_trigger = yes
-			}
-			1361 = {
-				has_production_building_trigger = yes
-			}
-			1363 = {
-				has_production_building_trigger = yes
-			}
-			1406 = {
-				has_production_building_trigger = yes
-			}
-			1361 = {
-				has_production_building_trigger = yes
-			}
-			3636 = {
-				has_production_building_trigger = yes
-			}
-			3637 = {
-				has_production_building_trigger = yes
-			}
-			3638 = {
-				has_production_building_trigger = yes
-			}
-            1367 = {
-				has_production_building_trigger = yes
-			}
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			
-			add_country_modifier = {
-			    name = mission_massive_growth_G28
-			    duration = -1
-			}
-		}
-	}
-	
-	G28_king_of_kobolds_G28 = {
-		icon = mission_crown_of_heavens
-        position = 9
-        
-		required_missions = { G28_production_quotas_G28 }
-        
-		trigger = {
-            region_stonetalon_mountains = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			
-			4506 = { add_permanent_claim = ROOT }
-			4507 = { add_permanent_claim = ROOT }
-			4508 = { add_permanent_claim = ROOT }
-			2318 = { add_permanent_claim = ROOT }
-			area_southsea_holdfast = {
-                add_permanent_claim = ROOT
-            }
-			651 = { add_permanent_claim = ROOT }
-			680 = { add_permanent_claim = ROOT }
-			3190 = { add_permanent_claim = ROOT }
-			784 = { add_permanent_claim = ROOT }
-			1999 = { add_permanent_claim = ROOT }
-			655 = { add_permanent_claim = ROOT }
-			3031 = { add_permanent_claim = ROOT }
-			1048 = { add_permanent_claim = ROOT }
-			1751 = { add_permanent_claim = ROOT }
-			1944 = { add_permanent_claim = ROOT }
-			515 = { add_permanent_claim = ROOT }
-			
-		}
-	}
-	
-	G28_one_king_to_rule_them_all_G28 = {
-		icon = mission_paladin_empowered_seals_righteous
-        position = 10
-        
-		required_missions = { G28_king_of_kobolds_G28 }
-        
-		trigger = {
-            area_southsea_holdfast = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-			4506 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			4508 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			4507 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			2318 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			651 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			680 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3190 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			784 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1999 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			655 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3031 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1048 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1751 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1944 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			515 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-		provinces_to_highlight = {
-            
-		}
-        
-		effect = {
-			
-			country_event = { id = wwu_windshear.12 }
-			
-			}
-	}
 	
 }
-
- G28_windshear_column_3 = {
-	 slot = 3
-	 generic = no
-	 ai = yes
-    
-	 potential = {
-		 tag = G28
-	 }
-    
-	 has_country_shield = yes
-	
-	 G28_force_the_centaur_G28 = {
-		 icon = mission_paladin_blade_of_justice_1
-         position = 3
-        
-		 required_missions = { G28_protect_the_caverns_G28 }
-        
-		 trigger = {
-            3640 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3642 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			2278 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1407 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3644 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-		 }
-		 provinces_to_highlight = {
-            
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_centaurs_in_chaos_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 
-	 G28_plunder_the_land_G28 = {
-		 icon = mission_horses
-         position = 4
-        
-		 required_missions = { G28_force_the_centaur_G28 }
-        
-		 trigger = {
-
-			3640 = { culture = culture_kobold }
-			3642 = { culture = culture_kobold }
-			2278 = { culture = culture_kobold }
-			1407 = { culture = culture_kobold }
-			3644 = { culture = culture_kobold }
-		
-
-		 }
-		 provinces_to_highlight = {
-            
-		 }
-        
-		 effect = {
-			area_malaka_jin = {
-                add_permanent_claim = ROOT
-			}
-			2279 = { add_permanent_claim = ROOT }
-			3643 = { add_permanent_claim = ROOT }
-		 }
-	 }
-	 
-	 G28_the_edge_of_the_stonetalon_mountains_G28 = {
-		 icon = mission_get_flag
-         position = 5
-        
-		 required_missions = { G28_plunder_the_land_G28 G28_generals_for_our_armies_G28 }
-        
-		 trigger = {
-
-		
-			2279 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3643 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_malaka_jin = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-
-		 }
-		 provinces_to_highlight = {
-
-		 }
-        
-		 effect = {
-			area_honor_stand = {
-                add_permanent_claim = ROOT
-			}
-			area_forgotten_pools = {
-                add_permanent_claim = ROOT
-			}
-
-		 }
-	 }
-	 G28_outposts_in_the_barrens_G28 = {
-		 icon = mission_map
-         position = 6
-        
-		 required_missions = { G28_the_edge_of_the_stonetalon_mountains_G28 }
-        
-		 trigger = {
-
-			area_honor_stand = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-			area_forgotten_pools = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-
-		 }
-		 provinces_to_highlight = {
-            
-		 }
-        
-		 effect = {
-			area_overgrowth = {
-                add_permanent_claim = ROOT
-			}
-			area_the_wailing_caverns = {
-                add_permanent_claim = ROOT
-			}
-			area_the_dry_hills = {
-                add_permanent_claim = ROOT
-			}
-
-		 }
-	 }
-	 G28_enforce_the_eastern_border_G28 = {
-		 icon = mission_treasure_map
-         position = 7
-        
-		 required_missions = { G28_outposts_in_the_barrens_G28 }
-        
-		 trigger = {
-
-			area_overgrowth = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-			area_the_wailing_caverns = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-			area_the_dry_hills = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-		    }
-
-		 }
-		 provinces_to_highlight = {
-            
-		 }
-        
-		 effect = {
-		
-			add_country_modifier = {
-			    name = mission_a_barren_frontier_G28
-			    duration = -1
-			}
-
-		 }
-	 }
-	 G28_colonize_the_barrens_G28 = {
-		 icon = mission_treasure_map
-         position = 8
-        
-		 required_missions = { G28_outposts_in_the_barrens_G28 }
-        
-		 trigger = {
-
-		1374 = { culture = culture_kobold  }
-		3456 = { culture = culture_kobold  }
-		3457 = { culture = culture_kobold  }
-		3458 = { culture = culture_kobold  }
-		3459 = { culture = culture_kobold  }
-		3460 = { culture = culture_kobold  }
-		1365 = { culture = culture_kobold  }
-		1409 = { culture = culture_kobold  }
-		1420 = { culture = culture_kobold  }
-		3453 = { culture = culture_kobold  }
-		3475 = { culture = culture_kobold  }
-		1368 = { culture = culture_kobold  } 
-		3454 = { culture = culture_kobold  } 
-		3455 = { culture = culture_kobold  } 
-		3474 = { culture = culture_kobold  }
-		1369 = { culture = culture_kobold  } 
-		1443 = { culture = culture_kobold  } 
-		3451 = { culture = culture_kobold  } 
-		3452 = { culture = culture_kobold  }
-		1442 = { culture = culture_kobold  } 
-		3446 = { culture = culture_kobold  } 
-		3448 = { culture = culture_kobold  } 
-
-		 }
-		 provinces_to_highlight = {
-
-		 }
-        
-		 effect = {
-		
-			add_country_modifier = {
-			    name = mission_survival_experts_G28
-			    duration = -1
-			}
-
-		 }
-	 }
-	 G28_tunnels_in_the_barrens_G28 = {
-		 icon = mission_gold_pile
-         position = 9
-        
-		 required_missions = { G28_colonize_the_barrens_G28 }
-        
-		 trigger = {
-
-		1374 = { development = 10 }
-		3456 = { development = 10 }
-		3457 = { development = 10 }
-		3458 = { development = 10 }
-		3459 = { development = 10 }
-		3460 = { development = 10 }
-		1365 = { development = 10 }
-		1409 = { development = 10 }
-		1420 = { development = 10 }
-		3453 = { development = 10 }
-		3475 = { development = 10 }
-		1368 = { development = 10 } 
-		3454 = { development = 10 } 
-		3455 = { development = 10 } 
-		3474 = { development = 10 }
-		1369 = { development = 10 } 
-		1443 = { development = 10 } 
-		3451 = { development = 10 } 
-		3452 = { development = 10 }
-		1442 = { development = 10 } 
-		3446 = { development = 10 } 
-		3448 = { development = 10 } 
-
-		 }
-		 provinces_to_highlight = {
-
-		 }
-        
-		 effect = {
-		
-			add_country_modifier = {
-			    name = mission_new_caves_G28
-			    duration = -1
-			}
-
-		 }
-	 }
- }
  
-  G28_windshear_column_4 = {
-	 slot = 4
-	 generic = no
-	 ai = yes
+G28_windshear_column_4 = {
+	slot = 4
+	generic = no
+	ai = yes
     
-	 potential = {
-		 tag = G28
-	 }
+	potential = {
+		tag = G28
+		has_personal_tab_active = yes
+	}
     
-	 has_country_shield = yes
+	has_country_shield = yes
 	
-	 G28_fortify_the_western_front_G28 = {
-		 icon = mission_defend
-         position = 1
-        
-		 required_missions = { }
-        
-		 trigger = {
-            owns_core_province = 3639
-			3639 = {
-			    has_fort_building_trigger = yes
-			}
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_western_fortifications_G28
-			    duration = -1
-			}
-		 }
-	 }
-	  G28_treasure_hoard_of_the_west_G28 = {
-		 icon = mission_cache
-         position = 2
-        
-		 required_missions = { G28_fortify_the_western_front_G28 }
-        
-		 trigger = {
-            3639 = { development = 10 }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_western_wealth_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_construct_farms_G28 = {
-		 icon = mission_barn
-         position = 3
-        
-		 required_missions = { G28_treasure_hoard_of_the_west_G28 }
-        
-		 trigger = {
-            OR = {
-                wow_farm_1   = 5
-                wow_farm_2   = 5
-                wow_farm_3   = 5
-            }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_satisfied_population_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_generals_for_our_armies_G28 = {
-		 icon = mission_admiral
-         position = 4
-        
-		 required_missions = { G28_construct_farms_G28 }
-        
-		 trigger = {
-            num_of_generals = 1
-			manpower_percentage = 0.85
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			1362 = { add_permanent_claim = ROOT }
-			3648 = { add_permanent_claim = ROOT }
-			3650 = { add_permanent_claim = ROOT }
-			1405 = { add_permanent_claim = ROOT }
-			1357 = { add_permanent_claim = ROOT }
-			3649 = { add_permanent_claim = ROOT }
-		 }
-	 }
-	 G28_push_the_border_west_G28 = {
-		 icon = mission_paladin_empowered_seals_truth
-         position = 5
-        
-		 required_missions = { G28_generals_for_our_armies_G28 G28_plunder_the_land_G28 }
-        
-		 trigger = {
-            1362 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3648 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3650 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1405 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1357 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			3649 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			2299 = { add_permanent_claim = ROOT }
-			area_thaldarah_grove = {
-                add_permanent_claim = ROOT
-            }
-			
-		 }
-	 }
-	 G28_force_the_harpies_to_the_ground_G28 = {
-		 icon = mission_gryphon_1
-         position = 6
-        
-		 required_missions = { G28_push_the_border_west_G28 }
-        
-		 trigger = {
-            2299 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			area_thaldarah_grove = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-		
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			
-			area_stonetalon_peak = {
-                add_permanent_claim = ROOT
-            }
-			
-		}	
-		 
-	 }
-	 G28_shatter_the_cenarion_circle_G28 = {
-		 icon = mission_night_elf_male
-         position = 7
-        
-		 required_missions = { G28_force_the_harpies_to_the_ground_G28 }
-        
-		 trigger = {
-           
-			area_stonetalon_peak = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-		
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			
-			add_country_modifier = {
-			    name = mission_victory_over_the_druids_G28
-			    duration = -1
-			}
-			
-		 }
-	 }
-	 G28_build_up_docks_G28 = {
-		 icon = mission_fishing
-         position = 8
-        
-		 required_missions = { G28_shatter_the_cenarion_circle_G28 }
-        
-		 trigger = {
-           
-			OR = {
-                wow_shipyard_1  = 5
-                wow_shipyard_2  = 5
-                wow_shipyard_3  = 5
-            }
-		
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			
-			add_country_modifier = {
-			    name = mission_kobold_ship_industry_G28
-			    duration = -1
-			}
-			
-		 }
-	 }
-	 G28_treasure_fleet_G28 = {
-		 icon = mission_ship_1
-         position = 9
-        
-		 required_missions = { G28_build_up_docks_G28 }
-        
-		 trigger = {
-           
-			navy_size = 50
-		
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			
-			add_country_modifier = {
-			    name = mission_treasure_fleet_G28
-			    duration = -1
-			}
-			
-		 }
-	 }
- }
+}
  
   G28_windshear_column_5 = {
-	 slot = 5
-	 generic = no
-	 ai = yes
+	slot = 5
+	generic = no
+	ai = yes
     
-	 potential = {
-		 tag = G28
-	 }
+	potential = {
+		tag = G28
+		has_personal_tab_active = yes
+	}
     
-	 has_country_shield = yes
+	has_country_shield = yes
 	
-	 G28_fortify_the_northern_front_G28 = {
-		 icon = mission_defend
-         position = 1
-        
-		 required_missions = { }
-        
-		 trigger = {
-            owns_core_province = 3635
-			3635 = {
-			    has_fort_building_trigger = yes
-			}
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_northern_fortifications_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_treasure_hoard_of_the_north_G28 = {
-		 icon = mission_cache
-         position = 2
-        
-		 required_missions = { G28_fortify_the_northern_front_G28 }
-        
-		 trigger = {
-            3635 = { development = 10 }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_northern_wealth_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_construct_arsenal_G28 = {
-		 icon = mission_blacksmithing
-         position = 3
-        
-		 required_missions = { G28_treasure_hoard_of_the_north_G28 }
-        
-		 trigger = {
-            OR = {
-                wow_arsenal_1   = 5
-                wow_arsenal_2   = 5
-                wow_arsenal_3   = 5
-            }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_prepared_army_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_build_up_our_forces_G28 = {
-		 icon = mission_warrior_class
-         position = 4
-        
-		 required_missions = { G28_construct_arsenal_G28 }
-        
-		 trigger = {
-            army_size_percentage = 0.8
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			area_stardust = {
-                add_permanent_claim = ROOT
-            }
-		 }
-	 }
-	 G28_strike_the_sentinels_G28 = {
-		 icon = mission_hunter_gun
-         position = 5
-        
-		 required_missions = { G28_build_up_our_forces_G28 }
-        
-		 trigger = {
-            area_stardust = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			area_astranaar = {
-                add_permanent_claim = ROOT
-            }
-			area_aessina = {
-                add_permanent_claim = ROOT
-            }
-			add_country_modifier = {
-			    name = mission_great_victory_G28
-			    duration = -1
-			}
-		 }
-	 }
-	 G28_press_the_attack_G28 = {
-		 icon = mission_hunter_focused_aim
-         position = 6
-        
-		 required_missions = { G28_strike_the_sentinels_G28 }
-        
-		 trigger = {
-            area_astranaar = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-			area_aessina = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			area_thistlefur = {
-                add_permanent_claim = ROOT
-            }
-			area_greenpaw_woods = {
-                add_permanent_claim = ROOT
-            }
-			
-		 }
-	 }
-	 G28_force_the_furbolgs_into_submission_G28 = {
-		 icon = mission_gladiator_medallion
-         position = 7
-        
-		 required_missions = { G28_press_the_attack_G28 }
-        
-		 trigger = {
-            area_thistlefur = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-			area_greenpaw_woods = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			area_ordil_aran = {
-                add_permanent_claim = ROOT
-            }
-			2229 = { add_permanent_claim = ROOT }
-			2231 = { add_permanent_claim = ROOT }
-			4643 = { add_permanent_claim = ROOT }
-			1349 = { add_permanent_claim = ROOT }
-			4642 = { add_permanent_claim = ROOT }
-			
-		 }
-	 }
-	 G28_kick_the_night_elves_out_G28 = {
-		 icon = mission_night_elf_female
-         position = 8
-        
-		 required_missions = { G28_force_the_furbolgs_into_submission_G28 }
-        
-		 trigger = {
-            area_ordil_aran = { type = all	country_or_non_sovereign_subject_holds = ROOT }
-			2229 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			2231 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			4643 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			1349 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-			4642 = {
-                country_or_non_sovereign_subject_holds = ROOT
-			}
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			add_country_modifier = {
-			    name = mission_victory_over_the_elves_G28
-			    duration = -1
-			}
-			
-		 }
-	 }
-	 G28_loot_their_land_G28 = {
-		 icon = mission_fire
-         position = 9
-        
-		 required_missions = { G28_kick_the_night_elves_out_G28 }
-        
-		 trigger = {
-             treasury = 10000
-		 }
-		 provinces_to_highlight = {
-            
-		
-		 }
-        
-		 effect = {
-			country_event = { id = wwu_windshear.13 }
-			
-		 }
-	 }
- }
+	
+}
