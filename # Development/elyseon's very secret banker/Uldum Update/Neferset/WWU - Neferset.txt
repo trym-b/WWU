@@ -17,14 +17,23 @@ B72_neferset_column_1 = {
 		position = 3
 		
 		provinces_to_highlight = {
-            #province_id = 2469
-            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+            OR = {
+                province_id = 1566
+			    province_id = 1563
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
         }
 		
 		trigger = {
-			#2469 = {
-				is_strongest_trade_power = ROOT
+			1566 = {
+			    province_has_center_of_trade_of_level = 2               
+                country_or_non_sovereign_subject_holds = ROOT
 			}
+			1563 = {
+			    province_has_center_of_trade_of_level = 2               
+                country_or_non_sovereign_subject_holds = ROOT
+			}
+			advisor = trader
 		}
 		effect = {			
 			add_country_modifier = {
@@ -38,10 +47,57 @@ B72_neferset_column_1 = {
 		required_missions = { B72_the_grand_caravan_lines }		
 		position = 4
 		
+		provinces_to_highlight = {
+            OR = {
+			    province_id = 474
+                province_id = 476
+				province_id = 481
+				province_id = 1237
+			    province_id = 1238
+				province_id = 1562
+				province_id = 4584
+			    province_id = 4602	
+				province_id = 4616
+				province_id = 4617
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+		
 		trigger = {
 			OR = {
-			    #coasts of rhamkahen
-				#upgrade twice X and X provinces
+			    AND = {
+			        4602 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+					476 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+					1238 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+					4584 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+					481 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+					4616 = {
+			            country_or_non_sovereign_subject_holds = ROOT
+					}
+				AND = {
+					1237 = {
+			            num_of_times_improved = 2
+					}
+					4617 = {
+			            num_of_times_improved = 2
+					}
+					474 = {
+			            num_of_times_improved = 2
+					}
+					1562 = {
+			            num_of_times_improved = 2
+					}
+				}			
 			}
 		}
 		effect = {			
@@ -56,31 +112,67 @@ B72_neferset_column_1 = {
 		required_missions = { B72_the_fertile_lands_of_virnaar_river }		
 		position = 5
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1565
+				province_id = 4621
+				province_id = 4622
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			#if = {
-                #limit = {
+			if = {
+                limit = {
                     4621  = { 
                         is_empty = yes
                     }
-                #}
-                #4621 = { 
+                }
+                4621 = { 
                     num_of_units_in_province = {
                         who = ROOT
                         amount = 2
                     }
                     NOT = { native_size = 1 }
-                #}
-            #}
+                }
+            }
+			if = {
+                limit = {
+                    4622  = { 
+                        is_empty = yes
+                    }
+                }
+                4622 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1565  = { 
+                        is_empty = yes
+                    }
+                }
+                1565 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_desert_colonization_b_b72
                 duration = -1
             }
-			#seize_empty_province_effect = { province = 4621 }
-			#seize_empty_province_effect = { province = 4622 }
-			#seize_empty_province_effect = { province = 1565 }
-			#seize_empty_province_effect = { province = 482 }
+			seize_empty_province_effect = { province = 4621 }
+			seize_empty_province_effect = { province = 4622 }
+			seize_empty_province_effect = { province = 1565 }
 		}
 	}
 	B72_expand_sea_trade_tanaris = {
@@ -88,10 +180,16 @@ B72_neferset_column_1 = {
 		required_missions = { B72_desert_expansion_b }		
 		position = 6
 		
+		provinces_to_highlight = {			
+			province_id = 1543
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			#have merchant in tanaris
-			#have X advisor employed
-			# certain % of trade power in Tanaris
+		    1543 = {
+			    has_trader = ROOT
+			}
+			advisor = navigator
 		}
 		effect = {			
 			add_country_modifier = {
@@ -106,15 +204,49 @@ B72_neferset_column_1 = {
 		position = 7
 		
 		provinces_to_highlight = {
-		    #area = area_neferset
-            #NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			OR = {
+				area = area_lands_end
+				province_id = 4559
+				province_id = 1552
+				province_id = 2323
+				province_id = 2324
+				province_id = 1551
+				province_id = 2326
+				province_id = 4550
+				province_id = 1543
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		
 		trigger = {
-			#area_northwatch_hold = {
+			area_lands_end = {
 			    type = all
 				country_or_non_sovereign_subject_holds = ROOT
-			#}
+			}
+			4559 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			1552 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			2323 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			2324 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			1551 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			2326 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			4550 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
+			1543 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -129,7 +261,10 @@ B72_neferset_column_1 = {
 		position = 8
 		
 		trigger = {
-			# sandfury is vassal or fully annexed
+			OR = {
+			    NOT = { exists = A73 }
+				A73 = { is_subject_of = ROOT }
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -143,14 +278,44 @@ B72_neferset_column_1 = {
 		required_missions = { B72_deathwings_offer }		
 		position = 10
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1564
+				province_id = 1570
+				province_id = 1572
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			# own 3 monument pillars in 3X provinces
+			1564 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+				has_great_project = {
+                    type = gp_obelisk_of_the_sun
+                    tier = 3
+                }
+			}
+			1570 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+				has_great_project = {
+                    type = gp_obelisk_of_the_stars
+                    tier = 3
+                }
+			}
+			1572 = {
+			    country_or_non_sovereign_subject_holds = ROOT
+				has_great_project = {
+                    type = gp_obelisk_of_the_moon
+                    tier = 3
+                }
+			}
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_open_to_the_world_b72
                 duration = -1
             }
+			#event to open or keep close (but take decision) the mists of Uldum
 		}
 	}
 	B72_a_familiar_force = {
@@ -200,7 +365,24 @@ B72_neferset_column_2 = {
 		required_missions = { }
 		
 		trigger = {
-		
+		    OR = {
+		        G10 = {
+				    has_opinion = {
+                        who = ROOT
+                        value = 100
+			        }
+			    }
+				is_rival = G10
+			}
+			OR = {
+			    G09 = {
+				    has_opinion = {
+                        who = ROOT
+                        value = 100
+			        }
+			    }
+			    is_rival = G09
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -214,8 +396,25 @@ B72_neferset_column_2 = {
 		required_missions = { B72_the_status_quo }		
 		position = 2
 		
+		provinces_to_highlight = {
+            OR = {
+		        province_id = 1563
+				province_id = 4618
+				province_id = 4619
+			}
+            NOT = { country_or_non_sovereign_subject_holds = ROOT }
+        }
+		
 		trigger = {
-			
+			1563 = {
+				num_of_times_improved = 2
+			}
+			4618 = {
+				num_of_times_improved = 3
+			}
+			4619 = {
+				num_of_times_improved = 4
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -229,14 +428,116 @@ B72_neferset_column_2 = {
 		required_missions = { B72_city_of_neferset }		
 		position = 3
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 482
+				province_id = 1574
+				province_id = 4626
+				province_id = 4628
+				province_id = 4629
+				province_id = 4627
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			
+			if = {
+                limit = {
+                    482  = { 
+                        is_empty = yes
+                    }
+                }
+                482 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1574  = { 
+                        is_empty = yes
+                    }
+                }
+                1574 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4626  = { 
+                        is_empty = yes
+                    }
+                }
+                4626 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4627  = { 
+                        is_empty = yes
+                    }
+                }
+                4627 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4628  = { 
+                        is_empty = yes
+                    }
+                }
+                4628 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4629  = { 
+                        is_empty = yes
+                    }
+                }
+                4629 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_desert_colonization_a_b72
                 duration = -1
             }
+			seize_empty_province_effect = { province = 482 }
+			seize_empty_province_effect = { province = 1574 }
+			seize_empty_province_effect = { province = 4626 }
+			seize_empty_province_effect = { province = 4627 }
+			seize_empty_province_effect = { province = 4628 }
+			seize_empty_province_effect = { province = 4629 }
+			
 		}
 	}
 	B72_the_case_of_orsis = {
@@ -259,8 +560,30 @@ B72_neferset_column_2 = {
 		required_missions = { B72_tanaris_dominance }
 		position = 8
 		
+		provinces_to_highlight = {
+			OR = {
+				area = area_steamwheedle_port
+				area = area_gadgetzan
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 		trigger = {
-			
+			OR = {
+			    AND = {
+			        NOT = { exists = GDG }
+				    GDG = { is_subject_of = ROOT }
+				}
+				AND = {
+				    area_steamwheedle_port = {
+			            type = all
+				        country_or_non_sovereign_subject_holds = ROOT
+			        }
+				    area_gadgetzan = {
+			            type = all
+				        country_or_non_sovereign_subject_holds = ROOT
+			        }
+				}
+			}
 		}
 		effect = {			
 			add_country_modifier = {
@@ -332,7 +655,7 @@ B72_neferset_column_3 = {
 		position = 3
 		
 		trigger = {
-			
+			NOT = { exists = POA }
 		}
 		effect = {			
 			add_country_modifier = {
@@ -347,13 +670,22 @@ B72_neferset_column_3 = {
 		position = 4
 		
 		trigger = {
-			
+			1566 = {
+				num_of_times_improved = 5
+				has_temple_building_trigger = yes
+			}
+			4623 = {
+				num_of_times_improved = 4
+				has_temple_building_trigger = yes
+			}
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_restore_the_lost_temples_b72
                 duration = -1
             }
+			1566 = { add_or_improve_fort = yes }
+			4623 = { add_or_improve_fort = yes }
 		}
 	}
 	B72_desert_expansion_c = {
@@ -361,14 +693,99 @@ B72_neferset_column_3 = {
 		required_missions = { B72_temple_of_ammon }		
 		position = 5
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 3219
+				province_id = 1014
+				province_id = 4633
+				province_id = 4632
+				province_id = 472
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			
+			if = {
+                limit = {
+                    3219  = { 
+                        is_empty = yes
+                    }
+                }
+                3219 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    472  = { 
+                        is_empty = yes
+                    }
+                }
+                472 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1014  = { 
+                        is_empty = yes
+                    }
+                }
+                1014 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4632  = { 
+                        is_empty = yes
+                    }
+                }
+                4632 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4633  = { 
+                        is_empty = yes
+                    }
+                }
+                4633 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_desert_colonization_c_b72
                 duration = -1
             }
+			seize_empty_province_effect = { province = 3219 }
+			seize_empty_province_effect = { province = 472 }
+			seize_empty_province_effect = { province = 1014 }
+			seize_empty_province_effect = { province = 4632 }
+			seize_empty_province_effect = { province = 4633 }
 		}
 	}
 	B72_the_case_of_ramkahen = {
@@ -511,13 +928,14 @@ B72_neferset_column_4 = {
 		position = 2
 		
 		trigger = {
-			
+			has_idea_group = wwu_armaments_ideas
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_tolviri_archers_b72
                 duration = -1
             }
+			# Opens a decision that unlocks option to evolve Armament Ideas
 		}
 	}
 	B72_atulhets_weapon = {
@@ -526,7 +944,7 @@ B72_neferset_column_4 = {
 		position = 3
 		
 		trigger = {
-			
+			#story chain
 		}
 		effect = {			
 			add_country_modifier = {
@@ -541,7 +959,7 @@ B72_neferset_column_4 = {
 		position = 4
 		
 		trigger = {
-			
+			#story chain
 		}
 		effect = {			
 			add_country_modifier = {
@@ -556,7 +974,7 @@ B72_neferset_column_4 = {
 		position = 5
 		
 		trigger = {
-			
+			#story chain
 		}
 		effect = {			
 			add_country_modifier = {
@@ -571,7 +989,7 @@ B72_neferset_column_4 = {
 		position = 6
 		
 		trigger = {
-			
+			#story chain
 		}
 		effect = {			
 			add_country_modifier = {
@@ -642,8 +1060,29 @@ B72_neferset_column_5 = {
 		required_missions = { B72_atulhets_weapon }		
 		position = 4
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 475
+				province_id = 1240
+				province_id = 4571
+				province_id = 4586
+				province_id = 4587
+				area = area_khartuts_tomb
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			
+			NOT = { exists = G15 }
+			area_khartuts_tomb = {
+			    type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			475 = { country_or_non_sovereign_subject_holds = ROOT }
+			1240 = { country_or_non_sovereign_subject_holds = ROOT }
+			4571 = { country_or_non_sovereign_subject_holds = ROOT }
+			4586 = { country_or_non_sovereign_subject_holds = ROOT }
+			4587 = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		effect = {			
 			add_country_modifier = {
@@ -657,14 +1096,67 @@ B72_neferset_column_5 = {
 		required_missions = { B72_oogah_raiders }		
 		position = 5
 		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4593
+				province_id = 4594
+				province_id = 1556
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		
 		trigger = {
-			
+			if = {
+                limit = {
+                    4593  = { 
+                        is_empty = yes
+                    }
+                }
+                4593 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    4594  = { 
+                        is_empty = yes
+                    }
+                }
+                4594 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
+			if = {
+                limit = {
+                    1556  = { 
+                        is_empty = yes
+                    }
+                }
+                1556 = { 
+                    num_of_units_in_province = {
+                        who = ROOT
+                        amount = 2
+                    }
+                    NOT = { native_size = 1 }
+                }
+            }
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_desert_colonization_d_b72
                 duration = -1
             }
+			seize_empty_province_effect = { province = 4593 }
+			seize_empty_province_effect = { province = 4594 }
+			seize_empty_province_effect = { province = 1556 }
 		}
 	}
 	B72_protectors_of_the_halls = {
