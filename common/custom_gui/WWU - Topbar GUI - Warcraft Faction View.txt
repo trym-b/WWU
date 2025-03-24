@@ -112,6 +112,108 @@ custom_text_box = {
    }
 }
 
+custom_button = {
+    name = warcraft_faction_call_all_to_war
+    
+    potential = {
+        has_global_flag = enabled_powerful_factions
+        
+        any_country = {
+            offensive_war_with = ROOT
+        }
+                
+        is_viewing_own_faction = yes
+    }
+    
+    trigger = { 
+        any_country = {
+            offensive_war_with = ROOT
+        }
+        
+        NOT = { has_country_modifier = recently_called_all_members_to_war }
+    }
+    
+    effect = { 
+        add_country_modifier = {
+            name = recently_called_all_members_to_war
+            duration = 365
+            hidden = yes
+        }
+        
+        if = {
+            limit = {
+                OR = {
+                    has_country_modifier = head_of_alliance
+                    has_country_modifier = member_of_alliance
+                }
+            }
+            
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_alliance
+                }
+                
+                #join_all_offensive_wars_of = ROOT
+                join_all_defensive_wars_of = ROOT
+            }
+        }
+        # Horde
+        else_if = {
+            limit = {
+                OR = {
+                    has_country_modifier = head_of_horde
+                    has_country_modifier = member_of_horde
+                }
+            }
+            
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_horde
+                }
+                
+                #join_all_offensive_wars_of = ROOT
+                join_all_defensive_wars_of = ROOT
+            }
+        }
+        # Trade Coalition
+        else_if = {
+            limit = {
+                OR = {
+                    has_country_modifier = head_of_trade_coalition
+                    has_country_modifier = member_of_trade_coalition
+                }
+            }
+            
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_trade_coalition
+                }
+                
+                #join_all_offensive_wars_of = ROOT
+                join_all_defensive_wars_of = ROOT
+            }
+        }
+        # Dragon Aspects
+        else_if = {
+            limit = {
+                OR = {
+                    has_country_modifier = head_of_dragon_aspects
+                    has_country_modifier = member_of_dragon_aspects
+                }
+            }
+            
+            every_country = {
+                limit = {
+                    has_country_modifier = member_of_dragon_aspects
+                }
+                
+                #join_all_offensive_wars_of = ROOT
+                join_all_defensive_wars_of = ROOT
+            }
+        }
+    }
+}
+
 # Window Background Elements
 custom_icon = {
     name = warcraft_faction_member_banner

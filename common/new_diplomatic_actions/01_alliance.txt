@@ -3644,9 +3644,18 @@ call_to_war_faction = {
         has_global_flag = enabled_faction_mechanics
         NOT = { has_country_modifier = recent_faction_interaction }
         
-        is_at_war = yes
-        FROM = { 
-            NOT = { is_at_war = yes }
+        any_country = {
+            offensive_war_with = ROOT
+        }
+        
+        # If Powerful Factions is enabled, allow nations already at war to be called in.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            FROM = { 
+                NOT = { is_at_war = yes }
+            }
         }
         
         # Alliance
@@ -3701,9 +3710,18 @@ call_to_war_faction = {
 	is_allowed = {
         NOT = { has_country_modifier = recent_faction_interaction }
 		
-        is_at_war = yes
-        FROM = { 
-            NOT = { is_at_war = yes }
+        any_country = {
+            offensive_war_with = ROOT
+        }
+        
+        # If Powerful Factions is enabled, allow nations already at war to be called in.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            FROM = { 
+                NOT = { is_at_war = yes }
+            }
         }
 	}
 	on_accept = {
@@ -3714,9 +3732,16 @@ call_to_war_faction = {
             }
         }
         
-        add_country_modifier = {
-            name = recent_faction_interaction
-            duration = 365
+        # With Powerful Factions, allow constant Call to Wars.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 7
+            }
         }
         
         hidden_effect = {
@@ -3752,10 +3777,18 @@ call_to_war_faction = {
             }
         }
         
-        add_country_modifier = {
-            name = recent_faction_interaction
-            duration = 365
+        # With Powerful Factions, allow constant Call to Wars.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 365
+            }
         }
+        
         add_prestige = -10
 	}
 	
@@ -3828,11 +3861,22 @@ call_to_war_faction = {
             export_to_variable = { variable_name = ai_value value = 1 }
             multiply_variable = { which = ai_value value = 25 }
         }
+		add_entry = {
+			name = INV_POWERFUL_FACTIONS
+			limit = {
+				has_global_flag = enabled_powerful_factions
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
 	}
 
 	ai_will_do = {
         # These AI will call in members, or any if they are losing badly
         OR = {
+            has_global_flag = enabled_powerful_factions
             personality = ai_militarist
             personality = ai_balanced
             NOT = { war_score = -50 }
@@ -3855,9 +3899,18 @@ request_aid_faction = {
         has_global_flag = enabled_faction_mechanics
         NOT = { has_country_modifier = recent_faction_interaction }
         
-        is_at_war = yes
-        FROM = {
-            NOT = { is_at_war = yes }
+        any_country = {
+            offensive_war_with = ROOT
+        }
+        
+        # If Powerful Factions is enabled, allow nations already at war to be called in.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            FROM = { 
+                NOT = { is_at_war = yes }
+            }
         }
         
         # Alliance
@@ -3916,9 +3969,18 @@ request_aid_faction = {
 	is_allowed = {
         NOT = { has_country_modifier = recent_faction_interaction }
 		
-        is_at_war = yes
-        FROM = {
-            NOT = { is_at_war = yes }
+        any_country = {
+            offensive_war_with = ROOT
+        }
+        
+        # If Powerful Factions is enabled, allow nations already at war to be called in.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            FROM = { 
+                NOT = { is_at_war = yes }
+            }
         }
 	}
 	on_accept = {
@@ -3929,9 +3991,16 @@ request_aid_faction = {
             }
         }
         
-        add_country_modifier = {
-            name = recent_faction_interaction
-            duration = 365
+        # With Powerful Factions, allow constant Call to Wars.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 7
+            }
         }
         
         hidden_effect = {
@@ -3967,10 +4036,18 @@ request_aid_faction = {
             }
         }
         
-        add_country_modifier = {
-            name = recent_faction_interaction
-            duration = 365
+        # With Powerful Factions, allow constant Call to Wars.
+        if = {
+            limit = {
+                NOT = { has_global_flag = enabled_powerful_factions }
+            }
+            
+            add_country_modifier = {
+                name = recent_faction_interaction
+                duration = 365
+            }
         }
+        
         add_prestige = -10
 	}
 	
@@ -4061,11 +4138,22 @@ request_aid_faction = {
             export_to_variable = { variable_name = ai_value value = 1 }
             multiply_variable = { which = ai_value value = 25 }
         }
+		add_entry = {
+			name = INV_POWERFUL_FACTIONS
+			limit = {
+				has_global_flag = enabled_powerful_factions
+			}
+			export_to_variable = {
+				variable_name = ai_value
+				value = 1000
+			}
+		}
 	}
 
 	ai_will_do = {
         # These AI will call in members, or any if they are losing badly
         OR = {
+            has_global_flag = enabled_powerful_factions
             personality = ai_militarist
             personality = ai_balanced
             NOT = { war_score = -50 }
