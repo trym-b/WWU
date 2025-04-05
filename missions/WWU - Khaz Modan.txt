@@ -103,13 +103,14 @@ A29_ironforge_column_2 = {
 					loyalty = 65
 				}
 			}
+			num_of_generals = 1
 		}
 		effect = { 
 		    add_adm_power = 100
 			add_mil_power = 100
 			add_country_modifier = {
                 name = mission_organize_the_army_a29
-                duration = -1
+                duration = 91250
             }
 			area_kharanos = {
                 add_permanent_claim = ROOT
@@ -209,7 +210,11 @@ A29_ironforge_column_2 = {
 			}
 
 			area_valley_of_kings = {
-				add_permanent_claim = ROOT
+				add_claim = ROOT
+			}
+
+			area_thorium_point = {
+				add_claim = ROOT
 			}
 
 			hidden_effect = {
@@ -232,13 +237,17 @@ A29_ironforge_column_2 = {
 		position = 4
 		
 	    trigger = {
-            A32 = {
-                has_opinion = {
-                    who = ROOT
-                    value = 150
-                }
-            }
+			OR = {
+				A32 = {
+                	has_opinion = {
+                    	who = ROOT
+                    	value = 150
+                	}
+            	}
+				NOT = { exists = A32 }
+			} 
 		}
+
         provinces_to_highlight = {
             is_capital_of = A32
         }
@@ -246,7 +255,16 @@ A29_ironforge_column_2 = {
 		effect = {
 			add_dip_power = 100
 			add_prestige = 10
-			create_alliance = A32
+
+			if = {
+				limit = {
+					A32 = {
+						NOT = { is_subject_of = ROOT }
+					}
+				}
+				create_alliance = A32
+			}
+
 			add_country_modifier = {
                 name = mission_relations_gnomes_a29
                 duration = -1
@@ -265,9 +283,15 @@ A29_ironforge_column_2 = {
 		
 	    trigger = {
             NOT = { exists = P57 }
+
+			area_gnomeregan = {
+				owned_by = ROOT
+				owned_by = A32
+			}
 		}
         provinces_to_highlight = {
             owned_by = P57
+			area = area_gnomeregan
         }
 		effect = {
 			add_dip_power = 100
@@ -333,6 +357,12 @@ A29_ironforge_column_3 = {
 			area_thelsamar = {
 				add_permanent_claim = ROOT
 			}
+			area_loch_modan_wildlands = {
+				add_permanent_claim = ROOT
+			}
+			area_loch_modan = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	A29_axis_of_awful_a29 = {
@@ -358,7 +388,7 @@ A29_ironforge_column_3 = {
 			add_adm_power = 100
 			add_country_modifier = {
                 name = mission_kobolds_war_a29
-                duration = -1
+                duration = 91250
             }
 			area_dun_algaz = {
 				add_permanent_claim = ROOT
@@ -391,6 +421,7 @@ A29_ironforge_column_3 = {
 			}
 			NOT = { exists = B13 }
 			NOT = { exists = B26 }
+			NOT = { exists = AXW }
 		}
 		provinces_to_highlight = {
             OR = {
@@ -574,6 +605,10 @@ A29_ironforge_column_4 = {
                 name = mission_thorium_mines_a29
                 duration = -1
             }
+
+			area_uldaman = {
+				add_claim = ROOT
+			}
 		}
 	}
 	A29_dwarvish_origins_a29 = {
@@ -727,9 +762,13 @@ A29_ironforge_column_5 = {
 			adm_tech = 15
 			dip_tech = 15
 			mil_tech = 15
-			num_of_owned_and_controlled_institutions = 2
+			innovativeness = 75
+
+			splendor = 800
 		}
 		effect = {
+			add_splendor = -800
+
             add_prestige = 30
 			add_country_modifier = {
                 name = mission_earthen_heritage_a29
