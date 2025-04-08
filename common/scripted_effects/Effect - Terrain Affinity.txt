@@ -211,6 +211,7 @@ update_terrain_affinity = {
         if = {
             limit = {
                 OR = {
+                    culture_group = culture_group_murloc
                     culture_group = culture_group_zangar
                     culture_group = culture_group_fungarian
                 }
@@ -273,6 +274,33 @@ update_terrain_affinity = {
             }
         }
 
+        # Coastal Affinity
+        if = {
+            limit = {
+                OR = {
+                    culture_group = culture_group_naga
+                    culture_group = culture_group_murloc
+                    culture_group = culture_group_lobstrok
+                    culture_group = culture_group_water
+                    culture_group = culture_group_sea_giant
+                }
+            }
+
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        has_terrain = coastline
+                        has_terrain = coastal_desert
+                    }
+                }
+
+                add_province_modifier  ={
+                    name = coastline_terrain_affinity
+                    duration = -1
+                }
+            }
+        }
+
         # Silithid Infestation Affinity
         if = {
             limit = {
@@ -301,7 +329,7 @@ update_terrain_affinity = {
             }
         }
     }
-}
+} 
 
 remove_terrain_affinity = {
     remove_province_modifier = underwater_terrain_affinity
@@ -313,5 +341,6 @@ remove_terrain_affinity = {
     remove_province_modifier = mountain_terrain_affinity
     remove_province_modifier = marsh_terrain_affinity
     remove_province_modifier = desert_terrain_affinity
+    remove_terrain_affinity  = coastline_terrain_affinity
     remove_province_modifier = silithid_infestation_affinity
 }
