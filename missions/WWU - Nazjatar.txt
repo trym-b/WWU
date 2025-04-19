@@ -102,10 +102,10 @@ NJZ_nazjatar_column_1 = {
 		effect = {
 			define_general = {
                 name = "Lord Hydraxis"
-                fire = 5
-                shock = 3
-                manuever = 5
-                siege = 2
+                fire = 6
+                shock = 4
+                manuever = 3
+                siege = 3
             }
             
             add_prestige = 20
@@ -147,7 +147,13 @@ NJZ_nazjatar_column_1 = {
 		trigger = {
             OR = {
                 NOT = { exists = P24 } # Abyssal Maw
-                war_with = P24
+                AND = {
+                    offensive_war_with = P24
+                    war_score_against = {
+                        who = P24
+                        value = 75
+                    }
+                }
             }
             2554 = {
                 controlled_by = ROOT
@@ -176,7 +182,7 @@ NJZ_nazjatar_column_1 = {
                 }
                 
                 create_subject = {
-                    subject_type = vassal
+                    subject_type = subjugated_vassal
                     subject = P24
                 }
             }
@@ -207,7 +213,7 @@ NJZ_nazjatar_column_1 = {
                 is_hegemon = yes
             }
             else = {
-                total_development = 1000
+                total_development = 1250
             }
 		}
         provinces_to_highlight = {
@@ -236,12 +242,11 @@ NJZ_nazjatar_column_1 = {
 		icon = mission_nzoth
         position = 7
         
-		required_missions = { 
-            NJZ_queen_of_the_tides
-        }
+		required_missions = { }
         
 		trigger = {
             NOT = { has_global_flag = nzoth_active }
+            development = 1000
             stability = 3
             army_size = 100
             navy_size = 100
@@ -647,7 +652,7 @@ NJZ_nazjatar_column_3 = {
         
 		effect = {
 			define_conquistador = {
-                name = "Zar’jira the Sea Witch"
+                name = "Zarï¿½jira the Sea Witch"
                 female = yes
                 
                 shock = 5
