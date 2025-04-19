@@ -93,6 +93,25 @@ wwu_tribal_tribal_council_reform = {
 	}
 }
 
+native_martial_tradition_reform = {
+	icon = "taming"
+	allow_normal_conversion = yes
+    
+	potential = {
+        government_reform = migratory_centaur_reform
+    }
+	
+	modifiers = {
+		infantry_power = 0.1
+		army_tradition = 1
+		land_attrition = -0.10 
+	}
+
+	ai = {
+		factor = 1
+	}
+}
+
 # For the Expeditionary Force/Criminal Organisation governments
 wwu_tribal_chain_of_command_reform = {
 	icon = "combat_readiness"
@@ -643,6 +662,24 @@ wwu_paganism_religious_enforcement = {
 	}
 }
 
+native_oral_tradition_reform = {
+	icon = "tree_form"
+	
+	potential = {
+        government_reform = migratory_centaur_reform
+    }
+	
+	modifiers = {
+		monthly_reform_progress_modifier = 0.25
+		tolerance_heathen = 1
+		tribal_development_growth = 0.01
+	}
+
+	ai = {
+		factor = 1.0
+	}
+}
+
 # Orc
 wwu_paganism_elemental_communion = {
 	icon = "echo_of_the_elements"
@@ -1153,6 +1190,62 @@ wwu_tribal_structure_nomadic_kinship = {
 	}
 }
 
+native_seasonal_travel_reform = {
+	icon = "tour_of_duty"
+	fixed_rank = 0
+	
+	potential = {
+        government_reform = migratory_centaur_reform
+    }
+	
+	trigger = {
+		NOT = { num_of_cities = 2 }
+	}
+	modifiers = {
+		migration_cost = -0.25
+		tribal_development_growth = 0.02
+	}
+    allow_migration = yes
+
+	ai = {
+		factor = 1
+	}
+}
+
+native_settle_down_reform = {
+	icon = "treasure_map"
+	fixed_rank = 0
+	
+	potential = {
+        government_reform = migratory_centaur_reform
+    }
+	
+	modifiers = {
+		global_institution_spread = 0.2
+		add_tribal_land_cost = 2.0
+		governing_capacity_modifier = -0.25
+	}
+	allow_migration = no
+	removed_effect = {
+		add_stability = -1
+	}
+
+	ai = {
+		factor = 1
+		
+
+		modifier = { 
+			factor = 2
+			tribal_development = 30
+		}
+
+		modifier = { 
+			factor = 2
+			tribal_development = 40
+		}
+	}
+}
+
 #-----------------------------------------
 # Chieftains (Level 6)
 #-----------------------------------------
@@ -1258,6 +1351,20 @@ wwu_chieftains_warrior_lords = {
 	}
 }
 
+native_clan_council_reform = {
+	icon = "profession_scroll"
+	allow_normal_conversion = yes
+	
+	potential = {
+        government_reform = migratory_centaur_reform
+    }
+	
+	modifiers = {
+		diplomatic_upkeep = 1
+		diplomats = 1
+	}
+}
+
 #-----------------------------------------
 # Outsiders (Level 7)
 #-----------------------------------------
@@ -1344,6 +1451,7 @@ wwu_outsiders_traded_with = {
 	modifiers = {
         merchants = 1
         global_trade_power = 0.1
+		core_creation = -0.1
 	}
     
     ai = {
