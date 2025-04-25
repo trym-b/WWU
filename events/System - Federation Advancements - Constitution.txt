@@ -1,0 +1,124 @@
+namespace = wwu_federation_adv_options
+
+# Maruuk Centaur Federal Constitution
+country_event = {
+	id = wwu_federation_adv_options.1
+	title = wwu_federation_adv_options.1.title
+	desc = wwu_federation_adv_options.1.desc
+	picture = DRAENOR_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {		
+		name = wwu_federation_adv_options.1.a
+		# Re-establish the Maruuk Horde and Unify the Federation
+		
+		if = {
+		    limit = {			    
+				has_reform = settled_centaur_reform
+			}
+		    every_tribal_land_province = {
+			    limit = { NOT = { owner = { exists = yes } } }
+			    settle_province = ROOT
+			}
+		}
+		
+		change_tag = MC8
+		trigger_ni_switch = yes
+		
+		add_government_reform = maruuk_centaur_horde_reform
+		
+		every_federation_member = {
+            limit = {
+                has_opinion = {
+				    who = ROOT
+					value = 100
+				}
+            }
+            ROOT = {
+                inherit = PREV
+            }
+        }       
+
+		ai_chance = {		
+			factor = 1
+		}
+	}
+	option = {
+		name = wwu_federation_adv_options.1.b
+		# Re-establish the Maruuk Horde and Federation Diplo Depedancy 
+		
+		if = {
+		    limit = {			    
+				has_reform = settled_centaur_reform
+			}
+		    every_tribal_land_province = {
+			    limit = { NOT = { owner = { exists = yes } } }
+			    settle_province = ROOT
+			}
+		}
+		
+		change_tag = MC8
+		trigger_ni_switch = yes
+		
+		add_government_reform = maruuk_centaur_horde_reform
+		
+		every_federation_member = {
+            limit = {
+                has_opinion = {
+				    who = ROOT
+					value = 100
+				}
+            }
+            ROOT = {
+                create_subject = {
+                    subject_type = tributary_vassal
+                    subject = PREV
+                }
+            }
+        } 
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = wwu_federation_adv_options.1.c
+		#Stay Tribal 
+		
+		add_country_modifier = {
+			name = mission_loyalty_to_the_federation
+			duration = -1
+		}
+		
+		ai_chance = {
+			factor = 2
+		}
+	}
+	option = {
+		name = wwu_federation_adv_options.1.d
+		#Stay Tribal but Diplo Vassalize Members
+		
+		add_country_modifier = {
+			name = mission_one_tribe_to_rule_them_all
+			duration = -1
+		}
+		every_federation_member = {
+            limit = {
+                has_opinion = {
+				    who = ROOT
+					value = 100
+				}
+            }
+			ROOT = {
+                create_subject = {
+                    subject_type = tributary_vassal
+                    subject = PREV
+                }
+            }
+        } 
+		ai_chance = {
+			factor = 3
+		}
+	}
+}

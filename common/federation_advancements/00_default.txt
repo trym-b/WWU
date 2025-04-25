@@ -14,12 +14,34 @@ federal_constitution = {
 		is_migratory_tribe = no
 	}
 
-	effect = {
-		
+	effect = {		
+		if = {
+		    limit = {
+			    government_reform = migratory_centaur_reform
+			}
+		    
+			every_federation_member = {
+		        limit = {
+				    OR = {
+				        has_reform = migratory_centaur_reform
+					    has_reform = settled_centaur_reform
+					}
+			    }
+		        every_tribal_land_province = {
+			        limit = { NOT = { owner = { exists = yes } } }
+			        settle_province = { owner = PREV } #doesnt work as intented
+			    }
+		    }
+			
+			country_event = {
+			    id = wwu_federation_adv_options.1
+            }
+		}
+        # Add other rewards for others if it is expanded beyond Maruuk Centaur		
 	}
 
 	ai_chance = {
-		factor = 0
+		factor = 1
 	}
 }
 
@@ -53,7 +75,7 @@ mutual_trust = {
 	}
 
 	modifier = {
-		monthly_federation_favor_growth = 0.1
+		monthly_federation_favor_growth = 0.15
 	}
 
 	ai_chance = {
@@ -69,7 +91,8 @@ joint_grain_depots = {
 	}
 
 	modifier = {
-		tribal_development_growth = 0.02
+		tribal_development_growth = 0.04
+		add_tribal_land_cost = -0.25 
 	}
 
 	ai_chance = {

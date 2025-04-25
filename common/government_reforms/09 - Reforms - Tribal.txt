@@ -93,12 +93,16 @@ wwu_tribal_tribal_council_reform = {
 	}
 }
 
-native_martial_tradition_reform = {
+wwu_native_martial_tradition_reform = {
 	icon = "taming"
 	allow_normal_conversion = yes
     
 	potential = {
-        has_reform = migratory_centaur_reform
+        OR = {
+            has_reform = migratory_centaur_reform
+		    has_reform = settled_centaur_reform
+			has_reform = maruuk_centaur_horde_reform
+		}
     }
 	
 	modifiers = {
@@ -662,11 +666,14 @@ wwu_paganism_religious_enforcement = {
 	}
 }
 
-native_oral_tradition_reform = {
+wwu_native_oral_tradition_reform = {
 	icon = "tree_form"
 	
 	potential = {
-        has_reform = migratory_centaur_reform
+        OR = {
+            has_reform = migratory_centaur_reform
+		    has_reform = settled_centaur_reform
+		}
     }
 	
 	modifiers = {
@@ -1190,9 +1197,10 @@ wwu_tribal_structure_nomadic_kinship = {
 	}
 }
 
-native_seasonal_travel_reform = {
+wwu_native_seasonal_travel_reform = {
 	icon = "tour_of_duty"
 	fixed_rank = 0
+	lock_level_when_selected    = yes
 	
 	potential = {
         has_reform = migratory_centaur_reform
@@ -1208,16 +1216,20 @@ native_seasonal_travel_reform = {
     allow_migration = yes
 
 	ai = {
-		factor = 1
+		factor = 2
 	}
 }
 
-native_settle_down_reform = {
+wwu_native_settle_down_reform = {
 	icon = "treasure_map"
 	fixed_rank = 0
+	lock_level_when_selected    = yes
 	
 	potential = {
-        has_reform = migratory_centaur_reform
+	    OR = {
+            has_reform = migratory_centaur_reform
+		    has_reform = settled_centaur_reform
+		}
     }
 	
 	modifiers = {
@@ -1225,24 +1237,15 @@ native_settle_down_reform = {
 		add_tribal_land_cost = 2.0
 		governing_capacity_modifier = -0.25
 	}
+	
 	allow_migration = no
+	
 	removed_effect = {
 		add_stability = -1
 	}
 
 	ai = {
 		factor = 1
-		
-
-		modifier = { 
-			factor = 2
-			tribal_development = 30
-		}
-
-		modifier = { 
-			factor = 2
-			tribal_development = 40
-		}
 	}
 }
 
@@ -1351,12 +1354,16 @@ wwu_chieftains_warrior_lords = {
 	}
 }
 
-native_clan_council_reform = {
+wwu_native_clan_council_reform = {
 	icon = "profession_scroll"
 	allow_normal_conversion = yes
 	
 	potential = {
-        has_reform = migratory_centaur_reform
+        OR = {
+            has_reform = migratory_centaur_reform
+		    has_reform = settled_centaur_reform
+			has_reform = maruuk_centaur_horde_reform
+		}
     }
 	
 	modifiers = {

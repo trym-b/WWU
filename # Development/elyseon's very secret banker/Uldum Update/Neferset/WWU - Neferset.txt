@@ -546,13 +546,46 @@ B72_neferset_column_2 = {
 		position = 6
 		
 		trigger = {
-			
+			OR = {
+			    AND = {
+			        G10 = {
+				        has_opinion = {
+                            who = ROOT
+                            value = 100
+			    	    }
+					}
+					diplomatic_reputation = 5
+				}
+				AND = {
+				    war_score_against = {
+	                    who = G10
+	                    value = 100
+                    }
+					employed_advisor = negotiator
+				}
+			}
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_city_of_orsis_b72
                 duration = -1
             }
+			if = {
+			    limit = {
+				    has_won_war_against = {
+	                    who = G10
+	                    max_years_since = 5
+                    }
+				}
+				# make into vassal/tributary vassal if you leave them alive
+				# X Bonus
+			}
+			else_if = {
+			    limit = {
+				    NOT = { exists = G10 } #annexed
+				}
+				# give bonus/cores
+			}
 		}
 	}
 	B72_gadgetzan_subjucation = {
@@ -794,13 +827,46 @@ B72_neferset_column_3 = {
 		position = 7
 		
 		trigger = {
-			
+			OR = {
+			    AND = {
+			        G09 = {
+				        has_opinion = {
+                            who = ROOT
+                            value = 100
+			    	    }
+					}
+					diplomatic_reputation = 5
+				}
+				AND = {
+				    war_score_against = {
+	                    who = G09
+	                    value = 100
+                    }
+					employed_advisor = negotiator
+				}
+			}
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_ramkahen_realm_b72
                 duration = -1
             }
+			if = {
+			    limit = {
+				    has_won_war_against = {
+	                    who = G09
+	                    max_years_since = 5
+                    }
+				}
+				# make into vassal/tributary vassal if you leave them alive
+				# X Bonus
+			}
+			else_if = {
+			    limit = {
+				    NOT = { exists = G09 } #annexed
+				}
+				# give bonus/cores
+			}
 		}
 	}
 	B72_state_of_uldum = {
@@ -809,7 +875,7 @@ B72_neferset_column_3 = {
 		position = 8
 		
 		trigger = {
-			
+			tag = G14
 		}
 		effect = {			
 			add_country_modifier = {
@@ -909,11 +975,11 @@ B72_neferset_column_4 = {
 		icon = mission_headquarters
 		required_missions = { }
 		
-		provinces_to_highlight = {
-			
-		}
 		trigger = {
-			
+		    employed_advisor = {
+                type = inquisitor
+            }
+		    religious_unity = 0.9
 		}
 		effect = {			
 			add_country_modifier = {
@@ -990,8 +1056,9 @@ B72_neferset_column_4 = {
 		
 		trigger = {
 			#story chain
+			trust = { who = NHO value = 50 }
 		}
-		effect = {			
+		effect = {
 			add_country_modifier = {
                 name = mission_tolviri_priesthood_b72
                 duration = -1
@@ -1165,13 +1232,44 @@ B72_neferset_column_5 = {
 		position = 6
 		
 		trigger = {
-			
+			OR = {
+			    AND = {
+			        4577 = {
+				        controlled_by = ROOT
+				    }
+				    1569 = {
+				        controlled_by = ROOT
+				    }
+				}
+				AND = {
+				    G09 = {
+				        has_opinion = {
+                            who = ROOT
+                            value = 100
+			    	    }					
+				    }
+				    army_size = G09
+					diplomatic_reputation = 3
+				}
+			}
 		}
 		effect = {			
 			add_country_modifier = {
                 name = mission_halls_of_origination_b72
                 duration = -1
             }
+			vassalize = ULW
+			if = {
+			    limit = {
+				    OR = {
+				        religion = cthun
+						religion = void
+					}
+				}
+				ULW = {
+				    change_religion = ROOT
+				}
+			}
 		}
 	}
 	B72_ungoro_colonial_effort = {
