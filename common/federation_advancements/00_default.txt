@@ -20,24 +20,17 @@ federal_constitution = {
 			    has_reform = migratory_centaur_reform
 			}
 		    
-			every_federation_member = {
-		        limit = {
-				    OR = {
-				        has_reform = migratory_centaur_reform
-					    has_reform = settled_centaur_reform
-					}
-			    }
-                
-                # Adds all tribal lands that ROOT owns as proper provinces
-		        every_tribal_land_province = {
+            # Each member gets their current tribal land as proper land
+            every_federation_member = {
+                every_tribal_land_province = {
                     limit = {
-                        tribal_land_of = ROOT
+                        tribal_land_of = PREV
                     }
-                    cede_province = ROOT
-                    add_core = ROOT
+                    cede_province = PREV
+                    add_core = PREV
                 }
-		    }
-			
+            }
+            
 			country_event = {
 			    id = wwu_federation_adv_options.1
             }
