@@ -1194,11 +1194,11 @@ NCountry = {
 	MIGRATORY_TRIBE_DEVASTATION_ALERT_THRESHOLD = 80,
 	MIGRATORY_TRIBE_DEVELOPMENT_PROGRESS = 0.02, 	-- How much progress on development for each monthly tick
 	MIGRATORY_TRIBE_DEVELOPMENT_OTHER_BONUS = 0.08,	-- Bonus progress gained on development from burning someone else province.
-	TRIBE_MIGRATION_ADM_COST = 15,
+	TRIBE_MIGRATION_ADM_COST = 50,
 	--- WWU: spread tribal migration cost between each monarch power type
-	TRIBE_MIGRATION_DIP_COST = 15,
+	TRIBE_MIGRATION_DIP_COST = 50,
 	--- WWU: spread tribal migration cost between each monarch power type
-	TRIBE_MIGRATION_MIL_COST = 15,
+	TRIBE_MIGRATION_MIL_COST = 50,
 	--- WWU: spread tribal migration cost between each monarch power type
 	SIBERIAN_TRIBE_MIGRATION_BONUS = 50,
 	SIBERIAN_TRIBE_MIGRATION_COOLDOWN_YEARS = 10,

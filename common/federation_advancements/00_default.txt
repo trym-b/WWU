@@ -17,7 +17,7 @@ federal_constitution = {
 	effect = {		
 		if = {
 		    limit = {
-			    government_reform = migratory_centaur_reform
+			    has_reform = migratory_centaur_reform
 			}
 		    
 			every_federation_member = {
@@ -27,10 +27,15 @@ federal_constitution = {
 					    has_reform = settled_centaur_reform
 					}
 			    }
+                
+                # Adds all tribal lands that ROOT owns as proper provinces
 		        every_tribal_land_province = {
-			        limit = { NOT = { owner = { exists = yes } } }
-			        settle_province = { owner = PREV } #doesnt work as intented
-			    }
+                    limit = {
+                        tribal_land_of = ROOT
+                    }
+                    cede_province = ROOT
+                    add_core = ROOT
+                }
 		    }
 			
 			country_event = {
