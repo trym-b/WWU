@@ -112,8 +112,35 @@ custom_text_box = {
    }
 }
 
+
+custom_button = {
+    name = warcraft_faction_invest
+    tooltip = warcraft_faction_invest_tt
+    
+    potential = {
+        is_viewing_own_faction = yes
+    }
+    
+    trigger = { 
+        years_of_income = 1
+        NOT = { has_country_modifier = factional_investment }
+    }
+    
+    effect = { 
+        add_years_of_income = -1
+        
+        add_country_modifier = {
+            name = factional_investment
+            duration = 1800
+        }
+        
+        boost_faction_renown = yes
+    }
+}
+
 custom_button = {
     name = warcraft_faction_call_all_to_war
+    tooltip = warcraft_faction_call_all_to_war_tt
     
     potential = {
         has_global_flag = enabled_powerful_factions
