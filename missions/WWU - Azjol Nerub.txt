@@ -44,9 +44,7 @@ P74_nerubian_column_1 = {
                         owned_by = ROOT
                     }
                     
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
+                    add_random_development = 1
                 }
                 
                 set_country_flag = cultural_dominantion_icecrown
@@ -103,8 +101,8 @@ P74_nerubian_column_2 = {
             area_balagarde = {
                 add_permanent_claim = ROOT
             }
-            # Cathedral of Darkness
-            2367 = {
+            # Sapphire Hive
+            2357 = {
                 add_core = ROOT
             }
             # Battlescar Spire
@@ -122,13 +120,13 @@ P74_nerubian_column_2 = {
         required_missions = { P74_breach_the_surface }
  
         trigger = {
-            2367 = { country_or_non_sovereign_subject_holds = ROOT } # Cathedral of Darkness
+            2357 = { country_or_non_sovereign_subject_holds = ROOT } # Sapphire Hive
             2361 = { country_or_non_sovereign_subject_holds = ROOT } # Battlescar Spire
             grown_by_development = 20
         }
         provinces_to_highlight = {
             OR = {
-                province_id = 2367
+                province_id = 2357
                 province_id = 2361
             }
             NOT = { country_or_non_sovereign_subject_holds = ROOT }
@@ -137,7 +135,7 @@ P74_nerubian_column_2 = {
         effect = {
             add_country_modifier = {
                 name = nerubian_war_on_surface
-                duration = 7300
+                duration = 9125
             }
             
             area_naxxanar = {
@@ -206,9 +204,7 @@ P74_nerubian_column_2 = {
                         owned_by = ROOT
                     }
                     
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
+                    add_random_development = 1
                 }
                 
                 set_country_flag = cultural_dominantion_wintergrasp
@@ -271,9 +267,7 @@ P74_nerubian_column_2 = {
                         owned_by = ROOT
                     }
                     
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
+                    add_random_development = 1
                 }
                 
                 set_country_flag = cultural_dominantion_dragonblight
@@ -345,9 +339,7 @@ P74_nerubian_column_2 = {
                         owned_by = ROOT
                     }
                     
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
+                    add_random_development = 1
                 }
                 
                 set_country_flag = cultural_dominantion_northrend
@@ -365,7 +357,9 @@ P74_nerubian_column_2 = {
                         duration = -1
                     }
                 }
+                set_country_flag = mission_completed_the_nerubian_empire
             }
+            custom_tooltip = P74_the_nerubian_empire_new_tunnels_TT
         }
  
         ai_weight   = { factor = 1 }
@@ -424,8 +418,6 @@ P74_nerubian_column_3 = {
             4789 = { 
                 country_or_non_sovereign_subject_holds = ROOT 
                 OR = {
-                    has_province_modifier = nerubian_tunnel_4
-                    has_province_modifier = nerubian_tunnel_5
                     has_province_modifier = nerubian_tunnel_6
                     has_province_modifier = nerubian_tunnel_7
                     has_province_modifier = nerubian_tunnel_8
@@ -486,9 +478,7 @@ P74_nerubian_column_3 = {
                         owned_by = ROOT
                     }
                     
-                    add_base_tax = 1
-                    add_base_production = 1
-                    add_base_manpower = 1
+                    add_random_development = 1
                 }
                 
                 set_country_flag = cultural_dominantion_borean_tundra
@@ -533,6 +523,7 @@ P74_nerubian_column_3 = {
                 rename_capital = "Throne of the Spider"
             }
             country_event = { id = wwu_azjol.9 }
+            custom_tooltip = nerubian_event_1_TT
         }
  
         ai_weight   = { factor = 1 }
@@ -560,8 +551,11 @@ P74_nerubian_column_4 = {
         required_missions = { P74_repairing_the_tunnel_network }
  
         trigger = {
-            any_owned_province = {
-                OR = {
+            calc_true_if = {
+                amount = 3
+                
+                all_owned_province = {
+                    OR = {
                     has_province_modifier = nerubian_tunnel_3
                     has_province_modifier = nerubian_tunnel_4
                     has_province_modifier = nerubian_tunnel_5
@@ -570,6 +564,7 @@ P74_nerubian_column_4 = {
                     has_province_modifier = nerubian_tunnel_8
                     has_province_modifier = nerubian_tunnel_9
                     has_province_modifier = nerubian_tunnel_10
+                    }
                 }
             }
  
@@ -606,6 +601,7 @@ P74_nerubian_column_4 = {
                 
                 all_owned_province = {
                     OR = {
+                        has_province_modifier = nerubian_tunnel_4
                         has_province_modifier = nerubian_tunnel_5
                         has_province_modifier = nerubian_tunnel_6
                         has_province_modifier = nerubian_tunnel_7
@@ -688,6 +684,7 @@ P74_nerubian_column_4 = {
                 
                 all_owned_province = {
                     OR = {
+                        has_province_modifier = nerubian_tunnel_5
                         has_province_modifier = nerubian_tunnel_6
                         has_province_modifier = nerubian_tunnel_7
                         has_province_modifier = nerubian_tunnel_8
@@ -828,6 +825,7 @@ P74_nerubian_column_5 = {
         }
         effect = {
             country_event = { id = wwu_azjol.10 }
+            custom_tooltip = nerubian_event_2_TT
         }
  
         ai_weight   = { factor = 1 }

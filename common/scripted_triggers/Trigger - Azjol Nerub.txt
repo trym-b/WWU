@@ -17,138 +17,213 @@ nerubian_tunnel_potential = {
 
 nerubian_tunnel_trigger = {
     culture = culture_nerubian
-    development = 10
-    
-    NOT = { has_province_modifier = nerubian_tunnel_10 } # Hide once at max tunnel depth
-    
-    superregion = northrend_superregion
-    
-    # standard upgrade path
+
     if = {
         limit = {
-            NOT = { has_province_modifier = nerubian_tunnel_1 }
-            NOT = { has_province_modifier = nerubian_tunnel_2 }
-            NOT = { has_province_modifier = nerubian_tunnel_3 }
-            NOT = { has_province_modifier = nerubian_tunnel_4 }
-            NOT = { has_province_modifier = nerubian_tunnel_5 }
-            NOT = { has_province_modifier = nerubian_tunnel_6 }
-            NOT = { has_province_modifier = nerubian_tunnel_7 }
-            NOT = { has_province_modifier = nerubian_tunnel_8 }
-            NOT = { has_province_modifier = nerubian_tunnel_9 }
-            NOT = { has_province_modifier = nerubian_tunnel_10 }
+            region = region_azjol_nerub
         }
-        
-        FROM = {
-            adm_power = 25
-            dip_power = 25
-            mil_power = 25
+        NOT = { has_province_modifier = nerubian_tunnel_10 } # Hide once at max tunnel depth
+
+        # Standard upgrade path
+        if = {
+            limit = {
+                nerubian_first_tunnel_trigger = yes
+            }
+                development = 5
+            owner = {
+                adm_power = 20
+                dip_power = 20
+                mil_power = 20
+            }
         }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_1
+            }
+                development = 10
+            owner = {
+                adm_power = 40
+                dip_power = 40
+                mil_power = 40
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_2
+            }
+                development = 15
+            owner = {
+                adm_power = 60
+                dip_power = 60
+                mil_power = 60
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_3
+            }
+                development = 20
+            owner = {
+                adm_power = 80
+                dip_power = 80
+                mil_power = 80
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_4
+            }
+                development = 25
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_5
+            }
+                development = 30
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_6
+            }
+                development = 35
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_7
+            }
+                development = 40
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_8
+            }
+                development = 45
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_9
+            }
+                development = 50
+            owner = {
+                adm_power = 100
+                dip_power = 100
+                mil_power = 100
+            }
+        }
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_10
+            }
+            
+            always = no
+        }
+
     }
-    else_if = {
+
+    if = {
         limit = {
-            has_province_modifier = nerubian_tunnel_1
+            NOT = { region = region_azjol_nerub }
+            superregion = northrend_superregion
         }
-        
-        FROM = {
-            adm_power = 50
-            dip_power = 50
-            mil_power = 50
+        NOT = { has_province_modifier = nerubian_tunnel_3 } # Hide once at max tunnel depth
+
+        # Extra upgrade trigger by completing mission tree
+        if = {
+            limit = {
+                nerubian_second_tunnel_trigger = yes
+            }
+                development = 5
+            owner = {
+                adm_power = 30
+                dip_power = 30
+                mil_power = 30
+                custom_trigger_tooltip = {
+                    tooltip = nerubian_tunnel_trigger_1
+                    has_country_flag = mission_completed_the_nerubian_empire
+                }
+            }
         }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_2
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_1
+            }
+                development = 5
+            owner = {
+                adm_power = 60
+                dip_power = 60
+                mil_power = 60
+                custom_trigger_tooltip = {
+                    tooltip = nerubian_tunnel_trigger_1
+                    has_country_flag = mission_completed_the_nerubian_empire
+                }
+            }
         }
-        
-        FROM = {
-            adm_power = 75
-            dip_power = 75
-            mil_power = 75
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_2
+            }
+                development = 10
+            owner = {
+                adm_power = 90
+                dip_power = 90
+                mil_power = 90
+                custom_trigger_tooltip = {
+                    tooltip = nerubian_tunnel_trigger_1
+                    has_country_flag = mission_completed_the_nerubian_empire
+                }
+            }
         }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_3
-        }
-        
-        FROM = {
-            adm_power = 100
-            dip_power = 100
-            mil_power = 100
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_4
-        }
-        
-        FROM = {
-            adm_power = 125
-            dip_power = 125
-            mil_power = 125
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_5
-        }
-        
-        FROM = {
-            adm_power = 150
-            dip_power = 150
-            mil_power = 150
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_6
-        }
-        
-        FROM = {
-            adm_power = 175
-            dip_power = 175
-            mil_power = 175
+        if = {
+            limit = {
+                has_province_modifier = nerubian_tunnel_3
+            }
+            
+            always = no
         }
     }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_7
-        }
-        
-        FROM = {
-            adm_power = 200
-            dip_power = 200
-            mil_power = 200
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_8
-        }
-        
-        FROM = {
-            adm_power = 225
-            dip_power = 225
-            mil_power = 225
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_9
-        }
-        
-        FROM = {
-            adm_power = 250
-            dip_power = 250
-            mil_power = 250
-        }
-    }
-    else_if = {
-        limit = {
-            has_province_modifier = nerubian_tunnel_10
-        }
-        
-        always = no
-    }
+
 }
 
+nerubian_first_tunnel_trigger = {
+                NOT = { has_province_modifier = nerubian_tunnel_1 }
+                NOT = { has_province_modifier = nerubian_tunnel_2 }
+                NOT = { has_province_modifier = nerubian_tunnel_3 }
+                NOT = { has_province_modifier = nerubian_tunnel_4 }
+                NOT = { has_province_modifier = nerubian_tunnel_5 }
+                NOT = { has_province_modifier = nerubian_tunnel_6 }
+                NOT = { has_province_modifier = nerubian_tunnel_7 }
+                NOT = { has_province_modifier = nerubian_tunnel_8 }
+                NOT = { has_province_modifier = nerubian_tunnel_9 }
+                NOT = { has_province_modifier = nerubian_tunnel_10 }
+}
+
+nerubian_second_tunnel_trigger = {
+                NOT = { has_province_modifier = nerubian_tunnel_1 }
+                NOT = { has_province_modifier = nerubian_tunnel_2 }
+                NOT = { has_province_modifier = nerubian_tunnel_3 }
+}
