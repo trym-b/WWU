@@ -1,0 +1,497 @@
+country_decisions = {
+    # Open menu for traps upgrade
+	archavon_upgrade_trap = {
+        color = { 156 158 33 }
+        
+        potential = {
+        NOT = {
+            has_country_flag = archavon_upgrade_trap_decision_open
+        }
+        OR = {
+            AND = {
+                tag = VAV
+                NOT = {
+                    VAV = {
+                        is_subject = yes
+                    }
+                }
+                3224 = {
+                    owned_by = VAV
+                }
+            }
+            AND = {
+                3224 = {
+                    owned_by = VAV
+                }
+                overlord_of = VAV
+            }
+        }
+        VAV = {
+            OR = {
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_1_army
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_2_army
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_3_army
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_4_army
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_1_bonus_power
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_2_bonus_power
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_3_bonus_power
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_4_bonus_power
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_1_siege
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_2_siege
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_3_siege
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_4_siege
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_1_cooldown
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_2_cooldown
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_3_cooldown
+                    value = 5
+                }
+                }
+                NOT = {
+                is_variable_equal = {
+                    which = archavon_trap_4_cooldown
+                    value = 5
+                }
+                }
+            }
+
+        }
+    }
+        
+		allow = {
+            3224 = {
+                num_of_buildings_in_province = 2
+                has_fort_building_trigger = yes
+            }
+            prestige = 5
+            legitimacy_equivalent = 5
+		}
+        
+		effect = {
+            country_event = { id = wwu_archavon.3 }
+            add_prestige = -5
+            if = {
+                limit = {
+                    government = monarchy
+                }
+                add_legitimacy = -5
+            }
+            else_if = {
+                limit = {
+                    government = republic
+                }
+                add_republican_tradition = -2.5
+            }
+            else_if = {
+                limit = {
+                    government = theocracy
+                }
+                add_devotion = -5
+            }
+            else_if = {
+                limit = {
+                    government = tribal
+                }
+                add_horde_unity = -5
+            }
+            custom_tooltip = archavon_upgrade_trap_decision_tt
+            
+            hidden_effect = {
+                set_country_flag = archavon_upgrade_trap_decision_open
+                3224 = {
+                    if = {
+                        limit = {
+                            has_building = wow_temple_3
+                        }
+                        remove_building = wow_temple_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_temple_2
+                        }
+                        remove_building = wow_temple_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_temple_1
+                        }
+                        remove_building = wow_temple_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_market_3
+                        }
+                        remove_building = wow_market_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_market_2
+                        }
+                        remove_building = wow_market_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_market_1
+                        }
+                        remove_building = wow_market_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_mine_3
+                        }
+                        remove_building = wow_mine_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_mine_2
+                        }
+                        remove_building = wow_mine_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_mine_1
+                        }
+                        remove_building = wow_mine_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_farm_3
+                        }
+                        remove_building = wow_farm_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_farm_2
+                        }
+                        remove_building = wow_farm_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_farm_1
+                        }
+                        remove_building = wow_farm_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_internment_camp_3
+                        }
+                        remove_building = wow_internment_camp_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_internment_camp_2
+                        }
+                        remove_building = wow_internment_camp_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_internment_camp_1
+                        }
+                        remove_building = wow_internment_camp_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_tavern_3
+                        }
+                        remove_building = wow_tavern_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_tavern_2
+                        }
+                        remove_building = wow_tavern_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_tavern_1
+                        }
+                        remove_building = wow_tavern_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_barracks_3
+                        }
+                        remove_building = wow_barracks_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_barracks_2
+                        }
+                        remove_building = wow_barracks_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_barracks_1
+                        }
+                        remove_building = wow_barracks_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_arsenal_3
+                        }
+                        remove_building = wow_arsenal_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_arsenal_2
+                        }
+                        remove_building = wow_arsenal_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_arsenal_1
+                        }
+                        remove_building = wow_arsenal_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_shipyard_3
+                        }
+                        remove_building = wow_shipyard_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_shipyard_2
+                        }
+                        remove_building = wow_shipyard_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_shipyard_1
+                        }
+                        remove_building = wow_shipyard_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_dockyard_3
+                        }
+                        remove_building = wow_dockyard_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_dockyard_2
+                        }
+                        remove_building = wow_dockyard_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_dockyard_1
+                        }
+                        remove_building = wow_dockyard_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_tower_3
+                        }
+                        remove_building = wow_tower_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_tower_2
+                        }
+                        remove_building = wow_tower_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_tower_1
+                        }
+                        remove_building = wow_tower_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_training_ground_3
+                        }
+                        remove_building = wow_training_ground_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_training_ground_2
+                        }
+                        remove_building = wow_training_ground_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_training_ground_1
+                        }
+                        remove_building = wow_training_ground_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_road_3
+                        }
+                        remove_building = wow_road_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_road_2
+                        }
+                        remove_building = wow_road_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_road_1
+                        }
+                        remove_building = wow_road_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_town_hall_3
+                        }
+                        remove_building = wow_town_hall_3
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_town_hall_2
+                        }
+                        remove_building = wow_town_hall_2
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_town_hall_1
+                        }
+                        remove_building = wow_town_hall_1
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_manufactory
+                        }
+                        remove_building = wow_manufactory
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_garrison
+                        }
+                        remove_building = wow_garrison
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_arcane_tower
+                        }
+                        remove_building = wow_arcane_tower
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_city_barracks
+                        }
+                        remove_building = wow_city_barracks
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_stables
+                        }
+                        remove_building = wow_stables
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_mana_conduit
+                        }
+                        remove_building = wow_mana_conduit
+                    }
+                    
+                    else_if = {
+                        limit = {
+                            has_building = wow_portal
+                        }
+                        remove_building = wow_portal
+                    }
+                    else_if = {
+                        limit = {
+                            has_building = wow_naval_barracks
+                        }
+                        remove_building = wow_naval_barracks
+                    }
+                }
+            }
+		}
+        
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
+    

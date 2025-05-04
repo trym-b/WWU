@@ -1,0 +1,728 @@
+#-----------------------------------
+# On Actions
+#-----------------------------------
+on_startup__archavon = {
+        country_event = { id = wwu_archavon.1 }
+}
+
+on_yearly_pulse__archavon = {
+
+    # Cleanup Modifiers if not owned by Vault of Archavon or someone with reward that prevents it
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_1 }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_1_b }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_1_grey }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_2 }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_2_b }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_2_grey }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_3 }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_3_b }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_3_grey }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_4 }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_4_b }
+    cleanup_archavon_province_modifier = { MODIFIER = archavon_trap_4_grey }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_1 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_2 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_3 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_4 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_5 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_6 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_7 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_8 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_9 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_10 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_11 }
+    cleanup_archavon_province_modifier = { MODIFIER = titan_facility_12 }
+    upgrade_archavon_province_modifier = yes
+
+
+    country_event = { id = wwu_archavon.2 }
+
+}
+#-----------------------------------
+# Misc
+#-----------------------------------
+cleanup_archavon_province_modifier = {
+    if = {
+        limit = {
+            any_owned_province = {
+                has_province_modifier = $MODIFIER$
+            }
+            NOT = { has_country_flag = archavon_start_modifiers }
+        }
+        
+        every_owned_province = {
+            limit = {
+                has_province_modifier = $MODIFIER$
+            }
+            remove_province_modifier = $MODIFIER$
+        }
+    }
+}
+
+remove_archavon_province_modifier = {
+    if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_1
+            }
+        }
+        remove_province_modifier = titan_facility_1
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_2
+            }
+        }
+        remove_province_modifier = titan_facility_2
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_3
+            }
+        }
+        remove_province_modifier = titan_facility_3
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_4
+            }
+        }
+        remove_province_modifier = titan_facility_4
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_5
+            }
+        }
+        remove_province_modifier = titan_facility_5
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_6
+            }
+        }
+        remove_province_modifier = titan_facility_6
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_7
+            }
+        }
+        remove_province_modifier = titan_facility_7
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_8
+            }
+        }
+        remove_province_modifier = titan_facility_8
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_9
+            }
+        }
+        remove_province_modifier = titan_facility_9
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_10
+            }
+        }
+        remove_province_modifier = titan_facility_10
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_11
+            }
+        }
+        remove_province_modifier = titan_facility_11
+    }
+    else_if = {
+        limit = {
+            3224 = {
+                has_province_modifier = titan_facility_12
+            }
+        }
+        remove_province_modifier = titan_facility_12
+    }
+}
+
+upgrade_archavon_province_modifier = {
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 10
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 20
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_1
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_1
+                    duration = -1
+                    desc = titan_facility_1_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 20
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 30
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_2
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_2
+                    duration = -1
+                    desc = titan_facility_2_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 30
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 40
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_3
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_3
+                    duration = -1
+                    desc = titan_facility_3_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 40
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 50
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_4
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_4
+                    duration = -1
+                    desc = titan_facility_4_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 50
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 60
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_5
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_5
+                    duration = -1
+                    desc = titan_facility_5_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 60
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 70
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_6
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_6
+                    duration = -1
+                    desc = titan_facility_6_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 70
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 80
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_7
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_7
+                    duration = -1
+                    desc = titan_facility_7_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 80
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 90
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_8
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_8
+                    duration = -1
+                    desc = titan_facility_8_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 90
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 100
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_9
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_9
+                    duration = -1
+                    desc = titan_facility_9_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 100
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 110
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_10
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_10
+                    duration = -1
+                    desc = titan_facility_10_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 110
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 120
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_11
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_11
+                    duration = -1
+                    desc = titan_facility_11_desc
+                }    
+            }
+        }
+    }
+
+    if = {
+        limit = {
+                check_variable = {
+                    which = archavon_titans_facility
+                    value = 120
+                }
+                NOT = {
+                    check_variable = {
+                        which = archavon_titans_facility
+                        value = 130
+                    }
+                }
+                3224 = {
+                    NOT = {
+                    has_province_modifier = titan_facility_12
+                    }
+                }
+        }
+        
+        every_owned_province = {
+            limit = {
+                OR = {
+                    has_province_modifier = titan_facility_1
+                    has_province_modifier = titan_facility_2
+                    has_province_modifier = titan_facility_3
+                    has_province_modifier = titan_facility_4
+                    has_province_modifier = titan_facility_5
+                    has_province_modifier = titan_facility_6
+                    has_province_modifier = titan_facility_7
+                    has_province_modifier = titan_facility_8
+                    has_province_modifier = titan_facility_9
+                    has_province_modifier = titan_facility_10
+                    has_province_modifier = titan_facility_11
+                    has_province_modifier = titan_facility_12
+                }
+            }
+            remove_archavon_province_modifier = yes
+            3224 = {
+                add_permanent_province_modifier = {
+                    name = titan_facility_12
+                    duration = -1
+                    desc = titan_facility_12_desc
+                }    
+            }
+        }
+    }
+
+}
+
+
