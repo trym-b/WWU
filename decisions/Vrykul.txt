@@ -1,3 +1,4 @@
+# Mission Nessesary
 country_decisions = {
     the_great_game = {
         potential = {
@@ -16,6 +17,60 @@ country_decisions = {
             add_country_modifier = {
                 name = great_game_cooldown
                 duration = 1460
+            }
+        }
+    }
+}
+
+# Vrykul Flavour
+country_decisions = {
+    vrykul_host_feast = {
+        potential = {
+            culture_group = culture_group_vrykul
+            NOT = { has_country_modifier = vrykul_flavour_hosting_feast }
+        }
+        allow = {
+            adm_power = 50
+            treasury = 100
+            NOT = { has_country_modifier = vrykul_flavour_hosting_feast }
+        }
+        effect = {
+            add_adm_power = -50
+            add_treasury = -100
+            add_prestige = 5
+
+            add_country_modifier = {
+                name = vrykul_flavour_hosting_feast
+                duration = 3650
+            }
+        }
+    }
+    vrykul_organize_tournaments = {
+        potential = {
+            culture_group = culture_group_vrykul
+            NOT = { has_country_modifier = vrykul_flavour_organize_tournament }
+        }
+        allow = {
+            treasury = 200
+            adm_power = 25
+            dip_power = 25
+            mil_power = 25
+            NOT = { has_country_modifier = vrykul_flavour_organize_tournament }
+        }
+        effect = {
+            add_treasury = -200
+            add_adm_power = -25
+            add_dip_power = -25
+            add_mil_power = -25
+            add_prestige = 5
+
+            create_general = {
+                tradition = 50
+            }
+
+            add_country_modifier = {
+                name = vrykul_flavour_organize_tournament
+                duration = 3650
             }
         }
     }
