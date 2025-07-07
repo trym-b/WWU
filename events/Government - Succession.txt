@@ -1591,5 +1591,96 @@ country_event = {
 #	}
 #}
 
+# Empire of Azj-Kahet
+country_event = {
+	id = wwu_government_succession.30
+	title = wwu_government_succession.30.title
+	desc = wwu_government_succession.30.desc
+	picture = AZJOL_NERUB_eventPicture
+	
+	is_triggered_only = yes
 
+	trigger = {
+        has_government_attribute = succession_kaheti
+	}
+	
+    immediate = {
+        hidden_effect = {
+            set_country_flag = skip_next_succession_event
+        }
+    }
+    
+    # The spawn of the current [Root.Monarch.GetTitle] shall ascend
+	option = {
+		name = wwu_government_succession.29.option.a
 
+		define_ruler = {
+            hide_skills = yes
+            claim = 100
+            min_age = 50
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A member of the Sureki shall ascend
+	option = {
+		name = wwu_government_succession.29.option.b
+
+		define_ruler = {
+            dip = -1
+            adm = -1
+            mil = 4
+            hide_skills = yes
+            claim = 75
+            min_age = 100
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A member of the Direweb shall ascend
+	option = {
+		name = wwu_government_succession.29.option.c
+
+		define_ruler = {
+            dip = -1
+            adm = 4
+            mil = -1
+            hide_skills = yes
+            claim = 75
+            min_age = 100
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # A member of the Dreadstrike shall ascend
+	option = {
+		name = wwu_government_succession.29.option.d
+
+		define_ruler = {
+            dip = 4
+            adm = -1
+            mil = -1
+            hide_skills = yes
+            claim = 75
+            min_age = 100
+        }
+		
+		ai_chance = {
+			factor = 25
+		}
+	}
+    
+    # Spawn pretenders if legitimacy is low
+    after = {
+        ruler_succession_rebel_spawn_legitimacy = yes
+    }
+}

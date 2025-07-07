@@ -2062,7 +2062,7 @@ silithid_lair_reform = {
 # Used by Forsaken by completing mission "P14_build_a_military_state"
 the_military_state_forsaken_reform = {
     icon                        = "dark_ranger"
-    legacy_equivalent           = autocracy_legacy
+    legacy_equivalent           = the_military_state_forsaken_legacy
     valid_for_new_country       = no
     allow_normal_conversion     = no 
 	allow_convert               = no 
@@ -2107,7 +2107,7 @@ the_military_state_forsaken_reform = {
 # Used by Forsaken
 the_forsaken_reform = {
     icon                        = "the_forsaken"
-    legacy_equivalent           = autocracy_legacy
+    legacy_equivalent           = the_forsaken_legacy
     valid_for_new_country       = no
     allow_normal_conversion     = no 
 	allow_convert               = no 
@@ -2141,4 +2141,92 @@ the_forsaken_reform = {
 			have_had_reform = the_military_state_forsaken_reform
         }
     }
+}
+
+azj_kahet_empire_reform = {
+	icon                        = "kaheti"
+    legacy_equivalent           = azj_kahet_empire_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+    heir    = no
+    queen   = no
+    
+	modifiers = {
+        idea_cost = -0.1
+        global_manpower_modifier = 0.25
+        
+        land_forcelimit_modifier = 0.1
+        land_forcelimit = 5
+        
+        governing_capacity = 150
+	}
+	
+    custom_attributes = {
+		locked_government_type = yes
+        succession_kaheti = yes
+        block_pretenders = yes
+        enables_automatic_spellcasting_ruler = yes
+	}
+    
+    potential = {
+        OR = {
+            have_had_reform = azj_kahet_empire_reform
+            culture_group = culture_group_kaheti
+        }
+    }
+    
+	ai = { factor = 0 }
+}
+
+hallowfall_expedition_reform = {
+	icon                        = "hallowfall"
+	legacy_equivalent           = hallowfall_expedition_legacy
+    valid_for_new_country       = no 
+    allow_normal_conversion     = no 
+	allow_convert               = no 
+    valid_for_nation_designer   = yes
+	nation_designer_cost        = 0
+    lock_level_when_selected    = yes
+    
+	modifiers = {
+        army_tradition_decay = -0.01
+        prestige_from_land = 0.1
+        fort_maintenance_modifier = -0.25
+        leader_cost = -0.15
+
+        allow_free_estate_privilege_revocation = yes
+        mil_advisor_cost = -0.15
+
+        governing_capacity = 100
+        
+        max_absolutism = 15
+	}
+	
+    conditional = {
+        allow = {
+            has_dlc = "Cradle of Civilization"
+        }
+        
+        government_abilities = {
+            autocratic_strength_mechanic
+        }
+    }
+    
+    custom_attributes = {
+		locked_government_type = yes
+	}
+    
+    potential = {
+        OR = {
+            tag = HFE
+            was_tag = HFE
+        }
+    }
+    
+	ai = { factor = 0 }
 }
