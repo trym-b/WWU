@@ -2173,6 +2173,25 @@ on_monthly_pulse__racial_system = {
                 duration = -1
             }
         }
+		# Sasquatch
+        if = {
+            limit = {
+                technology_group = tech_sasquash
+                OR = {
+                    NOT = { has_country_modifier = sasquatch_administration }
+                    NOT = { has_country_modifier = sasquatch_military }
+                }
+            }
+
+            add_country_modifier = {
+                name = sasquatch_administration
+                duration = -1
+            }
+            add_country_modifier = {
+                name = sasquatch_military
+                duration = -1
+            }
+        }
     }
     
     # Human
@@ -3998,6 +4017,22 @@ on_monthly_pulse__racial_system = {
 
         remove_country_modifier = night_fae_administration
         remove_country_modifier = night_fae_military
+    }
+	# Sasquatch
+    if = {
+        limit = {
+            OR = {
+                has_country_modifier = sasquatch_administration
+                has_country_modifier = sasquatch_military
+            }
+            OR = {
+                NOT = { has_global_flag = enabled_racial_modifiers }
+                NOT = { technology_group = tech_sasquash }
+            }
+        }
+
+        remove_country_modifier = sasquatch_administration
+        remove_country_modifier = sasquatch_military
     }
     # Ghost
     #if = {
