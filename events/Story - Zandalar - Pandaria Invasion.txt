@@ -290,7 +290,10 @@ country_event = {
                 add_core = ZFC
             }
             
-			create_march = ZFC
+			create_subject = {              
+				subject_type = vassal      
+				subject = ZFC       
+			}
             
             add_country_modifier = { 
                 name = thunderking_lookingfor_cooldown
@@ -298,9 +301,6 @@ country_event = {
                 hidden = yes
             }
             
-            discover_zandalar = yes
-            discover_pandaria = yes
-            discover_paradise_isles = yes
         }
     }
     
@@ -309,7 +309,7 @@ country_event = {
             country_event = { id = wwu_zandalar_pandaria_invasion.11 days = 1 }
         }
         
-        country_event = { id = wwu_zandalar_pandaria_invasion.12 days = 60 }
+        country_event = { id = wwu_zandalar_pandaria_invasion.12 days = 1 }
     }
 }          
 		
@@ -379,6 +379,10 @@ country_event = {
             duration = 7000
             hidden = yes
         }
+        discover_pandaria = yes
+        discover_zandalar = yes
+        discover_paradise_isles = yes
+        discover_south_seas = yes
     }
 }
 
@@ -394,16 +398,42 @@ country_event = {
 	mean_time_to_happen = {
 		days = 1
 	}
-        
+    immediate = {
+		hidden_effect = {
+
+			random_country = {
+				limit = {
+					OR = {
+					culture_group = culture_group_jinyu
+                    culture_group = culture_group_hozen
+                    culture_group = culture_group_pandaren
+					}
+					capital_scope = { 
+                        superregion = pandaria_superregion
+                    }
+					NOT = { tag = ROOT }
+				}
+				save_global_event_target_as = panda_target
+			}
+			}
+		if = {
+			limit = {
+				exists = event_target:panda_target
+
+			}
+
+        declare_war_with_cb = {
+            who = event_target:panda_target
+            casus_belli = cb_zandalar_war_against_pandaria
+        }
+		}
+    }
     option = {
         name = wwu_zandalar_pandaria_invasion.12.option.a
         
         set_country_flag = zandalar_war_against_pandaria_started
             
-        declare_war_with_cb = {
-            who = GOL
-            casus_belli = cb_zandalar_war_against_pandaria
-        }
+
         
         every_country = {
             limit = {
@@ -412,255 +442,1377 @@ country_event = {
                     culture_group = culture_group_hozen
                     culture_group = culture_group_pandaren
                 }
+                    capital_scope = { 
+                        superregion = pandaria_superregion
+                    }
             }
-            join_all_defensive_wars_of = GOL
+            join_all_defensive_wars_of = event_target:panda_target
         }
         
-        every_country = {
-            limit = {
-                OR = {
-                    is_subject_of = ROOT
-                    culture_group = culture_group_mogu
-                    has_country_flag = zandalari_troll_meeting_drakkari_joined
-                    has_country_flag = zandalari_troll_meeting_farraki_joined
-                    has_country_flag = zandalari_troll_meeting_gurubashi_joined
-                    has_country_flag = zandalari_troll_meeting_amani_joined
-                }
-            }
-            join_all_offensive_wars_of = A78
-        }
     }
+	after = {
+		event_target:panda_target = {
+			set_country_flag = zandalar_is_pandaria_defender
+		}
+		country_event = { id = wwu_zandalar_pandaria_invasion.13 days = 3 }
+	}
 }
-
-# Partition of Pandaria
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.20
-    title = wwu_zandalar_pandaria_invasion.20.title
-	desc = wwu_zandalar_pandaria_invasion.20.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    trigger = {
-        NOT = { has_global_flag = partition_of_pandaria }
-        tag = A78
-        has_country_flag = zandalar_war_against_pandaria_started
-        
-		is_at_war = no
-        
-		OR = {
-            has_country_flag = zandalar_war_against_pandaria_win
-            has_country_flag = zandalar_war_against_pandaria_lost
-        }
-    }
 	
-	mean_time_to_happen = {
-		days = 1
+country_event = {
+    id = wwu_zandalar_pandaria_invasion.13
+    title = wwu_zandalar_pandaria_invasion.13.title
+    desc = wwu_zandalar_pandaria_invasion.13.desc
+    picture = ZANDALAR_12_eventPicture
+	hidden = yes
+    is_triggered_only = yes
+
+		option = {
+		name = "wwu_zandalar_pandaria_invasion.23.option.a"
+			ROOT = {
+				every_country = {
+					limit = {
+						is_in_war = {
+							attackers = ROOT
+							defenders = THIS
+							casus_belli = cb_zandalar_war_against_pandaria
+						}
+					}
+					set_country_flag = zandalar_defender_for_resolution
+				}
+			}
+		}
 	}
     
-    immediate = {
-        hidden_effect = {
-            set_global_flag = partition_of_pandaria 
-        }
-    }
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.20.option.a
-        
-        inherit = ZFC
+#Pandaria participation
+country_event = {
+    id = wwu_zandalar_pandaria_invasion.20
+    title = wwu_zandalar_pandaria_invasion.20.title
+    desc = wwu_zandalar_pandaria_invasion.20.desc
+    picture = ZANDALAR_12_eventPicture
+
+    is_triggered_only = yes
+		trigger = {
+			tag = A78
+			has_country_flag = zandalar_war_against_pandaria_started
+			is_at_war = no
+			OR = {
+				AND = {
+					has_country_flag = zandalar_war_against_pandaria_win
+					any_country = {
+						has_country_flag = zandalar_defender_for_resolution
+					}
+				}
+				AND = {
+				has_country_flag = zandalar_war_against_pandaria_lost
+				NOT = { has_country_flag = zandalar_war_against_pandaria_lost_end }
+				}
+			}
+		}
+
+
+	immediate = {
+		random_country = {
+			limit = {
+				has_country_flag = zandalar_defender_for_resolution
+			}
+			save_event_target_as = current_defender
+		}
+	}
+
+	option = {
+	trigger = {
+	has_country_flag = zandalar_war_against_pandaria_win
+	}
+		name = "wwu_zandalar_pandaria_invasion.20.option.a"
+		ai_chance = { factor = 10 }
+		
+		if = {
+		limit = {
+		NOT = { has_country_flag = zandalar_enterprise_zul }
+		}
+		create_subject = {  
+			subject_type = commercial_enterprise
+			subject = ZFC
+		}
+		set_country_flag = zandalar_enterprise_zul
+		ZFC = {
+		override_country_name = zandalar_enterprise
+		remove_country_modifier = zandalar_invasion_force_upgrade
+		change_government = republic
+		add_republican_tradition = 100
+		set_government_rank = 2
+		}
+		custom_tooltip = zandalari_zfc_enterprise_claim
+		hidden_effect = {
+		every_province = {
+		limit = {
+		superregion = pandaria_superregion
+		NOT = {
+			owned_by = ROOT
+		}
+		}
+		add_permanent_claim = ZFC
+		}
+		}
+		}
+		
+		
+		event_target:current_defender = {
+		clr_country_flag = zandalar_defender_for_resolution
+		}
+		
+		ZFC = {
+		inherit = event_target:current_defender
+		}
+
+		if = {
+		limit = {
+		event_target:current_defender = {
+		NOT = { total_development = 33 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_8_2
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 33
+		NOT = { total_development = 66 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_16_4
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 66
+		NOT = { total_development = 100 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_24_6
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 100
+		NOT = { total_development = 133 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_32_8
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 133
+		NOT = { total_development = 166 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_40_10
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 166
+		NOT = { total_development = 200 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_48_12
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 200
+		NOT = { total_development = 233 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_56_14
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 233
+		NOT = { total_development = 266 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_64_16
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 266
+		NOT = { total_development = 300 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_72_18
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 300
+		}
+		}
+		custom_tooltip = zandalari_zfc_80_20
+		}
+
+
+
+		hidden_effect = {
+		ZFC = {
+		every_owned_province = {
+		kill_units = {
+			who = ZFC   # optional, only affect <scope>'s units. Scopes enemy, owner and controller work here.
+			amount = 100
+		}
+		}
+		}
+		# AE lokalna
+		if = {
+		limit = {
+		event_target:current_defender = {
+		NOT = { total_development = 33 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 8 
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 2
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 33
+		NOT = { total_development = 66 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 16 
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 4
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 66
+		NOT = { total_development = 100 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 24 
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 6
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 100
+		NOT = { total_development = 133 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 32
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 8
+			}
+		}
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 133
+		NOT = { total_development = 166 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 40
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 10
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 166
+		NOT = { total_development = 200 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 48
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 12
+			}
+		}
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 200
+		NOT = { total_development = 233 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 54
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 14
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 233
+		NOT = { total_development = 266 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 62
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 16
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 266
+		NOT = { total_development = 300 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 70
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 18
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 300
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 78
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 20
+			}
+		}
+		}
+		
+		}
+
+		# Zapętl event, jeśli są kolejni
+		if = {
+			limit = {
+				any_country = { has_country_flag = zandalar_defender_for_resolution }
+			}
+			country_event = { id = wwu_zandalar_pandaria_invasion.20 }
+		}
+	}
+
+	option = {
+	trigger = {
+	has_country_flag = zandalar_war_against_pandaria_win
+	}
+		name = "wwu_zandalar_pandaria_invasion.20.option.b"
+		ai_chance = { factor = 5 }
+		
+		if = {
+		limit = {
+		NOT = { has_country_flag = zandalar_enterprise_zul }
+		}
+		create_subject = {  
+			subject_type = commercial_enterprise
+			subject = ZFC
+		}
+		set_country_flag = zandalar_enterprise_zul
+		ZFC = {
+		override_country_name = zandalar_enterprise
+		remove_country_modifier = zandalar_invasion_force_upgrade
+		change_government = republic
+		add_republican_tradition = 100
+		set_government_rank = 2
+		}
+		custom_tooltip = zandalari_zfc_enterprise_claim
+		hidden_effect = {
+		every_province = {
+		limit = {
+		superregion = pandaria_superregion
+		NOT = {
+			owned_by = ROOT
+		}
+		}
+		add_permanent_claim = ZFC
+		}
+		}
+		}
+		
+		event_target:current_defender = {
+		clr_country_flag = zandalar_defender_for_resolution
+		}
+		
+		ZFC = {
+			create_subject = {              
+				subject_type = vassal      
+				subject = event_target:current_defender          
+			}
+		}
+		
+		if = {
+		limit = {
+		event_target:current_defender = {
+		NOT = { total_development = 33 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_5_1
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 33
+		NOT = { total_development = 66 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_10_2
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 66
+		NOT = { total_development = 100 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_15_3
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 100
+		NOT = { total_development = 133 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_20_4
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 133
+		NOT = { total_development = 166 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_25_5
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 166
+		NOT = { total_development = 200 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_30_6
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 200
+		NOT = { total_development = 233 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_35_7
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 233
+		NOT = { total_development = 266 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_40_8
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 266
+		NOT = { total_development = 300 }
+		}
+		}
+		custom_tooltip = zandalari_zfc_45_9
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 300
+		}
+		}
+		custom_tooltip = zandalari_zfc_50_10
+		}
 		
 		hidden_effect = {
-            # Zouchin Village
-            1904 = {
-                remove_core = ZFC
-            }
-        }
-        
-		if = {
-            limit = {
-                has_country_flag = zandalar_war_against_pandaria_win
-            }
-            
-		    add_country_modifier = { 
-                name = zandalari_mogu_win_war_for_zandalar
-                duration = 18250
-            }
-            
-            # Fate of X
-            country_event = { id = wwu_zandalar_pandaria_invasion.21 days = 3 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.22 days = 6 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.23 days = 9 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.24 days = 12 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.25 days = 15 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.26 days = 18 }
-            country_event = { id = wwu_zandalar_pandaria_invasion.27 days = 21 }
+		every_country = {
+		white_peace = event_target:current_defender
+		}
+		}
+		
+
+		
+		hidden_effect = {
+		ZFC = {
+		every_owned_province = {
+		kill_units = {
+			who = ZFC   # optional, only affect <scope>'s units. Scopes enemy, owner and controller work here.
+			amount = 100
+		}
+		}
 		}
 		if = {
-            limit = {
-                has_country_flag = zandalar_war_against_pandaria_lost
-            }
-            
-            add_stability = -1
-            
-            increase_zul_power_by_15 = yes
-            increase_zul_influence_by_10 = yes
-        }
-    }
-}
-    
-# Fate of the Shado-Pan
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.21
-    title = wwu_zandalar_pandaria_invasion.21.title
-	desc = wwu_zandalar_pandaria_invasion.21.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.21.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P37 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.21.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P37 }
-    }
-}
-
-# Fate of Xu'en
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.22
-    title = wwu_zandalar_pandaria_invasion.22.title
-	desc = wwu_zandalar_pandaria_invasion.22.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.22.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P66 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.22.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P66 }
-    }
-}
-
-# Fate of Yu'lon
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.23
-    title = wwu_zandalar_pandaria_invasion.23.title
-	desc = wwu_zandalar_pandaria_invasion.23.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.23.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P63 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.23.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P63 }
-    }
-}
-
-# Fate of Chi'ji
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.24
-    title = wwu_zandalar_pandaria_invasion.24.title
-	desc = wwu_zandalar_pandaria_invasion.24.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.24.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P65 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.24.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P65 }
-    }
-}
-
-# Fate of Niuzao
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.25
-    title = wwu_zandalar_pandaria_invasion.25.title
-	desc = wwu_zandalar_pandaria_invasion.25.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.25.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P64 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.25.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P64 }
-    }
-}
-
-# Fate of the Tiller's Union
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.26
-    title = wwu_zandalar_pandaria_invasion.26.title
-	desc = wwu_zandalar_pandaria_invasion.26.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.26.option.a
-        
-        partition_pandaria_nation_for_trolls = { TAG = P84 }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.26.option.b
-        
-        partition_pandaria_nation_for_mogu = { TAG = P84 }
-    }
-}
-
-# Fate of the Golden Lotus
-country_event = {
-	id = wwu_zandalar_pandaria_invasion.27
-    title = wwu_zandalar_pandaria_invasion.27.title
-	desc = wwu_zandalar_pandaria_invasion.27.desc
-	picture = ZANDALAR_12_eventPicture
-    
-	is_triggered_only = yes
-    
-    option = {
-        name = wwu_zandalar_pandaria_invasion.27.option.a
-
-        inherit_pandaria_nation_for_trolls = { TAG = GOL }
-    }
-
-    option = {
-        name = wwu_zandalar_pandaria_invasion.27.option.b
+		limit = {
+		event_target:current_defender = {
+		NOT = { total_development = 33 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 5 
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 1
+			}
+		}
+		}
 		
-        inherit_pandaria_nation_for_mogu = { TAG = GOL }
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 33
+		NOT = { total_development = 66 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 10
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 2
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 66
+		NOT = { total_development = 100 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 15
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 3
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 100
+		NOT = { total_development = 133 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 20
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 4
+			}
+		}
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 133
+		NOT = { total_development = 166 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 25
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 5
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 166
+		NOT = { total_development = 200 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 30
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 6
+			}
+		}
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 200
+		NOT = { total_development = 233 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 35
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 7
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 233
+		NOT = { total_development = 266 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 40
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 8
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 266
+		NOT = { total_development = 300 }
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 45
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 9
+			}
+		}
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 300
+		}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				capital_scope = {
+					superregion = pandaria_superregion
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 50
+			}
+		}
+		every_country = {
+			limit = {
+				NOT = { is_subject = yes }
+				NOT = { alliance_with = ROOT }
+				NOT = {
+					capital_scope = {
+						superregion = pandaria_superregion
+					}
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 10
+			}
+		}
+		}
+		}
+
+		if = {
+			limit = {
+				any_country = { has_country_flag = zandalar_defender_for_resolution }
+			}
+			country_event = { id = wwu_zandalar_pandaria_invasion.20 }
+		}
+	}
+
+	option = {
+	trigger = {
+	has_country_flag = zandalar_war_against_pandaria_win
+	}
+		name = "wwu_zandalar_pandaria_invasion.20.option.c"
+		
+		if = {
+		limit = {
+		NOT = { has_country_flag = zandalar_enterprise_zul }
+		}
+		create_subject = {  
+			subject_type = commercial_enterprise
+			subject = ZFC
+		}
+		set_country_flag = zandalar_enterprise_zul
+		ZFC = {
+		override_country_name = zandalar_enterprise
+		remove_country_modifier = zandalar_invasion_force_upgrade
+		change_government = republic
+		add_republican_tradition = 100
+		set_government_rank = 2
+		}
+		custom_tooltip = zandalari_zfc_enterprise_claim
+		hidden_effect = {
+		every_province = {
+		limit = {
+		superregion = pandaria_superregion
+		NOT = {
+			owned_by = ROOT
+		}
+		}
+		add_permanent_claim = ZFC
+		}
+		}
+		}
+		
+		ai_chance = { factor = 3 }
+		
+		hidden_effect = {
+		ZFC = {
+		every_owned_province = {
+		kill_units = {
+			who = ZFC   # optional, only affect <scope>'s units. Scopes enemy, owner and controller work here.
+			amount = 100
+		}
+		}
+		}
+		}
+		if = {
+		limit = {
+		event_target:current_defender = {
+		NOT = { total_development = 33 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -50 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 50
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 33
+		NOT = { total_development = 66 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -100 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 100
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 66
+		NOT = { total_development = 100 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -150 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 150
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 100
+		NOT = { total_development = 133 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -200 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 200
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 133
+		NOT = { total_development = 166 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -250 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 250
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 166
+		NOT = { total_development = 200 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -300 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 300
+		}
+
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 200
+		NOT = { total_development = 233 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -350 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 350
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 233
+		NOT = { total_development = 266 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -400 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 400
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 266
+		NOT = { total_development = 300 }
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -450 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 450
+		}
+		
+		else_if = {
+		limit = {
+		event_target:current_defender = {
+		total_development = 300
+		}
+		}
+		event_target:current_defender = {
+			add_treasury = -500 # 
+			clr_country_flag = zandalar_defender_for_resolution
+		}
+		add_treasury = 500
+		}
+
+		if = {
+			limit = {
+				any_country = { has_country_flag = zandalar_defender_for_resolution }
+			}
+			country_event = { id = wwu_zandalar_pandaria_invasion.20 }
+		}
+	}
+
+    option = {
+	trigger = {
+	has_country_flag = zandalar_war_against_pandaria_lost
+	}
+        name = "wwu_zandalar_pandaria_invasion.20.option.d"
+            add_stability = -3
+            increase_zul_power_by_10 = yes
+            increase_zul_influence_by_10 = yes
+			ZFC = {
+			remove_country_modifier = zandalar_invasion_force_upgrade
+			}
+			set_country_flag = zandalar_war_against_pandaria_lost_end
     }
+	
+	after = {
+		if = {
+			limit = {
+				any_country = { has_country_flag = zandalar_defender_for_resolution }
+			}
+			country_event = { id = wwu_zandalar_pandaria_invasion.101 }
+		}
+	}
 }
+
+
 
 # Lei Shen's Body
 country_event = {
@@ -754,9 +1906,16 @@ country_event = {
                 culture_group = culture_group_mogu
             }
             
-			join_all_defensive_wars_of = GOL
+			join_all_defensive_wars_of = event_target:panda_target
+			
         }
+		
+		
     }
+	after = {
+	country_event = { id = wwu_zandalar_pandaria_invasion.13 days = 3 }
+	}
+	
 }
 
 # Rise of the Thunder King
@@ -829,6 +1988,22 @@ country_event = {
 	option = {
 		name = wwu_zandalar_pandaria_invasion.100.option.a
         
-        country_event = { id =wwu_zandalar_pandaria_invasion.1 }
+        country_event = { id = wwu_zandalar_pandaria_invasion.1 }
+    }
+}
+
+country_event = {
+	id = wwu_zandalar_pandaria_invasion.101
+	title = wwu_zandalar_pandaria_invasion.101.title
+	desc = wwu_zandalar_pandaria_invasion.101.desc
+	picture = ZANDALAR_12_eventPicture
+    
+    hidden = yes
+	is_triggered_only = yes
+    
+	option = {
+		name = wwu_zandalar_pandaria_invasion.101.option.a
+        
+        country_event = { id = wwu_zandalar_pandaria_invasion.20 }
     }
 }
