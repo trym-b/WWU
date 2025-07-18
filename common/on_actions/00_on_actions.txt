@@ -1056,10 +1056,10 @@ on_yearly_pulse = {
         # Scourge
         wwu_scourge.201                             # AI Helper: spawn Scourge of Lordaeron for the AI if north EK is not touched by the player
         wwu_scourge.301                             # Clear Plague Flag
-		
-		#Secret Society of Sasquatch
-		wwu_secret_society_discovered.1             # Secret Society of Sasquatch is revealed
+        
+		# Secret Societ of Sasquatch
 		wwu_secret_society_discovered.2             # Secret Society got eradicated
+		
     }
     
     # Random Events
@@ -3164,6 +3164,21 @@ on_estate_removed = {
 # ROOT = Province, FROM = Owner Country / Province if Minority Expulsion
 on_colony_established = {
     
+}
+#Secret Society of Sasquatch
+on_colony_finished = { #ROOT - Province
+    if = {
+        limit = {
+            NOT = { has_global_flag = secret_society_revealed }
+			OR = {
+				province_id = 6347
+				province_id = 6348
+			}
+        }
+        owner = {
+            country_event = { id = wwu_secret_society_discovered.1 days = 50 random = 100 }
+        }
+    }
 }
 
 # ROOT = Country, FROM = Overlord Country
