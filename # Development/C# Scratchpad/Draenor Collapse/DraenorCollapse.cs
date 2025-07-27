@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EU4_Scratchpad;
+namespace EU4_Scratchpad.Draenor_Collapse;
 
 public static class DraenorCollapse
 {

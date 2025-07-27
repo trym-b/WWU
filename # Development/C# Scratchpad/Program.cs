@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EU4_Scratchpad.Unit_Generator;
+using System.ComponentModel.DataAnnotations;
 
 namespace EU4_Scratchpad
 {
@@ -8,7 +9,7 @@ namespace EU4_Scratchpad
         {
             SetupOutputFolder();
 
-
+            UnitGenerator.GenerateUnits();
         }
 
         public static void SetupOutputFolder()
