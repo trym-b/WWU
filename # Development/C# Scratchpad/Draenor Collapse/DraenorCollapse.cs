@@ -138,8 +138,8 @@ public static class DraenorCollapse
                     $"\t{id} = {{\r\n" +
                     "\t\tcede_province = event_target:cur_province_owner\r\n" +
                     "\t\tadd_core = event_target:cur_province_owner\r\n" +
-                    "\t\tchange_culture = event_target:cur_province_owner\r\n" +
-                    "\t\tchange_religion = event_target:cur_province_owner\r\n" +
+                    "\t\tchange_culture = event_target:cur_province\r\n" +
+                    "\t\tchange_religion = event_target:cur_province\r\n" +
                     "\t\t\r\n" +
                     "\t\tcopy_over_base_tax = yes\r\n" +
                     "\t\tcopy_over_base_production = yes\r\n" +

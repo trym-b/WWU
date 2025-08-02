@@ -1,5 +1,9 @@
-﻿using EU4_Scratchpad.Unit_Generator;
+﻿using EU4_Scratchpad.Draenor_Collapse;
+using EU4_Scratchpad.Parser;
+using EU4_Scratchpad.Unit_Generator;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EU4_Scratchpad
 {
@@ -9,7 +13,7 @@ namespace EU4_Scratchpad
         {
             SetupOutputFolder();
 
-            UnitGenerator.GenerateUnits();
+            DraenorCollapse.DraenorProvinceTransfer();
         }
 
         public static void SetupOutputFolder()
@@ -21,5 +25,6 @@ namespace EU4_Scratchpad
                 Directory.CreateDirectory(outputDir);
             }
         }
+
     }
 }
