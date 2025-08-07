@@ -276,7 +276,7 @@ public static class TradeNodeAnalyzer
         {
             Load(path);
             DetectCycles();
-            WriteSortedTradeNodes(write);
+            //WriteSortedTradeNodes(write);
         }
         catch (Exception ex)
         {

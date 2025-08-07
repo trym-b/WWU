@@ -42,7 +42,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 4015 # 365 * 11
+                duration = 900 # 90 * 10
             }
             
             hidden_effect = {
@@ -98,7 +98,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 3285 # 365 * 9
+                duration = 900 # 90 * 10
             }
             
             hidden_effect = {
@@ -162,7 +162,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 16425 # 365 * 45
+                duration = 2700 # 90 * 30
             }
             
             hidden_effect = {
@@ -226,7 +226,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 10950 # 365 * 30
+                duration = 2250 # 90 * 25
             }
             
             hidden_effect = {
@@ -282,7 +282,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 1825 # 365 * 5
+                duration = 450 # 90 * 5
             }
             
             hidden_effect = {
@@ -338,7 +338,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 6935 # 365 * 19
+                duration = 1350 # 90 * 15
             }
             
             hidden_effect = {
@@ -394,7 +394,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 3650 # 365 * 10
+                duration = 900 # 90 * 10
             }
             
             hidden_effect = {
@@ -450,7 +450,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 5475 # 365 * 15
+                duration = 1350 # 90 * 15
             }
             
             hidden_effect = {
@@ -506,7 +506,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 2920 # 365 * 8
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -562,7 +562,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 1095 # 365 * 3
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -618,7 +618,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 365 # 365 * 1
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -674,7 +674,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 365 # 365 * 1
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -730,7 +730,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 365 # 365 * 0
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -786,7 +786,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 365 # 365 * 0
+                duration = 180 # 90 * 2
             }
             
             hidden_effect = {
@@ -842,7 +842,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 1460 # 365 * 4
+                duration = 450 # 90 * 5
             }
             
             hidden_effect = {
@@ -898,7 +898,7 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 365 # 365 * 0
+                duration = 450 # 90 * 5
             }
             
             hidden_effect = {
@@ -954,11 +954,67 @@ country_decisions = {
             
             add_country_modifier = {
                 name = researching_monuments
-                duration = 4015 # 365 * 11
+                duration = 450 # 90 * 5
             }
             
             hidden_effect = {
                 set_country_flag = monument_research_focus_shadowlands
+            }
+		}
+		
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+    investigate_monuments_khaz_algar = {
+		color = { 156 158 33 }
+        
+		potential = {
+            has_reform = wwu_culture_assimilation
+            NOT = { has_country_flag = block_monument_research_decision }
+            NOT = { has_country_flag = monument_research_khaz_algar }
+            NOT = { has_country_modifier = researching_monuments }
+            
+            any_owned_province = {
+                superregion = khaz_algar_superregion
+            }
+		}
+        
+		allow = {
+            has_reform = wwu_culture_assimilation
+            NOT = { has_country_flag = monument_research_khaz_algar }
+            NOT = { has_country_modifier = researching_monuments }
+			
+            # General
+            is_at_war = no	
+			stability = 1
+            
+			# Cost
+            adm_power = 200
+			dip_power = 200
+			mil_power = 200
+            
+            any_owned_province = {
+                superregion = khaz_algar_superregion
+            }
+		}
+        
+		effect = {
+            # Cost
+			add_adm_power = -200
+			add_dip_power = -200
+            add_mil_power = -200
+            
+            custom_tooltip = MONUMENT_RESEARCH_BEGINS
+            
+            add_country_modifier = {
+                name = researching_monuments
+                duration = 450 # 90 * 5
+            }
+            
+            hidden_effect = {
+                set_country_flag = monument_research_focus_khaz_algar
             }
 		}
 		

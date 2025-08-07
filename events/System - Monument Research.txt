@@ -815,3 +815,44 @@ country_event = {
         clear_monument_research_flags = yes
     }
 }
+
+# Research Complete! (Khaz Algar)
+country_event = {
+	id = wwu_monument_research.27
+	title = wwu_monument_research.27.title
+	desc = wwu_monument_research.27.desc
+	picture = DRAGON_EGG_eventPicture
+
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_country_modifier = researching_monuments } # This means it has finished
+        has_country_flag = monument_research_begun
+        has_country_flag = monument_research_focus_khaz_algar
+    }
+    
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = monument_research_begun
+            clr_country_flag = block_monument_research_decision
+        }
+    }
+	
+    mean_time_to_happen = {
+		days = 1
+	}
+    
+	option = {
+		name = wwu_monument_research.27.option.a
+        
+        custom_tooltip = FINISHED_RESEARCH_KHAZ_ALGAR
+        
+        hidden_effect = {
+            set_country_flag = monument_research_khaz_algar
+        }
+	}
+    
+    after = {
+        clear_monument_research_flags = yes
+    }
+}
