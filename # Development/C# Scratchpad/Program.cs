@@ -1,9 +1,5 @@
 ﻿using EU4_Scratchpad.Draenor_Collapse;
-using EU4_Scratchpad.Parser;
-using EU4_Scratchpad.Unit_Generator;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using EU4_Scratchpad.TradenodeAnalysis;
 
 namespace EU4_Scratchpad
 {
@@ -13,7 +9,7 @@ namespace EU4_Scratchpad
         {
             SetupOutputFolder();
 
-            DraenorCollapse.DraenorProvinceTransfer();
+            TradeNodeAnalyzer.Apply();
         }
 
         public static void SetupOutputFolder()
