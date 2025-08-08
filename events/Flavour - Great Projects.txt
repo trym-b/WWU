@@ -464,4 +464,53 @@ country_event = {
 	}
 }
 
-
+# Uther's Tomb
+country_event = {
+	id = wwu_great_projects.12
+	title = wwu_great_projects.12.title
+	desc = wwu_great_projects.12.desc
+	picture = LORD_OF_THE_ARENA_eventPicture
+	
+    is_triggered_only = yes
+    
+	trigger = {
+        NOT = { has_global_flag = setup_statue_uthers_tomb }
+        has_dlc = "Leviathan"
+        
+        NOT = { current_age = age_rise_of_the_horde }
+        NOT = { current_age = age_frozen_throne }
+        
+        technology_group = tech_human
+        religion = holy_light
+        
+        owns = 6341
+        
+        6341 = {
+            NOT = {
+                has_great_project = {
+                    type = gp_uthers_tomb
+                }
+            }
+        }
+	}
+    
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+    immediate = {
+        hidden_effect = { 
+            set_global_flag = setup_statue_uthers_tomb 
+        }
+    }
+    
+	option = {
+		name = wwu_great_projects.12.option.a
+		
+		6341 = {
+            add_great_project = {
+                type = gp_uthers_tomb
+            }
+        }
+	}
+}
