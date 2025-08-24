@@ -679,6 +679,27 @@ province_event = {
                     value = 1
                 }
             }
+            
+            if = {
+                limit = {
+                    owner = {
+                        check_variable = {
+                            which = undead_plague_incident
+                            value = 10
+                        }
+                    }
+                }
+                
+                clr_global_flag = undead_plague_active
+            }
+            else = {
+                owner = {
+                    change_variable = {
+                        which = undead_plague_incident
+                        value = 1
+                    }
+                }
+            }
         }
     }
     
@@ -689,6 +710,31 @@ province_event = {
             type = scourge_cultist_rebels
             size = 3
         }
+	}
+    
+    option = {
+		name = wwu_scourge.35.option.b
+        
+        trigger = {
+            owner = { adm_power = 25 }
+        }
+		
+        owner = { add_adm_power = -25 }
+        
+        spawn_rebels = {
+            type = scourge_cultist_rebels
+            size = 1
+        }
+	}
+    
+    option = {
+		name = wwu_scourge.35.option.c
+        
+        trigger = {
+            owner = { mil_power = 50 }
+        }
+		
+        owner = { add_mil_power = -50 }
 	}
 }
 
