@@ -641,21 +641,6 @@ province_event = {
                 is_subject_of = A08
             }
         }
-        # Limit random plagues to 5 incidents once Scourge of Lordaeron are of a decent size
-        if = {
-            limit = {
-                P52 = {
-                    num_of_cities = 10
-                }
-            }
-        
-            NOT = {
-                check_variable = {
-                    which = undead_plague_counter
-                    value = 5
-                }
-            }
-        }
     }
     
 	mean_time_to_happen = { 
@@ -669,22 +654,36 @@ province_event = {
                 has_country_modifier = mission_uthers_investigations
             }
         }
+        
+        modifier = {
+            factor = 1.5
+            
+            owner = {
+                tag = A08
+                stability = 3
+            }
+        }
+        
+        modifier = {
+            factor = 0.5
+            
+            owner = {
+                tag = A08
+                
+                num_of_owned_provinces_with = {
+                    value = 10
+                    
+                    OR = {
+                        trade_goods = resource_artifacts
+                        trade_goods = resource_fossils
+                    }
+                }
+            }
+        }
     }
     
     immediate = {
         hidden_effect = {
-            if = {
-                limit = {
-                    P52 = {
-                        num_of_cities = 10
-                    }
-                }
-                change_variable = {
-                    which = undead_plague_counter
-                    value = 1
-                }
-            }
-            
             if = {
                 limit = {
                     owner = {
