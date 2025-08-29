@@ -782,6 +782,97 @@ country_event = {
     }
 }
 
+# Arrival of Hive Zukk'ash
+country_event = {
+    id = wwu_aqir.106
+    title = wwu_aqir.106.title
+    desc = wwu_aqir.106.desc
+    picture = SILITHID_SWARMER_eventPicture
+
+    is_triggered_only = yes
+
+    major = yes
+
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = wwu_aqir.106.option.a
+
+        area_writhing_deep = {
+            cede_province = KKH
+            add_core = KKH
+            change_culture = culture_silithid
+            change_religion = cthun
+        }
+
+        hidden_effect = {
+            KKH = {
+                country_event = { id = wwu_general_nation_setup.1 days = 1 }
+            }
+        }
+
+        A97 = {
+            country_event = { id = wwu_aqir.107 days = 1 }
+        }
+    }
+}
+
+# Subjegation of Hive Zukk'ash
+country_event = {
+    id = wwu_aqir.107
+    title = wwu_aqir.107.title
+    desc = wwu_aqir.107.desc
+    picture = DARK_PACT_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = { days = 1 }
+
+    option = {
+        name = wwu_aqir.107.option.a
+
+        create_subject = {
+            subject_type = silithid_hive
+            who = KKH
+        }
+
+        region_feralas = {
+            add_permanent_claim = KKH
+        }
+    }
+}
+
+# Silithid Hives - Call to Arms for offensive War
+country_event = {
+    id = wwu_aqir.108
+    title = wwu_aqir.108.title
+    desc = wwu_aqir.108.desc
+    picture = DARK_PACT_eventPicture
+
+    is_triggered_only = yes
+
+    mean_time_to_happen = { days = 1 }
+
+    option = {
+        name = wwu_aqir.108.option.a
+
+        every_subject_country = {
+            limit = { is_subject_of_type  = silithid_hive }
+            limit = { has_opinion { who = A97 value = 50 } }
+            limit = { NOT = { liberty_desire = 50 } }
+
+            join_all_offensive_wars_of = A97
+        }
+
+        add_country_modifier = {
+            name = call_qiraji_minions_cd
+            duration = 1825 # 5 years
+        }
+    }
+}
+
 # AI HELPERS
 
 # Corrupt the Caverns of Time Helper

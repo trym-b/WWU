@@ -1,6 +1,6 @@
 country_decisions = {
     #--------------------------------
-    # General
+    # General 
     #--------------------------------
     summon_avatar_of_corruption = {
         potential = {
@@ -51,6 +51,8 @@ country_decisions = {
     #--------------------------------
     # Awaken C'Thun
 	awaken_cthun = {
+
+        color = { 38 34 11 }
 		
 		potential = {
             NOT = { has_country_modifier = awakening_cthun }
@@ -63,7 +65,7 @@ country_decisions = {
 		allow = {
 			owns = 1520
             
-            stability = 0
+            stability = 2
             adm_power = 250
             dip_power = 250
             mil_power = 250
@@ -127,6 +129,8 @@ country_decisions = {
     #--------------------------------
 	# Awaken Yogg-Saron
 	awaken_yogg_saron = {
+
+        color = { 51 80 87 }
 		
 		potential = {
             NOT = { has_country_modifier = awakening_yogg_saron }
@@ -139,7 +143,7 @@ country_decisions = {
 		allow = {
 			owns = 2495
             
-            stability = 0
+            stability = 2
             adm_power = 250
             dip_power = 250
             mil_power = 250
@@ -209,6 +213,8 @@ country_decisions = {
     #--------------------------------
     # Awaken N'Zoth
 	awaken_nzoth = {
+
+        color = { 37 8 38 }
 		
 		potential = {
             NOT = { has_country_modifier = awakening_nzoth }
@@ -221,7 +227,7 @@ country_decisions = {
 		allow = {
 			owns = 616
             
-            stability = 0
+            stability = 2
             adm_power = 250
             dip_power = 250
             mil_power = 250
@@ -285,6 +291,9 @@ country_decisions = {
     #--------------------------------
     # Awaken Y'Shaarj
 	awaken_yshaarj = {
+
+        color = { 23 36 5 }
+
 		potential = {
             NOT = { has_country_modifier = awakening_yshaarj }
 			NOT = { has_country_flag = awakening_yshaarj_timer }
@@ -296,7 +305,7 @@ country_decisions = {
 		allow = {
 			owns = 1839
             
-            stability = 0
+            stability = 2
             adm_power = 250
             dip_power = 250
             mil_power = 250
@@ -406,4 +415,43 @@ country_decisions = {
 			}
 		}
 	}
+    #--------------------------------------------------------------
+    # Qiraji Call - Call all Silitihd Hives into offensive wars
+    #--------------------------------------------------------------
+    call_qiraji_minions = {
+        color = { 66 7 19 }
+        major = yes
+
+        potential = {
+            tag = A97
+            religion = cthun
+            is_subject = no
+            is_at_war = yes
+
+            NOT = { has_country_modifier = call_qiraji_minions_cd }
+        }
+
+        allow = {
+            is_at_war = yes
+            any_country = { defensive_war_with = ROOT }
+            any_subject_country = { is_subject_of_type = silithid_hive }
+
+            dip_power = 100
+            mil_power = 100
+            church_power = 50
+        }
+
+        effect = {
+            country_event = { id = wwu_aqir.108 days = 3 }
+
+            add_dip_power = -100
+            add_mil_power = -100
+            add_church_power = -50
+
+        }
+
+        ai_will_do = {
+            factor = 1
+        }
+    }
 }
