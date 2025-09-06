@@ -107,7 +107,7 @@ NDiplomacy = {
 	MAX_CLIENT_STATES = 10,							-- Max client states for one country
 
 	ALLOW_LEADER_DEMAND_TOGGLE = 0,					-- Whether or not player is allowed to set if warleader can negotiate for them
-	VASSALIZE_BASE_DEVELOPMENT_CAP = 100, 			-- Countries with more total development than this cannot be vassalized
+	VASSALIZE_BASE_DEVELOPMENT_CAP = 200, 			-- Countries with more total development than this cannot be vassalized
 
 	MARCH_BASE_DEVELOPMENT_CAP = 200, 				-- Countries with more total development than this cannot be made into a march
 
@@ -337,7 +337,7 @@ NDiplomacy = {
 	PEACE_COST_ANNUL = 10, 							-- _DDEF_PEACE_COST_ANNUL_ Peace cost for annulment of treaties
 	PEACE_COST_CHANGE_GOVERNMENT = 50, 				-- _Peace cost for changing government form
 	PEACE_COST_TRADE_POWER = 30, 					-- Peace cost for demanding trade power
-	PEACE_COST_STEER_TRADE = 60,					-- Peace cost for steering trade
+	PEACE_COST_STEER_TRADE = 50,					-- Peace cost for steering trade
 	PEACE_COST_INDEPENDANCE = 30, 					-- Peace cost for breaking free of union
 	PEACE_COST_ENFORCED_FLEET_BASING_RIGHTS = 10,   -- Peace cost for enforced fleet basing righs
 	PEACE_COST_ENFORCED_MILITARY_ACCESS = 10,       -- Peace cost for enforced military access
@@ -936,13 +936,13 @@ NCountry = {
 
 	START_YEARLY_INFLATION = 0.0, 					-- _CDEF_START_YEARLY_INFLATION_
 	CLAIM_LOSE = 25,								-- how many years until a claim is lost.
-	CORE_LOSE = -1, 								-- how many years until a core is lost.
+	CORE_LOSE = 200, 								-- how many years until a core is lost.
 	--- WWU: cores will never be lost
 	CORE_LOSE_CULTURE_GROUP = -1,					-- how many years until a core in a country's culture group is lost.
 	--- WWU: cores will never be lost
 	CORE_LOSE_PRIMARY_CULTURE_TAG = -1,				-- how many years until a core is lost for the primary tag of a country (-1 = never lost)
-	CORE_LOSE_PRESTIGE = -10.0,						-- Prestige change when lost core
-	ABANDON_CORE_PRESTIGE = -10.0,					-- The cost of abandoning a core that some other country owns.
+	CORE_LOSE_PRESTIGE = -1.0,						-- Prestige change when lost core
+	ABANDON_CORE_PRESTIGE = -5.0,					-- The cost of abandoning a core that some other country owns.
 	ABANDON_IDEAGROUP_REFUND = 0.35,				-- The part of the idea group spent that will be refunded upon abandonment.
 	--- WWU: make abandoning ideagroups slightly less costly
 	NEIGHBOURBONUS = -0.05, 						-- _CDEF_NEIGHBOURBONUS_

@@ -201,6 +201,8 @@ A97_ahn_qiraj_column_2 = {
             1563 = { owned_by = ROOT }
             1569 = { owned_by = ROOT }
             1558 = { owned_by = ROOT }
+            1576 = { owned_by = ROOT }
+            1564 = { owned_by = ROOT }
 		}
 		provinces_to_highlight = {
             OR = {
@@ -208,6 +210,8 @@ A97_ahn_qiraj_column_2 = {
                 province_id = 1563
                 province_id = 1569
                 province_id = 1558
+                province_id = 1586
+                province_id = 1564
             }
 			NOT = { owned_by = ROOT }
 		}
@@ -238,11 +242,20 @@ A97_ahn_qiraj_column_2 = {
 		trigger = {
             2328 = { country_or_subject_holds = ROOT }
             1547 = { country_or_subject_holds = ROOT }
+            4549 = { country_or_subject_holds = ROOT }
+
+            SDS = {
+                OR = {
+                    NOT = { exists = SDS }
+                    is_subject_of = ROOT
+                }
+            }
 		}
 		provinces_to_highlight = {
             OR = {
                 province_id = 2328 # Sands of the Watchers
                 province_id = 1547 # Valley of the Watchers
+                province_id = 4549 # Watcher's Rest
             }
 			NOT = { country_or_subject_holds = ROOT }
 		}
@@ -1215,10 +1228,12 @@ A97_ahn_qiraj_column_5 = {
                     area_diremaul = {
                         type = all
                         controlled_by = ROOT
+                        NOT = { owned_by = ROOT }
                     }
                     area_diremaul_interior = {
                         type = all
                         controlled_by = ROOT
+                        NOT = { owned_by = ROOT }
                     }  
                 }
 
@@ -1250,10 +1265,12 @@ A97_ahn_qiraj_column_5 = {
                     area_diremaul = {
                         type = all
                         controlled_by = ROOT
+                        NOT = { owned_by = ROOT }
                     }
                     area_diremaul_interior = {
                         type = all
                         controlled_by = ROOT
+                        NOT = { owned_by = ROOT }
                     }  
                 }
                 area_diremaul = {
@@ -1327,6 +1344,23 @@ A97_ahn_qiraj_column_5 = {
         effect = {
             add_prestige = 15
             add_years_of_income = 1.0
+
+            area_isle_of_dread = {
+                add_claim = ROOT
+            }
+
+            hidden_effect = {
+                if = {
+                    limit = {
+                        area_sarnor_isle = {
+                            NOT = is_core
+                        }
+                    }
+                    area_sarnor_isle = {
+                        add_core = ROOT
+                    }
+                }
+            }
 
             hidden_effect = {
                 H01 = {
