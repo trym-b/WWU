@@ -200,6 +200,10 @@ A08_lordaeron_column_1 = {
 
 			remove_country_modifier = A08_eastweald_administrative_attrition
 		}
+
+		ai_weight = {
+			factor = 10
+		}
 	}
 
     A08_secure_the_eastern_outposts = { 
@@ -556,9 +560,7 @@ A08_lordaeron_column_4 = {
 
     A08_eliminating_the_border_threats = { 
 		icon = mission_faction_fight_2
-		position = 2
-        
-	#	required_missions = { A08_consolidate_vandelmar } 
+		position = 1
         
 		trigger = {
             NOT = { exists = P55 }
@@ -602,6 +604,8 @@ A08_lordaeron_column_4 = {
     A08_passage_to_southshore = { 
 		icon = mission_storehouse
 		position = 3
+
+		required_missions = { A08_eliminating_the_border_threats A08_cull_the_beasts }
         
 		trigger = {
             991 = {
@@ -674,11 +678,47 @@ A08_lordaeron_column_5 = {
 		}
 	}
 
+	A08_cull_the_beasts = {
+		icon = mission_ancient_sword
+		position = 2
+
+		required_missions = { A08_rally_the_army }
+
+		trigger = {
+			RDP = {
+				NOT = { exists = RDP }
+			}
+			B14 = {
+				NOT = { exists = B14 }
+			}
+			A63 = {
+				NOT = { exists = A63 }
+			}
+			region_western_plaguelands = {
+				type = all
+				religion = holy_light
+			}
+		}
+
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = RDP
+				is_capital_of = B14
+				is_capital_of = A63
+			}
+		}
+
+		effect = {
+			add_mil_power = 250
+			area_tarrem_mill = {
+				add_claim = ROOT
+			}
+		}
+	}
+
 	A08_dalaran_diplomacy = {
 		icon = mission_magi
-		position = 3
-
-		required_missions = { A08_rally_the_army A08_eliminating_the_border_threats }
+		position = 4
 
 		trigger = {
 			OR = {
