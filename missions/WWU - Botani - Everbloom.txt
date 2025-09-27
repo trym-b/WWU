@@ -31,8 +31,6 @@ EVB_botani_column_2 = {
 		icon = mission_everbloom
         position = 1
         
-		required_missions = { }
-        
 		trigger = {
             area_everbloom_wilds = {
                 type = all
@@ -317,6 +315,7 @@ EVB_botani_column_3 = {
         
 		required_missions = { 
             EVB_control_the_everbloom_wilds
+            EVB_securing_farahlon
         }
         
 		trigger = {
@@ -436,9 +435,9 @@ EVB_botani_column_3 = {
 		icon = mission_orchid
         position = 5
 
+        required_missions = { EVB_culling_of_the_north }
+
 		trigger = {
-            mission_completed = EVB_securing_farahlon
-            
             area_temple_of_shanaar = {
                 type = all
                 
@@ -704,17 +703,15 @@ EVB_botani_column_4 = {
         
 		trigger = {
             region_farahlon = {
-                country_or_non_sovereign_subject_holds = ROOT
-                has_fort_building_trigger = yes
+                type = all
+                owned_by = ROOT
             }
 		}
+
 		provinces_to_highlight = {
             region = region_farahlon
-            NOT = {
-                has_fort_building_trigger = yes
-            }
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
+
 		effect = {
 			add_stability = 1
 			5644 = {
@@ -760,12 +757,8 @@ EVB_botani_column_4 = {
             area_everbloom_wilds = {    
                 type = all
                 
-                country_or_non_sovereign_subject_holds = ROOT
-                OR = {
-                    has_building = wow_temple_1
-                    has_building = wow_temple_2
-                    has_building = wow_temple_3
-                }
+                owned_by = ROOT
+                has_temple_building_trigger = yes
             }
 		}
 		provinces_to_highlight = {
@@ -781,6 +774,8 @@ EVB_botani_column_4 = {
 		}
         
 		effect = {
+            add_stability = 1
+            
 			add_country_modifier = {
                 name = mission_reverence_of_the_genesaur
                 duration = -1
@@ -827,10 +822,10 @@ EVB_botani_column_4 = {
     EVB_gnarlgars_forests = {
 		icon = mission_botani_hut
         position = 5
+
+        required_missions = { EVB_culling_of_the_north }
         
-		trigger = {
-            mission_completed = EVB_secure_the_eastern_passes
-            
+		trigger = {    
             area_shattrath_draenor = {
                 type = all
                 

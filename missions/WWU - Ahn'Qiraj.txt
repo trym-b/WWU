@@ -410,9 +410,9 @@ A97_ahn_qiraj_column_2 = {
 
     A97_incursion_into_dustfallew_marsh = {
         icon = mission_jaina
-        position = 8
+        position = 10
 
-        required_missions = { A97_dominate_thousand_needles }
+        #required_missions = { A97_dominate_thousand_needles }
 
         trigger = {
             region_dustwallow_marsh = {
@@ -438,7 +438,7 @@ A97_ahn_qiraj_column_2 = {
 
     A97_subjegation_of_onyxia = {
         icon = mission_black_dragonflight
-        position = 9
+        position = 11
 
         required_missions = { A97_incursion_into_dustfallew_marsh }
 
@@ -766,7 +766,7 @@ A97_ahn_qiraj_column_3 = {
 
     A97_dominate_thousand_needles = {
         icon = mission_runestone
-        position = 7
+        position = 9
 
         trigger = {
             num_of_owned_provinces_with = {
@@ -790,9 +790,9 @@ A97_ahn_qiraj_column_3 = {
 
     A97_incursion_into_south_barrens = {
         icon = mission_orc_female
-        position = 8
+        position = 11
 
-        required_missions = { A97_dominate_thousand_needles }
+        #required_missions = { A97_dominate_thousand_needles }
 
         trigger = {
             region_south_barrens = {
@@ -813,7 +813,7 @@ A97_ahn_qiraj_column_3 = {
 
     A97_new_war_of_the_shifting_sands = {
         icon = mission_orbital_strike
-        position = 10
+        position = 12
 
         required_missions = { 
             A97_subjegation_of_onyxia 
@@ -1075,47 +1075,11 @@ A97_ahn_qiraj_column_4 = {
 		}
     }
 
-    A97_devouring_of_feralas = {
-        icon = mission_cannibalize
-        position = 7
-
-        required_missions = { A97_destruction_of_feathermoon }
-
-        trigger = {
-            region_feralas = {
-                type = all
-                country_or_non_sovereign_subject_holds = ROOT
-            }
-        }
-
-        provinces_to_highlight = {
-            region = region_feralas
-        }
-
-        effect = {
-            add_prestige = 10
-            add_country_modifier = {
-                name = mission_devourer
-                duration = -1
-            }
-
-            hidden_effect = {
-                region_feralas = {  
-                    set_province_flag = silithid_infestation
-                    add_permanent_province_modifier = {
-                        name = silithid_infestation_affinity
-                        duration = -1
-                    }
-                }
-            }
-        }
-    }
-
     A97_incursion_into_mulgore = {
         icon = mission_tauren_male
-        position = 8
+        position = 10
 
-        required_missions = { A97_devouring_of_feralas A97_dominate_thousand_needles }
+        #required_missions = { A97_devouring_of_feralas }
 
         trigger = {
             region_mulgore = {
@@ -1136,7 +1100,7 @@ A97_ahn_qiraj_column_4 = {
 
     A97_defilement_of_mulgore = {
         icon = mission_emerald_nightmare
-        position = 9
+        position = 11
 
         required_missions = { A97_incursion_into_mulgore }
 
@@ -1198,7 +1162,7 @@ A97_ahn_qiraj_column_5 = {
         }
 
         effect = {
-            country_event = { id = wwu_aqir.106 }
+            country_event = { id = wwu_mission_ahnqiraj.1 }
 
 			hidden_effect = {
 				if = {
@@ -1337,29 +1301,58 @@ A97_ahn_qiraj_column_5 = {
         }
 
         effect = {
-            add_prestige = 15
-            add_years_of_income = 1.0
+            area_sarnor_isle = {
+                add_core = ROOT
+                add_devastation = 50
+                change_religion = ROOT
+                change_culture = culture_silithid
+            }
 
-            area_isle_of_dread = {
-                add_claim = ROOT
+            add_prestige = 10
+            add_years_of_income = 1
+
+            hidden_effect = {
+                H01 = {
+                    country_event = { id = wwu_aqir.104 days = 30 }
+                }
+                A94 = {
+                    country_event = { id = wwu_aqir.104 days = 30 }
+                }
+            }
+        }
+    }
+
+    A97_devouring_of_feralas = {
+        icon = mission_cannibalize
+        position = 7
+
+        required_missions = { A97_destruction_of_feathermoon }
+
+        trigger = {
+            region_feralas = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+
+        provinces_to_highlight = {
+            region = region_feralas
+        }
+
+        effect = {
+            add_prestige = 10
+            add_country_modifier = {
+                name = mission_devourer
+                duration = -1
             }
 
             hidden_effect = {
-                if = {
-                    limit = {
-                        area_sarnor_isle = {
-                            NOT = is_core
-                        }
+                region_feralas = {  
+                    set_province_flag = silithid_infestation
+                    add_permanent_province_modifier = {
+                        name = silithid_infestation_affinity
+                        duration = -1
                     }
-                    area_sarnor_isle = {
-                        add_core = ROOT
-                    }
-                }
-                H01 = {
-                    country_event = { id = wwu_aqir.104 days = 1 }
-                }
-                A94 = {
-                    country_event = { id = wwu_aqir.104 days = 1 }
                 }
             }
         }
@@ -1369,7 +1362,7 @@ A97_ahn_qiraj_column_5 = {
         icon = mission_akunda
         position = 8
 
-        required_missions = { A97_destruction_of_feathermoon }
+        required_missions = { A97_devouring_of_feralas }
 
         trigger = {
             region_desolace = {
@@ -1388,43 +1381,53 @@ A97_ahn_qiraj_column_5 = {
         }
     }
 
-    A97_powers_of_marudaron = {
+    A97_subjegation_of_maraudon = {
         icon = mission_hearthstone
         position = 9
 
         required_missions = { A97_incursion_into_desolace }
 
         trigger = {
-            area_inner_maraudon = {
-                type = all
-                owned_by = ROOT
-                religion = ROOT
-            }
-            area_outer_maraudon = {
-                type = all
-                owned_by = ROOT
-                religion = ROOT
+            OR = {
+                AND = {
+                    area_inner_maraudon = {
+                        owned_by = ROOT
+                    }
+                    NOT = { exists = B75 }
+                }
+                B75 = {
+                    war_with = A97
+                    A97 = {
+                        war_score_against = {
+                            who = B75
+                            value = 75
+                        }
+                    }
+                }
             }
         }
 
         provinces_to_highlight = {
-			OR = {
-				area = area_inner_maraudon
-				area = area_outer_maraudon
-			}
+            area = area_inner_maraudon
         }
 
         effect = {
-            add_country_modifier = {
-                name = mission_powers_of_marudaron
-                duration = -1
+            if = {
+                limit = {
+                    NOT = { exists = B75 }
+                }
+            }
+            country_event = { id = wwu_mission_ahnqiraj.4 }
+
+            else = {
+                country_event = { id = wwu_mission_ahnqiraj.3 }
             }
         }
     }
 
     A97_breach_domain_of_wind = {
         icon = mission_portal
-        position = 10
+        position = 12
 
         trigger = {
             army_size = 75
@@ -1465,7 +1468,7 @@ A97_ahn_qiraj_column_5 = {
 
     A97_resubjegate_alakir = {
         icon = mission_elemental_fury
-        position = 11
+        position = 13
 
         required_missions = { A97_breach_domain_of_wind }
 
